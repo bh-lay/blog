@@ -1,7 +1,7 @@
 //author bh-lay
 var fs = require('fs');
-var tpl = require('./tpl/module_tpl');
-var temp = fs.readFileSync('./tpl/index.html', "utf8");
+var tpl = require('../tpl/module_tpl');
+var temp = fs.readFileSync('./templates/index.html', "utf8");
 
 exports.deal = function (req,res){
 	res.setHeader('charset','utf-8');

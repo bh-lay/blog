@@ -1,4 +1,7 @@
-//author bh-lay
+/**
+ * @author bh-lay
+ */
+
 var fs = require('fs');
 
 /*Mime-Type*/
@@ -23,8 +26,8 @@ function notFound(res,txt){
 	res.writeHead(httpStatus, {
 		'Content-Type' : 'text/html'
 	});
-	var temp = fs.readFileSync('./tpl/404.html', "utf8");
-	temp=temp.replace(/{-content-}/,txt)
+	var temp = fs.readFileSync('./templates/404.html', "utf8");
+	temp = temp.replace(/{-content-}/,txt)
 	res.write(temp);
 	res.end();
 }

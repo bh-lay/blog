@@ -1,0 +1,33 @@
+﻿<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<title>增加文章</title>
+<meta name="keywords" content="剧中人,留言,小剧" />
+<meta name="description" content="剧中人的沟通交流地" />
+<link href="/skin/admin/admin.css" rel=stylesheet>
+</head>
+<body>
+	<div class="containter">
+		<div class="L_foUCpt mt6">增加文章</div>
+		<div class="L_formUI">
+			<form action="/ajax/article" method="post" target="_self"><ul>
+				<li class="L_foUItem"><label class="L_foUItTitle">标题：</label><input type="text" name="title" value="{title}"/></li>
+				<li class="L_foUItem"><label class="L_foUItTitle">缩略图：</label><input type="text" name="cover" value="{cover}"` /></li>
+				<li class="L_foUItem"><label class="L_foUItTitle">标签：</label><input type="text" name="tags" value="{tags}" /></li>
+				<li class="L_foUItem"><label class="L_foUItTitle">发表时间：</label><input type="text" name="time_show" value="{time_show}" /></li>
+				<li class="L_foUItem"><label class="L_foUItTitle">作者：</label><input type="text" name="author" value="{author}" /></li>
+				<li class="L_foUItem">
+					<label class="L_foUItTitle">文章简介：</label>
+					<textarea name="intro" cols="50" rows="5">{intro}</textarea>
+				</li>
+				<li class="L_foUItem">
+					<label class="L_foUItTitle">正文：</label>
+					<textarea name="content" cols="50" rows="10" >{content}</textarea>
+				</li>
+				<li class="L_foUItem"><input type="hidden" name="id" value="{id}" /><input type="submit" value="提交" /></li>
+			</ul></form>
+		</div>
+	</div>
+</body>
+</html>

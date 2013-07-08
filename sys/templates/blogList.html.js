@@ -2,11 +2,11 @@
  * @author bh-lay
  * view url : /blog    /blog/
  */
-var mongo = require('./conf/mongo_connect');
-var tpl = require('./tpl/module_tpl');
+var mongo = require('../conf/mongo_connect');
+var tpl = require('../tpl/module_tpl');
 
 var fs = require('fs');
-var page_temp=fs.readFileSync('./tpl/blogList.html', "utf8");
+var page_temp=fs.readFileSync('./templates/blogList.html', "utf8");
 page_temp = tpl.init(page_temp);
 			
 exports.deal = function (req,res){

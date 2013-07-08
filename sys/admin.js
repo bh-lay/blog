@@ -3,11 +3,12 @@
  */
 
 var fs = require('fs');
-var layFile= require('./conf/layFile');
-var session= require('./conf/session');
+var layFile = require('./conf/layFile');
+var session = require('./conf/session');
 var powerCode = 1;
 
 exports.deal=function(req,res,pathname){
+	
 	if(pathname.split('.').length==1) {
 		pathname += '/index.html'
 	}
@@ -18,7 +19,7 @@ exports.deal=function(req,res,pathname){
 		var session_this = session.start(req,res);
 			
 		if(session_this.power(powerCode)){
-			var controlPath='../web/'+pathname+'.js';
+			var controlPath='./templates/'+pathname+'.js';
 			fs.exists(controlPath, function (exists) {
 				if (!exists) {
 					layFile.read(req,res);
@@ -29,7 +30,7 @@ exports.deal=function(req,res,pathname){
 			});			
 		}else{
 			//need login first
-			var page = fs.readFileSync('../web/admin/login.html', "utf8");
+			var page = fs.readFileSync('./templates/admin/login.html', "utf8");
 			res.writeHead(200, {'Content-Type' : 'text/html'});
 			res.write(page);
 			res.end();

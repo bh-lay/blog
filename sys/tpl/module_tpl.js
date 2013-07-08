@@ -7,7 +7,7 @@
 //define template Object
 var tpl = {};
 
-tpl.article_item=['<div class="articleItem" articleId="{-id-}">',
+tpl.article_item = ['<div class="articleItem" articleId="{-id-}">',
 	'<div class="artItCpt">',
 		'<h3><a href="/blog/{-id-}" title="{-title-}"  target="_self" >{-title-}</a></h3>',
 		'<p>{-time_show-}</p>',
@@ -45,7 +45,7 @@ tpl.opus_item = ['<li>',
 	'</a>',
 '</li>'];
 
-tpl.nav=['<div class="navLayer">',
+tpl.nav = ['<div class="navLayer">',
 	'<div class="golCnt">',
 		'<a class="logo" href="/">小剧客栈</a>',
 		'<ul class="nav">',
@@ -60,7 +60,7 @@ tpl.nav=['<div class="navLayer">',
 	'</div>',
 '</div>'];
 
-tpl.gallery=["[",
+tpl.gallery = ["[",
 	"{'src':'/skin/naive/gallery/coast.jpg','alt':'江边'},",
 	"{'src':'/skin/naive/gallery/fish.jpg','alt':'鱼儿'},",
 	"{'src':'/skin/naive/gallery/tree.jpg','alt':'树林'},",
@@ -69,7 +69,7 @@ tpl.gallery=["[",
 "]"];
 
 //tongji template
-tpl.tongji=['<div class="tongji">',
+tpl.tongji = ['<div class="tongji">',
 	'<script type="text/javascript">',
 		'var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");',
 		'document.write(unescape("%3Cscript src=\'\" + _bdhmProtocol + \"hm.baidu.com/h.js%3F0f6bfc1dac208f86e5effd5f2d59027d\' type=\'text/javascript\'%3E%3C/script%3E"));',
@@ -96,6 +96,7 @@ exports.get = function(mod) {
 
 //method init
 exports.init=function(temp){
+
 	var temp=temp;
 	var txt='';
 	txt=temp.replace(/\{-(\w*)-}/g,function(){

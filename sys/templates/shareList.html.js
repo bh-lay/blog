@@ -2,12 +2,12 @@
  * @author bh-lay
  * view url : /blog    /blog/
  */
-var mongo = require('./conf/mongo_connect');
-var tpl = require('./tpl/module_tpl');
+var mongo = require('../conf/mongo_connect');
+var tpl = require('../tpl/module_tpl');
 
 var fs = require('fs');
-var page_temp=fs.readFileSync('./tpl/shareList.html', "utf8");
-page_temp=tpl.init(page_temp);
+var page_temp = fs.readFileSync('./templates/shareList.html', "utf8");
+page_temp = tpl.init(page_temp);
 
 exports.deal = function (req,res){
 	res.writeHead(200, {'Content-Type': 'text/html'});
