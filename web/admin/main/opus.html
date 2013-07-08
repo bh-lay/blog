@@ -1,0 +1,33 @@
+﻿<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<title>增加作品</title>
+<meta name="keywords" content="剧中人,留言,小剧" />
+<meta name="description" content="剧中人的沟通交流地" />
+<link href="../skin/admin.css" rel=stylesheet>
+</head>
+<body>
+	<div class="containter">
+		<div class="L_foUCpt mt6">添加作品</div>
+		<div class="L_formUI">
+			<form action="/ajax/opus" method="post" target="_self"><ul>
+				<li class="L_foUItem"><label class="L_foUItTitle">标题：</label><input type="text" name="title" value="{title}"/></li>
+				<li class="L_foUItem"><label class="L_foUItTitle">缩略图：</label><input type="text" name="cover" value="{cover}"` /></li>
+				<li class="L_foUItem"><label class="L_foUItTitle">作品大图：</label><input type="text" name="opus_pic" value="{opus_pic}" /></li>
+				<li class="L_foUItem"><label class="L_foUItTitle">标签：</label><input type="text" name="tags" value="{tags}" /></li>
+				<li class="L_foUItem"><label class="L_foUItTitle">创作时间：</label><input type="text" name="opus_time_create" value="{opus_time_create}" /></li>
+				<li class="L_foUItem">
+					<label class="L_foUItTitle">作品简介：</label>
+					<textarea name="intro" cols="50" rows="5">{intro}</textarea>
+				</li>
+				<li class="L_foUItem">
+					<label class="L_foUItTitle">作品详细：</label>
+					<textarea name="content" cols="50" rows="10" >{content}</textarea>
+				</li>
+				<li class="L_foUItem"><input type="hidden" name="id" value="{id}" /><input type="submit" value="提交" /></li>
+			</ul></form>
+		</div>
+	</div>
+</body>
+</html>
