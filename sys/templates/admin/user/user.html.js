@@ -6,7 +6,7 @@
 
 var fs = require('fs');
 var url = require('url');
-var temp=fs.readFileSync('../web/admin/user/user.html', "utf8");
+var temp=fs.readFileSync('./templates/admin/user/user.html', "utf8");
 var querystring=require('querystring');
 
 var user_group = {
@@ -38,7 +38,7 @@ exports.render = function (req,res){
 	search&&(search=search.replace('?',''));
 	var userID=querystring.parse(search).userid;
 	if(userID){
-		var mongo = require('../../../sys/conf/mongo_connect');
+		var mongo = require('../../../conf/mongo_connect');
 		mongo.open({'collection_name':'user'},function(err,collection,close){
 			collection.find({'id':userID}).toArray(function(err, docs) {		
 				var txt = valueInit(docs[0]);
