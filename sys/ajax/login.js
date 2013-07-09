@@ -44,6 +44,8 @@ function login (res,session_this,username,password){
 						'usernick' : docs[0]['usernick'],
 						'power' : powerList[docs[0]['user_group']]
 					});
+					
+					console.log('i\'m ',powerList[docs[0]['user_group']])
 					response(res,{
 						'code':1,
 						'msg':'login success!'
