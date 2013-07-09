@@ -1,0 +1,288 @@
+﻿@charset "utf-8";
+/**********************************
+******************************
+Template Name: darkblue
+Version: 1.0
+Author:  bh_lay
+E-mail:  bh_lay@126.com
+Author URI:http://bh-lay.com
+******************************
+**********************************/
+
+/*****全局设置******/
+*{margin:0px;padding:0px;}
+img{border:none;}
+body {background:url(bj.png) fixed #eee;font-family: "Microsoft Yahei";}
+p,ul,ol,li,form, dl {list-style: none; color: #333;}
+a{text-decoration: none;color: #333;}
+a:visited {color: #777;}
+a:hover { color:#000;}
+
+::-moz-selection{background:#000;color:#fff;}
+::selection {background:#000;color:#fff;}
+code::-moz-selection {background:#000;color:#fff;}
+code::selection {background:#000;color:#fff;}
+
+.INPUT{color:#777; font-size:12px; height:20px; padding:3px; border:1px #555 solid;}
+.TEXTAREA{color:#777; font-size:12px; padding:3px; border:1px #555 solid;}
+.inputText {border: 1px solid #ccc;}
+TD{color:#777; font-size:12px; padding:10px;}
+.table{border:1px #ddd solid}
+
+/*通用模块设置*/
+.left {float: left;}
+.right {float: right;}
+.center {text-align: center;}
+.clear {clear: both; height: 0px; font-size: 0px; line-height: 0px;}
+.none {display:none;}
+.hide {left: 0; position: absolute; top: -50px;}
+.containter {margin: 0px auto; width: 980px;}
+.main {width: 720px; float:left;}
+.sidebar {width: 260px; float:left;}
+.panel {float: left; width: 360px; display: inline;}
+.box {border: 1px solid #ccc; border-radius: 4px; padding: 5px; margin:0px 10px 20px; background-color:#f2f2f2; position:relative;}
+.close {background-color: #ddd; border-radius: 8px; color: #fff; cursor: pointer; font-size: 10px; font-weight: bold; height: 16px; line-height: 16px; position: absolute; right: 5px; text-align: center; top: 5px; width: 16px;z-index:10;}
+.close:hover {background-color: #444; color: #f00;}
+.shadow {box-shadow:0px 0px 10px #aaa; border-color:#fff;}
+.plaintext {font-size: 14px; text-indent: 2em; line-height: 2em;}
+/*内页导航*/
+.position {background-color: #F6F6F6; border: 1px solid #ccc; border-radius: 4px; font-size: 12px; line-height: 25px; margin:0px 10px 20px; padding: 0px 10px;}
+
+/**工具栏**/
+#toolbar{width:50px; position:fixed; right:8px; top:50%; }
+.ico{background: url(toolbar.png);cursor: pointer;display: block;height: 50px;overflow: hidden;text-indent: -99px; width: 50px;}
+.backtop{background-position:0px 0px;}
+.backtop:hover{background-position:-50px 0px;}
+.read{background-position:0px -50px;}
+.read:hover{background-position:-50px -50px;}
+.exitread{background-position:0px -100px;display:none;}
+.exitread:hover{background-position:-50px -100px;}
+.reply{background-position:0px -150px;}
+.reply:hover{background-position:-50px -150px;}
+
+/**栏目标题**/
+.caption {background-color:#bbb; color:#444; border-radius:4px; cursor:pointer; font-size: 15px; font-weight: normal; padding:2px 0px 2px 20px; position:relative;}
+.caption:hover {background-color:#888;}
+.caption span {color: #eee; font-family: Georgia; font-size: 10px; margin-left: 10px;}
+.caption a {float:right; font-size: 13px; padding-right:20px}
+
+/*文章正文内容*/
+.article {line-height: 2; padding: 25px; background-color:#fff; font-size: 14px; overflow:hidden;position:relative;}
+.article a {color: #fa0;}
+.article a:hover {color: #000;text-decoration:underline;}
+.article  h3, .article  h4, .article  h5, article  h6, .article  p, .article dl {margin: 1em 0em;}
+.article p {text-indent:2em;  }
+.articletop{border-bottom: 1px dashed #CCC; text-align: center; margin: 20px 0px;}
+.article  ol, .article  ul, .article dd {padding-left:4em;}
+.article li{list-style-type: decimal;}
+.smalltext  {padding: 8px; margin: 10px; border: 1px solid #ccc; text-indent: 2em; font-size: 90%; background-color: #eee;}
+.copylink {background-color: #eee; font-size: 85%; padding: 10px;}
+.ujian-hook{width:570px; margin:0px auto;}
+.codeArea {border-color:#444;border-style: solid;border-width: 10px 10px 10px 30px;padding: 20px;line-height:1.5;border-radius:15px;margin: 0px 30px;background: #555;color:#fff;}
+textarea.codeArea{width:80%;}
+
+/*实验室查看源码部分*/
+.labshow{border:1px solid #ddd;margin: 2em 4em;line-height:3em;}
+.labshow a{margin-left:4em;border-bottom:1px dashed #ccc;}
+.labshow span{height:100%;padding:0em 2em;background:#eee;display:inline-block;}
+
+/**列表页文章内容调用**/
+.articlelist dl {border-bottom: 1px dashed #aaa; margin-top: 20px; padding: 10px;}
+.articlelist dl dt {font-size: 15px; padding: 0 10px 10px;}
+.articlelist p {font-size: 12px; text-indent: 2em;}
+.more {background-color: #ddd; display: block; font-size: 12px; margin: 10px 0 0; padding: 2px 4px; width: 60px;}
+.more:hover {background-color: #fff;}
+
+/**纯标题调用列表**/
+.list {padding:10px 5px; font-size: 13px; }
+.list li {line-height: 26px; height:26px; overflow:hidden;}
+.list li a {background-position: 5px -248px; display: block; padding-left: 17px;}
+.list li a:hover {background-color: #bbb;color:#fff;}
+
+/**缩略图特效**/
+.focusimg a {background-color: #ddd; border: 1px solid #ccc; display:block; padding: 6px; border-radius:4px;}
+.focusimg a:hover {background-color: #fff;}
+
+/**排行列表**/
+.rank li.no1, .rank li.no2, .rank li.no3, .rank li.no4, .rank li.no5, .rank li.no6, .rank li.no7, .rank li.no8, .rank li.no9, .rank li.no10, .list li a {background-image: url(number.png); background-repeat: no-repeat;}
+.rank {padding: 10px 5px; font-size: 13px; }
+.rank li {padding-left: 25px; line-height: 23px;}
+.rank li.no1 {background-position: 4px 0px;}
+.rank li.no2 {background-position: 4px -25px;}
+.rank li.no3 {background-position: 4px -50px;}
+.rank li.no4 {background-position: 4px -75px;}
+.rank li.no5 {background-position: 4px -100px;}
+.rank li.no6 {background-position: 4px -125px;}
+.rank li.no7 {background-position: 4px -150px;}
+.rank li.no8 {background-position: 4px -175px;}
+.rank li.no9 {background-position: 4px -200px;}
+.rank li.no10 {background-position: 4px -225px;}
+
+/*CSS图像合并*/
+.searchmain .button, .logo, .aboutme a, .weibo, .weibo a:hover {background-image: url("skin.png");}
+
+/*页面顶部设置*/
+.top {height: 160px;}
+.searchmain {float: right;display:inline;margin:70px 10px 0px 0px;position:relative;width:230px;background:#fff;padding:1px;border-radius:5px;}
+.searchmain .inputText{height:30px;width:208px;display:block;padding:0px 10px;color:#aaa;border-radius:4px;background:#eee;line-height:30px;outline:none;}
+.searchmain .button{height:30px; width:35px;background-position:0px -61px;cursor:pointer;position:absolute;border:0px;border-radius:0px 3px 3px 0px;right:2px;top:2px;}
+.searchmain .button:hover{background-position:-36px -61px;}
+.logo{width:122px; height:106px; background-position:0px -93px; float:left; margin:40px 20px 0px;text-indent:-200px;overflow:hidden;}
+.slogan{float: left; height: 90px; margin-top: 40px; color: #444; text-shadow: 1px 1px 0px #fff;}
+.slogan h1{font-size: 35px; letter-spacing: 5px; line-height: 50px;}
+.slogan p{letter-spacing:4px; font-size:13px;}
+.slogan h4{color:#bbb; font-size:12px; font-family:georgia;}
+
+/**导航条**/
+.nav{height:30px; width:500px; background-color:#555; line-height:30px; margin:0px auto 20px; padding-left:20px; border-radius:4px; box-shadow: 0px 0px 10px #aaa; z-index: 100; position:relative;}
+.nav a{text-decoration:none; display:block; color:#fff; font-size:12px;}
+.nav a:hover{color:#555; background-color:#eee;}
+.nav ul, .nav li {margin:0px; padding:0px;list-style-type: none; display:block;}
+.nav ul li{display:inline; width:80px; height:30px; float:left; text-align:center; background-color:#666;}
+.nav ul li ul{clear:both; display:none;}
+.nav ul li:hover ul{display:block;}
+.nav ul li ul li{background-color:#555; border-bottom:1px solid #333;}
+
+/**首页个人信息区域**/
+.notice {color: #f80; font-size: 12px; line-height: 14px; padding: 5px 20px;}
+.notice a{color: #f80; margin-right: 2em;}
+.aboutme {width:220px;padding:10px;margin:auto;background-color: #ddd; color: #444; border-radius:8px;}
+.aboutme a {height: 70px; width: 70px; margin-right: 10px; background-color: #ddd; display: block; background-position: -162px -93px;text-indent:-6em;overflow:hidden;border-radius:4px;}
+.aboutme a:hover {background-position: -162px -163px;}
+.aboutme .say {float: right; width: 132px; font-size: 12px;text-indent:2em;}
+.weibo {width:210px;height: 30px; padding-left:20px; margin:0px auto 20px;}
+.weibo a {display: block; float: left; width: 64px; height: 30px;}
+.weibo .tx:hover {background-position: -20px -30px;}
+.weibo .wy:hover {background-position: -84px -30px;}
+.weibo .zk:hover {background-position: -148px -30px;}
+
+/**友情链接**/
+.links {margin:20px 10px;}
+.links dd {margin-top: 10px; }
+.links a {border: 1px solid #ddd; font-size: 13px; display: inline-block; margin: 4px; padding: 2px 20px; text-align: center; background-color:#eee;}
+
+/*底部设置*/
+.footer {background-color: #ccc; border-top:10px solid #444; margin-top: 20px; padding-top:20px; font-size: 12px;}
+.navigation {float: left; margin-bottom: 20px; width: 200px;}
+.navigation dd a:visited {color:#333;}
+.navigation dt {border-bottom: 1px solid #444; font-size: 14px; height: 30px; letter-spacing: 1em; line-height: 30px; margin-bottom: 7px; padding-left: 20px;}
+.navigation dd {background: none repeat scroll 0 0 #bbb; border-left: 3px solid #777; display: inline-block; margin: 4px; padding: 4px;}
+.copyright {text-align: center; padding: 50px 0px; float: left; width: 760px; height: 100px; line-height: 26px;}
+.copyright img {display: none;}
+
+.news_list dl {margin: 20px 10px;}
+.news_list dd {clear: both; font-size: 13px; height: 28px; line-height: 28px; margin: 0 20px;}
+.news_list dd a {float: left;}
+.news_list dd span {float: right;}
+
+.jiaocheng {margin:0px 20px 20px;}
+.jiaocheng a {background-color: #ddd; display: inline-block; float: left; font-size: 25px; border-radius:10px; height: 120px; line-height: 120px; margin: 0 10px; text-align: center; width: 193px;}
+.jiaocheng a:hover {background-color:#fc0;}
+
+/**图文信息调用**/
+.picText div{border:1px dashed #aaa;margin:30px 10px;padding:10px;background:#eee;border-radius:4px;}
+.picText h3{font-size: 18px; margin-bottom: 10px;}
+.picText img{display:block;margin:auto;max-width:100%;}
+.picText p{margin:2em 1em;font-size:14px;text-indent: 2em;}
+
+/**客户服务-列表页**/
+.shop_list {margin: 8px;}
+.shop_list dl {font-size: 12px; width: 300px; margin: 20px; float: left;}
+.shop_list .s_title {font-size: 15px; border-bottom: 1px dotted #ccc; padding: 5px; margin-bottom: 15px; text-indent: 0em;}
+.shop_list dt {float: left; margin-right: 10px;}
+.shop_list dd {text-indent: 2em;}
+
+/**客户服务-内容页**/
+.service .titlepic {float: left; width: 270px;}
+.service dl {float: left; width: 400px;}
+.service dt {background-color: #ddd; font-size: 25px; margin: 20px 0px; padding: 5px; text-align: center;}
+.service dd {font-size: 15px; height: 40px; line-height: 40px; margin-left: 20px;}
+.service dd strong {width: 70px; display: block; float: left;}
+.service .tprice {text-decoration: line-through; font-size: 12px; color: #ccc; margin-left: 2em;}
+.service .buycar {height: 40px; margin: 20px auto; text-align: center; line-height: 40px; font-size: 18px;}
+.service .titlepic a {background-color: #ddd; display: block; margin: 20px; padding: 15px;}
+.service .titlepic a:hover {background-color: #ccc;}
+
+/*单图片页*/
+.pictitle {font-size: 25px; letter-spacing: 0.2em; margin: 30px 20px; padding: 10px; text-align: center;}
+.photo {overflow:hidden; margin-bottom:40px; text-align:center;}
+.photo img {max-width:600px;background-color: #eee; border: 1px solid #aaa; border-radius: 4px; display: inline-block; padding: 17px;}
+.picintro {line-height: 35px; margin: 10px 50px;}
+.picintro  li {border-bottom: 1px dashed #aaa;}
+.picintro strong {width: 100px; float: left; font-size: 14px; padding-left: 10px;}
+
+/* 分页样式*/
+.list_page {margin: 15px 5px; font-size: 14px; margin: 15px; text-align: center;}
+.list_page a, .list_page b {display: inline-block; padding: 4px; border: 1px solid #ddd;}
+.list_page  a:hover  {border: 1px solid #ddd; background: #fff; font-weight: bold; text-decoration: none;}
+
+/**正文分页跳转**/
+.pageLink {margin:20px;}
+.pageLink a {border: 1px solid #ccc; display:inline-block; padding: 2px 10px; background-color: #ddd; margin: 0px 5px; font-size: 12px;}
+.pageLink a:hover {background-color: #fff; text-decoration: none;}
+
+/**首页分享模块***/
+.share_list {padding:8px; font-size: 13px;}
+.share_list dl {float: left; margin: 10px 5px; width: 96px;}
+.share_list img {width: 82px; display:block;}
+.share {margin: 20px auto; width: 300px;}
+
+/**我的分享内容页面**/
+.shareintro {line-height: 35px; margin: 10px 50px !important}
+.shareintro li {font-size: 14px; border-bottom: 1px dashed #aaa;}
+.shareintro strong {float: left; padding-left: 2em; width: 6em;}
+.shareintro li h1 {font-size: 20px; letter-spacing: 5px; padding: 20px; text-align: center;}
+
+/**图片列表**/
+.photo_list {margin: 8px;}
+.photo_list dl {display: inline; float: left; margin: 15px;}
+.photo_list dd {font-size: 13px; padding: 5px; text-align: center;}
+
+/**留言板**/
+.lyb {}
+.lyb dl {border-bottom: 1px dotted #000;	margin: 30px auto;padding: 30px 100px;width: 600px;}
+.lyb dt {background-color: #ddd; border-radius: 8px 8px 0px 0px; border-bottom: 1px dotted #aaa; font-size: 12px; height: 20px; line-height: 20px; padding: 5px 10px;}
+.lyb dt .floor {background-color: #eee; border: 1px solid #aaa; border-radius: 10px; display: inline-block; margin-right: 10px; padding: 0 10px; text-align: center;}
+.lyb strong {margin:0px 5px;} 
+.lyb .ly {background-color: #ddd; border-radius:0px 0px 8px 8px; border-top: medium none; padding: 10px; text-indent: 2em;}
+.lyb .reg {background-color:#f4f4f4;border-radius:8px;	border: 1px solid #ddd;font-size: 14px;margin: 10px 0 10px 128px;padding: 10px;text-indent: 2em;width: 450px;}
+
+#lyk {}
+#lyk dt {background-color: #ddd; padding: 5px 20px; font-size:13px;}
+#lyk dd {border: 1px solid; border-radius:4px; color: #aaa; height: 30px; margin: 10px; width: 240px;}
+#lyk .lytext {padding: 5px; height: auto; width: auto;}
+#lyk  #lytext, #lyk #saytext {background-color: transparent; border: none; text-indent: 2em; resize:vertical;}
+#lyk strong {font-size: 12px; font-weight: normal; margin: 0 5px; line-height: 29px;}
+#lyk .button {border: none;}
+#lyk .inputText {border: none; color: #000; height: 29px; line-height: 29px; margin: 0; padding: 0; background-color: transparent;}
+
+/**堆叠焦点图**/
+.focusphoto {margin: 15px auto; height: 200px; width: 640px; overflow: hidden; background-color: #eee; padding: 10px 0px 10px 10px; border: 1px solid #ddd;}
+.focusphoto dl {margin:0px;}
+.focusphoto dt {height: 200px; width: 150px; background-color: #ccc; float: left; margin-right: 10px; overflow: hidden;}
+.focusphoto dd {margin: 0px 10px 10px 0px; position:relative; float: left; height: 95px; width: 150px; background-color: #ccc; overflow: hidden; padding:0px;}
+.focusphoto  .no1, .focusphoto  .no2 {width: 70px;}
+.focusphoto dt img {height: 200px; width: auto;}
+.focusphoto dd img {width: 150px; height: auto;}
+.focusphoto .no1 img, .focusphoto .no2 img {height: 95px; width: auto;}
+.focusphoto p {background-color: #888;background-color: rgba(0, 0, 0, 0.5); bottom: 0; color: #fff; padding: 2px 0; position: absolute; text-align: center; width: 100%;}
+
+/*放大的图像或窗内弹框背景*/
+.piclist {width:488px; margin:20px auto; border:1px solid #aaa; position:relative; overflow:hidden; padding:10px;}
+.piclist img{width:100px; cursor:pointer; height:80px; display:inline; float:left; background-color:#aaa; margin:10px; border:1px solid #aaa; line-height:80px; text-align:center;}
+
+.lay_exist {background-color: #ddd; border-radius: 15px; color: #fff; cursor: pointer; font-size: 20px; height: 30px; line-height: 30px; position: fixed; right: 20px; text-align: center; top: 20px; width: 30px;}
+.lay_exist:hover {background-color: #444; color: #F00;}
+.lay_show{background-color:#888;background-color:rgba(0,0,0,0.8); height: 820px; display:none; left: 0; position: absolute; top: 0; width: 100%; text-align:center;z-index:100;}
+.lay_show .lay_img {padding:15px; position:relative; margin:100px auto 10px; display:inline-block; border:1px solid #fff; border-radius:4px; box-shadow:0px 0px 10px #fff; background-color:#bbb;}
+.lay_show .lay_title {background-color:#888;background-color:rgba(0,0,0,0.6);color:#fff; left: 0; padding: 5px 20px; position: absolute; top: 40%;}
+.lay_show .lay_over{background-color:#888;background-color:rgba(0,0,0,0.6);color:#fff; border-radius:8px; border:1px solid #fff; left: 40%;top:40%;margin-top:50px; padding: 10px 20px; position: absolute; display:none;}
+.lay_next, .lay_prev{display:block; background-color:#eee; width:40px; height:40px; line-height:40px; text-align:center; cursor:pointer; position:fixed; top:50%}
+.lay_next{right:0px; border-radius:4px 0px 0px 4px;}
+.lay_prev{left:0px; border-radius:0px 4px 4px 0px;}
+.lay_next:hover, .prev:hover{background-color:#444;}
+
+/*手风琴效果*/
+#lay_accordion{height:240px;overflow:hidden;margin:6px;}
+#lay_accordion li{height:240px;width:135px;float:left;overflow:hidden;position:relative;}
+#lay_accordion span{width:20px;height:180px;position:absolute;left:0px;top:0px;font-size:20px;padding:30px 12px;background:#aaa;background:rgba(0,0,0,0.2);border-left:1px solid #fff;color:#fff;}

@@ -1,0 +1,99 @@
+﻿/**
+ * Template Name: naive
+ * Version:1.0
+ * Author:	bh_lay
+ * E-mail:	bh_lay@126.com
+ * Blog:	http://bh-lay.com
+ **/
+
+/**
+ * base css 
+ *   include some reset and fix
+ **/
+body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,p{margin:0px;padding:0px;}
+img{border:none;}
+body{color:#333;font-size:14px;font-family:"Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";}
+ul,ol,li,form, dl {list-style: none;}
+a{text-decoration: none;color: #333;}
+a:visited {color: #777;}
+a:hover {color:#5c0;}
+TD{color:#777; font-size:12px; padding:10px;}
+.fix:after{content: ".";display: block;height: 0;clear: both;visibility: hidden;}
+.fix{display: inline-block;zoom:1;}
+
+
+/*
+ * common
+ * some pulic modules
+ **/
+
+/*page backgound gallery*/
+.gallayer{position: fixed;z-index:0; left:0px;top:0px;width: 100%;height: 100%;background: #bbb; }
+.galBj{position: absolute;z-index:11; left:0px;top:0px;width: 100%;height: 100%;overflow: hidden;color:#bbb;}
+.galMask{position: absolute;z-index:12; left:0px;top:0px;width: 100%;height: 100%;overflow:hidden;text-indent:-100em;background: url(/skin/naive/mask.png);}
+
+/*navigation*/
+.navLayer{position:fixed;z-index:1000;top:0px;right:0px;left:0px;padding:0px 15px;border-bottom:1px solid #666;border-radius:0px 0px 8px 8px;box-shadow: 1px 1px 2px #666;
+background:#fff;
+background:-webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#f2f2f2));
+background:-moz-linear-gradient(top,  #ffffff,  #f2f2f2);
+}
+.logo{display:block;float:left;width:100px;height:35px;margin:3px 40px 0px 0px;background:url(/skin/naive/skin.png) 0px -100px;text-indent: -10em;overflow: hidden;}
+.nav{line-height:40px;float:left;border-left:1px solid #e8e8e8;margin-right:20px;}
+.nav li{width:80px;float:left;border-right:1px solid #e8e8e8;}
+.nav a{display:block;font-size: 15px;color:#666;text-align:center;outline:none;}
+.nav a:hover{background: #f8f8f8;color:#333}
+.nav a:active{background: #ddd;color:#333}
+.nav .cur a{background: #f0f0f0;color:#333}
+.navLink{float:right;overflow:hidden;}
+.navLink li{height: 20px;float:left;padding:10px;}
+.navLink li a{line-height: 20px;padding:0px 5px;color:#999;font-size:12px; transition: all 0.3s ease 0s;}
+.navLink li a:hover{background:#aaa;color: #fff;}
+
+/*pop box*/
+.diaPop{z-index: 1000000;position: absolute;top:0px;display: none;background:#fff;border-radius: 8px;overflow: hidden;border:1px solid #ccc;box-shadow: 2px 2px 4px #aaa;}
+.diaPopCpt{height:30px;line-height:30px;background: #f2f2f2;}
+.diaPopCnt{background: #fff;}
+.popWin .layClose{height:17px;width:17px;background:#555;border-radius:10px;cursor: pointer;position:absolute;right:5px;top:5px;color:#ccc;text-align:center;line-height:17px;font-size:14px;}
+.popWin .layClose:hover{color:#c00;}
+
+.diaTips{z-index: 1000000;position: absolute;display: none;background:rgba(0,0,0,0.7);_background:#444;cursor: default;}
+.diaTipsCnt{padding:10px 25px;line-height:20px; font-size:18px;color:#fff;text-align: center;}
+
+.popWin{z-index: 1000000;position: absolute;top:0px;display: none;}
+.popWin .popWinBj{width:100%;height:100%;background: #000;opacity: 0.5;border-radius: 4px;}
+.popWin .popWinBody{background: #fff;position:absolute;left:5px;top:5px;}
+.popWin .button{width:156px;height: 36px;margin-left:-78px;background: url(skin.png) -500px -190px;text-indent:-29em;overflow:hidden;cursor: pointer;position:absolute;top:125px;left:50%;}
+.popWin p{top:50px;color:#333;font-size:14px;padding:30px 20px;}
+.popWin .layClose{height:17px;width:17px;background:#555;border-radius:10px;cursor: pointer;position:absolute;right:5px;top:5px;color:#ccc;text-align:center;line-height:17px;font-size:14px;}
+.popWin .layClose:hover{color:#c00;}
+
+/*放大的图像或窗内弹框背景*/
+.piclist {width:488px; margin:20px auto; border:1px solid #aaa; position:relative; overflow:hidden; padding:10px;}
+.piclist img{width:100px; cursor:pointer; height:80px; display:inline; float:left; background-color:#aaa; margin:10px; border:1px solid #aaa; line-height:80px; text-align:center;}
+
+.lay_exist {background-color:#ddd;border-radius:15px;color:#fff;cursor:pointer;font-size:20px;height:30px;line-height:30px;position:fixed;right:20px;text-align:center;top:20px;width:30px;z-index: 100;}
+.lay_exist:hover {background-color: #444; color: #f00;}
+.lay_show{background-color:#888;background-color:rgba(0,0,0,0.8);height:820px;display:none;left:0px;position:absolute;top:0px;width:100%;text-align:center;z-index:100;}
+.lay_show .lay_img {padding:15px;position:relative;margin:100px auto 10px;display:inline-block;border:1px solid #fff;border-radius:4px;box-shadow:0px 0px 10px #fff;background-color:#bbb;}
+.lay_show .lay_title{background-color:#888;background-color:rgba(0,0,0,0.6);color:#fff;left:0px;padding:5px 20px;position:absolute; top:40%;}
+.lay_show .lay_over{background-color:#888;background-color:rgba(0,0,0,0.6);color:#fff;border-radius:8px;border:1px solid #fff;left: 40%;top:40%;margin-top:50px;padding:10px 20px;position:absolute;display:none;}
+.lay_next, .lay_prev{display:block;background-color:#eee;width:40px;height:40px;line-height:40px;text-align:center;cursor:pointer; position:fixed;top:50%}
+.lay_next{right:0px; border-radius:4px 0px 0px 4px;}
+.lay_prev{left:0px; border-radius:0px 4px 4px 0px;}
+.lay_next:hover, .prev:hover{background-color:#444;}
+
+.contlayer{position: relative;z-index: 100;width: 100%;}
+
+.golCnt{width:100%;min-width:360px; max-width:900px;margin:auto;zoom:1;}
+.golCnt:after{content: ".";display: block;height: 0;clear: both;visibility: hidden;}
+
+.tongji{width: 0px;height:0px;overflow: hidden;}
+
+@media screen and (max-width : 800px){
+	.logo{width: 35px;margin-right:15px;}
+}
+@media screen and (max-width: 440px){
+	.navLink{display:none;}
+}
+
