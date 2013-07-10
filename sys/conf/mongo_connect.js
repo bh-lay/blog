@@ -27,7 +27,7 @@ exports.open = function(parm,callback) {
 	var DB = new mongodb.Db(conf.db_name, mongoserver,{safe:true});
 	
 	var parm = parm||{};
-	var collection_name=parm['collection_name']||'article';
+	var collection_name = parm['collection_name']||'article';
 	
 	DB.open(function (error, client) {
 		if (error){
