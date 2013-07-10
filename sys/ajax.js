@@ -8,6 +8,7 @@ var ajaxConfig={
 	'opus':'opus_add&edit',
 	'blog':'article_get',
 	'user':'user/user_add&edit',
+	'user_group':'user/user_group_add&edit',
 	'temp':'temp',
 	'login':'login',
 	'del' : 'del'
