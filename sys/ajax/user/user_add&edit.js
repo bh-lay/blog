@@ -6,7 +6,12 @@
 
 var mongo = require('../../conf/mongo_connect');
 var querystring=require('querystring');
-var session= require('../../conf/session');
+var session = require('../../conf/session');
+
+function response(res,data){
+	res.write(JSON.stringify(data));
+	res.end();
+}
 
 function add(parm,res){
 	var parm = parm;
@@ -52,10 +57,27 @@ exports.render = function (req,res){
 				'user_group':data['user_group']||'',
 			};
 			if(parm['username']){
+				
+				var session_this = session.start(req,res);
+			
 				if(parm['id']&&parm['id'].length>2){
-					edit(parm,res)
+					if(session_this.power(12)){
+						edit(parm,res)
+					}else{
+						response(res,{
+							'code':2,
+							'msg':'no power to edit user !'
+						});
+					}
 				}else{
-					add(parm,res);
+					if(session_this.power(11)){
+						add(parm,res);
+					}else{
+						response(res,{
+							'code':2,
+							'msg':'no power to edit user !'
+						});
+					}
 				}
 			}else{
 				res.end('{\'code\':2,\'msg\':\'please insert complete code !\'}');
