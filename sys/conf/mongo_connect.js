@@ -9,7 +9,7 @@
 	});
  */
 
-var conf={
+var conf = {
 	'host':'localhost',
 	'port':27017,
 	'user':'lay',
@@ -38,9 +38,10 @@ exports.open = function(parm,callback) {
 			if (err) {
 				callback('authorize failed !',undefined);
 			} else {
-				var collection = new mongodb.Collection(client, collection_name);
-				callback(undefined,collection,function(){
-					DB.close();
+				DB.createCollection(collection_name, function(err,collection){
+					callback(undefined,collection,function(){
+						DB.close();
+					});
 				});
 			}	
 		});
