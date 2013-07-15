@@ -24,7 +24,7 @@ exports.render = function (req,res){
 	var ID = querystring.parse(search).id;
 	if(ID){
 		var mongo = require('../../../conf/mongo_connect');
-		mongo.open({'collection_name':'user_group'},function(err,collection,close){
+		mongo.start({'collection_name':'user_group'},function(err,collection,close){
 			collection.find({'id':ID}).toArray(function(err, docs) {		
 				var txt = valueInit(docs[0]);
 				res.write(txt);

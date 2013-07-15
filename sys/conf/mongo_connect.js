@@ -22,7 +22,7 @@ var mongodb = require('mongodb');
 //exports.mongodb = mongodb;
 //exports.db = db;
 
-exports.open = function(parm,callback) {
+exports.start = function(parm,callback) {
 	var mongoserver = new mongodb.Server(conf.host, conf.port, {w:-1});
 	var DB = new mongodb.Db(conf.db_name, mongoserver,{safe:true});
 	

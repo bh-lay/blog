@@ -18,7 +18,7 @@ exports.render = function (req,res){
 	search&&(search=search.replace('?',''));
 	var opusID=querystring.parse(search).opusID;
 	if(opusID){
-		mongo.open({'collection_name':'opus'},function(err,collection,close){
+		mongo.start({'collection_name':'opus'},function(err,collection,close){
 			collection.find({'id':opusID}).toArray(function(err, docs) {		
 				var txt=valueInit(docs[0]);
 				res.write(txt);

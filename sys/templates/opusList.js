@@ -11,7 +11,7 @@ page_temp=tpl.init(page_temp);
 
 exports.deal = function (req,res){
 	res.writeHead(200, {'Content-Type': 'text/html'});
-	mongo.open({'collection_name':'opus'},function(err,collection,close){
+	mongo.start({'collection_name':'opus'},function(err,collection,close){
 		collection.find({}, {limit:28}).sort({id:-1}).toArray(function(err, docs) {
 			var txt='';
 			if(docs.length>0){

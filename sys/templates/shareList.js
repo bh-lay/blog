@@ -11,7 +11,7 @@ page_temp = tpl.init(page_temp);
 
 exports.deal = function (req,res){
 	res.writeHead(200, {'Content-Type': 'text/html'});
-	mongo.open({'collection_name':'share'},function(err,collection,close){
+	mongo.start({'collection_name':'share'},function(err,collection,close){
 		collection.find({}, {limit:15}).sort({id:-1}).toArray(function(err, docs) {
 			var txt='';
 			var temp=tpl.get('share_item');

@@ -39,7 +39,7 @@ exports.render = function (req,res){
 	var userID=querystring.parse(search).userid;
 	if(userID){
 		var mongo = require('../../../conf/mongo_connect');
-		mongo.open({'collection_name':'user'},function(err,collection,close){
+		mongo.start({'collection_name':'user'},function(err,collection,close){
 			collection.find({'id':userID}).toArray(function(err, docs) {		
 				var txt = valueInit(docs[0]);
 				res.write(txt);

@@ -9,7 +9,7 @@ page_temp=tpl.init(page_temp);
 exports.deal = function (req,res,pathname){
 	res.writeHead(200, {'Content-Type': 'text/html'});
 	var id=pathname.match(/^\/opus\/(\w*)/)[1];
-	mongo.open({'collection_name':'opus'},function(err,collection,close){
+	mongo.start({'collection_name':'opus'},function(err,collection,close){
 		collection.find({id:id}).toArray(function(err, docs) {
 			if(arguments[1].length==0){
 			//FIXME add no article page

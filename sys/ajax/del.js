@@ -27,7 +27,7 @@ function response(res,data){
 // delete blog 
 function del_blog(id,res,session_this){
 	if(session_this.power(4)){
-		mongo.open({'collection_name':'article'},function(err,collection,close){
+		mongo.start({'collection_name':'article'},function(err,collection,close){
 			collection.remove({id:id},function(err,docs){  
 				if(err) {  
 					console.log('ERROR');
@@ -49,7 +49,7 @@ function del_blog(id,res,session_this){
 // delete share
 function del_share(id,res,session_this){
 	if(session_this.power(7)){
-		mongo.open({'collection_name':'share'},function(err,collection,close){
+		mongo.start({'collection_name':'share'},function(err,collection,close){
 			collection.remove({id:id},function(err,docs){  
 				if(err) {  
 					console.log('ERROR');
@@ -71,7 +71,7 @@ function del_share(id,res,session_this){
 // delete opus
 function del_opus(id,res,session_this){
 	if(session_this.power(10)){
-		mongo.open({'collection_name':'opus'},function(err,collection,close){
+		mongo.start({'collection_name':'opus'},function(err,collection,close){
 			collection.remove({id:id},function(err,docs){  
 				if(err) {  
 					console.log('ERROR');
@@ -93,7 +93,7 @@ function del_opus(id,res,session_this){
 // delete user
 function del_user(id,res,session_this){
 	if(session_this.power(13)){
-		mongo.open({'collection_name':'user'},function(err,collection,close){
+		mongo.start({'collection_name':'user'},function(err,collection,close){
 			collection.remove({id:id},function(err,docs){
 				if(err) {  
 					console.log('ERROR');

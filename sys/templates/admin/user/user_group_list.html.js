@@ -17,7 +17,7 @@ var temp=['<tr>',
 exports.render = function (req,res){
 	res.writeHead(200, {'Content-Type': 'text/html'});
 	
-	mongo.open({'collection_name':'user_group'},function(err,collection,close){
+	mongo.start({'collection_name':'user_group'},function(err,collection,close){
 
 	    collection.find({},{}).toArray(function(err, docs) {
 			var txt='';

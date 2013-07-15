@@ -16,7 +16,7 @@ function get_list(data,res){
 		'limit':limit_num,
 		'skip':skip_num,
 	};
-	mongo.open({'collection_name':'article'},function(err,collection,close){
+	mongo.start({'collection_name':'article'},function(err,collection,close){
       //count the all list
       collection.count(function(err,count){
       	resJSON['count'] = count;
@@ -46,7 +46,7 @@ function get_detail(data,res){
 		'code':1,
 		'id' : data['id'],
 	};
-	mongo.open({'collection_name':'article'},function(err,collection,close){
+	mongo.start({'collection_name':'article'},function(err,collection,close){
 		collection.find({id:articleID}).toArray(function(err, docs) {
 			if(arguments[1].length==0){
 				resJSON['code'] = 2;

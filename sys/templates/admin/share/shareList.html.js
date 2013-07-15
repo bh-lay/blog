@@ -22,7 +22,7 @@ exports.render = function (req,res){
 	parm['page_cur'] = parseInt(parm['page_cur']);
 	var skip_list=parm['page_list_num']*(parm['page_cur']-1);
 	
-	mongo.open({'collection_name':'share'},function(err,collection,close){
+	mongo.start({'collection_name':'share'},function(err,collection,close){
 
       //count the all list
       collection.count(function(err,count){
