@@ -2,8 +2,8 @@
  * @author bh-lay
  * 
  */
-/**
-	@ demo
+/**************************************************************
+@ demo
 	$.ajax({
 		'type':'GET',
 		'url':'/ajax/del',
@@ -13,29 +13,68 @@
 		}, 
 	});
 
- */
+***************************************************************/
 
 var querystring=require('querystring');
 var mongo = require('../conf/mongo_connect');
 var session = require('../conf/session');
+
+var del_conf = {
+	'blog' : {
+		'collection_name' : 'article',
+		'power' : 4
+	},
+	'share' : {
+		'collection_name' : 'share',
+		'power' : 7
+	},
+	'opus' : {
+		'collection_name' : 'opus',
+		'power' : 10
+	},
+	'user' : {
+		'collection_name' : 'user',
+		'power' : 13
+	}
+}
 
 function response(res,data){
 	res.write(JSON.stringify(data));
 	res.end();
 }
 
-// delete blog 
-function del_blog(id,res,session_this){
-	if(session_this.power(4)){
-		mongo.open({'collection_name':'article'},function(err,collection,close){
-			collection.remove({id:id},function(err,docs){  
-				if(err) {  
-					console.log('ERROR');
-			   	 res.end('{\'code\':2,\'msg\':\'maybe something wrong !\'}');        
-				}else {
-					res.end('{\'code\':1,\'msg\':\'delete sucuss !\'}');
-				}
-				close();
+
+/**
+ * delet method
+ * @param {id,collection_name,need_power},res,session_this
+ */ 
+function DELET(param,res,session_this){
+	var id = param['id'],
+		collection_name = param['collection_name'],
+		need_power = param['need_power'],
+		res = res,
+		session_this = session_this;
+		
+	if(session_this.power(need_power)){
+		mongo.start(function(method){
+		
+			method.open({'collection_name':collection_name},function(err,collection){
+			
+				collection.remove({id:id},function(err,docs){
+					if(err) {  
+						console.log('ERROR');
+						response(res,{
+							'code' : 2,
+							'msg' : 'maybe something wrong !'
+						});   
+					}else {
+						response(res,{
+							'code' : 1,
+							'msg' : 'delete user sucuss !'
+						});
+					}
+					method.close();
+				});
 			});
 		});
 	}else{
@@ -46,115 +85,42 @@ function del_blog(id,res,session_this){
 	}
 }
 
-// delete share
-function del_share(id,res,session_this){
-	if(session_this.power(7)){
-		mongo.open({'collection_name':'share'},function(err,collection,close){
-			collection.remove({id:id},function(err,docs){  
-				if(err) {  
-					console.log('ERROR');
-				   res.end('{\'code\':2,\'msg\':\'maybe something wrong !\'}');        
-				}else {
-			      res.end('{\'code\':1,\'msg\':\'delete sucuss !\'}');
-				}
-				close();
-			});
-		});
-	}else{
-		response(res,{
-			'code' : 2,
-			'msg' : 'no power！'
-		});
-	}
-}
-
-// delete opus
-function del_opus(id,res,session_this){
-	if(session_this.power(10)){
-		mongo.open({'collection_name':'opus'},function(err,collection,close){
-			collection.remove({id:id},function(err,docs){  
-				if(err) {  
-					console.log('ERROR');
-				    res.end('{\'code\':2,\'msg\':\'maybe something wrong !\'}');        
-				}else {
-			        res.end('{\'code\':1,\'msg\':\'delete sucuss !\'}');
-				}
-				close();
-			});
-		});
-	}else{
-		response(res,{
-			'code' : 2,
-			'msg' : 'no power！'
-		});
-	}
-}
-
-// delete user
-function del_user(id,res,session_this){
-	if(session_this.power(13)){
-		mongo.open({'collection_name':'user'},function(err,collection,close){
-			collection.remove({id:id},function(err,docs){
-				if(err) {  
-					console.log('ERROR');
-					response(res,{
-						'code' : 2,
-						'msg' : 'maybe something wrong !'
-					});   
-				}else {
-					response(res,{
-						'code' : 1,
-						'msg' : 'delete user sucuss !'
-					});
-				}
-				close();
-			});
-		});
-	}else{
-		response(res,{
-			'code' : 2,
-			'msg' : 'no power！'
-		});
-	}
-}
 
 exports.render = function (req,res){
 	var dataString = req.url.split('?')[1]||'',
-		data = querystring.parse(dataString),
-		from = data['from']||'',
-		id = data['id']||'';
+		data = querystring.parse(dataString);
 	
-	if(from.length<2){
-		response(res,{
-			'code' : 2,
-			'msg' : 'please input [from] for del !'
-		});
-	}else if(id.length<2){
+	var from = data['from']||'';
+	
+	var param = {
+		'id' : data['id']||'',
+		'power' : null
+	};
+	
+	if(param['id'].length<2){
 		response(res,{
 			'code' : 2,
 			'msg' : 'please input [id] for del !'
 		});
+	}else if(from.length<2){
+		response(res,{
+			'code' : 2,
+			'msg' : 'please input [from] for del !'
+		});
 	}else{
-		var session_this = session.start(req,res);
-		
-		switch(from){
-			case 'blog' :
-				del_blog(id,res,session_this);
-				break;
-			case 'share' :
-				del_share(id,res,session_this);
-				break
-			case 'opus' :
-				del_opus(id,res,session_this);
-				break;
-			case 'user' :
-				del_user(id,res,session_this);
-				break;
-			default :
-				response(res,{
-					'code' : 2,
-					'msg' : 'please check [from] in [blog/share/opus/user] !'
-				});
+		//check ['from'] is exist
+		if(del_conf[from]){
+			var session_this = session.start(req,res);
+			
+			param['collection_name'] = del_conf[from]['collection_name'];
+			param['need_power'] = del_conf[from]['power'];
+			
+			DELET(param,res,session_this);
+		}else{
+			response(res,{
+				'code' : 2,
+				'msg' : 'please check [from] in [blog/share/opus/user] !'
+			});
 		}
 	}
 }

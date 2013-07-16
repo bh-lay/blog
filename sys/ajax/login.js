@@ -36,27 +36,32 @@ function login (res,session_this,username,password){
 		password = password;
 	
 	if(session_this.get('user_group') == 'guest'){
-		mongo.open({'collection_name':'user'},function(err,collection,close){
-			collection.find({'username':username,'password':password}).toArray(function(err, docs) {
-				if(docs.length > 0){
-					session_this.set({
-						'user_group' : docs[0]['user_group'],
-						'usernick' : docs[0]['usernick'],
-						'power' : powerList[docs[0]['user_group']]
-					});
-					
-					console.log('i\'m ',powerList[docs[0]['user_group']])
-					response(res,{
-						'code':1,
-						'msg':'login success!'
-					});
-				}else{
-					response(res,{
-						'code':2,
-						'msg':'二货，帐号密码输错了吧！'
-					});
-				}
-				close();
+		
+		mongo.start(function(method){
+			
+			method.open({'collection_name':'user'},function(err,collection,close){
+			
+				collection.find({'username':username,'password':password}).toArray(function(err, docs) {
+					if(docs.length > 0){
+						session_this.set({
+							'user_group' : docs[0]['user_group'],
+							'usernick' : docs[0]['usernick'],
+							'power' : powerList[docs[0]['user_group']]
+						});
+						
+						console.log('i\'m ',powerList[docs[0]['user_group']])
+						response(res,{
+							'code':1,
+							'msg':'login success!'
+						});
+					}else{
+						response(res,{
+							'code':2,
+							'msg':'二货，帐号密码输错了吧！'
+						});
+					}
+					method.close();
+				});
 			});
 		});
 	}else{

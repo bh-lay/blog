@@ -16,24 +16,26 @@ function get_list(data,res){
 		'limit':limit_num,
 		'skip':skip_num,
 	};
-	mongo.open({'collection_name':'article'},function(err,collection,close){
-      //count the all list
-      collection.count(function(err,count){
-      	resJSON['count'] = count;
-      });
-      
-      collection.find({},{limit:limit_num}).sort({id:-1}).skip(skip_num).toArray(function(err, docs) {
-			if(err){
-				resJSON.code=2;
-			}else{
-				for(var i=0 in docs){
-					delete docs[i]['content'];
+	mongo.start(function(method){
+		method.open({'collection_name':'article'},function(err,collection,close){
+	      //count the all list
+	      collection.count(function(err,count){
+	      	resJSON['count'] = count;
+	      });
+	      
+	      collection.find({},{limit:limit_num}).sort({id:-1}).skip(skip_num).toArray(function(err, docs) {
+				if(err){
+					resJSON.code=2;
+				}else{
+					for(var i=0 in docs){
+						delete docs[i]['content'];
+					}
+					resJSON['list'] = docs;
 				}
-				resJSON['list'] = docs;
-			}
-			res.write(JSON.stringify(resJSON));
-			res.end();
-			close();
+				res.write(JSON.stringify(resJSON));
+				res.end();
+				method.close();
+			});
 		});
 	});
 }
@@ -46,18 +48,20 @@ function get_detail(data,res){
 		'code':1,
 		'id' : data['id'],
 	};
-	mongo.open({'collection_name':'article'},function(err,collection,close){
-		collection.find({id:articleID}).toArray(function(err, docs) {
-			if(arguments[1].length==0){
-				resJSON['code'] = 2;
-				resJSON['msg'] = 'could not find this blog !';				
-			}else{ 
-				resJSON['detail'] = docs[0];
-				delete resJSON['detail']['_id'];
-			}
-			res.write(JSON.stringify(resJSON));
-			res.end();
-			close();
+	mongo.start(function(method){
+		method.open({'collection_name':'article'},function(err,collection,close){
+			collection.find({id:articleID}).toArray(function(err, docs) {
+				if(arguments[1].length==0){
+					resJSON['code'] = 2;
+					resJSON['msg'] = 'could not find this blog !';				
+				}else{ 
+					resJSON['detail'] = docs[0];
+					delete resJSON['detail']['_id'];
+				}
+				res.write(JSON.stringify(resJSON));
+				res.end();
+				method.close();
+			});
 		});
 	});
 }
