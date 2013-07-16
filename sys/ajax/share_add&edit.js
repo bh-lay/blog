@@ -8,28 +8,35 @@ var querystring = require('querystring');
 
 function add(parm,res){
 	var parm = parm;
-	mongo.open({'collection_name':'share'},function(err,collection,close){
-		collection.find({}, {}).toArray(function(err, docs) {
-			parm.id=Date.parse(new Date()).toString(16);
-
-			collection.insert(parm,function(err,result){
-				if(err) throw err;
-				res.end("{'code':1,'id':"+parm.id+",'msg':'sucess'}");
-				close();
+	mongo.start(function(method){
+		
+		method.open({'collection_name':'share'},function(err,collection){
+			collection.find({}, {}).toArray(function(err, docs) {
+				parm.id=Date.parse(new Date()).toString(16);
+	
+				collection.insert(parm,function(err,result){
+					if(err) throw err;
+					res.end("{'code':1,'id':"+parm.id+",'msg':'sucess'}");
+					method.close();
+				});
 			});
 		});
 	});
 }
 function edit(parm,res){
 	var parm = parm;
-	mongo.open({'collection_name':'share'},function(error,collection,close){
-		collection.update({'id':parm.id}, {$set:parm}, function(err,docs) {
-			if(err) {
-			    res.end('fail');        
-			}else {
-		        res.end('ok');
-			}
-			close();
+	
+	mongo.start(function(method){
+		
+		method.open({'collection_name':'share'},function(error,collection){
+			collection.update({'id':parm.id}, {$set:parm}, function(err,docs) {
+				if(err) {
+				    res.end('fail');        
+				}else {
+			        res.end('ok');
+				}
+				method.close();
+			});
 		});
 	});
 }

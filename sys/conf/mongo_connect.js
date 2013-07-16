@@ -1,14 +1,17 @@
 /**
  * @author bh-lay
  * 
- * @demo
-	exports.open({'collection_name':'article'},function(err,collection,close){
-		//dosomething……
-		//at last or you needn't connect to datebase,you should close it;
-		close();
-	});
  */
-
+/****************************************************************************
+ @demo
+	exports.start(function(method){
+		method.open({'collection_name':'article'},function(err,collection){
+			//dosomething……
+			//at last or you needn't connect to datebase,you should close it;
+			method.close();
+		});
+	});
+ ***************************************************************************/
 var conf = {
 	'host':'localhost',
 	'port':27017,
@@ -19,36 +22,9 @@ var conf = {
 
 var mongodb = require('mongodb');
 
-
-exports.open = function(parm,callback) {
-	var mongoserver = new mongodb.Server(conf.host, conf.port, {w:-1});
-	var DB = new mongodb.Db(conf.db_name, mongoserver,{safe:true});
-	
-	var parm = parm||{};
-	var collection_name = parm['collection_name']||'article';
-	
-	DB.open(function (error, client) {
-		if (error){
-			callback('can not open datebase !',undefined);
-			return; 
-		}
-		DB.authenticate(conf.user, conf.pass, function (err, val) {
-			if (err) {
-				callback('authorize failed !',undefined);
-			} else {
-				DB.createCollection(collection_name, function(err,collection){
-					callback(undefined,collection,function(){
-						DB.close();
-					});
-				});
-			}	
-		});
-	});
-};
-
-/**
- * 
+/** 
  * @param DB,collection_name,callback
+ * 
  */
 function open(DB,collection_name,callback){
 	var parm = parm||{};
@@ -70,15 +46,7 @@ function open(DB,collection_name,callback){
 	});
 }
 
-/** @demo
-	exports.start(function(method){
-		method.open({'collection_name':'article'},function(err,collection){
-			//dosomething……
-			//at last or you needn't connect to datebase,you should close it;
-			method.close();
-		});
-	});
- */
+
 exports.start = function(callback) {
 	var mongoserver = new mongodb.Server(conf.host, conf.port, {w:-1});
 	var DB = new mongodb.Db(conf.db_name, mongoserver,{safe:true});

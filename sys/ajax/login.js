@@ -39,7 +39,7 @@ function login (res,session_this,username,password){
 		
 		mongo.start(function(method){
 			
-			method.open({'collection_name':'user'},function(err,collection,close){
+			method.open({'collection_name':'user'},function(err,collection){
 			
 				collection.find({'username':username,'password':password}).toArray(function(err, docs) {
 					if(docs.length > 0){

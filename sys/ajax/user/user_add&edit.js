@@ -15,14 +15,18 @@ function response(res,data){
 
 function add(parm,res){
 	var parm = parm;
-	mongo.open({'collection_name':'user'},function(err,collection,close){
-		collection.find({}, {}).toArray(function(err, docs) {
-			parm.id=Date.parse(new Date()).toString(16);
-
-			collection.insert(parm,function(err,result){
-				if(err) throw err;
-				res.end("{'code':1,'id':"+parm.id+",'msg':'sucess'}");
-				close();
+	
+	mongo.start(function(method){
+		
+		method.open({'collection_name':'user'},function(err,collection){
+			collection.find({}, {}).toArray(function(err, docs) {
+				parm.id=Date.parse(new Date()).toString(16);
+	
+				collection.insert(parm,function(err,result){
+					if(err) throw err;
+					res.end("{'code':1,'id':"+parm.id+",'msg':'sucess'}");
+					method.close();
+				});
 			});
 		});
 	});
@@ -30,14 +34,18 @@ function add(parm,res){
 
 function edit(parm,res){
 	var parm = parm;
-	mongo.open({'collection_name':'user'},function(error,collection,close){
-		collection.update({'id':parm.id}, {$set:parm}, function(err,docs) {
-			if(err) {
-			    res.end('{\'code\':2,\'msg\':\'modified failure !\'}');        
-			}else {
-		        res.end('{\'code\':1,\'msg\':\'modified success !\'}');
-			}
-			close();
+	
+	mongo.start(function(method){
+		
+		method.open({'collection_name':'user'},function(error,collection){
+			collection.update({'id':parm.id}, {$set:parm}, function(err,docs) {
+				if(err) {
+				    res.end('{\'code\':2,\'msg\':\'modified failure !\'}');        
+				}else {
+			        res.end('{\'code\':1,\'msg\':\'modified success !\'}');
+				}
+				method.close();
+			});
 		});
 	});
 }

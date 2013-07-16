@@ -14,40 +14,48 @@ function response(res,data){
 
 function add(parm,res){
 	var parm = parm;
-	mongo.open({'collection_name':'article'},function(err,collection,close){
-		collection.find({}, {}).toArray(function(err, docs) {
-			parm.id=Date.parse(new Date()).toString(16);
-
-			collection.insert(parm,function(err,result){
-				if(err) throw err;
-				response(res,{
-					'code' : 1,
-					'id' : parm.id,
-					'msg' : 'add blog sucess !'
+	
+	mongo.start(function(method){
+		
+		method.open({'collection_name':'article'},function(err,collection){
+			collection.find({}, {}).toArray(function(err, docs) {
+				parm.id=Date.parse(new Date()).toString(16);
+	
+				collection.insert(parm,function(err,result){
+					if(err) throw err;
+					response(res,{
+						'code' : 1,
+						'id' : parm.id,
+						'msg' : 'add blog sucess !'
+					});
+					method.close();
 				});
-				close();
 			});
 		});
 	});
 }
 function edit(parm,res){
 	var parm = parm;
-	mongo.open({'collection_name':'article'},function(error,collection,close){
-		collection.update({'id':parm.id}, {$set:parm}, function(err,docs) {
-			if(err) {
-				response(res,{
-					'code' : 2,
-					'id' : parm.id,
-					'msg' : 'edit blog fail !'
-				});       
-			}else {
-				response(res,{
-					'code':1,
-					'id' : parm.id,
-					'msg':'edit blog success !'
-				});
-			}
-			close();
+	
+	mongo.start(function(method){
+		
+		method.open({'collection_name':'article'},function(error,collection){
+			collection.update({'id':parm.id}, {$set:parm}, function(err,docs) {
+				if(err) {
+					response(res,{
+						'code' : 2,
+						'id' : parm.id,
+						'msg' : 'edit blog fail !'
+					});       
+				}else {
+					response(res,{
+						'code':1,
+						'id' : parm.id,
+						'msg':'edit blog success !'
+					});
+				}
+				method.close();
+			});
 		});
 	});
 }
