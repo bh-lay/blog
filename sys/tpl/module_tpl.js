@@ -32,14 +32,14 @@ tpl.article_item = ['<div class="articleItem" articleId="{-id-}">',
 '</div>'];
 
 tpl.share_item = ['<li>',
-	'<a href="/share/{-id-}" title="{-title-}" target="_blank">',
+	'<a href="/share/{-id-}" title="{-title-}" target="_self">',
 		'<img src="{-cover-}" alt="{-title-}" />',
 		'<strong>{-title-}</strong>',
 	'</a>',
 '</li>'];
 
 tpl.opus_item = ['<li>',
-	'<a href="/opus/{-id-}" title="{-title-}" target="_blank">',
+	'<a href="/opus/{-id-}" title="{-title-}" target="_self">',
 		'<img src="{-cover-}" alt="{-title-}" />',
 		'<strong>{-title-}</strong>',
 	'</a>',

@@ -1,15 +1,13 @@
 //author bh-lay
 var mongo = require('../conf/mongo_connect');
-var fs = require('fs');
 var layFile = require('../lib/layFile');
-
-var tpl = require('../tpl/module_tpl');
-var page_temp=fs.readFileSync('./templates/blogDetail.html', "utf8");
-page_temp=tpl.init(page_temp);
+var temp = require('../tpl/page_temp');
 
 exports.deal = function (req,res,pathname){
-	res.writeHead(200, {'Content-Type': 'text/html'});
 	var id = pathname.match(/^\/blog\/(\w*)/)[1];
+	var page = temp.get('blogDetail',{'init':true});
+	
+	res.writeHead(200, {'Content-Type': 'text/html'});
 	
 	mongo.start(function(method){
 		
@@ -22,7 +20,7 @@ exports.deal = function (req,res,pathname){
 				}else{
 					var date=new Date(parseInt(docs[0].time_show));
 					docs[0].time_show=(date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+date.getDate();
-					var txt = page_temp.replace(/\{-(\w*)-}/g,function(){
+					var txt = page.replace(/\{-(\w*)-}/g,function(){
 						return docs[0][arguments[1]]||22222;
 					});
 					res.end(txt);

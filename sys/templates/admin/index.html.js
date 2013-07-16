@@ -3,9 +3,7 @@
 var fs = require('fs');
 var session= require('../../lib/session');
 var temp = fs.readFileSync('./templates/admin/index.html', "utf8");
-var pageData = {
-	
-};
+
 
 exports.render = function (req,res){
 	var session_this = session.start(req,res);

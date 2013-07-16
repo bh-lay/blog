@@ -21,6 +21,7 @@ exports.render = function (req,res){
 		mongo.start(function(method){
 		
 			method.open({'collection_name':'article'},function(err,collection){
+				
 				collection.find({'id':articleID}).toArray(function(err, docs) {		
 					var txt=valueInit(docs[0]);
 					res.write(txt);

@@ -1,15 +1,14 @@
 //author bh-lay
 var mongo = require('../conf/mongo_connect');
-var fs = require('fs');
 var layFile = require('../lib/layFile');
 
-var tpl = require('../tpl/module_tpl');
-var page_temp=fs.readFileSync('./templates/opusDetail.html', "utf8");
-page_temp=tpl.init(page_temp);
+var temp = require('../tpl/page_temp');
 
 exports.deal = function (req,res,pathname){
-	res.writeHead(200, {'Content-Type': 'text/html'});
 	var id=pathname.match(/^\/opus\/(\w*)/)[1];
+	var page_temp = temp.get('opusDetail',{'init':true});
+	
+	res.writeHead(200, {'Content-Type': 'text/html'});
 	
 	mongo.start(function(method){
 		

@@ -1,15 +1,15 @@
 //author bh-lay
-var fs = require('fs');
+
 var layFile = require('../lib/layFile');
-					
 var mongo = require('../conf/mongo_connect');
-var tpl = require('../tpl/module_tpl');
-var page_temp=fs.readFileSync('./templates/shareDetail.html', "utf8");
-page_temp = tpl.init(page_temp);
+
+var temp = require('../tpl/page_temp');
 
 exports.deal = function (req,res,pathname){
-	res.writeHead(200, {'Content-Type': 'text/html'});
 	var id=pathname.match(/^\/share\/(\w*)/)[1];
+	var page_temp = temp.get('shareDetail',{'init':true});
+	
+	res.writeHead(200, {'Content-Type': 'text/html'});
 	
 	mongo.start(function(method){
 		
