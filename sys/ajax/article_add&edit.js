@@ -5,7 +5,7 @@
 
 var mongo = require('../conf/mongo_connect');
 var querystring=require('querystring');
-var session= require('../conf/session');
+var session= require('../lib/session');
 
 function response(res,data){
 	res.write(JSON.stringify(data));

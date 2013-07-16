@@ -3,8 +3,8 @@
  */
 
 var fs = require('fs');
-var layFile = require('./conf/layFile');
-var session = require('./conf/session');
+var layFile = require('./lib/layFile');
+var session = require('./lib/session');
 var powerCode = 1;
 
 exports.deal=function(req,res,pathname){

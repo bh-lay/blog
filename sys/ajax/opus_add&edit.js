@@ -12,7 +12,7 @@ demo
  */
 
 var mongo = require('../conf/mongo_connect');
-var session= require('../conf/session');
+var session= require('../lib/session');
 var querystring=require('querystring');
 
 function add(parm,res){

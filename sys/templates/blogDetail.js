@@ -1,6 +1,7 @@
 //author bh-lay
 var mongo = require('../conf/mongo_connect');
 var fs = require('fs');
+var layFile = require('../lib/layFile');
 
 var tpl = require('../tpl/module_tpl');
 var page_temp=fs.readFileSync('./templates/blogDetail.html', "utf8");
@@ -17,7 +18,6 @@ exports.deal = function (req,res,pathname){
 			collection.find({id:id}).toArray(function(err, docs) {
 				if(arguments[1].length==0){
 				//FIXME add no article page
-					var layFile = require('../conf/layFile');
 					layFile.notFound(res,'哇塞，貌似这篇博文不存在哦!');
 				}else{
 					var date=new Date(parseInt(docs[0].time_show));

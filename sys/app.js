@@ -1,7 +1,7 @@
 //author bh-lay
 var http = require('http');
-var layFile = require('./conf/layFile');
-var session = require('./conf/session');
+var layFile = require('./lib/layFile');
+var session = require('./lib/session');
 
 /*301  URL redirection*/
 var url_redirect = require('./conf/301url');
