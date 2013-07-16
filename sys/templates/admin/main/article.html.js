@@ -18,7 +18,7 @@ exports.render = function (req,res){
 	search&&(search=search.replace('?',''));
 	var articleID=querystring.parse(search).articleID;
 	if(articleID){
-		mongo.start({'collection_name':'article'},function(err,collection,close){
+		mongo.open({'collection_name':'article'},function(err,collection,close){
 			collection.find({'id':articleID}).toArray(function(err, docs) {		
 				var txt=valueInit(docs[0]);
 				res.write(txt);

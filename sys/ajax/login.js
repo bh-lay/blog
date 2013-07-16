@@ -36,7 +36,7 @@ function login (res,session_this,username,password){
 		password = password;
 	
 	if(session_this.get('user_group') == 'guest'){
-		mongo.start({'collection_name':'user'},function(err,collection,close){
+		mongo.open({'collection_name':'user'},function(err,collection,close){
 			collection.find({'username':username,'password':password}).toArray(function(err, docs) {
 				if(docs.length > 0){
 					session_this.set({

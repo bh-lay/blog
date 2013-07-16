@@ -22,31 +22,36 @@ exports.render = function (req,res){
 	parm['page_cur'] = parseInt(parm['page_cur']);
 	var skip_list=parm['page_list_num']*(parm['page_cur']-1);
 	
-	mongo.start({'collection_name':'opus'},function(err,collection,close){
-
-      //count the all list
-      collection.count(function(err,count){
-      	parm['list_count'] = count;
-      });
-      
-      collection.find({},{limit:parm['page_list_num']}).sort({id:-1}).skip(skip_list).toArray(function(err, docs) {
-			var txt='';
-			var tpl=temp.join('');
-			for(var i in docs){
-				docs[i].opus_time_create = parse.time(docs[i].opus_time_create,'y-M-d');
-				txt+=tpl.replace(/\{(\w*)}/g,function(){
-					return docs[i][arguments[1]]||'';
-				});
-			}
-			var tpl=fs.readFileSync('./templates/admin/main/opusList.html', "utf8");
-			
-			var pageTpl = page.render(parm);
-			tpl=tpl.replace('{pageBar}',pageTpl);
+	mongo.start(function(method){
 		
-			tpl=tpl.replace('{content}',txt);
-			res.write(tpl);
-			res.end();
-			close();
+		method.open({'collection_name':'opus'},function(err,collection){
+	
+	      //count the all list
+	      collection.count(function(err,count){
+	      	parm['list_count'] = count;
+	      });
+	      
+	      collection.find({},{limit:parm['page_list_num']}).sort({id:-1}).skip(skip_list).toArray(function(err, docs) {
+				var txt='';
+				var tpl=temp.join('');
+				for(var i in docs){
+					docs[i].opus_time_create = parse.time(docs[i].opus_time_create,'y-M-d');
+					txt+=tpl.replace(/\{(\w*)}/g,function(){
+						return docs[i][arguments[1]]||'';
+					});
+				}
+				var tpl=fs.readFileSync('./templates/admin/main/opusList.html', "utf8");
+				
+				var pageTpl = page.render(parm);
+				tpl=tpl.replace('{pageBar}',pageTpl);
+			
+				tpl=tpl.replace('{content}',txt);
+				res.write(tpl);
+				res.end();
+				method.close();
+			});
+			
 		});
+
 	});
 }

@@ -18,21 +18,24 @@ var temp=['<tr>',
 exports.render = function (req,res){
 	res.writeHead(200, {'Content-Type': 'text/html'});
 	
-	mongo.start({'collection_name':'user'},function(err,collection,close){
+	mongo.start(function(method){
 
-      collection.find({},{}).toArray(function(err, docs) {
-			var txt='';
-			var tpl = temp.join('');
-			for(var i in docs){
-				txt += tpl.replace(/\{(\w*)}/g,function(){
-					return docs[i][arguments[1]]||'';
-				});
-			}
-			
-			var page = pageTpl.replace('{-content-}',txt);
-			res.write(page);
-			res.end();
-			close();
+		method.open({'collection_name':'user'},function(err,collection){
+	
+	      collection.find({},{}).toArray(function(err, docs) {
+				var txt='';
+				var tpl = temp.join('');
+				for(var i in docs){
+					txt += tpl.replace(/\{(\w*)}/g,function(){
+						return docs[i][arguments[1]]||'';
+					});
+				}
+				
+				var page = pageTpl.replace('{-content-}',txt);
+				res.write(page);
+				res.end();
+				method.close();
+			});
 		});
 	});
 }

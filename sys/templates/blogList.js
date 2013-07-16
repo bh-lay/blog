@@ -11,23 +11,28 @@ page_temp = tpl.init(page_temp);
 			
 exports.deal = function (req,res){
 	res.writeHead(200, {'Content-Type': 'text/html'});
-	mongo.start({'collection_name':'article'},function(err,collection,close){
-	//
-		collection.find({}, {limit:10}).sort({id:-1}).toArray(function(err, docs) {
-			var txt='';
-			var temp = tpl.get('article_item');
-			for(var i in docs){
-				var date=new Date(parseInt(docs[i].time_show));
-				docs[i].time_show=(date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+date.getDate();
-				docs[i].cover=docs[i].cover||'/images/notimg.gif';
-				txt+=temp.replace(/\{-(\w*)-}/g,function(){
-					return docs[i][arguments[1]]||'';
-				});
-			}
-			var page = page_temp.replace('{-content-}',txt);
-			res.write(page);
-			res.end();
-			close();
+	mongo.start(function(method){
+		
+		method.open({'collection_name':'article'},function(err,collection){
+			
+			collection.find({}, {limit:10}).sort({id:-1}).toArray(function(err, docs) {
+				var txt='';
+				var temp = tpl.get('article_item');
+				for(var i in docs){
+					var date=new Date(parseInt(docs[i].time_show));
+					docs[i].time_show=(date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+date.getDate();
+					docs[i].cover=docs[i].cover||'/images/notimg.gif';
+					txt+=temp.replace(/\{-(\w*)-}/g,function(){
+						return docs[i][arguments[1]]||'';
+					});
+				}
+				var page = page_temp.replace('{-content-}',txt);
+				res.write(page);
+				res.end();
+				method.close();
+			});
+			
 		});
+		
 	});
 }

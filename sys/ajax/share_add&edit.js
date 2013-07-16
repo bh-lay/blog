@@ -8,7 +8,7 @@ var querystring = require('querystring');
 
 function add(parm,res){
 	var parm = parm;
-	mongo.start({'collection_name':'share'},function(err,collection,close){
+	mongo.open({'collection_name':'share'},function(err,collection,close){
 		collection.find({}, {}).toArray(function(err, docs) {
 			parm.id=Date.parse(new Date()).toString(16);
 
@@ -22,7 +22,7 @@ function add(parm,res){
 }
 function edit(parm,res){
 	var parm = parm;
-	mongo.start({'collection_name':'share'},function(error,collection,close){
+	mongo.open({'collection_name':'share'},function(error,collection,close){
 		collection.update({'id':parm.id}, {$set:parm}, function(err,docs) {
 			if(err) {
 			    res.end('fail');        

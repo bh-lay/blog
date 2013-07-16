@@ -8,6 +8,7 @@ var fs = require('fs');
 var url = require('url');
 var temp=fs.readFileSync('./templates/admin/user/user.html', "utf8");
 var querystring=require('querystring');
+var mongo = require('../../../conf/mongo_connect');
 
 var user_group = {
 	'admin' : '管理员',
@@ -38,14 +39,19 @@ exports.render = function (req,res){
 	search&&(search=search.replace('?',''));
 	var userID=querystring.parse(search).userid;
 	if(userID){
-		var mongo = require('../../../conf/mongo_connect');
-		mongo.start({'collection_name':'user'},function(err,collection,close){
-			collection.find({'id':userID}).toArray(function(err, docs) {		
-				var txt = valueInit(docs[0]);
-				res.write(txt);
-				res.end();
-				close();
+		mongo.start(function(method){
+		
+			method.open({'collection_name':'user'},function(err,collection){
+		
+				collection.find({'id':userID}).toArray(function(err, docs) {		
+					var txt = valueInit(docs[0]);
+					res.write(txt);
+					res.end();
+					method.close();
+				});
+				
 			});
+			
 		});
 	}else{
 		res.end(valueInit({}));

@@ -18,12 +18,16 @@ exports.render = function (req,res){
 	search&&(search=search.replace('?',''));
 	var opusID=querystring.parse(search).opusID;
 	if(opusID){
-		mongo.start({'collection_name':'opus'},function(err,collection,close){
-			collection.find({'id':opusID}).toArray(function(err, docs) {		
-				var txt=valueInit(docs[0]);
-				res.write(txt);
-				res.end();
-				close();
+		mongo.start(function(method){
+			
+			method.open({'collection_name':'opus'},function(err,collection){
+				
+				collection.find({'id':opusID}).toArray(function(err, docs) {		
+					var txt=valueInit(docs[0]);
+					res.write(txt);
+					res.end();
+					method.close();
+				});
 			});
 		});
 	}else{
