@@ -3,6 +3,8 @@
  * view url : /share    /share/
  */
 var mongo = require('../conf/mongo_connect');
+var response = require('../lib/response');
+
 var tpl = require('../tpl/module_tpl');
 var temp = require('../tpl/page_temp');
 
@@ -27,8 +29,9 @@ exports.deal = function (req,res){
 					});
 				}
 				txt = page_temp.replace('{-content-}',txt);
-				res.write(txt);
-				res.end();
+				
+				response.html(res,200,txt);
+				
 				method.close();
 			});
 			

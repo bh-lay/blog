@@ -18,6 +18,7 @@
 var querystring=require('querystring');
 var mongo = require('../conf/mongo_connect');
 var session = require('../lib/session');
+var response = require('../lib/response');
 
 var del_conf = {
 	'blog' : {
@@ -38,10 +39,6 @@ var del_conf = {
 	}
 }
 
-function response(res,data){
-	res.write(JSON.stringify(data));
-	res.end();
-}
 
 
 /**
@@ -63,12 +60,12 @@ function DELET(param,res,session_this){
 				collection.remove({id:id},function(err,docs){
 					if(err) {  
 						console.log('ERROR');
-						response(res,{
+						response.json(res,{
 							'code' : 2,
 							'msg' : 'maybe something wrong !'
-						});   
+						});
 					}else {
-						response(res,{
+						response.json(res,{
 							'code' : 1,
 							'msg' : 'delete user sucuss !'
 						});
@@ -78,7 +75,7 @@ function DELET(param,res,session_this){
 			});
 		});
 	}else{
-		response(res,{
+		response.json(res,{
 			'code' : 2,
 			'msg' : 'no power！'
 		});
@@ -98,12 +95,12 @@ exports.render = function (req,res){
 	};
 	
 	if(param['id'].length<2){
-		response(res,{
+		response.json(res,{
 			'code' : 2,
 			'msg' : 'please input [id] for del !'
 		});
 	}else if(from.length<2){
-		response(res,{
+		response.json(res,{
 			'code' : 2,
 			'msg' : 'please input [from] for del !'
 		});
@@ -117,7 +114,7 @@ exports.render = function (req,res){
 			
 			DELET(param,res,session_this);
 		}else{
-			response(res,{
+			response.json(res,{
 				'code' : 2,
 				'msg' : 'please check [from] in [blog/share/opus/user] !'
 			});

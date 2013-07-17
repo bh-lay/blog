@@ -3,6 +3,7 @@
  */
 
 var fs = require('fs');
+var response = require('./response');
 
 /*Mime-Type*/
 var mime = {
@@ -15,42 +16,6 @@ var mime = {
 	'gif' : 'image/gif',
 };
 
-var httpStatus = null;
-
-/*
- * 404 notFound
- */
-function notFound(res,txt){
-	httpStatus = 404;
-	var txt=txt||'';
-	res.writeHead(httpStatus, {
-		'Content-Type' : 'text/html'
-	});
-	var temp = fs.readFileSync('./templates/404.html', "utf8");
-	temp = temp.replace(/{-content-}/,txt)
-	res.write(temp);
-	res.end();
-}
-
-/**
- * 415 not supposted 
- */
-function notSuppost(res,ext){
-	httpStatus = 415 ;
-	res.writeHead(httpStatus, {'Content-Type' : "text/plain"});
-	res.end('this type file(*.'+ext+') is not supposted !');
-}
-
-/**
- * 500 server error 
- */
-function serverErr(res,err){
-	httpStatus = 500;
-	res.writeHead(httpStatus, {
-		'Content-Type' : 'text/plain'
-	});
-	res.end(err.toString());
-}
 
 /*read static resources*/
 function readFile(req, res) {
@@ -64,46 +29,56 @@ function readFile(req, res) {
 		realPath += '/index.html'
 	}
 	if(!mime[ext]){
-		notSuppost(res,ext);
+		/**
+		 * 415 not supposted 
+		 */
+		response.define(res,415,{
+			'Content-Type' : 'text/plain'
+		},'this type file(*.'+ext+') is not supposted12345 !');
+		
 		return
 	}
 	fs.exists(realPath, function(exists) {
 		if(exists){
 			fs.readFile(realPath, function(err, file) {
 				if(err) {
-					serverErr(res,err)
+					/**
+					 * 500 server error 
+					 */
+					response.define(res,500,{
+						'Content-Type' : 'text/plain'
+					},err.toString());
+
 				} else {
-					var maxAge = 60 * 60 * 24 * 365;
-					var expires = new Date();
-					expires.setTime(expires.getTime() + maxAge * 1000);
-					
-					res.setHeader("Expires", expires.toUTCString());
-					res.setHeader("Cache-Control", "max-age=" + maxAge);
-					res.setHeader("Server", "node.js");
-					
+									
 					fs.stat(realPath, function(err, stat) {
+						
 						var lastModified = stat.mtime.toUTCString();
-						res.setHeader("Last-Modified", lastModified);
-						if(req.headers['if-modified-since'] && lastModified == req.headers['if-modified-since']) {
-							httpStatus = 304 ;
-							res.writeHead(httpStatus, "Not Modified");
-							res.end();
+						
+						if(req.headers['if-modified-since'] && (lastModified == req.headers['if-modified-since'])) {
+							
+							response.define(res,304,"Not Modified");
+							
 						} else {
-							httpStatus = 200 ;
-							res.writeHead(httpStatus, {
-								'Content-Type' : mime[ext] || "text/plain"
-							});
-							res.end(file);
+							var maxAge = 60 * 60 * 24 * 365;
+							var expires = new Date();
+							expires.setTime(expires.getTime() + maxAge * 1000);
+							response.define(res,200,{
+								"Expires" : expires.toUTCString() ,
+								"Cache-Control" : "max-age=" + maxAge ,
+								"Last-Modified" : lastModified,
+								"Server" : "node.js",
+							},file);
+							
 						}
 					});
 				}
 			});
 		}else{
 			// 404 notFound
-			notFound(res);
+			response.notFound(res);
 		}
 	});
 }
 
-exports.notFound=notFound;
 exports.read = readFile;

@@ -15,6 +15,7 @@ $.ajax({
  * */
 
 var tpl = require('../tpl/module_tpl');
+var response = require('../lib/response');
 
 exports.render = function (req,res){
 	var search = req.url.split('?')[1];
@@ -28,6 +29,6 @@ exports.render = function (req,res){
 		resJSON['code'] = 2;
 		resJSON['msg'] = 'plese tell use "tempA-tempB-tempC" to get temp !';
 	}
-	res.write(JSON.stringify(resJSON));
-	res.end();
+	
+	response.json(res,resJSON);
 }

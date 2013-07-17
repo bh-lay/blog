@@ -3,8 +3,9 @@
  * view url : /blog    /blog/
  */
 var mongo = require('../conf/mongo_connect');
-var tpl = require('../tpl/module_tpl');
+var response = require('../lib/response');
 
+var tpl = require('../tpl/module_tpl');
 var temp = require('../tpl/page_temp');
 			
 exports.deal = function (req,res){
@@ -27,8 +28,9 @@ exports.deal = function (req,res){
 					});
 				}
 				var page = page_temp.replace('{-content-}',txt);
-				res.write(page);
-				res.end();
+				
+				response.html(res,200,page);
+				
 				method.close();
 			});
 			
