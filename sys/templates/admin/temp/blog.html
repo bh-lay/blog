@@ -11,7 +11,11 @@
 <div class="containter">
 	<div class="caption">文件管理</div>
 	<div class="articleList">
-		开发中……
+		<form action="/ajax/tempModify" target="_self" method="post">
+			<textarea name="text" cols="30" rows="10">{-content-}</textarea>
+			<input type="hidden" name="module" value="index" />
+			<input type="submit" value="修改" />
+		</form>
 	</div>
 </div>
 

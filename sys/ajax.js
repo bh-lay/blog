@@ -12,6 +12,7 @@ var ajaxConfig={
 	'user':'user/user_add&edit',
 	'user_group':'user/user_group_add&edit',
 	'temp':'temp',
+	'tempModify':'tempModify',
 	'login':'login',
 	'del' : 'del'
 };
