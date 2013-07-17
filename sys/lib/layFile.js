@@ -66,6 +66,7 @@ function readFile(req, res) {
 							var expires = new Date();
 							expires.setTime(expires.getTime() + maxAge * 1000);
 							response.define(res,200,{
+								"Content-Type" : mime[ext],
 								"Expires" : expires.toUTCString() ,
 								"Cache-Control" : "max-age=" + maxAge ,
 								"Last-Modified" : lastModified,
