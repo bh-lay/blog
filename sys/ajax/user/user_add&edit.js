@@ -7,11 +7,7 @@
 var mongo = require('../../conf/mongo_connect');
 var querystring=require('querystring');
 var session = require('../../lib/session');
-
-function response(res,data){
-	res.write(JSON.stringify(data));
-	res.end();
-}
+var response = require('../../lib/response');
 
 function add(parm,res){
 	var parm = parm;
@@ -72,7 +68,7 @@ exports.render = function (req,res){
 					if(session_this.power(12)){
 						edit(parm,res)
 					}else{
-						response(res,{
+						response.json(res,{
 							'code':2,
 							'msg':'no power to edit user !'
 						});
@@ -81,7 +77,7 @@ exports.render = function (req,res){
 					if(session_this.power(11)){
 						add(parm,res);
 					}else{
-						response(res,{
+						response.json(res,{
 							'code':2,
 							'msg':'no power to edit user !'
 						});

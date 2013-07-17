@@ -10,7 +10,7 @@ var temp=['<tr>',
 	'<td>{power}</td>',
 	'<td>',
 		'<a href="user_group.html?id={id}" target="_self">改</a>',
-		'<a href="/ajax/del?from=user&id={id}" onclick="if(!confirm(\'三思啊，删了可就没啦！\')){return false;}" target="_self">删</a>',
+		'<a href="/ajax/del?from=user_group&id={id}" onclick="if(!confirm(\'三思啊，删了可就没啦！\')){return false;}" target="_self">删</a>',
 	'</td>',
 '</tr>'];
 

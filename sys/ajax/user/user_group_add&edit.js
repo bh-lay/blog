@@ -5,8 +5,9 @@
  */
 
 var mongo = require('../../conf/mongo_connect');
-var querystring=require('querystring');
-var session= require('../../lib/session');
+var querystring = require('querystring');
+var session = require('../../lib/session');
+var response = require('../../lib/response');
 
 function add(parm,res){
 	var parm = parm;
@@ -19,7 +20,11 @@ function add(parm,res){
 	
 				collection.insert(parm,function(err,result){
 					if(err) throw err;
-					res.end("{'code':1,'id':"+parm.id+",'msg':'sucess'}");
+					response.json(res,{
+						'code' : 1 ,
+						'id' : parm.id ,
+						'msg' : 'sucess'
+					})
 					method.close();
 				});
 			});
@@ -35,9 +40,15 @@ function edit(parm,res){
 		method.open({'collection_name':'user_group'},function(error,collection){
 			collection.update({'id':parm.id}, {$set:parm}, function(err,docs) {
 				if(err) {
-				    res.end('{\'code\':2,\'msg\':\'modified failure !\'}');        
+					response.json(res,{
+						'code' : 2 ,
+						'msg' : 'modified failure !'
+					});
 				}else {
-			        res.end('{\'code\':1,\'msg\':\'modified success !\'}');
+					response.json(res,{
+						'code' : 1,
+						'msg' : 'modified success !'
+					});
 				}
 				method.close();
 			});
@@ -65,10 +76,16 @@ exports.render = function (req,res){
 					add(parm,res);
 				}
 			}else{
-				res.end('{\'code\':2,\'msg\':\'please insert complete code !\'}');
+				response.json(res,{
+					'code' : 2,
+					'msg' : 'please insert complete code !'
+				});
 			}
 		});
 	}else{
-		res.end('{\'code\':2,\'msg\':\'please use [post] instead [get] to submit !\'}');
+		response.json(res,{
+			'code' : 2 , 
+			'msg' : 'please use [post] instead [get] to submit !'
+		});
 	}
 }
