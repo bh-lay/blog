@@ -14,6 +14,8 @@ var mime = {
 	'jpg' : 'image/jpeg',
 	'png' : 'image/png',
 	'gif' : 'image/gif',
+	'rar' : 'application/zip',
+	'zip' : 'application/zip',
 };
 
 
@@ -34,7 +36,7 @@ function readFile(req, res) {
 		 */
 		response.define(res,415,{
 			'Content-Type' : 'text/plain'
-		},'this type file(*.'+ext+') is not supposted12345 !');
+		},'this type file(*.'+ext+') is not supposted !');
 		
 		return
 	}
