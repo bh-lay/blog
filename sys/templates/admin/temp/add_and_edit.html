@@ -13,7 +13,7 @@
 	<div class="articleList">
 		<form action="/ajax/tempModify" target="_self" method="post">
 			<textarea name="text" cols="30" rows="10">{-content-}</textarea>
-			<input type="hidden" name="module" value="index" />
+			<input type="hidden" name="module" value="{-tempName-}" />
 			<input type="submit" value="修改" />
 		</form>
 	</div>

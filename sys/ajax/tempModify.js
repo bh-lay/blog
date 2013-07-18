@@ -7,7 +7,7 @@ var querystring = require('querystring');
 var response = require('../lib/response');
 var fs = require('fs');
 
-var tempSrc = './templates/index.html';
+var temp_list = require('../conf/templates');
 
 exports.render = function (req,res){
 	if (req.method != 'POST'){
@@ -23,17 +23,19 @@ exports.render = function (req,res){
 		info += chunk; 
 	}).addListener('end', function(){
 		var data = querystring.parse(info);
-		var parm={
-			'module' : data['module']||'',
-			'text' : data['text'],
-		};
+		var module = data['module']||'';
+		var text = data['text'];
 		
-		fs.writeFile(tempSrc,parm.text,function(err){
-			if(err) throw err;
-
-			res.end('ok')
-
-		});
+		var tempSrc = temp_list[module] ? temp_list[module]['src'] : null;
+		
+		if(tempSrc){
+			fs.writeFile(tempSrc,text,function(err){
+				if(err) throw err;
+				res.end('ok')
+			});
+		}else{
+			res.end('fail');
+		}
 		
 	//	response.json(res,{
 	//		'code':2,

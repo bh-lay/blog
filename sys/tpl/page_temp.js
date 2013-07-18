@@ -12,31 +12,7 @@
 var fs = require('fs');
 var tpl = require('../tpl/module_tpl');
 
-var temp_list = {
-	'index' : {
-		'src' : './templates/index.html',
-		'Last-Modified' : null,
-		'text' : null,
-	},
-	'blogDetail' : {
-		'src' : './templates/blogDetail.html',
-	},
-	'blogList' : {
-		'src' : './templates/blogList.html',
-	},
-	'opusList' : {
-		'src' : './templates/opusList.html',
-	},
-	'opusDetail' : {
-		'src' : './templates/opusDetail.html',
-	},
-	'shareList' : {
-		'src' : './templates/shareList.html',
-	},
-	'shareDetail' : {
-		'src' : './templates/shareDetail.html',
-	},
-}; 
+var temp_list = require('../conf/templates');
 
 //method get
 exports.get = function(mod,param) {

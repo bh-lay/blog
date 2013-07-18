@@ -47,9 +47,9 @@ var server=http.createServer(function (req,res) {
 			}
 		}
 	// check templates next
-		for(var i = 0,total = templates.length; i < total ;i++){
+		for(var i = 0 in templates){
 			if(!bingo&&pathname.match(templates[i]['reg'])){
-				require('./templates/'+templates[i]['require']).deal(req,res,pathname);
+				require(templates[i]['require']).deal(req,res,pathname);
 				bingo = true;
 				break;
 			}

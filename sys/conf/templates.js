@@ -2,45 +2,40 @@
  * @author bh-lay
  */
 
-module.exports = [
-	{
-		'name' : 'index',
-		'reg': /^(\/|)$/,
-		'require' :'index.js'
+module.exports = {
+	'index' : {
+		'reg' : /^(\/|)$/,
+		'require' : './templates/index.js',
+		'src' : './templates/index.html',
 	},
-	{
-		'name' : 'admin',
-		'reg': /^\/admin/,
-		'require' :'admin.js'
-	},
-	{
-		'name' : 'blogList',
+	'blogList' : {
 		'reg': /^\/blog(\/|)$/,
-		'require' :'blogList.js'
+		'require' :'./templates/blogList.js',
+		'src' : './templates/blogList.html',
 	},
-	{
-		'name' : 'blogDetail',
+	'blogDetail' : {
 		'reg': /^\/blog\/(\w+)/,
-		'require' :'blogDetail.js'
+		'require' :'./templates/blogDetail.js',
+		'src' : './templates/blogDetail.html',
 	},
-	{
-		'name' : 'shareList',
+	'shareList' : {
 		'reg': /^\/share(\/|)$/,
-		'require' :'shareList.js'
+		'require' :'./templates/shareList.js',
+		'src' : './templates/shareList.html',
 	},
-	{
-		'name' : 'shareDetail',
+	'shareDetail' : {
 		'reg': /^\/share\/(\w+)/,
-		'require' :'shareDetail.js'
+		'require' :'./templates/shareDetail.js',
+		'src' : './templates/shareDetail.html',
 	},
-	{
-		'name' : 'opusList',
+	'opusList' : {
 		'reg': /^\/opus(\/|)$/,
-		'require' :'opusList.js'
+		'require' :'./templates/opusList.js',
+		'src' : './templates/opusList.html',
 	},
-	{
-		'name' : 'opusDetail',
+	'opusDetail' : {
 		'reg': /^\/opus\/(\w+)/,
-		'require' :'opusDetail.js'
+		'require' :'./templates/opusDetail.js',
+		'src' : './templates/opusDetail.html',
 	},
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ];
+};

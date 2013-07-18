@@ -41,46 +41,47 @@ function readFile(req, res) {
 		return
 	}
 	fs.exists(realPath, function(exists) {
-		if(exists){
-			fs.readFile(realPath, function(err, file) {
-				if(err) {
-					/**
-					 * 500 server error 
-					 */
-					response.define(res,500,{
-						'Content-Type' : 'text/plain'
-					},err.toString());
-
-				} else {
-									
-					fs.stat(realPath, function(err, stat) {
-						
-						var lastModified = stat.mtime.toUTCString();
-						
-						if(req.headers['if-modified-since'] && (lastModified == req.headers['if-modified-since'])) {
-							
-							response.define(res,304,"Not Modified");
-							
-						} else {
-							var maxAge = 60 * 60 * 24 * 365;
-							var expires = new Date();
-							expires.setTime(expires.getTime() + maxAge * 1000);
-							response.define(res,200,{
-								"Content-Type" : mime[ext],
-								"Expires" : expires.toUTCString() ,
-								"Cache-Control" : "max-age=" + maxAge ,
-								"Last-Modified" : lastModified,
-								"Server" : "node.js",
-							},file);
-							
-						}
-					});
-				}
-			});
-		}else{
+		if(!exists){
 			// 404 notFound
 			response.notFound(res);
+			return ;
 		}
+		
+		fs.readFile(realPath, function(err, file) {
+			if(err) {
+				/**
+				 * 500 server error 
+				 */
+				response.define(res,500,{
+					'Content-Type' : 'text/plain'
+				},err.toString());
+				
+				return
+			} 
+			
+			fs.stat(realPath, function(err, stat) {
+				
+				var lastModified = stat.mtime.toUTCString();
+				
+				if(req.headers['if-modified-since'] && (lastModified == req.headers['if-modified-since'])) {
+					
+					response.define(res,304,"Not Modified");
+					
+				} else {
+					var maxAge = 60 * 60 * 24 * 365;
+					var expires = new Date();
+					expires.setTime(expires.getTime() + maxAge * 1000);
+					response.define(res,200,{
+						"Content-Type" : mime[ext],
+						"Expires" : expires.toUTCString() ,
+						"Cache-Control" : "max-age=" + maxAge ,
+						"Last-Modified" : lastModified,
+						"Server" : "node.js",
+					},file);
+					
+				}
+			});
+		});
 	});
 }
 
