@@ -6,6 +6,9 @@ var session = require('./lib/session');
 /*301  URL redirection*/
 var url_redirect = require('./conf/301url');
 
+/* templates config */
+var templates = require('./conf/templates');
+
 /* render config*/
 var dealModule = [
 	{
@@ -19,10 +22,6 @@ var dealModule = [
 		'require' :'admin.js'
 	}
 ];
-
-/* templates config */
-var templates = require('./conf/templates');
-
 
 /*server start*/
 var server=http.createServer(function (req,res) {
