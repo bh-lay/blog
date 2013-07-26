@@ -4,40 +4,87 @@
 
 var fs = require('fs');
 
+function logger(req,status){
+	var logger={
+		'time':new Date(),
+		'ip':req['connection']['remoteAddress'],
+		'url':req.url,
+		'user-agent':req.headers['user-agent'],
+		'status' : status
+	};
+	console.log(logger);
+}
 
-exports.json = function(res,data){
+function json(req,res){
+	var req = req,
+		res = res;
+	return function(data){
+		res.status = 200 ;
+		res.setHeader('Content-Type','application/json');
+		res.setHeader('charset','utf-8');
+		
+		res.write(JSON.stringify(data));
+		res.end();
+		
+		logger(req,200);
+	}
 	
-	res.statusCode = 200 ;
-	res.setHeader('Content-Type','application/json');
-	res.setHeader('charset','utf-8');
-	
-	res.write(JSON.stringify(data));
-	res.end();
-	
 }
 
-exports.html = function(res,status,content){
-	res.writeHeader(status,{
-		'Content-Type' : 'text/html',
-		'charset' : 'utf-8',
-		'server' : 'node.js',
-	});
-	res.end(content);
+function html(req,res){
+	var req = req,
+		res = res;
+	return function(status,content){
+		res.writeHeader(status,{
+			'Content-Type' : 'text/html',
+			'charset' : 'utf-8',
+			'server' : 'node.js',
+		});
+		res.end(content);
+		
+		logger(req,status);
+	}
 }
 
-exports.define = function(res,status,headers,content){
-	res.writeHeader(status,headers);
-	res.end(content)
+function define(req,res){
+	var req = req,
+		res = res;
+	return function(status,headers,content){
+		res.writeHeader(status,headers);
+		
+		content = content || null;
+		
+		res.end(content);
+		
+		logger(req,status);
+	}
 }
 
-exports.notFound = function(res,txt){
-	httpStatus = 404;
-	var txt=txt||'';
-	res.writeHead(httpStatus, {
-		'Content-Type' : 'text/html'
-	});
-	var temp = fs.readFileSync('./templates/404.html', "utf8");
-	temp = temp.replace(/{-content-}/,txt)
-	res.write(temp);
-	res.end();
+
+function notFound(req,res){
+	var req = req,
+		res = res;
+	return function(txt){
+		status = 404;
+		var txt=txt||'';
+		res.writeHead(status, {
+			'Content-Type' : 'text/html'
+		});
+		var temp = fs.readFileSync('./templates/404.html', "utf8");
+		temp = temp.replace(/{-content-}/,txt)
+		res.write(temp);
+		res.end();
+		
+		logger(req,404);
+	}
 }
+
+exports.start = function(req,res){
+	return {
+		'json' : json(req,res),
+		'html' : html(req,res),
+		'define' : define(req,res),
+		'notFound' : notFound(req,res),
+	}
+}
+

@@ -1,10 +1,10 @@
 //author bh-lay
 var mongo = require('../conf/mongo_connect');
-var response = require('../lib/response');
 
 var temp = require('../tpl/page_temp');
 
-exports.deal = function (req,res,pathname){
+exports.deal = function (req,res,res_this,pathname){
+
 	var id = pathname.match(/^\/blog\/(\w*)/)[1];
 	//get template
 	var page = temp.get('blogDetail',{'init':true});
@@ -16,7 +16,7 @@ exports.deal = function (req,res,pathname){
 			collection.find({id:id}).toArray(function(err, docs) {
 				if(arguments[1].length==0){
 				
-					response.notFound(res,'哇塞，貌似这篇博文不存在哦!');
+					res_this.notFound('哇塞，貌似这篇博文不存在哦!');
 					
 				}else{
 					var date=new Date(parseInt(docs[0].time_show));
@@ -25,7 +25,7 @@ exports.deal = function (req,res,pathname){
 						return docs[0][arguments[1]]||22222;
 					});
 					
-					response.html(res,200,txt);
+					res_this.html(200,txt);
 				}
 				method.close();
 			});

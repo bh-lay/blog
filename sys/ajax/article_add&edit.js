@@ -6,9 +6,8 @@
 var mongo = require('../conf/mongo_connect');
 var querystring=require('querystring');
 var session= require('../lib/session');
-var response = require('../lib/response');
 
-function add(parm,res){
+function add(parm,res_this){
 	var parm = parm;
 	
 	mongo.start(function(method){
@@ -19,7 +18,7 @@ function add(parm,res){
 	
 				collection.insert(parm,function(err,result){
 					if(err) throw err;
-					response.json(res,{
+					res_this.json({
 						'code' : 1,
 						'id' : parm.id,
 						'msg' : 'add blog sucess !'
@@ -30,7 +29,7 @@ function add(parm,res){
 		});
 	});
 }
-function edit(parm,res){
+function edit(parm,res_this){
 	var parm = parm;
 	
 	mongo.start(function(method){
@@ -38,13 +37,13 @@ function edit(parm,res){
 		method.open({'collection_name':'article'},function(error,collection){
 			collection.update({'id':parm.id}, {$set:parm}, function(err,docs) {
 				if(err) {
-					response.json(res,{
+					res_this.json({
 						'code' : 2,
 						'id' : parm.id,
 						'msg' : 'edit blog fail !'
 					});       
 				}else {
-					response.json(res,{
+					res_this.json({
 						'code':1,
 						'id' : parm.id,
 						'msg':'edit blog success !'
@@ -56,9 +55,9 @@ function edit(parm,res){
 	});
 }
 
-exports.render = function (req,res){
+exports.render = function (req,res_this,res){
 	if (req.method != 'POST'){
-		response.json(res,{
+		res_this.json({
 			'code':2,
 			'msg':'please use [post] instead [get] to submit'
 		});
@@ -87,25 +86,25 @@ exports.render = function (req,res){
 		
 			if(parm['id']&&parm['id'].length>2){
 				if(session_this.power(3)){
-					edit(parm,res)
+					edit(parm,res_this,res)
 				}else{
-					response.json(res,{
+					res_this.json({
 						'code':2,
 						'msg':'no power to edit blog !'
 					});
 				}
 			}else{
 				if(session_this.power(2)){
-					add(parm,res);
+					add(parm,res_this,res);
 				}else{
-					response.json(res,{
+					res_this.json({
 						'code':2,
 						'msg':'no power to add blog !'
 					});
 				}
 			}
 		}else{
-			response.json(res,{
+			res_this.json({
 				'code':2,
 				'msg':'please insert complete code !'
 			});

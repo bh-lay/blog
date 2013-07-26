@@ -3,17 +3,14 @@
  * view url : /blog    /blog/
  */
 var mongo = require('../conf/mongo_connect');
-var response = require('../lib/response');
 
 var tpl = require('../tpl/module_tpl');
 var temp = require('../tpl/page_temp');
 
-exports.deal = function (req,res){
+exports.deal = function (req,res,res_this){
 	var page_temp = temp.get('opusList',{'init':true});
 	var list_temp=tpl.get('opus_item');
-	
-	res.writeHead(200, {'Content-Type': 'text/html'});
-	
+		
 	mongo.start(function(method){
 		
 		method.open({'collection_name':'opus'},function(err,collection){
@@ -35,7 +32,7 @@ exports.deal = function (req,res){
 				}
 				txt = page_temp.replace('{-content-}',txt);
 				
-				response.html(res,200,txt);
+				res_this.html(200,txt);
 				
 				method.close();
 			});

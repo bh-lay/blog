@@ -7,14 +7,18 @@ var layFile = require('./lib/layFile');
 var session = require('./lib/session');
 var powerCode = 1;
 
-exports.deal=function(req,res,pathname){
+exports.deal=function(req,res,res_this,pathname){
 	
 	if(pathname.split('.').length==1) {
 		pathname += '/index.html'
 	}
 	
 	if(pathname.match(/.html.js$/)){
-		res.end('forbidden');
+	
+		res_this.define(415,{
+			'Content-Type' : 'text/plain'
+		},'this type file is not supposted !');
+	
 	}else if(pathname.match(/.html$/)){
 		var session_this = session.start(req,res);
 			
@@ -24,16 +28,17 @@ exports.deal=function(req,res,pathname){
 				if (!exists) {
 					layFile.read(req,res);
 				}else{
-					var ctl = require(controlPath);
-					ctl.render(req,res);
+					require(controlPath).render(req,res);
 				}
 			});			
 		}else{
 			//need login first
 			var page = fs.readFileSync('./templates/admin/login.html', "utf8");
-			res.writeHead(200, {'Content-Type' : 'text/html'});
-			res.write(page);
-			res.end();
+			
+			res_this.define(200,{
+				'Content-Type' : 'text/html'
+			},page);
+
 		}
 	}else{
 		layFile.read(req,res);

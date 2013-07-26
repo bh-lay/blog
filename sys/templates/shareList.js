@@ -3,16 +3,13 @@
  * view url : /share    /share/
  */
 var mongo = require('../conf/mongo_connect');
-var response = require('../lib/response');
 
 var tpl = require('../tpl/module_tpl');
 var temp = require('../tpl/page_temp');
 
-exports.deal = function (req,res){
+exports.deal = function (req,res,res_this){
 	var page_temp = temp.get('shareList',{'init':true});
 	var list_temp = tpl.get('share_item');
-	
-	res.writeHead(200, {'Content-Type': 'text/html'});
 	
 	mongo.start(function(method){
 		
@@ -30,7 +27,7 @@ exports.deal = function (req,res){
 				}
 				txt = page_temp.replace('{-content-}',txt);
 				
-				response.html(res,200,txt);
+				res_this.html(200,txt);
 				
 				method.close();
 			});

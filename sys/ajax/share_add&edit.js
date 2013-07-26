@@ -5,9 +5,8 @@
 
 var mongo = require('../conf/mongo_connect');
 var querystring = require('querystring');
-var response = require('../lib/response');
 
-function add(parm,res){
+function add(parm,res_this){
 	var parm = parm;
 	mongo.start(function(method){
 		
@@ -18,7 +17,7 @@ function add(parm,res){
 				collection.insert(parm,function(err,result){
 					if(err) throw err;
 					
-					response.json(res,{
+					res_this.json({
 						'code' : 1,
 						'id' : parm.id ,
 						'msg' : 'sucess'
@@ -30,7 +29,7 @@ function add(parm,res){
 		});
 	});
 }
-function edit(parm,res){
+function edit(parm,res_this){
 	var parm = parm;
 	
 	mongo.start(function(method){
@@ -38,12 +37,12 @@ function edit(parm,res){
 		method.open({'collection_name':'share'},function(error,collection){
 			collection.update({'id':parm.id}, {$set:parm}, function(err,docs) {
 				if(err) {
-				    response.json(res,{
+				    res_this.json({
 						'code' : 2,
 						'msg' : 'fail'
 					});         
 				}else {
-			        response.json(res,{
+			        res_this.json({
 						'code' : 1,
 						'msg' : 'sucess'
 					});
@@ -54,9 +53,9 @@ function edit(parm,res){
 	});
 }
 
-exports.render = function (req,res){
+exports.render = function (req,res_this,res){
 	if (req.method != 'POST'){
-		response.json(res,{
+		res_this.json({
 			'code' : 2,
 			'msg' : 'please use [post] instead [get] to submit'
 		});
@@ -81,12 +80,12 @@ exports.render = function (req,res){
 		};
 		if(parm['title']&&parm['content']){
 			if(parm['id']&&parm['id'].length>2){
-				edit(parm,res)
+				edit(parm,res_this)
 			}else{
-				add(parm,res);
+				add(parm,res_this);
 			}
 		}else{
-			response.json(res,{
+			res_this.json({
 				'code':2,
 				'msg':'please insert complete code !'
 			});

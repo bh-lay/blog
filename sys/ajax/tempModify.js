@@ -4,14 +4,13 @@
  */
 
 var querystring = require('querystring');
-var response = require('../lib/response');
 var fs = require('fs');
 
 var temp_list = require('../conf/templates');
 
-exports.render = function (req,res){
+exports.render = function (req,res_this,res){
 	if (req.method != 'POST'){
-		response.json(res,{
+		res_this.json({
 			'code' : 2,
 			'msg' : 'please use [post] instead [get] to submit'
 		});
@@ -31,15 +30,17 @@ exports.render = function (req,res){
 		if(tempSrc){
 			fs.writeFile(tempSrc,text,function(err){
 				if(err) throw err;
-				res.end('ok')
+				res_this.json({
+					'code':1,
+					'msg':'modified success !'
+				});
 			});
 		}else{
-			res.end('fail');
+			res_this.json({
+				'code':2,
+				'msg':'modified fail !'
+			});
 		}
-		
-	//	response.json(res,{
-	//		'code':2,
-	//		'msg':'please insert complete code !'
-	//	});
+
 	});
 }

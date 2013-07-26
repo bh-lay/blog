@@ -20,7 +20,7 @@ var mime = {
 
 
 /*read static resources*/
-function readFile(req, res) {
+function readFile(req , res_this) {
 	var pathname = req.url.split('?')[0];
 	var realPath = '.././web/' + pathname;
 	var ext = pathname.split('.')[1];
@@ -34,7 +34,7 @@ function readFile(req, res) {
 		/**
 		 * 415 not supposted 
 		 */
-		response.define(res,415,{
+		res_this.define(415,{
 			'Content-Type' : 'text/plain'
 		},'this type file(*.'+ext+') is not supposted !');
 		
@@ -43,7 +43,7 @@ function readFile(req, res) {
 	fs.exists(realPath, function(exists) {
 		if(!exists){
 			// 404 notFound
-			response.notFound(res);
+			res_this.notFound();
 			return ;
 		}
 		
@@ -52,7 +52,7 @@ function readFile(req, res) {
 				/**
 				 * 500 server error 
 				 */
-				response.define(res,500,{
+				res_this.define(500,{
 					'Content-Type' : 'text/plain'
 				},err.toString());
 				
@@ -65,13 +65,13 @@ function readFile(req, res) {
 				
 				if(req.headers['if-modified-since'] && (lastModified == req.headers['if-modified-since'])) {
 					
-					response.define(res,304,"Not Modified");
+					res_this.define(304,"Not Modified");
 					
 				} else {
 					var maxAge = 60 * 60 * 24 * 365;
 					var expires = new Date();
 					expires.setTime(expires.getTime() + maxAge * 1000);
-					response.define(res,200,{
+					res_this.define(200,{
 						"Content-Type" : mime[ext],
 						"Expires" : expires.toUTCString() ,
 						"Cache-Control" : "max-age=" + maxAge ,

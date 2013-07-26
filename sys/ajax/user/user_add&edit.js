@@ -1,26 +1,29 @@
 /**
  * @author bh-lay
  * 
- * demo $.post('/ajax/user',{},function(d){console.log(d)})
+ * demo $.post('/ajax/user',{
+	
+	});
  */
 
 var mongo = require('../../conf/mongo_connect');
 var querystring=require('querystring');
 var session = require('../../lib/session');
-var response = require('../../lib/response');
 
-function add(parm,res){
+function add(parm,res_this){
 	var parm = parm;
 	
 	mongo.start(function(method){
 		
 		method.open({'collection_name':'user'},function(err,collection){
+		
 			collection.find({}, {}).toArray(function(err, docs) {
-				parm.id=Date.parse(new Date()).toString(16);
+		
+				parm.id = Date.parse(new Date()).toString(16);
 	
 				collection.insert(parm,function(err,result){
 					if(err) throw err;
-					response.json(res,{
+					res_this.json({
 						'code' : 1,
 						'id' : parm.id ,
 						'msg' : 'sucess !'
@@ -32,7 +35,7 @@ function add(parm,res){
 	});
 }
 
-function edit(parm,res){
+function edit(parm,res_this){
 	var parm = parm;
 	
 	mongo.start(function(method){
@@ -40,12 +43,12 @@ function edit(parm,res){
 		method.open({'collection_name':'user'},function(error,collection){
 			collection.update({'id':parm.id}, {$set:parm}, function(err,docs) {
 				if(err) {
-					response.json(res,{
+					res_this.json({
 						'code' : 1,
 						'msg' : 'modified failure !'
 					});       
 				}else {
-					response.json(res,{
+					res_this.json({
 						'code' : 1,
 						'msg' : 'modified success !'
 					});
@@ -56,7 +59,7 @@ function edit(parm,res){
 	});
 }
 
-exports.render = function (req,res){
+exports.render = function (req,res_this,res){
 	if (req.method == 'POST'){
 		var info='';
 		req.addListener('data', function(chunk){
@@ -76,32 +79,32 @@ exports.render = function (req,res){
 			
 				if(parm['id']&&parm['id'].length>2){
 					if(session_this.power(12)){
-						edit(parm,res)
+						edit(parm,res_this);
 					}else{
-						response.json(res,{
+						res_this.json({
 							'code':2,
 							'msg':'no power to edit user !'
 						});
 					}
 				}else{
 					if(session_this.power(11)){
-						add(parm,res);
+						add(parm,res_this);
 					}else{
-						response.json(res,{
+						res_this.json({
 							'code':2,
 							'msg':'no power to edit user !'
 						});
 					}
 				}
 			}else{
-				response.json(res,{
+				res_this.json({
 					'code' : 2,
 					'msg' : 'please insert complete code !'
 				});
 			}
 		});
 	}else{
-		response.json(res,{
+		response.json({
 			'code' : 2,
 			'msg' : 'please use [post] instead [get] to submit !'
 		});

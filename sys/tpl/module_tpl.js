@@ -99,7 +99,7 @@ exports.get = function(mod) {
 	}else if(tpl[mod]){
 		return tpl[mod].join('');
 	}else{
-		return 'please make sure the template ['+mod+'] have be defined ！';		
+		return 'please make sure the template ['+mod+'] have be defined !';		
 	}
 }
 

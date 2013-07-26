@@ -3,16 +3,14 @@
  * view url : /blog    /blog/
  */
 var mongo = require('../conf/mongo_connect');
-var response = require('../lib/response');
 
 var tpl = require('../tpl/module_tpl');
 var temp = require('../tpl/page_temp');
 			
-exports.deal = function (req,res){
+exports.deal = function (req,res,res_this){
 	var page_temp = temp.get('blogList',{'init':true});
 	var list_temp = tpl.get('article_item');
-	
-	res.writeHead(200, {'Content-Type': 'text/html'});
+
 	mongo.start(function(method){
 		
 		method.open({'collection_name':'article'},function(err,collection){
@@ -29,7 +27,7 @@ exports.deal = function (req,res){
 				}
 				var page = page_temp.replace('{-content-}',txt);
 				
-				response.html(res,200,page);
+				res_this.html(200,page);
 				
 				method.close();
 			});

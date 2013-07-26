@@ -1,15 +1,12 @@
 //author bh-lay
 
 var mongo = require('../conf/mongo_connect');
-var response = require('../lib/response');
 
 var temp = require('../tpl/page_temp');
 
-exports.deal = function (req,res,pathname){
+exports.deal = function (req,res,res_this,pathname){
 	var id=pathname.match(/^\/share\/(\w*)/)[1];
 	var page_temp = temp.get('shareDetail',{'init':true});
-	
-	res.writeHead(200, {'Content-Type': 'text/html'});
 	
 	mongo.start(function(method){
 		
@@ -18,7 +15,7 @@ exports.deal = function (req,res,pathname){
 			collection.find({id:id}).toArray(function(err, docs) {
 				if(arguments[1].length==0){
 
-					response.notFound(res,'哇塞，貌似这篇分享不存在哦!');
+					res_this.notFound('哇塞，貌似这篇分享不存在哦!');
 					
 				}else{
 					var date=new Date(parseInt(docs[0].time_show));
@@ -27,7 +24,7 @@ exports.deal = function (req,res,pathname){
 						return docs[0][arguments[1]]||'';
 					});
 					
-					response.html(res,200,txt);
+					res_this.html(200,txt);
 					
 				}
 				method.close();
