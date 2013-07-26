@@ -1,6 +1,18 @@
 /**
  * @author bh-lay
  */
+/*
+	@DEMO
+	var response = require('./response');
+	var res_this = response.start(req,res);
+	
+	res_this.json({code:1,msg:'msg text !'});
+	res_this.html(200,'html text');
+	res_this.define(200,{content-type:'text/html'},'<html></html>');
+	res_this.notFound('not found');
+	res_this.error('error');
+	 
+*/
 
 var fs = require('fs');
 
@@ -65,6 +77,23 @@ function notFound(req,res){
 	var req = req,
 		res = res;
 	return function(txt){
+		var txt=txt||'';
+		res.writeHead(404, {
+			'Content-Type' : 'text/html'
+		});
+		var temp = fs.readFileSync('./templates/404.html', "utf8");
+		temp = temp.replace(/{-content-}/,txt)
+		res.write(temp);
+		res.end();
+		
+		logger(req,404);
+	}
+}
+
+function error(req,res){
+	var req = req,
+		res = res;
+	return function(txt){
 		status = 404;
 		var txt=txt||'';
 		res.writeHead(status, {
@@ -85,6 +114,7 @@ exports.start = function(req,res){
 		'html' : html(req,res),
 		'define' : define(req,res),
 		'notFound' : notFound(req,res),
+		'error' : error(req,res),
 	}
 }
 
