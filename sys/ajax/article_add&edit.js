@@ -4,8 +4,9 @@
  */
 
 var mongo = require('../conf/mongo_connect');
-var querystring=require('querystring');
-var session= require('../lib/session');
+var querystring = require('querystring');
+var session = require('../lib/session');
+var post = require('../lib/post');
 
 function add(parm,res_this){
 	var parm = parm;
@@ -63,12 +64,9 @@ exports.render = function (req,res_this,res){
 		});
 		return ;
 	}
-	
-	var info='';
-	req.addListener('data', function(chunk){
-		info += chunk; 
-	}).addListener('end', function(){
-		var data = querystring.parse(info);
+	post.parse(req,function(err,data){
+		
+		var data = data;
 		var parm={
 			'id' : data['id']||'',
 			'title':decodeURI(data['title']),
