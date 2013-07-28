@@ -12,5 +12,6 @@ module.exports = {
 	'temp':'temp',
 	'tempModify':'tempModify',
 	'login':'login',
-	'del' : 'del'
+	'del' : 'del',
+	'upload':'upload',
 };
