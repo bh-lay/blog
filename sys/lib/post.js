@@ -37,9 +37,17 @@ exports.parse = function(req,callBack){
 	}else{
 		var form = new formidable.IncomingForm();
 		form.uploadDir = "./temporary";
-		form.maxFieldsSiz = 1024 ;
+		//form.keepExtensions = true;
 		
 		form.parse(req, function(error, fields, files) {
+			
+			console.log(1234,form,'----------',files);
+			// @FIXME when i upload more than one file ,the arguments files is only single file
+			// but i can get all files information form form.openedFiles
+			// it confused me
+			//console.log(1234,arguments);
+			
+			files = form.openedFiles;
 			
 			callBack(error,fields, files);
 			
