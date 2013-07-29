@@ -4,7 +4,7 @@ var mongo = require('../conf/mongo_connect');
 
 var temp = require('../lib/page_temp');
 
-exports.deal = function (req,res,res_this,pathname){
+exports.deal = function (req,res_this,pathname){
 	var id=pathname.match(/^\/share\/(\w*)/)[1];
 	var page_temp = temp.get('shareDetail',{'init':true});
 	

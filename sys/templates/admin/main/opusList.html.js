@@ -13,8 +13,7 @@ var temp=['<tr>',
 	'<td class="arLiTime">{opus_time_create}</td>',
 '</tr>'];
 
-exports.render = function (req,res){
-	res.writeHead(200, {'Content-Type': 'text/html'});
+exports.render = function (req,res_this){
 
 	var parm = {'url_base':'/admin/main/opusList.html'};
 		parm['page_cur'] = req.url.split('?')[1] || 1;
@@ -46,8 +45,9 @@ exports.render = function (req,res){
 				tpl=tpl.replace('{pageBar}',pageTpl);
 			
 				tpl=tpl.replace('{content}',txt);
-				res.write(tpl);
-				res.end();
+				
+				res_this.html(200,tpl);
+				
 				method.close();
 			});
 			

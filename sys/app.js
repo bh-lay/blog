@@ -1,13 +1,16 @@
-//author bh-lay
+/**
+ * @author bh-lay
+ * 
+ */
+
 var http = require('http');
 var layFile = require('./lib/layFile');
-var session = require('./lib/session');
 var response = require('./lib/response');
 
-/*301  URL redirection*/
+// 301  URL redirection
 var url_redirect = require('./conf/301url');
 
-/* templates config */
+// templates config
 var templates = require('./conf/templates');
 
 /* render config*/
@@ -24,17 +27,16 @@ var dealModule = [
 	}
 ];
 
-/*server start*/
-var server=http.createServer(function (req,res) {
+// server start
+var server = http.createServer(function (req,res) {
 
 	var pathname = req.url.split('?')[0];
+	pathname = pathname.replace(/\.\./g, "");
 
 	var res_this = response.start(req,res);
 
-	pathname = pathname.replace(/\.\./g, "");
-
 //router
-	var bingo=false;
+	var bingo = false;
 
 	// check 301 router
 	if(url_redirect[pathname]){
@@ -54,7 +56,7 @@ var server=http.createServer(function (req,res) {
 	// check templates next
 		for(var i = 0 in templates){
 			if(!bingo&&pathname.match(templates[i]['reg'])){
-				require(templates[i]['require']).deal(req,res,res_this,pathname);
+				require(templates[i]['require']).deal(req,res_this,pathname);
 				bingo = true;
 				break;
 			}
@@ -64,6 +66,8 @@ var server=http.createServer(function (req,res) {
 			layFile.read(req,res_this);
 		}
 	}
-}).listen(3000, '0.0.0.0');
+});
+
+server.listen(3000, '0.0.0.0');
 
 

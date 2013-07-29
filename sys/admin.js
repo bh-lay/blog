@@ -7,7 +7,7 @@ var layFile = require('./lib/layFile');
 var session = require('./lib/session');
 var powerCode = 1;
 
-exports.deal=function(req,res,res_this,pathname){
+exports.deal = function(req,res,res_this,pathname){
 	
 	if(pathname.split('.').length==1) {
 		pathname += '/index.html'
@@ -28,7 +28,7 @@ exports.deal=function(req,res,res_this,pathname){
 				if (!exists) {
 					layFile.read(req,res);
 				}else{
-					require(controlPath).render(req,res);
+					require(controlPath).render(req,res_this);
 				}
 			});			
 		}else{

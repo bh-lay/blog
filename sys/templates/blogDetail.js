@@ -3,7 +3,7 @@ var mongo = require('../conf/mongo_connect');
 
 var temp = require('../lib/page_temp');
 
-exports.deal = function (req,res,res_this,pathname){
+exports.deal = function (req,res_this,pathname){
 
 	var id = pathname.match(/^\/blog\/(\w*)/)[1];
 	//get template

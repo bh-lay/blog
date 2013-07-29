@@ -14,8 +14,7 @@ var temp=['<tr>',
 	'</td>',
 '</tr>'];
 
-exports.render = function (req,res){
-	res.writeHead(200, {'Content-Type': 'text/html'});
+exports.render = function (req,res_this){
 	
 	mongo.start(function(method){
 		
@@ -31,8 +30,9 @@ exports.render = function (req,res){
 				}
 				
 				var page = pageTpl.replace('{-content-}',txt);
-				res.write(page);
-				res.end();
+				
+				res_this.html(200,page);
+				
 				method.close();
 			});
 		});

@@ -123,6 +123,7 @@ exports.start = function(req,res){
 		'define' : define(req,res),
 		'notFound' : notFound(req,res),
 		'error' : error(req,res),
+		'response' : res,
 	}
 }
 

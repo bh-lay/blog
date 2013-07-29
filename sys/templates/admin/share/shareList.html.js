@@ -13,8 +13,7 @@ var temp=['<tr>',
 	'<td class="arLiTime">{time_show}</td>',
 '</tr>'];
 
-exports.render = function (req,res){
-	res.writeHead(200, {'Content-Type': 'text/html'});
+exports.render = function (req,res_this){
 
 	var parm = {'url_base':'/admin/share/shareList.html'};
 		parm['page_cur'] = req.url.split('?')[1] || 1;
@@ -41,13 +40,14 @@ exports.render = function (req,res){
 						return docs[i][arguments[1]]||22222;
 					});
 				}
-				var tpl=fs.readFileSync('./templates/admin/share/shareList.html', "utf8");
+				var tpl = fs.readFileSync('./templates/admin/share/shareList.html', "utf8");
 				var pageTpl = page.render(parm);
-				tpl=tpl.replace('{pageBar}',pageTpl);
+				tpl = tpl.replace('{pageBar}',pageTpl);
 			
-				tpl=tpl.replace('{content}',txt);
-				res.write(tpl);
-				res.end();
+				tpl = tpl.replace('{content}',txt);
+				
+				res_this.html(200,tpl);
+
 				method.close();
 			});
 		});

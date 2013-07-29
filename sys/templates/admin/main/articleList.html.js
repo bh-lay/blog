@@ -14,13 +14,12 @@ var temp=['<tr>',
 '</tr>'];
 
 
-exports.render = function (req,res){
-	res.writeHead(200, {'Content-Type': 'text/html'});
+exports.render = function (req,res_this){
 
 	var parm = {'url_base':'/admin/main/articleList.html'};
 		parm['page_cur'] = req.url.split('?')[1] || 1;
 		parm['page_list_num'] = 10 ;
-	parm['page_cur'] = parseInt(parm['page_cur']);
+		parm['page_cur'] = parseInt(parm['page_cur']);
 	var skip_list=parm['page_list_num']*(parm['page_cur']-1);
 	
 	mongo.start(function(method){
@@ -45,11 +44,12 @@ exports.render = function (req,res){
 				var tpl=fs.readFileSync('./templates/admin/main/articleList.html', "utf8");
 				
 				var pageListTpl = page.render(parm);
-				tpl=tpl.replace('{pageBar}',pageListTpl);
+				tpl = tpl.replace('{pageBar}',pageListTpl);
 			
-				tpl=tpl.replace('{content}',txt);
-				res.write(tpl);
-				res.end();
+				tpl = tpl.replace('{content}',txt);
+				
+				res_this.html(200,tpl);
+				
 				method.close();
 			});
 		});

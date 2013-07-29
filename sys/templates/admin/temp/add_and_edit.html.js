@@ -5,8 +5,7 @@ var querystring = require('querystring');
 
 var temp_list = require('../../../conf/templates');
 
-exports.render = function (req,res){
-	res.writeHead(200, {'Content-Type': 'text/html'});
+exports.render = function (req,res_this){
 	
 	var dataString = req.url.split('?')[1]||'',
 		data = querystring.parse(dataString);
@@ -14,8 +13,9 @@ exports.render = function (req,res){
 	var tempName = data['temp']||'';
 	
 	if(!temp_list[tempName]){
-		res.write('无此模版');
-		res.end();
+		
+		res_this.html(200,'无此模版');
+
 	}else{
 	
 		var tpl = fs.readFileSync('./templates/admin/temp/add_and_edit.html', "utf8");
@@ -23,8 +23,7 @@ exports.render = function (req,res){
 		var tempCode = fs.readFileSync(temp_list[tempName]['src'], "utf8");
 		
 		tpl = tpl.replace(/{-tempName-}/,tempName).replace(/{-content-}/,tempCode);
-
-		res.write(tpl);
-		res.end();
+		
+		res_this.html(200,tpl);
 	}
 }

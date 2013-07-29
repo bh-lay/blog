@@ -12,8 +12,8 @@ function valueInit(data){
 	});
 	return txt;
 }
-exports.render = function (req,res){
-	res.writeHead(200, {'Content-Type': 'text/html'});
+exports.render = function (req,res_this){
+
 	var search=url.parse(req.url).search;
 	search&&(search=search.replace('?',''));
 	var articleID=querystring.parse(search).articleID;
@@ -23,14 +23,15 @@ exports.render = function (req,res){
 			method.open({'collection_name':'article'},function(err,collection){
 				
 				collection.find({'id':articleID}).toArray(function(err, docs) {		
-					var txt=valueInit(docs[0]);
-					res.write(txt);
-					res.end();
+					var txt = valueInit(docs[0]);
+					
+					res_this.html(200,txt);
+					
 					method.close();
 				});
 			});
 		});
 	}else{
-		res.end(valueInit({}));
+		res_this.html(200,valueInit({}));
 	}
 }

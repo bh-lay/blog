@@ -33,11 +33,11 @@ function valueInit(data){
 	});
 	return txt;
 }
-exports.render = function (req,res){
-	res.writeHead(200, {'Content-Type': 'text/html'});
-	var search=url.parse(req.url).search;
+exports.render = function (req,res_this){
+
+	var search = url.parse(req.url).search;
 	search&&(search=search.replace('?',''));
-	var userID=querystring.parse(search).userid;
+	var userID = querystring.parse(search).userid;
 	if(userID){
 		mongo.start(function(method){
 		
@@ -45,8 +45,9 @@ exports.render = function (req,res){
 		
 				collection.find({'id':userID}).toArray(function(err, docs) {		
 					var txt = valueInit(docs[0]);
-					res.write(txt);
-					res.end();
+					
+					res_this.html(200,txt);
+					
 					method.close();
 				});
 				
@@ -54,6 +55,6 @@ exports.render = function (req,res){
 			
 		});
 	}else{
-		res.end(valueInit({}));
+		res_this.html(200,valueInit({}));
 	}
 }
