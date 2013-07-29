@@ -1,10 +1,26 @@
 /*
  * author bh-lay
- * demo $.post('/ajax/addArticle',{'title':'我是剧中人4','content':'12457898765','gd':43},function(d){console.log(d)})
+ * 
+ */
+/*
+ @DEMO
+	$.ajax({
+		'type':'POST',
+		'url':'/ajax/addArticle',
+		'data':{
+			'id' : 'text',
+			'title' : 'text',
+			'cover' : 'text',
+			'time_show' : 'text',
+			'tags' : 'text,text,text',
+			'author' : 'text',
+			'content' : 'text',
+			'intro' : 'text',
+		},
+	});
  */
 
 var mongo = require('../conf/mongo_connect');
-var querystring = require('querystring');
 var session = require('../lib/session');
 var post = require('../lib/post');
 

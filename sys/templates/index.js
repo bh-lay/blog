@@ -1,5 +1,5 @@
 //author bh-lay
-var temp = require('../tpl/page_temp');
+var temp = require('../lib/page_temp');
 
 exports.deal = function (req,res,res_this){
 	var page_temp = temp.get('index',{'init':true});

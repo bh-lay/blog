@@ -1,10 +1,22 @@
-/*
- * author bh-lay
- * demo 
+/**
+ * @author bh-lay
+ * 
  */
+/**
+ @Demo 
+ 
+	$.ajax({
+		'type':'POST',
+		'url':'/ajax/tempModify',
+		'data':{
+			'module' : 'index',
+			'text' : '......'
+		},
+	});
+ */ 
 
-var querystring = require('querystring');
 var fs = require('fs');
+var post = require('../lib/post');
 
 var temp_list = require('../conf/templates');
 
@@ -17,11 +29,9 @@ exports.render = function (req,res_this,res){
 		return ;
 	}
 	
-	var info='';
-	req.addListener('data', function(chunk){
-		info += chunk; 
-	}).addListener('end', function(){
-		var data = querystring.parse(info);
+	post.parse(req,function(err,data){
+
+		var data = data;
 		var module = data['module']||'';
 		var text = data['text'];
 		

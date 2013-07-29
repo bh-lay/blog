@@ -2,8 +2,6 @@
  * @author bh-lay
  */
 
-var response = require('./lib/response');
-
 var ajaxConfig = require('./conf/ajax');
 
 exports.deal = function (req,res,res_this,pathname){

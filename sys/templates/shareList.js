@@ -4,8 +4,8 @@
  */
 var mongo = require('../conf/mongo_connect');
 
-var tpl = require('../tpl/module_tpl');
-var temp = require('../tpl/page_temp');
+var tpl = require('../lib/module_tpl');
+var temp = require('../lib/page_temp');
 
 exports.deal = function (req,res,res_this){
 	var page_temp = temp.get('shareList',{'init':true});

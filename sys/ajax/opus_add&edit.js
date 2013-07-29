@@ -3,12 +3,21 @@
  * 
  */
 /*
-demo
-	$.post('/ajax/addArticle',{
-		'title':'我是剧中人4',
-		'content':'12457898765',
+@ demo
+	$.ajax({
+		'type':'POST',
+		'url':'/ajax/opus',
+		'data':{
+			'id' : 'text',
+			'title' : 'text',
+			'cover' : 'text',
+			'opus_time_create' : 'text',
+			'tags' : 'text,text,text',
+			'opus_pic' : 'text',
+			'content' : 'text',
+			'intro' : 'text',
+		},
 	});
- * 
  */
 
 var querystring=require('querystring');

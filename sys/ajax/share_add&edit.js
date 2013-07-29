@@ -1,6 +1,24 @@
+/**
+ * @author bh-lay
+ * 
+ */
 /*
- * author bh-lay
- * demo $.post('/ajax/addArticle',{'title':'我是剧中人4','content':'12457898765','gd':43},function(d){console.log(d)})
+@ demo
+	$.ajax({
+		'type':'POST',
+		'url':'/ajax/share',
+		'data':{
+			'id' : 'text',
+			'title' : 'text',
+			'cover' : 'text',
+			'time_show' : 'text',
+			'tags' : 'text,text,text',
+			'from' : 'text',
+			'from_url' : 'text',
+			'content' : 'text',
+			'intro' : 'text',
+		},
+	});
  */
 
 var mongo = require('../conf/mongo_connect');

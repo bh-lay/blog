@@ -1,7 +1,7 @@
 //author bh-lay
 var mongo = require('../conf/mongo_connect');
 
-var temp = require('../tpl/page_temp');
+var temp = require('../lib/page_temp');
 
 exports.deal = function (req,res,res_this,pathname){
 	var id = pathname.match(/^\/opus\/(\w*)/)[1];
