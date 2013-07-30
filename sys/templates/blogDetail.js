@@ -8,7 +8,7 @@ exports.deal = function (req,res_this,pathname){
 	var id = pathname.match(/^\/blog\/(\w*)/)[1];
 	//get template
 	var page = temp.get('blogDetail',{'init':true});
-		
+	
 	mongo.start(function(method){
 		
 		method.open({'collection_name':'article'},function(err,collection){
@@ -20,7 +20,7 @@ exports.deal = function (req,res_this,pathname){
 					
 				}else{
 					var date=new Date(parseInt(docs[0].time_show));
-					docs[0].time_show=(date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+date.getDate();
+					docs[0].time_show = (date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+date.getDate();
 					var txt = page.replace(/\{-(\w*)-}/g,function(){
 						return docs[0][arguments[1]]||22222;
 					});
