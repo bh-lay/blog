@@ -26,7 +26,7 @@ exports.deal = function(req,res,res_this,pathname){
 			var controlPath='./templates/'+pathname+'.js';
 			fs.exists(controlPath, function (exists) {
 				if (!exists) {
-					layFile.read(req,res);
+					layFile.read(req,res_this);
 				}else{
 					require(controlPath).render(req,res_this);
 				}
@@ -41,6 +41,6 @@ exports.deal = function(req,res,res_this,pathname){
 
 		}
 	}else{
-		layFile.read(req,res);
+		layFile.read(req,res_this);
 	}
 }
