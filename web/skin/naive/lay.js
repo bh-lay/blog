@@ -5,6 +5,31 @@
 **/
 
 var L=L||{};
+
+//test css suports
+L.supports = (function() {
+   var div = document.createElement('div'),
+      vendors = 'Khtml Ms O Moz Webkit'.split(' '),
+      len = vendors.length;
+  
+   return function(prop) {
+      if ( prop in div.style ) return true;
+  
+      prop = prop.replace(/^[a-z]/, function(val) {
+         return val.toUpperCase();
+      });
+  
+      while(len--) {
+         if ( vendors[len] + prop in div.style ) {
+            // browser supports box-shadow. Do what you need.
+            // Or use a bang (!) to test if the browser doesn't.
+            return true;
+         }
+      }
+      return false;
+   };
+})();
+
 /**
  *load image
  * 	L.loadImg(src,{'loadFn','sizeFn'})
@@ -113,62 +138,100 @@ var L=L||{};
  * L.gallery() 
  */
 (function(ex){
-	var gal = $('.gallayer');
-	var bj = gal.find('.galBj');
-	var mask = gal.find('.galMask');
-	var data = eval('('+bj.html()+')');
-	var total = data.length;
+	function JS_show(data,gal,bj){
+		var data = data,
+			gal = gal,
+			bj = bj,
+			total = data.length;
 	
-	function fixImg(dom){
-		var img = dom;
-		var size = img.attr('data').split('-');
-		var imgW = size[0];
-		var imgH = size[1];
-		var winW = $(window).width();
-		var winH = $(window).height();
-		if(winW/winH > imgW/imgH){
-			img.css({
-				'width':winW,
-				'height':winW*imgH/imgW,
-				'marginTop':-(winW*imgH/imgW-winH)/2,
-				'marginLeft':0
-			});
-		}else{
-			img.css({
-				'width':winH*imgW/imgH,
-				'height':winH,
-				'marginTop':0,
-				'marginLeft':-(winH*imgW/imgH-winW)/2
-			});
-		}
-	}
-	function show(i,dom){
-		L.loadImg(data[i].src,{'loadFn':function(){
-			var imgW=arguments[0];
-			var imgH=arguments[1];
-			bj.fadeOut(1000,function(){
-				dom.attr({'src':data[i].src,'alt':data[i].alt||'','data':(imgW+'-'+imgH)});
-				fixImg(dom);
-				bj.fadeIn(800);
-				setTimeout(function(){
-					i++;
-					i==total&&(i=0);
-					show(i,dom);
-				},40000)
-			});
-		}});
-	}
-
-	ex.gallery = function(){
 		var bjDom = $('<img src="/skin/naive/loading_31.gif" width="54" height="55" style="margin-top:160px;margin-left:100px;" data="100-20"/>');
 	
 		L.loadImg("/skin/naive/loading_31.gif",{'loadFn':function(){
 			bj.html(bjDom);
-			show(0,bjDom);
+			show(0,bjDom,data);
 			$(window).on('resize',function(){
 				fixImg(bjDom)
 			});
 		}});
+		
+		function fixImg(dom){
+			var img = dom;
+			var size = img.attr('data').split('-');
+			var imgW = size[0];
+			var imgH = size[1];
+			var winW = $(window).width();
+			var winH = $(window).height();
+			if(winW/winH > imgW/imgH){
+				img.css({
+					'width':winW,
+					'height':winW*imgH/imgW,
+					'marginTop':-(winW*imgH/imgW-winH)/2,
+					'marginLeft':0
+				});
+			}else{
+				img.css({
+					'width':winH*imgW/imgH,
+					'height':winH,
+					'marginTop':0,
+					'marginLeft':-(winH*imgW/imgH-winW)/2
+				});
+			}
+		}
+		function show(i,dom,data){
+			L.loadImg(data[i].src,{'loadFn':function(){
+				var imgW=arguments[0];
+				var imgH=arguments[1];
+				bj.fadeOut(1000,function(){
+					dom.attr({'src':data[i].src,'alt':data[i].alt||'','data':(imgW+'-'+imgH)});
+					fixImg(dom);
+					bj.fadeIn(800);
+					setTimeout(function(){
+						i++;
+						i==total&&(i=0);
+						show(i,dom,data);
+					},40000)
+				});
+			}});
+		}
+	}
+	function CSS3(data,gal,bj){
+		var data = data,
+			gal = gal,
+			bj = bj,
+			total = data.length;
+		bj.html('');
+		show(0);
+		
+		function show(index){
+			var index = index,
+				src = data[index].src;
+			L.loadImg(src,{'loadFn':function(){
+					bj.css({
+						'width' : '100%',
+						'height' : '100%',
+						'backgroundImage' : 'url(' + src + ')',
+						'backgroundSize' : 'cover',
+						'backgroundPosition' : 'center center',
+						'transition' : '1s'
+					});
+					setTimeout(function(){
+						index++;
+						index == total&&(index=0);
+						show(index);
+					},40000)
+			}});
+		}
+	}
+	ex.gallery = function(){
+		var gal = $('.gallayer'),
+			bj = gal.find('.galBj'),
+			data = eval('('+bj.html()+')');
+		if (L.supports('backgroundSize')&&false){
+			CSS3(data,gal,bj);
+			console.log('use css3')
+		}else{
+			JS_show(data,gal,bj);
+		}
 	}
 }(L));
 
@@ -383,9 +446,6 @@ var L=L||{};
  */
 (function(ex){
 	var blogTemp = '';
-	$.get('/ajax/temp?article_item',function(data){
-		blogTemp = data['article_item'];
-	});
 	var getData = function(skip,limit,fn){
 		$.ajax({
 			'type' : 'GET' ,
@@ -419,25 +479,28 @@ var L=L||{};
 		var count = 100,
 			limit = 10,
 			skip = 10;
-		$('.blog_addMore').on('click','a',function(){
-			if(blogTemp.length>10){
-				getData(skip,limit,function(num){
-					skip += limit;
-					count = num ;
-					if(skip>=count){
-						$('.blog_addMore').hide();
-					}
+		$.get('/ajax/temp?article_item',function(data){
+			blogTemp = data['article_item'];
+			$('.blog_addMore').on('click','a',function(){
+				if(blogTemp.length>10){
+					getData(skip,limit,function(num){
+						skip += limit;
+						count = num ;
+						if(skip>=count){
+							$('.blog_addMore').hide();
+						}
+					});
+				}
+			});
+			$('.articleList').on('click','.dataLike',function(){
+				var left = $(this).offset().left-20,
+					top = $(this).offset().top-16;
+				L.dialog.tips({
+					'text':'交互接口开发中……',
+					'left':left,
+					'top':top,
+					'delay':2000
 				});
-			}
-		});
-		$('.articleList').on('click','.dataLike',function(){
-			var left = $(this).offset().left-20,
-				top = $(this).offset().top-16;
-			L.dialog.tips({
-				'text':'交互接口开发中……',
-				'left':left,
-				'top':top,
-				'delay':2000
 			});
 		});
 	};
