@@ -14,7 +14,7 @@ module.exports = {
 		'src' : './templates/blogList.html',
 	},
 	'blogDetail' : {
-		'reg': /^\/blog\/(\w+)/,
+		'reg': /^\/blog\/\w+$/,
 		'require' :'./templates/blogDetail.js',
 		'src' : './templates/blogDetail.html',
 	},
@@ -24,7 +24,7 @@ module.exports = {
 		'src' : './templates/shareList.html',
 	},
 	'shareDetail' : {
-		'reg': /^\/share\/(\w+)/,
+		'reg': /^\/share\/\w+$/,
 		'require' :'./templates/shareDetail.js',
 		'src' : './templates/shareDetail.html',
 	},
@@ -34,7 +34,7 @@ module.exports = {
 		'src' : './templates/opusList.html',
 	},
 	'opusDetail' : {
-		'reg': /^\/opus\/(\w+)/,
+		'reg': /^\/opus\/\w+$/,
 		'require' :'./templates/opusDetail.js',
 		'src' : './templates/opusDetail.html',
 	},
