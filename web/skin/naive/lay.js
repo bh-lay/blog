@@ -204,21 +204,19 @@ L.supports = (function() {
 		
 		function show(index){
 			var index = index,
-				src = data[index].src;
+				src = data[index].src,
+				newPic = $('<div style="width:100%;height:100%;background-size:cover;background-position:center center;display:none"></div>');
 			L.loadImg(src,{'loadFn':function(){
-					bj.css({
-						'width' : '100%',
-						'height' : '100%',
-						'backgroundImage' : 'url(' + src + ')',
-						'backgroundSize' : 'cover',
-						'backgroundPosition' : 'center center',
-						'transition' : '1s'
-					});
-					setTimeout(function(){
-						index++;
-						index == total&&(index=0);
-						show(index);
-					},40000)
+				newPic.css({'backgroundImage' : 'url(' + src + ')'});
+				bj.html(newPic);
+				newPic.fadeIn(1000);
+				setTimeout(function(){
+					bj.css({'backgroundImage' : 'url(' + src + ')'});
+					newPic.hide()
+					index++;
+					index == total&&(index=0);
+					show(index);
+				},40000);
 			}});
 		}
 	}
@@ -226,7 +224,7 @@ L.supports = (function() {
 		var gal = $('.gallayer'),
 			bj = gal.find('.galBj'),
 			data = eval('('+bj.html()+')');
-		if (L.supports('backgroundSize')&&false){
+		if (L.supports('backgroundSize')){
 			CSS3(data,gal,bj);
 			console.log('use css3')
 		}else{
@@ -299,23 +297,6 @@ L.supports = (function() {
 	}
 	ex.like=init;
 }(L));
-/*
- * L.a2Fn(dom,url,fn)
- */
-(function(ex){
-	var transform=function(dom,url,fn){
-		var dom=dom||$('body');
-		dom.find('a').each(function(){
-			var __=$(this);
-			if(__.attr('href')==url){
-				__.attr('href','javascript:void(0)');
-				__.on('click',fn);
-			}
-		});
-		
-	}
-	ex.a2Fn=transform;
-})(L);
 
 /*
  * nav bar
@@ -360,64 +341,80 @@ L.supports = (function() {
 
 /*
  * lantern graphic 
- * L.lantern(pic dom);
+ * L.lantern(picdom);
+ * L.lantern.start(json,index);
  */
 (function(ex){
-	var tpl = "<div class='lay_show'><div class='lay_exist'>X</div><div class='lay_img'><img alt='' src='' /><div class='lay_title'></div><div class='lay_over'>已经到达列表终点，点击继续浏览</div></div><a class='lay_prev'>《</a><a class='lay_next'>》</a></div>";
-	var init = function (dom){
-		var imgData=[];
+	function start (json,index){
+		var tpl = ["<div class='lay_show'>",
+			"<div class='lay_exist'>X</div>",
+			"<div class='lay_img'>",
+				"<img alt='' src='' />",
+				"<div class='lay_title'></div>",
+				"<div class='lay_over'>已经到达列表终点，点击继续浏览</div>",
+			"</div>",
+			"<a class='lay_prev'>《</a>",
+			"<a class='lay_next'>》</a>",
+		"</div>"].join('');
+		
+		var i = index,
+			json = json,
+			total = json.length,
+			src,
+			alt,
+			timer;
 		
 		if($('.lay_show').length==0){
 			$('body').append(tpl);
 		}
-		var imgList = dom;
-		var bigPic = $('.lay_show>.lay_img>img');
-		var total=imgList.length;
-		var i, width, height, marginT, src, alt,timer;
-		imgList.css({cursor:'pointer'});
-		$(".lay_exist").click(function(){$(this).parent().fadeOut('slow');});
-		if(total==1){$('.lay_next, .lay_prev').hide();}
-		function change(src,alt){//切换大图函数
+		var mainPic = $('.lay_show>.lay_img>img');
+		
+		if(total==1){
+			$('.lay_next, .lay_prev').hide();
+		}
+		function change(index){//切换大图函数
+			var src = json[index]['src'],
+				alt = json[index]['alt'];
 			$('.lay_title').html((i+1)+'/'+total+'　'+alt);
-			bigPic.fadeOut('300');
+			mainPic.fadeOut('300');
 			clearTimeout(timer);
-			timer=setTimeout(function(){
-				bigPic.attr('src',src);
-				setTimeout(function(){
-					width = bigPic.width();
-					height = bigPic.height();
-					marginT = ($(window).height()-$('.lay_show img').height())/2+$(document).scrollTop();
-					if (marginT<0){marginT=0;}
-					$('.lay_show .lay_img').stop().animate({'width': width,'height': height,'marginTop':marginT},300);
-					setTimeout(function(){bigPic.stop().fadeIn('300');},400);
-				},10);
+			timer = setTimeout(function(){
+				
+				mainPic.attr('src',src);
+				L.loadImg(src,{'loadFn':function(w,h){
+					width = w;
+					height = h;
+					var marginT = ($(window).height()-h-32)/2+$(document).scrollTop();
+					(marginT<0)&&(marginT=0);
+					$('.lay_show .lay_img').stop().animate({
+						'width': width,'height': height,'marginTop':marginT
+					},300,function(){
+						mainPic.stop().fadeIn('300');
+					});
+				}});
 			},800);
 		}
-		imgList.click(function(){
-			src = $(this).attr('src');
-			alt = $(this).attr('alt');
-			i = imgList.index(this);
-			$('.lay_show').fadeIn('800').css({height:$(document).height()+400});
-			change(src,alt);
-		});
+		
 		function over(){
 			$('.lay_over').slideDown(200).delay(800).fadeOut(800);
 		}
 		//前一张
 		function prev(){
 			if (i>0){
-				src = imgList.eq(--i).attr('src');
-				alt = imgList.eq(i).attr('alt');
-				change(src,alt);
-			}else{over();i=total;}
+				change(--i);
+			}else{
+				over();
+				i=total;
+			}
 		}
 		//下一张
 		function next(){
 			if (i<total-1){
-				src = imgList.eq(++i).attr('src');
-				alt = imgList.eq(i).attr('alt');
-				change(src,alt);
-			}else{over(); i=-1;}
+				change(++i);
+			}else{
+				over();
+				i=-1;
+			}
 		}
 		//左右键翻页
 		$(window).keydown(function(event){
@@ -432,11 +429,44 @@ L.supports = (function() {
 				}
 			}
 		});
-		$('.lay_next').click(function(){next();});
-		$('.lay_prev').click(function(){prev();});
-		$('.lay_next, .lay_prev').mouseover(function(){$(this).stop().animate({width:'60'},500)}).mouseout(function(){$(this).stop().animate({width:'40'},500)});
+		$('.lay_show').on('click','.lay_next',function(){
+			next();
+		}).on('click','.lay_prev',function(){
+			prev();
+		}).on('mouseover','.lay_next, .lay_prev',function(){
+			$(this).stop().animate({width:'60'},500);
+		}).on('mouseover','.lay_next, .lay_prev',function(){
+			$(this).stop().animate({width:'40'},500);
+		}).on('click','.lay_exist',function(){
+			$(this).parent().fadeOut('slow');			
+		});
+		
+		//start
+		$('.lay_show').fadeIn('800').css({
+			height:$(document).height()+400
+		});
+		change(index)
+	}
+	var init = function (dom){
+		
+		var imgDom = dom;
+		var json = [];
+		imgDom.css({cursor:'pointer'}).each(function(){
+	
+			json.push({
+				'src' : $(this).attr('src'),
+				'alt' : $(this).attr('alt'),
+			});
+			
+		});
+		imgDom.click(function(){
+			index = imgDom.index(this);
+			start(json,index);
+		});
+		
 	};
 	ex.lantern = init;
+	ex.lantern.start = start;
 })(L);
 
 
@@ -479,15 +509,23 @@ L.supports = (function() {
 		var count = 100,
 			limit = 10,
 			skip = 10;
+		var add_btn_tpl = ['<div class="blog_addMore">',
+			'<a href="javascript:void(0)">加载更多</a>',
+			'<span>正在加载……</span>',
+		'</div>'];
+		var add_btn = $(add_btn_tpl.join(''));
+		$('.articleList').append(add_btn);
 		$.get('/ajax/temp?article_item',function(data){
 			blogTemp = data['article_item'];
-			$('.blog_addMore').on('click','a',function(){
+			add_btn.on('click','a',function(){
+				add_btn.addClass('blog_addMore_loading');
 				if(blogTemp.length>10){
 					getData(skip,limit,function(num){
+						add_btn.removeClass('blog_addMore_loading');
 						skip += limit;
 						count = num ;
 						if(skip>=count){
-							$('.blog_addMore').hide();
+							add_btn.hide();
 						}
 					});
 				}
@@ -572,9 +610,7 @@ L.supports = (function() {
 			break
 			
 	}
-	// L.a2Fn($('body'),'/demo/bless.html',function(){
-		// L.dialog.pop({'title':'请留言','width':700,'html':'<iframe class="blessFrame" src="/demo/bless.html"></iframe>'});
-	// });
+
 	$('.articleList').on('click','.dataLike',function(){
 		var classId=$(this).parents('.articleItem').attr('classid');
 		var articleId=$(this).parents('.articleItem').attr('articleid');

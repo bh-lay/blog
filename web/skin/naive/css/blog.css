@@ -38,10 +38,16 @@
 .artItLaCircle{width: 10px;height:10px;background:#fff;border-radius:5px; float: left;margin:7px 8px 0px 0px;}
 .artItLaCorner{float: left;border-color: transparent #fff;border-style: solid;border-width: 8px 7px 8px 0px;margin:4px 0px 0px 0px;}
 
-.blog_addMore {width:420px;}
-.blog_addMore a{display: block;height:30px;line-height:30px; background: #fff;border-radius:4px;text-indent:15px; }
-.blog_addMore a:hover {background: #ccc;}
+.blog_addMore {width:420px;border-radius:4px;overflow: hidden;}
+.blog_addMore a,.blog_addMore span{display: block;height:30px;line-height:30px;text-indent:15px;}
+.blog_addMore span{background: #888;color:#fff;display: none;}
+.blog_addMore a {background: #fff;color: #333;}
+.blog_addMore a:hover {background: #ccc;color:#000}
 .blog_addMore a:active {background: #666;color:#fff;}
+
+.blog_addMore.blog_addMore_loading span{display: block;}
+.blog_addMore.blog_addMore_loading a{display: none;}
+
 
 @media screen and (max-width: 760px){
 	.articleList{width: 100%;padding-left: 0px;}
