@@ -31,6 +31,7 @@ var dealModule = [
 var server = http.createServer(function (req,res) {
 
 	var pathname = req.url.split('?')[0];
+	
 	pathname = pathname.replace(/\.\./g, "");
 
 	var res_this = response.start(req,res);

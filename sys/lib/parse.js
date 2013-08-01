@@ -20,33 +20,41 @@ exports.cookie = function parseCookie(str){
 }
 
 /**
- * @param (timestamp,'y-M-d h:m:s')
+ * @param (timestamp,'{y}-{m}-{d} {h}:{m}:{s}')
  * 
- * y:2012
- * M:2
- * d:12
- * h:4
- * m:32
- * s:46	
+ * y:year
+ * m:months
+ * d:date
+ * h:hour
+ * i:minutes
+ * s:second
+ * a:day
  */
 exports.time = function(timestamp,format){
 	if(arguments.length==0){
 		return null;
 	}
 	var date = new Date(parseInt(timestamp));
-	var format = format ||'y-M-d h:m:s';
+	var format = format ||'{y}-{m}-{d} {h}:{m}:{s}';
 	
 	var formatObj = {
 		y : date.getYear()+1900,
-		M : date.getMonth()+1,
+		m : date.getMonth()+1,
 		d : date.getDate(),
 		h : date.getHours(),
-		m : date.getMinutes(),
-		s : date.getSeconds()
+		i : date.getMinutes(),
+		s : date.getSeconds(),
+		a : date.getDay(),
 	};
 	
-	format = format.replace(/y|M|d|h|m|s/g,function(){
+	format = format.replace(/{(y|m|d|h|i|s|a)}/g,function(){
 		return formatObj[arguments[0]]||arguments[0];
 	});
 	return format;
+}
+
+exports.createID = function(){
+	var date = new Date();
+	var id = date.getTime().toString(16);
+	return id;
 }

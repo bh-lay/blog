@@ -23,6 +23,7 @@
 var querystring=require('querystring');
 var mongo = require('../conf/mongo_connect');
 var session= require('../lib/session');
+var parse = require('../lib/parse');
 
 function add(parm,res_this){
 	var parm = parm;
@@ -30,7 +31,8 @@ function add(parm,res_this){
 		
 		method.open({'collection_name':'opus'},function(err,collection){
 			collection.find({}, {}).toArray(function(err, docs) {
-				parm.id=Date.parse(new Date()).toString(16);
+				
+				parm.id = parse.createID();
 	
 				collection.insert(parm,function(err,result){
 					if(err) throw err;
@@ -89,7 +91,7 @@ exports.render = function (req,res_this,res){
 			'title':decodeURI(data['title']),
 			'cover':data['cover']||'',
 			'opus_pic':data['opus_pic']||'',
-			'opus_time_create':data['opus_time_create']||Date.parse(new Date()),
+			'opus_time_create':data['opus_time_create']||new Date().getTime(),
 			'tags':data['tags']||'',
 			'content':data['content'],
 			'intro':data['intro']||data['content'].slice(0,200),

@@ -39,20 +39,22 @@ L.supports = (function() {
 		var parm=parm||{};
 		var img=new Image();
 		if(parm.loadFn){
-			img.onload=function(){
+			img.onload = function(){
 				parm.loadFn(img.width,img.height);
 			}
 		}
 		if(parm.sizeFn){
-			var timer=setInterval(function(){
-				
-				
-			})
+			var timer = setInterval(function(){
+				if(img.width>1){
+					clearInterval(timer);
+					parm.sizeFn(img.width,img.height);
+				}
+			},2)
 		}
 		
 		img.src=src;
 	}
-	ex.loadImg=init;	
+	ex.loadImg = init;	
 }(L));
 
 /*

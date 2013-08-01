@@ -33,7 +33,7 @@ function send_res(req,res,status,headers,content){
         res.end(result);
     });
 	
-	var logger={
+	var logger = {
 		'time':new Date(),
 		'ip':req['connection']['remoteAddress'],
 		'url':req.url,

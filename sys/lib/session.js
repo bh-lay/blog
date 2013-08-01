@@ -78,7 +78,7 @@ exports.start = function(req,res){
 	if(session['lib'][cookie_sessionID]){
 		sessionID = cookie_sessionID;
 	}else{
-		sessionID = Date.parse(new Date()) + Math.ceil(Math.random()*1000);
+		sessionID = new Date().getTime() + Math.ceil(Math.random()*1000);
 		session['lib'][sessionID] = {
 			'time_cerate':new Date(),
 			'time_expire' : '',

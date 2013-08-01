@@ -34,7 +34,7 @@ exports.render = function (req,res_this){
 				var txt='';
 				var tpl=temp.join('');
 				for(var i in docs){
-					docs[i].opus_time_create = parse.time(docs[i].opus_time_create,'y-M-d');
+					docs[i].opus_time_create = parse.time(docs[i].opus_time_create,'{y}-{m}-{d}');
 					txt+=tpl.replace(/\{(\w*)}/g,function(){
 						return docs[i][arguments[1]]||'';
 					});

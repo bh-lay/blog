@@ -9,6 +9,7 @@
 var mongo = require('../../conf/mongo_connect');
 var querystring=require('querystring');
 var session = require('../../lib/session');
+var parse = require('../../lib/parse');
 
 function add(parm,res_this){
 	var parm = parm;
@@ -19,7 +20,7 @@ function add(parm,res_this){
 		
 			collection.find({}, {}).toArray(function(err, docs) {
 		
-				parm.id = Date.parse(new Date()).toString(16);
+				parm.id = parse.createID();
 	
 				collection.insert(parm,function(err,result){
 					if(err) throw err;

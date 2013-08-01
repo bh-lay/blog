@@ -23,6 +23,7 @@
 var mongo = require('../conf/mongo_connect');
 var session = require('../lib/session');
 var post = require('../lib/post');
+var parse = require('../lib/parse');
 
 function add(parm,res_this){
 	var parm = parm;
@@ -31,7 +32,8 @@ function add(parm,res_this){
 		
 		method.open({'collection_name':'article'},function(err,collection){
 			collection.find({}, {}).toArray(function(err, docs) {
-				parm.id=Date.parse(new Date()).toString(16);
+				
+				parm.id = parse.createID();
 	
 				collection.insert(parm,function(err,result){
 					if(err) throw err;
@@ -87,7 +89,7 @@ exports.render = function (req,res_this,res){
 			'id' : data['id']||'',
 			'title':decodeURI(data['title']),
 			'cover':data['cover']||'',
-			'time_show':data['time_show']||Date.parse(new Date()),
+			'time_show':data['time_show']||new Date().getTime(),
 			'tags':data['tags']||'',
 			'author':data['author']||'',
 			'content':data['content'],
