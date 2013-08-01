@@ -30,8 +30,8 @@ function send_res(req,res,status,headers,content){
 	content = content || null;
 	
 	zlib.gzip(content, function(err, result) {
-        res.end(result);
-    });
+		res.end(result);
+	});
 	
 	var logger = {
 		'time':new Date(),
