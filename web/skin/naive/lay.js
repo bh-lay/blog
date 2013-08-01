@@ -138,6 +138,10 @@ L.supports = (function() {
  * L.gallery() 
  */
 (function(ex){
+	var config = {
+		'delay' : 40000
+	};
+	
 	function JS_show(data,gal,bj){
 		var data = data,
 			gal = gal,
@@ -189,7 +193,7 @@ L.supports = (function() {
 						i++;
 						i==total&&(i=0);
 						show(i,dom,data);
-					},40000)
+					},config.delay)
 				});
 			}});
 		}
@@ -216,7 +220,7 @@ L.supports = (function() {
 					index++;
 					index == total&&(index=0);
 					show(index);
-				},40000);
+				},config.delay);
 			}});
 		}
 	}
@@ -351,7 +355,6 @@ L.supports = (function() {
 			"<div class='lay_img'>",
 				"<img alt='' src='' />",
 				"<div class='lay_title'></div>",
-				"<div class='lay_over'>已经到达列表终点，点击继续浏览</div>",
 			"</div>",
 			"<a class='lay_prev'>《</a>",
 			"<a class='lay_next'>》</a>",
@@ -395,15 +398,11 @@ L.supports = (function() {
 			},800);
 		}
 		
-		function over(){
-			$('.lay_over').slideDown(200).delay(800).fadeOut(800);
-		}
 		//前一张
 		function prev(){
 			if (i>0){
 				change(--i);
 			}else{
-				over();
 				i=total;
 			}
 		}
@@ -412,14 +411,13 @@ L.supports = (function() {
 			if (i<total-1){
 				change(++i);
 			}else{
-				over();
 				i=-1;
 			}
 		}
 		//左右键翻页
-		$(window).keydown(function(event){
+		$('window').keydown(function(e){
 			if($('.lay_show').css('display')=='block'){
-				switch(event.keyCode) {
+				switch(e.keyCode) {
 					case 37:prev();
 					break
 					case 39:next();

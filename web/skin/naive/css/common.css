@@ -75,10 +75,9 @@ background:-moz-linear-gradient(top,  #ffffff,  #f2f2f2);
 
 .lay_exist {background-color:#ddd;border-radius:15px;color:#fff;cursor:pointer;font-size:20px;height:30px;line-height:30px;position:fixed;right:20px;text-align:center;top:20px;width:30px;z-index: 100;}
 .lay_exist:hover {background-color: #444; color: #f00;}
-.lay_show{background-color:#888;background-color:rgba(0,0,0,0.8);height:820px;display:none;left:0px;position:absolute;top:0px;width:100%;text-align:center;z-index:1000;}
+.lay_show{background-color:#888;background-color:rgba(0,0,0,0.8);display:none;left:0px;position:absolute;top:0px;width:100%;text-align:center;z-index:1000;}
 .lay_show .lay_img {padding:15px;position:relative;margin:100px auto 10px;display:inline-block;border:1px solid #fff;border-radius:4px;box-shadow:0px 0px 10px #fff;background-color:#bbb;overflow: hidden;}
 .lay_show .lay_title{background-color:#888;background-color:rgba(0,0,0,0.6);color:#fff;left:0px;padding:5px 20px;position:absolute; top:40%;}
-.lay_show .lay_over{background-color:#888;background-color:rgba(0,0,0,0.6);color:#fff;border-radius:8px;border:1px solid #fff;left: 40%;top:40%;margin-top:50px;padding:10px 20px;position:absolute;display:none;}
 .lay_next, .lay_prev{display:block;background-color:#eee;width:40px;height:40px;line-height:40px;text-align:center;cursor:pointer; position:fixed;top:50%}
 .lay_next{right:0px; border-radius:4px 0px 0px 4px;}
 .lay_prev{left:0px; border-radius:0px 4px 4px 0px;}
