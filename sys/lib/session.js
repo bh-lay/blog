@@ -2,7 +2,6 @@
  * @author bh-lay
  */
 var expire_hour = 24;
-var sessionname_in_cookie = 'session_verify';
 var parse = require('../lib/parse');
 
 /**
@@ -62,13 +61,13 @@ function session_power(sessionID){
  *   match or create an sessionID
  *   return session data and set function
  */
-exports.start = function(req,res){
+exports.start = function(req,res_this){
 
 // get cookie from browser
 	var cookieStr = req.headers.cookie||'';
 	var cookieObj = parse.cookie(cookieStr);
 // get sessionID/IP/userAgent
-	var cookie_sessionID = cookieObj[sessionname_in_cookie]||null;
+	var cookie_sessionID = cookieObj['session_verify']||null;
 	var IP = req['connection']['remoteAddress'];
 	var userAgent = req['headers']['user-agent'];
 	
@@ -89,7 +88,11 @@ exports.start = function(req,res){
 			'power' : [],
 			'data':{}
 		};
-		res.setHeader('Set-Cookie',sessionname_in_cookie + '=' + sessionID + '; path=/');
+		res_this.cookie({
+			'session_verify' : sessionID,
+			'path' : '/',
+			'Max-Age' : 60*60*24*2
+		});
 	}
 	return {
 		'data' : session['lib'][sessionID]['data'] ,

@@ -20,7 +20,7 @@ exports.deal = function(req,res,res_this,pathname){
 		},'this type file is not supposted !');
 	
 	}else if(pathname.match(/.html$/)){
-		var session_this = session.start(req,res);
+		var session_this = session.start(req,res_this);
 			
 		if(session_this.power(powerCode)){
 			var controlPath='./templates/'+pathname+'.js';

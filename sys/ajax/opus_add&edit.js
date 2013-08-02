@@ -71,7 +71,7 @@ function edit(parm,res_this){
 	});
 }
 
-exports.render = function (req,res_this,res){
+exports.render = function (req,res_this){
 	if (req.method != 'POST'){
 		res_this.json({
 			'code' : 2,
@@ -97,7 +97,7 @@ exports.render = function (req,res_this,res){
 			'intro':data['intro']||data['content'].slice(0,200),
 		};
 		if(parm['title']&&parm['content']){
-			var session_this = session.start(req,res);
+			var session_this = session.start(req,res_this);
 			
 			if(parm['id']&&parm['id'].length>2){
 				if(session_this.power(9)){

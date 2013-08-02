@@ -14,6 +14,8 @@
 	or
 	res_this.notFound('not found');
 	or
+	res_this.cookie({'session_verify' : sessionID,'path' : '/','Max-Age' : 60*60*24*2},{'UID':'23w','path':'/admin'});
+	or
 	res_this.error('error');
 	 
 */
@@ -21,6 +23,16 @@
 var fs = require('fs');
 var zlib = require("zlib");
 
+var notFoundTemp = fs.readFileSync('./templates/404.html', "utf8");
+
+//FIXME logger 
+var logger = (function(){
+	
+	
+})();
+
+
+//Unified use send response method
 function send_res(req,res,status,headers,content){
 	
 	headers['Content-Encoding'] = 'gzip';
@@ -59,7 +71,6 @@ function json(req,res){
 }
 
 //response html page
-
 function html(req,res){
 	var req = req,
 		res = res;
@@ -84,8 +95,6 @@ function define(req,res){
 		
 	}
 }
-
-var notFoundTemp = fs.readFileSync('./templates/404.html', "utf8");
 
 //response not found
 function notFound(req,res){
@@ -116,6 +125,23 @@ function error(req,res){
 	}
 }
 
+//response cookie
+function cookie(req,res){
+	var req = req,
+		res = res;
+	return function(){
+		var cookieObj = arguments;
+		for(var i in cookieObj){
+			var cookie_this = cookieObj[i];
+			var cookie_str = '';
+			for(var i in cookie_this){
+				cookie_str += i + '=' + cookie_this[i] +';';
+			}
+			res.setHeader('Set-Cookie',cookie_str);	
+		}
+	}
+}
+
 exports.start = function(req,res){
 	return {
 		'json' : json(req,res),
@@ -123,6 +149,7 @@ exports.start = function(req,res){
 		'define' : define(req,res),
 		'notFound' : notFound(req,res),
 		'error' : error(req,res),
+		'cookie' : cookie(req,res),
 		'response' : res,
 	}
 }

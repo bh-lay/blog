@@ -67,9 +67,9 @@ function login (res_this,session_this,username,password){
 	}
 	
 }
-exports.render = function (req,res_this,res){
+exports.render = function (req,res_this){
 
-	var session_this = session.start(req,res);
+	var session_this = session.start(req,res_this);
 	
 	var search = req.url.split('?')[1]||'';
 	var data = querystring.parse(search);

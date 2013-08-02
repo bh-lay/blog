@@ -42,7 +42,7 @@ var del_conf = {
 
 /**
  * delet method
- * @param {id,collection_name,need_power},res,session_this
+ * @param {id,collection_name,need_power},res_this,session_this
  */ 
 function DELET(param,res_this,session_this){
 	var id = param['id'],
@@ -82,7 +82,7 @@ function DELET(param,res_this,session_this){
 }
 
 
-exports.render = function (req,res_this,res){
+exports.render = function (req,res_this){
 
 	var dataString = req.url.split('?')[1]||'',
 		data = querystring.parse(dataString);
@@ -107,7 +107,7 @@ exports.render = function (req,res_this,res){
 	}else{
 		//check ['from'] is exist
 		if(del_conf[from]){
-			var session_this = session.start(req,res);
+			var session_this = session.start(req,res_this);
 			
 			param['collection_name'] = del_conf[from]['collection_name'];
 			param['need_power'] = del_conf[from]['power'];

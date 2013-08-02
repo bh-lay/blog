@@ -98,7 +98,7 @@ exports.render = function (req,res_this,res){
 		
 		if(parm['title']&&parm['content']){
 		
-			var session_this = session.start(req,res);
+			var session_this = session.start(req,res_this);
 		
 			if(parm['id']&&parm['id'].length>2){
 				if(session_this.power(3)){
