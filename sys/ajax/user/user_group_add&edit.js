@@ -56,8 +56,10 @@ function edit(parm,res_this){
 	});
 }
 
-exports.render = function (req,res_this,res){
-
+exports.render = function (req,res_this){
+	
+	var res = res_this.response;
+	
 	if (req.method == 'POST'){
 		var info='';
 		req.addListener('data', function(chunk){

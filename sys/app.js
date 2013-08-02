@@ -49,7 +49,7 @@ var server = http.createServer(function (req,res) {
 	// check module next
 		for(var i = 0,total = dealModule.length; i < total ;i++){
 			if(!bingo&&pathname.match(dealModule[i]['reg'])){
-				require('./'+dealModule[i]['require']).deal(req,res,res_this,pathname);
+				require('./'+dealModule[i]['require']).deal(req,res_this,pathname);
 				bingo = true;
 				break;
 			}

@@ -20,7 +20,7 @@ var post = require('../lib/post');
 
 var temp_list = require('../conf/templates');
 
-exports.render = function (req,res_this,res){
+exports.render = function (req,res_this){
 	if (req.method != 'POST'){
 		res_this.json({
 			'code' : 2,

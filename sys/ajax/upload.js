@@ -6,7 +6,7 @@
 var fs = require('fs');
 var post = require('../lib/post');
 
-exports.render = function (req,res_this,res){
+exports.render = function (req,res_this){
 	
 	post.parse(req,function(err,fields, files){
 		

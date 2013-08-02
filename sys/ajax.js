@@ -4,11 +4,11 @@
 
 var ajaxConfig = require('./conf/ajax');
 
-exports.deal = function (req,res,res_this,pathname){
+exports.deal = function (req,res_this,pathname){
 	
 	var modul = pathname.split('/').pop();
 	if(ajaxConfig[modul]){
-		require('./ajax/'+ajaxConfig[modul]).render(req,res_this,res);
+		require('./ajax/'+ajaxConfig[modul]).render(req,res_this);
 	}else{
 		res_this.json({
 			'code' : 2,
