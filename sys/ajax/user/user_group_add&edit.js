@@ -6,7 +6,7 @@
 
 var mongo = require('../../conf/mongo_connect');
 var querystring = require('querystring');
-var session = require('../../lib/session');
+var session = require('../../mod/session');
 var parse = require('../../lib/parse');
 
 function add(parm,res_this){

@@ -1,7 +1,7 @@
 //author bh-lay
 
 var fs = require('fs');
-var session= require('../../lib/session');
+var session= require('../../mod/session');
 var temp = fs.readFileSync('./templates/admin/index.html', "utf8");
 
 

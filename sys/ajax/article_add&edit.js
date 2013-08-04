@@ -21,7 +21,7 @@
  */
 
 var mongo = require('../conf/mongo_connect');
-var session = require('../lib/session');
+var session = require('../mod/session');
 var post = require('../lib/post');
 var parse = require('../lib/parse');
 

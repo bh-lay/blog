@@ -3,7 +3,6 @@
  */
 
 var fs = require('fs');
-var response = require('./response');
 
 /*Mime-Type*/
 var mime = {

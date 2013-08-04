@@ -15,7 +15,7 @@ login: 									|		exist
 	});									|
 -----------------------------------------------------------------
 */
-var session = require('../lib/session');
+var session = require('../mod/session');
 var querystring = require('querystring');
 var mongo = require('../conf/mongo_connect');
 

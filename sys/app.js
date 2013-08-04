@@ -4,8 +4,8 @@
  */
 
 var http = require('http');
-var layFile = require('./lib/layFile');
-var response = require('./lib/response');
+var layFile = require('./mod/layFile');
+var response = require('./mod/response');
 
 // 301  URL redirection
 var url_redirect = require('./conf/301url');

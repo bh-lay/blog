@@ -17,7 +17,7 @@
 
 var querystring = require('querystring');
 var mongo = require('../conf/mongo_connect');
-var session = require('../lib/session');
+var session = require('../mod/session');
 
 var del_conf = {
 	'blog' : {

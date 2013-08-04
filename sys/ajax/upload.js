@@ -10,23 +10,16 @@ exports.render = function (req,res_this){
 	
 	post.parse(req,function(err,fields, files){
 		
-		if(files.upload){
+		if(files.length){
 			for(var i in files){
 				fs.rename(files[i].path, "../web/upload/" + files[i].name,function(err){
 	    	    	if(err) throw err;
 					
 				});
 			}
-			res_this.json({
-				'code':1,
-				'msg':'received files1 !'
-			});
-		}else{
-			res_this.json({
-				'code':2,
-				'msg':'no files !'
-			});
+			
 		}
+		res_this.json({fields:fields,files:files});
 	      
 	});
 }
