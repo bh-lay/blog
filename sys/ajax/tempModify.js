@@ -16,7 +16,7 @@
  */ 
 
 var fs = require('fs');
-var post = require('../lib/post');
+var parse = require('../lib/parse');
 
 var temp_list = require('../conf/templates');
 
@@ -29,7 +29,7 @@ exports.render = function (req,res_this){
 		return ;
 	}
 	
-	post.parse(req,function(err,data){
+	parse.request(req,function(err,data){
 
 		var data = data;
 		var module = data['module']||'';

@@ -5,7 +5,6 @@
  */
 
 var mongo = require('../../conf/mongo_connect');
-var querystring = require('querystring');
 var session = require('../../mod/session');
 var parse = require('../../lib/parse');
 
@@ -57,38 +56,25 @@ function edit(parm,res_this){
 }
 
 exports.render = function (req,res_this){
-	
-	var res = res_this.response;
-	
-	if (req.method == 'POST'){
-		var info='';
-		req.addListener('data', function(chunk){
-			info += chunk; 
-		}).addListener('end', function(){
-			var data = querystring.parse(info);
-			var parm={
-				'id' : data['id']||'',
-				'user_group_nick':decodeURI(data['user_group_nick']),
-				'user_group_name':data['user_group_name']||'',
-				'power':data['power']||'',
-			};
-			if(parm['user_group_name']){
-				if(parm['id']&&parm['id'].length>2){
-					edit(parm,res_this,res)
-				}else{
-					add(parm,res_this,res);
-				}
+	parse.request(req,function(error,fields, files){
+		var data = fields;
+		var parm={
+			'id' : data['id']||'',
+			'user_group_nick':decodeURI(data['user_group_nick']),
+			'user_group_name':data['user_group_name']||'',
+			'power':data['power']||'',
+		};
+		if(parm['user_group_name']){
+			if(parm['id']&&parm['id'].length>2){
+				edit(parm,res_this)
 			}else{
-				res_this.json({
-					'code' : 2,
-					'msg' : 'please insert complete code !'
-				});
+				add(parm,res_this);
 			}
-		});
-	}else{
-		res_this.json({
-			'code' : 2 , 
-			'msg' : 'please use [post] instead [get] to submit !'
-		});
-	}
+		}else{
+			res_this.json({
+				'code' : 2,
+				'msg' : 'please insert complete code !'
+			});
+		}
+	});
 }

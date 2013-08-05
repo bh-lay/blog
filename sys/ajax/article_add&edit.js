@@ -22,7 +22,6 @@
 
 var mongo = require('../conf/mongo_connect');
 var session = require('../mod/session');
-var post = require('../lib/post');
 var parse = require('../lib/parse');
 
 function add(parm,res_this){
@@ -82,7 +81,7 @@ exports.render = function (req,res_this,res){
 		});
 		return ;
 	}
-	post.parse(req,function(err,data){
+	parse.request(req,function(err,data){
 		
 		var data = data;
 		var parm={

@@ -7,7 +7,6 @@
  */
 
 var mongo = require('../../conf/mongo_connect');
-var querystring=require('querystring');
 var session = require('../../mod/session');
 var parse = require('../../lib/parse');
 
@@ -61,53 +60,43 @@ function edit(parm,res_this){
 }
 
 exports.render = function (req,res_this){
-	if (req.method == 'POST'){
-		var info='';
-		req.addListener('data', function(chunk){
-			info += chunk; 
-		}).addListener('end', function(){
-			var data = querystring.parse(info);
-			var parm={
-				'id' : data['id']||'',
-				'usernick':decodeURI(data['usernick']),
-				'username':data['username']||'',
-				'password':data['password']||'',
-				'user_group':data['user_group']||'',
-			};
-			if(parm['username']){
-				
-				var session_this = session.start(req,res_this);
+	parse.request(req,function(error,fields, files){
+		var data = fields;
+		var parm={
+			'id' : data['id']||'',
+			'usernick':decodeURI(data['usernick']),
+			'username':data['username']||'',
+			'password':data['password']||'',
+			'user_group':data['user_group']||'',
+		};
+		if(parm['username']){
 			
-				if(parm['id']&&parm['id'].length>2){
-					if(session_this.power(12)){
-						edit(parm,res_this);
-					}else{
-						res_this.json({
-							'code':2,
-							'msg':'no power to edit user !'
-						});
-					}
+			var session_this = session.start(req,res_this);
+		
+			if(parm['id']&&parm['id'].length>2){
+				if(session_this.power(12)){
+					edit(parm,res_this);
 				}else{
-					if(session_this.power(11)){
-						add(parm,res_this);
-					}else{
-						res_this.json({
-							'code':2,
-							'msg':'no power to edit user !'
-						});
-					}
+					res_this.json({
+						'code':2,
+						'msg':'no power to edit user !'
+					});
 				}
 			}else{
-				res_this.json({
-					'code' : 2,
-					'msg' : 'please insert complete code !'
-				});
+				if(session_this.power(11)){
+					add(parm,res_this);
+				}else{
+					res_this.json({
+						'code':2,
+						'msg':'no power to edit user !'
+					});
+				}
 			}
-		});
-	}else{
-		response.json({
-			'code' : 2,
-			'msg' : 'please use [post] instead [get] to submit !'
-		});
-	}
+		}else{
+			res_this.json({
+				'code' : 2,
+				'msg' : 'please insert complete code !'
+			});
+		}
+	});
 }
