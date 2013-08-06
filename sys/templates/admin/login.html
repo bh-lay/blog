@@ -81,6 +81,8 @@ if(self!=top){parent.location.href='/admin/login.html';}
 var form = $('#login'),
 	usernameIpt = form.find('input[name=username]'),
 	passwordIpt = form.find('input[name=password]');
+usernameIpt.focus();
+
 function getData(){
 	var data = {};
 	data.username = usernameIpt.val();
