@@ -6,6 +6,7 @@
 var http = require('http');
 var layFile = require('./mod/layFile');
 var response = require('./mod/response');
+var parse = require('./lib/parse');
 
 // 301  URL redirection
 var url_redirect = require('./conf/301url');
@@ -14,47 +15,33 @@ var url_redirect = require('./conf/301url');
 var templates = require('./conf/templates');
 
 /* render config*/
-var dealModule = [
-	{
-		'name' : 'ajax',
-		'reg': /^\/ajax\//,
-		'require' :'ajax.js'
-	},
-	{
-		'name' : 'admin',
-		'reg': /^\/admin/,
-		'require' :'admin.js'
-	}
-];
+var dealModule = {
+	'ajax' : 'ajax.js',
+	'admin' : 'admin.js'
+};
 
 // server start
 var server = http.createServer(function (req,res) {
 
-	var pathname = req.url.split('?')[0];
-	
-	pathname = pathname.replace(/\.\./g, "");
-
 	var res_this = response.start(req,res);
+	
+	var path = parse.url(req.url);
+	var pathname = path.pathname;
+	//path['pathnode'][0]
 
 //router
-	var bingo = false;
-
-	// check 301 router
 	if(url_redirect[pathname]){
-		bingo = true;
+	// check 301 router
 		res_this.define(301,{
 			'location':url_redirect[pathname]
 		});
-	}else{
+	}else if(dealModule[path['pathnode'][0]]){
 	// check module next
-		for(var i = 0,total = dealModule.length; i < total ;i++){
-			if(!bingo&&pathname.match(dealModule[i]['reg'])){
-				require('./'+dealModule[i]['require']).deal(req,res_this,pathname);
-				bingo = true;
-				break;
-			}
-		}
-	// check templates next
+		require('./'+dealModule[path['pathnode'][0]]).deal(req,res_this,pathname);
+
+	}else{
+	// check templates
+		var bingo = false;
 		for(var i = 0 in templates){
 			if(!bingo&&pathname.match(templates[i]['reg'])){
 				require(templates[i]['require']).deal(req,res_this,pathname);

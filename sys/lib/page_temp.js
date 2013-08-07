@@ -23,6 +23,7 @@ exports.get = function(mod,param) {
 		param = param ;
 		
 	var temp = temp_list[mod];
+	
 	if(temp){
 		var temp = fs.readFileSync(temp['src'], "utf8");
 		if(param.init){

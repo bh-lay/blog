@@ -95,3 +95,44 @@ exports.request = function(req,callBack){
 		callBack(null,fields,[]);
 	}
 }
+
+//parse URL
+exports.url = function(url){
+	var url = url||'';
+	//filter url code '../'
+		url = url.replace(/\.\.\//g,'');
+	
+	var a = url.split(/\?/);
+	
+	var obj = {
+		'pathname' : a[0],
+		'search' : a[1],
+		'filename' : null,
+		'pathnode' : a[0].replace(/^\/|\/$/g,'').split(/\//)
+	};
+	if(obj['pathname'].match(/\/\w+\.\w+$/)){
+		obj.pathnode.pop();
+		obj.filename = obj['pathname'].match(/\/(\w+\.\w+$)/)[1];
+	}
+	return obj;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
