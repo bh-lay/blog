@@ -7,8 +7,8 @@ var layFile = require('./mod/layFile');
 var session = require('./mod/session');
 var powerCode = 1;
 
-exports.deal = function(req,res_this,pathname){
-	
+exports.deal = function(req,res_this,path){
+	var pathname = path.pathname;
 	if(pathname.split('.').length==1) {
 		pathname += '/index.html'
 	}

@@ -103,13 +103,16 @@ exports.url = function(url){
 		url = url.replace(/\.\.\//g,'');
 	
 	var a = url.split(/\?/);
-	
+	var b = a[0].replace(/^\/|\/$/g,'');
 	var obj = {
 		'pathname' : a[0],
 		'search' : a[1],
 		'filename' : null,
-		'pathnode' : a[0].replace(/^\/|\/$/g,'').split(/\//)
+		'pathnode' : b.length?b.split(/\//):[],
 	};
+	
+	obj['root'] = '/' + (obj['pathnode'][0]||'');
+	
 	if(obj['pathname'].match(/\/\w+\.\w+$/)){
 		obj.pathnode.pop();
 		obj.filename = obj['pathname'].match(/\/(\w+\.\w+$)/)[1];
