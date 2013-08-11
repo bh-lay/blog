@@ -141,7 +141,7 @@ L.supports = (function() {
  */
 (function(ex){
 	var config = {
-		'delay' : 40000
+		'delay' : 4000
 	};
 	
 	function JS_show(data,gal,bj){
@@ -210,12 +210,15 @@ L.supports = (function() {
 		
 		function show(index){
 			var index = index,
-				src = data[index].src,
-				newPic = $('<div style="width:100%;height:100%;background-size:cover;background-position:center center;display:none"></div>');
+				src = data[index].src;
 			L.loadImg(src,{'loadFn':function(){
+				var newPic = $('<div class="galBj_mask"></div>');
 				newPic.css({'backgroundImage' : 'url(' + src + ')'});
 				bj.html(newPic);
-				newPic.fadeIn(1000);
+				//newPic.fadeIn(1000);
+				setTimeout(function(){
+					newPic.addClass('galMask_end');
+				},2);
 				setTimeout(function(){
 					bj.css({'backgroundImage' : 'url(' + src + ')'});
 					newPic.hide()
