@@ -2,6 +2,7 @@
 var mongo = require('../conf/mongo_connect');
 var temp = require('../lib/page_temp');
 var tpl = require('../lib/module_tpl');
+var parse = require('../lib/parse');
 
 function list_page(res_this){
 	var page_temp = temp.get('opusList',{'init':true});
@@ -16,8 +17,6 @@ function list_page(res_this){
 				var txt='';
 				if(docs.length>0){
 					for(var i in docs){
-						var date=new Date(parseInt(docs[i].time_show*1000));
-						docs[i].time_show=(date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+date.getDate();
 						docs[i].cover=docs[i].cover||'/images/notimg.gif';
 						txt += list_temp.replace(/\{-(\w*)-}/g,function(){
 							return docs[i][arguments[1]]||'';
@@ -51,8 +50,7 @@ function detail_page(res_this,id){
 					res_this.notFound('哇塞，貌似这作品享不存在哦!');
 					
 				}else{
-					var date=new Date(parseInt(docs[0].opus_time_create));
-					docs[0].opus_time_create=(date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+date.getDate();
+					docs[0].opus_time_create = parse.time(docs[0].opus_time_create ,'{y}-{m}-{d}');
 					var txt = page_temp.replace(/\{-(\w*)-}/g,function(){
 						return docs[0][arguments[1]]||'';
 					});

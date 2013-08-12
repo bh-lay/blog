@@ -36,7 +36,7 @@ exports.render = function (req,res_this){
 				var tpl=temp.join('');
 				for(var i in docs){
 					docs[i].time_show = parse.time(docs[i].time_show,'{y}-{m}-{d}');
-					
+
 					txt+=tpl.replace(/\{(\w*)}/g,function(){
 						return docs[i][arguments[1]]||22222;
 					});

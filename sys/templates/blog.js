@@ -6,6 +6,7 @@ var mongo = require('../conf/mongo_connect');
 
 var tpl = require('../lib/module_tpl');
 var temp = require('../lib/page_temp');
+var parse = require('../lib/parse');
 
 function list_page(res_this){
 	var page_temp = temp.get('blogList',{'init':true});
@@ -18,8 +19,7 @@ function list_page(res_this){
 			collection.find({}, {limit:10}).sort({id:-1}).toArray(function(err, docs) {
 				var txt='';
 				for(var i in docs){
-					var date=new Date(parseInt(docs[i].time_show));
-					docs[i].time_show=(date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+date.getDate();
+					docs[i].time_show = parse.time(docs[i].time_show ,'{y}-{m}-{d}');
 					docs[i].cover=docs[i].cover||'/images/notimg.gif';
 					txt += list_temp.replace(/\{-(\w*)-}/g,function(){
 						return docs[i][arguments[1]]||'';
@@ -51,8 +51,7 @@ function detail_page(res_this,id){
 					res_this.notFound('哇塞，貌似这篇博文不存在哦!');
 					
 				}else{
-					var date=new Date(parseInt(docs[0].time_show));
-					docs[0].time_show = (date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+date.getDate();
+					docs[0].time_show = parse.time(docs[0].time_show ,'{y}-{m}-{d}');
 					var txt = page_temp.replace(/\{-(\w*)-}/g,function(){
 						return docs[0][arguments[1]]||22222;
 					});

@@ -35,11 +35,12 @@ exports.render = function (req,res_this){
 				var tpl=temp.join('');
 				for(var i in docs){
 					docs[i].opus_time_create = parse.time(docs[i].opus_time_create,'{y}-{m}-{d}');
+					
 					txt+=tpl.replace(/\{(\w*)}/g,function(){
 						return docs[i][arguments[1]]||'';
 					});
 				}
-				var tpl=fs.readFileSync('./templates/admin/main/opusList.html', "utf8");
+				var tpl = fs.readFileSync('./templates/admin/main/opusList.html', "utf8");
 				
 				var pageTpl = page.render(parm);
 				tpl=tpl.replace('{pageBar}',pageTpl);
