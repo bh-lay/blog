@@ -40,18 +40,27 @@ background-size : cover;background-position : center center;}
 	background-position:center center;
 	
 	-webkit-mask-image : url('/skin/naive/mask_bj.png');
-	-webkit-mask-size : 0.1%;
-	-webkit-mask-position : center center;
 	-webkit-mask-repeat : no-repeat;
-	
-	opacity:0.3;
-	transition: all ease-in 1s;
+	-webkit-mask-position : center center;
+	-webkit-mask-size : 300%;
+	-webkit-animation:circle_zoom 1s
 }
-.galMask_end {
-	opacity:1;
-	-webkit-mask-size : 220%;
+@-webkit-keyframes circle_zoom {
+	0% {
+		opacity:0.3;
+		-webkit-mask-size:0%;
+		-webkit-animation-timing-function:ease-in 
+	}
+	50% {
+		opacity:0.8;
+		-webkit-mask-size:60%;
+		-webkit-animation-timing-function:ease-in 
+	}
+	100% {
+		opacity:1;
+		-webkit-mask-size:300%
+	}
 }
-
 /*navigation*/
 .navLayer{position:fixed;z-index:1000;top:0px;right:0px;left:0px;padding:0px 15px;border-bottom:1px solid #666;border-radius:0px 0px 8px 8px;box-shadow: 1px 1px 2px #666;
 background:#fff;
