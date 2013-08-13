@@ -56,7 +56,6 @@ exports.time = function(time,format){
 	};
 	
 	var time_str = format.replace(/{(y|m|d|h|i|s|a)}/g,function(){
-		console.log(arguments)
 		return formatObj[arguments[1]]||arguments[0];
 	});
 	//console.log(format,formatObj)

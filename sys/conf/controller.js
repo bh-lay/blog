@@ -3,10 +3,10 @@
  */
 
 module.exports = {
-	'/' : '/templates/index.js',
-	'/ajax' : '/ajax.js',
-	'/admin' : '/admin.js',
-	'/blog' : '/templates/blog.js',
-	'/share' :'/templates/share.js',
-	'/opus' :'/templates/opus.js',
+	'/' : '/controller/index.js',
+	'/ajax' : '/controller/ajax.js',
+	'/admin' : '/controller/admin.js',
+	'/blog' : '/controller/blog.js',
+	'/share' :'/controller/share.js',
+	'/opus' :'/controller/opus.js',
 };
