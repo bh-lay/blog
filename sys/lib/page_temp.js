@@ -27,7 +27,14 @@ exports.get = function(mod,param) {
 	if(temp){
 		var temp = fs.readFileSync(temp['src'], "utf8");
 		if(param.init){
-			temp = tpl.init(temp);
+			
+			temp = temp.replace(/\{-(\w*)-}/g,function(){
+				if(tpl.get(arguments[1])){
+					return tpl.get(arguments[1]);
+				}else{
+					return arguments[0];
+				}
+			});
 		}
 		return temp ;
 	}else{
