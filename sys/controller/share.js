@@ -6,18 +6,23 @@ var parse = require('../lib/parse');
 
 function list_page(res_this){
 	var page_temp = temp.get('shareList',{'init':true});
+	var list_temp = tpl.get('share_item');
 	
 	mongo.start(function(method){
 		
 		method.open({'collection_name':'share'},function(err,collection){
 			
 			collection.find({}, {limit:15}).sort({id:-1}).toArray(function(err, docs) {
+				var txt='';
+				for(var i in docs){
+					docs[i].cover=docs[i].cover||'/images/notimg.gif';
+					txt+=list_temp.replace(/\{-(\w*)-}/g,function(){
+						return docs[i][arguments[1]]||'';
+					});
+				}
+				txt = page_temp.replace('{-content-}',txt);
 				
-				var txt = tpl.produce('share_item',{'list':docs});
-				
-				var page_txt = page_temp.replace('{-content-}',txt);
-				
-				res_this.html(200,page_txt);
+				res_this.html(200,txt);
 				
 				method.close();
 			});
@@ -40,10 +45,12 @@ function detail_page(res_this,id){
 					res_this.notFound('哇塞，貌似这篇分享不存在哦!');
 					
 				}else{
+					var date = new Date(parseInt(docs[0].time_show));
 					docs[0].time_show = parse.time(docs[0].time_show ,'{y}-{m}-{d}');
-			
-					var juicer = require('juicer');
-					var txt = juicer(page_temp,docs[0]);
+					var txt = page_temp.replace(/\{-(\w*)-}/g,function(){
+						return docs[0][arguments[1]]||'';
+					});
+					
 					res_this.html(200,txt);
 					
 				}

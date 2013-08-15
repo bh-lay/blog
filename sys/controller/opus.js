@@ -6,18 +6,28 @@ var parse = require('../lib/parse');
 
 function list_page(res_this){
 	var page_temp = temp.get('opusList',{'init':true});
-			
+	var list_temp=tpl.get('opus_item');
+		
 	mongo.start(function(method){
 		
 		method.open({'collection_name':'opus'},function(err,collection){
 			
 			collection.find({}, {limit:28}).sort({id:-1}).toArray(function(err, docs) {
 				
-				var txt = tpl.produce('opus_item',{'list':docs});
-
-				var page_txt = page_temp.replace('{-content-}',txt);
+				var txt='';
+				if(docs.length>0){
+					for(var i in docs){
+						docs[i].cover=docs[i].cover||'/images/notimg.gif';
+						txt += list_temp.replace(/\{-(\w*)-}/g,function(){
+							return docs[i][arguments[1]]||'';
+						});
+					}
+				}else{
+					txt = '无数据';				
+				}
+				txt = page_temp.replace('{-content-}',txt);
 				
-				res_this.html(200,page_txt);
+				res_this.html(200,txt);
 				
 				method.close();
 			});
@@ -40,10 +50,10 @@ function detail_page(res_this,id){
 					res_this.notFound('哇塞，貌似这作品享不存在哦!');
 					
 				}else{
-				
 					docs[0].opus_time_create = parse.time(docs[0].opus_time_create ,'{y}-{m}-{d}');
-					var juicer = require('juicer');
-					var txt = juicer(page_temp,docs[0]);
+					var txt = page_temp.replace(/\{-(\w*)-}/g,function(){
+						return docs[0][arguments[1]]||'';
+					});
 					
 					res_this.html(200,txt);
 				}

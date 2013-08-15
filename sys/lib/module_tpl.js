@@ -4,55 +4,46 @@
  * use	exports.init(template)		can init all template item !
  */
 
-var juicer = require('juicer');
 //define template Object
 var tpl = {};
 
-tpl.article_item = ['{@each list as it,index}',
-	'<div class="articleItem" articleId="${it.id}">',
-		'<div class="artItCpt">',
-			'<h3><a href="/blog/${it.id}" title="${it.title}"  target="_self" >${it.title}</a></h3>',
-			'<p>${it.time_show}</p>',
+tpl.article_item = ['<div class="articleItem" articleId="{-id-}">',
+	'<div class="artItCpt">',
+		'<h3><a href="/blog/{-id-}" title="{-title-}"  target="_self" >{-title-}</a></h3>',
+		'<p>{-time_show-}</p>',
+	'</div>',
+	'<div class="artItCnt">',
+		'<div class="artItPic">',
+			'<a href="/blog/{-id-}" title="{-title-}"  target="_self" >',
+				'<img  src="{-cover-}" alt="{-title-}" />',
+			'</a>',
 		'</div>',
-		'<div class="artItCnt">',
-			'{@if it.cover}',
-			'<div class="artItPic">',
-				'<a href="/blog/${it.id}" title="${it.title}"  target="_self" >',
-					'<img  src="${it.cover}" alt="${it.title}" />',
-				'</a>',
-			'</div>',
-			'{@/if}',
-			'<div class="artItInfo"><p>${it.intro}</p></div>',
-			'<div class="artItTag">${it.tags}</div>',
-			'<div class="artItFoot">',
-				'<a class="dataLike" title="我喜欢" href="javascript:void(0)"><i></i><b>8</b></a>',
-				'<a class="dataView" title="查看" href="/blog/${it.id}" target="_self"><i></i><b>367</b></a>',
-			'</div>',
-		'</div>',
-		'<div class="artItLace">',
-			'<div class="artItLaCircle"></div>',
-			'<div class="artItLaCorner"><b></b><i></i></div>',
+		'<div class="artItInfo"><p>{-intro-}</p></div>',
+		'<div class="artItTag">{-tags-}</div>',
+		'<div class="artItFoot">',
+			'<a class="dataLike" title="我喜欢" href="javascript:void(0)"><i></i><b>8</b></a>',
+			'<a class="dataView" title="查看" href="/blog/{-id-}" target="_self"><i></i><b>367</b></a>',
 		'</div>',
 	'</div>',
-'{@/each}'];
+	'<div class="artItLace">',
+		'<div class="artItLaCircle"></div>',
+		'<div class="artItLaCorner"><b></b><i></i></div>',
+	'</div>',
+'</div>'];
 
-tpl.share_item = ['{@each list as it,index}',
-	'<li>',
-		'<a href="/share/${it.id}" title="${it.title}" target="_self">',
-			'<img src="${it.cover}" alt="${it.title}" />',
-			'<strong>${it.title}</strong>',
-		'</a>',
-	'</li>',
-'{@/each}'];
+tpl.share_item = ['<li>',
+	'<a href="/share/{-id-}" title="{-title-}" target="_self">',
+		'<img src="{-cover-}" alt="{-title-}" />',
+		'<strong>{-title-}</strong>',
+	'</a>',
+'</li>'];
 
-tpl.opus_item = ['{@each list as it,index}',
-	'<li>',
-		'<a href="/opus/${it.id}" title="${it.title}" target="_self">',
-			'<img src="${it.cover}" alt="${it.title}" />',
-			'<strong>${it.title}</strong>',
-		'</a>',
-	'</li>',
-'{@/each}'];
+tpl.opus_item = ['<li>',
+	'<a href="/opus/{-id-}" title="{-title-}" target="_self">',
+		'<img src="{-cover-}" alt="{-title-}" />',
+		'<strong>{-title-}</strong>',
+	'</a>',
+'</li>'];
 
 tpl.nav = ['<div class="navLayer">',
 	'<div class="golCnt">',
@@ -102,21 +93,27 @@ tpl.youyan = ['<!-- UY BEGIN -->',
 '<!-- UY END -->'];
 
 //method get
-function get(mod) {
-	var mod = mod||'';
-	if(tpl[mod]){
+exports.get = function(mod) {
+	if(!mod){
+		return 'please input template name ！';
+	}else if(tpl[mod]){
 		return tpl[mod].join('');
 	}else{
-		return null;		
+		return 'please make sure the template ['+mod+'] have be defined !';		
 	}
 }
-exports.get = get;
 
-exports.produce = function(mod,data){
-	var tpl = get(mod);
-	if(tpl){
-		return juicer(tpl,data);
-	}else{
-		return '';
-	}
+//method init
+exports.init=function(temp){
+
+	var temp=temp;
+	var txt='';
+	txt=temp.replace(/\{-(\w*)-}/g,function(){
+		if(tpl[arguments[1]]){
+			return tpl[arguments[1]].join('');
+		}else{
+			return arguments[0];
+		}
+	});
+	return txt;
 }

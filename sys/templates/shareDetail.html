@@ -2,10 +2,10 @@
 <html lang="en-US">
 <head>
 <meta charset="UTF-8">
-<title>${title}_小剧客栈</title>
+<title>{-title-}_小剧客栈</title>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-<meta name="keywords" content="${tags}" />
-<meta name="description" content="${intro}" />
+<meta name="keywords" content="{-tags-}" />
+<meta name="description" content="{-intro-}" />
 <link href="/skin/naive/favicon.ico" rel="shortcut icon"/>
 <link href="/skin/naive/css/common.css" rel="stylesheet" type="text/css" />
 <link href="/skin/naive/css/share.css" rel="stylesheet" type="text/css" />
@@ -18,20 +18,19 @@
 	<div class="contlayer">
 		<div class="golCnt"><div class="article">
 			<div class="articletop">
-				<h1>${title}</h1>
+				<h1>{-title-}</h1>
 				<p>
-					<span>时间：${time_show} </span>
-					<span>作者：${author}</span>
+					<span>时间：{-time_show-} </span>
+					<span>作者：{-author-}</span>
 				</p>
 			</div>
-			<div class="text">$${content}</div>
+			<div class="text">{-content-}</div>
 			<div class="youyan">{-youyan-}</div>
 		</div></div>
 	</div>
 {-nav-}
-<script src="/skin/js/lib/jquery.js" type="text/javascript"></script>
-<script src="/skin/js/lay.js" id="initJs" data="{'page':'shareDetail'}" type="text/javascript"></script>
-<script src="/skin/js/lib/layTool.js" type="text/javascript"></script>
+<script src="/skin/lib/js/jquery.js" type="text/javascript"></script>
+	<script src="/skin/naive/js/lay.js" id="initJs" data="{'page':'shareDetail'}" type="text/javascript"></script>
 {-tongji-}
 </body>
 </html>
