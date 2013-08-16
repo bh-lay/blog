@@ -1,6 +1,6 @@
-/*
+/**
  * @author bh-lay
- * view url : /blog    /blog/
+ * view URL : /blog    /blog/
  */
 var mongo = require('../conf/mongo_connect');
 

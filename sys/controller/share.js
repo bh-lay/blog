@@ -1,4 +1,6 @@
-//author bh-lay
+/**
+ * @author bh-lay
+ */
 var mongo = require('../conf/mongo_connect');
 var temp = require('../lib/page_temp');
 var tpl = require('../lib/module_tpl');
