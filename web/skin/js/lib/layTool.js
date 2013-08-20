@@ -322,7 +322,9 @@ L.supports = (function() {
 				'limit' : limit
 			},
 			'success' :function(d){
-				render(d.list,blogTemp);
+				var list = d.list;
+				var this_html = juicer(list,blogTemp);
+				$('.blog_addMore').before(this_html);
 				fn&fn(d.count);
 			}
 		});
@@ -381,7 +383,11 @@ L.supports = (function() {
 			
 		});
 	};
-	L.blogList=init;
+	L.blogList=function(){
+		//
+		init();
+			L.require('juicer');
+	};
 })(L);
 
 

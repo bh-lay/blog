@@ -69,7 +69,6 @@ exports.deal = function (req,res_this,path){
 		list_page(res_this);
 	}else if(path_length == 2){
 		var id = path['pathnode'][1];
-		//res_this.error();
 		detail_page(res_this,id)
 	}else{
 		res_this.notFound('小盆友，表逗我玩儿！');

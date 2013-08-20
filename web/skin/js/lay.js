@@ -24,7 +24,8 @@ var console = console || {'log' : function(a){}};
 		callback&&callback();
 	}
 	var require = function(str,callback){
-		var str = str.split(/?/)[0]||'';
+		var str = str||'';
+		str =str.split(/?/)[0]||'';
 		var str_spilt = str.split(/\./);
 		var callback = callback||function(){};
 		
