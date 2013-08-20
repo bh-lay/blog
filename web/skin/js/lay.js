@@ -8,7 +8,8 @@ var console = console || {'log' : function(a){}};
 
 (function(ex){
 	var conf = {
-		'lantern'	: {'js':'/skin/js/lib/lantern.js'}, 
+		'lantern'	: {'js':'/skin/js/lib/lantern.js'},
+		'juicer'		: {'js':'/skin/js/lib/juicer.js'},
 		'dialog'		: {'js':'/skin/js/lib/dialog.js'},
 	}
 

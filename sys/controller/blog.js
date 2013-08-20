@@ -7,6 +7,7 @@ var mongo = require('../conf/mongo_connect');
 var tpl = require('../lib/module_tpl');
 var temp = require('../lib/page_temp');
 var parse = require('../lib/parse');
+var juicer = require('juicer');
 
 function list_page(res_this){
 	var page_temp = temp.get('blogList',{'init':true});
@@ -51,7 +52,6 @@ function detail_page(res_this,id){
 				}else{
 					docs[0].time_show = parse.time(docs[0].time_show ,'{y}-{m}-{d}');
 
-					var juicer = require('juicer');
 					var txt = juicer(page_temp,docs[0]);
 					res_this.html(200,txt);
 				}
@@ -69,6 +69,7 @@ exports.deal = function (req,res_this,path){
 		list_page(res_this);
 	}else if(path_length == 2){
 		var id = path['pathnode'][1];
+		//res_this.error();
 		detail_page(res_this,id)
 	}else{
 		res_this.notFound('小盆友，表逗我玩儿！');
