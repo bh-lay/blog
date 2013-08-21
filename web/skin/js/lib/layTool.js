@@ -323,7 +323,7 @@ L.supports = (function() {
 			},
 			'success' :function(d){
 				var list = d.list;
-				var this_html = juicer(list,blogTemp);
+				var this_html = juicer(blogTemp,{'list':list});
 				$('.blog_addMore').before(this_html);
 				fn&fn(d.count);
 			}

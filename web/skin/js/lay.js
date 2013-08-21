@@ -25,11 +25,11 @@ var console = console || {'log' : function(a){}};
 	}
 	var require = function(str,callback){
 		var str = str||'';
-		str =str.split(/?/)[0]||'';
+		str = str.split(/\?/)[0]||'';
 		var str_spilt = str.split(/\./);
 		var callback = callback||function(){};
-		
-		if(str_spilt.lenght == 1){
+
+		if(str_spilt.length == 1){
 			//repuire from config
 			var modName = str;
 			var module = conf[modName];
@@ -40,7 +40,7 @@ var console = console || {'log' : function(a){}};
 			}else{
 				var url = module['js'];
 				loadJs(url,function(){
-					conf[modName]['load'][0] = true;
+					conf[modName]['load'] = true;
 					callback()
 				});
 			}
