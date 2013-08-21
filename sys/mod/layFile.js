@@ -15,8 +15,23 @@ var mime = {
 	'gif' : 'image/gif',
 	'rar' : 'application/zip',
 	'zip' : 'application/zip',
+	'pdf' : 'application/pdf',
 };
 
+//404 not found
+function notFound(ext,res_this){
+	if(ext.match(/^(png|gif|jpg)$/)){
+		res_this.define(404,{
+			'Content-Type' : 'text/plain'
+		},'this image is not found !');
+	}else if(ext.match(/^html$/)){
+		res_this.notFound();
+	}else{
+		res_this.define(404,{
+			'Content-Type' : 'text/plain'
+		},'this image is not found !');
+	}
+}
 
 /*read static resources*/
 function readFile(req , res_this) {
@@ -41,8 +56,7 @@ function readFile(req , res_this) {
 	}
 	fs.exists(realPath, function(exists) {
 		if(!exists){
-			// 404 notFound
-			res_this.notFound();
+			notFound(ext,res_this)
 			return ;
 		}
 		
