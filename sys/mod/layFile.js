@@ -44,16 +44,17 @@ function readFile(req , res_this) {
 		ext = 'html';
 		realPath += '/index.html'
 	}
-	if(!mime[ext]){
+	var content_type = mime[ext]||'unknown';
+//	if(!mime[ext]){
 		/**
 		 * 415 not supposted 
 		 */
-		res_this.define(415,{
-			'Content-Type' : 'text/plain'
-		},'this type file(*.'+ext+') is not supposted !');
+//		res_this.define(415,{
+//			'Content-Type' : 'text/plain'
+//		},'this type file(*.'+ext+') is not supposted !');
 		
-		return
-	}
+//		return
+//	}
 	fs.exists(realPath, function(exists) {
 		if(!exists){
 			notFound(ext,res_this)
@@ -85,7 +86,7 @@ function readFile(req , res_this) {
 					var expires = new Date();
 					expires.setTime(expires.getTime() + maxAge * 1000);
 					res_this.define(200,{
-						"Content-Type" : mime[ext],
+						"Content-Type" : content_type,
 						"Expires" : expires.toUTCString() ,
 						"Cache-Control" : "max-age=" + maxAge ,
 						"Last-Modified" : lastModified,
