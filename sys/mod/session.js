@@ -19,6 +19,7 @@ var parse = require('../lib/parse');
  * }
  * 
  */
+//FIXME don't forget to delete expire session
 var session={
 	'lib':{},
 	'expire':{},
