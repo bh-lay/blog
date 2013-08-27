@@ -1,17 +1,18 @@
 /**
  *	@author
- * L.require(mod,callBack);
+ * 
  */
 
 var L=L||{};
 var console = console || {'log' : function(a){}};
 
+//L.require(mod or url,callBack);
 (function(ex){
 	var conf = {
 		'lantern'	: {'js':'/skin/js/lib/lantern.js'},
-		'juicer'		: {'js':'/skin/js/lib/juicer.js'},
-		'dialog'		: {'js':'/skin/js/lib/dialog.js'},
-	}
+		'juicer'	: {'js':'/skin/js/lib/juicer.js'},
+		'dialog'	: {'js':'/skin/js/lib/dialog.js'},
+	};
 
 	function loadJs(url,fn){
 		$.get(url,function(){
@@ -62,4 +63,31 @@ var console = console || {'log' : function(a){}};
 		}
 	}
 	ex.require = require;
+}(L));
+
+/**
+ *  load image
+ *  L.loadImg(src,{'loadFn','sizeFn'});
+ */
+(function(ex){
+	var init=function (src,parm){
+		var parm = parm||{};
+		var img=new Image();
+		if(parm.loadFn){
+			img.onload = function(){
+				parm.loadFn(img.width,img.height);
+			}
+		}
+		if(parm.sizeFn){
+			var timer = setInterval(function(){
+				if(img.width>1){
+					clearInterval(timer);
+					parm.sizeFn(img.width,img.height);
+				}
+			},2)
+		}
+		
+		img.src=src;
+	}
+	ex.loadImg = init;
 }(L));

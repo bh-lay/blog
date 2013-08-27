@@ -33,59 +33,6 @@ L.supports = (function() {
    };
 })();
 
-/**
- *load image
- * 	L.loadImg(src,{'loadFn','sizeFn'});
- */
-(function(ex){
-	var init=function (src,parm){
-		var parm = parm||{};
-		var img=new Image();
-		if(parm.loadFn){
-			img.onload = function(){
-				parm.loadFn(img.width,img.height);
-			}
-		}
-		if(parm.sizeFn){
-			var timer = setInterval(function(){
-				if(img.width>1){
-					clearInterval(timer);
-					parm.sizeFn(img.width,img.height);
-				}
-			},2)
-		}
-		
-		img.src=src;
-	}
-	ex.loadImg = init;
-}(L));
-
-/*
- * L.tool
- * --L.tool.urlParm
- * --L.tool.placehold
- */
-(function(ex){
-	/*域名获取参数*/
-	var urlParm=function(url){
-	   var url = url||location.search;
-	   var parm = new Object();
-	   if (url.indexOf("?") != -1) {
-	      var str = url.substr(1);
-	      strs = str.split("&");
-	      for(var i = 0; i < strs.length; i ++) {
-	         parm[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
-	      }
-	   }
-	   return parm;
-	}
-	var placehold=function(){
-		
-	}
-	ex.urlParm=urlParm;
-	ex.placehold=placehold;
-}(L.tool=L.tool||{}));
-
 
 /*
  * page background
@@ -302,8 +249,6 @@ L.supports = (function() {
 	}
 	ex.indexNav=init;
 })(L);
-
-
 
 
 /*
