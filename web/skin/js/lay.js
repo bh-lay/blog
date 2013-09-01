@@ -3,13 +3,85 @@
  * 
  */
 
-var L=L||{};
+
 var console = console || {'log' : function(a){}};
+
+/**
+ * define namespace L
+ *  
+ * */
+var L = L || function(root){
+
+	//选择元素
+	function getDom(str){
+		var this_obj = [],
+			 check = str.slice(0,1),
+			 rooter = str.slice(1,1000);
+		
+		if(check=='#'){
+			this_obj.push(document.getElementById(rooter));
+		}else if(check=='.'){
+			var allobj = document.getElementsByTagName("*");
+			
+			for(var s=0;s<allobj.length;s++){
+				if(allobj[s].className==rooter){
+					this_obj.push(allobj[s]);
+				}
+			}
+		}else{
+			this_obj = document.getElementsByTagName(str);
+		}
+		console.log('here',this_obj)
+		return this_obj;
+	}
+	
+	//筛选元素
+	function findDom(str,dom){
+		var this_obj = [],
+			 check = str.slice(0,1),
+			 rooter = str.slice(1,1000);
+		function singleFind(d){
+			if(check=='#'){
+				this_obj.push(d.getElementById(rooter));
+			}else if(check=='.'){
+				var allobj = d.getElementsByTagName("*");
+				
+				for(var i=0;i<allobj.length;i++){
+					if(allobj[i].className==rooter){
+						this_obj.push(allobj[i]);
+					}
+				}
+			}else{
+				this_obj = d.getElementsByTagName(str);
+			}
+		}
+		
+		for(var s = 0,total = dom.length;s<total;s++){
+			singleFind(dom[s])
+		}
+		return this_obj;
+	}
+	
+	//拆分路径
+	var rootlist = root.split(/\s/)||[];
+	//临时存放选择对象的容器
+	var cache = [];
+	
+	for(var i = 0 , total = rootlist.length;i<total; i++){ //循环路径
+		
+		if(i == 0){
+			cache = 	getDom(rootlist[i]);
+		}else{
+			cache = findDom(rootlist[i],cache);
+		}
+	}
+	return cache;
+};
 
 //L.require(mod or url,callBack);
 (function(ex){
 	var conf = {
-		'lantern'	: {'js':'/skin/js/lib/lantern.js'},
+		'lantern': {'js':'/skin/js/lib/lantern.js'},
 		'juicer'	: {'js':'/skin/js/lib/juicer.js'},
 		'dialog'	: {'js':'/skin/js/lib/dialog.js'},
 	};
@@ -20,7 +92,6 @@ var console = console || {'log' : function(a){}};
 		});
 	}
 	function loadCss(url,callback){
-		
 		$('head').append('<link href="'+url+'" type="text/css" rel="stylesheet">');
 		callback&&callback();
 	}
@@ -86,7 +157,6 @@ var console = console || {'log' : function(a){}};
 				}
 			},2)
 		}
-		
 		img.src=src;
 	}
 	ex.loadImg = init;
