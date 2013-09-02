@@ -11,36 +11,15 @@ var console = console || {'log' : function(a){}};
  *  
  * */
 var L = L || function(root){
-
-	//选择元素
-	function getDom(str){
-		var this_obj = [],
-			 check = str.slice(0,1),
-			 rooter = str.slice(1,1000);
-		
-		if(check=='#'){
-			this_obj.push(document.getElementById(rooter));
-		}else if(check=='.'){
-			var allobj = document.getElementsByTagName("*");
-			
-			for(var s=0;s<allobj.length;s++){
-				if(allobj[s].className==rooter){
-					this_obj.push(allobj[s]);
-				}
-			}
-		}else{
-			this_obj = document.getElementsByTagName(str);
-		}
-		console.log('here',this_obj)
-		return this_obj;
-	}
 	
 	//筛选元素
 	function findDom(str,dom){
 		var this_obj = [],
 			 check = str.slice(0,1),
 			 rooter = str.slice(1,1000);
-		function singleFind(d){
+		
+		for(var s = 0,total = dom.length;s<total;s++){
+			var d = dom[s];
 			if(check=='#'){
 				this_obj.push(d.getElementById(rooter));
 			}else if(check=='.'){
@@ -55,25 +34,16 @@ var L = L || function(root){
 				this_obj = d.getElementsByTagName(str);
 			}
 		}
-		
-		for(var s = 0,total = dom.length;s<total;s++){
-			singleFind(dom[s])
-		}
 		return this_obj;
 	}
 	
 	//拆分路径
 	var rootlist = root.split(/\s/)||[];
 	//临时存放选择对象的容器
-	var cache = [];
+	var cache = [document];
 	
 	for(var i = 0 , total = rootlist.length;i<total; i++){ //循环路径
-		
-		if(i == 0){
-			cache = 	getDom(rootlist[i]);
-		}else{
-			cache = findDom(rootlist[i],cache);
-		}
+		cache = findDom(rootlist[i],cache);
 	}
 	return cache;
 };
