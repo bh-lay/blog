@@ -11,7 +11,6 @@ var console = console || {'log' : function(a){}};
  *  
  * */
 var L = L || function(root){
-	
 	//筛选元素
 	function findDom(str,dom){
 		var this_obj = [],
@@ -110,24 +109,28 @@ var L = L || function(root){
  *  load image
  *  L.loadImg(src,{'loadFn','sizeFn'});
  */
-(function(ex){
-	var init=function (src,parm){
-		var parm = parm||{};
-		var img=new Image();
-		if(parm.loadFn){
-			img.onload = function(){
-				parm.loadFn(img.width,img.height);
-			}
+L.loadImg = function (src,parm){
+	var parm = parm||{};
+		 loadFn = parm['loadFn'] || null;
+		 sizeFn = parm['sizeFn'] || null;
+		 errorFn = parm['errorFn'] || null;
+	
+	var img = new Image();
+	img.onerror = function(){
+		errorFn&&errorFn();
+	};
+	if(loadFn){
+		img.onload = function(){
+			loadFn(img.width,img.height);
 		}
-		if(parm.sizeFn){
-			var timer = setInterval(function(){
-				if(img.width>1){
-					clearInterval(timer);
-					parm.sizeFn(img.width,img.height);
-				}
-			},2)
-		}
-		img.src=src;
 	}
-	ex.loadImg = init;
-}(L));
+	if(sizeFn){
+		var timer = setInterval(function(){
+			if(img.width>1){
+				clearInterval(timer);
+				sizeFn(img.width,img.height);
+			}
+		},2);
+	}
+	img.src=src;
+};

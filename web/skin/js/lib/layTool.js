@@ -182,6 +182,7 @@ L.supports = (function() {
 	}
 	ex.nav=init;
 })(L);
+
 /*
  * set like
  *   used in blog share opus
@@ -241,8 +242,8 @@ L.supports = (function() {
 			delay=setTimeout(function(){
 				btnMod.removeClass('active');
 				cntMod.slideUp(200,function(){
-					moving=false;
-					oldIndex=null;
+					moving = false;
+					oldIndex = null;
 				});
 			},200);
 		})
