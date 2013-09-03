@@ -331,8 +331,9 @@ L.supports = (function() {
 	};
 	L.blogList=function(){
 		//
-		init();
-			L.require('juicer');
+		L.require('juicer',function(){
+			init();
+		});
 	};
 })(L);
 
@@ -361,6 +362,7 @@ L.supports = (function() {
 		$('.time_count').each(function(){
 			var time = parseInt($(this).html());
 			var a = new Date(time) - new Date();
+			a = (a<0)?0:a;
 			$(this).html(Math.ceil(a/(1000*60*60)));
 		});
 	}
