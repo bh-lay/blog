@@ -36,6 +36,7 @@ var L = L || function(root){
 		return this_obj;
 	}
 	
+	var root = root||'';
 	//拆分路径
 	var rootlist = root.split(/\s/)||[];
 	//临时存放选择对象的容器
@@ -52,6 +53,7 @@ var L = L || function(root){
 	var conf = {
 		'lantern': {'js':'/skin/js/lib/lantern.js'},
 		'juicer'	: {'js':'/skin/js/lib/juicer.js'},
+		'dialog'	: {'js':'/skin/js/lib/dialog.js'},
 		'dialog'	: {'js':'/skin/js/lib/dialog.js'},
 	};
 
@@ -134,3 +136,30 @@ L.loadImg = function (src,parm){
 	}
 	img.src=src;
 };
+
+//test css suports
+L.supports = (function() {
+   var div = document.createElement('div'),
+      vendors = 'Khtml Ms O Moz Webkit'.split(' '),
+      len = vendors.length;
+  
+   return function(prop) {
+      if ( prop in div.style ){
+      	return true;
+      }
+  
+      prop = prop.replace(/^[a-z]/, function(val) {
+         return val.toUpperCase();
+      });
+
+		for(var i = 0; i<len; i++){
+			if ( vendors[len] + prop in div.style ) {
+            // browser supports box-shadow. Do what you need.
+            // Or use a bang (!) to test if the browser doesn't.
+            break 
+            return true;
+         }
+		}
+      return false;
+   };
+})();

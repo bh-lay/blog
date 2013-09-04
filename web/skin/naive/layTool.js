@@ -6,33 +6,6 @@
 
 
 var L=L||{};
-//test css suports
-L.supports = (function() {
-   var div = document.createElement('div'),
-      vendors = 'Khtml Ms O Moz Webkit'.split(' '),
-      len = vendors.length;
-  
-   return function(prop) {
-      if ( prop in div.style ){
-      	return true;
-      }
-  
-      prop = prop.replace(/^[a-z]/, function(val) {
-         return val.toUpperCase();
-      });
-
-		for(var i = 0; i<len; i++){
-			if ( vendors[len] + prop in div.style ) {
-            // browser supports box-shadow. Do what you need.
-            // Or use a bang (!) to test if the browser doesn't.
-            break 
-            return true;
-         }
-		}
-      return false;
-   };
-})();
-
 
 /*
  * page background
@@ -374,7 +347,7 @@ L.supports = (function() {
  * init
  */
 (function(){
-	var parm=eval('('+$('#initJs').attr('data')+')');
+	var parm = eval('('+$('#initJs').attr('data')+')');
 	parm.page=parm.page||'';
 	L.gallery();
 	L.nav(parm.page);
