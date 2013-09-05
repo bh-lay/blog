@@ -357,7 +357,9 @@ var L=L||{};
 			L.countTime();
 			break
 		case 'article':
-			if($('.codeArea').length>0){$.getScript('/skin/naive/codeArea.js');}
+			if($('.codeArea').length>0){
+				L.require('codeArea');
+			}
 			L.require('lantern',function(){
 				L.lantern($('.article img'));
 			});
