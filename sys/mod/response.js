@@ -35,15 +35,22 @@ var logger = (function(){
 //Unified use send response method
 function send_res(req,res,status,headers,content){
 	
+	var headers = headers || {};
+	headers['server'] = 'nodejs';
+	headers['Connection'] = 'keep-alive';
 	headers['Content-Encoding'] = 'gzip';
 	
 	res.writeHeader(status,headers);
 	
-	content = content || null;
+	var content = content || null;
 	
-	zlib.gzip(content, function(err, result) {
-		res.end(result);
-	});
+	if(content){
+		zlib.gzip(content, function(err, result) {
+			res.end(result);
+		});
+	}else{
+		res.end();
+	}
 	
 	var logger = {
 		'time':new Date(),
@@ -79,7 +86,6 @@ function html(req,res){
 		send_res(req,res,status,{
 			'Content-Type' : 'text/html',
 			'charset' : 'utf-8',
-			'server' : 'node.js',
 		},content);
 
 	}

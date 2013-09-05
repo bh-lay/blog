@@ -90,7 +90,6 @@ function readFile(req , res_this) {
 						"Expires" : expires.toUTCString() ,
 						"Cache-Control" : "max-age=" + maxAge ,
 						"Last-Modified" : lastModified,
-						"Server" : "node.js",
 					},file);
 					
 				}
