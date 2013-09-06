@@ -1,13 +1,10 @@
 ﻿/**
- * @author:剧中人
- * 博客：http://bh-lay.com/
- * Copyright (c) 2012-2018 小剧客栈
+ * @author:bh-lay
+ * Blog : http://bh-lay.com/
+ * Copyright (c) 2012-2018
 **/
 
-
-var L=L||{};
-
-/*
+/**
  * page background
  * L.gallery() 
  */
@@ -17,6 +14,7 @@ var L=L||{};
 	};
 	
 	function JS_show(data,bj){
+		console.log('gallery:','use JS animate !');
 		var data = data,
 			bj = bj,
 			total = data.length;
@@ -72,6 +70,7 @@ var L=L||{};
 		}
 	}
 	function CSS3(data,bj){
+		console.log('gallery:','use css3 mask and animate!');
 		var data = data,
 			bj = bj,
 			total = data.length;
@@ -87,10 +86,10 @@ var L=L||{};
 				bj.html(newPic);
 				
 				if(!L.supports('webkitAnimation')){
-					console.log('not support -webkit-animation');
+					console.log('gallery:','not support -webkit-animation');
 					newPic.hide().fadeIn(1000);
 				}else{
-					console.log('support -webkit-animation');
+					console.log('gallery:','support -webkit-animation');
 				}
 
 				setTimeout(function(){
@@ -104,26 +103,43 @@ var L=L||{};
 		}
 	}
 	ex.gallery = function(){
+		console.log('gallery:','start !');
 		var bj = $('.gallayer .galBj'),
 			data = eval('('+bj.html()+')');
 		if (L.supports('backgroundSize')){
 			CSS3(data,bj);
-			console.log('use css3')
 		}else{
 			JS_show(data,bj);
 		}
 	}
 }(L));
 
-/*
+/**
  * L.nav()
  * 
  */
 (function(ex){
-	var init=function(page){
+	var first = true ;
+	var init=function(){
 		var delay;
+		$('.navLayer').fadeTo(100,0.6).mouseenter(function(){
+			clearTimeout(delay);
+			var __=$(this);
+			delay=setTimeout(function(){
+				__.stop().fadeTo(20,1);			
+			},20);
+		}).mouseleave(function(){
+			clearTimeout(delay);
+			var __=$(this);
+			delay=setTimeout(function(){
+				__.stop().fadeTo(800,0.6);
+			},300);
+		});
+	};
+	//page:index
+	var setCur = function(page){
 		switch(page){
-			case 'index':
+			case '':
 				page = 'index';
 			break
 			case 'artList':
@@ -138,22 +154,11 @@ var L=L||{};
 			case 'opusDetail':
 				page = 'opus';
 		}
+		$('.navLayer .nav li').removeClass('cur');
 		$('.navLayer .nav li[page='+page+']').addClass('cur');
-		$('.navLayer').fadeTo(100,0.6).mouseenter(function(){
-			clearTimeout(delay);
-			var __=$(this);
-			delay=setTimeout(function(){
-				__.stop().fadeTo(20,1);			
-			},20);
-		}).mouseleave(function(){
-			clearTimeout(delay);
-			var __=$(this);
-			delay=setTimeout(function(){
-				__.stop().fadeTo(800,0.6);
-			},300);
-		});
-	}
-	ex.nav=init;
+	};
+	ex.nav = init;
+	ex.nav.setCur = setCur;
 })(L);
 
 /*
@@ -185,11 +190,55 @@ var L=L||{};
 	}
 }(L));
 
-/*
- * nav bar
+/**
+ * L.render({init:true/false});
+ * 
  */
+L.render = function(param){
+	var param = param || {};
+		 param['init'] = param['init'] ||false;
+	function parse_url(){
+		var pathname = window.location.pathname;
+			 pathname = pathname.replace(/\/$/,'');
+		var path_node = pathname.split(/\//);
+		path_node.shift();
+		(path_node[0].length<1)&&(path_node[0] = '/')
+		return path_node;
+	}
+	
+	var module = parse_url();
+	console.log(module);
+	switch(module[0]){
+		case '/':
+			L.render.index(param);
+			break
+		case 'blog':
+			if(module.length == 1){
+				L.render.blogList(param);
+			}else{
+//				L.render.blogDetail(param)
+			}
+			break
+		case 'opus':
+//			if(module.length == 1){
+//				L.render.opusList(param);
+//			}else{
+//				L.render.opusDetail(param)
+//			}
+			break
+		case 'share':
+			if(module.length == 1){
+				L.render.shareList(param);
+//			}else{
+//				L.render.shareDetail(param)
+			}
+			break
+	}
+};
+
+//index page
 (function(ex){
-	var init=function(){
+	function indexNav(){
 		var mod=$('.indexNav');
 		var btnMod=mod.find('.inNavBtn span');
 		var cntMod=mod.find('.inNavCnt .inNavCntItem');
@@ -221,9 +270,23 @@ var L=L||{};
 			},200);
 		})
 	}
-	ex.indexNav=init;
-})(L);
-
+	function countTime(){
+		$('.time_count').each(function(){
+			var time = parseInt($(this).html());
+			var a = new Date(time) - new Date();
+			a = (a<0)?0:a;
+			$(this).html(Math.ceil(a/(1000*60*60)));
+		});
+	}
+	ex.index = function(param){
+		var param = param || {};
+		if(param['init']){
+			//FIXME need load some templates
+		}
+		indexNav();
+		countTime();
+	};
+})(L.render);
 
 /*
  * blogList page
@@ -299,98 +362,47 @@ var L=L||{};
 					});
 				});
 			});
-			
 		});
 	};
-	L.blogList=function(){
-		//
+	ex.blogList = function(){
 		L.require('juicer',function(){
 			init();
 		});
 	};
-})(L);
-
+})(L.render);
 
 /**
- * shareList page
+ * share list
  *  
  */
 (function(ex){
-	var init = function(){
-		var mod = $('.shareList');
-		mod.on('mouseenter','a',function(){
+	ex.shareList = function(){
+		
+		$('.shareList').on('mouseenter','a',function(){
 			$(this).find('strong').stop().animate({'bottom':0},200);
 		}).on('mouseleave','a',function(){
 			$(this).find('strong').stop().animate({'bottom':-100},200);
 		});
-	}
-	L.shareList=init;
-})(L);
-
-/*
- *  countTime
- */
-(function(ex){
-	var init = function(){
-		$('.time_count').each(function(){
-			var time = parseInt($(this).html());
-			var a = new Date(time) - new Date();
-			a = (a<0)?0:a;
-			$(this).html(Math.ceil(a/(1000*60*60)));
+	
+		L.require('lantern',function(){
+			L.lantern($('.article img'));
 		});
-	}
-	L.countTime = init;
-})(L);
+	};
+})(L.render);
 
 
 /*
- * init
+ * all start
  */
-(function(){
-	var parm = eval('('+$('#initJs').attr('data')+')');
-	parm.page=parm.page||'';
-	L.gallery();
-	L.nav(parm.page);
-	switch(parm.page){
-		case 'index':
-			L.indexNav();
-			L.countTime();
-			break
-		case 'article':
-			if($('.codeArea').length>0){
-				L.require('codeArea');
-			}
-			L.require('lantern',function(){
-				L.lantern($('.article img'));
-			});
-			break
-		case 'artList' :
-			L.blogList();
-		case 'shareList' :
-	//		L.shareList();
-			break
-		case 'shareDetail' :
-			L.require('lantern',function(){
-				L.lantern($('.article img'));
-			});
-			break
-		case 'opusList' :
-			break
-		case 'opusDetail' :
-			break
-		case 'bless' :
-			break
-			
-	}
-
-	$('.articleList').on('click','.dataLike',function(){
-		var classId=$(this).parents('.articleItem').attr('classid');
-		var articleId=$(this).parents('.articleItem').attr('articleid');
-		//console.log(classId,articleId,$(this).find('b'));
-		L.like(classId,articleId,$(this).find('b'));
+console.log('lay:','JS is start working !');
+L.require('lofox',function(){
+	lofox(function(){
+		L.render({init:true});
 	});
-})();
+});
 
-
-
-
+$(function(){
+	L.nav();
+	L.gallery();
+	L.render({init:false});
+});
