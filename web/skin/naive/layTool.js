@@ -199,15 +199,15 @@ L.render = function(param){
 		 param['init'] = param['init'] ||false;
 	function parse_url(){
 		var pathname = window.location.pathname;
-			 pathname = pathname.replace(/\/$/,'');
+			 pathname = pathname.replace(/^\/|\/$/g,'');
 		var path_node = pathname.split(/\//);
-		path_node.shift();
+		//path_node.shift();
 		(path_node[0].length<1)&&(path_node[0] = '/')
 		return path_node;
 	}
 	
 	var module = parse_url();
-	console.log(module);
+	console.log('hello i\'m module :',module);
 	switch(module[0]){
 		case '/':
 			L.render.index(param);
@@ -238,12 +238,12 @@ L.render = function(param){
 
 //index page
 (function(ex){
-	function indexNav(){
-		var mod=$('.indexNav');
-		var btnMod=mod.find('.inNavBtn span');
-		var cntMod=mod.find('.inNavCnt .inNavCntItem');
-		var moving=false;
-		var oldIndex=null;
+	function indexPanel(){
+		var mod = $('.indexNav');
+		var btnMod = mod.find('.inNavBtn span');
+		var cntMod = mod.find('.inNavCnt .inNavCntItem');
+		var moving = false;
+		var oldIndex = null;
 		var delay;
 		btnMod.on('mousemove',function(){
 			var s=$(this).index();
@@ -282,9 +282,17 @@ L.render = function(param){
 		var param = param || {};
 		if(param['init']){
 			//FIXME need load some templates
+			var dom = param['dom']||$('.contlayer');
+			$.get('/ajax/temp?index',function(data){
+				console.log(data)
+				dom.html(data['index']);
+				indexPanel();
+				countTime();
+			});
+		}else{
+			indexPanel();
+			countTime();
 		}
-		indexNav();
-		countTime();
 	};
 })(L.render);
 
@@ -311,6 +319,12 @@ L.render = function(param){
 			}
 		});
 	};
+	var getTemp = function(fn){
+		$.get('/ajax/temp?article_item',function(data){
+			blogTemp = data['article_item'];
+			fn&&fn(blogTemp);
+		});
+	}; 
 	var render = function(data,temp){
 		var data = data,
 			temp = temp;
@@ -325,7 +339,7 @@ L.render = function(param){
 			}
 			$('.blog_addMore').before(txt);
 	};
-	var init = function(){
+	var init = function(dom){
 		var count = 100,
 			limit = 10,
 			skip = 10;
@@ -334,21 +348,20 @@ L.render = function(param){
 			'<span>正在加载……</span>',
 		'</div>'];
 		var add_btn = $(add_btn_tpl.join(''));
-		$('.articleList').append(add_btn);
-		$.get('/ajax/temp?article_item',function(data){
-			blogTemp = data['article_item'];
+		dom.find('.articleList').append(add_btn);
+		
+		getTemp(function(blogTemp){
+
 			add_btn.on('click','a',function(){
 				add_btn.addClass('blog_addMore_loading');
-				if(blogTemp.length>10){
-					getData(skip,limit,function(num){
-						add_btn.removeClass('blog_addMore_loading');
-						skip += limit;
-						count = num ;
-						if(skip>=count){
-							add_btn.hide();
-						}
-					});
-				}
+				getData(skip,limit,function(num){
+					add_btn.removeClass('blog_addMore_loading');
+					skip += limit;
+					count = num ;
+					if(skip>=count){
+						add_btn.hide();
+					}
+				});
 			});
 			L.require('dialog',function(){
 				$('.articleList').on('click','.dataLike',function(){
@@ -364,9 +377,15 @@ L.render = function(param){
 			});
 		});
 	};
-	ex.blogList = function(){
+	ex.blogList = function(param){
+		var param = param || {};
+		var dom = param['dom']||$('.contlayer');
+		
+		if(param['init']){
+			dom.html('<div class="articleList"></div>');
+		}
 		L.require('juicer',function(){
-			init();
+			init(dom);
 		});
 	};
 })(L.render);
@@ -396,8 +415,19 @@ L.render = function(param){
  */
 console.log('lay:','JS is start working !');
 L.require('lofox',function(){
-	lofox(function(){
-		L.render({init:true});
+	
+	$(function(){
+		
+		var contlayer = $('.contlayer');
+		lofox(function(){
+			L.render({init:true,dom:contlayer});
+		});
+		$('body').on('click','a[lofox="true"]',function(){
+			var url = $(this).attr('href');
+			console.log(url)
+			lofox.push(url);
+			return false;
+		});
 	});
 });
 

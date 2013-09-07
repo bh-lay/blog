@@ -54,7 +54,7 @@ var L = L || function(root){
 		'lantern': {'js':'/skin/js/lib/lantern.js'},
 		'juicer'	: {'js':'/skin/js/lib/juicer.js'},
 		'dialog'	: {'js':'/skin/js/lib/dialog.js'},
-		'dialog'	: {'js':'/skin/js/lib/dialog.js'},
+		'lofox'	: {'js':'/skin/js/lib/lofox.js'},
 		'codeArea'	: {'js':'/skin/js/lib/codeArea.js'},
 	};
 

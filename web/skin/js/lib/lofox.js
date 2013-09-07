@@ -22,10 +22,10 @@ var lofox = function(callback){
 			return false;
 		});
 		exports.push = function(url){
-			callback(url);
 			window.history.pushState({
 				url: url
 			},'test',url);
+			callback(url);
 		}
 	};	
 	var HASH = function(callback){
