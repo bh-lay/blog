@@ -70,12 +70,11 @@ var L = L || function(root){
 			$('head').append('<link data-url="'+url+'" href="' + url + '" type="text/css" rel="stylesheet">');
 			callback&&callback();
 		}else{
+			console.log('require','[' + url + '] has been loaded, needn\'t to load again ！');
 			callback&&callback();
 		}
 	}
-	var require = function(str,callback){
-		console.log('require:','start with [' + str + ']');
-		var str = str||'';
+	var start = function(str,callback){
 		str = str.split(/\?/)[0]||'';
 		var str_spilt = str.split(/\./);
 		var callback = callback||function(){};
@@ -87,9 +86,10 @@ var L = L || function(root){
 			if(!module){
 				console.log('require','could not find module please check mod spell ！');
 			}else if(module['load']){
-				console.log('require','has been loaded, needn\'t to load again ！');
+				console.log('require','[' + modName + '] has been loaded, needn\'t to load again ！');
 				callback();
 			}else{
+				console.log('require:','loading start !');
 				var url = module['js'];
 				loadJs(url,function(){
 					conf[modName]['load'] = true;
@@ -101,11 +101,32 @@ var L = L || function(root){
 			var url = str;
 			var ext = str_spilt[1];
 			if(ext == 'css'){
-				loadCSS(url);
+				loadCSS(url,callback);
 			}else if(ext == 'js'){
 				loadJs(url,callback);
 			}else{
 				console.log('require','could not support this type module ！');
+			}
+		}
+	};
+	var require = function(str,callback){
+		console.log('require:','start with [' + str + ']');
+		var str = str||'',
+			callback = callback || function(){},
+			mod_list = str.split(/\,/),
+			len = mod_list.length;
+		
+		if(len == 1){
+			start(mod_list[0],callback);
+		}else{
+			var complete_num = 0;
+			for(var i = 0;i<len;i++){
+				start(mod_list[i],function(){
+					complete_num++;
+					if(complete_num == len){
+						callback();
+					}
+				});
 			}
 		}
 	}
@@ -117,10 +138,12 @@ var L = L || function(root){
  *  L.loadImg(src,{'loadFn','sizeFn'});
  */
 L.loadImg = function (src,parm){
+	console.log('loadImg:','start with [' + src + ']');
+	
 	var parm = parm||{};
-		 loadFn = parm['loadFn'] || null;
-		 sizeFn = parm['sizeFn'] || null;
-		 errorFn = parm['errorFn'] || null;
+		loadFn = parm['loadFn'] || null;
+		sizeFn = parm['sizeFn'] || null;
+		errorFn = parm['errorFn'] || null;
 	
 	var img = new Image();
 	img.onerror = function(){

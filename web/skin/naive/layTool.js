@@ -139,23 +139,10 @@
 			},300);
 		});
 	};
-	//page:index
+
 	var setCur = function(page){
-		switch(page){
-			case '':
-				page = 'index';
-			break
-			case 'artList':
-			case 'article':
-				page = 'blog';
-			break
-			case 'shareList':
-			case 'shareDetail':
-				page = 'share';
-			break 
-			case 'opusList':
-			case 'opusDetail':
-				page = 'opus';
+		if(page == '/'){
+			page = 'index';
 		}
 		$('.navLayer .nav li').removeClass('cur');
 		$('.navLayer .nav li[page='+page+']').addClass('cur');
@@ -203,17 +190,18 @@ L.render = function(param){
 	var titleDom = $('title'),
 		 param = param || {};
 		 param['init'] = param['init'] ||false;
+	
 	function parse_url(){
 		var pathname = window.location.pathname;
-			 pathname = pathname.replace(/^\/|\/$/g,'');
-		var path_node = pathname.split(/\//);
-		//path_node.shift();
+			 pathname = pathname.replace(/^\/|\/$/g,''),
+			 path_node = pathname.split(/\//);
 		(path_node[0].length<1)&&(path_node[0] = '/')
 		return path_node;
 	}
 	
 	var module = parse_url();
 	console.log('render :','this page is [' + module[0] + ']');
+	L.nav.setCur(module[0]); 
 	switch(module[0]){
 		case '/':
 			param['title'] = '小剧客栈_剧中人的个人空间 网页设计师博客 互动设计学习者';
@@ -378,7 +366,15 @@ L.render = function(param){
 	};
 	var bindEvent = function(dom){
 		console.log('blog list page:','bind event !');
+		console.log('blog list page:','add blog btn [more] !');
+		var add_btn_tpl = ['<div class="blog_addMore">',
+			'<a href="javascript:void(0)">加载更多</a>',
+			'<span>正在加载……</span>',
+		'</div>'].join('');
 		
+		add_btn = $(add_btn_tpl);
+		dom.find('.articleList').append(add_btn);
+
 		dom.on('click','.blog_addMore',function(){
 			add_btn.addClass('blog_addMore_loading');
 			getData();
@@ -396,15 +392,6 @@ L.render = function(param){
 		});
 	};
 	var init = function(dom){
-		console.log('blog list page:','add blog btn [more] !');
-		var add_btn_tpl = ['<div class="blog_addMore">',
-			'<a href="javascript:void(0)">加载更多</a>',
-			'<span>正在加载……</span>',
-		'</div>'].join('');
-		
-		add_btn = $(add_btn_tpl);
-		dom.find('.articleList').append(add_btn);
-		
 		getTemp(function(blogTemp){
 			bindEvent(dom);
 		});
@@ -415,10 +402,9 @@ L.render = function(param){
 		var dom = param['dom']||$('.contlayer');
 		
 		if(param['init']){
-			L.require('/skin/naive/css/blog.css');
 			dom.html('<div class="articleList"></div>');
 			skip = 0;
-			L.require('juicer',function(){
+			L.require('juicer,/skin/naive/css/blog.css',function(){
 				init(dom);
 				getData();
 			});
