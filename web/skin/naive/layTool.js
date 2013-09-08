@@ -238,8 +238,8 @@ L.render = function(param){
 
 //index page
 (function(ex){
-	function indexPanel(){
-		var mod = $('.indexNav');
+	function indexPanel(dom){
+		var mod = dom.find('.indexNav');
 		var btnMod = mod.find('.inNavBtn span');
 		var cntMod = mod.find('.inNavCnt .inNavCntItem');
 		var moving = false;
@@ -270,8 +270,8 @@ L.render = function(param){
 			},200);
 		})
 	}
-	function countTime(){
-		$('.time_count').each(function(){
+	function countTime(dom){
+		dom.find('.time_count').each(function(){
 			var time = parseInt($(this).html());
 			var a = new Date(time) - new Date();
 			a = (a<0)?0:a;
@@ -279,19 +279,20 @@ L.render = function(param){
 		});
 	}
 	ex.index = function(param){
-		var param = param || {};
+		console.log('render:','start render index page !');
+		var param = param || {},
+			dom = param['dom'] || $('.contlayer');
+			
 		if(param['init']){
-			//FIXME need load some templates
-			var dom = param['dom']||$('.contlayer');
+			console.log('render:','get index page temp!');
 			$.get('/ajax/temp?index',function(data){
-				console.log(data)
 				dom.html(data['index']);
-				indexPanel();
-				countTime();
+				indexPanel(dom);
+				countTime(dom);
 			});
 		}else{
-			indexPanel();
-			countTime();
+			indexPanel(dom);
+			countTime(dom);
 		}
 	};
 })(L.render);
@@ -311,11 +312,16 @@ L.render = function(param){
 				'skip' : skip ,
 				'limit' : limit
 			},
-			'success' :function(d){
-				var list = d.list;
+			'success' :function(data){
+				var list = data.list;
+				for(var i in list){
+					var date = new Date(parseInt(list[i].time_show));
+					list[i].time_show = (date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+ date.getDate();
+					list[i].cover = list[i].cover || '/images/notimg.gif';
+				}
 				var this_html = juicer(blogTemp,{'list':list});
 				$('.blog_addMore').before(this_html);
-				fn&fn(d.count);
+				fn&fn(data.count);
 			}
 		});
 	};
@@ -325,20 +331,6 @@ L.render = function(param){
 			fn&&fn(blogTemp);
 		});
 	}; 
-	var render = function(data,temp){
-		var data = data,
-			temp = temp;
-			var txt = '';
-			for(var i in data){
-				var date=new Date(parseInt(data[i].time_show));
-				data[i].time_show=(date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+date.getDate();
-				data[i].cover=data[i].cover||'/images/notimg.gif';
-				txt+=temp.replace(/\{-(\w*)-}/g,function(){
-					return data[i][arguments[1]]||22222;
-				});
-			}
-			$('.blog_addMore').before(txt);
-	};
 	var init = function(dom){
 		var count = 100,
 			limit = 10,
@@ -382,6 +374,7 @@ L.render = function(param){
 		var dom = param['dom']||$('.contlayer');
 		
 		if(param['init']){
+			L.require('/skin/naive/css/blog.css');
 			dom.html('<div class="articleList"></div>');
 		}
 		L.require('juicer',function(){

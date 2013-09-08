@@ -63,9 +63,14 @@ var L = L || function(root){
 			fn&&fn();
 		});
 	}
-	function loadCss(url,callback){
-		$('head').append('<link href="'+url+'" type="text/css" rel="stylesheet">');
-		callback&&callback();
+	function loadCSS(url,callback){
+		console.log('link[data-url="' + url + '"]')
+		if($('link[data-url="' + url + '"]').length == 0){
+			$('head').append('<link data-url="'+url+'" href="' + url + '" type="text/css" rel="stylesheet">');
+			callback&&callback();
+		}else{
+			callback&&callback();
+		}
 	}
 	var require = function(str,callback){
 		var str = str||'';
@@ -93,11 +98,7 @@ var L = L || function(root){
 			var url = str;
 			var ext = str_spilt[1];
 			if(ext == 'css'){
-				loadCSS(url,function(){
-					if(conf[modName]['load'][1]||!conf[modName]['css']){
-						return;
-					}
-				});
+				loadCSS(url);
 			}else if(ext == 'js'){
 				loadJs(url,callback);
 			}else{
