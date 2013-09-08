@@ -72,10 +72,16 @@
 	function CSS3(data,bj){
 		console.log('gallery:','use css3 mask and animate!');
 		var data = data,
+			isWebkit = false,
 			bj = bj,
 			total = data.length;
 		bj.html('');
 		show(0);
+		
+		if(L.supports('webkitAnimation')){
+			console.log('gallery:','support -webkit-animation');
+			isWebkit = true;
+		}
 		
 		function show(index){
 			var index = index,
@@ -85,11 +91,8 @@
 				newPic.css({'backgroundImage' : 'url(' + src + ')'});
 				bj.html(newPic);
 				
-				if(!L.supports('webkitAnimation')){
-					console.log('gallery:','not support -webkit-animation');
+				if(!isWebkit){
 					newPic.hide().fadeIn(1000);
-				}else{
-					console.log('gallery:','support -webkit-animation');
 				}
 
 				setTimeout(function(){
@@ -194,8 +197,11 @@
  * L.render({init:true/false});
  * 
  */
+
 L.render = function(param){
-	var param = param || {};
+	console.log('render :','start !');
+	var titleDom = $('title'),
+		 param = param || {};
 		 param['init'] = param['init'] ||false;
 	function parse_url(){
 		var pathname = window.location.pathname;
@@ -207,38 +213,47 @@ L.render = function(param){
 	}
 	
 	var module = parse_url();
-	console.log('hello i\'m module :',module);
+	console.log('render :','this page is [' + module[0] + ']');
 	switch(module[0]){
 		case '/':
+			param['title'] = '小剧客栈_剧中人的个人空间 网页设计师博客 互动设计学习者';
 			L.render.index(param);
 			break
 		case 'blog':
 			if(module.length == 1){
+				param['title'] = '博客_小剧客栈';
 				L.render.blogList(param);
 			}else{
 //				L.render.blogDetail(param)
 			}
 			break
 		case 'opus':
-//			if(module.length == 1){
-//				L.render.opusList(param);
+			param['title'] = '作品_小剧客栈';
+			if(module.length == 1){
+				L.render.opusList(param);
 //			}else{
 //				L.render.opusDetail(param)
-//			}
+			}
 			break
 		case 'share':
+			param['title'] = '分享_小剧客栈';
 			if(module.length == 1){
 				L.render.shareList(param);
-//			}else{
+			}else{
 //				L.render.shareDetail(param)
 			}
 			break
+	}
+	
+	if(param['title']){
+		titleDom.html(param['title']);
 	}
 };
 
 //index page
 (function(ex){
 	function indexPanel(dom){
+		console.log('index page:','render index panel !');
 		var mod = dom.find('.indexNav');
 		var btnMod = mod.find('.inNavBtn span');
 		var cntMod = mod.find('.inNavCnt .inNavCntItem');
@@ -271,6 +286,7 @@ L.render = function(param){
 		})
 	}
 	function countTime(dom){
+		console.log('index page:','count time !');
 		dom.find('.time_count').each(function(){
 			var time = parseInt($(this).html());
 			var a = new Date(time) - new Date();
@@ -279,14 +295,18 @@ L.render = function(param){
 		});
 	}
 	ex.index = function(param){
-		console.log('render:','start render index page !');
+		console.log('index page:','start render index page !');
 		var param = param || {},
 			dom = param['dom'] || $('.contlayer');
 			
 		if(param['init']){
-			console.log('render:','get index page temp!');
+			console.log('index page:','get index page template!');
+			L.require('/skin/naive/css/index.css');
 			$.get('/ajax/temp?index',function(data){
-				dom.html(data['index']);
+				var this_dom = $(data['index']);
+				this_dom.hide();
+				dom.html(this_dom);
+				this_dom.fadeIn(300);
 				indexPanel(dom);
 				countTime(dom);
 			});
@@ -297,13 +317,31 @@ L.render = function(param){
 	};
 })(L.render);
 
-/*
+/**
  * blogList page
  *  
  */
 (function(ex){
-	var blogTemp = '';
-	var getData = function(skip,limit,fn){
+	var blogTemp = '',
+		 add_btn,
+		 limit = 10,
+		 skip;
+	var insert = function (param){
+		console.log('blog list page:','insert html !');
+		var param = param || {};
+		var this_dom = $(param['html']).hide();
+		
+		if(param['end']){
+			add_btn.hide();
+		}else{
+			add_btn.removeClass('blog_addMore_loading');
+		}
+		add_btn.before(this_dom);
+		
+		this_dom.fadeIn(200);
+	};
+	var getData = function(fn){
+		console.log('blog list page:','get data {limit:' + limit+ ',skip:' + skip + '} !');
 		$.ajax({
 			'type' : 'GET' ,
 			'url' : '/ajax/blog',
@@ -313,73 +351,84 @@ L.render = function(param){
 				'limit' : limit
 			},
 			'success' :function(data){
-				var list = data.list;
+				var count = data['count'],
+					 list = data['list'];
 				for(var i in list){
 					var date = new Date(parseInt(list[i].time_show));
 					list[i].time_show = (date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+ date.getDate();
-					list[i].cover = list[i].cover || '/images/notimg.gif';
+					list[i].cover = list[i].cover;
 				}
 				var this_html = juicer(blogTemp,{'list':list});
-				$('.blog_addMore').before(this_html);
-				fn&fn(data.count);
+				
+				skip += limit;
+				insert({
+					'end' : (skip>=count)?true:false,
+					'html' : this_html,
+				})
+				fn&&fn();
 			}
 		});
 	};
 	var getTemp = function(fn){
+		console.log('blog list page:','get template !');
 		$.get('/ajax/temp?article_item',function(data){
 			blogTemp = data['article_item'];
 			fn&&fn(blogTemp);
 		});
-	}; 
-	var init = function(dom){
-		var count = 100,
-			limit = 10,
-			skip = 10;
-		var add_btn_tpl = ['<div class="blog_addMore">',
-			'<a href="javascript:void(0)">加载更多</a>',
-			'<span>正在加载……</span>',
-		'</div>'];
-		var add_btn = $(add_btn_tpl.join(''));
-		dom.find('.articleList').append(add_btn);
+	};
+	var bindEvent = function(dom){
+		console.log('blog list page:','bind event !');
 		
-		getTemp(function(blogTemp){
-
-			add_btn.on('click','a',function(){
-				add_btn.addClass('blog_addMore_loading');
-				getData(skip,limit,function(num){
-					add_btn.removeClass('blog_addMore_loading');
-					skip += limit;
-					count = num ;
-					if(skip>=count){
-						add_btn.hide();
-					}
-				});
-			});
+		dom.on('click','.blog_addMore',function(){
+			add_btn.addClass('blog_addMore_loading');
+			getData();
+		}).on('click','.dataLike',function(){
 			L.require('dialog',function(){
-				$('.articleList').on('click','.dataLike',function(){
-					var left = $(this).offset().left-20,
-						top = $(this).offset().top-16;
-					L.dialog.tips({
-						'text':'交互接口开发中……',
-						'left':left,
-						'top':top,
-						'delay':2000
-					});
+				var left = $(this).offset().left-20,
+					 top = $(this).offset().top-16;
+				L.dialog.tips({
+					'text':'交互接口开发中……',
+					'left':left,
+					'top':top,
+					'delay':2000
 				});
 			});
 		});
 	};
+	var init = function(dom){
+		console.log('blog list page:','add blog btn [more] !');
+		var add_btn_tpl = ['<div class="blog_addMore">',
+			'<a href="javascript:void(0)">加载更多</a>',
+			'<span>正在加载……</span>',
+		'</div>'].join('');
+		
+		add_btn = $(add_btn_tpl);
+		dom.find('.articleList').append(add_btn);
+		
+		getTemp(function(blogTemp){
+			bindEvent(dom);
+		});
+	};
 	ex.blogList = function(param){
+		console.log('blog list page:','start !');
 		var param = param || {};
 		var dom = param['dom']||$('.contlayer');
 		
 		if(param['init']){
 			L.require('/skin/naive/css/blog.css');
 			dom.html('<div class="articleList"></div>');
+			skip = 0;
+			L.require('juicer',function(){
+				init(dom);
+				getData();
+			});
+		}else{
+			skip = limit;
+			L.require('juicer',function(){
+				init(dom);
+			});
 		}
-		L.require('juicer',function(){
-			init(dom);
-		});
+
 	};
 })(L.render);
 
@@ -387,37 +436,158 @@ L.render = function(param){
  * share list
  *  
  */
-(function(ex){
-	ex.shareList = function(){
+(function(ex){	
+	var limit = 10,
+		 skip,
+		 dom;
+		 
+	var temp = ['{@each list as it,index}',
+		'<li>',
+			'<a href="/share/${it.id}" title="${it.title}" target="_self">',
+				'<img src="${it.cover}" alt="${it.title}" />',
+				'<strong>${it.title}</strong>',
+			'</a>',
+		'</li>',
+	'{@/each}'].join('');
+
+	var insert = function(param){
+		var this_dom = $(param['html']).hide();
+		dom.find('.shareList ul').html(this_dom);
+		this_dom.fadeIn(200);
+	};
+	var getData = function(fn){
+		$.ajax({
+			'type' : 'GET' ,
+			'url' : '/ajax/share',
+			'data' : {
+				'act' : 'get_list',
+				'skip' : skip ,
+				'limit' : limit
+			},
+			'success' :function(data){
+				var count = data['count'],
+					 list = data['list'];
+
+				var this_html = juicer(temp,{'list':list});
+				
+				skip += limit;
+				insert({
+					'end' : (skip>=count)?true:false,
+					'html' : this_html,
+				})
+				fn&&fn();
+			}
+		});
+	};
+	var start = function(){
 		
 		$('.shareList').on('mouseenter','a',function(){
 			$(this).find('strong').stop().animate({'bottom':0},200);
 		}).on('mouseleave','a',function(){
 			$(this).find('strong').stop().animate({'bottom':-100},200);
 		});
-	
-		L.require('lantern',function(){
-			L.lantern($('.article img'));
+	};
+	ex.shareList = function(param){
+		L.require('juicer',function(){
+			dom = param['dom'];
+			if(param['init']){
+				dom.html('<div class="golCnt"><div class="shareList"><ul></ul></div></div>');
+				L.require('/skin/naive/css/share.css');
+				getData(function(){
+					start();
+				});
+			}else{
+				start();
+			}
+		});
+	};
+})(L.render);
+
+/**
+ * opus list
+ *  
+ */
+(function(ex){	
+	var limit = 20,
+		 skip,
+		 dom;
+		 
+	var temp = ['{@each list as it,index}',
+		'<li>',
+			'<a href="/opus/${it.id}" title="${it.title}" target="_self">',
+				'<img src="${it.cover}" alt="${it.title}" />',
+				'<strong>${it.title}</strong>',
+			'</a>',
+		'</li>',
+	'{@/each}'].join('');
+
+	var insert = function(param){
+		var this_dom = $(param['html']).hide();
+		dom.find('.shareList ul').html(this_dom);
+		this_dom.fadeIn(200);
+	};
+	var getData = function(fn){
+		$.ajax({
+			'type' : 'GET' ,
+			'url' : '/ajax/opus',
+			'data' : {
+				'act' : 'get_list',
+				'skip' : skip ,
+				'limit' : limit
+			},
+			'success' :function(data){
+				var count = data['count'],
+					 list = data['list'];
+
+				var this_html = juicer(temp,{'list':list});
+				
+				skip += limit;
+				insert({
+					'end' : (skip>=count)?true:false,
+					'html' : this_html,
+				})
+				fn&&fn();
+			}
+		});
+	};
+	var start = function(){
+		
+		$('.shareList').on('mouseenter','a',function(){
+			$(this).find('strong').stop().animate({'bottom':0},200);
+		}).on('mouseleave','a',function(){
+			$(this).find('strong').stop().animate({'bottom':-100},200);
+		});
+	};
+	ex.opusList = function(param){
+		L.require('juicer',function(){
+			dom = param['dom'];
+			if(param['init']){
+				dom.html('<div class="golCnt"><div class="shareList"><ul></ul></div></div>');
+				L.require('/skin/naive/css/opus.css');
+				getData(function(){
+					start();
+				});
+			}else{
+				start();
+			}
 		});
 	};
 })(L.render);
 
 
-/*
+/**
  * all start
  */
 console.log('lay:','JS is start working !');
 L.require('lofox',function(){
 	
 	$(function(){
-		
 		var contlayer = $('.contlayer');
 		lofox(function(){
 			L.render({init:true,dom:contlayer});
 		});
 		$('body').on('click','a[lofox="true"]',function(){
 			var url = $(this).attr('href');
-			console.log(url)
 			lofox.push(url);
 			return false;
 		});

@@ -22,6 +22,10 @@ var lofox = function(callback){
 			return false;
 		});
 		exports.push = function(url){
+			if(url == window.location.pathname){
+				console.log('lofox:','needn\'t not push this state!');
+				return
+			}
 			window.history.pushState({
 				url: url
 			},'test',url);

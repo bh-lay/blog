@@ -59,12 +59,13 @@ var L = L || function(root){
 	};
 
 	function loadJs(url,fn){
+		console.log('require','load JS file [' + url + ']');
 		$.get(url,function(){
 			fn&&fn();
 		});
 	}
 	function loadCSS(url,callback){
-		console.log('link[data-url="' + url + '"]')
+		console.log('require','load CSS file [' + url + ']');
 		if($('link[data-url="' + url + '"]').length == 0){
 			$('head').append('<link data-url="'+url+'" href="' + url + '" type="text/css" rel="stylesheet">');
 			callback&&callback();
@@ -73,6 +74,7 @@ var L = L || function(root){
 		}
 	}
 	var require = function(str,callback){
+		console.log('require:','start with [' + str + ']');
 		var str = str||'';
 		str = str.split(/\?/)[0]||'';
 		var str_spilt = str.split(/\./);
@@ -83,8 +85,9 @@ var L = L || function(root){
 			var modName = str;
 			var module = conf[modName];
 			if(!module){
-				console.log('could not find module please check mod spell ！');
+				console.log('require','could not find module please check mod spell ！');
 			}else if(module['load']){
+				console.log('require','has been loaded, needn\'t to load again ！');
 				callback();
 			}else{
 				var url = module['js'];
@@ -102,7 +105,7 @@ var L = L || function(root){
 			}else if(ext == 'js'){
 				loadJs(url,callback);
 			}else{
-				console.log('could not support this type module ！');
+				console.log('require','could not support this type module ！');
 			}
 		}
 	}
