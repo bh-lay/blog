@@ -10,7 +10,7 @@
  */
 (function(ex){
 	var config = {
-		'delay' : 40000
+		'delay' : 30000
 	};
 	
 	function JS_show(data,bj){
@@ -212,15 +212,17 @@ L.render = function(param){
 				param['title'] = '博客_小剧客栈';
 				L.render.blogList(param);
 			}else{
-//				L.render.blogDetail(param)
+				param['id'] = module[1];
+				L.render.blogDetail(param)
 			}
 			break
 		case 'opus':
 			param['title'] = '作品_小剧客栈';
 			if(module.length == 1){
 				L.render.opusList(param);
-//			}else{
-//				L.render.opusDetail(param)
+			}else{
+				param['id'] = module[1];
+				L.render.opusDetail(param)
 			}
 			break
 		case 'share':
@@ -228,7 +230,8 @@ L.render = function(param){
 			if(module.length == 1){
 				L.render.shareList(param);
 			}else{
-//				L.render.shareDetail(param)
+				param['id'] = module[1];
+				L.render.shareDetail(param)
 			}
 			break
 	}
@@ -289,14 +292,22 @@ L.render = function(param){
 			
 		if(param['init']){
 			console.log('index page:','get index page template!');
+			outOver = false;
+			dom.fadeOut(100,function(){
+				outOver = true;
+			});
 			L.require('/skin/naive/css/index.css');
 			$.get('/ajax/temp?index',function(data){
 				var this_dom = $(data['index']);
-				this_dom.hide();
 				dom.html(this_dom);
-				this_dom.fadeIn(300);
-				indexPanel(dom);
-				countTime(dom);
+				var check = setInterval(function(){
+					if(outOver){
+						dom.fadeIn(300);
+						indexPanel(dom);
+						countTime(dom);
+						clearInterval(check);
+					}
+				},20);
 			});
 		}else{
 			indexPanel(dom);
@@ -419,6 +430,68 @@ L.render = function(param){
 })(L.render);
 
 /**
+ * blog detail
+ *  
+ */
+(function(ex){
+	var template = ['<div class="golCnt"><div class="article">',
+		'<div class="articletop">',
+			'<h1>${title}</h1>',
+			'<p><span>时间：${time_show} </span><span>作者：${author}</span></p>',
+		'</div>',
+		'{@if cover}<img src="${cover}" alt="${title}" class="topicImg" />{@/if}',
+		'<div class="text">$${content}</div>',
+		'<div class="copylink">',
+			'<div class="tag"><strong>本文关键字：</strong>${tags}</div>',
+			'<div class="pageUrl"><strong>转载请注明来源：</strong>http://bh-lay.com/blog/${id}</div>',
+		'</div>',
+		'<div class="youyan">',
+			'<div id="uyan_frame"></div>',
+			'<script type="text/javascript">',
+				'delete(uyan_c_g);delete(uyan_loaded);delete(uyan_s_g);delete(uyan_style_loaded);delete(uyan_style_loaded_over);',
+				'var uyan_config = {"du":"bh-lay.com"};',
+			'</script>',
+			'<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1605927" async=""></script>',
+		'</div>',
+	'</div>'].join('');
+	
+	function getData(id,fn){
+		$.ajax({
+			'type' : 'GET' ,
+			'url' : '/ajax/blog',
+			'data' : {
+				'act' : 'get_detail',
+				'id' : id ,
+			},
+			'success' :function(data){
+				if(data.code == 1){
+					var detail = data['detail'];
+					var date = new Date(parseInt(detail.time_show));
+					detail.time_show = (date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+ date.getDate();
+					var this_html = juicer(template,detail);
+					fn&&fn(this_html);
+				}else{
+					//FIXME something wrong
+				}
+			}
+		});
+	};
+	ex.blogDetail=function(param){
+		if(param['init']){
+			var param = param || {},
+				 dom = param['dom'] || $('.contlayer'),
+				 id = param['id'] || null;
+			L.require('juicer,/skin/naive/css/blog.css',function(){
+				getData(id,function(html){
+					dom.html(html);
+				});
+			});
+		}
+		
+	};
+})(L.render);
+
+/**
  * share list
  *  
  */
@@ -429,7 +502,7 @@ L.render = function(param){
 		 
 	var temp = ['{@each list as it,index}',
 		'<li>',
-			'<a href="/share/${it.id}" title="${it.title}" target="_self">',
+			'<a href="/share/${it.id}" title="${it.title}" lofox="true" target="_self" >',
 				'<img src="${it.cover}" alt="${it.title}" />',
 				'<strong>${it.title}</strong>',
 			'</a>',
@@ -489,6 +562,64 @@ L.render = function(param){
 	};
 })(L.render);
 
+
+/**
+ * share detail
+ *  
+ */
+(function(ex){
+	var template = ['<div class="golCnt"><div class="article">',
+		'<div class="articletop">',
+			'<h1>${title}</h1>',
+			'<p><span>时间：${time_show} </span><span>作者：${author}</span></p>',
+		'</div>',
+		'<div class="text">$${content}</div>',
+		'<div class="youyan">',
+			'<div id="uyan_frame"></div>',
+			'<script type="text/javascript">',
+				'delete(uyan_c_g);delete(uyan_loaded);delete(uyan_s_g);delete(uyan_style_loaded);delete(uyan_style_loaded_over);',
+				'var uyan_config = {"du":"bh-lay.com"};',
+			'</script>',
+			'<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1605927" async=""></script>',
+		'</div>',
+	'</div></div>'].join('');
+	
+	function getData(id,fn){
+		$.ajax({
+			'type' : 'GET' ,
+			'url' : '/ajax/share',
+			'data' : {
+				'act' : 'get_detail',
+				'id' : id ,
+			},
+			'success' :function(data){
+				if(data.code == 1){
+					var detail = data['detail'];
+					var date = new Date(parseInt(detail.time_show));
+					detail.time_show = (date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+ date.getDate();
+					var this_html = juicer(template,detail);
+					fn&&fn(this_html);
+				}else{
+					//FIXME something wrong
+				}
+			}
+		});
+	};
+	ex.shareDetail=function(param){
+		if(param['init']){
+			var param = param || {},
+				 dom = param['dom'] || $('.contlayer'),
+				 id = param['id'] || null;
+			L.require('juicer,/skin/naive/css/share.css',function(){
+				getData(id,function(html){
+					dom.html(html);
+				});
+			});
+		}
+		
+	};
+})(L.render);
+
 /**
  * opus list
  *  
@@ -498,14 +629,12 @@ L.render = function(param){
 		 skip,
 		 dom;
 		 
-	var temp = ['{@each list as it,index}',
-		'<li>',
-			'<a href="/opus/${it.id}" title="${it.title}" target="_self">',
-				'<img src="${it.cover}" alt="${it.title}" />',
-				'<strong>${it.title}</strong>',
-			'</a>',
-		'</li>',
-	'{@/each}'].join('');
+	var temp = ['{@each list as it,index}<li>',
+		'<a href="/opus/${it.id}" title="${it.title}" target="_self" lofox="true" >',
+			'<img src="${it.cover}" alt="${it.title}" />',
+			'<strong>${it.title}</strong>',
+		'</a>',
+	'</li>{@/each}'].join('');
 
 	var insert = function(param){
 		var this_dom = $(param['html']).hide();
@@ -545,7 +674,7 @@ L.render = function(param){
 		});
 	};
 	ex.opusList = function(param){
-		L.require('juicer',function(){
+		L.require('juicer,/skin/naive/css/opus.css',function(){
 			dom = param['dom'];
 			if(param['init']){
 				dom.html('<div class="golCnt"><div class="shareList"><ul></ul></div></div>');
@@ -560,6 +689,71 @@ L.render = function(param){
 	};
 })(L.render);
 
+/**
+ * opus detail
+ *  
+ */
+(function(ex){
+	var template = ['<div class="golCnt">',
+		'<div class="TagLine">小剧作品，一次次小小的进步，成就平凡的自己！</div>',
+		'<div id="focusTitle">',
+			'{@if cover}<img src="${cover}" alt="${title}" class="topicImg" />{@/if}',
+			'<div class="info">',
+				'<h1>${title}</h1><ul>',
+					'<li><strong>创作时间:</strong>${opus_time_create}</li>',
+					'<li><strong>相关页面:</strong><a href="#" title="字段暂无" target="_blank">字段暂无</a></li>',
+				'</ul>',
+			'</div>',
+		'</div>',
+		'<div class="opus_detail">',
+			'<div class="photo"><img src="${opus_pic}" alt="${title}" /></div>',
+			'<div class="text">$${content}</div>',
+			'<div class="youyan">',
+				'<div id="uyan_frame"></div>',
+				'<script type="text/javascript">',
+					'delete(uyan_c_g);delete(uyan_loaded);delete(uyan_s_g);delete(uyan_style_loaded);delete(uyan_style_loaded_over);',
+					'var uyan_config = {"du":"bh-lay.com"};',
+				'</script>',
+				'<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1605927" async=""></script>',
+			'</div>',
+		'</div>',
+	'</div>'].join('');
+	
+	function getData(id,fn){
+		$.ajax({
+			'type' : 'GET' ,
+			'url' : '/ajax/opus',
+			'data' : {
+				'act' : 'get_detail',
+				'id' : id ,
+			},
+			'success' :function(data){
+				if(data.code == 1){
+					var detail = data['detail'];
+					var date = new Date(parseInt(detail.time_show));
+					detail.time_show = (date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+ date.getDate();
+					var this_html = juicer(template,detail);
+					fn&&fn(this_html);
+				}else{
+					//FIXME something wrong
+				}
+			}
+		});
+	};
+	ex.opusDetail=function(param){
+		if(param['init']){
+			var param = param || {},
+				 dom = param['dom'] || $('.contlayer'),
+				 id = param['id'] || null;
+			L.require('juicer',function(){
+				getData(id,function(html){
+					dom.html(html);
+				});
+			});
+		}
+		
+	};
+})(L.render);
 
 /**
  * all start
