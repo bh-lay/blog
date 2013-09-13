@@ -15,8 +15,8 @@
 			{'src':'/skin/naive/gallery/coast.jpg','alt':'江边'},
 			{'src':'/skin/naive/gallery/fish.jpg','alt':'鱼儿'},
 			{'src':'/skin/naive/gallery/tree.jpg','alt':'树林'},
-			{'src':'/skin/naive/gallery/bamboo.jpg','alt':'竹子','size':[1400,937]},
-			{'src':'/skin/naive/gallery/roadtogate.jpg','alt':'校门'},
+			{'src':'/skin/naive/gallery/bamboo.jpg','alt':'竹子'},
+			{'src':'/skin/naive/gallery/roadtogate.jpg','alt':'校门'}
 		]
 	};
 	
