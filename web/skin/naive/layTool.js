@@ -11,7 +11,7 @@
 (function(ex){
 	var config = {
 		'delay' : 30000,
-		'coverData' :[
+		'coverData' : [
 			{'src':'/skin/naive/gallery/coast.jpg','alt':'江边'},
 			{'src':'/skin/naive/gallery/fish.jpg','alt':'鱼儿'},
 			{'src':'/skin/naive/gallery/tree.jpg','alt':'树林'},
