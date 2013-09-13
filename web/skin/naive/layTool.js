@@ -10,7 +10,14 @@
  */
 (function(ex){
 	var config = {
-		'delay' : 30000
+		'delay' : 30000,
+		'coverData' :[
+			{'src':'/skin/naive/gallery/coast.jpg','alt':'江边'},
+			{'src':'/skin/naive/gallery/fish.jpg','alt':'鱼儿'},
+			{'src':'/skin/naive/gallery/tree.jpg','alt':'树林'},
+			{'src':'/skin/naive/gallery/bamboo.jpg','alt':'竹子','size':[1400,937]},
+			{'src':'/skin/naive/gallery/roadtogate.jpg','alt':'校门'},
+		]
 	};
 	
 	function JS_show(data,bj){
@@ -108,7 +115,7 @@
 	ex.gallery = function(){
 		console.log('gallery:','start !');
 		var bj = $('.gallayer .galBj'),
-			data = eval('('+bj.html()+')');
+			data = config['coverData'];
 		if (L.supports('backgroundSize')){
 			CSS3(data,bj);
 		}else{
@@ -234,6 +241,9 @@ L.render = function(param){
 				L.render.shareDetail(param)
 			}
 			break
+		default :
+			var url = window.location.href;
+			$('.contlayer').load(url + ' .contlayer');
 	}
 	
 	if(param['title']){

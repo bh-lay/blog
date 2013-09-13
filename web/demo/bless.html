@@ -11,19 +11,26 @@
 </head>
 <body>
 	<div class="gallayer">
-		<div class="galBj">[{'src':'/skin/naive/gallery/coast.jpg','alt':'江边'},{'src':'/skin/naive/gallery/fish.jpg','alt':'鱼儿'},{'src':'/skin/naive/gallery/tree.jpg','alt':'树林'}]</div>
+		<div class="galBj"></div>
 		<div class="galMask">i'm a texture layer！</div>
 	</div>
 	<div class="contlayer">
-		<div class="golCnt"><div style="background: #fff;margin:100px auto 50px;padding:20px;border-radius :8px;">
-			 <!-- UY BEGIN -->
-			<div id="uyan_frame"></div>
-			<script type="text/javascript">
-				var uyan_config = {"du":"bh-lay.com"};
-			</script>
-			<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1605927" async=""></script>
-			<!-- UY END -->
-		</div></div>
+		<div class="golCnt">
+			<div style="background: #fff;margin:100px auto 50px;padding:20px;border-radius :8px;">
+				 <!-- UY BEGIN -->
+				<div id="uyan_frame"></div>
+				<script type="text/javascript">
+					delete(uyan_c_g);
+					delete(uyan_loaded);
+					delete(uyan_s_g);
+					delete(uyan_style_loaded);
+					delete(uyan_style_loaded_over);
+					var uyan_config = {"du":"bh-lay.com"};
+				</script>
+				<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1605927" async=""></script>
+				<!-- UY END -->
+			</div>
+		</div>
 	</div>
 	<div class="navLayer"><div class="golCnt"><a class="logo" href="/">小剧客栈</a><ul class="nav"><li page="blog"><a title="博客" href="/blog/">博客</a></li><li page="share"><a title="分享" href="/share/">分享</a></li><li page="opus"><a title="小剧作品" href="/opus/">作品</a></li></ul><ul class="navLink"><li><a title="给剧中人留言" href="/demo/bless.html">留言</a></li></ul></div></div>
 <script src="/skin/naive/jquery.js" type="text/javascript"></script>
