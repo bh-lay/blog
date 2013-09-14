@@ -169,11 +169,13 @@
 			if(r.length!=1){
 				//成功
 				if(r[0]!=''){
-					L.dialog.tips({'width':'200','html':'成功啦，灰常感谢！','callBack':function(){
-						obj.html(r[0])
+					L.dialog.tips('成功啦，灰常感谢！',{'width':'200','callBack':function(){
+						obj.html(r[0]);
 					}});
 				}else if(r[2]!=''){//已经提交
-					L.dialog.tips({'width':'200','html':'你已经点过人家啦，换一篇文章吧！','callBack':function(){obj.html(r[0])}});
+					L.dialog.tips('你已经点过人家啦，换一篇文章吧！',{'width':'200','callBack':function(){
+						obj.html(r[0]);
+					}});
 				}
 			}else{
 				L.pop({'width':'200','html':r[0]});
@@ -181,9 +183,7 @@
 		});
 	}
 	ex.like = function(type,id,obj){
-		L.require('dialog',function(){
-			init(type,id,obj);
-		});
+		init(type,id,obj);
 	}
 }(L));
 
@@ -191,13 +191,7 @@
  * L.render({init:true/false});
  * 
  */
-
-L.render = function(param){
-	console.log('render :','start !');
-	var titleDom = $('title'),
-		 param = param || {};
-		 param['init'] = param['init'] ||false;
-	
+(function(exports){
 	function parse_url(){
 		var pathname = window.location.pathname;
 			 pathname = pathname.replace(/^\/|\/$/g,''),
@@ -206,50 +200,78 @@ L.render = function(param){
 		return path_node;
 	}
 	
-	var module = parse_url();
-	console.log('render :','this page is [' + module[0] + ']');
-	L.nav.setCur(module[0]); 
-	switch(module[0]){
-		case '/':
-			param['title'] = '小剧客栈_剧中人的个人空间 网页设计师博客 互动设计学习者';
-			L.render.index(param);
-			break
-		case 'blog':
-			if(module.length == 1){
-				param['title'] = '博客_小剧客栈';
-				L.render.blogList(param);
-			}else{
-				param['id'] = module[1];
-				L.render.blogDetail(param)
+	function render(param){
+		console.log('render :','start !');
+		var titleDom = $('title'),
+			 param = param || {};
+			 param['init'] = param['init'] ||false;
+		
+		if(param['init']){
+			loading = L.dialog.loading();
+			param['render_over'] = render_over ;
+			param['dom'].hide();
+		}
+		var start_time = new Date().getTime();
+		function render_over(){
+			var end_time = new Date().getTime(),
+				 min_time = 600,
+				 delay_time = 0;
+			
+			if(end_time - start_time < min_time){
+				delay_time = min_time - (end_time - start_time);
 			}
-			break
-		case 'opus':
-			param['title'] = '作品_小剧客栈';
-			if(module.length == 1){
-				L.render.opusList(param);
-			}else{
-				param['id'] = module[1];
-				L.render.opusDetail(param)
-			}
-			break
-		case 'share':
-			param['title'] = '分享_小剧客栈';
-			if(module.length == 1){
-				L.render.shareList(param);
-			}else{
-				param['id'] = module[1];
-				L.render.shareDetail(param)
-			}
-			break
-		default :
-			var url = window.location.href;
-			$('.contlayer').load(url + ' .contlayer');
-	}
+			setTimeout(function(){
+				loading.close();
+				param['dom'].fadeIn(300);
+			},delay_time);
+		}
+		var module = parse_url();
+		console.log('render :','this page is [' + module[0] + ']');
+		L.nav.setCur(module[0]); 
+		switch(module[0]){
+			case '/':
+				param['title'] = '小剧客栈_剧中人的个人空间 网页设计师博客 互动设计学习者';
+				L.render.index(param);
+				break
+			case 'blog':
+				if(module.length == 1){
+					param['title'] = '博客_小剧客栈';
+					L.render.blogList(param);
+				}else{
+					param['id'] = module[1];
+					L.render.blogDetail(param)
+				}
+				break
+			case 'opus':
+				param['title'] = '作品_小剧客栈';
+				if(module.length == 1){
+					L.render.opusList(param);
+				}else{
+					param['id'] = module[1];
+					L.render.opusDetail(param)
+				}
+				break
+			case 'share':
+				param['title'] = '分享_小剧客栈';
+				if(module.length == 1){
+					L.render.shareList(param);
+				}else{
+					param['id'] = module[1];
+					L.render.shareDetail(param)
+				}
+				break
+			default :
+				var url = window.location.href;
+				$('.contlayer').load(url + ' .contlayer');
+		}
+		
+		if(param['title']){
+			titleDom.html(param['title']);
+		}
+	};
 	
-	if(param['title']){
-		titleDom.html(param['title']);
-	}
-};
+	exports.render = render ;
+})(L);
 
 //index page
 (function(ex){
@@ -298,25 +320,21 @@ L.render = function(param){
 	ex.index = function(param){
 		console.log('index page:','start render index page !');
 		var param = param || {},
-			dom = param['dom'] || $('.contlayer');
+			 dom = param['dom'] || $('.contlayer'),
+			 fn = param['render_over'] || null;
 			
 		if(param['init']){
 			console.log('index page:','get index page template!');
-			outOver = false;
-			dom.fadeOut(100,function(){
-				outOver = true;
-			});
+
 			L.require('/skin/naive/css/index.css');
 			$.get('/ajax/temp?index',function(data){
 				var this_dom = $(data['index']);
 				dom.html(this_dom);
 				var check = setInterval(function(){
-					if(outOver){
-						dom.fadeIn(300);
-						indexPanel(dom);
-						countTime(dom);
-						clearInterval(check);
-					}
+					indexPanel(dom);
+					countTime(dom);
+					clearInterval(check);
+					fn&&fn();
 				},20);
 			});
 		}else{
@@ -400,15 +418,13 @@ L.render = function(param){
 			add_btn.addClass('blog_addMore_loading');
 			getData();
 		}).on('click','.dataLike',function(){
-			L.require('dialog',function(){
-				var left = $(this).offset().left-20,
-					 top = $(this).offset().top-16;
-				L.dialog.tips({
-					'text':'交互接口开发中……',
-					'left':left,
-					'top':top,
-					'delay':2000
-				});
+			var this_ico = $(this);
+			var left = this_ico.offset().left-20,
+				 top = this_ico.offset().top-16;
+			L.dialog.tips('交互接口开发中……',{
+				'left':left,
+				'top':top,
+				'delay':2000
 			});
 		});
 	};
@@ -419,15 +435,18 @@ L.render = function(param){
 	};
 	ex.blogList = function(param){
 		console.log('blog list page:','start !');
-		var param = param || {};
-		var dom = param['dom']||$('.contlayer');
+		var param = param || {},
+			 dom = param['dom']||$('.contlayer'),
+			 fn = param['render_over'] || null;
 		
 		if(param['init']){
 			dom.html('<div class="articleList"></div>');
 			skip = 0;
 			L.require('juicer,/skin/naive/css/blog.css',function(){
 				init(dom);
-				getData();
+				getData(function(){
+					fn&&fn();
+				});
 			});
 		}else{
 			skip = limit;
@@ -481,7 +500,9 @@ L.render = function(param){
 					var this_html = juicer(template,detail);
 					fn&&fn(this_html);
 				}else{
-					//FIXME something wrong
+					L.dialog.tips('博客不存在！');
+					lofox.push('/blog',{render:false});
+					fn&&fn();
 				}
 			}
 		});
@@ -490,10 +511,12 @@ L.render = function(param){
 		if(param['init']){
 			var param = param || {},
 				 dom = param['dom'] || $('.contlayer'),
-				 id = param['id'] || null;
+				 id = param['id'] || null,
+				 callback = param['render_over'] || null;;
 			L.require('juicer,/skin/naive/css/blog.css',function(){
 				getData(id,function(html){
-					dom.html(html);
+					html&&dom.html(html);
+					callback&&callback();
 				});
 			});
 		}
@@ -557,13 +580,16 @@ L.render = function(param){
 		});
 	};
 	ex.shareList = function(param){
+		var fn = param['render_over'] || null;
+		dom = param['dom'];
+		
 		L.require('juicer',function(){
-			dom = param['dom'];
 			if(param['init']){
 				dom.html('<div class="golCnt"><div class="shareList"><ul></ul></div></div>');
 				L.require('/skin/naive/css/share.css');
 				getData(function(){
 					start();
+					fn&&fn();
 				});
 			}else{
 				start();
@@ -610,19 +636,24 @@ L.render = function(param){
 					var this_html = juicer(template,detail);
 					fn&&fn(this_html);
 				}else{
-					//FIXME something wrong
+					L.dialog.tips('分享不存在！');
+					lofox.push('/share',{render:false});
+					fn&&fn();
 				}
 			}
 		});
 	};
 	ex.shareDetail=function(param){
+		var fn = param['render_over'] || null;
+		
 		if(param['init']){
 			var param = param || {},
 				 dom = param['dom'] || $('.contlayer'),
 				 id = param['id'] || null;
 			L.require('juicer,/skin/naive/css/share.css',function(){
 				getData(id,function(html){
-					dom.html(html);
+					html&&dom.html(html);
+					fn&&fn();
 				});
 			});
 		}
@@ -684,13 +715,16 @@ L.render = function(param){
 		});
 	};
 	ex.opusList = function(param){
+		var fn = param['render_over'] || null;
+		dom = param['dom'];
+		
 		L.require('juicer,/skin/naive/css/opus.css',function(){
-			dom = param['dom'];
 			if(param['init']){
 				dom.html('<div class="golCnt"><div class="shareList"><ul></ul></div></div>');
 				L.require('/skin/naive/css/opus.css');
 				getData(function(){
 					start();
+					fn&&fn();
 				});
 			}else{
 				start();
@@ -745,19 +779,24 @@ L.render = function(param){
 					var this_html = juicer(template,detail);
 					fn&&fn(this_html);
 				}else{
-					//FIXME something wrong
+					L.dialog.tips('作品不存在！');
+					lofox.push('/opus',{render:false});
+					fn&&fn();
 				}
 			}
 		});
 	};
 	ex.opusDetail=function(param){
+		var fn = param['render_over'] || null;
+		var param = param || {},
+			 dom = param['dom'] || $('.contlayer'),
+			 id = param['id'] || null;
+				 
 		if(param['init']){
-			var param = param || {},
-				 dom = param['dom'] || $('.contlayer'),
-				 id = param['id'] || null;
 			L.require('juicer',function(){
 				getData(id,function(html){
-					dom.html(html);
+					html&&dom.html(html);
+					fn&&fn()
 				});
 			});
 		}
@@ -769,18 +808,16 @@ L.render = function(param){
  * all start
  */
 console.log('lay:','JS is start working !');
-L.require('lofox',function(){
-	
-	$(function(){
-		var contlayer = $('.contlayer');
-		lofox(function(){
-			L.render({init:true,dom:contlayer});
-		});
-		$('body').on('click','a[lofox="true"]',function(){
-			var url = $(this).attr('href');
-			lofox.push(url);
-			return false;
-		});
+
+L.require('lofox,dialog',function(){
+	var contlayer = $('.contlayer');
+	lofox(function(){
+		L.render({init:true,dom:contlayer});
+	});
+	$('body').on('click','a[lofox="true"]',function(){
+		var url = $(this).attr('href');
+		lofox.push(url);
+		return false;
 	});
 });
 

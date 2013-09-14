@@ -22,12 +22,13 @@ var L = L||{};
 		'.popWin p{top:50px;color:#333;font-size:14px;padding:30px 20px;}',
 		'.popWin .layClose{height:17px;width:17px;background:#555;border-radius:10px;cursor: pointer;position:absolute;right:5px;top:5px;color:#ccc;text-align:center;line-height:17px;font-size:14px;}',
 		'.popWin .layClose:hover{color:#c00;}',
+		'.diaLoading{z-index: 1000000;position: absolute;width:280px;height:40px;border-radius:0px 0px 10px 10px;top:40px;left:50%;margin-left:-140px;background:url(/skin/images/loading.gif) no-repeat center center #4f4f4f;cursor: default;}',
 		'</style>'
 	].join('');
 	$(function(){
 		$('head').append(style);
 	});
-	var pop=function (parm){
+	var pop = function (parm){
 		var parm=parm||{},
 		w=parm.width||300,
 		h=parm.height||'auto',
@@ -47,18 +48,25 @@ var L = L||{};
 		pop.find('.popWinBody').css({'width': w-10,'height':h-10});
 		pop.fadeIn('300');
 		fn&&fn();
-	}
-	var tips=function (parm){
-		var parm=parm||{},
-			text=parm.text||'请填写提示文本',
-			fn=parm.callBack,
-			t=parm.top||$(window).scrollTop()+200,
-			l=parm.left||300,
-			delay=parm.delay||2000;
-		var pop=$('<div class="diaTips"><div class="diaTipsCnt"></div></div>');
+	};
+	var tips = function (text,parm){
+		var pop = $('<div class="diaTips"><div class="diaTipsCnt"></div></div>');
+		var text = text || '请填写提示文本',
+			 parm = parm||{},
+			 fn = parm.callBack,
+			 top = parm.top || null,
+			 left = parm.left || null,
+			 delay = parm.delay||2000;
+		
+		pop.css({'top':top,'left':left});
 		pop.find('.diaTipsCnt').html(text);
-		pop.css({'top':t,'left':l});
 		$('body').append(pop);
+		if(!top){
+			pop.css({'top': $(window).scrollTop() + $(window).height()/2 + pop.height()/2});
+		}
+		if(!left){
+			pop.css({'left':$(window).width()/2 - pop.width()/2});
+		}
 		pop.fadeIn(100,function(){
 			fn&&fn();
 		});
@@ -66,8 +74,24 @@ var L = L||{};
 			pop.fadeOut(300,function(){
 				pop.remove();
 			});
-		},delay)
-	}
-	ex.pop=pop;
-	ex.tips=tips;
+		},delay);
+	};
+	//loading
+	var loading = function(){
+		this.dom = $('<div class="diaLoading"></div>').hide();
+		$('body').append(this.dom);
+		this.dom.fadeIn(100);
+	};
+	loading.prototype = {
+		'close' : function(){
+			this.dom.fadeOut(500,function(){
+				$(this).remove();
+			});
+		}
+	};
+	ex.pop = pop;
+	ex.tips = tips;
+	ex.loading = function(){
+		return new loading();
+	};
 })(L.dialog = L.dialog||{});

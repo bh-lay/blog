@@ -21,7 +21,9 @@ var lofox = function(callback){
 			}
 			return false;
 		});
-		exports.push = function(url){
+		exports.push = function(url,param){
+			var param = param || {};
+				 render = (typeof(param['render']) =="boolean")?param['render']:true;
 			if(url == window.location.pathname){
 				console.log('lofox:','needn\'t not push this state!');
 				return
@@ -29,23 +31,28 @@ var lofox = function(callback){
 			window.history.pushState({
 				url: url
 			},'test',url);
-			callback(url);
+			
+			render&&callback(url);
 		}
 	};	
 	var HASH = function(callback){
 		console.log('lofox:','using hash url !');
 		
-		var hash = window.location.hash;
+		var hash = window.location.hash,
+			 need_render = true;
 		setInterval(function(){
 			var new_hash = window.location.hash||'#';
-			if(new_hash != hash){
+			if((new_hash != hash)&&need_render){
 				hash = new_hash;
 				var url = hash.replace(/^#/,'');
 				callback(url);
 			}
 		},30);
 		
-		exports.push = function(url){
+		exports.push = function(url,param){
+			var param = param || {};
+			need_render = (typeof(param['render']) =="boolean")?param['render']:true;
+
 			window.location.hash = url;
 		}
 	}
