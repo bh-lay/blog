@@ -78,7 +78,7 @@ var L = L||{};
 	};
 	//loading
 	var loading = function(){
-		this.dom = $('<div class="diaLoading"></div>').hide();
+		this.dom = $('<div class="diaLoading">正在加载</div>').hide();
 		$('body').append(this.dom);
 		this.dom.fadeIn(100);
 	};

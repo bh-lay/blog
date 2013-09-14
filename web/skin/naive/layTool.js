@@ -214,7 +214,7 @@
 		var start_time = new Date().getTime();
 		function render_over(){
 			var end_time = new Date().getTime(),
-				 min_time = 600,
+				 min_time = 400,
 				 delay_time = 0;
 			
 			if(end_time - start_time < min_time){
