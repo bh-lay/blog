@@ -82,7 +82,7 @@ var L = L||{};
 	var loading = function(){
 		this.dom = $('<div class="diaLoading"><span>正在加载</span></div>').hide();
 		$('body').append(this.dom);
-		this.dom.slideDown(90);
+		this.dom.slideDown(100);
 	};
 	loading.prototype = {
 		'close' : function(){
