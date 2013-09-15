@@ -23,9 +23,10 @@ var L = L||{};
 		'.popWin .layClose{height:17px;width:17px;background:#555;border-radius:10px;cursor: pointer;position:absolute;right:5px;top:5px;color:#ccc;text-align:center;line-height:17px;font-size:14px;}',
 		'.popWin .layClose:hover{color:#c00;}',
 		//'.diaLoading{z-index: 1000000;position: absolute;width:280px;height:40px;border-radius:0px 0px 10px 10px;top:40px;left:50%;margin-left:-140px;background:url(/skin/images/loading.gif) no-repeat center center #4f4f4f;cursor: default;}',
-		'.diaLoading{z-index: 1000000;position: absolute;width:280px;height:40px;line-height:40px;text-align:center;color:#fff;font-size:16px;border-radius:0px 0px 10px 10px;top:40px;left:50%;margin-left:-140px;background: #4f4f4f;cursor: default;}',
-		'</style>'
-	].join('');
+		'.diaLoading{z-index: 1000000;position: absolute;width:280px;height:40px;border-radius:0px 0px 10px 10px;top:40px;left:50%;margin-left:-140px;background: #4f4f4f;}',
+		'.diaLoading span{position:absolute;display:block;width:100%;height:40px;bottom:0px;line-height:40px;text-align:center;color:#fff;font-size:16px;cursor: default;}',
+	'</style>'].join('');
+	
 	$(function(){
 		$('head').append(style);
 	});
@@ -79,9 +80,9 @@ var L = L||{};
 	};
 	//loading
 	var loading = function(){
-		this.dom = $('<div class="diaLoading">正在加载</div>').hide();
+		this.dom = $('<div class="diaLoading"><span>正在加载</span></div>').hide();
 		$('body').append(this.dom);
-		this.dom.fadeIn(100);
+		this.dom.slideDown(90);
 	};
 	loading.prototype = {
 		'close' : function(){

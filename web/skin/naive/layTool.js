@@ -206,8 +206,12 @@
 			 param = param || {};
 			 param['init'] = param['init'] ||false;
 		
+		var module = parse_url();
+		L.nav.setCur(module[0]); 
+		console.log('render :','this page is [' + module + ']');
+		
 		if(param['init']){
-			loading = L.dialog.loading();
+			var loading = L.dialog.loading();
 			param['render_over'] = render_over ;
 			param['dom'].hide();
 		}
@@ -228,9 +232,7 @@
 				param['dom'].fadeIn(300);
 			},delay_time);
 		}
-		var module = parse_url();
-		console.log('render :','this page is [' + module[0] + ']');
-		L.nav.setCur(module[0]); 
+
 		switch(module[0]){
 			case '/':
 				param['title'] = '小剧客栈_剧中人的个人空间 网页设计师博客 互动设计学习者';
@@ -329,12 +331,9 @@
 			$.get('/ajax/temp?index',function(data){
 				var this_dom = $(data['index']);
 				dom.html(this_dom);
-				var check = setInterval(function(){
-					indexPanel(dom);
-					countTime(dom);
-					clearInterval(check);
-					fn&&fn();
-				},20);
+				indexPanel(dom);
+				countTime(dom);
+				fn&&fn();
 			});
 		}else{
 			indexPanel(dom);
@@ -507,11 +506,12 @@
 		});
 	};
 	ex.blogDetail=function(param){
+		var param = param || {},
+			 dom = param['dom'] || $('.contlayer'),
+			 id = param['id'] || null,
+			 callback = param['render_over'] || null;
+		
 		if(param['init']){
-			var param = param || {},
-				 dom = param['dom'] || $('.contlayer'),
-				 id = param['id'] || null,
-				 callback = param['render_over'] || null;;
 			L.require('juicer,/skin/naive/css/blog.css',function(){
 				getData(id,function(html,title){
 					title&&(param['title'] = title);
