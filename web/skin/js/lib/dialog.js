@@ -82,11 +82,11 @@ var L = L||{};
 	var loading = function(){
 		this.dom = $('<div class="diaLoading"><span>正在加载……</span></div>').hide();
 		$('body').append(this.dom);
-		this.dom.slideDown(100);
+		this.dom.slideDown(80);
 	};
 	loading.prototype = {
 		'close' : function(){
-			this.dom.html('<span>已完成</span>').delay(400).fadeOut(300,function(){
+			this.dom.html('<span>已完成</span>').delay(600).fadeOut(400,function(){
 				$(this).remove();
 			});
 		}
