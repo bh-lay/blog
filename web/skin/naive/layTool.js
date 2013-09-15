@@ -221,7 +221,7 @@
 				titleDom.html(param['title']);
 			}
 			var end_time = new Date().getTime(),
-				 min_time = 1000,
+				 min_time = 500,
 				 delay_time = 0;
 			
 			if(end_time - start_time < min_time){
