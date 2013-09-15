@@ -213,8 +213,11 @@
 		}
 		var start_time = new Date().getTime();
 		function render_over(){
+			if(param['title']){
+				titleDom.html(param['title']);
+			}
 			var end_time = new Date().getTime(),
-				 min_time = 400,
+				 min_time = 1000,
 				 delay_time = 0;
 			
 			if(end_time - start_time < min_time){
@@ -263,10 +266,6 @@
 			default :
 				var url = window.location.href;
 				$('.contlayer').load(url + ' .contlayer');
-		}
-		
-		if(param['title']){
-			titleDom.html(param['title']);
 		}
 	};
 	
@@ -498,7 +497,7 @@
 					var date = new Date(parseInt(detail.time_show));
 					detail.time_show = (date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+ date.getDate();
 					var this_html = juicer(template,detail);
-					fn&&fn(this_html);
+					fn&&fn(this_html,data['detail']['title']);
 				}else{
 					L.dialog.tips('博客不存在！');
 					lofox.push('/blog',{render:false});
@@ -514,7 +513,8 @@
 				 id = param['id'] || null,
 				 callback = param['render_over'] || null;;
 			L.require('juicer,/skin/naive/css/blog.css',function(){
-				getData(id,function(html){
+				getData(id,function(html,title){
+					title&&(param['title'] = title);
 					html&&dom.html(html);
 					callback&&callback();
 				});
@@ -607,7 +607,7 @@
 	var template = ['<div class="golCnt"><div class="article">',
 		'<div class="articletop">',
 			'<h1>${title}</h1>',
-			'<p><span>时间：${time_show} </span><span>作者：${author}</span></p>',
+			'<p><span>分享时间：${time_show} </span></p>',
 		'</div>',
 		'<div class="text">$${content}</div>',
 		'<div class="youyan">',
@@ -634,7 +634,7 @@
 					var date = new Date(parseInt(detail.time_show));
 					detail.time_show = (date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+ date.getDate();
 					var this_html = juicer(template,detail);
-					fn&&fn(this_html);
+					fn&&fn(this_html,detail['title']);
 				}else{
 					L.dialog.tips('分享不存在！');
 					lofox.push('/share',{render:false});
@@ -651,7 +651,8 @@
 				 dom = param['dom'] || $('.contlayer'),
 				 id = param['id'] || null;
 			L.require('juicer,/skin/naive/css/share.css',function(){
-				getData(id,function(html){
+				getData(id,function(html,title){
+					title&&(param['title'] = title);
 					html&&dom.html(html);
 					fn&&fn();
 				});
@@ -774,10 +775,10 @@
 			'success' :function(data){
 				if(data.code == 1){
 					var detail = data['detail'];
-					var date = new Date(parseInt(detail.time_show));
-					detail.time_show = (date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+ date.getDate();
+					var date = new Date(parseInt(detail.opus_time_create));
+					detail.opus_time_create = (date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+ date.getDate();
 					var this_html = juicer(template,detail);
-					fn&&fn(this_html);
+					fn&&fn(this_html,detail['title']);
 				}else{
 					L.dialog.tips('作品不存在！');
 					lofox.push('/opus',{render:false});
@@ -794,7 +795,8 @@
 				 
 		if(param['init']){
 			L.require('juicer',function(){
-				getData(id,function(html){
+				getData(id,function(html,title){
+					title&&(param['title'] = title);
 					html&&dom.html(html);
 					fn&&fn()
 				});
