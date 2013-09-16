@@ -22,7 +22,8 @@ var L = L||{};
 		'.popWin p{top:50px;color:#333;font-size:14px;padding:30px 20px;}',
 		'.popWin .layClose{height:17px;width:17px;background:#555;border-radius:10px;cursor: pointer;position:absolute;right:5px;top:5px;color:#ccc;text-align:center;line-height:17px;font-size:14px;}',
 		'.popWin .layClose:hover{color:#c00;}',
-		//'.diaLoading{z-index: 1000000;position: absolute;width:280px;height:40px;border-radius:0px 0px 10px 10px;top:40px;left:50%;margin-left:-140px;background:url(/skin/images/loading.gif) no-repeat center center #4f4f4f;cursor: default;}',
+		'.diaWarn{z-index: 100;position: absolute;width:280px;height:40px;border-radius:0px 0px 10px 10px;top:40px;left:50%;margin-left:-140px;background: #fe9;}',
+		'.diaWarn span{position:absolute;display:block;width:100%;height:40px;bottom:0px;line-height:40px;text-align:center;color:#f00;font-size:16px;cursor: default;}',
 		'.diaLoading{z-index: 1000000;position: absolute;width:280px;height:40px;border-radius:0px 0px 10px 10px;top:40px;left:50%;margin-left:-140px;background: #4f4f4f;}',
 		'.diaLoading span{position:absolute;display:block;width:100%;height:40px;bottom:0px;line-height:40px;text-align:center;color:#fff;font-size:16px;cursor: default;}',
 	'</style>'].join('');
@@ -78,6 +79,12 @@ var L = L||{};
 			});
 		},delay);
 	};
+	var warn = function (text){
+		this.text = text;
+		var pop = $('<div class="diaWarn"><span>' + this.text + '</span></div>');
+		$('body').append(pop);
+	};
+	
 	//loading
 	var loading = function(){
 		this.dom = $('<div class="diaLoading"><span>正在加载……</span></div>').hide();
@@ -93,6 +100,9 @@ var L = L||{};
 	};
 	ex.pop = pop;
 	ex.tips = tips;
+	ex.warn = function(text){
+		return new warn(text);
+	};
 	ex.loading = function(){
 		return new loading();
 	};
