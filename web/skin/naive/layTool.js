@@ -192,11 +192,11 @@
  * 
  */
 (function(exports){
-	function parse_url(){
-		var pathname = window.location.pathname;
+	function parse_url(url){
+		var pathname = url || window.location.pathname;
 			 pathname = pathname.replace(/^\/|\/$/g,''),
 			 path_node = pathname.split(/\//);
-		(path_node[0].length<1)&&(path_node[0] = '/')
+		(path_node[0].length<1)&&(path_node[0] = '/');
 		return path_node;
 	}
 	
@@ -204,16 +204,17 @@
 		console.log('render :','start !');
 		var titleDom = $('title'),
 			 param = param || {};
-			 param['init'] = param['init'] ||false;
+			 param['init'] = param['init'] ||false,
+			 path = param['path'] || null;
 		
-		var module = parse_url();
+		var module = parse_url(path);
 		L.nav.setCur(module[0]); 
 		console.log('render :','this page is [' + module + ']');
 		
 		if(param['init']){
 			var loading = L.dialog.loading();
 			param['render_over'] = render_over ;
-			param['dom'].hide();
+			param['dom']&&param['dom'].hide();
 		}
 		var start_time = new Date().getTime();
 		function render_over(){
@@ -229,7 +230,7 @@
 			}
 			setTimeout(function(){
 				loading.close();
-				param['dom'].fadeIn(300);
+				param['dom']&&param['dom'].fadeIn(300);
 			},delay_time);
 		}
 
@@ -388,8 +389,8 @@
 				skip += limit;
 				insert({
 					'end' : (skip>=count)?true:false,
-					'html' : this_html,
-				})
+					'html' : this_html
+				});
 				fn&&fn();
 			}
 		});
@@ -488,7 +489,7 @@
 			'url' : '/ajax/blog',
 			'data' : {
 				'act' : 'get_detail',
-				'id' : id ,
+				'id' : id
 			},
 			'success' :function(data){
 				if(data.code == 1){
@@ -565,8 +566,8 @@
 				skip += limit;
 				insert({
 					'end' : (skip>=count)?true:false,
-					'html' : this_html,
-				})
+					'html' : this_html
+				});
 				fn&&fn();
 			}
 		});
@@ -626,7 +627,7 @@
 			'url' : '/ajax/share',
 			'data' : {
 				'act' : 'get_detail',
-				'id' : id ,
+				'id' : id
 			},
 			'success' :function(data){
 				if(data.code == 1){
@@ -701,8 +702,8 @@
 				skip += limit;
 				insert({
 					'end' : (skip>=count)?true:false,
-					'html' : this_html,
-				})
+					'html' : this_html
+				});
 				fn&&fn();
 			}
 		});
@@ -770,7 +771,7 @@
 			'url' : '/ajax/opus',
 			'data' : {
 				'act' : 'get_detail',
-				'id' : id ,
+				'id' : id
 			},
 			'success' :function(data){
 				if(data.code == 1){
@@ -813,14 +814,20 @@ console.log('lay:','JS is start working !');
 
 L.require('lofox,dialog',function(){
 	var contlayer = $('.contlayer');
-	lofox(function(){
-		L.render({init:true,dom:contlayer});
+	var support = lofox(function(url){
+		L.render({
+			path:url,
+			init:true,
+			dom:contlayer
+		});
 	});
-	$('body').on('click','a[lofox="true"]',function(){
-		var url = $(this).attr('href');
-		lofox.push(url);
-		return false;
-	});
+	if(support){
+		$('body').on('click','a[lofox="true"]',function(){
+			var url = $(this).attr('href');
+			lofox.push(url);
+			return false;
+		});
+	}
 });
 
 $(function(){

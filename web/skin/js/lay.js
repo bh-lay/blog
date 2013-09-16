@@ -55,7 +55,7 @@ var L = L || function(root){
 		'juicer'	: {'js':'/skin/js/lib/juicer.js'},
 		'dialog'	: {'js':'/skin/js/lib/dialog.js'},
 		'lofox'	: {'js':'/skin/js/lib/lofox.js'},
-		'codeArea'	: {'js':'/skin/js/lib/codeArea.js'},
+		'codeArea'	: {'js':'/skin/js/lib/codeArea.js'}
 	};
 
 	function loadJs(url,fn){

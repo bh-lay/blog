@@ -5,7 +5,7 @@
  * lofox mean : location fox
  */
 var lofox = function(callback){
-	lofox.start(callback)
+	return lofox.start(callback);
 };
 
 (function(exports){
@@ -13,9 +13,9 @@ var lofox = function(callback){
 		console.log('lofox:','support history API !');
 		
 		window.addEventListener('popstate',function(e){
-			//console.log(e);
+
 			var state = e.state || {};
-			//console.log(state);
+			//Avoid multiple rendering
 			if(state.url){
 				callback(state.url);
 			}
@@ -38,16 +38,17 @@ var lofox = function(callback){
 	var HASH = function(callback){
 		console.log('lofox:','using hash url !');
 		
-		var hash = window.location.hash,
+		var hash = window.location.hash || '#',
 			 need_render = true;
+		
 		setInterval(function(){
-			var new_hash = window.location.hash||'#';
+			var new_hash = window.location.hash || '#';
 			if((new_hash != hash)&&need_render){
 				hash = new_hash;
 				var url = hash.replace(/^#/,'');
 				callback(url);
 			}
-		},30);
+		},60);
 		
 		exports.push = function(url,param){
 			var param = param || {};
@@ -58,12 +59,15 @@ var lofox = function(callback){
 	}
 	
 	exports.start = function(callback){
+		var support = false;
 		console.log('lofox:','i\'m start !');
 		if(window.history&&window.history.pushState){
 			HTML5(callback);
-		}else{
-			HASH(callback);
+			support = false;
+		//}else{
+		//	HASH(callback);
 		}
+		return support;
 	};
 })(lofox);
 
