@@ -63,7 +63,7 @@ var lofox = function(callback){
 		console.log('lofox:','i\'m start !');
 		if(window.history&&window.history.pushState){
 			HTML5(callback);
-			support = false;
+			support = true;
 		//}else{
 		//	HASH(callback);
 		}
