@@ -79,8 +79,8 @@ var L = L||{};
 			});
 		},delay);
 	};
-	var warn = function (text){
-		this.text = text;
+	var warning = function (text){
+		this.text = text||'please input some text';
 		var pop = $('<div class="diaWarn"><span>' + this.text + '</span></div>');
 		$('body').append(pop);
 	};
@@ -100,8 +100,8 @@ var L = L||{};
 	};
 	ex.pop = pop;
 	ex.tips = tips;
-	ex.warn = function(text){
-		return new warn(text);
+	ex.warning = function(text){
+		return new warning(text);
 	};
 	ex.loading = function(){
 		return new loading();

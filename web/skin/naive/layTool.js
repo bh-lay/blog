@@ -828,6 +828,13 @@ L.require('lofox,dialog',function(){
 			return false;
 		});
 	}
+	
+	if($.browser.msie){
+		if($.browser.version=="6.0"||$.browser.version=="7.0"){
+			L.dialog.warning('别用你那高贵的浏览器蹂躏我！');
+		}
+	}
+	
 });
 
 $(function(){
