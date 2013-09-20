@@ -4,8 +4,8 @@
  *  
  * lofox mean : location fox
  */
-var lofox = function(callback){
-	return lofox.start(callback);
+var lofox = function(param,callback){
+	return lofox.start(param,callback);
 };
 
 (function(exports){
@@ -58,14 +58,17 @@ var lofox = function(callback){
 		}
 	}
 	
-	exports.start = function(callback){
-		var support = false;
+	exports.start = function(param,callback){
+		var param = param || {},
+			hash = param['hash'] || false,
+			support = true;
 		console.log('lofox:','i\'m start !');
 		if(window.history&&window.history.pushState){
 			HTML5(callback);
-			support = true;
-		//}else{
-		//	HASH(callback);
+		}else if(hash){
+			HASH(callback);
+		}else{
+			support = false;
 		}
 		return support;
 	};

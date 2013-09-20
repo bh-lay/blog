@@ -814,7 +814,7 @@ console.log('lay:','JS is start working !');
 
 L.require('lofox,dialog',function(){
 	var contlayer = $('.contlayer');
-	var support = lofox(function(url){
+	var support = lofox({},function(url){
 		L.render({
 			path:url,
 			init:true,
