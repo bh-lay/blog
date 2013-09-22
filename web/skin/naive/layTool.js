@@ -192,8 +192,8 @@
 (function(exports){
 	function parse_url(url){
 		var pathname = url || window.location.pathname;
-			 pathname = pathname.replace(/^\/|\/$/g,''),
-			 path_node = pathname.split(/\//);
+			 pathname = pathname.replace(/^\/|\/$/g,'');
+		var path_node = pathname.split(/\//);
 		(path_node[0].length<1)&&(path_node[0] = '/');
 		return path_node;
 	}

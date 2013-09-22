@@ -140,9 +140,9 @@ var L = L || function(root){
 L.loadImg = function (src,parm){
 	console.log('loadImg:','start with [' + src + ']');
 	
-	var parm = parm||{};
-		loadFn = parm['loadFn'] || null;
-		sizeFn = parm['sizeFn'] || null;
+	var parm = parm||{},
+		loadFn = parm['loadFn'] || null,
+		sizeFn = parm['sizeFn'] || null,
 		errorFn = parm['errorFn'] || null;
 	
 	var img = new Image();
