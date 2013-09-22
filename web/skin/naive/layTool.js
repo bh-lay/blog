@@ -800,6 +800,34 @@
 })(L.render);
 
 /**
+ *
+ * 
+ */
+(function(exports){
+	var tpl = ['<style>',
+		'.myCard{position:fixed;width:260px;height:300px;background:#fff;top:60px;left:20%;z-index:100;border-radius:4px;overflow:hidden;box-shadow:0px 0px 100px #000;}',
+		'.myCard_header{height:80px;background: url(/skin/naive/gallery/coast.jpg) center center;}',
+		'.myCard_info{position:absolute;top:40px;left:0px;width:100%;}',
+		'.myCard_cover{display:inline-block;margin-left:20px;width:60px;height:60px;background:#333;}',
+	'</style><div class="myCard">',
+		'<div class="myCard_header">',
+			
+		'</div>',
+		'<div class="myCard_info">',
+			'<span class="myCard_cover">',
+			'</span>',
+			'剧中人',
+		'</div>',
+		
+	'</div>'].join('');
+	var card = function(){
+		$('body').append(tpl);
+	};
+	exports.myCard = function(){
+		return new card();
+	};
+})(L);
+/**
  * all start
  */
 console.log('lay:','JS is start working !');
@@ -832,4 +860,5 @@ $(function(){
 	L.nav();
 	L.gallery();
 	L.render({init:false});
+//	L.myCard();
 });
