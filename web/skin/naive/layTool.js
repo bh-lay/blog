@@ -26,7 +26,7 @@
 			bj = bj,
 			total = data.length;
 	
-		var bjDom = $('<img/>');
+		var bjDom = $('<img/>').hide();
 	
 		bj.html(bjDom);
 		show(0,bjDom,data);
@@ -532,14 +532,10 @@
 		 skip,
 		 dom;
 		 
-	var temp = ['{@each list as it,index}',
-		'<li>',
-			'<a href="/share/${it.id}" title="${it.title}" lofox="true" target="_self" >',
-				'<img src="${it.cover}" alt="${it.title}" />',
-				'<strong>${it.title}</strong>',
-			'</a>',
-		'</li>',
-	'{@/each}'].join('');
+	var temp = ['{@each list as it,index}<li><a href="/share/${it.id}" title="${it.title}" lofox="true" target="_self" >',
+		'<img src="${it.cover}" alt="${it.title}" />',
+		'<strong>${it.title}</strong>',
+	'</a></li>{@/each}'].join('');
 
 	var insert = function(param){
 		var this_dom = $(param['html']).hide();
@@ -670,12 +666,10 @@
 		 skip,
 		 dom;
 		 
-	var temp = ['{@each list as it,index}<li>',
-		'<a href="/opus/${it.id}" title="${it.title}" target="_self" lofox="true" >',
-			'<img src="${it.cover}" alt="${it.title}" />',
-			'<strong>${it.title}</strong>',
-		'</a>',
-	'</li>{@/each}'].join('');
+	var temp = ['{@each list as it,index}<li><a href="/opus/${it.id}" title="${it.title}" target="_self" lofox="true" >',
+		'<img src="${it.cover}" alt="${it.title}" />',
+		'<strong>${it.title}</strong>',
+	'</a></li>{@/each}'].join('');
 
 	var insert = function(param){
 		var this_dom = $(param['html']).hide();
@@ -832,7 +826,6 @@ L.require('lofox,dialog',function(){
 			L.dialog.warning('别用你那高贵的浏览器蹂躏我！');
 		}
 	}
-	
 });
 
 $(function(){
