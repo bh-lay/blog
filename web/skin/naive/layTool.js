@@ -201,9 +201,9 @@
 	function render(param){
 		console.log('render :','start !');
 		var titleDom = $('title'),
-			 param = param || {};
-			 param['init'] = param['init'] ||false,
+			 param = param || {},
 			 path = param['path'] || null;
+			 param['init'] = param['init'] ||false;
 		
 		var module = parse_url(path);
 		L.nav.setCur(module[0]); 

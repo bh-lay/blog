@@ -22,7 +22,7 @@ var lofox = function(param,callback){
 			return false;
 		});
 		exports.push = function(url,param){
-			var param = param || {};
+			var param = param || {},
 				 render = (typeof(param['render']) =="boolean")?param['render']:true;
 			if(url == window.location.pathname){
 				console.log('lofox:','needn\'t not push this state!');
