@@ -26,15 +26,13 @@
 			bj = bj,
 			total = data.length;
 	
-		var bjDom = $('<img src="/skin/naive/loading_31.gif" width="54" height="55" style="margin-top:160px;margin-left:100px;" data="100-20"/>');
+		var bjDom = $('<img/>');
 	
-		L.loadImg("/skin/naive/loading_31.gif",{'loadFn':function(){
-			bj.html(bjDom);
-			show(0,bjDom,data);
-			$(window).on('resize',function(){
-				fixImg(bjDom)
-			});
-		}});
+		bj.html(bjDom);
+		show(0,bjDom,data);
+		$(window).on('resize',function(){
+			fixImg(bjDom)
+		});
 		
 		function fixImg(dom){
 			var img = dom;
