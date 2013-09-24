@@ -806,17 +806,22 @@
 (function(exports){
 	var tpl = ['<style>',
 		'.myCard{position:fixed;width:260px;height:300px;background:#fff;top:60px;left:20%;z-index:100;border-radius:4px;overflow:hidden;box-shadow:0px 0px 100px #000;}',
-		'.myCard_header{height:80px;background: url(/skin/naive/gallery/coast.jpg) center center;}',
-		'.myCard_info{position:absolute;top:40px;left:0px;width:100%;}',
-		'.myCard_cover{display:inline-block;margin-left:20px;width:60px;height:60px;background:#333;}',
+		'.myCard_header{height:80px;background: url(/skin/naive/mycard.png) center center;}',
+		'.myCard_info{position:absolute;top:40px;left:20px;width:100%;}',
+		'.myCard_cover{width:60px;height:60px;margin-right:10px;float:left;background:#333;}',
+		'.myCard_cpt{width:150px;float:left;}',
+		'.myCard_cpt h3{font-size:16px;color:#fff;font-weight:bold;}',
 	'</style><div class="myCard">',
 		'<div class="myCard_header">',
 			
 		'</div>',
 		'<div class="myCard_info">',
-			'<span class="myCard_cover">',
-			'</span>',
-			'剧中人',
+			'<div class="myCard_cover">',
+			'</div>',
+			'<div class="myCard_cpt">',
+				'<h3>剧中人</h3>',
+				'<p></p>',
+			'</div>',
 		'</div>',
 		
 	'</div>'].join('');
