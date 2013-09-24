@@ -806,11 +806,12 @@
 (function(exports){
 	var tpl = ['<style>',
 		'.myCard{position:fixed;width:260px;height:300px;background:#fff;top:60px;left:20%;z-index:100;border-radius:4px;overflow:hidden;box-shadow:0px 0px 100px #000;}',
-		'.myCard_header{height:80px;background: url(/skin/naive/mycard.png) center center;}',
-		'.myCard_info{position:absolute;top:40px;left:20px;width:100%;}',
+		'.myCard_header{height:80px;background: url(/skin/naive/mycard.png) center center #aaa;}',
+		'.myCard_info{position:absolute;top:35px;left:20px;width:100%;}',
 		'.myCard_cover{width:60px;height:60px;margin-right:10px;float:left;background:#333;}',
-		'.myCard_cpt{width:150px;float:left;}',
-		'.myCard_cpt h3{font-size:16px;color:#fff;font-weight:bold;}',
+		'.myCard_cpt{width:150px;float:left;text-shadow:1px 1px 8px #000;}',
+		'.myCard_cpt h3{line-height:20px;font-size:16px;color:#fff;font-weight:bold;}',
+		'.myCard_cpt p{line-height:20px;font-size:14px;color:#fff;}',
 	'</style><div class="myCard">',
 		'<div class="myCard_header">',
 			
@@ -820,7 +821,7 @@
 			'</div>',
 			'<div class="myCard_cpt">',
 				'<h3>剧中人</h3>',
-				'<p></p>',
+				'<p>前端工程师</p>',
 			'</div>',
 		'</div>',
 		
