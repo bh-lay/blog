@@ -10,7 +10,7 @@
  */
 (function(ex){
 	var config = {
-		'delay' : 30000,
+		'delay' : 40000,
 		'coverData' : [
 			{'src':'/skin/naive/gallery/coast.jpg','alt':'江边'},
 			{'src':'/skin/naive/gallery/fish.jpg','alt':'鱼儿'},
@@ -806,7 +806,7 @@
 (function(exports){
 	var tpl = ['<style>',
 		'.myCard{position:fixed;width:260px;height:300px;background:#fff;top:60px;left:20%;z-index:100;border-radius:4px;overflow:hidden;box-shadow:0px 0px 100px #000;}',
-		'.myCard_header{height:80px;background: url(/skin/naive/mycard.png) center center #aaa;}',
+		'.myCard_header{height:80px;background:#48f;}',
 		'.myCard_info{position:absolute;top:35px;left:20px;width:100%;}',
 		'.myCard_cover{width:60px;height:60px;margin-right:10px;float:left;background:#333;}',
 		'.myCard_cpt{width:150px;float:left;text-shadow:1px 1px 8px #000;}',
@@ -866,5 +866,5 @@ $(function(){
 	L.nav();
 	L.gallery();
 	L.render({init:false});
-//	L.myCard();
+	//L.myCard();
 });

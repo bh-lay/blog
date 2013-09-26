@@ -49,12 +49,12 @@ background-size : cover;background-position : center center;}
 }
 @-webkit-keyframes circle_zoom {
 	0% {
-		opacity:0.3;
-		-webkit-mask-size:0%;
+		opacity:0;
+		-webkit-mask-size:30%;
 		-webkit-animation-timing-function:ease-in 
 	}
-	50% {
-		opacity:0.8;
+	80% {
+		opacity:1;
 		-webkit-mask-size:60%;
 		-webkit-animation-timing-function:ease-in 
 	}
