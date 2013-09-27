@@ -12,9 +12,6 @@
  **/
 body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,p{margin:0px;padding:0px;}
 img{border:none;}
-html{height:100%;}
-body{height:100%;overflow-y:scroll;
-	color:#333;font-size:14px;font-family:"Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";}
 ul,ol,li,form, dl {list-style: none;}
 a{text-decoration: none;color: #333;}
 a:visited {color: #777;}
@@ -23,6 +20,9 @@ TD{color:#777; font-size:12px; padding:10px;}
 .fix:after{content: ".";display: block;height: 0;clear: both;visibility: hidden;}
 .fix{display: inline-block;zoom:1;}
 
+html,
+body{min-width:360px;height:100%;overflow-y:scroll;overflow-x:auto;
+	color:#333;font-size:14px;font-family:"Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";}
 
 /*
  * common
@@ -94,7 +94,7 @@ background:-moz-linear-gradient(top,  #ffffff,  #f2f2f2);
 @media screen and (max-width : 800px){
 	.logo{width: 35px;margin-right:15px;}
 }
-@media screen and (max-width: 440px){
+@media screen and (max-width: 460px){
 	.navLink{display:none;}
 }
 
