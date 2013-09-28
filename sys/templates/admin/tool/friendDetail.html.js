@@ -29,6 +29,6 @@ exports.render = function (req,res_this){
 			});
 		});
 	}else{
-		res_this.html(200,valueInit({}));
+		res_this.html(200,valueInit({isShow:1}));
 	}
 }
