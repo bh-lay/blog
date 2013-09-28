@@ -158,21 +158,23 @@ tpl.index = ['<div class="indeCnt">',
 '</div>'];
 
 //method get
-function get(mod) {
-	var mod = mod||'';
+function get(mod,callback) {
+	var mod = mod||'',
+		redata=null;
 	if(tpl[mod]){
-		return tpl[mod].join('');
-	}else{
-		return null;		
+		redata = tpl[mod].join('');
 	}
+	callback(redata);
 }
 exports.get = get;
 
-exports.produce = function(mod,data){
-	var tpl = get(mod);
-	if(tpl){
-		return juicer(tpl,data);
-	}else{
-		return '';
-	}
+exports.produce = function(mod,data,callback){
+	var redata = '';
+	get(mod,function(tpl){
+		if(tpl){
+			redata = juicer(tpl,data);
+		}
+		callback(redata);
+	});
+
 }

@@ -15,7 +15,7 @@ var tpl = require('../mod/module_tpl');
 var temp_list = require('../conf/templates');
 
 //method get
-exports.get = function(mod,param) {
+exports.get = function(mod,param,callback) {
 	if(arguments.length<1){
 		return 'please input template name !';
 	}
@@ -27,17 +27,33 @@ exports.get = function(mod,param) {
 	if(URI){
 		var temp = fs.readFileSync(URI, "utf8");
 		if(param.init){
+			var need_temp = [],
+				temp_data = {},
+				over_count = 0;
+				temp.replace(/\{-(\w*)-}/g,function(){
+					need_temp.push(arguments[1]);
+				});
+			var total = need_temp.length;
 			
-			temp = temp.replace(/\{-(\w*)-}/g,function(){
-				if(tpl.get(arguments[1])){
-					return tpl.get(arguments[1]);
-				}else{
-					return arguments[0];
+			for(var i=0;i<total;i++){
+				(function(i){
+					tpl.get(need_temp[i],function(temp){
+						temp_data[need_temp[i]] = temp;
+						all_callBack(temp_data)
+					});
+				})(i);
+			}
+			function all_callBack(temp_data){
+				over_count++;
+				if(over_count == total){
+					temp = temp.replace(/\{-(\w*)-}/g,function(){
+						return temp_data[arguments[1]] || arguments[0];
+					});
+					callback(temp);
 				}
-			});
+			}
 		}
-		return temp ;
 	}else{
-		return 'please check template name !';
+		callback('please check template name !');
 	}
 }

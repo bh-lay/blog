@@ -20,14 +20,26 @@ exports.render = function (req,res_this){
 	var search = req.url.split('?')[1];
 	var resJSON = {};
 	if(search){
-		data = search.split('-');
-		for(var i=0,total=data.length; i<total ;i++){
-			resJSON[data[i]] = tpl.get(data[i]);
+		var data = search.split('-'),
+			total = data.length,
+			over_count = 0;
+		for(var i=0; i<total ;i++){
+			(function(i){
+				tpl.get(data[i],function(temp){
+					resJSON[data[i]] = temp;
+					over_count++;
+					all_callBack()
+				});
+			})(i);
+		}
+		function all_callBack(){
+			if(over_count == total){
+				res_this.json(resJSON);
+			}
 		}
 	}else{
 		resJSON['code'] = 2;
-		resJSON['msg'] = 'plese tell use "tempA-tempB-tempC" to get temp !';
+		resJSON['msg'] = 'please use "tempA-tempB-tempC" to get temp !';
+		res_this.json(resJSON);
 	}
-	
-	res_this.json(resJSON);
 }

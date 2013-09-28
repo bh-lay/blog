@@ -7,53 +7,51 @@ var tpl = require('../mod/module_tpl');
 var parse = require('../lib/parse');
 
 function list_page(res_this){
-	var page_temp = temp.get('opusList',{'init':true});
-
-	mongo.start(function(method){
-
-		method.open({'collection_name':'opus'},function(err,collection){
-
-			collection.find({}, {limit:28}).sort({id:-1}).toArray(function(err, docs) {
-
-				var txt = tpl.produce('opus_item',{'list':docs});
-
-				var page_txt = page_temp.replace('{-content-}',txt);
-
-				res_this.html(200,page_txt);
-
-				method.close();
+	temp.get('opusList',{'init':true},function(page_temp){
+		mongo.start(function(method){
+	
+			method.open({'collection_name':'opus'},function(err,collection){
+	
+				collection.find({}, {limit:28}).sort({id:-1}).toArray(function(err, docs) {
+	
+					tpl.produce('opus_item',{'list':docs},function(txt){
+						var page_txt = page_temp.replace('{-content-}',txt);
+						res_this.html(200,page_txt);
+						method.close();
+					});
+				});
+	
 			});
-
+	
 		});
-
 	});
 }
 
 function detail_page(res_this,id){
-	var page_temp = temp.get('opusDetail',{'init':true});
-
-	mongo.start(function(method){
-
-		method.open({'collection_name':'opus'},function(err,collection){
-
-			collection.find({id:id}).toArray(function(err, docs) {
-				if(arguments[1].length==0){
-
-					res_this.notFound('哇塞，貌似这作品享不存在哦!');
-
-				}else{
-
-					docs[0].opus_time_create = parse.time(docs[0].opus_time_create ,'{y}-{m}-{d}');
-					var juicer = require('juicer');
-					var txt = juicer(page_temp,docs[0]);
-
-					res_this.html(200,txt);
-				}
-				method.close();
+	temp.get('opusDetail',{'init':true},function(page_temp){
+		mongo.start(function(method){
+	
+			method.open({'collection_name':'opus'},function(err,collection){
+	
+				collection.find({id:id}).toArray(function(err, docs) {
+					if(arguments[1].length==0){
+	
+						res_this.notFound('哇塞，貌似这作品享不存在哦!');
+	
+					}else{
+	
+						docs[0].opus_time_create = parse.time(docs[0].opus_time_create ,'{y}-{m}-{d}');
+						var juicer = require('juicer');
+						var txt = juicer(page_temp,docs[0]);
+	
+						res_this.html(200,txt);
+					}
+					method.close();
+				});
+	
 			});
-
+	
 		});
-
 	});
 }
 

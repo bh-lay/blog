@@ -7,53 +7,51 @@ var tpl = require('../mod/module_tpl');
 var parse = require('../lib/parse');
 
 function list_page(res_this){
-	var page_temp = temp.get('shareList',{'init':true});
-
-	mongo.start(function(method){
-
-		method.open({'collection_name':'share'},function(err,collection){
-
-			collection.find({}, {limit:15}).sort({id:-1}).toArray(function(err, docs) {
-
-				var txt = tpl.produce('share_item',{'list':docs});
-
-				var page_txt = page_temp.replace('{-content-}',txt);
-
-				res_this.html(200,page_txt);
-
-				method.close();
+	temp.get('shareList',{'init':true},function(page_temp){
+		mongo.start(function(method){
+	
+			method.open({'collection_name':'share'},function(err,collection){
+	
+				collection.find({}, {limit:15}).sort({id:-1}).toArray(function(err, docs) {
+	
+					tpl.produce('share_item',{'list':docs},function(txt){
+						var page_txt = page_temp.replace('{-content-}',txt);
+						res_this.html(200,page_txt);
+						method.close();
+					});
+				});
+	
 			});
-
+	
 		});
-
 	});
 }
 
 function detail_page(res_this,id){
-	var page_temp = temp.get('shareDetail',{'init':true});
-
-	mongo.start(function(method){
-
-		method.open({'collection_name':'share'},function(err,collection){
-
-			collection.find({id:id}).toArray(function(err, docs) {
-				if(docs.length==0){
-
-					res_this.notFound('哇塞，貌似这篇分享不存在哦!');
-
-				}else{
-					docs[0].time_show = parse.time(docs[0].time_show ,'{y}-{m}-{d}');
-
-					var juicer = require('juicer');
-					var txt = juicer(page_temp,docs[0]);
-					res_this.html(200,txt);
-
-				}
-				method.close();
+	temp.get('shareDetail',{'init':true},function(page_temp){
+		mongo.start(function(method){
+	
+			method.open({'collection_name':'share'},function(err,collection){
+	
+				collection.find({id:id}).toArray(function(err, docs) {
+					if(docs.length==0){
+	
+						res_this.notFound('哇塞，貌似这篇分享不存在哦!');
+	
+					}else{
+						docs[0].time_show = parse.time(docs[0].time_show ,'{y}-{m}-{d}');
+	
+						var juicer = require('juicer');
+						var txt = juicer(page_temp,docs[0]);
+						res_this.html(200,txt);
+	
+					}
+					method.close();
+				});
+	
 			});
-
+	
 		});
-
 	});
 }
 
