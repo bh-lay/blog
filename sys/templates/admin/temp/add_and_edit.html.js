@@ -20,7 +20,7 @@ exports.render = function (req,res_this){
 	
 		var tpl = fs.readFileSync('./templates/admin/temp/add_and_edit.html', "utf8");
 	
-		var tempCode = fs.readFileSync(temp_list[tempName]['src'], "utf8");
+		var tempCode = fs.readFileSync(temp_list[tempName], "utf8");
 		
 		tpl = tpl.replace(/{-tempName-}/,tempName).replace(/{-content-}/,tempCode);
 		

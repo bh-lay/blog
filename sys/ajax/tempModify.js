@@ -35,7 +35,7 @@ exports.render = function (req,res_this){
 		var module = data['module']||'';
 		var text = data['text'];
 		
-		var tempSrc = temp_list[module] ? temp_list[module]['src'] : null;
+		var tempSrc = temp_list[module] ? temp_list[module] : null;
 		
 		if(tempSrc){
 			fs.writeFile(tempSrc,text,function(err){

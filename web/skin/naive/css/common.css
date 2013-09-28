@@ -20,10 +20,8 @@ TD{color:#777; font-size:12px; padding:10px;}
 .fix:after{content: ".";display: block;height: 0;clear: both;visibility: hidden;}
 .fix{display: inline-block;zoom:1;}
 
-html,
-body{min-width:360px;height:100%;overflow-y:scroll;overflow-x:auto;
-	color:#333;font-size:14px;font-family:"Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";}
-
+html{min-width:360px;height:100%;overflow-x:auto;overflow-y:scroll;position: relative;}
+body{height:100%;color:#333;font-size:14px;font-family:"Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";}
 /*
  * common
  * some pulic modules

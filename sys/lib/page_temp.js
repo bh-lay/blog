@@ -22,10 +22,10 @@ exports.get = function(mod,param) {
 	var mod = mod,
 		param = param ;
 		
-	var temp = temp_list[mod];
+	var URI = temp_list[mod];
 	
-	if(temp){
-		var temp = fs.readFileSync(temp['src'], "utf8");
+	if(URI){
+		var temp = fs.readFileSync(URI, "utf8");
 		if(param.init){
 			
 			temp = temp.replace(/\{-(\w*)-}/g,function(){
