@@ -70,7 +70,7 @@ function DELET(param,res_this,session_this){
 					}else {
 						res_this.json({
 							'code' : 1,
-							'msg' : 'delete user sucuss !'
+							'msg' : 'delete sucuss !'
 						});
 					}
 					method.close();
