@@ -8,7 +8,7 @@
 		'type':'GET',
 		'url':'/ajax/del',
 		'data':{
-			'from' : 'blog',		blog/share/opus/user
+			'from' : 'blog',		blog/share/opus/user/blog_friend
 			'id' : '' ;
 		}, 
 	});
@@ -35,6 +35,10 @@ var del_conf = {
 	'user' : {
 		'collection_name' : 'user',
 		'power' : 13
+	},
+	'blog_friend' : {
+		'collection_name' : 'blog_friend',
+		'power' : 18
 	}
 }
 

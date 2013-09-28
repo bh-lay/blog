@@ -20,9 +20,9 @@ var querystring = require('querystring');
 var mongo = require('../conf/mongo_connect');
 
 var powerList = {
-	'admin' : [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-	'editor' : [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-	'test' : [1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	'admin' : [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+	'editor' : [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+	'test' : [1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 }
 
 function login (res_this,session_this,username,password){
