@@ -3,7 +3,7 @@
  */
 var mongo = require('../conf/mongo_connect');
 var temp = require('../lib/page_temp');
-var tpl = require('../lib/module_tpl');
+var tpl = require('../mod/module_tpl');
 var parse = require('../lib/parse');
 
 function list_page(res_this){

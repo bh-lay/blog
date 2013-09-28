@@ -14,7 +14,7 @@ $.ajax({
 });
  * */
 
-var tpl = require('../lib/module_tpl');
+var tpl = require('../mod/module_tpl');
 
 exports.render = function (req,res_this){
 	var search = req.url.split('?')[1];

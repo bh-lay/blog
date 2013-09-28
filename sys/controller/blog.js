@@ -4,7 +4,7 @@
  */
 var mongo = require('../conf/mongo_connect');
 
-var tpl = require('../lib/module_tpl');
+var tpl = require('../mod/module_tpl');
 var temp = require('../lib/page_temp');
 var parse = require('../lib/parse');
 var juicer = require('juicer');

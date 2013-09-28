@@ -10,7 +10,7 @@
  */
 
 var fs = require('fs');
-var tpl = require('../lib/module_tpl');
+var tpl = require('../mod/module_tpl');
 
 var temp_list = require('../conf/templates');
 
