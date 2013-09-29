@@ -10,7 +10,7 @@
  */
 
 var fs = require('fs');
-var tpl = require('../mod/module_tpl');
+var chip = require('../mod/chip');
 
 var temp_list = require('../conf/templates');
 
@@ -37,7 +37,7 @@ exports.get = function(mod,param,callback) {
 			
 			for(var i=0;i<total;i++){
 				(function(i){
-					tpl.get(need_temp[i],function(temp){
+					chip.get(need_temp[i],function(temp){
 						temp_data[need_temp[i]] = temp;
 						all_callBack(temp_data)
 					});

@@ -4,8 +4,8 @@
  */
 var mongo = require('../conf/mongo_connect');
 
-var tpl = require('../mod/module_tpl');
-var temp = require('../lib/page_temp');
+var chip = require('../mod/chip');
+var temp = require('../mod/page_temp');
 var parse = require('../lib/parse');
 var juicer = require('juicer');
 
@@ -21,7 +21,7 @@ function list_page(res_this){
 						docs[i].time_show = parse.time(docs[i].time_show ,'{y}-{m}-{d}');
 					}
 	
-					tpl.produce('article_item',{'list' : docs},function(txt){
+					chip.produce('article_item',{'list' : docs},function(txt){
 						var page = page_temp.replace('{-content-}',txt);
 						res_this.html(200,page);
 						method.close();

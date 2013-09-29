@@ -14,7 +14,7 @@ $.ajax({
 });
  * */
 
-var tpl = require('../mod/module_tpl');
+var chip = require('../mod/chip');
 
 exports.render = function (req,res_this){
 	var search = req.url.split('?')[1];
@@ -25,7 +25,7 @@ exports.render = function (req,res_this){
 			over_count = 0;
 		for(var i=0; i<total ;i++){
 			(function(i){
-				tpl.get(data[i],function(temp){
+				chip.get(data[i],function(temp){
 					resJSON[data[i]] = temp;
 					over_count++;
 					all_callBack()

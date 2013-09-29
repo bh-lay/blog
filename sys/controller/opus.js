@@ -2,8 +2,8 @@
  * @author bh-lay
  */
 var mongo = require('../conf/mongo_connect');
-var temp = require('../lib/page_temp');
-var tpl = require('../mod/module_tpl');
+var temp = require('../mod/page_temp');
+var chip = require('../mod/chip');
 var parse = require('../lib/parse');
 
 function list_page(res_this){
@@ -14,7 +14,7 @@ function list_page(res_this){
 	
 				collection.find({}, {limit:28}).sort({id:-1}).toArray(function(err, docs) {
 	
-					tpl.produce('opus_item',{'list':docs},function(txt){
+					chip.produce('opus_item',{'list':docs},function(txt){
 						var page_txt = page_temp.replace('{-content-}',txt);
 						res_this.html(200,page_txt);
 						method.close();
