@@ -82,7 +82,7 @@ exports.request = function(req,callBack){
 	
 	if(method == 'POST' || method =='post'){
 		var form = new formidable.IncomingForm();
-		form.uploadDir = "./temporary";
+		form.uploadDir = "./cache/upload";
 		//form.keepExtensions = true;
 		
 		form.parse(req, function(error, fields, files) {
@@ -125,23 +125,3 @@ exports.url = function(url){
 	}
 	return obj;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
