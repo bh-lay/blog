@@ -66,8 +66,8 @@ var L = L || function(root){
 	}
 	function loadCSS(url,callback){
 		console.log('require','load CSS file [' + url + ']');
-		if($('link[data-url="' + url + '"]').length == 0){
-			$('head').append('<link data-url="'+url+'" href="' + url + '" type="text/css" rel="stylesheet">');
+		if($('link[href="' + url + '"]').length == 0){
+			$('head').append('<link href="' + url + '" type="text/css" rel="stylesheet">');
 			callback&&callback();
 		}else{
 			console.log('require','[' + url + '] has been loaded, needn\'t to load again ！');

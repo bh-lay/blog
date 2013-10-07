@@ -1,6 +1,9 @@
 /**
  * @author bh-lay
  *  
+ * 
+ * code:
+ *   1:success
  */
 
 module.exports = {
@@ -15,4 +18,5 @@ module.exports = {
 	'login':'login',
 	'del' : 'del',
 	'upload':'upload',
+	'clear_cache':'clear_cache'
 };

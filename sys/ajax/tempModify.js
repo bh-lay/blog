@@ -16,7 +16,6 @@
  */ 
 
 var fs = require('fs');
-var parse = require('../lib/parse');
 
 var temp_list = require('../conf/templates');
 

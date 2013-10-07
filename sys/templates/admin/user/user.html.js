@@ -19,8 +19,9 @@ var user_group = {
 function valueInit(data){
 	var txt = temp.replace(/\{(user_group)}/g,function(){
 		var user_group_tpl = '';
+		data['user_group'] = '';
 		for(var i in user_group){
-			if(data['user_group']==i){
+			if(data['user_group'] == i){
 				user_group_tpl += '<option value="'+ i +'" selected="selected">' + user_group[i] + '</option>';
 			}else{
 				user_group_tpl += '<option value="'+ i +'">' + user_group[i] + '</option>';
@@ -44,9 +45,12 @@ exports.render = function (req,res_this){
 			method.open({'collection_name':'user'},function(err,collection){
 		
 				collection.find({'id':userID}).toArray(function(err, docs) {		
-					var txt = valueInit(docs[0]);
-					
-					res_this.html(200,txt);
+					if(docs.length == 0){
+						res_this.json({'msg':'this user is not found !'});
+					}else{
+						var txt = valueInit(docs[0]);
+						res_this.html(200,txt);
+					}
 					
 					method.close();
 				});

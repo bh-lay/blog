@@ -2,7 +2,6 @@
  * @author bh-lay
  */
 var expire_hour = 24;
-var parse = require('../lib/parse');
 
 /**
  * @seesion format
@@ -30,7 +29,7 @@ function session_set(sessionID){
 	var this_session = session['lib'][sessionID];
 	return function(param){
 		for(var i in param){
-			if( i == 'time_expire' || i == 'power' || i == 'user_group' || i == 'usernick'){
+			if( i == 'time_expire' || i == 'power' || i == 'user_group' || i == 'user_nick' || i == 'user_id'){
 				this_session[i] = param[i];
 			}
 		}		
@@ -40,7 +39,7 @@ function session_get(sessionID){
 	var this_session = session['lib'][sessionID];
 	return function(name){
 		var getData = null;
-		if(name == 'user_group' || name == 'time_expire' || name == 'usernick'){
+		if(name == 'user_group' || name == 'time_expire' || name == 'user_nick' || name == 'user_id'){
 			getData = this_session[name];
 		}
 		return getData;

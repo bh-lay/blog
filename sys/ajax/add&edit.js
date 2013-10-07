@@ -5,7 +5,6 @@
 
 var mongo = require('../conf/mongo_connect');
 var session = require('../mod/session');
-var parse = require('../lib/parse');
 
 function add(parm,res_this,collection_name){
 	var parm = parm;
@@ -147,6 +146,8 @@ filter_request.opus = function(data){
 		'opus_time_create':data['opus_time_create']||new Date().getTime(),
 		'tags':data['tags']||'',
 		'content':data['content'],
+		'work_range':data['work_range'],
+		'online_url':data['online_url'],
 		'intro':data['intro']||data['content'].slice(0,200),
 	};
 	if(!(param['title']&&param['content'])){

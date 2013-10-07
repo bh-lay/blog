@@ -31,111 +31,79 @@ var logger = (function(){
 	
 })();
 
-
-//Unified use send response method
-function send_res(req,res,status,headers,content){
-	
-	var headers = headers || {};
-	headers['server'] = 'nodejs';
-	headers['Connection'] = 'keep-alive';
-	headers['Content-Encoding'] = 'gzip';
-	
-	res.writeHeader(status,headers);
-	
-	var content = content || null;
-	
-	if(content){
-		zlib.gzip(content, function(err, result) {
-			res.end(result);
-		});
-	}else{
-		res.end();
+function connect(req,res){
+	this.req = req;
+	this.res = res;
+	var _this = this;
+	//Unified use send response method
+	this.send = function (status,headers,content){
+		
+		var headers = headers || {};
+		headers['server'] = 'nodejs';
+		headers['Connection'] = 'keep-alive';
+		headers['Content-Encoding'] = 'gzip';
+		
+		this.res.writeHeader(status,headers);
+		
+		var content = content || null;
+		
+		if(content){
+			zlib.gzip(content, function(err, result) {
+				_this.res.end(result);
+			});
+		}else{
+			this.res.end();
+		}
+		
+		var logger = {
+			'time':new Date(),
+			'ip':this.req['connection']['remoteAddress'],
+			'url':this.req.url,
+			'user-agent':this.req.headers['user-agent'],
+			'status' : status
+		};
+		console.log(logger);
 	}
-	
-	var logger = {
-		'time':new Date(),
-		'ip':req['connection']['remoteAddress'],
-		'url':req.url,
-		'user-agent':req.headers['user-agent'],
-		'status' : status
-	};
-	console.log(logger);
 }
 
-//response json data
-function json(req,res){
-	var req = req,
-		res = res;
-	return function(data){
-		
-		send_res(req,res,200,{
+connect.prototype = {
+	//response json data
+	'json' : function(data){
+		this.send(200,{
 			'Content-Type' : 'application/json',
 			'charset' : 'utf-8',
 		},JSON.stringify(data));
-		
-	}
-	
-}
-
-//response html page
-function html(req,res){
-	var req = req,
-		res = res;
-	return function(status,content){
-		
-		send_res(req,res,status,{
+	},
+	//response html page
+	'html' : function(status,content){
+		this.send(status,{
 			'Content-Type' : 'text/html',
 			'charset' : 'utf-8',
 		},content);
 
-	}
-}
-
-//response define data
-function define(req,res){
-	var req = req,
-		res = res;
-	return function(status,headers,content){
-		
-		send_res(req,res,status,headers,content);
-		
-	}
-}
-
-//response not found
-function notFound(req,res){
-	var req = req,
-		res = res;
-	return function(txt){
+	},
+	//response define data
+	'define' : function(status,headers,content){
+		this.send(status,headers,content);
+	},
+	//response not found
+	'notFound' : function(txt){
 		var txt=txt||'';
 		
 		var content = notFoundTemp.replace(/{-content-}/,txt);
 
-		send_res(req,res,404,{
+		this.send(404,{
 			'Content-Type' : 'text/html'
 		},content);
-
-	}
-}
-
-//response error
-function error(req,res){
-	var req = req,
-		res = res;
-	return function(txt){
-		
-		send_res(req,res,500,{
+	},
+	//response error
+	'error' : function(txt){
+		this.send(500,{
 			'Content-Type' : 'text/plain'
 		},'hello! my name is BUG !');
-		
-	}
-}
-
-//response cookie
-function cookie(req,res){
-	var req = req,
-		res = res;
-	return function(){
+	},
+	//response cookie
+	'cookie' : function(){
 		var cookieObj = arguments;
 		for(var i in cookieObj){
 			var cookie_this = cookieObj[i];
@@ -143,20 +111,11 @@ function cookie(req,res){
 			for(var i in cookie_this){
 				cookie_str += i + '=' + cookie_this[i] +';';
 			}
-			res.setHeader('Set-Cookie',cookie_str);	
+			this.res.setHeader('Set-Cookie',cookie_str);	
 		}
 	}
-}
+};
 
 exports.start = function(req,res){
-	return {
-		'json' : json(req,res),
-		'html' : html(req,res),
-		'define' : define(req,res),
-		'notFound' : notFound(req,res),
-		'error' : error(req,res),
-		'cookie' : cookie(req,res),
-		'response' : res,
-	}
-}
-
+	return new connect(req,res);
+};

@@ -97,27 +97,24 @@ body.index_page{overflow-y: hidden;overflow-x:auto; position: relative;width: 10
 .clear {font-size: 0px; line-height: 0px; clear: both;}
 .caption{border-bottom: 1px dotted #333;font-size: 18px;height: 30px;line-height: 30px;margin-bottom: 20px;text-indent: 2em;}
 
-.topNav{width:100%;height:40px;overflow:hidden;background-color:#111;}
-.userCnt{width:120px;height:40px;float:left;text-align:center;position:relative;}
+.topNav{width:100%;height:40px;overflow:hidden;background-color:#090;}
+.userCnt{width:120px;height:40px;float:left;text-align:center;position:relative;background: #009000}
 .userCnt .usernick{line-height:40px;color:#fff;font-size:16px;letter-spacing:4px;}
-.userCnt .exist{width:100%;height:100%;position:absolute;top:0px;left:0px;text-align: center;display: none;}
-.userCnt .exist a{display: block;height:40px;line-height:40px;background: #333;color:#fff;}
-.userCnt:hover .exist{display: block;}
+.userCnt .usernick_hover{width:100%;height:100%;position:absolute;top:0px;left:0px;text-align: center;display: none;}
+.userCnt .usernick_hover a{display:block;float:left;width:50%;height:40px;line-height:40px;background: #080;color:#fff;}
+.userCnt .usernick_hover a:hover{background: #070;}
+.userCnt:hover .usernick_hover{display: block;}
 
 .nav{float:left;}
 .nav ul{height:40px;line-height: 40px;}
 .nav li{float:left;}
-.nav li a{display: block;padding:0px 20px;color : #eee;font-size:16px;}
-.nav li a:visited{color:#eee;}
-.nav li a:hover{background:#444;color:#eee;}
-.nav li a.cur{background:#666;color:#fff;}
+.nav li a{display: block;padding:0px 20px;color : #efe;font-size:16px;}
+.nav li a:visited{color:#efe;}
+.nav li a:hover{background:#060;color:#fff;}
+.nav li a:active{background:#030;color:#fff;}
+.nav li a.cur{background:#222;color:#fff;border-left:1px solid #070;border-right:1px solid #0a0;padding:0px 19px;box-shadow: 1px 2px 3px #000 inset;text-shadow: 1px 2px 2px #000;}
 
-.nav_link{float:left; padding: 5px 0px 0px 40px;line-height:35px;}
-.nav_link li{float: left;}
-.nav_link li a{color:#ccc;}
-.nav_link li a:hover{color:#fff;}
-
-.secondNav{height:30px;padding-top:5px;background: #666;}
+.secondNav{height:30px;padding-top:5px;background: #222;}
 .navItem {padding-left:80px;}
 .navItem a{display: block;height:30px;padding:0px 10px;line-height:30px;float: left;color:#fff;}
 .navItem a.cur{background: #fff;color:#333;}

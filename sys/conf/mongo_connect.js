@@ -12,15 +12,14 @@
 		});
 	});
  ***************************************************************************/
-var conf = {
-	'host':'localhost',
-	'port':27017,
-	'user':'lay',
-	'pass':'19900927',
-	'db_name':'blog'
-};
 
 var mongodb = require('mongodb');
+var conf = CONFIG.mongo,
+	host = conf.host,
+	port = conf.port,
+	user = conf.user,
+	pass = conf.pass,
+	db_name = conf.db_name;
 
 /** 
  * @param DB,collection_name,callback
@@ -34,7 +33,7 @@ function open(DB,collection_name,callback){
 		 	callback('can not open datebase !',undefined);
 			return; 
 		}
-		DB.authenticate(conf.user, conf.pass, function (err, val) {
+		DB.authenticate(user, pass, function (err, val) {
 			if (err) {
 				callback('authorize failed !',undefined);
 			} else {
@@ -46,10 +45,9 @@ function open(DB,collection_name,callback){
 	});
 }
 
-
 exports.start = function(callback) {
-	var mongoserver = new mongodb.Server(conf.host, conf.port, {w:-1});
-	var DB = new mongodb.Db(conf.db_name, mongoserver,{safe:true});
+	var mongoserver = new mongodb.Server(host, port, {w:-1});
+	var DB = new mongodb.Db(db_name, mongoserver,{safe:true});
 	callback({
 		'open' : function(parm,callback){
 			var collection_name = parm['collection_name']||'article';
@@ -61,4 +59,3 @@ exports.start = function(callback) {
 		}
 	});
 };
-

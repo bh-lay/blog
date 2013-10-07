@@ -39,10 +39,10 @@ function login (res_this,session_this,username,password){
 					if(docs.length > 0){
 						session_this.set({
 							'user_group' : docs[0]['user_group'],
-							'usernick' : docs[0]['usernick'],
-							'power' : powerList[docs[0]['user_group']]
+							'user_nick' : docs[0]['usernick'],
+							'power' : powerList[docs[0]['user_group']],
+							'user_id' : docs[0]['id']
 						});
-						
 						console.log('i\'m ',powerList[docs[0]['user_group']]);
 						
 						res_this.json({

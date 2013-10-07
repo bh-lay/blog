@@ -3,14 +3,22 @@
  * 
  */
 
-var http = require('http');
-var layFile = require('./mod/layFile');
-var response = require('./mod/response');
-var parse = require('./lib/parse');
+var http = require('http'),
+	layFile = require('./mod/layFile'),
+	response = require('./mod/response');
 
 // 301 and controller
-var url_redirect = require('./conf/301url');
-var controller = require('./conf/controller');
+var url_redirect = require('./conf/301url'),
+	controller = require('./conf/controller');
+
+//define global object
+global.parse = require('./lib/parse');
+global.cache = require('./mod/cache');
+global.CONFIG = require('./conf/app_config');
+
+//////////////////////////////////////////
+var port = CONFIG.port,
+	ip = CONFIG.ip;
 
 // server start
 var server = http.createServer(function (req,res) {
@@ -27,14 +35,12 @@ var server = http.createServer(function (req,res) {
 		});
 	}else if(controller[path['root']]){
 		// check controller next
-		require('.'+controller[path['root']]).deal(req,res_this,path);
-
+		require('.' + controller[path['root']]).deal(req,res_this,path);
 	}else{
 		// read static file
 		layFile.read(req,res_this);
 	}
 });
 
-server.listen(3000, '0.0.0.0');
-
-
+server.listen(port, ip);
+console.log('server has been start at ' + port + ' port !');

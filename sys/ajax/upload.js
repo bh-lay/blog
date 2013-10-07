@@ -4,7 +4,6 @@
  */
 
 var fs = require('fs');
-var parse = require('../lib/parse');
 
 exports.render = function (req,res_this){
 	

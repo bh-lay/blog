@@ -2,7 +2,6 @@
 var fs = require('fs');
 var mongo = require('../../../conf/mongo_connect');
 var page = require('../../../lib/page_list');
-var parse = require('../../../lib/parse');
 
 var temp=['<tr>',
 	'<td class="arLiTitle"><a title="查看博文" href="/blog/{id}" target="_blank">{title}</a></td>',

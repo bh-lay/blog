@@ -213,6 +213,13 @@
 			var loading = L.dialog.loading();
 			param['render_over'] = render_over ;
 			param['dom']&&param['dom'].hide();
+			//reset js environment
+			delete(uyan_c_g);
+			delete(uyan_loaded);
+			delete(uyan_s_g);
+			delete(uyan_style_loaded);
+			delete(uyan_style_loaded_over);
+			window.uyan_config = window.uyan_config || {"du":"bh-lay.com"};
 		}
 		var start_time = new Date().getTime();
 		function render_over(){
@@ -220,7 +227,7 @@
 				titleDom.html(param['title']);
 			}
 			var end_time = new Date().getTime(),
-				 min_time = 500,
+				 min_time = 400,
 				 delay_time = 0;
 			
 			if(end_time - start_time < min_time){
@@ -474,7 +481,6 @@
 		'<div class="youyan">',
 			'<div id="uyan_frame"></div>',
 			'<script type="text/javascript">',
-				'delete(uyan_c_g);delete(uyan_loaded);delete(uyan_s_g);delete(uyan_style_loaded);delete(uyan_style_loaded_over);',
 				'var uyan_config = {"du":"bh-lay.com"};',
 			'</script>',
 			'<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1605927" async=""></script>',
@@ -529,18 +535,13 @@
  */
 (function(ex){	
 	var limit = 10,
-		 skip,
-		 dom;
-		 
-	var temp = ['{@each list as it,index}<li><a href="/share/${it.id}" title="${it.title}" lofox="true" target="_self" >',
-		'<img src="${it.cover}" alt="${it.title}" />',
-		'<strong>${it.title}</strong>',
-	'</a></li>{@/each}'].join('');
-
+		 skip = 0,
+		 count = 0;
 	var insert = function(param){
-		var this_dom = $(param['html']).hide();
-		dom.find('.shareList ul').html(this_dom);
-		this_dom.fadeIn(200);
+		var this_html = $(param['html']),
+			this_dom = param['dom'];
+
+		this_dom.html(this_html);
 	};
 	var getData = function(fn){
 		$.ajax({
@@ -552,22 +553,15 @@
 				'limit' : limit
 			},
 			'success' :function(data){
-				var count = data['count'],
-					 list = data['list'];
-
-				var this_html = juicer(temp,{'list':list});
-				
+				count = data['count'];
 				skip += limit;
-				insert({
-					'end' : (skip>=count)?true:false,
-					'html' : this_html
-				});
-				fn&&fn();
+				
+				var list = data['list'];
+				fn&&fn(list);
 			}
 		});
 	};
 	var start = function(){
-		
 		$('.shareList').on('mouseenter','a',function(){
 			$(this).find('strong').stop().animate({'bottom':0},200);
 		}).on('mouseleave','a',function(){
@@ -576,13 +570,23 @@
 	};
 	ex.shareList = function(param){
 		var fn = param['render_over'] || null;
-		dom = param['dom'];
+		var dom = param['dom'];
+		var temp = ['{@each list as it,index}<li><a href="/share/${it.id}" title="${it.title}" lofox="true" target="_self" >',
+			'<img src="${it.cover}" alt="${it.title}" />',
+			'<strong>${it.title}</strong>',
+		'</a></li>{@/each}'].join('');
 		
-		L.require('juicer',function(){
+		L.require('juicer,/skin/naive/css/share.css',function(){
 			if(param['init']){
+				skip = 0;
 				dom.html('<div class="golCnt"><div class="shareList"><ul></ul></div></div>');
-				L.require('/skin/naive/css/share.css');
-				getData(function(){
+				getData(function(list){
+					var this_html = juicer(temp,{'list':list});
+					insert({
+						'end' : (skip>=count)?true:false,
+						'html' : this_html,
+						'dom' : dom.find('.shareList ul')
+					});
 					start();
 					fn&&fn();
 				});
@@ -608,7 +612,6 @@
 		'<div class="youyan">',
 			'<div id="uyan_frame"></div>',
 			'<script type="text/javascript">',
-				'delete(uyan_c_g);delete(uyan_loaded);delete(uyan_s_g);delete(uyan_style_loaded);delete(uyan_style_loaded_over);',
 				'var uyan_config = {"du":"bh-lay.com"};',
 			'</script>',
 			'<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1605927" async=""></script>',
@@ -663,20 +666,16 @@
  */
 (function(ex){	
 	var limit = 20,
-		 skip,
+		 skip = 0,
+		 count = null,
 		 dom;
-		 
-	var temp = ['{@each list as it,index}<li><a href="/opus/${it.id}" title="${it.title}" target="_self" lofox="true" >',
-		'<img src="${it.cover}" alt="${it.title}" />',
-		'<strong>${it.title}</strong>',
-	'</a></li>{@/each}'].join('');
 
 	var insert = function(param){
-		var this_dom = $(param['html']).hide();
-		dom.find('.shareList ul').html(this_dom);
-		this_dom.fadeIn(200);
+		var this_html = $(param['html']),
+			this_dom = param['dom'];
+		this_dom.append(this_html);
 	};
-	var getData = function(fn){
+	var getData = function(callback){
 		$.ajax({
 			'type' : 'GET' ,
 			'url' : '/ajax/opus',
@@ -686,17 +685,14 @@
 				'limit' : limit
 			},
 			'success' :function(data){
-				var count = data['count'],
-					 list = data['list'];
-
-				var this_html = juicer(temp,{'list':list});
-				
+				count = data['count'];
 				skip += limit;
-				insert({
-					'end' : (skip>=count)?true:false,
-					'html' : this_html
-				});
-				fn&&fn();
+				
+				var list = data['list'];
+				for(var i = 0,total = list.length;i<total;i++){
+					list[i]['work_range'] = list[i]['work_range']?list[i]['work_range'].split(/\,/):['暂未填写'];
+				}
+				callback&&callback(list);
 			}
 		});
 	};
@@ -709,20 +705,30 @@
 		});
 	};
 	ex.opusList = function(param){
-		var fn = param['render_over'] || null;
-		dom = param['dom'];
+		var render_over = param['render_over'] || null;
+		var dom = param['dom'];
 		
 		L.require('juicer,/skin/naive/css/opus.css',function(){
-			if(param['init']){
-				dom.html('<div class="golCnt"><div class="shareList"><ul></ul></div></div>');
-				L.require('/skin/naive/css/opus.css');
-				getData(function(){
+			$.get('/ajax/temp?opus_item',function(data){
+				var temp = data['opus_item'];
+				if(param['init']){
+					skip = 0;
+					dom.html('<div class="golCnt"><div class="opusList"><ul></ul></div></div>');
+					getData(function(list){
+						var this_html = juicer(temp,{'list':list}),
+							this_dom = dom.find('.opusList ul');
+						insert({
+							'end' : (skip>=count)?true:false,
+							'html' : this_html,
+							'dom' : this_dom
+						});
+						start();
+						render_over&&render_over();
+					});
+				}else{
 					start();
-					fn&&fn();
-				});
-			}else{
-				start();
-			}
+				}
+			});
 		});
 	};
 })(L.render);
@@ -731,32 +737,7 @@
  * opus detail
  *  
  */
-(function(ex){
-	var template = ['<div class="golCnt">',
-		'<div class="TagLine">小剧作品，一次次小小的进步，成就平凡的自己！</div>',
-		'<div id="focusTitle">',
-			'{@if cover}<img src="${cover}" alt="${title}" class="topicImg" />{@/if}',
-			'<div class="info">',
-				'<h1>${title}</h1><ul>',
-					'<li><strong>创作时间:</strong>${opus_time_create}</li>',
-					'<li><strong>相关页面:</strong><a href="#" title="字段暂无" target="_blank">字段暂无</a></li>',
-				'</ul>',
-			'</div>',
-		'</div>',
-		'<div class="opus_detail">',
-			'<div class="photo"><img src="${opus_pic}" alt="${title}" /></div>',
-			'<div class="text">$${content}</div>',
-			'<div class="youyan">',
-				'<div id="uyan_frame"></div>',
-				'<script type="text/javascript">',
-					'delete(uyan_c_g);delete(uyan_loaded);delete(uyan_s_g);delete(uyan_style_loaded);delete(uyan_style_loaded_over);',
-					'var uyan_config = {"du":"bh-lay.com"};',
-				'</script>',
-				'<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1605927" async=""></script>',
-			'</div>',
-		'</div>',
-	'</div>'].join('');
-	
+(function(ex){	
 	function getData(id,fn){
 		$.ajax({
 			'type' : 'GET' ,
@@ -770,8 +751,8 @@
 					var detail = data['detail'];
 					var date = new Date(parseInt(detail.opus_time_create));
 					detail.opus_time_create = (date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+ date.getDate();
-					var this_html = juicer(template,detail);
-					fn&&fn(this_html,detail['title']);
+					
+					fn&&fn(detail,detail['title']);
 				}else{
 					L.dialog.tips('作品不存在！');
 					lofox.push('/opus',{render:false});
@@ -781,17 +762,25 @@
 		});
 	};
 	ex.opusDetail=function(param){
-		var fn = param['render_over'] || null;
+		var render_over = param['render_over'] || null;
 		var param = param || {},
 			 dom = param['dom'] || $('.contlayer'),
 			 id = param['id'] || null;
 				 
 		if(param['init']){
 			L.require('juicer',function(){
-				getData(id,function(html,title){
-					title&&(param['title'] = title);
-					html&&dom.html(html);
-					fn&&fn()
+				$.get('/ajax/temp?opus_detail',function(data){
+					var template = data['opus_detail'];
+					if(!template){
+						console.log('error','get template error !');
+						return
+					}
+					getData(id,function(detail,title){
+						var this_html = juicer(template,detail);
+						title&&(param['title'] = title);
+						this_html&&dom.html(this_html);
+						render_over&&render_over()
+					});
 				});
 			});
 		}

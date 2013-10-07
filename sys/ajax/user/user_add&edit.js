@@ -8,7 +8,6 @@
 
 var mongo = require('../../conf/mongo_connect');
 var session = require('../../mod/session');
-var parse = require('../../lib/parse');
 
 function add(parm,res_this){
 	var parm = parm;

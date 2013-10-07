@@ -1,7 +1,6 @@
 //author bh-lay
 var mongo = require('../../../conf/mongo_connect');
 var fs = require('fs');
-var parse = require('../../../lib/parse');
 
 var temp=['<tr>',
 	'<td class="arLiTitle">{title}</td>',

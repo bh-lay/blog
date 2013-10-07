@@ -7,6 +7,7 @@
 var juicer = require('juicer');
 var fs = require('fs');
 var mongo = require('../conf/mongo_connect');
+
 //define template Object
 var chip = {};
 
@@ -56,12 +57,55 @@ chip.share_item = function(callback){
 chip.opus_item = function(callback){
 	var chip =   ['{@each list as it,index}',
 		'<li>',
-			'<a href="/opus/${it.id}" title="${it.title}" target="_self" lofox="true" >',
-				'<img src="${it.cover}" alt="${it.title}" />',
-				'<strong>${it.title}</strong>',
-			'</a>',
+			'<div class="opus_cover">',
+				'<a href="/opus/${it.id}" title="${it.title}" target="_self" lofox="true" >',
+					'<img src="${it.cover}" alt="${it.title}" />',
+				'</a>',
+			'</div>',
+			'<div class="opus_info">',
+				'<h3><a href="/opus/${it.id}" target="_self" lofox="true" >${it.title}</a></h3>',
+				'<p><strong>开发范围：</strong>',
+					'{@each it.work_range as that,index}',
+						'<span>${that}</span>',
+					'{@/each}',
+				'</p>',
+				'<p><strong>在线地址：</strong>',
+					'{@if it.online_url}',
+						'<a href="${it.online_url}">${it.online_url}</a>',
+					'{@else}',
+						'<span>无在线地址</span>',
+					'{@/if}',
+				'</p>',
+			'</div>',
 		'</li>',
 	'{@/each}'].join('');
+	callback(chip);
+};
+
+chip.opus_detail = function(callback){
+	var chip = ['<div class="golCnt">',
+		'<div class="TagLine">小剧作品，一次次小小的进步，成就平凡的自己！</div>',
+		'<div id="focusTitle">',
+			'{@if cover}',
+				'<img src="${cover}" alt="${title}" class="topicImg" />',
+			'{@/if}',
+			'<div class="info">',
+				'<h1>${title}</h1>',
+				'<ul>',
+					'<li><strong>创作时间:</strong>${opus_time_create}</li>',
+					'<li><strong>相关页面:</strong><a href="#" title="字段暂无" target="_blank">字段暂无</a></li>',
+				'</ul>',
+			'</div>',
+		'</div>',
+		'<div class="opus_detail">',
+			'<div class="photo"><img src="${opus_pic}" alt="${title}" /></div>',
+			'<div class="text">$${content}</div>',
+			'<div class="youyan"><!-- UY BEGIN -->',
+				'<div id="uyan_frame"></div>',
+				'<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1605927" async=""></script>',
+			'<!-- UY END --></div>',
+		'</div>',
+	'</div>'].join('');
 	callback(chip);
 };
 
@@ -107,7 +151,7 @@ chip.tongji = function(callback){
 chip.youyan = function(callback){
 	var chip =  ['<!-- UY BEGIN -->',
 		'<div id="uyan_frame"></div>',
-		'<script type="text/javascript">var uyan_config = {"du":"bh-lay.com"};</script>',
+		'<script type="text/javascript">var uya n_config = {"du":"bh-lay.com"};</script>',
 		'<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1605927" async=""></script>',
 	'<!-- UY END -->'].join('');
 	callback(chip);
@@ -188,28 +232,20 @@ chip.index = function(callback){
 //method get
 function get(mod,callback) {
 	var mod = mod||'';
-		
+	//filter forbidden code: . /
 	mod = mod.replace(/\/|\./g,'');
-
-	var cache_path = './cache/chip/' + mod + '.txt';
-
-	fs.exists(cache_path, function(exists) {
-		if(exists){
-			//get chip from cache
-			var this_cache = fs.readFileSync(cache_path,'UTF-8');
+	
+	if(chip[mod]){
+		cache.chip(mod,function(this_cache){
 			callback(this_cache);
-		}else if(chip[mod]){
-			//create chip and save to cache
+		},function(save_cache){
 			chip[mod](function(this_chip){
-				callback(this_chip);
-				fs.writeFile(cache_path,this_chip,function(err){
-					if(err){console.log('create cache chip error',mod)};
-				});
+				save_cache(this_chip);
 			});
-		}else{
-			callback('');
-		}
-	});
+		});
+	}else{
+		callback('');
+	}
 }
 
 //get chip
