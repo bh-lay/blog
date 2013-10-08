@@ -91,7 +91,7 @@ tr,td{border:0px;}
  */
 iframe {border-width: 0px;height:100%;width: 100%;}
 html.index_page{position: relative;height:100%;}
-body.index_page{overflow-y: hidden;overflow-x:auto; position: relative;width: 100%;min-width:360px;height:100%;}
+body.index_page{overflow-y: hidden;overflow-x:auto; position: relative;width: 100%;min-width:430px;height:100%;}
 .mainFrame{position: absolute;top:75px;bottom:0px;left:0px;width: 100%;}
 
 .clear {font-size: 0px; line-height: 0px; clear: both;}
