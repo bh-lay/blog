@@ -9,7 +9,7 @@
 /*
  * pageB-1: blog list page 
  **/
-.articleList{width:460px;float:right; border-left: 1px dashed #fff;padding:100px 0px 100px 20px;}
+.articleList{width:600px;float:right; border-left: 1px dashed #fff;padding:100px 0px 100px 20px;}
 .articleItem{position: relative;z-index:1000; margin-bottom:30px;}
 .artItCpt{position:absolute; width: 280px;left: -320px;top:10px;text-align: right;text-shadow: 1px 1px 2px #000;}
 .artItCpt h3{font-size: 18px;font-weight: normal;line-height: 24px;}
@@ -49,7 +49,18 @@
 .blog_addMore.blog_addMore_loading a{display: none;}
 
 
-@media screen and (max-width: 760px){
+@media screen and (min-width: 1200px){
+	.articleList{width: 40%;}
+}
+
+@media screen and (max-width:1200px) and (min-width: 880px){
+	.articleList{width: 50%;}
+}
+
+@media screen and (max-width: 879px) and (min-width: 760px){
+	.articleList{width: 440px;}
+}
+@media screen and (max-width: 759px){
 	.articleList{width: 100%;padding-left: 0px;}
 	.artItCpt{position:relative;top:0px;left:0px;background:#fff;border-radius:4px;margin:0px 0px 10px 0px;width:100%;padding:5px 0px;text-align: left;text-shadow: 0px 0px 0px transparent;box-shadow: 0px 1px 2px #333;}
 	.artItCpt:after{content: "◆";text-align:center;line-height:20px;color:#fff;font-size:30px;
