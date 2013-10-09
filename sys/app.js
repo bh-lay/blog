@@ -17,8 +17,8 @@ global.cache = require('./mod/cache');
 global.CONFIG = require('./conf/app_config');
 
 //////////////////////////////////////////
-var port = CONFIG.port,
-	ip = CONFIG.ip;
+var app_port = CONFIG.port,
+	app_ip = CONFIG.ip;
 
 // server start
 var server = http.createServer(function (req,res) {
@@ -42,5 +42,5 @@ var server = http.createServer(function (req,res) {
 	}
 });
 
-server.listen(port, ip);
+server.listen(app_port, app_ip);
 console.log('server has been start at ' + port + ' port !');
