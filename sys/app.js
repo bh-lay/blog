@@ -43,4 +43,4 @@ var server = http.createServer(function (req,res) {
 });
 
 server.listen(app_port, app_ip);
-console.log('server has been start at ' + port + ' port !');
+console.log('server has been start at ' + app_port + ' port !');
