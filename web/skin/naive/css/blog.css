@@ -11,11 +11,11 @@
  **/
 .articleList{width:600px;float:right; border-left: 1px dashed #fff;padding:100px 0px 100px 20px;}
 .articleItem{position: relative;z-index:1000; margin-bottom:30px;}
-.artItCpt{position:absolute; width: 280px;left: -320px;top:10px;text-align: right;text-shadow: 1px 1px 2px #000;}
-.artItCpt h3{font-size: 18px;font-weight: normal;line-height: 24px;}
-.artItCpt h3 a{color: #fff;outline:none; transition: all 0.2s ease 0s;}
-.artItCpt h3 a:hover{_color:#ddd;}
-.artItPic h3 a:visited{color: #fff;transition: all 0.2s ease 0s;}
+.artItCpt{position:absolute; width: 280px;left: -320px;top:10px;text-align: right;}
+.artItCpt h3{font-weight: normal;line-height: 24px;}
+.artItCpt h3 a{padding:3px 10px;border-radius:4px;font-size: 16px;color:#666;background:#fff;outline:none; transition: all 0.8s ease 0s;}
+.artItCpt h3 a:hover{background:#fafafa;color:#333;}
+.artItPic h3 a:visited{color: #666;transition: all 0.2s ease 0s;}
 .artItCpt p{color:#fff;font-size: 14px;opacity:0.7;}
 .artItCnt{width:420px;background: #fff;overflow: hidden;border-radius: 8px;box-shadow: 1px 1px 4px #444;}
 .artItPic{overflow:hidden; }
