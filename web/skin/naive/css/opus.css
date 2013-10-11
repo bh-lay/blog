@@ -13,7 +13,7 @@
 .opusList ul{overflow:hidden;zoom:1; }
 .opusList ul li{width:280px;float: left;margin:0px 10px 20px;background:#fff;overflow: hidden;}
 .opus_cover{width:100%;height:160px;}
-.opus_cover a{display:block;width:100%;height:100%;background:#000;position:relative;overflow: hidden; }
+.opus_cover a{display:block;width:100%;height:100%;background:#fff;position:relative;overflow: hidden; }
 .opus_cover a img{display:block;width:100%;min-height: 100%;margn-top:-20px;transition: 0.06s;}
 .opus_cover a:hover img{opacity: 0.7;}
 .opus_info{height:140px;box-shadow: 0px 0px 15px #000;position: relative;background:#fff;}

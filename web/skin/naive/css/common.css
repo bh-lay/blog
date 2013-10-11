@@ -43,7 +43,7 @@ background-size : cover;background-position : center center;}
 	-webkit-mask-repeat : no-repeat;
 	-webkit-mask-position : center center;
 	-webkit-mask-size : 300%;
-	-webkit-animation:circle_zoom 0.8s
+	-webkit-animation:circle_zoom 1s
 }
 @-webkit-keyframes circle_zoom {
 	0% {
