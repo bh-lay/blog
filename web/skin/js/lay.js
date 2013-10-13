@@ -75,6 +75,7 @@ var L = L || function(root){
 		}
 	}
 	var start = function(str,callback){
+		str = str || '';
 		str = str.split(/\?/)[0]||'';
 		var str_spilt = str.split(/\./);
 		var callback = callback||function(){};
@@ -85,16 +86,29 @@ var L = L || function(root){
 			var module = conf[modName];
 			if(!module){
 				console.log('require','could not find module please check mod spell ！');
-			}else if(module['load']){
-				console.log('require','[' + modName + '] has been loaded, needn\'t to load again ！');
-				callback();
-			}else{
-				console.log('require:','loading start !');
-				var url = module['js'];
-				loadJs(url,function(){
-					conf[modName]['load'] = true;
-					callback()
-				});
+				return
+			}
+			switch (module['load']){
+				case 'done':
+					console.log('require','[' + modName + '] has been loaded, needn\'t to load again ！');
+					callback();
+				break
+				case 'loading':
+					var wait = setInterval(function(){
+						if(conf[modName]['load'] = 'done'){
+							clearInterval(wait);
+							callback();
+						}
+					},100);
+				break
+				default :
+					console.log('require:','loading start !');
+					var url = module['js'];
+					conf[modName]['load'] = 'loading';
+					loadJs(url,function(){
+						conf[modName]['load'] = 'done';
+						callback()
+					});
 			}
 		}else{
 			//repuire from url

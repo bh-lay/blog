@@ -429,24 +429,26 @@
 			});
 		});
 	};
-	var init = function(dom){
+	var init = function(dom,fn){
 		getTemp(function(blogTemp){
 			bindEvent(dom);
+			fn&&fn();
 		});
 	};
 	ex.blogList = function(param){
 		console.log('blog list page:','start !');
 		var param = param || {},
 			 dom = param['dom']||$('.contlayer'),
-			 fn = param['render_over'] || null;
+			 render_over = param['render_over'] || null;
 		
 		if(param['init']){
 			dom.html('<div class="articleList"></div>');
 			skip = 0;
 			L.require('juicer,/skin/naive/css/blog.css',function(){
-				init(dom);
-				getData(function(){
-					fn&&fn();
+				init(dom,function(){
+					getData(function(){
+						render_over&&render_over();
+					});
 				});
 			});
 		}else{
