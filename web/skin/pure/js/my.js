@@ -1,12 +1,12 @@
 /*
- * ×÷Õß:¾çÖĞÈË
- * ²©¿Í£ºhttp://bh-lay.com/
- * Copyright (c) 2012-2018 Ğ¡¾ç¿ÍÕ»
+ * ä½œè€…:å‰§ä¸­äºº
+ * åšå®¢ï¼šhttp://bh-lay.com/
+ * Copyright (c) 2012-2018 å°å‰§å®¢æ ˆ
  */
 
-//Ğ¡¾ç»¹ÊÇÇü·şÔÚÁËie6µÄÒùÍşÖ®ÏÂ
+//å°å‰§è¿˜æ˜¯å±ˆæœåœ¨äº†ie6çš„æ·«å¨ä¹‹ä¸‹
 function fixie6(){
-	$('body').prepend("<div id='killie6'><h1>¶Ô²»Æğ£¬ÄúÎŞ·¨Õı³£ä¯ÀÀ±¾²©¿Í</h1><p>ÄúµÄä¯ÀÀÆ÷¹ıÓÚ¹ÅÀÏ£¬¿ÉÄÜÎŞ·¨Õı³£²é¿´²©¿ÍÄÚÈİ¡£<a href='http://bh-lay.com/about/2012-07-30/42.html'>ÎªÊ²Ã´²»Ö§³ÖÎÒµÄä¯ÀÀÆ÷£¿</a><br/>ÍÆ¼öÄúÊ¹ÓÃ<a href='http://chrome.360.cn/'>360¼«ËÙä¯ÀÀÆ÷</a><a href='http://www.google.com/chrome/?hl=zh-CN'>¹È¸èä¯ÀÀÆ÷</a>£¬´Ó½ñÌì¿ªÊ¼ÌåÑé¿áìÅµÄÒ³ÃæĞ§¹û¡£</p></div>");
+	$('body').prepend("<div id='killie6'><h1>å¯¹ä¸èµ·ï¼Œæ‚¨æ— æ³•æ­£å¸¸æµè§ˆæœ¬åšå®¢</h1><p>æ‚¨çš„æµè§ˆå™¨è¿‡äºå¤è€ï¼Œå¯èƒ½æ— æ³•æ­£å¸¸æŸ¥çœ‹åšå®¢å†…å®¹ã€‚<a href='http://bh-lay.com/about/2012-07-30/42.html'>ä¸ºä»€ä¹ˆä¸æ”¯æŒæˆ‘çš„æµè§ˆå™¨ï¼Ÿ</a><br/>æ¨èæ‚¨ä½¿ç”¨<a href='http://chrome.360.cn/'>360æé€Ÿæµè§ˆå™¨</a><a href='http://www.google.com/chrome/?hl=zh-CN'>è°·æ­Œæµè§ˆå™¨</a>ï¼Œä»ä»Šå¤©å¼€å§‹ä½“éªŒé…·ç‚«çš„é¡µé¢æ•ˆæœã€‚</p></div>");
 	$('head').append("<style> #killie6{display:none;padding:50px;background:#aaa;} #killie6 a{text-decoration:underline;padding:1em;} #toolbar{position:'absolute'}</style>");
 	$('#killie6').slideDown(1000);
 	$('.share_list dl').css({float:'none'});
@@ -17,14 +17,14 @@ function fixie6(){
 	$('.nav>ul>li>a').mouseenter(function(){$(this).next().css({position: 'absolute',display:'block',marginLeft:'-50%',width: '80px'});});
 	$('.nav>ul>li').mouseleave(function(){$('.nav>ul>li>ul').hide();});
 }
-//×Ô¶¯ÌáĞÑÊäÈë¿ò²å¼ş
+//è‡ªåŠ¨æé†’è¾“å…¥æ¡†æ’ä»¶
 $.fn.autoKey=function(){
 	var searchBox = $(this);
 	var title=searchBox.val(); 
 	searchBox.click(function(){if(searchBox.val()==title){searchBox.val("");}}).blur(function(){if(searchBox.val()=="") {searchBox.val(title);}}); 
 	return searchBox;
 }
-//ÏÔÊ¾´óÍ¼²å¼ş
+//æ˜¾ç¤ºå¤§å›¾æ’ä»¶
 $.fn.showBigPic=function (){
 	var imgList = $(this);
 	var src;
@@ -39,86 +39,13 @@ $.fn.showBigPic=function (){
 	$('.lay_show').click(function(){$('.lay_show').fadeOut('slow');});
 	return imgList;
 }
-//Í¼Ïñä¯ÀÀÆ÷²å¼ş
-$.fn.photoMode=function (){
-	$('body').append("<div class='lay_show'><div class='lay_exist'>X</div><div class='lay_img'><img alt=' ' src=' ' /><div class='lay_title'></div><div class='lay_over'>ÒÑ¾­µ½´ïÁĞ±íÖÕµã£¬µã»÷¼ÌĞøä¯ÀÀ</div></div><a class='lay_prev'>¡¶</a><a class='lay_next'>¡·</a></div>");
-	var imgList = $(this);
-	var total=imgList.length;
-	var bigPic = $('.lay_show>.lay_img>img');
-	var i, width, height, marginT, src, alt;
-	imgList.parent().css({cursor:'pointer'});
-	function over(){$('.lay_over').slideDown(200).delay(800).fadeOut(800);}
-	$(".lay_exist").click(function(){$(this).parent().fadeOut('slow');});
-	if(total==1){$('.lay_next, .lay_prev').hide();}
-	function change(src,alt){
-		$('.lay_title').html((i+1)+'/'+total+'¡¡'+alt);
-		bigPic.fadeOut('300');
-		setTimeout(function(){
-			bigPic.attr('src',src);
-			setTimeout(function(){
-				width = bigPic.width();
-				height = bigPic.height();
-				marginT = ($(window).height()-$('.lay_show img').height())/2+$(document).scrollTop();
-				if (marginT<0){marginT=0;}
-				$('.lay_show .lay_img').animate({'width': width,'height': height,'marginTop':marginT},300);
-				setTimeout(function(){bigPic.fadeIn('300');},400);
-			},10);
-		},800);
-	}
-	imgList.click(function(){
-		src = $(this).attr('src');
-		alt = $(this).attr('alt');
-		i = imgList.index(this);
-		$('.lay_show').fadeIn('800').css({height:$(document).height()+400});
-		change(src,alt);
-	});
-	//Ç°Ò»ÕÅ
-	function prev(){
-		if (i>0){
-			src = imgList.eq(--i).attr('src');
-			alt = imgList.eq(i).attr('alt');
-			change(src,alt);
-		}else{over();i=total;}
-	}
-	//ÏÂÒ»ÕÅ
-	function next(){
-		if (i<total-1){
-			src = imgList.eq(++i).attr('src');
-			alt = imgList.eq(i).attr('alt');
-			change(src,alt);
-		}else{over(); i=-1;}
-	}
-	//×óÓÒ¼ü·­Ò³
-	$(window).keydown(function(event){
-		if($('.lay_show').css('display')=='block'){
-			switch(event.keyCode) {
-				case 37:prev();
-				break
-				case 39:next();
-				break
-				case 27:$('.lay_show').fadeOut('slow');
-				break
-			}
-		}
-	});
-	$('.lay_next').click(function(){next();});
-	$('.lay_prev').click(function(){prev();});
-	$('.lay_next, .lay_prev').mouseover(function(){$(this).animate({width:'60'},500)}).mouseout(function(){$(this).animate({width:'40'},500)});
-	return imgList;
-}
-//¿É¹Ø±Õ²å¼ş
-$.fn.shutDown=function(){
-  $(this).prepend('<div class="close">X</div>');
-  $(".close").click(function(){$(this).parent().slideUp('slow');});
-  return this;
-}
-//ÔÄ¶ÁÄ£Ê½Óë°æÈ¨Á´½Óº¯Êı
+//é˜…è¯»æ¨¡å¼ä¸ç‰ˆæƒé“¾æ¥å‡½æ•°
 function readMode(article,show,hide){
 	var article =$(article);
 	var show =$(show);
 	var hide =$(hide);
 	var url = window.location.href;
-	$('#toolbar').append('<div class="read ico" title="Ê¹ÓÃÔÄ¶ÁÄ£Ê½">ÔÄ¶ÁÄ£Ê½</div><div class="exitread ico" title="ÍË³öÔÄ¶ÁÄ£Ê½">Ò³ÃæÄ£Ê½</div>');
+	$('#toolbar').append('<div class="read ico" title="ä½¿ç”¨é˜…è¯»æ¨¡å¼">é˜…è¯»æ¨¡å¼</div><div class="exitread ico" title="é€€å‡ºé˜…è¯»æ¨¡å¼">é¡µé¢æ¨¡å¼</div>');
 	$('.read').click(function(){
 		article.animate({fontSize: '24px'},'slow');
 		hide.css('display','none');
@@ -133,20 +60,20 @@ function readMode(article,show,hide){
 		$('.exitread').slideUp('slow');
 		$('.read').slideDown('slow');
 	});
-	article.find('h3').append("<a class='hide' href='"+url+"' title='Ğ¡¾ç¿ÍÕ»'>²é¿´Ô­ÎÄ</a>");
-	article.find('p').eq(3).append("<a class='hide' href='"+url+"' title='Ğ¡¾ç¿ÍÕ»'>Ğ¡¾ç¿ÍÕ»</a>");
+	article.find('h3').append("<a class='hide' href='"+url+"' title='å°å‰§å®¢æ ˆ'>æŸ¥çœ‹åŸæ–‡</a>");
+	article.find('p').eq(3).append("<a class='hide' href='"+url+"' title='å°å‰§å®¢æ ˆ'>å°å‰§å®¢æ ˆ</a>");
 }
-//Ìí¼Ó¹ö¶¯µ½»Ø¸´Î»ÖÃµÄ°´Å¥º¯Êı
+//æ·»åŠ æ»šåŠ¨åˆ°å›å¤ä½ç½®çš„æŒ‰é’®å‡½æ•°
 function scrollReply(lyb){
 	var lyb = $(lyb);
-	$('#toolbar').append('<div class="reply ico" title="ÁôÑÔ»Ø¸´">ÁôÑÔ»Ø¸´</div>');  
+	$('#toolbar').append('<div class="reply ico" title="ç•™è¨€å›å¤">ç•™è¨€å›å¤</div>');  
 	$('.reply').click(function(){
 		var top=lyb.offset().top-150;
 		//alert(top);
 		$('html,body').animate({scrollTop:top},800);
 	});
 }
-//ÊÖ·çÇÙĞ§¹û
+//æ‰‹é£ç´æ•ˆæœ
 function accordion(page){
 	var pic = $(page);
 	var i;
@@ -166,48 +93,22 @@ function accordion(page){
 }
 
 $(document).ready(function(){
-//Ìí¼Ó¹¤¾ßÀ¸
-	$('body').append('<div id="toolbar"><div class="backtop ico" title="·µ»Ø¶¥²¿">·µ»Ø¶¥²¿</div></div>');
+//æ·»åŠ å·¥å…·æ 
+	$('body').append('<div id="toolbar"><div class="backtop ico" title="è¿”å›é¡¶éƒ¨">è¿”å›é¡¶éƒ¨</div></div>');
 	$('.backtop').click(function(){$('html,body').animate({scrollTop: '0px'}, 800);});
-//Ê¹ÓÃ²å¼ş¡¢º¯Êı
-	if($('.article img').length>0){$('.article img').photoMode();}
 	if($('.photo img').length>0){$('.photo img').showBigPic();}
 	if($('#keyboard').length>0){$('#keyboard').autoKey();}
-	if($(".shutdown").length>0){$('.shutdown').shutDown();}
 
 	if($('#uyan_frame').length>0){scrollReply('#uyan_frame');}
 	if($(".article").length>0){readMode('.article','.main','.sidebar');}
 	if($('#lay_accordion').length>0){accordion('#lay_accordion li');}
 	if($.browser.msie){if($.browser.version=="6.0"||$.browser.version=="7.0"){fixie6();}}
 
-//Ä£¿é±ß¿òÒõÓ°¼°¾íÕ¹À¸Ğ§¹û
+//æ¨¡å—è¾¹æ¡†é˜´å½±åŠå·å±•æ æ•ˆæœ
 	$(".box").mouseover(function(){$(this).addClass("shadow")}).mouseout(function(){$(this).removeClass("shadow")});
 	if($(".caption").length>0){$(".caption").click(function(){$(this).next().slideToggle('slow');});}
 
-//È¥µôÄ¬ÈÏÍ¼Ïñ
-	if($('.picText').length>0){
-		var i = 0;
-		for(i=0;i<$('.picText img').length;i++){
-			var src=$('.picText img').eq(i).attr('src').slice(-10,-4);
-			if(src=='notimg'){$('.picText img').eq(i).hide();}
-		}
-	}
-
-//·ÂÌÚÑ¶Ğ£ÓÑ½¹µãÍ¼
-	function focusPhoto(){
-		var i=0;
-		var totoal=$('.focusphoto>dl>dd').length;
-		function write(i){
-			var title = $('.focusphoto>dl>dd>a').eq(i).attr('title');
-			$('.focusphoto>dl>dd').eq(i).append('<p class="none">'+title+'</p>');
-		}
-		for (i=0;i<totoal;i++){write(i);}
-		$('.focusphoto>dl>dd').mouseenter(function(){$(this).find('p').slideDown('200');});
-		$('.focusphoto>dl>dd').mouseleave(function(){$(this).find('p').slideUp('1000');});
-	}
-	if($(".focusphoto").length>0){focusPhoto();}
-
-//ÁôÑÔ°åÒõÓ°Ğ§¹û
+//ç•™è¨€æ¿é˜´å½±æ•ˆæœ
 	$(".lyk input,.lyk textarea,.lyk .button input").focus(function(){$(this).parent().addClass('shadow');}).blur(function(){$(".lyk dd").removeClass('shadow');});
 
 });

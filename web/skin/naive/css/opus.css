@@ -24,7 +24,7 @@
 .opus_info p{height:18px;line-height:16px;padding:9px 10px;}
 .opus_info p strong{display: block;height:30px;float:left;font-size: 14px;font-weight:normal;color:#333;}
 .opus_info p span{display: inline-block;padding:0px 4px;font-size: 14px;color:#888;}
-.opus_info p a{color:#888;}
+.opus_info p a{display:block;width:190px;overflow:hidden;text-overflow:ellipsis; color:#888;}
 .opus_info p a:hover {color:#333;text-decoration: underline;}
 
 @media screen and (min-width: 900px){
