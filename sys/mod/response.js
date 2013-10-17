@@ -55,12 +55,10 @@ function connect(req,res){
 			this.res.end();
 		}
 		// logger ////////////////////////////////////
-		//x-forwarded-for
-		var ip = this.req['connection']['x-forwarded-for'] || this.req['connection']['remoteAddress'];
-		
 		var logger = {
 			'time':new Date(),
-			'ip':ip,
+			'ip':this.req['connection']['remoteAddress'],
+			'ip2' : req['headers']['x-forwarded-for'] ,
 			'url':this.req.url,
 			'user-agent':this.req.headers['user-agent'],
 			'status' : status
