@@ -2,7 +2,6 @@
  * @author bh-lay
  * 
  */
-
 var http = require('http'),
 	layFile = require('./mod/layFile'),
 	response = require('./mod/response');
