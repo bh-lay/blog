@@ -7,7 +7,7 @@ exports.render = function (req,res_this){
 	parse.request(req,function(err,data){
 		data.type = data.type||'';
 
-		if(data.type == 'chip' || data.type == 'html'){
+		if(data.type.match(/^(chip|html|ajax)$/)){
 			cache.clear(data.type,function(){
 				res_this.json({
 					'code': 1,
