@@ -21,7 +21,7 @@ var mongo = require('../conf/mongo_connect');
 var fs = require('fs');
 var querystring=require('querystring');
 
-function get_list(data,res_this){
+function get_list(data,callback){
 	var data = data,
 		limit_num = parseInt(data['limit'])||10,
 		skip_num = parseInt(data['skip'])||0;
@@ -40,6 +40,7 @@ function get_list(data,res_this){
 	      });
 	      
 	      collection.find({},{limit:limit_num}).sort({id:-1}).skip(skip_num).toArray(function(err, docs) {
+				method.close();
 				if(err){
 					resJSON.code = 2;
 				}else{
@@ -48,13 +49,12 @@ function get_list(data,res_this){
 					}
 					resJSON['list'] = docs;
 				}
-				res_this.json(resJSON);
-				method.close();
+				callback&&callback(resJSON);
 			});
 		});
 	});
 }
-function get_detail(data,res_this){
+function get_detail(data,callback){
 	var data=data,
 		articleID = data['id'];
 	
@@ -65,41 +65,56 @@ function get_detail(data,res_this){
 	mongo.start(function(method){
 		method.open({'collection_name':'article'},function(err,collection){
 			collection.find({id:articleID}).toArray(function(err, docs) {
+				method.close();
 				if(arguments[1].length==0){
 					resJSON['code'] = 2;
 					resJSON['msg'] = 'could not find this blog !';				
 				}else{ 
 					resJSON['detail'] = docs[0];
 				}
-				
-				res_this.json(resJSON);
-				method.close();
+				callback&&callback(resJSON);
 			});
 		});
 	});
 }
 
-exports.render = function (req,res_this,res){
-	var search = req.url.split('?')[1],
-		data = querystring.parse(search);
+function this_control(url,callback){
+	var search = url.split('?')[1],
+		 data = querystring.parse(search);
 	
 	if(data['act']=='get_list'){
-	
-		get_list(data,res_this,res);
+		get_list(data,function(json_data){
+			callback&&callback(json_data);
+		});
 		
 	}else if(data['act']=='get_detail'){
 		if(data['id']){
-			get_detail(data,res_this,res);
+			get_detail(data,function(json_data){
+				callback&&callback(json_data);
+			});
 		}else{
-			res_this.json({
+			callback&&callback({
 				'code' : 2,
 				'msg' : 'plese tell me which blog article you want to get !'
 			});
 		}
 	}else{
-		res_this.json({
+		callback&&callback({
 			'code' : 2,
 			'msg' : 'plese use [act] get_detail or get_list !'
 		});
 	}
+}
+
+exports.render = function (req,res_this,res){
+	
+	var url = req.url;
+
+	cache.ajax(url,function(this_cache){
+		res_this.json(this_cache);
+	},function(save_cache){
+		this_control(url,function(this_data){
+			save_cache(JSON.stringify(this_data));
+		});
+	});
 }

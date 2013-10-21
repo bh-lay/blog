@@ -160,8 +160,10 @@ L.loadImg = function (src,parm){
 		errorFn = parm['errorFn'] || null;
 	
 	var img = new Image();
-	img.onerror = function(){
-		errorFn&&errorFn();
+	if(errorFn){
+		img.onerror = function(){
+			errorFn();
+		}
 	};
 	if(loadFn){
 		img.onload = function(){

@@ -65,11 +65,18 @@ function connect(req,res){
 
 connect.prototype = {
 	//response json data
+	//data can be object or string
 	'json' : function(data){
+		var json_str ='';
+		if(typeof(data) == 'string'){
+			json_str = data;
+		}else{
+			json_str = JSON.stringify(data);
+		}
 		send.call(this,200,{
 			'Content-Type' : 'application/json',
 			'charset' : 'utf-8',
-		},JSON.stringify(data));
+		},json_str);
 	},
 	//response html page
 	'html' : function(status,content){
