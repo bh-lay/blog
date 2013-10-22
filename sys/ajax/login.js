@@ -28,7 +28,6 @@ var powerList = {
 function login (res_this,session_this,username,password){
 	var username = username,
 		password = password;
-	
 	if(session_this.get('user_group') == 'guest'){
 		
 		mongo.start(function(method){
@@ -36,14 +35,16 @@ function login (res_this,session_this,username,password){
 			method.open({'collection_name':'user'},function(err,collection){
 			
 				collection.find({'username':username,'password':password}).toArray(function(err, docs) {
+					method.close();
+					
 					if(docs.length > 0){
+						var user_group = docs[0]['user_group'];
 						session_this.set({
-							'user_group' : docs[0]['user_group'],
+							'user_group' : user_group,
 							'user_nick' : docs[0]['usernick'],
-							'power' : powerList[docs[0]['user_group']],
 							'user_id' : docs[0]['id']
 						});
-						console.log('i\'m ',powerList[docs[0]['user_group']]);
+						session_this.set_power(powerList[user_group]);
 						
 						res_this.json({
 							'code':1,
@@ -55,7 +56,6 @@ function login (res_this,session_this,username,password){
 							'msg':'二货，帐号密码输错了吧！'
 						});
 					}
-					method.close();
 				});
 			});
 		});
@@ -77,8 +77,8 @@ exports.render = function (req,res_this){
 	if (data['act']=='exist'){
 		session_this.set({
 			'user_group' : 'guest',
-			'power' : []
 		});
+		session_this.set_power([]);
 		res_this.json({
 			'code':1,
 			'msg':'exist success !'
