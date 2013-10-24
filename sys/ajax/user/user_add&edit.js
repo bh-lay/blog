@@ -70,27 +70,28 @@ exports.render = function (req,res_this){
 		};
 		if(parm['username']){
 			
-			var session_this = session.start(req,res_this);
+			session.start(req,res_this,function(session_this){
+				if(parm['id']&&parm['id'].length>2){
+					if(session_this.power(12)){
+						edit(parm,res_this);
+					}else{
+						res_this.json({
+							'code':2,
+							'msg':'no power to edit user !'
+						});
+					}
+				}else{
+					if(session_this.power(11)){
+						add(parm,res_this);
+					}else{
+						res_this.json({
+							'code':2,
+							'msg':'no power to edit user !'
+						});
+					}
+				}
+			});
 		
-			if(parm['id']&&parm['id'].length>2){
-				if(session_this.power(12)){
-					edit(parm,res_this);
-				}else{
-					res_this.json({
-						'code':2,
-						'msg':'no power to edit user !'
-					});
-				}
-			}else{
-				if(session_this.power(11)){
-					add(parm,res_this);
-				}else{
-					res_this.json({
-						'code':2,
-						'msg':'no power to edit user !'
-					});
-				}
-			}
 		}else{
 			res_this.json({
 				'code' : 2,

@@ -111,12 +111,12 @@ exports.render = function (req,res_this){
 	}else{
 		//check ['from'] is exist
 		if(del_conf[from]){
-			var session_this = session.start(req,res_this);
+			session.start(req,res_this,function(session_this){ 
+				param['collection_name'] = del_conf[from]['collection_name'];
+				param['need_power'] = del_conf[from]['power'];
 			
-			param['collection_name'] = del_conf[from]['collection_name'];
-			param['need_power'] = del_conf[from]['power'];
-			
-			DELET(param,res_this,session_this);
+				DELET(param,res_this,session_this);
+			});
 		}else{
 			res_this.json({
 				'code' : 2,

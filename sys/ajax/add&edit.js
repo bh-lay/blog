@@ -58,45 +58,47 @@ function edit(parm,res_this,collection_name){
 ////////////////////////////////////////////////
 function filter_request(req,res_this,callback){
 
-	var session_this = session.start(req,res_this),
-		need_power,
-		data_filter = {
-			error:null,
-			data : {},
-			collection_name : null
-		};
-	
-	parse.request(req,function(err,data){
-		var category = data['category'] || '';
-		switch(category){
-			case 'blog' :
-				data_filter = filter_request.blog(data);
-				data_filter['collection_name'] = 'article';
-				need_power = 3;
-				break
-			case 'share' :
-				data_filter = filter_request.share(data);
-				data_filter['collection_name'] = 'share';
-				need_power = 6;
-				break
-			case 'opus' :
-				data_filter = filter_request.opus(data);
-				data_filter['collection_name'] = 'opus';
-				need_power = 9;
-				break
-			case 'blog_friend' :
-				data_filter = filter_request.blog_friend(data);
-				data_filter['collection_name'] = 'blog_friend';
-				need_power = 18;
-				break
-			default :
-				data_filter['error'] = 'please input category [blog,share,opus,blog_friend]';
-		}
-		if(!session_this.power(need_power)){
-			data_filter['error'] = 'no power';
-		}
-		callback(data_filter);
+	session.start(req,res_this,function(session_this){
+		var need_power,
+			 data_filter = {
+				error:null,
+				data : {},
+				collection_name : null
+			 };
+		
+		parse.request(req,function(err,data){
+			var category = data['category'] || '';
+			switch(category){
+				case 'blog' :
+					data_filter = filter_request.blog(data);
+					data_filter['collection_name'] = 'article';
+					need_power = 3;
+					break
+				case 'share' :
+					data_filter = filter_request.share(data);
+					data_filter['collection_name'] = 'share';
+					need_power = 6;
+					break
+				case 'opus' :
+					data_filter = filter_request.opus(data);
+					data_filter['collection_name'] = 'opus';
+					need_power = 9;
+					break
+				case 'blog_friend' :
+					data_filter = filter_request.blog_friend(data);
+					data_filter['collection_name'] = 'blog_friend';
+					need_power = 18;
+					break
+				default :
+					data_filter['error'] = 'please input category [blog,share,opus,blog_friend]';
+			}
+			if(!session_this.power(need_power)){
+				data_filter['error'] = 'no power';
+			}
+			callback(data_filter);
+		});	
 	});
+
 }
 
 filter_request.blog = function(data){

@@ -7,12 +7,12 @@ var temp = fs.readFileSync('./templates/admin/index.html', "utf8");
 
 exports.render = function (req,res_this){
 	var res = res_this.response;
-	var session_this = session.start(req,res_this);
-	var usernick = session_this.get('user_nick');
-	
-	var userid = session_this.get('user_id');
-	
-	var txt = temp.replace('{-usernick-}',usernick).replace('{-userid-}',userid);
-	
-	res_this.html(200,txt);
+	session.start(req,res_this,function(session_this){
+		session_this.get('user_nick',function(usernick){
+			session_this.get('user_id',function(userid){
+				var txt = temp.replace('{-usernick-}',usernick).replace('{-userid-}',userid);
+				res_this.html(200,txt);	
+			});
+		});
+	});
 }

@@ -18,62 +18,92 @@ var expire_hour = 24;
  * }
  * 
  */
+
 //FIXME don't forget to delete expire session
-var session_pool={
-	'lib':{},
-	'expire':{},
-};
 
+var fs = require('fs');
+var session_root = './cache/session/';
 
-function SESSION(req,res_this){
+function save_session(){
+	var pathname = this.path;
+	var data = JSON.stringify(this);
+	fs.unlink(pathname,function(){
+		fs.writeFile(pathname,data,function(err){
+			if(err){
+				console.log('create session error');
+			};
+		});
+	});
+}
+
+function SESSION(req,res_this,callback){
 
 // get cookie from browser
 	var cookieStr = req.headers.cookie||'';
 	var cookieObj = parse.cookie(cookieStr);
 // get sessionID/IP/userAgent
-		
+	var IP = req['connection']['remoteAddress'];
+	var userAgent = req['headers']['user-agent'];
+	
 	this.sessionID = cookieObj['session_verify']||new Date().getTime() + Math.ceil(Math.random()*1000);
-	this.IP = req['connection']['remoteAddress'];
-	this.userAgent = req['headers']['user-agent'];
-	this.data = {
-		'user_group' : 'guest'
-	};
-	this.power_data = [];
+	this.path = session_root + this.sessionID + '.txt';
 	var that = this;
 // find sessionID in session library
-	if(!session_pool['lib'][this.sessionID]){
-		session_pool['lib'][this.sessionID] = {
-			'time_cerate':new Date(),
-			'ip' : this.IP,
-			'user-agent' : this.userAgent,
-			'power' : this.power_data,
-			'data':this.data
-		};
-		res_this.cookie({
-			'session_verify' : that.sessionID,
-			'path' : '/',
-			'Max-Age' : 60*60*24*2
-		});
-	}
+	fs.exists(this.path, function(exists) {
+		if(exists){
+			//read session file
+			fs.readFile(that.path,'UTF-8',function(err,file){
+				if(err){
+					console.log('readFile error');
+				}
+				var JSON_file = JSON.parse(file);
+				that.time_cerate = JSON_file['time_create'];
+				that.power_data = JSON_file['power_data'];
+				that.userAgent = JSON_file['userAgent'];
+				that.ip = JSON_file['ip'];
+				that.data = JSON_file['data'];
+				
+				callback&&callback();
+			});
+		}else{
+			//create session file
+			that.time_cerate = new Date();
+			that.power_data = [];
+			that.userAgent = userAgent;
+			that.ip = IP;
+			that.data = {
+				'user_group' : 'guest'
+			};
+			res_this.cookie({
+				'session_verify' : that.sessionID,
+				'path' : '/',
+				'Max-Age' : 60*60*24*2
+			});
+			
+			callback&&callback();
+			save_session.call(that);
+		}
+	});
 }
 SESSION.prototype = {
 	'set' : function (param){
 		var this_session = this.data;
 		for(var i in param){
-			session_pool['lib'][this.sessionID]['data'][i] = param[i];
+			this_session[i] = param[i];
 		}
+		save_session.call(this); 
 	},
-	'get' : function (name){
+	'get' : function (name,callback){
 		var this_session = this.data;
-		var getData = null;
-		getData = session_pool['lib'][this.sessionID]['data'][name];
-		return getData;
+		var getData = this_session[name] || null;
+		callback&&callback(getData);
 	},
 	'set_power' : function(array){
-		session_pool['lib'][this.sessionID]['power'] = array;
+		this.power_data = array;
+		save_session.call(this);
 	},
 	'power' : function (code){
-		if(code&&session_pool['lib'][this.sessionID]['power'][code]){
+		if(code&&this.power_data[code]){
 			return true;
 		}else{
 			return false;
@@ -85,6 +115,9 @@ SESSION.prototype = {
  *   match or create an sessionID
  *   return session data and set function
  */
-exports.start = function(req,res_this){
-	return new SESSION(req,res_this);
+exports.start = function(req,res_this,callback){
+	var session_this = new SESSION(req,res_this,function(){
+		callback&&callback(session_this);
+		console.log(session_this,session_this.prototype)
+	});
 };
