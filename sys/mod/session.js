@@ -27,13 +27,13 @@ var session_root = './cache/session/';
 function save_session(){
 	var pathname = this.path;
 	var data = JSON.stringify(this);
-	fs.unlink(pathname,function(){
+//	fs.unlink(pathname,function(){
 		fs.writeFile(pathname,data,function(err){
 			if(err){
 				console.log('create session error');
 			};
 		});
-	});
+//	});
 }
 
 function SESSION(req,res_this,callback){
@@ -58,7 +58,7 @@ function SESSION(req,res_this,callback){
 				}
 				var JSON_file = JSON.parse(file);
 				that.time_cerate = JSON_file['time_create'];
-				that.power_data = JSON_file['power_data'];
+				that.power_code = JSON_file['power_code'];
 				that.userAgent = JSON_file['userAgent'];
 				that.ip = JSON_file['ip'];
 				that.data = JSON_file['data'];
@@ -68,7 +68,7 @@ function SESSION(req,res_this,callback){
 		}else{
 			//create session file
 			that.time_cerate = new Date();
-			that.power_data = [];
+			that.power_code = [];
 			that.userAgent = userAgent;
 			that.ip = IP;
 			that.data = {
@@ -81,7 +81,6 @@ function SESSION(req,res_this,callback){
 			});
 			
 			callback&&callback();
-			save_session.call(that);
 		}
 	});
 }
@@ -89,21 +88,21 @@ SESSION.prototype = {
 	'set' : function (param){
 		var this_session = this.data;
 		for(var i in param){
-			this_session[i] = param[i];
+			if(i == 'power_data'){
+				this.power_code = param[i];
+			}else{
+				this_session[i] = param[i];
+			}
 		}
 		save_session.call(this); 
 	},
-	'get' : function (name,callback){
+	'get' : function (name){
 		var this_session = this.data;
 		var getData = this_session[name] || null;
-		callback&&callback(getData);
-	},
-	'set_power' : function(array){
-		this.power_data = array;
-		save_session.call(this);
+		return getData;
 	},
 	'power' : function (code){
-		if(code&&this.power_data[code]){
+		if(code&&this.power_code[code]){
 			return true;
 		}else{
 			return false;

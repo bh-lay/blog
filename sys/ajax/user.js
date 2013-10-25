@@ -6,8 +6,8 @@
 	});
  */
 
-var mongo = require('../../conf/mongo_connect');
-var session = require('../../mod/session');
+var mongo = require('../conf/mongo_connect');
+var session = require('../mod/session');
 
 function add(parm,res_this){
 	var parm = parm;
@@ -57,11 +57,11 @@ function edit(parm,res_this){
 		});
 	});
 }
-
-exports.render = function (req,res_this){
-	parse.request(req,function(error,fields, files){
+function add_edit (){
+	var that = this;
+	parse.request(this.request,function(error,fields, files){
 		var data = fields;
-		var parm={
+		var parm = {
 			'id' : data['id']||'',
 			'usernick':decodeURI(data['usernick']),
 			'username':data['username']||'',
@@ -69,22 +69,23 @@ exports.render = function (req,res_this){
 			'user_group':data['user_group']||'',
 		};
 		if(parm['username']){
-			
-			session.start(req,res_this,function(session_this){
+			session.start(that.request,that.res,function(session_this){
 				if(parm['id']&&parm['id'].length>2){
+					//check edit user power
 					if(session_this.power(12)){
-						edit(parm,res_this);
+						edit(parm,that.res);
 					}else{
-						res_this.json({
+						that.res.json({
 							'code':2,
 							'msg':'no power to edit user !'
 						});
 					}
 				}else{
+					//check add user power
 					if(session_this.power(11)){
-						add(parm,res_this);
+						add(parm,that.res);
 					}else{
-						res_this.json({
+						that.res.json({
 							'code':2,
 							'msg':'no power to edit user !'
 						});
@@ -93,10 +94,41 @@ exports.render = function (req,res_this){
 			});
 		
 		}else{
-			res_this.json({
+			that.res.json({
 				'code' : 2,
 				'msg' : 'please insert complete code !'
 			});
 		}
 	});
+}
+
+function signup(){
+	this.res.json({
+		'code' : 2,
+		'msg' : 'signup fail'
+	});
+}
+exports.render = function (req,res_this,path){
+	this.request = req;
+	this.res = res_this;
+	this.path = path;
+	if(path.pathnode.length == 2){
+		add_edit.call(this);
+	}else if(path.pathnode.length == 3){
+		switch(path.pathnode[2]){
+			case 'signup':
+				signup.call(this);
+			break
+			default :
+				res_this.json({
+					'code' : 2,
+					'msg' : 'wrong path'
+				});
+		}
+	}else{
+		res_this.json({
+			'code' : 2,
+			'msg' : 'wrong path'
+		});
+	}
 }
