@@ -36,12 +36,12 @@ function login (res_this,session_this,username,password){
 			if(docs.length > 0){
 				var user_group = docs[0]['user_group'];
 				
-				method.open({'collection_name':'user_group'},function(err,collection){
-					collection.find({'user_group':user_group}).toArray(function(err, docs) {
-						console.log(docs[0]['power']);
+		//		method.open({'collection_name':'user_group'},function(err,collection){
+		//			collection.find({'user_group':user_group}).toArray(function(err, docs) {
+		//				console.log(docs[0]['power']);
 						method.close();
-					});
-				});
+		//			});
+		//		});
 				
 				
 				session_this.set({
