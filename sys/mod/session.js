@@ -117,6 +117,6 @@ SESSION.prototype = {
 exports.start = function(req,res_this,callback){
 	var session_this = new SESSION(req,res_this,function(){
 		callback&&callback.call(session_this,session_this);
-		console.log(session_this,session_this.prototype)
+	//	console.log(session_this,session_this.prototype)
 	});
 };
