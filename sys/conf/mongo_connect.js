@@ -4,16 +4,16 @@
  */
 /****************************************************************************
  @demo
-	exports.start(function(method){
-		method.open({'collection_name':'article'},function(err,collection){
-			//dosomething……
-			//at last or you needn't connect to datebase,you should close it;
-			method.close();
-		});
+	var this_mongo = mongo.start();
+	this_mongo.open({'collection_name':'article'},function(err,collection){
+		//dosomething……
+		//at last or you needn't connect to datebase,you should close it;
+		this_mongo.close();
 	});
  ***************************************************************************/
 
 var mongodb = require('mongodb');
+//CONFIG is a global object
 var conf = CONFIG.mongo,
 	host = conf.host,
 	port = conf.port,
@@ -25,33 +25,44 @@ var conf = CONFIG.mongo,
  * @param DB,collection_name,callback
  * 
  */
+function connect(collection_name,callback){	
+	var that = this;
+	this.DB.authenticate(user, pass, function (err, val) {
+		if (err) {
+			callback&&callback('authorize failed !',undefined);
+		} else {
+			that.DB.createCollection(collection_name, function(err,collection){
+				callback&&callback(undefined,collection);
+			});
+		}	
+	});
+}
 
 function START(){
 	var mongoserver = new mongodb.Server(host, port, {w:-1});
 	this.DB = new mongodb.Db(db_name, mongoserver,{safe:true});
+	this.state = 'close';
 }
 START.prototype = {
 	'open' : function(parm,callback){
 		var collection_name = parm['collection_name']||'article';
-		var callback = callback||null;
 		var that = this;
-		this.DB.open(function (error, client) {
-			if (error){
-			 	callback('can not open datebase !',undefined);
-				return; 
-			}
-			that.DB.authenticate(user, pass, function (err, val) {
-				if (err) {
-					callback('authorize failed !',undefined);
-				} else {
-					that.DB.createCollection(collection_name, function(err,collection){
-						callback(undefined,collection);
-					});
-				}	
+		if(this.state == 'close'){
+			that.state = 'open';
+			this.DB.open(function (error, client) {
+				if (error){
+				 	callback&&callback('can not open datebase !',undefined);
+					return; 
+				}
+				that.client = client;
+				connect.call(that,collection_name,callback);
 			});
-		});
+		}else{
+			connect.call(that,collection_name,callback);
+		}
 	},
 	'close' : function(){
+		this.state = 'close';
 		this.DB.close();
 	}
 }

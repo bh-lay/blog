@@ -36,6 +36,10 @@ var del_conf = {
 		'collection_name' : 'user',
 		'power' : 13
 	},
+	'user_group' : {
+		'collection_name' : 'user_group',
+		'power' : 16
+	},
 	'blog_friend' : {
 		'collection_name' : 'blog_friend',
 		'power' : 18
@@ -120,7 +124,7 @@ exports.render = function (req,res_this){
 		}else{
 			res_this.json({
 				'code' : 2,
-				'msg' : 'please check [from] in [blog/share/opus/user] !'
+				'msg' : 'please check [from] in [blog/share/opus/user/user_group] !'
 			});
 		}
 	}

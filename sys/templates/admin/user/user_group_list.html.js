@@ -5,8 +5,8 @@ var mongo = require('../../../conf/mongo_connect');
 var pageTpl = fs.readFileSync('./templates/admin/user/user_group_list.html', "utf8");
 
 var temp=['<tr>',
-	'<td>{user_group_nick}</td>',
 	'<td>{user_group_name}</td>',
+	'<td>{user_group}</td>',
 	'<td>{power}</td>',
 	'<td>',
 		'<a href="user_group.html?id={id}" target="_self">改</a>',

@@ -17,7 +17,9 @@ function add(parm,res_this){
 			parm.id = parse.createID();
 
 			collection.insert(parm,function(err,result){
-				if(err) throw err;
+				if(err){
+					console.log(err)
+				};
 				res_this.json({
 					'code' : 1 ,
 					'id' : parm.id ,
@@ -57,11 +59,11 @@ exports.render = function (req,res_this){
 		var data = fields;
 		var parm={
 			'id' : data['id']||'',
-			'user_group_nick':decodeURI(data['user_group_nick']),
-			'user_group_name':data['user_group_name']||'',
+			'user_group_name':decodeURI(data['user_group_name']),
+			'user_group':data['user_group']||'',
 			'power':data['power']||'',
 		};
-		if(parm['user_group_name']){
+		if(parm['user_group']){
 			if(parm['id']&&parm['id'].length>2){
 				edit(parm,res_this)
 			}else{
