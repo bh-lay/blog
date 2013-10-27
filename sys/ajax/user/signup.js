@@ -12,23 +12,22 @@ var session = require('../../mod/session');
 function add(parm,res_this){
 	var parm = parm;
 	
-	mongo.start(function(method){
+	var method = mongo.start();
 		
-		method.open({'collection_name':'user'},function(err,collection){
-		
-			collection.find({}, {}).toArray(function(err, docs) {
-		
-				parm.id = parse.createID();
+	method.open({'collection_name':'user'},function(err,collection){
 	
-				collection.insert(parm,function(err,result){
-					if(err) throw err;
-					res_this.json({
-						'code' : 1,
-						'id' : parm.id ,
-						'msg' : 'sucess !'
-					});
-					method.close();
+		collection.find({}, {}).toArray(function(err, docs) {
+	
+			parm.id = parse.createID();
+
+			collection.insert(parm,function(err,result){
+				if(err) throw err;
+				res_this.json({
+					'code' : 1,
+					'id' : parm.id ,
+					'msg' : 'sucess !'
 				});
+				method.close();
 			});
 		});
 	});
@@ -37,23 +36,22 @@ function add(parm,res_this){
 function edit(parm,res_this){
 	var parm = parm;
 	
-	mongo.start(function(method){
+	var method = mongo.start();
 		
-		method.open({'collection_name':'user'},function(error,collection){
-			collection.update({'id':parm.id}, {$set:parm}, function(err,docs) {
-				if(err) {
-					res_this.json({
-						'code' : 1,
-						'msg' : 'modified failure !'
-					});       
-				}else {
-					res_this.json({
-						'code' : 1,
-						'msg' : 'modified success !'
-					});
-				}
-				method.close();
-			});
+	method.open({'collection_name':'user'},function(error,collection){
+		collection.update({'id':parm.id}, {$set:parm}, function(err,docs) {
+			if(err) {
+				res_this.json({
+					'code' : 1,
+					'msg' : 'modified failure !'
+				});       
+			}else {
+				res_this.json({
+					'code' : 1,
+					'msg' : 'modified success !'
+				});
+			}
+			method.close();
 		});
 	});
 }
@@ -69,7 +67,8 @@ exports.render = function (req,res_this){
 			'user_group':data['user_group']||'',
 		};
 		if(parm['username']){
-			session.start(req,res_this,function(session_this){
+			session.start(req,res_this,function(){
+				var session_this = this;
 				if(parm['id']&&parm['id'].length>2){
 					if(session_this.power(12)){
 						edit(parm,res_this);

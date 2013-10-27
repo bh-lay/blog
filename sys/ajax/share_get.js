@@ -32,25 +32,24 @@ function get_list(data,callback){
 		'skip':skip_num,
 	};
 	
-	mongo.start(function(method){
-		method.open({'collection_name':'share'},function(err,collection){
-	      //count the all list
-	      collection.count(function(err,count){
-	      	resJSON['count'] = count;
-	      });
-	      
-	      collection.find({},{limit:limit_num}).sort({id:-1}).skip(skip_num).toArray(function(err, docs) {
-				if(err){
-					resJSON.code = 2;
-				}else{
-					for(var i=0 in docs){
-						delete docs[i]['content'];
-					}
-					resJSON['list'] = docs;
+	var method = mongo.start();
+	method.open({'collection_name':'share'},function(err,collection){
+      //count the all list
+      collection.count(function(err,count){
+      	resJSON['count'] = count;
+      });
+      
+      collection.find({},{limit:limit_num}).sort({id:-1}).skip(skip_num).toArray(function(err, docs) {
+			if(err){
+				resJSON.code = 2;
+			}else{
+				for(var i=0 in docs){
+					delete docs[i]['content'];
 				}
-				callback&&callback(resJSON);
-				method.close();
-			});
+				resJSON['list'] = docs;
+			}
+			callback&&callback(resJSON);
+			method.close();
 		});
 	});
 }
@@ -62,19 +61,18 @@ function get_detail(data,callback){
 		'code':1,
 		'id' : data['id'],
 	};
-	mongo.start(function(method){
-		method.open({'collection_name':'share'},function(err,collection){
-			collection.find({id:articleID}).toArray(function(err, docs) {
-				if(arguments[1].length==0){
-					resJSON['code'] = 2;
-					resJSON['msg'] = 'could not find this share !';				
-				}else{ 
-					resJSON['detail'] = docs[0];
-				}
-				
-				callback&&callback(resJSON);
-				method.close();
-			});
+	var method = mongo.start();
+	method.open({'collection_name':'share'},function(err,collection){
+		collection.find({id:articleID}).toArray(function(err, docs) {
+			if(arguments[1].length==0){
+				resJSON['code'] = 2;
+				resJSON['msg'] = 'could not find this share !';				
+			}else{ 
+				resJSON['detail'] = docs[0];
+			}
+			
+			callback&&callback(resJSON);
+			method.close();
 		});
 	});
 }

@@ -56,25 +56,24 @@ function DELET(param,res_this,session_this){
 		session_this = session_this;
 		
 	if(session_this.power(need_power)){
-		mongo.start(function(method){
+		var method = mongo.start();
 		
-			method.open({'collection_name':collection_name},function(err,collection){
-			
-				collection.remove({id:id},function(err,docs){
-					if(err) {  
-						console.log('ERROR');
-						res_this.json({
-							'code' : 2,
-							'msg' : 'maybe something wrong !'
-						});
-					}else {
-						res_this.json({
-							'code' : 1,
-							'msg' : 'delete sucuss !'
-						});
-					}
-					method.close();
-				});
+		method.open({'collection_name':collection_name},function(err,collection){
+		
+			collection.remove({id:id},function(err,docs){
+				if(err) {  
+					console.log('ERROR');
+					res_this.json({
+						'code' : 2,
+						'msg' : 'maybe something wrong !'
+					});
+				}else {
+					res_this.json({
+						'code' : 1,
+						'msg' : 'delete sucuss !'
+					});
+				}
+				method.close();
 			});
 		});
 	}else{
@@ -111,7 +110,8 @@ exports.render = function (req,res_this){
 	}else{
 		//check ['from'] is exist
 		if(del_conf[from]){
-			session.start(req,res_this,function(session_this){ 
+			session.start(req,res_this,function(){
+				var session_this = this; 
 				param['collection_name'] = del_conf[from]['collection_name'];
 				param['need_power'] = del_conf[from]['power'];
 			

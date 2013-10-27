@@ -16,25 +16,24 @@ var temp=['<tr>',
 
 exports.render = function (req,res_this){
 	
-	mongo.start(function(method){
+	var method = mongo.start();
 		
-		method.open({'collection_name':'user_group'},function(err,collection){
-	
-		    collection.find({},{}).toArray(function(err, docs) {
-				var txt='';
-				var tpl = temp.join('');
-				for(var i in docs){
-					txt += tpl.replace(/\{(\w*)}/g,function(){
-						return docs[i][arguments[1]]||'';
-					});
-				}
-				
-				var page = pageTpl.replace('{-content-}',txt);
-				
-				res_this.html(200,page);
-				
-				method.close();
-			});
+	method.open({'collection_name':'user_group'},function(err,collection){
+
+	    collection.find({},{}).toArray(function(err, docs) {
+			var txt='';
+			var tpl = temp.join('');
+			for(var i in docs){
+				txt += tpl.replace(/\{(\w*)}/g,function(){
+					return docs[i][arguments[1]]||'';
+				});
+			}
+			
+			var page = pageTpl.replace('{-content-}',txt);
+			
+			res_this.html(200,page);
+			
+			method.close();
 		});
 	});
 }

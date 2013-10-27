@@ -9,22 +9,21 @@ var session = require('../mod/session');
 function add(parm,res_this,collection_name){
 	var parm = parm;
 	
-	mongo.start(function(method){
-		
-		method.open({'collection_name':collection_name},function(err,collection){
-			collection.find({}, {}).toArray(function(err, docs) {
-				
-				parm.id = parse.createID();
-	
-				collection.insert(parm,function(err,result){
-					if(err){console.log('error');}
-					res_this.json({
-						'code' : 1,
-						'id' : parm.id,
-						'msg' : 'add sucess !'
-					});
-					method.close();
+	var method = mongo.start();
+
+	method.open({'collection_name':collection_name},function(err,collection){
+		collection.find({}, {}).toArray(function(err, docs) {
+			
+			parm.id = parse.createID();
+
+			collection.insert(parm,function(err,result){
+				if(err){console.log('error');}
+				res_this.json({
+					'code' : 1,
+					'id' : parm.id,
+					'msg' : 'add sucess !'
 				});
+				method.close();
 			});
 		});
 	});
@@ -32,25 +31,24 @@ function add(parm,res_this,collection_name){
 function edit(parm,res_this,collection_name){
 	var parm = parm;
 	
-	mongo.start(function(method){
+	var method = mongo.start();
 		
-		method.open({'collection_name':collection_name},function(error,collection){
-			collection.update({'id':parm.id}, {$set:parm}, function(err,docs) {
-				if(err) {
-					res_this.json({
-						'code' : 2,
-						'id' : parm.id,
-						'msg' : 'edit blog fail !'
-					});       
-				}else {
-					res_this.json({
-						'code':1,
-						'id' : parm.id,
-						'msg':'edit success !'
-					});
-				}
-				method.close();
-			});
+	method.open({'collection_name':collection_name},function(error,collection){
+		collection.update({'id':parm.id}, {$set:parm}, function(err,docs) {
+			if(err) {
+				res_this.json({
+					'code' : 2,
+					'id' : parm.id,
+					'msg' : 'edit blog fail !'
+				});       
+			}else {
+				res_this.json({
+					'code':1,
+					'id' : parm.id,
+					'msg':'edit success !'
+				});
+			}
+			method.close();
 		});
 	});
 }
@@ -58,7 +56,8 @@ function edit(parm,res_this,collection_name){
 ////////////////////////////////////////////////
 function filter_request(req,res_this,callback){
 
-	session.start(req,res_this,function(session_this){
+	session.start(req,res_this,function(){
+		var session_this = this;
 		var need_power,
 			 data_filter = {
 				error:null,

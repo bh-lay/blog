@@ -7,43 +7,41 @@ var chip = require('../mod/chip');
 
 function list_page(callback){
 	temp.get('opusList',{'init':true},function(page_temp){
-		mongo.start(function(method){
-	
-			method.open({'collection_name':'opus'},function(err,collection){
-	
-				collection.find({}, {limit:28}).sort({id:-1}).toArray(function(err, docs) {
-					method.close();
-					for(var i = 0,total = docs.length;i<total;i++){
-						docs[i]['work_range'] = docs[i]['work_range']?docs[i]['work_range'].split(/\,/):['暂未填写'];
-					}
-					chip.produce('opus_item',{'list':docs},function(txt){
-						var page_txt = page_temp.replace('{-content-}',txt);
-						callback(page_txt);
-					});
+		var method = mongo.start();
+
+		method.open({'collection_name':'opus'},function(err,collection){
+
+			collection.find({}, {limit:28}).sort({id:-1}).toArray(function(err, docs) {
+				method.close();
+				for(var i = 0,total = docs.length;i<total;i++){
+					docs[i]['work_range'] = docs[i]['work_range']?docs[i]['work_range'].split(/\,/):['暂未填写'];
+				}
+				chip.produce('opus_item',{'list':docs},function(txt){
+					var page_txt = page_temp.replace('{-content-}',txt);
+					callback(page_txt);
 				});
-	
 			});
-	
+
 		});
+
 	});
 }
 
 function detail_page(id,callback){
-	mongo.start(function(method){
-		method.open({'collection_name':'opus'},function(err,collection){
-			collection.find({id:id}).toArray(function(err, docs) {
-				method.close();
-				if(docs.length==0){
-					res_this.notFound('哇塞，貌似这作品享不存在哦!');
-				}else{
-					temp.get('opusDetail',{'init':true},function(page_temp){
-						docs[0].opus_time_create = parse.time(docs[0].opus_time_create ,'{y}-{m}-{d}');
-						var juicer = require('juicer');
-						var txt = juicer(page_temp,docs[0]);
-						callback(txt);
-					});
-				}
-			});
+	var method = mongo.start();
+	method.open({'collection_name':'opus'},function(err,collection){
+		collection.find({id:id}).toArray(function(err, docs) {
+			method.close();
+			if(docs.length==0){
+				res_this.notFound('哇塞，貌似这作品享不存在哦!');
+			}else{
+				temp.get('opusDetail',{'init':true},function(page_temp){
+					docs[0].opus_time_create = parse.time(docs[0].opus_time_create ,'{y}-{m}-{d}');
+					var juicer = require('juicer');
+					var txt = juicer(page_temp,docs[0]);
+					callback(txt);
+				});
+			}
 		});
 	});
 }

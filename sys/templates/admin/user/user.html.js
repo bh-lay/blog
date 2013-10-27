@@ -40,21 +40,19 @@ exports.render = function (req,res_this){
 	search&&(search=search.replace('?',''));
 	var userID = querystring.parse(search).userid;
 	if(userID){
-		mongo.start(function(method){
-		
-			method.open({'collection_name':'user'},function(err,collection){
-		
-				collection.find({'id':userID}).toArray(function(err, docs) {		
-					if(docs.length == 0){
-						res_this.json({'msg':'this user is not found !'});
-					}else{
-						var txt = valueInit(docs[0]);
-						res_this.html(200,txt);
-					}
-					
-					method.close();
-				});
+		var method = mongo.start();
+	
+		method.open({'collection_name':'user'},function(err,collection){
+	
+			collection.find({'id':userID}).toArray(function(err, docs) {		
+				if(docs.length == 0){
+					res_this.json({'msg':'this user is not found !'});
+				}else{
+					var txt = valueInit(docs[0]);
+					res_this.html(200,txt);
+				}
 				
+				method.close();
 			});
 			
 		});

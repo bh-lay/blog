@@ -217,14 +217,13 @@ chip.index = function(callback){
 		'</div>',
 	'</div>'].join('');
 	
-	mongo.start(function(method){
-		method.open({'collection_name':'blog_friend'},function(err,collection){
-			collection.find({}, {limit:10}).toArray(function(err, docs) {
-				var chip = juicer(this_tpl,{'friend_list':docs})
-				
-				callback(chip);
-				method.close();
-			});
+	var method = mongo.start();
+	method.open({'collection_name':'blog_friend'},function(err,collection){
+		collection.find({}, {limit:10}).toArray(function(err, docs) {
+			var chip = juicer(this_tpl,{'friend_list':docs})
+			
+			callback(chip);
+			method.close();
 		});
 	});
 };

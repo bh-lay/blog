@@ -18,7 +18,7 @@ exports.render = function (req,res_this){
 	search&&(search=search.replace('?',''));
 	var articleID=querystring.parse(search).articleID;
 	if(articleID){
-		mongo.start(function(method){
+		var method = mongo.start();
 		
 			method.open({'collection_name':'article'},function(err,collection){
 				
@@ -30,7 +30,6 @@ exports.render = function (req,res_this){
 					method.close();
 				});
 			});
-		});
 	}else{
 		res_this.html(200,valueInit({}));
 	}

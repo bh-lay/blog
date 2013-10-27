@@ -21,7 +21,7 @@ exports.render = function (req,res_this){
 		parm['page_cur'] = parseInt(parm['page_cur']);
 	var skip_list=parm['page_list_num']*(parm['page_cur']-1);
 	
-	mongo.start(function(method){
+	var method = mongo.start();
 		
 		method.open({'collection_name':'article'},function(err,collection){
 
@@ -52,5 +52,4 @@ exports.render = function (req,res_this){
 				method.close();
 			});
 		});
-	});
 }

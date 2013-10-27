@@ -29,44 +29,37 @@ function login (res_this,session_this,username,password){
 	var username = username,
 		password = password;
 	var user_group = session_this.get('user_group');
-
-	if(user_group == 'guest'){
-		mongo.start(function(method){
-			method.open({'collection_name':'user'},function(err,collection){
-				collection.find({'username':username,'password':password}).toArray(function(err, docs) {
-					method.close();
-					if(docs.length > 0){
-						var user_group = docs[0]['user_group'];
-						session_this.set({
-							'user_group' : user_group,
-							'user_nick' : docs[0]['usernick'],
-							'user_id' : docs[0]['id'],
-							'power_data' : powerList[user_group]
-						});
-						
-						res_this.json({
-							'code':1,
-							'msg':'login success!'
-						});
-					}else{
-						res_this.json({
-							'code':2,
-							'msg':'二货，帐号密码输错了吧！'
-						});
-					}
+	//matche user
+	var method = mongo.start();
+	method.open({'collection_name':'user'},function(err,collection){
+		collection.find({'username':username,'password':password}).toArray(function(err, docs) {
+			method.close();
+			if(docs.length > 0){
+				var user_group = docs[0]['user_group'];
+				session_this.set({
+					'user_group' : user_group,
+					'user_nick' : docs[0]['usernick'],
+					'user_id' : docs[0]['id'],
+					'power_data' : powerList[user_group]
 				});
-			});
+				
+				res_this.json({
+					'code':1,
+					'msg':'login success!'
+				});
+			}else{
+				res_this.json({
+					'code':2,
+					'msg':'二货，帐号密码输错了吧！'
+				});
+			}
 		});
-	}else{
-		res_this.json({
-			'code':201,
-			'msg':'二货，你已经登陆过喽，要退出吗!'
-		});
-	}
+	});
 }
 exports.render = function (req,res_this){
 
-	session.start(req,res_this,function(session_this){
+	session.start(req,res_this,function(){
+		var session_this = this;
 		var search = req.url.split('?')[1]||'';
 		var data = querystring.parse(search);
 		//exist

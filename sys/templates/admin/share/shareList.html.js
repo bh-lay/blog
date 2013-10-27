@@ -20,35 +20,34 @@ exports.render = function (req,res_this){
 	parm['page_cur'] = parseInt(parm['page_cur']);
 	var skip_list=parm['page_list_num']*(parm['page_cur']-1);
 	
-	mongo.start(function(method){
+	var method = mongo.start();
 		
-		method.open({'collection_name':'share'},function(err,collection){
-	
-	      //count the all list
-	      collection.count(function(err,count){
-	      	parm['list_count'] = count;
-	      });
-	      
-	      collection.find({},{limit:parm['page_list_num']}).sort({id:-1}).skip(skip_list).toArray(function(err, docs) {
-				var txt='';
-				var tpl=temp.join('');
-				for(var i in docs){
-					docs[i].time_show = parse.time(docs[i].time_show,'{y}-{m}-{d}');
-					
-					txt+=tpl.replace(/\{(\w*)}/g,function(){
-						return docs[i][arguments[1]]||22222;
-					});
-				}
-				var tpl = fs.readFileSync('./templates/admin/share/shareList.html', "utf8");
-				var pageTpl = page.render(parm);
-				tpl = tpl.replace('{pageBar}',pageTpl);
-			
-				tpl = tpl.replace('{content}',txt);
-				
-				res_this.html(200,tpl);
+	method.open({'collection_name':'share'},function(err,collection){
 
-				method.close();
-			});
+      //count the all list
+      collection.count(function(err,count){
+      	parm['list_count'] = count;
+      });
+      
+      collection.find({},{limit:parm['page_list_num']}).sort({id:-1}).skip(skip_list).toArray(function(err, docs) {
+			var txt='';
+			var tpl=temp.join('');
+			for(var i in docs){
+				docs[i].time_show = parse.time(docs[i].time_show,'{y}-{m}-{d}');
+				
+				txt+=tpl.replace(/\{(\w*)}/g,function(){
+					return docs[i][arguments[1]]||22222;
+				});
+			}
+			var tpl = fs.readFileSync('./templates/admin/share/shareList.html', "utf8");
+			var pageTpl = page.render(parm);
+			tpl = tpl.replace('{pageBar}',pageTpl);
+		
+			tpl = tpl.replace('{content}',txt);
+			
+			res_this.html(200,tpl);
+
+			method.close();
 		});
 	});
 }

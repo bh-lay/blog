@@ -7,14 +7,13 @@ var chip = require('../mod/chip');
 
 function list_page(callback){
 	temp.get('shareList',{'init':true},function(page_temp){
-		mongo.start(function(method){
-			method.open({'collection_name':'share'},function(err,collection){
-				collection.find({}, {limit:15}).sort({id:-1}).toArray(function(err, docs) {
-					method.close();
-					chip.produce('share_item',{'list':docs},function(txt){
-						var page_txt = page_temp.replace('{-content-}',txt);
-						callback(page_txt);
-					});
+		var method = mongo.start();
+		method.open({'collection_name':'share'},function(err,collection){
+			collection.find({}, {limit:15}).sort({id:-1}).toArray(function(err, docs) {
+				method.close();
+				chip.produce('share_item',{'list':docs},function(txt){
+					var page_txt = page_temp.replace('{-content-}',txt);
+					callback(page_txt);
 				});
 			});
 		});
@@ -23,25 +22,20 @@ function list_page(callback){
 
 function detail_page(id,callback){
 	temp.get('shareDetail',{'init':true},function(page_temp){
-		mongo.start(function(method){
-	
-			method.open({'collection_name':'share'},function(err,collection){
-	
-				collection.find({id:id}).toArray(function(err, docs) {
-					method.close();
-					if(docs.length==0){
-						res_this.notFound('哇塞，貌似这篇分享不存在哦!');
-					}else{
-						docs[0].time_show = parse.time(docs[0].time_show ,'{y}-{m}-{d}');
-	
-						var juicer = require('juicer');
-						var txt = juicer(page_temp,docs[0]);
-						callback(txt);
-					}
-				});
-	
+		var method = mongo.start();
+		method.open({'collection_name':'share'},function(err,collection){
+			collection.find({id:id}).toArray(function(err, docs) {
+				method.close();
+				if(docs.length==0){
+					res_this.notFound('哇塞，貌似这篇分享不存在哦!');
+				}else{
+					docs[0].time_show = parse.time(docs[0].time_show ,'{y}-{m}-{d}');
+
+					var juicer = require('juicer');
+					var txt = juicer(page_temp,docs[0]);
+					callback(txt);
+				}
 			});
-	
 		});
 	});
 }

@@ -16,28 +16,27 @@ var temp=['<tr>',
 
 exports.render = function (req,res_this){
 
-	mongo.start(function(method){
+	var method = mongo.start();
 		
-		method.open({'collection_name':'blog_friend'},function(err,collection){
-	      
-	      collection.find().sort({id:-1}).toArray(function(err, docs) {
-				var txt = '';
-				var tpl = temp;
-				for(var i in docs){
-					docs[i].time_create = docs[i].time_create?parse.time(docs[i].time_create,'{y}-{m}-{d}'):null;
-					
-					txt += tpl.replace(/\{(\w*)}/g,function(){
-						return docs[i][arguments[1]]||'未填写';
-					});
-				}
-				var tpl = fs.readFileSync('./templates/admin/tool/friendList.html', "utf8");
-			
-				tpl = tpl.replace('{content}',txt);
+	method.open({'collection_name':'blog_friend'},function(err,collection){
+      
+      collection.find().sort({id:-1}).toArray(function(err, docs) {
+			var txt = '';
+			var tpl = temp;
+			for(var i in docs){
+				docs[i].time_create = docs[i].time_create?parse.time(docs[i].time_create,'{y}-{m}-{d}'):null;
 				
-				res_this.html(200,tpl);
+				txt += tpl.replace(/\{(\w*)}/g,function(){
+					return docs[i][arguments[1]]||'未填写';
+				});
+			}
+			var tpl = fs.readFileSync('./templates/admin/tool/friendList.html', "utf8");
+		
+			tpl = tpl.replace('{content}',txt);
+			
+			res_this.html(200,tpl);
 
-				method.close();
-			});
+			method.close();
 		});
 	});
 }

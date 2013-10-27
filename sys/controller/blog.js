@@ -11,17 +11,16 @@ var fs = require('fs');
 
 function list_page(callback){
 	temp.get('blogList',{'init':true},function(page_temp){
-		mongo.start(function(method){
-			method.open({'collection_name':'article'},function(err,collection){
-				collection.find({}, {limit:10}).sort({id:-1}).toArray(function(err, docs) {
-					method.close();
-					for(var i in docs){
-						docs[i].time_show = parse.time(docs[i].time_show ,'{y}-{m}-{d}');
-					}
-					chip.produce('article_item',{'list' : docs},function(txt){
-						var page = page_temp.replace('{-content-}',txt);
-						callback(page);
-					});
+		var method = mongo.start();
+		method.open({'collection_name':'article'},function(err,collection){
+			collection.find({}, {limit:10}).sort({id:-1}).toArray(function(err, docs) {
+				method.close();
+				for(var i in docs){
+					docs[i].time_show = parse.time(docs[i].time_show ,'{y}-{m}-{d}');
+				}
+				chip.produce('article_item',{'list' : docs},function(txt){
+					var page = page_temp.replace('{-content-}',txt);
+					callback(page);
 				});
 			});
 		});
@@ -31,20 +30,19 @@ function list_page(callback){
 function detail_page(id,callback){
 	//get template
 	temp.get('blogDetail',{'init':true},function(page_temp){
-		mongo.start(function(method){
-	
-			method.open({'collection_name':'article'},function(err,collection){
-	
-				collection.find({id:id}).toArray(function(err, docs) {
-					method.close();
-					if(arguments[1].length==0){
-						res_this.notFound('哇塞，貌似这篇博文不存在哦!');
-					}else{
-						docs[0].time_show = parse.time(docs[0].time_show ,'{y}-{m}-{d}');
-						var txt = juicer(page_temp,docs[0]);
-						callback&&callback(txt);
-					}
-				});
+		var method = mongo.start();
+
+		method.open({'collection_name':'article'},function(err,collection){
+
+			collection.find({id:id}).toArray(function(err, docs) {
+				method.close();
+				if(arguments[1].length==0){
+					res_this.notFound('哇塞，貌似这篇博文不存在哦!');
+				}else{
+					docs[0].time_show = parse.time(docs[0].time_show ,'{y}-{m}-{d}');
+					var txt = juicer(page_temp,docs[0]);
+					callback&&callback(txt);
+				}
 			});
 		});
 	});

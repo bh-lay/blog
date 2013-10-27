@@ -17,15 +17,14 @@ exports.render = function (req,res_this){
 	search&&(search=search.replace('?',''));
 	var id = querystring.parse(search).id;
 	if(id){
-		mongo.start(function(method){
-			method.open({'collection_name':'blog_friend'},function(err,collection){
-				collection.find({'id':id}).toArray(function(err, docs) {		
-					var txt=valueInit(docs[0]);
-					
-					res_this.html(200,txt);
-					
-					method.close();
-				});
+		var method = mongo.start();
+		method.open({'collection_name':'blog_friend'},function(err,collection){
+			collection.find({'id':id}).toArray(function(err, docs) {		
+				var txt=valueInit(docs[0]);
+				
+				res_this.html(200,txt);
+				
+				method.close();
 			});
 		});
 	}else{

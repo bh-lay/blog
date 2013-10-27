@@ -12,9 +12,8 @@ exports.deal = function(req,res_this,path){
 	if(!path.filename) {
 		pathname += '/index.html'
 	}
-	session.start(req,res_this,function(session_this){
-		
-		console.log(session_this.power(powerCode),session_this,'----------------------');
+	session.start(req,res_this,function(){
+		var session_this = this;
 		if(session_this.power(powerCode) || pathname == login_path){
 			var pagePath = './templates' + pathname;
 			var controlPath = './templates' + pathname + '.js';

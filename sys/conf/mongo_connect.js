@@ -25,37 +25,37 @@ var conf = CONFIG.mongo,
  * @param DB,collection_name,callback
  * 
  */
-function open(DB,collection_name,callback){
-	var parm = parm||{};
-	
-	DB.open(function (error, client) {
-		if (error){
-		 	callback('can not open datebase !',undefined);
-			return; 
-		}
-		DB.authenticate(user, pass, function (err, val) {
-			if (err) {
-				callback('authorize failed !',undefined);
-			} else {
-				DB.createCollection(collection_name, function(err,collection){
-					callback(undefined,collection);
-				});
-			}	
+
+function START(){
+	var mongoserver = new mongodb.Server(host, port, {w:-1});
+	this.DB = new mongodb.Db(db_name, mongoserver,{safe:true});
+}
+START.prototype = {
+	'open' : function(parm,callback){
+		var collection_name = parm['collection_name']||'article';
+		var callback = callback||null;
+		var that = this;
+		this.DB.open(function (error, client) {
+			if (error){
+			 	callback('can not open datebase !',undefined);
+				return; 
+			}
+			that.DB.authenticate(user, pass, function (err, val) {
+				if (err) {
+					callback('authorize failed !',undefined);
+				} else {
+					that.DB.createCollection(collection_name, function(err,collection){
+						callback(undefined,collection);
+					});
+				}	
+			});
 		});
-	});
+	},
+	'close' : function(){
+		this.DB.close();
+	}
 }
 
 exports.start = function(callback) {
-	var mongoserver = new mongodb.Server(host, port, {w:-1});
-	var DB = new mongodb.Db(db_name, mongoserver,{safe:true});
-	callback({
-		'open' : function(parm,callback){
-			var collection_name = parm['collection_name']||'article';
-			var callback = callback||null;
-			open(DB,collection_name,callback);
-		},
-		'close' : function(){
-			DB.close();
-		}
-	});
+	return new START();
 };
