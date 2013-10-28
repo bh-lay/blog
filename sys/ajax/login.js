@@ -41,7 +41,7 @@ function login (res_this,session_this,username,password){
 					method.close();
 					session_this.set({
 						'user_group' : user_group,
-						'user_nick' : docs[0]['usernick'],
+						'user_nick' : docs[0]['usernick'], 
 						'user_id' : docs[0]['id'],
 						'power_data' : power_data
 					});

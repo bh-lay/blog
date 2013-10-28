@@ -60,11 +60,11 @@ function add_edit (){
 	parse.request(this.request,function(error,fields, files){
 		var data = fields;
 		var parm = {
-			'id' : data['id']||'',
+			'id' : data['id'] || '',
 			'usernick':decodeURI(data['usernick']),
-			'username':data['username']||'',
-			'password':data['password']||'',
-			'user_group':data['user_group']||'',
+			'username':data['username'] || '',
+			'password':data['password'] || '',
+			'user_group':data['user_group'] || '',
 		};
 		if(parm['username']){
 			session.start(that.request,that.res,function(){
@@ -102,9 +102,38 @@ function add_edit (){
 }
 
 function signup(){
-	this.res.json({
-		'code' : 2,
-		'msg' : 'signup fail'
+	var that = this;
+	parse.request(this.request,function(error,data){
+		var param = {};
+		param['email'] = data['email'] || null;
+		param['username'] = data['email'] || null;
+		param['usernick'] = data['usernick'] || param['username'] || '';
+		param['password'] = data['password'] || null;
+		param['user_group'] = 'user';
+		param['id'] = parse.createID();
+		if(param['email']&&param['password']){
+			var method = mongo.start();
+			method.open({'collection_name':'user'},function(err,collection){
+				collection.find({}, {}).toArray(function(err, docs) {
+					collection.insert(param,function(err,result){
+						method.close();
+						if(err){
+							console.log(err);
+						}
+						that.res.json({
+							'code' : 1,
+							'id' : param.id ,
+							'msg' : 'sucess !'
+						});
+					});
+				});
+			});
+		}else{
+			that.res.json({
+				'code' : 2,
+				'msg' : 'signup fail'
+			});
+		}
 	});
 }
 exports.render = function (req,res_this,path){

@@ -102,7 +102,7 @@ SESSION.prototype = {
 		return getData;
 	},
 	'power' : function (code){
-		if(code&&this.power_code[code]){
+		if(code&&this.power_code[code]=='1'){
 			return true;
 		}else{
 			return false;
