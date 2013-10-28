@@ -19,42 +19,39 @@ var session = require('../mod/session');
 var querystring = require('querystring');
 var mongo = require('../conf/mongo_connect');
 
-var powerList = {
-	'admin' : [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-	'editor' : [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-	'test' : [1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+function get_power(method,user_group,callback){
+	method.open({'collection_name':'user_group'},function(err,collection){
+		collection.find({'user_group':user_group}).toArray(function(err, docs) {
+			var power_data = docs[0]['power'];
+			callback&&callback(power_data);
+		});
+	});
 }
 
 function login (res_this,session_this,username,password){
 	var username = username,
 		password = password;
-	var user_group = session_this.get('user_group');
 	//matche user
 	var method = mongo.start();
 	method.open({'collection_name':'user'},function(err,collection){
 		collection.find({'username':username,'password':password}).toArray(function(err, docs) {
 			if(docs.length > 0){
 				var user_group = docs[0]['user_group'];
-				
-		//		method.open({'collection_name':'user_group'},function(err,collection){
-		//			collection.find({'user_group':user_group}).toArray(function(err, docs) {
-		//				console.log(docs[0]['power']);
-						method.close();
-		//			});
-		//		});
-				
-				
-				session_this.set({
-					'user_group' : user_group,
-					'user_nick' : docs[0]['usernick'],
-					'user_id' : docs[0]['id'],
-					'power_data' : powerList[user_group]
+				get_power(method,user_group,function(power_data){
+					method.close();
+					session_this.set({
+						'user_group' : user_group,
+						'user_nick' : docs[0]['usernick'],
+						'user_id' : docs[0]['id'],
+						'power_data' : power_data
+					});
+					
+					res_this.json({
+						'code':1,
+						'msg':'login success!'
+					});
 				});
 				
-				res_this.json({
-					'code':1,
-					'msg':'login success!'
-				});
 			}else{
 				res_this.json({
 					'code':2,

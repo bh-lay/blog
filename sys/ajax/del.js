@@ -43,6 +43,10 @@ var del_conf = {
 	'blog_friend' : {
 		'collection_name' : 'blog_friend',
 		'power' : 18
+	},
+	'power' : {
+		'collection_name' : 'power',
+		'power' : 20
 	}
 }
 

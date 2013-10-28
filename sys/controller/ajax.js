@@ -9,6 +9,7 @@ var ajaxConfig = {
 	'blog':'article_get',
 	'user':'user',
 	'user_group':'user/user_group_add&edit',
+	'power':'user/power_add&edit',
 	'temp':'temp',
 	'tempModify':'tempModify',
 	'login':'login',
