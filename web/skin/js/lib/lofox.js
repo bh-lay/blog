@@ -5,7 +5,7 @@
  * lofox mean : location fox
  */
 var lofox = function(dom,callback){
-	return new lofox.start(dom,callback);
+	return new lofox.init(dom,callback);
 };
 
 (function(exports){
@@ -44,6 +44,7 @@ var lofox = function(dom,callback){
 		if(data){
 			data['title']&&page_title.html(data['title']);
 			var start_time = new Date().getTime();
+			this.render_code++;
 			data['renderFn']&&data['renderFn'].call({
 				'path' : path,
 				'dom' :that.dom,
@@ -87,19 +88,20 @@ var lofox = function(dom,callback){
 		}
 	};	
 
-	var START = function(dom,callback){
+	var INIT = function(dom,callback){
 		console.log('lofox:','i\'m start !');
 		this.router = {};
 		this.callback = callback;
 		this.support = true;
 		this.dom = dom;
+		this.render_count = 1;
 		if(window.history&&window.history.pushState){
 			HTML5.call(this,callback);
 		}else{
 			this.support = false;
 		}
 	};
-	START.prototype = {
+	INIT.prototype = {
 		'set' : function(root,name,callback){
 			var root = arguments[0];
 			var name = typeof(arguments[1]) == 'string' ? arguments[1] :null;
@@ -122,7 +124,7 @@ var lofox = function(dom,callback){
 			}
 		}
 	};
-	exports.start = START;
+	exports.init = INIT;
 })(lofox);
 
 

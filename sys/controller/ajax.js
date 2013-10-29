@@ -15,7 +15,8 @@ var ajaxConfig = {
 	'login':'login',
 	'del' : 'del',
 	'upload':'upload',
-	'clear_cache':'clear_cache'
+	'clear_cache':'clear_cache',
+	'disk':'disk'
 };
 
 exports.deal = function (req,res_this,path){
