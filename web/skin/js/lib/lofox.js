@@ -4,26 +4,77 @@
  *  
  * lofox mean : location fox
  */
-var lofox = function(param,callback){
-	return lofox.start(param,callback);
+var lofox = function(dom,callback){
+	return new lofox.start(dom,callback);
 };
 
 (function(exports){
-	var HTML5 = function(callback){
-		console.log('lofox:','support history API !');
+	function parse_url(url){
+		var pathname = url || window.location.pathname;
+			pathname = pathname.replace(/^\/|\/$/g,'');
+		var path_node = pathname.split(/\//);
+		path_node[0] = '/' + path_node[0];
+		return path_node;
+	}
+	var page_title = $('title');
+	function render_over(){
+		var that = this;
+		if(this.title){
+			page_title.html(this.title);
+		}
+		var end_time = new Date().getTime(),
+			min_time = 400,
+			delay_time = 0;
 		
+		if(end_time - this.start_time < min_time){
+			delay_time = min_time - (end_time - this.start_time);
+		}
+		setTimeout(function(){
+			that.loading.close();
+			that.dom&&that.dom.fadeIn(300);
+		},delay_time);
+	}
+	function render(url){
+		console.log('render :','this page is [' + path + ']');
+		var loading = L.dialog.loading();
+		this.dom.hide();
+		var path = parse_url(url);
+		var data = this.router[path[0]] || null;
+		var that = this;
+		if(data){
+			data['title']&&page_title.html(data['title']);
+			var start_time = new Date().getTime();
+			data['renderFn']&&data['renderFn'].call({
+				'path' : path,
+				'dom' :that.dom,
+				'render_over' : function(title){
+					render_over.call({
+						'start_time' : start_time,
+						'title' : title,
+						'loading' : loading,
+						'dom' : that.dom
+					});
+				}
+			},{
+				'init' : true
+			});
+		}
+	}
+	var HTML5 = function(){
+		console.log('lofox:','support history API !');
+		var that = this;
 		window.addEventListener('popstate',function(e){
-
 			var state = e.state || {};
 			//Avoid multiple rendering
 			if(state.url){
-				callback(state.url);
+				render.call(that,state.url);
 			}
 			return false;
 		});
+		
 		exports.push = function(url,param){
 			var param = param || {},
-				 render = (typeof(param['render']) =="boolean")?param['render']:true;
+				need_render = (typeof(param['render']) =="boolean")?param['render']:true;
 			if(url == window.location.pathname){
 				console.log('lofox:','needn\'t not push this state!');
 				return
@@ -32,47 +83,49 @@ var lofox = function(param,callback){
 				url: url
 			},'test',url);
 			
-			render&&callback(url);
+			need_render&&render.call(that,url);
 		}
 	};	
-	var HASH = function(callback){
-		console.log('lofox:','using hash url !');
-		
-		var hash = window.location.hash || '#',
-			 need_render = true;
-		
-		setInterval(function(){
-			var new_hash = window.location.hash || '#';
-			if((new_hash != hash)&&need_render){
-				hash = new_hash;
-				var url = hash.replace(/^#/,'');
-				callback(url);
-			}
-		},60);
-		
-		exports.push = function(url,param){
-			var param = param || {};
-			need_render = (typeof(param['render']) =="boolean")?param['render']:true;
 
-			window.location.hash = url;
-		}
-	}
-	
-	exports.start = function(param,callback){
-		var param = param || {},
-			hash = param['hash'] || false,
-			support = true;
+	var START = function(dom,callback){
 		console.log('lofox:','i\'m start !');
+		this.router = {};
+		this.callback = callback;
+		this.support = true;
+		this.dom = dom;
 		if(window.history&&window.history.pushState){
-			HTML5(callback);
-		}else if(hash){
-			HASH(callback);
+			HTML5.call(this,callback);
 		}else{
-			support = false;
+			this.support = false;
 		}
-		return support;
 	};
+	START.prototype = {
+		'set' : function(root,name,callback){
+			var root = arguments[0];
+			var name = typeof(arguments[1]) == 'string' ? arguments[1] :null;
+			var callback = typeof(arguments[arguments['length'] - 1]) == 'function' ?arguments[arguments['length'] - 1] :null;
+			this.router[root] = {
+				'name' : name,
+				'renderFn' : callback
+			};
+		},
+		'start' : function(){
+			var path = parse_url();
+			var data = this.router[path[0]] || null;
+			if(data){
+				data['renderFn']&&data['renderFn'].call({
+					'path' : path,
+					'dom' :this.dom
+				},{
+					'init' : false
+				});
+			}
+		}
+	};
+	exports.start = START;
 })(lofox);
+
+
 
 //demo
 /*

@@ -183,99 +183,10 @@
 }(L));
 
 /**
- * L.render({init:true/false});
+ * render
  * 
  */
-(function(exports){
-	function parse_url(url){
-		var pathname = url || window.location.pathname;
-			 pathname = pathname.replace(/^\/|\/$/g,'');
-		var path_node = pathname.split(/\//);
-		(path_node[0].length<1)&&(path_node[0] = '/');
-		return path_node;
-	}
-	
-	function render(param){
-		console.log('render :','start !');
-		var titleDom = $('title'),
-			 param = param || {},
-			 path = param['path'] || null;
-			 param['init'] = param['init'] ||false;
-		
-		var module = parse_url(path);
-		L.nav.setCur(module[0]); 
-		console.log('render :','this page is [' + module + ']');
-		
-		if(param['init']){
-			var loading = L.dialog.loading();
-			param['render_over'] = render_over ;
-			param['dom']&&param['dom'].hide();
-			//reset js environment
-			delete(uyan_c_g);
-			delete(uyan_loaded);
-			delete(uyan_s_g);
-			delete(uyan_style_loaded);
-			delete(uyan_style_loaded_over);
-			window.uyan_config = window.uyan_config || {"du":"bh-lay.com"};
-		}
-		var start_time = new Date().getTime();
-		function render_over(){
-			if(param['title']){
-				titleDom.html(param['title']);
-			}
-			var end_time = new Date().getTime(),
-				 min_time = 400,
-				 delay_time = 0;
-			
-			if(end_time - start_time < min_time){
-				delay_time = min_time - (end_time - start_time);
-			}
-			setTimeout(function(){
-				loading.close();
-				param['dom']&&param['dom'].fadeIn(300);
-			},delay_time);
-		}
-
-		switch(module[0]){
-			case '/':
-				param['title'] = '小剧客栈_剧中人的个人空间 网页设计师博客 互动设计学习者';
-				L.render.index(param);
-				break
-			case 'blog':
-				if(module.length == 1){
-					param['title'] = '博客_小剧客栈';
-					L.render.blogList(param);
-				}else{
-					param['id'] = module[1];
-					L.render.blogDetail(param)
-				}
-				break
-			case 'opus':
-				param['title'] = '作品_小剧客栈';
-				if(module.length == 1){
-					L.render.opusList(param);
-				}else{
-					param['id'] = module[1];
-					L.render.opusDetail(param)
-				}
-				break
-			case 'share':
-				param['title'] = '分享_小剧客栈';
-				if(module.length == 1){
-					L.render.shareList(param);
-				}else{
-					param['id'] = module[1];
-					L.render.shareDetail(param)
-				}
-				break
-			default :
-				var url = window.location.href;
-				$('.contlayer').load(url + ' .contlayer');
-		}
-	};
-	
-	exports.render = render ;
-})(L);
+var render = render || {};
 
 //index page
 (function(ex){
@@ -324,8 +235,8 @@
 	ex.index = function(param){
 		console.log('index page:','start render index page !');
 		var param = param || {},
-			 dom = param['dom'] || $('.contlayer'),
-			 fn = param['render_over'] || null;
+			 dom = this.dom || $('.contlayer'),
+			 fn = this.render_over || null;
 			
 		if(param['init']){
 			console.log('index page:','get index page template!');
@@ -343,7 +254,7 @@
 			countTime(dom);
 		}
 	};
-})(L.render);
+})(render);
 
 /**
  * blogList page
@@ -438,8 +349,8 @@
 	ex.blogList = function(param){
 		console.log('blog list page:','start !');
 		var param = param || {},
-			 dom = param['dom']||$('.contlayer'),
-			 render_over = param['render_over'] || null;
+			 dom = this.dom || $('.contlayer'),
+			 render_over = this.render_over || null;
 		
 		if(param['init']){
 			dom.html('<div class="articleList"></div>');
@@ -459,7 +370,7 @@
 		}
 
 	};
-})(L.render);
+})(render);
 
 /**
  * blog detail
@@ -511,22 +422,21 @@
 	};
 	ex.blogDetail=function(param){
 		var param = param || {},
-			 dom = param['dom'] || $('.contlayer'),
+			 dom = this.dom || $('.contlayer'),
 			 id = param['id'] || null,
-			 callback = param['render_over'] || null;
+			 render_over = this.render_over || null;
 		
 		if(param['init']){
 			L.require('juicer,/skin/naive/css/blog.css',function(){
 				getData(id,function(html,title){
-					title&&(param['title'] = title);
 					html&&dom.html(html);
-					callback&&callback();
+					render_over&&render_over(title);
 				});
 			});
 		}
 		
 	};
-})(L.render);
+})(render);
 
 /**
  * share list
@@ -568,8 +478,8 @@
 		});
 	};
 	ex.shareList = function(param){
-		var fn = param['render_over'] || null;
-		var dom = param['dom'];
+		var render_over = this.render_over || null;
+		var dom = this.dom;
 		var temp = ['{@each list as it,index}<li><a href="/share/${it.id}" title="${it.title}" lofox="true" target="_self" >',
 			'<img src="${it.cover}" alt="${it.title}" />',
 			'<strong>${it.title}</strong>',
@@ -587,14 +497,14 @@
 						'dom' : dom.find('.shareList ul')
 					});
 					start();
-					fn&&fn();
+					render_over&&render_over();
 				});
 			}else{
 				start();
 			}
 		});
 	};
-})(L.render);
+})(render);
 
 
 /**
@@ -641,23 +551,24 @@
 		});
 	};
 	ex.shareDetail=function(param){
-		var fn = param['render_over'] || null;
+		var render_over = this.render_over || null;
 		
 		if(param['init']){
 			var param = param || {},
-				 dom = param['dom'] || $('.contlayer'),
+				 dom = this.dom || $('.contlayer'),
 				 id = param['id'] || null;
 			L.require('juicer,/skin/naive/css/share.css',function(){
 				getData(id,function(html,title){
-					title&&(param['title'] = title);
 					html&&dom.html(html);
-					fn&&fn();
+					render_over&&render_over({
+						'title' : title
+					});
 				});
 			});
 		}
 		
 	};
-})(L.render);
+})(render);
 
 /**
  * opus list
@@ -704,8 +615,8 @@
 		});
 	};
 	ex.opusList = function(param){
-		var render_over = param['render_over'] || null;
-		var dom = param['dom'];
+		var render_over = this.render_over || null;
+		var dom = this.dom;
 		
 		L.require('juicer,/skin/naive/css/opus.css',function(){
 			$.get('/ajax/temp?opus_item',function(data){
@@ -730,7 +641,7 @@
 			});
 		});
 	};
-})(L.render);
+})(render);
 
 /**
  * opus detail
@@ -761,9 +672,9 @@
 		});
 	};
 	ex.opusDetail=function(param){
-		var render_over = param['render_over'] || null;
+		var render_over = this.render_over || null;
 		var param = param || {},
-			 dom = param['dom'] || $('.contlayer'),
+			 dom = this.dom || $('.contlayer'),
 			 id = param['id'] || null;
 				 
 		if(param['init']){
@@ -776,16 +687,17 @@
 					}
 					getData(id,function(detail,title){
 						var this_html = juicer(template,detail);
-						title&&(param['title'] = title);
 						this_html&&dom.html(this_html);
-						render_over&&render_over()
+						render_over&&render_over({
+							'title' : title || null
+						})
 					});
 				});
 			});
 		}
 		
 	};
-})(L.render);
+})(render);
 
 /**
  *
@@ -828,20 +740,53 @@ console.log('lay:','JS is start working !');
 
 L.require('lofox,dialog',function(){
 	var contlayer = $('.contlayer');
-	var support = lofox({},function(url){
-		L.render({
-			path:url,
-			init:true,
-			dom:contlayer
-		});
+	var fox = lofox(contlayer,function(url){
+		delete(uyan_c_g);
+		delete(uyan_loaded);
+		delete(uyan_s_g);
+		delete(uyan_style_loaded);
+		delete(uyan_style_loaded_over);
+		window.uyan_config = window.uyan_config || {"du":"bh-lay.com"};
 	});
-	if(support){
+	fox.set('/','首页',function(data){
+		L.nav.setCur('/'); 
+		render.index.call(this,data);
+	});
+	fox.set('/blog','博客_小剧客栈',function(data){
+		L.nav.setCur('blog');
+		if(this.path.length == 1){
+			render.blogList.call(this,data);
+		}else{
+			data['id'] = this.path[1];
+			render.blogDetail.call(this,data)
+		}
+	});
+	fox.set('/opus','作品_小剧客栈',function(data){
+		L.nav.setCur('opus');
+		if(this.path.length == 1){
+			render.opusList.call(this,data);
+		}else{
+			data['id'] = this.path[1];
+			render.opusDetail.call(this,data)
+		}
+	});
+	fox.set('/share','分享_小剧客栈',function(){
+		L.nav.setCur('share');
+		if(this.path.length == 1){
+			render.shareList.call(this,data);
+		}else{
+			data['id'] = this.path[1];
+			render.shareDetail.call(this,data)
+		}
+	});
+	fox.start();
+//	if(support){
 		$('body').on('click','a[lofox="true"]',function(){
 			var url = $(this).attr('href');
 			lofox.push(url);
 			return false;
 		});
-	}
+//	}
 	
 	if($.browser.msie){
 		if($.browser.version=="6.0"||$.browser.version=="7.0"){
@@ -853,6 +798,5 @@ L.require('lofox,dialog',function(){
 $(function(){
 	L.nav();
 	L.gallery();
-	L.render({init:false});
 	//L.myCard();
 });
