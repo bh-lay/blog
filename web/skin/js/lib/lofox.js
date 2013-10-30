@@ -107,7 +107,7 @@ var lofox = function(dom,callback){
 			var name = typeof(arguments[1]) == 'string' ? arguments[1] :null;
 			var callback = typeof(arguments[arguments['length'] - 1]) == 'function' ?arguments[arguments['length'] - 1] :null;
 			this.router[root] = {
-				'name' : name,
+				'title' : name,
 				'renderFn' : callback
 			};
 		},

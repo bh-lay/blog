@@ -560,9 +560,7 @@ var render = render || {};
 			L.require('juicer,/skin/naive/css/share.css',function(){
 				getData(id,function(html,title){
 					html&&dom.html(html);
-					render_over&&render_over({
-						'title' : title
-					});
+					render_over&&render_over(title);
 				});
 			});
 		}
@@ -688,9 +686,7 @@ var render = render || {};
 					getData(id,function(detail,title){
 						var this_html = juicer(template,detail);
 						this_html&&dom.html(this_html);
-						render_over&&render_over({
-							'title' : title || null
-						})
+						render_over&&render_over(title);
 					});
 				});
 			});
@@ -748,11 +744,11 @@ L.require('lofox,dialog',function(){
 		delete(uyan_style_loaded_over);
 		window.uyan_config = window.uyan_config || {"du":"bh-lay.com"};
 	});
-	fox.set('/','首页',function(data){
+	fox.set('/','小剧客栈_剧中人的个人空间 网页设计师博客 互动设计学习者',function(data){
 		L.nav.setCur('/'); 
 		render.index.call(this,data);
 	});
-	fox.set('/blog','博客_小剧客栈',function(data){
+	fox.set('/blog','我的博客_小剧客栈',function(data){
 		L.nav.setCur('blog');
 		if(this.path.length == 1){
 			render.blogList.call(this,data);
@@ -761,7 +757,7 @@ L.require('lofox,dialog',function(){
 			render.blogDetail.call(this,data)
 		}
 	});
-	fox.set('/opus','作品_小剧客栈',function(data){
+	fox.set('/opus','我的作品_小剧客栈',function(data){
 		L.nav.setCur('opus');
 		if(this.path.length == 1){
 			render.opusList.call(this,data);
@@ -770,7 +766,7 @@ L.require('lofox,dialog',function(){
 			render.opusDetail.call(this,data)
 		}
 	});
-	fox.set('/share','分享_小剧客栈',function(){
+	fox.set('/share','我的分享_小剧客栈',function(data){
 		L.nav.setCur('share');
 		if(this.path.length == 1){
 			render.shareList.call(this,data);
