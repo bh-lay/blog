@@ -219,7 +219,7 @@ chip.index = function(callback){
 	
 	var method = mongo.start();
 	method.open({'collection_name':'blog_friend'},function(err,collection){
-		collection.find({}, {limit:10}).toArray(function(err, docs) {
+		collection.find({}, {limit:20}).toArray(function(err, docs) {
 			var chip = juicer(this_tpl,{'friend_list':docs})
 			
 			callback(chip);
