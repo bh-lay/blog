@@ -30,7 +30,7 @@ function get_power(method,user_group,callback){
 
 function login (res_this,session_this,username,password){
 	var username = username,
-		password = password;
+		password = parse.md5(password);
 	//matche user
 	var method = mongo.start();
 	method.open({'collection_name':'user'},function(err,collection){

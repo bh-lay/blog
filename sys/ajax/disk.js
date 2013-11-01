@@ -49,7 +49,8 @@ exports.render = function (req,res_this,path){
 			getDir(root + path,function(err,files){
 				var json = {
 					'code' : 1,
-					'files' : files
+					'files' : files,
+					'md5' : parse.md5(123)
 				}
 				if(err){
 					json.code = 404;

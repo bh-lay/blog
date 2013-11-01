@@ -63,7 +63,7 @@ function add_edit (){
 			'id' : data['id'] || '',
 			'usernick':decodeURI(data['usernick']),
 			'username':data['username'] || '',
-			'password':data['password'] || '',
+			'password':parse.md5(data['password'] || ''),
 			'user_group':data['user_group'] || '',
 		};
 		if(parm['username']){
@@ -108,7 +108,7 @@ function signup(){
 		param['email'] = data['email'] || null;
 		param['username'] = data['email'] || null;
 		param['usernick'] = data['usernick'] || param['username'] || '';
-		param['password'] = data['password'] || null;
+		param['password'] = parse.md5(data['password'] || '');
 		param['user_group'] = 'user';
 		param['id'] = parse.createID();
 		if(param['email']&&param['password']){

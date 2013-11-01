@@ -3,6 +3,7 @@
  */
 var querystring = require('querystring');
 var formidable = require('formidable');
+var crypto = require('crypto');
 
 
 exports.cookie = function parseCookie(str){
@@ -125,3 +126,10 @@ exports.url = function(url){
 	}
 	return obj;
 }
+
+exports.md5 = function(text) {
+	if(typeof(text) != 'string'){
+		text = text.toString();
+	}
+	return crypto.createHash('md5').update(text).digest('hex');
+};

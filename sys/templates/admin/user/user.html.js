@@ -27,7 +27,6 @@ function valueInit(data){
 				user_group_tpl += '<option value="'+ i +'">' + user_group[i] + '</option>';
 			}
 		}
-		
 		return user_group_tpl;
 	}).replace(/\{(\w*)}/g,function(){
 		return data[arguments[1]]||'';
