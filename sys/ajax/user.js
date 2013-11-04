@@ -61,43 +61,46 @@ function add_edit (){
 		var data = fields;
 		var parm = {
 			'id' : data['id'] || '',
-			'usernick':decodeURI(data['usernick']),
 			'username':data['username'] || '',
-			'password':parse.md5(data['password'] || ''),
+			'password':data['password'] ? parse.md5(data['password']) : null,
+			'email':data['email'] || null,
 			'user_group':data['user_group'] || '',
 		};
-		if(parm['username']){
-			session.start(that.request,that.res,function(){
-				var session_this = this;
-				if(parm['id']&&parm['id'].length>2){
-					//check edit user power
-					if(session_this.power(12)){
-						edit(parm,that.res);
-					}else{
-						that.res.json({
-							'code':2,
-							'msg':'no power to edit user !'
-						});
-					}
-				}else{
-					//check add user power
-					if(session_this.power(11)){
-						add(parm,that.res);
-					}else{
-						that.res.json({
-							'code':2,
-							'msg':'no power to edit user !'
-						});
-					}
-				}
-			});
-		
-		}else{
+		if(!parm['username']){
 			that.res.json({
 				'code' : 2,
 				'msg' : 'please insert complete code !'
 			});
+			return
 		}
+		
+		session.start(that.request,that.res,function(){
+			var session_this = this;
+			if(parm['id']&&parm['id'].length>2){
+				//check edit user power
+				if(session_this.power(12)){
+					if(parm['password'] == null){
+						delete parm['password'];
+					}
+					edit(parm,that.res);
+				}else{
+					that.res.json({
+						'code':2,
+						'msg':'no power to edit user !'
+					});
+				}
+			}else{
+				//check add user power
+				if(session_this.power(11)){
+					add(parm,that.res);
+				}else{
+					that.res.json({
+						'code':2,
+						'msg':'no power to edit user !'
+					});
+				}
+			}
+		});
 	});
 }
 
@@ -106,8 +109,6 @@ function signup(){
 	parse.request(this.request,function(error,data){
 		var param = {};
 		param['email'] = data['email'] || null;
-		param['username'] = data['email'] || null;
-		param['usernick'] = data['usernick'] || param['username'] || '';
 		param['password'] = parse.md5(data['password'] || '');
 		param['user_group'] = 'user';
 		param['id'] = parse.createID();

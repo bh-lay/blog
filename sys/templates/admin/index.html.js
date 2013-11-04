@@ -9,9 +9,9 @@ exports.render = function (req,res_this){
 	var res = res_this.response;
 	session.start(req,res_this,function(){
 		var session_this = this;
-		var usernick = session_this.get('user_nick');
+		var username = session_this.get('username');
 		var userid = session_this.get('user_id');
-		var txt = temp.replace('{-usernick-}',usernick).replace('{-userid-}',userid);
+		var txt = temp.replace('{-username-}',username).replace('{-userid-}',userid);
 		res_this.html(200,txt);
 	});
 }

@@ -6,7 +6,7 @@ var pageTpl = fs.readFileSync('./templates/admin/user/userList.html', "utf8");
 
 var temp=['<tr>',
 	'<td>{username}</td>',
-	'<td>{usernick}</td>',
+	'<td>{email}</td>',
 	'<td>{user_group}</td>',
 	'<td>',
 		'<a href="user.html?userid={id}" target="_self">改</a>',

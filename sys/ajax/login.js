@@ -33,15 +33,27 @@ function login (res_this,session_this,username,password){
 		password = parse.md5(password);
 	//matche user
 	var method = mongo.start();
+
 	method.open({'collection_name':'user'},function(err,collection){
-		collection.find({'username':username,'password':password}).toArray(function(err, docs) {
+		//
+		collection.find({"$or": [{'username':username},{'email':username}]}).toArray(function(err, docs) {
+			
 			if(docs.length > 0){
+				if( docs[0]['password'] != password){
+					//密码错了
+					res_this.json({
+						'code':2,
+						'msg':'二货，帐号密码输错了吧！'
+					});
+					return
+				}
+				
 				var user_group = docs[0]['user_group'];
 				get_power(method,user_group,function(power_data){
 					method.close();
 					session_this.set({
 						'user_group' : user_group,
-						'user_nick' : docs[0]['usernick'], 
+						'username' : docs[0]['username'], 
 						'user_id' : docs[0]['id'],
 						'power_data' : power_data
 					});
@@ -53,6 +65,7 @@ function login (res_this,session_this,username,password){
 				});
 				
 			}else{
+				//账号错了
 				res_this.json({
 					'code':2,
 					'msg':'二货，帐号密码输错了吧！'

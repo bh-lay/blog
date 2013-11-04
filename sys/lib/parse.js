@@ -128,6 +128,7 @@ exports.url = function(url){
 }
 
 exports.md5 = function(text) {
+	text = text || '';
 	if(typeof(text) != 'string'){
 		text = text.toString();
 	}
