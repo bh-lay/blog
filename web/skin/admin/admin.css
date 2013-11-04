@@ -99,11 +99,11 @@ body.index_page{overflow-y: hidden;overflow-x:auto; position: relative;width: 10
 
 .topNav{width:100%;height:40px;overflow:hidden;background-color:#090;}
 .userCnt{width:120px;height:40px;float:left;text-align:center;position:relative;background: #009000}
-.userCnt .usernick{line-height:40px;color:#fff;font-size:16px;letter-spacing:4px;}
-.userCnt .usernick_hover{width:100%;height:100%;position:absolute;top:0px;left:0px;text-align: center;display: none;}
-.userCnt .usernick_hover a{display:block;float:left;width:50%;height:40px;line-height:40px;background: #080;color:#fff;}
-.userCnt .usernick_hover a:hover{background: #070;}
-.userCnt:hover .usernick_hover{display: block;}
+.userCnt .username{line-height:40px;color:#fff;font-size:16px;letter-spacing:4px;}
+.userCnt .username_hover{width:100%;height:100%;position:absolute;top:0px;left:0px;text-align: center;display: none;}
+.userCnt .username_hover a{display:block;float:left;width:50%;height:40px;line-height:40px;background: #080;color:#fff;}
+.userCnt .username_hover a:hover{background: #070;}
+.userCnt:hover .username_hover{display: block;}
 
 .nav{float:left;}
 .nav ul{height:40px;line-height: 40px;}
