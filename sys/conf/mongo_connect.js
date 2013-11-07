@@ -48,15 +48,23 @@ START.prototype = {
 		var collection_name = parm['collection_name']||'article';
 		var that = this;
 		if(this.state == 'close'){
-			that.state = 'open';
+			this.state = 'open_process';
 			this.DB.open(function (error, client) {
+				that.state = 'open';
 				if (error){
 				 	callback&&callback('can not open datebase !',undefined);
 					return; 
 				}
-				that.client = client;
+		//		that.client = client;
 				connect.call(that,collection_name,callback);
 			});
+		}else if(this.state == 'open_process'){
+			var try_use = setInterval(function(){
+				if(that.state == 'open'){
+					clearInterval(try_use);
+					connect.call(that,collection_name,callback);
+				}
+			},100);
 		}else{
 			connect.call(that,collection_name,callback);
 		}

@@ -93,14 +93,14 @@ exports.render = function (req,res_this){
 		}else{
 		//login
 			var username = data['username'];
-			var password = data['password'];
-			if(!username||!password){
+			var password = data['password'] || '';
+			if(!username||password.length<2){
 				res_this.json({
 					'code':2,
 					'msg':'please input username and password !'
 				});
 			}else{
-				login(res_this,session_this,username,password)
+				login(res_this,session_this,username,password);
 			}
 		}
 	});

@@ -28,16 +28,17 @@ function save_session(){
 	var pathname = this.path;
 	var data = JSON.stringify(this);
 //	fs.unlink(pathname,function(){
-		fs.writeFile(pathname,data,function(err){
-			if(err){
-				console.log('create session error');
-			};
-		});
+		fs.writeFileSync(pathname,data);
+	//	fs.writeFile(pathname,data,function(err){
+	//		if(err){
+	//			console.log('create session error');
+	//		};
+	//	});
 //	});
 }
 
 function SESSION(req,res_this,callback){
-
+	req.headers = req.headers || {};
 // get cookie from browser
 	var cookieStr = req.headers.cookie||'';
 	var cookieObj = parse.cookie(cookieStr);
