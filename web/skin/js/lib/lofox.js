@@ -45,6 +45,7 @@ var lofox = function(dom,callback){
 			data['title']&&page_title.html(data['title']);
 			var start_time = new Date().getTime();
 			this.render_code++;
+			this.callback&&this.callback();
 			data['renderFn']&&data['renderFn'].call({
 				'path' : path,
 				'dom' :that.dom,
@@ -96,7 +97,7 @@ var lofox = function(dom,callback){
 		this.dom = dom;
 		this.render_count = 1;
 		if(window.history&&window.history.pushState){
-			HTML5.call(this,callback);
+			HTML5.call(this);
 		}else{
 			this.support = false;
 		}
