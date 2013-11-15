@@ -8,7 +8,7 @@ var smtpTransport = nodemailer.createTransport("SMTP",{
 	service: "126.com",
 	auth: {
 		user: "bh_lay@126.com",
-		pass: "tianxj19890203"
+		pass: "######"
 	}
 });
 
