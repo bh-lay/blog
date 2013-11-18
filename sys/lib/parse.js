@@ -12,7 +12,7 @@ exports.cookie = function parseCookie(str){
 	
 	var list = str.split(';');
 	
-	for(var i = 0 , total = list.length ; i < total ; i++){
+	for(var i = 0 , t = list.length ; i < t ; i++){
 		var parseList = list[i].split('=');
 		var nameStr = parseList[0]||'';
 		var name = nameStr.replace(/^\s+|\s+$/g,'');
