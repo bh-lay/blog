@@ -9,4 +9,5 @@ module.exports = {
 	'/blog' : '/controller/blog.js',
 	'/share' :'/controller/share.js',
 	'/opus' :'/controller/opus.js',
+	'/connect' :'/controller/connect.js',
 };

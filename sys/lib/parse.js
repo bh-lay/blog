@@ -111,9 +111,12 @@ exports.url = function(url){
 	
 	var a = url.split(/\?/);
 	var b = a[0].replace(/^\/|\/$/g,'');
+	var searchStr = a[1] || '';
+	var search = querystring.parse(searchStr);
+	
 	var obj = {
 		'pathname' : a[0],
-		'search' : a[1],
+		'search' : search,
 		'filename' : null,
 		'pathnode' : b.length?b.split(/\//):[],
 	};
