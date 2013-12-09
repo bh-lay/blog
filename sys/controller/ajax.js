@@ -12,7 +12,6 @@ var ajaxConfig = {
 	'power':'user/power_add&edit',
 	'temp':'temp',
 	'tempModify':'tempModify',
-	'login':'login',
 	'del' : 'del',
 	'upload':'upload',
 	'clear_cache':'clear_cache',

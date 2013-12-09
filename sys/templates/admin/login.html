@@ -104,7 +104,7 @@ form.submit(function(){
 	if(data){
 		$.ajax({
 			'type':'GET',
-			'url':'/ajax/login',
+			'url':'/ajax/user/login',
 			'data':data,
 			'success' : function(d){
 				if(d.code==1){
