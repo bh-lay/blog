@@ -73,7 +73,7 @@ function getUserSession(id,callback){
 		});
 	});
 }
-//登录或注册
+//登录或注册页面
 function loginOrRegister(res_this){
 	res_this.json({'name':'loginOrRegister'});
 }

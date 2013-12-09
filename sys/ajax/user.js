@@ -107,7 +107,18 @@ function add_edit (){
 		});
 	});
 }
-//注册新的用户
+
+function handleSNS(id,req,res_this){
+	session.start(req,res_this,function(){
+		var SNS = this.get('SNSuserid');
+		console.log('-----------------',SNS)
+	});
+}
+/**
+ * 注册新的用户
+ * param {email & password}
+ *  
+ **/
 function signup(){
 	var that = this;
 	parse.request(this.request,function(error,data){
@@ -130,6 +141,8 @@ function signup(){
 							'id' : param.id ,
 							'msg' : 'sucess !'
 						});
+						//处理SNSuser关联
+						handleSNS(param.id,that.request,that.res);
 					});
 				});
 			});
@@ -151,7 +164,7 @@ function get_power(method,user_group,callback){
 	});
 }
 //处理login
-function login_handle(res_this,session_this,username,password){
+function login_handle(req,res_this,session_this,username,password){
 		//matche user
 	var method = mongo.start();
 
@@ -171,10 +184,11 @@ function login_handle(res_this,session_this,username,password){
 				var user_group = docs[0]['user_group'];
 				get_power(method,user_group,function(power_data){
 					method.close();
+					var userid = docs[0]['id'];
 					session_this.set({
 						'user_group' : user_group,
 						'username' : docs[0]['username'], 
-						'user_id' : docs[0]['id'],
+						'user_id' : userid,
 						'power_data' : power_data
 					});
 					
@@ -182,8 +196,9 @@ function login_handle(res_this,session_this,username,password){
 						'code':1,
 						'msg':'login success!'
 					});
+					//处理SNSuser关联
+					handleSNS(userid,req,res_this);
 				});
-				
 			}else{
 				//账号错了
 				res_this.json({
@@ -211,7 +226,7 @@ function login (){
 		}else{
 			session.start(req,res_this,function(){
 				var session_this = this;
-				login_handle(res_this,session_this,username,password);
+				login_handle(req,res_this,session_this,username,password);
 			});
 		}
 	});
