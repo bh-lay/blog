@@ -113,7 +113,7 @@ var L = L || function(root){
 		}else{
 			//repuire from url
 			var url = str;
-			var ext = str_spilt[1];
+			var ext = str_spilt[str_spilt.length - 1];
 			if(ext == 'css'){
 				loadCSS(url,callback);
 			}else if(ext == 'js'){

@@ -17,6 +17,7 @@ window.admin.publish = window.admin.publish || {};
 		'</div>',
 		'<div class="publish_cnt"></div>',
 	'</div>'].join('');
+	
 	function show_module (dom,cpt_dom,name,id){
 		if(name == 'share'){
 			admin.publish.share(dom,id);
@@ -135,6 +136,10 @@ window.admin.publish = window.admin.publish || {};
 		'</ul></form>',
 	'</div>'].join('');
 	
+	var require = new loader({
+		'mditor' : '/frontEnd/mditor/mditor.js'
+	});
+	
 	/****
 	 * 获取博文内容
 	 */
@@ -146,6 +151,7 @@ window.admin.publish = window.admin.publish || {};
 			'url' : '/ajax/blog',
 			'type' : 'GET',
 			'data' : {
+				'content_format' : 'markdown',
 				'act' : 'get_detail',
 				'id' : id
 			},
@@ -261,6 +267,9 @@ window.admin.publish = window.admin.publish || {};
 			}
 			var new_html = valueInit(article_tpl,data);
 			dom.html(new_html);
+			require.load('mditor',function(){
+				mditor.bind(dom.find('textarea'));
+			});
 			admin.formToAjax(dom,{
 				'onSubmit' : function(data){
 					UI.prompt('正在提交博文修改！');

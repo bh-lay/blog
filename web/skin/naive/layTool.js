@@ -383,7 +383,7 @@ var render = render || {};
 			'<p><span>时间：${time_show} </span><span>作者：${author}</span></p>',
 		'</div>',
 		'{@if cover}<img src="${cover}" alt="${title}" class="topicImg" />{@/if}',
-		'<div class="text">$${content}</div>',
+		'<div class="text md_html">$${content}</div>',
 		'<div class="copylink">',
 			'<div class="tag"><strong>本文关键字：</strong>${tags}</div>',
 			'<div class="pageUrl"><strong>转载请注明来源：</strong>http://bh-lay.com/blog/${id}</div>',
@@ -427,7 +427,7 @@ var render = render || {};
 			 render_over = this.render_over || null;
 		
 		if(param['init']){
-			L.require('juicer,/skin/naive/css/blog.css',function(){
+			L.require('juicer,/skin/naive/css/blog.css,/frontEnd/lib/showdown/style-0.6.4.min.css',function(){
 				getData(id,function(html,title){
 					html&&dom.html(html);
 					render_over&&render_over(title);
@@ -557,7 +557,7 @@ var render = render || {};
 			var param = param || {},
 				 dom = this.dom || $('.contlayer'),
 				 id = param['id'] || null;
-			L.require('juicer,/skin/naive/css/share.css',function(){
+			L.require('juicer,/skin/naive/css/share.css,/frontEnd/lib/showdown/style-0.6.4.min.css',function(){
 				getData(id,function(html,title){
 					html&&dom.html(html);
 					render_over&&render_over(title);
@@ -676,7 +676,7 @@ var render = render || {};
 			 id = param['id'] || null;
 				 
 		if(param['init']){
-			L.require('juicer',function(){
+			L.require('juicer,/frontEnd/lib/showdown/style-0.6.4.min.css',function(){
 				$.get('/ajax/temp?opus_detail',function(data){
 					var template = data['opus_detail'];
 					if(!template){

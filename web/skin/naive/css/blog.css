@@ -90,6 +90,7 @@
 .article li{list-style-type: decimal;}
 .article img{max-width:100%;}
 .article .topicImg {display: block;margin: auto;}
+.article pre{border:1px solid #aaa;border-radius:4px;background:#f4f4f4;}
 
 /*实验室*/
 .labshow {border:1px solid #ddd;line-height: 3em;margin: 2em 4em;}
