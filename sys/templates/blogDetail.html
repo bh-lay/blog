@@ -7,8 +7,9 @@
 <meta name="keywords" content="${tags}" />
 <meta name="description" content="${intro}" />
 <link href="/skin/naive/favicon.ico" rel="shortcut icon"/>
-<link href="/skin/naive/css/common.css" rel="stylesheet" type="text/css" />
-<link href="/skin/naive/css/blog.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/skin/naive/css/common.css"/>
+<link rel="stylesheet" type="text/css" href="/skin/naive/css/blog.css" />
+<link rel="stylesheet" type="text/css" href="/frontEnd/lib/showdown/style-0.6.4.min.css" />
 </head>
 <body>
 	<div class="gallayer">
@@ -27,7 +28,7 @@
 			{@if cover}
 				<img src="${cover}" alt="${title}" class="topicImg" />
 			{@/if}
-			<div class="text">$${content}</div>
+			<div class="text md_html">$${content}</div>
 			<div class="copylink">
 				<div class="tag"><strong>本文关键字：</strong>${tags}</div>
 				<div class="pageUrl"><strong>转载请注明来源：</strong>http://bh-lay.com/blog/${id}</div>
