@@ -8,6 +8,9 @@ var chip = require('../mod/chip');
 var temp = require('../mod/page_temp');
 var juicer = require('juicer');
 var fs = require('fs');
+//var markdown = require('markdown');
+var showdown = require('../lib/showdown/showdown.js');
+var converter = new showdown.converter();
 
 function list_page(callback){
 	temp.get('blogList',{'init':true},function(page_temp){
@@ -40,7 +43,10 @@ function detail_page(id,callback){
 					res_this.notFound('哇塞，貌似这篇博文不存在哦!');
 				}else{
 					docs[0].time_show = parse.time(docs[0].time_show ,'{y}-{m}-{d}');
+				//	docs[0].content = markdown.parse(docs[0].content);
+					docs[0].content = converter.makeHtml(docs[0].content);
 					var txt = juicer(page_temp,docs[0]);
+				//	callback&&callback(docs[0].content);
 					callback&&callback(txt);
 				}
 			});
