@@ -20,6 +20,9 @@ get_list: 								|		get_detail
 var mongo = require('../conf/mongo_connect');
 var fs = require('fs');
 var querystring=require('querystring');
+//var markdown = require('markdown');
+var showdown = require('../lib/showdown/showdown.js');
+var converter = new showdown.converter();
 
 function get_list(data,callback){
 	var data = data,
@@ -55,11 +58,14 @@ function get_list(data,callback){
 }
 function get_detail(data,callback){
 	var data=data,
-		articleID = data['id'];
+		articleID = data['id'],
+		//内容格式（html/markdown）
+		content_format = data['content_format'] || 'html';
 	
 	var resJSON={
 		'code':1,
-		'id' : data['id'],
+		'id' : articleID,
+		'content_format' : content_format
 	};
 	var method = mongo.start();
 	method.open({'collection_name':'article'},function(err,collection){
@@ -69,6 +75,15 @@ function get_detail(data,callback){
 				resJSON['code'] = 2;
 				resJSON['msg'] = 'could not find this blog !';				
 			}else{ 
+				resJSON['detail'] = docs[0];
+				
+				if(content_format == 'html'){
+				//	docs[0].content = markdown.parse(docs[0].content);
+					docs[0].content = converter.makeHtml(docs[0].content);
+				}
+			//	}else if(content_format == 'markdown'){
+					
+			//	}
 				resJSON['detail'] = docs[0];
 			}
 			callback&&callback(resJSON);
