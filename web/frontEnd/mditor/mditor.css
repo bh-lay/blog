@@ -1,0 +1,4 @@
+.mditor{background:#fff;position: fixed;top:0px;left:0px;width:100%;height:100%;z-index: 50000;}
+.mditor_input{position: absolute;top:0px;left:0px;width:50%;height:100%;}
+.mditor_input textarea{position: absolute;top:0px;left:0px;width:100%;height:100%;border:none;resize:none;background:#eee;margin:0px;padding:0px;}
+.mditor_view{position: absolute;top:0px;right:0px;width:50%;height:100%;}
