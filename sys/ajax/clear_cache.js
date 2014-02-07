@@ -5,13 +5,13 @@
 exports.render = function (req,res_this){
 	//FIXME add power check
 	parse.request(req,function(err,data){
-		data.type = data.type||'';
+		var type = data.type = data.type || '';
 
-		if(data.type.match(/^(chip|html|ajax)$/)){
-			cache.clear(data.type,function(){
+		if(type.match(/^(all|chip|html|ajax)$/)){
+			cache.clear(type,function(){
 				res_this.json({
 					'code': 1,
-					'msg' : 'clear cache :[' + data.type + '] completely !'
+					'msg' : 'clear cache :[' + type + '] completely !'
 				});
 			});
 		}else{

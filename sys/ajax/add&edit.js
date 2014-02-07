@@ -17,13 +17,22 @@ function add(parm,res_this,collection_name){
 			parm.id = parse.createID();
 
 			collection.insert(parm,function(err,result){
-				if(err){console.log('error');}
+				if(err){
+					console.log('error');
+					res_this.json({
+						'code' : 400,
+						'msg' : 'maybe something wrong please connect bh-lay'
+					});
+				}
 				res_this.json({
 					'code' : 1,
 					'id' : parm.id,
 					'msg' : 'add sucess !'
 				});
+				
 				method.close();
+				//清除所有缓存
+				cache.clear('all');
 			});
 		});
 	});
@@ -32,7 +41,7 @@ function edit(parm,res_this,collection_name){
 	var parm = parm;
 	
 	var method = mongo.start();
-		
+	
 	method.open({'collection_name':collection_name},function(error,collection){
 		collection.update({'id':parm.id}, {$set:parm}, function(err,docs) {
 			if(err) {
@@ -47,6 +56,8 @@ function edit(parm,res_this,collection_name){
 					'id' : parm.id,
 					'msg':'edit success !'
 				});
+				//清除所有缓存
+				cache.clear('all');
 			}
 			method.close();
 		});

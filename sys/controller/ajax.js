@@ -3,6 +3,7 @@
  */
 
 var ajaxConfig = {
+	'admin' : 'admin',
 	'add_edit':'add&edit',
 	'share':'share_get',
 	'opus':'opus_get',
@@ -15,7 +16,8 @@ var ajaxConfig = {
 	'del' : 'del',
 	'upload':'upload',
 	'clear_cache':'clear_cache',
-	'disk':'disk'
+	'disk':'disk',
+	'friends':'friends_get'
 };
 
 exports.deal = function (req,res_this,path){

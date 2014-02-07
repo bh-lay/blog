@@ -1,5 +1,13 @@
 /**
  * @author bh-lay
+ * 
+ * @demo
+ * 	cache.chip('blog_list',function(this_cache){
+ * 		//do something with this_cache
+ * 	},function(save_cache){
+ * 		//if none of cache,do this Fn ,in the end Fn1 with be start
+ * 		save_cache(this_cache);
+ * 	});
  */
 var fs = require('fs');
 var cache_max_num = 1000;
@@ -58,18 +66,19 @@ function clear_directory(root_path,callback){
 /**
  * cache.clear(root,name,fn)
  * cache.clear(root,fn)
+ * 
  * root:chip/html/ajax
  */
-exports.clear = function(){
+function CLEAR(){
 	//filter arguments
 	var root = arguments[0] || '',
-		 name = null,
-		 callback = null;
-	if(typeof(arguments[1])=="function"){
+		name = null,
+		callback = null;
+	if(typeof(arguments[1]) == "function"){
 		callback = arguments[1];
-	}else if(typeof(arguments[1])=="string"){
+	}else if(typeof(arguments[1]) == "string"){
 		name = arguments[1];
-		if(typeof(arguments[2])=="function"){
+		if(typeof(arguments[2]) == "function"){
 			callback = arguments[2];
 		}
 	}
@@ -83,11 +92,17 @@ exports.clear = function(){
 		}else{
 			clear_directory(root_path,callback);
 		}
+	}else if(root == 'all'){
+		clear_directory('./cache/chip/');
+		clear_directory('./cache/html/');
+		clear_directory('./cache/ajax/');
+		callback&&callback();
 	}else{
-		callback&&callback('arguments[0] error please use [chip|html|ajax]');
+		callback&&callback('arguments[0] error please use [all|chip|html|ajax]');
 	}
 }
 // use cache exports
+exports.clear = CLEAR;
 exports.chip = function(cache_name,callback,create_cache){
 	cache(cache_name,callback,create_cache,'chip');
 };
@@ -98,16 +113,3 @@ exports.ajax = function(cache_name,callback,create_cache){
 	var this_name = cache_name.replace(/\/|\?/g,'_'); 
 	cache(this_name,callback,create_cache,'ajax');
 };
-
-
-
-/*////////////////////////////////////////////////////
-@demo
-------------------------------------------------------
-	cache.chip('blog_list',function(this_cache){
-		//do something with this_cache
-	},function(save_cache){
-		//if none of cache,do this Fn ,in the end Fn1 with be start
-		save_cache(this_cache);
-	});
-////////////////////////////////////////////////////*/

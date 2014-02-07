@@ -80,6 +80,9 @@ function DELET(param,res_this,session_this){
 						'code' : 1,
 						'msg' : 'delete sucuss !'
 					});
+					
+					//清除所有缓存
+					cache.clear('all');
 				}
 				method.close();
 			});

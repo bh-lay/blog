@@ -1,78 +1,47 @@
 <!DOCTYPE HTML>
-<html lang="en-US" class="index_page">
+<html lang="en-US">
 <head>
 <meta charset="UTF-8">
 <title>剧中人后台</title>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 <link href="/skin/admin/admin.css" rel="stylesheet">
 </head>
-<body class="index_page">
+<body>
 <div class="topNav">
 	<div class="containter">
 		<div class="userCnt">
 			<div class="username">{-username-}</div>
 			<div class="username_hover">
 				<a href="/ajax/user/exist" onclick="if(!confirm('二逼，是不是不玩儿啦！')){return false;}">退出
-					</a><a target="main" href="/admin/user/user.html?userid={-userid-}">改密</a>
+					</a><a class="lofox" href="/admin/user/user.html?userid={-userid-}">改密</a>
 			</div>
 		</div>
 		<div class="nav">
 			<ul>
-				<li><a href="/admin/admin_index.html" target="main">首页</a></li>
-				<li><a href="javascript:void(0)">内容</a></li>
-				<li><a href="javascript:void(0)">模版</a></li>
-				<li><a href="javascript:void(0)">用户</a></li>
+				<li><a href="/admin" class="lofox">首页</a></li>
+				<li><a class="lofox" href="/admin/article">博文</a></li>
+				<li><a class="lofox" href="/admin/share">分享</a></li>
+				<li><a class="lofox" href="/admin/opus">作品</a></li>
+				<li>
+					<a href="javascript:void(0)">用户</a>
+					<div class="navItem">
+						<a class="lofox" href="/admin/user/list">用户管理</a>
+						<a class="lofox" href="/admin/user/group">用 户 组</a>
+						<a class="lofox" href="/admin/user/power">权限列表</a> 
+					</div>
+				</li>
 		    </ul>
 		</div>
 	</div>
 </div>
-<div class="secondNav">
+<div class="mainFrame">
 	<div class="containter">
-		<div class="navItem">
-			<a target="_blank" href="/">站点首页</a>
-		</div>
-		<div class="navItem">
-			<a target="main" href="/admin/main/articleList.html">文章管理</a>
-			<a target="main" href="/admin/share/shareList.html">分享管理</a>
-			<a target="main" href="/admin/main/opusList.html">作品管理</a>
-		</div>
-		<div class="navItem">
-			<a target="main" href="/admin/temp/add_and_edit.html?temp=index">首页模版</a>
-			<a target="main" href="/admin/temp/add_and_edit.html?temp=blogDetail">博文模版</a>
-			<a target="main" href="/admin/temp/add_and_edit.html?temp=shareDetail">分享模版</a>
-			<a target="main" href="/admin/temp/add_and_edit.html?temp=opusDetail">作品模版</a>
-		</div>
-		<div class="navItem">
-			<a target="main" href="/admin/user/userList.html">用户管理</a>
-			<a target="main" href="/admin/user/user_group_list.html">用 户 组</a>
-			<a target="main" href="/admin/user/power_list.html">权限列表</a> 
-		</div>
+		<div class="crumbs">文章列表</div>
+		<div class="mainCnt"> </div>
 	</div>
 </div>
-<div class="mainFrame">
-	<iframe id="mainFrame" src="/admin/admin_index.html" name="main"> </iframe>
-</div>
-<script src="/skin/admin/jquery.js" type="text/javascript"></script>
-<script type="text/javascript">
-	var Btn = $('.nav li a');
-	var navCnt = $('.secondNav .navItem');
-	
-	Btn.click(function(){
-		var i = $(this).parent().index()
-		Btn.removeClass('cur').eq(i).addClass('cur');
-		navCnt.hide().eq(i).show();
-		if($(this).attr('target') == 'main'){
-			navCnt.find('a').removeClass('cur');
-		}
-	});
-	navCnt.on('click','a',function(){
-		if($(this).attr('target') == 'main'){
-			navCnt.find('a').removeClass('cur');
-			$(this).addClass('cur');
-		}
-	});
-	
-	Btn.eq(0).trigger('click');
-</script>
+<script src="/frontEnd/jquery.js" type="text/javascript"></script>
+<script src="/frontEnd/loader.js" type="text/javascript"></script>
+<script src="/skin/admin/index.js" type="text/javascript"></script>
 </body>
 </html>

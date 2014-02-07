@@ -33,7 +33,7 @@ function get_list(data,callback){
 	};
 	
 	var method = mongo.start();
-	method.open({'collection_name':'article'},function(err,collection){
+	method.open({'collection_name':'blog_friend'},function(err,collection){
       //count the all list
 		collection.count(function(err,count){
 			resJSON['count'] = count;
@@ -57,12 +57,12 @@ function get_detail(data,callback){
 	var data=data,
 		articleID = data['id'];
 	
-	var resJSON={
+	var resJSON = {
 		'code':1,
 		'id' : data['id'],
 	};
 	var method = mongo.start();
-	method.open({'collection_name':'article'},function(err,collection){
+	method.open({'collection_name':'blog_friend'},function(err,collection){
 		collection.find({id:articleID}).toArray(function(err, docs) {
 			method.close();
 			if(arguments[1].length==0){
