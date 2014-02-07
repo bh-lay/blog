@@ -37,10 +37,11 @@ function notFound(ext,res_this){
 function readFile(req , res_this) {
 	var pathname = req.url.split('?')[0];
 	var realPath = '.././web/' + pathname;
-	var ext = pathname.split('.')[1];
+	var pathname_split = pathname.split('.');
+	var ext = pathname_split.length>1 ? pathname_split[pathname_split.length - 1] : null;
 	
 	//add a default files for directory
-	if(!ext) {
+	if(ext == null) {
 		ext = 'html';
 		realPath += '/index.html'
 	}
