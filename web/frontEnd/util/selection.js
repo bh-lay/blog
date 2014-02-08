@@ -1,28 +1,12 @@
 /**
  * @author bh-lay
  * 
- * 
- *  $(selector).Selection()
+ * @github: https://github.com/bh-lay/Selection
+ * @introduction: https://github.com/bh-lay/Selection/blob/master/README.md
  *  
  */
 
-window.util = window.util || {};
 (function(exports){
-	String.prototype.countL = (function () {
-		return function(){
-			var s = this;
-			var l = 0;
-			var a = s.split("");
-			for (var i=0;i<a.length;i++) {
-				if(a[i].charCodeAt(0)<299) {
-					l++;
-				} else {
-					l+=2;
-				}
-			}
-			return l;
-		}
-	})();
 	//set
 	var setPosition = (function() {
 		var textarea = document.createElement("textarea");
@@ -60,7 +44,7 @@ window.util = window.util || {};
 					 end = 0;
 				tarea.focus();
 				var sTextRange = document.selection.createRange();
-				
+
 				if (tarea.tagName == "TEXTAREA") {
 					var oTextRange = document.body.createTextRange();
 					oTextRange.moveToElementText(tarea);
@@ -86,7 +70,13 @@ window.util = window.util || {};
 			}
 		}
 	})();
-	//set & get
+	/**	 
+	 * @method Selection set or get texarea position
+	 * @param {Object} textarea jquery dom
+	 * @param {Number} [start]
+	 * @param {Number} [end]
+	 * 
+	 **/
 	function Selection(){
 		var tarea = arguments[0];
 		if(tarea.tagName != 'TEXTAREA'){
@@ -98,7 +88,14 @@ window.util = window.util || {};
 			return getPosition(tarea);
 		}
 	}
-	//insert
+	/**	 
+	 * @method insertTxt
+	 * @param {Object} dom jquery dom
+	 * @param {String} text
+	 * @param {Number} [start]
+	 * @param {Number} [end]
+	 * 
+	 **/
 	function insertTxt(tarea,txt,start,end){
 		if(tarea.tagName != 'TEXTAREA' || typeof(txt) == 'undefined'){
 			return
@@ -107,43 +104,49 @@ window.util = window.util || {};
 		var this_start,this_end;
 		if(typeof(start) == 'undefined'){
 			var pos = getPosition(tarea);
-			
+
 			this_start = pos[0];
 			this_end = pos[1];
 		}else{
 			this_start = parseInt(start);
 			this_end = end || this_start;
 		}
-		
+
 		var allTxt = tarea.value,
 			 frontTxt = allTxt.slice(0,this_start),
 			 endTxt = allTxt.slice(this_end);
 		tarea.value = frontTxt + txt + endTxt;
-		
+
 		tarea.focus();
-		setPosition(tarea ,frontTxt.length + txt.length,0);
+		var reSlect_start = frontTxt.length + txt.length;
+		setPosition(tarea,reSlect_start,0);
+		return {
+			'focus' : function(start,end){
+				setPosition(tarea,frontTxt.length + start,end);
+			}
+		}
 	};
-	
-	
+
+
 	//exports
 	exports.insertTxt = insertTxt;
 	exports.Selection = Selection;
-	
+
 	//exports for jquery
-	$ = $ ||{fn:{}};
-	$.fn.Selection = function(){
-		var tarea = this[0];
-		if(tarea.tagName != 'TEXTAREA'){
-			return this
-		}else if(arguments['length'] > 0){
-			setPosition(tarea,arguments[0],arguments[1]);
-			return this
-		}else{
-			return getPosition(tarea);
-		}
-	};
-	$.fn.insertTxt = function(txt,start,end){
-		insertTxt(this[0],txt,start,end);
-		return this
-	};
+	if(jQuery && jQuery.fn){
+		jQuery.fn.Selection = function(){
+			var tarea = this[0];
+			if(tarea.tagName != 'TEXTAREA'){
+				return this
+			}else if(arguments['length'] > 0){
+				setPosition(tarea,arguments[0],arguments[1]);
+				return this
+			}else{
+				return getPosition(tarea);
+			}
+		};
+		jQuery.fn.insertTxt = function(txt,start,end){
+			return insertTxt(this[0],txt,start,end);
+		};
+	}
 })(window.util);
