@@ -38,10 +38,11 @@
 .mditor_tool_side{float: right;padding:5px 5px 0px 0px;}
 
 .mditor_main{position: absolute;top:50px;left:10px;right:10px;bottom:10px;}
-.mditor_input{position: absolute;top:0px;left:0px;width:50%;height:100%;}
+.mditor_input{position: absolute;top:0px;left:0px;width:50%;height:100%;z-index:0;}
 .mditor_input textarea{position: absolute;top:0px;left:0px;border:none;resize:none;background:#eee;color:#333;line-height:200%;margin:0px;padding:10px 15px;}
 .mditor_input textarea:focus{background: #fff;box-shadow: 1px 1px 10px #000;outline:none;}
-.mditor_view{position: absolute;top:0px;right:0px;width:50%;height:100%;overflow: auto;background:#fff;}
+.mditor_view{position: absolute;top:0px;right:0px;width:50%;height:100%;z-index: 1;}
+.mditor_viewer{position: absolute;top:0px;right:0px;left:10px;height:100%;overflow: auto;background:#fff;}
 .mditor_view .md_html{padding:20px 10px;}
 
 /*小工具栏*/
@@ -50,6 +51,11 @@
 	transition:0.2s;-moz-transition-duration: 0.2s;-webkit-transition-duration: 0.2s;-o-transition-duration: 0.2s;}
 .mditor_miniBar a:hover{box-shadow:0px 0px 4px rgba(1,1,4,0.3);color:#333;}
 .mditor_miniBar a:active{box-shadow:0px 0px 4px rgba(1,1,4,0.3) inset;text-shadow:0px 0px 2px rgba(1,1,4,0.3);background:#aaa;color:#fff;}
-
-
+.mditor_preview{visibility: hidden;}
+@media screen and (max-width: 645px){
+	.mditor_input{width: 100%;}
+	.mditor_view{width: 100%;display: none;}
+	.mditor_preview{visibility:visible;}
+	.mditor_viewer{left:0px;}
+}
 

@@ -6,22 +6,29 @@ window.mditor = window.mditor || {};
 
 (function(exports){
 	var miniBar_tpl = ['<div class="mditor_miniBar">',
-		'<a style="float: right;" href="javascript:void(0)" title="全屏"><i class="icon-fullscreen"></i></a>',
+		'<a href="javascript:void(0)" title="加粗" data-btn="bold"><i class="icon-bold"></i></a>',
+		'<a href="javascript:void(0)" title="斜体" data-btn="italic" ><i class="icon-italic"></i></a>',
+		'<a href="javascript:void(0)" title="链接"><i class="icon-link"></i></a>',
+		'<a href="javascript:void(0)" title="图片"><i class="icon-image"></i></a>',
+		'<a href="javascript:void(0)" title="代码"><i class="icon-code"></i></a>',
+		'<a href="javascript:void(0)" title="撤销"><i class="icon-undo"></i></a>',
+		'<a href="javascript:void(0)" title="重做"><i class="icon-redo"></i></a>',
+		'<a href="javascript:void(0)" title="全屏" data-btn="fullscreen" style="float: right;"><i class="icon-fullscreen"></i></a>',
 	'</div>'].join('');
 	var editor_tpl = ['<div class="mditor">',
 		'<div class="mditor_toolBar">',
 			'<div class="mditor_tool_side">',
-					'<a href="javascript:void(0)" title="预览"><i class="icon-view"></i></a>',
-					'<a href="javascript:void(0)" title="退出全屏" data-btn="exist_fullscreen"><i class="icon-exist_fullscreen"></i></a>',
+				'<a href="javascript:void(0)" title="预览" data-btn="preview" class="mditor_preview"><i class="icon-view"></i></a>',
+				'<a href="javascript:void(0)" title="退出全屏" data-btn="exist_fullscreen"><i class="icon-exist_fullscreen"></i></a>',
 			'</div>',
 			'<div class="mditor_tool_main">',
-					'<a href="javascript:void(0)" title="加粗" data-btn="bold"><i class="icon-bold"></i></a>',
-					'<a href="javascript:void(0)" title="斜体" data-btn="italic" ><i class="icon-italic"></i></a>',
-					'<a href="javascript:void(0)" title="链接"><i class="icon-link"></i></a>',
-					'<a href="javascript:void(0)" title="图片"><i class="icon-image"></i></a>',
-					'<a href="javascript:void(0)" title="代码"><i class="icon-code"></i></a>',
-					'<a href="javascript:void(0)" title="撤销"><i class="icon-undo"></i></a>',
-					'<a href="javascript:void(0)" title="重做"><i class="icon-redo"></i></a>',
+				'<a href="javascript:void(0)" title="加粗" data-btn="bold"><i class="icon-bold"></i></a>',
+				'<a href="javascript:void(0)" title="斜体" data-btn="italic" ><i class="icon-italic"></i></a>',
+				'<a href="javascript:void(0)" title="链接"><i class="icon-link"></i></a>',
+				'<a href="javascript:void(0)" title="图片"><i class="icon-image"></i></a>',
+				'<a href="javascript:void(0)" title="代码"><i class="icon-code"></i></a>',
+				'<a href="javascript:void(0)" title="撤销"><i class="icon-undo"></i></a>',
+				'<a href="javascript:void(0)" title="重做"><i class="icon-redo"></i></a>',
 			'</div>',
 		'</div>',
 		'<div class="mditor_main">',
@@ -65,7 +72,7 @@ window.mditor = window.mditor || {};
 		var padding_lr = parseInt(this._textarea.css('paddingLeft'))*2;
 		var padding_tb = parseInt(this._textarea.css('paddingTop'))*2;
 		this._textarea.css({
-			'width' : parent_w - 10 - padding_lr,
+			'width' : parent_w - padding_lr,
 			'height' : parent_h - padding_tb
 		});
 	}
@@ -82,6 +89,43 @@ window.mditor = window.mditor || {};
 //			return false
 //		}
 //	});
+	/**
+	 * 工具类
+	 */
+	function toolHandle(toolDom,textarea,param){
+		var param = param || {};
+		var onInsert = param['onInsert'] || null;
+		var exception =param['exception'] || null;
+		if(!toolDom || !textarea){
+			return
+		}
+		
+		toolDom.on('click','a',function(){
+			var name = $(this).attr('data-btn');
+			switch(name){
+				case 'bold':
+					txt = '**粗粗的文字**';
+					textarea.insertTxt(txt).focus(2,5);
+					onInsert&&onInsert(txt);
+				break
+				case 'italic':
+					txt = '*斜斜的文字*';
+					textarea.insertTxt(txt).focus(1,5);
+					onInsert&&onInsert(txt);
+				break
+				default:
+					if(!exception){
+						return
+					}
+					var returns = exception(name);
+					if(typeof(returns) == 'string'){
+						textarea.insertTxt(returns).focus(2,5);
+						onInsert&&onInsert(returns);
+					}
+			}
+		});
+	}
+
 	function EDITOR(param){
 		if(private_active){
 			return
@@ -115,19 +159,23 @@ window.mditor = window.mditor || {};
 				this_editor.render();
 			},100);
 		});
-		this.dom.on('click','.mditor_toolBar a',function(){
-			var btn = $(this).attr('data-btn');
-			var txt = '';
-			if(btn == 'bold'){
-				txt = '**粗粗的文字**';
-				this_editor._textarea.insertTxt(txt).focus(2,5);
-			}else if(btn == 'italic'){
-				txt = '*斜斜的文字*';
-				this_editor._textarea.insertTxt(txt).focus(1,5);
-			}else if(btn == 'exist_fullscreen'){
-				this_editor.close();
+		//处理工具栏
+		toolHandle(this.dom.find('.mditor_toolBar'),this._textarea,{
+			'onInsert' : function(){
+				this_editor.render();
+			},
+			'exception' : function(name){
+				if(name == 'exist_fullscreen'){
+					this_editor.close();
+				}else if(name == "preview"){
+					var viewDom = this_editor.dom.find('.mditor_view');
+					if(viewDom.css('display') == 'none'){
+						viewDom.show();
+					}else{
+						viewDom.hide();
+					}
+				}
 			}
-			this_editor.render();
 		});
 	}
 	EDITOR.prototype = {
@@ -160,13 +208,19 @@ window.mditor = window.mditor || {};
 			var area = $(this);
 			var toolbar = $(miniBar_tpl);
 			area.before(toolbar);
-			toolbar.on('click','a',function(){
-				new EDITOR({
-					'editFor' : area,
-					'closeFn' : function(txt){
-						area.val(txt);
+			
+			//处理工具栏
+			toolHandle(toolbar,area,{
+				'exception' : function(name){
+					if(name == 'fullscreen'){
+						new EDITOR({
+							'editFor' : area,
+							'closeFn' : function(txt){
+								area.val(txt);
+							}
+						});
 					}
-				});
+				}
 			});
 		});
 	}
