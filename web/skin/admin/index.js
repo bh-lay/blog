@@ -10,7 +10,7 @@ window.onload=function(){
 		bodyTag.style.height = document.documentElement.clientWidth / screen.width * screen.height + 'px';
 	}
 	setTimeout(function() {
-		window.scrollTo(0,50);
+		window.scrollTo(0,1);
 	},500);
 };
 window.admin = window.admin || {};
