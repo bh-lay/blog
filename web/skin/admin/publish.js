@@ -244,21 +244,27 @@ window.admin.publish = window.admin.publish || {};
 		});
 		return txt;
 	}
+	function article_handule(dom,data){
+		var new_html = valueInit(article_tpl,data);
+		dom.html(new_html);
+		require.load('mditor',function(){
+			mditor.bind(dom.find('.pub_arti_main textarea'));
+		});
+		admin.formToAjax(dom,{
+			'onSubmit' : function(data){
+				UI.prompt('正在提交博文修改！');
+			},
+			'onResponse' : function(data){
+				UI.prompt('博文修改完毕');
+				admin.push('/admin/');
+				admin.refresh();
+			}
+		});
+	}
 	//发布帖子
 	function ARTICLE(dom,id){
 		if(!id){
-			var new_html = valueInit(article_tpl,{});
-			dom.html(new_html);
-			admin.formToAjax(dom,{
-				'onSubmit' : function(data){
-					UI.prompt('正在发布！');
-				},
-				'onResponse' : function(data){
-					UI.prompt('博文发布完毕');
-					admin.push('/admin/');
-					admin.refresh();
-				}
-			});
+			article_handule(dom,{});
 			return
 		}
 		getArticle(id,function(err,data){
@@ -266,21 +272,7 @@ window.admin.publish = window.admin.publish || {};
 				dom.html('数据异常！');
 				return
 			}
-			var new_html = valueInit(article_tpl,data);
-			dom.html(new_html);
-			require.load('mditor',function(){
-				mditor.bind(dom.find('.pub_arti_main textarea'));
-			});
-			admin.formToAjax(dom,{
-				'onSubmit' : function(data){
-					UI.prompt('正在提交博文修改！');
-				},
-				'onResponse' : function(data){
-					UI.prompt('博文修改完毕');
-					admin.push('/admin/');
-					admin.refresh();
-				}
-			});
+			article_handule(dom,data);
 		});
 	}
 	//发布分享
