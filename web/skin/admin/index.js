@@ -1,26 +1,34 @@
 ﻿/**
  * @author bh-lay
- * 个人主页主文件
+ * 后台主js文件
  * 
  */
 
-
+window.onload=function(){
+	if(document.documentElement.scrollHeight <= document.documentElement.clientHeight) {
+		bodyTag = document.getElementsByTagName('body')[0];
+		bodyTag.style.height = document.documentElement.clientWidth / screen.width * screen.height + 'px';
+	}
+	setTimeout(function() {
+		window.scrollTo(0,50);
+	},500);
+};
 window.admin = window.admin || {};
 
 /**
- * @method P.push
+ * @method admin.push
  * 	@param {String} url,the location url needn't '/p/'
  * 	@example 
- * 		P.push('vote'); //'vote' is means '/p/vote'
+ * 		admin.push('vote'); //'vote' is means '/p/vote'
  * 
- * @method P.refresh
- * 	@example P.refresh();
+ * @method admin.refresh
+ * 	@example admin.refresh();
  * 
- * @method P.load 
+ * @method admin.load 
  *		@param {String} url,the resources url you want to load
  * 	@param {Function} callback 
  * 	@example
- * 		P.load('/p/public/js/util/slideBar.js',function(){
+ * 		admin.load('/p/public/js/util/slideBar.js',function(){
  * 			console.log('i'm the sidebar!')
  * 		});
  ***/
@@ -310,11 +318,13 @@ pageList.prototype = {
 	},
 	'render' : function(){
 		var txt = '';
+
 		if (this.page_cur > 1) {
-			txt += '<a data-page="prev" href="javascript:void(0)" >上一页</a>';
+			txt += '<div class="pageList_prev"><a data-page="prev" href="javascript:void(0)" >上一页</a></div>';
 		}else{
-			txt += '<span>上一页</span>';
+			txt += '<div class="pageList_prev"><span>上一页</span></div>';
 		}
+		txt += '<div class="pageList_main">';
 		for(var i = 0; i < this.page_num; i++) {
 			if(i+1 != this.page_cur){
 				txt += '<a data-page="jump" href="javascript:void(0)">' + (i + 1) + '</a>';
@@ -322,10 +332,11 @@ pageList.prototype = {
 				txt += '<b>'+ (i + 1) +'</b>'
 			}
 		}
+		txt += '</div>';
 		if (this.page_num - this.page_cur >= 1) {
-			txt += '<a data-page="next" href="javascript:void(0)">下一页</a>';
+			txt += '<div class="pageList_next"><a data-page="next" href="javascript:void(0)">下一页</a></div>';
 		}else{
-			txt += '<span>下一页</span>';
+			txt += '<div class="pageList_next"><span>下一页</span></div>';
 		}
 		this.dom.html(txt);
 	}

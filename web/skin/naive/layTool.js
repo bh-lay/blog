@@ -427,7 +427,7 @@ var render = render || {};
 			 render_over = this.render_over || null;
 		
 		if(param['init']){
-			L.require('juicer,/skin/naive/css/blog.css,/frontEnd/lib/showdown/style-0.6.4.min.css',function(){
+			L.require('juicer,/skin/naive/css/blog.css',function(){
 				getData(id,function(html,title){
 					html&&dom.html(html);
 					render_over&&render_over(title);

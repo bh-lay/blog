@@ -350,10 +350,7 @@ window.admin.render = window.admin.render || {};
  **/
 (function(exports){
 	var tpl = ['<tr>',
-		'<td class="arLiTitle" title="博名">{title}</td>',
-		'<td class="arLiTitle" title="网址">{url}</td>',
-		'<td class="arLiTitle" title="是否显示">{isShow}</td>',
-		'<td class="arLiTitle" title="描述">{discription}</td>',
+		'<td class="arLiTitle" title="{title}{url}">{title}</td>',
 		'<td class="arLiTitle" title="添加时间">{time_create}</td>',
 		'<td class="arLiEdit">',
 			'<a title="修改" href="/admin/publish/friends/{id}" target="_self">改</a>',

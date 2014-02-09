@@ -3,6 +3,7 @@
  * 博客：http://bh-lay.com/
  * Copyright (c) 2012-2018 小剧客栈
 **/
+//alert(window.outerWidth);
 
 window.admin = window.admin || {};
 window.admin.publish = window.admin.publish || {};
@@ -268,7 +269,7 @@ window.admin.publish = window.admin.publish || {};
 			var new_html = valueInit(article_tpl,data);
 			dom.html(new_html);
 			require.load('mditor',function(){
-				mditor.bind(dom.find('textarea'));
+				mditor.bind(dom.find('.pub_arti_main textarea'));
 			});
 			admin.formToAjax(dom,{
 				'onSubmit' : function(data){
