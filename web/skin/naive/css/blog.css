@@ -87,7 +87,8 @@
 .articletop h1{font-size:30px;font-weight:normal;}
 .articletop p{color:#666;}
 .article  ol, .article  ul, .article dd {padding-left:4em;}
-.article li{list-style-type: decimal;}
+.article ol li{list-style-type: decimal;}
+.article ul li{list-style-type: disc;}
 .article img{max-width:100%;}
 .article .topicImg {display: block;margin: auto;}
 .article pre{border:1px solid #aaa;border-radius:4px;background:#f4f4f4;overflow-x:auto;padding:5px 10px;font-size:12px;line-height:1.8;}
