@@ -10,7 +10,7 @@ window.mditor = window.mditor || {};
 		'<a href="javascript:void(0)" title="斜体" data-btn="italic" ><i class="icon-italic"></i></a>',
 		'<a href="javascript:void(0)" title="链接" data-btn="link"><i class="icon-link"></i></a>',
 		'<a href="javascript:void(0)" title="图片" data-btn="image"><i class="icon-image"></i></a>',
-		'<a href="javascript:void(0)" title="代码"><i class="icon-code"></i></a>',
+		'<a href="javascript:void(0)" title="代码" data-btn="code"><i class="icon-code"></i></a>',
 		'<a href="javascript:void(0)" title="撤销"><i class="icon-undo"></i></a>',
 		'<a href="javascript:void(0)" title="重做"><i class="icon-redo"></i></a>',
 		'<a href="javascript:void(0)" title="全屏" data-btn="fullscreen" style="float: right;"><i class="icon-fullscreen"></i></a>',
@@ -24,9 +24,9 @@ window.mditor = window.mditor || {};
 			'<div class="mditor_tool_main">',
 				'<a href="javascript:void(0)" title="加粗" data-btn="bold"><i class="icon-bold"></i></a>',
 				'<a href="javascript:void(0)" title="斜体" data-btn="italic" ><i class="icon-italic"></i></a>',
-				'<a href="javascript:void(0)" title="链接"><i class="icon-link"></i></a>',
-				'<a href="javascript:void(0)" title="图片"><i class="icon-image"></i></a>',
-				'<a href="javascript:void(0)" title="代码"><i class="icon-code"></i></a>',
+		'<a href="javascript:void(0)" title="链接" data-btn="link"><i class="icon-link"></i></a>',
+		'<a href="javascript:void(0)" title="图片" data-btn="image"><i class="icon-image"></i></a>',
+		'<a href="javascript:void(0)" title="代码" data-btn="code"><i class="icon-code"></i></a>',
 				'<a href="javascript:void(0)" title="撤销"><i class="icon-undo"></i></a>',
 				'<a href="javascript:void(0)" title="重做"><i class="icon-redo"></i></a>',
 			'</div>',
@@ -120,9 +120,15 @@ window.mditor = window.mditor || {};
 				break
 				case 'image':
 					txt = '![这是标题](http://)';
-					textarea.insertTxt(txt).focus(1,4);
+					textarea.insertTxt(txt).focus(2,4);
 					onInsert&&onInsert(txt);
 				break
+				case 'code':
+					txt = '\n\n```javascript\n\n```\n\n';
+					textarea.insertTxt(txt).focus(5,10);
+					onInsert&&onInsert(txt);
+				break
+				
 				default:
 					if(!exception){
 						return
