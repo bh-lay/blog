@@ -8,8 +8,8 @@ window.mditor = window.mditor || {};
 	var miniBar_tpl = ['<div class="mditor_miniBar">',
 		'<a href="javascript:void(0)" title="加粗" data-btn="bold"><i class="icon-bold"></i></a>',
 		'<a href="javascript:void(0)" title="斜体" data-btn="italic" ><i class="icon-italic"></i></a>',
-		'<a href="javascript:void(0)" title="链接"><i class="icon-link"></i></a>',
-		'<a href="javascript:void(0)" title="图片"><i class="icon-image"></i></a>',
+		'<a href="javascript:void(0)" title="链接" data-btn="link"><i class="icon-link"></i></a>',
+		'<a href="javascript:void(0)" title="图片" data-btn="image"><i class="icon-image"></i></a>',
 		'<a href="javascript:void(0)" title="代码"><i class="icon-code"></i></a>',
 		'<a href="javascript:void(0)" title="撤销"><i class="icon-undo"></i></a>',
 		'<a href="javascript:void(0)" title="重做"><i class="icon-redo"></i></a>',
@@ -111,6 +111,16 @@ window.mditor = window.mditor || {};
 				case 'italic':
 					txt = '*斜斜的文字*';
 					textarea.insertTxt(txt).focus(1,5);
+					onInsert&&onInsert(txt);
+				break
+				case 'link':
+					txt = '[这是内容](http://)';
+					textarea.insertTxt(txt).focus(1,4);
+					onInsert&&onInsert(txt);
+				break
+				case 'image':
+					txt = '![这是标题](http://)';
+					textarea.insertTxt(txt).focus(1,4);
 					onInsert&&onInsert(txt);
 				break
 				default:
