@@ -1,8 +1,20 @@
-# my blog introdution
+[我的博客 bh-lay.com](http://bh-lay.com)
+======
 
-My blog was founded in March 2012. used a PHP framework CMS, after more than a year of adjustment,I got an idea to use another architecture. In June 2013, I developed and launched node.Js version.
-A first-time to coding node.Js, the code will certainly have a lot to modify place, welcome put forward amendments.
-[bh-lay.com](http://bh-lay.com)
+##博客简介
+[小剧客栈](http://bh-lay.com)是我互联网的成长路上的一个缩影，它伴随我近两年来的成长，借此也结交到不少前辈好友，欢迎大家关注我：剧中人。
+
+## 博客的发展
+我的博客于2012年3月建立。第一版使用国内一款php的cms框架（帝国CMS）。
+写博客之初，我还是一个是刚接触互联网的学生，对于前端及设计上的认知较浅，因此也写过不少我在这个阶段的文章。
+
+写了一年的博客之后，自身对于前端的驾驭能力也稍稍有所增长。这时出于接口的需要使得我认为，需要需找一个很易上手的版本。
+
+于是在2013年六月，我开发并上线了node.js版本的博客，也就是目前git里的版本。
+
+2013年下半年，是我个人的一个快速成长期，也是我博文更新的空白期，期间零零星星发布过对后端构架的修改，但面向访客的更新几乎没有。
+
+2014年初，我基于showdown的渲染库开发了markdown编辑器：mditor。
 
 
 
