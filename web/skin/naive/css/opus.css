@@ -46,7 +46,12 @@
 .opus_detail {line-height: 2;margin:40px auto;padding: 25px; background-color:#fff; font-size: 14px; overflow:hidden;position:relative;border-radius:4px;box-shadow: 1px 1px 2px #666;}
 .opus_detail a {color: #4a0;}
 .opus_detail a:hover {color: #000;text-decoration:underline;}
-.opus_detail  h3, .opus_detail  h4, .opus_detail  h5, opus_detail  h6, .opus_detail  p, .opus_detail dl {margin: 1em 0em;}
+.opus_detail  h3,
+.opus_detail  h4,
+.opus_detail  h5,
+.opus_detail  h6,
+.opus_detail  p,
+.opus_detail dl {margin: 1em 0em;}
 .opus_detail p {text-indent:2em;  }
 .opus_detailtop{border-bottom: 1px dashed #CCC; text-align: center; margin: 20px 0px;}
 .opus_detailtop h1{font-size:30px;font-weight:normal;}
@@ -56,9 +61,9 @@
 .opus_detail img{max-width:100%;display: block;margin: auto;}
 .opus_detail .topicImg {display: block;margin: auto;}
 /*我的作品*/
-#focusTitle{min-height:120px;overflow:hidden;margin:30px 0px;border:1px solid #fff;background:#fff;background:rgba(255,255,255,0.5);}
-#focusTitle img{height:100px;padding:10px;float:left;}
-#focusTitle .info{float:left;padding:15px;width:500px;}
+#focusTitle{min-height:120px;overflow:hidden;margin:30px 0px;border:1px solid #fff;background:#fff;background:rgba(255,255,255,0.5);position: relative;}
+#focusTitle img{height:100px;padding:10px;position: absolute;top:0px;left:0px;}
+#focusTitle .info{position:relative;padding:15px 15px 15px 130px;}
 #focusTitle h1{padding-bottom:20px;border-bottom:1px solid #aaa;
 font-size: 20px;letter-spacing: 0.5em;font-weight:normal;color:#000;}
 #focusTitle ul{font-size:16px;padding-top:20px;}
@@ -67,4 +72,12 @@ font-size: 20px;letter-spacing: 0.5em;font-weight:normal;color:#000;}
 .TagLine{height:50px;margin:80px 20px 40px;background:url(../tagline.png) no-repeat;text-indent:-100em;overflow:hidden;}
 .opus_detail .youyan {padding-top:20px;}
 
-
+@media screen and (min-width: 900px){
+	.opusList {width:900px;}
+}
+@media screen and (max-width: 899px) and (min-width : 600px) {
+	.opusList {width:600px;}
+}
+@media screen and (max-width: 599px) {
+	.opusList {width:300px;}
+}

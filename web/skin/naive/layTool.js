@@ -5,119 +5,68 @@
 **/
 
 /**
- * page background
- * L.gallery() 
+ * all start
  */
-(function(ex){
-	var config = {
-		'delay' : 50000,
-		'coverData' : [
-			{'src':'/skin/naive/gallery/bamboo.jpg','alt':'竹子'},
-			{'src':'/skin/naive/gallery/coast.jpg','alt':'江边'}
-		]
-	};
-	
-	function JS_show(data,bj){
-		console.log('gallery:','use JS animate !');
-		var data = data,
-			bj = bj,
-			total = data.length;
-	
-		var bjDom = $('<img/>').hide();
-	
-		bj.html(bjDom);
-		show(0,bjDom,data);
-		$(window).on('resize',function(){
-			fixImg(bjDom)
-		});
-		
-		function fixImg(dom){
-			var img = dom;
-			var size = img.attr('data').split('-');
-			var imgW = size[0];
-			var imgH = size[1];
-			var winW = $(window).width();
-			var winH = $(window).height();
-			if(winW/winH > imgW/imgH){
-				img.css({
-					'width':winW,
-					'height':winW*imgH/imgW,
-					'marginTop':-(winW*imgH/imgW-winH)/2,
-					'marginLeft':0
-				});
-			}else{
-				img.css({
-					'width':winH*imgW/imgH,
-					'height':winH,
-					'marginTop':0,
-					'marginLeft':-(winH*imgW/imgH-winW)/2
-				});
-			}
-		}
-		function show(i,dom,data){
-			L.loadImg(data[i].src,{'loadFn':function(){
-				var imgW=arguments[0];
-				var imgH=arguments[1];
-				bj.fadeOut(1000,function(){
-					dom.attr({'src':data[i].src,'alt':data[i].alt||'','data':(imgW+'-'+imgH)});
-					fixImg(dom);
-					bj.fadeIn(800);
-					setTimeout(function(){
-						i++;
-						i==total&&(i=0);
-						show(i,dom,data);
-					},config.delay)
-				});
-			}});
-		}
-	}
-	function CSS3(data,bj){
-		console.log('gallery:','use css3 mask and animate!');
-		var data = data,
-			isWebkit = false,
-			bj = bj,
-			total = data.length;
-		bj.html('');
-		show(0);
-		
-		if(L.supports('webkitAnimation')){
-			console.log('gallery:','support -webkit-animation');
-			isWebkit = true;
-		}
-		
-		function show(index){
-			var index = index,
-				src = data[index].src;
-			L.loadImg(src,{'loadFn':function(){
-				var newPic = $('<div class="galBj_mask"></div>');
-				newPic.css({'backgroundImage' : 'url(' + src + ')'});
-				bj.html(newPic);
-				
-				if(!isWebkit){
-					newPic.hide().fadeIn(1000);
-				}
+console.log('lay:','JS is start working !');
 
-				setTimeout(function(){
-					bj.css({'backgroundImage' : 'url(' + src + ')'});
-					newPic.hide()
-					index++;
-					index == total&&(index=0);
-					show(index);
-				},config.delay);
-			}});
-		}
-	}
-	ex.gallery = function(){
-		console.log('gallery:','start !');
-		var bj = $('.gallayer .galBj'),
-			data = config['coverData'];
-		if (L.supports('backgroundSize')){
-			CSS3(data,bj);
+L.require('lofox,dialog',function(){
+	L.nav();
+	L.gallery();
+	var contlayer = $('.contlayer');
+	var fox = lofox(contlayer,function(url){
+		delete(uyan_c_g);
+		delete(uyan_loaded);
+		delete(uyan_s_g);
+		delete(uyan_style_loaded);
+		delete(uyan_style_loaded_over);
+		window.uyan_config = window.uyan_config || {"du":"bh-lay.com"};
+	});
+	fox.set('/','小剧客栈_剧中人的个人空间 网页设计师博客 互动设计学习者',function(data){
+		L.nav.setCur('/'); 
+		render.index.call(this,data);
+	});
+	fox.set('/blog','我的博客_小剧客栈',function(data){
+		L.nav.setCur('blog');
+		if(this.path.length == 1){
+			render.blogList.call(this,data);
 		}else{
-			JS_show(data,bj);
+			data['id'] = this.path[1];
+			render.blogDetail.call(this,data)
+		}
+	});
+	fox.set('/opus','我的作品_小剧客栈',function(data){
+		L.nav.setCur('opus');
+		if(this.path.length == 1){
+			render.opusList.call(this,data);
+		}else{
+			data['id'] = this.path[1];
+			render.opusDetail.call(this,data)
+		}
+	});
+	fox.set('/share','我的分享_小剧客栈',function(data){
+		L.nav.setCur('share');
+		if(this.path.length == 1){
+			render.shareList.call(this,data);
+		}else{
+			data['id'] = this.path[1];
+			render.shareDetail.call(this,data)
+		}
+	});
+	fox.start();
+//	if(support){
+		$('body').on('click','a[lofox="true"]',function(){
+			var url = $(this).attr('href');
+			lofox.push(url);
+			return false;
+		});
+//	}
+	
+	if($.browser.msie){
+		if($.browser.version=="6.0"||$.browser.version=="7.0"){
+			L.dialog.warning('别用你那高贵的浏览器蹂躏我！');
 		}
 	}
-}(L));
+});
 
 /**
  * L.nav()
@@ -127,18 +76,27 @@
 	var first = true ;
 	var init=function(){
 		var delay;
-		$('.navLayer').fadeTo(100,0.6).mouseenter(function(){
+		var bjDom = $('.nav_bj').fadeTo(100,0.6);
+		$('.navLayer').mouseenter(function(){
 			clearTimeout(delay);
-			var __=$(this);
 			delay=setTimeout(function(){
-				__.stop().fadeTo(20,1);			
+				bjDom.stop().fadeTo(20,1);			
 			},20);
 		}).mouseleave(function(){
 			clearTimeout(delay);
-			var __=$(this);
 			delay=setTimeout(function(){
-				__.stop().fadeTo(800,0.6);
+				bjDom.stop().fadeTo(800,0.6);
 			},300);
+		});
+		var isOpen = false;
+		$('.nav_moreBtn').click(function(){
+			if(isOpen){
+				isOpen = false;
+				$('.nav_mainList').slideUp(80);
+			}else{
+				isOpen = true;
+				$('.nav_mainList').slideDown(80);
+			}
 		});
 	};
 
@@ -729,70 +687,119 @@ var render = render || {};
 		return new card();
 	};
 })(L);
-/**
- * all start
- */
-console.log('lay:','JS is start working !');
 
-L.require('lofox,dialog',function(){
-	var contlayer = $('.contlayer');
-	var fox = lofox(contlayer,function(url){
-		delete(uyan_c_g);
-		delete(uyan_loaded);
-		delete(uyan_s_g);
-		delete(uyan_style_loaded);
-		delete(uyan_style_loaded_over);
-		window.uyan_config = window.uyan_config || {"du":"bh-lay.com"};
-	});
-	fox.set('/','小剧客栈_剧中人的个人空间 网页设计师博客 互动设计学习者',function(data){
-		L.nav.setCur('/'); 
-		render.index.call(this,data);
-	});
-	fox.set('/blog','我的博客_小剧客栈',function(data){
-		L.nav.setCur('blog');
-		if(this.path.length == 1){
-			render.blogList.call(this,data);
-		}else{
-			data['id'] = this.path[1];
-			render.blogDetail.call(this,data)
-		}
-	});
-	fox.set('/opus','我的作品_小剧客栈',function(data){
-		L.nav.setCur('opus');
-		if(this.path.length == 1){
-			render.opusList.call(this,data);
-		}else{
-			data['id'] = this.path[1];
-			render.opusDetail.call(this,data)
-		}
-	});
-	fox.set('/share','我的分享_小剧客栈',function(data){
-		L.nav.setCur('share');
-		if(this.path.length == 1){
-			render.shareList.call(this,data);
-		}else{
-			data['id'] = this.path[1];
-			render.shareDetail.call(this,data)
-		}
-	});
-	fox.start();
-//	if(support){
-		$('body').on('click','a[lofox="true"]',function(){
-			var url = $(this).attr('href');
-			lofox.push(url);
-			return false;
-		});
-//	}
+
+/**
+ * page background
+ * L.gallery() 
+ */
+(function(ex){
+	var config = {
+		'delay' : 50000,
+		'coverData' : [
+			{'src':'/skin/naive/gallery/bamboo.jpg','alt':'竹子'},
+			{'src':'/skin/naive/gallery/coast.jpg','alt':'江边'}
+		]
+	};
 	
-	if($.browser.msie){
-		if($.browser.version=="6.0"||$.browser.version=="7.0"){
-			L.dialog.warning('别用你那高贵的浏览器蹂躏我！');
+	function JS_show(data,bj){
+		console.log('gallery:','use JS animate !');
+		var data = data,
+			bj = bj,
+			total = data.length;
+	
+		var bjDom = $('<img/>').hide();
+	
+		bj.html(bjDom);
+		show(0,bjDom,data);
+		$(window).on('resize',function(){
+			fixImg(bjDom)
+		});
+		
+		function fixImg(dom){
+			var img = dom;
+			var size = img.attr('data').split('-');
+			var imgW = size[0];
+			var imgH = size[1];
+			var winW = $(window).width();
+			var winH = $(window).height();
+			if(winW/winH > imgW/imgH){
+				img.css({
+					'width':winW,
+					'height':winW*imgH/imgW,
+					'marginTop':-(winW*imgH/imgW-winH)/2,
+					'marginLeft':0
+				});
+			}else{
+				img.css({
+					'width':winH*imgW/imgH,
+					'height':winH,
+					'marginTop':0,
+					'marginLeft':-(winH*imgW/imgH-winW)/2
+				});
+			}
+		}
+		function show(i,dom,data){
+			L.loadImg(data[i].src,{'loadFn':function(){
+				var imgW=arguments[0];
+				var imgH=arguments[1];
+				bj.fadeOut(1000,function(){
+					dom.attr({'src':data[i].src,'alt':data[i].alt||'','data':(imgW+'-'+imgH)});
+					fixImg(dom);
+					bj.fadeIn(800);
+					setTimeout(function(){
+						i++;
+						i==total&&(i=0);
+						show(i,dom,data);
+					},config.delay)
+				});
+			}});
 		}
 	}
-});
+	function CSS3(data,bj){
+		console.log('gallery:','use css3 mask and animate!');
+		var data = data,
+			isWebkit = false,
+			bj = bj,
+			total = data.length;
+		bj.html('');
+		show(0);
+		
+		if(L.supports('webkitAnimation')){
+			console.log('gallery:','support -webkit-animation');
+			isWebkit = true;
+		}
+		
+		function show(index){
+			var index = index,
+				src = data[index].src;
+			L.loadImg(src,{'loadFn':function(){
+				var newPic = $('<div class="galBj_mask"></div>');
+				newPic.css({'backgroundImage' : 'url(' + src + ')'});
+				bj.html(newPic);
+				
+				if(!isWebkit){
+					newPic.hide().fadeIn(1000);
+				}
 
-$(function(){
-	L.nav();
-	L.gallery();
-	//L.myCard();
-});
+				setTimeout(function(){
+					bj.css({'backgroundImage' : 'url(' + src + ')'});
+					newPic.hide()
+					index++;
+					index == total&&(index=0);
+					show(index);
+				},config.delay);
+			}});
+		}
+	}
+	ex.gallery = function(){
+		console.log('gallery:','start !');
+		var bj = $('.gallayer .galBj'),
+			data = config['coverData'];
+		if (L.supports('backgroundSize')){
+			CSS3(data,bj);
+		}else{
+			JS_show(data,bj);
+		}
+	}
+}(L));
