@@ -73,29 +73,28 @@ L.require('lofox,dialog',function(){
  * 
  */
 (function(ex){
-	var first = true ;
 	var init=function(){
 		var delay;
-		var bjDom = $('.nav_bj').fadeTo(100,0.6);
-		$('.navLayer').mouseenter(function(){
-			clearTimeout(delay);
-			delay=setTimeout(function(){
-				bjDom.stop().fadeTo(20,1);			
-			},20);
-		}).mouseleave(function(){
-			clearTimeout(delay);
-			delay=setTimeout(function(){
-				bjDom.stop().fadeTo(800,0.6);
-			},300);
-		});
 		var isOpen = false;
 		$('.nav_moreBtn').click(function(){
 			if(isOpen){
 				isOpen = false;
-				$('.nav_mainList').slideUp(80);
+				$('.nav_mainList').slideUp(80,function(){
+					$(this).height(0).show();
+				});
 			}else{
 				isOpen = true;
-				$('.nav_mainList').slideDown(80);
+				$('.nav_mainList').hide().height('auto').slideDown(120);
+			}
+		});
+		$('.nav_mainList').on('click',function(){
+			if($('.nav_moreBtn').css('display') == 'block'){
+				isOpen = false;
+				$('.nav_mainList').slideUp(80,function(){
+					$(this).height(0).show();
+				});
+			}else{
+				alert(2)
 			}
 		});
 	};

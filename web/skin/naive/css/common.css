@@ -20,8 +20,8 @@ TD{color:#777; font-size:12px; padding:10px;}
 .fix:after{content: ".";display: block;height: 0;clear: both;visibility: hidden;}
 .fix{display: inline-block;zoom:1;}
 
-html{position: relative;min-width:360px;height:100%;overflow-x:auto;overflow-y:scroll;}
-body{position:relative;min-width:360px;height:100%;color:#333;font-size:14px;font-family:"Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";}
+html{position: relative;min-width:340px;height:100%;overflow-x:auto;overflow-y:scroll;}
+body{position:relative;min-width:340px;height:100%;color:#333;font-size:14px;font-family:"Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";}
 /*
  * common
  * some pulic modules
@@ -71,6 +71,7 @@ background-size : cover;background-position : center center;}
 }
 .nav_bj{
 	height:40px;
+	opacity:0.7;
 	border-bottom:1px solid #666;
 	border-radius:0px 0px 8px 8px;
 	box-shadow: 1px 1px 2px #666;
@@ -79,7 +80,7 @@ background-size : cover;background-position : center center;}
 	background:-moz-linear-gradient(top,  #ffffff,  #f2f2f2);
 }
 .nav_main{position: absolute;top:0px;left:0px;width: 100%;}
-.nav_logo{display:block;float:left;width:100px;height:35px;margin:3px 40px 0px 0px;background:url(/skin/naive/skin.png) 0px -100px;text-indent: -10em;overflow: hidden;}
+.nav_logo{display:block;float:left;width:100px;height:35px;margin:3px 40px 0px 10px;background:url(/skin/naive/skin.png) 0px -100px;text-indent: -10em;overflow: hidden;}
 .nav_logo i{display:inline-block;width:100px;height:35px;margin:3px 40px 0px 0px;background:url(/skin/naive/skin.png) 0px -100px;text-indent: -10em;overflow: hidden;}
 .nav{line-height:40px;float:left;border-left:1px solid #e8e8e8;margin-right:20px;}
 .nav li{width:80px;float:left;border-right:1px solid #e8e8e8;}
@@ -114,7 +115,7 @@ background-size : cover;background-position : center center;}
 .nav_mainList{}
 .nav_moreBtn{display: none;}
 @media screen and (max-width : 550px){
-	.nav_bj{border-radius: 0px;}
+	.nav_bj{border-radius: 0px;opacity:1;background:#fff;}
 	.nav_moreBtn{display: block;}
 	.nav_mainList{
 		display: none;
@@ -123,6 +124,8 @@ background-size : cover;background-position : center center;}
 		left:0px;
 		width: 100%;
 		background: #fff;
+		overflow: hidden;
+		box-shadow: 0px 2px 2px rgba(0,0,0,0.7)
 	}
 	.nav_main ul{float: none;margin:0px;}
 	.nav_main li{float: none;border:none;width:auto;}
