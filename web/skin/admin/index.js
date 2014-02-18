@@ -45,7 +45,7 @@ window.admin = window.admin || {};
 		var not_admin = false,
 			 page,
 			 title;
-		//判断是否为个人主页模块
+		//判断是否为后台
 		if(urlData.length == 0 || urlData[0] != 'admin'){
 			not_admin = true;
 		}else{

@@ -74,7 +74,6 @@ L.require('lofox,dialog',function(){
  */
 (function(ex){
 	var init=function(){
-		var delay;
 		var isOpen = false;
 		$('.nav_moreBtn').click(function(){
 			if(isOpen){

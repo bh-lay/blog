@@ -21,7 +21,7 @@ body{width: 100%;min-width:360px;}
 .mt5{margin-top:50px;}
 .mt6{margin-top:60px;}
 
-.mainFrame{}
+.mainFrame{padding-top:40px;}
 .containter{max-width:900px;margin:auto;}
 /*面包屑*/
 .crumbs{
@@ -37,32 +37,77 @@ body{width: 100%;min-width:360px;}
  * 基础页面
  */
 
-.topNav{width:100%;height:40px;overflow:hidden;background-color:#444;}
 .userCnt{width:120px;height:40px;float:left;text-align:center;position:relative;background: #777}
 .userCnt .username{line-height:40px;color:#fff;font-size:16px;letter-spacing:4px;cursor: pointer;}
 .userCnt .username_hover{width:100%;height:100%;position:absolute;top:0px;left:0px;text-align: center;display: none;}
 .userCnt .username_hover a{display:block;float:left;width:50%;height:40px;line-height:40px;background: #500;color:#fff;}
 .userCnt .username_hover a:hover{background: #700;}
 
+
+.nav_main{
+	position:fixed;
+	z-index:1000;
+	top:0px;
+	right:0px;
+	left:0px;
+	background-color:#444;
+}
+
+.nav_mainList{}
 .nav{float:left;}
-.nav ul{height:40px;line-height: 40px;}
-.nav li{float:left;width:70px;text-align: center;}
-.nav li a{display: block;color : #efe;font-size:16px;}
+.nav ul{line-height: 40px;overflow:hidden;}
+.nav li{float:left;}
+.nav li a{display: block;padding:0px 20px;color : #efe;font-size:16px;}
 .nav li a:visited{color:#efe;}
 .nav li a:hover{background:#333;color:#fff;}
 .nav li a.cur{background:#222;color:#fff;border-left:1px solid #070;border-right:1px solid #0a0;padding:0px 19px;box-shadow: 1px 2px 3px #000 inset;text-shadow: 1px 2px 2px #000;}
 
-.nav li .navItem{display:none;}
-.navItem {overflow:hidden;background:#fff;box-shadow:1px 1px 10px rgba(0,0,0,0.4);}
-.navItem a{display: block;width:100px;height:40px;line-height:40px;text-align:center;float: left;color:#333;}
-.navItem a:hover{background: #f4f4f4;}
-.navItem a:active{background: #ddd;}
-@media screen and (max-width: 570px){
-	.userCnt{width:80px;}
-	.userCnt .username{opacity: 0.6;}
-	.nav li{width:55px;}
+
+.nav_tool{position: absolute;top: 0px;right:10px;}
+.nav_moreBtn{
+	float:right;
+	display:block;
+	height:22px;
+	padding:7px 10px 0px;
+	margin-top:3px;
+	border:1px solid #888;
+	border-radius: 4px;
+	background: rgba(0,0,0,0.6);
+}
+.nav_moreBtn:hover{background:rgba(0,0,0,0.8);}
+.nav_moreBtn:active{background:#000;}
+.nav_Btn_ico{
+	display:block;
+	width: 22px;
+	height:2px;border-radius: 1px;background: #fff;
+	margin-bottom: 4px;
+}
+.navItem,
+.nav_moreBtn{display: none;}
+@media screen and (max-width : 550px){
+	.navItem,
+	.nav_moreBtn{display: block;}
+
+	.userCnt{background: transparent;}
+	.nav_mainList{
+		display: none;
+		position: fixed;
+		top:40px;
+		left:0px;
+		width: 100%;
+		text-align:center;
+		background: #444;
+		overflow: hidden;
+		box-shadow: 0px 2px 2px rgba(0,0,0,0.7)
+	}
+	.nav_main ul{float: none;margin:0px;}
+	.nav_main li{float: none;border:none;width:auto;}
+	.nav{float:none;}
 	.nav li a{font-size: 14px;}
 }
+/*navigation*/
+
+
 /**基础页面**/
 
 /**
@@ -100,7 +145,7 @@ body{width: 100%;min-width:360px;}
 	cursor: default;
 }
 .pageList span{border-color:#eee;background:#fff;color:#999;cursor: default;}
-@media screen and (max-width: 400px){
+@media screen and (max-width: 550px){
 	.pageList{font-size:12px;}
 	.pageList_prev{width:50px;}
 	.pageList_next{width:50px;float: right;}
@@ -145,7 +190,7 @@ body{width: 100%;min-width:360px;}
 .listSheet a{color:#fff;}
 .listSheet a:visited {color:#fff;}
 .listSheet a:hover {color:#ccc;text-decoration: underline;}
-@media screen and (max-width: 400px){	
+@media screen and (max-width: 550px){	
 	.listSheet{background:#444;border-radius: 0px;}
 	.listSheet td{padding:12px 5px;font-size: 12px;line-height:14px;}
 }

@@ -329,6 +329,29 @@ window.admin.render = window.admin.render || {};
 				plane.close();
 			});
 		});
+		var isOpen = false;
+		$('.nav_moreBtn').click(function(){
+			if(isOpen){
+				isOpen = false;
+				$('.nav_mainList').slideUp(80,function(){
+					$(this).height(0).show();
+				});
+			}else{
+				isOpen = true;
+				$('.nav_mainList').hide().height('auto').slideDown(120);
+			}
+		});
+		$('.nav_mainList').on('click',function(){
+			if($('.nav_moreBtn').css('display') == 'block'){
+				isOpen = false;
+				$('.nav_mainList').slideUp(80,function(){
+					$(this).height(0).show();
+				});
+			}else{
+				//貌似不需要else
+			}
+		});
+
 	}
 
 	exports.nav = function(){

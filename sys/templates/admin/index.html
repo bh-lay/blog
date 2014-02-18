@@ -9,7 +9,7 @@
 <link href="/skin/admin/admin.css" rel="stylesheet">
 </head>
 <body>
-<div class="topNav">
+<div class="nav_main">
 	<div class="containter">
 		<div class="userCnt">
 			<div class="username">{-username-}</div>
@@ -18,22 +18,29 @@
 					</a><a class="lofox" href="/admin/user/user.html?userid={-userid-}">改密</a>
 			</div>
 		</div>
-		<div class="nav">
-			<ul>
-				<li><a href="/admin" class="lofox">首页</a></li>
-				<li><a class="lofox" href="/admin/article">博文</a></li>
-				<li><a class="lofox" href="/admin/share">分享</a></li>
-				<li><a class="lofox" href="/admin/opus">作品</a></li>
-				<li>
-					<a href="javascript:void(0)">用户</a>
-					<div class="navItem">
-						<a class="lofox" href="/admin/user/list">用户管理</a>
-						<a class="lofox" href="/admin/user/group">用 户 组</a>
-						<a class="lofox" href="/admin/user/power">权限列表</a> 
-					</div>
-				</li>
-		    </ul>
+		<div class="nav_mainList">
+			<div class="nav">
+				<ul>
+					<li><a href="/admin" class="lofox">首页</a></li>
+					<li><a class="lofox" href="/admin/article">博文</a></li>
+					<li><a class="lofox" href="/admin/share">分享</a></li>
+					<li><a class="lofox" href="/admin/opus">作品</a></li>
+					<li>
+						<a href="javascript:void(0)">用户</a>
+						<div class="navItem">
+							<a class="lofox" href="/admin/user/list">用户管理</a>
+							<a class="lofox" href="/admin/user/group">用 户 组</a>
+							<a class="lofox" href="/admin/user/power">权限列表</a> 
+						</div>
+					</li>
+			    </ul>
+			</div>
 		</div>
+	</div>
+	<div class="nav_tool">
+		<a class="nav_moreBtn" href="javascript:void(0)">
+			<span class="nav_Btn_ico"></span><span class="nav_Btn_ico"></span><span class="nav_Btn_ico"></span>
+		</a>
 	</div>
 </div>
 <div class="mainFrame">
