@@ -94,7 +94,7 @@ L.require('lofox,dialog',function(){
 					$(this).height(0).show();
 				});
 			}else{
-				alert(2)
+				//貌似不需要else
 			}
 		});
 	};
