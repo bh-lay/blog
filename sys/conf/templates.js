@@ -11,4 +11,5 @@ module.exports = {
 	'opusList' : './templates/opusList.html',
 	'opusDetail' : './templates/opusDetail.html',
 	'labsList' : './templates/labsList.html',
+	'labsDetail' : './templates/labsDetail.html',
 };

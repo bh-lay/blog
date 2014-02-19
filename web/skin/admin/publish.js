@@ -13,9 +13,9 @@ window.admin.publish = window.admin.publish || {};
 		'<div class="publish_cpt">',
 			'<a href="javascript:void(0)" data-type="article" class="active">博文</a>',
 			'<a href="javascript:void(0)" data-type="share">分享</a>',
+			'<a href="javascript:void(0)" data-type="labs">实验室</a>',
 			'<a href="javascript:void(0)" data-type="opus">作品</a>',
 			'<a href="javascript:void(0)" data-type="friends">友情链接</a>',
-			'<a href="javascript:void(0)" data-type="labs">实验室</a>',
 		'</div>',
 		'<div class="publish_cnt"></div>',
 	'</div>'].join('');

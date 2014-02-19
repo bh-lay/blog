@@ -24,6 +24,10 @@ var del_conf = {
 		'collection_name' : 'article',
 		'power' : 4
 	},
+	'labs' : {
+		'collection_name' : 'labs',
+		'power' : 4
+	},
 	'share' : {
 		'collection_name' : 'share',
 		'power' : 7
@@ -104,7 +108,7 @@ exports.render = function (req,res_this){
 	var from = data['from']||'';
 	
 	var param = {
-		'id' : data['id']||'',
+		'id' : data['id'] || '',
 		'power' : null
 	};
 	

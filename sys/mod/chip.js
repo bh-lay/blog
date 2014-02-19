@@ -60,7 +60,7 @@ chip.share_item = function(callback){
 chip.labs_item = function(callback){
 	var chip =  ['{@each list as it,index}',
 		'<li>',
-			'<a href="/share/${it.id}" title="${it.title}" lofox="true" target="_self" >',
+			'<a href="/labs/${it.id}" title="${it.title}" lofox="true" target="_self" >',
 				'<img src="${it.cover}" alt="${it.title}" />',
 				'<strong>${it.title}</strong>',
 			'</a>',

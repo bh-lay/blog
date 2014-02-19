@@ -14,6 +14,7 @@ window.admin.render = window.admin.render || {};
 	var txt = ['<div>',
 		'<a href="/admin/publish/article">写博文</a>--',
 		'<a href="/admin/publish/share">发分享</a>--',
+		'<a href="/admin/publish/labs">实验室</a>--',
 		'<a href="/admin/publish/opus">传作品</a>--',
 		'<a href="/admin/publish/friends">加友情链接</a>',
 	'</div>',
@@ -311,7 +312,7 @@ window.admin.render = window.admin.render || {};
 		'<td class="arLiTitle"><a title="查看博文" href="/blog/{id}" target="_blank">{title}</a></td>',
 		'<td class="arLiEdit">',
 			'<a class="lofox" title="修改" href="/admin/publish/labs/{id}" target="_self">改</a>',
-			'<a title="删除" href="/ajax/del?from=blog&id={id}" onclick="if(!confirm(\'三思啊，删了可就没啦！\')){return false;}" 	target="_self">删</a>',
+			'<a title="删除" href="/ajax/del?from=labs&id={id}" onclick="if(!confirm(\'三思啊，删了可就没啦！\')){return false;}" 	target="_self">删</a>',
 		'</td>',
 		'<td class="arLiTime">{time_show}</td>',
 	'</tr>'].join('');
