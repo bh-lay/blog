@@ -37,7 +37,8 @@ window.admin = window.admin || {};
 		'opus' : '作品列表',
 		'user' : '用户',
 		'publish' : '发布台',
-		'friends' : '友情链接'
+		'friends' : '友情链接',
+		'labs' : '实验室'
 	};
 	
 	function filterUrl(input){
@@ -110,6 +111,11 @@ window.admin = window.admin || {};
 					var dom = createDom(mainDom);
 					admin.render.opus(dom);
 				break
+				case 'labs':
+					//作品
+					var dom = createDom(mainDom);
+					admin.render.labs(dom);
+				break
 				case 'user':
 					//用户
 					var dom = createDom(mainDom);
@@ -144,7 +150,7 @@ window.admin = window.admin || {};
 						id = urlData[3];
 					}
 					
-					if(type.match(/^(article|share|opus|friends)$/)){
+					if(type.match(/^(article|share|opus|friends|labs)$/)){
 						admin.publish.init(dom,{
 							'active' : type,
 							'id' : id

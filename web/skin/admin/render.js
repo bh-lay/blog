@@ -32,7 +32,6 @@ window.admin.render = window.admin.render || {};
 
 /**
  * 博文列表页
- * 博文内容页
  * @param {Object} dom
  * @param {String|Number} [id] article ID
  **/
@@ -302,6 +301,87 @@ window.admin.render = window.admin.render || {};
 })(window.admin.render);
 
 
+/**
+ * 实验室列表页
+ * @param {Object} dom
+ * @param {String|Number} [id] article ID
+ **/
+(function(exports){
+	var tpl = ['<tr>',
+		'<td class="arLiTitle"><a title="查看博文" href="/blog/{id}" target="_blank">{title}</a></td>',
+		'<td class="arLiEdit">',
+			'<a class="lofox" title="修改" href="/admin/publish/labs/{id}" target="_self">改</a>',
+			'<a title="删除" href="/ajax/del?from=blog&id={id}" onclick="if(!confirm(\'三思啊，删了可就没啦！\')){return false;}" 	target="_self">删</a>',
+		'</td>',
+		'<td class="arLiTime">{time_show}</td>',
+	'</tr>'].join('');
+	function render(tpl,data){
+		var txt = '';
+		for(var i=0 in data){
+			txt += tpl.replace(/{(\w*)}/g,function(){
+				var key = arguments[1];
+				return data[i][key] || '';
+			});
+		}
+		return txt;
+	}
+	//获取文章列表
+	function getList(start,limit,callback){
+		$.ajax({
+			'url' : '/ajax/labs',
+			'type' : 'GET',
+			'data' : {
+				'act' : 'get_list',
+				'skip' : start,
+				'limit' : limit
+			},
+			'success' : function(data){
+				for(var i in data.list){
+					data.list[i].time_show = parse.time(data.list[i].time_create,'{y}-{m}-{d}');
+				}
+				callback(null,data);	
+			}
+		});
+	}
+	function listPage(dom){
+		var list_html = '<table class="listSheet articleList" cellspacing="0">';
+		//每页显示条数
+		var page_list_num = 8;
+		getList(0,page_list_num,function(err,data){
+			if(err){
+				console.log('error');
+				return
+			}
+			list_html += render(tpl,data.list);
+			list_html += '</table>';
+			
+			list_html += '<div class="page"></div>';
+			dom.html(list_html);
+			//分页组件
+			var page = admin.pageList(dom.find('.page'),{
+				'list_count' : data.count,
+				'page_cur' : 0,
+				'page_list_num' : page_list_num
+			});
+			page.jump = function(num){
+				
+				//console.log(num,12);
+				getList((num-1)*page_list_num,page_list_num,function(err,data){
+					if(err){
+						console.log('error');
+						return
+					}
+					var new_html = render(tpl,data.list);
+					
+					dom.find('table').html(new_html);
+				});
+			};
+		});
+	}
+	exports.labs = function(dom,id){
+		listPage(dom);
+	};
+})(window.admin.render);
 /**
 (function(exports){	
 })(window.admin.render);

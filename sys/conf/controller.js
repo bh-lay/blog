@@ -9,5 +9,6 @@ module.exports = {
 	'/blog' : '/controller/blog.js',
 	'/share' :'/controller/share.js',
 	'/opus' :'/controller/opus.js',
+	'/labs' :'/controller/labs.js',
 	'/connect' :'/controller/connect.js',
 };

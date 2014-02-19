@@ -15,6 +15,7 @@ window.admin.publish = window.admin.publish || {};
 			'<a href="javascript:void(0)" data-type="share">分享</a>',
 			'<a href="javascript:void(0)" data-type="opus">作品</a>',
 			'<a href="javascript:void(0)" data-type="friends">友情链接</a>',
+			'<a href="javascript:void(0)" data-type="labs">实验室</a>',
 		'</div>',
 		'<div class="publish_cnt"></div>',
 	'</div>'].join('');
@@ -26,6 +27,8 @@ window.admin.publish = window.admin.publish || {};
 			admin.publish.opus(dom,id);
 		}else if(name == 'friends'){
 			admin.publish.friends(dom,id);
+		}else if(name == 'labs'){
+			admin.publish.labs(dom,id);
 		}else{
 			//默认为发布文章
 			admin.publish.article(dom,id);
@@ -123,6 +126,27 @@ window.admin.publish = window.admin.publish || {};
 		'</ul></form>',
 	'</div>'].join('');
 	
+	var labs_tpl = ['<div class="L_formUI">',
+		'<form action="/ajax/add_edit" method="post" target="_self"><ul>',
+			'<li class="L_foUItem"><label class="L_foUItTitle">标题：</label><input type="text" name="title" value="{title}"/></li>',
+			'<li class="L_foUItem"><label class="L_foUItTitle">缩略图：</label><input type="text" name="cover" value="{cover}"` /></li>',
+			'<li class="L_foUItem"><label class="L_foUItTitle">创作时间：</label><input type="text" name="time_create" value="{opus_time_create}" /></li>',
+			'<li class="L_foUItem">',
+				'<label class="L_foUItTitle">插件简介：</label>',
+				'<textarea name="intro" cols="50" rows="5">{intro}</textarea>',
+			'</li>',
+			'<li class="L_foUItem">',
+				'<label class="L_foUItTitle">插件详细介绍：</label>',
+				'<textarea name="content" cols="50" rows="10" >{content}</textarea>',
+			'</li>',
+			'<li class="L_foUItem">',
+				'<input type="hidden" name="id" value="{id}" />',
+				'<input type="hidden" name="category" value="labs" />',
+				'<input type="submit" value="提交" />',
+			'</li>',
+		'</ul></form>',
+	'</div>'].join('');
+	
 	var friend_tpl = ['<div class="L_formUI">',
 		'<form action="/ajax/add_edit" method="post" target="_self"><ul>',
 			'<li class="L_foUItem"><label class="L_foUItTitle">标题：</label><input type="text" name="title" value="{title}"/></li>',
@@ -150,6 +174,31 @@ window.admin.publish = window.admin.publish || {};
 		}
 		$.ajax({
 			'url' : '/ajax/blog',
+			'type' : 'GET',
+			'data' : {
+				'content_format' : 'markdown',
+				'act' : 'get_detail',
+				'id' : id
+			},
+			'success' : function(data){
+				if(data.code != 1){
+					callback && callback('data error');
+				}else{
+					callback && callback(null,data.detail);
+				}	
+			}
+		});
+	}
+	
+	/****
+	 * 获取实验室内容
+	 */
+	function getLabs(id,callback){
+		if(!id){
+			callback && callback('missing arguments');
+		}
+		$.ajax({
+			'url' : '/ajax/labs',
 			'type' : 'GET',
 			'data' : {
 				'content_format' : 'markdown',
@@ -313,6 +362,45 @@ window.admin.publish = window.admin.publish || {};
 			});
 		});
 	}
+	
+	//发布实验室内容
+	function LABS(dom,id){
+		if(!id){
+			var new_html = valueInit(labs_tpl,{});
+			
+			dom.html(new_html);
+			admin.formToAjax(dom,{
+				'onSubmit' : function(data){
+					UI.prompt('正在提交实验室的修改！');
+				},
+				'onResponse' : function(data){
+					UI.prompt('实验室发布完毕');
+					admin.push('/admin/');
+					admin.refresh();
+				}
+			});
+			return
+		}
+		getLabs(id,function(err,data){
+			if(err){
+				dom.html('数据异常！');
+				return
+			}
+			var new_html = valueInit(labs_tpl,data);
+			
+			dom.html(new_html);
+			admin.formToAjax(dom,{
+				'onSubmit' : function(data){
+					UI.prompt('正在提交分享修改！');
+				},
+				'onResponse' : function(data){
+					UI.prompt('分享修改完毕');
+					admin.push('/admin/');
+					admin.refresh();
+				}
+			});
+		});
+	}
 	function OPUS(dom,id){
 		if(!id){
 			var new_html = valueInit(opus_tpl,{});
@@ -392,4 +480,5 @@ window.admin.publish = window.admin.publish || {};
 	exports.share = SHARE;
 	exports.opus = OPUS;
 	exports.friends = FRIENDS;
+	exports.labs = LABS;
 })(window.admin.publish);

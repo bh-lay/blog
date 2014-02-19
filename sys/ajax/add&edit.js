@@ -99,6 +99,11 @@ function filter_request(req,res_this,callback){
 					data_filter['collection_name'] = 'blog_friend';
 					need_power = 18;
 					break
+				case 'labs' :
+					data_filter = filter_request.labs(data);
+					data_filter['collection_name'] = 'labs';
+					need_power = 3;
+					break
 				default :
 					data_filter['error'] = 'please input category [blog,share,opus,blog_friend]';
 			}
@@ -170,6 +175,26 @@ filter_request.opus = function(data){
 		'data' : param
 	};
 }
+
+filter_request.labs = function(data){
+	var error = null;
+	var param = {
+		'id' : data['id']||'',
+		'title':decodeURI(data['title']),
+		'cover':data['cover']||'',
+		'time_create':data['time_create']||new Date().getTime(),
+		'content':data['content'],
+		'intro':data['intro'] || data['content'].slice(0,200),
+	};
+	if(!(param['title']&&param['content'])){
+		error = 'please insert complete code !';
+	}
+	return {
+		'error' : error,
+		'data' : param
+	};
+}
+
 filter_request.blog_friend = function(data){
 	var error = null;
 	var param = {

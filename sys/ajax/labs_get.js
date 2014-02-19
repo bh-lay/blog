@@ -1,0 +1,133 @@
+/*
+ * @author bh-lay
+ */
+/*
+@demo
+-----------------------------------------------------------------
+get_list: 								|		get_detail
+	$.ajax({                      |       	$.ajax({
+		'type':'GET',              |       		'type':'GET',
+		'url':'/ajax/blog',        |       		'url':'/ajax/blog',
+		'data':{                   |       		'data':{
+			'act' : 'get_list',     |       			'act' : 'get_detail',
+			'limit_num' : '12',		|					'id' :'123456789'
+			'skip_num' : '34'			|				}
+		}	       						|       	});
+	});                           |
+-----------------------------------------------------------------
+ */
+
+var mongo = require('../conf/mongo_connect');
+var fs = require('fs');
+var querystring=require('querystring');
+//var markdown = require('markdown');
+var showdown = require('../lib/showdown/showdown.js');
+var converter = new showdown.converter();
+
+function get_list(data,callback){
+	var data = data,
+		limit_num = parseInt(data['limit'])||10,
+		skip_num = parseInt(data['skip'])||0;
+	
+	var resJSON = {
+		'code':1,
+		'limit':limit_num,
+		'skip':skip_num,
+	};
+	
+	var method = mongo.start();
+	method.open({'collection_name':'labs'},function(err,collection){
+      //count the all list
+		collection.count(function(err,count){
+			resJSON['count'] = count;
+			
+			collection.find({},{limit:limit_num}).sort({id:-1}).skip(skip_num).toArray(function(err, docs) {
+				method.close();
+				if(err){
+					resJSON.code = 2;
+				}else{
+					for(var i=0 in docs){
+						delete docs[i]['content'];
+					}
+					resJSON['list'] = docs;
+				}
+				callback&&callback(resJSON);
+			});
+		});
+	});
+}
+function get_detail(data,callback){
+	var data=data,
+		labID = data['id'],
+		//内容格式（html/markdown）
+		content_format = data['content_format'] || 'html';
+	
+	var resJSON={
+		'code':1,
+		'id' : labID,
+		'content_format' : content_format
+	};
+	var method = mongo.start();
+	method.open({'collection_name':'labs'},function(err,collection){
+		collection.find({id:labID}).toArray(function(err, docs) {
+			method.close();
+			if(arguments[1].length==0){
+				resJSON['code'] = 2;
+				resJSON['msg'] = 'could not find this lab !';				
+			}else{ 
+				resJSON['detail'] = docs[0];
+				
+				if(content_format == 'html'){
+				//	docs[0].content = markdown.parse(docs[0].content);
+					docs[0].content = converter.makeHtml(docs[0].content);
+				}
+			//	}else if(content_format == 'markdown'){
+					
+			//	}
+				resJSON['detail'] = docs[0];
+			}
+			callback&&callback(resJSON);
+		});
+	});
+}
+
+function this_control(url,callback){
+	var search = url.split('?')[1],
+		 data = querystring.parse(search);
+	
+	if(data['act']=='get_list'){
+		get_list(data,function(json_data){
+			callback&&callback(json_data);
+		});
+		
+	}else if(data['act']=='get_detail'){
+		if(data['id']){
+			get_detail(data,function(json_data){
+				callback&&callback(json_data);
+			});
+		}else{
+			callback&&callback({
+				'code' : 2,
+				'msg' : 'plese tell me which lab you want to get !'
+			});
+		}
+	}else{
+		callback&&callback({
+			'code' : 2,
+			'msg' : 'plese use [act] get_detail or get_list !'
+		});
+	}
+}
+
+exports.render = function (req,res_this,res){
+	
+	var url = req.url;
+
+	cache.ajax(url,function(this_cache){
+		res_this.json(this_cache);
+	},function(save_cache){
+		this_control(url,function(this_data){
+			save_cache(JSON.stringify(this_data));
+		});
+	});
+}

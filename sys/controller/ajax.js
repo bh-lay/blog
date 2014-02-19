@@ -8,6 +8,7 @@ var ajaxConfig = {
 	'share':'share_get',
 	'opus':'opus_get',
 	'blog':'article_get',
+	'labs':'labs_get',
 	'user':'user',
 	'user_group':'user/user_group_add&edit',
 	'power':'user/power_add&edit',

@@ -10,4 +10,5 @@ module.exports = {
 	'shareDetail': './templates/shareDetail.html',
 	'opusList' : './templates/opusList.html',
 	'opusDetail' : './templates/opusDetail.html',
+	'labsList' : './templates/labsList.html',
 };

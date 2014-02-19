@@ -1,5 +1,8 @@
 /*
  * @author bh-lay
+ *
+ *  生成代码段
+ * 
  * use	exports.get(modname)		can get template we have defined !
  * use	exports.init(template)		can init all template item !
  */
@@ -43,6 +46,18 @@ chip.article_item =function(callback){
 };
 
 chip.share_item = function(callback){
+	var chip =  ['{@each list as it,index}',
+		'<li>',
+			'<a href="/share/${it.id}" title="${it.title}" lofox="true" target="_self" >',
+				'<img src="${it.cover}" alt="${it.title}" />',
+				'<strong>${it.title}</strong>',
+			'</a>',
+		'</li>',
+	'{@/each}'].join('');
+	callback(chip);
+};
+
+chip.labs_item = function(callback){
 	var chip =  ['{@each list as it,index}',
 		'<li>',
 			'<a href="/share/${it.id}" title="${it.title}" lofox="true" target="_self" >',
