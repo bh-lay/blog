@@ -14,7 +14,7 @@
 .opusList ul li{width:280px;float: left;margin:0px 10px 20px;background:#fff;overflow: hidden;border-radius:4px;}
 .opus_cover{width:100%;height:160px;}
 .opus_cover a{display:block;width:100%;height:100%;background:#fff;position:relative;overflow: hidden; }
-.opus_cover a img{display:block;width:100%;min-height: 100%;margin-top:-20px;transition: 0.1s;}
+.opus_cover a img{display:block;min-width:280px;max-width:100%;min-height: 100%;margin:0px auto;transition: 0.1s;}
 .opus_cover a:hover img{opacity: 0.8;}
 .opus_info{height:140px;box-shadow: 0px 0px 15px #000;position: relative;background:#fff;}
 .opus_info h3 {height:50px;position: relative;margin-bottom: 8px;border-bottom:1px dashed #ddd;}
@@ -34,7 +34,8 @@
 	.opusList {width:600px;}
 }
 @media screen and (max-width: 599px) {
-	.opusList {width:300px;}
+	.opusList {width:100%;}
+	.opusList ul li{width:100%;max-width: 500px;float:none; margin:0px auto 20px;border-radius: 0px;}
 }
 
 
@@ -72,12 +73,3 @@ font-size: 20px;letter-spacing: 0.5em;font-weight:normal;color:#000;}
 .TagLine{height:50px;margin:80px 20px 40px;background:url(../tagline.png) no-repeat;text-indent:-100em;overflow:hidden;}
 .opus_detail .youyan {padding-top:20px;}
 
-@media screen and (min-width: 900px){
-	.opusList {width:900px;}
-}
-@media screen and (max-width: 899px) and (min-width : 600px) {
-	.opusList {width:600px;}
-}
-@media screen and (max-width: 599px) {
-	.opusList {width:300px;}
-}
