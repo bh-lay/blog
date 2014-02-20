@@ -184,6 +184,7 @@ filter_request.labs = function(data){
 		'cover':data['cover']||'',
 		'time_create':data['time_create']||new Date().getTime(),
 		'content':data['content'],
+		'api_url' : data['api_url'],
 		'intro':data['intro'] || data['content'].slice(0,200),
 	};
 	if(!(param['title']&&param['content'])){
