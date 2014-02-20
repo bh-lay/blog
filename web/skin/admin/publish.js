@@ -135,6 +135,7 @@ window.admin.publish = window.admin.publish || {};
 				'<label class="L_foUItTitle">插件简介：</label>',
 				'<textarea name="intro" cols="50" rows="5">{intro}</textarea>',
 			'</li>',
+			'<li class="L_foUItem"><label class="L_foUItTitle">api地址：</label><input type="text" name="api_url" value="{api_url}" /></li>',
 			'<li class="L_foUItem">',
 				'<label class="L_foUItTitle">插件详细介绍：</label>',
 				'<textarea name="content" cols="50" rows="10" >{content}</textarea>',
