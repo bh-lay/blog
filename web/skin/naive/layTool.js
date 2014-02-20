@@ -52,6 +52,15 @@ L.require('lofox,dialog',function(){
 			render.shareDetail.call(this,data)
 		}
 	});
+	fox.set('/labs','我的分享_小剧客栈',function(data){
+		//L.nav.setCur('');
+		if(this.path.length == 1){
+			render.shareList.call(this,data);
+		}else{
+			data['id'] = this.path[1];
+			render.shareDetail.call(this,data)
+		}
+	});
 	fox.start();
 //	if(support){
 		$('body').on('click','a[lofox="true"]',function(){
