@@ -40,14 +40,14 @@ function detail_page(id,callback){
 			collection.find({id:id}).toArray(function(err, docs) {
 				method.close();
 				if(arguments[1].length==0){
-					res_this.notFound('哇塞，貌似这篇博文不存在哦!');
+					callback && callback('哇塞，貌似这篇博文不存在哦!');
 				}else{
 					docs[0].time_show = parse.time(docs[0].time_show ,'{y}-{m}-{d}');
 				//	docs[0].content = markdown.parse(docs[0].content);
 					docs[0].content = converter.makeHtml(docs[0].content);
 					var txt = juicer(page_temp,docs[0]);
 				//	callback&&callback(docs[0].content);
-					callback&&callback(txt);
+					callback&&callback(null,txt);
 				}
 			});
 		});
@@ -71,7 +71,11 @@ exports.deal = function (req,res_this,path){
 		cache.html('blog_id_' + id,function(this_cache){
 			res_this.html(200,this_cache);
 		},function(save_cache){
-			detail_page(id,function(this_html){
+			detail_page(id,function(err,this_html){
+				if(err){
+					res_this.notFound(err);
+					return
+				}
 				save_cache(this_html);
 			});
 		});
