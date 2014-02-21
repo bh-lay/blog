@@ -15,14 +15,37 @@
 
 (function(exports){
 	var loadHistory = {};
+	//定义私有变量
+	var private_doc = document;
+	var private_loader = private_doc.createElement('div');
+	var private_body = private_doc.getElementsByTagName('body')[0];
 	
+	//初始化loader的dom环境
+	private_loader.setAttribute('data-module' , 'loader');
+	private_loader.style.display = 'none';
+	private_body.appendChild(private_loader);
+	
+	//加载javascript
 	function loadJS(url,fn){
-		$.ajax({
-			'url' : url,
-			'success' : function(){
-				fn&&fn();
-			}
-		});
+		var script = private_doc.createElement('script');
+		script.type = 'text/javascript';
+		script.charset = 'UTF-8';
+		script.onload = function() {
+			fn&&fn();
+		};
+		script.src = url;
+		private_loader.appendChild(script);
+	}
+	//加载CSS
+	function loadCSS(url,fn){
+		var link = private_doc.createElement('link');
+		link.type = 'text/css';
+		link.rel = 'stylesheet';
+		link.onload = function() {
+			fn&&fn();
+		};
+		link.href = url;
+		private_loader.appendChild(link);
 	}
 	function loadTXT(url,fn){
 		$.ajax({
@@ -31,10 +54,6 @@
 				fn&&fn(d);
 			}
 		});
-	}
-	function loadCSS(url,fn){
-		$('head').append('<link href="' + url + '" type="text/css" rel="stylesheet">');
-		fn&&fn();
 	}
 	//start loading
 	function load_start(url,callback){
