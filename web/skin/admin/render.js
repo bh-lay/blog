@@ -383,68 +383,6 @@ window.admin.render = window.admin.render || {};
 		listPage(dom);
 	};
 })(window.admin.render);
-/**
-(function(exports){	
-})(window.admin.render);
-**/
-
-/***
- * 导航
- **/
-(function(exports){
-	function navigation (){
-		var Btn = $('.nav li a');
-		Btn.click(function(){
-			var offset = $(this).offset();
-			var cnt = $(this).next();
-			if(cnt.length == 0){
-				return
-			}
-			var plane = UI.plane({
-				'top' : offset.top + 40,
-				'left' : offset.left,
-				'width' : cnt.find('a').length * 100, 
-				'html' : cnt[0].outerHTML
-			});
-			plane.dom.click(function(){
-				plane.close();
-			});
-		});
-		var isOpen = false;
-		$('.nav_moreBtn').click(function(){
-			if(isOpen){
-				isOpen = false;
-				$('.nav_mainList').slideUp(80,function(){
-					$(this).height(0).show();
-				});
-			}else{
-				isOpen = true;
-				$('.nav_mainList').hide().height('auto').slideDown(120);
-			}
-		});
-		$('.nav_mainList').on('click',function(){
-			if($('.nav_moreBtn').css('display') == 'block'){
-				isOpen = false;
-				$('.nav_mainList').slideUp(80,function(){
-					$(this).height(0).show();
-				});
-			}else{
-				//貌似不需要else
-			}
-		});
-
-	}
-
-	exports.nav = function(){
-		navigation();
-		$('.userCnt').click(function(){
-			$('.username_hover').slideDown(200);
-		});
-		$('.username_hover').mouseleave(function(){
-			$(this).fadeOut(200);
-		})
-	};
-})(window.admin.render);
 
 
 /**
@@ -527,4 +465,21 @@ window.admin.render = window.admin.render || {};
 	exports.friends = function(dom,id){
 		listPage(dom);
 	};
+})(window.admin.render);
+
+/**
+ * 用户首页
+ **/
+(function(exports){
+	var userIndex_tpl = ['<div class="navItem">',
+		'<a class="lofox" href="/admin/user/list">用户管理</a>---',
+		'<a class="lofox" href="/admin/user/group">用 户 组</a>---',
+		'<a class="lofox" href="/admin/user/power">权限列表</a>',
+	'</div>'].join('');
+	
+	function userIndex(dom){
+		dom.html(userIndex_tpl);
+	}
+	
+	exports.userIndex = userIndex;
 })(window.admin.render);

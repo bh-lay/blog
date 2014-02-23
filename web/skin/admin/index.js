@@ -121,7 +121,7 @@ window.admin = window.admin || {};
 					var dom = createDom(mainDom);
 					if(urlData.length == 2){
 						page_title = '用户';
-						dom.html('俺是用户首页');
+						admin.render.userIndex(dom);
 					}else if(urlData.length >= 3){
 						if(urlData[2] == 'list'){
 							page_title = '用户列表';
@@ -175,7 +175,7 @@ window.admin = window.admin || {};
 			$('.crumbs').html(page_title);
 		});
 		
-		admin.render.nav();
+		admin.render.base();
 		
 		$('body').on('click','.lofox',function(){
 			var url = $(this).attr('href');
@@ -383,3 +383,63 @@ window.parse = window.parse || {};
 		return time_str;
 	}
 })(window.parse);
+
+/***
+ * 基础页
+ **/
+window.admin = window.admin || {};
+window.admin.render = window.admin.render || {};
+(function(exports){
+	function navigation (){
+		var Btn = $('.nav li a');
+		Btn.click(function(){
+			var offset = $(this).offset();
+			var cnt = $(this).next();
+			if(cnt.length == 0){
+				return
+			}
+			var plane = UI.plane({
+				'top' : offset.top + 40,
+				'left' : offset.left,
+				'width' : cnt.find('a').length * 100, 
+				'html' : cnt[0].outerHTML
+			});
+			plane.dom.click(function(){
+				plane.close();
+			});
+		});
+		var isOpen = false;
+		$('.nav_moreBtn').click(function(){
+			if(isOpen){
+				isOpen = false;
+				$('.nav_mainList').slideUp(80,function(){
+					$(this).height(0).show();
+				});
+			}else{
+				isOpen = true;
+				$('.nav_mainList').hide().height('auto').slideDown(120);
+			}
+		});
+		$('.nav_mainList').on('click',function(){
+			if($('.nav_moreBtn').css('display') == 'block'){
+				isOpen = false;
+				$('.nav_mainList').slideUp(80,function(){
+					$(this).height(0).show();
+				});
+			}else{
+				//貌似不需要else
+			}
+		});
+
+	}
+
+	exports.base = function(){
+		navigation();
+		$('.userCnt').click(function(){
+			$('.username_hover').slideDown(200);
+		});
+		$('.username_hover').mouseleave(function(){
+			$(this).fadeOut(200);
+		})
+	};
+})(window.admin.render);

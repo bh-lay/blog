@@ -14,4 +14,4 @@ exports.render = function (req,res_this){
 		var txt = temp.replace('{-username-}',username).replace('{-userid-}',userid);
 		res_this.html(200,txt);
 	});
-}
+};
