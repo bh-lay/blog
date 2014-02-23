@@ -89,17 +89,20 @@ if(self!=top){
 	parent.location.href='/admin/login';
 }
 
+var usernameIpt = $('input[name=username]');
+var passwordIpt = $('input[name=password]');
+
 usernameIpt.focus();
 
 function getData(){
-	var username = $('input[name=username]').val();
-	var password = $('input[name=password]').val();
-	if(data.username.length < 1){
+	var username = usernameIpt.val();
+	var password = passwordIpt.val();
+	if(username.length < 1){
 		alert('二逼，快输用户名！');
 		usernameIpt.focus();
 		return false;
 	}
-	if(data.password.length < 1){
+	if(password.length < 1){
 		alert('忘写密码了吧，二货！');
 		passwordIpt.focus();
 		return false;
@@ -109,32 +112,24 @@ function getData(){
 		'password' : password
 	};
 }
-form.submit(function(){
+$('form').submit(function(){
 	var data = getData();
-	if(data){
-		$.ajax({
-			'type':'POST',
-			'url':'/ajax/user/login',
-			'data':{
-				'username' : data.username,
-				'password' : data.password
-			},
-			'success' : function(d){
-				if(d.code==1){
-					alert('恭喜二货，登陆成功啦！')
-					window.location.href = '/admin';
-				}else if(d.code == 201){
-					if(confirm(d.msg)){
-						$.get('/ajax/login',{'act' : 'exist'},function(){
-							alert('已经退出了，你个二货！');
-						});
-					}
-				}else{
-					alert(d.msg);
-				}
+	$.ajax({
+		'url':'/ajax/user/login',
+		'type':'POST',
+		'data':{
+			'username' : data.username,
+			'password' : data.password
+		},
+		'success' : function(d){
+			if(d.code==1){
+				alert('恭喜二货，登陆成功啦！')
+				window.location.href = '/admin';
+			}else if(d.code == 201){
+				alert(d.msg);
 			}
-		});
-	}
+		}
+	});
 	return false;
 });
 
