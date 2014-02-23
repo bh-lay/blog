@@ -214,6 +214,13 @@ function login_handle(req,res_this,session_this,username,password){
 function login (){
 	var req = this.request;
 	var res_this = this.res;
+	if(req.method != 'POST'){
+		res_this.json({
+			'code' : 201,
+			'msg' : 'please use POST to login !'
+		});
+		return
+	}
 	parse.request(req,function(error,data){
 		var username = data['username'];
 		var password = data['password'] || '';

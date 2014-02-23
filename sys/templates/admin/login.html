@@ -77,7 +77,7 @@
 </style>
 </head>
 <body>
-	<form name="login" target="_self" id="login" method="get" action="/ajax/login">
+	<form name="login" target="_self" id="login" method="post" action="/ajax/user/login">
 		<h1>剧</h1>
 		<input name="username" type="text" class="input_text" placeholder="帐号">
 		<input name="password" type="password" class="input_text" placeholder="密码">
@@ -85,17 +85,15 @@
 	</form>
 <script src="/skin/admin/jquery.js" type="text/javascript"></script>
 <script type="text/javascript">
-if(self!=top){parent.location.href='/admin/login.html';}
+if(self!=top){
+	parent.location.href='/admin/login';
+}
 
-var form = $('#login'),
-	usernameIpt = form.find('input[name=username]'),
-	passwordIpt = form.find('input[name=password]');
 usernameIpt.focus();
 
 function getData(){
-	var data = {};
-	data.username = usernameIpt.val();
-	data.password = passwordIpt.val();
+	var username = $('input[name=username]').val();
+	var password = $('input[name=password]').val();
 	if(data.username.length < 1){
 		alert('二逼，快输用户名！');
 		usernameIpt.focus();
@@ -106,15 +104,21 @@ function getData(){
 		passwordIpt.focus();
 		return false;
 	}
-	return data;
+	return {
+		'username' : username,
+		'password' : password
+	};
 }
 form.submit(function(){
 	var data = getData();
 	if(data){
 		$.ajax({
-			'type':'GET',
+			'type':'POST',
 			'url':'/ajax/user/login',
-			'data':data,
+			'data':{
+				'username' : data.username,
+				'password' : data.password
+			},
 			'success' : function(d){
 				if(d.code==1){
 					alert('恭喜二货，登陆成功啦！')
