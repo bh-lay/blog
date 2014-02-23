@@ -125,7 +125,7 @@ window.admin = window.admin || {};
 					}else if(urlData.length >= 3){
 						if(urlData[2] == 'list'){
 							page_title = '用户列表';
-							dom.html('俺是用户列表页');
+							admin.render.userList(dom);
 						}else if(urlData[2] == 'group'){
 							page_title = '用户组列表';
 							dom.html('俺是用户组列表页');

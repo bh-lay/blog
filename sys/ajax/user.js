@@ -4,6 +4,7 @@
  * /ajax/user
  * /ajax/user/signup
  * /ajax/user/login
+ * /ajax/user/list
  * demo $.post('/ajax/user',{
 	
 	});
@@ -155,6 +156,42 @@ function signup(){
 	});
 }
 
+/**
+ * 获取用户列表
+ * 
+ */
+function get_list(data,callback){
+	var data = data,
+		limit_num = parseInt(data['limit'])||10,
+		skip_num = parseInt(data['skip'])||0;
+	
+	var resJSON = {
+		'code':200,
+		'limit':limit_num,
+		'skip':skip_num,
+	};
+	var method = mongo.start();
+	method.open({'collection_name':'user'},function(err,collection){
+      //count the all list
+		collection.count(function(err,count){
+			resJSON['count'] = count;
+			
+			collection.find({},{limit:limit_num}).sort({id:-1}).skip(skip_num).toArray(function(err, docs) {
+				method.close();
+				if(err){
+					resJSON.code = 2;
+				}else{
+					for(var i=0,total=docs.length;i<total;i++){
+						delete docs[i].password;
+					}
+					resJSON['list'] = docs;
+				}
+				callback&&callback(resJSON);
+			});
+		});
+	});
+}
+
 function get_power(method,user_group,callback){
 	method.open({'collection_name':'user_group'},function(err,collection){
 		collection.find({'user_group':user_group}).toArray(function(err, docs) {
@@ -253,6 +290,20 @@ function exist(){
 		});
 	});
 }
+//获取用户列表
+function list(){
+	var req = this.request;
+	var res_this = this.res;
+	parse.request(req,function(err,data){
+		if(err){
+			//res_this.json({a:12});
+			return
+		}
+		get_list(data,function(json){
+			res_this.json(json);
+		});
+	});
+}
 
 exports.render = function (req,res_this,path){
 	this.request = req;
@@ -270,6 +321,9 @@ exports.render = function (req,res_this,path){
 			break
 			case 'exist':
 				exist.call(this);
+			break
+			case 'list':
+				list.call(this);
 			break
 			default :
 				res_this.json({

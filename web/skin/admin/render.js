@@ -483,3 +483,49 @@ window.admin.render = window.admin.render || {};
 	
 	exports.userIndex = userIndex;
 })(window.admin.render);
+
+
+/**
+ * 用户列表
+ **/
+(function(exports){
+	var userItem = ['<tr>',
+		'<td>{username}</td>',
+		'<td>{email}</td>',
+		'<td>{user_group}</td>',
+		'<td>',
+			'<a href="user.html?userid={id}" target="_self">改</a>',
+			'<a href="/ajax/del?from=user&id={id}" onclick="if(!confirm(\'三思啊，删了可就没啦！\')){return false;}" target="_self">删</a>',
+		'</td>',
+	'</tr>'].join('');
+	
+	function render(tpl,data){
+		var txt = '';
+		for(var i=0 in data){
+			txt += tpl.replace(/{(\w*)}/g,function(){
+				var key = arguments[1];
+				return data[i][key] || '';
+			});
+		}
+		return txt;
+	}
+	
+	function userList(dom){
+		
+		dom.html('34567890');
+		$.ajax({
+			'url' : '/ajax/user/list',
+			'success' : function(d){
+				var html = '<table class="listSheet articleList" cellspacing="0">';
+				html += render(userItem,d.list);
+				html += '</table>';
+				dom.html(html);
+			},
+			'error' : function(){
+				dom.html('error');
+			}
+		})
+	}
+	
+	exports.userList = userList;
+})(window.admin.render);
