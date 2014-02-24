@@ -309,7 +309,7 @@ window.admin.render = window.admin.render || {};
  **/
 (function(exports){
 	var tpl = ['<tr>',
-		'<td class="arLiTitle"><a title="查看博文" href="/blog/{id}" target="_blank">{title}</a></td>',
+		'<td class="arLiTitle"><a title="查看博文" href="/labs/{id}" target="_blank">{title}</a></td>',
 		'<td class="arLiEdit">',
 			'<a class="lofox" title="修改" href="/admin/publish/labs/{id}" target="_self">改</a>',
 			'<a title="删除" href="/ajax/del?from=labs&id={id}" onclick="if(!confirm(\'三思啊，删了可就没啦！\')){return false;}" 	target="_self">删</a>',
