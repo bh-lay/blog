@@ -122,10 +122,10 @@ $('form').submit(function(){
 			'password' : data.password
 		},
 		'success' : function(d){
-			if(d.code==1){
+			if(d.code==200){
 				alert('恭喜二货，登陆成功啦！')
 				window.location.href = '/admin';
-			}else if(d.code == 201){
+			}else{
 				alert(d.msg);
 			}
 		}

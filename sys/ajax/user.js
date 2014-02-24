@@ -207,6 +207,13 @@ function login_handle(req,res_this,session_this,username,password){
 
 	method.open({'collection_name':'user'},function(err,collection){
 		//
+		if(err){
+			res_this.json({
+				'code':4,
+				'msg':'咱数据库呗拐跑了！'
+			});
+			return
+		}
 		collection.find({"$or": [{'username':username},{'email':username}]}).toArray(function(err, docs) {
 			
 			if(docs.length > 0){
