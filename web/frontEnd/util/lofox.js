@@ -90,10 +90,9 @@ window.util = window.util || {};
 					return
 				}
 				var routerName = filterData[0];
-				var args = filterData[1] || [];
+				var param = filterData[1] || null;
 				if(this.map[routerName]){
-					console.log(this.map[routerName]);
-					this.map[routerName]['renderFn'].apply(window,args);
+					this.map[routerName]['renderFn'](param);
 				}
 			}
 		});

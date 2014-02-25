@@ -15,50 +15,81 @@
 		var lofox = new util.lofox();
 		lofox.router(function(pathData,searchData){
 			var routerName = null;
-			var args = null;
-			var title = null;
+			var param = {};
+			
+			var pathLength = pathData.length;
 			//判断是否为首页
-			if(pathData.length == 0){
+			if(pathLength == 0){
 				routerName = 'index';
 				title = '首页';
 			}else{
 				switch(pathData[0]){
 					case 'blog':
-						routerName = 'index';
-						title = '首页';
+						if(pathLength == 1){
+							routerName = 'blogList';
+						}else if(pathLength == 2){
+							routerName = 'blogDetail';
+							param.id = pathData[1];
+						}
 					break
 					case 'share':
-						routerName = 'shareList';
-						title = '分享';
+						if(pathLength == 1){
+							routerName = 'shareList';
+						}else if(pathLength == 2){
+							routerName = 'shareDetail';
+							param.id = pathData[1];
+						}
 					break
 					case 'labs':
-						routerName = 'labs';
-						title = '实验室';
+						title = '实验室_小剧客栈';
+						if(pathLength == 1){
+							routerName = 'labsList';
+						}else if(pathLength == 2){
+							routerName = 'labsDetail';
+							param.id = pathData[1];
+						}
 					break
 					case 'opus':
-						routerName = 'opus';
-						title = '作品';
+						if(pathLength == 1){
+							routerName = 'opusList';
+						}else if(pathLength == 2){
+							routerName = 'opusDetail';
+							param.id = pathData[1];
+						}
 					break
 					default:
 				}
 			}
-			return [routerName,args];
+			return [routerName,param];
 		});
-		lofox.set('index','首页',function(){
+		lofox.set('index','首页_小剧客栈',function(){
 			console.log('首页');
 		});
-		lofox.set('shareList','shouye',function(){
-			console.log(2345);
+		lofox.set('blogList','博客_小剧客栈',function(){
+			console.log('1');
 		});
-		lofox.set('shareList','shouye',function(){
-			console.log(2345);
+		lofox.set('blogDetail','博客_小剧客栈',function(){
+			console.log('2',arguments[0]);
 		});
-		lofox.set('shareList','shouye',function(){
-			console.log(2345);
+		lofox.set('shareList','分享_小剧客栈',function(){
+			console.log('3');
 		});
-		lofox.set('shareList','shouye',function(){
-			console.log(2345);
+		lofox.set('shareDetail','分享_小剧客栈',function(){
+			console.log('4',arguments[0]);
 		});
+		lofox.set('opusList','作品_小剧客栈',function(){
+			console.log('5');
+		});
+		lofox.set('opusDetail','作品_小剧客栈',function(){
+			console.log('6',arguments[0]);
+		});
+		lofox.set('labsList','实验室_小剧客栈',function(){
+			console.log('7');
+		});
+		lofox.set('labsDetail','实验室_小剧客栈',function(){
+			console.log('8',arguments[0]);
+		});
+		
 		$('body').on('click','a[lofox="true"]',function(){
 			var url = $(this).attr('href');
 			setTimeout(function(){
