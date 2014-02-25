@@ -29,7 +29,7 @@ window.util = window.util || {};
 			var state = e.state || {};
 			//console.log('from popstate event !',state);
 			var url = state.url || null;
-			//Çå³ıµÚÒ»´Î²»È·¶¨ĞÔµÄ´¥·¢
+			//æ¸…é™¤ç¬¬ä¸€æ¬¡ä¸ç¡®å®šæ€§çš„è§¦å‘
 			if(url){
 				this_fox.refresh(url);
 			}
@@ -59,7 +59,7 @@ window.util = window.util || {};
 	}
 
 	function EMIT(eventName,args){
-		//ÊÂ¼ş¶ÑÎŞ¸ÃÊÂ¼ş£¬½áÊøÔËĞĞ
+		//äº‹ä»¶å †æ— è¯¥äº‹ä»¶ï¼Œç»“æŸè¿è¡Œ
 		if(!this.events[eventName]){
 			return
 		}
@@ -71,23 +71,52 @@ window.util = window.util || {};
 		var this_fox = this;
 		this.events = {};
 		this.push = null;
+		this.map = {};
+		//return {routerName,args}
+		this._router = null;
 		if(window.history&&window.history.pushState){
 			HTML5.call(this);
 		}else{
 			HASH.call(this);
 		}
-		//ÎªÒì²½½Ó¿Ú
+		//ä¸ºå¼‚æ­¥æ¥å£
 		setTimeout(function(){
 			this_fox.refresh();
 		},10);
+		this.on('change',function(pathData,searchData){
+			if(this._router){
+				var filterData = this._router(pathData,searchData);
+				if(!filterData){
+					return
+				}
+				var routerName = filterData[0];
+				var args = filterData[1] || [];
+				if(this.map[routerName]){
+					console.log(this.map[routerName]);
+					this.map[routerName]['renderFn'].apply(window,args);
+				}
+			}
+		});
 	}
 	LOFOX.prototype = {
+		'router' : function(callback){
+			this._router = callback;
+		},
 		'on' : function ON(eventName,callback){
-			//ÊÂ¼ş¶ÑÎŞ¸ÃÊÂ¼ş£¬´´½¨Ò»¸öÊÂ¼ş¶Ñ
+			//äº‹ä»¶å †æ— è¯¥äº‹ä»¶ï¼Œåˆ›å»ºä¸€ä¸ªäº‹ä»¶å †
 			if(!this.events[eventName]){
 				this.events[eventName] = [];
 			}
 			this.events[eventName].push(callback);
+		},
+		'set' : function(routerName,title,callback){
+			var routerName = arguments[0];
+			var title = typeof(arguments[1]) == 'string' ? arguments[1] :null;
+			var callback = typeof(callback) =='function' ? callback :null;
+			this.map[routerName] = {
+				'title' : title,
+				'renderFn' : callback
+			};
 		},
 		'refresh' : function (url){
 			var url = url || window.location.pathname+window.location.search+window.location.hash;
@@ -95,7 +124,7 @@ window.util = window.util || {};
 		
 			var urlStr = urlSplit[0].split('#')[0];
 			var searchStr = urlSplit[1];
-			//È¥³ıÊ×Î²µÄ¡®/¡¯
+			//å»é™¤é¦–å°¾çš„â€˜/â€™
 			urlStr = urlStr.replace(/^\/*|\/*$/g,'');
 			var pathData = urlStr.split(/\//);
 			
