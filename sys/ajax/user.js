@@ -237,7 +237,7 @@ function login_handle(req,res_this,session_this,username,password){
 					});
 					
 					res_this.json({
-						'code':1,
+						'code':200,
 						'msg':'login success!'
 					});
 					//处理SNSuser关联
