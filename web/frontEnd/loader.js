@@ -15,17 +15,17 @@
 
 (function(exports){
 	var loadHistory = {};
-	//定义私有变量
+	//瀹氫箟绉佹湁鍙橀噺
 	var private_doc = document;
 	var private_loader = private_doc.createElement('div');
 	var private_body = private_doc.getElementsByTagName('body')[0];
 	
-	//初始化loader的dom环境
+	//鍒濆鍖杔oader鐨刣om鐜
 	private_loader.setAttribute('data-module' , 'loader');
 	private_loader.style.display = 'none';
 	private_body.appendChild(private_loader);
 	
-	//加载javascript
+	//鍔犺浇javascript
 	function loadJS(url,fn){
 		var script = private_doc.createElement('script');
 		script.type = 'text/javascript';
@@ -36,7 +36,7 @@
 		script.src = url;
 		private_loader.appendChild(script);
 	}
-	//加载CSS
+	//鍔犺浇CSS
 	function loadCSS(url,fn){
 		var link = private_doc.createElement('link');
 		link.type = 'text/css';

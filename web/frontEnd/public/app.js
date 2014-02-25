@@ -4,13 +4,15 @@
  * Copyright (c) 2012-2018
 **/
 
-/**
- * all start
- */
-(function(){
+window.L = window.L || {};
+
+(function(exports){
 	var require = new loader({
-		'lofox' : '/frontEnd/util/lofox.js'
+		'lofox' : '/frontEnd/util/lofox.js',
+		'juicer' : '/skin/js/lib/juicer.js',
+		'dialog' : '/skin/js/lib/dialog.js'
 	});
+	
 	require.load('lofox',function(){
 		var lofox = new util.lofox();
 		lofox.router(function(pathData,searchData){
@@ -62,32 +64,55 @@
 			}
 			return [routerName,param];
 		});
-		lofox.set('index','首页_小剧客栈',function(){
-			console.log('首页');
+		
+		var dom = $('.containter');
+		lofox.set('index','小剧客栈_剧中人的个人空间 网页设计师博客 互动设计学习者',function(){
+			L.nav.setCur('/'); 
+			render.index(dom);
 		});
-		lofox.set('blogList','博客_小剧客栈',function(){
-			console.log('1');
+		
+		lofox.set('blogList','我的博客_小剧客栈',function(){
+			L.nav.setCur('blog');
+			render.blogList(dom);
 		});
-		lofox.set('blogDetail','博客_小剧客栈',function(){
-			console.log('2',arguments[0]);
+		lofox.set('blogDetail','我的博客_小剧客栈',function(param){
+			L.nav.setCur('blog');
+			render.blogDetail(dom,param.id)
 		});
-		lofox.set('shareList','分享_小剧客栈',function(){
-			console.log('3');
+		
+		lofox.set('shareList','我的分享_小剧客栈',function(){
+			L.nav.setCur('share');
+			render.shareList(dom);
 		});
-		lofox.set('shareDetail','分享_小剧客栈',function(){
-			console.log('4',arguments[0]);
+		lofox.set('shareDetail','我的分享_小剧客栈',function(param){
+			L.nav.setCur('share');
+			render.shareDetail(dom,param.id)
 		});
+		
 		lofox.set('opusList','作品_小剧客栈',function(){
-			console.log('5');
+			L.nav.setCur('opus');
+			render.opusList(dom);
 		});
-		lofox.set('opusDetail','作品_小剧客栈',function(){
-			console.log('6',arguments[0]);
+		lofox.set('opusDetail','作品_小剧客栈',function(param){
+			L.nav.setCur('opus');
+			render.opusDetail(dom,param.id)
 		});
 		lofox.set('labsList','实验室_小剧客栈',function(){
-			console.log('7');
+			L.nav.setCur('labs');
+			render.labsList(dom);
 		});
-		lofox.set('labsDetail','实验室_小剧客栈',function(){
-			console.log('8',arguments[0]);
+		lofox.set('labsDetail','实验室_小剧客栈',function(param){
+			L.nav.setCur('labs');
+			render.labsDetail(dom,param.id)
+		});
+		
+		lofox.on('change',function(url){
+			delete(uyan_c_g);
+			delete(uyan_loaded);
+			delete(uyan_s_g);
+			delete(uyan_style_loaded);
+			delete(uyan_style_loaded_over);
+			window.uyan_config = window.uyan_config || {"du":"bh-lay.com"};
 		});
 		
 		$('body').on('click','a[lofox="true"]',function(){
@@ -98,9 +123,12 @@
 			},20);
 			return false;
 		});
+		
+		exports.require = function(a,b){
+			require.load(a,b)
+		};
 	});
-})();
-window.L = window.L || {};
+})(window.L);
 /**
  * L.nav()
  * 
@@ -221,13 +249,11 @@ var render = render || {};
 			$(this).html(Math.ceil(a/(1000*60*60)));
 		});
 	}
-	ex.index = function(param){
+	ex.index = function(dom,callback){
 		console.log('index page:','start render index page !');
-		var param = param || {},
-			 dom = this.dom || $('.contlayer'),
-			 fn = this.render_over || null;
+		var param = param || {};
 			
-		if(param['init']){
+//		if(param['init']){
 			console.log('index page:','get index page template!');
 
 			L.require('/skin/naive/css/index.css');
@@ -238,10 +264,10 @@ var render = render || {};
 				countTime(dom);
 				fn&&fn();
 			});
-		}else{
-			indexPanel(dom);
-			countTime(dom);
-		}
+//		}else{
+//			indexPanel(dom);
+//			countTime(dom);
+//		}
 	};
 })(render);
 
@@ -335,7 +361,7 @@ var render = render || {};
 			fn&&fn();
 		});
 	};
-	ex.blogList = function(param){
+	ex.blogList = function(dom,param){
 		console.log('blog list page:','start !');
 		var param = param || {},
 			 dom = this.dom || $('.contlayer'),
@@ -409,9 +435,8 @@ var render = render || {};
 			}
 		});
 	};
-	ex.blogDetail=function(param){
+	ex.blogDetail=function(dom,param){
 		var param = param || {},
-			 dom = this.dom || $('.contlayer'),
 			 id = param['id'] || null,
 			 render_over = this.render_over || null;
 		
@@ -684,6 +709,80 @@ var render = render || {};
 	};
 })(render);
 
+
+/**
+ * labs list
+ *  
+ */
+(function(ex){	
+	var limit = 20,
+		 skip = 0,
+		 count = null,
+		 dom;
+
+	var insert = function(param){
+		var this_html = $(param['html']),
+			this_dom = param['dom'];
+		this_dom.append(this_html);
+	};
+	var getData = function(callback){
+		$.ajax({
+			'type' : 'GET' ,
+			'url' : '/ajax/opus',
+			'data' : {
+				'act' : 'get_list',
+				'skip' : skip ,
+				'limit' : limit
+			},
+			'success' :function(data){
+				count = data['count'];
+				skip += limit;
+				
+				var list = data['list'];
+				for(var i = 0,total = list.length;i<total;i++){
+					list[i]['work_range'] = list[i]['work_range']?list[i]['work_range'].split(/\,/):['暂未填写'];
+				}
+				callback&&callback(list);
+			}
+		});
+	};
+	var start = function(){
+		
+		$('.shareList').on('mouseenter','a',function(){
+			$(this).find('strong').stop().animate({'bottom':0},200);
+		}).on('mouseleave','a',function(){
+			$(this).find('strong').stop().animate({'bottom':-100},200);
+		});
+	};
+	ex.labsList = function(dom,param){
+		var render_over = this.render_over || null;
+		
+		L.require('juicer,/skin/naive/css/opus.css',function(){
+			$.get('/ajax/temp?opus_item',function(data){
+				var temp = data['opus_item'];
+				if(param['init']){
+					skip = 0;
+					dom.html('<div class="golCnt"><div class="opusList"><ul></ul></div></div>');
+					getData(function(list){
+						var this_html = juicer(temp,{'list':list}),
+							this_dom = dom.find('.opusList ul');
+						insert({
+							'end' : (skip>=count)?true:false,
+							'html' : this_html,
+							'dom' : this_dom
+						});
+						start();
+						render_over&&render_over();
+					});
+				}else{
+					start();
+				}
+			});
+		});
+	};
+})(render);
+
+
 /**
  * labs detail
  *  
@@ -712,10 +811,9 @@ var render = render || {};
 			}
 		});
 	};
-	ex.opusDetail=function(param){
+	ex.labsDetail=function(dom,param){
 		var render_over = this.render_over || null;
 		var param = param || {},
-			 dom = this.dom || $('.contlayer'),
 			 id = param['id'] || null;
 				 
 		if(param['init']){
