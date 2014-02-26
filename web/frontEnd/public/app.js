@@ -17,13 +17,12 @@ window.L = window.L || {};
 		var lofox = new util.lofox();
 		lofox.router(function(pathData,searchData){
 			var routerName = null;
-			var param = {};
+			var args = [];
 			
 			var pathLength = pathData.length;
 			//判断是否为首页
 			if(pathLength == 0){
 				routerName = 'index';
-				title = '首页';
 			}else{
 				switch(pathData[0]){
 					case 'blog':
@@ -31,7 +30,7 @@ window.L = window.L || {};
 							routerName = 'blogList';
 						}else if(pathLength == 2){
 							routerName = 'blogDetail';
-							param.id = pathData[1];
+							args[0] = pathData[1];
 						}
 					break
 					case 'share':
@@ -39,7 +38,7 @@ window.L = window.L || {};
 							routerName = 'shareList';
 						}else if(pathLength == 2){
 							routerName = 'shareDetail';
-							param.id = pathData[1];
+							args[0] = pathData[1];
 						}
 					break
 					case 'labs':
@@ -48,7 +47,7 @@ window.L = window.L || {};
 							routerName = 'labsList';
 						}else if(pathLength == 2){
 							routerName = 'labsDetail';
-							param.id = pathData[1];
+							args[0] = pathData[1];
 						}
 					break
 					case 'opus':
@@ -56,18 +55,18 @@ window.L = window.L || {};
 							routerName = 'opusList';
 						}else if(pathLength == 2){
 							routerName = 'opusDetail';
-							param.id = pathData[1];
+							args[0] = pathData[1];
 						}
 					break
 					default:
 				}
 			}
-			return [routerName,param];
+			return [routerName,args];
 		});
 		
-		var dom = $('.containter');
+		var dom = $('.contlayer');
 		lofox.set('index','小剧客栈_剧中人的个人空间 网页设计师博客 互动设计学习者',function(){
-			L.nav.setCur('/'); 
+			L.nav.setCur('/');
 			render.index(dom);
 		});
 		
@@ -75,9 +74,9 @@ window.L = window.L || {};
 			L.nav.setCur('blog');
 			render.blogList(dom);
 		});
-		lofox.set('blogDetail','我的博客_小剧客栈',function(param){
+		lofox.set('blogDetail','我的博客_小剧客栈',function(id){
 			L.nav.setCur('blog');
-			render.blogDetail(dom,param.id)
+			render.blogDetail(dom,id);
 		});
 		
 		lofox.set('shareList','我的分享_小剧客栈',function(){
@@ -86,7 +85,7 @@ window.L = window.L || {};
 		});
 		lofox.set('shareDetail','我的分享_小剧客栈',function(param){
 			L.nav.setCur('share');
-			render.shareDetail(dom,param.id)
+			render.shareDetail(dom,param.id);
 		});
 		
 		lofox.set('opusList','作品_小剧客栈',function(){
@@ -363,11 +362,7 @@ var render = render || {};
 	};
 	ex.blogList = function(dom,param){
 		console.log('blog list page:','start !');
-		var param = param || {},
-			 dom = this.dom || $('.contlayer'),
-			 render_over = this.render_over || null;
 		
-		if(param['init']){
 			dom.html('<div class="articleList"></div>');
 			skip = 0;
 			L.require('juicer,/skin/naive/css/blog.css',function(){
@@ -377,12 +372,6 @@ var render = render || {};
 					});
 				});
 			});
-		}else{
-			skip = limit;
-			L.require('juicer',function(){
-				init(dom);
-			});
-		}
 
 	};
 })(render);
@@ -491,16 +480,13 @@ var render = render || {};
 			$(this).find('strong').stop().animate({'bottom':-100},200);
 		});
 	};
-	ex.shareList = function(param){
-		var render_over = this.render_over || null;
-		var dom = this.dom;
+	ex.shareList = function(dom,param){
 		var temp = ['{@each list as it,index}<li><a href="/share/${it.id}" title="${it.title}" lofox="true" target="_self" >',
 			'<img src="${it.cover}" alt="${it.title}" />',
 			'<strong>${it.title}</strong>',
 		'</a></li>{@/each}'].join('');
 		
 		L.require('juicer,/skin/naive/css/share.css',function(){
-			if(param['init']){
 				skip = 0;
 				dom.html('<div class="golCnt"><div class="shareList"><ul></ul></div></div>');
 				getData(function(list){
@@ -511,11 +497,7 @@ var render = render || {};
 						'dom' : dom.find('.shareList ul')
 					});
 					start();
-					render_over&&render_over();
 				});
-			}else{
-				start();
-			}
 		});
 	};
 })(render);
@@ -755,28 +737,22 @@ var render = render || {};
 		});
 	};
 	ex.labsList = function(dom,param){
-		var render_over = this.render_over || null;
 		
 		L.require('juicer,/skin/naive/css/opus.css',function(){
 			$.get('/ajax/temp?opus_item',function(data){
 				var temp = data['opus_item'];
-				if(param['init']){
-					skip = 0;
-					dom.html('<div class="golCnt"><div class="opusList"><ul></ul></div></div>');
-					getData(function(list){
-						var this_html = juicer(temp,{'list':list}),
-							this_dom = dom.find('.opusList ul');
-						insert({
-							'end' : (skip>=count)?true:false,
-							'html' : this_html,
-							'dom' : this_dom
-						});
-						start();
-						render_over&&render_over();
+				skip = 0;
+				dom.html('<div class="golCnt"><div class="opusList"><ul></ul></div></div>');
+				getData(function(list){
+					var this_html = juicer(temp,{'list':list}),
+						this_dom = dom.find('.opusList ul');
+					insert({
+						'end' : (skip>=count)?true:false,
+						'html' : this_html,
+						'dom' : this_dom
 					});
-				}else{
 					start();
-				}
+				});
 			});
 		});
 	};
