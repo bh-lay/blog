@@ -1,0 +1,1 @@
+{"sessionID":"1393238768286","path":"./cache/session/1393238768286.txt","power_code":"11111111111111111111","userAgent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.76 Safari/537.36","ip":"127.0.0.1","data":{"user_group":"admin","username":"剧中人","user_id":"14221db9321"}}

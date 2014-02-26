@@ -6,43 +6,62 @@
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<link href="/skin/admin/admin.css" rel="stylesheet">
+<link href="/frontEnd/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="/favicon.ico" rel="shortcut icon"/>
+<style type="text/css">
+	body{padding-top:60px;font-family: Microsoft Yahei;}
+</style>
 </head>
 <body>
-<div class="nav_main">
-	<div class="containter">
-		<div class="userCnt">
-			<div class="username">{-username-}</div>
-			<div class="username_hover">
-				<a href="/ajax/user/exist" onclick="if(!confirm('二逼，是不是不玩儿啦！')){return false;}">退出
-					</a><a class="lofox" href="/admin/user/user.html?userid={-userid-}">改密</a>
-			</div>
-		</div>
-		<div class="nav_mainList">
-			<div class="nav"><ul>
-				<li><a href="/admin" class="lofox">首页</a></li>
-				<li><a class="lofox" href="/admin/article">博文</a></li>
-				<li><a class="lofox" href="/admin/share">分享</a></li>
-				<li><a class="lofox" href="/admin/opus">作品</a></li>
-				<li><a class="lofox" href="/admin/labs">实验室</a></li>
-				<li><a class="lofox" href="/admin/user">用户</a></li>
-		    </ul></div>
-		</div>
-	</div>
-	<div class="nav_tool">
-		<a class="nav_moreBtn" href="javascript:void(0)">
-			<span class="nav_Btn_ico"></span><span class="nav_Btn_ico"></span><span class="nav_Btn_ico"></span>
-		</a>
-	</div>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<div class="container">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a href="/admin" class="navbar-brand lofox">小剧客栈</a>
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      <li><a href="/admin" class="lofox">首页</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">内容<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a class="lofox" href="/admin/article">博文</a></li>
+     	  <li><a class="lofox" href="/admin/share">分享</a></li>
+	 	  <li><a class="lofox" href="/admin/opus">作品</a></li>
+	 	  <li><a class="lofox" href="/admin/labs">实验室</a></li>
+        </ul>
+	  <li><a class="lofox" href="/admin/user">用户</a></li>
+	  <li><a class="lofox" href="/admin/friends">友情链接</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{-username-} <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a class="lofox" href="/admin/user/user.html?userid={-userid-}">改密</a></li>
+          <li class="divider"></li>
+          <li><a href="/ajax/user/exist" onclick="if(!confirm('二逼，是不是不玩儿啦！')){return false;}">退出</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div><!-- /.navbar-collapse -->
 </div>
-<div class="mainFrame">
-	<div class="containter">
-		<div class="crumbs">文章列表</div>
-		<div class="mainCnt"> </div>
-	</div>
+</nav>    
+<div class="container bs-docs-container">
+	<ol class="breadcrumb row">
+	  <li class="crumbs active">Data</li>
+	</ol>
+	<div class="mainCnt"> </div>
 </div>
 <script src="/frontEnd/jquery.js" type="text/javascript"></script>
+<script type="text/javascript" src="/frontEnd/lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="/frontEnd/loader.js" type="text/javascript"></script>
 <script src="/skin/admin/index.js" type="text/javascript"></script>
 </body>

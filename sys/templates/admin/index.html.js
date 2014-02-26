@@ -2,10 +2,10 @@
 
 var fs = require('fs');
 var session= require('../../mod/session');
-var temp = fs.readFileSync('./templates/admin/index.html', "utf8");
 
 
 exports.render = function (req,res_this){
+var temp = fs.readFileSync('./templates/admin/index.html', "utf8");
 	var res = res_this.response;
 	session.start(req,res_this,function(){
 		var session_this = this;

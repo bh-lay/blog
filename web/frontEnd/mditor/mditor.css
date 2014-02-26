@@ -46,7 +46,7 @@
 .mditor_view .md_html{padding:20px 10px;}
 
 /*小工具栏*/
-.mditor_miniBar{height:26px;padding:4px 8px;background:#fff;box-shadow:0px 0px 5px rgba(0,0,0,0.3);position:relative;}
+.mditor_miniBar{height:35px;padding:4px 8px;background:#fff;box-shadow:0px 0px 5px rgba(0,0,0,0.3);position:relative;}
 .mditor_miniBar a{display:inline-block;width:26px;height:26px;border-radius:4px;line-height:26px;text-align:center;font-size: 24px;color:#aaa;
 	transition:0.2s;-moz-transition-duration: 0.2s;-webkit-transition-duration: 0.2s;-o-transition-duration: 0.2s;}
 .mditor_miniBar a:hover{box-shadow:0px 0px 4px rgba(1,1,4,0.3);color:#333;}

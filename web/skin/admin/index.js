@@ -28,7 +28,8 @@ window.admin = window.admin || {};
 		'lofox' : '/frontEnd/util/lofox.js',
 		'pop' : '/frontEnd/UI/pop.js',
 		'render' : '/skin/admin/render.js',
-		'publish' : '/skin/admin/publish.js'
+		'publish' : '/frontEnd/publish/publish.js',
+		'publishCSS' : '/frontEnd/publish/publish.css'
 	});
 	var nameToTitle = {
 		'index' : '后台首页',
@@ -75,7 +76,7 @@ window.admin = window.admin || {};
 		dom.html(newDom);
 		return newDom;
 	}
-	require.load('lofox,pop,render,publish',function(){
+	require.load('lofox,pop,render,publish,publishCSS',function(){
 		var lofox = util.lofox();
 		var mainDom = $('.mainCnt');
 		var titleDom = $('title');
@@ -291,7 +292,7 @@ function pageList(dom,param){
 	this.page_list_num = param.page_list_num || 15;
 	this.page_num = Math.ceil(this.list_count / this.page_list_num);
 	this.jump = null;
-	this.dom = $('<div class="pageList"></div>');
+	this.dom = $('<ul class="pagination"></ul>');
 	
 	this.dom.on('click','a[data-page="jump"]',function(){
 		var num = parseInt($(this).html());
@@ -317,23 +318,21 @@ pageList.prototype = {
 		var txt = '';
 
 		if (this.page_cur > 1) {
-			txt += '<div class="pageList_prev"><a data-page="prev" href="javascript:void(0)" >上一页</a></div>';
+			txt += '<li><a data-page="prev" href="javascript:void(0)" >上一页</a></li>';
 		}else{
-			txt += '<div class="pageList_prev"><span>上一页</span></div>';
+			txt += '<li class="disabled"><span>上一页</span></li>';
 		}
-		txt += '<div class="pageList_main">';
 		for(var i = 0; i < this.page_num; i++) {
 			if(i+1 != this.page_cur){
-				txt += '<a data-page="jump" href="javascript:void(0)">' + (i + 1) + '</a>';
+				txt += '<li><a data-page="jump" href="javascript:void(0)">' + (i + 1) + '</a></li>';
 			}else{
-				txt += '<b>'+ (i + 1) +'</b>'
+				txt += '<li class="disabled"><a href="javascript:void(0)">'+ (i + 1) +'</a></li>';
 			}
 		}
-		txt += '</div>';
 		if (this.page_num - this.page_cur >= 1) {
-			txt += '<div class="pageList_next"><a data-page="next" href="javascript:void(0)">下一页</a></div>';
+			txt += '<li><a data-page="next" href="javascript:void(0)">下一页</a></li>';
 		}else{
-			txt += '<div class="pageList_next"><span>下一页</span></div>';
+			txt += '<li class="disabled"><span>下一页</span></li>';
 		}
 		this.dom.html(txt);
 	}
@@ -390,51 +389,7 @@ window.parse = window.parse || {};
 window.admin = window.admin || {};
 window.admin.render = window.admin.render || {};
 (function(exports){
-	function navigation (){
-		var Btn = $('.nav li a');
-		Btn.click(function(){
-			var offset = $(this).offset();
-			var cnt = $(this).next();
-			if(cnt.length == 0){
-				return
-			}
-			var plane = UI.plane({
-				'top' : offset.top + 40,
-				'left' : offset.left,
-				'width' : cnt.find('a').length * 100, 
-				'html' : cnt[0].outerHTML
-			});
-			plane.dom.click(function(){
-				plane.close();
-			});
-		});
-		var isOpen = false;
-		$('.nav_moreBtn').click(function(){
-			if(isOpen){
-				isOpen = false;
-				$('.nav_mainList').slideUp(80,function(){
-					$(this).height(0).show();
-				});
-			}else{
-				isOpen = true;
-				$('.nav_mainList').hide().height('auto').slideDown(120);
-			}
-		});
-		$('.nav_mainList').on('click',function(){
-			if($('.nav_moreBtn').css('display') == 'block'){
-				isOpen = false;
-				$('.nav_mainList').slideUp(80,function(){
-					$(this).height(0).show();
-				});
-			}else{
-				//貌似不需要else
-			}
-		});
-
-	}
-
 	exports.base = function(){
-		navigation();
 		$('.userCnt').click(function(){
 			$('.username_hover').slideDown(200);
 		});
