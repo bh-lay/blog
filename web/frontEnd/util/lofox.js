@@ -1,6 +1,7 @@
 /**
  * @author bh-lay
- *  
+ * @github https://github.com/bh-lay/lofox
+ * @modified 2014-2-26 15:49
  *  location fox
  */
 window.util = window.util || {};
@@ -72,7 +73,8 @@ window.util = window.util || {};
 		this.events = {};
 		this.push = null;
 		this.map = {};
-		//return {routerName,args}
+		this._other = null;
+		//this is a function return [routerName,args]
 		this._router = null;
 		if(window.history&&window.history.pushState){
 			HTML5.call(this);
@@ -83,6 +85,7 @@ window.util = window.util || {};
 		setTimeout(function(){
 			this_fox.refresh();
 		},10);
+		//执行set方法设置的回调
 		this.on('change',function(pathData,searchData){
 			if(this._router){
 				var filterData = this._router(pathData,searchData);
@@ -90,9 +93,15 @@ window.util = window.util || {};
 					return
 				}
 				var routerName = filterData[0];
-				var param = filterData[1] || null;
+				var args = [];
+				if(typeof(filterData[1]) == 'object' && filterData[1].length){
+					args = filterData[1];
+				}
+				
 				if(this.map[routerName]){
-					this.map[routerName]['renderFn'](param);
+					this.map[routerName]['renderFn'].apply(window,args);
+				}else{
+					this._other && this._other(pathData,searchData);
 				}
 			}
 		});
@@ -100,6 +109,9 @@ window.util = window.util || {};
 	LOFOX.prototype = {
 		'router' : function(callback){
 			this._router = callback;
+		},
+		'other' : function(callback){
+			this._other = other;
 		},
 		'on' : function ON(eventName,callback){
 			//事件堆无该事件，创建一个事件堆
