@@ -20,9 +20,9 @@ get_list: 								|		get_detail
 var mongo = require('../../conf/mongo_connect');
 var fs = require('fs');
 var querystring=require('querystring');
-//var markdown = require('markdown');
-var showdown = require('../../lib/showdown/showdown.js');
-var converter = new showdown.converter();
+
+var add_editPower = require('./power_add&edit.js');
+
 
 function get_list(data,callback){
 	var data = data,
@@ -76,9 +76,7 @@ function get_detail(data,callback){
 	});
 }
 
-function this_control(url,callback){
-	var search = url.split('?')[1],
-		 data = querystring.parse(search);
+function this_control(data,callback){
 	
 	if(data['act']=='get_list'){
 		get_list(data,function(json_data){
@@ -104,15 +102,24 @@ function this_control(url,callback){
 	}
 }
 
-exports.render = function (req,res_this,res){
+exports.render = function (req,res_this,path){
 	
 	var url = req.url;
-
-	cache.ajax(url,function(this_cache){
-		res_this.json(this_cache);
-	},function(save_cache){
-		this_control(url,function(this_data){
-			save_cache(JSON.stringify(this_data));
+	var pathnode = path.pathnode;
+	if(pathnode.length == 2){
+		var search = url.split('?')[1],
+			 data = querystring.parse(search);
+		 
+		cache.ajax(url,function(this_cache){
+			res_this.json(this_cache);
+		},function(save_cache){
+			this_control(data,function(this_data){
+				save_cache(JSON.stringify(this_data));
+			});
 		});
-	});
+	}else if(pathnode.length == 3){
+		if(pathnode[2] == 'add_edit'){
+			add_editPower.render(req,res_this);
+		}
+	}
 }

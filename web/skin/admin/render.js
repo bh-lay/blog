@@ -539,7 +539,7 @@ window.admin.render = window.admin.render || {};
 		'<td>{name}</td>',
 		'<td>{discription}</td>',
 		'<td>',
-			'<a href="user.html?userid={id}" target="_self">改</a>',
+			'<a href="/admin/publish/power/{id}" target="_self">改</a>',
 			'<a href="/ajax/del?from=power&id={id}" onclick="if(!confirm(\'三思啊，删了可就没啦！\')){return false;}" target="_self">删</a>',
 		'</td>',
 	'</tr>'].join('');
@@ -559,11 +559,12 @@ window.admin.render = window.admin.render || {};
 		$.ajax({
 			'url' : '/ajax/power',
 			'data' : {
-				'act' : 'get_list'
+				'act' : 'get_list',
+				'limit' : 60
 			},
 			'success' : function(d){
 				var html = ['<div class="row">',
-					'<a href="/admin/publish/opus" class="btn btn-primary btn-sm lofox" role="button">发作品</a>',
+					'<a href="/admin/publish/power" class="btn btn-primary btn-sm lofox" role="button">加权限</a>',
 				'</div><br/>',
 				'<div class="panel panel-default row">',
 					'<table class="table table-hover">',
@@ -577,6 +578,5 @@ window.admin.render = window.admin.render || {};
 			}
 		})
 	}
-	
 	exports.powerList = userList;
 })(window.admin.render);

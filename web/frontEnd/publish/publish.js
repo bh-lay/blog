@@ -286,12 +286,40 @@ window.admin.publish = window.admin.publish || {};
 			}
 		});
 	}
+	
+	/****
+	 * 获取权限内容
+	 */
+	function getPower(id,callback){
+		if(!id){
+			callback && callback('missing arguments');
+		}
+		$.ajax({
+			'url' : '/ajax/power',
+			'type' : 'GET',
+			'data' : {
+				'act' : 'get_detail',
+				'id' : id
+			},
+			'success' : function(data){
+				if(data.code != 1){
+					callback && callback('data error');
+				}else{
+					callback && callback(null,data.detail);
+				}	
+			}
+		});
+	}
+	
+	//初始化模版
 	function valueInit(tpl,data){
 		var txt = tpl.replace(/\{(\w*)}/g,function(){
 			return data[arguments[1]]||'';
 		});
 		return txt;
 	}
+	
+	//处理博文模块
 	function article_handule(dom,data){
 		var new_html = valueInit(article_tpl,data);
 		dom.html(new_html);
@@ -477,10 +505,62 @@ window.admin.publish = window.admin.publish || {};
 			});
 		});
 	}
+	
+	
+	/**
+	 * 权限
+	 **/
+	var power_tpl = ['<form action="/ajax/power/add_edit" method="post" target="_self"><ul>',
+		'<li class="L_foUItem"><label class="L_foUItTitle">权限编号：</label><input type="text" name="id" value="{id}"/></li>',
+		'<li class="L_foUItem"><label class="L_foUItTitle">权限名：</label><input type="text" name="name" value="{name}" /></li>',
+		'<li class="L_foUItem"><label class="L_foUItTitle">权限描述：</label><input type="text" name="discription" value="{discription}" ></li>',
+		'<li class="L_foUItem"><input type="submit" value="提交" /></li>',
+	'</ul></form>'].join('');
+	
+	//发布权限内容
+	function POWER(dom,id){
+		if(!id){
+			var new_html = valueInit(power_tpl,{});
+			
+			dom.html(new_html);
+			admin.formToAjax(dom,{
+				'onSubmit' : function(data){
+					UI.prompt('正在提交权限的修改！');
+				},
+				'onResponse' : function(data){
+					UI.prompt('全县修改完毕');
+					admin.push('/admin/');
+					admin.refresh();
+				}
+			});
+			return
+		}
+		getPower(id,function(err,data){
+			if(err){
+				dom.html('数据异常！');
+				return
+			}
+			var new_html = valueInit(power_tpl,data);
+			
+			dom.html(new_html);
+			admin.formToAjax(dom,{
+				'onSubmit' : function(data){
+					UI.prompt('正在提交权限的修改！');
+				},
+				'onResponse' : function(data){
+					UI.prompt('全县修改完毕');
+					admin.push('/admin/');
+					admin.refresh();
+				}
+			});
+		});
+	}
+	
 	//对外接口
 	exports.article = ARTICLE;
 	exports.share = SHARE;
 	exports.opus = OPUS;
 	exports.friends = FRIENDS;
 	exports.labs = LABS;
+	exports.power = POWER;
 })(window.admin.publish);

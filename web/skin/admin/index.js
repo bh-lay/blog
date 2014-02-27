@@ -156,6 +156,8 @@ window.admin = window.admin || {};
 							'active' : type,
 							'id' : id
 						});
+					}else if(type == 'power'){
+						admin.publish.power(dom,id);
 					}else{
 						admin.push('/publish');
 						admin.refresh();
