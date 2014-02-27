@@ -422,7 +422,12 @@ window.admin.render = window.admin.render || {};
 		});
 	}
 	function listPage(dom){
-		var list_html = '<table class="listSheet articleList" cellspacing="0">';
+		var list_html = ['<div class="row">',
+			'<a href="/admin/publish/opus" class="btn btn-primary btn-sm lofox" role="button">发作品</a>',
+		'</div><br/>',
+		'<div class="panel panel-default row">',
+			'<table class="table table-hover">',
+				'<tr><th>标题</th><th>发布时间</th><th>操作</th></tr>'].join('');
 		//每页显示条数
 		var page_list_num = 8;
 		getList(0,page_list_num,function(err,data){
@@ -431,7 +436,7 @@ window.admin.render = window.admin.render || {};
 				return
 			}
 			list_html += render(tpl,data.list);
-			list_html += '</table>';
+			list_html += '</table></div>';
 			
 			list_html += '<div class="page"></div>';
 			dom.html(list_html);
@@ -466,9 +471,6 @@ window.admin.render = window.admin.render || {};
  **/
 (function(exports){
 	var userIndex_tpl = ['<div class="navItem">',
-		'<a class="lofox" href="/admin/user/list">用户管理</a>---',
-		'<a class="lofox" href="/admin/user/group">用 户 组</a>---',
-		'<a class="lofox" href="/admin/user/power">权限列表</a>',
 	'</div>'].join('');
 	
 	function userIndex(dom){
@@ -505,14 +507,17 @@ window.admin.render = window.admin.render || {};
 	}
 	
 	function userList(dom){
-		
-		dom.html('34567890');
 		$.ajax({
 			'url' : '/ajax/user/list',
 			'success' : function(d){
-				var html = '<table class="listSheet articleList" cellspacing="0">';
+				var html = ['<div class="row">',
+					'<a href="/admin/publish/opus" class="btn btn-primary btn-sm lofox" role="button">发作品</a>',
+				'</div><br/>',
+				'<div class="panel panel-default row">',
+					'<table class="table table-hover">',
+					'<tr><th>标题</th><th>邮箱</th><th>用户组</th><th>操作</th></tr>'].join('');
 				html += render(userItem,d.list);
-				html += '</table>';
+				html += '</table></div>';
 				dom.html(html);
 			},
 			'error' : function(){

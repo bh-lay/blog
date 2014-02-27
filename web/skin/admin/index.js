@@ -138,10 +138,10 @@ window.admin = window.admin || {};
 							admin.refresh();
 						}
 					}
-					
 				break
 				case 'publish':
-					var dom = createDom(mainDom);
+					mainDom.html('<div class="row"></div>');
+					var dom = mainDom.find('.row');
 					var type = 'article';
 					var id = null;
 					if(urlData.length >= 3){
