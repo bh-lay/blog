@@ -528,3 +528,55 @@ window.admin.render = window.admin.render || {};
 	
 	exports.userList = userList;
 })(window.admin.render);
+
+
+/**
+ * 权限列表
+ **/
+(function(exports){
+	var userItem = ['<tr>',
+		'<td>{id}</td>',
+		'<td>{name}</td>',
+		'<td>{discription}</td>',
+		'<td>',
+			'<a href="user.html?userid={id}" target="_self">改</a>',
+			'<a href="/ajax/del?from=power&id={id}" onclick="if(!confirm(\'三思啊，删了可就没啦！\')){return false;}" target="_self">删</a>',
+		'</td>',
+	'</tr>'].join('');
+	
+	function render(tpl,data){
+		var txt = '';
+		for(var i=0 in data){
+			txt += tpl.replace(/{(\w*)}/g,function(){
+				var key = arguments[1];
+				return data[i][key] || '';
+			});
+		}
+		return txt;
+	}
+	
+	function userList(dom){
+		$.ajax({
+			'url' : '/ajax/power',
+			'data' : {
+				'act' : 'get_list'
+			},
+			'success' : function(d){
+				var html = ['<div class="row">',
+					'<a href="/admin/publish/opus" class="btn btn-primary btn-sm lofox" role="button">发作品</a>',
+				'</div><br/>',
+				'<div class="panel panel-default row">',
+					'<table class="table table-hover">',
+					'<tr><th>#</th><th>权限名</th><th>权限描述</th><th>操作</th></tr>'].join('');
+				html += render(userItem,d.list);
+				html += '</table></div>';
+				dom.html(html);
+			},
+			'error' : function(){
+				dom.html('error');
+			}
+		})
+	}
+	
+	exports.powerList = userList;
+})(window.admin.render);

@@ -132,7 +132,7 @@ window.admin = window.admin || {};
 							dom.html('俺是用户组列表页');
 						}else if(urlData[2] == 'power'){
 							page_title = '权限页';
-							dom.html('俺是权限页');
+							admin.render.powerList(dom);
 						}else{
 							admin.push('/user/');
 							admin.refresh();
