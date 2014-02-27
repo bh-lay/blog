@@ -28,5 +28,4 @@ exports.render = function (req,res_this){
 			method.close();
 		});
 	});
-
 }

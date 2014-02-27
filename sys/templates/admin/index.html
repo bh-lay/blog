@@ -15,7 +15,6 @@
 <body>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 <div class="container">
-  <!-- Brand and toggle get grouped for better mobile display -->
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
       <span class="sr-only">Toggle navigation</span>
@@ -26,29 +25,25 @@
     <a href="/admin" class="navbar-brand lofox">小剧客栈</a>
   </div>
 
-  <!-- Collect the nav links, forms, and other content for toggling -->
-  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
+      <li><a class="lofox" href="/admin/publish">发布</a></li>
       <li><a class="lofox" href="/admin/article">博文</a></li>
       <li><a class="lofox" href="/admin/share">分享</a></li>
 	  <li><a class="lofox" href="/admin/opus">作品</a></li>
 	  <li><a class="lofox" href="/admin/labs">实验室</a></li>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">用户<b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a class="lofox" href="/admin/user/list">用户管理</a></li>
-     	  <li><a class="lofox" href="/admin/user/group">用 户 组</a></li>
-	 	  <li><a class="lofox" href="/admin/user/power">权限列表</a></li>
-        </ul>
-       </li>
 	  <li><a class="lofox" href="/admin/friends">友情链接</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li class="dropdown">
+       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">{-username-} <b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li><a class="lofox" href="/admin/user/user.html?userid={-userid-}">改密</a></li>
           <li><a href="/ajax/user/exist" onclick="if(!confirm('二逼，是不是不玩儿啦！')){return false;}">退出</a></li>
+          <li class="divider"></li>
+          <li><a class="lofox" href="/admin/user/list">用户管理</a></li>
+     	  <li><a class="lofox" href="/admin/user/group">用 户 组</a></li>
+	 	  <li><a class="lofox" href="/admin/user/power">权限列表</a></li>
         </ul>
       </li>
     </ul>
