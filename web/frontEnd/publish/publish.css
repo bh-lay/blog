@@ -6,13 +6,20 @@
 .publish_cpt a{display:inline-block;padding:0px 15px;height:35px;line-height:35px;font-size:14px;color:#fff;opacity: 0.7;}
 .publish_cpt a:hover{background: #d30;opacity: 1;text-decoration: none;}
 .publish_cpt a.active{position:relative;z-index:1; background: #f3f3f3;color:#333;opacity: 1;box-shadow: 0px 0px 15px #000;}
+
+.pub_row_input{display: table;width:100%;margin-bottom:15px;}
+.pub_row_input input{display:table-cell;width:100%;height:34px;line-height:26px;padding:0px 10px; border:none;font-size: 14px;}
+.pub_row_input textarea{display:table-cell;width:100%;min-height:90px;padding:5px 10px;border:none;resize: vertical;top:0px;left:0px;}
+
 /*博文*/
 .pub_article{margin:0px 20px;padding:20px 0px;}
-.pub_arti_title{margin-bottom:15px;}
-.pub_arti_title input{width:100%;height:34px;line-height:34px;padding:0px; border:none;text-indent:1em;font-size: 14px;}
-.pub_arti_intro{margin-bottom:15px;}
-.pub_arti_intro textarea{display: block;width:100%;height:90px;padding:0px;border:none;resize: none;top:0px;left:0px;}
 .pub_arti_main{margin-bottom:20px;}
 .pub_arti_main textarea{display: block;width:100%;height:150px;border:none;resize: none;}
 /*分享*/
 .pub_share{margin:0px 20px;padding:20px 0px;}
+/*实验室*/
+.pub_labs{margin:0px 20px;padding:20px 0px;}
+/*作品*/
+.pub_opus{margin:0px 20px;padding:20px 0px;}
+/*友情链接*/
+.pub_friend{margin:0px 20px;padding:20px 0px;}

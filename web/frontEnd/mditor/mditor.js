@@ -15,7 +15,7 @@ window.mditor = window.mditor || {};
 		'<a href="javascript:void(0)" title="重做"><i class="icon-redo"></i></a>',
 		'<a href="javascript:void(0)" title="全屏" data-btn="fullscreen" style="float: right;"><i class="icon-fullscreen"></i></a>',
 	'</div>'].join('');
-	var editor_tpl = ['<div class="mditor">',
+	var editor_tpl = ['<div class="mditor_fullScreen">',
 		'<div class="mditor_toolBar">',
 			'<div class="mditor_tool_side">',
 				'<a href="javascript:void(0)" title="预览" data-btn="preview" class="mditor_preview"><i class="icon-view"></i></a>',
