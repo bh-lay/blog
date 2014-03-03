@@ -70,7 +70,7 @@ chip.labs_item = function(callback){
 };
 
 chip.labs_detail = function(callback){
-	var chip = ['<div class="golCnt"><div class="article">',
+	var chip = ['<div class="golCnt"><div class="article labs_detail">',
 		'<div class="articletop"><h1>${title}</h1></div>',
 			'{@if cover}',
 				'<img src="${cover}" alt="${title}" class="topicImg" />',
@@ -148,7 +148,7 @@ chip.nav = function(callback){
 					'<ul class="nav">',
 						'<li page="blog"><a lofox="true" title="博客" href="/blog/">博客</a></li>',
 						'<li page="share"><a lofox="true" title="分享" href="/share/">分享</a></li>',
-						'<li page="opus"><a lofox="true" title="小剧的实验室" href="/labs/">实验室</a></li>',
+						'<li page="labs"><a lofox="true" title="小剧的实验室" href="/labs/">实验室</a></li>',
 						'<li page="opus"><a lofox="true" title="小剧作品" href="/opus/">作品</a></li>',
 					'</ul>',
 					'<ul class="navLink">',
