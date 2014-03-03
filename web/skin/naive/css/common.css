@@ -114,7 +114,7 @@ background-size : cover;background-position : center center;}
 }
 .nav_mainList{}
 .nav_moreBtn{display: none;}
-@media screen and (max-width : 550px){
+@media screen and (max-width : 660px){
 	.nav_bj{border-radius: 0px;opacity:1;background:#fff;}
 	.nav_moreBtn{display: block;}
 	.nav_mainList{

@@ -69,11 +69,25 @@ chip.labs_item = function(callback){
 	callback(chip);
 };
 
+chip.labs_detail = function(callback){
+	var chip = ['<div class="golCnt"><div class="article">',
+		'<div class="articletop"><h1>${title}</h1></div>',
+			'{@if cover}',
+				'<img src="${cover}" alt="${title}" class="topicImg" />',
+			'{@/if}',
+		'<div class="text md_html">$${content}</div>',
+		'<div class="youyan"><!-- UY BEGIN -->',
+				'<div id="uyan_frame"></div>',
+				'<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1605927" async=""></script>',
+			'<!-- UY END --></div>',
+	'</div></div>'].join('');
+	callback(chip);
+};
 chip.opus_item = function(callback){
 	var chip =   ['{@each list as it,index}',
 		'<li>',
 			'<div class="opus_cover">',
-				'<a href="/labs/${it.id}" title="${it.title}" target="_self" lofox="true" >',
+				'<a href="/opus/${it.id}" title="${it.title}" target="_self" lofox="true" >',
 					'<img src="${it.cover}" alt="${it.title}" />',
 				'</a>',
 			'</div>',

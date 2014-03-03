@@ -1,7 +1,7 @@
 /**
  * @author bh-lay
  * @github https://github.com/bh-lay/lofox
- * @modified 2014-2-26 15:49
+ * @modified 2014-2-27 14:09
  *  location fox
  */
 window.util = window.util || {};
@@ -42,23 +42,59 @@ window.util = window.util || {};
 			},'test',url);
 		}
 	};	
+
 	var HASH = function(){
 		var this_fox = this;
-		var hash = window.location.hash;
-		setInterval(function(){
-			var new_hash = window.location.hash||'#';
-			if(new_hash != hash){
-				hash = new_hash;
-				var url = hash.replace(/^#/,'');
-			}
-		},30);
 		
+		//由于hash的特殊性，通过此值来判断是否需要触发refresh方法
+		var private_need_refresh = true;
+		//记录hash值
+		var private_oldHash = window.location.hash;
+		
+		if(typeof(window.onhashchange) != 'undefined'){
+			window.onhashchange = function(e){
+				var new_hash = window.location.hash || '#';
+			//	console.log('event',new_hash);
+				private_oldHash = new_hash;
+				var url = new_hash.replace(/^#/,'');
+				
+				if(private_need_refresh){
+					this_fox.refresh(url);
+				}else{
+					private_need_refresh = true;
+				}
+			}
+		}else{
+			setInterval(function(){
+				var new_hash = window.location.hash || '#';
+			//	console.log('interval',new_hash);
+				//hash发生变化
+				if(new_hash != private_oldHash){
+					private_oldHash = new_hash;
+					var url = new_hash.replace(/^#/,'');
+					
+					if(!private_need_refresh){
+						this_fox.refresh(url);
+					}else{
+						private_need_refresh = true;
+					}
+				}
+			},50);
+		}
+		
+				
+		//初始化处理hash
+		if(private_oldHash.length < 2){
+			private_oldHash = window.location.pathname;
+			window.location.hash = private_oldHash;
+		}
 		this.push = function(url){
+			private_need_refresh = false;
 			this.url = url;
 			window.location.hash = url;
 		}
 	}
-
+	
 	function EMIT(eventName,args){
 		//事件堆无该事件，结束运行
 		if(!this.events[eventName]){
@@ -73,12 +109,13 @@ window.util = window.util || {};
 		this.events = {};
 		this.push = null;
 		this.map = {};
-		this._other = null;
 		//this is a function return [routerName,args]
 		this._router = null;
 		if(window.history&&window.history.pushState){
+			this._use = 'html5';
 			HTML5.call(this);
 		}else{
+			this._use = 'hash';
 			HASH.call(this);
 		}
 		//为异步接口
@@ -87,31 +124,30 @@ window.util = window.util || {};
 		},10);
 		//执行set方法设置的回调
 		this.on('change',function(pathData,searchData){
-			if(this._router){
-				var filterData = this._router(pathData,searchData);
-				if(!filterData){
-					return
-				}
-				var routerName = filterData[0];
-				var args = [];
-				if(typeof(filterData[1]) == 'object' && filterData[1].length){
-					args = filterData[1];
-				}
-				
-				if(this.map[routerName]){
-					this.map[routerName]['renderFn'].apply(window,args);
-				}else{
-					this._other && this._other(pathData,searchData);
-				}
+			if(!this._router){
+				return
+			}
+			var filterData = this._router(pathData,searchData);
+			if(!filterData){
+				return
+			}
+			var routerName = filterData[0];
+			var pageTitle = filterData[1];
+			//设置标题
+			this.title(pageTitle);
+			var args = [];
+			for(var i=2,total=filterData.length;i<total;i++){
+				args.push(filterData[i]);
+			}
+			
+			if(this.map[routerName]){
+				this.map[routerName]['renderFn'].apply(window,args);
 			}
 		});
 	}
 	LOFOX.prototype = {
 		'router' : function(callback){
 			this._router = callback;
-		},
-		'other' : function(callback){
-			this._other = other;
 		},
 		'on' : function ON(eventName,callback){
 			//事件堆无该事件，创建一个事件堆
@@ -120,18 +156,33 @@ window.util = window.util || {};
 			}
 			this.events[eventName].push(callback);
 		},
-		'set' : function(routerName,title,callback){
+		'set' : function(routerName,callback){
 			var routerName = arguments[0];
-			var title = typeof(arguments[1]) == 'string' ? arguments[1] :null;
 			var callback = typeof(callback) =='function' ? callback :null;
 			this.map[routerName] = {
-				'title' : title,
 				'renderFn' : callback
 			};
 		},
+		//设置页面标题
+		'title' : function(title){
+			var type = typeof(title);
+			if(type.match(/number|string/)){
+				document.title = title
+			}
+		},
 		'refresh' : function (url){
-			var url = url || window.location.pathname+window.location.search+window.location.hash;
-			var urlSplit = url.length>0 ? url.split(/\?/) : ['',''];
+			var urlString;
+			if(url){
+				urlString = url ;
+			}else if(this._use == 'html5'){
+				urlString = window.location.pathname+window.location.search+window.location.hash;
+			}else if(this._use == 'hash'){
+				urlString = window.location.hash || '#';
+				//去除hash标记{#}
+				urlString = urlString.replace(/^#/,'');
+			}
+			
+			var urlSplit = urlString.length>0 ? urlString.split(/\?/) : ['',''];
 		
 			var urlStr = urlSplit[0].split('#')[0];
 			var searchStr = urlSplit[1];
@@ -144,7 +195,6 @@ window.util = window.util || {};
 			}
 //			console.log(pathData,2);
 			var searchData = searchParser(searchStr);
-		
 			EMIT.call(this,'change',[pathData,searchData]);
 		}
 	};
