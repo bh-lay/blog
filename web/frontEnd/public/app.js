@@ -105,11 +105,11 @@ window.L = window.L || {};
 		});
 		
 		lofox.set('labsList',function(){
-			L.nav.setCur('opus');
+			L.nav.setCur('labs');
 			render.labsList(dom);
 		});
 		lofox.set('labsDetail',function(param){
-			L.nav.setCur('opus');
+			L.nav.setCur('labs');
 			console.log(param,2323)
 			render.labsDetail(dom,param.id);
 		});
