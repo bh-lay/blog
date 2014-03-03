@@ -73,7 +73,7 @@ function get_detail(data,callback){
 			method.close();
 			if(arguments[1].length==0){
 				resJSON['code'] = 2;
-				resJSON['msg'] = 'could not find this lab !';				
+				resJSON['msg'] = 'could not find this lab ' + labID + ' !';				
 			}else{ 
 				resJSON['detail'] = docs[0];
 				

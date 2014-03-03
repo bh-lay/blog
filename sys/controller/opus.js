@@ -33,7 +33,7 @@ function detail_page(id,callback){
 		collection.find({id:id}).toArray(function(err, docs) {
 			method.close();
 			if(docs.length==0){
-				res_this.notFound('哇塞，貌似这作品享不存在哦!');
+				callback('哇塞，貌似这作品享不存在哦!');
 			}else{
 				temp.get('opusDetail',{'init':true},function(page_temp){
 					docs[0].opus_time_create = parse.time(docs[0].opus_time_create ,'{y}-{m}-{d}');
