@@ -11,4 +11,6 @@ pids
 logs
 results
 
+.project
 npm-debug.log
+sys/cache/
