@@ -136,6 +136,7 @@ window.L = window.L || {};
 			require.load(a,b)
 		};
 		L.gallery();
+		L.nav();
 	});
 })(window.L);
 
