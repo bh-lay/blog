@@ -128,7 +128,8 @@ background-size : cover;background-position : center center;}
 		box-shadow: 0px 2px 2px rgba(0,0,0,0.7)
 	}
 	.nav_main ul{float: none;margin:0px;}
-	.nav_main li{float: none;border:none;width:auto;}
+	.nav_main li{float: none;height:30px;border:none;width:auto;padding:0px;text-align: center;}
+	.nav_main li a{display: block;height:30px;line-height:30px;}
 }
 /*navigation*/
 
