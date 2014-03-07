@@ -160,9 +160,6 @@ window.admin.publish = window.admin.publish || {};
 		'</form>',
 	'</div>'].join('');
 	
-	var require = new loader({
-		'mditor' : '/frontEnd/mditor/mditor.js'
-	});
 	
 	/****
 	 * 获取博文内容
@@ -323,9 +320,9 @@ window.admin.publish = window.admin.publish || {};
 	function article_handule(dom,data){
 		var new_html = valueInit(article_tpl,data);
 		dom.html(new_html);
-		require.load('mditor',function(){
+//		require.load('mditor',function(){
 			mditor.bind(dom.find('textarea.mditor'));
-		});
+//		});
 		admin.formToAjax(dom,{
 			'onSubmit' : function(data){
 				UI.prompt('正在提交博文修改！');
@@ -406,9 +403,9 @@ window.admin.publish = window.admin.publish || {};
 					admin.refresh();
 				}
 			});
-			require.load('mditor',function(){
+//			require.load('mditor',function(){
 				mditor.bind(dom.find('textarea.mditor'));
-			});
+//			});
 			return
 		}
 		getLabs(id,function(err,data){
@@ -564,3 +561,16 @@ window.admin.publish = window.admin.publish || {};
 	exports.labs = LABS;
 	exports.power = POWER;
 })(window.admin.publish);
+
+define && define(function(require,exports){
+	require('/frontEnd/publish/publish.css');
+	require('/frontEnd/mditor/mditor.js');
+	
+	exports.init = window.admin.publish.init;
+	exports.article = window.admin.publish.article;
+	exports.share = window.admin.publish.share;
+	exports.opus = window.admin.publish.opus;
+	exports.friends = window.admin.publish.friends;
+	exports.labs = window.admin.publish.labs;
+	exports.power = window.admin.publish.power;
+});

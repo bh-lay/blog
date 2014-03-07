@@ -1,7 +1,7 @@
 /**
  * @author bh-lay
  * @github https://github.com/bh-lay/lofox
- * @modified 2014-2-27 14:09
+ * @modified 2014-3-7 14:09
  *  location fox
  */
 window.util = window.util || {};
@@ -203,3 +203,9 @@ window.util = window.util || {};
 		return new LOFOX()
 	};
 })(window.util);
+
+//提供CommonJS规范的接口
+define && define(function(require,exports,module){
+	//对外接口
+	return window.util.lofox;
+});

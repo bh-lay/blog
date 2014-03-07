@@ -24,13 +24,7 @@ window.admin = window.admin || {};
  * 		});
  ***/
 (function(exports){	
-	var require = new loader({
-		'lofox' : '/frontEnd/util/lofox.js',
-		'pop' : '/frontEnd/UI/pop.js',
-		'render' : '/frontEnd/public/admin/render.js',
-		'publish' : '/frontEnd/publish/publish.js',
-		'publishCSS' : '/frontEnd/publish/publish.css'
-	});
+
 	var nameToTitle = {
 		'index' : '后台首页',
 		'share' : '分享列表',
@@ -76,7 +70,11 @@ window.admin = window.admin || {};
 		dom.html(newDom);
 		return newDom;
 	}
-	require.load('lofox,pop,render,publish,publishCSS',function(){
+	seajs.use([
+		'/frontEnd/util/lofox.js',
+		'/frontEnd/UI/pop.js',
+		'/frontEnd/public/admin/render.js'
+	],function(){
 		var lofox = util.lofox();
 		var mainDom = $('.mainCnt');
 		var titleDom = $('title');
@@ -150,18 +148,19 @@ window.admin = window.admin || {};
 					if(urlData.length >= 4){
 						id = urlData[3];
 					}
-					
-					if(type.match(/^(article|share|opus|friends|labs)$/)){
-						admin.publish.init(dom,{
-							'active' : type,
-							'id' : id
-						});
-					}else if(type == 'power'){
-						admin.publish.power(dom,id);
-					}else{
-						admin.push('/publish');
-						admin.refresh();
-					}
+					seajs.use('/frontEnd/publish/publish.js',function(publish){
+						if(type.match(/^(article|share|opus|friends|labs)$/)){
+							admin.publish.init(dom,{
+								'active' : type,
+								'id' : id
+							});
+						}else if(type == 'power'){
+							admin.publish.power(dom,id);
+						}else{
+							admin.push('/publish');
+							admin.refresh();
+						}
+					});
 				break
 				case 'friends':
 					//友情链接模块

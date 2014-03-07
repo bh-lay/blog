@@ -12,11 +12,11 @@ window.admin.render = window.admin.render || {};
  **/
 (function(exports){
 	var txt = ['<div class="list-group">',
-		'<a class="list-group-item" href="/admin/publish/article">写博文</a>',
-		'<a class="list-group-item" href="/admin/publish/share">发分享</a>',
-		'<a class="list-group-item" href="/admin/publish/labs">实验室</a>',
-		'<a class="list-group-item" href="/admin/publish/opus">传作品</a>',
-		'<a class="list-group-item" href="/admin/publish/friends">加友情链接</a>',
+		'<a class="list-group-item lofox" href="/admin/publish/article">写博文</a>',
+		'<a class="list-group-item lofox" href="/admin/publish/share">发分享</a>',
+		'<a class="list-group-item lofox" href="/admin/publish/labs">实验室</a>',
+		'<a class="list-group-item lofox" href="/admin/publish/opus">传作品</a>',
+		'<a class="list-group-item lofox" href="/admin/publish/friends">加友情链接</a>',
 	'</div>',
 	'<div class="list-group">',
 		'<a class="list-group-item" href="/ajax/clear_cache?type=all">清除<strong>所有</strong>缓存</a>',
