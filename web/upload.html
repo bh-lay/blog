@@ -5,21 +5,21 @@
 <title>upload</title>
 </head>
 <body>
-	<form action="/ajax/upload" method="post" enctype="Multipart/form-data">
+	<form action="/ajax/asset/upload" method="post" enctype="Multipart/form-data">
 		<h1>文件上传模式</h1>
-    	<input type="text" name="title" >
+    	<input type="text" name="title" value="/images" />
         <input type="file" name="upload" multiple="multiple">
         <input type="submit" value="Upload file" />
     </form>
-	<form action="/ajax/upload" method="post">
+	<form action="/ajax/asset/upload" method="post">
 		<h1>post</h1>
-    	<input type="text" name="title" >
+    	<input type="text" name="baseUrl" value="/images" />
         <input type="file" name="upload" multiple="multiple">
         <input type="submit" value="Upload file" />
     </form>
-	<form action="/ajax/upload" method="get">
+	<form action="/ajax/asset/upload" method="get">
 		<h1>get</h1>
-    	<input type="text" name="title" >
+    	<input type="text" name="title" value="/images" />
         <input type="file" name="upload" multiple="multiple">
         <input type="submit" value="Upload file" />
     </form>

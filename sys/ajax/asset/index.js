@@ -2,6 +2,8 @@
  * @author bh-lay
  */
 var read = require('./fileList');
+var upload = require('./upload');
+
 exports.render = function (req,res_this,path){
 	if(path.pathnode.length == 2){
 		parse.request(req,function(err,data){
@@ -19,6 +21,10 @@ exports.render = function (req,res_this,path){
 				res_this.json(json);
 			});
 		});
+	}else if(path.pathnode.length == 3){
+		if(path.pathnode[2] == 'upload'){
+			upload.upload(req,res_this);
+		}
 	}else{
 		res_this.json({
 			'code' : 2,

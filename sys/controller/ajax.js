@@ -15,7 +15,6 @@ var ajaxConfig = {
 	'temp':'temp',
 	'tempModify':'tempModify',
 	'del' : 'del',
-	'upload':'upload',
 	'clear_cache':'clear_cache',
 	'asset':'asset/index',
 	'friends':'friends_get'
