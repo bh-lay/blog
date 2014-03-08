@@ -8,6 +8,7 @@
 window.admin = window.admin || {};
 window.admin.publish = window.admin.publish || {};
 
+//多发布模式
 (function(exports){
 	var publish_tpl = ['<div class="publish">',
 		'<div class="publish_cpt">',
@@ -55,6 +56,17 @@ window.admin.publish = window.admin.publish || {};
 	};
 })(window.admin.publish);
 
+	//初始化模版
+admin.publish.valueInit = function (tpl,data){
+		var txt = tpl.replace(/\{(\w*)}/g,function(){
+			return data[arguments[1]]||'';
+		});
+		return txt;
+	}
+
+/**
+ * 发布博文
+ */
 (function(exports){
 	var article_tpl = ['<div class="pub_article"><form action="/ajax/add_edit" method="post" target="_self">',
 		'<div class="pub_row_input"><input type="text" placeholder="博文标题，必须要填的哦！" name="title" value="{title}"/></div>',
@@ -76,90 +88,6 @@ window.admin.publish = window.admin.publish || {};
 			'<button type="submit" class="btn btn-primary">提交</button>',
 		'</div>',
 	'</form></div>'].join('');
-	var share_tpl = ['<div class="pub_share">',
-		'<form action="/ajax/add_edit" method="post" target="_self">',
-			'<div class="pub_row_input">',
-				'<input type="text" placeholder="分享主题" name="title" value="{title}"/>',
-			'</div>',
-			'<div class="pub_row_input">',
-				'<textarea name="intro" placeholder="分享简介" cols="50" rows="5">{intro}</textarea>',
-			'</div>',
-			'<div class="pub_row_input">',
-				'<textarea name="content" placeholder="分享详情" cols="50" rows="10" >{content}</textarea>',
-			'</div>',
-			'<div>',
-				'<input type="text" placeholder="缩略图" name="cover" value="{cover}" />',
-				'<input type="text" placeholder="标签" name="tags" value="{tags}" />',
-				'<input type="text" placeholder="发表时间" name="time_show" value="{time_show}" />',
-				'<input type="text" placeholder="分享来自" name="from" value="{from}" />',
-				'<input type="text" placeholder="分享地址" name="from_url" value="{from_url}" />',
-			'</div>',
-			'<div>',
-				'<input type="hidden" name="id" value="{id}" />',
-				'<input type="hidden" name="category" value="share" />',
-				'<button type="submit" class="btn btn-primary">提交</button>',
-			'</div>',
-		'</form>',
-	'</div>'].join('');
-	var opus_tpl = ['<div class="pub_opus">',
-		'<form action="/ajax/add_edit" method="post" target="_self">',
-			'<div class="pub_row_input"><input type="text" name="title" value="{title}" placeholder="标题"/></div>',
-			'<div class="pub_row_input"><input type="text" name="work_range" value="{work_range}" placeholder="开发范围" /></div>',
-			'<div class="pub_row_input"><input type="text" name="online_url" value="{online_url}" placeholder="在线地址" /></div>',
-			'<div class="pub_row_input">',
-				'<textarea name="intro" cols="50" rows="5" placeholder="作品简介">{intro}</textarea>',
-			'</div>',
-			'<div class="pub_row_input">',
-				'<textarea class="mditor" name="content" cols="50" rows="10" placeholder="作品详细信息" >{content}</textarea>',
-			'</div>',
-			'<div class="">',
-				'<input type="text" name="cover" value="{cover}" placeholder="缩略图"/>',
-				'<input type="text" name="opus_pic" value="{opus_pic}" placeholder="作品大图" />',
-				'<input type="text" name="tags" value="{tags}" placeholder="标签" />',
-				'<input type="text" name="opus_time_create" value="{opus_time_create}" placeholder="创作时间" />',
-			'</div>',
-			'<div>',
-				'<input type="hidden" name="id" value="{id}" />',
-				'<input type="hidden" name="category" value="opus" />',
-				'<button type="submit" class="btn btn-primary">提交</button>',
-			'</div>',
-		'</form>',
-	'</div>'].join('');
-	
-	var labs_tpl = ['<div class="pub_labs">',
-		'<form action="/ajax/add_edit" method="post" target="_self">',
-			'<div class="pub_row_input"><input type="text" name="title" value="{title}" placeholder="标题"/></div>',
-			'<div class="pub_row_input"><input type="text" name="cover" value="{cover}" placeholder="缩略图" /></div>',
-			'<div class="pub_row_input"><input type="text" name="time_create" value="{opus_time_create}" placeholder="创作时间" /></div>',
-			'<div class="pub_row_input">',
-				'<textarea name="intro" cols="50" rows="5" placeholder="插件简介">{intro}</textarea>',
-			'</div>',
-			'<div class="pub_row_input"><input type="text" name="api_url" value="{api_url}" placeholder="api地址" /></div>',
-			'<div class="pub_row_input">',
-				'<textarea name="content" cols="50" rows="10" placeholder="插件详细介绍" >{content}</textarea>',
-			'</div>',
-			'<div>',
-				'<input type="hidden" name="id" value="{id}" />',
-				'<input type="hidden" name="category" value="labs" />',
-				'<button type="submit" class="btn btn-primary">提交</button>',
-			'</div>',
-		'</form>',
-	'</div>'].join('');
-	
-	var friend_tpl = ['<div class="pub_friend">',
-		'<form action="/ajax/add_edit" method="post" target="_self">',
-			'<div class="pub_row_input"><input type="text" name="title" value="{title}" placeholder="标题" /></div>',
-			'<div class="pub_row_input"><input type="text" name="url" value="{url}" placeholder="地址" /></div>',
-			'<div class="pub_row_input"><input type="text" name="discription" value="{discription}" placeholder="描述" /></div>',
-			'<div class="pub_row_input"><input type="text" name="isShow" value="{isShow}" placeholder="是否显示" /></div>',
-			'<div class="pub_row_input">',
-				'<input type="hidden" name="id" value="{id}" />',
-				'<input type="hidden" name="category" value="blog_friend" />',
-				'<button type="submit" class="btn btn-primary">提交</button>',
-			'</div>',
-		'</form>',
-	'</div>'].join('');
-	
 	
 	/****
 	 * 获取博文内容
@@ -185,140 +113,9 @@ window.admin.publish = window.admin.publish || {};
 			}
 		});
 	}
-	
-	/****
-	 * 获取实验室内容
-	 */
-	function getLabs(id,callback){
-		if(!id){
-			callback && callback('missing arguments');
-		}
-		$.ajax({
-			'url' : '/ajax/labs',
-			'type' : 'GET',
-			'data' : {
-				'content_format' : 'markdown',
-				'act' : 'get_detail',
-				'id' : id
-			},
-			'success' : function(data){
-				if(data.code != 1){
-					callback && callback('data error');
-				}else{
-					callback && callback(null,data.detail);
-				}	
-			}
-		});
-	}
-
-	/****
-	 * 获取分享内容
-	 */
-	function getShare(id,callback){
-		if(!id){
-			callback && callback('missing arguments');
-		}
-		$.ajax({
-			'url' : '/ajax/share',
-			'type' : 'GET',
-			'data' : {
-				'act' : 'get_detail',
-				'id' : id
-			},
-			'success' : function(data){
-				if(data.code != 1){
-					callback && callback('data error');
-				}else{
-					callback && callback(null,data.detail);
-				}	
-			}
-		});
-	}
-	
-	
-	/****
-	 * 获取作品内容
-	 */
-	function getOpus(id,callback){
-		if(!id){
-			callback && callback('missing arguments');
-		}
-		$.ajax({
-			'url' : '/ajax/opus',
-			'type' : 'GET',
-			'data' : {
-				'act' : 'get_detail',
-				'id' : id
-			},
-			'success' : function(data){
-				if(data.code != 1){
-					callback && callback('data error');
-				}else{
-					callback && callback(null,data.detail);
-				}	
-			}
-		});
-	}
-	
-	/****
-	 * 获取友情链接内容
-	 */
-	function getFriend(id,callback){
-		if(!id){
-			callback && callback('missing arguments');
-		}
-		$.ajax({
-			'url' : '/ajax/friends',
-			'type' : 'GET',
-			'data' : {
-				'act' : 'get_detail',
-				'id' : id
-			},
-			'success' : function(data){
-				if(data.code != 1){
-					callback && callback('data error');
-				}else{
-					callback && callback(null,data.detail);
-				}	
-			}
-		});
-	}
-	
-	/****
-	 * 获取权限内容
-	 */
-	function getPower(id,callback){
-		if(!id){
-			callback && callback('missing arguments');
-		}
-		$.ajax({
-			'url' : '/ajax/power',
-			'type' : 'GET',
-			'data' : {
-				'act' : 'get_detail',
-				'id' : id
-			},
-			'success' : function(data){
-				if(data.code != 1){
-					callback && callback('data error');
-				}else{
-					callback && callback(null,data.detail);
-				}	
-			}
-		});
-	}
-	
-	//初始化模版
-	function valueInit(tpl,data){
-		var txt = tpl.replace(/\{(\w*)}/g,function(){
-			return data[arguments[1]]||'';
-		});
-		return txt;
-	}
-	
 	//处理博文模块
 	function article_handule(dom,data){
-		var new_html = valueInit(article_tpl,data);
+		var new_html = admin.publish.valueInit(article_tpl,data);
 		dom.html(new_html);
 //		require.load('mditor',function(){
 			mditor.bind(dom.find('textarea.mditor'));
@@ -348,10 +145,66 @@ window.admin.publish = window.admin.publish || {};
 			article_handule(dom,data);
 		});
 	}
+
+	exports.article = ARTICLE;
+})(window.admin.publish);
+
+/**
+ * 发布分享
+ */
+(function(exports){
+	var share_tpl = ['<div class="pub_share">',
+		'<form action="/ajax/add_edit" method="post" target="_self">',
+			'<div class="pub_row_input">',
+				'<input type="text" placeholder="分享主题" name="title" value="{title}"/>',
+			'</div>',
+			'<div class="pub_row_input">',
+				'<textarea name="intro" placeholder="分享简介" cols="50" rows="5">{intro}</textarea>',
+			'</div>',
+			'<div class="pub_row_input">',
+				'<textarea name="content" placeholder="分享详情" cols="50" rows="10" >{content}</textarea>',
+			'</div>',
+			'<div>',
+				'<input type="text" placeholder="缩略图" name="cover" value="{cover}" />',
+				'<input type="text" placeholder="标签" name="tags" value="{tags}" />',
+				'<input type="text" placeholder="发表时间" name="time_show" value="{time_show}" />',
+				'<input type="text" placeholder="分享来自" name="from" value="{from}" />',
+				'<input type="text" placeholder="分享地址" name="from_url" value="{from_url}" />',
+			'</div>',
+			'<div>',
+				'<input type="hidden" name="id" value="{id}" />',
+				'<input type="hidden" name="category" value="share" />',
+				'<button type="submit" class="btn btn-primary">提交</button>',
+			'</div>',
+		'</form>',
+	'</div>'].join('');
+	/****
+	 * 获取分享内容
+	 */
+	function getShare(id,callback){
+		if(!id){
+			callback && callback('missing arguments');
+		}
+		$.ajax({
+			'url' : '/ajax/share',
+			'type' : 'GET',
+			'data' : {
+				'act' : 'get_detail',
+				'id' : id
+			},
+			'success' : function(data){
+				if(data.code != 1){
+					callback && callback('data error');
+				}else{
+					callback && callback(null,data.detail);
+				}	
+			}
+		});
+	}
 	//发布分享
 	function SHARE(dom,id){
 		if(!id){
-			var new_html = valueInit(share_tpl,{});
+			var new_html = admin.publish.valueInit(share_tpl,{});
 			
 			dom.html(new_html);
 			admin.formToAjax(dom,{
@@ -371,7 +224,7 @@ window.admin.publish = window.admin.publish || {};
 				dom.html('数据异常！');
 				return
 			}
-			var new_html = valueInit(share_tpl,data);
+			var new_html = admin.publish.valueInit(share_tpl,data);
 			
 			dom.html(new_html);
 			admin.formToAjax(dom,{
@@ -387,50 +240,63 @@ window.admin.publish = window.admin.publish || {};
 		});
 	}
 	
-	//发布实验室内容
-	function LABS(dom,id){
+	exports.share = SHARE;
+})(window.admin.publish);
+
+/**
+ * 发布作品
+ */
+(function(exports){
+	var opus_tpl = ['<div class="pub_opus">',
+		'<form action="/ajax/add_edit" method="post" target="_self">',
+			'<div class="pub_row_input"><input type="text" name="title" value="{title}" placeholder="标题"/></div>',
+			'<div class="pub_row_input"><input type="text" name="work_range" value="{work_range}" placeholder="开发范围" /></div>',
+			'<div class="pub_row_input"><input type="text" name="online_url" value="{online_url}" placeholder="在线地址" /></div>',
+			'<div class="pub_row_input">',
+				'<textarea name="intro" cols="50" rows="5" placeholder="作品简介">{intro}</textarea>',
+			'</div>',
+			'<div class="pub_row_input">',
+				'<textarea class="mditor" name="content" cols="50" rows="10" placeholder="作品详细信息" >{content}</textarea>',
+			'</div>',
+			'<div class="">',
+				'<input type="text" name="cover" value="{cover}" placeholder="缩略图"/>',
+				'<input type="text" name="opus_pic" value="{opus_pic}" placeholder="作品大图" />',
+				'<input type="text" name="tags" value="{tags}" placeholder="标签" />',
+				'<input type="text" name="opus_time_create" value="{opus_time_create}" placeholder="创作时间" />',
+			'</div>',
+			'<div>',
+				'<input type="hidden" name="id" value="{id}" />',
+				'<input type="hidden" name="category" value="opus" />',
+				'<button type="submit" class="btn btn-primary">提交</button>',
+			'</div>',
+		'</form>',
+	'</div>'].join('');
+	/****
+	 * 获取作品内容
+	 */
+	function getOpus(id,callback){
 		if(!id){
-			var new_html = valueInit(labs_tpl,{});
-			
-			dom.html(new_html);
-			admin.formToAjax(dom,{
-				'onSubmit' : function(data){
-					UI.prompt('正在提交实验室的修改！');
-				},
-				'onResponse' : function(data){
-					UI.prompt('实验室发布完毕');
-					admin.push('/admin/');
-					admin.refresh();
-				}
-			});
-//			require.load('mditor',function(){
-				mditor.bind(dom.find('textarea.mditor'));
-//			});
-			return
+			callback && callback('missing arguments');
 		}
-		getLabs(id,function(err,data){
-			if(err){
-				dom.html('数据异常！');
-				return
+		$.ajax({
+			'url' : '/ajax/opus',
+			'type' : 'GET',
+			'data' : {
+				'act' : 'get_detail',
+				'id' : id
+			},
+			'success' : function(data){
+				if(data.code != 1){
+					callback && callback('data error');
+				}else{
+					callback && callback(null,data.detail);
+				}	
 			}
-			var new_html = valueInit(labs_tpl,data);
-			
-			dom.html(new_html);
-			admin.formToAjax(dom,{
-				'onSubmit' : function(data){
-					UI.prompt('正在提交分享修改！');
-				},
-				'onResponse' : function(data){
-					UI.prompt('分享修改完毕');
-					admin.push('/admin/');
-					admin.refresh();
-				}
-			});
 		});
 	}
 	function OPUS(dom,id){
 		if(!id){
-			var new_html = valueInit(opus_tpl,{});
+			var new_html = admin.publish.valueInit(opus_tpl,{});
 			
 			dom.html(new_html);
 			admin.formToAjax(dom,{
@@ -450,7 +316,7 @@ window.admin.publish = window.admin.publish || {};
 				dom.html('数据异常！');
 				return
 			}
-			var new_html = valueInit(opus_tpl,data);
+			var new_html = admin.publish.valueInit(opus_tpl,data);
 			
 			dom.html(new_html);
 			admin.formToAjax(dom,{
@@ -465,11 +331,151 @@ window.admin.publish = window.admin.publish || {};
 			});
 		});
 	}
+
+	exports.opus = OPUS;
+})(window.admin.publish);
+
+
+/**
+ * 发布试验室
+ */
+(function(exports){
+	var labs_tpl = ['<div class="pub_labs">',
+		'<form action="/ajax/add_edit" method="post" target="_self">',
+			'<div class="pub_row_input"><input type="text" name="title" value="{title}" placeholder="标题"/></div>',
+			'<div class="pub_row_input"><input type="text" name="cover" value="{cover}" placeholder="缩略图" /></div>',
+			'<div class="pub_row_input"><input type="text" name="time_create" value="{opus_time_create}" placeholder="创作时间" /></div>',
+			'<div class="pub_row_input">',
+				'<textarea name="intro" cols="50" rows="5" placeholder="插件简介">{intro}</textarea>',
+			'</div>',
+			'<div class="pub_row_input"><input type="text" name="api_url" value="{api_url}" placeholder="api地址" /></div>',
+			'<div class="pub_row_input">',
+				'<textarea class="mditor" name="content" cols="50" rows="10" placeholder="插件详细介绍" >{content}</textarea>',
+			'</div>',
+			'<div>',
+				'<input type="hidden" name="id" value="{id}" />',
+				'<input type="hidden" name="category" value="labs" />',
+				'<button type="submit" class="btn btn-primary">提交</button>',
+			'</div>',
+		'</form>',
+	'</div>'].join('');
+	/****
+	 * 获取实验室内容
+	 */
+	function getLabs(id,callback){
+		if(!id){
+			callback && callback('missing arguments');
+		}
+		$.ajax({
+			'url' : '/ajax/labs',
+			'type' : 'GET',
+			'data' : {
+				'content_format' : 'markdown',
+				'act' : 'get_detail',
+				'id' : id
+			},
+			'success' : function(data){
+				if(data.code != 1){
+					callback && callback('data error');
+				}else{
+					callback && callback(null,data.detail);
+				}	
+			}
+		});
+	}
+	//发布实验室内容
+	function LABS(dom,id){
+		if(!id){
+			var new_html = admin.publish.valueInit(labs_tpl,{});
+			
+			dom.html(new_html);
+			admin.formToAjax(dom,{
+				'onSubmit' : function(data){
+					UI.prompt('正在提交实验室的修改！');
+				},
+				'onResponse' : function(data){
+					UI.prompt('实验室发布完毕');
+					admin.push('/admin/');
+					admin.refresh();
+				}
+			});
+			mditor.bind(dom.find('textarea.mditor'));
+			return
+		}
+		getLabs(id,function(err,data){
+			if(err){
+				dom.html('数据异常！');
+				return
+			}
+			var new_html = admin.publish.valueInit(labs_tpl,data);
+			
+			dom.html(new_html);
+			mditor.bind(dom.find('textarea.mditor'));
+			admin.formToAjax(dom,{
+				'onSubmit' : function(data){
+					UI.prompt('正在提交实验室修改！');
+				},
+				'onResponse' : function(data){
+					UI.prompt('实验室修改完毕');
+					admin.push('/admin/');
+					admin.refresh();
+				}
+			});
+		});
+	}
+	
+	exports.labs = LABS;
+})(window.admin.publish);
+
+/**
+ * 发布友情链接
+ */
+
+(function(exports){
+	var friend_tpl = ['<div class="pub_friend">',
+		'<form action="/ajax/add_edit" method="post" target="_self">',
+			'<div class="pub_row_input"><input type="text" name="title" value="{title}" placeholder="标题" /></div>',
+			'<div class="pub_row_input"><input type="text" name="url" value="{url}" placeholder="地址" /></div>',
+			'<div class="pub_row_input"><input type="text" name="discription" value="{discription}" placeholder="描述" /></div>',
+			'<div class="pub_row_input"><input type="text" name="isShow" value="{isShow}" placeholder="是否显示" /></div>',
+			'<div class="pub_row_input">',
+				'<input type="hidden" name="id" value="{id}" />',
+				'<input type="hidden" name="category" value="blog_friend" />',
+				'<button type="submit" class="btn btn-primary">提交</button>',
+			'</div>',
+		'</form>',
+	'</div>'].join('');
+	
+	
+	/****
+	 * 获取友情链接内容
+	 */
+	function getFriend(id,callback){
+		if(!id){
+			callback && callback('missing arguments');
+		}
+		$.ajax({
+			'url' : '/ajax/friends',
+			'type' : 'GET',
+			'data' : {
+				'act' : 'get_detail',
+				'id' : id
+			},
+			'success' : function(data){
+				if(data.code != 1){
+					callback && callback('data error');
+				}else{
+					callback && callback(null,data.detail);
+				}	
+			}
+		});
+	}
+	
 	
 	//增加、修改友情链接
 	function FRIENDS(dom,id){
 		if(!id){
-			var new_html = valueInit(friend_tpl,{});
+			var new_html = admin.publish.valueInit(friend_tpl,{});
 			dom.html(new_html);
 			admin.formToAjax(dom,{
 				'onSubmit' : function(data){
@@ -488,7 +494,7 @@ window.admin.publish = window.admin.publish || {};
 				dom.html('数据异常！');
 				return
 			}
-			var new_html = valueInit(friend_tpl,data);
+			var new_html = admin.publish.valueInit(friend_tpl,data);
 			dom.html(new_html);
 			admin.formToAjax(dom,{
 				'onSubmit' : function(data){
@@ -500,6 +506,39 @@ window.admin.publish = window.admin.publish || {};
 					admin.refresh();
 				}
 			});
+		});
+	}
+	
+	
+	//对外接口
+	exports.friends = FRIENDS;
+})(window.admin.publish);
+
+/**
+ * 发布权限
+ */
+(function(exports){
+	/****
+	 * 获取权限内容
+	 */
+	function getPower(id,callback){
+		if(!id){
+			callback && callback('missing arguments');
+		}
+		$.ajax({
+			'url' : '/ajax/power',
+			'type' : 'GET',
+			'data' : {
+				'act' : 'get_detail',
+				'id' : id
+			},
+			'success' : function(data){
+				if(data.code != 1){
+					callback && callback('data error');
+				}else{
+					callback && callback(null,data.detail);
+				}	
+			}
 		});
 	}
 	
@@ -517,15 +556,15 @@ window.admin.publish = window.admin.publish || {};
 	//发布权限内容
 	function POWER(dom,id){
 		if(!id){
-			var new_html = valueInit(power_tpl,{});
+			var new_html = admin.publish.valueInit(power_tpl,{});
 			
 			dom.html(new_html);
 			admin.formToAjax(dom,{
 				'onSubmit' : function(data){
-					UI.prompt('正在提交权限的修改！');
+					UI.prompt('正在提交权限的创建！');
 				},
 				'onResponse' : function(data){
-					UI.prompt('全县修改完毕');
+					UI.prompt('权限修改完毕');
 					admin.push('/admin/');
 					admin.refresh();
 				}
@@ -537,7 +576,7 @@ window.admin.publish = window.admin.publish || {};
 				dom.html('数据异常！');
 				return
 			}
-			var new_html = valueInit(power_tpl,data);
+			var new_html = admin.publish.valueInit(power_tpl,data);
 			
 			dom.html(new_html);
 			admin.formToAjax(dom,{
@@ -554,11 +593,6 @@ window.admin.publish = window.admin.publish || {};
 	}
 	
 	//对外接口
-	exports.article = ARTICLE;
-	exports.share = SHARE;
-	exports.opus = OPUS;
-	exports.friends = FRIENDS;
-	exports.labs = LABS;
 	exports.power = POWER;
 })(window.admin.publish);
 
