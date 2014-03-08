@@ -39,7 +39,7 @@
 
 .mditor_main{position: absolute;top:50px;left:10px;right:10px;bottom:10px;}
 .mditor_input{position: absolute;top:0px;left:0px;width:50%;height:100%;z-index:0;}
-.mditor_input textarea{position: absolute;top:0px;left:0px;border:none;resize:none;background:#eee;color:#333;line-height:200%;margin:0px;padding:10px 15px;}
+.mditor_input textarea{position: absolute;top:0px;left:0px;border:none;resize:none;background:#eee;color:#333;line-height:200%;margin:0px;padding:10px 15px;box-sizing: content-box;}
 .mditor_input textarea:focus{background: #fff;box-shadow: 1px 1px 10px #000;outline:none;}
 .mditor_view{position: absolute;top:0px;right:0px;width:50%;height:100%;z-index: 1;}
 .mditor_viewer{position: absolute;top:0px;right:0px;left:10px;height:100%;overflow: auto;background:#fff;}
