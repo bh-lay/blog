@@ -1,6 +1,9 @@
 /**
  * @author bh-lay
  * 
+ * @github https://github.com/bh-lay/UI
+ * @modified 2014-3-7 19:10
+ * 
  * Function depends on
  *		JQUERY
  * 
@@ -42,6 +45,10 @@
  *     		}
  *   		}
  * 	});
+ 
+ * @method UI.pop.config.gap 为pop弹框配置页面显示边界
+ * 	@param {String} name 设置边界名（top/right/bottom/left）
+ * 	@param {Number} vlue 设置边界尺寸
  * 
  * @method UI.confirm
  * 	@param {Object} param the main paramter
@@ -71,7 +78,22 @@
  * 
  * @method UI.prompt
  * 	@param {String} text
- * 	@param {String|Number} [time]
+ * 	@param {String|Number} [time] 默认为1300ms，0为不自动关闭
+ * 
+ * 	@returns {Object} prompt
+ * 	@returns {Object} prompt.dom prompt所属DOM
+ * 	@returns {Function} prompt.tips 为prompt设置内容
+ * 	@returns {Function} confirm.close 关闭prompt
+ * 
+ * 	@example 
+ * 	//默认时间
+ * 		P.prompt('操作失败');
+ * 	//指定时间
+ * 		P.prompt('操作失败',2400);
+ * 	//主动控制
+ * 		var a = P.prompt('正在发送',0);
+ * 		a.tips('发送成功');
+ * 		a.close()
  * 
  **/
 
@@ -87,6 +109,10 @@ window.UI = window.UI || {};
 		'<div class="pro_pop_cnt"></div>',
 		'<a href="javascript:void(0)" class="pro_pop_close" title="\u5173\u95ED">X</a>',
 	'</div>'].join('');
+	
+	var miniChat_tpl = ['<div class="pro_miniChatSlideCnt"><div class="pro_miniChat">',
+		'<div class="pro_miniChat_text">{text}</div>',
+	'</div></div>'].join('');
 	
 	var confirm_tpl = ['<div class="pro_confirm">',
 		'<div class="pro_confirm_text">{text}</div>',
@@ -125,13 +151,17 @@ window.UI = window.UI || {};
 		'.pro_pop_close:hover{background-color:#eee;border-left-color:#ddd;text-decoration:none;}',
 		'.pro_pop_close:active{background-color:#ddd;border-left-color:#ccc;color:#ccc;}',
 		'.pro_confirm{_border:1px solid #eee;position:absolute;background:#fff;border-radius:4px;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6);}',
-		'.pro_confirm_text{padding:30px 0px 20px;height:40px;line-height:40px;text-align:center;font-size:20px;color:#333;}',
-		'.pro_pop_confirm{padding:10px 0px 15px 30px;text-align:center;}',
-		'.pro_pop_confirm a{display:inline-block;height:30px;padding:0px 15px;border-radius:3px;font-size:14px;line-height:30px;background:#38b;color:#fff;margin-right:30px;}',
+		'.pro_confirm_text{padding:30px 0px 20px;box-sizing:content-box;height:40px;line-height:40px;text-align:center;font-size:20px;color:#333;}',
+		'.pro_miniChatSlideCnt{width:220px;height:0px;overflow:hidden;position:absolute;border-radius:4px;box-shadow:2px 3px 10px rgba(0,0,0,0.6);}',
+		'.pro_miniChat{position:absolute;left:0px;bottom:0px;width:100%;_border:1px solid #eee;background:#fff;overflow:hidden;}',
+		'.pro_miniChat_text{padding:20px 10px 10px;box-sizing:content-box;line-height:24px;text-align:center;font-size:14px;color:#333;}',
+		'.pro_miniChat .pro_pop_confirm a{height:26px;line-height:26px;}',
+		'.pro_pop_confirm{padding:10px 0px 15px 30px;box-sizing:content-box;text-align:center;}',
+		'.pro_pop_confirm a{display:inline-block;height:30px;padding:0px 15px;box-sizing:content-box;border-radius:3px;font-size:14px;line-height:30px;background:#38b;color:#fff;margin-right:30px;}',
 		'.pro_pop_confirm a:hover{text-decoration: none;background:#49c;}',
 		'.pro_pop_confirm a:active{text-decoration: none;background:#27a}',
 		'.pro_plane{width:200px;position:absolute;top:400px;left:300px;}',
-		'.pro_prompt{width:240px;position:absolute;padding:30px 10px;background:#fff;_border:1px solid #fafafa;border-radius:4px;box-shadow:2px 2px 10px rgba(0,0,0,0.5);}',
+		'.pro_prompt{width:240px;position:absolute;padding:30px 10px;box-sizing:content-box;background:#fff;_border:1px solid #fafafa;border-radius:4px;box-shadow:2px 2px 10px rgba(0,0,0,0.5);}',
 		'.pro_cnt{font-size:18px;color:#222;text-align:center;}',
 	'</style>'].join('');
 	var isIE67 = false;
@@ -155,57 +185,58 @@ window.UI = window.UI || {};
 		 private_win = $(window),
 		 private_winW,
 		 private_winH,
-		 privita_doc = $(document),
-		 privita_docH,
+		 private_doc = $(document),
+		 private_docH,
 		 private_scrollTop;
+	//重新计算窗口尺寸
+	function countSize(){
+		private_winW = document.body.clientWidth;
+		private_scrollTop = private_win.scrollTop();
+		private_winH = window.innerHeight;
+		private_docH = private_doc.height();
+	}
+	$('head').append(popCSS);
+	$('body').append(DOM);
 
-	$(function(){
-		$('head').append(popCSS);
-		$('body').append(DOM);
-		//count window size
-		function countSize(){
-			private_winW = private_body.width();
-			private_scrollTop = private_win.scrollTop()
-			private_winH = private_win.height();
-			privita_docH = privita_doc.height();
-		}
-		
-		countSize();
-		//fix Prompt Mask position & size
-		if(isIE67){
+	//更新窗口尺寸
+	countSize();
+	//fix Prompt Mask position & size
+	if(isIE67){
+		private_maskDom.css({
+			'width' : private_winW,
+			'height' : private_docH
+		});
+		private_win.on('resize scroll',function(){
+			//更新窗口尺寸
+			countSize();
+			private_promptDom.animate({
+				'top' : private_scrollTop
+			},100);
 			private_maskDom.css({
 				'width' : private_winW,
-				'height' : privita_docH
+				'height' : private_docH
 			});
-			private_win.on('resize scroll',function(){
-				private_promptDom.animate({
-					'top' : private_scrollTop
-				},100);
-				private_maskDom.css({
-					'width' : private_winW,
-					'height' : privita_docH
-				});
-			});
-		}else{
-			private_promptDom.css({
-				'position' : 'fixed',
-				'top' : 0
-			});
+		});
+	}else{
+		private_promptDom.css({
+			'position' : 'fixed',
+			'top' : 0
+		});
+		private_maskDom.css({
+			'position' : 'fixed',
+			'top' : 0,
+			'width' : private_winW,
+			'height' : private_winH
+		});
+		private_win.on('resize scroll',function(){
+			//更新窗口尺寸
+			countSize();
 			private_maskDom.css({
-				'position' : 'fixed',
-				'top' : 0,
 				'width' : private_winW,
 				'height' : private_winH
 			});
-			private_win.on('resize',function(){
-				private_maskDom.css({
-					'width' : private_winW,
-					'height' : private_winH
-				});
-			});
-		}
-		private_win.on('resize scroll',countSize);
-	});
+		});
+	}
 	
 	var dragMask = $('<div style="width:100%;height:100%;position:absolute;top:0px;left:0px;z-index:100000;cursor:default;"></div>');
 	function drag(handle_dom,dom,param){
@@ -221,6 +252,8 @@ window.UI = window.UI || {};
 			}
 		});
 		function down(e){
+			//更新窗口尺寸
+			countSize();
 //			e.preventDefault();
 //			e.stopPropagation();
 			dx = e.pageX;
@@ -229,7 +262,7 @@ window.UI = window.UI || {};
 			t_start = parseInt(dom.css('top'));
 			w_start = parseInt(dom.outerWidth());
 			h_start = parseInt(dom.outerHeight());
-			privita_doc.mousemove(move).mouseup(up);
+			private_doc.mousemove(move).mouseup(up);
 			dragMask.css({
 				'width' : private_winW,
 				'height' : private_winH,
@@ -249,29 +282,29 @@ window.UI = window.UI || {};
 		}
 		function up(e) {
 			dragMask.remove();
-			privita_doc.unbind("mousemove", move).unbind("mouseup", up);
+			private_doc.unbind("mousemove", move).unbind("mouseup", up);
 			end&&end();
 		}
 	}	
 	
-	function fix_position(top,left,width,height){
-		if(top<private_scrollTop){
+	function fix_position(top,left,width,height,gap){
+		if(top<private_scrollTop + gap.top){
 			//Beyond the screen(top)
-			top = private_scrollTop;
-		}else if(top + height - private_scrollTop > private_winH) {
+			top = private_scrollTop  + gap.top;
+		}else if(top + height - private_scrollTop > private_winH - gap.bottom) {
 			//Beyond the screen(bottom)
-			if(height > private_winH){
+			if(height > private_winH - gap.top - gap.bottom){
 				//Is higher than the screen
-				top = private_scrollTop;
+				top = private_scrollTop + gap.top;
 			}else{
 				//Is shorter than the screen
-				top = private_scrollTop + private_winH - height;
+				top = private_scrollTop + private_winH - height - gap.bottom;
 			}
 		}
-		if(left<0){
-			left = 0;
-		}else if(left + width > private_winW){
-			left = private_winW - width;
+		if(left < gap.left){
+			left =  gap.left;
+		}else if(left + width > private_winW - gap.right){
+			left = private_winW - width - gap.right;
 		}
 		return {
 			'top' : top,
@@ -281,15 +314,20 @@ window.UI = window.UI || {};
 	//增加确认方法
 	function add_confirm(dom,param,close){
 		var callback = null;
-		var btns = ['确认','取消'];
+		var cancel = null;
+		var btns = ['\u786E\u8BA4','\u53D6\u6D88'];
 		if(typeof(param) == "function"){
 			callback = param;
 		}else if(typeof(param) == "object"){
 			if(param['btns']){
-				btns = [param['btns'][0],param['btns'][1]];
+				btns[0] = param['btns'][0];
+				btns[1] = param['btns'][1];
 			}
 			if(typeof(param['callback']) == "function"){
 				callback = param['callback'];
+			}
+			if(typeof(param['cancel']) == "function"){
+				cancel = param['cancel'];
 			}
 		}
 		var this_html = confirmBar_tpl.replace(/{(\w+)}/g,function(){
@@ -302,10 +340,25 @@ window.UI = window.UI || {};
 		});
 		dom.append(this_html);
 		dom.on('click','.pro_pop_confirm_ok',function(){
-			callback && callback();
-			close();
+			if(callback){
+				//根据执行结果判断是否要关闭弹框
+				var result = callback();
+				if(result != false){
+					close();
+				}
+			}else{
+				close();
+			}
 		}).on('click','.pro_pop_confirm_cancel',function(){
-			close();
+			if(cancel){
+				//根据执行结果判断是否要关闭弹框
+				var result = cancel();
+				if(result != false){
+					close();
+				}
+			}else{
+				close();
+			}
 		});
 		
 	}
@@ -347,10 +400,10 @@ window.UI = window.UI || {};
 			});
 		}
 		
-		var top = typeof(param['top']) == 'number' ? param['top'] : 300;
+		var top = typeof(param['top']) == 'number' ? param['top'] : (private_scrollTop + 300);
 		var left = typeof(param['left']) == 'number' ? param['left'] : private_winW/2 - this_width/2;
 		//fix position get size
-		var fixSize = fix_position(top,left,this_width,this_height+41);
+		var fixSize = fix_position(top,left,this_width,this_height+41,private_CONFIG.gap);
 		top = fixSize.top;
 		left = fixSize.left;
 		//can drag is pop
@@ -358,7 +411,7 @@ window.UI = window.UI || {};
 			'move' : function(dx,dy,l_start,t_start,w_start,h_start){
 				var top = dy + t_start;
 				var left = dx + l_start;
-				var newSize = fix_position(top,left,w_start,h_start);
+				var newSize = fix_position(top,left,w_start,h_start,private_CONFIG.gap);
 				this_pop.dom.css({
 					'left' : newSize.left,
 					'top' : newSize.top
@@ -385,6 +438,23 @@ window.UI = window.UI || {};
 		
 		private_mainDom.append(this.dom);
 	}
+	private_CONFIG = {
+		'gap' : {
+			'top' : 0,
+			'left' : 0,
+			'bottom' : 0,
+			'right' : 0
+		}
+	}
+	POP.config = {
+		'gap' : function(name,value){
+			if(name && name.match(/(top|right|bottom|left)/)){
+				if(parseInt(value)){
+					private_CONFIG.gap[name] = value;
+				}
+			}
+		}
+	};
 	POP.prototype = {
 		'close' : function (effect,time){
 			this.closeFn && this.closeFn();
@@ -420,7 +490,7 @@ window.UI = window.UI || {};
 		var param = param || {};
 		var this_pop = this;
 		
-		var this_text = param['text'] || '请输入确认信息！';
+		var this_text = param['text'] || '\u8BF7\u8F93\u5165\u786E\u8BA4\u4FE1\u606F！';
 		var callback = param['callback'] || null;
 		var this_html = confirm_tpl.replace(/{text}/,this_text);
 		
@@ -434,10 +504,14 @@ window.UI = window.UI || {};
 		// create pop
 		this.dom.css({
 			'width' : 300,
-			'left' : 800,
+			'left' : private_winW/2 - 150,
 			'top' : 200
 		});
 		
+		maskCount++
+		if(maskCount==1){
+			private_maskDom.fadeIn(80);
+		}
 		private_promptDom.append(this.dom);
 	}
 	CONFIRM.prototype = {
@@ -458,6 +532,10 @@ window.UI = window.UI || {};
 					$(this).remove();
 				});
 			}
+			maskCount--
+			if(maskCount==0){
+				private_maskDom.fadeOut(80);
+			}
 		}
 	};
 	/**
@@ -465,29 +543,44 @@ window.UI = window.UI || {};
 	 * 
 	 **/
 	function prompt(txt,time){
+		var this_prompt = this;
 		var txt = txt || '\u8BF7\u8F93\u5165\u5185\u5BB9';
-		var delay = time ? parseInt(time) :	1300;
-		var dom = $(prompt_tpl);		
-		//insert text
-		dom.find('.pro_cnt').html(txt);
-		dom.css({
-			'top' : private_winH/2-50,
+		this.dom = $(prompt_tpl);		
+		
+		this.tips(txt);
+		this.dom.css({
+			'top' : (private_winH < 700 ? 100 : private_winH/2-300),
 			'left' : private_winW/2 - 120
 		});
-		private_promptDom.append(dom);
-		setTimeout(function(){
-			dom.fadeOut(200,function(){
-				dom.remove();
-			});
-		},delay);
+		//console.log(private_winH,12);
+		private_promptDom.append(this.dom);
+		if(time != 0){
+			this_prompt.close(time);
+		}
 	}
-	
+	prompt.prototype = {
+		'tips' : function(txt){
+			if(txt){
+				this.dom.find('.pro_cnt').html(txt);
+			}
+		},
+		'close' : function(time){
+			var delay = time ? parseInt(time) : 1300 ;
+			var this_prompt = this;
+			
+			setTimeout(function(){
+				this_prompt.dom.fadeOut(200,function(){
+					this_prompt.dom.remove();
+				});
+			},delay);
+		}
+	};
 
 	//the active plane
 	activePlane = null;
 	//check click
 	var bingoDom = false;
-	privita_doc.on('mousedown',function checkClick(){
+	private_doc.on('mousedown',function checkClick(){
 		
 		setTimeout(function(){
 			if(!bingoDom){
@@ -542,14 +635,56 @@ window.UI = window.UI || {};
 		}
 	};
 	
+	function miniChat(param){
+		var param = param || {};
+		var this_chat = this;
+
+		this.text = param['text'] || '\u8BF7\u8F93\u5165\u6807\u9898';
+		this.closeFn = param['closeFn'] || null;
+		var this_tpl = miniChat_tpl.replace('{text}',this.text);
+		this.dom = $(this_tpl);
+		//当有确认参数时
+		add_confirm(this.dom.find('.pro_miniChat'),param,function(){
+			this_chat.close();
+		});
+		
+		var top = typeof(param['top']) == 'number' ? param['top'] : 300;
+		var left = typeof(param['left']) == 'number' ? param['left'] : 300;
+		
+		// create pop
+		this.dom.css({
+			'left' : left,
+			'top' : top
+		});
+		private_mainDom.append(this.dom);
+		var height = this.dom.find('.pro_miniChat').height();
+		this.dom.animate({
+			'height' : height
+		},200);
+	}
+	miniChat.prototype = {
+		'close' : function (effect,time){
+			this.closeFn && this.closeFn();
+			this.dom['slideUp'](140,function(){
+				$(this).remove();
+			});
+		}
+	};
+	
 	// Set the interface
 	exports.pop = function(){
 		return new POP(arguments[0]);
 	};
+	exports.pop.config = POP.config;
+	exports.miniChat = function(){
+		return new miniChat(arguments[0]);
+	};
 	exports.confirm = function(){
 		return new CONFIRM(arguments[0]);
 	};
-	exports.prompt = prompt;
+	exports.prompt = function(txt,time){
+		return new prompt(txt,time);
+	};
 	exports.plane = function(){
 		//close the active plane
 		activePlane&&activePlane.close();
@@ -800,3 +935,15 @@ window.UI = window.UI || {};
 		return new scrollBar(dom);
 	};
 })(window.UI);
+
+//提供CommonJS规范的接口
+define && define(function(require,exports,module){
+	//对外接口
+	exports.asas = 1212;
+	exports.pop = window.UI.pop;
+	exports.miniChat = window.UI.miniChat;
+	exports.confirm = window.UI.confirm;
+	exports.prompt = window.UI.prompt;
+	exports.plane = window.UI.plane;
+	exports.drag = window.UI.drag;
+});

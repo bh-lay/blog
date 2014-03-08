@@ -81,7 +81,7 @@ function DELET(param,res_this,session_this){
 					});
 				}else {
 					res_this.json({
-						'code' : 1,
+						'code' : 200,
 						'msg' : 'delete sucuss !'
 					});
 					
@@ -111,7 +111,13 @@ exports.render = function (req,res_this){
 		'id' : data['id'] || '',
 		'power' : null
 	};
-	
+	if(req.method != 'POST'){
+		res_this.json({
+			'code' : 201,
+			'msg' : 'please use POST to delete !'
+		});
+		return
+	}
 	if(param['id'].length<2){
 		res_this.json({
 			'code' : 2,

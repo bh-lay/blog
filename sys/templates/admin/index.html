@@ -9,7 +9,9 @@
 <link href="/frontEnd/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="/favicon.ico" rel="shortcut icon"/>
 <style type="text/css">
-	body{padding-top:60px;font-family: Microsoft Yahei;}
+	html{min-height:100%; }
+	body{padding-top:60px;
+		font-family: Microsoft Yahei;}
 	.navbar {
 	  min-height: 38px;
 	}
@@ -23,6 +25,8 @@
 		padding:6px 10px;
 		margin:4px 10px 0px 0px;
 	}
+	table{background:#ddd;border-radius: 0px;}
+	tr{background: #fff;}
 </style>
 </head>
 <body>
@@ -46,6 +50,14 @@
 	  <li><a class="lofox" href="/admin/opus">作品</a></li>
 	  <li><a class="lofox" href="/admin/labs">实验室</a></li>
 	  <li><a class="lofox" href="/admin/friends">友情链接</a></li>
+	  <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">用户 <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a class="lofox" href="/admin/user/list">用户管理</a></li>
+     	  <li><a class="lofox" href="/admin/user/group">用 户 组</a></li>
+	 	  <li><a class="lofox" href="/admin/user/power">权限列表</a></li>
+        </ul>
+      </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
        <li class="dropdown">
@@ -53,10 +65,6 @@
         <ul class="dropdown-menu">
           <li><a class="lofox" href="/admin/user/user.html?userid={-userid-}">改密</a></li>
           <li><a href="/ajax/user/exist" onclick="if(!confirm('二逼，是不是不玩儿啦！')){return false;}">退出</a></li>
-          <li class="divider"></li>
-          <li><a class="lofox" href="/admin/user/list">用户管理</a></li>
-     	  <li><a class="lofox" href="/admin/user/group">用 户 组</a></li>
-	 	  <li><a class="lofox" href="/admin/user/power">权限列表</a></li>
         </ul>
       </li>
     </ul>
