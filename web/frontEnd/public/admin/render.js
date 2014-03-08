@@ -41,7 +41,7 @@ window.admin.render = window.admin.render || {};
 		'<td>{time_show}</td>',
 		'<td>',
 			'<a class="lofox" title="修改" href="/admin/publish/article/{id}" target="_self">改</a>--',
-			'<a title="删除" href="/ajax/del?from=blog&id={id}" onclick="if(!confirm(\'三思啊，删了可就没啦！\')){return false;}" 	target="_self">删</a>',
+			'<a title="删除" href="/ajax/del?from=blog&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！">删</a>',
 		'</td>',
 	'</tr>'].join('');
 	function render(tpl,data){
@@ -128,7 +128,7 @@ window.admin.render = window.admin.render || {};
 		'<td class="arLiTitle"><a title="查看分享" href="/share/{id}" target="_blank">{title}</a></td>',
 		'<td class="arLiEdit">',
 			'<a title="修改" href="/admin/publish/share/{id}" target="_self">改</a>',
-			'<a title="删除" href="/ajax/del?from=share&id={id}" onclick="if(!confirm(\'三思啊，删了可就没啦！\')){return false;}" target="_self">删</a>',
+			'<a title="删除" href="/ajax/del?from=share&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！">删</a>',
 		'</td>',
 		'<td class="arLiTime">{time_show}</td>',
 	'</tr>'].join('');
@@ -217,7 +217,7 @@ window.admin.render = window.admin.render || {};
 		'<td class="arLiTitle"><a title="查看作品" href="/share/{id}" target="_blank">{title}</a></td>',
 		'<td class="arLiEdit">',
 			'<a title="修改" href="/admin/publish/opus/{id}" target="_self">改</a>',
-			'<a title="删除" href="/ajax/del?from=opus&id={id}" onclick="if(!confirm(\'三思啊，删了可就没啦！\')){return false;}" target="_self">删</a>',
+			'<a title="删除" href="/ajax/del?from=opus&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！">删</a>',
 		'</td>',
 		'<td class="arLiTime">{time_show}</td>',
 	'</tr>'].join('');
@@ -301,7 +301,7 @@ window.admin.render = window.admin.render || {};
 		'<td class="arLiTitle"><a title="查看博文" href="/labs/{id}" target="_blank">{title}</a></td>',
 		'<td class="arLiEdit">',
 			'<a class="lofox" title="修改" href="/admin/publish/labs/{id}" target="_self">改</a>',
-			'<a title="删除" href="/ajax/del?from=labs&id={id}" onclick="if(!confirm(\'三思啊，删了可就没啦！\')){return false;}" 	target="_self">删</a>',
+			'<a title="删除" href="/ajax/del?from=labs&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！">删</a>',
 		'</td>',
 		'<td class="arLiTime">{time_show}</td>',
 	'</tr>'].join('');
@@ -390,7 +390,7 @@ window.admin.render = window.admin.render || {};
 		'<td class="arLiTitle" title="添加时间">{time_create}</td>',
 		'<td class="arLiEdit">',
 			'<a title="修改" href="/admin/publish/friends/{id}" target="_self">改</a>',
-			'<a title="删除" href="/ajax/del?from=blog_friend&id={id}" onclick="if(!confirm(\'三思啊，删了可就没啦！\')){return false;}" target="_self">删</a>',
+			'<a title="删除" href="/ajax/del?from=blog_friend&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！">删</a>',
 		'</td>',
 	'</tr>'].join('');
 	function render(tpl,data){
@@ -491,7 +491,7 @@ window.admin.render = window.admin.render || {};
 		'<td>{user_group}</td>',
 		'<td>',
 			'<a href="user.html?userid={id}" target="_self">改</a>',
-			'<a href="/ajax/del?from=user&id={id}" onclick="if(!confirm(\'三思啊，删了可就没啦！\')){return false;}" target="_self">删</a>',
+			'<a title="删除" href="/ajax/del?from=user&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！">删</a>',
 		'</td>',
 	'</tr>'].join('');
 	
@@ -539,8 +539,8 @@ window.admin.render = window.admin.render || {};
 		'<td>{name}</td>',
 		'<td>{discription}</td>',
 		'<td>',
-			'<a href="/admin/publish/power/{id}" target="_self">改</a>',
-			'<a href="/ajax/del?from=power&id={id}" onclick="if(!confirm(\'三思啊，删了可就没啦！\')){return false;}" target="_self">删</a>',
+			'<a href="/admin/publish/power/{id}" class="lofox" target="_self">改</a>',
+			'<a title="删除" href="/ajax/del?from=power&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！">删</a>',
 		'</td>',
 	'</tr>'].join('');
 	

@@ -203,9 +203,56 @@ window.admin = window.admin || {};
 		exports.refresh = function(){
 			lofox.refresh();
 		};
+		
+		
+		
+		
 	});
 })(window.admin);
 
+$(function(exports){
+	function delPOST(url,callback){
+		$.ajax({
+			'url' : url,
+			'type' : 'POST',
+			'success' : function(data){
+				if(data && data.code == 200){
+					callback && callback(null,'删除成功');
+				}else{
+					var msg = data.msg || '删除失败';
+					callback && callback(msg);
+				}
+			},
+			'error' : function(){
+				callback && callback('网络出错！');
+			}
+		});
+	}
+	$('body').on('click','a[data-action-del]',function(){
+			var btn = $(this);
+			var url = btn.attr('href');
+			var text = btn.attr('data-action-del');
+			var item_selector = btn.attr('data-item-selector');
+			var item = btn.parents(item_selector);
+			UI.confirm({
+				'text' : text,
+				'callback' : function(){
+					delPOST(url,function(err,msg){
+						if(err){
+							UI.prompt(err);
+						}else{
+							item.fadeTo(400,0.1,function(){
+								item.slideUp(200,function(){
+									item.remove();
+								});
+							});
+						}
+					});
+				}
+			});
+			return false;
+		});
+});
 
 /***
  * 使用ajax提交表单
@@ -282,6 +329,9 @@ formToAjax.prototype = {
 		});
 	}
 };
+
+
+
 /***
  * 分页 页码
  **/
