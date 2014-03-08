@@ -12,11 +12,11 @@ window.admin.render = window.admin.render || {};
  **/
 (function(exports){
 	var txt = ['<div class="list-group">',
-		'<a class="list-group-item lofox" href="/admin/publish/article">写博文</a>',
-		'<a class="list-group-item lofox" href="/admin/publish/share">发分享</a>',
-		'<a class="list-group-item lofox" href="/admin/publish/labs">实验室</a>',
-		'<a class="list-group-item lofox" href="/admin/publish/opus">传作品</a>',
-		'<a class="list-group-item lofox" href="/admin/publish/friends">加友情链接</a>',
+		'<a class="list-group-item custom-lofox" href="/admin/publish/article">写博文</a>',
+		'<a class="list-group-item custom-lofox" href="/admin/publish/share">发分享</a>',
+		'<a class="list-group-item custom-lofox" href="/admin/publish/labs">实验室</a>',
+		'<a class="list-group-item custom-lofox" href="/admin/publish/opus">传作品</a>',
+		'<a class="list-group-item custom-lofox" href="/admin/publish/friends">加友情链接</a>',
 	'</div>',
 	'<div class="list-group">',
 		'<a class="list-group-item" href="/ajax/clear_cache?type=all">清除<strong>所有</strong>缓存</a>',
@@ -40,8 +40,8 @@ window.admin.render = window.admin.render || {};
 		'<td><a title="查看博文" href="/blog/{id}" target="_blank">{title}</a></td>',
 		'<td>{time_show}</td>',
 		'<td>',
-			'<a class="lofox" title="修改" href="/admin/publish/article/{id}" target="_self">改</a>--',
-			'<a title="删除" href="/ajax/del?from=blog&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！">删</a>',
+			'<a class="btn btn-default btn-xs custom-lofox" title="修改" href="/admin/publish/article/{id}" target="_self"><span class="glyphicon glyphicon-edit"></span></a>',
+			'<a class="btn btn-default btn-xs" title="删除" href="/ajax/del?from=blog&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！"><span class="glyphicon glyphicon-remove"></span></a>',
 		'</td>',
 	'</tr>'].join('');
 	function render(tpl,data){
@@ -74,10 +74,10 @@ window.admin.render = window.admin.render || {};
 	}
 	function listPage(dom){
 		var list_html = ['<div class="row">',
-			'<a href="/admin/publish/article" class="btn btn-primary btn-sm lofox" role="button">发博客</a>',
+			'<a href="/admin/publish/article" class="btn btn-primary btn-sm custom-lofox" role="button">发博客</a>',
 		'</div><br/>',
 		'<div class="panel panel-default row">',
-			'<table class="table table-hover">',
+			'<table class="table table-hover custom-listTable">',
 				'<tr><th>标题</th><th>发布时间</th><th>操作</th></tr>'].join('');
 		//每页显示条数
 		var page_list_num = 8;
@@ -126,11 +126,11 @@ window.admin.render = window.admin.render || {};
 (function(exports){
 	var list_tpl = ['<tr>',
 		'<td class="arLiTitle"><a title="查看分享" href="/share/{id}" target="_blank">{title}</a></td>',
-		'<td class="arLiEdit">',
-			'<a title="修改" href="/admin/publish/share/{id}" target="_self">改</a>',
-			'<a title="删除" href="/ajax/del?from=share&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！">删</a>',
-		'</td>',
 		'<td class="arLiTime">{time_show}</td>',
+		'<td class="arLiEdit">',
+			'<a class="btn btn-default btn-xs custom-lofox" title="修改" href="/admin/publish/share/{id}" target="_self"><span class="glyphicon glyphicon-edit"></span></a>',
+			'<a class="btn btn-default btn-xs" title="删除" href="/ajax/del?from=share&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！"><span class="glyphicon glyphicon-remove"></span></a>',
+		'</td>',
 	'</tr>'].join('');
 	
 	function render(tpl,data){
@@ -162,10 +162,10 @@ window.admin.render = window.admin.render || {};
 	}
 	function listPage(dom){
 		var list_html = ['<div class="row">',
-			'<a href="/admin/publish/share" class="btn btn-primary btn-sm lofox" role="button">发分享</a>',
+			'<a href="/admin/publish/share" class="btn btn-primary btn-sm custom-lofox" role="button">发分享</a>',
 		'</div><br/>',
 		'<div class="panel panel-default row">',
-			'<table class="table table-hover">',
+			'<table class="table table-hover custom-listTable">',
 				'<tr><th>标题</th><th>发布时间</th><th>操作</th></tr>'].join('');
 				//每页显示条数
 		var page_list_num = 10;
@@ -215,11 +215,11 @@ window.admin.render = window.admin.render || {};
 (function(exports){
 	var list_tpl = ['<tr>',
 		'<td class="arLiTitle"><a title="查看作品" href="/share/{id}" target="_blank">{title}</a></td>',
-		'<td class="arLiEdit">',
-			'<a title="修改" href="/admin/publish/opus/{id}" target="_self">改</a>',
-			'<a title="删除" href="/ajax/del?from=opus&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！">删</a>',
-		'</td>',
 		'<td class="arLiTime">{time_show}</td>',
+		'<td class="arLiEdit">',
+			'<a class="btn btn-default btn-xs custom-lofox" title="修改" href="/admin/publish/opus/{id}" target="_self"><span class="glyphicon glyphicon-edit"></span></a>',
+			'<a class="btn btn-default btn-xs" title="删除" href="/ajax/del?from=opus&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！"><span class="glyphicon glyphicon-remove"></span></a>',
+		'</td>',
 	'</tr>'].join('');
 	
 	function render(tpl,data){
@@ -251,10 +251,10 @@ window.admin.render = window.admin.render || {};
 	}
 	function OPUS(dom){
 		var list_html = ['<div class="row">',
-			'<a href="/admin/publish/opus" class="btn btn-primary btn-sm lofox" role="button">发作品</a>',
+			'<a href="/admin/publish/opus" class="btn btn-primary btn-sm custom-lofox" role="button">发作品</a>',
 		'</div><br/>',
 		'<div class="panel panel-default row">',
-			'<table class="table table-hover">',
+			'<table class="table table-hover custom-listTable">',
 				'<tr><th>标题</th><th>发布时间</th><th>操作</th></tr>'].join('');
 				//每页显示条数
 		var page_list_num = 10;
@@ -299,11 +299,11 @@ window.admin.render = window.admin.render || {};
 (function(exports){
 	var tpl = ['<tr>',
 		'<td class="arLiTitle"><a title="查看博文" href="/labs/{id}" target="_blank">{title}</a></td>',
-		'<td class="arLiEdit">',
-			'<a class="lofox" title="修改" href="/admin/publish/labs/{id}" target="_self">改</a>',
-			'<a title="删除" href="/ajax/del?from=labs&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！">删</a>',
-		'</td>',
 		'<td class="arLiTime">{time_show}</td>',
+		'<td class="arLiEdit">',
+			'<a class="btn btn-default btn-xs custom-lofox" title="修改" href="/admin/publish/labs/{id}" target="_self"><span class="glyphicon glyphicon-edit"></span></a>',
+			'<a class="btn btn-default btn-xs" title="删除" href="/ajax/del?from=labs&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！"><span class="glyphicon glyphicon-remove"></span></a>',
+		'</td>',
 	'</tr>'].join('');
 	function render(tpl,data){
 		var txt = '';
@@ -335,10 +335,10 @@ window.admin.render = window.admin.render || {};
 	}
 	function listPage(dom){
 		var list_html = ['<div class="row">',
-			'<a href="/admin/publish/opus" class="btn btn-primary btn-sm lofox" role="button">发作品</a>',
+			'<a href="/admin/publish/opus" class="btn btn-primary btn-sm custom-lofox" role="button">发作品</a>',
 		'</div><br/>',
 		'<div class="panel panel-default row">',
-			'<table class="table table-hover">',
+			'<table class="table table-hover custom-listTable">',
 				'<tr><th>标题</th><th>发布时间</th><th>操作</th></tr>'].join('');
 		//每页显示条数
 		var page_list_num = 8;
@@ -389,8 +389,8 @@ window.admin.render = window.admin.render || {};
 		'<td class="arLiTitle" title="{title}{url}">{title}</td>',
 		'<td class="arLiTitle" title="添加时间">{time_create}</td>',
 		'<td class="arLiEdit">',
-			'<a title="修改" href="/admin/publish/friends/{id}" target="_self">改</a>',
-			'<a title="删除" href="/ajax/del?from=blog_friend&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！">删</a>',
+			'<a class="btn btn-default btn-xs custom-lofox" title="修改" href="/admin/publish/friends/{id}" target="_self"><span class="glyphicon glyphicon-edit"></span></a>',
+			'<a class="btn btn-default btn-xs" title="删除" href="/ajax/del?from=blog_friend&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！"><span class="glyphicon glyphicon-remove"></span></a>',
 		'</td>',
 	'</tr>'].join('');
 	function render(tpl,data){
@@ -423,10 +423,10 @@ window.admin.render = window.admin.render || {};
 	}
 	function listPage(dom){
 		var list_html = ['<div class="row">',
-			'<a href="/admin/publish/opus" class="btn btn-primary btn-sm lofox" role="button">发作品</a>',
+			'<a href="/admin/publish/opus" class="btn btn-primary btn-sm custom-lofox" role="button">发作品</a>',
 		'</div><br/>',
 		'<div class="panel panel-default row">',
-			'<table class="table table-hover">',
+			'<table class="table table-hover custom-listTable">',
 				'<tr><th>标题</th><th>发布时间</th><th>操作</th></tr>'].join('');
 		//每页显示条数
 		var page_list_num = 8;
@@ -490,8 +490,8 @@ window.admin.render = window.admin.render || {};
 		'<td>{email}</td>',
 		'<td>{user_group}</td>',
 		'<td>',
-			'<a href="user.html?userid={id}" target="_self">改</a>',
-			'<a title="删除" href="/ajax/del?from=user&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！">删</a>',
+			'<a class="btn btn-default btn-xs custom-lofox" href="user.html?userid={id}" target="_self"><span class="glyphicon glyphicon-edit"></span></a>',
+			'<a class="btn btn-default btn-xs" title="删除" href="/ajax/del?from=user&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！"><span class="glyphicon glyphicon-remove"></span></a>',
 		'</td>',
 	'</tr>'].join('');
 	
@@ -511,7 +511,7 @@ window.admin.render = window.admin.render || {};
 			'url' : '/ajax/user/list',
 			'success' : function(d){
 				var html = ['<div class="row">',
-					'<a href="/admin/publish/opus" class="btn btn-primary btn-sm lofox" role="button">发作品</a>',
+					'<a href="/admin/publish/opus" class="btn btn-primary btn-sm custom-lofox" role="button">发作品</a>',
 				'</div><br/>',
 				'<div class="panel panel-default row">',
 					'<table class="table table-hover">',
@@ -539,8 +539,8 @@ window.admin.render = window.admin.render || {};
 		'<td>{name}</td>',
 		'<td>{discription}</td>',
 		'<td>',
-			'<a href="/admin/publish/power/{id}" class="lofox" target="_self">改</a>',
-			'<a title="删除" href="/ajax/del?from=power&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！">删</a>',
+			'<a class="btn btn-default btn-xs custom-lofox" href="/admin/publish/power/{id}" class="custom-lofox" target="_self"><span class="glyphicon glyphicon-edit"></span></a>',
+			'<a class="btn btn-default btn-xs" title="删除" href="/ajax/del?from=power&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！"><span class="glyphicon glyphicon-remove"></span></a>',
 		'</td>',
 	'</tr>'].join('');
 	
@@ -564,10 +564,10 @@ window.admin.render = window.admin.render || {};
 			},
 			'success' : function(d){
 				var html = ['<div class="row">',
-					'<a href="/admin/publish/power" class="btn btn-primary btn-sm lofox" role="button">加权限</a>',
+					'<a href="/admin/publish/power" class="btn btn-primary btn-sm custom-lofox" role="button">加权限</a>',
 				'</div><br/>',
 				'<div class="panel panel-default row">',
-					'<table class="table table-hover">',
+					'<table class="table table-hover custom-listTable">',
 					'<tr><th>#</th><th>权限名</th><th>权限描述</th><th>操作</th></tr>'].join('');
 				html += render(userItem,d.list);
 				html += '</table></div>';

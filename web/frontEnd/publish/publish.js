@@ -58,11 +58,12 @@ window.admin.publish = window.admin.publish || {};
 
 	//初始化模版
 admin.publish.valueInit = function (tpl,data){
-		var txt = tpl.replace(/\{(\w*)}/g,function(){
-			return data[arguments[1]]||'';
-		});
-		return txt;
-	}
+		
+	var txt = tpl.replace(/\{(\w*)}/g,function(){
+		return data[arguments[1]]||'';
+	});
+	return txt;
+};
 
 /**
  * 发布博文

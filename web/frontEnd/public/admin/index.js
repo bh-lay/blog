@@ -33,7 +33,8 @@ window.admin = window.admin || {};
 		'user' : '用户',
 		'publish' : '发布台',
 		'friends' : '友情链接',
-		'labs' : '实验室'
+		'labs' : '实验室',
+		'gallery' : '图库'
 	};
 	
 	function filterUrl(input){
@@ -140,7 +141,7 @@ window.admin = window.admin || {};
 				case 'publish':
 					mainDom.html('<div class="row"></div>');
 					var dom = mainDom.find('.row');
-					var type = 'article';
+					var type = '';
 					var id = null;
 					if(urlData.length >= 3){
 						type = urlData[2];
@@ -148,24 +149,28 @@ window.admin = window.admin || {};
 					if(urlData.length >= 4){
 						id = urlData[3];
 					}
-					seajs.use('/frontEnd/publish/publish.js',function(publish){
-						if(type.match(/^(article|share|opus|friends|labs)$/)){
-							admin.publish.init(dom,{
+					if(type.match(/^(article|share|opus|friends|labs|power)$/)){
+						seajs.use('/frontEnd/publish/publish.js',function(publish){
+							publish.init(dom,{
 								'active' : type,
 								'id' : id
 							});
-						}else if(type == 'power'){
-							admin.publish.power(dom,id);
-						}else{
-							admin.push('/publish');
-							admin.refresh();
-						}
-					});
+						});
+					}else{
+						admin.push('/publish/article');
+						admin.refresh();
+					}
 				break
 				case 'friends':
 					//友情链接模块
 					var dom = createDom(mainDom);
 					admin.render.friends(dom);
+				break
+				case 'gallery' :
+					var dom = createDom(mainDom);
+					seajs.use('/frontEnd/gallery/index.js',function(gallery){
+						gallery.init(dom);
+					});
 				break
 				default:
 					admin.push('/admin/');
@@ -179,7 +184,7 @@ window.admin = window.admin || {};
 		
 		admin.render.base();
 		
-		$('body').on('click','.lofox',function(){
+		$('body').on('click','a.custom-lofox',function(){
 			var url = $(this).attr('href');
 			lofox.push(url);
 			lofox.refresh();

@@ -17,7 +17,7 @@ var ajaxConfig = {
 	'del' : 'del',
 	'upload':'upload',
 	'clear_cache':'clear_cache',
-	'disk':'disk',
+	'asset':'asset/index',
 	'friends':'friends_get'
 };
 
