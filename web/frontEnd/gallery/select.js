@@ -1,9 +1,13 @@
 define(function(require,exports){
+	
+	var uploader = require('/frontEnd/util/uploader.js');
+	
 	var loading_tpl = '<div class="gp_loading">正在加载</div>';
 	var base_tpl = ['<div class="gP_select">',
 		'<div class="gp_select_top">',
 			'<a href="javascript:void(0)" data-action="back"><span class="glyphicon glyphicon-chevron-left"></span></a>',
 			'<a href="javascript:void(0)" data-action="upload"><span class="glyphicon glyphicon-cloud-upload"></span></a>',
+			'<span class="gP_rootNav">/</span>',
 		'</div>',
 		'<div class="gp_select_cnt"></div>',
 	'</div>'].join('');
@@ -17,7 +21,7 @@ define(function(require,exports){
 		'<div class="gP_file-ico">{type}</div>',
 		'<div class="gP_file-name">{name}</div>',
 	'</div>'].join('');
-	
+	//获取目录信息
 	function getData(path,callback){
 		$.ajax({
 			'url' : '/ajax/asset',
@@ -67,6 +71,13 @@ define(function(require,exports){
 	function bindEvent(){
 		var this_select = this;
 		
+		var up = new uploader({
+			'dom' : this.dom.find('a[data-action="upload"]'),
+			'action' : '/ajax/asset/upload'
+		});
+		up.responseParser = function(a,b){
+			console.log(a,b,12)
+		}
 		this.dom.on('click','.gP_dir_item',function(){
 			var name = $(this).attr('data-name');
 			this_select.open(name);
@@ -74,11 +85,14 @@ define(function(require,exports){
 			this_select.back();
 		});
 	}
+	
+	//文件选择类
 	function SELECT(dom,param){
 		this.root = '';
 		
 		this.dom = $(base_tpl);
 		this.cntDom = this.dom.find('.gp_select_cnt');
+		this.pathDom = this.dom.find('.gP_rootNav');
 		dom.html(this.dom);
 		bindEvent.call(this);
 		
@@ -88,6 +102,9 @@ define(function(require,exports){
 		'open' : function(filename){
 			var this_select = this;
 			var path = this.root + '/' + filename;
+			path = path.replace(/\/*/,'/');
+			path = path.length>0 ? path : '/';
+			
 			this.jump(path);
 		},
 		'back' : function(){
@@ -103,6 +120,7 @@ define(function(require,exports){
 		'jump' : function(path){
 			var this_select = this;
 			this.cntDom.html(loading_tpl);
+			this.pathDom.html(path);
 			getData(path,function(err,data){
 				if(err){
 					this_select.cntDom.html('错啦！');
