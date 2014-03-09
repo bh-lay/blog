@@ -139,8 +139,8 @@ window.admin = window.admin || {};
 					}
 				break
 				case 'publish':
-					mainDom.html('<div class="row"></div>');
-					var dom = mainDom.find('.row');
+					mainDom.html('<div class="col-md-12"></div>');
+					var dom = mainDom.find('.col-md-12');
 					var type = '';
 					var id = null;
 					if(urlData.length >= 3){
@@ -167,7 +167,8 @@ window.admin = window.admin || {};
 					admin.render.friends(dom);
 				break
 				case 'gallery' :
-					var dom = createDom(mainDom);
+					mainDom.html('<div class="col-md-12"></div>');
+					var dom = mainDom.find('.col-md-12');
 					seajs.use('/frontEnd/gallery/index.js',function(gallery){
 						gallery.init(dom);
 					});
@@ -216,15 +217,15 @@ window.admin = window.admin || {};
 })(window.admin);
 
 $(function(exports){
-	function delPOST(url,callback){
+	function sendPOST(url,callback){
 		$.ajax({
 			'url' : url,
 			'type' : 'POST',
 			'success' : function(data){
 				if(data && data.code == 200){
-					callback && callback(null,'删除成功');
+					callback && callback(null,'操作成功');
 				}else{
-					var msg = data.msg || '删除失败';
+					var msg = data.msg || '操作失败';
 					callback && callback(msg);
 				}
 			},
@@ -233,30 +234,66 @@ $(function(exports){
 			}
 		});
 	}
-	$('body').on('click','a[data-action-del]',function(){
-			var btn = $(this);
-			var url = btn.attr('href');
-			var text = btn.attr('data-action-del');
-			var item_selector = btn.attr('data-item-selector');
-			var item = btn.parents(item_selector);
-			UI.confirm({
-				'text' : text,
-				'callback' : function(){
-					delPOST(url,function(err,msg){
-						if(err){
-							UI.prompt(err);
-						}else{
-							item.fadeTo(400,0.1,function(){
-								item.slideUp(200,function(){
-									item.remove();
-								});
-							});
-						}
-					});
-				}
-			});
-			return false;
+	$('body').on('click','a[data-action-ajaxConfirm]',function(){
+		var btn = $(this);
+		var url = btn.attr('href');
+		var text = btn.attr('data-action-ajaxConfirm');
+		UI.confirm({
+			'text' : text,
+			'callback' : function(){
+				sendPOST(url,function(err,msg){
+					if(err){
+						UI.prompt(err);
+					}else{
+						UI.prompt('操作成功！');
+					}
+				});
+			}
 		});
+		return false;
+	}).on('click','a[data-action-del]',function(){
+		var btn = $(this);
+		var url = btn.attr('href');
+		var text = btn.attr('data-action-del');
+		var item_selector = btn.attr('data-item-selector');
+		var item = btn.parents(item_selector);
+		UI.confirm({
+			'text' : text,
+			'callback' : function(){
+				sendPOST(url,function(err,msg){
+					if(err){
+						UI.prompt(err);
+					}else{
+						item.fadeTo(400,0.1,function(){
+							item.slideUp(200,function(){
+								item.remove();
+							});
+						});
+					}
+				});
+			}
+		});
+		return false;
+	}).on('click','a[data-action-ajax]',function(){
+		var btn = $(this);
+		var url = btn.attr('href');
+		var text = btn.attr('data-action-ajax');
+		$.ajax({
+			'url' : url,
+			'type' : 'POST',
+			'success' : function(data){
+				if(data && data.code ==200){
+					UI.prompt(text);
+				}else{
+					UI.prompt('操作失败！');
+				}
+			},
+			'error' : function(){
+				UI.prompt('网络出错！');
+			}
+		});
+		return false;
+	});
 });
 
 /***

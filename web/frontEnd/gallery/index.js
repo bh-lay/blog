@@ -1,19 +1,17 @@
 define(function(require,exports){
 	require('/frontEnd/gallery/style.css');
+	var select = require('/frontEnd/gallery/select.js');
+	
 	var base_tpl = ['<div class="galleryPanel">',
 		'<div class="gP_tab">',
 			'<a href="javascript:void(0)" data-type="select">选择</a>',
-			'<a href="javascript:void(0)" data-type="upload">上传</a>',
 			'<a href="javascript:void(0)" data-type="maker">拼图</a>',
 		'</div>',
 		'<div class="gP_cnt"></div>',
 	'</div>'].join('');
-	var loading_tpl = '<div class="gp_loading">正在加载</div>';
 
 	function show_module (dom,cpt_dom,name){
-		if(name == 'upload'){
-			UPLOAD(dom);
-		}else if(name == 'maker'){
+		if(name == 'maker'){
 			MAKER(dom);
 		}else{
 			//默认为选择已上传
@@ -41,15 +39,11 @@ define(function(require,exports){
 		
 	}
 	function SELECT(dom){
-		dom.html(loading_tpl);
+		select(dom);
 	}
-	function UPLOAD(){
-		
-	}
-	function MAKER(){
-		
+	function MAKER(dom){
+		dom.html('<div class="gp_loading">待开发</div>');
 	}
 	exports.init = INIT;
 	exports.select = SELECT;
-	exports.upload = UPLOAD;
 });

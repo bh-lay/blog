@@ -11,7 +11,15 @@ var temp = fs.readFileSync('./templates/admin/index.html', "utf8");
 		var session_this = this;
 		var username = session_this.get('username');
 		var userid = session_this.get('user_id');
-		var txt = temp.replace('{-username-}',username).replace('{-userid-}',userid);
+		
+		var data = {
+			'username' : username,
+			'userid' : userid
+		};
+		data.database = JSON.stringify(data);
+		var txt = temp.replace(/{(\w+)}/g,function(a,b){
+			return data[b] || '';
+		});
 		res_this.html(200,txt);
 	});
 };
