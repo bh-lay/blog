@@ -1,7 +1,7 @@
 ﻿/**
  *	@author bh-lay
  *	@github https://github.com/bh-lay/uploader
- *  @updata 2014-3-5 17:42
+ *  @updata 2014-3-9 21:2
  * 
  */
 window.util = window.util || {};
@@ -242,3 +242,10 @@ window.util = window.util || {};
 	};
 	exports.uploader = uploader;
 })(window.util);
+
+
+//提供CommonJS规范的接口
+define && define(function(require,exports,module){
+	//对外接口
+	return window.util.uploader;
+});
