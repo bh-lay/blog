@@ -80,25 +80,31 @@ exports.request = function(req,callBack){
 	}
 
 	var method = req['method']||'';
+	var fields = querystring.parse(req.url.split('?')[1]);
 	
 	if(method == 'POST' || method =='post'){
 		var form = new formidable.IncomingForm();
 		form.uploadDir = "./cache/upload";
 		//form.keepExtensions = true;
 		
-		form.parse(req, function(error, fields, files) {
+		form.parse(req, function(error, fields_post, files) {
 			// @FIXME when i upload more than one file ,the arguments files is only single file
 			// but i can get all files information form form.openedFiles
 			// it confused me
 			//console.log(1234,arguments);
 			
 			files = form.openedFiles;
+			//将URL上的参数非强制性的增加到post数据上
+			for(var i in fields){
+				if(!fields_post[i]){
+					fields_post[i] = fields[i];
+				}
+			}
 			
-			callBack(error,fields, files);
+			callBack(error,fields_post, files);
 		
 		});
 	}else{
-		var fields = querystring.parse(req.url.split('?')[1]);
 		callBack(null,fields,[]);
 	}
 }

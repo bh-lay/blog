@@ -11,20 +11,37 @@ window.admin.render = window.admin.render || {};
  * 首页
  **/
 (function(exports){
-	var txt = ['<div class="list-group">',
-		'<a class="list-group-item custom-lofox" href="/admin/publish/article">写博文</a>',
-		'<a class="list-group-item custom-lofox" href="/admin/publish/share">发分享</a>',
-		'<a class="list-group-item custom-lofox" href="/admin/publish/labs">实验室</a>',
-		'<a class="list-group-item custom-lofox" href="/admin/publish/opus">传作品</a>',
-		'<a class="list-group-item custom-lofox" href="/admin/publish/friends">加友情链接</a>',
+	var base_tpl = ['<div class="col-md-8">',
+		'<div class="jumbotron">',
+			'<h1>{username}你还有脸回来！</h1>',
+			'<p>你有多久没有更新博文了？</p>',
+			'<p>博客还想不想要了？</p>',
+			'<p>人生就此荒废你开心么？</p>',
+			'<p><a class="btn btn-primary btn-lg" href="/" target="_blank" role="button">去看看博客</a></p>',
+		'</div>',
 	'</div>',
-	'<div class="list-group">',
-		'<a class="list-group-item" href="/ajax/clear_cache?type=all">清除<strong>所有</strong>缓存</a>',
-		'<a class="list-group-item" href="/ajax/clear_cache?type=chip">清除片段缓存</a>',
-		'<a class="list-group-item" href="/ajax/clear_cache?type=ajax">清除ajax缓存</a>',
-		'<a class="list-group-item" href="/ajax/clear_cache?type=html">清除页面缓存</a>',
+	'<div class="col-md-4">',
+		'<div class="custom-mb20">',
+			'<a class="btn btn-default btn-block custom-lofox" href="/admin/gallery">图库</a>',
+		'</div>',
+		'<div class="custom-mb20">',
+			'<div class="btn-group btn-group-sm btn-group-justified">',
+				'<a class="btn btn-default custom-lofox" href="/admin/publish/article">写博文</a>',
+				'<a class="btn btn-default custom-lofox" href="/admin/publish/share">发分享</a>',
+				'<a class="btn btn-default custom-lofox" href="/admin/publish/labs">实验室</a>',
+				'<a class="btn btn-default custom-lofox" href="/admin/publish/opus">传作品</a>',
+				'<a class="btn btn-default custom-lofox" href="/admin/publish/friends">加友链</a>',
+			'</div>',
+		'</div>',
+		'<div class="list-group">',
+			'<a class="list-group-item" href="/ajax/clear_cache?type=all"  data-action-ajax="清除缓存成功" >清除<strong>所有</strong>缓存</a>',
+			'<a class="list-group-item" href="/ajax/clear_cache?type=chip" data-action-ajax="清除缓存成功" >清除片段缓存</a>',
+			'<a class="list-group-item" href="/ajax/clear_cache?type=ajax" data-action-ajax="清除缓存成功" >清除ajax缓存</a>',
+			'<a class="list-group-item" href="/ajax/clear_cache?type=html" data-action-ajax="清除缓存成功" >清除页面缓存</a>',
+		'</div>',
 	'</div>'].join('');
 	function INDEX(dom){
+		var txt = base_tpl.replace('{username}',admin_dataBase.username);
 		dom.html(txt);
 	}
 	exports.index = INDEX;
@@ -73,12 +90,13 @@ window.admin.render = window.admin.render || {};
 		});
 	}
 	function listPage(dom){
-		var list_html = ['<div class="row">',
-			'<a href="/admin/publish/article" class="btn btn-primary btn-sm custom-lofox" role="button">发博客</a>',
-		'</div><br/>',
-		'<div class="panel panel-default row">',
-			'<table class="table table-hover custom-listTable">',
-				'<tr><th>标题</th><th>发布时间</th><th>操作</th></tr>'].join('');
+		var list_html = ['<div class="col-md-12 custom-mb10">',
+			'<a href="/admin/publish/article" class="btn btn-primary btn-sm custom-lofox" role="button">发博客</a><br/>',
+		'</div>',
+		'<div class="col-md-12">',
+			'<div class="panel panel-default">',
+				'<table class="table table-hover custom-listTable">',
+					'<tr><th>标题</th><th>发布时间</th><th>操作</th></tr>'].join('');
 		//每页显示条数
 		var page_list_num = 8;
 		getList(0,page_list_num,function(err,data){
@@ -87,9 +105,9 @@ window.admin.render = window.admin.render || {};
 				return
 			}
 			list_html += render(tpl,data.list);
-			list_html += '</table></div>';
+			list_html += '</table></div></div>';
 			
-			list_html += '<div class="page row"></div>';
+			list_html += '<div class="page col-md-12"></div>';
 			dom.html(list_html);
 			//分页组件
 			var page = admin.pageList(dom.find('.page'),{
@@ -161,12 +179,13 @@ window.admin.render = window.admin.render || {};
 		});
 	}
 	function listPage(dom){
-		var list_html = ['<div class="row">',
+		var list_html = ['<div class="col-md-12 custom-mb10">',
 			'<a href="/admin/publish/share" class="btn btn-primary btn-sm custom-lofox" role="button">发分享</a>',
-		'</div><br/>',
-		'<div class="panel panel-default row">',
-			'<table class="table table-hover custom-listTable">',
-				'<tr><th>标题</th><th>发布时间</th><th>操作</th></tr>'].join('');
+		'</div>',
+		'<div class="col-md-12">',
+			'<div class="panel panel-default">',
+				'<table class="table table-hover custom-listTable">',
+					'<tr><th>标题</th><th>发布时间</th><th>操作</th></tr>'].join('');
 				//每页显示条数
 		var page_list_num = 10;
 		getList(0,page_list_num,function(err,data){
@@ -175,9 +194,9 @@ window.admin.render = window.admin.render || {};
 				return
 			}
 			list_html += render(list_tpl,data.list);
-			list_html += '</table></div>';
+			list_html += '</table></div></div>';
 			
-			list_html += '<div class="page row"></div>';
+			list_html += '<div class="page col-md-12"></div>';
 			dom.html(list_html);
 			var page = admin.pageList(dom.find('.page'),{
 				'list_count' : data.count,
@@ -250,12 +269,13 @@ window.admin.render = window.admin.render || {};
 		});
 	}
 	function OPUS(dom){
-		var list_html = ['<div class="row">',
+		var list_html = ['<div class="col-md-12 custom-mb10">',
 			'<a href="/admin/publish/opus" class="btn btn-primary btn-sm custom-lofox" role="button">发作品</a>',
-		'</div><br/>',
-		'<div class="panel panel-default row">',
-			'<table class="table table-hover custom-listTable">',
-				'<tr><th>标题</th><th>发布时间</th><th>操作</th></tr>'].join('');
+		'</div>',
+		'<div class="col-md-12">',
+			'<div class="panel panel-default">',
+				'<table class="table table-hover custom-listTable">',
+					'<tr><th>标题</th><th>发布时间</th><th>操作</th></tr>'].join('');
 				//每页显示条数
 		var page_list_num = 10;
 		getList(0,page_list_num,function(err,data){
@@ -264,9 +284,9 @@ window.admin.render = window.admin.render || {};
 				return
 			}
 			list_html += render(list_tpl,data.list);
-			list_html += '</table></div>';
+			list_html += '</table></div></div>';
 			
-			list_html += '<div class="page"></div>';
+			list_html += '<div class="page col-md-12"></div>';
 			dom.html(list_html);
 			var page = admin.pageList(dom.find('.page'),{
 				'list_count' : data.count,
@@ -334,12 +354,13 @@ window.admin.render = window.admin.render || {};
 		});
 	}
 	function listPage(dom){
-		var list_html = ['<div class="row">',
+		var list_html = ['<div class="col-md-12 custom-mb10">',
 			'<a href="/admin/publish/opus" class="btn btn-primary btn-sm custom-lofox" role="button">发作品</a>',
-		'</div><br/>',
-		'<div class="panel panel-default row">',
-			'<table class="table table-hover custom-listTable">',
-				'<tr><th>标题</th><th>发布时间</th><th>操作</th></tr>'].join('');
+		'</div>',
+		'<div class="col-md-12">',
+			'<div class="panel panel-default">',
+				'<table class="table table-hover custom-listTable">',
+					'<tr><th>标题</th><th>发布时间</th><th>操作</th></tr>'].join('');
 		//每页显示条数
 		var page_list_num = 8;
 		getList(0,page_list_num,function(err,data){
@@ -348,9 +369,9 @@ window.admin.render = window.admin.render || {};
 				return
 			}
 			list_html += render(tpl,data.list);
-			list_html += '</table></div>';
+			list_html += '</table></div></div>';
 			
-			list_html += '<div class="page"></div>';
+			list_html += '<div class="page col-md-12"></div>';
 			dom.html(list_html);
 			//分页组件
 			var page = admin.pageList(dom.find('.page'),{
@@ -422,12 +443,13 @@ window.admin.render = window.admin.render || {};
 		});
 	}
 	function listPage(dom){
-		var list_html = ['<div class="row">',
+		var list_html = ['<div class="col-md-12 custom-mb10">',
 			'<a href="/admin/publish/opus" class="btn btn-primary btn-sm custom-lofox" role="button">发作品</a>',
-		'</div><br/>',
-		'<div class="panel panel-default row">',
-			'<table class="table table-hover custom-listTable">',
-				'<tr><th>标题</th><th>发布时间</th><th>操作</th></tr>'].join('');
+		'</div>',
+		'<div class="col-md-12">',
+			'<div class="panel panel-default">',
+				'<table class="table table-hover custom-listTable">',
+					'<tr><th>标题</th><th>发布时间</th><th>操作</th></tr>'].join('');
 		//每页显示条数
 		var page_list_num = 8;
 		getList(0,page_list_num,function(err,data){
@@ -436,9 +458,9 @@ window.admin.render = window.admin.render || {};
 				return
 			}
 			list_html += render(tpl,data.list);
-			list_html += '</table></div>';
+			list_html += '</table></div></div>';
 			
-			list_html += '<div class="page"></div>';
+			list_html += '<div class="page col-md-12"></div>';
 			dom.html(list_html);
 			//分页组件
 			var page = admin.pageList(dom.find('.page'),{
@@ -510,14 +532,15 @@ window.admin.render = window.admin.render || {};
 		$.ajax({
 			'url' : '/ajax/user/list',
 			'success' : function(d){
-				var html = ['<div class="row">',
+				var html = ['<div class="col-md-12 custom-mb10">',
 					'<a href="/admin/publish/opus" class="btn btn-primary btn-sm custom-lofox" role="button">发作品</a>',
-				'</div><br/>',
-				'<div class="panel panel-default row">',
-					'<table class="table table-hover">',
-					'<tr><th>标题</th><th>邮箱</th><th>用户组</th><th>操作</th></tr>'].join('');
+				'</div>',
+				'<div class="col-md-12">',
+					'<div class="panel panel-default">',
+						'<table class="table table-hover">',
+						'<tr><th>标题</th><th>邮箱</th><th>用户组</th><th>操作</th></tr>'].join('');
 				html += render(userItem,d.list);
-				html += '</table></div>';
+				html += '</table></div></div>';
 				dom.html(html);
 			},
 			'error' : function(){
@@ -563,14 +586,15 @@ window.admin.render = window.admin.render || {};
 				'limit' : 60
 			},
 			'success' : function(d){
-				var html = ['<div class="row">',
+				var html = ['<div class="col-md-12 custom-mb10">',
 					'<a href="/admin/publish/power" class="btn btn-primary btn-sm custom-lofox" role="button">加权限</a>',
-				'</div><br/>',
-				'<div class="panel panel-default row">',
-					'<table class="table table-hover custom-listTable">',
-					'<tr><th>#</th><th>权限名</th><th>权限描述</th><th>操作</th></tr>'].join('');
+				'</div>',
+				'<div class="col-md-12">',
+					'<div class="panel panel-default">',
+						'<table class="table table-hover custom-listTable">',
+						'<tr><th>#</th><th>权限名</th><th>权限描述</th><th>操作</th></tr>'].join('');
 				html += render(userItem,d.list);
-				html += '</table></div>';
+				html += '</table></div></div>';
 				dom.html(html);
 			},
 			'error' : function(){

@@ -11,7 +11,7 @@ exports.render = function (req,res_this,path){
 			
 			read.list(pathStr,function(err,files){
 				var json = {
-					'code' : 1,
+					'code' : 200,
 					'files' : files
 				}
 				if(err){

@@ -292,7 +292,7 @@ function exist(){
 			'power_data' : []
 		});
 		res_this.json({
-			'code':1,
+			'code':200,
 			'msg':'exist success !'
 		});
 	});
