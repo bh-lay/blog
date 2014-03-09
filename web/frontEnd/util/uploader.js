@@ -1,7 +1,7 @@
 ﻿/**
  *	@author bh-lay
  *	@github https://github.com/bh-lay/uploader
- *  @updata 2014-02-21
+ *  @updata 2014-3-5 17:42
  * 
  */
 window.util = window.util || {};
@@ -14,7 +14,8 @@ window.util = window.util || {};
 	var up_tpl = ['<div class="uploaderItem uploader{ID}">',
 		'<iframe id="uploader{ID}" name="uploader{ID}" width="0" height="0" marginwidth="0" frameborder="0" src="about:blank"></iframe>',
 		'<form method="post" action="{action}" enctype="multipart/form-data" name="uploader" target="uploader{ID}">',
-			'<input name="{fileinputname}" type="file" multiple="multiple" class="uploader_btn" title="请选择图片"/>',
+			//请选择图片
+			'<input name="{fileinputname}" type="file" multiple="multiple" class="uploader_btn" title="\u8BF7\u9009\u62E9\u56FE\u7247"/>',
 		'</form>',
 	'</div>'].join('');
 	
@@ -118,6 +119,8 @@ window.util = window.util || {};
 		});
 		iframe_load(iframe,function(){
 			var responseTXT = this.body.innerHTML;
+			//去除部分浏览器自动添加的标签
+			responseTXT = responseTXT.replace(/<[^>]+>|<\/[^>]+>/g,'');
 			//移除上传模块dom
 			uploaderDom.remove();
 			//未定义格式化数据，直接退出计算
@@ -153,7 +156,7 @@ window.util = window.util || {};
 			}catch(e){
 				this_up.emit('fail',[
 					ID,
-					'服务器数据异常！'
+					'\u670D\u52A1\u5668\u6570\u636E\u5F02\u5E38\uFF01'//服务器数据异常！
 				]);
 			}
 			
