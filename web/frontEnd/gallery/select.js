@@ -73,10 +73,18 @@ define(function(require,exports){
 		
 		var up = new uploader({
 			'dom' : this.dom.find('a[data-action="upload"]'),
-			'action' : '/ajax/asset/upload'
+			'action' : '/ajax/asset/upload',
+			'data' : {
+				'act' : 'addFile',
+				'root' : '2323'
+			}
 		});
-		up.responseParser = function(a,b){
-			console.log(a,b,12)
+		up.responseParser = function(data){
+			if(data && data.code && data.code == 200){
+				console.log('上传成功！',data);
+			}else{
+				console.log('上传成功！');
+			}
 		}
 		this.dom.on('click','.gP_dir_item',function(){
 			var name = $(this).attr('data-name');
