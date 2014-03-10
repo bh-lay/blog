@@ -1,7 +1,7 @@
 ﻿/**
  *	@author bh-lay
  *	@github https://github.com/bh-lay/uploader
- *  @updata 2014-3-10 15:38
+ *  @updata 2014-3-10 22:25
  * 
  */
 window.util = window.util || {};
