@@ -14,3 +14,4 @@ results
 .project
 npm-debug.log
 sys/cache/
+web/upload
