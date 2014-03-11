@@ -1,7 +1,7 @@
 ﻿/**
  *	@author bh-lay
  *	@github https://github.com/bh-lay/uploader
- *  @updata 2014-3-10 22:25
+ *  @updata 2014-3-12 00:06
  * 
  */
 window.util = window.util || {};
@@ -122,7 +122,7 @@ window.util = window.util || {};
 		this.responseParser = param['responseParser'] || null;
 		this.fileinputname = param['fileinputname'] || 'photos';
 		//事件集
-		this.onLeave = param.onLeave || null;
+		this.onHide = param.onHide || null;
 		this.onMousedown = param.onMousedown || null;
 		this.beforeUpload = param.beforeUpload || null;
 		this.onStartUpload = param.onStartUpload || null;
@@ -152,6 +152,7 @@ window.util = window.util || {};
 	}
 	//销毁自己
 	SingleUp.prototype.destory = function(){
+		this.onHide && this.onHide();
 		if(this.status == 'wait'){
 			this.dom.remove();
 		}else{
@@ -198,7 +199,6 @@ window.util = window.util || {};
 		//事件处理
 		uploaderDom.on('mouseleave',function(){
 	//		setTimeout(function(){
-				this_up.onLeave && this_up.onLeave();
 				this_up.destory();
 		//	},100);
 		}).on('mousedown',function(){
@@ -255,8 +255,15 @@ window.util = window.util || {};
 		this.responseParser = param['responseParser'] || null;
 		
 		//为按钮绑定悬停事件
+		var delay;
 		this.dom.mouseenter(function(){
-			this_up.createSingleUp($(this));
+			clearTimeout(delay);
+			var btn = $(this);
+			delay = setTimeout(function(){
+				this_up.createSingleUp(btn);
+			},100);
+		}).mouseleave(function(){
+			clearTimeout(delay);
 		});
 	}
 	uploader.prototype = {
@@ -309,7 +316,7 @@ window.util = window.util || {};
 				'onFail' : function(ID,extra){
 					this_up.emit('fail',[ID,extra]);
 				},
-				'onLeave' : function(){
+				'onHide' : function(){
 					BTN.removeClass('hover');
 					BTN.removeClass('active');
 				},
