@@ -1,6 +1,7 @@
 define(function(require,exports){
 	
 	var uploader = require('/frontEnd/util/uploader.js');
+	var events = require('/frontEnd/util/event.js');
 	
 	var loading_tpl = '<div class="gp_loading">正在加载</div>';
 	var base_tpl = ['<div class="gP_select">',
@@ -43,7 +44,7 @@ define(function(require,exports){
 								'name' : data.files[i]['name']
 							});
 						}else{
-							var match = data.files[i]['name'].match(/\.(.+)/);
+							var match = data.files[i]['name'].match(/\.(\w+)$/);
 							type = match ? match[1] : '';
 							newData['files'].push({
 								'name' : data.files[i]['name'],
@@ -71,20 +72,24 @@ define(function(require,exports){
 	function bindEvent(){
 		var this_select = this;
 		
-		var up = new uploader({
+		var thisUpload = new uploader({
 			'dom' : this.dom.find('a[data-action="upload"]'),
 			'action' : '/ajax/asset/upload',
 			'data' : {
 				'act' : 'addFile',
-				'root' : '2323'
+				'root' : '/'
 			}
 		});
-		up.responseParser = function(data){
+		this.on('fresh',function(baseRoot){
+			thisUpload.data.root = baseRoot;
+		});
+		thisUpload.responseParser = function(data){
 			if(data && data.code && data.code == 200){
 				console.log('上传成功！',data);
 			}else{
 				console.log('上传成功！');
 			}
+			this_select.refresh();
 		}
 		this.dom.on('click','.gP_dir_item',function(){
 			var name = $(this).attr('data-name');
@@ -101,7 +106,11 @@ define(function(require,exports){
 		this.dom = $(base_tpl);
 		this.cntDom = this.dom.find('.gp_select_cnt');
 		this.pathDom = this.dom.find('.gP_rootNav');
+		
 		dom.html(this.dom);
+		//扩展事件处理
+		events.extend.call(this);
+		//绑定dom事件
 		bindEvent.call(this);
 		
 		this.open('');
@@ -124,6 +133,11 @@ define(function(require,exports){
 			}
 			this.jump(path);
 		},
+		//刷新当前列表
+		'refresh' : function(){
+			var path = this.root;
+			this.jump(path);
+		},
 		//跳转至指定目录
 		'jump' : function(path){
 			var this_select = this;
@@ -138,6 +152,7 @@ define(function(require,exports){
 				html += render(item_tpl,data.files);
 				this_select.cntDom.html(html);
 				this_select.root = path;
+				this_select.emit('fresh',this_select.root);
 			});
 		}
 	};

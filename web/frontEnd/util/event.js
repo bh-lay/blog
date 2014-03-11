@@ -18,14 +18,14 @@ window.util = window.util || {};
 
 (function(exports){
 	function ON(eventName,callback){
-		//ÊÂ¼ş¶ÑÎŞ¸ÃÊÂ¼ş£¬´´½¨Ò»¸öÊÂ¼ş¶Ñ
+		//äº‹ä»¶å †æ— è¯¥äº‹ä»¶ï¼Œåˆ›å»ºä¸€ä¸ªäº‹ä»¶å †
 		if(!this.events[eventName]){
 			this.events[eventName] = [];
 		}
 		this.events[eventName].push(callback);
 	}
 	function EMIT(eventName,args){
-		//ÊÂ¼ş¶ÑÎŞ¸ÃÊÂ¼ş£¬½áÊøÔËĞĞ
+		//äº‹ä»¶å †æ— è¯¥äº‹ä»¶ï¼Œç»“æŸè¿è¡Œ
 		if(!this.events[eventName]){
 			return
 		}
@@ -33,7 +33,7 @@ window.util = window.util || {};
 			this.events[eventName][i].call(this.event_global || this,args);
 		}
 	}
-	//¼Ì³Ğ
+	//ç»§æ‰¿
 	function EXTEND(){
 		this.events = {};
 		this.on = ON;
@@ -52,3 +52,11 @@ window.util = window.util || {};
 	exports.events = EVENTS;
 	exports.events.extend = EXTEND;
 })(window.util);
+
+
+//æä¾›CommonJSè§„èŒƒçš„æ¥å£
+define && define(function(require,exports,module){
+	//å¯¹å¤–æ¥å£
+	exports.events = window.util.events;
+	exports.extend = window.util.events.extend;
+});
