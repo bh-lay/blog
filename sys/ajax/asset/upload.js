@@ -19,10 +19,13 @@ exports.upload = function (req,res_this){
 			code = 201
 		}else if(files.length){
 			json.fields = fields;
+			var baseRoot = fields.root || '';
+			//消除参数中首尾的｛/｝
+			baseRoot = baseRoot.replace(/^\/|\/$/g,'');
 			var newFiles = [];
 			for(var i in files){
 			/*
-				fs.rename(files[i].path,"../../asset/" + ROOT + '/' + files[i].name,function(err){
+				fs.rename(files[i].path, "../../asset/" + baseRoot + '/' + files[i].name,function(err){
 	    	    	if(err){
 	    	    		errorFiles.push(files[i]);
 	    	    	}else{

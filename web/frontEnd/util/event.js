@@ -55,6 +55,7 @@ window.util = window.util || {};
 
 //提供commonJS规范的接口
 window.define && define(function(require,exports){
+
 	exports.events = window.util.events;
 	exports.extend = window.util.events.extend;
 });

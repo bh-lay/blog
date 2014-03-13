@@ -11,11 +11,10 @@
  */
 .labsList{padding:100px 0px;margin:auto}
 .labsList ul{overflow:hidden;zoom:1; }
-.labsList ul li{width:280px;float: left;margin:0px 10px 20px;background:#fff;overflow: hidden;border-radius:4px;}
-.labs_cover{width:100%;height:160px;}
-.labs_cover a{display:block;width:100%;height:100%;background:#fff;position:relative;overflow: hidden; }
-.labs_cover a img{display:block;min-width:280px;max-width:100%;min-height: 100%;margin:0px auto;transition: 0.1s;}
-.labs_cover a:hover img{opacity: 0.8;}
+.labsList ul li{width:280px;height:300px;float: left;margin:0px 10px 20px;background:#fff;overflow: hidden;border-radius:4px;}
+.labsList ul li a{display:block;width:100%;height:100%;background:#fff;position:relative;overflow: hidden; }
+.labsList ul li a img{display:block;min-width:280px;max-width:100%;min-height: 140px;margin:0px auto;transition: 0.1s;}
+.labsList ul li a:hover img{opacity: 0.8;}
 .labs_info{height:140px;box-shadow: 0px 0px 15px #000;position: relative;background:#fff;}
 .labs_info h3 {height:50px;position: relative;margin-bottom: 8px;border-bottom:1px dashed #ddd;}
 .labs_info h3 a{display: block;width:260px;height:26px;line-height:26px;padding: 12px 10px 0px;overflow:hidden;font-size:17px;font-weight: normal;color:#333;}

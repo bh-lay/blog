@@ -27,13 +27,13 @@ function detail_page(id,callback){
 			collection.find({id:id}).toArray(function(err, docs) {
 				method.close();
 				if(docs.length==0){
-					res_this.notFound('哇塞，貌似这篇分享不存在哦!');
+					callback && callback('哇塞，貌似这篇分享不存在哦!');
 				}else{
 					docs[0].time_show = parse.time(docs[0].time_show ,'{y}-{m}-{d}');
 
 					var juicer = require('juicer');
 					var txt = juicer(page_temp,docs[0]);
-					callback(txt);
+					callback && callback(txt);
 				}
 			});
 		});

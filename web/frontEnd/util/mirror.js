@@ -1,9 +1,9 @@
 /**
  * @author bh-lay
  * 
- * ¾µÏñ¸´ÖÆÎÄ±¾¿ò¹¦ÄÜ
- * ÓÃÓÚ¼ÆËã¹â±êÔÚÊäÈë¿òÖĞµÄ¾ø¶ÔÎ»ÖÃ¼°ÎÄ±¾µÄÕæÊµ¸ß¶È
- * ÒÀÀµ Jquery
+ * é•œåƒå¤åˆ¶æ–‡æœ¬æ¡†åŠŸèƒ½
+ * ç”¨äºè®¡ç®—å…‰æ ‡åœ¨è¾“å…¥æ¡†ä¸­çš„ç»å¯¹ä½ç½®åŠæ–‡æœ¬çš„çœŸå®é«˜åº¦
+ * ä¾èµ– Jquery
  * 
  */
 
@@ -20,7 +20,7 @@ window.util = window.util || {};
 		"borderStyle","borderWidth",
 		"overflowX","overflowY"
 	];
-	//¾µÏñdomA,Ô´domB
+	//é•œåƒdomA,æºdomB
 	function copyBase(domA,domB){
 		var offset = domB.offset();
 		domA.scrollTop(domB.scrollTop())
@@ -42,7 +42,7 @@ window.util = window.util || {};
 		}
 		domA.css(cssObj);
 	}
-	//¹ıÂË×Ö·û
+	//è¿‡æ»¤å­—ç¬¦
 	function filterTxt(txt){
 		var newTxt = txt.replace(/</g, '&lt')
 			.replace(/>/g, '&gt')
@@ -70,7 +70,7 @@ window.util = window.util || {};
 		
 			var mirrorTxt = frontTxt + '<span></span>' + endTxt;
 			this.dom.html(mirrorTxt);
-			//Ğ£ÕıÎ»ÖÃ
+			//æ ¡æ­£ä½ç½®
 			copyBase(this.dom,this.origin);
 			$('body').append(this.dom);
 			var offset = this.dom.find('span').offset();

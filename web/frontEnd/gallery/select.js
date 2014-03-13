@@ -44,7 +44,7 @@ define(function(require,exports){
 								'name' : data.files[i]['name']
 							});
 						}else{
-							var match = data.files[i]['name'].match(/\.(.+)/);
+							var match = data.files[i]['name'].match(/\.(\w+)$/);
 							type = match ? match[1] : '';
 							newData['files'].push({
 								'name' : data.files[i]['name'],
@@ -72,23 +72,38 @@ define(function(require,exports){
 	function bindEvent(){
 		var this_select = this;
 		
-		var up = new uploader({
+		var thisUpload = new uploader({
 			'dom' : this.dom.find('a[data-action="upload"]'),
 			'action' : '/ajax/asset/upload',
 			'data' : {
+<<<<<<< HEAD
 				'root' : this.root
 			}
 		});
 		up.responseParser = function(data){
 			var files = [];
+=======
+				'act' : 'addFile',
+				'root' : '/'
+			}
+		});
+		this.on('fresh',function(baseRoot){
+			thisUpload.data.root = baseRoot;
+		});
+		thisUpload.responseParser = function(data){
+>>>>>>> master
 			if(data && data.code && data.code == 200){
 				files = data.files;
 			}else{
 				files = [];
 			}
+<<<<<<< HEAD
 			return {
 				'files' : files
 			};
+=======
+			this_select.refresh();
+>>>>>>> master
 		}
 		up.on('success',function(){
 			this_select.refresh();
@@ -114,7 +129,15 @@ define(function(require,exports){
 		this.dom = $(base_tpl);
 		this.cntDom = this.dom.find('.gp_select_cnt');
 		this.pathDom = this.dom.find('.gP_rootNav');
+		
 		dom.html(this.dom);
+<<<<<<< HEAD
+=======
+		//扩展事件处理
+		events.extend.call(this);
+		//绑定dom事件
+		bindEvent.call(this);
+>>>>>>> master
 		
 		//扩展事件机制
 		events.extend.call(this);
@@ -143,6 +166,11 @@ define(function(require,exports){
 			}
 			this.jump(path);
 		},
+		//刷新当前列表
+		'refresh' : function(){
+			var path = this.root;
+			this.jump(path);
+		},
 		//跳转至指定目录
 		'jump' : function(path){
 			var this_select = this;
@@ -157,7 +185,11 @@ define(function(require,exports){
 				html += render(item_tpl,data.files);
 				this_select.cntDom.html(html);
 				this_select.root = path;
+<<<<<<< HEAD
 				this_select.emit('fresh',path);
+=======
+				this_select.emit('fresh',this_select.root);
+>>>>>>> master
 			});
 		}
 	};
