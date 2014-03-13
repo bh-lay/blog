@@ -76,13 +76,6 @@ define(function(require,exports){
 			'dom' : this.dom.find('a[data-action="upload"]'),
 			'action' : '/ajax/asset/upload',
 			'data' : {
-<<<<<<< HEAD
-				'root' : this.root
-			}
-		});
-		up.responseParser = function(data){
-			var files = [];
-=======
 				'act' : 'addFile',
 				'root' : '/'
 			}
@@ -91,26 +84,21 @@ define(function(require,exports){
 			thisUpload.data.root = baseRoot;
 		});
 		thisUpload.responseParser = function(data){
->>>>>>> master
 			if(data && data.code && data.code == 200){
 				files = data.files;
 			}else{
 				files = [];
 			}
-<<<<<<< HEAD
 			return {
 				'files' : files
 			};
-=======
-			this_select.refresh();
->>>>>>> master
 		}
-		up.on('success',function(){
+		thisUpload.on('success',function(){
 			this_select.refresh();
 		});
 		
 		this.on('fresh',function(path){
-			up.data.root = path;
+			thisUpload.data.root = path;
 		});
 		this.dom.on('click','.gP_dir_item',function(){
 			//点击文件夹图标，执行打开动作
@@ -131,16 +119,10 @@ define(function(require,exports){
 		this.pathDom = this.dom.find('.gP_rootNav');
 		
 		dom.html(this.dom);
-<<<<<<< HEAD
-=======
+
 		//扩展事件处理
 		events.extend.call(this);
 		//绑定dom事件
-		bindEvent.call(this);
->>>>>>> master
-		
-		//扩展事件机制
-		events.extend.call(this);
 		bindEvent.call(this);
 		this.open('');
 	}
@@ -185,11 +167,7 @@ define(function(require,exports){
 				html += render(item_tpl,data.files);
 				this_select.cntDom.html(html);
 				this_select.root = path;
-<<<<<<< HEAD
-				this_select.emit('fresh',path);
-=======
 				this_select.emit('fresh',this_select.root);
->>>>>>> master
 			});
 		}
 	};
