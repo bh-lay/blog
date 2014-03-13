@@ -9,7 +9,7 @@
 
 .gP_select{}
 .gp_select_top{height:30px;line-height:30px;padding:5px 10px;box-sizing:content-box;}
-.gp_select_top a{display: inline-block;height: 30px;padding:0px 8px;font-size:18px;color:#888;}
+.gp_select_top a{display: inline-block;height: 30px;padding:0px 8px;font-size:18px;color:#888;transition: 0.3s;}
 .gp_select_top a:hover,
 .gp_select_top a.hover,
 .gp_select_top a.active{box-shadow:1px 1px 5px #777;border-radius:4px;background: #fff;color:#333;}

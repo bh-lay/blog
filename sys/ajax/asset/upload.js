@@ -13,22 +13,31 @@ exports.upload = function (req,res_this){
 	}
 	parse.request(req,function(err,fields, files){
 		var errorFiles = [];
+		var ROOT = fields.root || '';
+		ROOT = ROOT.replace(/^\/|\/$/g,'');
 		if(err){
 			code = 201
 		}else if(files.length){
 			json.fields = fields;
 			var newFiles = [];
 			for(var i in files){
-				fs.rename(files[i].path, "../web/upload/" + files[i].name,function(err){
+			/*
+				fs.rename(files[i].path,"../../asset/" + ROOT + '/' + files[i].name,function(err){
 	    	    	if(err){
 	    	    		errorFiles.push(files[i]);
 	    	    	}else{
 	    	    		newFiles.push({
 	    	    			'name' : files[i]['name'],
-	    	    			'path' : 'http://asset.bh-lay.com/' + fields.root + '/' + files[i]['name']
+	    	    			'path' : 'http://asset.bh-lay.com/' + ROOT + '/' + files[i]['name']
 	    	    		});
 	    	    	}
 				});
+			*/
+				fs.rename(files[i].path,"../../asset/" + ROOT + '/' + files[i].name);
+				newFiles.push({
+ 	    			'name' : files[i]['name'],
+ 	    			'path' : 'http://asset.bh-lay.com/' + ROOT + '/' + files[i]['name']
+ 	    		});
 			}
 			json.files = newFiles;
 			if(errorFiles.length > 0){

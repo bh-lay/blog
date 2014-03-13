@@ -1,6 +1,7 @@
 define(function(require,exports){
 	
 	var uploader = require('/frontEnd/util/uploader.js');
+	var events = require('/frontEnd/util/event.js');
 	
 	var loading_tpl = '<div class="gp_loading">正在加载</div>';
 	var base_tpl = ['<div class="gP_select">',
@@ -75,21 +76,33 @@ define(function(require,exports){
 			'dom' : this.dom.find('a[data-action="upload"]'),
 			'action' : '/ajax/asset/upload',
 			'data' : {
-				'act' : 'addFile',
-				'root' : '2323'
+				'root' : this.root
 			}
 		});
 		up.responseParser = function(data){
+			var files = [];
 			if(data && data.code && data.code == 200){
-				console.log('上传成功！',data);
+				files = data.files;
 			}else{
-				console.log('上传成功！');
+				files = [];
 			}
+			return {
+				'files' : files
+			};
 		}
+		up.on('success',function(){
+			this_select.refresh();
+		});
+		
+		this.on('fresh',function(path){
+			up.data.root = path;
+		});
 		this.dom.on('click','.gP_dir_item',function(){
+			//点击文件夹图标，执行打开动作
 			var name = $(this).attr('data-name');
 			this_select.open(name);
 		}).on('click','a[data-action="back"]',function(){
+			//后退
 			this_select.back();
 		});
 	}
@@ -102,8 +115,10 @@ define(function(require,exports){
 		this.cntDom = this.dom.find('.gp_select_cnt');
 		this.pathDom = this.dom.find('.gP_rootNav');
 		dom.html(this.dom);
-		bindEvent.call(this);
 		
+		//扩展事件机制
+		events.extend.call(this);
+		bindEvent.call(this);
 		this.open('');
 	}
 	SELECT.prototype = {
@@ -113,6 +128,10 @@ define(function(require,exports){
 			path = path.replace(/\/*/,'/');
 			path = path.length>0 ? path : '/';
 			
+			this.jump(path);
+		},
+		'refresh' : function(){
+			var path = this.root;
 			this.jump(path);
 		},
 		'back' : function(){
@@ -138,6 +157,7 @@ define(function(require,exports){
 				html += render(item_tpl,data.files);
 				this_select.cntDom.html(html);
 				this_select.root = path;
+				this_select.emit('fresh',path);
 			});
 		}
 	};
