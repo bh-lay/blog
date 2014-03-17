@@ -121,6 +121,7 @@ admin.publish.valueInit = function (tpl,data){
 //		require.load('mditor',function(){
 			mditor.bind(dom.find('textarea.mditor'));
 //		});
+		
 		admin.formToAjax(dom,{
 			'onSubmit' : function(data){
 				UI.prompt('正在提交博文修改！');

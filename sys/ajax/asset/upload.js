@@ -4,6 +4,7 @@
  */
 
 var fs = require('fs');
+var assetPath = "../../asset/";
 
 exports.upload = function (req,res_this){
 	var json = {
@@ -14,14 +15,12 @@ exports.upload = function (req,res_this){
 	parse.request(req,function(err,fields, files){
 		var errorFiles = [];
 		var ROOT = fields.root || '';
+		//消除参数中首尾的｛/｝
 		ROOT = ROOT.replace(/^\/|\/$/g,'');
 		if(err){
 			code = 201
 		}else if(files.length){
 			json.fields = fields;
-			var baseRoot = fields.root || '';
-			//消除参数中首尾的｛/｝
-			baseRoot = baseRoot.replace(/^\/|\/$/g,'');
 			var newFiles = [];
 			for(var i in files){
 			/*
@@ -36,7 +35,8 @@ exports.upload = function (req,res_this){
 	    	    	}
 				});
 			*/
-				fs.rename(files[i].path,"../../asset/" + ROOT + '/' + files[i].name);
+				var newPath = assetPath + ROOT + '/' + files[i].name;
+				fs.rename(files[i].path,newPath);
 				newFiles.push({
  	    			'name' : files[i]['name'],
  	    			'path' : 'http://asset.bh-lay.com/' + ROOT + '/' + files[i]['name']
