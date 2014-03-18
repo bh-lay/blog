@@ -23,24 +23,21 @@ exports.upload = function (req,res_this){
 			json.fields = fields;
 			var newFiles = [];
 			for(var i in files){
-			/*
-				fs.rename(files[i].path, "../../asset/" + baseRoot + '/' + files[i].name,function(err){
-	    	    	if(err){
-	    	    		errorFiles.push(files[i]);
-	    	    	}else{
-	    	    		newFiles.push({
-	    	    			'name' : files[i]['name'],
-	    	    			'path' : 'http://asset.bh-lay.com/' + ROOT + '/' + files[i]['name']
-	    	    		});
-	    	    	}
-				});
-			*/
 				var newPath = assetPath + ROOT + '/' + files[i].name;
-				fs.rename(files[i].path,newPath);
-				newFiles.push({
- 	    			'name' : files[i]['name'],
- 	    			'path' : 'http://asset.bh-lay.com/' + ROOT + '/' + files[i]['name']
- 	    		});
+				
+				//禁止上传同名文件
+				var exists = fs.existsSync(newPath);
+				if(exists){
+					errorFiles.push({
+						'name' : files[i]['name']
+					});
+				}else{
+					fs.rename(files[i].path,newPath);
+					newFiles.push({
+	 	    			'name' : files[i]['name'],
+	 	    			'path' : 'http://asset.bh-lay.com/' + ROOT + '/' + files[i]['name']
+	 	    		});
+				}
 			}
 			json.files = newFiles;
 			if(errorFiles.length > 0){

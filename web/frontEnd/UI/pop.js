@@ -2,7 +2,7 @@
  * @author bh-lay
  * 
  * @github https://github.com/bh-lay/UI
- * @modified 2014-3-7 19:10
+ * @modified 2014-3-12 15:34
  * 
  * Function depends on
  *		JQUERY
@@ -63,6 +63,14 @@
  * 	@returns {Function} confirm.close 关闭弹框的方法
  * 	@returns {Function} confirm.closeFn 弹框关闭时的回调
  * 
+ * @method UI.ask
+ * 	@param {String} text 标题
+ * 	@param {String} callback 回调
+ * 
+ * 	@returns {Object} ask
+ * 	@returns {Object} ask.dom prompt所属DOM
+ * 	@returns {Function} ask.close 关闭
+ * 
  * @method UI.plane
  * 	@param {Object} param the main paramter
  * 	@param {String} param.html
@@ -118,6 +126,11 @@ window.UI = window.UI || {};
 		'<div class="pro_confirm_text">{text}</div>',
 	'</div>'].join('');
 	
+	var ask_tpl = ['<div class="pro_ask">',
+		'<div class="pro_ask_text">{text}</div>',
+		'<input type="text" name="pro_ask_key"/>',
+	'</div>'].join('');
+	
 	var confirmBar_tpl = ['<div class="pro_pop_confirm">',
 		'<a href="javascript:void(0)" class="pro_pop_confirm_ok">{confirm}</a>',
 		'<a href="javascript:void(0)" class="pro_pop_confirm_cancel">{cancel}</a>',
@@ -151,7 +164,10 @@ window.UI = window.UI || {};
 		'.pro_pop_close:hover{background-color:#eee;border-left-color:#ddd;text-decoration:none;}',
 		'.pro_pop_close:active{background-color:#ddd;border-left-color:#ccc;color:#ccc;}',
 		'.pro_confirm{_border:1px solid #eee;position:absolute;background:#fff;border-radius:4px;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6);}',
-		'.pro_confirm_text{padding:30px 0px 20px;box-sizing:content-box;height:40px;line-height:40px;text-align:center;font-size:20px;color:#333;}',
+		'.pro_confirm_text{padding:30px 10px 20px;line-height:26px;text-align:center;font-size:20px;color:#333;}',
+		'.pro_ask{_border:1px solid #eee;position:absolute;background:#fff;border-radius:4px;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6);}',
+		'.pro_ask_text{padding:30px 10px 10px;line-height:26px;text-align:center;font-size:20px;color:#333;}',
+		'.pro_ask input{display:block;margin:0px auto 15px;height:30px;padding:4px 4px;line-height:22px;box-sizing:border-size;width:90%;}',
 		'.pro_miniChatSlideCnt{width:220px;height:0px;overflow:hidden;position:absolute;border-radius:4px;box-shadow:2px 3px 10px rgba(0,0,0,0.6);}',
 		'.pro_miniChat{position:absolute;left:0px;bottom:0px;width:100%;_border:1px solid #eee;background:#fff;overflow:hidden;}',
 		'.pro_miniChat_text{padding:20px 10px 10px;box-sizing:content-box;line-height:24px;text-align:center;font-size:14px;color:#333;}',
@@ -484,7 +500,7 @@ window.UI = window.UI || {};
 	};
 	
 	/***
-	 * pop 
+	 * CONFIRM 
 	 */
 	function CONFIRM(param){
 		var param = param || {};
@@ -538,6 +554,86 @@ window.UI = window.UI || {};
 			}
 		}
 	};
+	
+	
+	/***
+	 * ASK 
+	 */
+	function ASK(text,callback){
+		var this_pop = this;
+		
+		var this_text = text || '\u8BF7\u8F93\u5165\u786E\u8BA4\u4FE1\u606F！';
+		var this_html = ask_tpl.replace(/{text}/,this_text);
+		
+		this.dom = $(this_html);
+		this.closeFn =  null;
+		this.callback = callback || null;
+		
+		var this_html = confirmBar_tpl.replace(/{(\w+)}/g,function(a,key){
+			if(key == 'confirm'){
+				return '确定';
+			}else if(key == 'cancel'){
+				return '取消';
+			}
+		});
+		this.dom.append(this_html);
+		this.dom.on('click','.pro_pop_confirm_ok',function(){
+			var value = this_pop.dom.find('input').val();
+			if(this_pop.callback){
+				//根据执行结果判断是否要关闭弹框
+				var result = this_pop.callback(value);
+				if(result != false){
+					this_pop.close();
+				}
+			}else{
+				this_pop.close();
+			}
+		}).on('click','.pro_pop_confirm_cancel',function(){
+			this_pop.close();
+		});
+		
+		
+		
+		
+		// create pop
+		this.dom.css({
+			'width' : 300,
+			'left' : private_winW/2 - 150,
+			'top' : 200
+		});
+	
+		private_mainDom.append(this.dom);
+	}
+	ASK.prototype = {
+		'close' : function (effect,time){
+			this.closeFn && this.closeFn();
+
+			if(!effect){
+				this.dom.remove();
+			}else{
+				var method = 'fadeOut';
+				var time = time ? parseInt(time) : 80;
+				if(effect == 'fade'){
+					method = 'fadeOut'
+				}else if(effect == 'slide'){
+					method = 'slideUp'
+				}
+				this.dom[method](time,function(){
+					$(this).remove();
+				});
+			}
+			maskCount--
+			if(maskCount==0){
+				private_maskDom.fadeOut(80);
+			}
+		},
+		'setValue' : function(text){
+			var text = text ? text.toString() : '';
+			this.dom.find('input').val(text);
+		}
+	};
+	
+	
 	/**
 	 * prompt
 	 * 
@@ -681,6 +777,9 @@ window.UI = window.UI || {};
 	};
 	exports.confirm = function(){
 		return new CONFIRM(arguments[0]);
+	};
+	exports.ask = function(text,callback){
+		return new ASK(text,callback);
 	};
 	exports.prompt = function(txt,time){
 		return new prompt(txt,time);
@@ -937,9 +1036,9 @@ window.UI = window.UI || {};
 })(window.UI);
 
 //提供CommonJS规范的接口
-define && define(function(require,exports,module){
+window.define && define(function(require,exports,module){
 	//对外接口
-	exports.asas = 1212;
+	exports.ask = window.UI.ask;
 	exports.pop = window.UI.pop;
 	exports.miniChat = window.UI.miniChat;
 	exports.confirm = window.UI.confirm;

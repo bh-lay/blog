@@ -3,6 +3,8 @@
  */
 var read = require('./fileList');
 var upload = require('./upload');
+var del = require('./delete');
+var rename = require('./rename');
 
 exports.render = function (req,res_this,path){
 	if(path.pathnode.length == 2){
@@ -24,6 +26,10 @@ exports.render = function (req,res_this,path){
 	}else if(path.pathnode.length == 3){
 		if(path.pathnode[2] == 'upload'){
 			upload.upload(req,res_this);
+		}else if(path.pathnode[2] == 'del'){
+			del.del(req,res_this);
+		}else if(path.pathnode[2] == 'rename'){
+			rename.rename(req,res_this);
 		}
 	}else{
 		res_this.json({
