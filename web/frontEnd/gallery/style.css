@@ -20,4 +20,8 @@
 .gP_file-name{height:30px;line-height:30px;text-align:center; font-size: 12px;overflow: hidden;}
 
 .gP_dir_item:hover,
-.gP_file_item:hover{background:#aaa;}
+.gP_file_item:hover{background:#aaa;
+	transition:0.2s;
+	-moz-transition-duration: 0.2s;
+	-webkit-transition-duration: 0.2s;
+	-o-transition-duration: 0.2s;}
