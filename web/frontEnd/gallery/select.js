@@ -7,6 +7,7 @@ define(function(require,exports){
 	var base_tpl = ['<div class="gP_select">',
 		'<div class="gp_select_top">',
 			'<a href="javascript:void(0)" data-action="back"><span class="glyphicon glyphicon-chevron-left"></span></a>',
+			'<a href="javascript:void(0)" data-action="createDir"><span class="glyphicon glyphicon-folder-close"></span></a>',
 			'<a href="javascript:void(0)" data-action="upload"><span class="glyphicon glyphicon-cloud-upload"></span></a>',
 			'<span class="gP_rootNav">/</span>',
 		'</div>',
@@ -24,7 +25,7 @@ define(function(require,exports){
 					'<span class="gP_tool_btn_ico"><span class="glyphicon glyphicon-trash"></span></span>',
 					'<strong class="gP_tool_btn_name">删除</strong>',
 				'</a>',
-				'<a href="javascript:void(0)" class="gP_tool_btn">',
+				'<a href="javascript:void(0)" class="gP_tool_btn" data-action="rename">',
 					'<span class="gP_tool_btn_ico"><span class="glyphicon glyphicon-pencil"></span>',
 					'<strong class="gP_tool_btn_name">重命名</strong>',
 				'</a>',
@@ -135,6 +136,11 @@ define(function(require,exports){
 			//点击文件夹图标，执行打开动作
 			var name = $(this).parent().attr('data-name');
 			this_select.open(name);
+		}).on('click','a[data-action="createDir"]',function(){
+			//创建新的文件夹
+			var ask = UI.ask('新目录叫什么呢？', function(txt){
+				this_select.createDir(txt);
+			});
 		}).on('click','a[data-action="back"]',function(){
 			//后退
 			this_select.back();
@@ -210,6 +216,30 @@ define(function(require,exports){
 				'type' : 'POST',
 				'data' : {
 					'path' : path
+				},
+				'dataType' : 'json',
+				'success' : function(data){
+					this_select.refresh();
+					callback && callback(null,data);
+				},
+				'error' : function(){
+					callback && callback('网络出错');
+				}
+			});
+		},
+		'createDir' : function(foldername,callback){
+			var this_select = this;
+			if(!foldername || foldername.length < 0){
+				callback && callback('参数不全');
+				return;
+			}
+
+			$.ajax({
+				'url' : '/ajax/asset/createDir',
+				'type' : 'POST',
+				'data' : {
+					'root' : this.root,
+					'name' : foldername,
 				},
 				'dataType' : 'json',
 				'success' : function(data){
