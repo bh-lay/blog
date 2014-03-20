@@ -2,7 +2,7 @@
  * @author bh-lay
  * 
  * @github https://github.com/bh-lay/UI
- * @modified 2014-3-19 1:17
+ * @modified 2014-3-20 13:11
  * 
  * Function depends on
  *		JQUERY
@@ -110,7 +110,7 @@ window.UI = window.UI || {};
 	var allCnt = ['<div class="pop_lawyer">',
 		'<div class="pop_mask"></div>',
 		'<div class="pop_main_cnt"></div>',
-		'<div class="pop_prompt_cnt"></div>',
+		'<div class="pop_fixedScreen_cnt"></div>',
 	'</div>'].join('');
 	var pop_tpl = ['<div class="pro_pop">',
 		'<div class="pro_pop_cpt"></div>',
@@ -154,7 +154,7 @@ window.UI = window.UI || {};
 		'.pop_lawyer{position:absolute;top:0px;left:0px;width:0px;height:0px;overflow:visible;z-index:5000;font-family:"Microsoft Yahei"}',
 		'.pop_mask{position:absolute;top:0px;left:0px;background:#000;display:none;opacity:0.2}',
 		'.pop_main_cnt{position:absolute;top:0px;left:0px;}',
-		'.pop_prompt_cnt{position:absolute;top:0px;left:0px;}',
+		'.pop_fixedScreen_cnt{position:absolute;top:0px;left:0px;}',
 		'.pro_pop{width:200px;_border:1px solid #eee;position:absolute;top:400px;left:300px;',
 			'background:#fff;border-radius:4px;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6);}',
 		'.pro_pop_cpt{position:relative;height:40px;line-height:40px;margin-right:41px;overflow:hidden;border-bottom:1px solid #ebebeb;background:#f6f6f6;',
@@ -197,13 +197,14 @@ window.UI = window.UI || {};
 	var private_body = $('html,body'),
 		 private_maskDom = DOM.find('.pop_mask'),
 		 private_mainDom = DOM.find('.pop_main_cnt'),
-		 private_promptDom = DOM.find('.pop_prompt_cnt'),
+		 private_fixedScreenDom = DOM.find('.pop_fixedScreen_cnt'),
 		 private_win = $(window),
 		 private_winW,
 		 private_winH,
 		 private_doc = $(document),
 		 private_docH,
-		 private_scrollTop;
+		 private_scrollTop,
+		 private_maskCount = 0;;
 	//重新计算窗口尺寸
 	function countSize(){
 		private_winW = document.body.clientWidth;
@@ -216,7 +217,9 @@ window.UI = window.UI || {};
 
 	//更新窗口尺寸
 	countSize();
-	//fix Prompt Mask position & size
+	/**
+	 *	fix Prompt Mask position & size 
+	 */ 
 	if(isIE67){
 		private_maskDom.css({
 			'width' : private_winW,
@@ -225,7 +228,7 @@ window.UI = window.UI || {};
 		private_win.on('resize scroll',function(){
 			//更新窗口尺寸
 			countSize();
-			private_promptDom.animate({
+			private_fixedScreenDom.animate({
 				'top' : private_scrollTop
 			},100);
 			private_maskDom.css({
@@ -234,7 +237,7 @@ window.UI = window.UI || {};
 			});
 		});
 	}else{
-		private_promptDom.css({
+		private_fixedScreenDom.css({
 			'position' : 'fixed',
 			'top' : 0
 		});
@@ -253,14 +256,14 @@ window.UI = window.UI || {};
 			});
 		});
 	}
-	
-	var dragMask = $('<div style="width:100%;height:100%;position:absolute;top:0px;left:0px;z-index:100000;cursor:default;"></div>');
+	//通用拖动方法
 	function drag(handle_dom,dom,param){
 		var param = param || {};
 		var moving = param['move'] || null;
 		var start = param['start'] || null;
 		var end = param['end'] || null;
-		
+		var dragMask = $('<div style="width:100%;height:100%;position:absolute;top:0px;left:0px;z-index:100000;cursor:default;"></div>');
+	
 		var dx, dy,l_start,t_start,w_start,h_start;
 		handle_dom.mousedown(function(e){
 			if(e.button == 0){
@@ -286,7 +289,7 @@ window.UI = window.UI || {};
 				'left' : 0,
 				'cursor' : handle_dom.css('cursor')
 			});
-			private_promptDom.append(dragMask);
+			private_fixedScreenDom.append(dragMask);
 			start&&start();
 		}
 		function move(e){
@@ -301,9 +304,10 @@ window.UI = window.UI || {};
 			private_doc.unbind("mousemove", move).unbind("mouseup", up);
 			end&&end();
 		}
-	}	
-	
-	function fix_position(top,left,width,height,gap){
+	}
+	//通用调整位置的方法
+	function fix_position(top,left,width,height){
+		var gap = private_CONFIG.gap;
 		if(top<private_scrollTop + gap.top){
 			//Beyond the screen(top)
 			top = private_scrollTop  + gap.top;
@@ -378,10 +382,39 @@ window.UI = window.UI || {};
 		});
 		
 	}
+	
+	/**
+	 * 公用关闭方法
+	 *  
+	 */
+	function CLOSEMETHOD(effect,time){
+			this.closeFn && this.closeFn();
+
+			if(!effect){
+				this.dom.remove();
+			}else{
+				var method = 'fadeOut';
+				var time = time ? parseInt(time) : 80;
+				if(effect == 'fade'){
+					method = 'fadeOut'
+				}else if(effect == 'slide'){
+					method = 'slideUp'
+				}
+				this.dom[method](time,function(){
+					$(this).remove();
+				});
+			}
+
+			if(this._mask){
+				private_maskCount--
+				if(private_maskCount==0){
+					private_maskDom.fadeOut(80);
+				}
+			}
+		}
 	/***
 	 * pop 
 	 */
-	var maskCount = 0;
 	function POP(param){
 		var param = param || {};
 		var this_pop = this;
@@ -419,7 +452,7 @@ window.UI = window.UI || {};
 		var top = typeof(param['top']) == 'number' ? param['top'] : (private_scrollTop + 300);
 		var left = typeof(param['left']) == 'number' ? param['left'] : private_winW/2 - this_width/2;
 		//fix position get size
-		var fixSize = fix_position(top,left,this_width,this_height+41,private_CONFIG.gap);
+		var fixSize = fix_position(top,left,this_width,this_height+41);
 		top = fixSize.top;
 		left = fixSize.left;
 		//can drag is pop
@@ -427,7 +460,7 @@ window.UI = window.UI || {};
 			'move' : function(dx,dy,l_start,t_start,w_start,h_start){
 				var top = dy + t_start;
 				var left = dx + l_start;
-				var newSize = fix_position(top,left,w_start,h_start,private_CONFIG.gap);
+				var newSize = fix_position(top,left,w_start,h_start);
 				this_pop.dom.css({
 					'left' : newSize.left,
 					'top' : newSize.top
@@ -446,8 +479,8 @@ window.UI = window.UI || {};
 			this_pop.close();
 		}).find('.pro_pop_cpt').html(this.title);
 		if(this._mask){
-			maskCount++
-			if(maskCount==1){
+			private_maskCount++
+			if(private_maskCount==1){
 				private_maskDom.fadeIn(80);
 			}
 		}
@@ -471,33 +504,8 @@ window.UI = window.UI || {};
 			}
 		}
 	};
-	POP.prototype = {
-		'close' : function (effect,time){
-			this.closeFn && this.closeFn();
-
-			if(!effect){
-				this.dom.remove();
-			}else{
-				var method = 'fadeOut';
-				var time = time ? parseInt(time) : 80;
-				if(effect == 'fade'){
-					method = 'fadeOut'
-				}else if(effect == 'slide'){
-					method = 'slideUp'
-				}
-				this.dom[method](time,function(){
-					$(this).remove();
-				});
-			}
-
-			if(this._mask){
-				maskCount--
-				if(maskCount==0){
-					private_maskDom.fadeOut(80);
-				}
-			}
-		}
-	};
+	//使用close方法
+	POP.prototype['close'] = CLOSEMETHOD;
 	
 	/***
 	 * CONFIRM 
@@ -509,7 +517,7 @@ window.UI = window.UI || {};
 		var this_text = param['text'] || '\u8BF7\u8F93\u5165\u786E\u8BA4\u4FE1\u606F！';
 		var callback = param['callback'] || null;
 		var this_html = confirm_tpl.replace(/{text}/,this_text);
-		
+		this._mask = true;
 		this.dom = $(this_html);
 		this.closeFn = param['closeFn'] || null;
 		
@@ -524,36 +532,13 @@ window.UI = window.UI || {};
 			'top' : 200
 		});
 		
-		maskCount++
-		if(maskCount==1){
+		private_maskCount++
+		if(private_maskCount==1){
 			private_maskDom.fadeIn(80);
 		}
-		private_promptDom.append(this.dom);
+		private_fixedScreenDom.append(this.dom);
 	}
-	CONFIRM.prototype = {
-		'close' : function (effect,time){
-			this.closeFn && this.closeFn();
-
-			if(!effect){
-				this.dom.remove();
-			}else{
-				var method = 'fadeOut';
-				var time = time ? parseInt(time) : 80;
-				if(effect == 'fade'){
-					method = 'fadeOut'
-				}else if(effect == 'slide'){
-					method = 'slideUp'
-				}
-				this.dom[method](time,function(){
-					$(this).remove();
-				});
-			}
-			maskCount--
-			if(maskCount==0){
-				private_maskDom.fadeOut(80);
-			}
-		}
-	};
+	CONFIRM.prototype['close'] = CLOSEMETHOD
 	
 	
 	/***
@@ -592,9 +577,6 @@ window.UI = window.UI || {};
 			this_pop.close();
 		});
 		
-		
-		
-		
 		// create pop
 		this.dom.css({
 			'width' : 300,
@@ -602,35 +584,12 @@ window.UI = window.UI || {};
 			'top' : 200
 		});
 	
-		private_mainDom.append(this.dom);
+		private_fixedScreenDom.append(this.dom);
 	}
-	ASK.prototype = {
-		'close' : function (effect,time){
-			this.closeFn && this.closeFn();
-
-			if(!effect){
-				this.dom.remove();
-			}else{
-				var method = 'fadeOut';
-				var time = time ? parseInt(time) : 80;
-				if(effect == 'fade'){
-					method = 'fadeOut'
-				}else if(effect == 'slide'){
-					method = 'slideUp'
-				}
-				this.dom[method](time,function(){
-					$(this).remove();
-				});
-			}
-			maskCount--
-			if(maskCount==0){
-				private_maskDom.fadeOut(80);
-			}
-		},
-		'setValue' : function(text){
-			var text = text ? text.toString() : '';
-			this.dom.find('input').val(text);
-		}
+	ASK.prototype['close'] = CLOSEMETHOD;
+	ASK.prototype['setValue'] = function(text){
+		var text = text ? text.toString() : '';
+		this.dom.find('input').val(text);
 	};
 	
 	
@@ -649,7 +608,7 @@ window.UI = window.UI || {};
 			'left' : private_winW/2 - 120
 		});
 		//console.log(private_winH,12);
-		private_promptDom.append(this.dom);
+		private_fixedScreenDom.append(this.dom);
 		if(time != 0){
 			this_prompt.close(time);
 		}
@@ -671,9 +630,12 @@ window.UI = window.UI || {};
 			},delay);
 		}
 	};
-
+	
+	/**
+	 *	PLANE 
+	 */
 	//the active plane
-	activePlane = null;
+	private_activePlane = null;
 	//check click
 	var bingoDom = false;
 	private_doc.on('mousedown',function checkClick(){
@@ -681,7 +643,7 @@ window.UI = window.UI || {};
 		setTimeout(function(){
 			if(!bingoDom){
 				//close the active plane
-				activePlane&&activePlane.close();
+				private_activePlane&&private_activePlane.close();
 			}else{
 				bingoDom = false;
 			}
@@ -691,6 +653,10 @@ window.UI = window.UI || {};
 	});
 	
 	function PLANE(param){
+		//如果有已展开的PLANE，干掉他
+		private_activePlane&&private_activePlane.close();
+		private_activePlane = this;
+		
 		var param = param || {};
 		var this_plane = this;		
 
@@ -709,27 +675,11 @@ window.UI = window.UI || {};
 		});
 		private_mainDom.append(this.dom);
 	}
-	PLANE.prototype = {
-		'close' : function(effect,time){
-			this.closeFn && this.closeFn();
-			//empty the active plane
-			activePlane = null;
-			if(!effect){
-				this.dom.remove();
-			}else{
-				var method = 'fadeOut';
-				var time = time ? parseInt(time) : 80;
-				if(effect == 'fade'){
-					method = 'fadeOut'
-				}else if(effect == 'slide'){
-					method = 'slideUp'
-				}
-				this.dom[method](time,function(){
-					$(this).remove();
-				});
-			}
-		}
-	};
+	PLANE.prototype['close'] = CLOSEMETHOD;
+	
+	/**
+	 *	miniChat 
+	 */
 	
 	function miniChat(param){
 		var param = param || {};
@@ -758,16 +708,11 @@ window.UI = window.UI || {};
 			'height' : height
 		},200);
 	}
-	miniChat.prototype = {
-		'close' : function (effect,time){
-			this.closeFn && this.closeFn();
-			this.dom['slideUp'](140,function(){
-				$(this).remove();
-			});
-		}
-	};
+	miniChat.prototype['close'] = CLOSEMETHOD;
 	
-	// Set the interface
+	/**
+	 *  抛出对外接口
+	 */
 	exports.pop = function(){
 		return new POP(arguments[0]);
 	};
@@ -785,10 +730,7 @@ window.UI = window.UI || {};
 		return new prompt(txt,time);
 	};
 	exports.plane = function(){
-		//close the active plane
-		activePlane&&activePlane.close();
-		activePlane = new PLANE(arguments[0]);
-		return activePlane;
+		return new PLANE(arguments[0]);
 	}
 	exports.drag = drag;
 })(UI);
@@ -839,40 +781,34 @@ window.UI = window.UI || {};
 	}
 	function handuleAnimate(dom,is){
 		is = is || {};
-		var right,width,time,delayTime;
+		var right,time,delayTime;
 		if(is.draging){
 			return
 		}
 		
 		if(is.hoverCnt && is.fromOut){
-			width = 8;
 			right = 0;
 			time = 40;
-			delayTime = 10;
+			delayTime = 0;
 			if(is.hoverBar){
-				width = 18;
 			}
 		}else if(is.hoverBar){
-			width = 18;
 			right = 0;
 			time = 80;
 			delayTime = 80;
 		}else if(is.hoverCnt){
-			width = 8;
 			right = 0;
-			time = 300;
+			time = 200;
 			delayTime = 600;
 		}else{
-			width = 8;
-			right = -8;
-			time = 600;
+			right = -10;
+			time = 300;
 			delayTime = 600;
 		}
 
 		clearTimeout(is.delay);
 		is.delay = setTimeout(function(){
 			dom.stop().animate({
-				'width' : width,
 				'right' : right
 			},time);
 		},delayTime);
