@@ -7,15 +7,16 @@
 .gP_cnt{position:relative;background:#f3f3f3;min-height:300px;}
 .gp_loading{position:absolute;width: 100%;height: 30px;top:50%;margin-top:-15px;line-height:30px;color:#ccc;font-size:20px;text-align: center;}
 
-.gP_select{}
-.gp_select_top{height:30px;line-height:30px;padding:5px 10px;box-sizing:content-box;}
+.gP_select{padding:0px 10px;}
+.gp_select_top{height:30px;line-height:30px;padding:5px 0px;box-sizing:content-box;}
 .gp_select_top a{display: inline-block;height: 30px;padding:0px 8px;font-size:18px;color:#888;transition: 0.3s;}
 .gp_select_top a:hover,
 .gp_select_top a.hover,
 .gp_select_top a.active{box-shadow:1px 1px 5px #777;border-radius:4px;background: #fff;color:#333;}
-.gp_select_cnt{position: relative;min-height: 260px;padding:15px;overflow: hidden;}
+.gp_select_cnt{position: relative;min-height: 260px;padding:15px 0px;overflow: hidden;}
 
-.gP_item{position:relative;width:90px;height:120px;float: left;margin:0px 5px 10px 10px;box-sizing: content-box;background:#ddd;cursor: pointer;overflow: hidden;}
+.gP_item{width:12.5%;float: left;padding:0px 5px 20px 10px;box-sizing:border-box;}
+.gP_item_body{position:relative;height:120px;background:#ddd;cursor: pointer;overflow: hidden;}
 .gP_file-ico{height:90px;line-height:90px;text-align: center;color: #aaa;font-size:34px; background: #fff;
 	transition:0.3s;
 	-moz-transition-duration: 0.3s;
@@ -40,7 +41,16 @@
 .gP_tool_btn .gP_tool_btn_name{display: block;}
 .gP_tool_btn:hover{text-decoration: none;background:rgba(0,0,0,0.5);color:#fff;}
 
-@media screen and (max-width: 645px){
-	.gP_item{width:120px;}
+@media screen and (max-width: 1000px){
+	.gP_item{width:20%;}
+}
+@media screen and (max-width: 800px){
 	.gP_item_toolBar{width:30px;height:30px;line-height:30px;}
+	.gP_item{width:25%;}
+}
+@media screen and (max-width: 645px){
+	.gP_item{width:33.3%;}
+}
+@media screen and (max-width: 440px){
+	.gP_item{width:50%;}
 }

@@ -2,6 +2,7 @@ define(function(require,exports){
 	
 	var uploader = require('/frontEnd/util/uploader.js');
 	var events = require('/frontEnd/util/event.js');
+	var panel = require('/frontEnd/util/panel.js');
 	
 	var loading_tpl = '<div class="gp_loading">正在加载</div>';
 	var base_tpl = ['<div class="gP_select">',
@@ -15,6 +16,7 @@ define(function(require,exports){
 	'</div>'].join('');
 	
 	var dir_tpl = ['<div class="gP_item" data-type="{type}" data-name="{name}">',
+		'<div class="gP_item_body">',
 		'<div class="gP_dir_item">',
 			'<div class="gP_file-ico"><span class="glyphicon glyphicon-folder-open"></span></div>',
 			'<div class="gP_file-name">{name}</div>',
@@ -32,9 +34,11 @@ define(function(require,exports){
 			'</div>',
 		'</div>',
 		'<a href="javascript:void(0)" class="gP_item_toolBar"><span class="glyphicon glyphicon-chevron-down"></span></a>',
+	'</div>',
 	'</div>'].join('');
 	
 	var file_item_tpl = ['<div class="gP_item" data-type="{type}" data-name="{name}">',
+		'<div class="gP_item_body">',
 		'<div class="gP_file_item">',
 			'<div class="gP_file-ico">{type}</div>',
 			'<div class="gP_file-name">{name}</div>',
@@ -52,8 +56,25 @@ define(function(require,exports){
 			'</div>',
 		'</div>',
 		'<a href="javascript:void(0)" class="gP_item_toolBar"><span class="glyphicon glyphicon-chevron-down"></span></a>',
+	'</div>',
 	'</div>'].join('');
-	//获取目录信息
+
+
+	function render(tpl,data){
+		var txt = '';
+		for(var i=0 in data){
+			txt += tpl.replace(/{(\w*)}/g,function(){
+				var key = arguments[1];
+				return data[i][key] || '';
+			});
+		}
+		return txt;
+	}
+	
+
+	/**
+	 * 获取目录信息
+	 */
 	function getData(path,callback){
 		$.ajax({
 			'url' : '/ajax/asset',
@@ -72,7 +93,8 @@ define(function(require,exports){
 						var type = '';
 						if(data.files[i]['isdir']){
 							newData['dir'].push({
-								'name' : data.files[i]['name']
+								'name' : data.files[i]['name'],
+								'type' : 'folder'
 							});
 						}else{
 							var match = data.files[i]['name'].match(/\.(\w+)$/);
@@ -90,16 +112,48 @@ define(function(require,exports){
 			}
 		});
 	}
-	function render(tpl,data){
-		var txt = '';
-		for(var i=0 in data){
-			txt += tpl.replace(/{(\w*)}/g,function(){
-				var key = arguments[1];
-				return data[i][key] || '';
-			});
-		}
-		return txt;
+	
+	//删除文件
+	function delFile(pathname,callback){
+		$.ajax({
+			'url' : '/ajax/asset/del',
+			'type' : 'POST',
+			'data' : {
+				'path' : pathname
+			},
+			'dataType' : 'json',
+			'success' : function(data){
+				callback && callback(null,data);
+			},
+			'error' : function(){
+				callback && callback('网络出错');
+			}
+		});
 	}
+	//删除目录
+	function delDir(pathname,callback){
+		$.ajax({
+			'url' : '/ajax/asset/delDir',
+			'type' : 'POST',
+			'data' : {
+				'path' : pathname
+			},
+			'dataType' : 'json',
+			'success' : function(data){
+				if(data && data.code == 200){
+					callback && callback(null);
+				}else{
+					var msg = '删除失败,code(' + (data.msg || '') + ')';
+					callback && callback(msg);
+				}
+			},
+			'error' : function(){
+				callback && callback('网络出错');
+			}
+		});
+	}
+	
+	
 	function bindEvent(){
 		var this_select = this;
 		
@@ -129,16 +183,13 @@ define(function(require,exports){
 			this_select.refresh();
 		});
 		
-		this.on('fresh',function(path){
-			thisUpload.data.root = path;
-		});
 		this.dom.on('click','.gP_dir_item',function(){
 			//点击文件夹图标，执行打开动作
-			var name = $(this).parent().attr('data-name');
+			var name = $(this).parents('.gP_item').attr('data-name');
 			this_select.open(name);
 		}).on('click','a[data-action="createDir"]',function(){
 			//创建新的文件夹
-			var ask = UI.ask('新目录叫什么呢？', function(txt){
+			UI.ask('新目录叫什么呢？', function(txt){
 				this_select.createDir(txt);
 			});
 		}).on('click','a[data-action="back"]',function(){
@@ -156,11 +207,16 @@ define(function(require,exports){
 			ask.setValue(pureName);
 		}).on('click','a[data-action="del"]',function(){
 			//删除
-			var name = $(this).parents('.gP_item').attr('data-name');
+			var item = $(this).parents('.gP_item');
+			var name = item.attr('data-name');
 			UI.confirm({
 				'text' : '删除就找不回来了，你再想想？',
 				'callback' : function(){
-					this_select.del(name);
+					var type = 'file';
+					if(item.attr('data-type') == 'folder'){
+						type = 'folder';
+					}
+					this_select.del(name,type);
 				}
 			});
 		}).on('click','.gP_item_toolBar',function(){
@@ -178,8 +234,65 @@ define(function(require,exports){
 				},50);
 			}
 		});
+		
+		//文件（文件夹）绑定右键
+		var itemMenu = panel({
+			'targets' : '.gP_item',
+			'callback':function(name) {
+				console.log('you have chioce "' , name , '" from the [ ' , this , ']');
+			},
+			'callbefore' : function(){
+				console.log('you have panel [ ' , this , ']');
+			}
+		});
+		
+		//指定类型
+		itemMenu.type = 'menu';
+		//增删菜单条目
+		itemMenu.add('open',{'txt':'打开'},function(){
+			//打开
+			var name = $(this).attr('data-name');
+			this_select.open(name);
+		});
+		itemMenu.add('rename',{'txt':'重命名'},function(){
+			//重命名
+			var name = $(this).attr('data-name');
+			var ask = UI.ask('快想一个新名字！', function(txt){
+				this_select.rename(name,txt);
+			});
+			//获取纯文件名，去除后缀名
+			var nameMatch = name.match(/(.+)\.((?:\w|\s|\d)+)$/);
+			var pureName = nameMatch ? nameMatch[1] : name;
+			ask.setValue(pureName);
+		});
+		itemMenu.add('delete',{'txt':'删除'},function(){
+			//打开
+			var item = $(this);
+			var name = item.attr('data-name');
+			UI.confirm({
+				'text' : '删除就找不回来了，你再想想？',
+				'callback' : function(){
+					var type = 'file';
+					if(item.attr('data-type') == 'folder'){
+						type = 'folder';
+					}
+					this_select.del(name,type);
+				}
+			});
+		});
+		
+		//空白处绑定右键
+		var itemMenu = panel({
+			'targets' : '.gP_cnt'
+		});
+		itemMenu.add('mkdir',{'txt':'新建目录'},function(){
+			//创建新的文件夹
+			UI.ask('新目录叫什么呢？', function(txt){
+				this_select.createDir(txt);
+			});
+		});
 	}
-	
+
 	//文件选择类
 	function SELECT(dom,param){
 		this.root = '';
@@ -206,26 +319,28 @@ define(function(require,exports){
 	//		console.log(path,'333')
 			this.jump(path);
 		},
-		'del' : function(filename,callback){
+		'del' : function(name,type){
 			var this_select = this;
 			
-			var path = this.root + '/' + filename;
+			var path = this.root + '/' + name;
 			path = path.replace(/\/+/g,'/');
-			$.ajax({
-				'url' : '/ajax/asset/del',
-				'type' : 'POST',
-				'data' : {
-					'path' : path
-				},
-				'dataType' : 'json',
-				'success' : function(data){
+			if(type == 'folder'){
+				delDir(path,function(err){
+					if(err){
+						UI.prompt(err);
+						return;
+					}
 					this_select.refresh();
-					callback && callback(null,data);
-				},
-				'error' : function(){
-					callback && callback('网络出错');
-				}
-			});
+				});
+			}else{
+				delFile(path,function(err){
+					if(err){
+						UI.prompt(err);
+						return;
+					}
+					this_select.refresh();
+				});
+			}
 		},
 		'createDir' : function(foldername,callback){
 			var this_select = this;

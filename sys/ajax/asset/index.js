@@ -28,7 +28,9 @@ exports.render = function (req,res_this,path){
 		if(path.pathnode[2] == 'upload'){
 			upload.upload(req,res_this);
 		}else if(path.pathnode[2] == 'del'){
-			del.del(req,res_this);
+			del.file(req,res_this);
+		}else if(path.pathnode[2] == 'delDir'){
+			del.dir(req,res_this);
 		}else if(path.pathnode[2] == 'rename'){
 			rename.rename(req,res_this);
 		}else if(path.pathnode[2] == 'createDir'){
