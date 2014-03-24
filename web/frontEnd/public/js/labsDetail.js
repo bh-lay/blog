@@ -36,8 +36,8 @@ define(function(require,exports){
 			 dom = dom || $('.contlayer'),
 			 id = id || null;
 		 
-		$.get('/ajax/temp?opus_detail',function(data){
-			var template = data['opus_detail'];
+		$.get('/ajax/temp?labs_detail',function(data){
+			var template = data['labs_detail'];
 			if(!template){
 				console.log('error','get template error !');
 				return
