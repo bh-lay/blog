@@ -355,7 +355,7 @@ window.admin.render = window.admin.render || {};
 	}
 	function listPage(dom){
 		var list_html = ['<div class="col-md-12 custom-mb10">',
-			'<a href="/admin/publish/opus" class="btn btn-primary btn-sm custom-lofox" role="button">发作品</a>',
+			'<a href="/admin/publish/labs" class="btn btn-primary btn-sm custom-lofox" role="button">发插件</a>',
 		'</div>',
 		'<div class="col-md-12">',
 			'<div class="panel panel-default">',

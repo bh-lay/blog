@@ -56,7 +56,7 @@ var render = render || {};
 //		if(param['init']){
 			console.log('index page:','get index page template!');
 
-			L.require('/skin/naive/css/index.css');
+			L.require('/frontEnd/public/css/index.css');
 			$.get('/ajax/temp?index',function(data){
 				var this_dom = $(data['index']);
 				dom.html(this_dom);
@@ -166,7 +166,7 @@ var render = render || {};
 		
 			dom.html('<div class="articleList"></div>');
 			skip = 0;
-			L.require('juicer,/skin/naive/css/blog.css',function(){
+			L.require('juicer,/frontEnd/public/css/blog.css',function(){
 				init(dom,function(){
 					getData(function(){
 				//		render_over&&render_over();
@@ -231,7 +231,7 @@ var render = render || {};
 			 render_over = this.render_over || null;
 		
 	//	if(param['init']){
-			L.require('juicer,/skin/naive/css/blog.css',function(){
+			L.require('juicer,/frontEnd/public/css/blog.css',function(){
 				getData(id,function(html,title){
 					html&&dom.html(html);
 					render_over&&render_over(title);
@@ -287,7 +287,7 @@ var render = render || {};
 			'<strong>${it.title}</strong>',
 		'</a></li>{@/each}'].join('');
 		
-		L.require('juicer,/skin/naive/css/share.css',function(){
+		L.require('juicer,/frontEnd/public/css/share.css',function(){
 				skip = 0;
 				dom.html('<div class="golCnt"><div class="shareList"><ul></ul></div></div>');
 				getData(function(list){
@@ -353,7 +353,7 @@ var render = render || {};
 	//	if(param['init']){
 			var dom = dom || $('.contlayer'),
 				 id = id || null;
-			L.require('juicer,/skin/naive/css/share.css,/frontEnd/lib/showdown/style-0.6.4.min.css',function(){
+			L.require('juicer,/frontEnd/public/css/share.css,/frontEnd/lib/showdown/style-0.6.4.min.css',function(){
 				getData(id,function(html,title){
 					html&&dom.html(html);
 					render_over&&render_over(title);
@@ -411,7 +411,7 @@ var render = render || {};
 	ex.opusList = function(dom,param){
 		var render_over = this.render_over || null;
 		
-		L.require('juicer,/skin/naive/css/opus.css',function(){
+		L.require('juicer,/frontEnd/public/css/opus.css',function(){
 			$.get('/ajax/temp?opus_item',function(data){
 				var temp = data['opus_item'];
 	//			if(param['init']){
@@ -539,7 +539,7 @@ var render = render || {};
 //		if(!param['init']){
 //			return
 //		}
-		L.require('juicer,/skin/naive/css/labs.css',function(){
+		L.require('juicer,/frontEnd/public/css/labs.css',function(){
 			$.get('/ajax/temp?labs_item',function(data){
 				var temp = data['labs_item'];
 				skip = 0;
@@ -594,7 +594,7 @@ var render = render || {};
 			 id = id || null;
 		
 //	if(param['init']){
-			L.require('juicer,/skin/naive/css/labs.css',function(){
+			L.require('juicer,/frontEnd/public/css/labs.css',function(){
 				$.get('/ajax/temp?labs_detail',function(data){
 					var template = data['labs_detail'];
 					if(!template){
