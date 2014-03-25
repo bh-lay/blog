@@ -1,6 +1,7 @@
 define(function(require,exports){
 	require('/frontEnd/gallery/style.css');
 	var select = require('/frontEnd/gallery/select.js');
+	var UI = require('/frontEnd/UI/pop.js');
 	
 	var base_tpl = ['<div class="galleryPanel">',
 		'<div class="gP_tab">',
@@ -44,6 +45,15 @@ define(function(require,exports){
 	function MAKER(dom){
 		dom.html('<div class="gp_loading">待开发</div>');
 	}
+	function POP(dom){
+		var pop = UI.cover({
+			'title' : '选择文件'
+		});
+		SELECT(pop.cntDom);
+	
+	}
+	
+	exports.pop = POP;
 	exports.init = INIT;
 	exports.select = SELECT;
 });

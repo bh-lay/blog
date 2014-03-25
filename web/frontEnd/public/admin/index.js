@@ -23,8 +23,7 @@ window.admin = window.admin || {};
  * 			console.log('i'm the sidebar!')
  * 		});
  ***/
-(function(exports){	
-
+(function(exports){
 	var nameToTitle = {
 		'index' : '后台首页',
 		'share' : '分享列表',
@@ -74,7 +73,8 @@ window.admin = window.admin || {};
 	seajs.use([
 		'/frontEnd/util/lofox.js',
 		'/frontEnd/UI/pop.js',
-		'/frontEnd/public/admin/render.js'
+		'/frontEnd/public/admin/render.js',
+		'/frontEnd/lib/jquery/jquery.easing.1.3.min.js'
 	],function(){
 		var lofox = util.lofox();
 		var mainDom = $('.mainCnt');
@@ -209,10 +209,6 @@ window.admin = window.admin || {};
 		exports.refresh = function(){
 			lofox.refresh();
 		};
-		
-		
-		
-		
 	});
 })(window.admin);
 
