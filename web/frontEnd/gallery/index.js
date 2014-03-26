@@ -47,9 +47,10 @@ define(function(require,exports){
 	}
 	function POP(dom){
 		var pop = UI.cover({
-			'title' : '选择文件'
+			'title' : '选择文件',
+			'html' : '<div class="container bs-docs-container"><div class="row"><div class="col-md-12"></div></div></div>'
 		});
-		SELECT(pop.cntDom);
+		SELECT(pop.cntDom.find('.col-md-12'));
 	
 	}
 	
