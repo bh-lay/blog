@@ -2,7 +2,7 @@
  * @author bh-lay
  * 
  * @github https://github.com/bh-lay/UI
- * @modified 2014-3-20 13:11
+ * @modified 2014-3-26 20:37
  * 
  * Function depends on
  *		JQUERY
@@ -143,7 +143,7 @@ window.UI = window.UI || {};
 	
 	var cover_tpl = ['<div class="pro_cover">',
 		'<div class="pro_coverCnt"></div>',
-		'<a href="javascript:void(0)" class="pro_coverClose">﹀</a>',
+		'<a href="javascript:void(0)" class="pro_coverClose">〉</a>',
 	'</div>'].join('');
 	
 	var popCSS = ['<style type="text/css" data-module="UI-pop-prompt-plane">',
@@ -157,10 +157,12 @@ window.UI = window.UI || {};
 			'font-weight: normal;',
 			'font-style: normal;',
 		'}',
-		'.pop_lawyer{position:absolute;top:0px;left:0px;width:0px;height:0px;overflow:visible;z-index:5000;font-family:"Microsoft Yahei"}',
-		'.pop_mask{position:absolute;top:0px;left:0px;background:#000;display:none;opacity:0.2}',
-		'.pop_main_cnt{position:absolute;top:0px;left:0px;}',
-		'.pop_fixedScreen_cnt{position:absolute;top:0px;left:0px;}',
+		//基础框架
+		'.pop_lawyer{position:absolute;top:0px;left:0px;z-index:4999;width:100%;height:0px;overflow:visible;font-family:"Microsoft Yahei"}',
+		'.pop_mask{position:absolute;top:0px;left:0px;width:100%;background:#000;display:none;opacity:0.2}',
+		'.pop_main_cnt{width:0px;height:0px;overflow:visible;}',
+		'.pop_fixedScreen_cnt{position:absolute;top:0px;left:0px;width:100%;height:0px;overflow:visible;}',
+		//各模块样式
 		'.pro_pop{width:200px;_border:1px solid #eee;position:absolute;top:400px;left:300px;',
 			'background:#fff;border-radius:4px;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6);}',
 		'.pro_pop_cpt{position:relative;height:40px;line-height:40px;margin-right:41px;overflow:hidden;border-bottom:1px solid #ebebeb;background:#f6f6f6;',
@@ -185,9 +187,9 @@ window.UI = window.UI || {};
 		'.pro_plane{width:200px;position:absolute;top:400px;left:300px;}',
 		'.pro_prompt{width:240px;position:absolute;padding:30px 10px;box-sizing:content-box;background:#fff;_border:1px solid #fafafa;border-radius:4px;box-shadow:2px 2px 10px rgba(0,0,0,0.5);}',
 		'.pro_cnt{font-size:18px;color:#222;text-align:center;}',
-		'.pro_cover{position:relative;width:1000px;height:100px;}',
+		'.pro_cover{position:absolute;top:0px;left:0px;width:100%;height:100px;}',
 		'.pro_coverCnt{position:relative;width:100%;height:100%;background:#fff;}',
-		'.pro_coverClose{display:block;position:absolute;top:0px;right:30px;width:50px;height:20px;text-align:center;line-height:20px;color:#ddd;font-family:"Simsun";font-size:30px;background:#555;}',
+		'.pro_coverClose{display:block;position:absolute;top:50%;left:0px;width:20px;height:60px;padding-left:5px;text-align:center;line-height:60px;color:#ddd;font-family:"Simsun";font-size:30px;background:#555;}',
 		'.pro_coverClose:hover{background-color:#333;color:#fff;text-decoration:none;}',
 	'</style>'].join('');
 	var isIE67 = false;
@@ -214,7 +216,18 @@ window.UI = window.UI || {};
 		 private_doc = $(document),
 		 private_docH,
 		 private_scrollTop,
-		 private_maskCount = 0;;
+		 private_maskCount = 0;
+		 
+	var private_CONFIG = {
+		'gap' : {
+			'top' : 0,
+			'left' : 0,
+			'bottom' : 0,
+			'right' : 0
+		},
+		'zIndex' : 499
+	};
+	
 	//重新计算窗口尺寸
 	function countSize(){
 		private_winW = document.body.clientWidth;
@@ -232,8 +245,9 @@ window.UI = window.UI || {};
 	 */ 
 	if(isIE67){
 		private_maskDom.css({
-			'width' : private_winW,
-			'height' : private_docH
+			'position' : 'absolute',
+			'height' : private_winH,
+			'top' : 0
 		});
 		private_win.on('resize scroll',function(){
 			//更新窗口尺寸
@@ -242,8 +256,8 @@ window.UI = window.UI || {};
 				'top' : private_scrollTop
 			},100);
 			private_maskDom.css({
-				'width' : private_winW,
-				'height' : private_docH
+				'top' : private_scrollTop,
+				'height' : private_winH
 			});
 		});
 	}else{
@@ -253,15 +267,13 @@ window.UI = window.UI || {};
 		});
 		private_maskDom.css({
 			'position' : 'fixed',
-			'top' : 0,
-			'width' : private_winW,
-			'height' : private_winH
+			'height' : private_winH,
+			'top' : 0
 		});
 		private_win.on('resize scroll',function(){
 			//更新窗口尺寸
 			countSize();
 			private_maskDom.css({
-				'width' : private_winW,
 				'height' : private_winH
 			});
 		});
@@ -515,14 +527,6 @@ window.UI = window.UI || {};
 		
 		private_mainDom.append(this.dom);
 	}
-	private_CONFIG = {
-		'gap' : {
-			'top' : 0,
-			'left' : 0,
-			'bottom' : 0,
-			'right' : 0
-		}
-	}
 	POP.config = {
 		'gap' : function(name,value){
 			if(name && name.match(/(top|right|bottom|left)/)){
@@ -769,6 +773,7 @@ window.UI = window.UI || {};
 		var this_cover = this;
 		this.dom = $(cover_tpl);
 		this.cntDom = this.dom.find('.pro_coverCnt');
+		this.closeDom = this.dom.find('.pro_coverClose');
 		this.closeFn = param['closeFn'] || null;
 		
 		var this_html = param['html'] || '';
@@ -778,29 +783,31 @@ window.UI = window.UI || {};
 		this.dom.on('click','.pro_coverClose',function(){
 			this_cover.close();
 		});
+		
+		this.closeDom.hide();
 		// create pop
 		this.dom.css({
-			'width' :  private_winW,
-		 	'height' : private_winH,
-			'left' : 0,
-			'top' : 0
+		 	'height' : private_winH
 		});
 		this.cntDom.css({
 			'top' : 0,
 			'left' : private_winW
 		}).animate({
 			'left' : 0
-		},{duration: 200, easing:"easeOutQuad" , complete: ""});
+		},200,function(){
+			this_cover.closeDom.fadeIn(100);
+		});
 		private_fixedScreenDom.append(this.dom);
 	}
 	//使用close方法
 	COVER.prototype['close'] = function(){
 		var DOM = this.dom;
+		this.closeDom.fadeOut(100);
 		this.cntDom.animate({
-			'top' : private_winH
-		},{duration: 400, easing:"easeInBack" , complete: function(){
+			'left' : private_winW
+		},400, function(){
 			DOM.remove();
-		}});
+		});
 	};
 
 	

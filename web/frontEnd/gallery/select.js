@@ -34,6 +34,7 @@ define(function(require,exports){
 			'</div>',
 		'</div>',
 		'<a href="javascript:void(0)" class="gP_item_toolBar"><span class="glyphicon glyphicon-chevron-down"></span></a>',
+		'<a href="javascript:void(0)" class="gP_item_check"><span class="glyphicon glyphicon-unchecked"></span><span class="glyphicon glyphicon-check"></span></a>',
 	'</div>',
 	'</div>'].join('');
 	
@@ -56,6 +57,7 @@ define(function(require,exports){
 			'</div>',
 		'</div>',
 		'<a href="javascript:void(0)" class="gP_item_toolBar"><span class="glyphicon glyphicon-chevron-down"></span></a>',
+		'<a href="javascript:void(0)" class="gP_item_check"><span class="glyphicon glyphicon-unchecked"></span><span class="glyphicon glyphicon-check"></span></a>',
 	'</div>',
 	'</div>'].join('');
 
@@ -232,6 +234,15 @@ define(function(require,exports){
 				toolsDom.animate({
 					'height' : 120
 				},50);
+			}
+		}).on('click','.gP_item_check',function(){
+			
+			var item = $(this).parents('.gP_item');
+			
+			if(item.hasClass('gP_item_checked')){
+				item.removeClass('gP_item_checked');
+			}else{
+				item.addClass('gP_item_checked');
 			}
 		});
 		
