@@ -16,7 +16,7 @@
 .gp_select_cnt{position: relative;min-height: 260px;padding:15px 0px;overflow: hidden;}
 
 .gP_item{width:12.5%;float: left;padding:5px;margin-bottom:10px;box-sizing:border-box;}
-.gP_item_body{position:relative;height:120px;background:#ddd;cursor: pointer;overflow: hidden;box-shadow:1px 1px 4px rgba(0,0,0,0.3);}
+.gP_item_body{position:relative;height:120px;background:#eee;cursor: pointer;overflow: hidden;box-shadow:1px 1px 4px rgba(0,0,0,0.3);}
 .gP_file-ico{height:90px;line-height:90px;text-align: center;color: #aaa;font-size:34px; background: #fff;
 	transition:0.3s;
 	-moz-transition-duration: 0.3s;
@@ -26,16 +26,16 @@
 .gP_file-name{height:30px;line-height:30px;text-align:center; font-size: 12px;overflow: hidden;}
 
 .gP_dir_item:hover .gP_file-ico,
-.gP_file_item:hover .gP_file-ico{background:#ddd;color:#b30;}
+.gP_file_item:hover .gP_file-ico{background:transparent;color:#b30;}
 
 .gP_item_check{position:absolute;top:0px;left:0px;width:20px;height:20px;line-height:20px;text-align:center;color:#aaa;font-size:12px;border-radius: 0px 0px 6px 0px;}
-.gP_item_check:hover{background:#ccc;color:#333;}
-.gP_item_check:active{background:#ccc;}
-.gP_item_check .glyphicon-check{display:none;color:#000;}
+.gP_item_check:hover{background:#ddd;color:#333;}
+.gP_item_check:active{background:#ddd;}
+.gP_item_check .glyphicon-check{display:none;color:#b30;}
 
 .gP_item_toolBar{position:absolute;top:0px;right:0px;width:20px;height:20px;line-height:20px;text-align:center;color:#aaa;font-size:12px;border-radius: 0px 0px 0px 6px;}
-.gP_item_toolBar:hover{background:#ccc;color:#333;}
-.gP_item_toolBar:active{background:#ccc;}
+.gP_item_toolBar:hover{background:#ddd;color:#333;}
+.gP_item_toolBar:active{background:#ddd;}
 .gP_item_toolBar span{transition:0.3s;-moz-transition-duration: 0.3s;-webkit-transition-duration: 0.3s;-o-transition-duration: 0.3s;}
 .gP_item_toolBar.open span{-webkit-transform:rotate(180deg);}
 
@@ -48,7 +48,8 @@
 
 /*选中状态*/
 .gP_item_checked .gP_item_body{box-shadow:0px 0px 2px #000;}
-.gP_item_checked .gP_item_check{background:#ccc;color:#333;}
+.gP_item_checked .gP_item_check{background:#aaa;color:#333;}
+.gP_item_checked .gP_file-ico{background:transparent;color:#b30;}
 .gP_item_checked .glyphicon-unchecked{display: none;}
 .gP_item_checked .glyphicon-check{display:inline-block;}
 .gP_item_checked{}
