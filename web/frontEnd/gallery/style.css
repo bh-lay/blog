@@ -52,7 +52,7 @@
 .gP_item_checked .gP_file-ico{background:transparent;color:#b30;}
 .gP_item_checked .glyphicon-unchecked{display: none;}
 .gP_item_checked .glyphicon-check{display:inline-block;}
-.gP_item_checked{}
+.gP_item_checked .gP_item_toolBar{display: none;}
 
 @media screen and (max-width: 1000px){
 	.gP_item{width:20%;}
