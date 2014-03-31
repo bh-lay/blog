@@ -39,7 +39,11 @@
 .gP_item_toolBar span{transition:0.3s;-moz-transition-duration: 0.3s;-webkit-transition-duration: 0.3s;-o-transition-duration: 0.3s;}
 .gP_item_toolBar.open span{-webkit-transform:rotate(180deg);}
 
-.gP_item_tools{position:absolute;width:100%;height: 0px;top:0px;left:0px;}
+.gP_item_tools{position:absolute;width:100%;height: 0px;top:0px;left:0px;
+	transition:0.1s;
+	-moz-transition-duration: 0.1s;
+	-webkit-transition-duration: 0.1s;
+	-o-transition-duration: 0.1s;}
 .gP_item_toolsCnt{position: absolute;left: 0px;bottom: 0px;width:100%;height:120px;background:#fff;}
 .gP_tool_btn{display: block;padding:10px 0px;color:#333;text-align: center;}
 .gP_tool_btn .gP_tool_btn_ico{display: block;}
@@ -53,6 +57,9 @@
 .gP_item_checked .glyphicon-unchecked{display: none;}
 .gP_item_checked .glyphicon-check{display:inline-block;}
 .gP_item_checked .gP_item_toolBar{display: none;}
+
+/*操作菜单状态*/
+.gP_item_menuing .gP_item_tools{height:100%;}
 
 @media screen and (max-width: 1000px){
 	.gP_item{width:20%;}

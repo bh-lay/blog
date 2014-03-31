@@ -222,18 +222,13 @@ define(function(require,exports){
 				}
 			});
 		}).on('click','.gP_item_toolBar',function(){
-			var thisBtn = $(this);
-			var toolsDom = $(this).parents('.gP_item').find('.gP_item_tools');
-			if(toolsDom.height()>115){
-				thisBtn.removeClass('open');
-				toolsDom.animate({
-					'height' : 0
-				},100);
+			//打开操作面板
+			var item = $(this).parents('.gP_item');
+			
+			if(item.hasClass('gP_item_menuing')){
+				item.removeClass('gP_item_menuing');
 			}else{
-				thisBtn.addClass('open');
-				toolsDom.animate({
-					'height' : 120
-				},50);
+				item.addClass('gP_item_menuing');
 			}
 		}).on('click','.gP_item_check',function(){
 			
