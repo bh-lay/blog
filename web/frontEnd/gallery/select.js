@@ -222,7 +222,7 @@ define(function(require,exports){
 				}
 			});
 		}).on('click','.gP_item_toolBar',function(){
-			//打开操作面板
+			//打开操作面板状态
 			var item = $(this).parents('.gP_item');
 			
 			if(item.hasClass('gP_item_menuing')){
@@ -231,7 +231,7 @@ define(function(require,exports){
 				item.addClass('gP_item_menuing');
 			}
 		}).on('click','.gP_item_check',function(){
-			
+			//选中状态
 			var item = $(this).parents('.gP_item');
 			
 			if(item.hasClass('gP_item_checked')){
@@ -248,7 +248,7 @@ define(function(require,exports){
 				console.log('you have chioce "' , name , '" from the [ ' , this , ']');
 			},
 			'callbefore' : function(){
-				console.log('you have panel [ ' , this , ']');
+			//	console.log('you have panel [ ' , this , ']');
 			}
 		});
 		

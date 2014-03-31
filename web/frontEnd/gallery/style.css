@@ -60,7 +60,7 @@
 
 /*操作菜单状态*/
 .gP_item_menuing .gP_item_tools{height:100%;}
-
+.gP_item_menuing .gP_item_check{display: none;}
 @media screen and (max-width: 1000px){
 	.gP_item{width:20%;}
 }
