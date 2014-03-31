@@ -1,0 +1,239 @@
+@mixin transition($seconds:0.3s)
+  transition : $seconds
+  -moz-transition-duration : $seconds
+  -webkit-transition-duration : $seconds
+  -o-transition-duration : $seconds
+
+.galleryPanel
+  margin :
+    bottom : 20px
+  @include transition(0.2s)
+
+.gP_tab
+  height : 35px
+  background : #b30
+  overflow : hidden
+  a
+    display : inline-block
+    padding : 0px 15px
+    height : 35px
+    line :
+      height : 35px
+    font-size : 14px
+    color : #fff
+    opacity : 0.7
+  a:hover
+    background: #d30
+    opacity: 1
+    text:
+      decoration: none
+  a.active
+    position : relative
+    z-index : 1
+    background : #f3f3f3
+    color : #333
+    opacity : 1
+    box-shadow : 0px 0px 15px #000
+
+.gP_cnt
+  position : relative
+  background : #f3f3f3
+  min-height : 300px
+
+.gp_loading
+  position : absolute
+  width : 100%
+  height : 30px
+  top : 50%
+  margin-top : -15px
+  line-height : 30px
+  color : #ccc
+  font-size : 20px
+  text-align : center
+
+.gP_select
+  padding : 0px 10px
+
+.gp_select_top
+  height : 30px
+  line-height : 30px
+  padding : 5px 0px
+  box-sizing : content-box
+  a
+    display : inline-block
+    height : 30px
+    padding : 0px 8px
+    font-size : 18px
+    color : #888
+    transition : 0.3s
+  a:hover,
+  a.hover,
+  a.active
+    box-shadow : 1px 1px 5px #777
+    border-radius : 4px
+    background : #fff
+    color : #333
+
+.gp_select_cnt
+  position : relative
+  min-height : 260px
+  padding : 15px 0px
+  overflow : hidden
+
+.gP_item
+  width : 12.5%
+  float : left
+  padding : 5px
+  margin-bottom : 10px
+  box-sizing : border-box
+
+.gP_item_body
+  position : relative
+  height : 120px
+  background : #eee
+  cursor : pointer
+  overflow : hidden
+  box-shadow : 1px 1px 4px rgba(0,0,0,0.3)
+
+.gP_file-ico
+  height : 90px
+  line-height : 90px
+  text-align : center
+  color : #aaa
+  font-size : 34px
+  background : #fff
+  @include transition(0.3s)
+  span
+    display : inline-block
+    width : 50px !important
+    height : 50px
+
+.gP_file-name
+  height : 30px
+  line-height : 30px
+  text-align : center
+  font-size : 12px
+  overflow : hidden
+
+.gP_dir_item:hover .gP_file-ico,
+.gP_file_item:hover .gP_file-ico
+  background : transparent
+  color : #b30
+
+.gP_item_check
+  position : absolute
+  top : 0px
+  left : 0px
+  width : 20px
+  height : 20px
+  line-height : 20px
+  text-align : center
+  color : #aaa
+  font-size : 12px
+  border-radius :  0px 0px 6px 0px
+  &:hover
+    background : #ddd
+    color : #333
+  &:active
+    background : #ddd
+  .glyphicon-check
+    display : none
+    color : #b30
+
+.gP_item_toolBar
+  position : absolute
+  top : 0px
+  right : 0px
+  width : 20px
+  height : 20px
+  line-height : 20px
+  text-align : center
+  color : #aaa
+  font-size : 12px
+  border-radius : 0px 0px 0px 6px
+  &:hover
+    background : #ddd
+    color : #333
+  &:active
+    background : #ddd
+  span
+    @include transition(0.3s)
+
+.gP_item_toolBar.open span
+  -webkit-transform : rotate(180deg)
+
+
+.gP_item_tools
+  position : absolute
+  width : 100%
+  height : 0px
+  top : 0px
+  left : 0px
+  @include transition(0.1s)
+
+.gP_item_toolsCnt
+  position : absolute
+  left : 0px
+  bottom : 0px
+  width : 100%
+  height : 120px
+  background : #fff
+
+.gP_tool_btn
+  display : block
+  padding : 10px 0px
+  color : #333
+  text-align : center
+  .gP_tool_btn_ico
+    display :  block
+  .gP_tool_btn_name
+    display :  block
+  &:hover
+    text-decoration :  none
+    background : rgba(0,0,0,0.5)
+    color : #fff
+
+/*selected mode*/
+.gP_item_checked
+  .gP_item_body
+    box-shadow : 0px 0px 2px #000
+  .gP_item_check
+    background : #aaa
+    color : #333
+  .gP_file-ico
+    background : transparent
+    color : #b30
+  .glyphicon-unchecked
+    display :  none
+  .glyphicon-check
+    display : inline-block
+  .gP_item_toolBar
+    display :  none
+
+/*menuing mode*/
+.gP_item_menuing
+  .gP_item_tools
+    height : 100%
+  .gP_item_check
+    display : none
+
+@media (max-width :  1000px)
+  .gP_item
+    width : 20%
+
+@media (max-width :  800px)
+  .gP_item_toolBar,
+  .gP_item_check
+    width : 30px
+    height : 30px
+    line-height : 30px
+  .gP_item
+    width : 25%
+
+@media (max-width :  645px)
+  .gP_item
+    width : 33.3%
+
+@media (max-width :  440px)
+  .gP_item
+    width : 50%
