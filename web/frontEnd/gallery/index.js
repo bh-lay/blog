@@ -1,60 +1,513 @@
 define(function(require,exports){
-	require('/frontEnd/gallery/style.css');
-	var select = require('/frontEnd/gallery/select.js');
-	var UI = require('/frontEnd/UI/pop.js');
 	
-	var base_tpl = ['<div class="galleryPanel">',
-		'<div class="gP_tab">',
-			'<a href="javascript:void(0)" data-type="select">选择</a>',
-			'<a href="javascript:void(0)" data-type="maker">拼图</a>',
+	require('/frontEnd/gallery/style.css');
+	var uploader = require('/frontEnd/util/uploader.js');
+	var events = require('/frontEnd/util/event.js');
+	var panel = require('/frontEnd/util/panel.js');
+	var UI = require('/frontEnd/UI/pop.js');
+		
+	var loading_tpl = '<div class="gp_loading">正在加载</div>';
+	var empty_tpl = '<div class="gp_loading">傻逼，建个空目录做啥子！</div>';
+	var base_tpl = ['<div class="gP_select">',
+		'<div class="gp_toolBar">',
+			'<div class="gp_toolBar_left">',
+				'<a href="javascript:void(0)" data-action="back"><span class="glyphicon glyphicon-chevron-left"></span></a>',
+				'<a href="javascript:void(0)" data-action="createDir"><span class="glyphicon glyphicon-folder-close"></span></a>',
+				'<a href="javascript:void(0)" data-action="upload"><span class="glyphicon glyphicon-cloud-upload"></span></a>',
+			'</div>',
+			'<span class="gP_rootNav">/</span>',
+			'<div class="gp_toolBar_right">',
+				'<a href="javascript:void(0)" data-action="changeLayout">',
+					'<div class="changeLayout layoutColum">',
+						'<div class="span1"></div><div class="span2"></div>',
+						'<div class="span3"></div><div class="span4"></div>',
+						'<div class="span5"></div><div class="span6"></div>',
+					'</div>',
+				'</a>',
+			'</div>',
 		'</div>',
-		'<div class="gP_cnt"></div>',
+		'<div class="gp_select_cnt gp_select_colum"></div>',
+	'</div>'].join('');
+	
+	var dir_tpl = ['<div class="gP_item" data-type="{type}" data-name="{name}">',
+		'<div class="gP_item_body">',
+		'<div class="gP_dir_item">',
+			'<div class="gP_file-ico"><span class="glyphicon glyphicon-folder-open"></span></div>',
+			'<div class="gP_file-name" title="{name}" >{name}</div>',
+		'</div>',
+		'<div class="gP_item_tools">',
+			'<div class="gP_item_toolsCnt">',
+				'<a href="javascript:void(0)" class="gP_tool_btn" data-action="del">',
+					'<span class="gP_tool_btn_ico"><span class="glyphicon glyphicon-trash"></span></span>',
+					'<strong class="gP_tool_btn_name">删除</strong>',
+				'</a>',
+				'<a href="javascript:void(0)" class="gP_tool_btn" data-action="rename">',
+					'<span class="gP_tool_btn_ico"><span class="glyphicon glyphicon-pencil"></span>',
+					'<strong class="gP_tool_btn_name">重命名</strong>',
+				'</a>',
+			'</div>',
+		'</div>',
+		'<a href="javascript:void(0)" class="gP_item_toolBar"><span class="glyphicon glyphicon-chevron-down"></span></a>',
+		'<a href="javascript:void(0)" class="gP_item_check"><span class="glyphicon glyphicon-unchecked"></span><span class="glyphicon glyphicon-check"></span></a>',
+	'</div>',
+	'</div>'].join('');
+	
+	var file_item_tpl = ['<div class="gP_item" data-type="{type}" data-name="{name}">',
+		'<div class="gP_item_body">',
+		'<div class="gP_file_item">',
+			'<div class="gP_file-ico">{ico}</div>',
+			'<div class="gP_file-name" title="{name}" >{name}</div>',
+		'</div>',
+		'<div class="gP_item_tools">',
+			'<div class="gP_item_toolsCnt">',
+				'<a href="javascript:void(0)" class="gP_tool_btn" data-action="del">',
+					'<span class="gP_tool_btn_ico"><span class="glyphicon glyphicon-trash"></span></span>',
+					'<strong class="gP_tool_btn_name">删除</strong>',
+				'</a>',
+				'<a href="javascript:void(0)" class="gP_tool_btn" data-action="rename">',
+					'<span class="gP_tool_btn_ico"><span class="glyphicon glyphicon-pencil"></span>',
+					'<strong class="gP_tool_btn_name">重命名</strong>',
+				'</a>',
+			'</div>',
+		'</div>',
+		'<a href="javascript:void(0)" class="gP_item_toolBar"><span class="glyphicon glyphicon-chevron-down"></span></a>',
+		'<a href="javascript:void(0)" class="gP_item_check"><span class="glyphicon glyphicon-unchecked"></span><span class="glyphicon glyphicon-check"></span></a>',
+	'</div>',
 	'</div>'].join('');
 
-	function show_module (dom,cpt_dom,name){
-		if(name == 'maker'){
-			MAKER(dom);
-		}else{
-			//默认为选择已上传
-			name = "select";
-			SELECT(dom);
+
+	function render(tpl,data){
+		var txt = '';
+		for(var i=0 in data){
+			txt += tpl.replace(/{(\w*)}/g,function(){
+				var key = arguments[1];
+				return data[i][key] || '';
+			});
 		}
-		cpt_dom.find('a').removeClass('active');
-		cpt_dom.find('a[data-type="' + name + '"]').addClass('active');
-	
+		return txt;
 	}
 	
-	function INIT(dom,param){
-		dom.html(base_tpl);
+
+	/**
+	 * 获取目录信息
+	 */
+	function getData(path,callback){
+		$.ajax({
+			'url' : '/ajax/asset',
+			'type' : 'GET',
+			'data' : {
+				'path' : path
+			},
+			'dataType' : 'json',
+			'success' : function(data){
+				if(data && data.code == 200){
+					var newData = {
+						'dir' : [],
+						'files' : []
+					};
+					for(var i in data.files){
+						var type = '';
+						if(data.files[i]['isdir']){
+							newData['dir'].push({
+								'name' : data.files[i]['name'],
+								'type' : 'folder'
+							});
+						}else{
+							var match = data.files[i]['name'].match(/\.(\w+)$/);
+							type = match ? match[1] : '';
+							newData['files'].push({
+								'name' : data.files[i]['name'],
+								'type' : type
+							});
+						}
+					}
+					callback && callback(null,newData);
+				}else{
+					callback && callback('网络出错！');
+				}
+			}
+		});
+	}
+	
+	//删除文件
+	function delFile(pathname,callback){
+		$.ajax({
+			'url' : '/ajax/asset/del',
+			'type' : 'POST',
+			'data' : {
+				'path' : pathname
+			},
+			'dataType' : 'json',
+			'success' : function(data){
+				callback && callback(null,data);
+			},
+			'error' : function(){
+				callback && callback('网络出错');
+			}
+		});
+	}
+	//删除目录
+	function delDir(pathname,callback){
+		$.ajax({
+			'url' : '/ajax/asset/delDir',
+			'type' : 'POST',
+			'data' : {
+				'path' : pathname
+			},
+			'dataType' : 'json',
+			'success' : function(data){
+				if(data && data.code == 200){
+					callback && callback(null);
+				}else{
+					var msg = '删除失败,code(' + (data.msg || '') + ')';
+					callback && callback(msg);
+				}
+			},
+			'error' : function(){
+				callback && callback('网络出错');
+			}
+		});
+	}
+	
+	
+	function bindEvent(){
+		var this_select = this;
 		
-		var cpt_dom = dom.find('.gP_tab');
-		var cnt_dom = dom.find('.gP_cnt');
-		
-		var param = param || {};
-		var active = param.active || 'article';
-		show_module(cnt_dom,cpt_dom,active);
-		cpt_dom.on('click','a',function(){
-			var name = $(this).attr('data-type');
-			show_module(cnt_dom,cpt_dom,name);
+		var thisUpload = new uploader({
+			'dom' : this.dom.find('a[data-action="upload"]'),
+			'action' : '/ajax/asset/upload',
+			'data' : {
+				'act' : 'addFile',
+				'root' : '/'
+			}
+		});
+		this.on('fresh',function(baseRoot){
+			thisUpload.data.root = baseRoot;
+		});
+		thisUpload.responseParser = function(data){
+		//	console.log(data,'---------------');
+			if(data && data.code && data.code == 200){
+				files = data.files;
+			}else{
+				files = [];
+			}
+			return {
+				'files' : files
+			};
+		}
+		thisUpload.on('success',function(){
+			this_select.refresh();
 		});
 		
+		this.dom.on('click','.gP_dir_item',function(){
+			//点击文件夹图标，执行打开动作
+			var name = $(this).parents('.gP_item').attr('data-name');
+			this_select.open(name);
+		}).on('click','a[data-action="createDir"]',function(){
+			//创建新的文件夹
+			UI.ask('新目录叫什么呢？', function(txt){
+				this_select.createDir(txt);
+			});
+		}).on('click','a[data-action="back"]',function(){
+			//后退
+			this_select.back();
+		}).on('click','a[data-action="changeLayout"]',function(){
+			//改变布局
+			this_select.layout();
+		}).on('click','a[data-action="rename"]',function(){
+			//重命名
+			var name = $(this).parents('.gP_item').attr('data-name');
+			var ask = UI.ask('快想一个新名字！', function(txt){
+				this_select.rename(name,txt);
+			});
+			//获取纯文件名，去除后缀名
+			var nameMatch = name.match(/(.+)\.((?:\w|\s|\d)+)$/);
+			var pureName = nameMatch ? nameMatch[1] : name;
+			ask.setValue(pureName);
+		}).on('click','a[data-action="del"]',function(){
+			//删除
+			var item = $(this).parents('.gP_item');
+			var name = item.attr('data-name');
+			UI.confirm({
+				'text' : '删除就找不回来了，你再想想？',
+				'callback' : function(){
+					var type = 'file';
+					if(item.attr('data-type') == 'folder'){
+						type = 'folder';
+					}
+					this_select.del(name,type);
+				}
+			});
+		}).on('click','.gP_item_toolBar',function(){
+			//打开操作面板状态
+			var item = $(this).parents('.gP_item');
+			
+			if(item.hasClass('gP_item_menuing')){
+				this_select.dom.find('.gP_item').removeClass('gP_item_menuing');
+			}else{
+				this_select.dom.find('.gP_item').removeClass('gP_item_menuing');
+				item.addClass('gP_item_menuing');
+				this_select.dom.find('.gP_item').removeClass('gP_item_checked');
+			}
+		}).on('click','.gP_item_check',function(){
+			//选中状态
+			var item = $(this).parents('.gP_item');
+			
+			if(item.hasClass('gP_item_checked')){
+				item.removeClass('gP_item_checked');
+			}else{
+				item.addClass('gP_item_checked');
+			}
+			this_select.dom.find('.gP_item').removeClass('gP_item_menuing');
+		});
+		
+		//文件（文件夹）绑定右键
+		var itemMenu = panel({
+			'targets' : '.gP_item',
+			'callback':function(name) {
+				console.log('you have chioce "' , name , '" from the [ ' , this , ']');
+			},
+			'callbefore' : function(){
+			//	console.log('you have panel [ ' , this , ']');
+			}
+		});
+		
+		//指定类型
+		itemMenu.type = 'menu';
+		//增删菜单条目
+		itemMenu.add('open',{'txt':'打开'},function(){
+			//打开
+			var name = $(this).attr('data-name');
+			this_select.open(name);
+		});
+		itemMenu.add('rename',{'txt':'重命名'},function(){
+			//重命名
+			var name = $(this).attr('data-name');
+			var ask = UI.ask('快想一个新名字！', function(txt){
+				this_select.rename(name,txt);
+			});
+			//获取纯文件名，去除后缀名
+			var nameMatch = name.match(/(.+)\.((?:\w|\s|\d)+)$/);
+			var pureName = nameMatch ? nameMatch[1] : name;
+			ask.setValue(pureName);
+		});
+		itemMenu.add('delete',{'txt':'删除'},function(){
+			//打开
+			var item = $(this);
+			var name = item.attr('data-name');
+			UI.confirm({
+				'text' : '删除就找不回来了，你再想想？',
+				'callback' : function(){
+					var type = 'file';
+					if(item.attr('data-type') == 'folder'){
+						type = 'folder';
+					}
+					this_select.del(name,type);
+				}
+			});
+		});
+		
+		//空白处绑定右键
+		var itemMenu = panel({
+			'targets' : '.gP_cnt'
+		});
+		itemMenu.add('mkdir',{'txt':'新建目录'},function(){
+			//创建新的文件夹
+			UI.ask('新目录叫什么呢？', function(txt){
+				this_select.createDir(txt);
+			});
+		});
 	}
-	function SELECT(dom){
-		select(dom);
+
+	//文件选择类
+	function SELECT(dom,param){
+		this.root = '';
+		
+		this.dom = $(base_tpl);
+		this._layout = 'colum';
+		this.cntDom = this.dom.find('.gp_select_cnt');
+		this.pathDom = this.dom.find('.gP_rootNav');
+		
+		dom.html(this.dom);
+
+		//扩展事件处理
+		events.extend.call(this);
+		//绑定dom事件
+		bindEvent.call(this);
+		this.open('');
+		this.layout('colum');
 	}
-	function MAKER(dom){
-		dom.html('<div class="gp_loading">待开发</div>');
-	}
-	function POP(dom){
+	SELECT.prototype = {
+		'open' : function(filename){
+			var this_select = this;
+			var path = this.root + '/' + filename;
+	//		console.log(path,'22')
+			path = path.replace(/\/+/g,'/');
+			path = path.length>0 ? path : '/';
+	//		console.log(path,'333')
+			this.jump(path);
+		},
+		'del' : function(name,type){
+			var this_select = this;
+			
+			var path = this.root + '/' + name;
+			path = path.replace(/\/+/g,'/');
+			if(type == 'folder'){
+				delDir(path,function(err){
+					if(err){
+						UI.prompt(err);
+						return;
+					}
+					this_select.refresh();
+				});
+			}else{
+				delFile(path,function(err){
+					if(err){
+						UI.prompt(err);
+						return;
+					}
+					this_select.refresh();
+				});
+			}
+		},
+		'layout' : function(input){
+			var type = '';
+			if(input && input.match(/^grid|colum$/)){
+				type = input;
+			}else{
+				if(this._layout == "colum"){
+					type = "grid";
+				}else{
+					type = "colum";
+				}
+			}
+			this._layout = type;
+			
+			var btn = this.dom.find('.changeLayout');
+			var listDom = this.dom.find('.gp_select_cnt');
+			//改变布局
+			if(this._layout == "colum"){
+				btn.removeClass('layoutGrid');
+				btn.addClass('layoutColum');
+				listDom.addClass('gp_select_colum');
+				listDom.removeClass('gp_select_grid');
+			}else{
+				btn.addClass('layoutGrid');
+				btn.removeClass('layoutColum');
+				listDom.removeClass('gp_select_colum');
+				listDom.addClass('gp_select_grid');
+			}
+		},
+		'createDir' : function(foldername,callback){
+			var this_select = this;
+			if(!foldername || foldername.length < 0){
+				callback && callback('参数不全');
+				return;
+			}
+
+			$.ajax({
+				'url' : '/ajax/asset/createDir',
+				'type' : 'POST',
+				'data' : {
+					'root' : this.root,
+					'name' : foldername,
+				},
+				'dataType' : 'json',
+				'success' : function(data){
+					this_select.refresh();
+					callback && callback(null,data);
+				},
+				'error' : function(){
+					callback && callback('网络出错');
+				}
+			});
+		},
+		'rename' : function(filename,txt,callback){
+		//	console.log(name,txt);
+			var this_select = this;
+			if(!filename || !txt || filename.length < 0 || txt.length < 0){
+				callback && callback('参数不全');
+				return;
+			}
+			
+			var newName = txt;
+
+			$.ajax({
+				'url' : '/ajax/asset/rename',
+				'type' : 'POST',
+				'data' : {
+					'root' : this.root,
+					'oldName' : filename,
+					'newName' : newName
+				},
+				'dataType' : 'json',
+				'success' : function(data){
+					this_select.refresh();
+					callback && callback(null,data);
+				},
+				'error' : function(){
+					callback && callback('网络出错');
+				}
+			});
+		},
+		'back' : function(){
+			var root = this.root;
+			//去除最后一节目录
+			var path = root.split('/');
+			path.pop();
+			var newRoot = path.join('/');
+			if(newRoot == root){
+				return
+			}
+			this.jump(newRoot);
+		},
+		//刷新当前列表
+		'refresh' : function(){
+			var path = this.root;
+			this.jump(path);
+		},
+		//跳转至指定目录
+		'jump' : function(path){
+			var this_select = this;
+			this.cntDom.html(loading_tpl);
+			this.pathDom.html(path);
+			getData(path,function(err,data){
+				if(err){
+					this_select.cntDom.html('错啦！');
+					return
+				}
+				var html = '';
+				if(data.dir.length + data.files.length > 0){
+					html += render(dir_tpl,data.dir);
+					for(var i in data.files){
+						var extHtml = '<span class="glyphicon glyphicon-file"></span>';
+						if(data.files[i]['type'].match(/^jpg|gif|jpeg|png$/i)){
+							extHtml = '<span class="glyphicon glyphicon-picture"></span>';
+						}
+						data.files[i]['ico'] = extHtml;
+					}
+				}else{
+					html = empty_tpl;
+				}
+				html += render(file_item_tpl,data.files);
+				this_select.cntDom.html(html);
+				this_select.root = path;
+				this_select.emit('fresh',this_select.root);
+			});
+		}
+	};
+	
+	exports.select = function(dom,param){
+		return new SELECT(dom,param);
+	};
+	exports.init = function(dom,param){
+		return new SELECT(dom,param);
+	};
+	exports.pop = function POP(dom){
 		var pop = UI.cover({
 			'title' : '选择文件',
-			'html' : '<div class="container bs-docs-container"><div class="row"><div class="col-md-12"></div></div></div>'
+			'html' : '<div class="galleryPop"><div class="container bs-docs-container"><div class="row"><div class="col-md-12"></div></div></div></div>'
 		});
-		SELECT(pop.cntDom.find('.col-md-12'));
-	
-	}
-	
-	exports.pop = POP;
-	exports.init = INIT;
-	exports.select = SELECT;
+		return new SELECT(pop.cntDom.find('.col-md-12'));
+	};
 });

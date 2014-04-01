@@ -4,64 +4,27 @@
   -webkit-transition-duration : $seconds
   -o-transition-duration : $seconds
 
-.galleryPanel
-  margin :
-    bottom : 20px
-  @include transition(0.2s)
 
-.gP_tab
-  height : 35px
-  background : #b30
-  overflow : hidden
-  a
-    display : inline-block
-    padding : 0px 15px
-    height : 35px
-    line :
-      height : 35px
-    font-size : 14px
-    color : #fff
-    opacity : 0.7
-  a:hover
-    background: #d30
-    opacity: 1
-    text:
-      decoration: none
-  a.active
-    position : relative
-    z-index : 1
-    background : #f3f3f3
-    color : #333
-    opacity : 1
-    box-shadow : 0px 0px 15px #000
-
-.gP_cnt
-  position : relative
-  background : #f3f3f3
-  min-height : 300px
-
+/*loading*/
 .gp_loading
-  position : absolute
   width : 100%
-  height : 30px
-  top : 50%
-  margin-top : -15px
-  line-height : 30px
-  color : #ccc
+  height : 60px
+  line-height : 60px
+  color : #bbb
   font-size : 20px
   text-align : center
-
+  background : #fff
 .gP_select
-  padding : 0px 10px
-
-.gp_select_top
-  height : 30px
-  line-height : 30px
-  padding : 5px 0px
+  margin-bottom : 20px
+.gp_toolBar
+  height : 35px
+  line-height : 35px
   box-sizing : content-box
+  margin-bottom : 10px
+  background : #fff
   a
     display : inline-block
-    height : 30px
+    height : 35px
     padding : 0px 8px
     font-size : 18px
     color : #888
@@ -69,35 +32,94 @@
   a:hover,
   a.hover,
   a.active
-    box-shadow : 1px 1px 5px #777
-    border-radius : 4px
-    background : #fff
+    background : #eee
     color : #333
+  .gp_toolBar_left
+    float : left
+  .gp_toolBar_right
+    float : right
+    .changeLayout
+      top : 2px
+  
+
+/* change layout btn*/
+.changeLayout
+  position : relative
+  overflow : hidden
+  width : 30px
+  height : 30px
+  &:hover
+    div
+      background : #555
+  div
+    position : absolute
+    width : 7px
+    height : 7px
+    background : #aaa
+    @include transition(0.2s)
+.layoutGrid
+  .span1
+    left : 7px
+    top : 7px
+  .span2
+    left : 16px
+    top : 7px
+  .span3
+    left : 7px
+    top : 16px
+  .span4
+    left : 16px
+    top : 16px
+  .span5
+    left : 3px
+    top : 30px
+  .span6
+    left : 17px
+    top : 30px
+
+.layoutColum
+  div
+    width : 4px
+    height : 4px
+  .span1
+    left : 4px
+    top : 6px
+  .span2
+    left : 11px
+    top : 6px
+    width : 15px
+  .span3
+    left : 4px
+    top : 13px
+  .span4
+    left : 11px
+    top : 13px
+    width : 15px
+  .span5
+    left : 4px
+    top : 20px
+  .span6
+    left : 11px
+    top : 20px
+    width : 15px
 
 .gp_select_cnt
   position : relative
-  min-height : 260px
-  padding : 15px 0px
   overflow : hidden
-
+  
+/*file and folder item*/
 .gP_item
-  width : 12.5%
-  float : left
-  padding : 5px
-  margin-bottom : 10px
   box-sizing : border-box
+  @include transition(0.2s)
 
 .gP_item_body
   position : relative
-  height : 120px
   background : #eee
   cursor : pointer
   overflow : hidden
-  box-shadow : 1px 1px 4px rgba(0,0,0,0.3)
+  @include transition(0.2s)
 
 .gP_file-ico
-  height : 90px
-  line-height : 90px
   text-align : center
   color : #aaa
   font-size : 34px
@@ -105,8 +127,8 @@
   @include transition(0.3s)
   span
     display : inline-block
-    width : 50px !important
-    height : 50px
+    width : 2em !important
+    height : 40px
 
 .gP_file-name
   height : 30px
@@ -114,6 +136,8 @@
   text-align : center
   font-size : 12px
   overflow : hidden
+  white-space : nowrap
+  text-overflow : ellipsis
 
 .gP_dir_item:hover .gP_file-ico,
 .gP_file_item:hover .gP_file-ico
@@ -130,12 +154,6 @@
   text-align : center
   color : #aaa
   font-size : 12px
-  border-radius :  0px 0px 6px 0px
-  &:hover
-    background : #ddd
-    color : #333
-  &:active
-    background : #ddd
   .glyphicon-check
     display : none
     color : #b30
@@ -150,12 +168,6 @@
   text-align : center
   color : #aaa
   font-size : 12px
-  border-radius : 0px 0px 0px 6px
-  &:hover
-    background : #ddd
-    color : #333
-  &:active
-    background : #ddd
   span
     @include transition(0.3s)
 
@@ -169,6 +181,7 @@
   height : 0px
   top : 0px
   left : 0px
+  overflow : hidden
   @include transition(0.1s)
 
 .gP_item_toolsCnt
@@ -176,29 +189,21 @@
   left : 0px
   bottom : 0px
   width : 100%
-  height : 120px
   background : #fff
 
 .gP_tool_btn
-  display : block
+  display : inline-block
   padding : 10px 0px
   color : #333
   text-align : center
-  .gP_tool_btn_ico
-    display :  block
-  .gP_tool_btn_name
-    display :  block
   &:hover
     text-decoration :  none
-    background : rgba(0,0,0,0.5)
-    color : #fff
-
+  .glyphicon
+    margin : 0px 5px
+    
 /*selected mode*/
 .gP_item_checked
-  .gP_item_body
-    box-shadow : 0px 0px 1px #000
   .gP_item_check
-    background : #aaa
     color : #333
   .gP_file-ico
     background : transparent
@@ -216,24 +221,122 @@
     height : 100%
   .gP_item_check
     display : none
-
-@media (max-width :  1000px)
+    
+/*Grid layout*/
+.gp_select_grid
+  margin-left : -5px
+  margin-right : -5px
   .gP_item
-    width : 20%
+    width : 12.5%
+    float : left
+    padding : 5px
+    margin-bottom : 10px
+  .gP_item_body
+    height : 120px
+    box-shadow : 1px 1px 4px rgba(0,0,0,0.3)
+  .gP_file-ico
+    height : 90px
+    line-height : 90px
+  
+  .gP_item_toolBar
+    border-radius : 0px 0px 0px 6px
+    &:hover
+      background : #ddd
+      color : #333
+    &:active
+      background : #ddd
+  
+  .gP_item_toolsCnt
+    height : 120px
+  
+  .gP_tool_btn
+    .gP_tool_btn_ico
+      display :  block
+    .gP_tool_btn_name
+      display :  block
+    &:hover
+      background : rgba(0,0,0,0.5)
+      color : #fff
+  .gP_item_check
+    border-radius :  0px 0px 6px 0px
+    &:hover
+      background : #ddd
+      color : #333
+    &:active
+      background : #ddd
+  
+  .gP_item_checked
+    .gP_item_check
+      background : #ccc
+    
+  .glyphicon-check
+    color : #b30
+  @media (max-width :  1000px)
+    .gP_item
+      width : 20%
 
-@media (max-width :  800px)
+  @media (max-width :  800px)
+    .gP_item_toolBar,
+    .gP_item_check
+      width : 30px
+      height : 30px
+      line-height : 30px
+    .gP_item
+      width : 25%
+
+  @media (max-width :  645px)
+    .gP_item
+      width : 33.3%
+
+  @media (max-width :  440px)
+    .gP_item
+      width : 50%
+
+
+/*colum layout*/
+.gp_select_colum
+  box-shadow : 1px 1px 4px rgba(0,0,0,0.2)
+  overflow : hidden
+  
+  .gP_item_body
+    height : 40px
+    border-top : 1px solid #ddd
+    margin-top : -1px
+  .gP_file-ico
+    position : absolute
+    width : 100%
+    height : 40px
+    line-height : 40px
+    font-size : 24px
+    text-align : left
+    padding-left : 50px
+  
+  .gP_file-name
+    position : absolute
+    top : 0px
+    right : 50px
+    left : 100px
+    height : 40px
+    line-height : 40px
+    text-align : left  
+  
+  .gP_item_toolsCnt
+    height : 40px
+    text-align : center
+  
+  .gP_tool_btn
+    padding : 0px 10px
+    height : 40px
+    line-height : 40px
   .gP_item_toolBar,
   .gP_item_check
-    width : 30px
-    height : 30px
-    line-height : 30px
-  .gP_item
-    width : 25%
+    width : 40px
+    height : 40px
+    line-height : 40px
 
-@media (max-width :  645px)
-  .gP_item
-    width : 33.3%
 
-@media (max-width :  440px)
-  .gP_item
-    width : 50%
+/*gallery is in pop*/
+.galleryPop
+  height : 100%
+  background : #ddd
+  overflow : auto

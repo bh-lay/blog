@@ -11,7 +11,9 @@
 <style type="text/css">
 	html{min-height:100%; }
 	body{padding-top:60px;
-		font-family: "Microsoft Yahei";}
+		font-family: "Microsoft Yahei";
+		background : #ddd;
+	}
 	.navbar {
 	  min-height: 38px;
 	}
@@ -25,7 +27,9 @@
 		padding:6px 10px;
 		margin:4px 10px 0px 0px;
 	}
-	.mainCnt{min-height:500px;}
+	.navbar-default{box-shadow:0px 0px 5px rgba(0,0,0,0.7);background:#fff;border:none;}
+	.breadcrumb{background: #fff;}
+	.mainCnt{min-height:500px;overflow: hidden;}
 	.custom-listTable{background:#ddd;border-radius: 0px;}
 	.custom-listTable tr{background: #fff;}
 	.custom-listTable .btn{margin-right:10px;}
@@ -36,7 +40,7 @@
 </style>
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 <div class="container">
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">

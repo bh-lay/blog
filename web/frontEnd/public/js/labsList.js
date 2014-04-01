@@ -6,6 +6,17 @@ define(function(require,exports){
 	require('/frontEnd/lib/juicer.js');
 	require('/frontEnd/public/css/labs.css');
 	
+	var temp = ['{@each list as it,index}',
+		'<li><div class="lab_item">',
+			'<div class="lab_cover" style="background-image:url(${it.cover})"></div>',
+			'<h4 class="lab_title">${it.title}</h4>',
+			'<a class="lab_link" href="/labs/${it.id}" title="${it.title}" lofox="true" target="_self" >查看</a>',
+			'<div class="lab_info">',
+				
+				'<p>${it.intro}</p>',
+			'</div>',
+		'</div></li>',
+	'{@/each}'].join('');
 	var limit = 20,
 		 skip = 0,
 		 count = null,
@@ -49,20 +60,17 @@ define(function(require,exports){
 //		if(!param['init']){
 //			return
 //		}
-		$.get('/ajax/temp?labs_item',function(data){
-			var temp = data['labs_item'];
-			skip = 0;
-			dom.html('<div class="golCnt"><div class="labsList"><ul></ul></div></div>');
-			getData(function(list){
-				var this_html = juicer(temp,{'list':list}),
-					this_dom = dom.find('.labsList ul');
-				insert({
-					'end' : (skip>=count)?true:false,
-					'html' : this_html,
-					'dom' : this_dom
-				});
-				start();
+		skip = 0;
+		dom.html('<div class="golCnt"><div class="labsList"><ul></ul></div></div>');
+		getData(function(list){
+			var this_html = juicer(temp,{'list':list}),
+				this_dom = dom.find('.labsList ul');
+			insert({
+				'end' : (skip>=count)?true:false,
+				'html' : this_html,
+				'dom' : this_dom
 			});
+			start();
 		});
 	};
 });
