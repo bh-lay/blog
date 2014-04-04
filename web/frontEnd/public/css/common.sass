@@ -1,0 +1,391 @@
+﻿/**
+ * Template Name: naive
+ * Version:1.0
+ * Author:  bh_lay
+ * E-mail:  bh_lay@126.com
+ * Blog:  http://bh-lay.com
+ *
+
+/**
+ * base css 
+ *   include some reset and fix
+ *
+
+body, div, ul, ol, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, p
+  margin: 0px
+  padding: 0px
+
+img
+  border: none
+
+ul, ol, li, form, dl
+  list-style: none
+
+a
+  text-decoration: none
+  color: #333
+  &:hover
+    color: #5c0
+
+TD
+  color: #777
+  font-size: 12px
+  padding: 10px
+
+.fix
+  &:after
+    content: "."
+    display: block
+    height: 0
+    clear: both
+    visibility: hidden
+  display: inline-block
+  zoom: 1
+
+html
+  position: relative
+  min-width: 340px
+  height: 100%
+  overflow-x: auto
+  overflow-y: scroll
+
+body
+  position: relative
+  min-width: 340px
+  height: 100%
+  color: #333
+  font-size: 14px
+  font-family: "Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体"
+
+/*
+ * common
+ * some pulic modules
+ *
+
+/*page backgound gallery
+
+.gallayer
+  position: fixed
+  z-index: 0
+  left: 0px
+  top: 0px
+  width: 100%
+  height: 100%
+  background: #bbb
+
+.galBj
+  position: absolute
+  z-index: 11
+  left: 0px
+  top: 0px
+  width: 100%
+  height: 100%
+  overflow: hidden
+  background-size: cover
+  background-position: center center
+
+.galMask
+  position: absolute
+  z-index: 12
+  left: 0px
+  top: 0px
+  width: 100%
+  height: 100%
+  overflow: hidden
+  text-indent: -100em
+  background: url(/skin/naive/mask.png)
+
+.galBj_mask
+  width: 100%
+  height: 100%
+  background-size: cover
+  background-position: center center
+  -webkit-mask-image: url('/skin/naive/mask_bj.png')
+  -webkit-mask-repeat: no-repeat
+  -webkit-mask-position: center center
+  -webkit-mask-size: 300%
+  -webkit-animation: circle_zoom 1s
+
+@-webkit-keyframes circle_zoom
+  0%
+    opacity: 0
+    -webkit-mask-size: 30%
+    -webkit-animation-timing-function: ease-in
+  80%
+    opacity: 1
+    -webkit-mask-size: 60%
+    -webkit-animation-timing-function: ease-in
+  100%
+    opacity: 1
+    -webkit-mask-size: 300%
+
+
+/*navigation
+
+.navLayer
+  position: fixed
+  z-index: 1000
+  top: 0px
+  right: 0px
+  left: 0px
+
+.nav_bj
+  height: 40px
+  opacity: 0.7
+  border-bottom: 1px solid #666
+  border-radius: 0px 0px 8px 8px
+  box-shadow: 1px 1px 2px #666
+  background: #fff
+  background: -webkit-gradient(linear, left top, left bottom, from(white), to(#f2f2f2))
+  background: -moz-linear-gradient(top, white, #f2f2f2)
+
+.nav_main
+  position: absolute
+  top: 0px
+  left: 0px
+  width: 100%
+
+.nav_logo
+  display: block
+  float: left
+  width: 100px
+  height: 35px
+  margin: 3px 40px 0px 10px
+  background: url(/skin/naive/skin.png) 0px -100px
+  text-indent: -10em
+  overflow: hidden
+  i
+    display: inline-block
+    width: 100px
+    height: 35px
+    margin: 3px 40px 0px 0px
+    background: url(/skin/naive/skin.png) 0px -100px
+    text-indent: -10em
+    overflow: hidden
+
+.nav
+  line-height: 40px
+  float: left
+  border-left: 1px solid #e8e8e8
+  margin-right: 20px
+  li
+    width: 80px
+    float: left
+    border-right: 1px solid #e8e8e8
+  a
+    display: block
+    font-size: 15px
+    color: #666
+    text-align: center
+    outline: none
+    &:hover
+      background: #f8f8f8
+      color: #333
+    &:active
+      background: #ddd
+      color: #333
+  .cur a
+    background: #f0f0f0
+    color: #333
+
+.navLink
+  float: right
+  overflow: hidden
+  li
+    height: 20px
+    float: left
+    padding: 10px
+    a
+      line-height: 20px
+      padding: 0px 5px
+      color: #999
+      font-size: 12px
+      transition: all 0.3s ease 0s
+      &:hover
+        background: #aaa
+        color: #fff
+
+.nav_tool
+  position: absolute
+  top: 0px
+  right: 10px
+
+.nav_moreBtn
+  float: right
+  display: block
+  height: 22px
+  padding: 7px 10px 0px
+  margin-top: 3px
+  border: 1px solid #888
+  border-radius: 4px
+  background: rgba(0, 0, 0, 0.6)
+  &:hover
+    background: rgba(0, 0, 0, 0.8)
+  &:active
+    background: #000
+
+.nav_Btn_ico
+  display: block
+  width: 22px
+  height: 2px
+  border-radius: 1px
+  background: #fff
+  margin-bottom: 4px
+
+.nav_mainList!
+
+.nav_moreBtn
+  display: none
+
+@media screen and (max-width: 660px)
+  .nav_bj
+    border-radius: 0px
+    opacity: 1
+    background: #fff
+  .nav_moreBtn
+    display: block
+  .nav_mainList
+    display: none
+    position: fixed
+    top: 40px
+    left: 0px
+    width: 100%
+    background: #fff
+    overflow: hidden
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.7)
+  .nav_main
+    ul
+      float: none
+      margin: 0px
+    li
+      float: none
+      height: 30px
+      border: none
+      width: auto
+      padding: 0px
+      text-align: center
+      a
+        display: block
+        height: 30px
+        line-height: 30px
+
+/*navigation
+
+.piclist
+  width: 488px
+  margin: 20px auto
+  border: 1px solid #aaa
+  position: relative
+  overflow: hidden
+  padding: 10px
+  img
+    width: 100px
+    cursor: pointer
+    height: 80px
+    display: inline
+    float: left
+    background-color: #aaa
+    margin: 10px
+    border: 1px solid #aaa
+    line-height: 80px
+    text-align: center
+
+.contlayer
+  position: relative
+  z-index: 100
+  width: 100%
+  min-height: 100%
+  overflow: hidden
+
+.golCnt
+  width: 100%
+  max-width: 900px
+  margin: auto
+  zoom: 1
+  &:after
+    content: "."
+    display: block
+    height: 0
+    clear: both
+    visibility: hidden
+
+.tongji
+  width: 0px
+  height: 0px
+  overflow: hidden
+
+/*布局
+
+.l_row
+  width: 960px
+  margin: auto
+  overflow: hidden
+
+@media screen and (max-width: 980px)
+  .l_row
+    width: 700px
+
+@media screen and (max-width: 710px)
+  .l_row
+    width: 100%
+
+/*文章
+
+.article
+  padding : 10px
+  font-family: "Microsoft Yahei"
+  h1,h2,h3,h4,h5,h6
+    font-weight : normal
+    margin : 1em 0 0
+  h1,
+    font-size : 24px
+  h2,
+    font-size : 20px
+  h3,
+    font-size : 18px
+  h4,
+    font-size : 16px
+  h5,
+    font-size : 14px
+  h6,
+    font-size : 12px
+  p
+    line-height: 2
+    text-indent: 2em
+    margin : 1em 0
+    color : #444
+  ul
+    margin : 1em 0
+    padding-left : 1em
+    list-style-type: disc
+    li
+      margin-left : 1em
+      list-style-type: disc
+  
+  ol
+    margin : 1em 0
+    padding-left : 1em
+    list-style-type: decimal
+    li
+      margin-left : 1em
+      list-style-type: decimal
+  pre
+    border : 1px solid #eee
+    font-family : inherit
+    padding : 5px 10px
+    background : #f8f8f8
+    color : #777
+    overflow-x: auto
+    font-size: 12px
+    line-height: 1.8
+    border-radius: 4px
+  a
+    color: #333
+    padding : 0px 0.5em
+    text-decoration : underline
+    &:hover
+      color: #000
+      background : #f2f2f2
+      text-decoration: underline
+  img
+    max-width: 100%

@@ -10,7 +10,7 @@ define(function(require,exports){
 		'<li><div class="lab_item">',
 			'<div class="lab_cover" style="background-image:url(${it.cover})"></div>',
 			'<h4 class="lab_title">${it.title}</h4>',
-			'<a class="lab_link" href="/labs/${it.id}" title="${it.title}" lofox="true" target="_self" >查看</a>',
+			'<a class="lab_link" href="/labs/${it.id}" title="${it.title}" target="layLabs" >查看</a>',
 			'<div class="lab_info">',
 				
 				'<p>${it.intro}</p>',

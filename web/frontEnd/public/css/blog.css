@@ -74,20 +74,11 @@
 /*
  * pageB-2: blog detail page 
  */
-.article {line-height: 2;padding: 25px; background-color:#fff; font-size: 14px; overflow:hidden;border-radius:4px;box-shadow: 1px 1px 2px #666;margin:100px auto;}
-.article a {color: #4a0;}
-.article a:hover {color: #000;text-decoration:underline;}
-.article  h3, .article  h4, .article  h5, article  h6, .article  p, .article dl {margin: 1em 0em;}
-.article p {text-indent:2em;  }
+.blog_article{background :#fff;}
 .articletop{border-bottom: 1px dashed #CCC; text-align: center; margin: 20px 0px;}
 .articletop h1{font-size:30px;font-weight:normal;}
 .articletop p{color:#666;}
-.article  ol, .article  ul, .article dd {padding-left:4em;}
-.article ol li{list-style-type: decimal;}
-.article ul li{list-style-type: disc;}
-.article img{max-width:100%;}
 .article .topicImg {display: block;margin: auto;}
-.article pre{border:1px solid #aaa;border-radius:4px;background:#f4f4f4;overflow-x:auto;padding:5px 10px;font-size:12px;line-height:1.8;}
 
 /*实验室*/
 .labshow {border:1px solid #ddd;line-height: 3em;margin: 2em 4em;}

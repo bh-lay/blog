@@ -142,7 +142,7 @@ chip.nav = function(callback){
 	var chip =  ['<div class="navLayer">',
 		'<div class="nav_bj"></div>',
 		'<div class="nav_main">',
-			'<div class="golCnt">',
+			'<div class="l_row">',
 				'<a class="nav_logo" lofox="true" href="/">小剧客栈</a>',
 				'<div class="nav_mainList">',
 					'<ul class="nav">',

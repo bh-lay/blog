@@ -6,7 +6,7 @@ define(function(require,exports){
 	require('/frontEnd/lib/juicer.js');
 	require('/frontEnd/public/css/blog.css');
 
-	var template = ['<div class="golCnt"><div class="article">',
+	var template = ['<div class="golCnt"><div class="article blog_article">',
 		'<div class="articletop">',
 			'<h1>${title}</h1>',
 			'<p><span>时间：${time_show} </span><span>作者：${author}</span></p>',
