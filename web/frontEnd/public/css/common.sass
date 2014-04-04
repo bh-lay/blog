@@ -319,7 +319,6 @@ body
 .l_row
   width: 960px
   margin: auto
-  overflow: hidden
 
 @media screen and (max-width: 980px)
   .l_row
@@ -374,11 +373,13 @@ body
     font-family : inherit
     padding : 5px 10px
     background : #f8f8f8
-    color : #777
+    color : #555
     overflow-x: auto
     font-size: 12px
     line-height: 1.8
     border-radius: 4px
+  code
+    font-family : inherit
   a
     color: #333
     padding : 0px 0.5em
@@ -389,3 +390,10 @@ body
       text-decoration: underline
   img
     max-width: 100%
+
+.sourceCode
+  position : absolute
+  overflow : hidden
+  width : 0px
+  height : 0px
+  

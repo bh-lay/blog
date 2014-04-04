@@ -7,12 +7,12 @@ define(function(require,exports){
 	require('/frontEnd/lib/juicer.js');
 	require('/frontEnd/public/css/share.css');
 	
-	var template = ['<div class="golCnt"><div class="article">',
+	var template = ['<div class="golCnt shareDetail">',
 		'<div class="articletop">',
 			'<h1>${title}</h1>',
 			'<p><span>分享时间：${time_show} </span></p>',
 		'</div>',
-		'<div class="text">$${content}</div>',
+		'<div class="article">$${content}</div>',
 		'<div class="youyan">',
 			'<div id="uyan_frame"></div>',
 			'<script type="text/javascript">',
@@ -20,7 +20,7 @@ define(function(require,exports){
 			'</script>',
 			'<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1605927" async=""></script>',
 		'</div>',
-	'</div></div>'].join('');
+	'</div>'].join('');
 	
 	function getData(id,fn){
 		$.ajax({

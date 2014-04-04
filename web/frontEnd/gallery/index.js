@@ -214,51 +214,61 @@ define(function(require,exports){
 		}).on('click','a[data-action="changeLayout"]',function(){
 			//改变布局
 			this_select.layout();
-		}).on('click','a[data-action="rename"]',function(){
-			//重命名
-			var name = $(this).parents('.gP_item').attr('data-name');
-			var ask = UI.ask('快想一个新名字！', function(txt){
-				this_select.rename(name,txt);
+		});
+
+		//空白处绑定右键
+		var itemMenu = panel({
+			'targets' : '.gP_cnt'
+		});
+		itemMenu.add('mkdir',{'txt':'新建目录'},function(){
+			//创建新的文件夹
+			UI.ask('新目录叫什么呢？', function(txt){
+				this_select.createDir(txt);
 			});
-			//获取纯文件名，去除后缀名
-			var nameMatch = name.match(/(.+)\.((?:\w|\s|\d)+)$/);
-			var pureName = nameMatch ? nameMatch[1] : name;
-			ask.setValue(pureName);
-		}).on('click','a[data-action="del"]',function(){
+		});
+	}
+	/**
+	 * 为目录/文件绑定事件
+	 * 对象必须包含属性
+	 *   dom
+	 * 方法
+	 *   del
+	 * 
+	 */
+	function bindItemEvent(){
+		var this_item = this;
+		var itemDom = this.dom;
+		itemDom.on('click','a[data-action="del"]',function(){
 			//删除
-			var item = $(this).parents('.gP_item');
-			var name = item.attr('data-name');
+			var name = itemDom.attr('data-name');
 			UI.confirm({
 				'text' : '删除就找不回来了，你再想想？',
 				'callback' : function(){
 					var type = 'file';
-					if(item.attr('data-type') == 'folder'){
+					if(itemDom.attr('data-type') == 'folder'){
 						type = 'folder';
 					}
-					this_select.del(name,type);
+					this_item.del();
 				}
 			});
 		}).on('click','.gP_item_toolBar',function(){
 			//打开操作面板状态
-			var item = $(this).parents('.gP_item');
-			
-			if(item.hasClass('gP_item_menuing')){
-				this_select.dom.find('.gP_item').removeClass('gP_item_menuing');
+			if(itemDom.hasClass('gP_item_menuing')){
+				itemDom.removeClass('gP_item_menuing');
 			}else{
-				this_select.dom.find('.gP_item').removeClass('gP_item_menuing');
-				item.addClass('gP_item_menuing');
-				this_select.dom.find('.gP_item').removeClass('gP_item_checked');
+				itemDom.removeClass('gP_item_menuing');
+				itemDom.addClass('gP_item_menuing');
+			//	this_item.dom.find('.gP_item').removeClass('gP_item_checked');
 			}
 		}).on('click','.gP_item_check',function(){
 			//选中状态
-			var item = $(this).parents('.gP_item');
 			
-			if(item.hasClass('gP_item_checked')){
-				item.removeClass('gP_item_checked');
+			if(itemDom.hasClass('gP_item_checked')){
+				itemDom.removeClass('gP_item_checked');
 			}else{
-				item.addClass('gP_item_checked');
+				itemDom.addClass('gP_item_checked');
 			}
-			this_select.dom.find('.gP_item').removeClass('gP_item_menuing');
+		//	this_item.dom.find('.gP_item').removeClass('gP_item_menuing');
 		});
 		
 		//文件（文件夹）绑定右键
@@ -278,13 +288,13 @@ define(function(require,exports){
 		itemMenu.add('open',{'txt':'打开'},function(){
 			//打开
 			var name = $(this).attr('data-name');
-			this_select.open(name);
+			this_item.open(name);
 		});
 		itemMenu.add('rename',{'txt':'重命名'},function(){
 			//重命名
 			var name = $(this).attr('data-name');
 			var ask = UI.ask('快想一个新名字！', function(txt){
-				this_select.rename(name,txt);
+				this_item.rename(txt);
 			});
 			//获取纯文件名，去除后缀名
 			var nameMatch = name.match(/(.+)\.((?:\w|\s|\d)+)$/);
@@ -292,7 +302,7 @@ define(function(require,exports){
 			ask.setValue(pureName);
 		});
 		itemMenu.add('delete',{'txt':'删除'},function(){
-			//打开
+			//删除
 			var item = $(this);
 			var name = item.attr('data-name');
 			UI.confirm({
@@ -302,24 +312,135 @@ define(function(require,exports){
 					if(item.attr('data-type') == 'folder'){
 						type = 'folder';
 					}
-					this_select.del(name,type);
+					this_item.del();
 				}
 			});
 		});
-		
-		//空白处绑定右键
-		var itemMenu = panel({
-			'targets' : '.gP_cnt'
-		});
-		itemMenu.add('mkdir',{'txt':'新建目录'},function(){
-			//创建新的文件夹
-			UI.ask('新目录叫什么呢？', function(txt){
-				this_select.createDir(txt);
-			});
-		});
 	}
+	/**
+	 *  目录类
+	 * @param {Object} dom
+	 * @param {Object} param
+	 */
+	function folderItem(dom,data){
+		this.title = '';
+		this.path = '';
+		this.url = '';
+		/**
+		 * 状态
+		 * 正常 normal
+		 * 选中 selected
+		 * 菜单 menuing
+		 */
+		this.status = 'normal';
+		
+		var html = render(dir_tpl,[data]);
+		this.dom = $(html);
+		
+		dom.append(this.dom);
+		bindItemEvent.call(this);
+	}
+	folderItem.prototype = {
+		'del' : function(){
+			var path = this.path;
+			delDir(path,function(err){
+				if(err){
+					UI.prompt(err);
+					return;
+				}
+			//	this_select.refresh();
+			});
+		},
+		'rename' : function(filename,txt,callback){
+		//	console.log(name,txt);
+			if(!filename || !txt || filename.length < 0 || txt.length < 0){
+				callback && callback('参数不全');
+				return;
+			}
+			
+			var newName = txt;
 
-	//文件选择类
+			$.ajax({
+				'url' : '/ajax/asset/rename',
+				'type' : 'POST',
+				'data' : {
+					'root' : this.root,
+					'oldName' : filename,
+					'newName' : newName
+				},
+				'dataType' : 'json',
+				'success' : function(data){
+					callback && callback(null,data);
+				},
+				'error' : function(){
+					callback && callback('网络出错');
+				}
+			});
+		}
+	};
+	/**
+	 * 文件类
+	 * @param {Object} dom
+	 * @param {Object} param
+	 */
+	function fileItem(dom,data){
+		this.title = '';
+		this.path = '';
+		this.url = '';
+		/**
+		 * 状态
+		 * 正常 normal
+		 * 选中 selected
+		 * 菜单 menuing
+		 */
+		this.status = 'normal';
+		
+		var html = render(file_item_tpl,[data]);
+		this.dom = $(html);
+		dom.append(this.dom);
+		bindItemEvent.call(this);
+	}
+	fileItem.prototype = {
+		'del' : function(){
+			var path = this.path;
+			delFile(path,function(err){
+				if(err){
+					UI.prompt(err);
+					return;
+				}
+			//	this_select.refresh();
+			});
+		},
+		'rename' : function(filename,txt,callback){
+		//	console.log(name,txt);
+			if(!filename || !txt || filename.length < 0 || txt.length < 0){
+				callback && callback('参数不全');
+				return;
+			}
+			
+			var newName = txt;
+
+			$.ajax({
+				'url' : '/ajax/asset/rename',
+				'type' : 'POST',
+				'data' : {
+					'root' : this.root,
+					'oldName' : filename,
+					'newName' : newName
+				},
+				'dataType' : 'json',
+				'success' : function(data){
+					callback && callback(null,data);
+				},
+				'error' : function(){
+					callback && callback('网络出错');
+				}
+			});
+		}
+	};
+	/**
+	 * 文件选择类
+	 */
 	function SELECT(dom,param){
 		this.root = '';
 		
@@ -327,7 +448,8 @@ define(function(require,exports){
 		this._layout = 'colum';
 		this.cntDom = this.dom.find('.gp_select_cnt');
 		this.pathDom = this.dom.find('.gP_rootNav');
-		
+		this.folders = [];
+		this.files = [];
 		dom.html(this.dom);
 
 		//扩展事件处理
@@ -336,6 +458,8 @@ define(function(require,exports){
 		bindEvent.call(this);
 		this.open('');
 		this.layout('colum');
+		
+	window.as = this;
 	}
 	SELECT.prototype = {
 		'open' : function(filename){
@@ -469,16 +593,16 @@ define(function(require,exports){
 		//跳转至指定目录
 		'jump' : function(path){
 			var this_select = this;
-			this.cntDom.html(loading_tpl);
+			var cntDom = this.cntDom;
+			cntDom.html(loading_tpl);
 			this.pathDom.html(path);
 			getData(path,function(err,data){
 				if(err){
-					this_select.cntDom.html('错啦！');
+					cntDom.html('错啦！');
 					return
 				}
-				var html = '';
 				if(data.dir.length + data.files.length > 0){
-					html += render(dir_tpl,data.dir);
+					cntDom.html('');
 					for(var i in data.files){
 						var extHtml = '<span class="glyphicon glyphicon-file"></span>';
 						if(data.files[i]['type'].match(/^jpg|gif|jpeg|png$/i)){
@@ -486,14 +610,26 @@ define(function(require,exports){
 						}
 						data.files[i]['ico'] = extHtml;
 					}
+					this_select.folders = [];
+					this_select.files = [];
+					for(var i in data.dir){
+						var folderNew = new folderItem(cntDom,data.dir[i]);
+						this_select.folders.push(folderNew);
+					}
+					for(var i in data.files){
+						var fileNew = new fileItem(cntDom,data.files[i]);
+						this_select.files.push(fileNew);
+					}
 				}else{
-					html = empty_tpl;
+					cntDom.html(empty_tpl);
 				}
-				html += render(file_item_tpl,data.files);
-				this_select.cntDom.html(html);
+				
 				this_select.root = path;
 				this_select.emit('fresh',this_select.root);
 			});
+		},
+		'selection' : function(){
+			
 		}
 	};
 	

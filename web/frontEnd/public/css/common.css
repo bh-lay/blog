@@ -311,8 +311,7 @@ body {
 /*布局 */
 .l_row {
   width: 960px;
-  margin: auto;
-  overflow: hidden; }
+  margin: auto; }
 
 @media screen and (max-width: 980px) {
   .l_row {
@@ -363,11 +362,13 @@ body {
     font-family: inherit;
     padding: 5px 10px;
     background: #f8f8f8;
-    color: #777777;
+    color: #555555;
     overflow-x: auto;
     font-size: 12px;
     line-height: 1.8;
     border-radius: 4px; }
+  .article code {
+    font-family: inherit; }
   .article a {
     color: #333333;
     padding: 0px 0.5em;
@@ -378,3 +379,9 @@ body {
       text-decoration: underline; }
   .article img {
     max-width: 100%; }
+
+.sourceCode {
+  position: absolute;
+  overflow: hidden;
+  width: 0px;
+  height: 0px; }

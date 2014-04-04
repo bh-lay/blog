@@ -72,10 +72,7 @@ chip.labs_item = function(callback){
 chip.labs_detail = function(callback){
 	var chip = ['<div class="golCnt"><div class="article labs_detail">',
 		'<div class="articletop"><h1>${title}</h1></div>',
-			'{@if cover}',
-				'<img src="${cover}" alt="${title}" class="topicImg" />',
-			'{@/if}',
-		'<div class="text md_html">$${content}</div>',
+		'<div class="article">$${content}</div>',
 		'<div class="youyan"><!-- UY BEGIN -->',
 				'<div id="uyan_frame"></div>',
 				'<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1605927" async=""></script>',

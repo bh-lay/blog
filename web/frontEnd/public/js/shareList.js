@@ -47,7 +47,7 @@ define(function(require,exports){
 		'</a></li>{@/each}'].join('');
 
 		skip = 0;
-		dom.html('<div class="golCnt"><div class="shareList"><ul></ul></div></div>');
+		dom.html('<div class="l_row"><div class="shareList"><ul></ul></div></div>');
 		getData(function(list){
 			var this_html = juicer(temp,{'list':list});
 			insert({

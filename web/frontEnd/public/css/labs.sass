@@ -1,6 +1,14 @@
 ﻿/*
  * pageC-1 :  opus list page 
  */
+@mixin transition($seconds:0.3s)
+  transition : $seconds
+  -moz-transition-duration : $seconds
+  -webkit-transition-duration : $seconds
+  -o-transition-duration : $seconds
+
+
+
 .labsList
   padding : 100px 0px
   margin : auto
@@ -12,57 +20,47 @@
     li
       float :  left
       width : 33.3%
-      @media screen and (max-width :  750px)
+      @media screen and (max-width : 980px)
         width : 50%
-      @media screen and (max-width :  600px)
+      @media screen and (max-width : 600px)
         width : 100%
 
     .lab_item
       position : relative
-      height : 390px
+      height : 440px
       margin : 0px 10px 20px
       background : #fff
       overflow :  hidden
       .lab_cover
-        position : relative
+        display : block
         height :  300px
         margin : 0px auto
         overflow : hidden
-        transition :  0.1s
+        @include transition(0.2s)
         background :
           size : cover
           position : center
           repeat : no-repeat
           color : #e30
-        img
-          width : 100%
-      .lab_title
-        position : absolute
-        top : 60px
-        left : 10px
-        font-weight : normal
-        height : 30px
-        line-height : 30px
-        margin-bottom : 10px
-        text-shadow : 0px 1px 3px #000
-        color : #fff
-        font-size : 20px
-      .lab_link
-        position : absolute
-        top : 120px
-        left : 10px
-        width : 80px
-        height : 30px
-        line-height : 30px
-        text-align : center
-        background : #fff
         &:hover
-          text-decoration : none
-          background : #ddd
-          color : #333
+          opacity : 0.8
+      .lab_title
+        font-weight : normal
+        line-height : 30px
+        color : #333
+        font-size : 20px
+        text-align : center
+        a
+          display : block
+          padding : 10px
+          border-bottom : 1px dashed #eee
+          @include transition(0.2s)
+          &:hover
+            border-bottom-style : solid
+            background : #eee
+            color : #0a4
       .lab_info
         width : 100%
-        height : 50px
         padding : 10px
         box-sizing : border-box
         p
@@ -129,3 +127,20 @@
       &:hover 
         color : #333
         text-decoration :  underline
+        
+/*s实验室详情页*/
+
+.labs_detail_title
+  padding : 80px 0px 30px
+  background : url("/frontEnd/public/images/greyBj.png") #fff
+  border-bottom : 1px solid #eee
+  h1
+    padding : 0px 10px
+    line-height : 30px
+    font-size : 30px
+    font-weight : normal
+    color : #222
+.labs_detail_main
+  background : #fff
+  .labs_detail
+    padding : 20px 0px

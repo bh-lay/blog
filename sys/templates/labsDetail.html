@@ -11,25 +11,22 @@
 <link rel="stylesheet" type="text/css" href="/frontEnd/public/css/labs.css" />
 </head>
 <body>
-	<div class="l_row">
-		<div class="col-md-12">
-			<div class="article labs_detail">
-				<div class="articletop">
-					<h1>${title}</h1>
-					<p>
-					</p>
-				</div>
-				{@if cover}
-					<img src="${cover}" alt="${title}" class="topicImg" />
-				{@/if}
-				<div class="text md_html">$${content}</div>
+	<div class="labs_detail_title">
+		<div class="l_row">
+			<h1>${title}</h1>
+		</div>
+	</div>
+	<div class="labs_detail_main">
+		<div class="l_row">
+			<div class="labs_detail">
+				<div class="article">$${content}</div>
 			</div>
 		</div>
 	</div>
 {-nav-}
 <script src="/skin/js/lib/jquery.js" type="text/javascript"></script>
 <script src="/frontEnd/lib/sea.js" type="text/javascript"></script>
-<script src="/frontEnd/public/labsDetail.js" type="text/javascript"></script>
+<script src="/frontEnd/public/js/labsDetail.js" type="text/javascript"></script>
 {-tongji-}
 </body>
 </html>

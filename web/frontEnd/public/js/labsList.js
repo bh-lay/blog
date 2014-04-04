@@ -8,11 +8,11 @@ define(function(require,exports){
 	
 	var temp = ['{@each list as it,index}',
 		'<li><div class="lab_item">',
-			'<div class="lab_cover" style="background-image:url(${it.cover})"></div>',
-			'<h4 class="lab_title">${it.title}</h4>',
-			'<a class="lab_link" href="/labs/${it.id}" title="${it.title}" target="layLabs" >查看</a>',
+			'<a class="lab_cover" href="/labs/${it.id}" title="${it.title}" target="_blank" style="background-image:url(${it.cover})"></a>',
+			'<h4 class="lab_title">',
+				'<a href="/labs/${it.id}" title="${it.title}" target="_blank">${it.title}</a>',
+			'</h4>',
 			'<div class="lab_info">',
-				
 				'<p>${it.intro}</p>',
 			'</div>',
 		'</div></li>',
@@ -61,7 +61,7 @@ define(function(require,exports){
 //			return
 //		}
 		skip = 0;
-		dom.html('<div class="golCnt"><div class="labsList"><ul></ul></div></div>');
+		dom.html('<div class="l_row"><div class="labsList"><ul></ul></div></div>');
 		getData(function(list){
 			var this_html = juicer(temp,{'list':list}),
 				this_dom = dom.find('.labsList ul');

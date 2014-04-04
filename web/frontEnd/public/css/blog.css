@@ -74,12 +74,13 @@
 /*
  * pageB-2: blog detail page 
  */
-.blog_article{background :#fff;}
-.articletop{border-bottom: 1px dashed #CCC; text-align: center; margin: 20px 0px;}
+.blog_article{background :#fff;margin:60px auto;}
+.article_cover{text-align:center;}
+.articletop{border-bottom: 1px dashed #CCC; text-align: center;padding : 40px 0px 20px; margin-bottom: 20px;}
 .articletop h1{font-size:30px;font-weight:normal;}
 .articletop p{color:#666;}
 .article .topicImg {display: block;margin: auto;}
-
+.copylink{margin : 10px 20px;}
 /*实验室*/
 .labshow {border:1px solid #ddd;line-height: 3em;margin: 2em 4em;}
 .labshow span {background:#eee;display: inline-block;height: 100%;padding: 0em 2em;}
