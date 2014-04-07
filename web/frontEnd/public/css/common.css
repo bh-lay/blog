@@ -380,6 +380,31 @@ body {
   .article img {
     max-width: 100%; }
 
+/*
+ * 提示信息 */
+.l_notice {
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 4px; }
+  .l_notice strong,
+  .l_notice b {
+    font-size: 16px;
+    font-weight: normal;
+    margin: 0 0.5em; }
+
+.l_notice_warn {
+  background: #fcf8e3;
+  color: #8a6d3b;
+  border-color: #faebcc; }
+
+.l_notice_tips {
+  background: #d9edf7;
+  color: #31708f;
+  border-color: #bce8f1; }
+
 .sourceCode {
   position: absolute;
   overflow: hidden;
