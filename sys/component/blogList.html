@@ -1,0 +1,27 @@
+{@each list as it,index}
+	<div class="articleItem" articleId="${it.id}">
+		<div class="artItCpt">
+			<h3><a href="/blog/${it.id}" title="${it.title}" lofox="true" target="_self" >${it.title}</a></h3>
+			<p>${it.time_show}</p>
+		</div>
+		<div class="artItCnt">
+			{@if it.cover}
+			<div class="artItPic">
+				<a href="/blog/${it.id}" title="${it.title}" lofox="true" target="_self" >
+					<img src="${it.cover}" alt="${it.title}" />
+				</a>
+			</div>
+			{@/if}
+			<div class="artItInfo"><p>${it.intro}</p></div>
+			<div class="artItTag">${it.tags}</div>
+			<div class="artItFoot">
+				<a class="dataLike" title="我喜欢" href="javascript:void(0)"><i></i><b>8</b></a>
+				<a class="dataView" title="查看" href="/blog/${it.id}" lofox="true" target="_self"><i></i><b>367</b></a>
+			</div>
+		</div>
+		<div class="artItLace">
+			<div class="artItLaCircle"></div>
+			<div class="artItLaCorner"><b></b><i></i></div>
+		</div>
+	</div>
+{@/each}

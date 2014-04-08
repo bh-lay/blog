@@ -5,6 +5,32 @@
 define(function(require,exports){
 	require('/frontEnd/lib/juicer.js');
 	require('/frontEnd/public/css/opus.css');
+	
+	var item_tpl = ['{@each list as it,index}',
+		'<li>',
+			'<div class="opus_cover">',
+				'<a href="/opus/${it.id}" title="${it.title}" target="_self" lofox="true" >',
+					'<img src="${it.cover}" alt="${it.title}" />',
+				'</a>',
+			'</div>',
+			'<div class="opus_info">',
+				'<h3><a href="/opus/${it.id}" target="_self" lofox="true" >${it.title}</a></h3>',
+				'<p><strong>开发范围：</strong>',
+					'{@each it.work_range as that,index}',
+						'<span>${that}</span>',
+					'{@/each}',
+				'</p>',
+				'<p><strong>在线地址：</strong>',
+					'{@if it.online_url}',
+						'<a href="${it.online_url}">${it.online_url}</a>',
+					'{@else}',
+						'<span>无在线地址</span>',
+					'{@/if}',
+				'</p>',
+			'</div>',
+		'</li>',
+	'{@/each}'].join('');
+	
 	var limit = 20,
 		 skip = 0,
 		 count = null,
@@ -47,26 +73,22 @@ define(function(require,exports){
 	
 	return function(dom,param){
 		var render_over = this.render_over || null;
-		
-		$.get('/ajax/temp?opus_item',function(data){
-			var temp = data['opus_item'];
 //			if(param['init']){
-				skip = 0;
-				dom.html('<div class="golCnt"><div class="opusList"><ul></ul></div></div>');
-				getData(function(list){
-					var this_html = juicer(temp,{'list':list}),
-						this_dom = dom.find('.opusList ul');
-					insert({
-						'end' : (skip>=count)?true:false,
-						'html' : this_html,
-						'dom' : this_dom
-					});
-					start();
-					render_over&&render_over();
+			skip = 0;
+			dom.html('<div class="golCnt"><div class="opusList"><ul></ul></div></div>');
+			getData(function(list){
+				var this_html = juicer(item_tpl,{'list':list}),
+					this_dom = dom.find('.opusList ul');
+				insert({
+					'end' : (skip>=count)?true:false,
+					'html' : this_html,
+					'dom' : this_dom
 				});
-	//		}else{
+				start();
+				render_over&&render_over();
+			});
+//		}else{
 //				start();
 //			}
-		});
 	};
 });

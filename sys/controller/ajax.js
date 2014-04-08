@@ -12,8 +12,6 @@ var ajaxConfig = {
 	'user':'/user/index',
 	'user_group':'user/user_group_add&edit',
 	'power':'user/power',
-	'temp':'temp',
-	'tempModify':'tempModify',
 	'del' : 'del',
 	'clear_cache':'clear_cache',
 	'asset':'asset/index',

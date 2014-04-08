@@ -5,9 +5,35 @@
 define(function(require,exports){
 	require('/frontEnd/lib/juicer.js');
 	require('/frontEnd/public/css/blog.css');
+	var blogTemp =  ['{@each list as it,index}',
+		'<div class="articleItem" articleId="${it.id}">',
+			'<div class="artItCpt">',
+				'<h3><a href="/blog/${it.id}" title="${it.title}" lofox="true" target="_self" >${it.title}</a></h3>',
+				'<p>${it.time_show}</p>',
+			'</div>',
+			'<div class="artItCnt">',
+				'{@if it.cover}',
+				'<div class="artItPic">',
+					'<a href="/blog/${it.id}" title="${it.title}" lofox="true" target="_self" >',
+						'<img src="${it.cover}" alt="${it.title}" />',
+					'</a>',
+				'</div>',
+				'{@/if}',
+				'<div class="artItInfo"><p>${it.intro}</p></div>',
+				'<div class="artItTag">${it.tags}</div>',
+				'<div class="artItFoot">',
+					'<a class="dataLike" title="我喜欢" href="javascript:void(0)"><i></i><b>8</b></a>',
+					'<a class="dataView" title="查看" href="/blog/${it.id}" lofox="true" target="_self"><i></i><b>367</b></a>',
+				'</div>',
+			'</div>',
+			'<div class="artItLace">',
+				'<div class="artItLaCircle"></div>',
+				'<div class="artItLaCorner"><b></b><i></i></div>',
+			'</div>',
+		'</div>',
+	'{@/each}'].join('');
 	
-	var blogTemp = '',
-		 add_btn,
+	var add_btn,
 		 limit = 10,
 		 skip;
 	var insert = function (param){
@@ -25,7 +51,6 @@ define(function(require,exports){
 		this_dom.fadeIn(200);
 	};
 	var getData = function(fn){
-		console.log('blog list page:','get data {limit:' + limit+ ',skip:' + skip + '} !');
 		$.ajax({
 			'type' : 'GET' ,
 			'url' : '/ajax/blog',
@@ -53,13 +78,8 @@ define(function(require,exports){
 			}
 		});
 	};
-	var getTemp = function(fn){
-		console.log('blog list page:','get template !');
-		$.get('/ajax/temp?article_item',function(data){
-			blogTemp = data['article_item'];
-			fn&&fn(blogTemp);
-		});
-	};
+
+
 	var bindEvent = function(dom){
 		console.log('blog list page:','bind event !');
 		console.log('blog list page:','add blog btn [more] !');
@@ -86,10 +106,9 @@ define(function(require,exports){
 		});
 	};
 	var init = function(dom,fn){
-		getTemp(function(blogTemp){
-			bindEvent(dom);
-			fn&&fn();
-		});
+		bindEvent(dom);
+		fn&&fn();
+
 	};
 	
 	return function(dom,param){

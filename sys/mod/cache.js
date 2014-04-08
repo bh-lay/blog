@@ -17,7 +17,7 @@ function cache(cache_name,callback,create_cache,root){
 	var cache_path = cache_root + cache_name + '.txt';
 	
 	fs.exists(cache_path, function(exists) {
-		if(exists){
+		if(0||exists){
 			//get cache from cache directory
 			fs.readFile(cache_path,'UTF-8',function(err,this_cache){
 				if(err){
