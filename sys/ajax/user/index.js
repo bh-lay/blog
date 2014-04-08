@@ -210,7 +210,7 @@ function login_handle(req,res_this,session_this,username,password){
 		if(err){
 			res_this.json({
 				'code':4,
-				'msg':'咱数据库呗拐跑了！'
+				'msg':'咱数据库被拐跑了！'
 			});
 			return
 		}
@@ -311,6 +311,32 @@ function list(){
 		});
 	});
 }
+//获取用户信息
+function detail(userID){
+	var req = this.request;
+	var res_this = this.res;
+	
+	var method = mongo.start();
+	var resJSON = {
+		'code' : 200,
+		'detail' : null
+	};
+	method.open({'collection_name':'user'},function(err,collection){
+		collection.find({id:userID}).toArray(function(err, docs) {
+			method.close();
+			if(arguments[1].length==0){
+				resJSON['code'] = 201;
+				resJSON['msg'] = 'could not find this user ' + userID + ' !';				
+			}else{ 
+				resJSON['detail'] = docs[0];
+				if(resJSON['detail']['password']){
+					delete resJSON['detail']['password']
+				}
+			}
+			res_this.json(resJSON);
+		});
+	});
+}
 
 exports.render = function (req,res_this,path){
 	this.request = req;
@@ -333,10 +359,9 @@ exports.render = function (req,res_this,path){
 				list.call(this);
 			break
 			default :
-				res_this.json({
-					'code' : 2,
-					'msg' : 'wrong path'
-				});
+				var id = path.pathnode[2];
+				detail.call(this,id);
+				
 		}
 	}else{
 		res_this.json({

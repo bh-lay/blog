@@ -149,7 +149,7 @@ window.admin = window.admin || {};
 					if(urlData.length >= 4){
 						id = urlData[3];
 					}
-					if(type.match(/^(article|share|opus|friends|labs|power)$/)){
+					if(type.match(/^(article|share|opus|friends|labs|power|user)$/)){
 						seajs.use('/frontEnd/publish/publish.js',function(publish){
 							publish.init(dom,{
 								'active' : type,

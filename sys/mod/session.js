@@ -78,7 +78,8 @@ function SESSION(req,res_this,callback){
 			res_this.cookie({
 				'session_verify' : that.sessionID,
 				'path' : '/',
-				'Max-Age' : 60*60*24*2
+				'Max-Age' : 60*60*24*7,//session浏览器端保存七天
+				'HttpOnly' : true//前端脚本不可见
 			});
 			
 			callback&&callback();

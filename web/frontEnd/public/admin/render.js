@@ -512,7 +512,7 @@ window.admin.render = window.admin.render || {};
 		'<td>{email}</td>',
 		'<td>{user_group}</td>',
 		'<td>',
-			'<a class="btn btn-default btn-xs custom-lofox" href="user.html?userid={id}" target="_self"><span class="glyphicon glyphicon-edit"></span></a>',
+			'<a class="btn btn-default btn-xs custom-lofox" href="/admin/publish/user/{id}" target="_self"><span class="glyphicon glyphicon-edit"></span></a>',
 			'<a class="btn btn-default btn-xs" title="删除" href="/ajax/del?from=user&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！"><span class="glyphicon glyphicon-remove"></span></a>',
 		'</td>',
 	'</tr>'].join('');
@@ -533,7 +533,7 @@ window.admin.render = window.admin.render || {};
 			'url' : '/ajax/user/list',
 			'success' : function(d){
 				var html = ['<div class="col-md-12 custom-mb10">',
-					'<a href="/admin/publish/opus" class="btn btn-primary btn-sm custom-lofox" role="button">发作品</a>',
+					'<a href="/admin/publish/user" class="btn btn-primary btn-sm custom-lofox" role="button">增加用户</a>',
 				'</div>',
 				'<div class="col-md-12">',
 					'<div class="panel panel-default">',

@@ -13,6 +13,7 @@ define && define(function(require,exports){
 	var labs = require('/frontEnd/publish/labs.js');
 	var friends = require('/frontEnd/publish/friends.js');
 	var power = require('/frontEnd/publish/power.js');
+	var user = require('/frontEnd/publish/user.js');
 	
 	var publish_tpl = ['<div class="publish">',
 		'<div class="publish_cpt">',
@@ -34,6 +35,8 @@ define && define(function(require,exports){
 			friends(dom,id);
 		}else if(name == 'labs'){
 			labs(dom,id);
+		}else if(name == 'user'){
+			user(dom,id);
 		}else{
 			//默认为发布文章
 			article(dom,id);
@@ -44,19 +47,24 @@ define && define(function(require,exports){
 	
 	}
 	function INIT(dom,param){
-		dom.html(publish_tpl);
-		var cpt_dom = dom.find('.publish_cpt');
-		var cnt_dom = dom.find('.publish_cnt');
 		
 		var param = param || {};
 		var id = param.id || null;
 		var active = param.active || 'article';
-		show_module(cnt_dom,cpt_dom,active,id);
-		cpt_dom.on('click','a',function(){
-			var name = $(this).attr('data-type');
-			show_module(cnt_dom,cpt_dom,name,null);
-			admin.push('publish/' + name);
-		});
+		if(active == 'user'){
+			show_module(dom,cpt_dom,active,id);
+		}else{
+			dom.html(publish_tpl);
+			var cpt_dom = dom.find('.publish_cpt');
+			var cnt_dom = dom.find('.publish_cnt');
+			show_module(cnt_dom,cpt_dom,active,id);
+			cpt_dom.on('click','a',function(){
+				var name = $(this).attr('data-type');
+				show_module(cnt_dom,cpt_dom,name,null);
+				admin.push('publish/' + name);
+			});
+		}
+
 	};
 	
 	
@@ -67,4 +75,5 @@ define && define(function(require,exports){
 	exports.labs = labs;
 	exports.friends = friends;
 	exports.power = power;
+	exports.user = user;
 });
