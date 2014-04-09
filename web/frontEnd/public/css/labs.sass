@@ -140,7 +140,36 @@
     font-size : 30px
     font-weight : normal
     color : #222
-.labs_detail_main
+    margin : 30px 0px 90px
+.labs_detail_bar
+  width : 100%
+  height : 0px
+  position : absolute
+  z-index : 50
+  .labs_detail_bar_body
+    width : 100%
+    padding-top : 20px
+    .labs_detail_bar_cnt
+      height : 40px
+      margin : auto
+      max-width : 300px
+      background : #292f36
+      a
+        display : block
+        width : 33.3%
+        float : left
+        height : 40px
+        line-height : 40px
+        color : #fff
+        text-align : center
+        @include transition(0.2s)
+        &:hover
+          background : rgba(0,0,0,0.3)
+
+.labs_detail_doc
+  padding : 80px 0px 20px
   background : #fff
-  .labs_detail
-    padding : 20px 0px
+.labs_detail_download
+  background : #aaa
+  min-height : 600px
+  margin-bottom : 100px 
