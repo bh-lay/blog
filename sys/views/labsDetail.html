@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<title>${title}_小剧客栈</title>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta name="keywords" content="${keywords}" />
+<meta name="description" content="${description}" />
+<link href="/favicon.ico" rel="shortcut icon"/>
+<link rel="stylesheet" type="text/css" href="/frontEnd/public/css/common.css"/>
+<link rel="stylesheet" type="text/css" href="/frontEnd/public/css/labs.css" />
+</head>
+<body>
+	<div class="labs_detail_title">
+		<div class="l_row">
+			<h1>${title}</h1>
+		</div>
+	</div>
+	<div class="labs_detail_bar">
+		<div class="labs_detail_bar_body">
+			<div class="l_row">
+				<div class="labs_detail_bar_cnt">
+					<a href="#doc">文档</a>
+					<a href="#download">下载</a>
+					<a href="#demo">DOME</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="labs_detail_cnt">
+		<a name="doc"></a>
+		<div class="labs_detail_doc">
+			<div class="l_row">
+				<div class="l_notice l_notice_tips">
+					<strong>实验室</strong>正在开发中，目前有许多明显需要改进的地方，敬请期待！
+				</div>
+				<div class="article">${content}</div>
+			</div>
+		</div>
+		<a name="download"></a>
+		<div class="labs_detail_download">
+			<div class="l_row">
+				<div class="l_col_12">
+					<div class="labs_detail_download_title">
+					</div>
+					<div class="labs_detail_download_link">
+						<a href="javascript:void(0)"><i class="layIcon">A</i></a>
+						<a href="javascript:void(0)"><i class="layIcon">B</i></a>
+						<a href="javascript:void(0)"><i class="layIcon">C</i></a>
+					</div>
+					<div class="github_widget" data-repo="${git_full_name}">
+					
+					</div>
+				</div>
+			</div>
+		</div>
+		<span style="color:#fff">-</span>
+	</div>
+{{{navigation}}}
+<script src="/skin/js/lib/jquery.js" type="text/javascript"></script>
+<script src="/frontEnd/lib/sea.js" type="text/javascript"></script>
+<script src="/frontEnd/public/js/labsDetail.js" type="text/javascript"></script>
+{{{baiduAndGoogleTongji}}}
+</body>
+</html>

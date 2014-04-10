@@ -32,7 +32,7 @@ define && define(function(require,exports){
 			'<div class="pub_row_input">',
 				'<textarea name="intro" cols="50" rows="5" placeholder="插件简介">{intro}</textarea>',
 			'</div>',
-			'<div class="pub_row_input"><input type="text" name="api_url" value="{api_url}" placeholder="api地址" /></div>',
+			'<div class="pub_row_input"><input type="text" name="git_full_name" value="{git_full_name}" placeholder="github地址（如“bh-lay/uploader”）" /></div>',
 			'<div class="pub_row_input">',
 				'<textarea class="mditor" name="content" cols="50" rows="10" placeholder="插件详细介绍" >{content}</textarea>',
 			'</div>',

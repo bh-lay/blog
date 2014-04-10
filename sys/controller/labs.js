@@ -5,6 +5,8 @@ var mongo = require('../conf/mongo_connect');
 var temp = require('../mod/page_temp');
 var chip = require('../mod/chip');
 var juicer = require('juicer');
+var views = require('../mod/views');
+var component = require('../mod/component');
 
 var showdown = require('../lib/showdown/showdown.js');
 var converter = new showdown.converter();
@@ -39,9 +41,8 @@ function detail_page(id,callback){
 					docs[0].time_show = parse.time(docs[0].time_create ,'{y}-{m}-{d}');
 				//	docs[0].content = markdown.parse(docs[0].content);
 					docs[0].content = converter.makeHtml(docs[0].content);
-					var txt = juicer(page_temp,docs[0]);
 				//	callback&&callback(docs[0].content);
-					callback&&callback(txt);
+					callback&&callback(null,docs[0]);
 				}
 			});
 		});
@@ -60,13 +61,26 @@ exports.deal = function (req,res_this,path){
 		});
 	}else if(path_length == 2){
 		var id = path['pathnode'][1];
-		cache.html('labs_id_' + id,function(this_cache){
-			res_this.html(200,this_cache);
-		},function(save_cache){
-			detail_page(id,function(this_html){
-				save_cache(this_html);
+		
+		//获取作品信息
+		detail_page(id,function(err,data){
+			cache.html('labs_id_' + id,function(this_cache){
+				res_this.html(200,this_cache);
+			},function(save_cache){
+				//获取视图
+				views.get('labsDetail',{
+					'title' : data.title,
+					'keywords' : data.tags,
+					'description' : data.intro,
+					'content' : data.content,
+					'git_full_name' : data.git_full_name
+				},function(err,html){
+					save_cache(html);
+				});
 			});
 		});
+		
+		
 	}else{
 		res_this.notFound('小盆友，表逗我玩儿！');
 	}

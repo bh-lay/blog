@@ -25,7 +25,7 @@ exports.deal = function (req,res_this,path){
 	}else if(path_length == 2){
 		var id = path['pathnode'][1];
 		
-		//获取博客列表信息
+		//获取博客信息
 		component.get('blogDetail',{
 			'id' : id
 		},function(err,blog_detail_html,data){

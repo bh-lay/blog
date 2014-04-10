@@ -14,7 +14,7 @@ var component = require('../mod/component');
 
 var baseRoot = './views/';
 
-function getComponent(temp,callback){
+function replaceComponent(temp,callback){
 	var need_temp = [],
 		temp_data = {},
 		over_count = 0;
@@ -57,10 +57,11 @@ exports.get = function(URI,data,callback){
 		});
 		
 		//解析模版的component
-		getComponent(fileStr,function(err,txt){
+		replaceComponent(fileStr,function(err,txt){
 			var temp = txt;
 			//查找脚本文件
 			fs.exists(realPath + '.js', function(exists) {
+			console.log(temp);
 				if(!exists){
 					//没有脚本文件，直接返回模版内容
 					callback && callback(null,temp);
