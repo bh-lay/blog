@@ -153,24 +153,17 @@ seajs.use('/frontEnd/util/lofox.js',function(){
  */
 (function(ex){
 	var init=function(){
-		var isOpen = false;
-		$('.nav_moreBtn').click(function(){
-			if(isOpen){
-				isOpen = false;
-				$('.nav_mainList').slideUp(80,function(){
-					$(this).height(0).show();
-				});
+		$('.nav_tool a').click(function(){
+			if($('.navLayer').hasClass('nav_slidedown')){
+				$('.navLayer').removeClass('nav_slidedown');
 			}else{
-				isOpen = true;
-				$('.nav_mainList').hide().height('auto').slideDown(120);
+				$('.navLayer').addClass('nav_slidedown');
 			}
 		});
+
 		$('.nav_mainList').on('click',function(){
-			if($('.nav_moreBtn').css('display') == 'block'){
-				isOpen = false;
-				$('.nav_mainList').slideUp(80,function(){
-					$(this).height(0).show();
-				});
+			if($('.navLayer').hasClass('nav_slidedown')){
+				$('.navLayer').removeClass('nav_slidedown');
 			}else{
 				//貌似不需要else
 			}

@@ -11,7 +11,7 @@
 
 var fs = require('fs');
 var component = require('../mod/component');
-
+var juicer = require('juicer');
 var baseRoot = './views/';
 
 function replaceComponent(temp,callback){
@@ -52,16 +52,16 @@ exports.get = function(URI,data,callback){
 			return
 		}
 		//替换变量
-		fileStr = fileStr.replace(/\${(\w*)}/g,function(a,b){
-			return data[b] || '';
-		});
+		fileStr = juicer(fileStr,data);
+//		fileStr = fileStr.replace(/\${(\w*)}/g,function(a,b){
+//			return data[b] || '';
+//		});
 		
 		//解析模版的component
 		replaceComponent(fileStr,function(err,txt){
 			var temp = txt;
 			//查找脚本文件
 			fs.exists(realPath + '.js', function(exists) {
-			console.log(temp);
 				if(!exists){
 					//没有脚本文件，直接返回模版内容
 					callback && callback(null,temp);

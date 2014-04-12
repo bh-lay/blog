@@ -220,39 +220,43 @@ body {
 .nav_moreBtn {
   float: right;
   display: block;
-  height: 22px;
-  padding: 7px 10px 0px;
-  margin-top: 3px;
-  border: 1px solid #888888;
-  border-radius: 4px;
-  background: rgba(0, 0, 0, 0.6); }
-  .nav_moreBtn:hover {
-    background: rgba(0, 0, 0, 0.8); }
-  .nav_moreBtn:active {
-    background: black; }
+  position: relative;
+  overflow: hidden;
+  width: 30px;
+  height: 30px;
+  margin-top: 4px; }
 
 .nav_Btn_ico {
   display: block;
+  position: absolute;
+  left: 4px;
   width: 22px;
-  height: 2px;
-  border-radius: 1px;
-  background: white;
-  margin-bottom: 4px; }
+  height: 4px;
+  border-radius: 2px;
+  background: #555555;
+  transition: 0.4s;
+  -moz-transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+  -o-transition-duration: 0.4s; }
+
+.nav_Btn_ico_1 {
+  top: 7px; }
+
+.nav_Btn_ico_2 {
+  top: 14px; }
+
+.nav_Btn_ico_3 {
+  top: 21px; }
 
 .nav_moreBtn {
   display: none; }
 
 @media screen and (max-width: 660px) {
-  .nav_bj {
-    border-radius: 0px;
-    opacity: 1;
-    background: white; }
-
   .nav_moreBtn {
     display: block; }
 
   .nav_mainList {
-    display: none;
+    height: 1px;
     position: fixed;
     top: 40px;
     left: 0px;
@@ -260,6 +264,29 @@ body {
     background: white;
     overflow: hidden;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.7); }
+
+  /*下拉菜单时 */
+  .nav_slidedown .nav_mainList {
+    height: auto; }
+  .nav_slidedown .nav_Btn_ico_1 {
+    top: 14px;
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg); }
+  .nav_slidedown .nav_Btn_ico_2 {
+    opacity: 0;
+    bottom: 31px; }
+  .nav_slidedown .nav_Btn_ico_3 {
+    top: 14px;
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg); }
+
+  /*重置导航样式 */
+  .nav_bj {
+    border-radius: 0px;
+    opacity: 1;
+    background: white; }
 
   .nav_main ul {
     float: none;
@@ -349,8 +376,8 @@ body {
 
 @media screen and (max-width: 1300px) {
   .l_row {
-    width: 940px; } }
-@media screen and (max-width: 950px) {
+    width: 960px; } }
+@media screen and (max-width: 970px) {
   .l_row {
     width: 100%; }
     .l_row .l_col_1, .l_row .l_col_2, .l_row .l_col_4, .l_row .l_col_6, .l_row .l_col_8 {

@@ -5,6 +5,18 @@
  * E-mail:  bh_lay@126.com
  * Blog:  http://bh-lay.com
  *
+@mixin transition($seconds:0.3s)
+  transition : $seconds
+  -moz-transition-duration : $seconds
+  -webkit-transition-duration : $seconds
+  -o-transition-duration : $seconds
+
+@mixin rotate($rt:7.5deg)
+  -moz-transform: rotate($rt)
+  -o-transform: rotate($rt)
+  -webkit-transform: rotate($rt)
+//  filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.9914,M12=-0.1305,M21=0.1305,M22=0.9914,SizingMethod=’auto expand’);
+//  -ms-filter:“progid:DXImageTransform.Microsoft.Matrix(M11=0.9914,M12=-0.1305,M21=0.1305,M22=0.9914,SizingMethod=’auto expand’)”; 
 
 /**
  * base css 
@@ -224,39 +236,35 @@ body
 .nav_moreBtn
   float: right
   display: block
-  height: 22px
-  padding: 7px 10px 0px
-  margin-top: 3px
-  border: 1px solid #888
-  border-radius: 4px
-  background: rgba(0, 0, 0, 0.6)
-  &:hover
-    background: rgba(0, 0, 0, 0.8)
-  &:active
-    background: #000
+  position: relative
+  overflow : hidden
+  width : 30px
+  height: 30px
+  margin-top: 4px
 
 .nav_Btn_ico
   display: block
+  position : absolute
+  left : 4px
   width: 22px
-  height: 2px
-  border-radius: 1px
-  background: #fff
-  margin-bottom: 4px
-
-.nav_mainList!
-
+  height: 4px
+  border-radius: 2px
+  background: #555
+  @include transition(0.4s)
+.nav_Btn_ico_1
+  top : 7px
+.nav_Btn_ico_2
+  top : 14px
+.nav_Btn_ico_3
+  top : 21px
 .nav_moreBtn
   display: none
 
 @media screen and (max-width: 660px)
-  .nav_bj
-    border-radius: 0px
-    opacity: 1
-    background: #fff
   .nav_moreBtn
     display: block
   .nav_mainList
-    display: none
+    height : 1px
     position: fixed
     top: 40px
     left: 0px
@@ -264,6 +272,24 @@ body
     background: #fff
     overflow: hidden
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.7)
+  /*下拉菜单时
+  .nav_slidedown
+    .nav_mainList
+      height : auto
+    .nav_Btn_ico_1
+      top : 14px
+      @include rotate(45deg)
+    .nav_Btn_ico_2
+      opacity : 0
+      bottom : 31px
+    .nav_Btn_ico_3
+      top : 14px
+      @include rotate(-45deg)
+  /*重置导航样式
+  .nav_bj
+    border-radius: 0px
+    opacity: 1
+    background: #fff
   .nav_main
     ul
       float: none
@@ -279,8 +305,8 @@ body
         display: block
         height: 30px
         line-height: 30px
-
 /*navigation
+
 
 .piclist
   width: 488px
@@ -355,8 +381,8 @@ body
     width : 100%
 @media screen and (max-width: 1300px)
   .l_row
-    width: 940px
-@media screen and (max-width: 950px)
+    width: 960px
+@media screen and (max-width: 970px)
   .l_row
     width: 100%
     .l_col_1,.l_col_2,.l_col_4,.l_col_6,.l_col_8

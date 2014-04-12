@@ -70,6 +70,6 @@ font-size: 20px;letter-spacing: 0.5em;font-weight:normal;color:#000;}
 #focusTitle ul{font-size:16px;padding-top:20px;}
 #focusTitle li{float:left;width:50%;color:#666;}
 #focusTitle strong{padding-right:10px;font-weight:normal;}
-.TagLine{height:50px;margin:80px 20px 40px;background:url(../tagline.png) no-repeat;text-indent:-100em;overflow:hidden;}
+.TagLine{height:50px;margin:80px 20px 40px;background:url(/frontEnd/public/images/tagline.png) no-repeat;text-indent:-100em;overflow:hidden;}
 .opus_detail .youyan {padding-top:20px;}
 

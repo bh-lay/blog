@@ -12,9 +12,7 @@ seajs.use('/frontEnd/util/tie.js',function(){
 		$.getScript('/frontEnd/lib/github/reposWidge.js');
 	});
 
-
-
-
+	//下载部分
 	var btn = $('.labs_detail_download_link a');
 	btn.eq(0).addClass('active');
 
@@ -26,5 +24,4 @@ seajs.use('/frontEnd/util/tie.js',function(){
 		btn.removeClass('active');
 		btn.eq(index).addClass('active');
 	});
-	
 });

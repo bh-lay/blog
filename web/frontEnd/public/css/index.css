@@ -11,7 +11,7 @@
  * pageA: index page 
  **/
 .indeCnt{position: absolute;left:0px;top:0px;z-index: 100;width: 100%;height:100%;min-height:450px;}
-.indeCnt .golCnt{position: relative;height: 100%;}
+.indeCnt .l_row{position: relative;height: 100%;}
 
 .layIntroCnt{position:absolute; width:310px;top:130px;left:0px;white-space: nowrap;cursor: default;}
 .layIntro{float: left;clear: left;}
