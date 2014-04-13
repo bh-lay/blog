@@ -250,7 +250,7 @@ body
   height: 4px
   border-radius: 2px
   background: #555
-  @include transition(0.4s)
+  @include transition(0.2s)
 .nav_Btn_ico_1
   top : 7px
 .nav_Btn_ico_2
@@ -265,6 +265,7 @@ body
     display: block
   .nav_mainList
     height : 1px
+    opacity : 0
     position: fixed
     top: 40px
     left: 0px
@@ -272,19 +273,21 @@ body
     background: #fff
     overflow: hidden
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.7)
+    @include transition(0.2s)
   /*下拉菜单时
   .nav_slidedown
     .nav_mainList
       height : auto
+      opacity : 1
     .nav_Btn_ico_1
       top : 14px
       @include rotate(45deg)
     .nav_Btn_ico_2
-      opacity : 0
-      bottom : 31px
-    .nav_Btn_ico_3
       top : 14px
       @include rotate(-45deg)
+    .nav_Btn_ico_3
+      opacity : 0
+      bottom : 31px
   /*重置导航样式
   .nav_bj
     border-radius: 0px
@@ -296,15 +299,15 @@ body
       margin: 0px
     li
       float: none
-      height: 30px
+      height: 40px
       border: none
       width: auto
       padding: 0px
       text-align: center
       a
         display: block
-        height: 30px
-        line-height: 30px
+        height: 40px
+        line-height: 40px
 /*navigation
 
 

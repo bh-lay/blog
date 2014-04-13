@@ -3,7 +3,7 @@
  */
 .labsList {
   padding: 100px 0px;
-  margin: auto; }
+  margin: 0px 10px; }
   .labsList ul {
     margin-left: -10px;
     margin-right: -10px;
@@ -152,7 +152,7 @@
       background: #292f36; }
       .labs_detail_bar .labs_detail_bar_body .labs_detail_bar_cnt a {
         display: block;
-        width: 33.3%;
+        width: 25%;
         float: left;
         height: 40px;
         line-height: 40px;
@@ -166,19 +166,18 @@
           background: rgba(0, 0, 0, 0.3); }
 
 .labs_detail_doc {
-  padding: 80px 0px 20px;
+  padding: 120px 0px 20px;
   background: white; }
 
 .labs_detail_download {
-  background: #cccccc;
-  padding-top: 60px;
-  min-height: 600px;
-  margin-bottom: 100px; }
+  background: #eeeeee;
+  padding-top: 130px;
+  min-height: 500px; }
 
 .labs_detail_download_title {
   width: 160px;
   height: 40px;
-  margin: 0px auto 50px;
+  margin: 0px auto 80px;
   background: url("/frontEnd/public/images/labs.png") 0px 0px; }
 
 .labs_detail_download_linkTxt {
@@ -186,7 +185,7 @@
   height: 100px;
   overflow: hidden;
   margin: 0 auto; }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 500px) {
     .labs_detail_download_linkTxt {
       margin: 0 10px; } }
   .labs_detail_download_linkTxt ul {
@@ -198,21 +197,21 @@
       position: relative;
       float: left;
       text-align: center;
-      background: white; }
+      background: #2c3e50; }
       .labs_detail_download_linkTxt ul li h6 {
         height: 30px;
         padding-top: 15px;
         line-height: 30px;
-        color: #333333;
+        color: white;
         font-size: 18px;
         font-weight: normal; }
       .labs_detail_download_linkTxt ul li p, .labs_detail_download_linkTxt ul li p a {
         height: 24px;
         line-height: 24px;
         font-size: 14px;
-        color: #7e7e7e; }
+        color: #999999; }
         .labs_detail_download_linkTxt ul li p a:hover, .labs_detail_download_linkTxt ul li p a a:hover {
-          color: black;
+          color: white;
           text-decoration: underline; }
       .labs_detail_download_linkTxt ul li .labs_arrow {
         position: absolute;
@@ -221,7 +220,8 @@
         margin: 0px 0px -10px -10px;
         width: 20px;
         height: 20px;
-        color: white;
+        line-height: 20px;
+        color: #2c3e50;
         font-size: 20px;
         font-family: "Simsun"; }
     .labs_detail_download_linkTxt ul .labs_link_github .labs_arrow {
@@ -255,3 +255,128 @@
   @media screen and (max-width: 600px) {
     .labs_detail_download_link a {
       margin: 0px 20px 40px; } }
+
+/*github部分 */
+.labs_detail_github {
+  background: #2c3e50;
+  padding: 120px 0px 100px;
+  min-height: 450px;
+  position: relative; }
+  .labs_detail_github .labsDeGit_loading {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -50px 0px 0px -50px;
+    text-align: center;
+    line-height: 100px;
+    color: white;
+    font-size: 30px; }
+  .labs_detail_github .labsDeGit_cpt {
+    height: 50px;
+    line-height: 50px;
+    font-size: 36px;
+    color: white;
+    text-align: center;
+    margin-bottom: 60px; }
+  .labs_detail_github .labsDeGit_user {
+    width: 184px;
+    margin: 0px auto 40px;
+    background: white; }
+    .labs_detail_github .labsDeGit_user .labsDeGitUser_cover {
+      display: block;
+      width: 184px;
+      height: 184px; }
+      .labs_detail_github .labsDeGit_user .labsDeGitUser_cover img {
+        display: block;
+        width: 184px;
+        height: 184px; }
+    .labs_detail_github .labsDeGit_user .labsDeGitUser_name a {
+      display: block;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      border-bottom: 1px solid #f4f4f4;
+      transition: 0.4s;
+      -moz-transition-duration: 0.4s;
+      -webkit-transition-duration: 0.4s;
+      -o-transition-duration: 0.4s; }
+      .labs_detail_github .labsDeGit_user .labsDeGitUser_name a:hover {
+        background: #f4f4f4; }
+    .labs_detail_github .labsDeGit_user .labsDeGitUser_name strong {
+      color: #333333;
+      font-size: 18px;
+      font-weight: normal;
+      margin-right: 10px; }
+    .labs_detail_github .labsDeGit_user .labsDeGitUser_name span {
+      color: #aaaaaa;
+      font-size: 14px; }
+    .labs_detail_github .labsDeGit_user .labsDeGitUser_data {
+      height: 45px; }
+      .labs_detail_github .labsDeGit_user .labsDeGitUser_data a {
+        display: block;
+        width: 33.3%;
+        height: 45px;
+        float: left;
+        text-align: center;
+        transition: 0.4s;
+        -moz-transition-duration: 0.4s;
+        -webkit-transition-duration: 0.4s;
+        -o-transition-duration: 0.4s; }
+        .labs_detail_github .labsDeGit_user .labsDeGitUser_data a strong {
+          display: block;
+          font-weight: normal;
+          line-height: 25px;
+          color: #555555;
+          font-size: 16px; }
+        .labs_detail_github .labsDeGit_user .labsDeGitUser_data a span {
+          display: block;
+          line-height: 15px;
+          color: #bbbbbb;
+          font-size: 12px;
+          letter-spacing: -1px; }
+        .labs_detail_github .labsDeGit_user .labsDeGitUser_data a:hover {
+          background: #f4f4f4; }
+  .labs_detail_github .labsDeGit_repos {
+    margin: 0px 10px;
+    background: white; }
+    .labs_detail_github .labsDeGit_repos .labsDeGitRepos_cpt {
+      height: 40px;
+      border-bottom: 1px solid #f4f4f4; }
+      .labs_detail_github .labsDeGit_repos .labsDeGitRepos_cpt .labsDeGitRepos_cpt_logo {
+        height: 40px;
+        float: left;
+        padding: 0px 10px 0px 20px;
+        line-height: 40px;
+        color: #aaaaaa; }
+      .labs_detail_github .labsDeGit_repos .labsDeGitRepos_cpt .labsDeGitRepos_cpt_root {
+        line-height: 40px; }
+        .labs_detail_github .labsDeGit_repos .labsDeGitRepos_cpt .labsDeGitRepos_cpt_root a {
+          color: #777777; }
+          .labs_detail_github .labsDeGit_repos .labsDeGitRepos_cpt .labsDeGitRepos_cpt_root a:hover {
+            color: #222222;
+            text-decoration: underline; }
+    .labs_detail_github .labsDeGit_repos .labsDeGitRepos_cnt {
+      overflow: hidden; }
+      .labs_detail_github .labsDeGit_repos .labsDeGitRepos_cnt a {
+        display: block;
+        width: 33.3333%;
+        height: 100px;
+        float: left;
+        text-align: center; }
+        .labs_detail_github .labsDeGit_repos .labsDeGitRepos_cnt a .labsDeGitRepos_cnt_ico {
+          display: block;
+          height: 60px;
+          line-height: 60px;
+          font-size: 30px;
+          color: #666666; }
+        .labs_detail_github .labsDeGit_repos .labsDeGitRepos_cnt a strong {
+          display: block;
+          height: 40px;
+          line-height: 40px;
+          color: #333333;
+          font-size: 16px;
+          font-weight: normal; }
+        .labs_detail_github .labsDeGit_repos .labsDeGitRepos_cnt a:hover {
+          background: #f4f4f4; }

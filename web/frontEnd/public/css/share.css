@@ -9,7 +9,7 @@
 /*
  * pageC-1: share list page 
  */
-.shareList{padding:100px 0px;margin:auto}
+.shareList{padding:100px 0px;margin:0px 10px}
 .shareList ul{overflow:hidden;zoom:1; }
 .shareList ul li{width:20%;height:160px; float: left;}
 .shareList ul li a{display:block;width:100%;height:100%;background:#fff;position:relative;overflow: hidden; }

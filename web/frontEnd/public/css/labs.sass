@@ -11,7 +11,7 @@
 
 .labsList
   padding : 100px 0px
-  margin : auto
+  margin : 0px 10px
   ul
     margin-left : -10px
     margin-right : -10px
@@ -156,7 +156,7 @@
       background : #292f36
       a
         display : block
-        width : 33.3%
+        width : 25%
         float : left
         height : 40px
         line-height : 40px
@@ -167,24 +167,23 @@
           background : rgba(0,0,0,0.3)
 
 .labs_detail_doc
-  padding : 80px 0px 20px
+  padding : 120px 0px 20px
   background : #fff
 .labs_detail_download
-  background : #ccc
-  padding-top : 60px
-  min-height : 600px
-  margin-bottom : 100px
+  background : #eee
+  padding-top : 130px
+  min-height : 500px
 .labs_detail_download_title
   width : 160px
   height : 40px
-  margin : 0px auto 50px
+  margin : 0px auto 80px
   background : url('/frontEnd/public/images/labs.png') 0px 0px
 .labs_detail_download_linkTxt
   max-width : 460px
   height : 100px
   overflow : hidden
   margin : 0 auto
-  @media screen and (max-width: 600px)
+  @media screen and (max-width: 500px)
     margin : 0 10px
   ul
     width : 400%
@@ -195,12 +194,12 @@
       position : relative
       float : left
       text-align : center
-      background : #fff
+      background : #2c3e50
       h6
         height : 30px
         padding-top : 15px
         line-height : 30px
-        color : #333
+        color : #fff
         font :
           size : 18px
           weight : normal
@@ -208,9 +207,9 @@
         height : 24px
         line-height : 24px
         font-size : 14px
-        color : #7e7e7e
+        color : #999
         a:hover
-          color : #000
+          color : #fff
           text-decoration : underline
       .labs_arrow
         position : absolute
@@ -219,7 +218,8 @@
         margin : 0px 0px -10px -10px 
         width : 20px
         height : 20px
-        color : #fff
+        line-height : 20px
+        color : #2c3e50
         font:
           size : 20px
           family : "Simsun"
@@ -256,3 +256,124 @@
   @media screen and (max-width: 600px)
     a
       margin : 0px 20px 40px
+/*github部分
+.labs_detail_github
+  background : #2c3e50
+  padding : 120px 0px 100px
+  min-height : 450px
+  position : relative
+  .labsDeGit_loading
+    width : 100px
+    height : 100px
+    position : absolute
+    top : 50%
+    left : 50%
+    margin : -50px 0px 0px -50px
+    text-align : center
+    line-height : 100px
+    color : #fff
+    font-size : 30px
+  .labsDeGit_cpt
+    height : 50px
+    line-height : 50px
+    font-size : 36px
+    color : #fff
+    text-align : center
+    margin-bottom : 60px
+  .labsDeGit_user
+    width : 184px
+    margin : 0px auto 40px
+    background : #fff
+    .labsDeGitUser_cover
+      display : block
+      width : 184px
+      height : 184px
+      img
+        display : block
+        width : 184px
+        height : 184px
+    .labsDeGitUser_name
+      a
+        display : block
+        height : 40px
+        line-height : 40px
+        text-align : center
+        border-bottom : 1px solid #f4f4f4
+        @include transition(0.4s)
+        &:hover
+          background : #f4f4f4
+      strong
+        color : #333
+        font-size : 18px
+        font-weight : normal
+        margin-right : 10px
+      span
+        color : #aaa
+        font-size : 14px
+    .labsDeGitUser_data
+      height : 45px
+      a
+        display : block
+        width : 33.3%
+        height : 45px
+        float : left
+        text-align : center
+        @include transition(0.4s)
+        strong
+          display : block
+          font-weight : normal
+          line-height : 25px
+          color : #555
+          font-size : 16px
+        span
+          display : block
+          line-height : 15px
+          color : #bbb
+          font-size : 12px
+          letter-spacing : -1px
+        &:hover
+          background : #f4f4f4
+  .labsDeGit_repos
+    margin : 0px 10px
+    background : #fff
+    .labsDeGitRepos_cpt
+      height : 40px
+      border-bottom : 1px solid #f4f4f4
+      .labsDeGitRepos_cpt_logo
+        height : 40px
+        float : left
+        padding : 0px 10px 0px 20px
+        line-height : 40px
+        color : #aaa
+      .labsDeGitRepos_cpt_root
+        line-height : 40px
+        a
+          color : #777
+          &:hover
+            color : #222
+            text-decoration : underline
+    .labsDeGitRepos_cnt
+      overflow : hidden
+      a
+        display : block
+        width : 33.3333%
+        height : 100px
+        float : left
+        text-align : center
+        .labsDeGitRepos_cnt_ico
+          display : block
+          height : 60px
+          line-height : 60px
+          font-size : 30px
+          color : #666
+        strong
+          display : block
+          height : 40px
+          line-height : 40px
+          color : #333
+          font:
+            size : 16px
+            weight : normal
+          
+        &:hover
+          background : #f4f4f4

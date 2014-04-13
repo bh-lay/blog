@@ -5,7 +5,7 @@
 define(function(require,exports){
 	require('/frontEnd/lib/juicer.js');
 	require('/frontEnd/public/css/opus.css');
-	var template = ['<div class="golCnt">',
+	var template = ['<div class="l_row">',
 		'<div class="TagLine">小剧作品，一次次小小的进步，成就平凡的自己！</div>',
 		'<div id="focusTitle">',
 			'{@if cover}',

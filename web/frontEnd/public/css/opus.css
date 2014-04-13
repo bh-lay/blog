@@ -34,7 +34,7 @@
 	.opusList {width:600px;}
 }
 @media screen and (max-width: 599px) {
-	.opusList {width:100%;}
+	.opusList {width:auto;margin:0px 10px;}
 	.opusList ul li{width:100%;max-width: 500px;float:none; margin:0px auto 20px;border-radius: 0px;}
 }
 

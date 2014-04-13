@@ -1,94 +1,276 @@
-﻿/**
+@charset "UTF-8";
+/*
  * Template Name: naive
  * Version:1.0
- * Author:	bh_lay
- * E-mail:	bh_lay@126.com
- * Blog:	http://bh-lay.com
- **/
-
-/*
- * pageB-1: blog list page 
- **/
-.articleList{width:600px;float:right; border-left: 1px dashed #fff;padding:100px 0px 100px 20px;}
-.articleItem{position: relative;z-index:1000; margin-bottom:30px;}
-.artItCpt{position:absolute; width: 280px;left: -320px;top:10px;text-align: right;}
-.artItCpt h3{font-weight: normal;line-height: 24px;}
-.artItCpt h3 a{padding:3px 10px;border-radius:4px;font-size: 16px;color:#666;background:#fff;outline:none; transition: all 0.8s ease 0s;}
-.artItCpt h3 a:hover{background:#fafafa;color:#333;}
-.artItPic h3 a:visited{color: #666;transition: all 0.2s ease 0s;}
-.artItCpt p{color:#fff;font-size: 14px;opacity:0.7;}
-.artItCnt{width:420px;background: #fff;overflow: hidden;border-radius: 8px;box-shadow: 1px 1px 4px #444;}
-.artItPic{overflow:hidden; }
-.artItPic img{display: block;max-width: 100%;margin:auto;}
-.artItInfo{padding:10px 20px;line-height: 150%;font-size:12px;color:#555;text-indent:2em;}
-.artItTag{padding:0px 20px;line-height:24px;margin-bottom:10px;font-size: 14px;color:#666;}
-.artItFrom{padding:0px 20px;line-height:30px;font-size: 14px;color:#333;}
-.artItFoot{height:20px;padding:4px 20px;background: #f2f2f2;border-top:1px solid #ccc;box-shadow: 0px 1px 2px #ddd inset;}
-.artItFoot a{height:20px;display:block;float:left;margin-right:15px;line-height:20px;}
-.artItFoot a *{height:20px;display:block;float:left;}
-.artItFoot a b{font-size:12px;font-weight:normal;color:#aaa;padding:0px 5px;}
-.artItFoot a i{width:20px;background:url(../ico.png)}
-.artItFoot .dataLike i{background-position:0px 0px;}
-.artItFoot .dataLike:hover i{width:20px;background-position:0px -20px;}
-.artItFoot .dataLike:hover b{color:#a00}
-.artItFoot .dataView i{background-position:-20px 0px;}
-.artItFoot .dataView:hover i{width:20px;background-position:-20px -20px;}
-.artItFoot .dataView:hover b{color:#000}
-.artItLace{position: absolute;top:10px;left:-25px;}
-.artItLaCircle{width: 10px;height:10px;background:#fff;border-radius:5px; float: left;margin:7px 8px 0px 0px;}
-.artItLaCorner{float: left;border-color: transparent #fff;border-style: solid;border-width: 8px 7px 8px 0px;margin:4px 0px 0px 0px;}
-
-.blog_addMore {width:420px;border-radius:4px;overflow: hidden;}
-.blog_addMore a,.blog_addMore span{display: block;height:30px;line-height:30px;text-indent:15px;}
-.blog_addMore span{background: #888;color:#fff;display: none;}
-.blog_addMore a {background: #fff;color: #333;}
-.blog_addMore a:hover {background: #ccc;color:#000}
-.blog_addMore a:active {background: #666;color:#fff;}
-
-.blog_addMore.blog_addMore_loading span{display: block;}
-.blog_addMore.blog_addMore_loading a{display: none;}
-
-
-@media screen and (min-width: 1200px){
-	.articleList{width: 40%;}
-}
-
-@media screen and (max-width:1200px) and (min-width: 880px){
-	.articleList{width: 50%;}
-}
-
-@media screen and (max-width: 879px) and (min-width: 760px){
-	.articleList{width: 440px;}
-}
-@media screen and (max-width: 759px){
-	.articleList{width: 100%;padding-left: 0px;}
-	.artItCpt{position:relative;top:0px;left:0px;background:#fff;margin:0px 0px 10px 0px;width:100%;padding:5px 0px;text-align: left;text-shadow: 0px 0px 0px transparent;box-shadow: 0px 1px 2px #333;}
-	.artItCpt:after{content: "◆";text-align:center;font-family:"Simsun";line-height:20px;color:#fff;font-size:20px;
-		display:block;width: 20px;height:20px;position: absolute;left:20px;bottom:-9px;}
-	.artItCpt h3 a{color:#333;padding-left: 15px;}
-	.artItCpt p{color:#333;padding-left: 15px;}
-	.artItCnt{border-radius: 0px;}
-	.artItCpt,.artItCnt,.blog_addMore{width:100%;margin-left:auto;margin-right:auto;}
-}
-
-/*
- * pageB-2: blog detail page 
+ * Author:  bh_lay
+ * E-mail:  bh_lay@126.com
+ * Blog:  http://bh-lay.com
  */
-.blog_article{background :#fff;margin:60px auto;}
-.article_cover{text-align:center;}
-.articletop{border-bottom: 1px dashed #CCC; text-align: center;padding : 40px 0px 20px; margin-bottom: 20px;}
-.articletop h1{font-size:30px;font-weight:normal;}
-.articletop p{color:#666;}
-.article .topicImg {display: block;margin: auto;}
-.copylink{margin : 10px 20px;}
-/*实验室*/
-.labshow {border:1px solid #ddd;line-height: 3em;margin: 2em 4em;}
-.labshow span {background:#eee;display: inline-block;height: 100%;padding: 0em 2em;}
-.labshow a {border-bottom: 1px dashed #ccc;margin-left: 4em;}
+/* pageB-1: blog list page 
+ */
+.articleList {
+  width: 600px;
+  float: right;
+  border-left: 1px dashed white;
+  padding: 100px 0px 100px 20px; }
 
+.articleItem {
+  position: relative;
+  z-index: 1000;
+  margin-bottom: 30px; }
 
+.artItCpt {
+  position: absolute;
+  width: 280px;
+  left: -320px;
+  top: 10px;
+  text-align: right; }
+  .artItCpt h3 {
+    font-weight: normal;
+    line-height: 24px; }
+    .artItCpt h3 a {
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-size: 16px;
+      color: #666666;
+      background: white;
+      outline: none;
+      transition: all 0.8s ease 0s; }
+      .artItCpt h3 a:hover {
+        background: #fafafa;
+        color: #333333; }
 
-.article .youyan {padding-top:20px;}
+.artItPic h3 a:visited {
+  color: #666666;
+  transition: all 0.2s ease 0s; }
+
+.artItCpt p {
+  color: white;
+  font-size: 14px;
+  opacity: 0.7; }
+
+.artItCnt {
+  width: 420px;
+  background: white;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 1px 1px 4px #444444; }
+
+.artItPic {
+  overflow: hidden;
+  background: #eeeeee; }
+  .artItPic img {
+    display: block;
+    max-width: 100%;
+    margin: auto; }
+
+.artItInfo {
+  padding: 10px 20px;
+  line-height: 150%;
+  font-size: 12px;
+  color: #555555;
+  text-indent: 2em; }
+
+.artItTag {
+  padding: 0px 20px;
+  line-height: 24px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #666666; }
+
+.artItFrom {
+  padding: 0px 20px;
+  line-height: 30px;
+  font-size: 14px;
+  color: #333333; }
+
+.artItFoot {
+  height: 20px;
+  padding: 4px 20px;
+  background: #f2f2f2;
+  border-top: 1px solid #cccccc;
+  box-shadow: 0px 1px 2px #dddddd inset; }
+  .artItFoot a {
+    height: 20px;
+    display: block;
+    float: left;
+    margin-right: 15px;
+    line-height: 20px; }
+    .artItFoot a * {
+      height: 20px;
+      display: block;
+      float: left; }
+    .artItFoot a b {
+      font-size: 12px;
+      font-weight: normal;
+      color: #aaaaaa;
+      padding: 0px 5px; }
+    .artItFoot a i {
+      width: 20px;
+      background: url(../ico.png); }
+  .artItFoot .dataLike i {
+    background-position: 0px 0px; }
+  .artItFoot .dataLike:hover i {
+    width: 20px;
+    background-position: 0px -20px; }
+  .artItFoot .dataLike:hover b {
+    color: #aa0000; }
+  .artItFoot .dataView i {
+    background-position: -20px 0px; }
+  .artItFoot .dataView:hover i {
+    width: 20px;
+    background-position: -20px -20px; }
+  .artItFoot .dataView:hover b {
+    color: black; }
+
+.artItLace {
+  position: absolute;
+  top: 10px;
+  left: -25px; }
+
+.artItLaCircle {
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-radius: 5px;
+  float: left;
+  margin: 7px 8px 0px 0px; }
+
+.artItLaCorner {
+  float: left;
+  border-color: transparent white;
+  border-style: solid;
+  border-width: 8px 7px 8px 0px;
+  margin: 4px 0px 0px 0px; }
+
+.blog_addMore {
+  width: 420px;
+  border-radius: 4px;
+  overflow: hidden; }
+  .blog_addMore a {
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    text-indent: 15px; }
+  .blog_addMore span {
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    text-indent: 15px;
+    background: #888888;
+    color: white;
+    display: none; }
+  .blog_addMore a {
+    background: white;
+    color: #333333; }
+    .blog_addMore a:hover {
+      background: #cccccc;
+      color: black; }
+    .blog_addMore a:active {
+      background: #666666;
+      color: white; }
+  .blog_addMore.blog_addMore_loading span {
+    display: block; }
+  .blog_addMore.blog_addMore_loading a {
+    display: none; }
+
+@media screen and (min-width: 1200px) {
+  .articleList {
+    width: 40%; } }
+@media screen and (max-width: 1200px) and (min-width: 880px) {
+  .articleList {
+    width: 50%; } }
+@media screen and (max-width: 879px) and (min-width: 760px) {
+  .articleList {
+    width: 440px; } }
+@media screen and (max-width: 759px) {
+  .articleList {
+    width: auto;
+    margin: 10px;
+    padding-left: 0px;
+    border: none; }
+
+  .artItLace {
+    display: none; }
+
+  .artItCpt {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    background: white;
+    margin: 0px 0px 10px 0px;
+    width: 100%;
+    padding: 5px 0px;
+    text-align: left;
+    text-shadow: 0px 0px 0px transparent;
+    box-shadow: 0px 1px 2px #333333; }
+    .artItCpt:after {
+      content: "◆";
+      text-align: center;
+      font-family: "Simsun";
+      line-height: 20px;
+      color: white;
+      font-size: 20px;
+      display: block;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      left: 20px;
+      bottom: -9px; }
+    .artItCpt h3 a, .artItCpt p {
+      color: #333333;
+      padding-left: 15px; }
+
+  .artItCnt {
+    border-radius: 0px; }
+
+  .artItCpt, .artItCnt, .blog_addMore {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto; } }
+/* pageB-2: blog detail page */
+.blog_article {
+  background: white;
+  margin: 60px auto; }
+
+.article_cover {
+  text-align: center; }
+
+.articletop {
+  border-bottom: 1px dashed #cccccc;
+  text-align: center;
+  padding: 40px 0px 20px;
+  margin-bottom: 20px; }
+  .articletop h1 {
+    font-size: 30px;
+    font-weight: normal; }
+  .articletop p {
+    color: #666666; }
+
+.article .topicImg {
+  display: block;
+  margin: auto; }
+
+.copylink {
+  margin: 10px 20px; }
+
+/*实验室 */
+.labshow {
+  border: 1px solid #dddddd;
+  line-height: 3em;
+  margin: 2em 4em; }
+  .labshow span {
+    background: #eeeeee;
+    display: inline-block;
+    height: 100%;
+    padding: 0em 2em; }
+  .labshow a {
+    border-bottom: 1px dashed #cccccc;
+    margin-left: 4em; }
+
+.article .youyan {
+  padding-top: 20px; }
+
 @media screen and (max-width: 1000px) {
-	.articletop h1{font-size: 24px;}
-}
+  .articletop h1 {
+    font-size: 24px; } }
