@@ -5,7 +5,10 @@ define(function(require,exports){
 	var events = require('/frontEnd/util/event.js');
 	var panel = require('/frontEnd/util/panel.js');
 	var UI = require('/frontEnd/UI/pop.js');
-		
+	
+	var fileItem = require('/frontEnd/gallery/fileItem.js');
+	var folderItem = require('/frontEnd/gallery/folderItem.js');
+	
 	var loading_tpl = '<div class="gp_loading">正在加载</div>';
 	var empty_tpl = '<div class="gp_loading">傻逼，建个空目录做啥子！</div>';
 	var base_tpl = ['<div class="gP_select">',
@@ -29,53 +32,6 @@ define(function(require,exports){
 		'<div class="gp_select_cnt gp_select_colum"></div>',
 	'</div>'].join('');
 	
-	var dir_tpl = ['<div class="gP_item" data-type="{type}" data-name="{name}">',
-		'<div class="gP_item_body">',
-		'<div class="gP_dir_item">',
-			'<div class="gP_file-ico"><span class="glyphicon glyphicon-folder-open"></span></div>',
-			'<div class="gP_file-name" title="{name}" >{name}</div>',
-		'</div>',
-		'<div class="gP_item_tools">',
-			'<div class="gP_item_toolsCnt">',
-				'<a href="javascript:void(0)" class="gP_tool_btn" data-action="del">',
-					'<span class="gP_tool_btn_ico"><span class="glyphicon glyphicon-trash"></span></span>',
-					'<strong class="gP_tool_btn_name">删除</strong>',
-				'</a>',
-				'<a href="javascript:void(0)" class="gP_tool_btn" data-action="rename">',
-					'<span class="gP_tool_btn_ico"><span class="glyphicon glyphicon-pencil"></span>',
-					'<strong class="gP_tool_btn_name">重命名</strong>',
-				'</a>',
-			'</div>',
-		'</div>',
-		'<a href="javascript:void(0)" class="gP_item_toolBar"><span class="glyphicon glyphicon-chevron-down"></span></a>',
-		'<a href="javascript:void(0)" class="gP_item_check"><span class="glyphicon glyphicon-unchecked"></span><span class="glyphicon glyphicon-check"></span></a>',
-	'</div>',
-	'</div>'].join('');
-	
-	var file_item_tpl = ['<div class="gP_item" data-type="{type}" data-name="{name}">',
-		'<div class="gP_item_body">',
-		'<div class="gP_file_item">',
-			'<div class="gP_file-ico">{ico}</div>',
-			'<div class="gP_file-name" title="{name}" >{name}</div>',
-		'</div>',
-		'<div class="gP_item_tools">',
-			'<div class="gP_item_toolsCnt">',
-				'<a href="javascript:void(0)" class="gP_tool_btn" data-action="del">',
-					'<span class="gP_tool_btn_ico"><span class="glyphicon glyphicon-trash"></span></span>',
-					'<strong class="gP_tool_btn_name">删除</strong>',
-				'</a>',
-				'<a href="javascript:void(0)" class="gP_tool_btn" data-action="rename">',
-					'<span class="gP_tool_btn_ico"><span class="glyphicon glyphicon-pencil"></span>',
-					'<strong class="gP_tool_btn_name">重命名</strong>',
-				'</a>',
-			'</div>',
-		'</div>',
-		'<a href="javascript:void(0)" class="gP_item_toolBar"><span class="glyphicon glyphicon-chevron-down"></span></a>',
-		'<a href="javascript:void(0)" class="gP_item_check"><span class="glyphicon glyphicon-unchecked"></span><span class="glyphicon glyphicon-check"></span></a>',
-	'</div>',
-	'</div>'].join('');
-
-
 	function render(tpl,data){
 		var txt = '';
 		for(var i=0 in data){
@@ -113,11 +69,8 @@ define(function(require,exports){
 								'type' : 'folder'
 							});
 						}else{
-							var match = data.files[i]['name'].match(/\.(\w+)$/);
-							type = match ? match[1] : '';
 							newData['files'].push({
-								'name' : data.files[i]['name'],
-								'type' : type
+								'name' : data.files[i]['name']
 							});
 						}
 					}
@@ -128,47 +81,7 @@ define(function(require,exports){
 			}
 		});
 	}
-	
-	//删除文件
-	function delFile(pathname,callback){
-		$.ajax({
-			'url' : '/ajax/asset/del',
-			'type' : 'POST',
-			'data' : {
-				'path' : pathname
-			},
-			'dataType' : 'json',
-			'success' : function(data){
-				callback && callback(null,data);
-			},
-			'error' : function(){
-				callback && callback('网络出错');
-			}
-		});
-	}
-	//删除目录
-	function delDir(pathname,callback){
-		$.ajax({
-			'url' : '/ajax/asset/delDir',
-			'type' : 'POST',
-			'data' : {
-				'path' : pathname
-			},
-			'dataType' : 'json',
-			'success' : function(data){
-				if(data && data.code == 200){
-					callback && callback(null);
-				}else{
-					var msg = '删除失败,code(' + (data.msg || '') + ')';
-					callback && callback(msg);
-				}
-			},
-			'error' : function(){
-				callback && callback('网络出错');
-			}
-		});
-	}
-	
+
 	
 	function bindEvent(){
 		var this_select = this;
@@ -195,8 +108,19 @@ define(function(require,exports){
 				'files' : files
 			};
 		}
+		thisUpload.on('startUpload',function(ID,files){
+			console.log(arguments);
+	
+			for(var i in files){
+				var fileNew = new fileItem(this_select.root,{
+					'name' : files[i]['name']
+				});
+				this_select.files.push(fileNew);
+				this_select.cntDom.append(fileNew.dom);
+			}
+		});
 		thisUpload.on('success',function(){
-			this_select.refresh();
+			//this_select.refresh();
 		});
 		
 		this.dom.on('click','.gP_dir_item',function(){
@@ -227,222 +151,12 @@ define(function(require,exports){
 			});
 		});
 	}
-	/**
-	 * 为目录/文件绑定事件
-	 * 对象必须包含属性
-	 *   dom
-	 * 方法
-	 *   del
-	 * 
-	 */
-	function bindItemEvent(){
-		var this_item = this;
-		var itemDom = this.dom;
-		itemDom.on('click','a[data-action="del"]',function(){
-			//删除
-			var name = itemDom.attr('data-name');
-			UI.confirm({
-				'text' : '删除就找不回来了，你再想想？',
-				'callback' : function(){
-					var type = 'file';
-					if(itemDom.attr('data-type') == 'folder'){
-						type = 'folder';
-					}
-					this_item.del();
-				}
-			});
-		}).on('click','.gP_item_toolBar',function(){
-			//打开操作面板状态
-			if(itemDom.hasClass('gP_item_menuing')){
-				itemDom.removeClass('gP_item_menuing');
-			}else{
-				itemDom.removeClass('gP_item_menuing');
-				itemDom.addClass('gP_item_menuing');
-			//	this_item.dom.find('.gP_item').removeClass('gP_item_checked');
-			}
-		}).on('click','.gP_item_check',function(){
-			//选中状态
-			
-			if(itemDom.hasClass('gP_item_checked')){
-				itemDom.removeClass('gP_item_checked');
-			}else{
-				itemDom.addClass('gP_item_checked');
-			}
-		//	this_item.dom.find('.gP_item').removeClass('gP_item_menuing');
-		});
-		
-		//文件（文件夹）绑定右键
-		var itemMenu = panel({
-			'targets' : '.gP_item',
-			'callback':function(name) {
-				console.log('you have chioce "' , name , '" from the [ ' , this , ']');
-			},
-			'callbefore' : function(){
-			//	console.log('you have panel [ ' , this , ']');
-			}
-		});
-		
-		//指定类型
-		itemMenu.type = 'menu';
-		//增删菜单条目
-		itemMenu.add('open',{'txt':'打开'},function(){
-			//打开
-			var name = $(this).attr('data-name');
-			this_item.open(name);
-		});
-		itemMenu.add('rename',{'txt':'重命名'},function(){
-			//重命名
-			var name = $(this).attr('data-name');
-			var ask = UI.ask('快想一个新名字！', function(txt){
-				this_item.rename(txt);
-			});
-			//获取纯文件名，去除后缀名
-			var nameMatch = name.match(/(.+)\.((?:\w|\s|\d)+)$/);
-			var pureName = nameMatch ? nameMatch[1] : name;
-			ask.setValue(pureName);
-		});
-		itemMenu.add('delete',{'txt':'删除'},function(){
-			//删除
-			var item = $(this);
-			var name = item.attr('data-name');
-			UI.confirm({
-				'text' : '删除就找不回来了，你再想想？',
-				'callback' : function(){
-					var type = 'file';
-					if(item.attr('data-type') == 'folder'){
-						type = 'folder';
-					}
-					this_item.del();
-				}
-			});
-		});
-	}
-	/**
-	 *  目录类
-	 * @param {Object} dom
-	 * @param {Object} param
-	 */
-	function folderItem(dom,data){
-		this.title = '';
-		this.path = '';
-		this.url = '';
-		/**
-		 * 状态
-		 * 正常 normal
-		 * 选中 selected
-		 * 菜单 menuing
-		 */
-		this.status = 'normal';
-		
-		var html = render(dir_tpl,[data]);
-		this.dom = $(html);
-		
-		dom.append(this.dom);
-		bindItemEvent.call(this);
-	}
-	folderItem.prototype = {
-		'del' : function(){
-			var path = this.path;
-			delDir(path,function(err){
-				if(err){
-					UI.prompt(err);
-					return;
-				}
-			//	this_select.refresh();
-			});
-		},
-		'rename' : function(filename,txt,callback){
-		//	console.log(name,txt);
-			if(!filename || !txt || filename.length < 0 || txt.length < 0){
-				callback && callback('参数不全');
-				return;
-			}
-			
-			var newName = txt;
-
-			$.ajax({
-				'url' : '/ajax/asset/rename',
-				'type' : 'POST',
-				'data' : {
-					'root' : this.root,
-					'oldName' : filename,
-					'newName' : newName
-				},
-				'dataType' : 'json',
-				'success' : function(data){
-					callback && callback(null,data);
-				},
-				'error' : function(){
-					callback && callback('网络出错');
-				}
-			});
-		}
-	};
-	/**
-	 * 文件类
-	 * @param {Object} dom
-	 * @param {Object} param
-	 */
-	function fileItem(dom,data){
-		this.title = '';
-		this.path = '';
-		this.url = '';
-		/**
-		 * 状态
-		 * 正常 normal
-		 * 选中 selected
-		 * 菜单 menuing
-		 */
-		this.status = 'normal';
-		
-		var html = render(file_item_tpl,[data]);
-		this.dom = $(html);
-		dom.append(this.dom);
-		bindItemEvent.call(this);
-	}
-	fileItem.prototype = {
-		'del' : function(){
-			var path = this.path;
-			delFile(path,function(err){
-				if(err){
-					UI.prompt(err);
-					return;
-				}
-			//	this_select.refresh();
-			});
-		},
-		'rename' : function(filename,txt,callback){
-		//	console.log(name,txt);
-			if(!filename || !txt || filename.length < 0 || txt.length < 0){
-				callback && callback('参数不全');
-				return;
-			}
-			
-			var newName = txt;
-
-			$.ajax({
-				'url' : '/ajax/asset/rename',
-				'type' : 'POST',
-				'data' : {
-					'root' : this.root,
-					'oldName' : filename,
-					'newName' : newName
-				},
-				'dataType' : 'json',
-				'success' : function(data){
-					callback && callback(null,data);
-				},
-				'error' : function(){
-					callback && callback('网络出错');
-				}
-			});
-		}
-	};
+	
 	/**
 	 * 文件选择类
 	 */
 	function SELECT(dom,param){
-		this.root = '';
+		this.root = '/';
 		
 		this.dom = $(base_tpl);
 		this._layout = 'colum';
@@ -459,7 +173,6 @@ define(function(require,exports){
 		this.open('');
 		this.layout('colum');
 		
-	window.as = this;
 	}
 	SELECT.prototype = {
 		'open' : function(filename){
@@ -470,29 +183,6 @@ define(function(require,exports){
 			path = path.length>0 ? path : '/';
 	//		console.log(path,'333')
 			this.jump(path);
-		},
-		'del' : function(name,type){
-			var this_select = this;
-			
-			var path = this.root + '/' + name;
-			path = path.replace(/\/+/g,'/');
-			if(type == 'folder'){
-				delDir(path,function(err){
-					if(err){
-						UI.prompt(err);
-						return;
-					}
-					this_select.refresh();
-				});
-			}else{
-				delFile(path,function(err){
-					if(err){
-						UI.prompt(err);
-						return;
-					}
-					this_select.refresh();
-				});
-			}
 		},
 		'layout' : function(input){
 			var type = '';
@@ -546,34 +236,6 @@ define(function(require,exports){
 				}
 			});
 		},
-		'rename' : function(filename,txt,callback){
-		//	console.log(name,txt);
-			var this_select = this;
-			if(!filename || !txt || filename.length < 0 || txt.length < 0){
-				callback && callback('参数不全');
-				return;
-			}
-			
-			var newName = txt;
-
-			$.ajax({
-				'url' : '/ajax/asset/rename',
-				'type' : 'POST',
-				'data' : {
-					'root' : this.root,
-					'oldName' : filename,
-					'newName' : newName
-				},
-				'dataType' : 'json',
-				'success' : function(data){
-					this_select.refresh();
-					callback && callback(null,data);
-				},
-				'error' : function(){
-					callback && callback('网络出错');
-				}
-			});
-		},
 		'back' : function(){
 			var root = this.root;
 			//去除最后一节目录
@@ -591,40 +253,39 @@ define(function(require,exports){
 			this.jump(path);
 		},
 		//跳转至指定目录
-		'jump' : function(path){
+		'jump' : function(basePath){
 			var this_select = this;
 			var cntDom = this.cntDom;
 			cntDom.html(loading_tpl);
-			this.pathDom.html(path);
-			getData(path,function(err,data){
+			this.pathDom.html(basePath);
+			getData(basePath,function(err,data){
 				if(err){
 					cntDom.html('错啦！');
 					return
 				}
 				if(data.dir.length + data.files.length > 0){
 					cntDom.html('');
-					for(var i in data.files){
-						var extHtml = '<span class="glyphicon glyphicon-file"></span>';
-						if(data.files[i]['type'].match(/^jpg|gif|jpeg|png$/i)){
-							extHtml = '<span class="glyphicon glyphicon-picture"></span>';
-						}
-						data.files[i]['ico'] = extHtml;
-					}
 					this_select.folders = [];
 					this_select.files = [];
 					for(var i in data.dir){
-						var folderNew = new folderItem(cntDom,data.dir[i]);
+						var folderNew = new folderItem(basePath,{
+							'name' : data.dir[i]['name']
+						});
+						cntDom.append(folderNew.dom);
 						this_select.folders.push(folderNew);
 					}
 					for(var i in data.files){
-						var fileNew = new fileItem(cntDom,data.files[i]);
+						var fileNew = new fileItem(basePath,{
+							'name' : data.files[i]['name']
+						});
+						cntDom.append(fileNew.dom);
 						this_select.files.push(fileNew);
 					}
 				}else{
 					cntDom.html(empty_tpl);
 				}
 				
-				this_select.root = path;
+				this_select.root = basePath;
 				this_select.emit('fresh',this_select.root);
 			});
 		},

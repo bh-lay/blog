@@ -229,6 +229,18 @@
 .gP_item_menuing .gP_item_check {
   display: none; }
 
+/*deleted animation */
+.gP_item_deleted {
+  transition: 0s;
+  -moz-transition-duration: 0s;
+  -webkit-transition-duration: 0s;
+  -o-transition-duration: 0s; }
+  .gP_item_deleted .gP_item_body {
+    transition: 0s;
+    -moz-transition-duration: 0s;
+    -webkit-transition-duration: 0s;
+    -o-transition-duration: 0s; }
+
 /*Grid layout */
 .gp_select_grid {
   margin-left: -5px;

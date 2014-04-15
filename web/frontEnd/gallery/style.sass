@@ -4,7 +4,6 @@
   -webkit-transition-duration : $seconds
   -o-transition-duration : $seconds
 
-
 /*loading*/
 .gp_loading
   width : 100%
@@ -221,7 +220,12 @@
     height : 100%
   .gP_item_check
     display : none
-    
+/*deleted animation*/
+.gP_item_deleted
+  @include transition(0s)
+  .gP_item_body
+    @include transition(0s)
+  
 /*Grid layout*/
 .gp_select_grid
   margin-left : -5px

@@ -1,6 +1,8 @@
 /**
  * @author bh-lay
- * 
+ * @github https://github.com/bh-lay/tie.js
+ * @modified 2014-4-15 10:09
+ *  location fox
  * 处理既要相对于某个模块固定，又要在其可视时悬浮的页面元素
  * util.tie({
 		'dom' : ,			//需要浮动的元素
