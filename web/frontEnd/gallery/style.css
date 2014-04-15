@@ -141,7 +141,13 @@
   font-size: 12px;
   overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis; }
+  text-overflow: ellipsis;
+  color: #555555; }
+  .gP_file-name strong {
+    font-weight: normal; }
+  .gP_file-name span {
+    padding-left: 3px;
+    color: #aaaaaa; }
 
 .gP_dir_item:hover .gP_file-ico,
 .gP_file_item:hover .gP_file-ico {

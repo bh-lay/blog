@@ -4,11 +4,11 @@ define(function(require,exports){
 	var panel = require('/frontEnd/util/panel.js');
 	var UI = require('/frontEnd/UI/pop.js');
 	
-	var file_item_tpl = ['<div class="gP_item file_item_{id}" data-name="{name}">',
+	var file_item_tpl = ['<div class="gP_item file_item_{id}">',
 		'<div class="gP_item_body">',
 		'<div class="gP_file_item">',
 			'<div class="gP_file-ico">{ico}</div>',
-			'<div class="gP_file-name" title="{name}" >{name}</div>',
+			'<div class="gP_file-name" title="{filename}{extension}" ><strong>{filename}</strong><span>{extension}</span></div>',
 		'</div>',
 		'<div class="gP_item_tools">',
 			'<div class="gP_item_toolsCnt">',
@@ -107,14 +107,7 @@ define(function(require,exports){
 		//增删菜单条目
 		itemMenu.add('rename',{'txt':'重命名'},function(){
 			//重命名
-			var name = $(this).attr('data-name');
-			var ask = UI.ask('快想一个新名字！', function(txt){
-				this_item.rename(txt);
-			});
-			//获取纯文件名，去除后缀名
-			var nameMatch = name.match(/(.+)\.((?:\w|\s|\d)+)$/);
-			var pureName = nameMatch ? nameMatch[1] : name;
-			ask.setValue(pureName);
+			this_item.rename();
 		});
 		itemMenu.add('delete',{'txt':'删除'},function(){
 			//删除
@@ -144,15 +137,21 @@ define(function(require,exports){
 		 */
 		this.status = 'normal';
 					
-		var match = this['name'].match(/\.(\w+)$/);
-		var type = match ? match[1] : '';
+		var match = this['name'].match(/(.*)\.(\w+)$/);
+		
+		this.file = {
+			'filename' : match ? match[1] : this['name'],
+			'extension' : match ? '.' + match[2] : ''
+		};
+		
+		
 		var extHtml = '<span class="glyphicon glyphicon-file"></span>';
-		if(type.match(/^jpg|gif|bmp|jpeg|png$/i)){
+		if(this.file.extension.match(/^jpg|gif|bmp|jpeg|png$/i)){
 			extHtml = '<span class="glyphicon glyphicon-picture"></span>';
 		}
-		
 		var html = render(file_item_tpl,[{
-			'name' : this['name'],
+			'filename' : this.file['filename'],
+			'extension' : this.file['extension'],
 			'ico' : extHtml,
 			'id' : private_item_ID
 		}]);
@@ -197,6 +196,7 @@ define(function(require,exports){
 		},
 		'rename' : function(callback){
 		//	console.log(name,txt);
+			var this_item = this;
 			var filename = this.name;
 			var baseRoot = this.root;
 			var ask = UI.ask('快想一个新名字！', function(txt){
@@ -212,7 +212,16 @@ define(function(require,exports){
 					},
 					'dataType' : 'json',
 					'success' : function(data){
-						callback && callback(null,data);
+						if(data && data.code == 200){
+							this_item.file.filename = newName;
+							this_item.name = this_item.file.filename + this_item.file.extension;
+							var item_dom = this_item.dom.find('.gP_file-name');
+							item_dom.find('strong').html(this_item.file.filename);
+							item_dom.attr('title',this_item.name);
+							callback && callback(null,data);
+						}else{
+							callback && callback('重命名失败');
+						}
 					},
 					'error' : function(){
 						callback && callback('网络出错');
@@ -220,9 +229,8 @@ define(function(require,exports){
 				});
 			});
 			//获取纯文件名，去除后缀名
-			var nameMatch = name.match(/(.+)\.((?:\w|\s|\d)+)$/);
-			var pureName = nameMatch ? nameMatch[1] : name;
-			ask.setValue(pureName);
+			
+			ask.setValue(this.file.filename);
 		}
 	};
 
