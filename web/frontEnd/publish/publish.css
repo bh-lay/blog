@@ -7,9 +7,13 @@
 .publish_cpt a:hover{background: #d30;opacity: 1;text-decoration: none;}
 .publish_cpt a.active{position:relative;z-index:1; background: #f3f3f3;color:#333;opacity: 1;box-shadow: 0px 0px 15px #000;}
 
-.pub_row_input{display: table;width:100%;margin-bottom:15px;}
-.pub_row_input input{display:table-cell;width:100%;height:34px;line-height:26px;padding:0px 10px; border:none;font-size: 14px;}
-.pub_row_input textarea{display:table-cell;width:100%;min-height:90px;padding:5px 10px;border:none;resize: vertical;top:0px;left:0px;}
+.pub_row_input{width:100%;margin-bottom:15px;}
+.pub_row_input input{width:100%;height:34px;line-height:26px;padding:0px 10px; border:none;font-size: 14px;}
+.pub_row_input textarea{width:100%;min-height:90px;padding:5px 10px;border:none;resize: vertical;top:0px;left:0px;}
+
+.pub_row_image{position:relative;height:150px;margin-bottom:20px;background-position: center center;background-repeat:no-repeat;background-size:contain;background-color:#fff;}
+.pub_cover_btn{position:absolute;top:0px;right:0px;width:100px;height:30px;line-height: 30px;text-align: center;font-size: 16px;color:#666;}
+.pub_cover_btn:hover{}
 
 /*博文*/
 .pub_article{margin:0px 20px;padding:20px 0px;}

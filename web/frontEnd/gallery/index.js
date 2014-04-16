@@ -384,7 +384,7 @@ define(function(require,exports){
 		},
 		'selection' : function(){
 			var selectedFiles = [];
-			var filesTotal = all.length;
+			var filesTotal = this.files.length;
 			for(var i=0;i<filesTotal;i++){
 				if(this.files[i].status == 'selected'){
 					selectedFiles.push({
@@ -410,6 +410,7 @@ define(function(require,exports){
 		
 		pop.dom.find('.galleryPop_footer a').on('click',function(){
 			callback && callback(explorer.selection());
+			pop.close();
 		});
 		
 	};

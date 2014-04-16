@@ -27,8 +27,13 @@ define(function(require,exports){
 		'<div class="pub_row_input">',
 			'<textarea class="mditor" placeholder="博文正文" name="content">{content}</textarea>',
 		'</div>',
+		'<div class="pub_row_image">',
+			'<div class="pub_row_image" style="background-image:url({cover});">',
+				'<a class="pub_cover_btn" href="javascript:void(0)">选择</a>',
+			'</div>',
+			'<input type="hidden" placeholder="缩略图" name="cover" value="{cover}" />',
+		'</div>',
 		'<div>',
-			'<input type="text" placeholder="缩略图" name="cover" value="{cover}" />',
 			'<input type="text" placeholder="标签" name="tags" value="{tags}" />',
 			'<input type="text" placeholder="作者" name="author" value="{author}" />',
 			'<input type="text" placeholder="发表时间" name="time_show" value="{time_show}" />',
@@ -69,11 +74,14 @@ define(function(require,exports){
 		var new_html = valueInit(article_tpl,data);
 		dom.html(new_html);
 		mditor.bind(dom.find('textarea.mditor'));
-		dom.find('input[name="cover"]').click(function(){
-			gallery.pop(function(){
-				console.log(arguments);
+		dom.find('.pub_cover_btn').click(function(){
+			gallery.pop(function(files){
+				if(files && files.length>0){
+					var url = files[0]['url'];
+					dom.find('.pub_row_image').css('backgroundImage','url(' + url + ')');
+					dom.find('input[name="cover"]').val(url);
+				}
 			});
-			return false;
 		});
 		
 		admin.formToAjax(dom,{

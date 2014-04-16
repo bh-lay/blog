@@ -79,7 +79,8 @@ define(function(require,exports){
 			'fullname' : fullname,
 			'filename' : filename,
 			'extension' : extension,
-			'pathname' : pathname
+			'pathname' : pathname,
+			'url' : url
 		};
 	}
 	
@@ -128,14 +129,8 @@ define(function(require,exports){
 			//	this_file.dom.find('.gP_item').removeClass('gP_item_checked');
 			}
 		}).on('click','.gP_item_check',function(){
-			//选中状态
-			
-			if(itemDom.hasClass('gP_item_checked')){
-				itemDom.removeClass('gP_item_checked');
-			}else{
-				itemDom.addClass('gP_item_checked');
-			}
-		//	this_file.dom.find('.gP_item').removeClass('gP_item_menuing');
+			//切换选中状态
+			this_file.select();
 		});
 	}
 	
@@ -239,6 +234,15 @@ define(function(require,exports){
 			});
 			//设置对话框纯文件名
 			ask.setValue(this.filename);
+		},
+		'select' : function(){
+			if(this.status == 'selected'){
+				this.status = 'normal';
+				this.dom.removeClass('gP_item_checked');
+			}else{
+				this.status = 'selected';
+				this.dom.addClass('gP_item_checked');
+			}
 		}
 	};
 
