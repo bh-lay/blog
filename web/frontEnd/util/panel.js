@@ -50,13 +50,13 @@ window.util.panel = window.util.panel || function(param) {
 	////////////////////////////////////////////
 	var console = window.console || {'log':function(){}};
 	
-	var pvt_win = $(window),
-		 pvt_winW = pvt_win.width(),
-		 pvt_winH = pvt_win.height(),
-		 pvt_panel = null,
-		 pvt_body = $('html,body'),
-		 pvt_scrollTop,
-		 pvt_scrollLeft;
+	var private_win = $(window),
+		 private_winW,
+		 private_winH,
+		 private_scrollTop,
+		 private_scrollLeft,
+		 private_active_panel = null,
+		 private_body = $('html,body');
 
 	var menu_tpl = ['<div class="panel_menu panel_mark"><ul class="pa_me_list">{-content-}</ul></div>'];
 	var dock_tpl = ['<div class="panel_dock panel_mark"><div class="pa_do_body">{-content-}</div></div>'];
@@ -77,6 +77,12 @@ window.util.panel = window.util.panel || function(param) {
 		'.panel_dock a:hover{color:#222;background:#eee;}',
 	'</style>'];
 	
+	function reCountSize(){
+		private_winW = private_win.width();
+		private_winH = private_win.height();
+		private_scrollTop = private_win.scrollTop();
+		private_scrollLeft = private_win.scrollLeft();
+	}
 	function change_dispaly(name, check) {
 		if(typeof (this['list'][name]) == "object") {
 			this['list'][name]['display'] = check;
@@ -84,13 +90,16 @@ window.util.panel = window.util.panel || function(param) {
 	}
 	// Unified to remove panel dom
 	function remove_panel(){
-		if(pvt_panel){
-			pvt_panel.fadeOut(100,function(){
+		if(private_active_panel){
+			private_active_panel.fadeOut(100,function(){
 				$(this).remove();
 			});
-			pvt_panel = null;
+			private_active_panel = null;
 		}
 	}
+	//重算浏览器尺寸
+	reCountSize();
+	setTimeout(reCountSize,1000);
 	$(function(){
 		$('head').append(style_tpl.join(''));
 		//try to close panel
@@ -108,18 +117,12 @@ window.util.panel = window.util.panel || function(param) {
 			return false;
 		});
 		
-		function reSize(){
-			pvt_winW = pvt_win.width();
-			pvt_winH = pvt_win.height();
-			pvt_scrollTop = pvt_win.scrollTop();
-			pvt_scrollLeft = pvt_win.scrollLeft();
-		}
 		//window resize 
 		var delay;
 		$(window).on('resize scroll',function(){
 			clearTimeout(delay);
 			delay = setTimeout(function(){
-				reSize();
+				reCountSize();
 				remove_panel();
 			},100);
 		});
@@ -179,17 +182,17 @@ window.util.panel = window.util.panel || function(param) {
 		//append panel dom and mark the dom mark
       remove_panel();
 		$('body').append(panel_dom);
-		pvt_panel = panel_dom;
+		private_active_panel = panel_dom;
 		
 		// setting panel dom position
 		var panel_h = panel_dom.outerHeight(),
 			 panel_w = panel_dom.outerWidth();
 		
-		if(panel_h + top > pvt_winH + pvt_scrollTop){
-			top = pvt_scrollTop + pvt_winH - panel_h;
+		if(panel_h + top > private_winH + private_scrollTop){
+			top = private_scrollTop + private_winH - panel_h;
 		}
-		if(panel_w + left > pvt_winW + pvt_scrollLeft){
-			left = pvt_scrollLeft + pvt_winW - panel_w
+		if(panel_w + left > private_winW + private_scrollLeft){
+			left = private_scrollLeft + private_winW - panel_w
 		}
 		panel_dom.css({
 			'top' : top,

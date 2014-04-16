@@ -6,8 +6,7 @@ define(function(require,exports){
 	var panel = require('/frontEnd/util/panel.js');
 	var UI = require('/frontEnd/UI/pop.js');
 	
-	
-	var dir_tpl = ['<div class="gP_item" data-type="folder" data-name="{name}">',
+	var dir_tpl = ['<div class="gP_item" data-type="folder" data-fullname="{name}">',
 		'<div class="gP_item_body">',
 		'<div class="gP_dir_item">',
 			'<div class="gP_file-ico"><span class="glyphicon glyphicon-folder-open"></span></div>',
@@ -79,6 +78,9 @@ define(function(require,exports){
 		itemDom.on('click','a[data-action="del"]',function(){
 			//删除
 			this_item.del();
+		}).on('click','a[data-action="rename"]',function(){
+			//重命名
+			this_item.rename();
 		}).on('click','.gP_item_toolBar',function(){
 			//打开操作面板状态
 			if(itemDom.hasClass('gP_item_menuing')){
@@ -106,8 +108,8 @@ define(function(require,exports){
 	 * @param {Object} param
 	 */
 	function folderItem(basePath,data){
-		this.name = data.name;
-		this.path = '/' + basePath + '/' + this.name;
+		this.fullname = data.name;
+		this.path = '/' + basePath + '/' + this.fullname;
 		//过滤重复的路径中重复的//
 		this.path = this.path.replace(/\/+/g,'/');
 		
@@ -121,7 +123,7 @@ define(function(require,exports){
 		this.status = 'normal';
 		
 		var html = render(dir_tpl,[{
-			'name' : this.name
+			'name' : this.fullname
 		}]);
 		this.dom = $(html);
 		
@@ -161,95 +163,37 @@ define(function(require,exports){
 				}
 			});
 		},
-		'rename' : function(filename,txt,callback){
-		//	console.log(name,txt);
-			if(!filename || !txt || filename.length < 0 || txt.length < 0){
-				callback && callback('参数不全');
-				return;
-			}
-			
-			var newName = txt;
-
-			$.ajax({
-				'url' : '/ajax/asset/rename',
-				'type' : 'POST',
-				'data' : {
-					'root' : this.root,
-					'oldName' : filename,
-					'newName' : newName
-				},
-				'dataType' : 'json',
-				'success' : function(data){
-					callback && callback(null,data);
-				},
-				'error' : function(){
-					callback && callback('网络出错');
-				}
-			});
-		}
-	};
-
-
-	var a = {
-		'open' : function(filename){
-			var this_select = this;
-			var path = this.root + '/' + filename;
-	//		console.log(path,'22')
-			path = path.replace(/\/+/g,'/');
-			path = path.length>0 ? path : '/';
-	//		console.log(path,'333')
-			this.jump(path);
-		},
-		'del' : function(name,type){
-			var this_select = this;
-			
-			var path = this.root + '/' + name;
-			path = path.replace(/\/+/g,'/');
-			if(type == 'folder'){
-				delDir(path,function(err){
-					if(err){
-						UI.prompt(err);
-						return;
+		'rename' : function(callback){
+			var this_folder = this;
+			var ask = UI.ask('快想一个新名字！', function(txt){
+				var newName = txt;
+				$.ajax({
+					'url' : '/ajax/asset/rename',
+					'type' : 'POST',
+					'data' : {
+						'root' : this_folder.root,
+						'oldName' : this_folder.fullname,
+						'newName' : newName
+					},
+					'dataType' : 'json',
+					'success' : function(data){
+						if(data && data.code == 200){
+							callback && callback(null,data);
+							this_folder.dom.attr('data-fullname',newName);
+							this_folder.dom.find('.gP_file-name')
+								.attr('title',newName)
+								.html(newName);
+						}else{
+							
+						}
+					},
+					'error' : function(){
+						callback && callback('网络出错');
 					}
-					this_select.refresh();
 				});
-			}else{
-				delFile(path,function(err){
-					if(err){
-						UI.prompt(err);
-						return;
-					}
-					this_select.refresh();
-				});
-			}
-		},
-		'rename' : function(filename,txt,callback){
-		//	console.log(name,txt);
-			var this_select = this;
-			if(!filename || !txt || filename.length < 0 || txt.length < 0){
-				callback && callback('参数不全');
-				return;
-			}
-			
-			var newName = txt;
-
-			$.ajax({
-				'url' : '/ajax/asset/rename',
-				'type' : 'POST',
-				'data' : {
-					'root' : this.root,
-					'oldName' : filename,
-					'newName' : newName
-				},
-				'dataType' : 'json',
-				'success' : function(data){
-					this_select.refresh();
-					callback && callback(null,data);
-				},
-				'error' : function(){
-					callback && callback('网络出错');
-				}
 			});
+			//设置对话框纯文件名
+			ask.setValue(this.fullname);
 		}
 	};
 	

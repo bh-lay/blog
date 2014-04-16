@@ -269,6 +269,8 @@ body {
     -moz-transition-duration: 0.2s;
     -webkit-transition-duration: 0.2s;
     -o-transition-duration: 0.2s; }
+    .nav_mainList .nav {
+      padding-top: 20px; }
 
   /*下拉菜单时 */
   .nav_slidedown .nav_mainList {

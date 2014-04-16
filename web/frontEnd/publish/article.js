@@ -70,7 +70,10 @@ define(function(require,exports){
 		dom.html(new_html);
 		mditor.bind(dom.find('textarea.mditor'));
 		dom.find('input[name="cover"]').click(function(){
-			gallery.pop();
+			gallery.pop(function(){
+				console.log(arguments);
+			});
+			return false;
 		});
 		
 		admin.formToAjax(dom,{

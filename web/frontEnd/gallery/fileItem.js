@@ -4,11 +4,11 @@ define(function(require,exports){
 	var panel = require('/frontEnd/util/panel.js');
 	var UI = require('/frontEnd/UI/pop.js');
 	
-	var file_item_tpl = ['<div class="gP_item file_item_{id}">',
+	var file_item_tpl = ['<div class="gP_item" data-type="file" data-fullname="{fullname}" >',
 		'<div class="gP_item_body">',
 		'<div class="gP_file_item">',
 			'<div class="gP_file-ico">{ico}</div>',
-			'<div class="gP_file-name" title="{filename}{extension}" ><strong>{filename}</strong><span>{extension}</span></div>',
+			'<div class="gP_file-name" title="{fullname}" ><strong>{filename}</strong><span>{extension}</span></div>',
 		'</div>',
 		'<div class="gP_item_tools">',
 			'<div class="gP_item_toolsCnt">',
@@ -29,14 +29,58 @@ define(function(require,exports){
 
 
 	function render(tpl,data){
-		var txt = '';
-		for(var i=0 in data){
-			txt += tpl.replace(/{(\w*)}/g,function(){
-				var key = arguments[1];
-				return data[i][key] || '';
-			});
+		var extHtml = '<span class="glyphicon glyphicon-file"></span>';
+		if(data.extension.match(/^\.(jpg|gif|bmp|jpeg|png)$/i)){
+			extHtml = '<span class="glyphicon glyphicon-picture"></span>';
+		}else if(data.extension.match(/^\.(zip|rar|tar)$/i)){
+			extHtml = '<span class="glyphicon glyphicon-compressed"></span>';
 		}
+		data.ico = extHtml;
+		var txt = '';
+		txt += tpl.replace(/{(\w*)}/g,function(){
+			var key = arguments[1];
+			return data[key] || '';
+		});
 		return txt;
+	}
+	
+	
+	/**
+	 * @method parseFullname 解析文件名
+	 * @param String fullname 文件全名
+	 * @param String basePath 文件所在目录
+	 * @param String domain 文件所在域名
+	 * 
+	 * @returns Object file 文件对象
+	 * @returns String file.fullname 文件全名
+	 * @returns String file.filename 文件名
+	 * @returns String file.extension 扩展名
+	 * @returns String file.pathname 文件所在路径+文件全名
+	 * @returns String file.url 文件绝对地址
+	 * 
+	 * @example
+	 * 	var file = parseFullname('readme.txt');
+	 * 	file.fullname; //'readme.txt'
+	 * 	file.filename; //'readme'
+	 * 	file.extension; //'.txt'
+	 */
+	function parseFullname(fullname,basePath,domain){
+		var fullname = fullname || '';
+
+		var match = fullname.match(/(.*)\.(\w+)$/);
+		var filename = match ? match[1] : fullname;
+		var extension = match ? '.' + match[2] : '';
+		var pathname = '/' + basePath + '/' + fullname;
+		//过滤重复的路径中重复的//
+		pathname = pathname.replace(/\/+/g,'/');
+		var url = domain + pathname.replace(/$^\//,'');
+		
+		return {
+			'fullname' : fullname,
+			'filename' : filename,
+			'extension' : extension,
+			'pathname' : pathname
+		};
 	}
 	
 	//删除文件
@@ -66,11 +110,14 @@ define(function(require,exports){
 	 * 
 	 */
 	function bindItemEvent(){
-		var this_item = this;
+		var this_file = this;
 		var itemDom = this.dom;
 		itemDom.on('click','a[data-action="del"]',function(){
 			//删除
-			this_item.del();
+			this_file.del();
+		}).on('click','a[data-action="rename"]',function(){
+			//重命名
+			this_file.rename();
 		}).on('click','.gP_item_toolBar',function(){
 			//打开操作面板状态
 			if(itemDom.hasClass('gP_item_menuing')){
@@ -78,7 +125,7 @@ define(function(require,exports){
 			}else{
 				itemDom.removeClass('gP_item_menuing');
 				itemDom.addClass('gP_item_menuing');
-			//	this_item.dom.find('.gP_item').removeClass('gP_item_checked');
+			//	this_file.dom.find('.gP_item').removeClass('gP_item_checked');
 			}
 		}).on('click','.gP_item_check',function(){
 			//选中状态
@@ -88,30 +135,7 @@ define(function(require,exports){
 			}else{
 				itemDom.addClass('gP_item_checked');
 			}
-		//	this_item.dom.find('.gP_item').removeClass('gP_item_menuing');
-		});
-		
-		//文件（文件夹）绑定右键
-		var itemMenu = panel({
-			'targets' : '.file_item_' + private_item_ID,
-			'callback':function(name) {
-				console.log('you have chioce "' , name , '" from the [ ' , this , ']');
-			},
-			'callbefore' : function(){
-			//	console.log('you have panel [ ' , this , ']');
-			}
-		});
-		
-		//指定类型
-		itemMenu.type = 'menu';
-		//增删菜单条目
-		itemMenu.add('rename',{'txt':'重命名'},function(){
-			//重命名
-			this_item.rename();
-		});
-		itemMenu.add('delete',{'txt':'删除'},function(){
-			//删除
-			this_item.del();
+		//	this_file.dom.find('.gP_item').removeClass('gP_item_menuing');
 		});
 	}
 	
@@ -120,15 +144,7 @@ define(function(require,exports){
 	 * @param {Object} dom
 	 * @param {Object} param
 	 */
-	var private_item_ID = 0;
 	function fileItem(basePath,data){
-		private_item_ID++;
-		this.name = data.name;
-		this.path = '/' + basePath + '/' + this.name;
-		//过滤重复的路径中重复的//
-		this.path = this.path.replace(/\/+/g,'/');
-		
-		this.url = 'http://asset.bh-lay.com/' + this.path;
 		/**
 		 * 状态
 		 * 正常 normal
@@ -136,25 +152,19 @@ define(function(require,exports){
 		 * 菜单 menuing
 		 */
 		this.status = 'normal';
-					
-		var match = this['name'].match(/(.*)\.(\w+)$/);
+		this.fullname = data.name;
 		
-		this.file = {
-			'filename' : match ? match[1] : this['name'],
-			'extension' : match ? '.' + match[2] : ''
-		};
+		var file = parseFullname(this.fullname,basePath,'http://asset.bh-lay.com/');
+		this.filename = file.filename;
+		this.extension = file.extension;
+		this.pathname = file.pathname;
+		this.url =  file.url;
 		
-		
-		var extHtml = '<span class="glyphicon glyphicon-file"></span>';
-		if(this.file.extension.match(/^jpg|gif|bmp|jpeg|png$/i)){
-			extHtml = '<span class="glyphicon glyphicon-picture"></span>';
-		}
-		var html = render(file_item_tpl,[{
-			'filename' : this.file['filename'],
-			'extension' : this.file['extension'],
-			'ico' : extHtml,
-			'id' : private_item_ID
-		}]);
+		var html = render(file_item_tpl,{
+			'fullname' : this.fullname,
+			'filename' : this.filename,
+			'extension' : this.extension
+		});
 		
 		this.dom = $(html);
 		bindItemEvent.call(this);
@@ -162,13 +172,13 @@ define(function(require,exports){
 	}
 	fileItem.prototype = {
 		'del' : function(){
-			var path = this.path;
+			var pathname = this.pathname;
 			var DOM = this.dom;
 			UI.confirm({
 				'text' : '删除就找不回来了，你再想想？',
 				'callback' : function(){
 					//发送删除请求
-					delFile(path,function(err){
+					delFile(pathname,function(err){
 						if(err){
 							UI.prompt(err);
 							return;
@@ -196,9 +206,7 @@ define(function(require,exports){
 		},
 		'rename' : function(callback){
 		//	console.log(name,txt);
-			var this_item = this;
-			var filename = this.name;
-			var baseRoot = this.root;
+			var this_file = this;
 			var ask = UI.ask('快想一个新名字！', function(txt){
 				
 				var newName = txt;
@@ -206,18 +214,19 @@ define(function(require,exports){
 					'url' : '/ajax/asset/rename',
 					'type' : 'POST',
 					'data' : {
-						'root' : baseRoot,
-						'oldName' : filename,
+						'root' : this_file.root,
+						'oldName' : this_file.fullname,
 						'newName' : newName
 					},
 					'dataType' : 'json',
 					'success' : function(data){
 						if(data && data.code == 200){
-							this_item.file.filename = newName;
-							this_item.name = this_item.file.filename + this_item.file.extension;
-							var item_dom = this_item.dom.find('.gP_file-name');
-							item_dom.find('strong').html(this_item.file.filename);
-							item_dom.attr('title',this_item.name);
+							
+							this_file.filename = newName;
+							this_file.fullname = this_file.filename + this_file.extension;
+							var item_dom = this_file.dom.find('.gP_file-name');
+							item_dom.find('strong').html(this_file.filename);
+							item_dom.attr('title',this_file.fullname);
 							callback && callback(null,data);
 						}else{
 							callback && callback('重命名失败');
@@ -228,9 +237,8 @@ define(function(require,exports){
 					}
 				});
 			});
-			//获取纯文件名，去除后缀名
-			
-			ask.setValue(this.file.filename);
+			//设置对话框纯文件名
+			ask.setValue(this.filename);
 		}
 	};
 

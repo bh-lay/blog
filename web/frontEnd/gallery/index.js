@@ -32,6 +32,14 @@ define(function(require,exports){
 		'<div class="gp_select_cnt gp_select_colum"></div>',
 	'</div>'].join('');
 	
+	var pop_tpl = ['<div class="galleryPop">',
+		'<div class="galleryPop_cnt"><div class="container bs-docs-container"><div class="row">',
+			'<div class="col-md-12"></div>',
+		'</div></div></div>',
+		'<div class="galleryPop_footer">',
+			'<a href="javascript:void(0)">确定</a>',
+		'</div>',
+	'</div>'].join('');
 	function render(tpl,data){
 		var txt = '';
 		for(var i=0 in data){
@@ -43,7 +51,17 @@ define(function(require,exports){
 		return txt;
 	}
 	
-
+	/**
+	 * @method researchFullname 从数组中查找属性fullname 为传入参数的对象 
+	 */
+	function researchFullname (fullname,data){
+		var total = data.length;
+		for(var i=0;i<total;i++){
+			if(data[i].fullname == fullname){
+				return data[i];
+			}
+		}
+	}
 	/**
 	 * 获取目录信息
 	 */
@@ -125,7 +143,7 @@ define(function(require,exports){
 		
 		this.dom.on('click','.gP_dir_item',function(){
 			//点击文件夹图标，执行打开动作
-			var name = $(this).parents('.gP_item').attr('data-name');
+			var name = $(this).parents('.gP_item').attr('data-fullname');
 			this_select.open(name);
 		}).on('click','a[data-action="createDir"]',function(){
 			//创建新的文件夹
@@ -141,14 +159,73 @@ define(function(require,exports){
 		});
 
 		//空白处绑定右键
-		var itemMenu = panel({
+		var fileMenu = panel({
 			'targets' : '.gP_cnt'
 		});
-		itemMenu.add('mkdir',{'txt':'新建目录'},function(){
+		fileMenu.add('mkdir',{'txt':'新建目录'},function(){
 			//创建新的文件夹
 			UI.ask('新目录叫什么呢？', function(txt){
 				this_select.createDir(txt);
 			});
+		});
+		
+		
+		//文件右键菜单
+		var fileMenu = panel({
+			'targets' : '.gP_item[data-type="file"]',
+			'callback':function(name) {
+				console.log('you have chioce "' , name , '" from the [ ' , this , ']');
+			},
+			'callbefore' : function(){
+				
+			}
+		});
+		//指定类型
+		fileMenu.type = 'menu';
+		//增删菜单条目
+		fileMenu.add('rename',{'txt':'重命名'},function(){
+			//重命名
+			var fullname = $(this).attr('data-fullname');
+			var file = this_select.get(fullname,'file');
+			file && file.rename();
+		});
+		fileMenu.add('delete',{'txt':'删除'},function(){
+			//删除
+			var fullname = $(this).attr('data-fullname');
+			var file = this_select.get(fullname,'file');
+			file && file.del();
+		});
+		
+		
+		//文件夹右键菜单
+		var folderMenu = panel({
+			'targets' : '.gP_item[data-type="folder"]',
+			'callback':function(name) {
+				console.log('you have chioce "' , name , '" from the [ ' , this , ']');
+			},
+			'callbefore' : function(){
+				
+			}
+		});
+		//指定类型
+		folderMenu.type = 'menu';
+		//增删菜单条目
+		folderMenu.add('open',{'txt':'打开'},function(){
+			//重命名
+			var fullname = $(this).attr('data-fullname');
+			this_select.open(fullname);
+		});
+		folderMenu.add('rename',{'txt':'重命名'},function(){
+			//重命名
+			var fullname = $(this).attr('data-fullname');
+			var folder = this_select.get(fullname,'folder');
+			folder && folder.rename();
+		});
+		folderMenu.add('delete',{'txt':'删除'},function(){
+			//删除
+			var fullname = $(this).attr('data-fullname');
+			var folder = this_select.get(fullname,'folder');
+			folder && folder.del();
 		});
 	}
 	
@@ -236,6 +313,22 @@ define(function(require,exports){
 				}
 			});
 		},
+		'get' : function(fullname,type){
+			var result = false;
+			if(fullname && fullname.length > 0){
+				var type = type || '';
+				if(type == 'file'){
+					result = researchFullname(fullname,this.files);
+				}else if(type == 'folder'){
+					result = researchFullname(fullname,this.folders);
+				}else{
+					var all = this.files.concat(this.folders);
+					result = researchFullname(fullname,all);
+				}
+			}
+			return result;
+			
+		},
 		'back' : function(){
 			var root = this.root;
 			//去除最后一节目录
@@ -290,21 +383,34 @@ define(function(require,exports){
 			});
 		},
 		'selection' : function(){
-			
+			var selectedFiles = [];
+			var filesTotal = all.length;
+			for(var i=0;i<filesTotal;i++){
+				if(this.files[i].status == 'selected'){
+					selectedFiles.push({
+						'extension': this.files[i]['extension'],
+						'fullname': this.files[i]['fullname'],
+						'url': this.files[i]['url']
+					});
+				}
+			}
+			return selectedFiles
 		}
 	};
 	
-	exports.select = function(dom,param){
-		return new SELECT(dom,param);
-	};
 	exports.init = function(dom,param){
 		return new SELECT(dom,param);
 	};
-	exports.pop = function POP(dom){
+	exports.pop = function POP(callback){
 		var pop = UI.cover({
 			'title' : '选择文件',
-			'html' : '<div class="galleryPop"><div class="container bs-docs-container"><div class="row"><div class="col-md-12"></div></div></div></div>'
+			'html' : pop_tpl
 		});
-		return new SELECT(pop.cntDom.find('.col-md-12'));
+		var explorer = new SELECT(pop.cntDom.find('.col-md-12'));
+		
+		pop.dom.find('.galleryPop_footer a').on('click',function(){
+			callback && callback(explorer.selection());
+		});
+		
 	};
 });
