@@ -2,7 +2,7 @@
  * @author bh-lay
  * 
  * @github https://github.com/bh-lay/UI
- * @modified 2014-3-26 20:37
+ * @modified 2014-34-17 13:52
  * 
  * Function depends on
  *		JQUERY
@@ -115,7 +115,7 @@ window.UI = window.UI || {};
 	var pop_tpl = ['<div class="pro_pop">',
 		'<div class="pro_pop_cpt"></div>',
 		'<div class="pro_pop_cnt"></div>',
-		'<a href="javascript:void(0)" class="pro_pop_close" title="\u5173\u95ED">X</a>',
+		'<a href="javascript:void(0)" class="pro_pop_close" title="\u5173\u95ED">×</a>',
 	'</div>'].join('');
 	
 	var miniChat_tpl = ['<div class="pro_miniChatSlideCnt"><div class="pro_miniChat">',
@@ -147,16 +147,6 @@ window.UI = window.UI || {};
 	'</div>'].join('');
 	
 	var popCSS = ['<style type="text/css" data-module="UI-pop-prompt-plane">',
-		'@font-face {',
-			'font-family:"UI";',
-			'src:url("/js/api/UI/images/ui-webfont.eot");',
-			'src:url("/js/api/UI/images/ui-webfont.eot?#iefix") format("embedded-opentype"),',
-			'url("/js/api/UI/images/ui-webfont.woff") format("woff"),',
-			'url("/js/api/UI/images/ui-webfont.ttf")  format("truetype"),',
-			'url("/js/api/UI/images/ui-webfont.svg#icon") format("svg");',
-			'font-weight: normal;',
-			'font-style: normal;',
-		'}',
 		//基础框架
 		'.pop_lawyer{position:absolute;top:0px;left:0px;z-index:4999;width:100%;height:0px;overflow:visible;font-family:"Microsoft Yahei"}',
 		'.pop_mask{position:absolute;top:0px;left:0px;width:100%;background:#000;display:none;opacity:0.2}',
@@ -168,7 +158,7 @@ window.UI = window.UI || {};
 		'.pro_pop_cpt{position:relative;height:40px;line-height:40px;margin-right:41px;overflow:hidden;border-bottom:1px solid #ebebeb;background:#f6f6f6;',
 			'color:#333;font-size:18px;text-indent:15px;cursor: default;}',
 		'.pro_pop_cnt{position:relative;min-height:100px;overflow:hidden;width:100%;}',
-		'.pro_pop_close{display:block;position:absolute;top:0px;right:0px;width:40px;height:40px;text-align:center;line-height:40px;color:#ddd;font-family:"UI";font-size:40px;background:#fafafa;border:1px solid #ebebeb;border-width:0px 0px 1px 1px;}',
+		'.pro_pop_close{display:block;position:absolute;top:0px;right:0px;width:40px;height:40px;text-align:center;line-height:40px;color:#ddd;font-family:"Simsun";font-size:40px;background:#fafafa;border:1px solid #ebebeb;border-width:0px 0px 1px 1px;text-decoration:none;}',
 		'.pro_pop_close:hover{background-color:#eee;border-left-color:#ddd;text-decoration:none;}',
 		'.pro_pop_close:active{background-color:#ddd;border-left-color:#ccc;color:#ccc;}',
 		'.pro_confirm{_border:1px solid #eee;position:absolute;background:#fff;border-radius:4px;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6);}',

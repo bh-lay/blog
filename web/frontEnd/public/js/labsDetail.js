@@ -49,7 +49,7 @@ seajs.use('/frontEnd/util/tie.js',function(){
 	var repos_name = $('.labs_detail_github').attr('data-repo');
 	var this_data = {};
 	getRepoData(repos_name,function(err,data){
-		console.log(data,'-----------');
+	//	console.log(data,'-----------');
 		var temp = $('#github-temp').html();
 		this_data['user_avatar'] = data.owner.avatar_url;
 		this_data['user_login'] = data.owner.login;
@@ -71,10 +71,25 @@ seajs.use('/frontEnd/util/tie.js',function(){
 				}
 				
 			});
-		console.log(this_data,'-----------');
+		//	console.log(this_data,'-----------');
 			$('.labs_detail_github .labsDeGit_cnt').html(this_html);
 			
 		});
+	});
+	
+	//demo部分
+	function autoHeight(){
+		var winH = $(window).height();
+		$('.labs_detail_demo').height(winH);
+	}
+	autoHeight();
+	$(window).resize(function(){
+		autoHeight();
+	});
+	
+	$('.labsDeDemo_btn').click(function(){
+		var url = $('.labs_detail_demo').attr('data-demopath');
+		$('.labs_detail_demo').html('<iframe src="' + url + '" frameborder="0"></iframe>');
 	});
 });
 

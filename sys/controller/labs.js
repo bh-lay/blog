@@ -72,7 +72,8 @@ exports.deal = function (req,res_this,path){
 					'keywords' : data.tags,
 					'description' : data.intro,
 					'content' : data.content,
-					'git_full_name' : data.git_full_name
+					'git_full_name' : data.git_full_name,
+					'demo_url' : data.demo_url
 				},function(err,html){
 					save_cache(html);
 				});

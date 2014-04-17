@@ -185,6 +185,7 @@ filter_request.labs = function(data){
 		'time_create':data['time_create']||new Date().getTime(),
 		'content':data['content'],
 		'git_full_name' : data['git_full_name'],
+		'demo_url' : data['demo_url'],
 		'intro':data['intro'] || data['content'].slice(0,200),
 	};
 	if(!(param['title']&&param['content'])){
