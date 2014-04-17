@@ -149,21 +149,25 @@
       height: 40px;
       margin: auto;
       max-width: 300px;
-      background: #292f36; }
+      background: white;
+      border-radius: 4px;
+      _border: 1px solid #bbbbbb;
+      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+      overflow: hidden; }
       .labs_detail_bar .labs_detail_bar_body .labs_detail_bar_cnt a {
         display: block;
         width: 25%;
         float: left;
         height: 40px;
         line-height: 40px;
-        color: white;
+        color: #2c3e50;
         text-align: center;
         transition: 0.2s;
         -moz-transition-duration: 0.2s;
         -webkit-transition-duration: 0.2s;
         -o-transition-duration: 0.2s; }
         .labs_detail_bar .labs_detail_bar_body .labs_detail_bar_cnt a:hover {
-          background: rgba(0, 0, 0, 0.3); }
+          background: #eeeeee; }
 
 .labs_detail_doc {
   padding: 120px 0px 20px;

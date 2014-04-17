@@ -2,7 +2,10 @@
  * opus detail
  *  
  */
-seajs.use('/frontEnd/util/tie.js',function(){
+seajs.use([
+	'/frontEnd/util/tie.js',
+	'/frontEnd/lib/highlight/highlight.pack.js'
+],function(){
 	util.tie({
 		'dom' : $('.labs_detail_bar_body'),
 		'scopeDom' : $('.labs_detail_cnt'),
@@ -32,7 +35,11 @@ seajs.use('/frontEnd/util/tie.js',function(){
 			dataType: 'jsonp',
 			success: function(d){
 				var repo = d.data;
-				callback && callback(null,repo);
+				if(d && d.status != 200){
+					callback && callback(data.message || '受限');
+				}else{
+					callback && callback(null,repo);
+				}
 			} 
 		});
 	}
@@ -49,7 +56,10 @@ seajs.use('/frontEnd/util/tie.js',function(){
 	var repos_name = $('.labs_detail_github').attr('data-repo');
 	var this_data = {};
 	getRepoData(repos_name,function(err,data){
-	//	console.log(data,'-----------');
+		if(err){
+			$('.labs_detail_github .labsDeGit_cnt').html('<p>github限制了你的数据抓取！</p>');
+			return
+		}
 		var temp = $('#github-temp').html();
 		this_data['user_avatar'] = data.owner.avatar_url;
 		this_data['user_login'] = data.owner.login;
@@ -86,11 +96,8 @@ seajs.use('/frontEnd/util/tie.js',function(){
 	$(window).resize(function(){
 		autoHeight();
 	});
-	
-	$('.labsDeDemo_btn').click(function(){
-		var url = $('.labs_detail_demo').attr('data-demopath');
-		$('.labs_detail_demo').html('<iframe src="' + url + '" frameborder="0"></iframe>');
-	});
+	//代码高亮
+	hljs.initHighlighting();
 });
 
 window.L = window.L || {};

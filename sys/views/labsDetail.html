@@ -24,7 +24,7 @@
 					<a href="#doc">文档</a>
 					<a href="#download">下载</a>
 					<a href="#github">Github</a>
-					<a href="#demo">DOME</a>
+					<a href="#demo_link">DOME</a>
 				</div>
 			</div>
 		</div>
@@ -85,11 +85,12 @@
 				</div>
 			</div>
 		</div>
-		<a name="demo"></a>
+		<a name="demo_link"></a>
 		<div class="labs_detail_demo" data-demopath="${demo_url}">
-			<a href="javascript:void(0)" class="labsDeDemo_btn">
+			<!--<a href="javascript:void(0)" class="labsDeDemo_btn">
 				<span class="icon-eye-open"></span>查看demo
-			</a>
+			</a>-->
+			<iframe src="${demo_url}" frameborder="0"></iframe>
 		</div>
 	</div>
 	<div class="labs_footer">
@@ -151,9 +152,9 @@
 	</div>
 </script>
 {{{navigation}}}
-<script src="/skin/js/lib/jquery.js" type="text/javascript"></script>
-<script src="/frontEnd/lib/sea.js" type="text/javascript"></script>
-<script src="/frontEnd/public/js/labsDetail.js" type="text/javascript"></script>
+<script type="text/javascript" src="/skin/js/lib/jquery.js"></script>
+<script type="text/javascript" src="/frontEnd/lib/sea.js"></script>
+<script type="text/javascript" src="/frontEnd/public/js/labsDetail.js"></script>
 {{{baiduAndGoogleTongji}}}
 </body>
 </html>
