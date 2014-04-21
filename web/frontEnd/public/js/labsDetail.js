@@ -35,10 +35,10 @@ seajs.use([
 			dataType: 'jsonp',
 			success: function(d){
 				var repo = d.data;
-				if(d && d.status != 200){
-					callback && callback(data.message || '受限');
-				}else{
+				if(d && d.meta && d.meta.status == 200){
 					callback && callback(null,repo);
+				}else{
+					callback && callback(d.message || '受限');
 				}
 			} 
 		});
@@ -57,7 +57,8 @@ seajs.use([
 	var this_data = {};
 	getRepoData(repos_name,function(err,data){
 		if(err){
-			$('.labs_detail_github .labsDeGit_cnt').html('<p>github限制了你的数据抓取！</p>');
+			var noResult_tpl = $('#githubNoResult-temp').html();
+			$('.labs_detail_github .labsDeGit_cnt').html(noResult_tpl);
 			return
 		}
 		var temp = $('#github-temp').html();

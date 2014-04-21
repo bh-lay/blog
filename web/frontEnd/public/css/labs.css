@@ -284,6 +284,19 @@
     color: white;
     text-align: center;
     margin-bottom: 60px; }
+  .labs_detail_github .labsGitNoResult {
+    color: white;
+    text-align: center; }
+    .labs_detail_github .labsGitNoResult h3 {
+      font-weight: normal;
+      font-size: 24px;
+      margin-bottom: 10px; }
+    .labs_detail_github .labsGitNoResult h5 {
+      font-weight: normal;
+      font-size: 18px; }
+    .labs_detail_github .labsGitNoResult p {
+      font-size: 12px;
+      opacity: 0.5; }
   .labs_detail_github .labsDeGit_user {
     width: 184px;
     margin: 0px auto 40px;
