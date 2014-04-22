@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<html lang="en-US" style="height:100%">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+</head>
+<body style="height:100%;background :#000;margin:0px;padding: 0px;overflow: auto;">
+<div class="console" style="line-height:30px;text-align:center;color:#fff">
+	手势检测中
+</div>
+	<script type="text/javascript" src="/frontEnd/jquery.js"></script>
+
+	<script type="text/javascript">
+
+function toucher(dom){
+	return new toucher.init(dom);
+}
+(function(exports){
+	//处理自定义事件
+	function ON(eventName,callback){
+		this._events = this._events || {};
+		//事件堆无该事件，创建一个事件堆
+		if(!this._events[eventName]){
+			this._events[eventName] = [];
+		}
+		this._events[eventName].push(callback);
+	}
+	function EMIT(eventName,args){
+		this._events = this._events || {};
+		//事件堆无该事件，结束运行
+		if(!this._events[eventName]){
+			return
+		}
+		for(var i=0,total=this._events[eventName].length;i<total;i++){
+			this._events[eventName][i].call(this.event_global || this,args);
+		}
+	}
+	
+	function swipeDirection(x1, x2, y1, y2) {
+		return Math.abs(x1 - x2) >=
+			Math.abs(y1 - y2) ? (x1 - x2 > 0 ? 'Left' : 'Right') : (y1 - y2 > 0 ? 'Up' : 'Down')
+	}
+	
+	function touch(dom){
+		var this_touch = this;
+		var DOM = dom;
+		//轻击开始时间
+		var touchStartTime = 0;
+		//记录上一次点击时间
+		var lastTouchTime = 0;
+		//记录初始轻击的位置
+		var x1,y1,x2,y2;
+		//轻击事件的延时器
+		var touchDelay;
+		//测试长按事件的延时器
+		var longTap;
+		//记录当前事件是否已为等待结束的状态
+		var isActive = false;
+		
+		//单次用户操作结束
+		function actionOver(){
+			isActive = false;
+			clearTimeout(longTap);
+			clearTimeout(touchDelay);
+		}
+		
+		function touchStart(e){
+			x1 = e.touches[0].pageX;
+			y1 = e.touches[0].pageY;
+			x2 = 0;
+			y2 = 0;
+			isActive = true;
+			touchStartTime = new Date();
+			
+			//检测是否为长按
+			clearTimeout(longTap);
+			longTap = setTimeout(function(){
+				actionOver();
+				//断定此次事件为长按事件
+				this_touch.emit('longTap');
+			},500);
+	//		$('.console').html('<br/>____________<br/>');
+		}
+		function touchend(){
+			if(!isActive){
+				return
+			}
+			var now = new Date();
+			if(now - lastTouchTime > 260){
+				touchDelay = setTimeout(function(){
+					//断定此次事件为轻击事件
+					actionOver();
+					this_touch.emit('singleTap');
+		//			$('.console').append('singleTap！<br/>');
+				},250);
+			}else{
+				clearTimeout(touchDelay);
+				actionOver();
+				//断定此次事件为连续两次轻击事件
+				this_touch.emit('doubleTap');
+			//	$('.console').append('doubleTap！<br/>');
+			}
+			lastTouchTime = now;
+		}
+		
+		function touchmove(e){
+		//	$('.console').append('swipe<br/>');
+			if(!isActive){
+				return
+			}
+    	    x2 = e.touches[0].pageX
+        	y2 = e.touches[0].pageY
+			//断定此次事件为移动手势
+			var direction = swipeDirection(x1, x2, y1, y2);
+			this_touch.emit('swipe' + direction);
+		//	$('.console').append('swipe' + direction + '<br/>');
+			actionOver();
+			e.preventDefault();
+			e.stopPropagation();
+		}
+		
+		/**
+		 * 对开始手势的监听
+		 */
+		DOM.addEventListener('touchstart',touchStart);
+		DOM.addEventListener('MSPointerDown',touchStart);
+		DOM.addEventListener('pointerdown',touchStart);
+		
+		/**
+		 * 对手势结束的监听（轻击）
+		 */
+		DOM.addEventListener('touchend',touchend);
+		DOM.addEventListener('MSPointerUp',touchend);
+		DOM.addEventListener('pointerup',touchend);
+		
+		/**
+		 * 对移动手势的监听
+		 */
+		DOM.addEventListener('touchmove',touchmove);
+		DOM.addEventListener('MSPointerMove',touchmove);
+		DOM.addEventListener('pointermove',touchmove);
+		
+		/**
+		 * 对移动结束的监听
+		 */
+		DOM.addEventListener('touchcancel',actionOver);
+		DOM.addEventListener('MSPointerCancel',actionOver);
+		DOM.addEventListener('pointercancel',actionOver);
+	}
+	touch.prototype['on'] = ON;
+	touch.prototype['emit'] = EMIT;
+	exports.init = touch;
+})(toucher);
+
+var bodyTouch = toucher($('body')[0]);
+bodyTouch.on('longTap',function(){
+	$('.console').append('longTap！<br/>');
+});
+</script>
+</body>
+</html>
