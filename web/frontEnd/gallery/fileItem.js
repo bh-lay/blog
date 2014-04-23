@@ -2,6 +2,7 @@ define(function(require,exports){
 	
 	var events = require('/frontEnd/util/event.js');
 	var panel = require('/frontEnd/util/panel.js');
+	var toucher = require('/frontEnd/util/toucher.js');
 	var UI = require('/frontEnd/UI/pop.js');
 	
 	var file_item_tpl = ['<div class="gP_item" data-type="file" data-fullname="{fullname}" >',
@@ -129,6 +130,19 @@ define(function(require,exports){
 			//	this_file.dom.find('.gP_item').removeClass('gP_item_checked');
 			}
 		}).on('click','.gP_item_check',function(){
+			//切换选中状态
+			this_file.select();
+		});
+		var touchEvents = toucher(itemDom.find('.gP_item_body')[0]);
+		touchEvents.on('swipeLeft',function(){
+			itemDom.find('.gP_item_body').animate({
+				'left' : -100
+			},80);
+		}).on('swipeRight',function(){
+			itemDom.find('.gP_item_body').animate({
+				'left' : 0
+			},80);
+		}).on('longTap',function(){
 			//切换选中状态
 			this_file.select();
 		});
