@@ -22,8 +22,7 @@
 <script type="text/javascript">
 	function ajaxUpload() {
 		var fileObj = document.getElementById("file").files[0];
-
-            var FileController = "/ajax/asset/upload";
+		var FileController = "/ajax/asset/upload";
             // FormData
 
             var form = new FormData();
@@ -38,19 +37,14 @@
             xhr.open("post", FileController, true);
 
             xhr.onload = function () {
-
-               // alert("�ϴ����!");
+            	
 
             };
 
-            xhr.upload.addEventListener("progress", progressFunction, false);
-
-            
-
+            xhr.upload.addEventListener("progress",function(){
+            	
+            }, false);
             xhr.send(form);
-
-
-
         }
 
         function progressFunction(evt) {
@@ -71,7 +65,7 @@
 
         }  
         document.getElementById("file").onchange = function(){
-        	alert(2323);
+        	new ajaxUpload();
         };
 
     </script>
