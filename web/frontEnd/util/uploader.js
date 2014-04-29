@@ -5,12 +5,10 @@
  * 
  */
 window.util = window.util || {};
-/**
- * until.drag(handle_dom,dom,fn);
- */
-(function uploaderClosure(exports){
+
+(function(exports){
 	var staticID = 0;
-	var upCnt_tpl = ['<div class="uploaderCnt" style="width:0px;height:0px;position:fixed;left:0px;top:0px;z-index:1000000;"></div>'].join('');
+	var upCnt_tpl = ['<div class="uploaderCnt" style="width:0px;height:0px;position:fixed;left:0px;top:0px;overflow:hidden"></div>'].join('');
 	var up_tpl = ['<div class="uploaderItem uploader{ID}">',
 		'<iframe id="uploader{ID}" name="uploader{ID}" width="0" height="0" src="about:blank"></iframe>',
 		'<form method="post" action="{action}" enctype="multipart/form-data" name="uploader" target="uploader{ID}">',
