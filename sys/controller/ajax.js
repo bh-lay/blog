@@ -15,7 +15,8 @@ var ajaxConfig = {
 	'del' : 'del',
 	'clear_cache':'clear_cache',
 	'asset':'asset/index',
-	'friends':'friends_get'
+	'friends':'friends_get',
+	'demo':'demo/index'
 };
 
 exports.deal = function (req,res_this,path){

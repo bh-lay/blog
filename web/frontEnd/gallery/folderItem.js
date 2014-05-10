@@ -171,8 +171,7 @@ define(function(require,exports){
 					'url' : '/ajax/asset/rename',
 					'type' : 'POST',
 					'data' : {
-						'root' : this_folder.root,
-						'oldName' : this_folder.fullname,
+						'pathname' : this_folder.path,
 						'newName' : newName
 					},
 					'dataType' : 'json',

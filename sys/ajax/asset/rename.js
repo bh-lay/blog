@@ -12,28 +12,37 @@ exports.rename = function (req,res_this){
 	}
 	parse.request(req,function(err,fields,files){
 		
-		var root = fields.root || '';
-		var oldName = fields.oldName || '';
+		var pathname = fields.pathname || '';
 		var newName = fields.newName || '';
 		
 		//消除参数中首尾的｛/｝
-		root = root.replace(/^\/|\/$/g,'');
-		if(err || oldName.length < 1 || newName.length < 1){
+		pathname = pathname.replace(/^\/|\/$/g,'');
+		if(err || pathname.length < 1 || newName.length < 1){
 			json.code = 201;
 			json.msg = '参数不全';
-			json.sd = fields;
 			res_this.json(json);
 		}else{
-			var filePath = assetPath + root + '/' + oldName;
+			var filePath = assetPath + '/' + pathname;
 			var newPath = '';
-
-			var pathnameMatch = oldName.match(/(.+)\.((?:\w|\s|\d)+)$/);
+			
+			/**
+			 * (.*)所在目录
+			 * (.+)文件名
+			 * ((?:\w|\s|\d)+)后缀名
+			 */
+			var pathnameMatch = pathname.match(/(.*)\/(.+)\.((?:\w|\s|\d)+)$/);
 			
 			if(pathnameMatch){
-				var extension = pathnameMatch[2];
+				var extension = pathnameMatch[3];
+				var root = pathnameMatch[1];
 				newPath = assetPath + root + '/' + newName + '.' + extension;
 			}else{
-				newPath = assetPath + root + '/' + newName;
+				var pathnameMatch2 = pathname.match(/(.*)\/(.+)$/);
+				if(pathnameMatch2){
+					newPath = assetPath + pathnameMatch2[1] + '/' + newName;
+				}else{
+					newPath = assetPath + '/' + newName;
+				}
 			}
 			//检测是否同名
 			var exists = fs.existsSync(newPath);

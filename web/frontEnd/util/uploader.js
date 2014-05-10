@@ -1,7 +1,8 @@
 ﻿/**
  *	@author bh-lay
  *	@github https://github.com/bh-lay/uploader
- *  @updata 2014-4-28 15:46
+ *  @updata 2014-5-11 0:16
+ * Function depend on Jquery!
  * 
  */
 window.util = window.util || {};
@@ -22,8 +23,9 @@ window.util = window.util || {};
 	
 	//创建工作环境
 	var global_cnt = $(upCnt_tpl);
-
-	$('body').append(global_cnt);
+	$(function(){
+		$('body').append(global_cnt);
+	});
 	var private_isSupportTouch = "ontouchend" in document ? true : false;
 	
 	//iframe加载事件监听方法
@@ -216,33 +218,15 @@ window.util = window.util || {};
 	};
 	
 	/**
-	 * @method uploader 上传类
-	 * @param {Object} param 主参数
-	 * 
+	 * 为上传按钮绑定事件
 	 */
-
-	function uploader(param){
+	function bindEventsForUploader(){
 		var this_up = this;
-		//事件堆
-		this._events = {};
-		this.action = param['action'] || null;
-		this.data = param['data'] || {};
-		//绑定上传方法的DOM
-		this.dom = param['dom'];
-		this.fileinputname = param['fileinputname'] || 'photos';
-		//是否可上传
-		this.can_upload = true;
-		this.responseParser = param['responseParser'] || null;
-		
-		//当前激活状态的上传组建
-		this.activeSet = null;
-		
 		//创建一个上传组建
 		function workStart(){
 			var btn = $(this);
 			this_up.createSingleUp(btn);
 		}
-		
 		if(this.dom[0].addEventListener && private_isSupportTouch){
 			//移动端使用touch
 			this.dom.each(function(){
@@ -263,6 +247,32 @@ window.util = window.util || {};
 			//代理click事件至上传组建
 			this_up.activeSet.dom.find('.uploader_btn').trigger('click');
 		});
+	}
+	/**
+	 * @method uploader 上传类
+	 * @param {Object} param 主参数
+	 * 
+	 */
+
+	function uploader(param){
+		var this_up = this;
+		var param = param || {};
+		//事件堆
+		this._events = {};
+		this.action = param['action'] || null;
+		this.data = param['data'] || {};
+		//绑定上传方法的DOM
+		this.dom = param['dom'];
+		this.fileinputname = param['fileinputname'] || 'photos';
+		//是否可上传
+		this.can_upload = true;
+		this.responseParser = param['responseParser'] || null;
+		
+		//当前激活状态的上传组建
+		this.activeSet = null;
+		setTimeout(function(){
+			bindEventsForUploader.call(this_up);
+		},200);
 	}
 	uploader.prototype = {
 		'on' : function (eventName,callback){

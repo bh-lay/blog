@@ -69,11 +69,15 @@ define(function(require,exports){
 		var fullname = fullname || '';
 
 		var match = fullname.match(/(.*)\.(\w+)$/);
+		//文件基础名
 		var filename = match ? match[1] : fullname;
+		//文件扩展名
 		var extension = match ? '.' + match[2] : '';
+		//文件完整路径
 		var pathname = '/' + basePath + '/' + fullname;
-		//过滤重复的路径中重复的//
+		//过滤路径中重复的//
 		pathname = pathname.replace(/\/+/g,'/');
+		//URL地址
 		var url = domain + pathname.replace(/$^\//,'');
 		
 		return {
@@ -223,8 +227,7 @@ define(function(require,exports){
 					'url' : '/ajax/asset/rename',
 					'type' : 'POST',
 					'data' : {
-						'root' : this_file.root,
-						'oldName' : this_file.fullname,
+						'pathname' : this_file.pathname,
 						'newName' : newName
 					},
 					'dataType' : 'json',
@@ -238,6 +241,7 @@ define(function(require,exports){
 							item_dom.attr('title',this_file.fullname);
 							callback && callback(null,data);
 						}else{
+							UI.prompt('重命名失败');
 							callback && callback('重命名失败');
 						}
 					},
