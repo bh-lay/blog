@@ -507,7 +507,7 @@ body {
 .ini .hljs-value,
 .clojure .hljs-attribute,
 .coffeescript .hljs-attribute {
-  color: #990000; }
+  color: #ff3300; }
 
 .hljs-number {
   color: #330000; }

@@ -8,7 +8,7 @@
 	.cnt{width:400px;margin:auto;padding-top:100px}
 	.upload{display: block;margin:0px auto 20px;width:100px;height : 30px;line-height:30px;background:#f4f4f4;text-align: center;font-size:14px;color:#333;text-decoration:none}
 	.upload:hover{background:#fff;}
-	.uploading{float:left;width:170px;height:200px;line-height:200px;margin:0px 10px 20px;text-align: center;background: #fff;color:#666;font-family:"microsoft yahei"}
+	.uploading{float:left;width:170px;height:140px;line-height:26px;padding-top:60px;margin:0px 10px 20px;text-align: center;background: #fff;color:#666;font-family:"microsoft yahei"}
 	.imgCard{float:left;width:170px;height:200px;overflow: hidden;margin:0px 10px 20px;background : #fff}
 	.imgCard img{width: 100%}
 	textarea{width:90%;display:block;margin:0px auto 40px;padding:5px 10px;font-size:12px;color:#666;border-color:#ddd;resize:none;}
@@ -65,6 +65,9 @@
 		}
 		$('#up_' + ID).before(html)
 		$('#up_' + ID).remove();
+	});
+	uploader.on('error',function(ID){
+		$('#up_' + ID).html('上传失败，打开F12看看原因吧！');
 	});
 </script>
 </body>
