@@ -116,6 +116,7 @@ exports.url = function(url){
 		url = url.replace(/\.\.\//g,'');
 	
 	var a = url.split(/\?/);
+	//去除首尾的“/”
 	var b = a[0].replace(/^\/|\/$/g,'');
 	var searchStr = a[1] || '';
 	var search = querystring.parse(searchStr);
@@ -130,7 +131,7 @@ exports.url = function(url){
 	obj['root'] = '/' + (obj['pathnode'][0]||'');
 	
 	if(obj['pathname'].match(/\/\w+\.\w+$/)){
-		obj.pathnode.pop();
+		//obj.pathnode.pop();
 		obj.filename = obj['pathname'].match(/\/(\w+\.\w+$)/)[1];
 	}
 	return obj;

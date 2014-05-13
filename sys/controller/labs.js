@@ -19,13 +19,13 @@ function list_page(callback){
 	});
 }
 
-function get_detail(id,callback){
+function get_detail(lab_name,callback){
 	//get template
 	var method = mongo.start();
 
 	method.open({'collection_name':'labs'},function(err,collection){
 
-		collection.find({id:id}).toArray(function(err, docs) {
+		collection.find({'name':lab_name}).toArray(function(err, docs) {
 			method.close();
 			if(arguments[1].length==0){
 				callback&&callback('哇塞，貌似这个插件不存在哦!');
@@ -59,13 +59,16 @@ exports.deal = function (req,res_this,path){
 			});
 		});
 	}else if(path_length == 2){
-		var id = path['pathnode'][1];
-		
-		cache.html('labs_id_' + id,function(this_cache){
+		var lab_name = decodeURI(path['pathnode'][1]);
+		cache.html('labs_id_' + lab_name,function(this_cache){
 			res_this.html(200,this_cache);
 		},function(save_cache){
 			//获取作品信息
-			get_detail(id,function(err,data){
+			get_detail(lab_name,function(err,data){
+				if(err){
+					res_this.notFound('小盆友，表逗我玩儿！');
+					return
+				}
 				//获取视图
 				views.get('labsDetail',{
 					'title' : data.title,

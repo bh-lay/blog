@@ -180,6 +180,7 @@ filter_request.labs = function(data){
 	var error = null;
 	var param = {
 		'id' : data['id']||'',
+		'name' : data['name']||'',
 		'title':decodeURI(data['title']),
 		'cover':data['cover']||'',
 		'time_create':data['time_create']||new Date().getTime(),

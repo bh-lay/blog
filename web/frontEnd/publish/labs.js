@@ -26,6 +26,7 @@ define && define(function(require,exports){
 	
 	var labs_tpl = ['<div class="pub_labs">',
 		'<form action="/ajax/add_edit" method="post" target="_self">',
+			'<div class="pub_row_input"><input type="text" name="name" value="{name}" placeholder="插件名"/></div>',
 			'<div class="pub_row_input"><input type="text" name="title" value="{title}" placeholder="标题"/></div>',
 			'<div class="pub_row_input"><input type="text" name="cover" value="{cover}" placeholder="缩略图" /></div>',
 			'<div class="pub_row_input"><input type="text" name="time_create" value="{opus_time_create}" placeholder="创作时间" /></div>',
