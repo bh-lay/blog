@@ -41,9 +41,7 @@
 
             };
 
-            xhr.upload.addEventListener("progress",function(){
-            	
-            }, false);
+            xhr.upload.addEventListener("progress",progressFunction, false);
             xhr.send(form);
         }
 

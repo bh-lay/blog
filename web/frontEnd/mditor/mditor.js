@@ -5,6 +5,11 @@
 window.mditor = window.mditor || {};
 
 (function(exports){
+	var localStorage = window.localStorage || {
+		'getItem' : function(){},
+		'setItem' : function(){}
+	};
+
 	var miniBar_tpl = ['<div class="mditor_miniBar">',
 		'<a href="javascript:void(0)" title="加粗" data-btn="bold"><i class="icon-bold"></i></a>',
 		'<a href="javascript:void(0)" title="斜体" data-btn="italic" ><i class="icon-italic"></i></a>',
@@ -155,7 +160,9 @@ window.mditor = window.mditor || {};
 		}else{
 			content = param['content'] || '';
 		}
-		
+		if(content.length < 2 && localStorage.getItem('mditor')){
+			content = localStorage.getItem('mditor');
+		}
 		
 		var new_tpl = editor_tpl.replace('{content}',content);
 		
@@ -196,7 +203,9 @@ window.mditor = window.mditor || {};
 	}
 	EDITOR.prototype = {
 		'getContent' : function(){
-			return this._textarea.val();
+			var content = this._textarea.val();
+			localStorage.setItem('mditor',content);
+			return content;
 		},
 		'getHtml' : function(){
 			console.log('refresh')
