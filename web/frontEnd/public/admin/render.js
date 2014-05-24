@@ -318,7 +318,7 @@ window.admin.render = window.admin.render || {};
  **/
 (function(exports){
 	var tpl = ['<tr>',
-		'<td class="arLiTitle"><a title="查看博文" href="/labs/{id}" target="_blank">{title}</a></td>',
+		'<td class="arLiTitle"><a title="查看博文" href="/labs/{name}" target="_blank">{title}</a></td>',
 		'<td class="arLiTime">{time_show}</td>',
 		'<td class="arLiEdit">',
 			'<a class="btn btn-default btn-xs custom-lofox" title="修改" href="/admin/publish/labs/{id}" target="_self"><span class="glyphicon glyphicon-edit"></span></a>',
