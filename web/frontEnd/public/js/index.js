@@ -54,20 +54,13 @@ define(function(require,exports){
 	}
 	return function(dom,callback){
 		console.log('index page:','start render index page !');
-		var param = param || {};
-			
-//		if(param['init']){
-			console.log('index page:','get index page template!');
+		dom.css('position','absolute');
 
-			
-				var this_dom = $(temp);
-				dom.html(this_dom);
-				indexPanel(dom);
-				countTime(dom);
+		console.log('index page:','get index page template!');
 		
-//		}else{
-//			indexPanel(dom);
-//			countTime(dom);
-//		}
+		var this_dom = $(temp);
+		dom.html(this_dom);
+		indexPanel(dom);
+		countTime(dom);
 	};
 });

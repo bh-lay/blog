@@ -6,123 +6,116 @@
 
 window.L = window.L || {};
 
-seajs.use('/frontEnd/util/lofox.js',function(){
+seajs.use('/frontEnd/util/lofox_1.0.js',function(){
 	var lofox = new util.lofox();
-	lofox.router(function(pathData,searchData){
-		var routerName = null;
-		var pageTile = '';
-		var param = {};
-		
-		var pathLength = pathData.length;
-		//判断是否为首页
-		if(pathLength == 0){
-			pageTile = '小剧客栈_剧中人的个人空间 网页设计师博客 互动设计学习者';
-			routerName = 'index';
-		}else{
-			switch(pathData[0]){
-				case 'blog':
-					pageTile = '我的博客_小剧客栈';
-					if(pathLength == 1){
-						routerName = 'blogList';
-					}else if(pathLength == 2){
-						routerName = 'blogDetail';
-						param.id = pathData[1];
-					}
-				break
-				case 'share':
-					pageTile = '我的分享_小剧客栈';
-					if(pathLength == 1){
-						routerName = 'shareList';
-					}else if(pathLength == 2){
-						routerName = 'shareDetail';
-						param.id = pathData[1];
-					}
-				break
-				case 'opus':
-					pageTile = '作品_小剧客栈';
-					if(pathLength == 1){
-						routerName = 'opusList';
-					}else if(pathLength == 2){
-						routerName = 'opusDetail';
-						param.id = pathData[1];
-					}
-				break
-				case 'labs':
-					pageTile = '实验室_小剧客栈';
-					if(pathLength == 1){
-						routerName = 'labsList';
-					}else if(pathLength == 2){
-						routerName = 'labsDetail';
-						console.log(pathData[1],2323);
-						param.id = pathData[1];
-					}
-				break
-				default:
-			}
-		}
-		return [routerName,pageTile,param];
-	});
 	
 	var dom = $('.contlayer');
-	lofox.set('index',function(){
+	
+	function ani(){
+		var oldDom = dom.find('.contlayer_body');
+		var newDom = $('<div class="contlayer_body">正在加载</div>');
+		
+		dom.append(newDom);
+		if(oldDom.length != 0){
+			newDom.css({
+				'left': '200%'
+			});
+			oldDom.animate({
+				'left': '-200%'
+			},400).fadeOut(100,function(){
+				oldDom.remove();
+				newDom.animate({
+					'left': 0
+				},200);
+			});
+		}
+		return newDom;
+	}
+	/**
+	 * 首页
+	 */
+	lofox.set('/',function(){
+		this.title('小剧客栈_剧中人的个人空间 网页设计师博客 互动设计学习者');
 		L.nav.setCur('/');
+		var dom = ani();
 		seajs.use('/frontEnd/public/js/index.js',function(indexPage){
 			indexPage(dom);
 		});
 	});
-	
-	lofox.set('blogList',function(){
+	/**
+	 * 博文列表
+	 */
+	lofox.set('/blog',function(){
+		this.title('我的博客_小剧客栈');
 		L.nav.setCur('blog');
+		var dom = ani();
 		seajs.use('/frontEnd/public/js/blogList.js',function(blogList){
 			blogList(dom);
 		});
 	});
-	lofox.set('blogDetail',function(id){
+	/**
+	 * 博客详细页
+	 */
+	lofox.set('/blog/{id}',function(param){
+		this.title('我的博客_小剧客栈');
 		L.nav.setCur('blog');
+		var dom = ani();
 		seajs.use('/frontEnd/public/js/blogDetail.js',function(blogDetail){
-			blogDetail(dom,id);
+			blogDetail(dom,param.id);
 		});
 	});
-	
-	lofox.set('shareList',function(){
+	/**
+	 * 我的分享列表
+	 */
+	lofox.set('/share',function(){
+		this.title('我的分享_小剧客栈');
 		L.nav.setCur('share');
+		var dom = ani();
 		seajs.use('/frontEnd/public/js/shareList.js',function(shareList){
 			shareList(dom);
 		});
 	});
-	lofox.set('shareDetail',function(param){
+	/**
+	 * 我的分享详细
+	 */
+	lofox.set('/share/{id}',function(param){
+		this.title('我的分享_小剧客栈');
 		L.nav.setCur('share');
+		var dom = ani();
 		seajs.use('/frontEnd/public/js/shareDetail.js',function(shareDetail){
 			shareDetail(dom,param.id);
 		});
 	});
 	
-	lofox.set('opusList',function(){
+	lofox.set('/opus',function(){
+		this.title('作品_小剧客栈');
 		L.nav.setCur('opus');
+		var dom = ani();
 		seajs.use('/frontEnd/public/js/opusList.js',function(opusList){
 			opusList(dom);
 		});
 	});
-	lofox.set('opusDetail',function(param){
+	lofox.set('/opus/{id}',function(param){
+		this.title('作品_小剧客栈');
 		L.nav.setCur('opus');
+		var dom = ani();
 		seajs.use('/frontEnd/public/js/opusDetail.js',function(opusDetail){
 			opusDetail(dom,param.id);
 		});
 	});
 	
-	lofox.set('labsList',function(){
+	lofox.set('/labs',function(){
+		this.title('实验室_小剧客栈');
+		
 		L.nav.setCur('labs');
+		var dom = ani();
 		seajs.use('/frontEnd/public/js/labsList.js',function(labsList){
 			labsList(dom);
 		});
 	});
-	lofox.set('labsDetail',function(param){
-		L.nav.setCur('labs');
-		seajs.use('/frontEnd/public/js/labsDetail.js',function(labsDetail){
-			labsDetail(dom,param.id);
-		});
-	});
-	
+	/**
+	 * 监听页面跳转
+	 */
 	lofox.on('change',function(url){
 		delete(uyan_c_g);
 		delete(uyan_loaded);

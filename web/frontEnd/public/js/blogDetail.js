@@ -39,21 +39,22 @@ define(function(require,exports){
 					var date = new Date(parseInt(detail.time_show));
 					detail.time_show = (date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+ date.getDate();
 					var this_html = juicer(template,detail);
-					fn&&fn(this_html,data['detail']['title']);
+					fn&&fn(null,this_html,data['detail']['title']);
 				}else{
-					L.dialog.tips('博客不存在！');
-					lofox.push('/blog',{render:false});
-					fn&&fn();
+					fn&&fn('博客不存在！');
 				}
 			}
 		});
 	};
 	
-	return function(dom,param){
-		var param = param || {},
-			 id = param['id'] || null,
-			 render_over = this.render_over || null;
-		getData(id,function(html,title){
+	return function(dom,id,callback){
+		var render_over = render_over || null;
+		
+		getData(id,function(err,html,title){
+			if(err){
+				alert(err);
+				return
+			}
 			html&&dom.html(html);
 			render_over&&render_over(title);
 		});
