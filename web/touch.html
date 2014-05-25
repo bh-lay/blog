@@ -9,18 +9,26 @@ body{
 	margin:0px;
 	padding:0px;
 	background :#000;
+	font-family:'microsoft yahei'
+}
+.consoleCnt{
+	min-height:00%;
+	position:relative;
 }
 .console{
-	width:100%;
-	height : 500;
+	position:relative;
+	width:33.33%;
+	float:left;
 	top:0px;
 	left:0px;
 	padding: 0px 0px 100px;
 	overflow: auto;
-	line-height:30px;
+	line-height:24px;
 	text-align:center;
+	font-size:13px;
 	color:#fff
 }
+.console3{background:#333;min-height:1000px;}
 #toucher{
 	position:fixed;
 	bottom:0px;
@@ -29,40 +37,121 @@ body{
 	height:60px;
 	background:#fff;
 }
+.checkA,.checkB,.checkC{
+	width : 33.33%;
+	height : 60px;
+	line-height : 60px;
+	text-align: center;
+	font-size:14px;
+	background: #fff;
+	float: left
+}
+.checkC{
+	background:#eee 
+}
 </style>
 </head>
 <body>
-<div class="console">
+<div class="consoleCnt">
+<div class="console console1">
 	手势检测中<br/>
 </div>
-<div id="toucher">
+<div class="console console3">
+	手势检测中<br/>
 </div>
-	<script type="text/javascript" src="/frontEnd/jquery.js"></script>
-	<script type="text/javascript" src="/frontEnd/util/toucher.js"></script>
+<div class="console console2">
+	手势检测中<br/>
+</div>
+</div>
+<div id="toucher">
+	<div class="checkA">
+		<span>事件委托A</span>
+	</div>
+	<div class="checkC">
+		最底层
+	</div>
+	<div class="checkB">
+		<span>事件委托B</span>
+	</div>
+</div>
+	<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="/frontEnd/util/toucher_min.js"></script>
 
 	<script type="text/javascript">
-
+var i = 0;
+function I(){
+	i++;
+	if(i>=100){
+		i=1;
+	}
+	return '-' + i;
+}
 
 
 
 var bodyTouch = util.toucher($('#toucher')[0]);
-bodyTouch.on('singleTap',function(){
-	$('.console').append('singleTap！<br/>');
-}).on('doubleTap',function(){
-	$('.console').append('doubleTap！<br/>');
-}).on('longTap',function(){
-	$('.console').append('longTap！<br/>');
-}).on('swipe',function(){
-//	$('.console').append('swipe！<br/>');
-}).on('swipeUp',function(){
-	$('.console').append('swipeUp！<br/>');
-}).on('swipeRight',function(){
-	$('.console').append('swipeRight！<br/>');
-}).on('swipeDown',function(){
-	$('.console').append('swipeDown！<br/>');
-}).on('swipeLeft',function(){
-	$('.console').append('swipeLeft！<br/>');
+
+//console.log(bodyTouch,util.toucher);
+
+bodyTouch.on('singleTap',function(e){
+	$('.console3').html('singleTap'+I()+'<br/>');
+}).on('doubleTap',function(e){
+	$('.console3').html('doubleTap'+I()+'<br/>');
+}).on('longTap',function(e){
+	$('.console3').html('longTap'+I()+'<br/>');
+	console.log(this,e);
+}).on('swipe',function(e){
+	$('.console3').append('swipe'+I()+'<br/>');
+}).on('swipeUp',function(e){
+	$('.console3').html('swipeUp'+I()+'<br/>');
+}).on('swipeRight',function(e){
+	$('.console3').html('swipeRight'+I()+'<br/>');
+}).on('swipeDown',function(e){
+	$('.console3').html('swipeDown'+I()+'<br/>');
+}).on('swipeLeft',function(e){
+	$('.console3').html('swipeLeft'+I()+'<br/>');
 });
+
+bodyTouch.on('singleTap','.checkA',function(e){
+	$('.console1').html('singleTap'+I()+'<br/>');
+	console.log(this,e);
+	return false
+}).on('doubleTap','.checkA',function(e){
+	$('.console1').html('doubleTap'+I()+'<br/>');
+}).on('longTap','.checkA',function(e){
+	$('.console1').html('longTap'+I()+'<br/>');
+	console.log(this,e);
+}).on('swipe','.checkA',function(e){
+	$('.console1').append('swipe'+I()+'<br/>');
+}).on('swipeUp','.checkA',function(e){
+	$('.console1').html('swipeUp'+I()+'<br/>');
+}).on('swipeRight','.checkA',function(e){
+	$('.console1').html('swipeRight'+I()+'<br/>');
+}).on('swipeDown','.checkA',function(e){
+	$('.console1').html('swipeDown'+I()+'<br/>');
+}).on('swipeLeft','.checkA',function(e){
+	$('.console1').html('swipeLeft'+I()+'<br/>');
+});
+
+bodyTouch.on('singleTap','.checkB',function(e){
+	$('.console2').html('singleTap'+I()+'<br/>');
+}).on('doubleTap','.checkB',function(e){
+	$('.console2').html('doubleTap'+I()+'<br/>');
+}).on('longTap','.checkB',function(e){
+	$('.console2').html('longTap'+I()+'<br/>');
+}).on('swipe','.checkB',function(e){
+	$('.console2').append('swipe'+I()+'<br/>');
+	//console.log(this,e);
+}).on('swipeUp','.checkB',function(e){
+	$('.console2').html('swipeUp'+I()+'<br/>');
+}).on('swipeRight','.checkB',function(e){
+	$('.console2').html('swipeRight'+I()+'<br/>');
+}).on('swipeDown','.checkB',function(e){
+	$('.console2').html('swipeDown'+I()+'<br/>');
+}).on('swipeLeft','.checkB',function(e){
+	$('.console2').html('swipeLeft'+I()+'<br/>');
+});
+
 </script>
 </body>
 </html>
