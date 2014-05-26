@@ -13,7 +13,7 @@ seajs.use('/frontEnd/util/lofox_1.0.js',function(){
 	
 	function ani(){
 		var oldDom = dom.find('.contlayer_body');
-		var newDom = $('<div class="contlayer_body">正在加载</div>');
+		var newDom = $('<div class="contlayer_body"><div class="contlayer_loading">正在加载</div></div>');
 		
 		dom.append(newDom);
 		if(oldDom.length != 0){
