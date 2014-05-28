@@ -1,7 +1,7 @@
 /**
  * @author 剧中人
  * @github https://github.com/bh-lay/toucher
- * @modified 2014-5-25 15:48
+ * @modified 2014-5-28 20:57
  * 
  */
 window.util = window.util || {};
@@ -23,7 +23,7 @@ window.util.toucher = window.util.toucher || function (dom){
 			}
 		}
 	}
-	
+
 	/**
 	 * @method 向句柄所在对象增加事件监听
 	 * @description 支持链式调用
@@ -58,7 +58,7 @@ window.util.toucher = window.util.toucher || function (dom){
 		//提供链式调用的支持
 		return this;
 	}
-	
+
 	/**
 	 * @method 事件触发器
 	 * @description 根据事件最原始被触发的target，逐级向上追溯事件绑定
@@ -81,7 +81,7 @@ window.util.toucher = window.util.toucher || function (dom){
 			var eventsList = rest_events;
 			//置空尚未执行掉的事件集
 			rest_events = [];
-			
+
 			//遍历事件所有绑定
 			for(var i=0,total=eventsList.length;i<total;i++){
 				var classStr = eventsList[i]['className'];
@@ -118,8 +118,8 @@ window.util.toucher = window.util.toucher || function (dom){
 			}
 		}
 	}
-	
-	
+
+
 	/**
 	 * 判断swipe方向
 	 */
@@ -127,14 +127,14 @@ window.util.toucher = window.util.toucher || function (dom){
 		return Math.abs(x1 - x2) >=
 			Math.abs(y1 - y2) ? (x1 - x2 > 0 ? 'Left' : 'Right') : (y1 - y2 > 0 ? 'Up' : 'Down')
 	}
-	
+
 	/**
 	 * 监听原生的事件，主动触发模拟事件
 	 * 
 	 */
 	function eventListener(DOM){
 		var this_touch = this;
-		
+
 		//轻击开始时间
 		var touchStartTime = 0;
 		//记录上一次点击时间
@@ -147,14 +147,14 @@ window.util.toucher = window.util.toucher || function (dom){
 		var longTap;
 		//记录当前事件是否已为等待结束的状态
 		var isActive = false;
-		
+
 		//单次用户操作结束
 		function actionOver(){
 			isActive = false;
 			clearTimeout(longTap);
 			clearTimeout(touchDelay);
 		}
-		
+
 		function touchStart(e){
 			x1 = e.touches[0].pageX;
 			y1 = e.touches[0].pageY;
@@ -162,7 +162,7 @@ window.util.toucher = window.util.toucher || function (dom){
 			y2 = 0;
 			isActive = true;
 			touchStartTime = new Date();
-			
+
 			//检测是否为长按
 			clearTimeout(longTap);
 			longTap = setTimeout(function(){
@@ -190,11 +190,11 @@ window.util.toucher = window.util.toucher || function (dom){
 			}
 			lastTouchTime = now;
 		}
-		
+
 		function touchmove(e){
 			//断定此次事件为移动事件
 			EMIT.call(this_touch,'swipe',e);
-			
+
 			if(!isActive){
 				return
 			}
@@ -210,31 +210,33 @@ window.util.toucher = window.util.toucher || function (dom){
 				EMIT.call(this_touch,'singleTap',e);
 			}
 			actionOver();
-			e.preventDefault();
-			e.stopPropagation();
+			if(this_touch.preventDefault){
+				e.preventDefault();
+				e.stopPropagation();
+			}
 		}
-		
+
 		/**
 		 * 对开始手势的监听
 		 */
 		DOM.addEventListener('touchstart',touchStart);
 		DOM.addEventListener('MSPointerDown',touchStart);
 		DOM.addEventListener('pointerdown',touchStart);
-		
+
 		/**
 		 * 对手势结束的监听（轻击）
 		 */
 		DOM.addEventListener('touchend',touchend);
 		DOM.addEventListener('MSPointerUp',touchend);
 		DOM.addEventListener('pointerup',touchend);
-		
+
 		/**
 		 * 对移动手势的监听
 		 */
 		DOM.addEventListener('touchmove',touchmove);
 		DOM.addEventListener('MSPointerMove',touchmove);
 		DOM.addEventListener('pointermove',touchmove);
-		
+
 		/**
 		 * 对移动结束的监听
 		 */
@@ -242,14 +244,17 @@ window.util.toucher = window.util.toucher || function (dom){
 		DOM.addEventListener('MSPointerCancel',actionOver);
 		DOM.addEventListener('pointercancel',actionOver);
 	}
-	
-	
+
+
 	/**
 	 * touch类
 	 * 
 	 */
-	function touch(DOM){
+	function touch(DOM,param){
+		var param = param || {};
+
 		this.dom = DOM;
+		this.preventDefault = (typeof(param.preventDefaul)=='boolean' ? param.preventDefault : false);
 		//监听DOM原生事件
 		eventListener.call(this,this.dom);
 	}
