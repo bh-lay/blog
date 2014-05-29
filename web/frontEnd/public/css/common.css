@@ -43,14 +43,14 @@ TD {
 
 html {
   position: relative;
-  min-width: 340px;
+  min-width: 320px;
   height: 100%;
   overflow-x: auto;
   overflow-y: scroll; }
 
 body {
   position: relative;
-  min-width: 340px;
+  min-width: 320px;
   height: 100%;
   color: #333333;
   font-size: 14px;

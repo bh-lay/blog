@@ -408,15 +408,22 @@
   .labs_detail_demo .labsDeDemo_btn {
     position: absolute;
     width: 200px;
-    height: 40px;
-    top: 50%;
-    left: 50%;
-    margin: -20px 0px 0px -100px;
-    line-height: 40px;
+    padding: 10px 0px 7px;
+    top: 50px;
+    right: 0px;
+    background: #2c3e50;
     text-align: center;
-    font-size: 16px;
-    color: white;
-    background: #2c3e50; }
+    border-radius: 8px 0px 0px 8px; }
+    .labs_detail_demo .labsDeDemo_btn p {
+      line-height: 16px;
+      color: #566573;
+      font-size: 12px; }
+    .labs_detail_demo .labsDeDemo_btn a {
+      line-height: 25px;
+      font-size: 14px;
+      color: white; }
+      .labs_detail_demo .labsDeDemo_btn a:hover {
+        text-decoration: underline; }
 
 .labs_footer {
   padding: 50px 0px;
