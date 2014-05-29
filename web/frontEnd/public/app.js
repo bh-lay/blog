@@ -23,6 +23,7 @@ seajs.use('/frontEnd/util/lofox_1.0.js',function(){
 			oldDom.animate({
 				'left': '-200%'
 			},400).fadeOut(100,function(){
+				$(window).scrollTop(0);
 				oldDom.remove();
 				newDom.animate({
 					'left': 0
