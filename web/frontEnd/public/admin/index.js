@@ -66,8 +66,36 @@ window.admin = window.admin || {};
 		}
 	}
 	function createDom(dom){
-		var newDom = $('<div><div class="pro_loading">正在加载</div></div>');
-		dom.html(newDom);
+		var oldDom = dom.find('.mainCnt_body');
+		var newDom = $('<div class="mainCnt_body"><div><div class="pro_loading">正在加载</div></div></div>');
+		
+		dom.append(newDom);
+		if(oldDom.length != 0){
+			dom.css('height',dom.height());
+			oldDom.css({
+				'position' : 'absolute',
+				'top': 0,
+				'left' : 0
+			});
+			newDom.css({
+				'position' : 'absolute',
+				'top' : 0,
+				'left': '200%'
+			});
+			
+			oldDom.animate({
+				'left': '-100%'
+			},400).fadeOut(100,function(){
+				$(window).scrollTop(0);
+				oldDom.remove();
+				newDom.animate({
+					'left': 0
+				},200,function(){
+					dom.css('height','auto');
+					newDom.css('position','relative');
+				});
+			});
+		}
 		return newDom;
 	}
 	seajs.use([
