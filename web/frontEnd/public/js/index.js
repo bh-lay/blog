@@ -55,7 +55,12 @@ define(function(require,exports){
 	return function(dom,callback){
 		console.log('index page:','start render index page !');
 		dom.css('position','absolute');
-
+		setTimeout(function(){
+			dom.css('position','absolute');
+		},800);
+		setTimeout(function(){
+			dom.css('position','absolute');
+		},10);
 		console.log('index page:','get index page template!');
 		
 		var this_dom = $(temp);

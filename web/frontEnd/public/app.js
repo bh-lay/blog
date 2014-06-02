@@ -14,26 +14,30 @@ seajs.use('/frontEnd/util/lofox_1.0.js',function(){
 	function ani(){
 		var oldDom = dom.find('.contlayer_body');
 		var newDom = $('<div class="contlayer_body"><div class="contlayer_loading">正在加载</div></div>');
-		oldDom.css({
-			'position' : 'absolute',
-			'top': 0,
-			'left' : 0
-		});
 		dom.append(newDom);
 		if(oldDom.length != 0){
+			dom.css('height',dom.height());
+			oldDom.css({
+				'position' : 'absolute',
+				'top': 0,
+				'left' : 0
+			});
 			newDom.css({
 				'position' : 'absolute',
+				'top' : 0,
 				'left': '200%'
 			});
+			
 			oldDom.animate({
-				'left': '-200%'
+				'left': '-100%'
 			},400).fadeOut(100,function(){
 				$(window).scrollTop(0);
 				oldDom.remove();
 				newDom.animate({
 					'left': 0
 				},200,function(){
-					newDom.css('position','relative')
+					dom.css('height','auto');
+					newDom.css('position','relative');
 				});
 			});
 		}
