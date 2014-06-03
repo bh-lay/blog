@@ -196,8 +196,9 @@ window.admin = window.admin || {};
 					admin.render.friends(dom);
 				break
 				case 'gallery' :
-					mainDom.html('<div class="col-md-12"></div>');
-					var dom = mainDom.find('.col-md-12');
+					var domCnt = createDom(mainDom);
+					domCnt.html('<div class="col-md-12"></div>');
+					var dom = domCnt.find('.col-md-12');
 					seajs.use('/frontEnd/gallery/index.js',function(gallery){
 						gallery.init(dom);
 					});
