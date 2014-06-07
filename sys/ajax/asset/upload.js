@@ -17,8 +17,13 @@ exports.upload = function (req,res_this){
 			code = 201
 		}else if(files.length){
 			var newFiles = [];
+			var root = fields.root;
+			//消除参数中首尾的｛/｝
+			root = root.replace(/^\/|\/$/g,'');
+			
+			
 			for(var i in files){
-				var newPath = assetPath  + '/' + files[i].name;
+				var newPath = assetPath  + '/' + root + '/' + files[i].name;
 				
 				//禁止上传同名文件
 				var exists = fs.existsSync(newPath);
@@ -30,7 +35,7 @@ exports.upload = function (req,res_this){
 					fs.rename(files[i].path,newPath);
 					newFiles.push({
 	 	    			'name' : files[i]['name'],
-	 	    			'path' : 'http://asset.bh-lay.com/'  + '/' + files[i]['name']
+	 	    			'path' : 'http://asset.bh-lay.com/' + root + '/' + files[i]['name']
 	 	    		});
 				}
 			}

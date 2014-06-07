@@ -77,9 +77,10 @@ define(function(require,exports){
 		var pathname = '/' + basePath + '/' + fullname;
 		//过滤路径中重复的//
 		pathname = pathname.replace(/\/+/g,'/');
+		//过滤域名尾部的/
+		domain = domain.replace(/\/$/,'');
 		//URL地址
-		var url = domain + pathname.replace(/$^\//,'');
-		
+		var url = domain + pathname;
 		return {
 			'fullname' : fullname,
 			'filename' : filename,
@@ -157,15 +158,16 @@ define(function(require,exports){
 	 * @param {Object} dom
 	 * @param {Object} param
 	 */
-	function fileItem(basePath,data){
+	function fileItem(basePath,param){
 		/**
 		 * 状态
 		 * 正常 normal
 		 * 选中 selected
 		 * 菜单 menuing
+		 * 上传中uploading
 		 */
-		this.status = 'normal';
-		this.fullname = data.name;
+		this._status = param.status || 'normal';
+		this.fullname = param.name;
 		
 		var file = parseFullname(this.fullname,basePath,'http://asset.bh-lay.com/');
 		this.filename = file.filename;
@@ -182,8 +184,25 @@ define(function(require,exports){
 		this.dom = $(html);
 		bindItemEvent.call(this);
 		
+		this.status(this._status);
 	}
 	fileItem.prototype = {
+		'status' : function(name,value){
+			var need_change = true;
+			if(name == 'uploading'){
+				this.dom.addClass('gP_item_uploading');
+			}else if(name == "normal"){
+				this.dom.removeClass('gP_item_uploading');
+				this.dom.removeClass('gP_item_menuing');
+				this.dom.removeClass('gP_item_checked');
+			}else{
+				need_change = false;
+			}
+			if(need_change){
+				this._status = name;
+			}
+			
+		},
 		'del' : function(){
 			var pathname = this.pathname;
 			var DOM = this.dom;
@@ -254,11 +273,11 @@ define(function(require,exports){
 			ask.setValue(this.filename);
 		},
 		'select' : function(){
-			if(this.status == 'selected'){
-				this.status = 'normal';
+			if(this._status == 'selected'){
+				this._status = 'normal';
 				this.dom.removeClass('gP_item_checked');
 			}else{
-				this.status = 'selected';
+				this._status = 'selected';
 				this.dom.addClass('gP_item_checked');
 			}
 		}

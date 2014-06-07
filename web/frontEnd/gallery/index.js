@@ -127,17 +127,23 @@ define(function(require,exports){
 			};
 		}
 		thisUpload.on('startUpload',function(ID,files){
-			console.log(arguments);
+			console.log('startUpload',arguments);
 	
 			for(var i in files){
 				var fileNew = new fileItem(this_select.root,{
-					'name' : files[i]['name']
+					'name' : files[i]['name'],
+					'status' : 'uploading'
 				});
 				this_select.files.push(fileNew);
 				this_select.cntDom.append(fileNew.dom);
 			}
 		});
-		thisUpload.on('success',function(){
+		thisUpload.on('success',function(ID,files){
+			console.log('success',arguments);
+			for(var i in files){
+				var name = files[i].name;
+				this_select.get(name,'file').status('normal');
+			}
 			//this_select.refresh();
 		});
 		
@@ -194,6 +200,14 @@ define(function(require,exports){
 			var fullname = $(this).attr('data-fullname');
 			var file = this_select.get(fullname,'file');
 			file && file.del();
+		});
+		fileMenu.add('showurl',{'txt':'url地址'},function(){
+			//显示绝对地址
+			var fullname = $(this).attr('data-fullname');
+			var file = this_select.get(fullname,'file');
+			UI.confirm({
+				'text' : '<a target="_blank" href="' + file.url + '">' + file.url + '</a>'
+			})
 		});
 		
 		

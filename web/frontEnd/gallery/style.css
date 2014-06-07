@@ -235,6 +235,16 @@
 .gP_item_menuing .gP_item_check {
   display: none; }
 
+/*uploading mode */
+.gP_item_uploading .gP_file-ico {
+  background: #dddddd; }
+.gP_item_uploading .gP_item_check {
+  display: none; }
+.gP_item_uploading .glyphicon-unchecked {
+  display: none; }
+.gP_item_uploading .gP_item_toolBar {
+  display: none; }
+
 /*deleted animation */
 .gP_item_deleted {
   transition: 0s;
