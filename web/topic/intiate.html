@@ -7,9 +7,7 @@
 <meta name="description" content="记录一群斗志高昂的年轻人，加油吧，少年！" />
 <link href="/favicon.ico" rel="shortcut icon"/>
 <link rel="stylesheet" type="text/css" href="/frontEnd/public/css/common.css"/>
-<link href="/skin/topic/intiate/style.css" rel="stylesheet" type="text/css" />
-<script src="/skin/js/lib/jquery.js" type="text/javascript"></script>
-<script src="/skin/topic/intiate/default.js" type="text/javascript"></script>
+<link href="/frontEnd/public/topic/intiate/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body class="showpage news">
 <div class="navLayer"><div class="nav_bj"></div><div class="nav_main"><div class="l_row"><a class="nav_logo" lofox="true" href="/">小剧客栈</a><div class="nav_mainList"><ul class="nav"><li page="blog"><a lofox="true" title="博客" href="/blog/">博客</a></li><li page="share"><a lofox="true" title="分享" href="/share/">分享</a></li><li page="labs"><a lofox="true" title="小剧的实验室" href="/labs/">实验室</a></li><li page="opus"><a lofox="true" title="小剧作品" href="/opus/">作品</a></li></ul><ul class="navLink"><li><a title="创业团" target="_blank" href="/topic/intiate.html">创业团</a></li><li><a title="给剧中人留言" target="_blank" href="/demo/bless.html">留言</a></li></ul></div></div><div class="nav_tool"><a class="nav_moreBtn" href="javascript:void(0)"><span class="nav_Btn_ico"></span><span class="nav_Btn_ico"></span><span class="nav_Btn_ico"></span></a></div></div></div>
@@ -82,10 +80,73 @@
     <div class="copyright">
       <p>Copyright &#169; 2011-2012 bh-lay.com. Powered by：<strong>剧中人</strong></p>
       <p>本博客架构为：帝国CMS+HTML5+CSS3+Jquery</p>
-	  <p>前端技术交流群：59470700</p>
     </div>
     <div class="clear"></div>
   </div>
 </div>
+<script type="text/javascript" src="/frontEnd/jquery.js"></script>
+<script type="text/javascript">
+	
+var holy={};
+
+//瀑布流
+holy.wFall=function (){
+	var box = $('#waterfall').children("dl");
+	var boxer = [];//存放内容的数组
+	var timer;
+	var temp = [
+		"<div class='tips'>",
+			"本页面是剧中人朋友们的创业项目，目前大多为淘宝小店，希望每一颗渴望成功的种子都能生根发芽。如有任何意见及建议，请联系小剧！！！",
+		"</div>",
+			"<div class='col' id='colA'></div>",
+			"<div class='col' id='colB'></div>",
+			"<div class='col' id='colC'></div>",
+			"<div class='col' id='colD'>",
+		"</div>",
+		"<div id='addMore'>显示更多</div>"
+	];
+	var total = box.length;
+	var dlNo=0;//页面中已经生成的dl数量
+	var i=0;//源dl的索引值
+	$.each(box,function(){boxer.push($(this).html());});//获取源内容，生成数组
+	$('#waterfall').html(temp.join(''));//生成新的框架结构
+	var colA=$('#colA');
+	var colB=$('#colB');
+	var colC=$('#colC');
+	var colD=$('#colD');
+	var hA,hB,hC,hD;//四栏的高度
+	function show(showdlNo){//添加新内容，参数为添加的数量
+		for(var n=0;n<showdlNo;n++){
+			hA = colA.height();
+			hB = colB.height();
+			hC = colC.height();
+			hD = colD.height();
+			if(i==total){i=0}
+			if(hA<=hB&&hA<=hC&&hA<=hD){colA.append("<dl id='wf"+dlNo+"'>"+boxer[i++]+"</dl>");
+			}else if(hB<=hC&&hB<=hD){colB.append("<dl id='wf"+dlNo+"'>"+boxer[i++]+"</dl>");
+			}else if(hC<=hD){colC.append("<dl id='wf"+dlNo+"'>"+boxer[i++]+"</dl>");
+			}else{colD.append("<dl id='wf"+dlNo+"'>"+boxer[i++]+"</dl>");}
+			$('#wf'+dlNo++).fadeIn('300');
+		}
+	}
+	show(8);//页面初始显示八个dl
+	$(window).scroll(function(){
+		if(dlNo<40){//设置页面中的滚动可显示dl的数量
+			clearTimeout(timer);
+			timer = setTimeout(function(){
+				if($(document).scrollTop()+$(window).height()>$(document).height()-300){show(4);}
+			},500);
+		}else{$('#addMore').fadeIn('200');}
+	});
+	$('#addMore').click(function(){show(8)});
+}
+
+$(document).ready(function(){
+
+	if($('#waterfall').length>0){holy.wFall();}
+
+});
+	
+</script>
 </body>
 </html>

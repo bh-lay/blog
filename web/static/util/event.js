@@ -1,0 +1,2 @@
+/*! bh-lay.com 2014-06-07 */
+window.util=window.util||{},function(a){function b(a,b){this.events[a]||(this.events[a]=[]),this.events[a].push(b)}function c(a,b){if(this.events[a])for(var c=0,d=this.events[a].length;d>c;c++)this.events[a][c].call(this.event_global||this,b)}function d(){this.events={},this.on=b,this.emit=c}function e(a){this.events={},this.event_global=a||null}e.prototype={on:b,emit:c},a.events=e,a.events.extend=d}(window.util),window.define&&define(function(a,b){b.events=window.util.events,b.extend=window.util.events.extend});

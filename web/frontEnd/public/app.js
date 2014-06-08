@@ -230,8 +230,8 @@ seajs.use('/frontEnd/util/lofox_1.0.js',function(){
 	var config = {
 		'delay' : 50000,
 		'coverData' : [
-			{'src':'/skin/naive/gallery/bamboo.jpg','alt':'竹子'},
-			{'src':'/skin/naive/gallery/coast.jpg','alt':'江边'}
+			{'src':'/frontEnd/public/images/gallery/bamboo.jpg','alt':'竹子'},
+			{'src':'/frontEnd/public/images/gallery/coast.jpg','alt':'江边'}
 		]
 	};
 	var supports = (function() {
