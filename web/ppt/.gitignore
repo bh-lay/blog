@@ -1,9 +1,0 @@
-.DS_Store
-.svn
-demo
-demo-candy
-demo-skyline
-*.sublime-project
-*.sublime-workspace
-*.dev.*
-_wip
