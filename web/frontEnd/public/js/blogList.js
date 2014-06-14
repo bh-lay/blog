@@ -69,12 +69,7 @@ define(function(require,exports){
 				}
 				var this_html = juicer(blogTemp,{'list':list});
 				
-				skip += limit;
-				insert({
-					'end' : (skip>=count)?true:false,
-					'html' : this_html
-				});
-				fn&&fn();
+				fn&&fn(this_html,count);
 			}
 		});
 	};
@@ -93,32 +88,31 @@ define(function(require,exports){
 
 		dom.on('click','.blog_addMore',function(){
 			add_btn.addClass('blog_addMore_loading');
-			getData();
+			getData(function(html,count){
+				skip += limit;
+				insert({
+					'end' : (skip>=count)?true:false,
+					'html' : html
+				});
+			});
 		}).on('click','.dataLike',function(){
 			var this_ico = $(this);
 			var left = this_ico.offset().left-20,
 				 top = this_ico.offset().top-16;
-			L.dialog.tips('交互接口开发中……',{
-				'left':left,
-				'top':top,
-				'delay':2000
-			});
 		});
-	};
-	var init = function(dom,fn){
-		bindEvent(dom);
-		fn&&fn();
-
 	};
 	
 	return function(dom,param){
 		console.log('blog list page:','start !');
 	
-		dom.html('<div class="articleList"></div>');
+		dom.html('<div class="l_row"><div class="l_col_12"><div class="articleList"></div></div></div>');
 		skip = 0;
-		init(dom,function(){
-			getData(function(){
-		//		render_over&&render_over();
+		bindEvent(dom);
+		getData(function(html,count){
+			skip += limit;
+			insert({
+				'end' : (skip>=count)?true:false,
+				'html' : html
 			});
 		});
 

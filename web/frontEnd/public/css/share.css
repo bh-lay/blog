@@ -9,30 +9,29 @@
 /*
  * pageC-1: share list page 
  */
-.shareList{padding:100px 0px;margin:0px 10px}
-.shareList ul{overflow:hidden;zoom:1; }
-.shareList ul li{width:20%;height:160px; float: left;}
-.shareList ul li a{display:block;width:100%;height:100%;background:#fff;position:relative;overflow: hidden; }
-.shareList ul li a img{display:block;width:100%;min-height: 100%;transition: 0.5s;}
-.shareList ul li a strong{display:block;box-sizing:border-box;width:100%;height:50px;position: absolute;bottom:-100px;left:0px;overflow:hidden;
+.shareList{padding:100px 0px;overflow:hidden;zoom:1;}
+.shareList li{width:20%;height:160px; float: left;}
+.shareList li a{display:block;width:100%;height:100%;background:#fff;position:relative;overflow: hidden; }
+.shareList li a img{display:block;width:100%;min-height: 100%;transition: 0.5s;}
+.shareList li a strong{display:block;box-sizing:border-box;width:100%;height:50px;position: absolute;bottom:-100px;left:0px;overflow:hidden;
 	color:#000;font-weight:normal;line-height:50px;text-align:justify;white-space:nowrap;text-overflow:ellipsis; padding:0px 10px;
 background:linear-gradient(rgba(255,255,255,0),#fff);transition: 0.1s;}
-.shareList ul li a:hover img{opacity: 0.7;}
-.shareList ul li a:hover strong{bottom:0px;}
-.shareList ul li a:active img{opacity: 0.3;}
+.shareList li a:hover img{opacity: 0.7;}
+.shareList li a:hover strong{bottom:0px;}
+.shareList li a:active img{opacity: 0.3;}
 
 @media screen and (max-width: 1000px){
-	.shareList ul li{width:25%;}
+	.shareList li{width:25%;}
 }
 @media screen and (max-width: 760px){
-	.shareList ul li{width:33.3%;}
+	.shareList li{width:33.3%;}
 }
 @media screen and (max-width: 500px){
-	.shareList ul li{width:50%;}
-	.shareList ul li a strong{bottom: 0px;}
+	.shareList li{width:50%;}
+	.shareList li a strong{bottom: 0px;}
 }
 @media screen and (max-width: 340px){
-	.shareList ul li{width:100%;}
+	.shareList li{width:100%;}
 }
 
 

@@ -3,71 +3,69 @@
  */
 .labsList {
   padding: 100px 0px;
-  margin: 0px 10px; }
-  .labsList ul {
-    margin-left: -10px;
-    margin-right: -10px;
-    overflow: hidden;
-    zoom: 1; }
-    .labsList ul li {
-      float: left;
-      width: 33.3%; }
-      @media screen and (max-width: 980px) {
-        .labsList ul li {
-          width: 50%; } }
-      @media screen and (max-width: 600px) {
-        .labsList ul li {
-          width: 100%; } }
-    .labsList ul .lab_item {
-      position: relative;
-      height: 440px;
-      margin: 0px 10px 20px;
-      background: white;
-      overflow: hidden; }
-      .labsList ul .lab_item .lab_cover {
+  margin-left: -10px;
+  margin-right: -10px;
+  overflow: hidden;
+  zoom: 1; }
+  .labsList li {
+    float: left;
+    width: 33.3%; }
+    @media screen and (max-width: 980px) {
+      .labsList li {
+        width: 50%; } }
+    @media screen and (max-width: 600px) {
+      .labsList li {
+        width: 100%; } }
+  .labsList .lab_item {
+    position: relative;
+    height: 440px;
+    margin: 0px 10px 20px;
+    background: white;
+    overflow: hidden; }
+    .labsList .lab_item .lab_cover {
+      display: block;
+      height: 300px;
+      margin: 0px auto;
+      overflow: hidden;
+      transition: 0.2s;
+      -moz-transition-duration: 0.2s;
+      -webkit-transition-duration: 0.2s;
+      -o-transition-duration: 0.2s;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: #666666; }
+      .labsList .lab_item .lab_cover:hover {
+        opacity: 0.8; }
+    .labsList .lab_item .lab_title {
+      font-weight: normal;
+      line-height: 30px;
+      color: #333333;
+      font-size: 20px;
+      text-align: center; }
+      .labsList .lab_item .lab_title a {
         display: block;
-        height: 300px;
-        margin: 0px auto;
-        overflow: hidden;
+        padding: 10px;
+        border-bottom: 1px dashed #eeeeee;
         transition: 0.2s;
         -moz-transition-duration: 0.2s;
         -webkit-transition-duration: 0.2s;
-        -o-transition-duration: 0.2s;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-color: #666666; }
-        .labsList ul .lab_item .lab_cover:hover {
-          opacity: 0.8; }
-      .labsList ul .lab_item .lab_title {
-        font-weight: normal;
-        line-height: 30px;
+        -o-transition-duration: 0.2s; }
+        .labsList .lab_item .lab_title a:hover {
+          border-bottom-style: solid;
+          background: #eeeeee;
+          color: #00aa44; }
+    .labsList .lab_item .lab_info {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box; }
+      .labsList .lab_item .lab_info p {
         color: #333333;
-        font-size: 20px;
-        text-align: center; }
-        .labsList ul .lab_item .lab_title a {
-          display: block;
-          padding: 10px;
-          border-bottom: 1px dashed #eeeeee;
-          transition: 0.2s;
-          -moz-transition-duration: 0.2s;
-          -webkit-transition-duration: 0.2s;
-          -o-transition-duration: 0.2s; }
-          .labsList ul .lab_item .lab_title a:hover {
-            border-bottom-style: solid;
-            background: #eeeeee;
-            color: #00aa44; }
-      .labsList ul .lab_item .lab_info {
-        width: 100%;
-        padding: 10px;
-        box-sizing: border-box; }
-        .labsList ul .lab_item .lab_info p {
-          color: #333333;
-          font-size: 12px;
-          opacity: 0.7;
-          line-height: 16px;
-          text-indent: 2em;
-          text-align: justify; }
+        font-size: 12px;
+        opacity: 0.7;
+        line-height: 16px;
+        text-indent: 2em;
+        text-align: justify; }
 
 .labs_info {
   height: 140px;

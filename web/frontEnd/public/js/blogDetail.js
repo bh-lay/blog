@@ -6,7 +6,7 @@ define(function(require,exports){
 	require('/frontEnd/lib/juicer.js');
 	require('/frontEnd/public/css/blog.css');
 
-	var template = ['<div class="l_row blog_article">',
+	var template = ['<div class="l_row"><div class="l_col_12"><div class="blog_article">',
 		'<div class="articletop">',
 			'<h1>${title}</h1>',
 			'<p><span>时间：${time_show} </span><span>作者：${author}</span></p>',
@@ -23,7 +23,7 @@ define(function(require,exports){
 			'var uyan_config = {"du":"bh-lay.com"};',
 		'</script>',
 		'<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1605927" async=""></script>',
-	'</div>'].join('');
+	'</div></div></div>'].join('');
 	
 	function getData(id,fn){
 		$.ajax({
@@ -48,7 +48,6 @@ define(function(require,exports){
 	};
 	
 	return function(dom,id,callback){
-		var render_over = render_over || null;
 		
 		getData(id,function(err,html,title){
 			if(err){
@@ -56,7 +55,6 @@ define(function(require,exports){
 				return
 			}
 			html&&dom.html(html);
-			render_over&&render_over(title);
 		});
 		
 	};

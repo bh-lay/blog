@@ -52,7 +52,7 @@ exports.deal = function (req,res_this,path){
 			res_this.html(200,this_cache);
 		},function(save_cache){
 			//if none of cache,do this Fn
-			getList(function(list){
+			getList(function(err,list){
 				//获取视图
 				views.get('blogList',{
 					'title' : '我的博客',

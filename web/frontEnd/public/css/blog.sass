@@ -1,20 +1,14 @@
-﻿/**
- * Template Name: naive
- * Version:1.0
- * Author:  bh_lay
- * E-mail:  bh_lay@126.com
- * Blog:  http://bh-lay.com
- *
-
-/*
+﻿/*
  * pageB-1: blog list page 
  *
+
 
 .articleList
   width: 600px
   float: right
   border-left: 1px dashed #fff
   padding: 100px 0px 100px 20px
+  
 
 .articleItem
   position: relative
@@ -57,7 +51,6 @@
   overflow: hidden
   border-radius: 8px
   box-shadow: 1px 1px 4px #444
-
 .artItPic
   overflow: hidden
   background : #eee
@@ -79,6 +72,7 @@
   margin-bottom: 10px
   font-size: 14px
   color: #666
+  word-break: break-word
 
 .artItFrom
   padding: 0px 20px
@@ -109,7 +103,6 @@
       padding: 0px 5px
     i
       width: 20px
-      background: url(../ico.png)
   .dataLike
     i
       background-position: 0px 0px
@@ -196,9 +189,9 @@
 @media screen and (max-width: 759px)
   .articleList
     width: auto
-    margin : 10px
     padding-left: 0px
-    border : none
+    border: none
+    float: none
   .artItLace
     display : none
   .artItCpt
@@ -241,7 +234,9 @@
 .blog_article
   background: #fff
   margin: 60px auto
-
+  img
+    display: block
+    max-width: 100%
 .article_cover
   text-align: center
 

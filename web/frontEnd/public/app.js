@@ -4,6 +4,9 @@
  * Copyright (c) 2012-2018
 **/
 
+//删除为搜索引擎提供的dom
+$('.sourceCode').remove();
+
 window.L = window.L || {};
 
 seajs.use('/frontEnd/util/lofox_1.0.js',function(){
@@ -27,7 +30,6 @@ seajs.use('/frontEnd/util/lofox_1.0.js',function(){
 				'top' : 0,
 				'left': '200%'
 			});
-			
 			oldDom.animate({
 				'left': '-100%'
 			},400).fadeOut(100,function(){

@@ -1,11 +1,4 @@
 @charset "UTF-8";
-/*
- * Template Name: naive
- * Version:1.0
- * Author:  bh_lay
- * E-mail:  bh_lay@126.com
- * Blog:  http://bh-lay.com
- */
 /* pageB-1: blog list page 
  */
 .articleList {
@@ -76,7 +69,8 @@
   line-height: 24px;
   margin-bottom: 10px;
   font-size: 14px;
-  color: #666666; }
+  color: #666666;
+  word-break: break-word; }
 
 .artItFrom {
   padding: 0px 20px;
@@ -106,8 +100,7 @@
       color: #aaaaaa;
       padding: 0px 5px; }
     .artItFoot a i {
-      width: 20px;
-      background: url(../ico.png); }
+      width: 20px; }
   .artItFoot .dataLike i {
     background-position: 0px 0px; }
   .artItFoot .dataLike:hover i {
@@ -186,9 +179,9 @@
 @media screen and (max-width: 759px) {
   .articleList {
     width: auto;
-    margin: 10px;
     padding-left: 0px;
-    border: none; }
+    border: none;
+    float: none; }
 
   .artItLace {
     display: none; }
@@ -232,6 +225,9 @@
 .blog_article {
   background: white;
   margin: 60px auto; }
+  .blog_article img {
+    display: block;
+    max-width: 100%; }
 
 .article_cover {
   text-align: center; }

@@ -61,10 +61,10 @@ define(function(require,exports){
 //			return
 //		}
 		skip = 0;
-		dom.html('<div class="l_row"><div class="labsList"><ul></ul></div></div>');
 		getData(function(list){
+			dom.html('<div class="l_row"><div class="l_col_12"><ul class="labsList"></ul></div></div>');
 			var this_html = juicer(temp,{'list':list}),
-				this_dom = dom.find('.labsList ul');
+				this_dom = dom.find('.labsList');
 			insert({
 				'end' : (skip>=count)?true:false,
 				'html' : this_html,

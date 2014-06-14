@@ -18,6 +18,11 @@
 //  filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.9914,M12=-0.1305,M21=0.1305,M22=0.9914,SizingMethod=’auto expand’);
 //  -ms-filter:“progid:DXImageTransform.Microsoft.Matrix(M11=0.9914,M12=-0.1305,M21=0.1305,M22=0.9914,SizingMethod=’auto expand’)”; 
 
+@mixin borderbox()
+  box-sizing: border-box
+  -moz-box-sizing: border-box /* Firefox */
+  -webkit-box-sizing: border-box /* Safari */
+
 /**
  * base css 
  *   include some reset and fix
@@ -64,7 +69,6 @@ html
 body
   position: relative
   min-width: 320px
-  height: 100%
   color: #333
   font-size: 14px
   font-family: "Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体"
@@ -336,15 +340,14 @@ body
   position: relative
   z-index: 100
   width: 100%
-  min-height: 100%
   overflow: hidden
   .contlayer_body
     position: relative
     width: 100%
     min-height: 100%
+    overflow: hidden
   .contlayer_loading
-    position: relative
-    top: 200px
+    margin-top: 200px
     height: 60px
     line-height: 60px
     text-align: center
@@ -352,18 +355,6 @@ body
     color: #888
     background: #fff
     
-.golCnt
-  width: 100%
-  max-width: 900px
-  margin: auto
-  zoom: 1
-  &:after
-    content: "."
-    display: block
-    height: 0
-    clear: both
-    visibility: hidden
-
 .tongji
   width: 0px
   height: 0px
@@ -381,8 +372,10 @@ body
     clear: both
     visibility: hidden
   zoom: 1
-  .l_col_1,.l_col_2,.l_col_4,.l_col_6,.l_col_8,.l_col-12
+  .l_col_1,.l_col_2,.l_col_4,.l_col_6,.l_col_8,.l_col_12
     position : relative
+    padding: 0px 10px
+    @include borderbox()
   .l_col_1,.l_col_2,.l_col_4,.l_col_6,.l_col_8
     float : left
   .l_col_1
@@ -470,40 +463,11 @@ body
   img
     max-width: 100%
 
-/**
- * 提示信息
- 
-.l_notice
-  padding : 10px
-  margin : 0px 10px 10px
-  font-size : 14px
-  border:
-    width : 1px
-    style : solid
-    radius : 4px
-  strong,
-  b
-    font:
-      size : 16px
-      weight : normal
-    margin : 0 0.5em
-    
-.l_notice_warn
-  background : #fcf8e3
-  color : #8a6d3b
-  border-color : #faebcc
-.l_notice_tips
-  background : #d9edf7
-  color : #31708f
-  border-color : #bce8f1
-
-.l_notice_success
-
 .sourceCode
   position : absolute
-  overflow : hidden
-  width : 0px
-  height : 0px
+  top: 50px
+  width: 100%
+  z-index: 1000
 
 /**代码
 .hljs

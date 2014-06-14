@@ -45,15 +45,14 @@ define(function(require,exports){
 			'<img src="${it.cover}" alt="${it.title}" />',
 			'<strong>${it.title}</strong>',
 		'</a></li>{@/each}'].join('');
-
 		skip = 0;
-		dom.html('<div class="l_row"><div class="shareList"><ul></ul></div></div>');
 		getData(function(list){
+			dom.html('<div class="l_row"><div class="l_col_12"><ul class="shareList"></ul></div></div>');
 			var this_html = juicer(temp,{'list':list});
 			insert({
 				'end' : (skip>=count)?true:false,
 				'html' : this_html,
-				'dom' : dom.find('.shareList ul')
+				'dom' : dom.find('.shareList')
 			});
 			start();
 		});

@@ -75,8 +75,8 @@ define(function(require,exports){
 		var render_over = this.render_over || null;
 //			if(param['init']){
 			skip = 0;
-			dom.html('<div class="golCnt"><div class="opusList"><ul></ul></div></div>');
 			getData(function(list){
+				dom.html('<div class="golCnt"><div class="opusList"><ul></ul></div></div>');
 				var this_html = juicer(item_tpl,{'list':list}),
 					this_dom = dom.find('.opusList ul');
 				insert({
