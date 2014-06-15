@@ -660,3 +660,22 @@ body {
 .hljs-params {
   color: #666666;
 }
+
+.github-link {
+  position: fixed;
+  z-index: 5000;
+  display: block;
+  left: 0px;
+  bottom: 0px;
+  width: 60px;
+  height: 60px;
+  background: url(/frontEnd/public/images/github.png) top right;
+  transition: 0.1s;
+  -moz-transition-duration: 0.1s;
+  -webkit-transition-duration: 0.1s;
+  -o-transition-duration: 0.1s;
+}
+.github-link:hover {
+  width: 70px;
+  height: 70px;
+}

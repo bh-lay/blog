@@ -5,6 +5,7 @@
  * E-mail:  bh_lay@126.com
  * Blog:  http://bh-lay.com
  *
+
 @mixin transition($seconds:0.3s)
   transition : $seconds
   -moz-transition-duration : $seconds
@@ -20,8 +21,8 @@
 
 @mixin borderbox()
   box-sizing: border-box
-  -moz-box-sizing: border-box /* Firefox */
-  -webkit-box-sizing: border-box /* Safari */
+  -moz-box-sizing: border-box 
+  -webkit-box-sizing: border-box 
 
 /**
  * base css 
@@ -565,3 +566,18 @@ body
 
 .hljs-params
   color: #666
+  
+  
+.github-link
+  position: fixed
+  z-index: 5000
+  display: block
+  left: 0px
+  bottom: 0px
+  width: 60px
+  height: 60px
+  background: url(/frontEnd/public/images/github.png) top right
+  @include transition(0.1s)
+  &:hover
+    width: 70px
+    height: 70px
