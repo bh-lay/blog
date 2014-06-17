@@ -4,8 +4,8 @@
  *  
  */
 define(function(require,exports){
-	require('/frontEnd/lib/juicer.js');
-	require('/frontEnd/public/css/share.css');
+	require('lib/juicer.js');
+	require('public/css/share.css');
 	
 	var template = ['<div class="l_row"><div class="l_col_12 shareDetail">',
 		'<div class="articletop">',

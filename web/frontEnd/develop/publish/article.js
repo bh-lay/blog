@@ -8,9 +8,9 @@
  * 发布博文
  */
 define(function(require,exports){
-	require('/frontEnd/publish/publish.css');
-	require('/frontEnd/mditor/mditor.js');
-	var gallery = require('/frontEnd/gallery/index.js');
+	require('publish/publish.css');
+	require('mditor/mditor.js');
+	var gallery = require('gallery/index.js');
 	//初始化模版
 	function valueInit(tpl,data){
 			

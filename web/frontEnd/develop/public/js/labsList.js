@@ -3,8 +3,8 @@
  *  
  */
 define(function(require,exports){
-	require('/frontEnd/lib/juicer.js');
-	require('/frontEnd/public/css/labs.css');
+	require('lib/juicer.js');
+	require('public/css/labs.css');
 	
 	var temp = ['{@each list as it,index}',
 		'<li><div class="lab_item">',

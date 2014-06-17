@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" sizes="72x72" href="touch-icon-ipad.png" />
 <link rel="apple-touch-icon" sizes="114x114" href="touch-icon-iphone-retina.png" />
 <link rel="apple-touch-icon" sizes="144x144" href="touch-icon-ipad-retina.png" />
-<link href="/frontEnd/public/css/common.css" rel="stylesheet" type="text/css" />
+<link href="${frontEnd_base}public/css/common.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 	<div class="gallayer">
@@ -30,9 +30,17 @@
 {@/each}</ul>
 	</div></div>
 {{{navigation}}}
-<script type="text/javascript" src="/frontEnd/jquery.js"></script>
-<script type="text/javascript" src="/frontEnd/lib/sea.js"></script>
-<script type="text/javascript" src="/frontEnd/public/app.js"></script>
+<script type="text/javascript" src="${frontEnd_base}jquery.js"></script>
+<script type="text/javascript" src="${frontEnd_base}lib/sea.js"></script>
+<script type="text/javascript">
+	var app_config = {
+		'frontEnd_base' : '${frontEnd_base}'
+	};
+	seajs.config({
+	  'base' : '${frontEnd_base}'
+	});
+</script>
+<script type="text/javascript" src="${frontEnd_base}public/app.js"></script>
 {{{baiduAndGoogleTongji}}}
 </body>
 </html>

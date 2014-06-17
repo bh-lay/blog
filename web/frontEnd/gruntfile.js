@@ -1,6 +1,6 @@
 module.exports = function(grunt){
 
-    // ÏîÄ¿ÅäÖÃ
+    // ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 		
@@ -11,7 +11,7 @@ module.exports = function(grunt){
             build: {
 				expand: true,
 				cwd:'develop/',
-                src: '**/*.js',
+                src: ['**/*.js', '**/!*.min.js'],
                 dest: 'build/',
 				ext:".js"
             }               
@@ -38,11 +38,11 @@ module.exports = function(grunt){
 		},
     });
 
-    // ¼ÓÔØÌá¹©"uglify"ÈÎÎñµÄ²å¼ş
+    // ï¿½ï¿½ï¿½ï¿½ï¿½á¹©"uglify"ï¿½ï¿½ï¿½ï¿½Ä²ï¿½ï¿½
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-copy');
 
-    // Ä¬ÈÏÈÎÎñ
-    grunt.registerTask('default', ['uglify','cssmin,copy']);
+    // Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    grunt.registerTask('default', ['uglify','cssmin','copy']);
 }

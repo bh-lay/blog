@@ -9,7 +9,7 @@
  * 发布分享
  */
 define(function(require,exports){
-	require('/frontEnd/publish/publish.css');
+	require('publish/publish.css');
 
 	//初始化模版
 	function valueInit(tpl,data){

@@ -10,9 +10,9 @@
 
 
 define && define(function(require,exports){
-	require('/frontEnd/publish/publish.css');
-	require('/frontEnd/mditor/mditor.js');
-	require('/frontEnd/gallery/index.js');
+	require('publish/publish.css');
+	require('mditor/mditor.js');
+	require('gallery/index.js');
 	
 	
 	//初始化模版

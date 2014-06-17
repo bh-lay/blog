@@ -1,9 +1,9 @@
 define(function(require,exports){
 	
-	var events = require('/frontEnd/util/event.js');
-	var panel = require('/frontEnd/util/panel.js');
-	var toucher = require('/frontEnd/util/toucher.js');
-	var UI = require('/frontEnd/UI/pop.js');
+	var events = require('util/event.js');
+	var panel = require('util/panel.js');
+	var toucher = require('util/toucher.js');
+	var UI = require('UI/pop.js');
 	
 	var file_item_tpl = ['<div class="gP_item" data-type="file" data-fullname="{fullname}" >',
 		'<div class="gP_item_body">',

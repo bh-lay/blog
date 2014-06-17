@@ -57,6 +57,10 @@ exports.deal = function (req,res_this,path){
 			res_this.html(200,this_cache);
 		},function(save_cache){
 			detail_page(id,function(err,data){
+				if(err){
+					res_this.notFound('这篇分享不存在！');
+					return
+				}
 				//获取视图
 				views.get('shareDetail',{
 					'title' : data.title,

@@ -6,14 +6,14 @@
 //alert(window.outerWidth);
 
 define && define(function(require,exports){
-	require('/frontEnd/publish/publish.css');
-	var article = require('/frontEnd/publish/article.js');
-	var share = require('/frontEnd/publish/share.js');
-	var opus = require('/frontEnd/publish/opus.js');
-	var labs = require('/frontEnd/publish/labs.js');
-	var friends = require('/frontEnd/publish/friends.js');
-	var power = require('/frontEnd/publish/power.js');
-	var user = require('/frontEnd/publish/user.js');
+	require('publish/publish.css');
+	var article = require('publish/article.js');
+	var share = require('publish/share.js');
+	var opus = require('publish/opus.js');
+	var labs = require('publish/labs.js');
+	var friends = require('publish/friends.js');
+	var power = require('publish/power.js');
+	var user = require('publish/user.js');
 	
 	var publish_tpl = ['<div class="publish">',
 		'<div class="publish_cpt">',

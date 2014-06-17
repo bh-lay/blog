@@ -3,8 +3,8 @@
  *  
  */
 define(function(require,exports){
-	require('/frontEnd/lib/juicer.js');
-	require('/frontEnd/public/css/opus.css');
+	require('lib/juicer.js');
+	require('public/css/opus.css');
 	
 	var item_tpl = ['{@each list as it,index}',
 		'<li>',

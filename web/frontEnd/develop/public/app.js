@@ -11,7 +11,7 @@ $('body').append('<a href="https:github.com/bh-lay/blog" target="_blank" class="
 
 
 window.L = window.L || {};
-seajs.use('util/lofox_1.0.js',function(){
+seajs.use('util/lofox_1_0.js',function(){
 	var lofox = new util.lofox();
 	
 	var dom = $('.contlayer');

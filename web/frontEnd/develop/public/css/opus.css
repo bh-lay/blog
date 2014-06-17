@@ -19,8 +19,8 @@
 .opus_info{height:140px;box-shadow: 0px 0px 15px #000;position: relative;background:#fff;}
 .opus_info h3 {height:50px;position: relative;margin-bottom: 8px;border-bottom:1px dashed #ddd;}
 .opus_info h3 a{display: block;width:260px;height:26px;line-height:26px;padding: 12px 10px 0px;overflow:hidden;font-size:17px;font-weight: normal;color:#333;}
-.opus_info h3 a:hover{position:absolute;height:auto;padding:12px 10px 13px;background:url(/skin/naive/mask.png) #080;color:#fff;}
-.opus_info h3 a:active{background:url(/skin/naive/mask.png) #060;color:#fff;}
+.opus_info h3 a:hover{position:absolute;height:auto;padding:12px 10px 13px;background:url(../images/mask.png) #080;color:#fff;}
+.opus_info h3 a:active{background:url(../images/mask.png) #060;color:#fff;}
 .opus_info p{height:18px;line-height:16px;padding:9px 10px;}
 .opus_info p strong{display: block;height:30px;float:left;font-size: 14px;font-weight:normal;color:#333;}
 .opus_info p span{display: inline-block;padding:0px 4px;font-size: 14px;color:#888;}
@@ -70,6 +70,6 @@ font-size: 20px;letter-spacing: 0.5em;font-weight:normal;color:#000;}
 #focusTitle ul{font-size:16px;padding-top:20px;}
 #focusTitle li{float:left;width:50%;color:#666;}
 #focusTitle strong{padding-right:10px;font-weight:normal;}
-.TagLine{height:50px;margin:80px 20px 40px;background:url(/frontEnd/public/images/tagline.png) no-repeat;text-indent:-100em;overflow:hidden;}
+.TagLine{height:50px;margin:80px 20px 40px;background:url(../images/tagline.png) no-repeat;text-indent:-100em;overflow:hidden;}
 .opus_detail .youyan {padding-top:20px;}
 

@@ -3,8 +3,8 @@
  *  
  */
 define(function(require,exports){
-	require('/frontEnd/lib/juicer.js');
-	require('/frontEnd/public/css/blog.css');
+	require('lib/juicer.js');
+	require('public/css/blog.css');
 
 	var template = ['<div class="l_row"><div class="l_col_12"><div class="blog_article">',
 		'<div class="articletop">',

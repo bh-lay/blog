@@ -3,8 +3,8 @@
  *  
  */
 define(function(require,exports){
-	require('/frontEnd/lib/juicer.js');
-	require('/frontEnd/public/css/share.css');
+	require('lib/juicer.js');
+	require('public/css/share.css');
 	
 	var limit = 10,
 		 skip = 0,

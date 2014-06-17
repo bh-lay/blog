@@ -23,6 +23,7 @@ window.admin = window.admin || {};
  * 			console.log('i'm the sidebar!')
  * 		});
  ***/
+
 (function(exports){
 	var nameToTitle = {
 		'index' : '后台首页',
@@ -199,7 +200,7 @@ window.admin = window.admin || {};
 					var domCnt = createDom(mainDom);
 					domCnt.html('<div class="col-md-12"></div>');
 					var dom = domCnt.find('.col-md-12');
-					seajs.use('/frontEnd/gallery/index.js',function(gallery){
+					seajs.use('gallery/index.js',function(gallery){
 						gallery.init(dom);
 					});
 				break

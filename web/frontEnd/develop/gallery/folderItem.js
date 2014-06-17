@@ -1,10 +1,10 @@
 define(function(require,exports){
 	
-	require('/frontEnd/gallery/style.css');
-	var uploader = require('/frontEnd/util/uploader.js');
-	var events = require('/frontEnd/util/event.js');
-	var panel = require('/frontEnd/util/panel.js');
-	var UI = require('/frontEnd/UI/pop.js');
+	require('gallery/style.css');
+	var uploader = require('util/uploader.js');
+	var events = require('util/event.js');
+	var panel = require('util/panel.js');
+	var UI = require('UI/pop.js');
 	
 	var dir_tpl = ['<div class="gP_item" data-type="folder" data-fullname="{name}">',
 		'<div class="gP_item_body">',
