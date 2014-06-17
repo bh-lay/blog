@@ -6,7 +6,7 @@
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<link href="/frontEnd/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="/frontEnd/develop/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="/favicon.ico" rel="shortcut icon"/>
 <style type="text/css">
 	html{min-height:100%; }
@@ -126,12 +126,15 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="/frontEnd/jquery.js"></script>
-<script type="text/javascript" src="/frontEnd/lib/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/frontEnd/lib/sea.js" ></script>
-<script type="text/javascript" src="/frontEnd/public/admin/index.js"></script>
+<script type="text/javascript" src="/frontEnd/develop/jquery.js"></script>
+<script type="text/javascript" src="/frontEnd/develop/lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/frontEnd/develop/lib/sea.js" ></script>
 <script type="text/javascript">
+	seajs.config({
+	  'base' : '/frontEnd/develop/'
+	});
 	var admin_dataBase = {database};
 </script>
+<script type="text/javascript" src="/frontEnd/develop/public/admin/index.js"></script>
 </body>
 </html>

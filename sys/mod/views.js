@@ -45,6 +45,7 @@ function replaceComponent(temp,callback){
 exports.get = function(URI,data,callback){
 	var realPath = baseRoot + URI;
 	var data = data || {};
+	data.frontEnd_base = CONFIG.frontEnd_root;
 	//读取模版
 	fs.readFile(realPath + '.html', "utf8",function(err,fileStr){
 		if(err){
