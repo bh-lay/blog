@@ -7,7 +7,7 @@
 //删除为搜索引擎提供的dom
 $('.sourceCode').remove();
 //增加github图片
-$('body').append('<a href="https:github.com" target="_blank" class="github-link"></a>');
+$('body').append('<a href="https:github.com/bh-lay/blog" target="_blank" class="github-link"></a>');
 
 
 window.L = window.L || {};
