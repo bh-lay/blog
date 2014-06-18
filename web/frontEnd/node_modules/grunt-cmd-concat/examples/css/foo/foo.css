@@ -1,0 +1,6 @@
+@import "../index.css";
+
+body {
+    content: 'foo';
+    background: url('./foo.css');
+}

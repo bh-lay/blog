@@ -1,0 +1,6 @@
+@import "../bar.css";
+
+body {
+    content: 'baz';
+    background: url('./baz.css');
+}
