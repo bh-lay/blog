@@ -15,3 +15,4 @@ results
 npm-debug.log
 sys/cache/
 web/frontEnd/build
+web/frontEnd/dist
