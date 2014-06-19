@@ -8,7 +8,7 @@ module.exports = {
 	'ip' : '0.0.0.0',
 	'port' : 3000,
 	//前端静态资源根目录
-	'frontEnd_root' : '/frontEnd/develop/',
+	'frontEnd_root' : '/frontEnd/build/',
 	'mongo' : {
 		'host':'localhost',
 		'port':27017,

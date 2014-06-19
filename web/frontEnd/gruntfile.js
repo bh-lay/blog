@@ -17,7 +17,7 @@ module.exports = function(grunt){
 		},
 		transport : {
 			options : {
-				paths : ['build/'],
+				paths : ['develop/'],
 				alias : '<%= pkg.spm.alias %>',
 				parsers : {
 					'.js' : [script.jsParser],
@@ -30,7 +30,7 @@ module.exports = function(grunt){
 					idleading:''
 				},
 				files:[{
-					cwd:"build/",
+					cwd:"develop/",
 					src:["**/*.js"],
 					filter:"isFile",
 					dest:"build/",
@@ -40,7 +40,7 @@ module.exports = function(grunt){
 		},
 		concat:{
 			options : {
-				paths : ['build/'],
+				paths : ['build'],
 				include : 'relative',
 				alias : '<%= pkg.spm.alias %>'
 			},
@@ -52,10 +52,10 @@ module.exports = function(grunt){
 					expand:true,
 					cwd:'build/',
 					src:['**/*.js'],
-					dest:'build/',
+					dest:'dist/',
 					ext:'.js'
 				}]
-			},
+			}
  		},
 		uglify: {
 			options: {
@@ -63,9 +63,9 @@ module.exports = function(grunt){
 			},
 			build: {
 				expand: true,
-				cwd:'build/',
+				cwd:'dist/',
 				src: ['**/*.js', '**/!*.min.js'],
-				dest: 'build/',
+				dest: 'dist/',
 				ext:".js"
 			}
 		},
@@ -91,8 +91,8 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-cmd-concat');
 
  //
-	grunt.registerTask('copy', 'copy');
+	grunt.registerTask('copyAll', ['copy']);
 	grunt.registerTask('seajs', ['transport','concat']);
 	grunt.registerTask('min', ['uglify','cssmin']);
-//	grunt.registerTask('default', ['copy']);
+	grunt.registerTask('default', ['copy']);
 }
