@@ -16,3 +16,4 @@ npm-debug.log
 sys/cache/
 web/frontEnd/build
 web/frontEnd/dist
+web/frontEnd/node_modules
