@@ -9,7 +9,7 @@
  * 发布分享
  */
 define(function(require,exports){
-	require('publish/publish.css');
+	seajs.use('publish/publish.css');
 	require('mditor/mditor.js');
 	require('gallery/index.js');
 

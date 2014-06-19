@@ -5,7 +5,7 @@
 **/
 //alert(window.outerWidth);
 define && define("publish/publish-debug", [ "publish/article-debug", "mditor/mditor-debug.js", "gallery/index-debug.js", "publish/share-debug", "publish/opus-debug", "publish/labs-debug", "publish/friends-debug", "publish/power-debug", "publish/user-debug" ], function(require, exports) {
-    require("publish/publish-debug.css");
+    seajs.use("publish/publish.css");
     var article = require("publish/article-debug.js");
     var share = require("publish/share-debug.js");
     var opus = require("publish/opus-debug.js");
@@ -69,7 +69,7 @@ define && define("publish/publish-debug", [ "publish/article-debug", "mditor/mdi
  * 发布博文
  */
 define("publish/article-debug", [ "mditor/mditor-debug", "gallery/index-debug", "util/uploader-debug.js", "util/event-debug.js", "util/panel-debug.js", "UI/pop-debug.js", "gallery/fileItem-debug.js", "gallery/folderItem-debug.js" ], function(require, exports) {
-    require("publish/publish-debug.css");
+    seajs.use("publish/publish.css");
     require("mditor/mditor-debug.js");
     var gallery = require("gallery/index-debug.js");
     //初始化模版
@@ -156,7 +156,7 @@ define("publish/article-debug", [ "mditor/mditor-debug", "gallery/index-debug", 
  * 发布分享
  */
 define("publish/share-debug", [ "mditor/mditor-debug", "gallery/index-debug", "util/uploader-debug.js", "util/event-debug.js", "util/panel-debug.js", "UI/pop-debug.js", "gallery/fileItem-debug.js", "gallery/folderItem-debug.js" ], function(require, exports) {
-    require("publish/publish-debug.css");
+    seajs.use("publish/publish.css");
     require("mditor/mditor-debug.js");
     require("gallery/index-debug.js");
     //初始化模版
@@ -239,7 +239,7 @@ define("publish/share-debug", [ "mditor/mditor-debug", "gallery/index-debug", "u
  * 发布作品
  */
 define && define("publish/opus-debug", [ "mditor/mditor-debug", "gallery/index-debug", "util/uploader-debug.js", "util/event-debug.js", "util/panel-debug.js", "UI/pop-debug.js", "gallery/fileItem-debug.js", "gallery/folderItem-debug.js" ], function(require, exports) {
-    require("publish/publish-debug.css");
+    seajs.use("publish/publish.css");
     require("mditor/mditor-debug.js");
     require("gallery/index-debug.js");
     //初始化模版
@@ -320,7 +320,7 @@ define && define("publish/opus-debug", [ "mditor/mditor-debug", "gallery/index-d
  * 发布试验室
  */
 define && define("publish/labs-debug", [ "mditor/mditor-debug", "gallery/index-debug", "util/uploader-debug.js", "util/event-debug.js", "util/panel-debug.js", "UI/pop-debug.js", "gallery/fileItem-debug.js", "gallery/folderItem-debug.js" ], function(require, exports) {
-    require("publish/publish-debug.css");
+    seajs.use("publish/publish.css");
     require("mditor/mditor-debug.js");
     require("gallery/index-debug.js");
     //初始化模版
@@ -405,7 +405,7 @@ define && define("publish/labs-debug", [ "mditor/mditor-debug", "gallery/index-d
  * 发布友情链接
  */
 define && define("publish/friends-debug", [ "mditor/mditor-debug", "gallery/index-debug", "util/uploader-debug.js", "util/event-debug.js", "util/panel-debug.js", "UI/pop-debug.js", "gallery/fileItem-debug.js", "gallery/folderItem-debug.js" ], function(require, exports) {
-    require("publish/publish-debug.css");
+    seajs.use("publish/publish.css");
     require("mditor/mditor-debug.js");
     require("gallery/index-debug.js");
     //初始化模版
@@ -488,7 +488,7 @@ define && define("publish/friends-debug", [ "mditor/mditor-debug", "gallery/inde
  * 发布权限
  */
 define && define("publish/power-debug", [ "mditor/mditor-debug", "gallery/index-debug", "util/uploader-debug.js", "util/event-debug.js", "util/panel-debug.js", "UI/pop-debug.js", "gallery/fileItem-debug.js", "gallery/folderItem-debug.js" ], function(require, exports) {
-    require("publish/publish-debug.css");
+    seajs.use("publish/publish.css");
     require("mditor/mditor-debug.js");
     require("gallery/index-debug.js");
     //初始化模版
@@ -575,7 +575,7 @@ define && define("publish/power-debug", [ "mditor/mditor-debug", "gallery/index-
  * 发布分享
  */
 define("publish/user-debug", [], function(require, exports) {
-    require("publish/publish-debug.css");
+    seajs.use("publish/publish.css");
     //初始化模版
     function valueInit(tpl, data) {
         var txt = tpl.replace(/\{(\w*)}/g, function() {

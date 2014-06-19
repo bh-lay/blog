@@ -131,6 +131,16 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+**Dec 4th, 2013** `0.4.0`
+
+fix Windows path #58
+
+**Oct 15th, 2013** `0.4.0`
+
+- delete hack for grunt file object #45 **not compatible**
+
+- resolve deps error if require file and folder with the same name #50
+
 **Sep 4th, 2013** `0.3.0`
 
 Remove styleBox id logic added in 0.2.12, now require outside css module do not adding to styleBox,

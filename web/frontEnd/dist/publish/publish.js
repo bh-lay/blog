@@ -5,7 +5,7 @@
 **/
 //alert(window.outerWidth);
 define && define("publish/publish", [ "publish/article", "mditor/mditor.js", "gallery/index.js", "publish/share", "publish/opus", "publish/labs", "publish/friends", "publish/power", "publish/user" ], function(require, exports) {
-    require("publish/publish.css");
+    seajs.use("publish/publish.css");
     var article = require("publish/article.js");
     var share = require("publish/share.js");
     var opus = require("publish/opus.js");
@@ -69,7 +69,7 @@ define && define("publish/publish", [ "publish/article", "mditor/mditor.js", "ga
  * 发布博文
  */
 define("publish/article", [ "mditor/mditor", "gallery/index", "util/uploader.js", "util/event.js", "util/panel.js", "UI/pop.js", "gallery/fileItem.js", "gallery/folderItem.js" ], function(require, exports) {
-    require("publish/publish.css");
+    seajs.use("publish/publish.css");
     require("mditor/mditor.js");
     var gallery = require("gallery/index.js");
     //初始化模版
@@ -156,7 +156,7 @@ define("publish/article", [ "mditor/mditor", "gallery/index", "util/uploader.js"
  * 发布分享
  */
 define("publish/share", [ "mditor/mditor", "gallery/index", "util/uploader.js", "util/event.js", "util/panel.js", "UI/pop.js", "gallery/fileItem.js", "gallery/folderItem.js" ], function(require, exports) {
-    require("publish/publish.css");
+    seajs.use("publish/publish.css");
     require("mditor/mditor.js");
     require("gallery/index.js");
     //初始化模版
@@ -239,7 +239,7 @@ define("publish/share", [ "mditor/mditor", "gallery/index", "util/uploader.js", 
  * 发布作品
  */
 define && define("publish/opus", [ "mditor/mditor", "gallery/index", "util/uploader.js", "util/event.js", "util/panel.js", "UI/pop.js", "gallery/fileItem.js", "gallery/folderItem.js" ], function(require, exports) {
-    require("publish/publish.css");
+    seajs.use("publish/publish.css");
     require("mditor/mditor.js");
     require("gallery/index.js");
     //初始化模版
@@ -320,7 +320,7 @@ define && define("publish/opus", [ "mditor/mditor", "gallery/index", "util/uploa
  * 发布试验室
  */
 define && define("publish/labs", [ "mditor/mditor", "gallery/index", "util/uploader.js", "util/event.js", "util/panel.js", "UI/pop.js", "gallery/fileItem.js", "gallery/folderItem.js" ], function(require, exports) {
-    require("publish/publish.css");
+    seajs.use("publish/publish.css");
     require("mditor/mditor.js");
     require("gallery/index.js");
     //初始化模版
@@ -405,7 +405,7 @@ define && define("publish/labs", [ "mditor/mditor", "gallery/index", "util/uploa
  * 发布友情链接
  */
 define && define("publish/friends", [ "mditor/mditor", "gallery/index", "util/uploader.js", "util/event.js", "util/panel.js", "UI/pop.js", "gallery/fileItem.js", "gallery/folderItem.js" ], function(require, exports) {
-    require("publish/publish.css");
+    seajs.use("publish/publish.css");
     require("mditor/mditor.js");
     require("gallery/index.js");
     //初始化模版
@@ -488,7 +488,7 @@ define && define("publish/friends", [ "mditor/mditor", "gallery/index", "util/up
  * 发布权限
  */
 define && define("publish/power", [ "mditor/mditor", "gallery/index", "util/uploader.js", "util/event.js", "util/panel.js", "UI/pop.js", "gallery/fileItem.js", "gallery/folderItem.js" ], function(require, exports) {
-    require("publish/publish.css");
+    seajs.use("publish/publish.css");
     require("mditor/mditor.js");
     require("gallery/index.js");
     //初始化模版
@@ -575,7 +575,7 @@ define && define("publish/power", [ "mditor/mditor", "gallery/index", "util/uplo
  * 发布分享
  */
 define("publish/user", [], function(require, exports) {
-    require("publish/publish.css");
+    seajs.use("publish/publish.css");
     //初始化模版
     function valueInit(tpl, data) {
         var txt = tpl.replace(/\{(\w*)}/g, function() {

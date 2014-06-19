@@ -4,7 +4,7 @@
  */
 define("public/js/opusList-debug", [ "lib/juicer-debug" ], function(require, exports) {
     require("lib/juicer-debug.js");
-    require("public/css/opus-debug.css");
+    seajs.use("public/css/opus.css");
     var item_tpl = [ "{@each list as it,index}", "<li>", '<div class="opus_cover">', '<a href="/opus/${it.id}" title="${it.title}" target="_self" lofox="true" >', '<img src="${it.cover}" alt="${it.title}" />', "</a>", "</div>", '<div class="opus_info">', '<h3><a href="/opus/${it.id}" target="_self" lofox="true" >${it.title}</a></h3>', "<p><strong>开发范围：</strong>", "{@each it.work_range as that,index}", "<span>${that}</span>", "{@/each}", "</p>", "<p><strong>在线地址：</strong>", "{@if it.online_url}", '<a href="${it.online_url}">${it.online_url}</a>', "{@else}", "<span>无在线地址</span>", "{@/if}", "</p>", "</div>", "</li>", "{@/each}" ].join("");
     var limit = 20, skip = 0, count = null, dom;
     var insert = function(param) {

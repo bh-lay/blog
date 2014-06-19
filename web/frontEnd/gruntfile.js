@@ -8,12 +8,22 @@ module.exports = function(grunt){
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		copy: {
-			build: {
+			'copyAll': {
 				cwd: 'develop/',
 				src: ['**/*.css','**/*.js','**/*.png','**/*.jpg','**/*.eot','**/*.svg','**/*.ttf','**/*.woff'],
 				dest: 'build/',
 				expand: true
 			},
+			/**
+			 * 从临时目录dist 取回 合并后的seajs文件至build环境中
+			 */
+			'seaJS' :{
+				cwd: 'dist/',
+				src: ['**/*.js'],
+				dest: 'build/',
+				expand: true
+				
+			}
 		},
 		transport : {
 			options : {
@@ -30,6 +40,7 @@ module.exports = function(grunt){
 					idleading:''
 				},
 				files:[{
+					expand:true,
 					cwd:"develop/",
 					src:["**/*.js"],
 					filter:"isFile",
@@ -44,6 +55,9 @@ module.exports = function(grunt){
 				include : 'relative',
 				alias : '<%= pkg.spm.alias %>'
 			},
+			/**
+			 * 从build环境中合并seajs文件至临时目录dist
+			 */
 			common:{
 				options:{
 					include : 'all'
@@ -61,11 +75,11 @@ module.exports = function(grunt){
 			options: {
 				banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
 			},
-			build: {
+			common: {
 				expand: true,
-				cwd:'dist/',
+				cwd:'build/',
 				src: ['**/*.js', '**/!*.min.js'],
-				dest: 'dist/',
+				dest: 'build/',
 				ext:".js"
 			}
 		},
@@ -73,7 +87,7 @@ module.exports = function(grunt){
 			options: {  
 				keepSpecialComments: 0  
 			},  
-			minify: {
+			common: {
 				expand: true,
 				cwd: 'build/',
 				src: ['**/*.css', '**/!*.min.css'],
@@ -89,10 +103,18 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-cmd-transport');
 	grunt.loadNpmTasks('grunt-cmd-concat');
-
- //
-	grunt.registerTask('copyAll', ['copy']);
-	grunt.registerTask('seajs', ['transport','concat']);
+	
+	
+ 	//抽出saejs模块
+	grunt.registerTask('transports', ['transport:common']);
+ 	//合并saejs模块
+	grunt.registerTask('concats', ['concat:common']);
+ 	//复制所有可用文件
+ 	grunt.registerTask('copyAll', ['copy:copyAll']);
+ 	//复制saejs模块
+	grunt.registerTask('copySeajs', ['copy:seaJS']);
+	//压缩css、js（混淆）
 	grunt.registerTask('min', ['uglify','cssmin']);
-	grunt.registerTask('default', ['copy']);
+	//一键完成
+	grunt.registerTask('default', ['transport:common','concat:common','copy:copyAll','copy:seaJS','uglify:common','cssmin:common']);
 }

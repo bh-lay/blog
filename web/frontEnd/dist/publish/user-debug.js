@@ -8,7 +8,7 @@
  * 发布分享
  */
 define("publish/user-debug", [], function(require, exports) {
-    require("publish/publish-debug.css");
+    seajs.use("publish/publish.css");
     //初始化模版
     function valueInit(tpl, data) {
         var txt = tpl.replace(/\{(\w*)}/g, function() {

@@ -4,7 +4,7 @@
  */
 define("public/js/labsList", [ "lib/juicer" ], function(require, exports) {
     require("lib/juicer.js");
-    require("public/css/labs.css");
+    seajs.use("public/css/labs.css");
     var temp = [ "{@each list as it,index}", '<li><div class="lab_item">', '<a class="lab_cover" href="/labs/${it.name}" title="${it.title}" target="_blank" style="background-image:url(${it.cover})"></a>', '<h4 class="lab_title">', '<a href="/labs/${it.name}" title="${it.title}" target="_blank">${it.title}</a>', "</h4>", '<div class="lab_info">', "<p>${it.intro}</p>", "</div>", "</div></li>", "{@/each}" ].join("");
     var limit = 20, skip = 0, count = null, dom;
     var insert = function(param) {

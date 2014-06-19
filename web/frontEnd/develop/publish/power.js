@@ -11,7 +11,7 @@
  */
 
 define && define(function(require,exports){
-	require('publish/publish.css');
+	seajs.use('publish/publish.css');
 	require('mditor/mditor.js');
 	require('gallery/index.js');
 	

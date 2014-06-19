@@ -5,7 +5,7 @@
  */
 define(function(require,exports){
 	require('lib/juicer.js');
-	require('public/css/share.css');
+	seajs.use('public/css/share.css');
 	
 	var template = ['<div class="l_row"><div class="l_col_12 shareDetail">',
 		'<div class="articletop">',

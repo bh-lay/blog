@@ -6,7 +6,7 @@
 //alert(window.outerWidth);
 
 define && define(function(require,exports){
-	require('publish/publish.css');
+	seajs.use('publish/publish.css');
 	var article = require('publish/article.js');
 	var share = require('publish/share.js');
 	var opus = require('publish/opus.js');

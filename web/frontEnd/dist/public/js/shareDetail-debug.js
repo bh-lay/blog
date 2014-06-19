@@ -4,7 +4,7 @@
  */
 define("public/js/shareDetail-debug", [ "lib/juicer-debug" ], function(require, exports) {
     require("lib/juicer-debug.js");
-    require("public/css/share-debug.css");
+    seajs.use("public/css/share.css");
     var template = [ '<div class="l_row"><div class="l_col_12 shareDetail">', '<div class="articletop">', "<h1>${title}</h1>", "<p><span>分享时间：${time_show} </span></p>", "</div>", '<div class="article">$${content}</div>', '<div class="youyan">', '<div id="uyan_frame"></div>', '<script type="text/javascript">', 'var uyan_config = {"du":"bh-lay.com"};', "</script>", '<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1605927" async=""></script>', "</div>", "</div></div>" ].join("");
     function getData(id, fn) {
         $.ajax({

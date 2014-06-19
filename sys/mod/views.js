@@ -31,6 +31,9 @@ function replaceComponent(temp,callback){
 			});
 		})(i);
 	}
+	if(total == 0){
+		callback(null,temp);
+	}
 	function all_callBack(temp_data){
 		over_count++;
 		if(over_count == total){

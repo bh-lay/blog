@@ -4,7 +4,7 @@
  */
 define(function(require,exports){
 	require('lib/juicer.js');
-	require('public/css/blog.css');
+	seajs.use('public/css/blog.css');
 	var blogTemp =  ['{@each list as it,index}',
 		'<div class="articleItem" articleId="${it.id}">',
 			'<div class="artItCpt">',

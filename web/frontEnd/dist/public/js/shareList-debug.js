@@ -4,7 +4,7 @@
  */
 define("public/js/shareList-debug", [ "lib/juicer-debug" ], function(require, exports) {
     require("lib/juicer-debug.js");
-    require("public/css/share-debug.css");
+    seajs.use("public/css/share.css");
     var limit = 10, skip = 0, count = 0;
     var insert = function(param) {
         var this_html = $(param["html"]), this_dom = param["dom"];

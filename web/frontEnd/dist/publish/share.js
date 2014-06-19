@@ -8,7 +8,7 @@
  * 发布分享
  */
 define("publish/share", [ "mditor/mditor", "gallery/index", "util/uploader.js", "util/event.js", "util/panel.js", "UI/pop.js", "gallery/fileItem.js", "gallery/folderItem.js" ], function(require, exports) {
-    require("publish/publish.css");
+    seajs.use("publish/publish.css");
     require("mditor/mditor.js");
     require("gallery/index.js");
     //初始化模版
@@ -82,7 +82,7 @@ define("publish/share", [ "mditor/mditor", "gallery/index", "util/uploader.js", 
 });
 
 define("gallery/index", [ "util/uploader", "util/event", "util/panel", "UI/pop", "gallery/fileItem", "util/event.js", "util/panel.js", "util/toucher.js", "UI/pop.js", "gallery/folderItem", "util/uploader.js" ], function(require, exports) {
-    require("gallery/style.css");
+    seajs.use("gallery/style.css");
     var uploader = require("util/uploader.js");
     var events = require("util/event.js");
     var panel = require("util/panel.js");

@@ -4,7 +4,7 @@
  */
 define(function(require,exports){
 	require('lib/juicer.js');
-	require('public/css/share.css');
+	seajs.use('public/css/share.css');
 	
 	var limit = 10,
 		 skip = 0,

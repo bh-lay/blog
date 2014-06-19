@@ -4,7 +4,7 @@
  */
 define("public/js/blogDetail", [ "lib/juicer" ], function(require, exports) {
     require("lib/juicer.js");
-    require("public/css/blog.css");
+    seajs.use("public/css/blog.css");
     var template = [ '<div class="l_row"><div class="l_col_12"><div class="blog_article">', '<div class="articletop">', "<h1>${title}</h1>", "<p><span>时间：${time_show} </span><span>作者：${author}</span></p>", "</div>", '{@if cover}<div class="article_cover"><img src="${cover}" alt="${title}" class="topicImg" /></div>{@/if}', '<div class="article">$${content}</div>', '<div class="copylink">', '<div class="tag"><strong>本文关键字：</strong>${tags}</div>', '<div class="pageUrl"><strong>转载请注明来源：</strong>http://bh-lay.com/blog/${id}</div>', "</div>", '<div class="youyan">', '<div id="uyan_frame"></div>', '<script type="text/javascript">', 'var uyan_config = {"du":"bh-lay.com"};', "</script>", '<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1605927" async=""></script>', "</div></div></div>" ].join("");
     function getData(id, fn) {
         $.ajax({

@@ -1,5 +1,5 @@
 define("gallery/index-debug", [ "util/uploader-debug", "util/event-debug", "util/panel-debug", "UI/pop-debug", "gallery/fileItem-debug", "util/event-debug.js", "util/panel-debug.js", "util/toucher-debug.js", "UI/pop-debug.js", "gallery/folderItem-debug", "util/uploader-debug.js" ], function(require, exports) {
-    require("gallery/style-debug.css");
+    seajs.use("gallery/style.css");
     var uploader = require("util/uploader-debug.js");
     var events = require("util/event-debug.js");
     var panel = require("util/panel-debug.js");

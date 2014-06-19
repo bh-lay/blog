@@ -1,5 +1,5 @@
 define("gallery/index", [ "util/uploader", "util/event", "util/panel", "UI/pop", "gallery/fileItem", "util/event.js", "util/panel.js", "util/toucher.js", "UI/pop.js", "gallery/folderItem", "util/uploader.js" ], function(require, exports) {
-    require("gallery/style.css");
+    seajs.use("gallery/style.css");
     var uploader = require("util/uploader.js");
     var events = require("util/event.js");
     var panel = require("util/panel.js");
