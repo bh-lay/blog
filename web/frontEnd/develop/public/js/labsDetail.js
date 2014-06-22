@@ -3,8 +3,8 @@
  *  
  */
 seajs.use([
-	'/frontEnd/util/tie.js',
-	'/frontEnd/lib/highlight/highlight.pack.js'
+	'util/tie.js',
+	'lib/highlight/highlight.pack.js'
 ],function(){
 	util.tie({
 		'dom' : $('.labs_detail_bar_body'),

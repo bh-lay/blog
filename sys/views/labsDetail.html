@@ -11,9 +11,9 @@
 <link rel="apple-touch-icon" sizes="72x72" href="touch-icon-ipad.png" />
 <link rel="apple-touch-icon" sizes="114x114" href="touch-icon-iphone-retina.png" />
 <link rel="apple-touch-icon" sizes="144x144" href="touch-icon-ipad-retina.png" />
-<link rel="stylesheet" type="text/css" href="/frontEnd/public/css/common.css"/>
-<link rel="stylesheet" type="text/css" href="/frontEnd/public/css/labs.css" />
-<link rel="stylesheet" type="text/css" href="/frontEnd/lib/Font-Awesome-3.2.1/css/font-awesome.min.css"/>
+<link rel="stylesheet" type="text/css" href="${frontEnd_base}public/css/common.css"/>
+<link rel="stylesheet" type="text/css" href="${frontEnd_base}public/css/labs.css" />
+<link rel="stylesheet" type="text/css" href="${frontEnd_base}lib/Font-Awesome-3.2.1/css/font-awesome.min.css"/>
 </head>
 <body>
 	<div class="labs_detail_title">
@@ -167,9 +167,17 @@
 </div>
 </script>
 {{{navigation}}}
-<script type="text/javascript" src="/frontEnd/jquery.js"></script>
-<script type="text/javascript" src="/frontEnd/lib/sea.js"></script>
-<script type="text/javascript" src="/frontEnd/public/js/labsDetail.js"></script>
+<script type="text/javascript" src="${frontEnd_base}jquery.js"></script>
+<script type="text/javascript" src="${frontEnd_base}lib/sea.js"></script>
+<script type="text/javascript">
+	var app_config = {
+		'frontEnd_base' : '${frontEnd_base}'
+	};
+	seajs.config({
+	  'base' : '${frontEnd_base}'
+	});
+</script>
+<script type="text/javascript" src="${frontEnd_base}public/js/labsDetail.js"></script>
 {{{baiduAndGoogleTongji}}}
 </body>
 </html>
