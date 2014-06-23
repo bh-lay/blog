@@ -196,7 +196,7 @@ seajs.use('util/lofox_1_0.js',function(){
  */
 (function(exports){
 	var tpl = ['<style>',
-		'.myCard{position:fixed;width:260px;height:300px;background:#fff;top:60px;left:20%;z-index:100;border-radius:4px;overflow:hidden;box-shadow:0px 0px 100px #000;}',
+		'.myCard{position:fixed;width:260px;height:300px;background:#fff;top:60px;left:20%;z-index:100;border-radius:4px;overflow:hidden;box-shadow:0px 0px 100px rgba(0,0,0,0.2);}',
 		'.myCard_header{height:80px;background:#48f;}',
 		'.myCard_info{position:absolute;top:35px;left:20px;width:100%;}',
 		'.myCard_cover{width:60px;height:60px;margin-right:10px;float:left;background:#333;}',

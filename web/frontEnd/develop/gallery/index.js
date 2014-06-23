@@ -399,7 +399,7 @@ define(function(require,exports){
 			var selectedFiles = [];
 			var filesTotal = this.files.length;
 			for(var i=0;i<filesTotal;i++){
-				if(this.files[i].status == 'selected'){
+				if(this.files[i]._status == 'selected'){
 					selectedFiles.push({
 						'extension': this.files[i]['extension'],
 						'fullname': this.files[i]['fullname'],
@@ -422,6 +422,7 @@ define(function(require,exports){
 		var explorer = new SELECT(pop.cntDom.find('.col-md-12'));
 		
 		pop.dom.find('.galleryPop_footer a').on('click',function(){
+			console.log(explorer,explorer.selection(),123)
 			callback && callback(explorer.selection());
 			pop.close();
 		});

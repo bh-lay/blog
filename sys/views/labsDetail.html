@@ -26,9 +26,9 @@
 			<div class="l_row">
 				<div class="labs_detail_bar_cnt">
 					<a href="#doc">doc</a>
+					<a href="#demo_link">DOME</a>
 					<a href="#download">download</a>
 					<a href="#github">Github</a>
-					<a href="#demo_link">DOME</a>
 				</div>
 			</div>
 		</div>
@@ -37,10 +37,18 @@
 		<a name="doc"></a>
 		<div class="labs_detail_doc">
 			<div class="l_row">
-				<div class="l_notice l_notice_tips">
-					<strong>实验室</strong>正在开发中，目前有许多明显需要改进的地方，敬请期待！
-				</div>
 				<div class="article">$${content}</div>
+			</div>
+		</div>
+		<a name="demo_link"></a>
+		<div class="labs_detail_demo" data-demopath="${demo_url}">
+			<!--<a href="javascript:void(0)" class="">
+				<span class="icon-eye-open"></span>查看demo
+			</a>-->
+			<iframe src="${demo_url}" frameborder="0"></iframe>
+			<div class="labsDeDemo_btn">
+				<p>当前demo为iframe</p>
+				<a href="${demo_url}" target="_blank" ><i class="icon-share-alt"></i> 新窗口查看</a>
 			</div>
 		</div>
 		<a name="download"></a>
@@ -87,17 +95,6 @@
 				<div class="l_col_12 labsDeGit_loading">
 					<span class="icon-spinner icon-spin"></span>
 				</div>
-			</div>
-		</div>
-		<a name="demo_link"></a>
-		<div class="labs_detail_demo" data-demopath="${demo_url}">
-			<!--<a href="javascript:void(0)" class="">
-				<span class="icon-eye-open"></span>查看demo
-			</a>-->
-			<iframe src="${demo_url}" frameborder="0"></iframe>
-			<div class="labsDeDemo_btn">
-				<p>当前demo为iframe</p>
-				<a href="${demo_url}" target="_blank" ><i class="icon-share-alt"></i> 新窗口查看</a>
 			</div>
 		</div>
 	</div>

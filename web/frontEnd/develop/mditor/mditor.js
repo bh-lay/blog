@@ -51,24 +51,24 @@ window.mditor = window.mditor || {};
 	var link = document.createElement('link');
 	link.type = 'text/css';
 	link.rel = 'stylesheet';
-	link.href = admin_config.frontEnd_base + 'mditor/mditor.css';
+	link.href = admin_dataBase.frontEnd_base + 'mditor/mditor.css';
 	document.getElementsByTagName('head')[0].appendChild(link);
 	
 	var link2 = document.createElement('link');
 	link2.type = 'text/css';
 	link2.rel = 'stylesheet';
-	link2.href = admin_config.frontEnd_base + 'lib/showdown/style-0.6.4.min.css';
+	link2.href = admin_dataBase.frontEnd_base + 'lib/showdown/style-0.6.4.min.css';
 //	link2.href = 'http://dillinger.io/css/style-0.6.4.min.css';
 	document.getElementsByTagName('head')[0].appendChild(link2);
 	
 	var script = document.createElement('script');
 	script.type = 'text/javascript';
-	script.src = admin_config.frontEnd_base + 'lib/showdown/showdown.js';
+	script.src = admin_dataBase.frontEnd_base + 'lib/showdown/showdown.js';
 	document.getElementsByTagName('head')[0].appendChild(script);
 
 	var script2 = document.createElement('script');
 	script2.type = 'text/javascript';
-	script2.src = admin_config.frontEnd_base + 'util/selection.js';
+	script2.src = admin_dataBase.frontEnd_base + 'util/selection.js';
 	document.getElementsByTagName('head')[0].appendChild(script2);
 	
 	function resize(){
