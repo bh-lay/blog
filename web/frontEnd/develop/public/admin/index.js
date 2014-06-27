@@ -25,47 +25,6 @@ window.admin = window.admin || {};
  ***/
 
 (function(exports){
-	var nameToTitle = {
-		'index' : '后台首页',
-		'share' : '分享列表',
-		'article' : '博文列表',
-		'opus' : '作品列表',
-		'user' : '用户',
-		'publish' : '发布台',
-		'friends' : '友情链接',
-		'labs' : '实验室',
-		'gallery' : '图库'
-	};
-	
-	function filterUrl(input){
-		var urlData = input || [];
-		var not_admin = false,
-			 page,
-			 title;
-		//判断是否为后台
-		if(urlData.length == 0 || urlData[0] != 'admin'){
-			not_admin = true;
-		}else{
-			//判断是否为首页
-			if(urlData.length == 1){
-				page = 'index';
-				title = '首页';
-			}else if(nameToTitle[urlData[1]]){
-				page = urlData[1];
-				title = nameToTitle[page];
-			}else{
-				page = 'error';
-				title = '出错了';
-				//FIXME 出错了
-				console.log('url err!');
-			}
-		}
-		return {
-			'not_admin' : not_admin,
-			'page' : page,
-			'title' : title
-		}
-	}
 	function createDom(dom){
 		var oldDom = dom.find('.mainCnt_body');
 		var newDom = $('<div class="mainCnt_body"><div><div class="pro_loading">正在加载</div></div></div>');
@@ -100,121 +59,121 @@ window.admin = window.admin || {};
 		return newDom;
 	}
 	seajs.use([
-		'util/lofox.js',
-		'UI/pop.js',
+		'util/lofox_1_0.js',
+		'UI/dialog.js',
 		'public/admin/render.js',
 		'lib/jquery/jquery.easing.1.3.min.js'
 	],function(){
 		var lofox = util.lofox();
 		var mainDom = $('.mainCnt');
 		var titleDom = $('title');
-		lofox.on('change',function(urlData,searchData){
-			
-			var data = filterUrl(urlData);
-			var page_title = data.title;
-			var page_name = data.page;
-			//console.log(data);
-			if(data.not_admin){
-				//非管理后台
-				window.location.reload();
-				return
-			}
-			switch(page_name){
-				case 'index':
-					//首页
-					var dom = createDom(mainDom);
-					admin.render.index(dom);
-				break
-				case 'article':
-					//博文页
-					var dom = createDom(mainDom);
-					admin.render.article(dom);
-				break
-				case 'share':
-					//分享
-					var dom = createDom(mainDom);
-					admin.render.share(dom);
-				break
-				case 'opus':
-					//作品
-					var dom = createDom(mainDom);
-					admin.render.opus(dom);
-				break
-				case 'labs':
-					//作品
-					var dom = createDom(mainDom);
-					admin.render.labs(dom);
-				break
-				case 'user':
-					//用户
-					var dom = createDom(mainDom);
-					if(urlData.length == 2){
-						page_title = '用户';
-						admin.render.userIndex(dom);
-					}else if(urlData.length >= 3){
-						if(urlData[2] == 'list'){
-							page_title = '用户列表';
-							admin.render.userList(dom);
-						}else if(urlData[2] == 'group'){
-							page_title = '用户组列表';
-							dom.html('俺是用户组列表页');
-						}else if(urlData[2] == 'power'){
-							page_title = '权限页';
-							admin.render.powerList(dom);
-						}else{
-							admin.push('/user/');
-							admin.refresh();
-						}
-					}
-				break
-				case 'publish':
-					var domCnt = createDom(mainDom);
-					domCnt.html('<div class="col-md-12"></div>');
-					var dom = domCnt.find('.col-md-12');
-					var type = '';
-					var id = null;
-					if(urlData.length >= 3){
-						type = urlData[2];
-					}
-					if(urlData.length >= 4){
-						id = urlData[3];
-					}
-					if(type.match(/^(article|share|opus|friends|labs|power|user)$/)){
-						seajs.use('publish/publish.js',function(publish){
-							publish.init(dom,{
-								'active' : type,
-								'id' : id
-							});
-						});
-					}else{
-						admin.push('/publish/article');
-						admin.refresh();
-					}
-				break
-				case 'friends':
-					//友情链接模块
-					var dom = createDom(mainDom);
-					admin.render.friends(dom);
-				break
-				case 'gallery' :
-					var domCnt = createDom(mainDom);
-					domCnt.html('<div class="col-md-12"></div>');
-					var dom = domCnt.find('.col-md-12');
-					seajs.use('gallery/index.js',function(gallery){
-						gallery.init(dom);
-					});
-				break
-				default:
-					admin.push('/admin/');
-					admin.refresh();
-					return
-					mainDom.html('<div Style="height:60px;background:#fff;line-height:60px;text-align:center;">这是一个<strong Style="font-size:20px;">“错误的”</strong>页面，请找<a href="http://sighttp.qq.com/authd?IDKEY=add2a4ef1d41f5d9014a7162fd89e6343c31c38ccbf9cc6f" title="发起QQ聊天" target="_blank" style="color:#fa0;margin:0px 10px;">[ 剧中人 ]</a>查看哪儿出了问题！</div>');
-			}
-			titleDom.html(page_title + '—剧中人后台');
-			$('.crumbs').html(page_title);
-		});
+		
 		
 		admin.render.base();
+		
+		//首页
+		lofox.set('/admin/',function(){
+			this.title('后台首页');
+			var dom = createDom(mainDom);
+			admin.render.index(dom);
+		});
+		//博文页
+		lofox.set('/admin/article',function(){
+			this.title('博文列表');
+			var dom = createDom(mainDom);
+			admin.render.article(dom);
+		});
+		//分享页
+		lofox.set('/admin/share',function(){
+			this.title('分享列表');
+			var dom = createDom(mainDom);
+			admin.render.share(dom);
+		});
+		//作品页
+		lofox.set('/admin/opus',function(){
+			this.title('作品列表');
+			var dom = createDom(mainDom);
+			admin.render.opus(dom);
+		});
+		//实验室
+		lofox.set('/admin/labs',function(){
+			this.title('实验室');
+			var dom = createDom(mainDom);
+			admin.render.labs(dom);
+		});
+		//用户首页
+		lofox.set('/admin/user',function(){
+			this.title('用户');
+			var dom = createDom(mainDom);
+			admin.render.userIndex(dom);
+		});
+		//用户列表页
+		lofox.set('/admin/user/list',function(){
+			this.title('用户列表');
+			var dom = createDom(mainDom);
+			admin.render.userList(dom);
+		});
+		//用户组页
+		lofox.set('/admin/group',function(){
+			this.title('用户组列表');
+			var dom = createDom(mainDom);
+			dom.html('俺是用户组列表页');
+		});
+		//权限页
+		lofox.set('/admin/power',function(){
+			this.title('权限页');
+			var dom = createDom(mainDom);
+			admin.render.powerList(dom);
+		});
+		
+		//友情链接模块
+		lofox.set('/admin/friends',function(){
+			this.title('友情链接');
+			
+			var dom = createDom(mainDom);
+			admin.render.friends(dom);
+		});
+		//图库
+		lofox.set('/admin/gallery',function(){
+			this.title('图库');
+			
+			var domCnt = createDom(mainDom);
+			domCnt.html('<div class="col-md-12"></div>');
+			var dom = domCnt.find('.col-md-12');
+			seajs.use('gallery/index.js',function(gallery){
+				gallery.init(dom);
+			});
+		});
+		//发布相关
+		lofox.set([
+			'/admin/publish/',
+			'/admin/publish/{type}',
+			'/admin/publish/{type}/{id}'
+		],function(data){
+			this.title('发布台');
+			var domCnt = createDom(mainDom);
+			domCnt.html('<div class="col-md-12"></div>');
+			var dom = domCnt.find('.col-md-12');
+			var type = data.type || null;
+			var id = data.id || null;
+			
+			if(type && type.match(/^(article|share|opus|friends|labs|power|user)$/)){
+				seajs.use('publish/publish.js',function(publish){
+					publish.init(dom,{
+						'active' : type,
+						'id' : id
+					});
+				});
+			}else{
+				admin.push('/publish/article');
+				admin.refresh();
+			}
+		});
+		
+		lofox.rest(function(){
+			admin.push('');
+			admin.refresh();
+		})
 		
 		$('body').on('click','a.custom-lofox',function(){
 			var url = $(this).attr('href');

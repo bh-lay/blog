@@ -4,7 +4,7 @@ define(function(require,exports){
 	var uploader = require('util/uploader.js');
 	var events = require('util/event.js');
 	var panel = require('util/panel.js');
-	var UI = require('UI/pop.js');
+	var UI = require('UI/dialog.js');
 	
 	var dir_tpl = ['<div class="gP_item" data-type="folder" data-fullname="{name}">',
 		'<div class="gP_item_body">',

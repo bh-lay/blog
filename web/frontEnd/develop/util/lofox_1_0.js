@@ -2,12 +2,22 @@
  * @author bh-lay
  * @github https://github.com/bh-lay/lofox
  * @version 1.0
- * @modified 2014-5-20 18:54
+ * @modified 2014-6-27 23:14
  *  location fox
  */
-window.util = window.util || {};
 
-(function(exports){
+(function(global,doc,factoryFn){
+	var factory = factoryFn();
+	global.util = global.util || {};
+	global.util.lofox = factory;
+	
+	//提供CommonJS规范的接口
+	global.define && define(function(require,exports,module){
+		//对外接口
+		return factory;
+	});
+	
+})(window,document,function(exports){
 	/**
 	 * 格式化path 
 	 */
@@ -215,11 +225,23 @@ window.util = window.util || {};
 			}
 			this.events[eventName].push(callback);
 		},
-		'set' : function(routerName,callback){
-			var routerName = arguments[0];
-			var callback = typeof(callback) =='function' ? callback :null;
-			this._maps[routerName] = {
-				'renderFn' : callback
+		'set' : function(url,callback){
+			var routerNames = [];
+			var total;
+			var type = Object.prototype.toString.call(url);
+			if(type == '[object Array]'){
+				routerNames = url;
+				total = routerNames.length;
+			}else if (type == '[object String]'){
+				routerNames = [url];
+				total = 1;
+			}
+			for (var i=0;i<total;i++) {
+				var routerName = routerNames[i];
+				var callback = typeof(callback) =='function' ? callback :null;
+				this._maps[routerName] = {
+					'renderFn' : callback
+				};
 			};
 		},
 		//设置页面标题
@@ -250,7 +272,7 @@ window.util = window.util || {};
 			var searchData = searchParser(searchStr);
 			
 			var result = findUrlInMaps(pathData,this._maps);
-		
+			
 			if(result){
 				var data = result.data;
 				//执行set方法设置的回调
@@ -263,13 +285,7 @@ window.util = window.util || {};
 		}
 	};
 	
-	exports.lofox = function(){
+	return function(){
 		return new LOFOX()
 	};
-})(window.util);
-
-//提供CommonJS规范的接口
-window.define && define(function(require,exports,module){
-	//对外接口
-	return window.util.lofox;
 });

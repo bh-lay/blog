@@ -4,7 +4,7 @@ define(function(require,exports){
 	var uploader = require('util/uploader.js');
 	var events = require('util/event.js');
 	var panel = require('util/panel.js');
-	var UI = require('UI/pop.js');
+	var UI = require('UI/dialog.js');
 	var fileItem = require('gallery/fileItem.js');
 	var folderItem = require('gallery/folderItem.js');
 	
