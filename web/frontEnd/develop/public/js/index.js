@@ -28,7 +28,6 @@ define(function(require,exports){
 			'<a target="_blank" href="http://www.zhuwenlong.com/">Mofei梦的起飞</a>',
 			'<a target="_blank" href="http://www.hankewins.com/">前端生活</a>',
 			'<a target="_blank" href="http://www.woween.com">何东杰的网络日记</a>',
-			'<a target="_blank" href="http://www.yajee.net">前端ING</a>',
 			'<a target="_blank" href="http://www.w3cfuns.com/">前端开发网</a>',
 		'</div></div>',
 	'</div></div></div>'].join('');
