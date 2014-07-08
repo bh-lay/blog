@@ -3,23 +3,24 @@
  *
 
 
+.articleListCnt
+  height: 300px
+  margin-top: 100px
+  background: #fff
+  overflow: hidden
+  
 .articleList
-  width: 600px
-  float: right
-  border-left: 1px dashed #fff
-  padding: 100px 0px 100px 20px
+  width: 3000px
+  padding: 10px 10px 10px 10px
   
 
 .articleItem
-  position: relative
-  z-index: 1000
-  margin-bottom: 30px
+  width: 200px
+  float: left
+  margin-right: 10px
+  overflow: hidden
 
 .artItCpt
-  position: absolute
-  width: 280px
-  left: -320px
-  top: 10px
   text-align: right
   h3
     font-weight: normal
@@ -46,12 +47,9 @@
   opacity: 0.7
 
 .artItCnt
-  width: 420px
   background: #fff
-  overflow: hidden
-  border-radius: 8px
-  box-shadow: 1px 1px 4px #444
 .artItPic
+  height: 100px
   overflow: hidden
   background : #eee
   img
@@ -79,68 +77,6 @@
   line-height: 30px
   font-size: 14px
   color: #333
-
-.artItFoot
-  height: 20px
-  padding: 4px 20px
-  background: #f2f2f2
-  border-top: 1px solid #ccc
-  box-shadow: 0px 1px 2px #ddd inset
-  a
-    height: 20px
-    display: block
-    float: left
-    margin-right: 15px
-    line-height: 20px
-    *
-      height: 20px
-      display: block
-      float: left
-    b
-      font-size: 12px
-      font-weight: normal
-      color: #aaa
-      padding: 0px 5px
-    i
-      width: 20px
-  .dataLike
-    i
-      background-position: 0px 0px
-    &:hover
-      i
-        width: 20px
-        background-position: 0px -20px
-      b
-        color: #a00
-  .dataView
-    i
-      background-position: -20px 0px
-    &:hover
-      i
-        width: 20px
-        background-position: -20px -20px
-      b
-        color: #000
-
-.artItLace
-  position: absolute
-  top: 10px
-  left: -25px
-
-.artItLaCircle
-  width: 10px
-  height: 10px
-  background: #fff
-  border-radius: 5px
-  float: left
-  margin: 7px 8px 0px 0px
-
-.artItLaCorner
-  float: left
-  border-color: transparent #fff
-  border-style: solid
-  border-width: 8px 7px 8px 0px
-  margin: 4px 0px 0px 0px
 
 .blog_addMore
   width: 420px
@@ -173,60 +109,6 @@
       display: block
     a
       display: none
-
-@media screen and (min-width: 1200px)
-  .articleList
-    width: 40%
-
-@media screen and (max-width: 1200px) and (min-width: 880px)
-  .articleList
-    width: 50%
-
-@media screen and (max-width: 879px) and (min-width: 760px)
-  .articleList
-    width: 440px
-
-@media screen and (max-width: 759px)
-  .articleList
-    width: auto
-    padding-left: 0px
-    border: none
-    float: none
-  .artItLace
-    display : none
-  .artItCpt
-    position: relative
-    top: 0px
-    left: 0px
-    background: #fff
-    margin: 0px 0px 10px 0px
-    width: 100%
-    padding: 5px 0px
-    text-align: left
-    text-shadow: 0px 0px 0px transparent
-    box-shadow: 0px 1px 2px #333
-    &:after
-      content: "◆"
-      text-align: center
-      font-family: "Simsun"
-      line-height: 20px
-      color: #fff
-      font-size: 20px
-      display: block
-      width: 20px
-      height: 20px
-      position: absolute
-      left: 20px
-      bottom: -9px
-    h3 a, p
-      color: #333
-      padding-left: 15px
-  .artItCnt
-    border-radius: 0px
-  .artItCpt, .artItCnt, .blog_addMore
-    width: 100%
-    margin-left: auto
-    margin-right: auto
 
 /*
  * pageB-2: blog detail page

@@ -11,7 +11,10 @@ $('body').append('<a href="https:github.com/bh-lay/blog" target="_blank" class="
 
 
 window.L = window.L || {};
-seajs.use('util/lofox_1_0.js',function(){
+seajs.use([
+	'util/lofox_1_0.js',
+	'UI/dialog.js'
+],function(){
 	var lofox = new util.lofox();
 	
 	var dom = $('.contlayer');
@@ -64,7 +67,10 @@ seajs.use('util/lofox_1_0.js',function(){
 	lofox.set('/blog',function(){
 		this.title('我的博客_小剧客栈');
 		L.nav.setCur('blog');
-		var dom = ani();
+		//var dom = ani();
+//		UI.cover({
+			
+//		});
 		seajs.use('public/js/blogList.js',function(blogList){
 			blogList(dom);
 		});

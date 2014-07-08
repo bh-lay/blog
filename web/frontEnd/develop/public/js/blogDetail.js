@@ -11,7 +11,6 @@ define(function(require,exports){
 			'<h1>${title}</h1>',
 			'<p><span>时间：${time_show} </span><span>作者：${author}</span></p>',
 		'</div>',
-		'{@if cover}<div class="article_cover"><img src="${cover}" alt="${title}" class="topicImg" /></div>{@/if}',
 		'<div class="article">$${content}</div>',
 		'<div class="copylink">',
 			'<div class="tag"><strong>本文关键字：</strong>${tags}</div>',

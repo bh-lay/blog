@@ -21,14 +21,6 @@ define(function(require,exports){
 				'{@/if}',
 				'<div class="artItInfo"><p>${it.intro}</p></div>',
 				'<div class="artItTag">${it.tags}</div>',
-				'<div class="artItFoot">',
-					'<a class="dataLike" title="我喜欢" href="javascript:void(0)"><i></i><b>8</b></a>',
-					'<a class="dataView" title="查看" href="/blog/${it.id}" lofox="true" target="_self"><i></i><b>367</b></a>',
-				'</div>',
-			'</div>',
-			'<div class="artItLace">',
-				'<div class="artItLaCircle"></div>',
-				'<div class="artItLaCorner"><b></b><i></i></div>',
 			'</div>',
 		'</div>',
 	'{@/each}'].join('');
@@ -100,15 +92,41 @@ define(function(require,exports){
 			var left = this_ico.offset().left-20,
 				 top = this_ico.offset().top-16;
 		});
+		var scrollDom = dom.find('.articleListCnt')[0];
+		var $scrollBody = dom.find('.articleList');
+		function handle(event) {  
+			var delta = 0;  
+			if (!event) /* For IE. */  
+				event = window.event;  
+			if (event.wheelDelta) { /* IE/Opera. */  
+				delta = event.wheelDelta / 120;  
+			} else if (event.detail) {  
+				delta = -event.detail / 3;  
+			}
+			
+			var left = parseInt($scrollBody.css('marginLeft'));
+			
+			left += -100 * delta;
+			if(left > 0){
+				left = 0;
+			}
+			$scrollBody.css('marginLeft' ,left);
+			
+			event.preventDefault && event.preventDefault();  
+			event.returnValue = false;  
+		}
+
+		scrollDom.addEventListener && scrollDom.addEventListener('DOMMouseScroll', handle, false);
+		scrollDom.onmousewheel = scrollDom.onmousewheel = handle;
+		
 	};
 	
 	return function(dom,param){
 		console.log('blog list page:','start !');
-	
-		dom.html('<div class="l_row"><div class="l_col_12"><div class="articleList"></div></div></div>');
 		skip = 0;
-		bindEvent(dom);
 		getData(function(html,count){
+			dom.html('<div class="articleListCnt"><div class="articleList"></div></div>');
+			bindEvent(dom);
 			skip += limit;
 			insert({
 				'end' : (skip>=count)?true:false,

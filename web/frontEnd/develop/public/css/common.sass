@@ -99,7 +99,7 @@ body
   top: 0px
   width: 100%
   height: 100%
-  background: #bbb
+  background: #eee
 
 .galBj
   position: absolute
@@ -153,20 +153,17 @@ body
 .navLayer
   position: fixed
   z-index: 1000
-  top: 0px
-  right: 0px
-  left: 0px
+  top: 10px
+  left: 10px
+  width: 360px
+  background: #fff
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.3)
+  border-radius: 2px
+  overflow: hidden
 
 .nav_bj
   height: 40px
-  opacity: 0.7
-  border-bottom: 1px solid #666
-  border-radius: 0px 0px 8px 8px
-  box-shadow: 1px 1px 2px #666
-  background: #fff
-  background: -webkit-gradient(linear, left top, left bottom, from(white), to(#f2f2f2))
-  background: -moz-linear-gradient(top, white, #f2f2f2)
-
+  
 .nav_main
   position: absolute
   top: 0px
@@ -176,49 +173,42 @@ body
 .nav_logo
   display: block
   float: left
-  width: 100px
-  height: 35px
-  margin: 3px 40px 0px 10px
-  background: url(../images/skin.png) 0px -100px
-  text-indent: -10em
-  overflow: hidden
-  i
-    display: inline-block
-    width: 100px
-    height: 35px
-    margin: 3px 40px 0px 0px
-    background: url(../images/skin.png) 0px -100px
-    text-indent: -10em
-    overflow: hidden
+  height: 40px
+  line-height: 40px
+  padding: 0px 10px
+  font-size: 16px
+  color: #333
+  background: #f8f8f8
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f4f4f4))
+  background: -moz-linear-gradient(top,  #fff,  #f4f4f4)
+  background:linear-gradient(to bottom, #fff, #f4f4f4)
+  box-shadow: 0px 0px 3px rgba(0,0,0,0.2)
 
 .nav
-  line-height: 40px
   float: left
-  border-left: 1px solid #e8e8e8
   margin-right: 20px
   li
-    width: 80px
     float: left
-    border-right: 1px solid #e8e8e8
   a
     display: block
-    font-size: 15px
-    color: #666
-    text-align: center
+    line-height: 40px
+    font-size: 14px
+    padding: 0px 15px
     outline: none
+    color: #000
+    opacity: 0.4
+    @include transition(0.2s)
     &:hover
-      background: #f8f8f8
-      color: #333
+      opacity: 1
     &:active
-      background: #ddd
-      color: #333
+      color: #000
   .cur a
-    background: #f0f0f0
-    color: #333
+    opacity: 1
 
 .navLink
   float: right
   overflow: hidden
+  display: none
   li
     height: 20px
     float: left
@@ -226,12 +216,7 @@ body
     a
       line-height: 20px
       padding: 0px 5px
-      color: #999
       font-size: 12px
-      transition: all 0.3s ease 0s
-      &:hover
-        background: #aaa
-        color: #fff
 
 .nav_tool
   position: absolute
