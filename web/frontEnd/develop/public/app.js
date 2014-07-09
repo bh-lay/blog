@@ -67,7 +67,7 @@ seajs.use([
 	lofox.set('/blog',function(){
 		this.title('我的博客_小剧客栈');
 		L.nav.setCur('blog');
-		//var dom = ani();
+		var dom = ani();
 //		UI.cover({
 			
 //		});

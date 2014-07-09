@@ -122,6 +122,16 @@ body
   overflow: hidden
   text-indent: -100em
   background: url('../images/mask.png')
+  &:after
+    content: ''
+    display: block
+    height: 70px
+    background: #fff
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff',endColorstr='transparent')
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(transparent))
+    background: -moz-linear-gradient(top,  #fff,  transparent)
+    background: linear-gradient(to bottom, #ffffff, transparent)
+
 
 .galBj_mask
   width: 100%
@@ -155,11 +165,9 @@ body
   z-index: 1000
   top: 10px
   left: 10px
-  width: 360px
-  background: #fff
-  box-shadow: 1px 1px 2px rgba(0,0,0,0.3)
-  border-radius: 2px
+  width: 500px
   overflow: hidden
+  text-shadow: 0px 1px 2px #fff
 
 .nav_bj
   height: 40px
@@ -170,20 +178,6 @@ body
   left: 0px
   width: 100%
 
-.nav_logo
-  display: block
-  float: left
-  height: 40px
-  line-height: 40px
-  padding: 0px 10px
-  font-size: 16px
-  color: #333
-  background: #f8f8f8
-  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f4f4f4))
-  background: -moz-linear-gradient(top,  #fff,  #f4f4f4)
-  background:linear-gradient(to bottom, #fff, #f4f4f4)
-  box-shadow: 0px 0px 3px rgba(0,0,0,0.2)
-
 .nav
   float: left
   margin-right: 20px
@@ -191,16 +185,20 @@ body
     float: left
   a
     display: block
-    line-height: 40px
+    line-height: 30px
     font-size: 14px
     padding: 0px 15px
     outline: none
-    color: #000
+    color: #888
     opacity: 0.4
     @include transition(0.2s)
     &:hover
-      opacity: 1
+      opacity: 0.7
     &:active
+      color: #000
+    i
+      margin-right: 5px
+      font-size: 18px
       color: #000
   .cur a
     opacity: 1
