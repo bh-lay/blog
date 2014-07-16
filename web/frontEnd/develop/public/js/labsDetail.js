@@ -2,6 +2,8 @@
  * opus detail
  *  
  */
+
+
 seajs.use([
 	'util/tie.js',
 	'lib/highlight/highlight.pack.js'
@@ -9,7 +11,7 @@ seajs.use([
 	util.tie({
 		'dom' : $('.labs_detail_bar_body'),
 		'scopeDom' : $('.labs_detail_cnt'),
-		'fixed_top' : 30
+		'fixed_top' : 10
 	});
 	
 	//下载部分

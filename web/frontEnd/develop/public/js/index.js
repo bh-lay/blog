@@ -30,6 +30,10 @@ define(function(require,exports){
 			'<a target="_blank" href="http://www.woween.com">何东杰的网络日记</a>',
 			'<a target="_blank" href="http://www.w3cfuns.com/">前端开发网</a>',
 		'</div></div>',
+		'<div class="some_link">',
+			'<a title="创业团" target="_blank" href="/topic/intiate.html">创业团</a>',
+			'<a title="给剧中人留言" target="_blank" href="/demo/bless.html">留言</a>',
+		'</div>',
 	'</div></div></div>'].join('');
 	
 	return function(dom,callback){
