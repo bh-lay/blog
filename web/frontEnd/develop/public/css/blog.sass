@@ -4,53 +4,57 @@
 
 
 .articleListCnt
-  height: 300px
-  margin-top: 100px
-  background: #fff
+  margin: auto
   overflow: hidden
-  
+  @media screen and (max-width: 1960px)
+    width: 1600px
+  @media screen and (max-width: 1640px)
+    width: 1280px
+  @media screen and (max-width: 1320px)
+    width: 960px
+  @media screen and (max-width: 1000px)
+    width: 640px
+  @media screen and (max-width: 680px)
+    width: 320px
+
 .articleList
-  width: 3000px
-  padding: 10px 10px 10px 10px
+  padding: 50px 0px
   
 
 .articleItem
-  width: 200px
+  width: 300px
+  height: 400px
   float: left
-  margin-right: 10px
+  margin: 0px 10px 20px 10px
   overflow: hidden
+  background: #fff
 
 .artItCpt
-  text-align: right
+  padding: 15px 5px 5px
   h3
     font-weight: normal
     line-height: 24px
     a
-      padding: 3px 10px
+      padding: 3px 0px
+      display: block
       border-radius: 4px
       font-size: 16px
       color: #666
-      background: #fff
       outline: none
-      transition: all 0.8s ease 0s
       &:hover
         background: #fafafa
         color: #333
 
 .artItPic h3 a:visited
-  color: #666
+  color: #aaa
   transition: all 0.2s ease 0s
 
 .artItCpt p
-  color: #fff
+  color: #ccc
   font-size: 14px
-  opacity: 0.7
 
 .artItCnt
-  background: #fff
 .artItPic
-  height: 100px
-  overflow: hidden
   background : #eee
   img
     display: block
@@ -79,7 +83,8 @@
   color: #333
 
 .blog_addMore
-  width: 420px
+  clear: both
+  margin: 0px 10px
   border-radius: 4px
   overflow: hidden
   a

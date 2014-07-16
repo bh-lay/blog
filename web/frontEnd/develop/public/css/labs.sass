@@ -11,17 +11,22 @@
 
 .labsList
   padding : 100px 0px
-  margin-left : -10px
-  margin-right : -10px
   overflow : hidden
-  zoom : 1
+  margin: auto
+  overflow: hidden
+  @media screen and (max-width: 1960px)
+    width: 1600px
+  @media screen and (max-width: 1640px)
+    width: 1280px
+  @media screen and (max-width: 1320px)
+    width: 960px
+  @media screen and (max-width: 1000px)
+    width: 640px
+  @media screen and (max-width: 680px)
+    width: 320px
   li
     float :  left
-    width : 33.3%
-    @media screen and (max-width : 980px)
-      width : 50%
-    @media screen and (max-width : 600px)
-      width : 100%
+    width : 320px
 
   .lab_item
     position : relative

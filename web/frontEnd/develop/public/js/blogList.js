@@ -20,7 +20,7 @@ define(function(require,exports){
 				'</div>',
 				'{@/if}',
 				'<div class="artItInfo"><p>${it.intro}</p></div>',
-				'<div class="artItTag">${it.tags}</div>',
+				//'<div class="artItTag">${it.tags}</div>',
 			'</div>',
 		'</div>',
 	'{@/each}'].join('');
@@ -92,13 +92,14 @@ define(function(require,exports){
 			var left = this_ico.offset().left-20,
 				 top = this_ico.offset().top-16;
 		});
-		var scrollDom = dom.find('.articleListCnt')[0];
+/**	
+	var scrollDom = dom.find('.articleListCnt')[0];
 		var $scrollBody = dom.find('.articleList');
 		function handle(event) {  
 			var delta = 0;  
-			if (!event) /* For IE. */  
+			if (!event) // For IE.  
 				event = window.event;  
-			if (event.wheelDelta) { /* IE/Opera. */  
+			if (event.wheelDelta) { // IE/Opera
 				delta = event.wheelDelta / 120;  
 			} else if (event.detail) {  
 				delta = -event.detail / 3;  
@@ -118,6 +119,7 @@ define(function(require,exports){
 
 		scrollDom.addEventListener && scrollDom.addEventListener('DOMMouseScroll', handle, false);
 		scrollDom.onmousewheel = scrollDom.onmousewheel = handle;
+		*/
 		
 	};
 	

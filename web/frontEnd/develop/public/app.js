@@ -24,11 +24,11 @@ seajs.use([
 		var newDom = $('<div class="contlayer_body"><div class="contlayer_loading">正在加载</div></div>');
 		dom.append(newDom);
 		if(oldDom.length != 0){
-			dom.css('height',dom.height());
 			oldDom.css({
 				'position' : 'absolute',
 				'top': 0,
-				'left' : 0
+				'left' : 0,
+				'overflow': 'hidden'
 			});
 			newDom.css({
 				'position' : 'absolute',
@@ -43,7 +43,6 @@ seajs.use([
 				newDom.animate({
 					'left': 0
 				},200,function(){
-					dom.css('height','auto');
 					newDom.css('position','relative');
 				});
 			});
@@ -168,6 +167,7 @@ seajs.use([
  */
 (function(ex){
 	var init=function(){
+		var tips = null;
 		$('.nav_tool a').click(function(){
 			if($('.navLayer').hasClass('nav_slidedown')){
 				$('.navLayer').removeClass('nav_slidedown');
@@ -175,8 +175,12 @@ seajs.use([
 				$('.navLayer').addClass('nav_slidedown');
 			}
 		});
-
-		$('.nav_mainList').on('click',function(){
+		
+		$('.nav_main a').each(function(){
+		  $(this).attr('title','')
+		});
+		
+		$('.nav_main').on('click',function(){
 			if($('.navLayer').hasClass('nav_slidedown')){
 				$('.navLayer').removeClass('nav_slidedown');
 			}else{
