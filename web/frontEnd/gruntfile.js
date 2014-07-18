@@ -10,7 +10,7 @@ module.exports = function(grunt){
 		copy: {
 			'copyAll': {
 				cwd: 'develop/',
-				src: ['**/*.css','**/*.js','**/*.png','**/*.jpg','**/*.eot','**/*.svg','**/*.ttf','**/*.woff'],
+				src: ['**/*.css','**/*.js','**/*.png','**/*.jpg','**/*.gif','**/*.eot','**/*.svg','**/*.ttf','**/*.woff'],
 				dest: 'build/',
 				expand: true
 			},
