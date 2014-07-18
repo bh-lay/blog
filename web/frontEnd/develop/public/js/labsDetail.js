@@ -84,7 +84,6 @@ seajs.use([
 				}
 				
 			});
-		//	console.log(this_data,'-----------');
 			$('.labs_detail_github .labsDeGit_cnt').html(this_html);
 			
 		});

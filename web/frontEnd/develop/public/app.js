@@ -3,9 +3,13 @@
  * Blog : http://bh-lay.com/
  * Copyright (c) 2012-2018
 **/
+if(!window.history || !window.history.pushState){
+	window.location.href = '/topic/notSupport.html';
+}
 
 //删除为搜索引擎提供的dom
 $('.sourceCode').remove();
+
 //增加github图片
 $('body').append('<a href="https:github.com/bh-lay/blog" target="_blank" class="github-link"></a>');
 
@@ -22,30 +26,23 @@ seajs.use([
 	function ani(){
 		var oldDom = dom.find('.contlayer_body');
 		var newDom = $('<div class="contlayer_body"><div class="contlayer_loading">正在加载</div></div>');
-		dom.append(newDom);
 		if(oldDom.length != 0){
 			oldDom.css({
 				'position' : 'absolute',
-				'top': 0,
-				'left' : 0,
 				'overflow': 'hidden'
 			});
-			newDom.css({
-				'position' : 'absolute',
-				'top' : 0,
-				'left': '200%'
-			});
+			newDom.hide();
 			oldDom.animate({
-				'left': '-100%'
-			},400).fadeOut(100,function(){
-				$(window).scrollTop(0);
+				'top': '100%'
+			},400,function(){
 				oldDom.remove();
-				newDom.animate({
-					'left': 0
-				},200,function(){
+				dom.append(newDom);
+				newDom.fadeIn(100,function(){
 					newDom.css('position','relative');
 				});
 			});
+		}else{
+			dom.append(newDom);
 		}
 		return newDom;
 	}
@@ -302,7 +299,6 @@ seajs.use([
 		img.src=src;
 	};
 	function JS_show(data,bj){
-	//	console.log('gallery:','use JS animate !');
 		var data = data,
 			bj = bj,
 			total = data.length;
@@ -312,11 +308,10 @@ seajs.use([
 		bj.html(bjDom);
 		show(0,bjDom,data);
 		$(window).on('resize',function(){
-			fixImg(bjDom)
+			fixImg(bjDom);
 		});
 		
-		function fixImg(dom){
-			var img = dom;
+		function fixImg(img){
 			var size = img.attr('data').split('-');
 			var imgW = size[0];
 			var imgH = size[1];
@@ -339,11 +334,14 @@ seajs.use([
 			}
 		}
 		function show(i,dom,data){
-			loadImg(data[i].src,{'loadFn':function(){
-				var imgW=arguments[0];
-				var imgH=arguments[1];
+			loadImg(data[i].src,{'loadFn':function(imgW,imgH){
+				
 				bj.fadeOut(1000,function(){
-					dom.attr({'src':data[i].src,'alt':data[i].alt||'','data':(imgW+'-'+imgH)});
+					dom.attr({
+						'src' : data[i].src,
+						'alt' : data[i].alt || '',
+						'data' : (imgW+'-'+imgH)
+					});
 					fixImg(dom);
 					bj.fadeIn(800);
 					setTimeout(function(){
@@ -356,7 +354,6 @@ seajs.use([
 		}
 	}
 	function CSS3(data,bj){
-	//	console.log('gallery:','use css3 mask and animate!');
 		var data = data,
 			isWebkit = false,
 			bj = bj,
@@ -365,7 +362,6 @@ seajs.use([
 		show(0);
 		
 		if(supports('webkitAnimation')){
-	//		console.log('gallery:','support -webkit-animation');
 			isWebkit = true;
 		}
 		
@@ -392,7 +388,6 @@ seajs.use([
 		}
 	}
 	ex.gallery = function(){
-	//	console.log('gallery:','start !');
 		var bj = $('.gallayer .galBj'),
 			data = config['coverData'];
 		if (supports('backgroundSize')){
