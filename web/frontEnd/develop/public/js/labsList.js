@@ -4,7 +4,6 @@
  */
 define(function(require,exports){
 	require('lib/juicer.js');
-	seajs.use('public/css/labs.css');
 	
 	var temp = ['{@each list as it,index}',
 		'<li><div class="lab_item">',

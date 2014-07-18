@@ -4,7 +4,6 @@
  */
 define(function(require,exports){
 	require('lib/juicer.js');
-	seajs.use('public/css/blog.css');
 	var blogTemp =  ['{@each list as it,index}',
 		'<div class="articleItem" articleId="${it.id}">',
 			'<div class="artItCpt">',
@@ -29,7 +28,6 @@ define(function(require,exports){
 		 limit = 10,
 		 skip;
 	var insert = function (param){
-		console.log('blog list page:','insert html !');
 		var param = param || {};
 		var this_dom = $(param['html']).hide();
 		
@@ -68,8 +66,6 @@ define(function(require,exports){
 
 
 	var bindEvent = function(dom){
-		console.log('blog list page:','bind event !');
-		console.log('blog list page:','add blog btn [more] !');
 		var add_btn_tpl = ['<div class="blog_addMore">',
 			'<a href="javascript:void(0)">加载更多</a>',
 			'<span>正在加载……</span>',
@@ -124,7 +120,6 @@ define(function(require,exports){
 	};
 	
 	return function(dom,param){
-		console.log('blog list page:','start !');
 		skip = 0;
 		getData(function(html,count){
 			dom.html('<div class="articleListCnt"><div class="articleList"></div></div>');

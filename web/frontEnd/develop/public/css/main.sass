@@ -1,0 +1,776 @@
+﻿@mixin transition($seconds:0.3s)
+  transition : $seconds
+  -moz-transition-duration : $seconds
+  -webkit-transition-duration : $seconds
+  -o-transition-duration : $seconds
+
+
+/*
+ * pageA: index page
+ *
+
+.indeCnt
+
+.layIntroCnt
+  max-width: 320px
+  padding: 120px 0px 30px
+  margin: 0px auto 60px
+  white-space: nowrap
+  cursor: default
+  text-align: center
+
+.layIntro
+  clear: left
+
+.layIntroA
+  width: 100%
+  letter-spacing: 1em
+  overflow: hidden
+  margin-bottom: 30px
+  border-radius: 4px
+  color: #5b0
+  span
+    padding-left: 0.5em
+    font-size: 28px
+    color: #555
+  strong
+    font-weight: normal
+    font-size: 34px
+
+.layIntroB
+  width: 140px
+  margin: auto
+  line-height: 28px
+  font-size: 16px
+  color: #333
+  background: #fff
+  padding: 0px 10px
+  border-radius: 4px
+  letter-spacing: 5px
+
+.layIntroC
+  width: 200px
+  line-height: 22px
+  font-size: 14px
+  color: #888
+  background: #fff
+  padding: 0px 10px
+  border-radius: 4px
+  margin: 20px auto 25px
+
+.layIntroD
+  line-height: 30px
+  font-size: 18px
+  color: #555
+  background: #fff
+  padding: 0px 10px
+  border-radius: 4px
+  margin-bottom: 40px
+  letter-spacing: 5px
+
+.laySnsLink
+  clear: left
+  a
+    display: inline-block
+    width: 50px
+    height: 50px
+    margin-right: 35px
+    background-image: url(../images/SNS_skin.png)
+    outline: none
+    span
+      display: block
+      width: 50px
+      height: 50px
+      background-image: url(../images/SNS_skin.png)
+      transition: 0.16s
+      text-indent: -10em
+      overflow: hidden
+      opacity: 0
+      filter: alpha(opacity = 0)
+    &:hover span
+      opacity: 0.6
+      filter: alpha(opacity = 60)
+    &:active span
+      opacity: 1
+      filter: alpha(opacity = 100)
+      transition: 0.1s
+  .sns_qq
+    background-position: 0px 0px
+    span
+      background-position: 0px -50px
+  .sns_weibo
+    background-position: -50px 0px
+    span
+      background-position: -50px -50px
+  .sns_google
+    background-position: -100px 0px
+    span
+      background-position: -100px -50px
+  .sns_zhanku
+    background-position: -150px 0px
+    span
+      background-position: -150px -50px
+
+.some_link
+  text-align: center
+  border-top: 1px solid #fff
+  padding-top: 20px
+  a
+    margin: 0px 20px
+
+.webLink
+  position: fixed
+  width: 100%
+  bottom: 0px
+  left: 0px
+
+.webLinkBar
+  position: relative
+  width: 100px
+  height: 30px
+  line-height: 30px
+  margin: auto
+  text-align: center
+  font-size: 14px
+  background: #fff
+  border-radius: 4px 4px 0px 0px
+  z-index: 1
+  cursor: pointer
+  border: 1px solid #ccc
+  border-bottom: none
+
+.webLink_cnt
+  overflow: hidden
+  display: none
+  background: #fff
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.6)
+  a
+    display: block
+    border-bottom: 1px solid #eee
+    height: 40px
+    line-height: 40px
+    padding: 0px 10px
+    font-size: 14px
+    text-align: center
+
+@media screen and (min-width: 400px)
+  .webLink_cnt
+    width: 400px
+    margin: auto
+
+
+
+/*
+ * pageB-1: blog list page 
+ *
+
+
+.articleListCnt
+  margin: auto
+  overflow: hidden
+  @media screen and (max-width: 1960px)
+    width: 1600px
+  @media screen and (max-width: 1640px)
+    width: 1280px
+  @media screen and (max-width: 1320px)
+    width: 960px
+  @media screen and (max-width: 1000px)
+    width: 640px
+  @media screen and (max-width: 680px)
+    width: 320px
+
+.articleList
+  padding: 50px 0px
+  
+
+.articleItem
+  width: 300px
+  height: 400px
+  float: left
+  margin: 0px 10px 20px 10px
+  overflow: hidden
+  background: #fff
+
+.artItCpt
+  padding: 15px 5px 5px
+  h3
+    font-weight: normal
+    line-height: 24px
+    a
+      padding: 3px 0px
+      display: block
+      border-radius: 4px
+      font-size: 16px
+      color: #666
+      outline: none
+      &:hover
+        background: #fafafa
+        color: #333
+
+.artItPic h3 a:visited
+  color: #aaa
+  transition: all 0.2s ease 0s
+
+.artItCpt p
+  color: #ccc
+  font-size: 14px
+
+.artItCnt
+.artItPic
+  background : #eee
+  img
+    display: block
+    max-width: 100%
+    margin: auto
+
+.artItInfo
+  padding: 10px 20px
+  line-height: 150%
+  font-size: 12px
+  color: #555
+  text-indent: 2em
+
+.artItTag
+  padding: 0px 20px
+  line-height: 24px
+  margin-bottom: 10px
+  font-size: 14px
+  color: #666
+  word-break: break-word
+
+.artItFrom
+  padding: 0px 20px
+  line-height: 30px
+  font-size: 14px
+  color: #333
+
+.blog_addMore
+  clear: both
+  margin: 0px 10px
+  border-radius: 4px
+  overflow: hidden
+  a
+    display: block
+    height: 30px
+    line-height: 30px
+    text-indent: 15px
+  span
+    display: block
+    height: 30px
+    line-height: 30px
+    text-indent: 15px
+    background: #888
+    color: #fff
+    display: none
+  a
+    background: #fff
+    color: #333
+    &:hover
+      background: #ccc
+      color: #000
+    &:active
+      background: #666
+      color: #fff
+  &.blog_addMore_loading
+    span
+      display: block
+    a
+      display: none
+
+/*
+ * pageB-2: blog detail page
+
+.blog_article
+  background: #fff
+  margin: 60px auto
+  img
+    display: block
+    max-width: 100%
+    margin: auto
+.article_cover
+  text-align: center
+
+.articletop
+  border-bottom: 1px dashed #CCC
+  text-align: center
+  padding: 40px 0px 20px
+  margin-bottom: 20px
+  h1
+    font-size: 30px
+    font-weight: normal
+  p
+    color: #666
+
+.article .topicImg
+  display: block
+  margin: auto
+
+.copylink
+  margin: 10px 20px
+
+/*实验室
+
+.labshow
+  border: 1px solid #ddd
+  line-height: 3em
+  margin: 2em 4em
+  span
+    background: #eee
+    display: inline-block
+    height: 100%
+    padding: 0em 2em
+  a
+    border-bottom: 1px dashed #ccc
+    margin-left: 4em
+
+.article .youyan
+  padding-top: 20px
+
+@media screen and (max-width: 1000px)
+  .articletop h1
+    font-size: 24px
+
+
+
+
+/*
+ * pageC-1 :  labs list page 
+ */
+.labsList
+  padding : 100px 0px
+  overflow : hidden
+  margin: auto
+  overflow: hidden
+  @media screen and (max-width: 1960px)
+    width: 1600px
+  @media screen and (max-width: 1640px)
+    width: 1280px
+  @media screen and (max-width: 1320px)
+    width: 960px
+  @media screen and (max-width: 1000px)
+    width: 640px
+  @media screen and (max-width: 680px)
+    width: 320px
+  li
+    float :  left
+    width : 320px
+
+  .lab_item
+    position : relative
+    height : 440px
+    margin : 0px 10px 20px
+    background : #fff
+    overflow :  hidden
+    .lab_cover
+      display : block
+      height :  300px
+      margin : 0px auto
+      overflow : hidden
+      @include transition(0.2s)
+      background :
+        size : cover
+        position : center
+        repeat : no-repeat
+        color : #666
+      &:hover
+        opacity : 0.8
+    .lab_title
+      font-weight : normal
+      line-height : 30px
+      color : #333
+      font-size : 20px
+      text-align : center
+      a
+        display : block
+        padding : 10px
+        border-bottom : 1px dashed #eee
+        @include transition(0.2s)
+        &:hover
+          border-bottom-style : solid
+          background : #eee
+          color : #0a4
+    .lab_info
+      width : 100%
+      padding : 10px
+      box-sizing : border-box
+      p
+        color : #333
+        font-size : 12px
+        opacity : 0.7
+        line-height : 16px
+        text-indent : 2em
+        text-align : justify
+        
+
+.labs_info
+  height : 140px
+  box-shadow :  0px 0px 15px #000
+  position :  relative
+  background : #fff
+  
+  h3 
+    height : 50px
+    position :  relative
+    margin-bottom :  8px
+    border-bottom : 1px dashed #ddd
+    a
+      display :  block
+      width : 260px
+      height : 26px
+      line-height : 26px
+      padding :  12px 10px 0px
+      overflow : hidden
+      font-size : 17px
+      font-weight :  normal
+      color : #333
+      &:hover
+        position : absolute
+        height : auto
+        padding : 12px 10px 13px
+        background : url(../images/mask.png) #080
+        color : #fff
+      &:active
+        background : url(../images/mask.png) #060
+        color : #fff
+  p
+    height : 18px
+    line-height : 16px
+    padding : 9px 10px
+    strong
+      display :  block
+      height : 30px
+      float : left
+      font-size :  14px
+      font-weight : normal
+      color : #333
+    span
+      display :  inline-block
+      padding : 0px 4px
+      font-size :  14px
+      color : #888
+    a
+      display : block
+      width : 190px
+      overflow : hidden
+      text-overflow : ellipsis
+      color : #888
+      &:hover 
+        color : #333
+        text-decoration :  underline
+
+
+/*
+ * pageC-1: opus list page 
+ */
+.opusList
+  padding: 100px 0px
+  margin: auto
+  ul
+    overflow: hidden
+    zoom: 1
+    li
+      width: 280px
+      float: left
+      margin: 0px 10px 20px
+      background: #fff
+      overflow: hidden
+      border-radius: 4px
+
+.opus_cover
+  width: 100%
+  height: 160px
+  a
+    display: block
+    width: 100%
+    height: 100%
+    background: #fff
+    position: relative
+    overflow: hidden
+    img
+      display: block
+      min-width: 280px
+      max-width: 100%
+      min-height: 100%
+      margin: 0px auto
+      transition: 0.1s
+    &:hover img
+      opacity: 0.8
+
+.opus_info
+  height: 140px
+  box-shadow: 0px 0px 15px #000
+  position: relative
+  background: #fff
+  h3
+    height: 50px
+    position: relative
+    margin-bottom: 8px
+    border-bottom: 1px dashed #ddd
+    a
+      display: block
+      width: 260px
+      height: 26px
+      line-height: 26px
+      padding: 12px 10px 0px
+      overflow: hidden
+      font-size: 17px
+      font-weight: normal
+      color: #333
+      &:hover
+        position: absolute
+        height: auto
+        padding: 12px 10px 13px
+        background: url(../images/mask.png) #008800
+        color: #fff
+      &:active
+        background: url(../images/mask.png) #006600
+        color: #fff
+  p
+    height: 18px
+    line-height: 16px
+    padding: 9px 10px
+    strong
+      display: block
+      height: 30px
+      float: left
+      font-size: 14px
+      font-weight: normal
+      color: #333
+    span
+      display: inline-block
+      padding: 0px 4px
+      font-size: 14px
+      color: #888
+    a
+      display: block
+      width: 190px
+      overflow: hidden
+      text-overflow: ellipsis
+      color: #888
+      &:hover
+        color: #333
+        text-decoration: underline
+
+@media screen and (min-width: 900px)
+  .opusList
+    width: 900px
+
+@media screen and (max-width: 899px) and (min-width: 600px)
+  .opusList
+    width: 600px
+
+@media screen and (max-width: 599px)
+  .opusList
+    width: auto
+    margin: 0px 10px
+    ul li
+      width: 100%
+      max-width: 500px
+      float: none
+      margin: 0px auto 20px
+      border-radius: 0px
+
+
+/*
+ * pageB-2: blog detail page
+
+.opus_detail
+  line-height: 2
+  margin: 40px auto
+  padding: 25px
+  background-color: #fff
+  font-size: 14px
+  overflow: hidden
+  position: relative
+  border-radius: 4px
+  box-shadow: 1px 1px 2px #666
+  a
+    color: #4a0
+    &:hover
+      color: #000
+      text-decoration: underline
+  h3, h4, h5, h6, p, dl
+    margin: 1em 0em
+  p
+    text-indent: 2em
+
+.opus_detailtop
+  border-bottom: 1px dashed #CCC
+  text-align: center
+  margin: 20px 0px
+  h1
+    font-size: 30px
+    font-weight: normal
+  p
+    color: #666
+
+.opus_detail
+  ol, ul, dd
+    padding-left: 4em
+  li
+    list-style-type: decimal
+  img
+    max-width: 100%
+    display: block
+    margin: auto
+  .topicImg
+    display: block
+    margin: auto
+
+/*我的作品
+
+#focusTitle
+  min-height: 120px
+  overflow: hidden
+  margin: 30px 0px
+  border: 1px solid #fff
+  background: #fff
+  background: rgba(255, 255, 255, 0.5)
+  position: relative
+  img
+    height: 100px
+    padding: 10px
+    position: absolute
+    top: 0px
+    left: 0px
+  .info
+    position: relative
+    padding: 15px 15px 15px 130px
+  h1
+    padding-bottom: 20px
+    border-bottom: 1px solid #aaa
+    font-size: 20px
+    letter-spacing: 0.5em
+    font-weight: normal
+    color: #000
+  ul
+    font-size: 16px
+    padding-top: 20px
+  li
+    float: left
+    width: 50%
+    color: #666
+  strong
+    padding-right: 10px
+    font-weight: normal
+
+.TagLine
+  height: 50px
+  margin: 80px 20px 40px
+  background: url(../images/tagline.png) no-repeat
+  text-indent: -100em
+  overflow: hidden
+
+.opus_detail .youyan
+  padding-top: 20px
+
+
+/*
+ * pageC-1: share list page
+
+.shareList
+  padding: 100px 0px
+  overflow: hidden
+  zoom: 1
+  li
+    width: 20%
+    height: 160px
+    float: left
+    a
+      display: block
+      width: 100%
+      height: 100%
+      background: #fff
+      position: relative
+      overflow: hidden
+      img
+        display: block
+        width: 100%
+        min-height: 100%
+        transition: 0.5s
+      strong
+        display: block
+        box-sizing: border-box
+        width: 100%
+        height: 50px
+        position: absolute
+        bottom: -100px
+        left: 0px
+        overflow: hidden
+        color: #000
+        font-weight: normal
+        line-height: 50px
+        text-align: justify
+        white-space: nowrap
+        text-overflow: ellipsis
+        padding: 0px 10px
+        background: linear-gradient(rgba(255, 255, 255, 0), white)
+        transition: 0.1s
+      &:hover
+        img
+          opacity: 0.7
+        strong
+          bottom: 0px
+      &:active img
+        opacity: 0.3
+
+@media screen and (max-width: 1000px)
+  .shareList li
+    width: 25%
+
+@media screen and (max-width: 760px)
+  .shareList li
+    width: 33.3%
+
+@media screen and (max-width: 500px)
+  .shareList li
+    width: 50%
+    a strong
+      bottom: 0px
+
+@media screen and (max-width: 340px)
+  .shareList li
+    width: 100%
+
+/*
+ * pageB-2: blog detail page
+
+.shareDetail
+  background: #fff
+  margin: 60px auto
+
+.articletop
+  border-bottom: 1px dashed #CCC
+  text-align: center
+  padding: 40px 0px 20px
+  margin-bottom: 20px
+  h1
+    font-size: 30px
+    font-weight: normal
+  p
+    color: #666
+
+.article .topicImg
+  display: block
+  margin: auto
+
+.articletop
+  border-bottom: 1px dashed #ccc
+  text-align: center
+  margin: 20px 0px
+  h1
+    font-size: 30px
+    font-weight: normal
+  p
+    color: #666
+
+.article
+  .topicImg
+    display: block
+    margin: auto
+  .youyan
+    padding-top: 20px
+
+@media screen and (max-width: 1000px)
+  .articletop h1
+    font-size: 24px

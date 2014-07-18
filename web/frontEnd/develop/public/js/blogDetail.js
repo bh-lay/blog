@@ -4,7 +4,6 @@
  */
 define(function(require,exports){
 	require('lib/juicer.js');
-	seajs.use('public/css/blog.css');
 
 	var template = ['<div class="l_row"><div class="l_col_12"><div class="blog_article">',
 		'<div class="articletop">',

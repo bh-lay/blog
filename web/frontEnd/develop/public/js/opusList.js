@@ -4,7 +4,6 @@
  */
 define(function(require,exports){
 	require('lib/juicer.js');
-	seajs.use('public/css/opus.css');
 	
 	var item_tpl = ['{@each list as it,index}',
 		'<li>',

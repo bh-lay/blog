@@ -6,7 +6,6 @@
 
 //index page
 define(function(require,exports){
-	seajs.use('public/css/index.css');
 	
 	var temp = ['<div class="indeCnt"><div class="l_row"><div class="l_col_12">',
 		'<div class="layIntroCnt">',
