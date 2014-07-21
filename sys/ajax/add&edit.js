@@ -123,7 +123,7 @@ filter_request.blog = function(data){
 		'title':decodeURI(data['title']),
 		'cover':data['cover']||'',
 		'time_show':data['time_show']||new Date().getTime(),
-		'tags':data['tags']||'',
+		'tags':data['tags'] ? data['tags'].split(/\s*\,\s*/) : [],
 		'author':data['author']||'',
 		'content':data['content'],
 		'intro':data['intro']||data['content'].slice(0,200),
