@@ -6,10 +6,6 @@ define(function(require,exports){
 	require('lib/juicer.js');
 	var blogTemp =  ['{@each list as it,index}',
 		'<div class="articleItem" articleId="${it.id}">',
-			'<div class="artItCpt">',
-				'<h3><a href="/blog/${it.id}" title="${it.title}" lofox="true" target="_self" >${it.title}</a></h3>',
-				'<p>${it.time_show}</p>',
-			'</div>',
 			'<div class="artItCnt">',
 				'{@if it.cover}',
 				'<div class="artItPic">',
@@ -18,8 +14,12 @@ define(function(require,exports){
 					'</a>',
 				'</div>',
 				'{@/if}',
+				'<div class="artItCpt">',
+					'<a href="/blog/${it.id}" title="${it.title}" lofox="true" target="_self" >${it.title}</a>',
+				'</div>',
 				'<div class="artItInfo"><p>${it.intro}</p></div>',
-				//'<div class="artItTag">${it.tags}</div>',
+				'<div class="artItTime">${it.time_show}</div>',
+			//	'<div class="artItTag">${it.tags}</div>',
 			'</div>',
 		'</div>',
 	'{@/each}'].join('');
@@ -83,10 +83,21 @@ define(function(require,exports){
 					'html' : html
 				});
 			});
-		}).on('click','.dataLike',function(){
-			var this_ico = $(this);
-			var left = this_ico.offset().left-20,
-				 top = this_ico.offset().top-16;
+		}).on('mouseenter','.articleItem',function(){
+			var body = $(this).find('.artItCnt');
+			var height = $(this).height();
+			var cntH = body.height();
+			if(cntH < height){
+				return;
+			}
+			body.animate({
+				'marginTop' : -cntH + height
+			},100);
+		}).on('mouseleave','.articleItem',function(){
+			var body = $(this).find('.artItCnt');
+			body.animate({
+				'marginTop' : 0
+			},100);
 		});
 /**	
 	var scrollDom = dom.find('.articleListCnt')[0];

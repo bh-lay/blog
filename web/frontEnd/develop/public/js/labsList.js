@@ -61,7 +61,7 @@ define(function(require,exports){
 //		}
 		skip = 0;
 		getData(function(list){
-			dom.html('<div class="l_row"><div class="l_col_12"><ul class="labsList"></ul></div></div>');
+			dom.html('<ul class="labsList"></ul>');
 			var this_html = juicer(temp,{'list':list}),
 				this_dom = dom.find('.labsList');
 			insert({

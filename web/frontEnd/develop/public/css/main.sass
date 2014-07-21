@@ -5,16 +5,12 @@
   -o-transition-duration : $seconds
 
 
-/*
- * pageA: index page
- *
-
-.indeCnt
+/** pageA: index page*/
 
 .layIntroCnt
   max-width: 320px
-  padding: 120px 0px 30px
-  margin: 0px auto 60px
+  padding: 100px 0px 30px
+  margin: 0px auto 30px
   white-space: nowrap
   cursor: default
   text-align: center
@@ -114,7 +110,7 @@
 .some_link
   text-align: center
   border-top: 1px solid #fff
-  padding-top: 20px
+  padding: 20px 0px 40px
   a
     margin: 0px 20px
 
@@ -160,62 +156,54 @@
 
 
 
-/*
- * pageB-1: blog list page 
- *
+/** pageB-1: blog list page **/
 
 
 .articleListCnt
   margin: auto
   overflow: hidden
-  @media screen and (max-width: 1960px)
-    width: 1600px
-  @media screen and (max-width: 1640px)
-    width: 1280px
+  @media screen and (max-width: 1800px)
+    width: 1760px
+  @media screen and (max-width: 1760px)
+    width: 1320px
   @media screen and (max-width: 1320px)
-    width: 960px
-  @media screen and (max-width: 1000px)
-    width: 640px
-  @media screen and (max-width: 680px)
-    width: 320px
+    width: 880px
+  @media screen and (max-width: 880px)
+    width: 440px
+  @media screen and (max-width: 640px)
+    width: 100%
 
 .articleList
   padding: 50px 0px
   
 
 .articleItem
-  width: 300px
-  height: 400px
+  width: 420px
+  height: 390px
   float: left
   margin: 0px 10px 20px 10px
   overflow: hidden
   background: #fff
-
+  @media screen and (max-width: 640px)
+    width: auto
+    height: auto
+  
 .artItCpt
-  padding: 15px 5px 5px
-  h3
+  a
+    display: block
+    padding: 10px 5px
+    border-bottom: 1px solid #ddd
     font-weight: normal
-    line-height: 24px
-    a
-      padding: 3px 0px
-      display: block
-      border-radius: 4px
-      font-size: 16px
-      color: #666
-      outline: none
-      &:hover
-        background: #fafafa
-        color: #333
+    line-height: 22px
+    text-align: center
+    font-size: 16px
+    color: #333
+    outline: none
+    @include transition(0.2s)
+    &:hover
+      background: #eee
+      color: #000
 
-.artItPic h3 a:visited
-  color: #aaa
-  transition: all 0.2s ease 0s
-
-.artItCpt p
-  color: #ccc
-  font-size: 14px
-
-.artItCnt
 .artItPic
   background : #eee
   img
@@ -227,7 +215,7 @@
   padding: 10px 20px
   line-height: 150%
   font-size: 12px
-  color: #555
+  color: #888
   text-indent: 2em
 
 .artItTag
@@ -238,6 +226,10 @@
   color: #666
   word-break: break-word
 
+.artItTime
+  color: #aaa
+  font-size: 14px
+  padding: 10px 20px 20px
 .artItFrom
   padding: 0px 20px
   line-height: 30px
