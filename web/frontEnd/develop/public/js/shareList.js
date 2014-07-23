@@ -3,7 +3,6 @@
  *  
  */
 define(function(require,exports){
-	require('lib/juicer.js');
 	
 	var limit = 10,
 		 skip = 0,
@@ -40,14 +39,19 @@ define(function(require,exports){
 		});
 	};
 	return function(dom,param){
-		var temp = ['{@each list as it,index}<li><a href="/share/${it.id}" title="${it.title}" lofox="true" target="_self" >',
-			'<img src="${it.cover}" alt="${it.title}" />',
-			'<strong>${it.title}</strong>',
-		'</a></li>{@/each}'].join('');
+		var temp = ['<li><a href="/share/<%=id %>" title="<%=title %>" lofox="true" target="_self" >',
+			'<img src="<%=cover %>" alt="<%=title %>" />',
+			'<strong><%=title %></strong>',
+		'</a></li>'].join('');
+		var render = L.tplEngine(temp);
 		skip = 0;
 		getData(function(list){
 			dom.html('<div class="l_row"><div class="l_col_12"><ul class="shareList"></ul></div></div>');
-			var this_html = juicer(temp,{'list':list});
+			var this_html = '';
+			
+			for(var i=0,total=list.length;i<total;i++){
+				this_html += render(list[i]);
+			}
 			insert({
 				'end' : (skip>=count)?true:false,
 				'html' : this_html,

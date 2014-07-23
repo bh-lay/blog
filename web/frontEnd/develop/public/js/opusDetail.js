@@ -4,7 +4,7 @@
  */
 define(function(require,exports){
 	require('lib/juicer.js');
-	var template = ['<div class="l_row">',
+	var template = ['<div class="l_row"><div class="l_col_12">',
 		'<div class="TagLine">小剧作品，一次次小小的进步，成就平凡的自己！</div>',
 		'<div id="focusTitle">',
 			'{@if cover}',
@@ -26,7 +26,7 @@ define(function(require,exports){
 				'<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1605927" async=""></script>',
 			'<!-- UY END --></div>',
 		'</div>',
-	'</div>'].join('');
+	'</div></div>'].join('');
 	
 	
 	function getData(id,fn){

@@ -3,32 +3,30 @@
  *  
  */
 define(function(require,exports){
-	require('lib/juicer.js');
 	
-	var item_tpl = ['{@each list as it,index}',
-		'<li>',
-			'<div class="opus_cover">',
-				'<a href="/opus/${it.id}" title="${it.title}" target="_self" lofox="true" >',
-					'<img src="${it.cover}" alt="${it.title}" />',
-				'</a>',
-			'</div>',
-			'<div class="opus_info">',
-				'<h3><a href="/opus/${it.id}" target="_self" lofox="true" >${it.title}</a></h3>',
-				'<p><strong>开发范围：</strong>',
-					'{@each it.work_range as that,index}',
-						'<span>${that}</span>',
-					'{@/each}',
-				'</p>',
-				'<p><strong>在线地址：</strong>',
-					'{@if it.online_url}',
-						'<a href="${it.online_url}">${it.online_url}</a>',
-					'{@else}',
-						'<span>无在线地址</span>',
-					'{@/if}',
-				'</p>',
-			'</div>',
-		'</li>',
-	'{@/each}'].join('');
+	var item_tpl = ['<li>',
+		'<div class="opus_cover">',
+			'<a href="/opus/<%=id %>" title="<%=title %>" target="_self" lofox="true" >',
+				'<img src="<%=cover %>" alt="<%=title %>" />',
+			'</a>',
+		'</div>',
+		'<div class="opus_info">',
+			'<h3><a href="/opus/<%=id %>" target="_self" lofox="true" ><%=title %></a></h3>',
+			'<p><strong>开发范围：</strong>',
+				'<% for(var i=0;i<work_range.length;i++){ %>',
+					'<span><%=work_range[i] %></span>',
+				'<% } %>',
+			'</p>',
+			'<p><strong>在线地址：</strong>',
+				'<% if(online_url){ %>',
+					'<a href="<%=online_url %>"><%=online_url %></a>',
+				'<% }else{ %>',
+					'<span>无在线地址</span>',
+				'<% } %>',
+			'</p>',
+		'</div>',
+	'</li>'].join('');
+	var render = L.tplEngine(item_tpl);
 	
 	var limit = 20,
 		 skip = 0,
@@ -76,8 +74,12 @@ define(function(require,exports){
 			skip = 0;
 			getData(function(list){
 				dom.html('<div class="golCnt"><div class="opusList"><ul></ul></div></div>');
-				var this_html = juicer(item_tpl,{'list':list}),
+				var this_html = '',
 					this_dom = dom.find('.opusList ul');
+				
+				for(var i=0,total=list.length;i<total;i++){
+					this_html += render(list[i]);
+				}
 				insert({
 					'end' : (skip>=count)?true:false,
 					'html' : this_html,

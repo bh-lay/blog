@@ -49,11 +49,10 @@ define(function(require,exports){
 		
 		getData(id,function(err,html,title){
 			if(err){
-				alert(err);
 				return
 			}
+			callback && callback(title);
 			html&&dom.html(html);
 		});
-		
 	};
 });

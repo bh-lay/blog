@@ -3,19 +3,18 @@
  *  
  */
 define(function(require,exports){
-	require('lib/juicer.js');
 	
-	var temp = ['{@each list as it,index}',
-		'<li><div class="lab_item">',
-			'<a class="lab_cover" href="/labs/${it.name}" title="${it.title}" target="_blank" style="background-image:url(${it.cover})"></a>',
-			'<h4 class="lab_title">',
-				'<a href="/labs/${it.name}" title="${it.title}" target="_blank">${it.title}</a>',
-			'</h4>',
-			'<div class="lab_info">',
-				'<p>${it.intro}</p>',
-			'</div>',
-		'</div></li>',
-	'{@/each}'].join('');
+	var temp = ['<li><div class="lab_item">',
+		'<a class="lab_cover" href="/labs/<%=name %>" title="<%=title%>" target="_blank" style="background-image:url(<%=cover %>)"></a>',
+		'<h4 class="lab_title">',
+			'<a href="/labs/<%=name %>" title="<%=title %>" target="_blank"><%=title %></a>',
+		'</h4>',
+		'<div class="lab_info">',
+			'<p><%=intro %></p>',
+		'</div>',
+	'</div></li>'].join('');
+	
+	var render = L.tplEngine(temp);
 	var limit = 20,
 		 skip = 0,
 		 count = null,
@@ -56,14 +55,14 @@ define(function(require,exports){
 		});
 	};
 	return function(dom,param){
-//		if(!param['init']){
-//			return
-//		}
 		skip = 0;
 		getData(function(list){
 			dom.html('<ul class="labsList"></ul>');
-			var this_html = juicer(temp,{'list':list}),
+			var this_html = '',
 				this_dom = dom.find('.labsList');
+			for(var i=0,total=list.length;i<total;i++){
+				this_html += render(list[i]);
+			}
 			insert({
 				'end' : (skip>=count)?true:false,
 				'html' : this_html,
