@@ -1,7 +1,7 @@
 /**
  * @author bh-lay
  * @github https://github.com/bh-lay/tie.js
- * @modified 2014-4-15 10:09
+ * @modified 2014-7-25 0:37
  *  location fox
  * 处理既要相对于某个模块固定，又要在其可视时悬浮的页面元素
  * util.tie({
@@ -78,13 +78,16 @@ window.util = window.util || {};
 		this.minScrollTop = null;
 		this.maxScrollTop = null;
 		this.state = 'min';
+		
+		var scrollDom = param['scrollDom'] || $(window);
+		
 		this.refresh();
 		
 		if(this.scopeDom.css('position') == 'static'){
 			this.scopeDom.css('position','relative');
 		}
 	//	var delay;
-		$(window).on('scroll',function(){
+		scrollDom.on('scroll',function(){
 		//	console.log('滚着呢--')
 	//		clearTimeout(delay);
 	//		delay = setTimeout(function(){
@@ -112,8 +115,8 @@ window.util = window.util || {};
 		//console.log(this.state,scrollTop ,this.minScrollTop);
 		fix_position.call(this,scrollTop);
 	};
-	exports.tie = function(dom,cntDom){
-		return new INIT(dom,cntDom);
+	exports.tie = function(param){
+		return new INIT(param);
 	};
 })(window.util);
 

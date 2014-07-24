@@ -11,6 +11,7 @@ seajs.use([
 	util.tie({
 		'dom' : $('.labs_detail_bar_body'),
 		'scopeDom' : $('.labs_detail_cnt'),
+		'scrollDom' : $('body'),
 		'fixed_top' : 10
 	});
 	
