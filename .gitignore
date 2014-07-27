@@ -13,7 +13,8 @@ results
 
 .project
 npm-debug.log
-sys/cache/
+sys/cache
+sys/node_modules
 web/frontEnd/build
 web/frontEnd/dist
 web/frontEnd/node_modules
