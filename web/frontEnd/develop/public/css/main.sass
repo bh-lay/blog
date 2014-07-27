@@ -3,156 +3,132 @@
   -moz-transition-duration : $seconds
   -webkit-transition-duration : $seconds
   -o-transition-duration : $seconds
+ 
+@mixin rotate($rt:7.5deg)
+  -moz-transform: rotate($rt)
+  -o-transform: rotate($rt)
+  -webkit-transform: rotate($rt)
+//  filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.9914,M12=-0.1305,M21=0.1305,M22=0.9914,SizingMethod=’auto expand’);
+//  -ms-filter:“progid:DXImageTransform.Microsoft.Matrix(M11=0.9914,M12=-0.1305,M21=0.1305,M22=0.9914,SizingMethod=’auto expand’)”; 
+
+@mixin borderbox()
+  box-sizing: border-box
+  -moz-box-sizing: border-box 
+  -webkit-box-sizing: border-box 
+
 
 
 /** pageA: index page*/
-
-.layIntroCnt
-  max-width: 320px
-  padding: 100px 0px 30px
-  margin: 0px auto 30px
-  white-space: nowrap
-  cursor: default
-  text-align: center
-
-.layIntro
-  clear: left
-
-.layIntroA
-  width: 100%
-  letter-spacing: 1em
-  overflow: hidden
-  margin-bottom: 30px
-  border-radius: 4px
-  color: #5b0
-  span
-    padding-left: 0.5em
-    font-size: 28px
-    color: #555
-  strong
-    font-weight: normal
-    font-size: 34px
-
-.layIntroB
-  width: 140px
+.indeCnt
+  width: 600px
   margin: auto
-  line-height: 28px
+  padding-top: 100px  
+
+.index_intro
+  margin-bottom: 20px
+  text-align: center
+  background: #fff
+  border-radius: 4px
+  overflow: hidden
+.index_intro_cpt
+  padding: 20px 0px
+  background: url(../images/mask.png) #063
+  color: #fff
+  
+.index_intro_logo
+  font-size: 120px
+  line-height: 120px
+  margin-bottom: 10px
+
+.index_intro_a
+  font-size: 30px
+  font-weight: normal
+  line-height: 40px
+  letter-spacing: 20px
+  margin-bottom: 10px
+
+.index_intro_cnt
+  padding: 20px
+.index_intro_b
   font-size: 16px
+  line-height: 20px
+  margin-bottom: 15px
+  color: #666
+.index_intro_c
   color: #333
-  background: #fff
-  padding: 0px 10px
-  border-radius: 4px
-  letter-spacing: 5px
+  font-size: 20px
+  line-height: 20px
+  margin-bottom: 10px
+.index_intro_d
+  font-size: 12px
+  line-height: 20px
+  margin-bottom: 10px
+  color: #aaa
 
-.layIntroC
-  width: 200px
-  line-height: 22px
-  font-size: 14px
-  color: #888
-  background: #fff
-  padding: 0px 10px
-  border-radius: 4px
-  margin: 20px auto 25px
-
-.layIntroD
-  line-height: 30px
-  font-size: 18px
-  color: #555
-  background: #fff
-  padding: 0px 10px
-  border-radius: 4px
-  margin-bottom: 40px
-  letter-spacing: 5px
-
-.laySnsLink
-  clear: left
-  a
-    display: inline-block
-    width: 50px
-    height: 50px
-    margin-right: 35px
-    background-image: url(../images/SNS_skin.png)
-    outline: none
-    span
-      display: block
-      width: 50px
-      height: 50px
-      background-image: url(../images/SNS_skin.png)
-      transition: 0.16s
-      text-indent: -10em
-      overflow: hidden
-      opacity: 0
-      filter: alpha(opacity = 0)
-    &:hover span
-      opacity: 0.6
-      filter: alpha(opacity = 60)
-    &:active span
-      opacity: 1
-      filter: alpha(opacity = 100)
-      transition: 0.1s
-  .sns_qq
-    background-position: 0px 0px
-    span
-      background-position: 0px -50px
-  .sns_weibo
-    background-position: -50px 0px
-    span
-      background-position: -50px -50px
-  .sns_google
-    background-position: -100px 0px
-    span
-      background-position: -100px -50px
-  .sns_zhanku
-    background-position: -150px 0px
-    span
-      background-position: -150px -50px
 
 .some_link
-  text-align: center
-  border-top: 1px solid #fff
-  padding: 20px 0px 40px
+  margin-bottom: 20px
+  background: #fff
+  overflow: hidden
+  border-radius: 4px
   a
-    margin: 0px 20px
+    display: block
+    float: left
+    width: 50%
+    height: 40px
+    line-height: 40px
+    text-align: center
 
 .webLink
-  position: fixed
+  display: table
   width: 100%
-  bottom: 0px
-  left: 0px
+  background: #fff
+  border-radius: 4px
 
-.webLinkBar
-  position: relative
-  width: 100px
-  height: 30px
-  line-height: 30px
+.webLink_cpt
+  display: table-cell
+  vertical-align: middle
+  white-space: nowrap
+  width: 10%
+  line-height: 50px
+  padding: 0px 10px
   margin: auto
   text-align: center
   font-size: 14px
-  background: #fff
-  border-radius: 4px 4px 0px 0px
-  z-index: 1
   cursor: pointer
-  border: 1px solid #ccc
-  border-bottom: none
 
 .webLink_cnt
+  display: table-cell
+  width: 90%
   overflow: hidden
-  display: none
-  background: #fff
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.6)
   a
+    @include borderbox()
     display: block
-    border-bottom: 1px solid #eee
+    width: 50%
+    float: left
+    margin-top: -1px
+    border-top: 1px solid #eee
+    border-left: 1px solid #eee
     height: 40px
     line-height: 40px
-    padding: 0px 10px
     font-size: 14px
     text-align: center
+    @include transition(0.2s)
+    &:hover
+      background: #f6f6f6
 
-@media screen and (min-width: 400px)
-  .webLink_cnt
-    width: 400px
-    margin: auto
+
+@media screen and (max-width: 620px)
+  .indeCnt
+    width: auto
+    margin: 0px 10px
+  .webLink,.webLink_cpt,.webLink_cnt
+    display: block
+    width: auto
+  .webLink_cnt a
+    margin: 0px
+  .webLink_cnt a:nth-of-type(odd)
+    border-left: none
 
 
 
