@@ -9,7 +9,6 @@
  * 发布分享
  */
 define(function(require,exports){
-	seajs.use('publish/publish.css');
 	require('mditor/mditor.js');
 	require('gallery/index.js');
 
@@ -24,23 +23,30 @@ define(function(require,exports){
 	
 	var share_tpl = ['<div class="pub_share">',
 		'<form action="/ajax/add_edit" method="post" target="_self">',
-			'<div class="pub_row_input">',
-				'<input type="text" placeholder="分享主题" name="title" value="{title}"/>',
+			'<br/><div class="input-group">',
+				'<span class="input-group-addon">主题</span>',
+				'<input type="text" class="form-control"  placeholder="分享主题" name="title" value="{title}">',
 			'</div>',
-			'<div class="pub_row_input">',
-				'<textarea name="intro" placeholder="分享简介" cols="50" rows="5">{intro}</textarea>',
+			'<br/><div class="input-group">',
+				'<span class="input-group-addon">简介</span>',
+				'<textarea class="form-control" name="intro" placeholder="分享简介" cols="50" rows="5">{intro}</textarea>',
 			'</div>',
-			'<div class="pub_row_input">',
-				'<textarea name="content" placeholder="分享详情" cols="50" rows="10" >{content}</textarea>',
+			'<br/><div class="input-group">',
+				'<span class="input-group-addon">详情</span>',
+				'<textarea class="form-control" name="content" placeholder="分享详情" cols="50" rows="10" >{content}</textarea>',
 			'</div>',
-			'<div>',
-				'<input type="text" placeholder="缩略图" name="cover" value="{cover}" />',
+			'<br/><div class="input-group">',
+				'<span class="input-group-addon">缩略图</span>',
+				'<input class="form-control" type="text" placeholder="缩略图" name="cover" value="{cover}" />',
+				'<span class="input-group-addon">选择</span>',
+			'</div>',
+			'<br/><div>',
 				'<input type="text" placeholder="标签" name="tags" value="{tags}" />',
 				'<input type="text" placeholder="发表时间" name="time_show" value="{time_show}" />',
 				'<input type="text" placeholder="分享来自" name="from" value="{from}" />',
 				'<input type="text" placeholder="分享地址" name="from_url" value="{from_url}" />',
 			'</div>',
-			'<div>',
+			'<br/><div>',
 				'<input type="hidden" name="id" value="{id}" />',
 				'<input type="hidden" name="category" value="share" />',
 				'<button type="submit" class="btn btn-primary">提交</button>',

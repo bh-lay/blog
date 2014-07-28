@@ -6,7 +6,6 @@
 //alert(window.outerWidth);
 
 define && define(function(require,exports){
-	seajs.use('publish/publish.css');
 	var article = require('publish/article.js');
 	var share = require('publish/share.js');
 	var opus = require('publish/opus.js');
@@ -15,15 +14,19 @@ define && define(function(require,exports){
 	var power = require('publish/power.js');
 	var user = require('publish/user.js');
 	
-	var publish_tpl = ['<div class="publish">',
-		'<div class="publish_cpt">',
-			'<a href="javascript:void(0)" data-type="article" class="active">博文</a>',
-			'<a href="javascript:void(0)" data-type="share">分享</a>',
-			'<a href="javascript:void(0)" data-type="labs">实验室</a>',
-			'<a href="javascript:void(0)" data-type="opus">作品</a>',
-			'<a href="javascript:void(0)" data-type="friends">友情链接</a>',
+	var publish_tpl = ['<br/><div class="publish">',
+		'<div class="panel panel-default">',
+			'<div class="panel-body">',
+				'<ul class="nav nav-tabs" role="tablist">',
+					'<li role="presentation" class="active"><a href="javascript:void(0)" data-type="article" >博文</a></li>',
+					'<li role="presentation"><a href="javascript:void(0)" data-type="share">分享</a></li>',
+					'<li role="presentation"><a href="javascript:void(0)" data-type="labs">实验室</a></li>',
+					'<li role="presentation"><a href="javascript:void(0)" data-type="opus">作品</a></li>',
+					'<li role="presentation"><a href="javascript:void(0)" data-type="friends">友情链接</a></li>',
+				'</ul>',
+				'<div class="publish_cnt"></div>',
+			'</div>',
 		'</div>',
-		'<div class="publish_cnt"></div>',
 	'</div>'].join('');
 	
 	function show_module (dom,cpt_dom,name,id){
@@ -42,8 +45,8 @@ define && define(function(require,exports){
 			article(dom,id);
 		}
 	
-		cpt_dom.find('a').removeClass('active');
-		cpt_dom.find('a[data-type="' + name + '"]').addClass('active');
+		cpt_dom.find('li').removeClass('active');
+		cpt_dom.find('a[data-type="' + name + '"]').parent().addClass('active');
 	
 	}
 	function INIT(dom,param){
@@ -55,7 +58,7 @@ define && define(function(require,exports){
 			show_module(dom,cpt_dom,active,id);
 		}else{
 			dom.html(publish_tpl);
-			var cpt_dom = dom.find('.publish_cpt');
+			var cpt_dom = dom.find('.nav-tabs');
 			var cnt_dom = dom.find('.publish_cnt');
 			show_module(cnt_dom,cpt_dom,active,id);
 			cpt_dom.on('click','a',function(){

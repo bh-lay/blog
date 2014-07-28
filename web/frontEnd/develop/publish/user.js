@@ -9,7 +9,6 @@
  * 发布分享
  */
 define(function(require,exports){
-	seajs.use('publish/publish.css');
 
 	//初始化模版
 	function valueInit(tpl,data){

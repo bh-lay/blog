@@ -10,7 +10,6 @@
 
 
 define && define(function(require,exports){
-	seajs.use('publish/publish.css');
 	require('mditor/mditor.js');
 	require('gallery/index.js');
 	
@@ -26,11 +25,23 @@ define && define(function(require,exports){
 
 	var friend_tpl = ['<div class="pub_friend">',
 		'<form action="/ajax/add_edit" method="post" target="_self">',
-			'<div class="pub_row_input"><input type="text" name="title" value="{title}" placeholder="标题" /></div>',
-			'<div class="pub_row_input"><input type="text" name="url" value="{url}" placeholder="地址" /></div>',
-			'<div class="pub_row_input"><input type="text" name="discription" value="{discription}" placeholder="描述" /></div>',
-			'<div class="pub_row_input"><input type="text" name="isShow" value="{isShow}" placeholder="是否显示" /></div>',
-			'<div class="pub_row_input">',
+			'<br/><div class="input-group">',
+				'<span class="input-group-addon">标题</span>',
+				'<input type="text" class="form-control" name="title" value="{title}" placeholder="标题">',
+			'</div>',
+			'<br/><div class="input-group">',
+				'<span class="input-group-addon">地址</span>',
+				'<input type="text" class="form-control" name="url" value="{url}" placeholder="地址">',
+			'</div>',
+			'<br/><div class="input-group">',
+				'<span class="input-group-addon">描述</span>',
+				'<input type="text" class="form-control" name="discription" value="{discription}" placeholder="描述">',
+			'</div>',
+			'<br/><div class="input-group">',
+				'<span class="input-group-addon">是否显示</span>',
+				'<input type="text" class="form-control" name="isShow" value="{isShow}" placeholder="是否显示">',
+			'</div>',
+			'<br/><div class="pub_row_input">',
 				'<input type="hidden" name="id" value="{id}" />',
 				'<input type="hidden" name="category" value="blog_friend" />',
 				'<button type="submit" class="btn btn-primary">提交</button>',

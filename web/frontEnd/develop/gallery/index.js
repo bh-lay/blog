@@ -419,13 +419,12 @@ define(function(require,exports){
 			'title' : '选择文件',
 			'html' : pop_tpl
 		});
-		var explorer = new SELECT(pop.cntDom.find('.col-md-12'));
+		var explorer = new SELECT($(pop.cntDom).find('.col-md-12'));
 		
-		pop.dom.find('.galleryPop_footer a').on('click',function(){
+		$(pop.dom).find('.galleryPop_footer a').on('click',function(){
 			console.log(explorer,explorer.selection(),123)
 			callback && callback(explorer.selection());
 			pop.close();
 		});
-		
 	};
 });

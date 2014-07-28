@@ -8,37 +8,53 @@
  * 发布博文
  */
 define(function(require,exports){
-	seajs.use('publish/publish.css');
 	require('mditor/mditor.js');
 	var gallery = require('gallery/index.js');
 	//初始化模版
 	function valueInit(tpl,data){
-			
 		var txt = tpl.replace(/\{(\w*)}/g,function(){
 			return data[arguments[1]]||'';
 		});
 		return txt;
 	};
 	var article_tpl = ['<div class="pub_article"><form action="/ajax/add_edit" method="post" target="_self">',
-		'<div class="pub_row_input"><input type="text" placeholder="博文标题，必须要填的哦！" name="title" value="{title}"/></div>',
-		'<div class="pub_row_input">',
-			'<textarea placeholder="一段话概括博文" name="intro" cols="50" rows="5">{intro}</textarea>',
+		'<br/><div class="input-group">',
+  			'<span class="input-group-addon">标题</span>',
+  			'<input type="text" class="form-control" placeholder="博文标题，必须要填的哦！" name="title" value="{title}"/>',
 		'</div>',
-		'<div class="pub_row_input">',
-			'<textarea class="mditor" placeholder="博文正文" name="content">{content}</textarea>',
+		'<br/><div class="input-group">',
+			'<span class="input-group-addon">简介</span>',
+			'<textarea class="form-control" placeholder="一段话概括博文" name="intro" cols="50" rows="5">{intro}</textarea>',
 		'</div>',
-		'<div class="pub_row_image">',
-			'<div class="pub_row_image" style="background-image:url({cover});">',
-				'<a class="pub_cover_btn" href="javascript:void(0)">选择</a>',
+		'<br/><div class="input-group" style="width:100%">',
+			'<textarea class="mditor form-control" placeholder="博文正文" name="content">{content}</textarea>',
+		'</div>',
+		'<br/><div class="input-group">',
+  			'<span class="input-group-addon">缩略图</span>',
+  			'<input type="text" class="form-control" placeholder="缩略图" name="cover" value="{cover}" />',
+  			'<a href="javascript:void(0)" class="input-group-addon pub_cover_btn">选择</a>',
+		'</div>',
+		'<br/><div>',
+			'<div class="col-md-4">',
+				'<div class="input-group">',
+					'<span class="input-group-addon">$</span>',
+					'<input type="text" class="form-control" placeholder="标签" name="tags" value="{tags}" />',
+				'</div>',
 			'</div>',
-			'<input type="hidden" placeholder="缩略图" name="cover" value="{cover}" />',
+			'<div class="col-md-4">',
+				'<div class="input-group">',
+					'<span class="input-group-addon">$</span>',
+					'<input type="text" class="form-control" placeholder="作者" name="author" value="{author}" />',
+				'</div>',
+			'</div>',
+			'<div class="col-md-4">',
+				'<div class="input-group">',
+					'<span class="input-group-addon">$</span>',
+					'<input type="text" class="form-control" placeholder="发表时间" name="time_show" value="{time_show}" />',
+				'</div>',
+			'</div>',
 		'</div>',
-		'<div>',
-			'<input type="text" placeholder="标签" name="tags" value="{tags}" />',
-			'<input type="text" placeholder="作者" name="author" value="{author}" />',
-			'<input type="text" placeholder="发表时间" name="time_show" value="{time_show}" />',
-		'</div>',
-		'<div class="pub_sub">',
+		'<br/><div class="pub_sub">',
 			'<input type="hidden" name="id" value="{id}" />',
 			'<input type="hidden" name="category" value="blog" />',
 			'<button type="submit" class="btn btn-primary">提交</button>',
