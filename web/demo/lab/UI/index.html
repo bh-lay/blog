@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>UI_demo</title>
+	<style type="text/css">
+	.cnt{width:400px;margin:auto;padding-top:100px}
+	input{width:150px;display:block;margin:0px auto;}
+	textarea{width:90%;display:block;margin:0px auto 40px;padding:5px 10px;font-size:12px;color:#666;border-color:#ddd;resize:none;}
+	</style>
+</head>
+<body>
+	<script type="text/javascript">
+		function showPop(){
+			var pop = UI.pop({
+			  'title' : '我的弹框',
+			  'top' : 200,
+			  'left' : '600',
+			  'html' : 'this is html'
+			});
+		}
+		function showConfirmPop(){
+			UI.pop({
+			  'title' : '我是自定义按钮的弹框',
+			  'html' : '请我吃饭吧！',
+			  'confirm' : {
+			    'btns' : ['好的','不干'],
+			    'callback' : function(){
+			      alert('你是个好人！');
+			    }
+			  }
+			//  'confirm' : function(){
+			//    alert(2);
+			//  }
+			});
+		}
+		function showConfirm(){
+			UI.confirm({
+			  'text' : '请我吃饭吧！',
+			  'btns' : ['好的呀','不愿意'],
+			  'callback' : function(){
+			    alert('你是好人！');
+			  }
+			});
+		}
+		function showMessage(){
+			UI.prompt('我快死了');
+		}
+	</script>
+<div class="cnt">
+	<input type="button" onclick="showPop()" value="显示弹框"/>
+<textarea rows="7">
+var pop = UI.pop({
+  'title' : '我的弹框',
+  'top' : 200,
+  'left' : '600',
+  'html' : 'this is html'
+});
+</textarea>
+	<input type="button" onclick="showConfirmPop()" value="显示带对话的弹框"/>
+<textarea rows="11">
+UI.pop({
+  'title' : '我是自定义按钮的弹框',
+  'html' : '请我吃饭吧！',
+  'confirm' : {
+    'btns' : ['好的','不干'],
+    'callback' : function(){
+      alert('你是个好人！');
+    }
+  }
+});
+</textarea>
+	<input type="button" onclick="showConfirm()" value="显示确认框"/>
+<textarea rows="8">
+UI.confirm({
+  'text' : '请我吃饭吧！',
+  'btns' : ['好的呀','不愿意'],
+  'callback' : function(){
+    alert('你是好人！');
+  }
+});
+</textarea>
+	<input type="button" onclick="showMessage()" value="提示信息"/>
+<textarea rows="2">
+UI.prompt('我快死了');
+</textarea>
+</div>
+	<script type="text/javascript" src="/frontEnd/develop/jquery.js"></script>
+	<script type="text/javascript" src="/frontEnd/develop/UI/pop.js"></script>
+</body>
+</html>

@@ -123,7 +123,7 @@ filter_request.blog = function(data){
 		'title':decodeURI(data['title']),
 		'cover':data['cover']||'',
 		'time_show':data['time_show']||new Date().getTime(),
-		'tags':data['tags']||'',
+		'tags':data['tags'] ? data['tags'].split(/\s*\,\s*/) : [],
 		'author':data['author']||'',
 		'content':data['content'],
 		'intro':data['intro']||data['content'].slice(0,200),
@@ -180,11 +180,13 @@ filter_request.labs = function(data){
 	var error = null;
 	var param = {
 		'id' : data['id']||'',
+		'name' : data['name']||'',
 		'title':decodeURI(data['title']),
 		'cover':data['cover']||'',
 		'time_create':data['time_create']||new Date().getTime(),
 		'content':data['content'],
-		'api_url' : data['api_url'],
+		'git_full_name' : data['git_full_name'],
+		'demo_url' : data['demo_url'],
 		'intro':data['intro'] || data['content'].slice(0,200),
 	};
 	if(!(param['title']&&param['content'])){

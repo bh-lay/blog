@@ -41,7 +41,7 @@ function get_list(data,callback){
 		collection.count(function(err,count){
 			resJSON['count'] = count;
 			
-			collection.find({},{limit:limit_num}).sort({id:-1}).skip(skip_num).toArray(function(err, docs) {
+			collection.find({},{limit:limit_num}).sort({id:1}).skip(skip_num).toArray(function(err, docs) {
 				method.close();
 				if(err){
 					resJSON.code = 2;

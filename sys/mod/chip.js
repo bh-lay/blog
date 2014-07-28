@@ -14,37 +14,6 @@ var mongo = require('../conf/mongo_connect');
 //define template Object
 var chip = {};
 
-chip.article_item =function(callback){
-	var chip =  ['{@each list as it,index}',
-		'<div class="articleItem" articleId="${it.id}">',
-			'<div class="artItCpt">',
-				'<h3><a href="/blog/${it.id}" title="${it.title}" lofox="true" target="_self" >${it.title}</a></h3>',
-				'<p>${it.time_show}</p>',
-			'</div>',
-			'<div class="artItCnt">',
-				'{@if it.cover}',
-				'<div class="artItPic">',
-					'<a href="/blog/${it.id}" title="${it.title}" lofox="true" target="_self" >',
-						'<img src="${it.cover}" alt="${it.title}" />',
-					'</a>',
-				'</div>',
-				'{@/if}',
-				'<div class="artItInfo"><p>${it.intro}</p></div>',
-				'<div class="artItTag">${it.tags}</div>',
-				'<div class="artItFoot">',
-					'<a class="dataLike" title="我喜欢" href="javascript:void(0)"><i></i><b>8</b></a>',
-					'<a class="dataView" title="查看" href="/blog/${it.id}" lofox="true" target="_self"><i></i><b>367</b></a>',
-				'</div>',
-			'</div>',
-			'<div class="artItLace">',
-				'<div class="artItLaCircle"></div>',
-				'<div class="artItLaCorner"><b></b><i></i></div>',
-			'</div>',
-		'</div>',
-	'{@/each}'].join('');
-	callback(chip);
-};
-
 chip.share_item = function(callback){
 	var chip =  ['{@each list as it,index}',
 		'<li>',
@@ -72,10 +41,7 @@ chip.labs_item = function(callback){
 chip.labs_detail = function(callback){
 	var chip = ['<div class="golCnt"><div class="article labs_detail">',
 		'<div class="articletop"><h1>${title}</h1></div>',
-			'{@if cover}',
-				'<img src="${cover}" alt="${title}" class="topicImg" />',
-			'{@/if}',
-		'<div class="text md_html">$${content}</div>',
+		'<div class="article">$${content}</div>',
 		'<div class="youyan"><!-- UY BEGIN -->',
 				'<div id="uyan_frame"></div>',
 				'<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1605927" async=""></script>',
@@ -142,7 +108,7 @@ chip.nav = function(callback){
 	var chip =  ['<div class="navLayer">',
 		'<div class="nav_bj"></div>',
 		'<div class="nav_main">',
-			'<div class="golCnt">',
+			'<div class="l_row">',
 				'<a class="nav_logo" lofox="true" href="/">小剧客栈</a>',
 				'<div class="nav_mainList">',
 					'<ul class="nav">',

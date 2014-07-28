@@ -6,12 +6,14 @@
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<link href="/frontEnd/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="/frontEnd/develop/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="/favicon.ico" rel="shortcut icon"/>
 <style type="text/css">
 	html{min-height:100%; }
 	body{padding-top:60px;
-		font-family: "Microsoft Yahei";}
+		font-family: "Microsoft Yahei";
+		background : #ccc;
+	}
 	.navbar {
 	  min-height: 38px;
 	}
@@ -25,7 +27,10 @@
 		padding:6px 10px;
 		margin:4px 10px 0px 0px;
 	}
-	.mainCnt{min-height:500px;}
+	.navbar-default{box-shadow:0px 0px 5px rgba(0,0,0,0.7);background:#fff;border:none;}
+	.breadcrumb{background: #fff;}
+	.mainCnt{position:relative;min-height:500px;overflow: hidden;}
+	.mainCnt_body{position:relative;width:100%;}
 	.custom-listTable{background:#ddd;border-radius: 0px;}
 	.custom-listTable tr{background: #fff;}
 	.custom-listTable .btn{margin-right:10px;}
@@ -36,7 +41,7 @@
 </style>
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 <div class="container">
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -85,7 +90,7 @@
     </ul>
   </div><!-- /.navbar-collapse -->
 </div>
-</nav>    
+</nav> 
 <div class="container bs-docs-container">
 	<div class="row">
 		<div class="col-md-12">
@@ -121,12 +126,18 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="/frontEnd/jquery.js"></script>
-<script type="text/javascript" src="/frontEnd/lib/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/frontEnd/lib/sea.js" ></script>
-<script type="text/javascript" src="/frontEnd/public/admin/index.js"></script>
+<script type="text/javascript" src="/frontEnd/develop/jquery.js"></script>
+<script type="text/javascript" src="/frontEnd/develop/lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/frontEnd/develop/lib/sea.js" ></script>
 <script type="text/javascript">
+	admin_config = {
+		'frontEnd_base' : '/frontEnd/develop/'
+	};
+	seajs.config({
+	  'base' : '/frontEnd/develop/'
+	});
 	var admin_dataBase = {database};
 </script>
+<script type="text/javascript" src="/frontEnd/develop/public/admin/index.js"></script>
 </body>
 </html>

@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<title>剧中人后台</title>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<link href="${frontEnd_base}lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="/favicon.ico" rel="shortcut icon"/>
+<style type="text/css">
+	html{min-height:100%; }
+	body{padding-top:60px;
+		font-family: "Microsoft Yahei";
+		background : #ccc;
+	}
+	.navbar {
+	  min-height: 38px;
+	}
+	.nav > li > a {
+	  padding: 7px 15px;
+	}
+	.navbar-brand {
+	  padding: 7px 15px;
+	}
+	.navbar-toggle{
+		padding:6px 10px;
+		margin:4px 10px 0px 0px;
+	}
+	.navbar-default{box-shadow:0px 0px 5px rgba(0,0,0,0.7);background:#fff;border:none;}
+	.breadcrumb{background: #fff;}
+	.mainCnt{position:relative;min-height:500px;overflow: hidden;}
+	.mainCnt_body{position:relative;width:100%;}
+	.custom-listTable{background:#ddd;border-radius: 0px;}
+	.custom-listTable tr{background: #fff;}
+	.custom-listTable .btn{margin-right:10px;}
+	.custom-footer{background:#444;color:#fff;}
+	.custom-subFooter{background:#333;color:#fff;}
+	.custom-mb10{margin-bottom:10px;}
+	.custom-mb20{margin-bottom:20px;}
+</style>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+<div class="container">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a href="/admin" class="navbar-brand custom-lofox">小剧客栈</a>
+  </div>
+
+  <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      <li><a class="custom-lofox" href="/admin/article">博文</a></li>
+      <li><a class="custom-lofox" href="/admin/share">分享</a></li>
+	  <li><a class="custom-lofox" href="/admin/opus">作品</a></li>
+	  <li><a class="custom-lofox" href="/admin/labs">实验室</a></li>
+      <li><a class="custom-lofox" href="/admin/friends">友情链接</a></li>
+	  <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">工具 <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     	  <li><a class="custom-lofox" href="/admin/publish">发布</a></li>
+		  <li><a class="custom-lofox" href="/admin/gallery">图库</a></li>
+        </ul>
+      </li>
+	  <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">用户 <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a class="custom-lofox" href="/admin/user/list">用户管理</a></li>
+     	  <li><a class="custom-lofox" href="/admin/user/group">用 户 组</a></li>
+	 	  <li><a class="custom-lofox" href="/admin/user/power">权限列表</a></li>
+        </ul>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+       <li class="dropdown">
+        <a href="#" title="{username}" class="dropdown-toggle" data-toggle="dropdown">
+        	<span class="glyphicon glyphicon-user"></span>
+        	${username}
+        	 <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a class="custom-lofox" href="/admin/user/user.html?userid=${userid}">改密</a></li>
+          <li><a href="/ajax/user/exist" data-action-ajaxConfirm="二逼，是不是不玩儿啦！"><span class="glyphicon glyphicon-off"></span>退出</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div>
+</nav> 
+<div class="container bs-docs-container">
+	<div class="row">
+		<div class="mainCnt"> </div>
+	</div>
+</div>
+<div class="custom-footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h3>后台相关介绍</h3>
+				<ul>
+					<li>strong返回code值200为正常</li>
+					<li>基于bootstrap布局，自定义样式请加上“.custom-”前缀</li>
+				</ul>
+				<br/>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="custom-subFooter">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<br/>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="${frontEnd_base}jquery.js"></script>
+<script type="text/javascript" src="${frontEnd_base}lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${frontEnd_base}lib/sea.js" ></script>
+<script type="text/javascript">
+	seajs.config({
+	  'base' : '${frontEnd_base}'
+	});
+	var admin_dataBase = {
+		'username' : '${username}',
+		'userid' : '${userid}',
+		'frontEnd_base' : '${frontEnd_base}'
+	};
+</script>
+<script type="text/javascript" src="${frontEnd_base}public/admin/index.js"></script>
+</body>
+</html>

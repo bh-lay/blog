@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html lang="en-US" style="height:100%">
+<head>
+
+    <title>Html5 Ajax 上传</title>
+	<meta charset="UTF-8">
+</head>
+
+<body>
+
+    <progress id="progressBar" value="0" max="100">
+
+    </progress>
+
+    <span id="percentage"></span>
+
+    <br />
+
+    <input type="file" id="file" accept="image/*" name="myfile" />
+
+
+<script type="text/javascript">
+	function ajaxUpload() {
+		var fileObj = document.getElementById("file").files[0];
+		var FileController = "/ajax/asset/upload";
+            // FormData
+
+            var form = new FormData();
+
+            form.append("author", "hooyes"); 
+console.log(fileObj)
+return
+            form.append("file", fileObj);
+            // XMLHttpRequest
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("post", FileController, true);
+
+            xhr.onload = function () {
+            	
+
+            };
+
+            xhr.upload.addEventListener("progress",progressFunction, false);
+            xhr.send(form);
+        }
+
+        function progressFunction(evt) {
+
+            var progressBar = document.getElementById("progressBar");
+
+            var percentageDiv = document.getElementById("percentage");
+
+            if (evt.lengthComputable) {
+
+                progressBar.max = evt.total;
+
+                progressBar.value = evt.loaded;
+
+                percentageDiv.innerHTML = Math.round(evt.loaded / evt.total * 100) + "%";
+
+            }
+
+        }  
+        document.getElementById("file").onchange = function(){
+        	new ajaxUpload();
+        };
+
+    </script>
+</body>
+</html>

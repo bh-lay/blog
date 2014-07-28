@@ -4,16 +4,27 @@
 /*
 @demo
 -----------------------------------------------------------------
-get_list: 								|		get_detail
-	$.ajax({                      |       	$.ajax({
-		'type':'GET',              |       		'type':'GET',
-		'url':'/ajax/blog',        |       		'url':'/ajax/blog',
-		'data':{                   |       		'data':{
-			'act' : 'get_list',     |       			'act' : 'get_detail',
-			'limit_num' : '12',		|					'id' :'123456789'
-			'skip_num' : '34'			|				}
-		}	       						|       	});
-	});                           |
+get_list:
+	$.ajax({
+		'type':'GET',
+		'url':'/ajax/blog',
+		'data':{
+			'act' : 'get_list',
+			'limit_num' : '12',
+			'skip_num' : '34',
+			'tag' : 'javascript'
+		}
+	});
+
+get_detail
+	$.ajax({
+		'type':'GET',
+		'url':'/ajax/blog',
+		'data':{
+			'act' : 'get_detail',
+			'id' :'123456789'
+		}
+	});
 -----------------------------------------------------------------
  */
 
@@ -26,8 +37,9 @@ var converter = new showdown.converter();
 
 function get_list(data,callback){
 	var data = data,
-		limit_num = parseInt(data['limit'])||10,
-		skip_num = parseInt(data['skip'])||0;
+		limit_num = parseInt(data['limit']) || 10,
+		skip_num = parseInt(data['skip']) || 0,
+		findKeys = {};
 	
 	var resJSON = {
 		'code':1,
@@ -35,13 +47,18 @@ function get_list(data,callback){
 		'skip':skip_num,
 	};
 	
+	//过滤标签
+	if(data.tag){
+		findKeys.tags = data.tag;
+		
+	}
 	var method = mongo.start();
 	method.open({'collection_name':'article'},function(err,collection){
       //count the all list
 		collection.count(function(err,count){
 			resJSON['count'] = count;
 			
-			collection.find({},{limit:limit_num}).sort({id:-1}).skip(skip_num).toArray(function(err, docs) {
+			collection.find(findKeys,{limit:limit_num}).sort({id:-1}).skip(skip_num).toArray(function(err, docs) {
 				method.close();
 				if(err){
 					resJSON.code = 2;

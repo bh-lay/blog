@@ -1,0 +1,550 @@
+﻿/**
+ * Template Name: naive
+ * Version:1.0
+ * Author:  bh_lay
+ * E-mail:  bh_lay@126.com
+ * Blog:  http://bh-lay.com
+ *
+
+@mixin transition($seconds:0.3s)
+  transition : $seconds
+  -moz-transition-duration : $seconds
+  -webkit-transition-duration : $seconds
+  -o-transition-duration : $seconds
+
+@mixin rotate($rt:7.5deg)
+  -moz-transform: rotate($rt)
+  -o-transform: rotate($rt)
+  -webkit-transform: rotate($rt)
+//  filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.9914,M12=-0.1305,M21=0.1305,M22=0.9914,SizingMethod=’auto expand’);
+//  -ms-filter:“progid:DXImageTransform.Microsoft.Matrix(M11=0.9914,M12=-0.1305,M21=0.1305,M22=0.9914,SizingMethod=’auto expand’)”; 
+
+@mixin borderbox()
+  box-sizing: border-box
+  -moz-box-sizing: border-box 
+  -webkit-box-sizing: border-box 
+
+/**
+ * base css 
+ *   include some reset and fix
+ *
+
+body, div, ul, ol, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, p
+  margin: 0px
+  padding: 0px
+
+img
+  border: none
+
+ul, ol, li, form, dl
+  list-style: none
+
+a
+  text-decoration: none
+  color: #333
+  &:hover
+    color: #5c0
+
+TD
+  color: #777
+  font-size: 12px
+  padding: 10px
+
+.fix
+  &:after
+    content: "."
+    display: block
+    height: 0
+    clear: both
+    visibility: hidden
+  display: inline-block
+  zoom: 1
+
+html,body
+  position: relative
+  min-width: 320px
+  height: 100%
+  color: #333
+  font-size: 14px
+  font-family: "Microsoft YaHei",tahoma,arial,simsun,"宋体"
+
+@font-face
+  font-family: 'layIcon'
+  src: url('../fonts/layIcon-webfont.eot')
+  src: url('../fonts/layIcon-webfont.eot?#iefix') format("embedded-opentype"), url('../fonts/layIcon-webfont.woff') format("woff"), url('../fonts/layIcon-webfont.ttf') format("truetype"), url('../fonts/layIcon-webfont.svg#layIcon-webfont') format("svg")
+  font-weight: normal
+  font-style: normal
+
+.layIcon
+  font:
+    family : "layIcon"
+    style : normal
+.l-icon
+  font:
+    family : "layIcon"
+    style : normal
+/*
+ * common
+ * some pulic modules
+ *
+
+.contlayer
+  position: absolute
+  z-index: 100
+  top: 0px
+  right: 0px
+  left: 40px
+  height: 100%
+  overflow: hidden
+  .contlayer_body
+    position: relative
+    width: 100%
+    height: 100%
+    overflow: auto
+    -webkit-overflow-scrolling: touch
+  .contlayer_loading
+    margin-top: 200px
+    height: 60px
+    line-height: 60px
+    text-align: center
+    font-size: 18px
+    color: #888
+    background: #fff
+    
+.tongji
+  width: 0px
+  height: 0px
+  overflow: hidden
+
+/*page backgound gallery
+
+.gallayer
+  position: fixed
+  z-index: 0
+  left: 0px
+  top: 0px
+  width: 100%
+  height: 100%
+  background: #eee
+
+.galBj
+  position: absolute
+  z-index: 11
+  left: 0px
+  top: 0px
+  width: 100%
+  height: 100%
+  overflow: hidden
+  background-size: cover
+  background-position: center center
+
+.galMask
+  position: absolute
+  z-index: 12
+  left: 0px
+  top: 0px
+  width: 100%
+  height: 100%
+  overflow: hidden
+  text-indent: -100em
+  background: url('../images/mask.png')
+
+.galBj_mask
+  width: 100%
+  height: 100%
+  background-size: cover
+  background-position: center center
+  -webkit-mask-image: url('../images/mask_bj.png')
+  -webkit-mask-repeat: no-repeat
+  -webkit-mask-position: center center
+  -webkit-mask-size: 300%
+  -webkit-animation: circle_zoom 1s
+
+@-webkit-keyframes circle_zoom
+  0%
+    opacity: 0
+    -webkit-mask-size: 30%
+    -webkit-animation-timing-function: ease-in
+  80%
+    opacity: 1
+    -webkit-mask-size: 60%
+    -webkit-animation-timing-function: ease-in
+  100%
+    opacity: 1
+    -webkit-mask-size: 300%
+
+
+/*navigation
+
+.navLayer
+  position: fixed
+  z-index: 1000
+  top: 0px
+  left: 0px
+  width: 0px
+  height: 100%
+
+.nav_main
+  position: relative
+  top: 0px
+  left: 0px
+  width: 40px
+  height: 100%
+  background: #333
+  
+.nav
+  padding-top: 40px
+  li
+    display: block
+    margin-bottom: 10px
+  .cur a
+    color: #fff
+  a
+    display: block
+    width: 100%
+    height: 40px
+    line-height: 40px
+    outline: none
+    color: #888
+    white-space: nowarp
+    overflow: hidden
+    @include transition(0.1s)
+    &:hover
+      width: 160px
+      text-decoration: none
+      background: #fff
+      @include transition(0s)
+      box-shadow: 1px 1px 2px rgba(0,0,0,0.6)
+      color: #333
+      strong
+        display: inline-block
+    i
+      display: inline-block
+      width: 40px
+      text-align: center
+      font-family: "layIcon"
+      margin-right: 5px
+      font-size: 22px
+      font-style: normal
+    strong
+      font-weight: normal
+      font-size: 14px
+
+.navLink
+  overflow: hidden
+  display: none
+  li
+    height: 20px
+    float: left
+    padding: 10px
+    a
+      line-height: 20px
+      padding: 0px 5px
+      font-size: 12px
+
+.nav_tool
+  position: absolute
+  top: 5px
+  left: 5px
+
+.nav_moreBtn
+  float: right
+  display: block
+  position: relative
+  overflow : hidden
+  width : 30px
+  height: 30px
+
+.nav_Btn_ico
+  display: block
+  position : absolute
+  left : 4px
+  width: 22px
+  height: 4px
+  border-radius: 2px
+  background: #222
+  @include transition(0.2s)
+  box-shadow: 0px 0px 6px #fff
+.nav_Btn_ico_1
+  top : 7px
+.nav_Btn_ico_2
+  top : 14px
+.nav_Btn_ico_3
+  top : 21px
+.nav_moreBtn
+  display: none
+
+@media screen and (max-width: 660px)
+  .contlayer
+    left: 0px
+  .nav_moreBtn
+    display: block
+  .nav_main
+    width: 180px
+    left: -180px
+    @include transition(0.4s)
+  .nav
+    a
+      strong
+        display: inline-block
+	
+  /*下拉菜单时
+  .nav_slidedown
+    .nav_main
+      left: 0px
+    .nav_Btn_ico
+      background: #fff
+    .nav_Btn_ico_1
+      top : 14px
+      @include rotate(45deg)
+    .nav_Btn_ico_2
+      top : 14px
+      @include rotate(-45deg)
+    .nav_Btn_ico_3
+      opacity : 0
+      bottom : 31px
+/*navigation
+
+
+.piclist
+  width: 488px
+  margin: 20px auto
+  border: 1px solid #aaa
+  position: relative
+  overflow: hidden
+  padding: 10px
+  img
+    width: 100px
+    cursor: pointer
+    height: 80px
+    display: inline
+    float: left
+    background-color: #aaa
+    margin: 10px
+    border: 1px solid #aaa
+    line-height: 80px
+    text-align: center
+
+/*布局
+
+.l_row
+  width: 1200px
+  margin: auto
+  &:after
+    content: "."
+    display: block
+    height: 0
+    clear: both
+    visibility: hidden
+  zoom: 1
+  .l_col_1,.l_col_2,.l_col_4,.l_col_6,.l_col_8,.l_col_12
+    position : relative
+    padding: 0px 10px
+    @include borderbox()
+  .l_col_1,.l_col_2,.l_col_4,.l_col_6,.l_col_8
+    float : left
+  .l_col_1
+    width : 8.333333333%
+  .l_col_2
+    width : 16.66666666%
+  .l_col_4
+    width : 33.3333333%
+  .l_col_6
+    width : 50%
+  .l_col_8
+    width : 66.66666666%
+  .l_col_12
+    width : 100%
+@media screen and (max-width: 1300px)
+  .l_row
+    width: 960px
+@media screen and (max-width: 970px)
+  .l_row
+    width: 100%
+    .l_col_1,.l_col_2,.l_col_4,.l_col_6,.l_col_8
+      width : 100%
+      float : none
+
+/*文章
+
+.article
+  padding : 10px
+  font-family: "Microsoft Yahei"
+  h1,h2,h3,h4,h5,h6
+    font-weight : normal
+    margin : 1em 0 0
+  h1,
+    font-size : 24px
+  h2,
+    font-size : 20px
+  h3,
+    font-size : 18px
+  h4,
+    font-size : 16px
+  h5,
+    font-size : 14px
+  h6,
+    font-size : 12px
+  p
+    line-height: 2
+    text-indent: 2em
+    margin : 1em 0
+    color : #444
+  ul
+    margin : 1em 0
+    padding-left : 1em
+    list-style-type: disc
+    li
+      margin-left : 1em
+      list-style-type: disc
+  
+  ol
+    margin : 1em 0
+    padding-left : 1em
+    list-style-type: decimal
+    li
+      margin-left : 1em
+      list-style-type: decimal
+  pre
+    border : 1px solid #eee
+    font-family : inherit
+    padding : 5px 10px
+    background : #f8f8f8
+    color : #555
+    overflow-x: auto
+    font-size: 13px
+    line-height: 1.8
+    border-radius: 4px
+  code
+    font-family : inherit
+  a
+    color: #333
+    padding : 0px 0.5em
+    text-decoration : underline
+    &:hover
+      color: #000
+      background : #f2f2f2
+      text-decoration: underline
+  img
+    max-width: 100%
+
+.sourceCode
+  position : absolute
+  top: 50px
+  width: 100%
+  z-index: 1000
+
+/**代码
+.hljs
+  display : block
+  padding: 0.5em
+
+.profile .hljs-header *,
+.ini .hljs-title,
+.nginx .hljs-title
+  color: #fff
+
+.hljs-comment
+  color: #bbb
+  font-style: italic
+
+.hljs-string,
+.hljs-symbol,
+.diff .hljs-change,
+.hljs-regexp,
+.xml .hljs-attribute,
+.smalltalk .hljs-char,
+.xml .hljs-value,
+.ini .hljs-value,
+.clojure .hljs-attribute,
+.coffeescript .hljs-attribute
+  color: #f30
+
+.hljs-number
+  color: #300
+
+.hljs-built_in,
+.hljs-literal,
+.vhdl .hljs-typename,
+.go .hljs-constant,
+.go .hljs-typename,
+.ini .hljs-keyword,
+.lua .hljs-title,
+.perl .hljs-variable,
+.php .hljs-variable,
+.mel .hljs-variable,
+.django .hljs-variable,
+.css .funtion,
+.smalltalk .method,
+.hljs-hexcolor,
+.hljs-important,
+.hljs-flow,
+.hljs-inheritance,
+.parser3 .hljs-variable
+  color: #000
+
+.hljs-keyword
+  color: #222
+  font-weight: bold
+
+.hljs-title,
+.ruby .hljs-constant,
+.vala .hljs-constant,
+.hljs-parent,
+.hljs-deletion,
+.hljs-template_tag,
+.css .hljs-keyword,
+.objectivec .hljs-class .hljs-id,
+.smalltalk .hljs-class,
+.lisp .hljs-keyword,
+.apache .hljs-tag,
+.nginx .hljs-variable,
+.hljs-envvar,
+.bash .hljs-variable,
+.go .hljs-built_in,
+.vbscript .hljs-built_in,
+.lua .hljs-built_in,
+.rsl .hljs-built_in,
+.tail,
+.avrasm .hljs-label,
+.tex .hljs-formula,
+.tex .hljs-formula *
+  color: #bb1166
+
+.hljs-yardoctag,
+.hljs-phpdoc,
+.profile .hljs-header,
+.ini .hljs-title,
+.apache .hljs-tag,
+.parser3 .hljs-title
+  font-weight: bold
+
+.coffeescript .javascript,
+.javascript .xml,
+.tex .hljs-formula,
+.xml .javascript,
+.xml .vbscript,
+.xml .css,
+.xml .hljs-cdata
+  opacity: 0.6
+
+.hljs-params
+  color: #666
+  
+  
+.github-link
+  position: fixed
+  z-index: 5000
+  display: block
+  left: 40px
+  bottom: 0px
+  width: 60px
+  height: 60px
+  background: url(../images/github-left.png) top right
+  @include transition(0.1s)
+  &:hover
+    width: 70px
+    height: 70px
+@media screen and (max-width: 660px)
+  .github-link
+    left: 0px
