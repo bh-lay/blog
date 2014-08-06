@@ -180,6 +180,22 @@ window.admin = window.admin || {};
 			lofox.push(url);
 			lofox.refresh();
 			return false
+		}).on('click','a.custom-publish',function(){
+			var btn = $(this);
+			var type = btn.attr('data-type');
+			var id = btn.attr('data-id');
+			seajs.use('publish/publish.js',function(publish){
+				
+				var cover = UI.cover({
+					'from' : btn[0],
+					'html' : '<div class="container my-publish-cnt"></div>'
+				});
+				publish.init($(cover.dom).find('.my-publish-cnt'),{
+					'active' : type,
+					'id' : id
+				});
+			});
+			return false;
 		});
 		
 		exports.load = function(){

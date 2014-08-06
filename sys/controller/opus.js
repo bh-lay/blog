@@ -14,6 +14,7 @@ function list_page(callback){
 			method.close();
 			for(var i = 0,total = docs.length;i<total;i++){
 				docs[i]['work_range'] = docs[i]['work_range']?docs[i]['work_range'].split(/\,/):['暂未填写'];
+				docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? CONFIG.img_domain + docs[i].cover : docs[i].cover;
 			}
 			callback && callback(null,docs);
 		});

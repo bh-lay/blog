@@ -26,7 +26,7 @@ window.L = window.L || {};
 	exports.qiniu = function(url){
 		if(!url || url.length == 0){
 			return url;
-		}else if(!url.match(/^http/)){
+		}else if(url[0] == '/'){
 			return baseDomain + url;
 		}else{
 			return url;

@@ -39,6 +39,7 @@ function getList(callback){
 			method.close();
 			for(var i in docs){
 				docs[i].time_show = parse.time(docs[i].time_show ,'{y}-{m}-{d}');
+				docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? CONFIG.img_domain + docs[i].cover : docs[i].cover;
 			}
 			callback && callback(null,docs);
 		});

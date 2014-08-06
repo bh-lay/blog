@@ -57,7 +57,7 @@ window.admin.render = window.admin.render || {};
 		'<td><a title="查看博文" href="/blog/{id}" target="_blank">{title}</a></td>',
 		'<td>{time_show}</td>',
 		'<td>',
-			'<a class="btn btn-default btn-xs custom-lofox" title="修改" href="/admin/publish/article/{id}" target="_self"><span class="glyphicon glyphicon-edit"></span></a>',
+			'<a class="btn btn-default btn-xs custom-publish" title="修改" href="javascript:void(0)" data-type="article" data-id="{id}"><span class="glyphicon glyphicon-edit"></span></a>',
 			'<a class="btn btn-default btn-xs" title="删除" href="/ajax/del?from=blog&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！"><span class="glyphicon glyphicon-remove"></span></a>',
 		'</td>',
 	'</tr>'].join('');
@@ -146,7 +146,7 @@ window.admin.render = window.admin.render || {};
 		'<td class="arLiTitle"><a title="查看分享" href="/share/{id}" target="_blank">{title}</a></td>',
 		'<td class="arLiTime">{time_show}</td>',
 		'<td class="arLiEdit">',
-			'<a class="btn btn-default btn-xs custom-lofox" title="修改" href="/admin/publish/share/{id}" target="_self"><span class="glyphicon glyphicon-edit"></span></a>',
+			'<a class="btn btn-default btn-xs custom-publish" title="修改"  href="javascript:void(0)" data-type="share" data-id="{id}"><span class="glyphicon glyphicon-edit"></span></a>',
 			'<a class="btn btn-default btn-xs" title="删除" href="/ajax/del?from=share&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！"><span class="glyphicon glyphicon-remove"></span></a>',
 		'</td>',
 	'</tr>'].join('');
@@ -236,7 +236,7 @@ window.admin.render = window.admin.render || {};
 		'<td class="arLiTitle"><a title="查看作品" href="/share/{id}" target="_blank">{title}</a></td>',
 		'<td class="arLiTime">{time_show}</td>',
 		'<td class="arLiEdit">',
-			'<a class="btn btn-default btn-xs custom-lofox" title="修改" href="/admin/publish/opus/{id}" target="_self"><span class="glyphicon glyphicon-edit"></span></a>',
+			'<a class="btn btn-default btn-xs custom-publish" title="修改"  href="javascript:void(0)" data-type="opus" data-id="{id}"><span class="glyphicon glyphicon-edit"></span></a>',
 			'<a class="btn btn-default btn-xs" title="删除" href="/ajax/del?from=opus&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！"><span class="glyphicon glyphicon-remove"></span></a>',
 		'</td>',
 	'</tr>'].join('');
@@ -321,7 +321,7 @@ window.admin.render = window.admin.render || {};
 		'<td class="arLiTitle"><a title="查看博文" href="/labs/{name}" target="_blank">{title}</a></td>',
 		'<td class="arLiTime">{time_show}</td>',
 		'<td class="arLiEdit">',
-			'<a class="btn btn-default btn-xs custom-lofox" title="修改" href="/admin/publish/labs/{id}" target="_self"><span class="glyphicon glyphicon-edit"></span></a>',
+			'<a class="btn btn-default btn-xs custom-publish" title="修改"  href="javascript:void(0)" data-type="labs" data-id="{id}"><span class="glyphicon glyphicon-edit"></span></a>',
 			'<a class="btn btn-default btn-xs" title="删除" href="/ajax/del?from=labs&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！"><span class="glyphicon glyphicon-remove"></span></a>',
 		'</td>',
 	'</tr>'].join('');
@@ -410,7 +410,7 @@ window.admin.render = window.admin.render || {};
 		'<td class="arLiTitle" title="{title}{url}">{title}</td>',
 		'<td class="arLiTitle" title="添加时间">{time_create}</td>',
 		'<td class="arLiEdit">',
-			'<a class="btn btn-default btn-xs custom-lofox" title="修改" href="/admin/publish/friends/{id}" target="_self"><span class="glyphicon glyphicon-edit"></span></a>',
+			'<a class="btn btn-default btn-xs custom-publish" title="修改"  href="javascript:void(0)" data-type="friends" data-id="{id}"><span class="glyphicon glyphicon-edit"></span></a>',
 			'<a class="btn btn-default btn-xs" title="删除" href="/ajax/del?from=blog_friend&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！"><span class="glyphicon glyphicon-remove"></span></a>',
 		'</td>',
 	'</tr>'].join('');
@@ -512,7 +512,7 @@ window.admin.render = window.admin.render || {};
 		'<td>{email}</td>',
 		'<td>{user_group}</td>',
 		'<td>',
-			'<a class="btn btn-default btn-xs custom-lofox" href="/admin/publish/user/{id}" target="_self"><span class="glyphicon glyphicon-edit"></span></a>',
+			'<a class="btn btn-default btn-xs custom-publish"  href="javascript:void(0)" data-type="user" data-id="{id}"><span class="glyphicon glyphicon-edit"></span></a>',
 			'<a class="btn btn-default btn-xs" title="删除" href="/ajax/del?from=user&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！"><span class="glyphicon glyphicon-remove"></span></a>',
 		'</td>',
 	'</tr>'].join('');
@@ -562,7 +562,7 @@ window.admin.render = window.admin.render || {};
 		'<td>{name}</td>',
 		'<td>{discription}</td>',
 		'<td>',
-			'<a class="btn btn-default btn-xs custom-lofox" href="/admin/publish/power/{id}" class="custom-lofox" target="_self"><span class="glyphicon glyphicon-edit"></span></a>',
+			'<a class="btn btn-default btn-xs custom-publish" href="javascript:void(0)" data-type="power" data-id="{id}"><span class="glyphicon glyphicon-edit"></span></a>',
 			'<a class="btn btn-default btn-xs" title="删除" href="/ajax/del?from=power&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！"><span class="glyphicon glyphicon-remove"></span></a>',
 		'</td>',
 	'</tr>'].join('');
