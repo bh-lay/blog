@@ -93,9 +93,8 @@ define(function(require,exports){
 		dom.find('.pub_cover_btn').click(function(){
 			gallery.pop(function(files){
 				if(files && files.length>0){
-					var url = files[0]['url'];
-					dom.find('.pub_row_image').css('backgroundImage','url(' + url + ')');
-					dom.find('input[name="cover"]').val(url);
+					var path = files[0]['path'];
+					dom.find('input[name="cover"]').val(path);
 				}
 			});
 		});

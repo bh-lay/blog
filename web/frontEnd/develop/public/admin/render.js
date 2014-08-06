@@ -26,11 +26,11 @@ window.admin.render = window.admin.render || {};
 		'</div>',
 		'<div class="custom-mb20">',
 			'<div class="btn-group btn-group-sm btn-group-justified">',
-				'<a class="btn btn-default custom-lofox" href="/admin/publish/article">写博文</a>',
-				'<a class="btn btn-default custom-lofox" href="/admin/publish/share">发分享</a>',
-				'<a class="btn btn-default custom-lofox" href="/admin/publish/labs">实验室</a>',
-				'<a class="btn btn-default custom-lofox" href="/admin/publish/opus">传作品</a>',
-				'<a class="btn btn-default custom-lofox" href="/admin/publish/friends">加友链</a>',
+				'<a class="btn btn-default custom-publish" href="javascript:void(0)" data-type="article">写博文</a>',
+				'<a class="btn btn-default custom-publish" href="javascript:void(0)" data-type="share">发分享</a>',
+				'<a class="btn btn-default custom-publish" href="javascript:void(0)" data-type="labs">实验室</a>',
+				'<a class="btn btn-default custom-publish" href="javascript:void(0)" data-type="opus">传作品</a>',
+				'<a class="btn btn-default custom-publish" href="javascript:void(0)" data-type="friends">加友链</a>',
 			'</div>',
 		'</div>',
 		'<div class="list-group">',
@@ -91,7 +91,7 @@ window.admin.render = window.admin.render || {};
 	}
 	function listPage(dom){
 		var list_html = ['<div class="col-md-12 custom-mb10">',
-			'<a href="/admin/publish/article" class="btn btn-primary btn-sm custom-lofox" role="button">发博客</a><br/>',
+			'<a class="btn btn-default custom-publish" href="javascript:void(0)" data-type="article">写博文</a>',
 		'</div>',
 		'<div class="col-md-12">',
 			'<div class="panel panel-default">',
@@ -180,7 +180,7 @@ window.admin.render = window.admin.render || {};
 	}
 	function listPage(dom){
 		var list_html = ['<div class="col-md-12 custom-mb10">',
-			'<a href="/admin/publish/share" class="btn btn-primary btn-sm custom-lofox" role="button">发分享</a>',
+			'<a class="btn btn-default custom-publish" href="javascript:void(0)" data-type="share">发分享</a>',
 		'</div>',
 		'<div class="col-md-12">',
 			'<div class="panel panel-default">',
@@ -270,7 +270,7 @@ window.admin.render = window.admin.render || {};
 	}
 	function OPUS(dom){
 		var list_html = ['<div class="col-md-12 custom-mb10">',
-			'<a href="/admin/publish/opus" class="btn btn-primary btn-sm custom-lofox" role="button">发作品</a>',
+			'<a class="btn btn-default custom-publish" href="javascript:void(0)" data-type="opus">传作品</a>',
 		'</div>',
 		'<div class="col-md-12">',
 			'<div class="panel panel-default">',
@@ -355,7 +355,7 @@ window.admin.render = window.admin.render || {};
 	}
 	function listPage(dom){
 		var list_html = ['<div class="col-md-12 custom-mb10">',
-			'<a href="/admin/publish/labs" class="btn btn-primary btn-sm custom-lofox" role="button">发插件</a>',
+			'<a class="btn btn-default custom-publish" href="javascript:void(0)" data-type="labs">发插件</a>',
 		'</div>',
 		'<div class="col-md-12">',
 			'<div class="panel panel-default">',
@@ -444,7 +444,7 @@ window.admin.render = window.admin.render || {};
 	}
 	function listPage(dom){
 		var list_html = ['<div class="col-md-12 custom-mb10">',
-			'<a href="/admin/publish/opus" class="btn btn-primary btn-sm custom-lofox" role="button">发作品</a>',
+			'<a class="btn btn-default custom-publish" href="javascript:void(0)" data-type="friends">加友链</a>',
 		'</div>',
 		'<div class="col-md-12">',
 			'<div class="panel panel-default">',

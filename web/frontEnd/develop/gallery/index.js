@@ -403,7 +403,8 @@ define(function(require,exports){
 					selectedFiles.push({
 						'extension': this.files[i]['extension'],
 						'fullname': this.files[i]['fullname'],
-						'url': this.files[i]['url']
+						'url': this.files[i]['url'],
+						'path' : this.files[i]['pathname']
 					});
 				}
 			}
