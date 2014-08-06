@@ -15,6 +15,26 @@ $('body').append('<a href="https:github.com/bh-lay/blog" target="_blank" class="
 
 
 window.L = window.L || {};
+
+/**
+ *使用七牛云存储
+ * 若url为绝对地址，则使用源图，且不处理剪裁缩放
+ * L.qiniu(url,config);
+ */
+(function(exports){
+	var baseDomain = app_config.imgDomain;
+	exports.qiniu = function(url){
+		if(!url || url.length == 0){
+			return url;
+		}else if(!url.match(/^http/)){
+			return baseDomain + url;
+		}else{
+			return url;
+		}
+	}
+})(L);
+
+
 seajs.use([
 	'util/lofox_1_0.js',
 	'UI/dialog.js'

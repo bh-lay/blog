@@ -50,6 +50,8 @@ define(function(require,exports){
 			var this_html = '';
 			
 			for(var i=0,total=list.length;i<total;i++){
+				//使用七牛图床
+				list[i].cover = L.qiniu(list[i].cover);
 				this_html += render(list[i]);
 			}
 			insert({

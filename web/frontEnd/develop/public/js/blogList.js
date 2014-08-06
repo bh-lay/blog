@@ -51,7 +51,8 @@ define(function(require,exports){
 				for(var i in list){
 					var date = new Date(parseInt(list[i].time_show));
 					list[i].time_show = (date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+ date.getDate();
-					list[i].cover = list[i].cover;
+					//使用七牛图床
+					list[i].cover = L.qiniu(list[i].cover);
 				}
 				
 				me.count = count;

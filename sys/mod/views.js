@@ -48,7 +48,10 @@ function replaceComponent(temp,callback){
 exports.get = function(URI,data,callback){
 	var realPath = baseRoot + URI;
 	var data = data || {};
+	//增加文件配置
 	data.frontEnd_base = CONFIG.frontEnd_root;
+	data.img_domain = CONFIG.img_domain;
+	
 	//读取模版
 	fs.readFile(realPath + '.html', "utf8",function(err,fileStr){
 		if(err){

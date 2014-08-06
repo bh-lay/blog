@@ -9,6 +9,8 @@ module.exports = {
 	'port' : 3000,
 	//前端静态资源根目录
 	'frontEnd_root' : '/frontEnd/develop/',
+	//图床
+	'img_domain' : 'http://layasset.qiniudn.com/',
 	'mongo' : {
 		'host':'localhost',
 		'port':27017,

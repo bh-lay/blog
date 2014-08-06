@@ -53,7 +53,8 @@ define(function(require,exports){
 				
 				var list = data['list'];
 				for(var i = 0,total = list.length;i<total;i++){
-					list[i]['work_range'] = list[i]['work_range']?list[i]['work_range'].split(/\,/):['暂未填写'];
+					list[i]['work_range'] = list[i]['work_range']?list[i]['work_range'].split(/\,/):['暂未填写'];//使用七牛图床
+					list[i].cover = L.qiniu(list[i].cover);
 				}
 				callback&&callback(list);
 			}

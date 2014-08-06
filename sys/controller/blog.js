@@ -46,6 +46,7 @@ function getList(callback){
 };
 exports.deal = function (req,res_this,path){
 	var path_length = path['pathnode'].length;
+	
 	if(path_length == 1){
 		cache.html('blog_list',function(this_cache){
 			//do something with this_cache
@@ -71,6 +72,10 @@ exports.deal = function (req,res_this,path){
 			res_this.html(200,this_cache);
 		},function(save_cache){
 			getDetail(id,function(err,data){
+				if(err){
+					res_this.error('怎么坏掉了呢！');
+					return;
+				}
 				//获取视图
 				views.get('blogDetail',{
 					'id' : id,

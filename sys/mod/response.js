@@ -82,7 +82,7 @@ connect.prototype = {
 	'html' : function(status,content){
 		send.call(this,status,{
 			'Content-Type' : 'text/html',
-			'charset' : 'utf-8',
+			'charset' : 'utf-8'
 		},content);
 
 	},
@@ -102,9 +102,10 @@ connect.prototype = {
 	},
 	//response error
 	'error' : function(txt){
-		this.send(500,{
-			'Content-Type' : 'text/plain'
-		},'hello! my name is BUG !');
+		send.call(this,500,{
+			'Content-Type' : 'text/html',
+			'charset' : 'utf-8'
+		},'<h1>' + txt + '</h1><p>hello! my name is BUG !</p>');
 	},
 	//response cookie
 	'cookie' : function(){
