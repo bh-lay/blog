@@ -60,7 +60,7 @@ define && define(function(require,exports){
 	'</ul></form>'].join('');
 	
 	//发布权限内容
-	function POWER(dom,id){
+	function POWER(dom,id,sendFn){
 		if(!id){
 			var new_html = valueInit(power_tpl,{});
 			
@@ -71,8 +71,7 @@ define && define(function(require,exports){
 				},
 				'onResponse' : function(data){
 					UI.prompt('权限修改完毕');
-					admin.push('/admin/');
-					admin.refresh();
+					sendFn && sendFn();
 				}
 			});
 			return
@@ -90,9 +89,8 @@ define && define(function(require,exports){
 					UI.prompt('正在提交权限的修改！');
 				},
 				'onResponse' : function(data){
-					UI.prompt('全县修改完毕');
-					admin.push('/admin/');
-					admin.refresh();
+					UI.prompt('权限修改完毕');
+					sendFn && sendFn();
 				}
 			});
 		});

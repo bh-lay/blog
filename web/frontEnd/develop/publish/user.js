@@ -65,7 +65,7 @@ define(function(require,exports){
 		});
 	}
 	//用户模块
-	function SHARE(dom,id){
+	function SHARE(dom,id,sendFn){
 		if(!id){
 			var new_html = valueInit(share_tpl,{});
 			
@@ -76,8 +76,7 @@ define(function(require,exports){
 				},
 				'onResponse' : function(data){
 					UI.prompt('用户创建完毕');
-					admin.push('/admin/');
-					admin.refresh();
+					sendFn && sendFn();
 				}
 			});
 			return
@@ -96,8 +95,7 @@ define(function(require,exports){
 				},
 				'onResponse' : function(data){
 					UI.prompt('用户修改完毕');
-					admin.push('/admin/');
-					admin.refresh();
+					sendFn && sendFn();
 				}
 			});
 		});

@@ -76,7 +76,7 @@ define && define(function(require,exports){
 	
 	
 	//增加、修改友情链接
-	function FRIENDS(dom,id){
+	function FRIENDS(dom,id,sendFn){
 		if(!id){
 			var new_html = valueInit(friend_tpl,{});
 			dom.html(new_html);
@@ -86,8 +86,7 @@ define && define(function(require,exports){
 				},
 				'onResponse' : function(data){
 					UI.prompt('链接发布完毕');
-					admin.push('/admin/');
-					admin.refresh();
+					sendFn && sendFn();
 				}
 			});
 			return
@@ -105,8 +104,7 @@ define && define(function(require,exports){
 				},
 				'onResponse' : function(data){
 					UI.prompt('链接修改完毕');
-					admin.push('/admin/');
-					admin.refresh();
+					sendFn && sendFn();
 				}
 			});
 		});

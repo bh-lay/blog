@@ -77,7 +77,7 @@ define(function(require,exports){
 		});
 	}
 	//发布分享
-	function SHARE(dom,id){
+	function SHARE(dom,id,sendFn){
 		if(!id){
 			var new_html = valueInit(share_tpl,{});
 			
@@ -88,8 +88,7 @@ define(function(require,exports){
 				},
 				'onResponse' : function(data){
 					UI.prompt('分享发布完毕');
-					admin.push('/admin/');
-					admin.refresh();
+					sendFn && sendFn();
 				}
 			});
 			return
@@ -108,8 +107,7 @@ define(function(require,exports){
 				},
 				'onResponse' : function(data){
 					UI.prompt('分享修改完毕');
-					admin.push('/admin/');
-					admin.refresh();
+					sendFn && sendFn();
 				}
 			});
 		});

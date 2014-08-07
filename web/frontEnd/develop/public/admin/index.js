@@ -161,7 +161,11 @@ window.admin = window.admin || {};
 				seajs.use('publish/publish.js',function(publish){
 					publish.init(dom,{
 						'active' : type,
-						'id' : id
+						'id' : id,
+						'sendFn' : function(){
+							admin.push('/admin/');
+							admin.refresh();
+						}
 					});
 				});
 			}else{
@@ -185,7 +189,6 @@ window.admin = window.admin || {};
 			var type = btn.attr('data-type');
 			var id = btn.attr('data-id');
 			seajs.use('publish/publish.js',function(publish){
-				
 				var cover = UI.cover({
 					'from' : btn[0],
 					'html' : '<div class="container my-publish-cnt"></div>'

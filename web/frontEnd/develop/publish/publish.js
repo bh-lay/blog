@@ -24,22 +24,19 @@ define && define(function(require,exports){
 	
 	function show_module (dom,cpt_dom,name,id){
 		if(name == 'share'){
-			share(dom,id);
+			share(dom,id,sendFn);
 		}else if(name == 'opus'){
-			opus(dom,id);
+			opus(dom,id,sendFn);
 		}else if(name == 'friends'){
-			friends(dom,id);
+			friends(dom,id,sendFn);
 		}else if(name == 'labs'){
-			labs(dom,id);
+			labs(dom,id,sendFn);
 		}else if(name == 'user'){
-			user(dom,id);
+			user(dom,id,sendFn);
 		}else{
 			//默认为发布文章
-			article(dom,id);
+			article(dom,id,sendFn);
 		}
-	
-		cpt_dom.find('li').removeClass('active');
-		cpt_dom.find('a[data-type="' + name + '"]').parent().addClass('active');
 	
 	}
 	function INIT(dom,param){
@@ -47,20 +44,11 @@ define && define(function(require,exports){
 		var param = param || {};
 		var id = param.id || null;
 		var active = param.active || 'article';
-		if(active == 'user'){
-			show_module(dom,cpt_dom,active,id);
-		}else{
-			dom.html(publish_tpl);
-			var cpt_dom = dom.find('.nav-tabs');
-			var cnt_dom = dom.find('.publish_cnt');
-			show_module(cnt_dom,cpt_dom,active,id);
-			cpt_dom.on('click','a',function(){
-				var name = $(this).attr('data-type');
-				show_module(cnt_dom,cpt_dom,name,null);
-				admin.push('publish/' + name);
-			});
-		}
-
+		var sendFn = param['sendFn'] || null;
+		
+		dom.html(publish_tpl);
+		var cnt_dom = dom.find('.publish_cnt');
+		show_module(cnt_dom,cpt_dom,active,id,sendFn);
 	};
 	
 	

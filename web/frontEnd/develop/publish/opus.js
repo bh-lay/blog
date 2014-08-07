@@ -92,7 +92,7 @@ define && define(function(require,exports){
 			}
 		});
 	}
-	function OPUS(dom,id){
+	function OPUS(dom,id,sendFn){
 		if(!id){
 			var new_html = valueInit(opus_tpl,{});
 			
@@ -103,8 +103,7 @@ define && define(function(require,exports){
 				},
 				'onResponse' : function(data){
 					UI.prompt('分享发布完毕');
-					admin.push('/admin/');
-					admin.refresh();
+					sendFn && sendFn();
 				}
 			});
 			return
@@ -123,8 +122,7 @@ define && define(function(require,exports){
 				},
 				'onResponse' : function(data){
 					UI.prompt('作品修改完毕');
-					admin.push('/admin/');
-					admin.refresh();
+					sendFn && sendFn();
 				}
 			});
 		});

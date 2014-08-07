@@ -88,7 +88,7 @@ define && define(function(require,exports){
 		});
 	}
 	//发布实验室内容
-	function LABS(dom,id){
+	function LABS(dom,id,sendFn){
 		if(!id){
 			var new_html = valueInit(labs_tpl,{});
 			
@@ -99,8 +99,7 @@ define && define(function(require,exports){
 				},
 				'onResponse' : function(data){
 					UI.prompt('实验室发布完毕');
-					admin.push('/admin/');
-					admin.refresh();
+					sendFn && sendFn();
 				}
 			});
 			mditor.bind(dom.find('textarea.mditor'));
@@ -121,8 +120,7 @@ define && define(function(require,exports){
 				},
 				'onResponse' : function(data){
 					UI.prompt('实验室修改完毕');
-					admin.push('/admin/');
-					admin.refresh();
+					sendFn && sendFn();
 				}
 			});
 		});

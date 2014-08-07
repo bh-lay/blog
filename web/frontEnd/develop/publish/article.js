@@ -86,7 +86,7 @@ define(function(require,exports){
 		});
 	}
 	//处理博文模块
-	function article_handule(dom,data){
+	function article_handule(dom,data,sendFn){
 		var new_html = valueInit(article_tpl,data);
 		dom.html(new_html);
 		mditor.bind(dom.find('textarea.mditor'));
@@ -105,15 +105,14 @@ define(function(require,exports){
 			},
 			'onResponse' : function(data){
 				UI.prompt('博文修改完毕');
-				admin.push('/admin/');
-				admin.refresh();
+				sendFn && sendFn();
 			}
 		});
 	}
 	//发布帖子
-	function ARTICLE(dom,id){
+	function ARTICLE(dom,id,sendFn){
 		if(!id){
-			article_handule(dom,{});
+			article_handule(dom,{},sendFn);
 			return
 		}
 		getArticle(id,function(err,data){
@@ -121,7 +120,7 @@ define(function(require,exports){
 				dom.html('数据异常！');
 				return
 			}
-			article_handule(dom,data);
+			article_handule(dom,data,sendFn);
 		});
 	}
 	
