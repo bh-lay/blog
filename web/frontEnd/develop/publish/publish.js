@@ -22,7 +22,7 @@ define && define(function(require,exports){
 		'</div>',
 	'</div>'].join('');
 	
-	function show_module (dom,cpt_dom,name,id){
+	function show_module (dom,name,id,sendFn){
 		if(name == 'share'){
 			share(dom,id,sendFn);
 		}else if(name == 'opus'){
@@ -48,7 +48,7 @@ define && define(function(require,exports){
 		
 		dom.html(publish_tpl);
 		var cnt_dom = dom.find('.publish_cnt');
-		show_module(cnt_dom,cpt_dom,active,id,sendFn);
+		show_module(cnt_dom,active,id,sendFn);
 	};
 	
 	

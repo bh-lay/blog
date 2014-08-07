@@ -195,7 +195,12 @@ window.admin = window.admin || {};
 				});
 				publish.init($(cover.dom).find('.my-publish-cnt'),{
 					'active' : type,
-					'id' : id
+					'id' : id,
+					'sendFn' : function(){
+						setTimeout(function(){
+							cover.close();
+						},1000);
+					}
 				});
 			});
 			return false;
