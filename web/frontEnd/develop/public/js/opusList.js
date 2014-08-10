@@ -71,26 +71,22 @@ define(function(require,exports){
 	
 	return function(dom,param){
 		var render_over = this.render_over || null;
-//			if(param['init']){
-			skip = 0;
-			getData(function(list){
-				dom.html('<div class="golCnt"><div class="opusList"><ul></ul></div></div>');
-				var this_html = '',
-					this_dom = dom.find('.opusList ul');
-				
-				for(var i=0,total=list.length;i<total;i++){
-					this_html += render(list[i]);
-				}
-				insert({
-					'end' : (skip>=count)?true:false,
-					'html' : this_html,
-					'dom' : this_dom
-				});
-				start();
-				render_over&&render_over();
+		skip = 0;
+		getData(function(list){
+			dom.html('<div class="golCnt"><div class="opusList"><ul></ul></div></div>');
+			var this_html = '',
+				this_dom = dom.find('.opusList ul');
+			
+			for(var i=0,total=list.length;i<total;i++){
+				this_html += render(list[i]);
+			}
+			insert({
+				'end' : (skip>=count)?true:false,
+				'html' : this_html,
+				'dom' : this_dom
 			});
-//		}else{
-//				start();
-//			}
+			start();
+			render_over&&render_over();
+		});
 	};
 });

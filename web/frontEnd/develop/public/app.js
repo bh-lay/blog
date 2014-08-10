@@ -127,6 +127,7 @@ seajs.use([
 		});
 	});
 	
+	//作品列表页
 	lofox.set('/opus',function(){
 		this.title('作品_小剧客栈');
 		L.nav.setCur('opus');
@@ -135,6 +136,7 @@ seajs.use([
 			opusList(dom);
 		});
 	});
+	//作品详情页
 	lofox.set('/opus/{id}',function(param){
 		this.title('作品_小剧客栈');
 		L.nav.setCur('opus');
@@ -143,7 +145,7 @@ seajs.use([
 			opusDetail(dom,param.id);
 		});
 	});
-	
+	//实验室列表页
 	lofox.set('/labs',function(){
 		this.title('实验室_小剧客栈');
 		
@@ -173,7 +175,9 @@ seajs.use([
 		},20);
 		return false;
 	});
-	
+	L.push = function(url){
+		lofox.push(url)
+	}
 	L.gallery();
 	L.nav();
 });

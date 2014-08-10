@@ -3,7 +3,7 @@
  *  
  */
 
-
+//console.log('1111111',self.frameElement)
 seajs.use([
 	'util/tie.js',
 	'lib/highlight/highlight.pack.js'
@@ -26,10 +26,6 @@ seajs.use([
 		},200);
 		btn.removeClass('active');
 		btn.eq(index).addClass('active');
-	});
-	$(function(){
-		L.nav();
-		L.nav.setCur('labs');
 	});
 	//处理github异步数据
 	function getRepoData(repo_name,callback){
@@ -102,38 +98,3 @@ seajs.use([
 	//代码高亮
 	hljs.initHighlighting();
 });
-
-window.L = window.L || {};
-/**
- * L.nav()
- * 
- */
-(function(ex){
-	var init=function(){
-		$('.nav_tool a').click(function(){
-			if($('.navLayer').hasClass('nav_slidedown')){
-				$('.navLayer').removeClass('nav_slidedown');
-			}else{
-				$('.navLayer').addClass('nav_slidedown');
-			}
-		});
-
-		$('.nav_mainList').on('click',function(){
-			if($('.navLayer').hasClass('nav_slidedown')){
-				$('.navLayer').removeClass('nav_slidedown');
-			}else{
-				//貌似不需要else
-			}
-		});
-	};
-
-	var setCur = function(page){
-		if(page == '/'){
-			page = 'index';
-		}
-		$('.navLayer .nav li').removeClass('cur');
-		$('.navLayer .nav li[page='+page+']').addClass('cur');
-	};
-	ex.nav = init;
-	ex.nav.setCur = setCur;
-})(L);

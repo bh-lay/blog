@@ -72,5 +72,17 @@ define(function(require,exports){
 			});
 			start();
 		});
+		dom.on('click','a',function(){
+			var url = $(this).attr('href');
+			L.push(url);
+			UI.cover({
+				'from' : $(this).parents('.lab_item')[0],
+				'html' : '<iframe class="UI-plugin-iframe" src="' + url + '"></iframe>',
+				'closeFn' : function(){
+					history.back();
+				}
+			});
+			return false;
+		});
 	};
 });
