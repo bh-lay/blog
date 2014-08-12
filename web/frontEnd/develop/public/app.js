@@ -34,6 +34,29 @@ window.L = window.L || {};
 	}
 })(L);
 
+/**
+ * 模版引擎生成器
+ * L.tplEngine(str)
+ */
+(function(exports){
+	exports.tplEngine = function (str){
+		if(!str){
+			return;
+		}
+		return new Function("obj",
+			"var p=[];" +
+			"with(obj){p.push('" +
+			str
+			.replace(/[\r\t\n]/g, " ")
+			.split("<%").join("\t")
+			.replace(/((^|%>)[^\t]*)'/g, "$1\r")
+			.replace(/\t=(.*?)%>/g, "',$1,'")
+			.split("\t").join("');")
+			.split("%>").join("p.push('")
+			.split("\r").join("\\'")
+		+ "');}return p.join('');");
+	};
+})(L);
 
 seajs.use([
 	'util/lofox_1_0.js',
@@ -182,23 +205,7 @@ seajs.use([
 	L.nav();
 });
 
-L.tplEngine = function (str){
-	if(!str){
-		return;
-	}
-	return new Function("obj",
-		"var p=[];" +
-		"with(obj){p.push('" +
-		str
-		.replace(/[\r\t\n]/g, " ")
-		.split("<%").join("\t")
-		.replace(/((^|%>)[^\t]*)'/g, "$1\r")
-		.replace(/\t=(.*?)%>/g, "',$1,'")
-		.split("\t").join("');")
-		.split("%>").join("p.push('")
-		.split("\r").join("\\'")
-	+ "');}return p.join('');");
-};
+
 
 
 /**

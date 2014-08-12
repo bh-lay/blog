@@ -14,7 +14,7 @@ define(function(require,exports){
 				'<h1 class="index_intro_a">小剧客栈</h1>',
 			'</div>',
 			'<div class="index_intro_cnt">',
-				'<p class="index_intro_b">一个自称采用了单页面加响应式的个人博客</p>',
+				'<p class="index_intro_b">一个自称是单页面加响应式的个人博客</p>',
 				'<p class="index_intro_c">nodeJS强力驱动</p>',
 				'<p class="index_intro_d">无耻地没有采用express框架</p>',
 			'</div>',

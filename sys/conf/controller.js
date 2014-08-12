@@ -10,5 +10,5 @@ module.exports = {
 	'/share' :'/controller/share.js',
 	'/opus' :'/controller/opus.js',
 	'/labs' :'/controller/labs.js',
-	'/connect' :'/controller/connect.js',
+	'/connect' :'/controller/connect.js'
 };
