@@ -2,7 +2,7 @@
  * @author bh-lay
  * 
  * @github https://github.com/bh-lay/UI
- * @modified 2014-7-25 23:46
+ * @modified 2014-8-13 18:16
  * 
  **/
 
@@ -34,10 +34,10 @@
 	var confirmBar_tpl = '<div class="UI_pop_confirm"><a href="javascript:void(0)" class="UI_pop_confirm_ok"><%=confirm %></a><a href="javascript:void(0)" class="UI_pop_confirm_cancel"><%=cancel %></a></div>';
 	var plane_tpl = '<div class="UI_plane"></div>';
 	var prompt_tpl = '<div class="UI_prompt"><div class="UI_cnt"></div></div>';
-	var cover_tpl = '<div class="UI_cover"><div class="UI_coverCnt"></div><a href="javascript:void(0)" class="UI_coverClose">〉</a></div>';
+	var cover_tpl = '<div class="UI_cover"><div class="UI_coverCnt"></div><a href="javascript:void(0)" class="UI_coverClose">×</a></div>';
 	var select_tpl = '<div class="UI_select"><div class="UI_select_body"><% if(title){ %><div class="UI_selectCpt"><h3><%=title %></h3><% if(intro){ %><p><%=intro %></p><% } %></div><% } %><div class="UI_selectCnt"><% for(var i=0,total=list.length;i<total;i++){ %><a class="UI_select_btn" href="javascript:void(0)"><%=list[i] %></a><% } %></div></div><div class="UI_selectCancel"><a class="UI_select_btn" href="javascript:void(0)" data-index="-1">取消</a></div></div>';
 	
-	var popCSS = '.UI_lawyer{position:absolute;top:0px;left:0px;z-index:4999;width:100%;height:0px;overflow:visible;font-family:"Microsoft Yahei"}.UI_lawyer a,.UI_lawyer a:hover{text-decoration:none;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-tap-highlight-color:transparent}.UI_lawyer a:active{outline:none}.UI_mask{position:absolute;top:0px;left:0px;width:100%;background-color:#000;display:none;opacity:0.5;filter:alpha(opacity=50)}.UI_main_cnt{width:0px;height:0px;overflow:visible}.UI_fixedScreenTop_cnt{position:absolute;z-index:4999;top:0px;left:0px;width:100%;height:0px;overflow:visible}.UI_fixedScreenBottom_cnt{position:absolute;z-index:4999;left:0px;width:100%;height:0px;overflow:visible}.UI_pop{width:200px;_border:1px solid #eee;position:absolute;top:400px;left:300px;background:#fff;border-radius:4px;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_pop_cpt{position:relative;height:36px;line-height:36px;overflow:hidden;border-bottom:1px solid #ebebeb;color:#777;font-size:16px;text-indent:15px;cursor:default}.UI_pop_cnt{position:relative;min-height:100px;overflow:auto;width:100%}.UI_pop_close{display:block;position:absolute;top:0px;right:0px;width:40px;height:36px;text-align:center;color:#ddd;font:bold 20px/36px "simsun";transition:0.1s}.UI_pop_close:hover{color:#888}.UI_pop_close:active{color:#222}.UI_confirm{_border:1px solid #eee;position:absolute;background:#fff;border-radius:4px;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_confirm_text{padding:30px 10px 20px;line-height:26px;text-align:center;font-size:20px;color:#333}.UI_ask{_border:1px solid #eee;position:absolute;background:#fff;border-radius:4px;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_ask_text{padding:25px 10px 15px;line-height:26px;text-align:center;font-size:18px;color:#333}.UI_ask input{display:block;margin:0px auto 15px;height:30px;padding:4px 4px;line-height:22px;box-sizing:border-box;width:90%}.UI_pop_confirm{overflow:hidden;text-align:center;border-top:1px solid #ddd}.UI_pop_confirm a{display:block;width:50%;height:36px;float:left;font-size:14px;line-height:36px;color:#03f;box-sizing:border-box;transition:0.15s}.UI_pop_confirm_ok{border-right:1px solid #ddd}@media(min-width:640px){.UI_pop_confirm a:hover{background:#eee}}.UI_plane{width:200px;position:absolute;top:400px;left:300px}.UI_prompt{width:240px;position:absolute;left:50%;margin-left:-120px;box-sizing:content-box;background:#fff;_border:1px solid #fafafa;border-radius:4px;box-shadow:2px 2px 10px rgba(0,0,0,0.5)}.UI_cnt{padding:30px 10px;font-size:18px;color:#222;text-align:center}.UI_cover{position:absolute;top:0px;left:0px;width:100%;height:100px}.UI_coverCnt{position:relative;width:100%;height:100%;background:#fff;overflow:auto}.UI_coverClose{display:block;position:absolute;top:50%;left:0px;width:20px;height:60px;padding-left:5px;text-align:center;color:#ddd;font:30px/60px "simsun";background:#555}.UI_coverClose:hover{background-color:#333;color:#fff}.UI_select{position:absolute;width:100%;padding-bottom:10px}.UI_select a{display:block;height:40px;line-height:40px;text-align:center;color:#03f;font-size:16px}.UI_select_body{margin:0px 10px 10px;border-radius:8px;overflow:hidden;background:#fff}.UI_selectCpt{padding:8px 0px}.UI_selectCpt h3,.UI_selectCpt p{margin:0px;font-size:15px;line-height:18px;text-align:center;color:#aaa;font-weight:normal}.UI_selectCpt p{font-size:12px}.UI_selectCnt a{border-top:1px solid #eee}.UI_selectCancel{margin:0px 10px;border-radius:8px;overflow:hidden;background:#fff}.UI_main_cnt .UI_select{width:200px;padding:0px;border-radius:0px;box-shadow:2px 1px 5px rgba(0,0,0,0.8)}.UI_main_cnt .UI_select_body,.UI_main_cnt .UI_selectCancel{margin:0px;border-radius:0px}.UI_main_cnt .UI_select a{height:30px;line-height:30px;font-size:14px}.UI_main_cnt .UI_selectCancel{border-top:1px solid #eee;background:#eee}';
+	var popCSS = '.UI_lawyer{position:absolute;top:0px;left:0px;z-index:4999;width:100%;height:0px;overflow:visible;font-family:"Microsoft Yahei"}.UI_lawyer a,.UI_lawyer a:hover{text-decoration:none;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-tap-highlight-color:transparent}.UI_lawyer a:active{outline:none}.UI_mask{position:absolute;top:0px;left:0px;width:100%;background-color:#000;display:none;opacity:0.5;filter:alpha(opacity=50)}.UI_main_cnt{width:0px;height:0px;overflow:visible}.UI_fixedScreenTop_cnt{position:absolute;z-index:4999;top:0px;left:0px;width:100%;height:0px;overflow:visible}.UI_fixedScreenBottom_cnt{position:absolute;z-index:4999;left:0px;width:100%;height:0px;overflow:visible}.UI_pop{width:200px;_border:1px solid #eee;position:absolute;top:400px;left:300px;background:#fff;border-radius:4px;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_pop_cpt{position:relative;height:36px;line-height:36px;overflow:hidden;border-bottom:1px solid #ebebeb;color:#777;font-size:16px;text-indent:15px;cursor:default}.UI_pop_cnt{position:relative;min-height:100px;overflow:auto;width:100%}.UI_pop_close{display:block;position:absolute;top:0px;right:0px;width:40px;height:36px;text-align:center;color:#ddd;font:bold 20px/36px "simsun";transition:0.1s}.UI_pop_close:hover{color:#888}.UI_pop_close:active{color:#222}.UI_confirm{_border:1px solid #eee;position:absolute;background:#fff;border-radius:4px;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_confirm_text{padding:30px 10px 20px;line-height:26px;text-align:center;font-size:20px;color:#333}.UI_ask{_border:1px solid #eee;position:absolute;background:#fff;border-radius:4px;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_ask_text{padding:25px 10px 15px;line-height:26px;text-align:center;font-size:18px;color:#333}.UI_ask input{display:block;margin:0px auto 15px;height:30px;padding:4px 4px;line-height:22px;box-sizing:border-box;width:90%}.UI_pop_confirm{overflow:hidden;text-align:center;border-top:1px solid #ddd}.UI_pop_confirm a{display:block;width:50%;height:36px;float:left;font-size:14px;line-height:36px;color:#03f;box-sizing:border-box;transition:0.15s}.UI_pop_confirm_ok{border-right:1px solid #ddd}@media(min-width:640px){.UI_pop_confirm a:hover{background:#eee}}.UI_plane{width:200px;position:absolute;top:400px;left:300px}.UI_prompt{width:240px;position:absolute;left:50%;margin-left:-120px;box-sizing:content-box;background:#fff;_border:1px solid #fafafa;border-radius:4px;box-shadow:2px 2px 10px rgba(0,0,0,0.5)}.UI_cnt{padding:30px 10px;font-size:18px;color:#222;text-align:center}.UI_cover{position:absolute;top:0px;width:100%;height:100px}.UI_coverCnt{position:relative;width:100%;height:100%;background:#fff;overflow:auto}.UI_coverClose{display:block;position:absolute;top:10px;right:20px;width:30px;height:30px;text-align:center;color:#aaa;font:18px/30px "simsun";background:#eee;border-radius:15px;border:1px solid #aaa}.UI_coverClose:hover{background-color:#333;color:#fff;transition:0.2s}.UI_select{position:absolute;width:100%;padding-bottom:10px}.UI_select a{display:block;height:40px;line-height:40px;text-align:center;color:#03f;font-size:16px}.UI_select_body{margin:0px 10px 10px;border-radius:8px;overflow:hidden;background:#fff}.UI_selectCpt{padding:8px 0px}.UI_selectCpt h3,.UI_selectCpt p{margin:0px;font-size:15px;line-height:18px;text-align:center;color:#aaa;font-weight:normal}.UI_selectCpt p{font-size:12px}.UI_selectCnt a{border-top:1px solid #eee}.UI_selectCancel{margin:0px 10px;border-radius:8px;overflow:hidden;background:#fff}.UI_main_cnt .UI_select{width:200px;padding:0px;border-radius:0px;box-shadow:2px 1px 5px rgba(0,0,0,0.8)}.UI_main_cnt .UI_select_body,.UI_main_cnt .UI_selectCancel{margin:0px;border-radius:0px}.UI_main_cnt .UI_select a{height:30px;line-height:30px;font-size:14px}.UI_main_cnt .UI_selectCancel{border-top:1px solid #eee;background:#eee}';
 	
 	var isIE67 = false;
 	if(navigator.appName == "Microsoft Internet Explorer"){
@@ -64,7 +64,8 @@
 		private_docH,
 		private_scrollTop,
 		private_isSupportTouch = "ontouchend" in document ? true : false,
-		private_maskCount = 0;
+		private_maskCount = 0,
+		private_animation_range = 240;
 
 	var private_CONFIG = {
 		'gap' : {
@@ -80,7 +81,7 @@
 	if (document.compatMode == "BackCompat") {
 		docDom = private_body;
 	}else{
-		//document.compatMode == \"CSS1Compat\" 
+		//document.compatMode == \"CSS1Compat\"
 		docDom = document.documentElement;
 	}
 	function refreshSize(){
@@ -105,14 +106,25 @@
 	function isNum(ipt){
 		return (ipt !== '') && (ipt == +ipt) ? true : false;
 	}
-	
+	function clone(fromObj,toObj){   
+		for(var i in fromObj){   
+			if(typeof fromObj[i] == "object"){   
+				toObj[i] = fromObj[i].constructor==Array ? [] : {};
+				
+				clone(fromObj[i],toObj[i]);   
+				continue;   
+			}   
+			toObj[i] = fromObj[i];
+		}
+		return toObj;
+	}
 	//初始化组件基础功能
-	utils.ready(function(){
+//	utils.ready(function(){
 		//插入css样式表
 		var styleSheet = utils.createStyleSheet(popCSS,{'data-module' : "UI"});
 		private_head.appendChild(styleSheet);
 		
-		//插入弹框基础dom
+		//插入基础dom
 		private_body.appendChild(private_allCnt);
 		
 		//释放掉无用的内存
@@ -159,7 +171,7 @@
 		//监听浏览器缩放、滚屏事件
 		utils.bind(window,'resize',rebuild_fn);
 		utils.bind(window,'scroll',rebuild_fn);
-	});
+//	});
 	
 	//限制位置区域的方法
 	function fix_position(top,left,width,height){
@@ -278,49 +290,7 @@
 			blur && blur();
 		}
 	}
-	/**
-	 * 可定制关闭方法
-	 * 上下文要求
-	 *   关闭回调：this.closeFn
-	 *   是否有蒙层：this._mask
-	 *   dom对象：this.dom
-	 */
-	function CLOSEMETHOD(effect_define,time_define){
-		var default_effect = effect_define || null;
-		var default_time = time_define;
-		
-		return function(effect,time){
-			effect = effect || default_effect;
-			time = parseInt(time || default_time) || 80;
-			
-			//处理关闭回调、蒙层检测
-			this.closeFn && this.closeFn();
-			if(this._mask){
-				private_maskCount--;
-				if(private_maskCount==0){
-					utils.fadeOut(private_maskDom,400);
-					removeBlur && removeBlur();
-				}
-			}
-			
-			var DOM = this.dom;
-			if(effect == 'none'){
-				utils.removeNode(DOM);
-			}else if(effect == 'fade'){
-				utils.fadeOut(DOM,time,function(){
-					utils.removeNode(DOM);
-				});
-			}else if(effect == 'slide'){
-				utils.slideUp(DOM,time,function(){
-					utils.removeNode(DOM);
-				});
-			}else if(effect == 'zoomOut'){
-				utils.zoomOut(DOM,time,function(){
-					utils.removeNode(DOM);
-				});
-			}
-		}
-	}
+	
 	
 	/**
 	 * 开场动画
@@ -328,46 +298,114 @@
 	 *   动画结束，设置dom为结束样式
 	 **/
 	var animDom = utils.createDom('<div style="position:absolute;background:#fff;"></div>')[0];
-	function openingAnimation(DOM,cssEnd,fromDom,time,tween,fn){
-		utils.css(DOM,{
-			'width' : cssEnd.width
-		});
-		var normalHeight = cssEnd.height || utils.outerHeight(DOM);
-		utils.hide(DOM);
-		var cssStart = {
-			'width' : cssEnd.width,
-			'height' : cssEnd.height,
-			'left' : cssEnd.left,
-			'top' : (cssEnd.top ? cssEnd.top - 100 : null),
-			'opacity' : 0
-		};
-		if(fromDom){
+	function openAnimation(DOM,from,time,tween,fn){
+		var fromMark = from;
+		var offset = utils.offset(DOM);
+		var cssStart,
+			cssEnd = {
+				width : utils.outerWidth(DOM),
+				height : utils.outerHeight(DOM),
+				top : offset.top,
+				left : offset.left,
+				opacity : 1
+			};
+		if(typeof(fromMark) == 'object'){
 			tween = 'SineEaseIn';
 			time = 200;
-			var offset = utils.offset(fromDom);
-			cssStart.top = offset.top;
-			cssStart.left = offset.left;
-			cssStart.height = utils.outerHeight(fromDom);
-			cssStart.width = utils.outerWidth(fromDom);
-			cssStart.opacity = 0.5;
+			var offset_from = utils.offset(fromMark);
+			cssStart = {
+				top : offset_from.top,
+				left : offset_from.left,
+				width : utils.outerWidth(fromMark),
+				height : utils.outerHeight(fromMark),
+				opacity : 0.5
+			}
+		}else{
+			//拷贝结束动画
+			cssStart = clone(cssEnd,{});
+			cssStart.opacity = 0;
+			
+			if(fromMark == 'left'){
+				cssStart.left = cssStart.left - private_animation_range;
+			}else if(fromMark == 'right'){
+				cssStart.left = cssStart.left + private_animation_range;
+			}else if(fromMark == 'bottom'){
+				cssStart.top = cssStart.top + private_animation_range;
+			}else{
+				cssStart.top = cssStart.top - private_animation_range;
+			}
 		}
+		//隐藏真实dom
+		utils.css(DOM,{
+			display : 'none'
+		});
 		//放置于初始位置
 		private_mainDom.appendChild(animDom);
 		utils.css(animDom,cssStart);
 		//动画开始
-		utils.animation(animDom,{
-			'width' : cssEnd.width,
-			'height' : normalHeight,
-			'left' : cssEnd.left,
-			'top' : cssEnd.top,
-			'opacity' : 1
-		},time,tween,function(){
+		utils.animation(animDom,cssEnd,time,tween,function(){
 			utils.removeNode(animDom);
-			cssEnd.display = 'block';
-			utils.css(DOM,cssEnd);
+			//显示真实dom
+			utils.css(DOM,{
+				display : 'block'
+			});
 			fn && fn();
 		});
 	}
+	
+	/**
+	 * 结束动画
+	 */
+	function closeAnimation(time_define,fn){
+		return function(time){
+			var me = this;
+			var time = isNum(time) ? time : parseInt(time_define) || 80;
+			var from = me._from;
+			
+			//处理关闭回调、蒙层检测
+			me.closeFn && me.closeFn();
+			if(me._mask){
+				private_maskCount--;
+				if(private_maskCount == 0){
+					utils.fadeOut(private_maskDom,400);
+					removeBlur && removeBlur();
+				}
+			}
+			
+			var DOM = me.dom;
+			var cssEnd = {
+				'opacity' : 0
+			};
+			if(from && from.tagName && from.parentNode){
+				utils.zoomOut(DOM,time,function(){
+					utils.removeNode(DOM);
+				});
+			}else if(typeof(from) == 'string'){
+				if(from == 'top'){
+					cssEnd.top = utils.getStyle(DOM,'top') - private_animation_range;
+				}else if(from == 'left'){
+					cssEnd.left = utils.getStyle(DOM,'left') - private_animation_range;
+				}else if(from == 'bottom'){
+					cssEnd.top = utils.getStyle(DOM,'top') + private_animation_range;
+				}else if(from == 'right'){
+					//判断dom水平定位依据
+					if(utils.getStyle(DOM,'left') != 'auto'){
+						cssEnd.left = utils.getStyle(DOM,'left') + private_animation_range;
+					}else{
+						cssEnd.right = utils.getStyle(DOM,'right') - private_animation_range;
+					}
+				}
+				//动画开始
+				utils.animation(DOM,cssEnd,time,'SineEaseIn',function(){
+					utils.removeNode(DOM);
+					fn && fn.call(me);
+				});
+			}else{
+				utils.removeNode(DOM);
+			}
+		}
+	}
+	
 	/**
 	 * 弹框
 	 * pop 
@@ -380,7 +418,8 @@
 		this.cntDom = utils.findByClassName(this.dom,'UI_pop_cnt')[0];
 		this.closeFn = param['closeFn'] || null;
 		this._mask = param['mask'] || false;
-
+		this._from = param['from'] || 'top';
+		
 		var this_html = param['html'] || '';
 		var this_width = param['width'] || Math.min(600,private_docW-20);
 
@@ -432,23 +471,25 @@
 		}
 
 
-		//insert html
+		//插入内容
 		this.cntDom.innerHTML = this_html;
+		
+		//设置宽度，为计算位置尺寸做准备
 		utils.css(this.dom,{
 			'width' : this_width
 		});
 		private_mainDom.appendChild(this.dom);
 		
-		//fix position get size
+		//校正位置
 		var fixSize = adaption(this_width,utils.outerHeight(this.dom));
 		var top = isNum(param['top']) ? param['top'] : fixSize.top;
 		var left = isNum(param['left']) ? param['left'] : fixSize.left;
-		
-		openingAnimation(this.dom,{
-			'width' : this_width,
+		utils.css(this.dom,{
 			'top' : top,
 			'left' : left
-		},param.from,200,'QuadEaseIn');
+		});
+		//开场动画
+		openAnimation(this.dom,this._from,200,'QuadEaseIn');
 		
 		utils.bind(this.dom,'click','.UI_pop_close',function(){
 			this_pop.close();
@@ -457,7 +498,7 @@
 		this._mask && showMask();
 	}
 	//使用close方法
-	POP.prototype['close'] = CLOSEMETHOD('zoomOut',150);
+	POP.prototype['close'] = closeAnimation(200);
 	POP.prototype['adapt'] = function(){
 		var width = utils.outerWidth(this.dom);
 		var height = utils.outerHeight(this.dom);
@@ -481,34 +522,31 @@
 		var this_html = utils.render(confirm_tpl,{
 			'text' : this_text
 		});
-		this._mask = typeof(param['mask']) == 'boolean' ? param['mask'] : true;
 		this.dom = utils.createDom(this_html)[0];
 		this.closeFn = param['closeFn'] || null;
+		this._mask = typeof(param['mask']) == 'boolean' ? param['mask'] : true;
+		this._from = param.from;
+		this._mask && showMask();
 		
 		add_confirm(this.dom,param,function(){
 			this_pop.close();
 		});
-		
-		private_fixedScreenTopDom.appendChild(this.dom);
 		utils.css(this.dom,{
 			'width' : 300
 		});
+		private_fixedScreenTopDom.appendChild(this.dom);
+		
 		var height = utils.outerHeight(this.dom);
 		var newPosition = adaption(300,height);
-		
-		openingAnimation(this.dom,{
-			'width' : 300,
+		utils.css(this.dom,{
 			'left' : newPosition.screenLeft,
-			'top' : newPosition.top
-		},param.from,100,'BackEaseOut',function(){
-			utils.css(this_pop.dom,{
-				'top' : newPosition.screenTop
-			});
+			'top' : newPosition.screenTop
 		});
 		
-		this._mask && showMask();
+		openAnimation(this.dom,this._from,100,'BackEaseOut');
+		
 	}
-	CONFIRM.prototype['close'] = CLOSEMETHOD('fade');
+	CONFIRM.prototype['close'] = closeAnimation(200);
 
 
 	/**
@@ -523,13 +561,14 @@
 		});
 
 		this.dom = utils.createDom(this_html)[0];
+		this._from = param.from || 'top';
 		this.inputDom = utils.findByClassName(me.dom,'UI_ask_key')[0];
 		this.closeFn =  null;
 		this.callback = callback || null;
 		
 		var confirm_html = utils.render(confirmBar_tpl,{
-			'confirm' : '确定',
-			'cancel' : '取消'
+			confirm : '确定',
+			cancel : '取消'
 		});
 		
 		this.dom.appendChild(utils.createDom(confirm_html)[0]);
@@ -547,19 +586,17 @@
 		var newPosition = adaption(300,160);
 
 		private_fixedScreenTopDom.appendChild(this.dom);
+		utils.css(this.dom,{
+			width : 300,
+			left : newPosition.screenLeft,
+			marginTop : -100,
+		});
 		
-		openingAnimation(this.dom,{
-			'width' : 300,
-			'left' : newPosition.screenLeft,
-			'top' : private_scrollTop + private_winH/2 - 100
-		},param.from,100,'BackEaseOut',function(){
-			utils.css(me.dom,{
-				'marginTop' : -100,
-				'top' : ''
-			});
+		openAnimation(this.dom,this._from,100,'BackEaseOut',function(){
+			me.inputDom.focus();
 		});
 	}
-	ASK.prototype['close'] = CLOSEMETHOD('fade');
+	ASK.prototype['close'] = closeAnimation(200);
 	ASK.prototype['setValue'] = function(text){
 		this.inputDom.value = text.toString();
 	};
@@ -573,7 +610,7 @@
 		var this_prompt = this;
 		var text = text || 'need text in arguments!';
 		this.dom = utils.createDom(prompt_tpl)[0];
-
+		this._from = 'top';
 		this.tips(text,time);
 		
 		var newPosition = adaption(260,100);
@@ -589,7 +626,7 @@
 		},140,'BackEaseOut');
 		
 	}
-	prompt.prototype['close'] = CLOSEMETHOD('zoomOut',150);
+	prompt.prototype['close'] = closeAnimation(80);
 	prompt.prototype['tips'] = function(txt,time){
 		var this_prompt = this;
 		if(txt){
@@ -648,6 +685,7 @@
 		this.closeFn = param['closeFn'] || null;
 
 		this.dom = utils.createDom(plane_tpl)[0];
+		this._from = null;
 
 		//insert html
 		this.dom.innerHTML = this_html;
@@ -660,7 +698,7 @@
 		});
 		private_mainDom.appendChild(this.dom);
 	}
-	PLANE.prototype['close'] = CLOSEMETHOD('fade',200);
+	PLANE.prototype['close'] = closeAnimation(200);
 
 
 	/***
@@ -671,13 +709,15 @@
 		var param = param || {};
 		var me = this;
 		this.dom = utils.createDom(cover_tpl)[0];
+		this._mask = typeof(param['mask']) == 'boolean' ? param['mask'] : false;
+		this._from = param.from || 'top';
+		
 		this.cntDom = utils.findByClassName(this.dom,'UI_coverCnt')[0];
 		this.closeFn = param['closeFn'] || null;
 
 		var this_html = param['html'] || '';
-		//insert html
-		this.cntDom.innerHTML = this_html;
 		
+		//关闭事件
 		utils.bind(this.dom,'click','.UI_coverClose',function(){
 			me.close();
 		});
@@ -686,35 +726,49 @@
 		private_fixedScreenTopDom.appendChild(this.dom);
 		//记录body的scrollY设置
 		this._bodyOverflowY = utils.getStyle(private_body,'overflowY');
+		var cssObj = {
+			width : isNum(param.width) ? Math.min(private_docW,param.width) : private_docW,
+			top : private_scrollTop
+		};
+		if(isNum(param.height)){
+			cssObj.height = Math.min(private_winH,param.height);
+		}
+		//水平定位
+		if(isNum(param.right)){
+			cssObj.right = param.right;
+		}else if(isNum(param.left)){
+			cssObj.left = param.left;
+		}else{
+			cssObj.position = 'relative';
+			cssObj.margin = 'auto';
+		}
+		//垂直定位
+		if(isNum(param.bottom)){
+			cssObj.top = private_winH - (cssObj.height || private_winH) - param.bottom;
+		}else if(isNum(param.top)){
+			cssObj.top = param.top;
+		}else{
+			cssObj.top = (private_docH - cssObj.heigh)/2
+		}
+		utils.css(me.dom,cssObj);
 		
-		openingAnimation(this.dom,{
-			'width' : private_docW,
-			'top' : private_scrollTop,
-			'left' : 0
-		},param.from,200,'QuadEaseIn',function(){
+		openAnimation(this.dom,this._from,200,'QuadEaseIn',function(){
 			utils.css(private_body,{
 				'overflowY' : 'hidden'
 			});
-			utils.css(me.dom,{
-				'width' : '',
-				'top' : 0
-			});
 		});
+		//打开蒙层
+		this._mask && showMask();
+		//insert html
+		this.cntDom.innerHTML = this_html;
 	}
 	//使用close方法
-	COVER.prototype['close'] = function(){
+	COVER.prototype['close'] = closeAnimation(200,function(){
 		var me = this;
-		
 		utils.css(private_body,{
 			'overflowY' : me._bodyOverflowY
 		});
-		utils.css(this.cntDom,{
-			'overflowY' : 'hidden'
-		});
-		utils.zoomOut(this.dom,400, function(){
-			utils.removeNode(me.dom);
-		});
-	};
+	});
 
 	/**
 	 * 选择功能
@@ -779,7 +833,23 @@
 			});
 		});
 	}
-	SELECT.prototype['close'] = CLOSEMETHOD('slide',200);
+	SELECT.prototype['close'] = function(effect,time){
+		
+		//处理关闭回调、蒙层检测
+		this.closeFn && this.closeFn();
+		if(this._mask){
+			private_maskCount--;
+			if(private_maskCount==0){
+				utils.fadeOut(private_maskDom,400);
+				removeBlur && removeBlur();
+			}
+		}
+		
+		var DOM = this.dom;
+		utils.slideUp(DOM,200,function(){
+			utils.removeNode(DOM);
+		});
+	};
 	/**
 	 *  抛出对外接口
 	 */
@@ -959,7 +1029,6 @@
 	 * dom设置样式
 	 */
 	function setStyle(elem,prop,value){
-	
 		if(typeof(value) != 'string' && (value != +value)){
 			return
 		}
@@ -1138,7 +1207,7 @@
 		setCss(DOM,{
 			'-webkit-transform' : 'scale(0.5)',
 			'-webkit-transition' : time + 'ms',
-			'opacity' : 0,
+			'opacity' : 0
 		});
 		
 		var delay;
@@ -1148,7 +1217,7 @@
 				setCss(DOM,{
 					'-webkit-transform' : 'scale(1)',
 					'-webkit-transition' : transt,
-					'opacity' : op,
+					'opacity' : op
 				});
 				fn && fn.call(DOM);
 			},20);
@@ -1318,10 +1387,6 @@
 		'bind' : bind,
 		'unbind' : removeHandler,
 		'drag' : drag,
-		//隐藏dom
-		'hide' : function (elem){
-			elem.style['display'] = 'none';
-		},
 		'animation' : function (a,b,c,d,e) {
 			return new anim(a,b,c,d,e);
 		},

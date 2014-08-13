@@ -65,7 +65,8 @@ seajs.use([
 	var lofox = new util.lofox();
 	
 	var dom = $('.contlayer');
-	
+	var activeCover = null;
+	var basePage;
 	function ani(){
 		var oldDom = dom.find('.contlayer_body');
 		var newDom = $('<div class="contlayer_body"><div class="contlayer_loading">正在加载</div></div>');
@@ -93,6 +94,7 @@ seajs.use([
 	 * 首页
 	 */
 	lofox.set('/',function(){
+		basePage = 'index';
 		this.title('小剧客栈_剧中人的个人空间 网页设计师博客 互动设计学习者');
 		L.nav.setCur('/');
 		var dom = ani();
@@ -104,6 +106,7 @@ seajs.use([
 	 * 博文列表
 	 */
 	lofox.set('/blog',function(){
+		basePage = 'indexList';
 		this.title('我的博客_小剧客栈');
 		L.nav.setCur('blog');
 		var dom = ani();
@@ -120,9 +123,20 @@ seajs.use([
 	lofox.set('/blog/{id}',function(param){
 		this.title('我的博客_小剧客栈');
 		L.nav.setCur('blog');
-		var dom = ani();
+		activeCover = UI.cover({
+			'from' : 'bottom',
+			'width' : 900,
+			'mask' : true,
+			'closeFn' : function(){
+				activeCover = null;
+				lofox.push('/blog');
+				if(basePage != 'indexList'){
+					lofox.refresh();
+				}
+			}
+		});
 		seajs.use('public/js/blogDetail.js',function(blogDetail){
-			blogDetail(dom,param.id,function(title){
+			blogDetail($(activeCover.cntDom),param.id,function(title){
 				lofox.title(title);
 			});
 		});
@@ -131,6 +145,7 @@ seajs.use([
 	 * 我的分享列表
 	 */
 	lofox.set('/share',function(){
+		basePage = 'shareList';
 		this.title('我的分享_小剧客栈');
 		L.nav.setCur('share');
 		var dom = ani();
@@ -144,9 +159,22 @@ seajs.use([
 	lofox.set('/share/{id}',function(param){
 		this.title('我的分享_小剧客栈');
 		L.nav.setCur('share');
-		var dom = ani();
+		
+		activeCover = UI.cover({
+			'from' : 'bottom',
+			'width' : 900,
+			'mask' : true,
+			'closeFn' : function(){
+				activeCover = null;
+				lofox.push('/share');
+				if(basePage != 'shareList'){
+					lofox.refresh();
+				}
+			}
+		});
+		
 		seajs.use('public/js/shareDetail.js',function(shareDetail){
-			shareDetail(dom,param.id);
+			shareDetail($(activeCover.cntDom),param.id);
 		});
 	});
 	
@@ -170,6 +198,8 @@ seajs.use([
 	});
 	//实验室列表页
 	lofox.set('/labs',function(){
+		basePage = 'labsList';
+		
 		this.title('实验室_小剧客栈');
 		
 		L.nav.setCur('labs');
@@ -178,10 +208,45 @@ seajs.use([
 			labsList(dom);
 		});
 	});
+	//实验室详情页
+	lofox.set('/labs/{id}',function(param){
+		this.title('实验室_小剧客栈');
+
+		activeCover = UI.cover({
+			'from' : 'right',
+			'mask' : true,
+			'html' : '<iframe class="UI-plugin-iframe" src="/labs/' + param.id + '"></iframe>',
+			'closeFn' : function(){
+				activeCover = null;
+				lofox.push('/labs');
+				if(basePage != 'labsList'){
+					lofox.refresh();
+				}
+			}
+		});
+	});
+	//留言板
+	lofox.set('/demo/bless.html',function(param){
+		this.title('留言板_小剧客栈');
+		L.nav.setCur('');
+		var dom = ani();
+		dom.html(['<div class="l_row"><div class="l_col_12"><div style="background: #fff;margin:100px auto 50px;padding:20px;border-radius :8px;">',
+			'<div id="uyan_frame"></div>',
+			'<script type="text/javascript">var uyan_config = {"du":"bh-lay.com"};</script>',
+			'<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1605927" async=""></script>',
+		'</div></div></div>'].join(''));
+	});
+	
 	/**
 	 * 监听页面跳转
 	 */
 	lofox.on('change',function(url){
+		if(activeCover){
+			activeCover.closeFn = null;
+			activeCover.close();
+			activeCover = null;
+		}
+		
 		delete(uyan_c_g);
 		delete(uyan_loaded);
 		delete(uyan_s_g);

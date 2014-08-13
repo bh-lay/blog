@@ -6,7 +6,7 @@
 define(function(require,exports){
 	require('lib/juicer.js');
 	
-	var template = ['<div class="l_row"><div class="l_col_12 shareDetail">',
+	var template = ['<div class="shareDetail">',
 		'<div class="articletop">',
 			'<h1>${title}</h1>',
 			'<p><span>分享时间：${time_show} </span></p>',
@@ -19,7 +19,7 @@ define(function(require,exports){
 			'</script>',
 			'<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1605927" async=""></script>',
 		'</div>',
-	'</div></div>'].join('');
+	'</div>'].join('');
 	
 	function getData(id,fn){
 		$.ajax({

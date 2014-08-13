@@ -5,9 +5,9 @@
 define(function(require,exports){
 	
 	var temp = ['<li><div class="lab_item">',
-		'<a class="lab_cover" href="/labs/<%=name %>" title="<%=title%>" target="_blank" style="background-image:url(<%=cover %>)"></a>',
+		'<a class="lab_cover" lofox="true" href="/labs/<%=name %>" title="<%=title%>" style="background-image:url(<%=cover %>)"></a>',
 		'<h4 class="lab_title">',
-			'<a href="/labs/<%=name %>" title="<%=title %>" target="_blank"><%=title %></a>',
+			'<a href="/labs/<%=name %>" lofox="true" title="<%=title %>"><%=title %></a>',
 		'</h4>',
 		'<div class="lab_info">',
 			'<p><%=intro %></p>',
@@ -71,18 +71,6 @@ define(function(require,exports){
 				'dom' : this_dom
 			});
 			start();
-		});
-		dom.on('click','a',function(){
-			var url = $(this).attr('href');
-			L.push(url);
-			UI.cover({
-				'from' : $(this).parents('.lab_item')[0],
-				'html' : '<iframe class="UI-plugin-iframe" src="' + url + '"></iframe>',
-				'closeFn' : function(){
-					history.back();
-				}
-			});
-			return false;
 		});
 	};
 });

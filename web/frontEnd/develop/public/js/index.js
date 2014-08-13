@@ -21,7 +21,7 @@ define(function(require,exports){
 		'</div>',
 		'<div class="some_link">',
 			'<a title="创业团" target="_blank" href="/topic/intiate.html">创业团</a>',
-			'<a title="给剧中人留言" target="_blank" href="/demo/bless.html">留言</a>',
+			'<a title="给剧中人留言" href="/demo/bless.html" lofox="true">留言</a>',
 		'</div>',
 		'<div class="webLink"><div class="webLink_cpt">我的小伙伴</div>',
 		'<div class="webLink_cnt">',

@@ -5,7 +5,7 @@
 define(function(require,exports){
 	require('lib/juicer.js');
 
-	var template = ['<div class="l_row"><div class="l_col_12"><div class="blog_article">',
+	var template = ['<div class="blog_article">',
 		'<div class="articletop">',
 			'<h1>${title}</h1>',
 			'<p><span>时间：${time_show} </span><span>作者：${author}</span></p>',
@@ -21,7 +21,7 @@ define(function(require,exports){
 			'var uyan_config = {"du":"bh-lay.com"};',
 		'</script>',
 		'<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1605927" async=""></script>',
-	'</div></div></div>'].join('');
+	'</div>'].join('');
 	
 	function getData(id,fn){
 		$.ajax({
