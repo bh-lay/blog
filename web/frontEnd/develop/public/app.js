@@ -213,7 +213,7 @@ seajs.use([
 		this.title('实验室_小剧客栈');
 
 		activeCover = UI.cover({
-			'from' : 'right',
+			'from' : 'bottom',
 			'mask' : true,
 			'html' : '<iframe class="UI-plugin-iframe" src="/labs/' + param.id + '"></iframe>',
 			'closeFn' : function(){

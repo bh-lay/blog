@@ -2,7 +2,7 @@
  * @author bh-lay
  * 
  * @github https://github.com/bh-lay/UI
- * @modified 2014-8-13 18:16
+ * @modified 2014-8-14 17:17
  * 
  **/
 
@@ -37,7 +37,7 @@
 	var cover_tpl = '<div class="UI_cover"><div class="UI_coverCnt"></div><a href="javascript:void(0)" class="UI_coverClose">×</a></div>';
 	var select_tpl = '<div class="UI_select"><div class="UI_select_body"><% if(title){ %><div class="UI_selectCpt"><h3><%=title %></h3><% if(intro){ %><p><%=intro %></p><% } %></div><% } %><div class="UI_selectCnt"><% for(var i=0,total=list.length;i<total;i++){ %><a class="UI_select_btn" href="javascript:void(0)"><%=list[i] %></a><% } %></div></div><div class="UI_selectCancel"><a class="UI_select_btn" href="javascript:void(0)" data-index="-1">取消</a></div></div>';
 	
-	var popCSS = '.UI_lawyer{position:absolute;top:0px;left:0px;z-index:4999;width:100%;height:0px;overflow:visible;font-family:"Microsoft Yahei"}.UI_lawyer a,.UI_lawyer a:hover{text-decoration:none;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-tap-highlight-color:transparent}.UI_lawyer a:active{outline:none}.UI_mask{position:absolute;top:0px;left:0px;width:100%;background-color:#000;display:none;opacity:0.5;filter:alpha(opacity=50)}.UI_main_cnt{width:0px;height:0px;overflow:visible}.UI_fixedScreenTop_cnt{position:absolute;z-index:4999;top:0px;left:0px;width:100%;height:0px;overflow:visible}.UI_fixedScreenBottom_cnt{position:absolute;z-index:4999;left:0px;width:100%;height:0px;overflow:visible}.UI_pop{width:200px;_border:1px solid #eee;position:absolute;top:400px;left:300px;background:#fff;border-radius:4px;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_pop_cpt{position:relative;height:36px;line-height:36px;overflow:hidden;border-bottom:1px solid #ebebeb;color:#777;font-size:16px;text-indent:15px;cursor:default}.UI_pop_cnt{position:relative;min-height:100px;overflow:auto;width:100%}.UI_pop_close{display:block;position:absolute;top:0px;right:0px;width:40px;height:36px;text-align:center;color:#ddd;font:bold 20px/36px "simsun";transition:0.1s}.UI_pop_close:hover{color:#888}.UI_pop_close:active{color:#222}.UI_confirm{_border:1px solid #eee;position:absolute;background:#fff;border-radius:4px;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_confirm_text{padding:30px 10px 20px;line-height:26px;text-align:center;font-size:20px;color:#333}.UI_ask{_border:1px solid #eee;position:absolute;background:#fff;border-radius:4px;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_ask_text{padding:25px 10px 15px;line-height:26px;text-align:center;font-size:18px;color:#333}.UI_ask input{display:block;margin:0px auto 15px;height:30px;padding:4px 4px;line-height:22px;box-sizing:border-box;width:90%}.UI_pop_confirm{overflow:hidden;text-align:center;border-top:1px solid #ddd}.UI_pop_confirm a{display:block;width:50%;height:36px;float:left;font-size:14px;line-height:36px;color:#03f;box-sizing:border-box;transition:0.15s}.UI_pop_confirm_ok{border-right:1px solid #ddd}@media(min-width:640px){.UI_pop_confirm a:hover{background:#eee}}.UI_plane{width:200px;position:absolute;top:400px;left:300px}.UI_prompt{width:240px;position:absolute;left:50%;margin-left:-120px;box-sizing:content-box;background:#fff;_border:1px solid #fafafa;border-radius:4px;box-shadow:2px 2px 10px rgba(0,0,0,0.5)}.UI_cnt{padding:30px 10px;font-size:18px;color:#222;text-align:center}.UI_cover{position:absolute;top:0px;width:100%;height:100px}.UI_coverCnt{position:relative;width:100%;height:100%;background:#fff;overflow:auto}.UI_coverClose{display:block;position:absolute;top:10px;right:20px;width:30px;height:30px;text-align:center;color:#aaa;font:18px/30px "simsun";background:#eee;border-radius:15px;border:1px solid #aaa}.UI_coverClose:hover{background-color:#333;color:#fff;transition:0.2s}.UI_select{position:absolute;width:100%;padding-bottom:10px}.UI_select a{display:block;height:40px;line-height:40px;text-align:center;color:#03f;font-size:16px}.UI_select_body{margin:0px 10px 10px;border-radius:8px;overflow:hidden;background:#fff}.UI_selectCpt{padding:8px 0px}.UI_selectCpt h3,.UI_selectCpt p{margin:0px;font-size:15px;line-height:18px;text-align:center;color:#aaa;font-weight:normal}.UI_selectCpt p{font-size:12px}.UI_selectCnt a{border-top:1px solid #eee}.UI_selectCancel{margin:0px 10px;border-radius:8px;overflow:hidden;background:#fff}.UI_main_cnt .UI_select{width:200px;padding:0px;border-radius:0px;box-shadow:2px 1px 5px rgba(0,0,0,0.8)}.UI_main_cnt .UI_select_body,.UI_main_cnt .UI_selectCancel{margin:0px;border-radius:0px}.UI_main_cnt .UI_select a{height:30px;line-height:30px;font-size:14px}.UI_main_cnt .UI_selectCancel{border-top:1px solid #eee;background:#eee}';
+	var popCSS = '.UI_lawyer{position:absolute;top:0px;left:0px;z-index:4999;width:100%;height:0px;overflow:visible;font-family:"Microsoft Yahei"}.UI_lawyer a,.UI_lawyer a:hover{text-decoration:none;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-tap-highlight-color:transparent}.UI_lawyer a:active{outline:none}.UI_mask{position:absolute;top:0px;left:0px;width:100%;background-color:#000;display:none;opacity:0.5;filter:alpha(opacity=50)}.UI_main_cnt{width:0px;height:0px;overflow:visible}.UI_fixedScreenTop_cnt{position:absolute;z-index:4999;top:0px;left:0px;width:100%;height:0px;overflow:visible}.UI_fixedScreenBottom_cnt{position:absolute;z-index:4999;left:0px;width:100%;height:0px;overflow:visible}.UI_pop{width:200px;_border:1px solid #eee;position:absolute;top:400px;left:300px;background:#fff;border-radius:4px;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_pop_cpt{position:relative;height:36px;line-height:36px;overflow:hidden;border-bottom:1px solid #ebebeb;color:#777;font-size:16px;text-indent:15px;cursor:default}.UI_pop_cnt{position:relative;min-height:100px;overflow:auto;width:100%}.UI_pop_close{display:block;position:absolute;top:0px;right:0px;width:40px;height:36px;text-align:center;color:#ddd;font:bold 20px/36px "simsun";transition:0.1s}.UI_pop_close:hover{color:#888}.UI_pop_close:active{color:#222}.UI_confirm{_border:1px solid #eee;position:absolute;background:#fff;border-radius:4px;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_confirm_text{padding:30px 10px 20px;line-height:26px;text-align:center;font-size:20px;color:#333}.UI_ask{_border:1px solid #eee;position:absolute;background:#fff;border-radius:4px;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_ask_text{padding:25px 10px 15px;line-height:26px;text-align:center;font-size:18px;color:#333}.UI_ask input{display:block;margin:0px auto 15px;height:30px;padding:4px 4px;line-height:22px;box-sizing:border-box;width:90%}.UI_pop_confirm{overflow:hidden;text-align:center;border-top:1px solid #ddd}.UI_pop_confirm a{display:block;width:50%;height:36px;float:left;font-size:14px;line-height:36px;color:#03f;box-sizing:border-box;transition:0.15s}.UI_pop_confirm_ok{border-right:1px solid #ddd}@media(min-width:640px){.UI_pop_confirm a:hover{background:#eee}}.UI_plane{width:200px;position:absolute;top:400px;left:300px}.UI_prompt{width:240px;position:absolute;left:50%;margin-left:-120px;box-sizing:content-box;background:#fff;_border:1px solid #fafafa;border-radius:4px;box-shadow:2px 2px 10px rgba(0,0,0,0.5)}.UI_cnt{padding:30px 10px;font-size:18px;color:#222;text-align:center}.UI_cover{position:absolute;top:0px;width:100%;height:100px}.UI_coverCnt{position:relative;width:100%;height:100%;background:#fff;overflow:auto}.UI_coverClose{display:block;position:absolute;top:10px;right:20px;width:30px;height:30px;text-align:center;color:#aaa;font:18px/30px "simsun";background:#eee;border-radius:15px;border:1px solid #aaa}.UI_coverClose:hover{background-color:#333;color:#fff;transition:0.2s}.UI_select{position:absolute;width:100%;padding-bottom:10px}.UI_select a{display:block;height:40px;line-height:40px;text-align:center;color:#03f;font-size:16px}.UI_select_body{margin:0px 10px 10px;border-radius:8px;overflow:hidden;background:#fff}.UI_selectCpt{padding:8px 0px}.UI_selectCpt h3,.UI_selectCpt p{margin:0px;font-size:15px;line-height:18px;text-align:center;color:#aaa;font-weight:normal}.UI_selectCpt p{font-size:12px}.UI_selectCnt a{border-top:1px solid #eee}.UI_selectCancel{margin:0px 10px;border-radius:8px;overflow:hidden;background:#fff}.UI_main_cnt .UI_select{width:200px;padding:0px;border-radius:0px;box-shadow:2px 1px 5px rgba(0,0,0,0.8)}.UI_main_cnt .UI_select_body,.UI_main_cnt .UI_selectCancel{margin:0px;border-radius:0px}.UI_main_cnt .UI_select a{height:34px;line-height:34px;font-size:14px}.UI_main_cnt .UI_selectCancel{display:none}';
 	
 	var isIE67 = false;
 	if(navigator.appName == "Microsoft Internet Explorer"){
@@ -68,13 +68,13 @@
 		private_animation_range = 240;
 
 	var private_CONFIG = {
-		'gap' : {
-			'top' : 0,
-			'left' : 0,
-			'bottom' : 0,
-			'right' : 0
+		gap : {
+			top : 0,
+			left : 0,
+			bottom : 0,
+			right : 0
 		},
-		'zIndex' : 499
+		zIndex : 499
 	};
 	
 	var docDom;
@@ -106,18 +106,7 @@
 	function isNum(ipt){
 		return (ipt !== '') && (ipt == +ipt) ? true : false;
 	}
-	function clone(fromObj,toObj){   
-		for(var i in fromObj){   
-			if(typeof fromObj[i] == "object"){   
-				toObj[i] = fromObj[i].constructor==Array ? [] : {};
-				
-				clone(fromObj[i],toObj[i]);   
-				continue;   
-			}   
-			toObj[i] = fromObj[i];
-		}
-		return toObj;
-	}
+	
 	//初始化组件基础功能
 //	utils.ready(function(){
 		//插入css样式表
@@ -138,32 +127,32 @@
 		var rebuild_fn = null;
 		if(isIE67){
 			utils.css(private_fixedScreenTopDom,{
-				'top' : private_scrollTop
+				top : private_scrollTop
 			});
 			utils.css(private_fixedScreenBottomDom,{
-				'top' : private_scrollTop + private_winH
+				top : private_scrollTop + private_winH
 			});
 			
 			rebuild_fn = function(){
 				refreshSize();
 				utils.css(private_fixedScreenTopDom,{
-					'top' : private_scrollTop
+					top : private_scrollTop
 				});
 				utils.css(private_fixedScreenBottomDom,{
-					'top' : private_scrollTop + private_winH
+					top : private_scrollTop + private_winH
 				});
 				utils.css(private_maskDom,{
-					'top' : private_scrollTop
+					top : private_scrollTop
 				});
 			};
 		}else{
 			utils.css(private_fixedScreenTopDom,{
-				'position' : 'fixed',
-				'top' : 0
+				position : 'fixed',
+				top : 0
 			});
 			utils.css(private_fixedScreenBottomDom,{
-				'position' : 'fixed',
-				'bottom' : 0
+				position : 'fixed',
+				bottom : 0
 			});
 			rebuild_fn = refreshSize;
 		}
@@ -196,8 +185,8 @@
 		}
 		
 		return {
-			'top' : top,
-			'left' : left
+			top : top,
+			left : left
 		}
 	}
 	//计算自适应页面位置的方法
@@ -213,10 +202,10 @@
 		
 		var newPosition = fix_position(top,left,width,height);
 		return {
-			'top' : newPosition.top,
-			'left' : newPosition.left,
-			'screenTop' : screenTop,
-			'screenLeft' : newPosition.left
+			top : newPosition.top,
+			left : newPosition.left,
+			screenTop : screenTop,
+			screenLeft : newPosition.left
 		}
 	}
 	
@@ -228,19 +217,19 @@
 		if(typeof(param) == "function"){
 			callback = param;
 		}else if(typeof(param) == "object"){
-			var paramBtns = param['btns'] || [];
+			var paramBtns = param.btns || [];
 			btns[0] = paramBtns[0] || btns[0];
 			btns[1] = paramBtns[1] || btns[1];
-			if(typeof(param['callback']) == "function"){
-				callback = param['callback'];
+			if(typeof(param.callback) == "function"){
+				callback = param.callback;
 			}
-			if(typeof(param['cancel']) == "function"){
-				cancel = param['cancel'];
+			if(typeof(param.cancel) == "function"){
+				cancel = param.cancel;
 			}
 		}
 		var this_html = utils.render(confirmBar_tpl,{
-			'confirm' : btns[0],
-			'cancel' : btns[1]
+			confirm : btns[0],
+			cancel : btns[1]
 		});
 		dom.appendChild(utils.createDom(this_html)[0]);
 		
@@ -270,7 +259,7 @@
 	if(utils.supports('-webkit-filter')){
 		blur = function (){
 			setRootElementsStyle({
-				'-webkit-filter' : 'blur(2px)'
+				'-webkit-filter' : 'blur(1px)'
 			});
 		};
 		removeBlur = function (){
@@ -297,53 +286,74 @@
 	 *   创建一个dom用来完成动画
 	 *   动画结束，设置dom为结束样式
 	 **/
-	var animDom = utils.createDom('<div style="position:absolute;background:#fff;"></div>')[0];
 	function openAnimation(DOM,from,time,tween,fn){
-		var fromMark = from;
+		if(!from){
+			//不需要动画
+			return
+		}
+		
 		var offset = utils.offset(DOM);
+		
+		//动画第一帧css
 		var cssStart,
-			cssEnd = {
+			//动画需要改变的css
+			cssAnim = {},
+			//目标对象的源css
+			cssOrignal = {
 				width : utils.outerWidth(DOM),
 				height : utils.outerHeight(DOM),
 				top : offset.top,
-				left : offset.left,
-				opacity : 1
+				left : offset.left
 			};
-		if(typeof(fromMark) == 'object'){
+		
+		//参数是dom对象
+		if(from && from.tagName && from.parentNode){
 			tween = 'SineEaseIn';
 			time = 200;
-			var offset_from = utils.offset(fromMark);
+			var offset_from = utils.offset(from);
 			cssStart = {
 				top : offset_from.top,
 				left : offset_from.left,
-				width : utils.outerWidth(fromMark),
-				height : utils.outerHeight(fromMark),
-				opacity : 0.5
-			}
-		}else{
-			//拷贝结束动画
-			cssStart = clone(cssEnd,{});
-			cssStart.opacity = 0;
-			
-			if(fromMark == 'left'){
-				cssStart.left = cssStart.left - private_animation_range;
-			}else if(fromMark == 'right'){
-				cssStart.left = cssStart.left + private_animation_range;
-			}else if(fromMark == 'bottom'){
-				cssStart.top = cssStart.top + private_animation_range;
+				width : utils.outerWidth(from),
+				height : utils.outerHeight(from)
+			};
+			cssAnim = utils.clone(cssOrignal,{});
+		//参数是字符串
+		}else if(typeof(from) == 'string'){
+			//拷贝最终位置
+			cssStart = utils.clone(cssOrignal,{});
+			if(from == 'left'){
+				cssStart.left = cssOrignal.left - private_animation_range;
+				cssAnim.left = cssOrignal.left;
+			}else if(from == 'right'){
+				cssStart.left = cssOrignal.left + private_animation_range;
+				cssAnim.left = cssOrignal.left;
+			}else if(from == 'bottom'){
+				cssStart.top = cssOrignal.top + private_animation_range;
+				cssAnim.top = cssOrignal.top;
 			}else{
-				cssStart.top = cssStart.top - private_animation_range;
+				cssStart.top = cssOrignal.top - private_animation_range;
+				cssAnim.top = cssOrignal.top;
 			}
+			
 		}
+		
+		//创建一个dom用来完成动画
+		var animDom = utils.createDom('<div style="position:absolute;background:#fff;"></div>')[0];
 		//隐藏真实dom
 		utils.css(DOM,{
-			display : 'none'
+			'display' : 'none'
 		});
+		
 		//放置于初始位置
-		private_mainDom.appendChild(animDom);
+		cssStart.opacity = 0;
 		utils.css(animDom,cssStart);
+		private_mainDom.appendChild(animDom);
+		
 		//动画开始
-		utils.animation(animDom,cssEnd,time,tween,function(){
+		cssAnim.opacity = 1;
+		utils.animation(animDom,cssAnim,time,tween,function(){
+			//删除动画dom
 			utils.removeNode(animDom);
 			//显示真实dom
 			utils.css(DOM,{
@@ -379,6 +389,7 @@
 			if(from && from.tagName && from.parentNode){
 				utils.zoomOut(DOM,time,function(){
 					utils.removeNode(DOM);
+					fn && fn.call(me);
 				});
 			}else if(typeof(from) == 'string'){
 				if(from == 'top'){
@@ -402,6 +413,7 @@
 				});
 			}else{
 				utils.removeNode(DOM);
+				fn && fn.call(me);
 			}
 		}
 	}
@@ -416,54 +428,54 @@
 		
 		this.dom = utils.createDom(pop_tpl)[0];
 		this.cntDom = utils.findByClassName(this.dom,'UI_pop_cnt')[0];
-		this.closeFn = param['closeFn'] || null;
-		this._mask = param['mask'] || false;
-		this._from = param['from'] || 'top';
+		this.closeFn = param.closeFn || null;
+		this._mask = param.mask || false;
+		this._from = param.from || 'top';
 		
-		var this_html = param['html'] || '';
-		var this_width = param['width'] || Math.min(600,private_docW-20);
+		var this_html = param.html || '';
+		var this_width = param.width || Math.min(600,private_docW-20);
 
 
 		//当有确认参数时
-		if(param['confirm']){
-			add_confirm(this.dom,param['confirm'],function(){
+		if(param.confirm){
+			add_confirm(this.dom,param.confirm,function(){
 				this_pop.close();
 			});
 		}
 		//处理title参数
 		var caption_dom = utils.findByClassName(this.dom,'UI_pop_cpt')[0];
-		if(!param['title']){
+		if(!param.title){
 			utils.removeNode(caption_dom);
 		}else{
-			var title = param['title'] || 'need title in parameter!';
+			var title = param.title || 'need title in parameter!';
 			
 			caption_dom.innerHTML = title;
 			//can drag is pop
 			var dragMask = null;
 			utils.drag(caption_dom,this.dom,{
-				'start' : function(){
+				start : function(){
 					//更新窗口尺寸
 					refreshSize();
 					
 					dragMask = utils.createDom(dragMask_tpl)[0];
 					utils.css(dragMask,{
-						'width' : private_docW,
-						'height' : private_winH,
-						'cursor' : utils.getStyle(caption_dom,'cursor')
+						width : private_docW,
+						height : private_winH,
+						cursor : utils.getStyle(caption_dom,'cursor')
 					});
 					private_fixedScreenTopDom.appendChild(dragMask);
 				},
-				'move' : function(mx,my,l_start,t_start,w_start,h_start){
+				move : function(mx,my,l_start,t_start,w_start,h_start){
 					var left = mx + l_start;
 					var top = my + t_start;
 					
 					var newSize = fix_position(top,left,w_start,h_start);
 					utils.css(this_pop.dom,{
-						'left' : newSize.left,
-						'top' : newSize.top
+						left : newSize.left,
+						top : newSize.top
 					});
 				},
-				'end' : function (){
+				end : function (){
 					dragMask && utils.removeNode(dragMask);
 					dragMask = null;
 				}
@@ -476,17 +488,17 @@
 		
 		//设置宽度，为计算位置尺寸做准备
 		utils.css(this.dom,{
-			'width' : this_width
+			width : this_width
 		});
 		private_mainDom.appendChild(this.dom);
 		
 		//校正位置
 		var fixSize = adaption(this_width,utils.outerHeight(this.dom));
-		var top = isNum(param['top']) ? param['top'] : fixSize.top;
-		var left = isNum(param['left']) ? param['left'] : fixSize.left;
+		var top = isNum(param.top) ? param.top : fixSize.top;
+		var left = isNum(param.left) ? param.left : fixSize.left;
 		utils.css(this.dom,{
-			'top' : top,
-			'left' : left
+			top : top,
+			left : left
 		});
 		//开场动画
 		openAnimation(this.dom,this._from,200,'QuadEaseIn');
@@ -498,15 +510,15 @@
 		this._mask && showMask();
 	}
 	//使用close方法
-	POP.prototype['close'] = closeAnimation(200);
-	POP.prototype['adapt'] = function(){
+	POP.prototype.close = closeAnimation(200);
+	POP.prototype.adapt = function(){
 		var width = utils.outerWidth(this.dom);
 		var height = utils.outerHeight(this.dom);
 		
 		var fixSize = adaption(width,height);
 		utils.animation(this.dom,{
-			'top' : fixSize.top,
-			'left' : fixSize.left
+			top : fixSize.top,
+			left : fixSize.left
 		}, 100);
 	};
 
@@ -517,36 +529,36 @@
 		var param = param || {};
 		var this_pop = this;
 		
-		var this_text = param['text'] || 'need text in parameter!';
-		var callback = param['callback'] || null;
+		var this_text = param.text || 'need text in parameter!';
+		var callback = param.callback || null;
 		var this_html = utils.render(confirm_tpl,{
-			'text' : this_text
+			text : this_text
 		});
 		this.dom = utils.createDom(this_html)[0];
-		this.closeFn = param['closeFn'] || null;
-		this._mask = typeof(param['mask']) == 'boolean' ? param['mask'] : true;
-		this._from = param.from;
+		this.closeFn = param.closeFn || null;
+		this._mask = typeof(param.mask) == 'boolean' ? param.mask : true;
+		this._from = param.from || null;
 		this._mask && showMask();
 		
 		add_confirm(this.dom,param,function(){
 			this_pop.close();
 		});
 		utils.css(this.dom,{
-			'width' : 300
+			width : 300
 		});
 		private_fixedScreenTopDom.appendChild(this.dom);
 		
 		var height = utils.outerHeight(this.dom);
 		var newPosition = adaption(300,height);
 		utils.css(this.dom,{
-			'left' : newPosition.screenLeft,
-			'top' : newPosition.screenTop
+			left : newPosition.screenLeft,
+			top : newPosition.screenTop
 		});
 		
 		openAnimation(this.dom,this._from,100,'BackEaseOut');
 		
 	}
-	CONFIRM.prototype['close'] = closeAnimation(200);
+	CONFIRM.prototype.close = closeAnimation(200);
 
 
 	/**
@@ -557,7 +569,7 @@
 		var param = param || {};
 		var this_text = text || 'need text in parameter!';
 		var this_html = utils.render(ask_tpl,{
-			'text' : this_text
+			text : this_text
 		});
 
 		this.dom = utils.createDom(this_html)[0];
@@ -596,8 +608,8 @@
 			me.inputDom.focus();
 		});
 	}
-	ASK.prototype['close'] = closeAnimation(200);
-	ASK.prototype['setValue'] = function(text){
+	ASK.prototype.close = closeAnimation(200);
+	ASK.prototype.setValue = function(text){
 		this.inputDom.value = text.toString();
 	};
 
@@ -616,18 +628,18 @@
 		var newPosition = adaption(260,100);
 		// create pop
 		utils.css(this.dom,{
-			'top' : 0,
-			'opacity' : 0
+			top : 100,
+			opacity : 0
 		});
 		private_fixedScreenTopDom.appendChild(this.dom);
 		utils.animation(this.dom,{
-			'top' : newPosition.screenTop,
-			'opacity' : 1
+			top : newPosition.screenTop,
+			opacity : 1
 		},140,'BackEaseOut');
 		
 	}
-	prompt.prototype['close'] = closeAnimation(80);
-	prompt.prototype['tips'] = function(txt,time){
+	prompt.prototype.close = closeAnimation(80);
+	prompt.prototype.tips = function(txt,time){
 		var this_prompt = this;
 		if(txt){
 			utils.findByClassName(this.dom,'UI_cnt')[0].innerHTML = txt;
@@ -681,24 +693,27 @@
 
 		var param = param || {};
 
-		var this_html = param['html'] || '';
-		this.closeFn = param['closeFn'] || null;
+		var this_html = param.html || '';
+		this.closeFn = param.closeFn || null;
 
 		this.dom = utils.createDom(plane_tpl)[0];
-		this._from = null;
+		this._from = param.from || null;
 
 		//insert html
 		this.dom.innerHTML = this_html;
 		
 		utils.css(this.dom,{
-			'width' : param['width'] || 240,
-			'height' :param['height'] || null,
-			'top' : isNum(param['top']) ? param['top'] : 300,
-			'left' : isNum(param['left']) ? param['left'] : 800
+			width : param.width || 240,
+			height :param.height || null,
+			top : isNum(param.top) ? param.top : 300,
+			left : isNum(param.left) ? param.left : 800
 		});
+		
 		private_mainDom.appendChild(this.dom);
+		
+		openAnimation(this.dom,this._from,100,'BackEaseOut');
 	}
-	PLANE.prototype['close'] = closeAnimation(200);
+	PLANE.prototype.close = closeAnimation(200);
 
 
 	/***
@@ -709,13 +724,13 @@
 		var param = param || {};
 		var me = this;
 		this.dom = utils.createDom(cover_tpl)[0];
-		this._mask = typeof(param['mask']) == 'boolean' ? param['mask'] : false;
+		this._mask = typeof(param.mask) == 'boolean' ? param.mask : false;
 		this._from = param.from || 'top';
 		
 		this.cntDom = utils.findByClassName(this.dom,'UI_coverCnt')[0];
-		this.closeFn = param['closeFn'] || null;
+		this.closeFn = param.closeFn || null;
 
-		var this_html = param['html'] || '';
+		var this_html = param.html || '';
 		
 		//关闭事件
 		utils.bind(this.dom,'click','.UI_coverClose',function(){
@@ -763,10 +778,10 @@
 		this.cntDom.innerHTML = this_html;
 	}
 	//使用close方法
-	COVER.prototype['close'] = closeAnimation(200,function(){
+	COVER.prototype.close = closeAnimation(200,function(){
 		var me = this;
 		utils.css(private_body,{
-			'overflowY' : me._bodyOverflowY
+			overflowY : me._bodyOverflowY
 		});
 	});
 
@@ -785,40 +800,41 @@
 			fns.push(item[1]);
 		});
 		var this_html = utils.render(select_tpl,{
-			'list' : nameList,
-			'title' : param.title || null,
-			'intro' : param.intro || null
+			list : nameList,
+			title : param.title || null,
+			intro : param.intro || null
 		});
 		
 		this.dom = utils.createDom(this_html)[0];
-		this._mask = true;
 		this.closeFn = param.closeFn || null;
 		
 		if(private_docW > 640){
+			this._mask = false;
 			new PLANE({
-				'top' : param.top || 100,
-				'left' : param.left || 100,
-				'width' : param.width || 200,
-				'height' : 0,
-				'closeFn' : function(){
+				top : param.top || 100,
+				left : param.left || 100,
+				width : param.width || 200,
+				height : 0,
+				closeFn : function(){
 					this_sel.close();
 				}
 			}).dom.appendChild(this.dom);
 			utils.css(this.dom,{
-				'position' : 'relative',
-				'width' : '100%'
+				position : 'relative',
+				width : '100%'
 			});
 		} else {
+			this._mask = true;
 			utils.css(this.dom,{
-				'bottom' : -100,
-				'opacity' : 0
+				bottom : -100,
+				opacity : 0
 			});
 			
 			private_fixedScreenBottomDom.appendChild(this.dom);
 			
 			utils.animation(this.dom, {
-				'bottom' : 0,
-				'opacity' : 1
+				bottom : 0,
+				opacity : 1
 			}, 300, 'ElasticEaseOut');
 		}
 		
@@ -833,7 +849,7 @@
 			});
 		});
 	}
-	SELECT.prototype['close'] = function(effect,time){
+	SELECT.prototype.close = function(effect,time){
 		
 		//处理关闭回调、蒙层检测
 		this.closeFn && this.closeFn();
@@ -854,48 +870,48 @@
 	 *  抛出对外接口
 	 */
 	return {
-		'pop' : function(){
+		pop : function(){
 			return new POP(arguments[0]);
 		},
-		'config' : {
-			'gap' : function(name,value){
+		config : {
+			gap : function(name,value){
 				//name符合top/right/bottom/left,且value值为数字类型（兼容字符类型）
 				if(name && typeof(private_CONFIG.gap[name]) == 'number' && isNum(value)){
 					private_CONFIG.gap[name] = parseInt(value);
 				}
 			},
-			'zIndex' : function(num){
+			zIndex : function(num){
 				var num = parseInt(num);
 				if(num > 0){
 					private_CONFIG.zIndex = num;
 					utils.css(private_allCnt,{
-						'zIndex':num
+						zIndex : num
 					});
 					utils.css(private_fixedScreenBottomDom,{
-						'zIndex':num
+						zIndex : num
 					});
 					utils.css(private_fixedScreenTopDom,{
-						'zIndex':num
+						zIndex : num
 					});
 				}
 			}
 		},
-		'confirm' : function(){
+		confirm : function(){
 			return new CONFIRM(arguments[0]);
 		},
-		'ask' : function(text,callback,param){
+		ask : function(text,callback,param){
 			return new ASK(text,callback,param);
 		},
-		'prompt' : function(txt,time){
+		prompt : function(txt,time){
 			return new prompt(txt,time);
 		},
-		'plane' : function(){
+		plane : function(){
 			return new PLANE(arguments[0]);
 		},
-		'cover' : function(){
+		cover : function(){
 			return new COVER(arguments[0]);
 		},
-		'select' : function(){
+		select : function(){
 			return new SELECT(arguments[0],arguments[1]);
 		}
 	};
@@ -903,7 +919,7 @@
 	
 	//判断是否支持css属性
 	var supports = (function() {
-		var styles = document.createElement('div')['style'],
+		var styles = document.createElement('div').style,
 			vendors = 'Webkit Khtml Ms O Moz'.split(/\s/),
 			len = vendors.length;
 		
@@ -960,6 +976,24 @@
 	function TypeOf(obj) {
 		return Object.prototype.toString.call(obj).match(/\s(\w+)/)[1];
 	}
+	
+	/**
+	 * 对象拷贝
+	 *
+	 */
+	function clone(fromObj,toObj){   
+		for(var i in fromObj){   
+			if(typeof fromObj[i] == "object"){   
+				toObj[i] = fromObj[i].constructor==Array ? [] : {};
+				
+				clone(fromObj[i],toObj[i]);   
+				continue;   
+			}   
+			toObj[i] = fromObj[i];
+		}
+		return toObj;
+	}
+	
 	/**
  	 * 遍历数组或对象
 	 * 
@@ -1034,7 +1068,7 @@
 		}
 		prop = prop.toString();
 		if (prop == "opacity") {
-			elem.style['filter'] = 'alpha(opacity=' + (value * 100)+ ')';
+			elem.style.filter = 'alpha(opacity=' + (value * 100)+ ')';
 			value = value;
 		} else if (value == +value && value != ''){
 			value = value + "px";
@@ -1095,11 +1129,10 @@
     })();
 	
 	/**
-	 * 动画类
-	 *
+	 * JS动画类
+	 * 内部类，不检测参数
 	 */
-    function anim(elem,cssObj,durtime) {
-		var args = arguments;
+    function JS_anim(elem,cssObj,durtime,animType,onEnd) {
         this.elem = elem;
 		
 		var cssParse = parseCSS_forAnim(this.elem, cssObj);
@@ -1111,24 +1144,12 @@
 		//属性目标值Array
 		this.cssEnd = cssParse[2];
 		this.durtime = durtime;
-		this.animType = "Linear";
-		this.onEnd = null;
-		if (args.length < 3) {
-			throw new Error("missing arguments [dom,cssObj,durtime]");
-		} else {
-			if (TypeOf(args[3]) == "Function") {
-				this.onEnd = args[3];
-			}else if (typeof (args[3]) == "string") {
-				this.animType = args[3];
-			}
-			
-			if (TypeOf(args[4]) == "Function") {
-				this.onEnd = args[4];
-			}
-		}
+		this.animType = animType || "Linear";
+		this.onEnd = onEnd;
+		
 		this.startAnim();
     }
-    anim.prototype['startAnim'] = function () {
+    JS_anim.prototype.startAnim = function () {
 		var me = this;
 		//全部时间 | 开始时间
 		var time_all = this.durtime;
@@ -1170,7 +1191,60 @@
 		requestAnimationFrame(showFrame);
 	};
 	
-	
+	/**
+	 * css3动画
+	 * 内部类，不检测参数
+	 */
+	function css_anim(elem,cssObj,durtime,animType,onEnd){
+		//记录初始transition值
+		var transition_start = getStyle(elem,'-webkit-transition');
+		var cssSet = clone(cssObj,{
+			'-webkit-transform' : 'translate3d(0, 0, 0)',
+			'-webkit-transition' : durtime + 'ms'
+		});
+		
+		var delay;
+		function endFn(){
+			clearTimeout(delay);
+			delay = setTimeout(function(){
+				removeEventListener("webkitTransitionEnd",endFn, true);
+				//还原transition值
+				setCss(elem,{
+					'-webkit-transition' : transition_start
+				});
+				onEnd && onEnd.call(elem);
+			},30);
+		}
+		elem.addEventListener("webkitTransitionEnd",endFn, true);
+		
+		setCss(elem,cssSet);
+	}
+	/**
+	 * 兼容css3、js动画
+	 */
+	function animation(elem,cssObj,durtime,a,b) {
+        var animType = "Linear",
+			onEnd = null;
+		
+		if (arguments.length < 3) {
+			throw new Error("missing arguments [dom,cssObj,durtime]");
+		} else {
+			if (TypeOf(a) == "Function") {
+				onEnd = a;
+			}else if (typeof (a) == "string") {
+				animType = a;
+			}
+			
+			if (TypeOf(b) == "Function") {
+				onEnd = b;
+			}
+		}
+		if(private_css3){
+			return css_anim(elem,cssObj,durtime,animType,onEnd);
+		}else{
+			return new JS_anim(elem,cssObj,durtime,animType,onEnd);
+		}
+	}
 	var outerWidth,
 		outerHeight;
 	var testDom = document.createElement('div');
@@ -1184,12 +1258,12 @@
 	}
 	if(testDom.getBoundingClientRect !== 'undefined'){
 		outerWidth = function(elem){
-			var output = elem.getBoundingClientRect()['width'] || 0;
+			var output = elem.getBoundingClientRect().width || 0;
 			
 			return typeof(output) != 'undefined' ? output : count_outerWidth(elem);
 		};
 		outerHeight = function(elem){
-			var output = elem.getBoundingClientRect()['height'] || 0;
+			var output = elem.getBoundingClientRect().height || 0;
 			
 			return typeof(output) != 'undefined' ? output : count_outerHeight(elem);
 		};
@@ -1202,43 +1276,35 @@
 	//缩小，淡出
 	var zoomOut = private_css3 ? function(DOM,time,fn){
 		var op = getStyle(DOM,'opacity');
-		var transt = getStyle(DOM,'-webkit-transition');
 		
-		setCss(DOM,{
+		css_anim(DOM,{
 			'-webkit-transform' : 'scale(0.5)',
-			'-webkit-transition' : time + 'ms',
-			'opacity' : 0
+			opacity : 0
+		},time,null,function(){
+			setCss(DOM,{
+				'-webkit-transform' : 'scale(1)',
+				opacity : op
+			});
+			fn && fn.call(DOM);
 		});
-		
-		var delay;
-		DOM.addEventListener("webkitTransitionEnd", function(){
-			clearTimeout(delay);
-			delay = setTimeout(function(){
-				setCss(DOM,{
-					'-webkit-transform' : 'scale(1)',
-					'-webkit-transition' : transt,
-					'opacity' : op
-				});
-				fn && fn.call(DOM);
-			},20);
-		}, true);
+
 	} : function (DOM,time,fn){
 		var op = getStyle(DOM,'opacity');
-		DOM.style['overflow'] = 'hidden';
+		DOM.style.overflow = 'hidden';
 		var width = getStyle(DOM,'width');
 		var height = outerHeight(DOM);
 		var left = getStyle(DOM,'left') || 0;
 		var top = getStyle(DOM,'top') || 0;
 		
-		new anim(DOM,{
-			'width' : width/2,
-			'height' : height/2,
-			'left' : (left + width/4),
-			'top' : (top + height/4),
-			'opacity' : 0
+		animation(DOM,{
+			width : width/2,
+			height : height/2,
+			left : (left + width/4),
+			top : (top + height/4),
+			opacity : 0
 		},time,function(){
-			DOM.style['opacity'] = op;
-			DOM.style['display'] = 'none';
+			DOM.style.opacity = op;
+			DOM.style.display = 'none';
 			fn && fn.call(DOM);
 		});
 	};
@@ -1340,9 +1406,9 @@
 	//通用拖动方法
 	function drag(handle_dom,dom,param){
 		var param = param || {};
-		var onStart = param['start'] || null;
-		var onMove = param['move'] || null;
-		var onEnd = param['end'] || null;
+		var onStart = param.start || null;
+		var onMove = param.move || null;
+		var onEnd = param.end || null;
 		
 		var X, Y,L,T,W,H;
 		bindHandler(handle_dom,'mousedown',function (e){
@@ -1374,36 +1440,35 @@
 	}
 	
     return {
-		'TypeOf' : TypeOf,
-		'each' : each,
-		'css' : setCss,
-		'supports' : supports,
-		'zoomOut' : zoomOut,
-		'hasClass' : hasClass,
-		'getStyle' : getStyle,
-		'outerWidth' : outerWidth,
-		'outerHeight' : outerHeight,
-		'ready' : ready,
-		'bind' : bind,
-		'unbind' : removeHandler,
-		'drag' : drag,
-		'animation' : function (a,b,c,d,e) {
-			return new anim(a,b,c,d,e);
-		},
+		TypeOf : TypeOf,
+		each : each,
+		css : setCss,
+		supports : supports,
+		zoomOut : zoomOut,
+		hasClass : hasClass,
+		getStyle : getStyle,
+		outerWidth : outerWidth,
+		outerHeight : outerHeight,
+		ready : ready,
+		bind : bind,
+		clone : clone,
+		unbind : removeHandler,
+		drag : drag,
+		animation : animation,
 		//创建dom
-		'createDom' : function (html){
+		createDom : function (html){
 			var a = document.createElement('div');
 			a.innerHTML = html;
 			return a.childNodes;
 		},
 		//移除dom节点
-		'removeNode' : function (elem){  
+		removeNode : function (elem){  
 			if(elem && elem.parentNode && elem.tagName != 'BODY'){  
 				elem.parentNode.removeChild(elem);  
 			}  
 		},
 		//创建style标签
-		'createStyleSheet' : function (cssStr,attr){
+		createStyleSheet : function (cssStr,attr){
 			var styleTag = document.createElement('style');
 			
 			attr = attr || {};
@@ -1423,7 +1488,7 @@
 			return styleTag;
 		},
 		//根据class查找元素
-		'findByClassName' : (function(){
+		findByClassName : (function(){
 			if(typeof(document.getElementsByClassName) !== 'undefined'){
 				//支持gEbCN
 				return function (dom,classStr){
@@ -1447,16 +1512,16 @@
 			}
 		})(),
 		 //读取dom在页面中的位置
-		'offset' : function (elem){
+		offset : function (elem){
 			var box = {
-				'top' : 0,
-				'left' : 0,
-				'screen_top' : 0,
-				'screen_left' : 0
-			}
-			var size;
+				top : 0,
+				left : 0,
+				screen_top : 0,
+				screen_left : 0
+			},
+			size;
 			
-			if ( typeof(elem.getBoundingClientRect) !== 'undefined' ) {
+			if (typeof(elem.getBoundingClientRect) !== 'undefined' ) {
 				size = elem.getBoundingClientRect();
 			}
 			box.screen_top = size.top;
@@ -1467,40 +1532,40 @@
 			return box;
 		},
 		//滑出
-		'slideUp' : function (DOM,time,fn){
-			DOM.style['overflow'] = 'hidden';
+		slideUp : function (DOM,time,fn){
+			DOM.style.overflow = 'hidden';
 			//FIXME padding
-			new anim(DOM,{
-				'height' : 0,
-				'padding' : 0
+			animation(DOM,{
+				height : 0,
+				padding : 0
 			}, time,function(){
-				DOM.style['display'] = 'none';
+				DOM.style.display = 'none';
 				fn && fn.call(DOM);
 			});
 		},
 		//淡入
-		'fadeIn' : function (DOM,time,fn){
+		fadeIn : function (DOM,time,fn){
 			var op = getStyle(DOM,'opacity');
-			DOM.style['opacity'] = 0;
-			DOM.style['display'] = 'block';
-			new anim(DOM,{
+			DOM.style.opacity = 0;
+			DOM.style.display = 'block';
+			animation(DOM,{
 				'opacity' : op
 			}, time, function(){
 				fn && fn.call(DOM);
 			});
 		},
 		//淡出
-		'fadeOut' : function (DOM,time,fn){
+		fadeOut : function (DOM,time,fn){
 			var op = getStyle(DOM,'opacity');
-			new anim(DOM,{
+			animation(DOM,{
 				'opacity' : 0
 			}, time,function(){
-				DOM.style['opacity'] = op;
-				DOM.style['display'] = 'none';
+				DOM.style.opacity = op;
+				DOM.style.display = 'none';
 				fn && fn.call(DOM);
 			});
 		},
-		'render' : function (str, data){
+		render : function (str, data){
 			if(!str || !data){
 				return '';
 			}
