@@ -1,7 +1,7 @@
 /**
  * @author bh-lay
  */
-var mongo = require('../conf/mongo_connect');
+var mongo = require('../mod/DB');
 var views = require('../mod/views');
 var component = require('../mod/component');
 

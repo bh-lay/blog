@@ -9,7 +9,7 @@
 
 var juicer = require('juicer');
 var fs = require('fs');
-var mongo = require('../conf/mongo_connect');
+var mongo = require('../mod/DB');
 
 //define template Object
 var chip = {};

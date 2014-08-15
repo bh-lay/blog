@@ -7,7 +7,7 @@
 var views = require('../mod/views');
 var component = require('../mod/component');
 
-var mongo = require('../conf/mongo_connect');
+var mongo = require('../mod/DB');
 var showdown = require('../lib/showdown/showdown.js');
 var converter = new showdown.converter();
 

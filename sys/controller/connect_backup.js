@@ -3,7 +3,7 @@
  */
 var https = require('https');
 var querystring = require('querystring');
-var mongo = require('../conf/mongo_connect');
+var mongo = require('../mod/DB');
 var sina = require('../lib/sinaSDK.js');
 var session = require('../mod/session');
 

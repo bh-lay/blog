@@ -5,7 +5,7 @@
  */
 
 var juicer = require('juicer');
-var mongo = require('../conf/mongo_connect');
+var mongo = require('../mod/DB');
 
 exports.produce = function(temp,data,callback){
 	var method = mongo.start();

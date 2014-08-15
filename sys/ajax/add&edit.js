@@ -3,7 +3,7 @@
  * 
  */
 
-var mongo = require('../conf/mongo_connect');
+var mongo = require('../mod/DB');
 var session = require('../mod/session');
 
 function add(parm,res_this,collection_name){

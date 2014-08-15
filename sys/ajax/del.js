@@ -16,7 +16,7 @@
 ***************************************************************/
 
 var querystring = require('querystring');
-var mongo = require('../conf/mongo_connect');
+var mongo = require('../mod/DB');
 var session = require('../mod/session');
 
 var del_conf = {

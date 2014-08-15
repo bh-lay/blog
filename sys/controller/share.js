@@ -1,7 +1,7 @@
 /**
  * @author bh-lay
  */
-var mongo = require('../conf/mongo_connect');
+var mongo = require('../mod/DB');
 var temp = require('../mod/page_temp');
 var chip = require('../mod/chip');
 var juicer = require('juicer');

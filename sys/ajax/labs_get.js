@@ -17,7 +17,7 @@ get_list: 								|		get_detail
 -----------------------------------------------------------------
  */
 
-var mongo = require('../conf/mongo_connect');
+var mongo = require('../mod/DB');
 var fs = require('fs');
 var querystring=require('querystring');
 //var markdown = require('markdown');

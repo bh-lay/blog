@@ -10,7 +10,7 @@
 	});
  */
 
-var mongo = require('../../conf/mongo_connect');
+var mongo = require('../../mod/DB');
 var session = require('../../mod/session');
 //增加一条用户记录
 function add(parm,res_this){
