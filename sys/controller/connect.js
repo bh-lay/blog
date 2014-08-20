@@ -18,6 +18,7 @@ function login(request,res_this,user,callback){
 				'user_group' : user_group,
 				'username' : user['username'], 
 				'user_id' : userid,
+				'avatar' : '',
 				'power_data' : power_data
 			});
 			callback && callback(null)
