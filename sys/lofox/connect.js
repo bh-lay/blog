@@ -10,6 +10,7 @@
 
 var fs = require('fs');
 var zlib = require("zlib");
+var parse = require('./parse.js');
 var SESSION = require('./session.js');
 
 
@@ -95,9 +96,10 @@ function sendHTML(status,content){
  *
  */
 function CONNECT(req,res){
+	this.url = parse.url(req.url);
 	this.request = req;
 	this.response = res;
-	this.session = null;
+	this._session = null;
 }
 /**	//向客户端发送信息
  *	connect.write('json',{
@@ -177,16 +179,16 @@ CONNECT.prototype['cookie'] = function(){
  */
 CONNECT.prototype['session'] = function(callback){
 	var me = this;
-	if(this.session){
+	if(this._session){
 		//session已被打开,直接使用
-		callback&&callback(this.session);
+		callback&&callback(this._session);
 	}else{
 		//启用session
 		var cookie = this.cookie();
-		this.session = new SESSION(cookie,function(cookieObj){
+		this._session = new SESSION(cookie,function(cookieObj){
 			me.cookie(cookieObj);
 		},function(){
-			callback&&callback(me.session);
+			callback&&callback(me._session);
 		});
 	}
 };

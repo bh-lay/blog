@@ -7,10 +7,13 @@
  */
 
 var http = require('http');
-var parse = require('./parse.js')
 var connect = require('./connect.js');
+var DB = require('./DB.js');
+var views = require('./views');
+var cache = require('./cache');
 var staticFile = require('./staticFile.js');
 var url_redirect = require('../conf/301url');
+var config = require('../conf/app_config');
 
 /**
  * 格式化path 
@@ -49,7 +52,7 @@ function searchParser(search){
  * @param {Object} url
  */
 function findUrlInMaps(inputPath,MAPS){
-	//定义从url中取到的值
+	//定义从url中取到的数据｛变量｝
 	var matchValue = {};
 	//记录找到的maps项
 	var this_mapsItem = null;
@@ -58,8 +61,8 @@ function findUrlInMaps(inputPath,MAPS){
 	for(var i in MAPS){
 		//获取maps当前项数组形式的url节点
 		var pathData = pathParser(i);
-		//比对输入url长度与maps当前节点长度是否一致
-		if(pathData.length != inputPath.length){
+		//路径与maps当前节点长度不一致，或最后配置不为通配符“*”跳过
+		if(pathData.length != inputPath.length && pathData[pathData.length -1] != '*'){
 			continue
 		}
 		
@@ -73,15 +76,17 @@ function findUrlInMaps(inputPath,MAPS){
 				if(tryMatch){
 					var key = tryMatch[1];
 					matchValue[key] = inputPath[s];
-				}else{
-					//既不一致，又不是变量，丢弃此条maps记录
+				}else if(pathData[s] != '*'){
+					//既不一致，又不是变量，也不是通配符，丢弃此条maps记录
 					this_mapsItem = null;
 					matchValue = {};
 					break
 				}
+				//else{} //符合条件
 			}
+			//else{} //符合条件
 		}
-		//若已经匹配出结果，结束匹配
+		//若已经匹配出结果，不再继续匹配
 		if(this_mapsItem){
 			break
 		}
@@ -109,9 +114,10 @@ function APP(port){
 	
 	// server start
 	var server = http.createServer(function (req,res) {
-		var path = parse.url(req.url);
-		var new_connect = new connect(req,res);
 		
+		var new_connect = new connect(req,res);
+		var path = new_connect.url;
+		console.log(path);
 		var pathNode = pathParser(path.pathname);
 		var result = findUrlInMaps(pathNode,me.MAPS);
 		
@@ -179,4 +185,7 @@ APP.prototype.rest = function(callback){
 		this.REST = callback;
 	}
 };
+APP.prototype.views = views;
+APP.prototype.cache = cache;
+APP.prototype.config = config;
 module.exports = APP;

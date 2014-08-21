@@ -4,8 +4,9 @@
  */
 
 var fs = require('fs');
+var parse = require('../../lofox/parse.js');
 
-exports.upload = function (req,res_this){
+exports.upload = function (req,callback){
 	var json = {
 		'code':200,
 		'files' : []
@@ -25,6 +26,6 @@ exports.upload = function (req,res_this){
 			}
 			json.files = newFiles;
 		}
-		res_this.json(json);
+		callback && callback(json);
 	});
 }

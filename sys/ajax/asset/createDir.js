@@ -4,12 +4,10 @@
  */
 
 var fs = require('fs');
+var parse = require('../../lofox/parse.js');
 var assetPath = "../../asset/";
 
-exports.createDir = function (req,res_this){
-	var json = {
-		'code':200
-	}
+exports.createDir = function (req,callback){
 	parse.request(req,function(err,fields,files){
 		
 		var root = fields.root || '';
@@ -18,25 +16,21 @@ exports.createDir = function (req,res_this){
 		//消除参数中首尾的｛/｝
 		root = root.replace(/^\/|\/$/g,'');
 		if(err || dirName.length < 1){
-			json.code = 201;
-			json.msg = '参数不全';
-			res_this.json(json);
+			callback && callback('参数不全');
 		}else{
 			var Path = assetPath + root + '/' + dirName;
 			
 			//检测是否同名
 			var exists = fs.existsSync(Path);
 			if(exists){
-				json.code = 202;
-				json.msg = '目录重名';
-				res_this.json(json);
+				callback && callback('目录重名');
 			}else{
 				fs.mkdir(Path,777,function(err){
 					if(err){
-						json.code = 201;
-						json.msg = '出错了';
+						callback && callback('出错了');
+					}else{
+						callback && callback(null);
 					}
-					res_this.json(json);
 				});
 				
 			}

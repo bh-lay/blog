@@ -4,17 +4,14 @@
  */
 
 var fs = require('fs');
+var parse = require('../../lofox/parse');
 var assetPath = "../../asset/";
 
-exports.upload = function (req,res_this){
-	var json = {
-		'code':200,
-		'files' : []
-	}
+exports.upload = function (req,callback){
 	parse.request(req,function(err,fields, files){
 		var errorFiles = [];
 		if(err){
-			code = 201
+			callback && callback(err);
 		}else if(files.length){
 			var newFiles = [];
 			var root = fields.root;
@@ -39,8 +36,7 @@ exports.upload = function (req,res_this){
 	 	    		});
 				}
 			}
-			json.files = newFiles;
+			callback && callback(null,newFiles);
 		}
-		res_this.json(json);
 	});
 }

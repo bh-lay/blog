@@ -1,10 +1,8 @@
 /**
  * @author bh-lay
  */
+var parse = require('../lib/parse');
 var mongo = require('../mod/DB');
-var juicer = require('juicer');
-var views = require('../mod/views');
-var component = require('../mod/component');
 
 var showdown = require('../lib/showdown/showdown.js');
 var converter = new showdown.converter();
@@ -43,49 +41,50 @@ function get_detail(lab_name,callback){
 	});
 }
 
-exports.deal = function (req,res_this,path){
-	var path_length = path['pathnode'].length;
-	if(path_length == 1){
-		cache.html('labs_list',function(this_cache){
-			res_this.html(200,this_cache);
-		},function(save_cache){
-			list_page(function(err,list){
-				//获取视图
-				views.get('labsList',{
-					'title' : '实验室',
-					'keywords' : '剧中人,bh-lay,网站建设,网页设计,设计师',
-					'description' : '小剧客栈是剧中人精心营造的一个向广大设计爱好者、喜欢剧中人开放的博客，小剧希望用设计师鞭策自己，愿意和你共同分享，一起进步！',
-					'list' : list
-				},function(err,html){
-					save_cache(html);
-				});
+
+exports.list = function (connect,app){
+	app.cache.html('labs_list',function(this_cache){
+		connect.write('html',200,this_cache);
+	},function(save_cache){
+		list_page(function(err,list){
+			//获取视图
+			app.views('labsList',{
+				'title' : '实验室',
+				'keywords' : '剧中人,bh-lay,网站建设,网页设计,设计师',
+				'description' : '小剧客栈是剧中人精心营造的一个向广大设计爱好者、喜欢剧中人开放的博客，小剧希望用设计师鞭策自己，愿意和你共同分享，一起进步！',
+				'list' : list
+			},function(err,html){
+				save_cache(html);
 			});
 		});
-	}else if(path_length == 2){
-		var lab_name = decodeURI(path['pathnode'][1]);
-		cache.html('labs_id_' + lab_name,function(this_cache){
-			res_this.html(200,this_cache);
-		},function(save_cache){
-			//获取作品信息
-			get_detail(lab_name,function(err,data){
+	});
+};
+
+exports.detail = function (connect,app,lab_name){
+	app.cache.html('labs_id_' + lab_name,function(this_cache){
+		connect.write('html',200,this_cache);
+	},function(save_cache){
+		//获取作品信息
+		get_detail(lab_name,function(err,data){
+			if(err){
+				connect.write('error','怎么坏掉了呢！');
+				return
+			}
+			//获取视图
+			app.views('labsDetail',{
+				'title' : data.title,
+				'keywords' : data.tags,
+				'description' : data.intro,
+				'content' : data.content,
+				'git_full_name' : data.git_full_name,
+				'demo_url' : data.demo_url
+			},function(err,html){
 				if(err){
-					res_this.notFound('小盆友，表逗我玩儿！');
+					connect.write('error','怎么坏掉了呢！');
 					return
 				}
-				//获取视图
-				views.get('labsDetail',{
-					'title' : data.title,
-					'keywords' : data.tags,
-					'description' : data.intro,
-					'content' : data.content,
-					'git_full_name' : data.git_full_name,
-					'demo_url' : data.demo_url
-				},function(err,html){
-					save_cache(html);
-				});
+				save_cache(html);
 			});
 		});
-	}else{
-		res_this.notFound('小盆友，表逗我玩儿！');
-	}
+	});
 };
