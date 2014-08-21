@@ -233,7 +233,7 @@ window.admin.render = window.admin.render || {};
  **/
 (function(exports){
 	var list_tpl = ['<tr>',
-		'<td class="arLiTitle"><a title="查看作品" href="/share/{id}" target="_blank">{title}</a></td>',
+		'<td class="arLiTitle"><a title="查看作品" href="/opus/{id}" target="_blank">{title}</a></td>',
 		'<td class="arLiTime">{time_show}</td>',
 		'<td class="arLiEdit">',
 			'<a class="btn btn-default btn-xs custom-publish" title="修改"  href="javascript:void(0)" data-type="opus" data-id="{id}"><span class="glyphicon glyphicon-edit"></span></a>',

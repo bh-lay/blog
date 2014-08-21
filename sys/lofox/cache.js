@@ -39,6 +39,10 @@ function cache(cache_name,callback,create_cache,root){
 			});
 			//try to clear cache
 			fs.readdir(cache_root,function(err,files){
+				if(err){
+					callback&&callback(err);
+					return
+				}
 				var total = files.length;
 				if(total > cache_max_num){
 					clear_directory(cache_root);
@@ -51,6 +55,10 @@ function cache(cache_name,callback,create_cache,root){
 function clear_directory(root_path,callback){
 	
 	fs.readdir(root_path,function(err,files){
+		if(err){
+			callback&&callback(err);
+			return
+		}
 		var total = files.length;
 
 		for(var i = 0;i < total;i++){
