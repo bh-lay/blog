@@ -60,10 +60,10 @@ window.L = window.L || {};
 
 seajs.use([
 	'util/lofox_1_0.js',
-	'UI/dialog.js'
+	'UI/dialog.js',
+	'comments/index.js'
 ],function(){
 	var lofox = new util.lofox();
-	
 	var dom = $('.contlayer');
 	var activeCover = null;
 	var basePage;
@@ -98,6 +98,10 @@ seajs.use([
 		this.title('小剧客栈_剧中人的个人空间 网页设计师博客 互动设计学习者');
 		L.nav.setCur('/');
 		var dom = ani();
+		dom.html('<div class="l_row"></div>');
+	//	new L.comments(dom.find('.l_row'));
+		
+		//return;
 		seajs.use('public/js/index.js',function(indexPage){
 			indexPage(dom);
 		});

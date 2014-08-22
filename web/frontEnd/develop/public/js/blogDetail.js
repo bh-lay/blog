@@ -15,12 +15,6 @@ define(function(require,exports){
 			'<div class="tag"><strong>本文关键字：</strong>${tags}</div>',
 			'<div class="pageUrl"><strong>转载请注明来源：</strong>http://bh-lay.com/blog/${id}</div>',
 		'</div>',
-		'<div class="youyan">',
-		'<div id="uyan_frame"></div>',
-		'<script type="text/javascript">',
-			'var uyan_config = {"du":"bh-lay.com"};',
-		'</script>',
-		'<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1605927" async=""></script>',
 	'</div>'].join('');
 	
 	function getData(id,fn){
