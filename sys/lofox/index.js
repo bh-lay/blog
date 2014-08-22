@@ -8,9 +8,8 @@
 
 var http = require('http');
 var connect = require('./connect.js');
-var DB = require('./DB.js');
-var views = require('./views');
-var cache = require('./cache');
+var views = require('./views.js');
+var cache = require('./cache.js');
 var staticFile = require('./staticFile.js');
 var url_redirect = require('../conf/301url');
 var config = require('../conf/app_config');
@@ -188,4 +187,5 @@ APP.prototype.rest = function(callback){
 APP.prototype.views = views;
 APP.prototype.cache = cache;
 APP.prototype.config = config;
+
 module.exports = APP;

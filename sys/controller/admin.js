@@ -3,7 +3,6 @@
  * 
  */
 
-var session = require('../mod/session');
 var powerCode = 1;
 var login_path = '/admin/login';
 

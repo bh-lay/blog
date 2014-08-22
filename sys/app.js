@@ -57,12 +57,15 @@ app.get('/admin/*', function(data,connect){
 });
 
 //用户认证
-var connect = require('./controller/connect.js');
-app.get('/connect/*', function(data,connect){
-	connect.write('json',{
-		'code' : 500
-	})
-	//connect.render(connect,app);
+var snsLogin = require('./controller/snsLogin.js');
+app.get('/snsLogin/{from}', function(data,connect){
+	if(data.from == 'github'){
+		snsLogin.github(connect,app);
+	}else{
+		connect.write('json',{
+			'code' : 500
+		});
+	}
 });
 
 /**

@@ -5,7 +5,6 @@ var https = require('https');
 var querystring = require('querystring');
 var mongo = require('../mod/DB');
 var sina = require('../lib/sinaSDK.js');
-var session = require('../mod/session');
 
 function matchUser(param,callback){
 	var from = param['from'] || 'weibo';

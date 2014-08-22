@@ -4,9 +4,7 @@
  * demo $.post('/ajax/user',{},function(d){console.log(d)})
  */
 
-var mongo = require('../../mod/DB');
-var session = require('../../mod/session');
-
+var mongo = require('../../lofox/DB.js');
 function add(parm,res_this){
 	var parm = parm;
 	

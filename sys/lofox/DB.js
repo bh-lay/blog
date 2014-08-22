@@ -4,6 +4,7 @@
 
 
 var mongodb = require('mongodb');
+var parse = require('./parse.js');
 //CONFIG is a global object
 var conf = CONFIG.mongo,
 	host = conf.host,
@@ -109,9 +110,9 @@ exports.get_power = function (user_group,callback){
 	var method = new START();
 	method.open({'collection_name':'user_group'},function(err,collection){
 		collection.find({'user_group':user_group}).toArray(function(err, docs) {
-			var power_data = docs[0]['power'];
 			method.close();
-			callback&&callback(power_data);
+			var power_data = docs.length ? docs[0]['power'] : null;
+			callback&&callback(err,power_data);
 		});
 	});
 }

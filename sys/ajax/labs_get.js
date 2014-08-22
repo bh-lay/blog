@@ -17,7 +17,7 @@ get_list: 								|		get_detail
 -----------------------------------------------------------------
  */
 
-var mongo = require('../mod/DB');
+var mongo = require('../lofox/DB.js');
 var fs = require('fs');
 var querystring=require('querystring');
 //var markdown = require('markdown');

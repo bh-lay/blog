@@ -7,7 +7,7 @@ var querystring = require('querystring');
 var CONF = {
 	'client_id' : '150e88277697b41e0702',
 	'client_secret' : 'a1aa1a69c98375665a58287c2de2ca7636742f65',
-	'redirect_uri' : 'http://bh-lay.com/connect/github/'
+	'redirect_uri' : 'http://bh-lay.com/snsLogin/github/'
 }
 exports.get_token = function (code,callback){
 	var postData = querystring.stringify({

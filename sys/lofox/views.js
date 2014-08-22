@@ -10,7 +10,7 @@
  */
 
 var fs = require('fs');
-var component = require('../mod/component');
+var component = require('./component');
 var juicer = require('juicer');
 var baseRoot = './views/';
 
