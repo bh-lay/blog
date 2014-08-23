@@ -19,19 +19,15 @@ function add(parm,callback){
 	var method = mongo.start();
 		
 	method.open({'collection_name':'user'},function(err,collection){
-	
-		collection.find({}, {}).toArray(function(err, docs) {
-	
-			parm.id = parse.createID();
+		parm.id = parse.createID();
 
-			collection.insert(parm,function(err,result){
-				if(err) {
-					callback && callback(err);
-				}else {
-					callback && callback(null);
-				}
-				method.close();
-			});
+		collection.insert(parm,function(err,result){
+			if(err) {
+				callback && callback(err);
+			}else {
+				callback && callback(null);
+			}
+			method.close();
 		});
 	});
 }
@@ -168,7 +164,7 @@ function login_handle(connect,session_this,username,password){
 					session_this.set({
 						'user_group' : user_group,
 						'username' : docs[0]['username'], 
-						'user_id' : userid,
+						'uid' : userid,
 						'power_data' : power_data
 					});
 					

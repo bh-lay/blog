@@ -16,8 +16,131 @@
   -moz-box-sizing: border-box 
   -webkit-box-sizing: border-box 
 
+/**用户登录框**/
+.l_login_panel
+  padding: 50px
 
+/** 评论 **/
+.l_comments
+  padding-top: 50px
 
+.l_com_sendBox
+  margin-bottom: 30px
+
+.l_com_item
+  height: 80px
+  margin-bottom: 10px
+  background: #fff
+
+.l_sendBox
+  position: relative
+  transition: 0.5s
+
+.l_sendBox_main
+  position: relative
+  margin-left: 90px
+  background: #ccc
+
+.l_send_textarea textarea
+  position: relative
+  display: block
+  box-sizing: border-box
+  width: 100%
+  height: 80px
+  padding: 4px 10px
+  margin: 0px
+  border: none
+  resize: none
+  font-family: inherit
+  line-height: 1.5
+  font-size: 16px
+  color: #333 
+  transition: 0.05s
+  &:focus
+    outline: none
+
+.l_send_placeholder
+  position: absolute
+  top: 0px
+  left: 0px
+  width: 100%
+  height: 100%
+  line-height: 50px
+  text-indent: 1em
+  font-size: 18px
+  color: #666
+  cursor: text
+    
+.l_send_tools
+  height: 0px
+  padding: 0px
+  overflow: hidden
+  background: #fff
+  transition: 0.2s
+
+.l_send_tools_left
+  float: left
+
+.l_send_face
+  display: block
+  width: 30px
+  height: 30px
+  background: #333
+
+.l_send_tools_right
+  float: right
+
+.l_send_submit
+  display: block
+  width: 80px
+  height: 30px
+  line-height: 30px
+  text-align: center
+  color: #333
+  background: #fff
+  &:hover
+    background: #eee
+    color: #333
+
+.l_sendBox_active
+  .l_sendBox_main
+    box-shadow: 1px 1px 2px #000
+  .l_send_tools
+    height: 30px
+    margin-top: 1px
+
+.l_sendBox_avatar
+  position: absolute
+  top: 0px
+  left: 0px
+  width: 80px
+  height: 80px
+  overflow: hidden
+  background: #333
+  &:hover
+    .l_send_login
+      top: 0px
+  img
+    position: relative
+    width: 100%
+    
+.l_send_login
+  position: absolute
+  top: 100%
+  left: 0px
+  display: block
+  width: 100%
+  text-align: center
+  line-height: 80px
+  font-size: 16px
+  color: #fff
+  background: #000
+  background: rgba(0,0,0,0.5)
+  transition: 0.3s
+  &:hover
+    color: #fff
+  
+  
 /** pageA: index page*/
 .indeCnt
   width: 600px

@@ -57,6 +57,22 @@ window.L = window.L || {};
 		+ "');}return p.join('');");
 	};
 })(L);
+/**
+ * 全局登录方法
+ *
+ */
+(function(exports){
+	var baseTpl = ['<div class="l_login_panel">',
+		'<a href="#">github登录</a>',
+		'<a href="#">游客登录</a>',
+	'</div>'].join('');
+	exports.login = function (){
+		UI.pop({
+			// 'mask' : true,
+			'html' : baseTpl
+		});
+	};
+})(L);
 
 seajs.use([
 	'util/lofox_1_0.js',
@@ -99,9 +115,9 @@ seajs.use([
 		L.nav.setCur('/');
 		var dom = ani();
 		dom.html('<div class="l_row"></div>');
-	//	new L.comments(dom.find('.l_row'));
+		new L.comments(dom.find('.l_row'));
+		return;
 		
-		//return;
 		seajs.use('public/js/index.js',function(indexPage){
 			indexPage(dom);
 		});

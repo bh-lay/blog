@@ -16,19 +16,16 @@ function add(parm,collection_name,callback){
 			callback && callback(err);
 			return
 		}
-		collection.find({}, {}).toArray(function(err, docs) {
-			
-			parm.id = parse.createID();
+		parm.id = parse.createID();
 
-			collection.insert(parm,function(err,result){
-				if(err){
-					callback && callback(err);
-					return
-				}
-				callback && callback(null);
-				
-				method.close();
-			});
+		collection.insert(parm,function(err,result){
+			if(err){
+				callback && callback(err);
+				return
+			}
+			callback && callback(null);
+			
+			method.close();
 		});
 	});
 }

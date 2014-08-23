@@ -5,7 +5,7 @@
  */
 
 var juicer = require('juicer');
-var mongo = require('../mod/DB');
+var mongo = require('../lofox/DB');
 
 exports.produce = function(temp,data,callback){
 	var method = mongo.start();

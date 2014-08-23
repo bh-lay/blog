@@ -19,7 +19,7 @@ exports.render = function(connect,app){
 				'keywords' : '剧中人,bh-lay,网站建设,网页设计,设计师',
 				'description' : '小剧客栈是剧中人精心营造的一个向广大设计爱好者、喜欢剧中人开放的博客，小剧希望用设计师鞭策自己，愿意和你共同分享，一起进步！',
 				'username' : session_this.get('username'),
-				'userid' : session_this.get('user_id')
+				'userid' : session_this.get('uid')
 			},function(err,html){
 				if(err){
 					connect.write('html',500,'系统出错');
