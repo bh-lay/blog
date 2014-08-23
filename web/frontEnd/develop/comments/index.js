@@ -7,10 +7,6 @@
 	var baseTpl = ['<div class="l_comments">',
 		'<div class="l_com_sendBox"></div>',
 		'<div class="l_com_list">',
-			'<div class="l_com_item">',
-			'</div>',
-			'<div class="l_com_item">',
-			'</div>',
 		'</div>',
 	'</div>'].join('');
 	var sendBox_tpl = ['<div class="l_sendBox">',
@@ -34,6 +30,9 @@
 		'</div>',
 	'</div>'].join('');
 	
+	var item_tpl = ['<div class="l_com_item">',
+		'<%=content %>,<%=time %>,<%=uid %>',
+	'</div>',].join('');
 	/**
 	 * sendBox类
 	 */
@@ -63,12 +62,52 @@
 		});
 		$(dom).html($(this.dom));
 	}
-	sendBox.prototype.login = function(){
+	sendBox.prototype = {};
+	
+	/**
+	 * 列表类
+	 *
+	 */
+	function list(dom){
+		this.list = [];
+		this.skip = 0;
+		this.limit = 30;
+		this.total = 0;
+		this._status = 'normal';
+		this.dom = dom;
+		
+		this.getMore();
+	}
+	list.prototype.getMore = function(callback){
+		if(this._status == 'loading'){
+			return;
+		}
+		var me = this;
+		this._status = 'loading';
+		$.ajax({
+			'url' : '/ajax/comments/list',
+			'success' : function(data){
+				if(data.code && data.code == 200){
+					var DATA = data.data;
+					me.total = DATA.total;
+					me.list.concat(DATA.list);
+					var html = '';
+					for(var i=0,total=DATA.list.length;i<total;i++){
+						html += me.render(DATA.list[i]);
+					}
+					$(me.dom).append(html);
+				}
+			}
+		});
 	};
+	list.prototype.render = L.tplEngine(item_tpl);
+	
+	
 	return function(dom){
 		
 		this.dom = $(baseTpl)[0];
 		new sendBox($(this.dom).find('.l_com_sendBox')[0]);
+		new list($(this.dom).find('.l_com_list')[0]);
 		dom.html($(this.dom));
 	} 
 });

@@ -8,7 +8,6 @@ module.exports = function(data,callback){
 		skip_num = parseInt(data['skip']) || 0;
 	
 	var resJSON = {
-		'code':1,
 		'limit':limit_num,
 		'skip':skip_num,
 	};
@@ -22,11 +21,11 @@ module.exports = function(data,callback){
 			collection.find({},{limit:limit_num}).sort({id:-1}).skip(skip_num).toArray(function(err, docs) {
 				method.close();
 				if(err){
-					resJSON.code = 2;
+					callback&&callback(err);
 				}else{
 					resJSON['list'] = docs;
+					callback&&callback(null,resJSON);
 				}
-				callback&&callback(null,resJSON);
 			});
 		});
 	});

@@ -5,7 +5,7 @@ var parse = require('../../lofox/parse.js');
 //增加一条评论
 module.exports = function(data,callback){
 	var item = {
-		'content' : data.content,
+		'content' : parse.encodeHtml(data.content),
 		'time' : new Date().getTime(),
 		'uid' : data.uid || null
 	};

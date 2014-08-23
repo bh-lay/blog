@@ -107,6 +107,8 @@ exports.request = function(req,callBack){
 	}
 }
 
+
+
 //parse URL
 exports.url = function(url){
 	var url = url||'';
@@ -141,4 +143,13 @@ exports.md5 = function(text) {
 		text = text.toString();
 	}
 	return crypto.createHash('md5').update(text).digest('hex');
+};
+
+exports.encodeHtml = function(s){
+	return (typeof s != "string") ? s : s.replace(/"|&|'|<|>|[\x00-\x20]|[\x7F-\xFF]|[\u0100-\u2700]/g,function($0){
+		var c = $0.charCodeAt(0), r = ["&#"];
+		c = (c == 0x20) ? 0xA0 : c;
+		r.push(c); r.push(";");
+		return r.join("");
+	});
 };

@@ -114,8 +114,8 @@ seajs.use([
 		this.title('小剧客栈_剧中人的个人空间 网页设计师博客 互动设计学习者');
 		L.nav.setCur('/');
 		var dom = ani();
-		dom.html('<div class="l_row"></div>');
-		new L.comments(dom.find('.l_row'));
+		dom.html('<div class="l_row"><div class="l_col_12"></div></div>');
+		new L.comments(dom.find('.l_col_12'));
 		return;
 		
 		seajs.use('public/js/index.js',function(indexPage){

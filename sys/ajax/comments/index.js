@@ -38,14 +38,14 @@ exports.add = function (connect,app){
 //接口
 exports.list = function (connect,app){
 	var data = connect.url.search;
-	list(data,function(err,data){
+	list(data,function(err,jsonData){
 		var json = {
 			'code' : 200
 		}
 		if(err){
 			json.code = 201
 		}else{
-			json.data = data;
+			json.data = jsonData;
 		}
 		connect.write('json',json);
 	});
