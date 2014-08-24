@@ -76,8 +76,7 @@ window.L = window.L || {};
 
 seajs.use([
 	'util/lofox_1_0.js',
-	'UI/dialog.js',
-	'comments/index.js'
+	'UI/dialog.js'
 ],function(){
 	var lofox = new util.lofox();
 	var dom = $('.contlayer');
@@ -114,9 +113,6 @@ seajs.use([
 		this.title('小剧客栈_剧中人的个人空间 网页设计师博客 互动设计学习者');
 		L.nav.setCur('/');
 		var dom = ani();
-		dom.html('<div class="l_row"><div class="l_col_12"></div></div>');
-		new L.comments(dom.find('.l_col_12'));
-		return;
 		
 		seajs.use('public/js/index.js',function(indexPage){
 			indexPage(dom);
@@ -130,9 +126,6 @@ seajs.use([
 		this.title('我的博客_小剧客栈');
 		L.nav.setCur('blog');
 		var dom = ani();
-//		UI.cover({
-			
-//		});
 		seajs.use('public/js/blogList.js',function(blogList){
 			blogList(dom);
 		});
@@ -255,6 +248,20 @@ seajs.use([
 			'<script type="text/javascript">var uyan_config = {"du":"bh-lay.com"};</script>',
 			'<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1605927" async=""></script>',
 		'</div></div></div>'].join(''));
+	});
+	
+	/**
+	 * 留言板2
+	 */
+	lofox.set('/bless',function(){
+		basePage = 'indexList';
+		this.title('留言板_小剧客栈');
+		L.nav.setCur('blog');
+		var dom = ani();
+		seajs.use('comments/index.js',function(blogList){
+			dom.html('<div class="l_row"><div class="l_col_12"></div></div>');
+			new L.comments(dom.find('.l_col_12'));
+		});
 	});
 	
 	/**

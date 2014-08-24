@@ -23,6 +23,10 @@ module.exports = function(data,callback){
 				if(err){
 					callback&&callback(err);
 				}else{
+					docs.forEach(function(item){
+						item.uid = item.uid || '123';
+					});
+				
 					resJSON['list'] = docs;
 					callback&&callback(null,resJSON);
 				}
