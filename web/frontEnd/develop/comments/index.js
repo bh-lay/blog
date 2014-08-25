@@ -89,13 +89,16 @@
 			'success' : function(data){
 				if(data.code && data.code == 200){
 					var DATA = data.data;
-					me.total = DATA.total;
+					me.total = DATA.count;
 					me.list.concat(DATA.list);
 					var html = '';
 					for(var i=0,total=DATA.list.length;i<total;i++){
 						html += me.render(DATA.list[i]);
 					}
 					$(me.dom).append(html);
+					if(me.total == 0){
+						$(me.dom).append('<div class="l_com_list_noData">暂无数据</div>');
+					}
 				}
 			}
 		});

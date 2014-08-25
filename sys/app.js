@@ -9,7 +9,10 @@ app.set('staticFileRoot','../web/')
 
 //首页
 var index = require('./controller/index.js');
-app.get('/', function(data,connect){
+app.get([
+	'/',
+	'/bless'
+	], function(data,connect){
 	index.deal(connect,app);
 });
 
