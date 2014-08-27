@@ -195,6 +195,7 @@ exports.add_edit = function (connect,app){
 			'username' : data['username'] || '',
 			'password' : data['password'] ? parse.md5(data['password']) : null,
 			'email' : data['email'] || null,
+			'avatar' : data['avatar'] || null,
 			'user_group' : data['user_group'] || '',
 		};
 		if(!parm['username']){
@@ -315,27 +316,53 @@ exports.list = function(connect,app){
 		});
 	});
 }
-
-//获取用户信息
-exports.detail = function (connect,app,userID){
+/**
+ * 获取用户信息
+ */
+function getUserDetail(userID,callback){
 	var method = mongo.start();
-	var resJSON = {
-		'code' : 200,
-		'detail' : null
-	};
 	method.open({'collection_name':'user'},function(err,collection){
 		collection.find({id:userID}).toArray(function(err, docs) {
 			method.close();
-			if(arguments[1].length==0){
-				resJSON['code'] = 201;
-				resJSON['msg'] = 'could not find this user ' + userID + ' !';				
-			}else{ 
-				resJSON['detail'] = docs[0];
-				if(resJSON['detail']['password']){
-					delete resJSON['detail']['password']
-				}
+			if(err){
+				callback && callback(err);
+				return;
 			}
-			connect.write('json',resJSON);
+			var item = docs[0];
+			if(item['password']){
+				delete item['password']
+			}
+			callback&& callback(null,item)
 		});
+	});
+}
+//获取用户信息
+exports.detail = function (connect,app,userID){
+	parse.request(connect.request,function(err,data){
+		if(err){
+			connect.write('json',{
+				'code' : 2,
+				'msg' : ''
+			});
+			return
+		}
+		if(data.uid){
+			getUserDetail(data.uid,function(err,detail){
+				connect.write('json',{
+					'code' : 200,
+					'detail' : detail
+				});
+			});
+		}else{
+			connect.session(function(session_this){
+				var uid = session_this.get('uid');
+				getUserDetail(uid,function(err,detail){
+					connect.write('json',{
+						'code' : 200,
+						'detail' : detail
+					});
+				});
+			});
+		}
 	});
 }

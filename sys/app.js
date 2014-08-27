@@ -1,9 +1,10 @@
 
 global.CONFIG = require('./conf/app_config');
+
 //引入app框架
 var app_factory = require('../sys/lofox/index.js');
 //创建app
-var app = new app_factory(3000);
+var app = new app_factory(CONFIG.port);
 
 app.set('staticFileRoot','../web/')
 
@@ -170,11 +171,11 @@ app.get('/ajax/comments/{act}', function(data,connect){
 
 //用户
 var ajax_user = require('./ajax/user/index');
-app.get('/ajax/user', function(data,connect){
-	ajax_user.add_edit(connect,app);
-});
 app.get('/ajax/user/{mark}', function(data,connect){
 	switch(data.mark){
+		case 'add_edit':
+			ajax_user.add_edit(connect,app);
+		break
 		case 'signup':
 			ajax_user.signup(connect,app);
 		break
@@ -187,9 +188,13 @@ app.get('/ajax/user/{mark}', function(data,connect){
 		case 'list':
 			ajax_user.list(connect,app);
 		break
+		case 'detail':
+			ajax_user.detail(connect,app);
+		break
 		default :
-			var id = data.mark;
-			ajax_user.detail(connect,app,id);
+			connect.write('json',{
+				'code' : 500
+			});
 			
 	}
 });

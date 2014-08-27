@@ -63,14 +63,49 @@ window.L = window.L || {};
  */
 (function(exports){
 	var baseTpl = ['<div class="l_login_panel">',
-		'<a href="#">github登录</a>',
+		'<a target="github_login" href="https://github.com/login/oauth/authorize?client_id=150e88277697b41e0702&redirect_uri=http://bh-lay.com/snsLogin/github/">github登录</a>',
 		'<a href="#">游客登录</a>',
+		'<iframe src="about:blank" name="github_login" frameborder="0"></iframe>',
 	'</div>'].join('');
-	exports.login = function (){
-		UI.pop({
-			// 'mask' : true,
-			'html' : baseTpl
+	var githubTpl = '<iframe src="https://github.com/login/oauth/authorize?client_id=150e88277697b41e0702&redirect_uri=http://bh-lay.com/snsLogin/github/" name="github_login" frameborder="0"></iframe>';
+	function getMyInfo(callback){
+		$.ajax({
+			'url' : '/ajax/user/detail',
+			'type' : 'POST',
+			'success' : function(data){
+				if(data && data.code == 200){
+					callback && callback(null,data.detail);
+				}else{
+					callback && callback('error');
+				}
+			}
 		});
+	}
+	
+	//存储程序需要用到的登录回调
+	var LoginCallbacks = [];
+	
+	//相应登录的回调函数
+	window.appLoginCallback = function(){
+		for(var i=0,total=LoginCallbacks.length;i<LoginCallbacks;i++){
+			LoginCallbacks[i]('');
+		}
+		LoginCallbacks = [];
+	};
+	exports.login = function (type,callback){
+		LoginCallbacks.push(callback);
+		switch(type){
+			case 'github':
+				UI.pop({
+					'mask' : true,
+			//		'html' : githubTpl
+				});
+				getMyInfo(function(err,data){
+					callback && callback(err,data)
+				});
+			break
+		}
+		
 	};
 })(L);
 

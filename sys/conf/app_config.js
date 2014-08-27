@@ -1,12 +1,13 @@
 /**
- * @author bh-lay
+ * 此文件为项目配置文件
+ * 切不可直接传至服务端，需要手动配置
  * 
  */
 
 module.exports = {
 	'host' : '*',
 	'ip' : '0.0.0.0',
-	'port' : 3000,
+	'port' : 80,
 	//前端静态资源根目录
 	'frontEnd_root' : '/frontEnd/develop/',
 	//图床

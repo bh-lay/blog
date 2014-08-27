@@ -109,25 +109,27 @@
     height: 30px
     margin-top: 1px
 
-.l_sendBox_avatar
+.l_sendBox_side
   position: absolute
   top: 0px
   left: 0px
   width: 80px
+.l_sendBox_avatar
+  position: relative
   height: 80px
   overflow: hidden
   background: #333
   &:hover
     .l_send_login
-      top: 0px
+      opacity : 1
   img
     position: relative
     width: 100%
     
 .l_send_login
   position: absolute
-  top: 100%
-  left: 0px
+  top: 0
+  left: 0
   display: block
   width: 100%
   text-align: center
@@ -136,6 +138,7 @@
   color: #fff
   background: #000
   background: rgba(0,0,0,0.5)
+  opacity: 1
   transition: 0.3s
   &:hover
     color: #fff
@@ -697,7 +700,7 @@
     display: block
     margin: auto
 
-/*我的作品
+/*我的作品**/
 
 #focusTitle
   min-height: 120px
@@ -745,8 +748,7 @@
   padding-top: 20px
 
 
-/*
- * pageC-1: share list page
+/** pageC-1: share list page **/
 
 .shareList
   padding: 100px 0px

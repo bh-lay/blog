@@ -24,9 +24,12 @@
 				'</div>',
 			'</div>',
 		'</div>',
-		'<div class="l_sendBox_avatar">',
-			'<img src="http://asset.bh-lay.com/user/default.jpg" />',
-			'<a href="javascript:void(0)" class="l_send_login">登录</a>',
+		'<div class="l_sendBox_side">',
+			'<div class="l_sendBox_avatar">',
+				'<img src="http://layasset.qiniudn.com/user/default.jpg" />',
+				'<a href="javascript:void(0)" class="l_send_login">雁过留名</a>',
+			'</div>',
+			'<div class="l_sendBox_name"></div>',
 		'</div>',
 	'</div>'].join('');
 	
@@ -39,26 +42,34 @@
 	function sendBox(dom){
 		var me = this;
 		this.dom = $(sendBox_tpl)[0];
-    this.text = '';
+		this.text = '';
 		
-		var $textarea = $(this.dom).find('textarea');
-		var $placeholder = $(this.dom).find('.l_send_placeholder');
-    $textarea.on('keydown keyup input paste',function(){
-      me.text = $(this).val();
-    });
+		var $allDom = $(this.dom);
+		var $textarea = $allDom.find('textarea');
+		var $placeholder = $allDom.find('.l_send_placeholder');
+		$textarea.on('keydown keyup input paste',function(){
+			me.text = $(this).val();
+		});
 		$textarea.on('focus',function(){
-			$(me.dom).addClass('l_sendBox_active');
+			$allDom.addClass('l_sendBox_active');
 			$placeholder.fadeOut(100);
 		}).on('focusout',function(){
-      if(me.text.length == 0){
-        $(me.dom).removeClass('l_sendBox_active');
+			if(me.text.length == 0){
+				$allDom.removeClass('l_sendBox_active');
 				$placeholder.fadeIn(100);
-      }
+			}
 		});
+		
+		function loginHandule(err,user){
+			$allDom.find('.l_sendBox_name').html(user.username);
+			if(user.avatar){
+				$allDom.find('.l_sendBox_avatar img').attr('src',user.avatar);
+			}
+		}
 		$(this.dom).on('click','.l_send_placeholder',function(){
 			$textarea.focus();
 		}).on('click','.l_send_login',function(){
-			L.login();
+			L.login('github',loginHandule);
 		});
 		$(dom).html($(this.dom));
 	}
@@ -97,7 +108,7 @@
 					}
 					$(me.dom).append(html);
 					if(me.total == 0){
-						$(me.dom).append('<div class="l_com_list_noData">暂无数据</div>');
+						$(me.dom).append('<div class="l_com_list_noData">来的真早，快抢沙发！</div>');
 					}
 				}
 			}

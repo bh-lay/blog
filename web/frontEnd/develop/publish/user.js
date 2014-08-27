@@ -3,11 +3,7 @@
  * 博客：http://bh-lay.com/
  * Copyright (c) 2012-2018 小剧客栈
 **/
-//alert(window.outerWidth);
 
-/**
- * 发布分享
- */
 define(function(require,exports){
 
 	//初始化模版
@@ -19,13 +15,8 @@ define(function(require,exports){
 		return txt;
 	};
 	
-	var share_tpl = ['<div class="pub_share">',
-				/*<li class="L_foUItem"><label class="L_foUItTitle">：</label><input type="text" name="" value="{email}" /></li>
-				<li class="L_foUItem"><label class="L_foUItTitle">：</label><input type="text" name="" ></li>
-				<li class="L_foUItem"><label class="L_foUItTitle">：</label><select name="">{user_group}</select></li>
-				<li class="L_foUItem"><input type="hidden" name="id" value="{id}" /><input type="submit" value="提交" /></li>
-				**/
-		'<form action="/ajax/user" method="post" target="_self">',
+	var share_tpl = ['<div>',
+		'<form action="/ajax/user/add_edit" method="post" target="_self">',
 			'<div class="pub_row_input">',
 				'<input type="text" placeholder="用户名" name="username" value="{username}"/>',
 			'</div>',
@@ -36,11 +27,13 @@ define(function(require,exports){
 				'<input type="text" placeholder="密码" name="password" />',
 			'</div>',
 			'<div class="pub_row_input">',
+				'<input type="text" placeholder="头像" name="avatar" value="{avatar}"/>',
+			'</div>',
+			'<div class="pub_row_input">',
 				'<input type="text" placeholder="用户组" name="user_group" value="{user_group}"/>',
 			'</div>',
 			'<div>',
 				'<input type="hidden" name="id" value="{id}" />',
-				'<input type="hidden" name="category" value="share" />',
 				'<button type="submit" class="btn btn-primary">提交</button>',
 			'</div>',
 		'</form>',
@@ -53,8 +46,11 @@ define(function(require,exports){
 			callback && callback('missing arguments');
 		}
 		$.ajax({
-			'url' : '/ajax/user/' + id,
-			'type' : 'GET',
+			'url' : '/ajax/user/detail',
+			'data' : {
+				'uid' : id
+			},
+			'type' : 'POST',
 			'success' : function(data){
 				if(data.code != 200){
 					callback && callback('data error');
@@ -65,7 +61,7 @@ define(function(require,exports){
 		});
 	}
 	//用户模块
-	function SHARE(dom,id,sendFn){
+	return function(dom,id,sendFn){
 		if(!id){
 			var new_html = valueInit(share_tpl,{});
 			
@@ -99,7 +95,5 @@ define(function(require,exports){
 				}
 			});
 		});
-	}
-	
-	return SHARE;
+	};
 });
