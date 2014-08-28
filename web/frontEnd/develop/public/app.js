@@ -3,9 +3,26 @@
  * Blog : http://bh-lay.com/
  * Copyright (c) 2012-2018
 **/
-if(!window.history || !window.history.pushState){
-	window.location.href = '/topic/notSupport.html';
-}
+
+(function(){
+	var browser = navigator.appName 
+	var b_version = navigator.appVersion 
+	var version = b_version.split(";"); 
+	var trim_Version = version[1].replace(/[ ]/g,""); 
+	var isIe678 = false;
+	if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE6.0"){
+		isIe678 = true;
+	} else if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE7.0"){
+		isIe678 = true;
+	}else if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE8.0"){
+		isIe678 = true;
+	}
+	
+	if(isIe678){
+		window.location.href = '/topic/notSupport.html';
+	}
+})();
+
 
 //删除为搜索引擎提供的dom
 $('.sourceCode').remove();
@@ -57,9 +74,10 @@ window.L = window.L || {};
 		+ "');}return p.join('');");
 	};
 })(L);
+
 /**
  * 全局登录方法
- *
+ *   需要污染一个命名空间：appLoginCallback
  */
 (function(exports){
 	var baseTpl = ['<div class="l_login_panel">',
@@ -86,9 +104,9 @@ window.L = window.L || {};
 	var LoginCallbacks = [];
 	
 	//相应登录的回调函数
-	window.appLoginCallback = function(){
-		for(var i=0,total=LoginCallbacks.length;i<LoginCallbacks;i++){
-			LoginCallbacks[i]('');
+	window.appLoginCallback = function(data){
+		for(var i=0,total=LoginCallbacks.length;i<total;i++){
+			LoginCallbacks[i](data);
 		}
 		LoginCallbacks = [];
 	};
@@ -96,13 +114,7 @@ window.L = window.L || {};
 		LoginCallbacks.push(callback);
 		switch(type){
 			case 'github':
-				UI.pop({
-					'mask' : true,
-			//		'html' : githubTpl
-				});
-				getMyInfo(function(err,data){
-					callback && callback(err,data)
-				});
+				window.open('https://github.com/login/oauth/authorize?client_id=150e88277697b41e0702&redirect_uri=http://bh-lay.com/snsLogin/github/');
 			break
 		}
 		
@@ -293,9 +305,9 @@ seajs.use([
 		this.title('留言板_小剧客栈');
 		L.nav.setCur('blog');
 		var dom = ani();
-		seajs.use('comments/index.js',function(blogList){
+		seajs.use('comments/index.js',function(comments){
 			dom.html('<div class="l_row"><div class="l_col_12"></div></div>');
-			new L.comments(dom.find('.l_col_12'));
+			new comments(dom.find('.l_col_12'));
 		});
 	});
 	

@@ -22,12 +22,22 @@ function login(connect,user,callback){
 		});
 	});
 }
-
 //对外接口
 exports.github = function (connect,app){
+	//定义返回页面方法
+	function sendResult(data){
+		//获取视图
+		app.views('snsLogin',{
+			'from' : 'github',
+			'data' : JSON.stringify(data)
+		},function(err,html){
+			connect.write('html',200,html);
+		});
+	}
+
 	var code = connect.url.search.code;
 	if(!code){
-		connect.write('json',{
+		sendResult({
 			'code' : 203,
 			'msg' : 'missing code'
 		});
@@ -36,7 +46,7 @@ exports.github = function (connect,app){
 	github.get_token(code,function(err,data){
 		if(err){
 			console.log(err);
-			connect.write('json',{
+			sendResult({
 				'code' : 201,
 				'msg' : '获取token失败',
 			});
@@ -47,22 +57,17 @@ exports.github = function (connect,app){
 			'access_token' : data.access_token
 		},function(err,data){
 			if(err){
-				connect.write('json',{
+				sendResult({
 					'code' : 202,
 					'msg' : '获取用户信息失败',
 				});
 				return
 			}
 			
-		//	res_this.json({
-	//			'err' : err,
-	//			'data' : data
-		//	});
-			
 			var method = DB.start();
 			method.open({'collection_name':'user'},function(err,collection){
 				if(err){
-					connect.write('json',{
+					sendResult({
 						'code':4,
 						'msg':'咱数据库被拐跑了！'
 					});
@@ -89,15 +94,16 @@ exports.github = function (connect,app){
 							usrInfo.id = id;
 							login(connect,usrInfo,function(err){
 								if(err){
-									connect.write('json',{
+									sendResult({
 										'code': 6,
 										'msg':'创建用户成功，登陆失败！'
 									});
 									return
 								}
-								connect.write('json',{
+								sendResult({
 									'code': 200,
-									'msg':'创建用户成功，且登陆成功！！'
+									'msg':'创建用户成功，且登陆成功！！',
+									'user' : usrInfo
 								});
 							});
 							
@@ -106,15 +112,16 @@ exports.github = function (connect,app){
 						//用户已存在
 						login(req,res_this,docs[0],function(err){
 							if(err){
-								connect.write('json',{
+								sendResult({
 									'code': 7,
 									'msg':'登陆失败！'
 								});
 								return
 							}
-							connect.write('json',{
-								'code': 200,
-								'msg':'登陆成功！'
+							sendResult({
+								'code' : 200,
+								'msg' : '登陆成功！',
+								'user' : docs[0]
 							});
 						});
 					}
