@@ -97,9 +97,9 @@ define(function(require,exports){
 			L.login('github',function (data){
 				if(data.code != 200){
 					UI.prompt('登录失败',3000);
+					return;
 				}
-				console.log(data,'-------');
-				return;
+				var user = data.user;
 				$allDom.find('.l_sendBox_name').html(user.username);
 				if(user.avatar){
 					$allDom.find('.l_sendBox_avatar img').attr('src',user.avatar);

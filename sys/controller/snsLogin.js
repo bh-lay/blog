@@ -110,7 +110,7 @@ exports.github = function (connect,app){
 						});
 					}else{
 						//用户已存在
-						login(req,res_this,docs[0],function(err){
+						login(connect,docs[0],function(err){
 							if(err){
 								sendResult({
 									'code': 7,
