@@ -156,20 +156,25 @@ function login_handle(connect,session_this,username,password){
 						'msg':'二货，帐号密码输错了吧！'
 					});
 					return
-				}				
-				var user_group = docs[0]['user_group'];
+				}
+				var user = docs[0];
+				var user_group = user['user_group'];
 				get_power(method,user_group,function(power_data){
 					method.close();
-					var userid = docs[0]['id'];
+					var userid = user['id'];
 					session_this.set({
 						'user_group' : user_group,
-						'username' : docs[0]['username'], 
+						'username' : user['username'], 
 						'uid' : userid,
 						'power_data' : power_data
 					});
+					if(user.password){
+						delete user.parseword;
+					}
 					
 					connect.write('json',{
 						'code':200,
+						'user' : user,
 						'msg':'login success!'
 					});
 				});
@@ -329,7 +334,7 @@ function getUserDetail(userID,callback){
 				return;
 			}
 			var item = docs[0];
-			if(item['password']){
+			if(item && item['password']){
 				delete item['password']
 			}
 			callback&& callback(null,item)

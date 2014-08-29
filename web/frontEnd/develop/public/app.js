@@ -78,14 +78,15 @@ window.L = window.L || {};
 /**
  * 全局登录方法
  *   需要污染一个命名空间：appLoginCallback
+ * 公用数据中心
+ *   L.dataBase.user(fn);
  */
 (function(exports){
 	var baseTpl = ['<div class="l_login_panel">',
-		'<a target="github_login" href="https://github.com/login/oauth/authorize?client_id=150e88277697b41e0702&redirect_uri=http://bh-lay.com/snsLogin/github/">github登录</a>',
-		'<a href="#">游客登录</a>',
-		'<iframe src="about:blank" name="github_login" frameborder="0"></iframe>',
+		'用户名: <input name="username" type="text" /><br/>',
+		'密码: <input name="password" type="password" /><br/>',
+		'<input type="submit" value="登录" /><br/>',
 	'</div>'].join('');
-	var githubTpl = '<iframe src="https://github.com/login/oauth/authorize?client_id=150e88277697b41e0702&redirect_uri=http://bh-lay.com/snsLogin/github/" name="github_login" frameborder="0"></iframe>';
 	function getMyInfo(callback){
 		$.ajax({
 			'url' : '/ajax/user/detail',
@@ -99,7 +100,33 @@ window.L = window.L || {};
 			}
 		});
 	}
+	function loginPop(callback){
+		var pop = UI.pop({
+			'mask' : true,
+			'width' : 400,
+			'html' : baseTpl
+		});
+		var $popDom = $(pop.dom);
+		$popDom.on('click','input[type="submit"]',function(){
+			var username = $popDom.find('input[name="username"]').val();
+			var password = $popDom.find('input[name="password"]').val();
+			$.ajax({
+				'url' : '/ajax/user/login',
+				'type' : 'POST',
+				'data' : {
+					'username' : username,
+					'password' : password
+				},
+				'success' : function(data){
+					pop.close();
+					callback && callback(data);
+				}
+			})
+		});
+	}
 	
+	//存储当前用户的信息
+	var userInfo = null;
 	//存储程序需要用到的登录回调
 	var LoginCallbacks = [];
 	
@@ -110,14 +137,30 @@ window.L = window.L || {};
 		}
 		LoginCallbacks = [];
 	};
+	
 	exports.login = function (type,callback){
-		LoginCallbacks.push(callback);
 		switch(type){
 			case 'github':
+				LoginCallbacks.push(callback);
 				window.open('https://github.com/login/oauth/authorize?client_id=150e88277697b41e0702&redirect_uri=http://bh-lay.com/snsLogin/github/');
 			break
+			default:
+				loginPop(callback);
 		}
-		
+	};
+	
+	exports.dataBase = exports.dataBase || {};
+	exports.dataBase.user = function(callback){
+		if(userInfo){
+			callback && callback(null,userInfo);
+		}else{
+			getMyInfo(function(err,user){
+				if(!err){
+					userInfo = user;
+				}
+				callback && callback(err,user);
+			});
+		}
 	};
 })(L);
 
@@ -307,7 +350,7 @@ seajs.use([
 		var dom = ani();
 		seajs.use('comments/index.js',function(comments){
 			dom.html('<div class="l_row"><div class="l_col_12"></div></div>');
-			new comments(dom.find('.l_col_12'));
+			new comments.init(dom.find('.l_col_12'));
 		});
 	});
 	
