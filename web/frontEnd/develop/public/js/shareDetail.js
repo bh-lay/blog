@@ -13,6 +13,7 @@ define(function(require,exports){
 		'</div>',
 		'<div class="article">$${content}</div>',
 		'<div class="youyan">',
+			'评论模块为第三方应用，小聚正在努力开发自己的评论系统，敬请期待！',
 			'<div id="uyan_frame"></div>',
 			'<script type="text/javascript">',
 				'var uyan_config = {"du":"bh-lay.com"};',

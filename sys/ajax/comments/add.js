@@ -7,11 +7,15 @@ module.exports = function(data,callback){
 	var item = {
 		'content' : parse.encodeHtml(data.content),
 		'time' : new Date().getTime(),
-		'uid' : data.uid || null
+		'uid' : data.uid || null,
+		'id' : data.id
 	};
+	if(!item.id){
+		callback && callback('missing argument : id');
+		return;
+	}
 	var method = mongo.start();
 	method.open({'collection_name':'comments'},function(err,collection){
-		item.id = parse.createID();
 		collection.insert(item,function(err,result){
 			if(err) {
 				callback && callback(err);

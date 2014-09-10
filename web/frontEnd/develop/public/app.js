@@ -164,6 +164,28 @@ window.L = window.L || {};
 	};
 })(L);
 
+/**
+ * 全局用户UI
+ *   L.user.info();
+ */
+(function(exports){
+
+	exports.user = exports.user || {};
+	exports.user.infoPanel = function(callback){
+		UI.cover({
+			'from' : 'right',
+			'width' : 400,
+			'right' : 0,
+			'mask' : true
+		});
+	//	L.dataBase.user(function(err,user){
+		
+	//	});
+	};
+})(L);
+
+
+
 seajs.use([
 	'util/lofox_1_0.js',
 	'UI/dialog.js'
@@ -350,7 +372,7 @@ seajs.use([
 		var dom = ani();
 		seajs.use('comments/index.js',function(comments){
 			dom.html('<div class="l_row"><div class="l_col_12"></div></div>');
-			new comments.init(dom.find('.l_col_12'));
+			new comments.init(dom.find('.l_col_12')[0],'define-1');
 		});
 	});
 	

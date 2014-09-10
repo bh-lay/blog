@@ -4,6 +4,7 @@ var mongo = require('../../lofox/DB.js');
 //获取评论列表
 module.exports = function(data,callback){
 	var data = data,
+		id = data['id'],
 		limit_num = parseInt(data['limit']) || 10,
 		skip_num = parseInt(data['skip']) || 0;
 	
@@ -14,11 +15,12 @@ module.exports = function(data,callback){
 	
 	var method = mongo.start();
 	method.open({'collection_name':'comments'},function(err,collection){
-    //count the all list
-		collection.count(function(err,count){
-			resJSON['count'] = count;
 			
-			collection.find({},{limit:limit_num}).sort({id:-1}).skip(skip_num).toArray(function(err, docs) {
+		collection.find({'id' : id},{limit:limit_num}).sort({time:-1}).skip(skip_num).toArray(function(err, docs) {
+			//count the all list
+			collection.count({'id' : id},function(err,count){
+				resJSON['count'] = count;
+				
 				method.close();
 				if(err){
 					callback&&callback(err);

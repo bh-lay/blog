@@ -69,7 +69,7 @@ exports.detail = function (connect,app,id){
 	},function(save_cache){
 		getDetail(id,function(err,data){
 			if(err){
-				connect.write('error','怎么坏掉了呢！');
+				connect.write('notFound','404');
 				return;
 			}
 			//获取视图

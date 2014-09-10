@@ -3,6 +3,8 @@
 define(function(require,exports){
 	var mirror = require('comments/mirror.js');
 	var selection = require('comments/selection.js');
+	var private_hasLogin = false;
+	
 	var baseTpl = ['<div class="l_comments">',
 		'<div class="l_com_sendBox"></div>',
 		'<div class="l_com_list">',
@@ -32,14 +34,13 @@ define(function(require,exports){
 			'<div class="l_sendBox_name"></div>',
 		'</div>',
 	'</div>'].join('');
-	var loginTpl = ['<div style="height:80px;background:#eee">',
-		'<a href="#" class="login_account" >帐号登录</a>',
-		'<a href="#" class="login_github" >github登录</a>',
-	'</div>'].join('');
 	
-	var item_tpl = ['<div class="l_com_item">',
-		'<%=content %>,<%=time %>,<%=uid %>',
-	'</div>',].join('');
+	
+	var item_tpl = ['<% for(var i=0,total=list.length;i<total;i++){%>',
+		'<div class="l_com_item">',
+			'<%=list[i].content %>,<%=list[i].time %>,<% if(list[i].cover){ %><img src="<%=list[i].cover %>,"/><%}%><%=list[i].uid %>',
+		'</div>',
+	'<%}%>'].join('');
 	
 	//处理自定义事件
 	function ON(eventName,callback){
@@ -79,17 +80,29 @@ define(function(require,exports){
 		}
 	}
 	/**
-	 * 处理登录逻辑
+	 * 显示登录界面
 	 */
-	function loginHandle(btn){
+	var activeLoginPanel = null;
+	function showLoginPanel(btn,events){
+		if(activeLoginPanel){
+			activeLoginPanel.close();
+			return;
+		}
 		var me = this;
-		var offset = btn.offset();
-		var plane = UI.plane({
-			'top' : offset.top,
-			'left' : offset.left,
-			'width' : 300,
-			'from' : btn[0],
-			'html' : loginTpl
+		activeLoginPanel = UI.select([
+			['帐号登录',function(){
+				L.login('account',callbackHandle);
+			}],
+			['github登录',function(){
+				L.login('github',callbackHandle);
+			}]
+		],{
+			'from' : 'bottom',
+			'top' : events.clientY + 2,
+			'left' : events.clientX + 5,
+			'closeFn' : function(){
+				activeLoginPanel = null;
+			}
 		});
 		function callbackHandle(data){
 			if(data.code != 200){
@@ -100,20 +113,27 @@ define(function(require,exports){
 			//触发自定义事件“login”
 			EMIT.call(me,'login',[user]);
 		}
-		$(plane.dom).on('mouseleave',function(){
-			plane.close();
-		}).on('click','.login_account',function(){
-			plane.close();
-			//帐号登录
-			L.login('account',callbackHandle);
-			return false;
-		}).on('click','.login_github',function(){
-			plane.close();
-			//github登录
-			L.login('github',callbackHandle);
-			return false;
-		});
 			
+	}
+	/**
+	 * 发送评论
+	 *
+	 */
+	function sendComment(data,callback){
+		$.ajax({
+			'url' : '/ajax/comments/add',
+			'data' : {
+				'id' : data.id,
+				'content' : data.text
+			},
+			'success' : function(data){
+				if(data.code && data.code == 200){
+					callback && callback(null);
+				}else{
+					callback && callback('fail');
+				}
+			}
+		});
 	}
 	/**
 	 * 绑定dom事件
@@ -131,6 +151,7 @@ define(function(require,exports){
 			clearTimeout(delay);
 			delay = setTimeout(function(){
 				var newVal = $textarea.val();
+				//校验字符是否发生改变
 				if(newVal == me.text){
 					return
 				}
@@ -157,13 +178,22 @@ define(function(require,exports){
 		
 		$(this.dom).on('click','.l_send_placeholder',function(){
 			$textarea.focus();
-		}).on('mouseenter','.l_sendBox_avatar',function(){
-			var btn = $(this);
-			if(true){
-				loginHandle.call(me,btn)
+		}).on('click','.l_sendBox_avatar',function(e){
+			var btn = $(this)[0];
+			if(me.private_hasLogin){
+				L.user.infoPanel();
+			}else{
+				showLoginPanel.call(me,btn,e)
 			}
 		}).on('click','.l_send_tools',function(){
 			$textarea.focus();
+		}).on('click','.l_send_submit',function(){
+			sendComment({
+				'id' : me.id,
+				'text' : me.text
+			},function(){
+				console.log(arguments);
+			});
 		});
 	}
 	//绑定对象自定义事件
@@ -193,15 +223,17 @@ define(function(require,exports){
 			$countRest.html(me.limit - length);
 		}).on('login',function(user){
 			setAvatar.call(me,user);
+			private_hasLogin = true;
 		});
 		
 	}
 	/**
 	 * sendBox类
 	 */
-	function sendBox(dom,param){
+	function sendBox(dom,id){
 		var me = this;
 		var param = param || {};
+		this.id = id;
 		this.dom = $(sendBox_tpl)[0];
 		this.limit = param.limit || 500;
 		this.text = '';
@@ -213,18 +245,26 @@ define(function(require,exports){
 		//绑定对象自定义事件
 		bindCustomEvent.call(this);
 		L.dataBase.user(function(err,user){
-			setAvatar.call(me,user);
-		})
+			if(err){
+				private_hasLogin = false;
+			}else if(user){
+				private_hasLogin = true;
+				setAvatar.call(me,user);
+			}
+		});
 	}
 	sendBox.prototype = {
 		'on' : ON
 	};
 	
+	
+	
 	/**
 	 * 列表类
 	 *
 	 */
-	function list(dom){
+	function list(dom,id){
+		this.id = id;
 		this.list = [];
 		this.skip = 0;
 		this.limit = 30;
@@ -242,15 +282,15 @@ define(function(require,exports){
 		this._status = 'loading';
 		$.ajax({
 			'url' : '/ajax/comments/list',
+			'data' : {
+				'id' : this.id
+			},
 			'success' : function(data){
 				if(data.code && data.code == 200){
 					var DATA = data.data;
 					me.total = DATA.count;
 					me.list.concat(DATA.list);
-					var html = '';
-					for(var i=0,total=DATA.list.length;i<total;i++){
-						html += me.render(DATA.list[i]);
-					}
+					var html = me.render(DATA);
 					$(me.dom).append(html);
 					if(me.total == 0){
 						$(me.dom).append('<div class="l_com_list_noData">来的真早，快抢沙发！</div>');
@@ -264,12 +304,13 @@ define(function(require,exports){
 	
 	exports.sendBox = sendBox;
 	exports.list = list;
-	exports.init = function(dom){
+	exports.init = function(dom,id){
 		
 		this.dom = $(baseTpl)[0];
-		dom.html($(this.dom));
+		this.id = id;
+		$(dom).html($(this.dom));
 		
-		this.sendBox = new sendBox($(this.dom).find('.l_com_sendBox')[0]);
-		this.list = new list($(this.dom).find('.l_com_list')[0]);
+		this.sendBox = new sendBox($(this.dom).find('.l_com_sendBox')[0],id);
+		this.list = new list($(this.dom).find('.l_com_list')[0],id);
 	};
 });
