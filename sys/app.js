@@ -8,7 +8,7 @@ var app = new app_factory(CONFIG.port);
 
 app.set('staticFileRoot','../web/')
 
-//首页
+//首页、留言板
 var index = require('./controller/index.js');
 app.get([
 	'/',
@@ -198,6 +198,3 @@ app.get('/ajax/user/{mark}', function(data,connect){
 			
 	}
 });
-
-
-
