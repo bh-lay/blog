@@ -2,7 +2,7 @@
  * @author bh-lay
  * 
  * @github https://github.com/bh-lay/UI
- * @modified 2014-9-10 10:27
+ * @modified 2014-9-16 16:51
  * 
  **/
 
@@ -38,7 +38,7 @@
 	/**
 	 * 基础模版
 	 */
-	var allCnt_tpl = '<div class="UI_lawyer"><div class="UI_mask"></div><div class="UI_main_cnt"></div><div class="UI_fixedScreenTop_cnt"></div><div class="UI_fixedScreenBottom_cnt"></div></div>';
+	var allCnt_tpl = '<div class="UI_lawyer"><div class="UI_mask"></div><div class="UI_main_cnt"></div><div class="UI_fixedScreenBottom_cnt"></div></div>';
 	var pop_tpl = '<div class="UI_pop"><div class="UI_pop_cpt"></div><div class="UI_cnt"></div><a href="javascript:;" class="UI_pop_close" title="\u5173\u95ED">×</a></div>';
 	var confirm_tpl = '<div class="UI_confirm"><div class="UI_confirm_text"><%=text %></div></div>';
 	var ask_tpl = '<div class="UI_ask"><div class="UI_ask_text"><%=text %></div><input class="UI_ask_key" type="text" name="UI_ask_key"/></div>';
@@ -48,7 +48,7 @@
 	var cover_tpl = '<div class="UI_cover"><div class="UI_cnt"></div><a href="javascript:;" class="UI_close UI_coverClose">×</a></div>';
 	var select_tpl = '<div class="UI_select"><div class="UI_select_body UI_cnt"><% if(title){ %><div class="UI_selectCpt"><h3><%=title %></h3><% if(intro){ %><p><%=intro %></p><% } %></div><% } %><div class="UI_selectCnt"><% for(var i=0,total=list.length;i<total;i++){ %><a class="UI_select_btn" href="javascript:;"><%=list[i] %></a><% } %></div></div><div class="UI_selectCancel"><a class="UI_select_btn" href="javascript:;">取消</a></div></div>';
 	
-	var popCSS = '.UI_lawyer{position:absolute;top:-100%;left:0;z-index:4999;width:100%;height:100%;overflow:visible;font-family:"Microsoft Yahei"}.UI_lawyer a,.UI_lawyer a:hover,.UI_lawyer a:active{outline:none;text-decoration:none;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-tap-highlight-color:transparent}.UI_mask{position:absolute;top:100%;left:0;width:100%;height:100%;background:#000;display:none;opacity:0.6;filter:alpha(opacity=50)}.UI_main_cnt{position:absolute;width:100%;height:0;top:100%;overflow:visible}.UI_fixedScreenTop_cnt{position:absolute;z-index:4999;left:0;width:100%;height:0;overflow:visible}.UI_fixedScreenBottom_cnt{position:absolute;z-index:4999;left:0;width:100%;height:0;overflow:visible}.UI-blur{-webkit-transition:0.08s;-webkit-filter:blur(2px)}.UI_pop{width:200px;position:absolute;top:400px;left:300px;background:#fff;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_pop_cpt{position:relative;height:36px;line-height:36px;overflow:hidden;border-bottom:1px solid #ebebeb;color:#777;font-size:16px;text-indent:15px;cursor:default}.UI_pop .UI_cnt{position:relative;min-height:100px;overflow:auto;width:100%}.UI_pop_close{display:block;position:absolute;top:0;right:0;width:40px;height:36px;text-align:center;color:#ddd;font:bold 20px/36px "simsun";transition:0.1s}.UI_pop_close:hover{color:#888}.UI_pop_close:active{color:#222}.UI_confirm{width:300px;position:relative;margin:-100px auto 0;background:#fff;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_confirm_text{padding:30px 10px 20px;line-height:26px;text-align:center;font-size:20px;color:#333}.UI_ask{width:300px;position:relative;margin:-100px auto 0;background:#fff;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_ask_text{padding:25px 10px 15px;line-height:26px;text-align:center;font-size:18px;color:#333}.UI_ask input{display:block;margin:0 auto 15px;height:30px;padding:4px 4px;line-height:22px;box-sizing:border-box;width:90%}.UI_pop_confirm{overflow:hidden;text-align:center;border-top:1px solid #ddd}.UI_pop_confirm a{display:block;width:50%;height:36px;float:left;font-size:14px;line-height:36px;color:#03f;box-sizing:border-box;transition:0.15s}.UI_pop_confirm_ok{border-right:1px solid #ddd}@media(min-width:640px){.UI_pop_confirm a:hover{background:#eee}}.UI_plane{width:200px;position:absolute;top:400px;left:300px}.UI_prompt{width:240px;left:50%;margin-left:-120px;position:absolute}.UI_prompt_cnt{padding:30px 10px;background:#fff;box-shadow:2px 2px 10px rgba(0,0,0,0.5);font-size:18px;color:#333;text-align:center}.UI_cover{position:absolute;top:0;width:100%;height:100px;max-width:100%}.UI_cover .UI_cnt{position:relative;width:100%;height:100%;background:#fff;overflow:auto}.UI_coverClose{display:block;position:absolute;top:10px;right:20px;width:30px;height:30px;text-align:center;color:#aaa;font:18px/30px "simsun";background:#eee;border-radius:15px;border:1px solid #aaa}.UI_coverClose:hover{background:#333;color:#fff;transition:0.2s}.UI_select{position:absolute;width:100%;padding-bottom:10px}.UI_select a{display:block;height:40px;line-height:40px;text-align:center;color:#03f;font-size:16px}.UI_select_body{margin:0 10px 10px;border-radius:8px;overflow:hidden;background:#fff}.UI_selectCpt{padding:8px 0}.UI_selectCpt h3,.UI_selectCpt p{margin:0;font-size:15px;line-height:18px;text-align:center;color:#aaa;font-weight:normal}.UI_selectCpt p{font-size:12px}.UI_selectCnt a{border-top:1px solid #eee}.UI_selectCancel{margin:0 10px;border-radius:8px;overflow:hidden;background:#fff}.UI_main_cnt .UI_select{width:200px;padding:0;border-radius:0;box-shadow:2px 2px 2px rgba(0,0,0,0.6)}.UI_main_cnt .UI_select_body,.UI_main_cnt .UI_selectCancel{margin:0;border-radius:0}.UI_main_cnt .UI_select a{height:34px;line-height:34px;font-size:14px}.UI_main_cnt .UI_selectCancel{display:none}';
+	var popCSS = '.UI_lawyer{position:absolute;top:-100%;left:0;z-index:4999;width:100%;height:100%;overflow:visible;font-family:"Microsoft Yahei"}.UI_lawyer a,.UI_lawyer a:hover,.UI_lawyer a:active{outline:none;text-decoration:none;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-tap-highlight-color:transparent}.UI_mask{position:absolute;top:100%;left:0;width:100%;height:100%;background:#000;display:none;opacity:0.6;filter:alpha(opacity=50)}.UI_main_cnt{position:absolute;width:100%;height:0;top:100%;overflow:visible}.UI_fixedScreenBottom_cnt{position:absolute;z-index:4999;left:0;width:100%;height:0;overflow:visible}.UI-blur{-webkit-transition:0.08s;-webkit-filter:blur(2px)}.UI_pop{width:200px;position:absolute;top:400px;left:300px;background:#fff;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_pop_cpt{position:relative;height:36px;line-height:36px;overflow:hidden;border-bottom:1px solid #ebebeb;color:#777;font-size:16px;text-indent:15px;cursor:default}.UI_pop .UI_cnt{position:relative;min-height:100px;overflow:auto;width:100%}.UI_pop_close{display:block;position:absolute;top:0;right:0;width:40px;height:36px;text-align:center;color:#ddd;font:bold 20px/36px "simsun";transition:0.1s}.UI_pop_close:hover{color:#888}.UI_pop_close:active{color:#222}.UI_confirm{width:300px;position:absolute;background:#fff;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_confirm_text{padding:30px 10px 20px;line-height:26px;text-align:center;font-size:20px;color:#333}.UI_ask{width:300px;position:absolute;background:#fff;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_ask_text{padding:25px 10px 15px;line-height:26px;text-align:center;font-size:18px;color:#333}.UI_ask input{display:block;margin:0 auto 15px;height:30px;padding:4px 4px;line-height:22px;box-sizing:border-box;width:90%}.UI_pop_confirm{overflow:hidden;text-align:center;border-top:1px solid #ddd}.UI_pop_confirm a{display:block;width:50%;height:36px;float:left;font-size:14px;line-height:36px;color:#03f;box-sizing:border-box;transition:0.15s}.UI_pop_confirm_ok{border-right:1px solid #ddd}@media(min-width:640px){.UI_pop_confirm a:hover{background:#eee}}.UI_plane{width:200px;position:absolute;top:400px;left:300px}.UI_prompt{width:240px;left:50%;margin-left:-120px;position:absolute}.UI_prompt_cnt{padding:30px 10px;background:#fff;box-shadow:2px 2px 10px rgba(0,0,0,0.5);font-size:18px;color:#333;text-align:center}.UI_cover{position:absolute;top:0;width:100%;height:100px;max-width:100%}.UI_cover .UI_cnt{position:relative;width:100%;height:100%;background:#fff;overflow:auto}.UI_coverClose{display:block;position:absolute;top:10px;right:20px;width:30px;height:30px;text-align:center;color:#aaa;font:18px/30px "simsun";background:#eee;border-radius:15px;border:1px solid #aaa}.UI_coverClose:hover{background:#333;color:#fff;transition:0.2s}.UI_select{position:absolute;width:100%;padding-bottom:10px}.UI_select a{display:block;height:40px;line-height:40px;text-align:center;color:#03f;font-size:16px}.UI_select_body{margin:0 10px 10px;border-radius:8px;overflow:hidden;background:#fff}.UI_selectCpt{padding:8px 0}.UI_selectCpt h3,.UI_selectCpt p{margin:0;font-size:15px;line-height:18px;text-align:center;color:#aaa;font-weight:normal}.UI_selectCpt p{font-size:12px}.UI_selectCnt a{border-top:1px solid #eee}.UI_selectCancel{margin:0 10px;border-radius:8px;overflow:hidden;background:#fff}.UI_main_cnt .UI_select{width:200px;padding:0;border-radius:0;box-shadow:2px 2px 2px rgba(0,0,0,0.6)}.UI_main_cnt .UI_select_body,.UI_main_cnt .UI_selectCancel{margin:0;border-radius:0}.UI_main_cnt .UI_select a{height:34px;line-height:34px;font-size:14px}.UI_main_cnt .UI_selectCancel{display:none}';
 	
 	var isIE67 = false;
 	if(navigator.appName == "Microsoft Internet Explorer"){
@@ -65,7 +65,6 @@
 	var private_allCnt = utils.createDom(allCnt_tpl)[0],
 		private_maskDom = findByClassName(private_allCnt,'UI_mask')[0],
 		private_mainDom = findByClassName(private_allCnt,'UI_main_cnt')[0],
-		private_fixedScreenTopDom = findByClassName(private_allCnt,'UI_fixedScreenTop_cnt')[0],
 		private_fixedScreenBottomDom = findByClassName(private_allCnt,'UI_fixedScreenBottom_cnt')[0],
 		private_cssDom = null,
 		private_body = document.body,
@@ -89,7 +88,7 @@
 	if (document.compatMode == "BackCompat") {
 		docDom = private_body;
 	}else{
-		//document.compatMode == \"CSS1Compat\"
+		//"CSS1Compat"
 		docDom = document.documentElement;
 	}
 	function refreshSize(){
@@ -127,18 +126,12 @@
 		
 		var rebuild_fn = null;
 		if(isIE67){
-			setCSS(private_fixedScreenTopDom,{
-				top : private_scrollTop + private_winH
-			});
 			setCSS(private_fixedScreenBottomDom,{
 				top : private_scrollTop + private_winH*2
 			});
 			
 			rebuild_fn = function(){
 				refreshSize();
-				setCSS(private_fixedScreenTopDom,{
-					top : private_scrollTop + private_winH
-				});
 				setCSS(private_fixedScreenBottomDom,{
 					top : private_scrollTop + private_winH*2
 				});
@@ -151,7 +144,7 @@
 				position : 'fixed',
 				bottom : 0
 			});
-			setCSS([private_fixedScreenTopDom,private_maskDom],{
+			setCSS(private_maskDom,{
 				'position' : 'fixed',
 				'top' : 0
 			});
@@ -428,7 +421,8 @@
 				top : offset_from.top,
 				left : offset_from.left,
 				width : outerWidth(from),
-				height : outerHeight(from)
+				height : outerHeight(from),
+				overflow : 'hidden'
 			};
 			cssAnim = {
 				width : getCSS(DOM,'width'),
@@ -640,11 +634,12 @@
 		});
 		//显示蒙层
 		showMask(this._mask,function(){
-			private_fixedScreenTopDom.appendChild(me.dom);
+			private_mainDom.appendChild(me.dom);
 			
 			var newPosition = adaption(300,outerHeight(me.dom));
 			setCSS(me.dom,{
-				top : newPosition.screenTop
+				top : newPosition.top,
+				left : newPosition.left
 			});
 			openAnimation(me.dom,me._from,100,null,function(){
 				//处理是否易于关闭
@@ -691,7 +686,12 @@
 
 		//显示蒙层
 		showMask(this._mask,function(){
-			private_fixedScreenTopDom.appendChild(me.dom);
+			private_mainDom.appendChild(me.dom);
+			var newPosition = adaption(300,outerHeight(me.dom));
+			setCSS(me.dom,{
+				top : newPosition.top,
+				left : newPosition.left
+			});
 			openAnimation(me.dom,me._from,100,80,function(){
 				me.inputDom.focus();
 				//处理是否易于关闭
@@ -710,31 +710,30 @@
 	 * prompt
 	 * 
 	 **/
-	function prompt(text,time,param){
-		var this_prompt = this,
-			param = param || {};
+	function PROMPT(text,time,param){
+		var param = param || {};
+		
 		this.dom = utils.createDom(prompt_tpl)[0];
 		this._from = param.from || 'bottom';
 		this.tips(text,time);
 		
 		// create pop
 		setCSS(this.dom,{
-			top : private_winH/3
+			top : private_winH/3 + private_scrollTop
 		});
-		private_fixedScreenTopDom.appendChild(this.dom);
+		private_mainDom.appendChild(this.dom);
 		
 		openAnimation(this.dom,this._from,100,30);
-		
 	}
-	prompt.prototype.close = closeAnimation(80);
-	prompt.prototype.tips = function(txt,time){
-		var this_prompt = this;
+	PROMPT.prototype.close = closeAnimation(80);
+	PROMPT.prototype.tips = function(txt,time){
+		var me = this;
 		if(txt){
 			findByClassName(this.dom,'UI_prompt_cnt')[0].innerHTML = txt;
 		}
 		if(time != 0){
 			setTimeout(function(){
-				this_prompt.close();
+				me.close();
 			},(time || 1500));
 		}
 	};
@@ -809,16 +808,16 @@
 		}
 		//垂直定位
 		if(isNum(param.bottom)){
-			cssObj.top = private_winH - cssObj.height - param.bottom;
+			cssObj.top = private_winH - cssObj.height - param.bottom + private_scrollTop;
 		}else if(isNum(param.top)){
-			cssObj.top = param.top;
+			cssObj.top = private_scrollTop + param.top;
 		}else{
-			cssObj.top = (private_winH - cssObj.height)/2
+			cssObj.top = private_scrollTop + (private_winH - cssObj.height)/2
 		}
 		//打开蒙层
 		showMask(this._mask,function(){
 			setCSS(me.dom,cssObj);
-			private_fixedScreenTopDom.appendChild(me.dom);
+			private_mainDom.appendChild(me.dom);
 			
 			openAnimation(me.dom,me._from,200,400,function(){
 				setCSS(private_body,{
@@ -877,22 +876,29 @@
 		
 		//显示蒙层
 		showMask(this._mask,function(){
-			var cssObj;
 			if(private_docW > 640){
-				cssObj = {
+				var cssObj = {
 					top : param.top || 100,
 					left : param.left || 100,
 					width : param.width || 200
 				};
 				private_mainDom.appendChild(me.dom);
+				
+				setCSS(me.dom,cssObj);
+				var newSize = fix_position(cssObj.top,cssObj.left,cssObj.width,outerHeight(me.dom));
+				setCSS(me.dom,{
+					left : newSize.left,
+					top : newSize.top
+				});
+				
+				
 			} else {
 				me._from = 'bottom';
 				private_fixedScreenBottomDom.appendChild(me.dom);
-				cssObj = {
+				setCSS(me.dom,{
 					bottom : 0
-				};
+				});
 			}
-			setCSS(me.dom,cssObj);
 			openAnimation(me.dom,me._from,200,400,function(){
 				easyCloseHandle.call(me,param.easyClose,true);
 			});
@@ -918,7 +924,7 @@
 				var num = parseInt(num);
 				if(num > 0){
 					private_CONFIG.zIndex = num;
-					setCSS([private_allCnt,private_fixedScreenBottomDom,private_fixedScreenTopDom],{
+					setCSS([private_allCnt,private_fixedScreenBottomDom],{
 						zIndex : num
 					});
 				}
@@ -931,7 +937,7 @@
 			return new ASK(text,callback,param);
 		},
 		prompt : function(txt,time,param){
-			return new prompt(txt,time,param);
+			return new PROMPT(txt,time,param);
 		},
 		plane : function(){
 			return new PLANE(arguments[0]);

@@ -36,7 +36,12 @@ module.exports = function(data,callback){
 	
 	var method = mongo.start();
 	method.open({'collection_name':'comments'},function(err,collection){
-			
+		if(err){
+			method.close();
+			callback&&callback(err);
+			return
+		}
+		
 		collection.find({'id' : id},{limit:limit_num}).sort({time:-1}).skip(skip_num).toArray(function(err, docs) {
 			//count the all list
 			collection.count({'id' : id},function(err,count){
@@ -55,6 +60,14 @@ module.exports = function(data,callback){
 							users[item.uid] = {};
 						}
 					});
+					function endFn(){
+						docs.forEach(function(item){
+							item.user = users[item.uid] || {};
+						});
+						resJSON['list'] = docs;
+						callback&&callback(null,resJSON);
+					}
+					
 					//遍历所有需要的用户id
 					for(var key in users){
 						uidsLength++;
@@ -65,17 +78,13 @@ module.exports = function(data,callback){
 								users[key] = userInfo;
 							}
 							if(overLength == uidsLength){
-								docs.forEach(function(item){
-									item.user = users[item.uid] || {};
-								});
-							
-								resJSON['list'] = docs;
-								callback&&callback(null,resJSON);
+								endFn();
 							}
 						});
 					}
-					
-				
+					if(uidsLength == 0){
+						endFn();
+					}
 				}
 			});
 		});
