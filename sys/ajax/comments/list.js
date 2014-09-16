@@ -1,6 +1,27 @@
 
 var mongo = require('../../lofox/DB.js');
 
+
+function getUserInfo(id,callback){
+	var method = mongo.start();
+	method.open({'collection_name':'user'},function(err,collection){
+		if(err){
+			callback && callback(err);
+			return;
+		}
+		collection.find({'id' : id}).toArray(function(err, docs) {
+			method.close();
+			if(err || docs.length == 0){
+				callback && callback(err);
+				return;
+			}
+			delete docs[0]['password'];
+			callback && callback(null,docs[0]);
+		});
+	});
+}
+
+
 //获取评论列表
 module.exports = function(data,callback){
 	var data = data,
@@ -25,12 +46,36 @@ module.exports = function(data,callback){
 				if(err){
 					callback&&callback(err);
 				}else{
+					var users = {};
+					var uidsLength = 0;
+					var overLength = 0;
+					//获取所有需要的用户id
 					docs.forEach(function(item){
-						item.uid = item.uid || '123';
+						if(item.uid){
+							users[item.uid] = {};
+						}
 					});
+					//遍历所有需要的用户id
+					for(var key in users){
+						uidsLength++;
+						//获取用户信息
+						getUserInfo(key,function(err,userInfo){
+							overLength++;
+							if(!err){
+								users[key] = userInfo;
+							}
+							if(overLength == uidsLength){
+								docs.forEach(function(item){
+									item.user = users[item.uid] || {};
+								});
+							
+								resJSON['list'] = docs;
+								callback&&callback(null,resJSON);
+							}
+						});
+					}
+					
 				
-					resJSON['list'] = docs;
-					callback&&callback(null,resJSON);
 				}
 			});
 		});

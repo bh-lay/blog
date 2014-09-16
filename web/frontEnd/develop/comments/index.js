@@ -21,7 +21,7 @@ define(function(require,exports){
 					'<a href="#" class="l_send_face"></a>',
 				'</div>',
 				'<div class="l_send_tools_right">',
-					'<div class="l_send_count"><b></b><i>/</i><span>500</span></div>',
+					'<div class="l_send_count"><b>500</b><i>/</i><span>500</span></div>',
 					'<a href="#" class="l_send_submit">发布</a>',
 				'</div>',
 			'</div>',
@@ -38,7 +38,8 @@ define(function(require,exports){
 	
 	var item_tpl = ['<% for(var i=0,total=list.length;i<total;i++){%>',
 		'<div class="l_com_item">',
-			'<%=list[i].content %>,<%=list[i].time %>,<% if(list[i].cover){ %><img src="<%=list[i].cover %>,"/><%}%><%=list[i].uid %>',
+			'<img src="<% if(list[i].user.avatar){ %><%=list[i].user.avatar%><% }else{ %>http://layasset.qiniudn.com/user/default.jpg<% } %>" alt="" />',
+			'<%=list[i].content %>,<%=list[i].time %>,<%=list[i].uid %>',
 		'</div>',
 	'<%}%>'].join('');
 	
