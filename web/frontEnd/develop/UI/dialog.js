@@ -2,7 +2,7 @@
  * @author bh-lay
  * 
  * @github https://github.com/bh-lay/UI
- * @modified 2014-9-16 16:51
+ * @modified 2014-9-17 16:53
  * 
  **/
 
@@ -38,7 +38,7 @@
 	/**
 	 * 基础模版
 	 */
-	var allCnt_tpl = '<div class="UI_lawyer"><div class="UI_mask"></div><div class="UI_main_cnt"></div><div class="UI_fixedScreenBottom_cnt"></div></div>';
+	var allCnt_tpl = '<div class="UI_lawyer"><div class="UI_mask"></div><div class="UI_main_cnt"></div></div>';
 	var pop_tpl = '<div class="UI_pop"><div class="UI_pop_cpt"></div><div class="UI_cnt"></div><a href="javascript:;" class="UI_pop_close" title="\u5173\u95ED">×</a></div>';
 	var confirm_tpl = '<div class="UI_confirm"><div class="UI_confirm_text"><%=text %></div></div>';
 	var ask_tpl = '<div class="UI_ask"><div class="UI_ask_text"><%=text %></div><input class="UI_ask_key" type="text" name="UI_ask_key"/></div>';
@@ -48,13 +48,16 @@
 	var cover_tpl = '<div class="UI_cover"><div class="UI_cnt"></div><a href="javascript:;" class="UI_close UI_coverClose">×</a></div>';
 	var select_tpl = '<div class="UI_select"><div class="UI_select_body UI_cnt"><% if(title){ %><div class="UI_selectCpt"><h3><%=title %></h3><% if(intro){ %><p><%=intro %></p><% } %></div><% } %><div class="UI_selectCnt"><% for(var i=0,total=list.length;i<total;i++){ %><a class="UI_select_btn" href="javascript:;"><%=list[i] %></a><% } %></div></div><div class="UI_selectCancel"><a class="UI_select_btn" href="javascript:;">取消</a></div></div>';
 	
-	var popCSS = '.UI_lawyer{position:absolute;top:-100%;left:0;z-index:4999;width:100%;height:100%;overflow:visible;font-family:"Microsoft Yahei"}.UI_lawyer a,.UI_lawyer a:hover,.UI_lawyer a:active{outline:none;text-decoration:none;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-tap-highlight-color:transparent}.UI_mask{position:absolute;top:100%;left:0;width:100%;height:100%;background:#000;display:none;opacity:0.6;filter:alpha(opacity=50)}.UI_main_cnt{position:absolute;width:100%;height:0;top:100%;overflow:visible}.UI_fixedScreenBottom_cnt{position:absolute;z-index:4999;left:0;width:100%;height:0;overflow:visible}.UI-blur{-webkit-transition:0.08s;-webkit-filter:blur(2px)}.UI_pop{width:200px;position:absolute;top:400px;left:300px;background:#fff;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_pop_cpt{position:relative;height:36px;line-height:36px;overflow:hidden;border-bottom:1px solid #ebebeb;color:#777;font-size:16px;text-indent:15px;cursor:default}.UI_pop .UI_cnt{position:relative;min-height:100px;overflow:auto;width:100%}.UI_pop_close{display:block;position:absolute;top:0;right:0;width:40px;height:36px;text-align:center;color:#ddd;font:bold 20px/36px "simsun";transition:0.1s}.UI_pop_close:hover{color:#888}.UI_pop_close:active{color:#222}.UI_confirm{width:300px;position:absolute;background:#fff;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_confirm_text{padding:30px 10px 20px;line-height:26px;text-align:center;font-size:20px;color:#333}.UI_ask{width:300px;position:absolute;background:#fff;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_ask_text{padding:25px 10px 15px;line-height:26px;text-align:center;font-size:18px;color:#333}.UI_ask input{display:block;margin:0 auto 15px;height:30px;padding:4px 4px;line-height:22px;box-sizing:border-box;width:90%}.UI_pop_confirm{overflow:hidden;text-align:center;border-top:1px solid #ddd}.UI_pop_confirm a{display:block;width:50%;height:36px;float:left;font-size:14px;line-height:36px;color:#03f;box-sizing:border-box;transition:0.15s}.UI_pop_confirm_ok{border-right:1px solid #ddd}@media(min-width:640px){.UI_pop_confirm a:hover{background:#eee}}.UI_plane{width:200px;position:absolute;top:400px;left:300px}.UI_prompt{width:240px;left:50%;margin-left:-120px;position:absolute}.UI_prompt_cnt{padding:30px 10px;background:#fff;box-shadow:2px 2px 10px rgba(0,0,0,0.5);font-size:18px;color:#333;text-align:center}.UI_cover{position:absolute;top:0;width:100%;height:100px;max-width:100%}.UI_cover .UI_cnt{position:relative;width:100%;height:100%;background:#fff;overflow:auto}.UI_coverClose{display:block;position:absolute;top:10px;right:20px;width:30px;height:30px;text-align:center;color:#aaa;font:18px/30px "simsun";background:#eee;border-radius:15px;border:1px solid #aaa}.UI_coverClose:hover{background:#333;color:#fff;transition:0.2s}.UI_select{position:absolute;width:100%;padding-bottom:10px}.UI_select a{display:block;height:40px;line-height:40px;text-align:center;color:#03f;font-size:16px}.UI_select_body{margin:0 10px 10px;border-radius:8px;overflow:hidden;background:#fff}.UI_selectCpt{padding:8px 0}.UI_selectCpt h3,.UI_selectCpt p{margin:0;font-size:15px;line-height:18px;text-align:center;color:#aaa;font-weight:normal}.UI_selectCpt p{font-size:12px}.UI_selectCnt a{border-top:1px solid #eee}.UI_selectCancel{margin:0 10px;border-radius:8px;overflow:hidden;background:#fff}.UI_main_cnt .UI_select{width:200px;padding:0;border-radius:0;box-shadow:2px 2px 2px rgba(0,0,0,0.6)}.UI_main_cnt .UI_select_body,.UI_main_cnt .UI_selectCancel{margin:0;border-radius:0}.UI_main_cnt .UI_select a{height:34px;line-height:34px;font-size:14px}.UI_main_cnt .UI_selectCancel{display:none}';
+	var popCSS = '.UI_lawyer{position:absolute;top:-100%;left:0;z-index:4999;width:100%;height:100%;overflow:visible;font-family:"Microsoft Yahei"}.UI_lawyer a,.UI_lawyer a:hover,.UI_lawyer a:active{outline:none;text-decoration:none;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-tap-highlight-color:transparent}.UI_mask{position:absolute;top:100%;left:0;width:100%;height:100%;background:#000;display:none;opacity:0.6;filter:alpha(opacity=50)}.UI_main_cnt{position:absolute;width:100%;height:0;top:100%;overflow:visible}.UI-blur{-webkit-transition:0.08s;-webkit-filter:blur(2px)}.UI_pop{width:200px;position:absolute;top:400px;left:300px;background:#fff;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_pop_cpt{position:relative;height:36px;line-height:36px;overflow:hidden;border-bottom:1px solid #ebebeb;color:#777;font-size:16px;text-indent:15px;cursor:default}.UI_pop .UI_cnt{position:relative;min-height:100px;overflow:auto}.UI_pop_close{display:block;position:absolute;top:0;right:0;width:40px;height:36px;text-align:center;color:#ddd;font:bold 20px/36px "simsun";transition:0.1s}.UI_pop_close:hover{color:#888}.UI_pop_close:active{color:#222}.UI_confirm{width:300px;position:absolute;background:#fff;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_confirm_text{padding:30px 10px 20px;line-height:26px;text-align:center;font-size:20px;color:#333}.UI_ask{width:300px;position:absolute;background:#fff;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_ask_text{padding:25px 10px 15px;line-height:26px;text-align:center;font-size:18px;color:#333}.UI_ask input{display:block;margin:0 auto 15px;height:30px;padding:4px 4px;line-height:22px;box-sizing:border-box;width:90%}.UI_pop_confirm{overflow:hidden;text-align:center;border-top:1px solid #ddd;white-space:nowrap}.UI_pop_confirm a{display:inline-block;width:50%;font-size:14px;line-height:36px;color:#03f;transition:0.15s}.UI_pop_confirm a:hover{background:#eee}.UI_pop_confirm_ok{border-right:1px solid #ddd}.UI_plane{width:200px;position:absolute;top:400px;left:300px}.UI_prompt{width:240px;left:50%;margin-left:-120px;position:absolute}.UI_prompt_cnt{padding:30px 10px;background:#fff;box-shadow:2px 2px 10px rgba(0,0,0,0.5);font-size:18px;color:#333;text-align:center}.UI_cover{position:absolute;top:0;width:100%;height:100px;max-width:100%}.UI_cover .UI_cnt{position:relative;width:100%;height:100%;background:#fff;overflow:auto}.UI_coverClose{display:block;position:absolute;top:10px;right:20px;width:30px;height:30px;text-align:center;color:#aaa;font:18px/30px "simsun";background:#eee;border-radius:15px;border:1px solid #aaa}.UI_coverClose:hover{background:#333;color:#fff;transition:0.2s}.UI_select{position:absolute;width:200px;box-shadow:2px 2px 2px rgba(0,0,0,0.6)}.UI_select a{display:block;height:40px;line-height:40px;text-align:center;color:#03f;font-size:16px}.UI_select_body{overflow:hidden;background:#fff}.UI_selectCpt{padding:8px 0}.UI_selectCpt h3,.UI_selectCpt p{margin:0;font-size:15px;line-height:18px;text-align:center;color:#aaa;font-weight:normal}.UI_selectCpt p{font-size:12px}.UI_selectCnt a{height:34px;line-height:34px;font-size:14px;border-top:1px solid #ddd}.UI_selectCnt a:hover{background:#eee}.UI_selectCancel{display:none}@media(max-width:640px){.UI_select{position:fixed;bottom:0;width:100%;padding-bottom:10px}.UI_select_body, .UI_selectCancel{margin:0 10px;border-radius:8px}.UI_select_body{margin:0 10px 10px}.UI_selectCancel{display:block;background:#fff}.UI_lawyer a:hover{background:none}}.UI_ie678 .UI_pop,.UI_ie678 .UI_confirm,.UI_ie678 .UI_ask,.UI_ie678 .UI_prompt,.UI_ie678 .UI_select{outline:3px solid #ccc}';
 	
-	var isIE67 = false;
+	var isIE67 = isIE678 = false;
 	if(navigator.appName == "Microsoft Internet Explorer"){
 		var version = navigator.appVersion.split(";")[1].replace(/[ ]/g,"");
 		if(version == "MSIE6.0" || version == "MSIE7.0"){
-			isIE67 = true; 
+			isIE67 = true;
+			isIE678 = true;
+		}else if(version == "MSIE8.0"){
+			isIE678 = true;
 		}
 	}
 	
@@ -65,7 +68,6 @@
 	var private_allCnt = utils.createDom(allCnt_tpl)[0],
 		private_maskDom = findByClassName(private_allCnt,'UI_mask')[0],
 		private_mainDom = findByClassName(private_allCnt,'UI_main_cnt')[0],
-		private_fixedScreenBottomDom = findByClassName(private_allCnt,'UI_fixedScreenBottom_cnt')[0],
 		private_cssDom = null,
 		private_body = document.body,
 		private_docW,
@@ -83,7 +85,9 @@
 		},
 		zIndex : 499
 	};
-	
+	if(isIE678){
+		utils.addClass(private_allCnt,'UI_ie678');
+	}
 	var docDom;
 	if (document.compatMode == "BackCompat") {
 		docDom = private_body;
@@ -93,11 +97,10 @@
 	}
 	function refreshSize(){
 		//重新计算窗口尺寸
-		private_scrollTop = document.documentElement.scrollTop == 0 ? private_body.scrollTop : document.documentElement.scrollTop;
+		private_scrollTop = docDom.scrollTop == 0 ? private_body.scrollTop : docDom.scrollTop;
 		private_winH = window.innerHeight || document.documentElement.clientHeight;
 		private_docH = docDom.scrollHeight;
 		private_docW = docDom.clientWidth;
-		
 		//向css环境写入动态css
 		private_cssDom && utils.removeNode(private_cssDom);
 		var styleStr = [
@@ -126,24 +129,14 @@
 		
 		var rebuild_fn = null;
 		if(isIE67){
-			setCSS(private_fixedScreenBottomDom,{
-				top : private_scrollTop + private_winH*2
-			});
 			
 			rebuild_fn = function(){
 				refreshSize();
-				setCSS(private_fixedScreenBottomDom,{
-					top : private_scrollTop + private_winH*2
-				});
 				setCSS(private_maskDom,{
 					'marginTop' : private_scrollTop
 				});
 			};
 		}else{
-			setCSS(private_fixedScreenBottomDom,{
-				position : 'fixed',
-				bottom : 0
-			});
 			setCSS(private_maskDom,{
 				'position' : 'fixed',
 				'top' : 0
@@ -253,8 +246,8 @@
 	}
 	//检测body的mouseup事件
 	utils.bind(private_body,'mouseup',function checkClick(event) {
+		var target = event.srcElement || event.target;
 		setTimeout(function(){
-			var target = event.srcElement || event.target;
 			while (!utils.hasClass(target,'UI_easyClose')) {
 				target = target.parentNode;
 				if(!target){
@@ -321,13 +314,17 @@
 			callback && callback();
 			return;
 		}
-		
 		private_maskCount++
 		if(private_maskCount==1){
-			utils.fadeIn(private_maskDom,500,function(){
+			if(!isIE678){
+				utils.fadeIn(private_maskDom,500,function(){
+					callback && callback();
+				});
+				blur && blur();
+			}else{
+				utils.css(private_maskDom,{'display':'block'});
 				callback && callback();
-			});
-			blur && blur();
+			}
 		}else{
 			callback && callback();
 		}
@@ -340,8 +337,11 @@
 			private_maskCount--;
 			if(private_maskCount == 0){
 				removeBlur && removeBlur();
-				utils.fadeOut(private_maskDom,400);
-				
+				if(!isIE678){
+					utils.fadeOut(private_maskDom,400);
+				}else{
+					utils.css(private_maskDom,{'display':'none'});
+				}
 			}
 		}
 	}
@@ -397,15 +397,14 @@
 	 *   创建一个dom用来完成动画
 	 *   动画结束，设置dom为结束样式
 	 **/
-	var openAnimation = isIE67 ? function openAnimation(a,b,c,d,fn){
+	var openAnimation = isIE678 ? function (a,b,c,d,fn){
 		fn && fn();
-	} : function openAnimation(DOM,from,time,animation_range,fn){
-		if(!from || from == 'none'){
+	} : function (DOM,from,time,animation_range,fn){
+		if(!from || from == 'none' || !animation_range){
 			fn && fn();
 			//不需要动画
 			return
 		}
-		var range = animation_range || 80;
 		var offset = utils.offset(DOM);
 		
 		//动画第一帧css
@@ -432,7 +431,7 @@
 			};
 		//参数是字符串
 		}else if(typeof(from) == 'string'){
-			var countResult = countAnimation(DOM,from,-range);
+			var countResult = countAnimation(DOM,from,-animation_range);
 			cssStart[countResult[0]] = countResult[2];
 			cssAnim[countResult[0]] = countResult[1];
 		}
@@ -485,27 +484,30 @@
 			}
 			this.dead = true;
 			
+			//处理关闭回调、蒙层检测
+			var DOM = me.dom;
+			fn && fn.call(me);
+			function endFn(){
+				utils.removeNode(DOM);
+				me.closeFn && me.closeFn();
+				closeMask(me._mask);
+			}
+			
+			if(isIE678){
+				endFn();
+				return
+			}
 			
 			var time = isNum(time) ? time : parseInt(time_define) || 80;
 			var from = me._from;
 			
 			var range = animation_range || 80;
 			
-			//处理关闭回调、蒙层检测
-			fn && fn.call(me);
-			function endFn(){
-				me.closeFn && me.closeFn();
-				closeMask(me._mask);
-			}
-			
-			
-			var DOM = me.dom;
 			var cssEnd = {
 				'opacity' : 0
 			};
 			if(from && from.tagName && from.parentNode){
 				utils.zoomOut(DOM,time,function(){
-					utils.removeNode(DOM);
 					endFn();
 				});
 			}else if(typeof(from) == 'string'){
@@ -515,11 +517,9 @@
 				
 				//动画开始
 				animation(DOM,cssEnd,time,'SineEaseIn',function(){
-					utils.removeNode(DOM);
 					endFn();
 				});
 			}else{
-				utils.removeNode(DOM);
 				endFn();
 			}
 		}
@@ -556,10 +556,6 @@
 			caption_dom.innerHTML = title;
 			//can drag is pop
 			utils.drag(caption_dom,this.dom,{
-				start : function(){
-					//更新窗口尺寸
-					refreshSize();
-				},
 				move : function(mx,my,l_start,t_start,w_start,h_start){
 					var left = mx + l_start;
 					var top = my + t_start;
@@ -598,7 +594,7 @@
 				left : left
 			});
 			//开场动画
-			openAnimation(me.dom,me._from,200,null,function(){
+			openAnimation(me.dom,me._from,200,80,function(){
 				//处理是否易于关闭
 				easyCloseHandle.call(me,param.easyClose,true);
 			});
@@ -641,7 +637,7 @@
 				top : newPosition.top,
 				left : newPosition.left
 			});
-			openAnimation(me.dom,me._from,100,null,function(){
+			openAnimation(me.dom,me._from,100,80,function(){
 				//处理是否易于关闭
 				easyCloseHandle.call(me,param.easyClose,true);
 			});
@@ -762,7 +758,7 @@
 		
 		private_mainDom.appendChild(this.dom);
 		
-		openAnimation(this.dom,this._from,100,null,function(){
+		openAnimation(this.dom,this._from,100,80,function(){
 			//处理是否易于关闭
 			easyCloseHandle.call(me,true);
 		});
@@ -876,7 +872,11 @@
 		
 		//显示蒙层
 		showMask(this._mask,function(){
-			if(private_docW > 640){
+			if(private_docW < 640 && !isIE678){
+				//手机版
+				me._from = 'bottom';
+				private_mainDom.appendChild(me.dom);
+			}else{
 				var cssObj = {
 					top : param.top || 100,
 					left : param.left || 100,
@@ -889,14 +889,6 @@
 				setCSS(me.dom,{
 					left : newSize.left,
 					top : newSize.top
-				});
-				
-				
-			} else {
-				me._from = 'bottom';
-				private_fixedScreenBottomDom.appendChild(me.dom);
-				setCSS(me.dom,{
-					bottom : 0
 				});
 			}
 			openAnimation(me.dom,me._from,200,400,function(){
@@ -924,7 +916,7 @@
 				var num = parseInt(num);
 				if(num > 0){
 					private_CONFIG.zIndex = num;
-					setCSS([private_allCnt,private_fixedScreenBottomDom],{
+					setCSS(private_allCnt,{
 						zIndex : num
 					});
 				}
@@ -955,7 +947,7 @@
 	 * String Number Array
 	 * Object Function 
 	 * HTMLDocument
-	 * Undefined Null 
+	 * Undefined Null
 	 */
 	function TypeOf(obj) {
 		return Object.prototype.toString.call(obj).match(/\s(\w+)/)[1];
@@ -1082,6 +1074,8 @@
 		} else if (value == 'auto'){
 			if(prop == 'height'){
 				value = elem.clientHeight;
+			}else if(prop == 'width'){
+				value = elem.clientWidth;
 			}
 		}
 		
@@ -1304,14 +1298,14 @@
 	}
 	if(testDom.getBoundingClientRect !== 'undefined'){
 		outerWidth = function(elem){
-			var output = elem.getBoundingClientRect().width || 0;
+			var output = elem.getBoundingClientRect().width;
 			
-			return typeof(output) != 'undefined' ? output : count_outerWidth(elem);
+			return typeof(output) == 'number' ? output : count_outerWidth(elem);
 		};
 		outerHeight = function(elem){
-			var output = elem.getBoundingClientRect().height || 0;
+			var output = elem.getBoundingClientRect().height;
 			
-			return typeof(output) != 'undefined' ? output : count_outerHeight(elem);
+			return typeof(output) == 'number' ? output : count_outerHeight(elem);
 		};
 	}else{
 		outerWidth = count_outerWidth;
@@ -1389,6 +1383,7 @@
 		}
 		bindHandler(elem,type,callback);
 	}
+	
 	
     return {
 		TypeOf : TypeOf,
@@ -1580,7 +1575,8 @@
 			}
 			box.screen_top = size.top;
 			box.screen_left = size.left;
-			box.top = size.top + document.body.scrollTop;
+			
+			box.top = size.top + (document.documentElement.scrollTop == 0 ? document.body.scrollTop : document.documentElement.scrollTop);
 			box.left = size.left + document.body.scrollLeft;
 			
 			return box;
