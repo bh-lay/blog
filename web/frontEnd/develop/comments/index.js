@@ -38,8 +38,12 @@ define(function(require,exports){
 	
 	var item_tpl = ['<% for(var i=0,total=list.length;i<total;i++){%>',
 		'<div class="l_com_item">',
-			'<img src="<% if(list[i].user.avatar){ %><%=list[i].user.avatar%><% }else{ %>http://layasset.qiniudn.com/user/default.jpg<% } %>" alt="" />',
-			'<%=list[i].content %>,<%=list[i].time %>,<%=list[i].uid %>',
+			'<div class="l_com_item_main">',
+				'<%=list[i].content %>,<%=list[i].time %>,<%=list[i].uid %>',
+			'</div>',
+			'<div class="l_com_item_avatar">',
+				'<img src="<% if(list[i].user.avatar){ %><%=list[i].user.avatar%><% }else{ %>http://layasset.qiniudn.com/user/default.jpg<% } %>"/>',
+			'</div>',
 		'</div>',
 	'<%}%>'].join('');
 	

@@ -2,7 +2,7 @@
  * @author bh-lay
  * 
  * @github https://github.com/bh-lay/UI
- * @modified 2014-9-18 14:16
+ * @modified 2014-9-18 17:0
  * 
  **/
 
@@ -45,10 +45,10 @@
 		ask_tpl = '<div class="UI_ask"><div class="UI_ask_text"><%=text %></div><input class="UI_ask_key" type="text" name="UI_ask_key"/></div>',
 		confirmBar_tpl = '<div class="UI_pop_confirm"><a href="javascript:;" class="UI_pop_confirm_ok"><%=confirm %></a><a href="javascript:;" class="UI_pop_confirm_cancel"><%=cancel %></a></div>',
 		plane_tpl = '<div class="UI_plane"></div>',
-		prompt_tpl = '<div class="UI_prompt"><div class="UI_prompt_cnt"></div></div>',
+		prompt_tpl = '<div class="UI_prompt"><div class="UI_cnt"></div></div>',
 		cover_tpl = '<div class="UI_cover"><div class="UI_cnt"></div><a href="javascript:;" class="UI_close UI_coverClose">×</a></div>',
 		select_tpl = '<div class="UI_select"><div class="UI_select_body UI_cnt"><% if(title){ %><div class="UI_selectCpt"><h3><%=title %></h3><% if(intro){ %><p><%=intro %></p><% } %></div><% } %><div class="UI_selectCnt"><% for(var i=0,total=list.length;i<total;i++){ %><a class="UI_select_btn" href="javascript:;"><%=list[i] %></a><% } %></div></div><div class="UI_selectCancel"><a class="UI_select_btn" href="javascript:;">取消</a></div></div>',
-		popCSS = '.UI_lawyer{position:absolute;top:0;left:0;z-index:4999;width:100%;height:0;overflow:visible;font-family:"Microsoft Yahei"}.UI_lawyer a,.UI_lawyer a:hover,.UI_lawyer a:active{outline:none;text-decoration:none;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-tap-highlight-color:transparent}.UI_mask{position:absolute;top:0;left:0;width:100%;height:100%;background:#000;display:none;opacity:0.6;filter:alpha(opacity=60)}.UI-blur{-webkit-transition:0.08s;-webkit-filter:blur(3px)}.UI_pop{width:200px;position:absolute;top:400px;left:300px;background:#fff;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_pop_cpt{position:relative;height:36px;line-height:36px;overflow:hidden;border-bottom:1px solid #ebebeb;color:#777;font-size:16px;text-indent:15px;cursor:default}.UI_pop .UI_cnt{position:relative;min-height:100px;overflow:auto}.UI_pop_close{display:block;position:absolute;top:0;right:0;width:40px;height:36px;text-align:center;color:#ddd;font:bold 20px/36px "simsun";transition:0.1s}.UI_pop_close:hover{color:#888}.UI_pop_close:active{color:#222}.UI_confirm{width:300px;position:absolute;background:#fff;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_confirm_text{padding:30px 10px 20px;line-height:26px;text-align:center;font-size:20px;color:#333}.UI_ask{width:300px;position:absolute;background:#fff;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_ask_text{padding:25px 10px 15px;line-height:26px;text-align:center;font-size:18px;color:#333}.UI_ask input{display:block;margin:0 auto 15px;height:30px;padding:4px 4px;line-height:22px;box-sizing:border-box;width:90%}.UI_pop_confirm{overflow:hidden;text-align:center;border-top:1px solid #ddd;white-space:nowrap}.UI_pop_confirm a{display:inline-block;width:50%;font-size:14px;line-height:36px;color:#03f;transition:0.15s}.UI_pop_confirm a:hover{background:#eee}.UI_pop_confirm_ok{border-right:1px solid #ddd}.UI_plane{width:200px;position:absolute;top:400px;left:300px}.UI_prompt{width:240px;left:50%;margin-left:-120px;position:absolute}.UI_prompt_cnt{padding:30px 10px;background:#fff;box-shadow:2px 2px 10px rgba(0,0,0,0.5);font-size:18px;color:#333;text-align:center}.UI_cover{position:absolute;top:0;width:100%;height:100px;max-width:100%}.UI_cover .UI_cnt{position:relative;width:100%;height:100%;background:#fff;overflow:auto}.UI_coverClose{display:block;position:absolute;top:10px;right:20px;width:30px;height:30px;text-align:center;color:#aaa;font:18px/30px "simsun";background:#eee;border-radius:15px;border:1px solid #aaa}.UI_coverClose:hover{background:#333;color:#fff;transition:0.2s}.UI_select{position:absolute;width:200px;box-shadow:2px 2px 2px rgba(0,0,0,0.6)}.UI_select a{display:block;height:40px;line-height:40px;text-align:center;color:#03f;font-size:16px}.UI_select_body{overflow:hidden;background:#fff}.UI_selectCpt{padding:8px 0}.UI_selectCpt h3,.UI_selectCpt p{margin:0;font-size:15px;line-height:18px;text-align:center;color:#aaa;font-weight:normal}.UI_selectCpt p{font-size:12px}.UI_selectCnt a{height:34px;line-height:34px;font-size:14px;border-top:1px solid #ddd}.UI_selectCnt a:hover{background:#eee}.UI_selectCancel{display:none}@media(max-width:640px){.UI_select{position:fixed;bottom:0;width:100%;padding-bottom:10px}.UI_select_body, .UI_selectCancel{margin:0 10px;border-radius:8px}.UI_select_body{margin:0 10px 10px}.UI_selectCancel{display:block;background:#fff}.UI_lawyer a:hover{background:none}}.UI_ie678 .UI_pop,.UI_ie678 .UI_confirm,.UI_ie678 .UI_ask,.UI_ie678 .UI_prompt,.UI_ie678 .UI_select{outline:3px solid #ccc}';
+		popCSS = '.UI_lawyer{position:absolute;top:0;left:0;z-index:4999;width:100%;height:0;overflow:visible;font-family:"Microsoft Yahei"}.UI_lawyer a,.UI_lawyer a:hover,.UI_lawyer a:active{outline:none;text-decoration:none;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-tap-highlight-color:transparent}.UI_mask{position:absolute;top:0;left:0;width:100%;height:100%;background:#000;display:none;opacity:0.6;filter:alpha(opacity=60)}.UI-blur{-webkit-transition:0.08s;-webkit-filter:blur(3px)}.UI_pop{width:200px;position:absolute;top:400px;left:300px;background:#fff;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_pop_cpt{position:relative;height:36px;line-height:36px;overflow:hidden;border-bottom:1px solid #ebebeb;color:#777;font-size:16px;text-indent:15px;cursor:default}.UI_pop .UI_cnt{position:relative;min-height:100px;overflow:auto}.UI_pop_close{display:block;position:absolute;top:0;right:0;width:40px;height:36px;text-align:center;color:#ddd;font:bold 20px/36px "simsun";transition:0.1s}.UI_pop_close:hover{color:#888}.UI_pop_close:active{color:#222}.UI_confirm{width:300px;position:absolute;background:#fff;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_confirm_text{padding:30px 10px 20px;line-height:26px;text-align:center;font-size:20px;color:#333}.UI_ask{width:300px;position:absolute;background:#fff;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_ask_text{padding:25px 10px 15px;line-height:26px;text-align:center;font-size:18px;color:#333}.UI_ask input{display:block;margin:0 auto 15px;height:30px;padding:4px 4px;line-height:22px;box-sizing:border-box;width:90%}.UI_pop_confirm{overflow:hidden;text-align:center;border-top:1px solid #ddd;white-space:nowrap}.UI_pop_confirm a{display:inline-block;width:50%;font-size:14px;line-height:36px;color:#03f;transition:0.15s}.UI_pop_confirm a:hover{background:#eee}.UI_pop_confirm_ok{border-right:1px solid #ddd}.UI_plane{width:200px;position:absolute;top:400px;left:300px}.UI_prompt{position:absolute;width:240px;background:#fff;box-shadow:2px 2px 10px rgba(0,0,0,0.5)}.UI_prompt .UI_cnt{padding:30px 10px;font-size:18px;color:#333;text-align:center}.UI_cover{position:absolute;top:0;width:100%;height:100px;max-width:100%}.UI_cover .UI_cnt{position:relative;width:100%;height:100%;background:#fff;overflow:auto}.UI_coverClose{display:block;position:absolute;top:10px;right:20px;width:30px;height:30px;text-align:center;color:#aaa;font:18px/30px "simsun";background:#eee;border-radius:15px;border:1px solid #aaa}.UI_coverClose:hover{background:#333;color:#fff;transition:0.2s}.UI_select{position:absolute;width:200px;box-shadow:2px 2px 2px rgba(0,0,0,0.6)}.UI_select a{display:block;height:40px;line-height:40px;text-align:center;color:#03f;font-size:16px}.UI_select_body{overflow:hidden;background:#fff}.UI_selectCpt{padding:8px 0}.UI_selectCpt h3,.UI_selectCpt p{margin:0;font-size:15px;line-height:18px;text-align:center;color:#aaa;font-weight:normal}.UI_selectCpt p{font-size:12px}.UI_selectCnt a{height:34px;line-height:34px;font-size:14px;border-top:1px solid #ddd}.UI_selectCnt a:hover{background:#eee}.UI_selectCancel{display:none}@media(max-width:640px){.UI_select{position:fixed;bottom:0;width:100%;padding-bottom:10px}.UI_select_body, .UI_selectCancel{margin:0 10px;border-radius:8px}.UI_select_body{margin:0 10px 10px}.UI_selectCancel{display:block;background:#fff}.UI_lawyer a:hover{background:none}}.UI_ie678 .UI_pop,.UI_ie678 .UI_confirm,.UI_ie678 .UI_ask,.UI_ie678 .UI_prompt,.UI_ie678 .UI_select{outline:3px solid #ccc}';
 	
 	var isIE67 = isIE678 = false;
 	if(navigator.appName == "Microsoft Internet Explorer"){
@@ -74,17 +74,14 @@
 		private_scrollTop;
 
 	var private_CONFIG = {
-		gap : {
-			top : 0,
-			left : 0,
-			bottom : 0,
-			right : 0
+		'gap' : {
+			'top' : 0,
+			'left' : 0,
+			'bottom' : 0,
+			'right' : 0
 		},
-		zIndex : 499
+		'zIndex' : 499
 	};
-	if(isIE678){
-		utils.addClass(private_allCnt,'UI_ie678');
-	}
 	var docDom;
 	if (document.compatMode == "BackCompat") {
 		docDom = private_body;
@@ -116,6 +113,10 @@
 		//更新窗口尺寸
 		refreshSize();
 		setTimeout(refreshSize,500);
+		
+		if(isIE678){
+			utils.addClass(private_allCnt,'UI_ie678');
+		}
 		
 		var rebuild_fn = null;
 		if(isIE67){
@@ -161,28 +162,26 @@
 		}
 		
 		return {
-			top : top,
-			left : left
+			'top' : Math.ceil(top),
+			'left' : Math.ceil(left)
 		}
 	}
-	//计算自适应页面位置的方法
-	function adaption(width,height){
-		var top = (private_winH - height)/2 + private_scrollTop;
-		var left = (private_docW - width)/2;
-		
-		var gap = private_CONFIG.gap;
-		var screenTop = (private_winH - height)/2;
-		if(screenTop < gap.top){
-			screenTop = gap.top;
+	//设置dom自适应于页面
+	function adaption(dom,param,time){
+		var param = param ||{},
+			width = outerWidth(dom),
+			height = outerHeight(dom),
+			top = (private_winH - height)/2 + private_scrollTop,
+			left = (private_docW - width)/2,
+			newPosition = fix_position(top,left,width,height),
+			method = setCSS;
+		if(isNum(time)){
+			method = animation;
 		}
-		
-		var newPosition = fix_position(top,left,width,height);
-		return {
-			top : newPosition.top,
-			left : newPosition.left,
-			screenTop : screenTop,
-			screenLeft : newPosition.left
-		}
+		method(dom,{
+			'top' : isNum(param.top) ? param.top : Math.ceil(newPosition.top),
+			'left' : isNum(param.left) ? param.left : Math.ceil(newPosition.left)
+		},time);
 	}
 	
 	//增加确认方法
@@ -204,8 +203,8 @@
 			}
 		}
 		var this_html = utils.render(confirmBar_tpl,{
-			confirm : btns[0],
-			cancel : btns[1]
+			'confirm' : btns[0],
+			'cancel' : btns[1]
 		});
 		dom.appendChild(utils.createDom(this_html)[0]);
 		
@@ -221,8 +220,8 @@
 	}
 	
 	/**
-	 * 处理对象是否易于关闭的扩展
-	 *   点击自身以外的空间，按下esc键
+	 * 处理对象易于关闭的扩展
+	 *   点击自身以外 or 按下esc
 	 */
 	 //当前打开状态的对象
 	private_active = [];
@@ -263,9 +262,9 @@
 	 *   default_value 为默认参数
 	 */
 	function easyCloseHandle(mark,default_value){
+		var me = this;
 		if(typeof(mark) == 'boolean' ? mark : default_value){
-			var me = this;
-			utils.addClass(this.dom,'UI_easyClose');
+			utils.addClass(me.dom,'UI_easyClose');
 			setTimeout(function(){
 				private_active.push(me);
 			});
@@ -312,12 +311,16 @@
 	function showMask(callback){
 		var lastMask = maskObjsLast();
 		zIndex = lastMask ? lastMask[1] + 2 : 2;
-		setCSS(this.dom,{'zIndex': zIndex});
+		setCSS(this.dom,{
+			'zIndex': zIndex
+		});
 		if(!this._mask){
 			callback && callback();
 			return;
 		}
-		setCSS(private_maskDom,{'zIndex': zIndex - 1});
+		setCSS(private_maskDom,{
+			'zIndex': zIndex - 1
+		});
 		
 		if(lastMask){
 			//尚有需要蒙层的元素
@@ -330,7 +333,9 @@
 				});
 				blur && blur();
 			}else{
-				setCSS(private_maskDom,{'display':'block'});
+				setCSS(private_maskDom,{
+					'display':'block'
+				});
 				callback && callback();
 			}
 		}
@@ -408,17 +413,17 @@
 			time = 200;
 			var offset_from = utils.offset(from);
 			cssStart = {
-				top : offset_from.top,
-				left : offset_from.left,
-				width : outerWidth(from),
-				height : outerHeight(from),
-				overflow : 'hidden'
+				'top' : offset_from.top,
+				'left' : offset_from.left,
+				'width' : outerWidth(from),
+				'height' : outerHeight(from),
+				'overflow' : 'hidden'
 			};
 			cssAnim = {
-				width : getCSS(DOM,'width'),
-				height : getCSS(DOM,'height'),
-				top : getCSS(DOM,'top'),
-				left : getCSS(DOM,'left')
+				'width' : getCSS(DOM,'width'),
+				'height' : getCSS(DOM,'height'),
+				'top' : getCSS(DOM,'top'),
+				'left' : getCSS(DOM,'left')
 			};
 		//参数是字符串
 		}else if(typeof(from) == 'string'){
@@ -435,8 +440,8 @@
 		var cntDom = findByClassName(animDom,'UI_cnt')[0];
 		insertAfter(animDom,DOM);
 		if(cntDom){
-			setCSS(cntDom,{
-				'height' : outerHeight(cntDom)
+			setCSS(animDom,{
+				'height' : outerHeight(DOM)
 			});
 			cntDom.innerHTML = '';
 		}
@@ -457,7 +462,7 @@
 			utils.removeNode(animDom);
 			//显示真实dom
 			setCSS(DOM,{
-				display : 'block'
+				'display' : 'block'
 			});
 			fn && fn();
 		});
@@ -470,10 +475,10 @@
 			var me = this;
 			
 			//检测、记录自己是否“活着”
-			if(this.dead){
+			if(me.dead){
 				return;
 			}
-			this.dead = true;
+			me.dead = true;
 			
 			//处理关闭回调、蒙层检测
 			var DOM = me.dom;
@@ -547,21 +552,21 @@
 		var param = param || {};
 		var me = this;
 		
-		this.dom = utils.createDom(pop_tpl)[0];
-		this.cntDom = findByClassName(this.dom,'UI_cnt')[0];
-		this.closeFn = param.closeFn || null;
-		this._mask = param.mask || false;
-		this._from = param.from || 'top';
+		me.dom = utils.createDom(pop_tpl)[0];
+		me.cntDom = findByClassName(me.dom,'UI_cnt')[0];
+		me.closeFn = param.closeFn || null;
+		me._mask = param.mask || false;
+		me._from = param.from || 'top';
 		
 
 		//当有确认参数时
 		if(param.confirm){
-			add_confirm(this.dom,param.confirm,function(){
+			add_confirm(me.dom,param.confirm,function(){
 				me.close();
 			});
 		}
 		//处理title参数
-		var caption_dom = findByClassName(this.dom,'UI_pop_cpt')[0];
+		var caption_dom = findByClassName(me.dom,'UI_pop_cpt')[0];
 		if(!param.title){
 			utils.removeNode(caption_dom);
 		}else{
@@ -569,25 +574,25 @@
 			
 			caption_dom.innerHTML = title;
 			//can drag is pop
-			utils.drag(caption_dom,this.dom,{
-				move : function(mx,my,l_start,t_start,w_start,h_start){
+			utils.drag(caption_dom,me.dom,{
+				'move' : function(mx,my,l_start,t_start,w_start,h_start){
 					var left = mx + l_start;
 					var top = my + t_start;
 					
 					var newSize = fix_position(top,left,w_start,h_start);
 					setCSS(me.dom,{
-						left : newSize.left,
-						top : newSize.top
+						'left' : newSize.left,
+						'top' : newSize.top
 					});
 				}
 			});
 		}
 		
-		bindEvent(this.dom,'click','.UI_pop_close',function(){
+		bindEvent(me.dom,'click','.UI_pop_close',function(){
 			me.close();
 		});
 		
-		showMask.call(this,function(){
+		showMask.call(me,function(){
 			var this_width = Math.min(param.width || 600,private_docW-20);
 			
 			//插入内容
@@ -595,18 +600,13 @@
 			
 			//设置宽度，为计算位置尺寸做准备
 			setCSS(me.dom,{
-				width : this_width
+				'width' : this_width
 			});
 			private_allCnt.appendChild(me.dom);
 			
 			//校正位置
-			var fixSize = adaption(this_width,outerHeight(me.dom));
-			var top = isNum(param.top) ? param.top : fixSize.top;
-			var left = isNum(param.left) ? param.left : fixSize.left;
-			setCSS(me.dom,{
-				top : top,
-				left : left
-			});
+			adaption(me.dom,param);
+			
 			//开场动画
 			openAnimation(me.dom,me._from,200,80,function(){
 				//处理是否易于关闭
@@ -617,11 +617,7 @@
 	//使用close方法
 	POP.prototype.close = closeAnimation(500);
 	POP.prototype.adapt = function(){
-		var fixSize = adaption(outerWidth(this.dom),outerHeight(this.dom));
-		animation(this.dom,{
-			top : fixSize.top,
-			left : fixSize.left
-		}, 100);
+		adaption(this.dom,null,100);
 	};
 
 	/**
@@ -634,23 +630,20 @@
 		var this_html = utils.render(confirm_tpl,{
 			'text' : param.text || 'need text in parameter!'
 		});
-		this.dom = utils.createDom(this_html)[0];
-		this.closeFn = param.closeFn || null;
-		this._mask = typeof(param.mask) == 'boolean' ? param.mask : true;
-		this._from = param.from || 'top';
+		me.dom = utils.createDom(this_html)[0];
+		me.closeFn = param.closeFn || null;
+		me._mask = typeof(param.mask) == 'boolean' ? param.mask : true;
+		me._from = param.from || 'top';
 		
-		add_confirm(this.dom,param,function(){
+		add_confirm(me.dom,param,function(){
 			me.close();
 		});
 		//显示蒙层
-		showMask.call(this,function(){
+		showMask.call(me,function(){
 			private_allCnt.appendChild(me.dom);
 			
-			var newPosition = adaption(300,outerHeight(me.dom));
-			setCSS(me.dom,{
-				'top' : newPosition.top,
-				'left' : newPosition.left
-			});
+			adaption(me.dom);
+			
 			openAnimation(me.dom,me._from,100,80,function(){
 				//处理是否易于关闭
 				easyCloseHandle.call(me,param.easyClose,true);
@@ -671,37 +664,35 @@
 			'text' : text || 'need text in parameter!'
 		});
 
-		this.dom = utils.createDom(this_html)[0];
-		this._mask = typeof(param.mask) == 'boolean' ? param.mask : true;
-		this._from = param.from || 'top';
-		this.inputDom = findByClassName(me.dom,'UI_ask_key')[0];
-		this.closeFn =  null;
+		me.dom = utils.createDom(this_html)[0];
+		me._mask = typeof(param.mask) == 'boolean' ? param.mask : true;
+		me._from = param.from || 'top';
+		me.inputDom = findByClassName(me.dom,'UI_ask_key')[0];
+		me.closeFn =  null;
 		
 		var confirm_html = utils.render(confirmBar_tpl,{
 			'confirm' : '确定',
 			'cancel' : '取消'
 		});
 		
-		this.dom.appendChild(utils.createDom(confirm_html)[0]);
+		me.dom.appendChild(utils.createDom(confirm_html)[0]);
 		
 		//确定
-		bindEvent(this.dom,'click','.UI_pop_confirm_ok',function(){
+		bindEvent(me.dom,'click','.UI_pop_confirm_ok',function(){
 			//根据执行结果判断是否要关闭弹框
 			callback ? ((callback(me.inputDom.value) != false) && me.close()) : me.close();
 		});
 		//取消
-		bindEvent(this.dom,'click','.UI_pop_confirm_cancel',function(){
+		bindEvent(me.dom,'click','.UI_pop_confirm_cancel',function(){
 			me.close();
 		});
 
 		//显示蒙层
-		showMask.call(this,function(){
+		showMask.call(me,function(){
 			private_allCnt.appendChild(me.dom);
-			var newPosition = adaption(300,outerHeight(me.dom));
-			setCSS(me.dom,{
-				top : newPosition.top,
-				left : newPosition.left
-			});
+			
+			adaption(me.dom);
+			
 			openAnimation(me.dom,me._from,100,80,function(){
 				me.inputDom.focus();
 				//处理是否易于关闭
@@ -723,17 +714,16 @@
 	function PROMPT(text,time,param){
 		var param = param || {};
 		var me = this;
-		this.dom = utils.createDom(prompt_tpl)[0];
-		this._from = param.from || 'bottom';
-		this._mask = param.mask ? true : false;
-		this.tips(text,time);
+		me.dom = utils.createDom(prompt_tpl)[0];
+		me._from = param.from || 'bottom';
+		me._mask = param.mask ? true : false;
+		me.tips(text,time);
 		
 		// create pop
-		setCSS(this.dom,{
-			top : private_winH/3 + private_scrollTop
-		});
-		showMask.call(this,function(){
+		showMask.call(me,function(){
 			private_allCnt.appendChild(me.dom);
+			adaption(me.dom);
+			
 			openAnimation(me.dom,me._from,100,30);
 		});
 	}
@@ -741,7 +731,7 @@
 	PROMPT.prototype.tips = function(txt,time){
 		var me = this;
 		if(txt){
-			findByClassName(this.dom,'UI_prompt_cnt')[0].innerHTML = txt;
+			findByClassName(this.dom,'UI_cnt')[0].innerHTML = txt;
 		}
 		if(time != 0){
 			setTimeout(function(){
@@ -757,21 +747,20 @@
 		var me = this;
 		var param = param || {};
 		
-		this.closeFn = param.closeFn || null;
-
-		this.dom = utils.createDom(plane_tpl)[0];
-		this._from = param.from || null;
+		me.closeFn = param.closeFn || null;
+		me.dom = utils.createDom(plane_tpl)[0];
+		me._from = param.from || null;
 		
 		//insert html
-		this.dom.innerHTML = param.html || '';
+		me.dom.innerHTML = param.html || '';
 		
-		setCSS(this.dom,{
+		setCSS(me.dom,{
 			'width' : param.width || 240,
-			'height' :param.height || null,
+			'height' : param.height || null,
 			'top' : isNum(param.top) ? param.top : 300,
 			'left' : isNum(param.left) ? param.left : 800
 		});
-		showMask.call(this,function(){
+		showMask.call(me,function(){
 			private_allCnt.appendChild(me.dom);
 			openAnimation(me.dom,me._from,100,80,function(){
 				//处理是否易于关闭
@@ -789,25 +778,25 @@
 	function COVER(param){
 		var param = param || {};
 		var me = this;
-		this.dom = utils.createDom(cover_tpl)[0];
-		this._mask = typeof(param.mask) == 'boolean' ? param.mask : false;
-		this._from = param.from || 'top';
+		me.dom = utils.createDom(cover_tpl)[0];
+		me._mask = typeof(param.mask) == 'boolean' ? param.mask : false;
+		me._from = param.from || 'top';
 		
-		this.cntDom = findByClassName(this.dom,'UI_cnt')[0];
-		this.closeFn = param.closeFn || null;
+		me.cntDom = findByClassName(me.dom,'UI_cnt')[0];
+		me.closeFn = param.closeFn || null;
 		
 		
 		//关闭事件
-		bindEvent(this.dom,'click','.UI_close',function(){
+		bindEvent(me.dom,'click','.UI_close',function(){
 			me.close();
 		});
 
 		
 		//记录body的scrollY设置
-		this._bodyOverflowY = getCSS(private_body,'overflowY');
+		me._bodyOverflowY = getCSS(private_body,'overflowY');
 		var cssObj = {
-			width : isNum(param.width) ? Math.min(private_docW,param.width) : null,
-			height : isNum(param.height) ? Math.min(private_winH,param.height) : private_winH
+			'width' : isNum(param.width) ? Math.min(private_docW,param.width) : null,
+			'height' : isNum(param.height) ? Math.min(private_winH,param.height) : private_winH
 		};
 		//水平定位
 		if(isNum(param.right)){
@@ -827,7 +816,7 @@
 			cssObj.top = private_scrollTop + (private_winH - cssObj.height)/2
 		}
 		//打开蒙层
-		showMask.call(this,function(){
+		showMask.call(me,function(){
 			setCSS(me.dom,cssObj);
 			private_allCnt.appendChild(me.dom);
 			
@@ -840,15 +829,15 @@
 			});
 		});
 		//insert html
-		this.cntDom.innerHTML = param.html || '';
+		me.cntDom.innerHTML = param.html || '';
 	}
 	//使用close方法
 	COVER.prototype.close = closeAnimation(400,500,function(){
 		setCSS(this.cntDom,{
-			overflowY : 'hidden'
+			'overflowY' : 'hidden'
 		});
 		setCSS(private_body,{
-			overflowY : this._bodyOverflowY
+			'overflowY' : this._bodyOverflowY
 		});
 	});
 
@@ -872,13 +861,13 @@
 			'intro' : param.intro || null
 		});
 		
-		this.dom = utils.createDom(this_html)[0];
-		this.closeFn = param.closeFn || null;
-		this._from = param.from || 'bottom';
-		this._mask = private_docW > 640 ? param.mask : true;
+		me.dom = utils.createDom(this_html)[0];
+		me.closeFn = param.closeFn || null;
+		me._from = param.from || 'bottom';
+		me._mask = private_docW > 640 ? param.mask : true;
 		
 		//绑定事件
-		var btns = findByClassName(this.dom,'UI_select_btn');
+		var btns = findByClassName(me.dom,'UI_select_btn');
 		utils.each(btns,function(index,btn){
 			bindEvent(btn,'click',function(){
 				fns[index] && fns[index]();
@@ -887,24 +876,24 @@
 		});
 		
 		//显示蒙层
-		showMask.call(this,function(){
+		showMask.call(me,function(){
 			if(private_docW < 640 && !isIE678){
 				//手机版
 				me._from = 'bottom';
 				private_allCnt.appendChild(me.dom);
 			}else{
 				var cssObj = {
-					top : param.top || 100,
-					left : param.left || 100,
-					width : param.width || 200
+					'top' : param.top || 100,
+					'left' : param.left || 100,
+					'width' : param.width || 200
 				};
 				private_allCnt.appendChild(me.dom);
 				
 				setCSS(me.dom,cssObj);
 				var newSize = fix_position(cssObj.top,cssObj.left,cssObj.width,outerHeight(me.dom));
 				setCSS(me.dom,{
-					left : newSize.left,
-					top : newSize.top
+					'left' : newSize.left,
+					'top' : newSize.top
 				});
 			}
 			openAnimation(me.dom,me._from,200,400,function(){
@@ -918,17 +907,17 @@
 	 *  抛出对外接口
 	 */
 	return {
-		pop : function(){
+		'pop' : function(){
 			return new POP(arguments[0]);
 		},
-		config : {
-			gap : function(name,value){
+		'config' : {
+			'gap' : function(name,value){
 				//name符合top/right/bottom/left,且value值为数字类型（兼容字符类型）
 				if(name && typeof(private_CONFIG.gap[name]) == 'number' && isNum(value)){
 					private_CONFIG.gap[name] = parseInt(value);
 				}
 			},
-			zIndex : function(num){
+			'zIndex' : function(num){
 				var num = parseInt(num);
 				if(num > 0){
 					private_CONFIG.zIndex = num;
@@ -938,22 +927,22 @@
 				}
 			}
 		},
-		confirm : function(){
+		'confirm' : function(){
 			return new CONFIRM(arguments[0]);
 		},
-		ask : function(text,callback,param){
+		'ask' : function(text,callback,param){
 			return new ASK(text,callback,param);
 		},
-		prompt : function(txt,time,param){
+		'prompt' : function(txt,time,param){
 			return new PROMPT(txt,time,param);
 		},
-		plane : function(){
+		'plane' : function(){
 			return new PLANE(arguments[0]);
 		},
-		cover : function(){
+		'cover' : function(){
 			return new COVER(arguments[0]);
 		},
-		select : function(){
+		'select' : function(){
 			return new SELECT(arguments[0],arguments[1]);
 		}
 	};
@@ -1084,7 +1073,7 @@
 		if (/\px$/.test(value)){
 			value = parseInt(value);
 		}else if (isNum(value) ){
-			value = parseInt(value*10000)/10000;
+			value = Number(value);
 		} else if(value == '' || value == 'medium'){
 			value = 0;
 		} else if (value == 'auto'){
@@ -1141,7 +1130,7 @@
 			}
 			
 			if( isNum(value) ){
-				value = parseInt(value*10000)/10000;
+				value = Number(value);
 				props.push(key);
 				cssOri.push(value);
 				cssEnd.push(end_value);
@@ -1209,9 +1198,9 @@
 			var start,end,value;
 			for (var i = 0; i < css_length; i++) {
 				//计算当前帧需要的属性值
-				start = me.cssOri[i] * 10000;
-				end = me.cssEnd[i] * 10000;
-				value = aniFunction(time_use, start, (end-start), time_all)/10000;
+				start = me.cssOri[i];
+				end = me.cssEnd[i];
+				value = aniFunction(time_use, start, (end-start), time_all);
 				setStyle(me.elem,me.props[i],value);
 			}
 			
