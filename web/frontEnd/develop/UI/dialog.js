@@ -2,7 +2,7 @@
  * @author bh-lay
  * 
  * @github https://github.com/bh-lay/UI
- * @modified 2014-9-17 16:53
+ * @modified 2014-9-18 14:16
  * 
  **/
 
@@ -33,22 +33,22 @@
 		animation = utils.animation,
 		outerWidth = utils.outerWidth,
 		outerHeight = utils.outerHeight,
-		findByClassName = utils.findByClassName;
+		findByClassName = utils.findByClassName,
+		bindEvent = utils.bind;
 	
 	/**
 	 * 基础模版
 	 */
-	var allCnt_tpl = '<div class="UI_lawyer"><div class="UI_mask"></div><div class="UI_main_cnt"></div></div>';
-	var pop_tpl = '<div class="UI_pop"><div class="UI_pop_cpt"></div><div class="UI_cnt"></div><a href="javascript:;" class="UI_pop_close" title="\u5173\u95ED">×</a></div>';
-	var confirm_tpl = '<div class="UI_confirm"><div class="UI_confirm_text"><%=text %></div></div>';
-	var ask_tpl = '<div class="UI_ask"><div class="UI_ask_text"><%=text %></div><input class="UI_ask_key" type="text" name="UI_ask_key"/></div>';
-	var confirmBar_tpl = '<div class="UI_pop_confirm"><a href="javascript:;" class="UI_pop_confirm_ok"><%=confirm %></a><a href="javascript:;" class="UI_pop_confirm_cancel"><%=cancel %></a></div>';
-	var plane_tpl = '<div class="UI_plane"></div>';
-	var prompt_tpl = '<div class="UI_prompt"><div class="UI_prompt_cnt"></div></div>';
-	var cover_tpl = '<div class="UI_cover"><div class="UI_cnt"></div><a href="javascript:;" class="UI_close UI_coverClose">×</a></div>';
-	var select_tpl = '<div class="UI_select"><div class="UI_select_body UI_cnt"><% if(title){ %><div class="UI_selectCpt"><h3><%=title %></h3><% if(intro){ %><p><%=intro %></p><% } %></div><% } %><div class="UI_selectCnt"><% for(var i=0,total=list.length;i<total;i++){ %><a class="UI_select_btn" href="javascript:;"><%=list[i] %></a><% } %></div></div><div class="UI_selectCancel"><a class="UI_select_btn" href="javascript:;">取消</a></div></div>';
-	
-	var popCSS = '.UI_lawyer{position:absolute;top:-100%;left:0;z-index:4999;width:100%;height:100%;overflow:visible;font-family:"Microsoft Yahei"}.UI_lawyer a,.UI_lawyer a:hover,.UI_lawyer a:active{outline:none;text-decoration:none;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-tap-highlight-color:transparent}.UI_mask{position:absolute;top:100%;left:0;width:100%;height:100%;background:#000;display:none;opacity:0.6;filter:alpha(opacity=50)}.UI_main_cnt{position:absolute;width:100%;height:0;top:100%;overflow:visible}.UI-blur{-webkit-transition:0.08s;-webkit-filter:blur(2px)}.UI_pop{width:200px;position:absolute;top:400px;left:300px;background:#fff;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_pop_cpt{position:relative;height:36px;line-height:36px;overflow:hidden;border-bottom:1px solid #ebebeb;color:#777;font-size:16px;text-indent:15px;cursor:default}.UI_pop .UI_cnt{position:relative;min-height:100px;overflow:auto}.UI_pop_close{display:block;position:absolute;top:0;right:0;width:40px;height:36px;text-align:center;color:#ddd;font:bold 20px/36px "simsun";transition:0.1s}.UI_pop_close:hover{color:#888}.UI_pop_close:active{color:#222}.UI_confirm{width:300px;position:absolute;background:#fff;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_confirm_text{padding:30px 10px 20px;line-height:26px;text-align:center;font-size:20px;color:#333}.UI_ask{width:300px;position:absolute;background:#fff;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_ask_text{padding:25px 10px 15px;line-height:26px;text-align:center;font-size:18px;color:#333}.UI_ask input{display:block;margin:0 auto 15px;height:30px;padding:4px 4px;line-height:22px;box-sizing:border-box;width:90%}.UI_pop_confirm{overflow:hidden;text-align:center;border-top:1px solid #ddd;white-space:nowrap}.UI_pop_confirm a{display:inline-block;width:50%;font-size:14px;line-height:36px;color:#03f;transition:0.15s}.UI_pop_confirm a:hover{background:#eee}.UI_pop_confirm_ok{border-right:1px solid #ddd}.UI_plane{width:200px;position:absolute;top:400px;left:300px}.UI_prompt{width:240px;left:50%;margin-left:-120px;position:absolute}.UI_prompt_cnt{padding:30px 10px;background:#fff;box-shadow:2px 2px 10px rgba(0,0,0,0.5);font-size:18px;color:#333;text-align:center}.UI_cover{position:absolute;top:0;width:100%;height:100px;max-width:100%}.UI_cover .UI_cnt{position:relative;width:100%;height:100%;background:#fff;overflow:auto}.UI_coverClose{display:block;position:absolute;top:10px;right:20px;width:30px;height:30px;text-align:center;color:#aaa;font:18px/30px "simsun";background:#eee;border-radius:15px;border:1px solid #aaa}.UI_coverClose:hover{background:#333;color:#fff;transition:0.2s}.UI_select{position:absolute;width:200px;box-shadow:2px 2px 2px rgba(0,0,0,0.6)}.UI_select a{display:block;height:40px;line-height:40px;text-align:center;color:#03f;font-size:16px}.UI_select_body{overflow:hidden;background:#fff}.UI_selectCpt{padding:8px 0}.UI_selectCpt h3,.UI_selectCpt p{margin:0;font-size:15px;line-height:18px;text-align:center;color:#aaa;font-weight:normal}.UI_selectCpt p{font-size:12px}.UI_selectCnt a{height:34px;line-height:34px;font-size:14px;border-top:1px solid #ddd}.UI_selectCnt a:hover{background:#eee}.UI_selectCancel{display:none}@media(max-width:640px){.UI_select{position:fixed;bottom:0;width:100%;padding-bottom:10px}.UI_select_body, .UI_selectCancel{margin:0 10px;border-radius:8px}.UI_select_body{margin:0 10px 10px}.UI_selectCancel{display:block;background:#fff}.UI_lawyer a:hover{background:none}}.UI_ie678 .UI_pop,.UI_ie678 .UI_confirm,.UI_ie678 .UI_ask,.UI_ie678 .UI_prompt,.UI_ie678 .UI_select{outline:3px solid #ccc}';
+	var allCnt_tpl = '<div class="UI_lawyer"><div class="UI_mask"></div></div>',
+		pop_tpl = '<div class="UI_pop"><div class="UI_pop_cpt"></div><div class="UI_cnt"></div><a href="javascript:;" class="UI_pop_close" title="\u5173\u95ED">×</a></div>',
+		confirm_tpl = '<div class="UI_confirm"><div class="UI_confirm_text"><%=text %></div></div>',
+		ask_tpl = '<div class="UI_ask"><div class="UI_ask_text"><%=text %></div><input class="UI_ask_key" type="text" name="UI_ask_key"/></div>',
+		confirmBar_tpl = '<div class="UI_pop_confirm"><a href="javascript:;" class="UI_pop_confirm_ok"><%=confirm %></a><a href="javascript:;" class="UI_pop_confirm_cancel"><%=cancel %></a></div>',
+		plane_tpl = '<div class="UI_plane"></div>',
+		prompt_tpl = '<div class="UI_prompt"><div class="UI_prompt_cnt"></div></div>',
+		cover_tpl = '<div class="UI_cover"><div class="UI_cnt"></div><a href="javascript:;" class="UI_close UI_coverClose">×</a></div>',
+		select_tpl = '<div class="UI_select"><div class="UI_select_body UI_cnt"><% if(title){ %><div class="UI_selectCpt"><h3><%=title %></h3><% if(intro){ %><p><%=intro %></p><% } %></div><% } %><div class="UI_selectCnt"><% for(var i=0,total=list.length;i<total;i++){ %><a class="UI_select_btn" href="javascript:;"><%=list[i] %></a><% } %></div></div><div class="UI_selectCancel"><a class="UI_select_btn" href="javascript:;">取消</a></div></div>',
+		popCSS = '.UI_lawyer{position:absolute;top:0;left:0;z-index:4999;width:100%;height:0;overflow:visible;font-family:"Microsoft Yahei"}.UI_lawyer a,.UI_lawyer a:hover,.UI_lawyer a:active{outline:none;text-decoration:none;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-tap-highlight-color:transparent}.UI_mask{position:absolute;top:0;left:0;width:100%;height:100%;background:#000;display:none;opacity:0.6;filter:alpha(opacity=60)}.UI-blur{-webkit-transition:0.08s;-webkit-filter:blur(3px)}.UI_pop{width:200px;position:absolute;top:400px;left:300px;background:#fff;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_pop_cpt{position:relative;height:36px;line-height:36px;overflow:hidden;border-bottom:1px solid #ebebeb;color:#777;font-size:16px;text-indent:15px;cursor:default}.UI_pop .UI_cnt{position:relative;min-height:100px;overflow:auto}.UI_pop_close{display:block;position:absolute;top:0;right:0;width:40px;height:36px;text-align:center;color:#ddd;font:bold 20px/36px "simsun";transition:0.1s}.UI_pop_close:hover{color:#888}.UI_pop_close:active{color:#222}.UI_confirm{width:300px;position:absolute;background:#fff;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_confirm_text{padding:30px 10px 20px;line-height:26px;text-align:center;font-size:20px;color:#333}.UI_ask{width:300px;position:absolute;background:#fff;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_ask_text{padding:25px 10px 15px;line-height:26px;text-align:center;font-size:18px;color:#333}.UI_ask input{display:block;margin:0 auto 15px;height:30px;padding:4px 4px;line-height:22px;box-sizing:border-box;width:90%}.UI_pop_confirm{overflow:hidden;text-align:center;border-top:1px solid #ddd;white-space:nowrap}.UI_pop_confirm a{display:inline-block;width:50%;font-size:14px;line-height:36px;color:#03f;transition:0.15s}.UI_pop_confirm a:hover{background:#eee}.UI_pop_confirm_ok{border-right:1px solid #ddd}.UI_plane{width:200px;position:absolute;top:400px;left:300px}.UI_prompt{width:240px;left:50%;margin-left:-120px;position:absolute}.UI_prompt_cnt{padding:30px 10px;background:#fff;box-shadow:2px 2px 10px rgba(0,0,0,0.5);font-size:18px;color:#333;text-align:center}.UI_cover{position:absolute;top:0;width:100%;height:100px;max-width:100%}.UI_cover .UI_cnt{position:relative;width:100%;height:100%;background:#fff;overflow:auto}.UI_coverClose{display:block;position:absolute;top:10px;right:20px;width:30px;height:30px;text-align:center;color:#aaa;font:18px/30px "simsun";background:#eee;border-radius:15px;border:1px solid #aaa}.UI_coverClose:hover{background:#333;color:#fff;transition:0.2s}.UI_select{position:absolute;width:200px;box-shadow:2px 2px 2px rgba(0,0,0,0.6)}.UI_select a{display:block;height:40px;line-height:40px;text-align:center;color:#03f;font-size:16px}.UI_select_body{overflow:hidden;background:#fff}.UI_selectCpt{padding:8px 0}.UI_selectCpt h3,.UI_selectCpt p{margin:0;font-size:15px;line-height:18px;text-align:center;color:#aaa;font-weight:normal}.UI_selectCpt p{font-size:12px}.UI_selectCnt a{height:34px;line-height:34px;font-size:14px;border-top:1px solid #ddd}.UI_selectCnt a:hover{background:#eee}.UI_selectCancel{display:none}@media(max-width:640px){.UI_select{position:fixed;bottom:0;width:100%;padding-bottom:10px}.UI_select_body, .UI_selectCancel{margin:0 10px;border-radius:8px}.UI_select_body{margin:0 10px 10px}.UI_selectCancel{display:block;background:#fff}.UI_lawyer a:hover{background:none}}.UI_ie678 .UI_pop,.UI_ie678 .UI_confirm,.UI_ie678 .UI_ask,.UI_ie678 .UI_prompt,.UI_ie678 .UI_select{outline:3px solid #ccc}';
 	
 	var isIE67 = isIE678 = false;
 	if(navigator.appName == "Microsoft Internet Explorer"){
@@ -67,14 +67,11 @@
 	 **/ 
 	var private_allCnt = utils.createDom(allCnt_tpl)[0],
 		private_maskDom = findByClassName(private_allCnt,'UI_mask')[0],
-		private_mainDom = findByClassName(private_allCnt,'UI_main_cnt')[0],
-		private_cssDom = null,
 		private_body = document.body,
 		private_docW,
 		private_winH,
 		private_docH,
-		private_scrollTop,
-		private_maskCount = 0;
+		private_scrollTop;
 
 	var private_CONFIG = {
 		gap : {
@@ -101,13 +98,6 @@
 		private_winH = window.innerHeight || document.documentElement.clientHeight;
 		private_docH = docDom.scrollHeight;
 		private_docW = docDom.clientWidth;
-		//向css环境写入动态css
-		private_cssDom && utils.removeNode(private_cssDom);
-		var styleStr = [
-			'.UI_cover{height:' + private_winH + 'px;max-height:' + private_winH + 'px;}',
-			'.UI_ask{top:' + (private_winH/2) + 'px;}'
-		].join('');
-		private_cssDom = utils.createStyleSheet(styleStr,{'data-module' : "UI_plug"});
 	}
 	
 	
@@ -129,7 +119,6 @@
 		
 		var rebuild_fn = null;
 		if(isIE67){
-			
 			rebuild_fn = function(){
 				refreshSize();
 				setCSS(private_maskDom,{
@@ -145,8 +134,8 @@
 		}
 		
 		//监听浏览器缩放、滚屏事件
-		utils.bind(window,'resize',rebuild_fn);
-		utils.bind(window,'scroll',rebuild_fn);
+		bindEvent(window,'resize',rebuild_fn);
+		bindEvent(window,'scroll',rebuild_fn);
 //	});
 	
 	//限制位置区域的方法
@@ -221,11 +210,11 @@
 		dom.appendChild(utils.createDom(this_html)[0]);
 		
 		//绑定事件，根据执行结果判断是否要关闭弹框
-		utils.bind(dom,'click','.UI_pop_confirm_ok',function(){
+		bindEvent(dom,'click','.UI_pop_confirm_ok',function(){
 			//点击确认按钮
 			callback ? ((callback() != false) && close()) : close();
 		});
-		utils.bind(dom,'click','.UI_pop_confirm_cancel',function(){
+		bindEvent(dom,'click','.UI_pop_confirm_cancel',function(){
 			//点击取消按钮
 			cancel ? ((cancel() != false) && close()) : close();
 		});
@@ -237,21 +226,24 @@
 	 */
 	 //当前打开状态的对象
 	private_active = [];
-	
+	//关闭最上一个
 	function closeActive(){
-		utils.each(private_active,function(i,item){
-			item.close();
-		});
-		private_active = [];
+		var item = null;
+		while(1){
+			item = private_active.pop();
+			if(!item || !item.dead){
+				break
+			}
+		}
+		item && item.close();
 	}
 	//检测body的mouseup事件
-	utils.bind(private_body,'mouseup',function checkClick(event) {
+	bindEvent(private_body,'mouseup',function checkClick(event) {
 		var target = event.srcElement || event.target;
 		setTimeout(function(){
 			while (!utils.hasClass(target,'UI_easyClose')) {
 				target = target.parentNode;
 				if(!target){
-					//close the active
 					closeActive();
 					break
 				}
@@ -259,7 +251,7 @@
 		});
 	});
 	//检测window的keydown事件（esc）
-	utils.bind(private_body,'keyup',function checkClick(event) {
+	bindEvent(private_body,'keyup',function checkClick(event) {
 		if(event.keyCode == 27){
 			closeActive();
 		}
@@ -276,7 +268,7 @@
 			utils.addClass(this.dom,'UI_easyClose');
 			setTimeout(function(){
 				private_active.push(me);
-			},20);
+			});
 		}
 	}
 	
@@ -306,53 +298,52 @@
 		};
 	}
 	
+	//存储蒙层信息
+	var maskObjs = [];
+	//获取最后一个蒙层信息
+	function maskObjsLast(){
+		var len = maskObjs.length;
+		return len ? maskObjs[len-1] : null;
+	}
+	
 	/**
 	 * 显示蒙层 
 	 */
-	function showMask(mark,callback){
-		if(!mark){
+	function showMask(callback){
+		var lastMask = maskObjsLast();
+		zIndex = lastMask ? lastMask[1] + 2 : 2;
+		setCSS(this.dom,{'zIndex': zIndex});
+		if(!this._mask){
 			callback && callback();
 			return;
 		}
-		private_maskCount++
-		if(private_maskCount==1){
+		setCSS(private_maskDom,{'zIndex': zIndex - 1});
+		
+		if(lastMask){
+			//尚有需要蒙层的元素
+			callback && callback();
+		}else{
+			//没有需要蒙层的元素，关闭蒙层
 			if(!isIE678){
 				utils.fadeIn(private_maskDom,500,function(){
 					callback && callback();
 				});
 				blur && blur();
 			}else{
-				utils.css(private_maskDom,{'display':'block'});
+				setCSS(private_maskDom,{'display':'block'});
 				callback && callback();
 			}
-		}else{
-			callback && callback();
 		}
-	}
-	/**
-	 * 关闭蒙层
-	 */
-	function closeMask(mark){
-		if(mark){
-			private_maskCount--;
-			if(private_maskCount == 0){
-				removeBlur && removeBlur();
-				if(!isIE678){
-					utils.fadeOut(private_maskDom,400);
-				}else{
-					utils.css(private_maskDom,{'display':'none'});
-				}
-			}
-		}
+		maskObjs.push([this,zIndex]);
 	}
 	//在指定DOM后插入新DOM
 	function insertAfter(newElement, targetElement){
 		var parent = targetElement.parentNode;
 		if (parent.lastChild == targetElement) {
-			// 如果最后的节点是目标元素，则直接添加。因为默认是最后
+			// 如果最后的节点是目标元素，则直接追加
 			parent.appendChild(newElement);
 		} else {
-			//如果不是，则插入在目标元素的下一个兄弟节点 的前面。也就是目标元素的后面
+			//插入到目标元素的下一个兄弟节点之前
 			parent.insertBefore(newElement, targetElement.nextSibling);
 		}
 	}
@@ -441,7 +432,7 @@
 		html = html.replace(/<iframe.+>\s*<\/iframe>/ig,'');
 		var animDom = utils.createDom(html)[0];
 		//为了效果跟流畅，隐藏内容部分
-		var cntDom = utils.findByClassName(animDom,'UI_cnt')[0];
+		var cntDom = findByClassName(animDom,'UI_cnt')[0];
 		insertAfter(animDom,DOM);
 		if(cntDom){
 			setCSS(cntDom,{
@@ -490,7 +481,30 @@
 			function endFn(){
 				utils.removeNode(DOM);
 				me.closeFn && me.closeFn();
-				closeMask(me._mask);
+				/**
+				 * 关闭蒙层
+				 */
+				if(me._mask){
+					utils.each(maskObjs,function(index,item){
+						if(item[0] == me){
+							maskObjs.splice(index,1);
+							return false;
+						}
+					});
+					var lastMask = maskObjsLast();
+					setCSS(private_maskDom,{
+						'zIndex' : (lastMask ? lastMask[1]-1 : 1)
+					});
+					
+					if(!lastMask){
+						removeBlur && removeBlur();
+						if(!isIE678){
+							utils.fadeOut(private_maskDom,400);
+						}else{
+							setCSS(private_maskDom,{'display':'none'});
+						}
+					}
+				}
 			}
 			
 			if(isIE678){
@@ -569,11 +583,11 @@
 			});
 		}
 		
-		utils.bind(this.dom,'click','.UI_pop_close',function(){
+		bindEvent(this.dom,'click','.UI_pop_close',function(){
 			me.close();
 		});
 		
-		showMask(this._mask,function(){
+		showMask.call(this,function(){
 			var this_width = Math.min(param.width || 600,private_docW-20);
 			
 			//插入内容
@@ -583,7 +597,7 @@
 			setCSS(me.dom,{
 				width : this_width
 			});
-			private_mainDom.appendChild(me.dom);
+			private_allCnt.appendChild(me.dom);
 			
 			//校正位置
 			var fixSize = adaption(this_width,outerHeight(me.dom));
@@ -629,13 +643,13 @@
 			me.close();
 		});
 		//显示蒙层
-		showMask(this._mask,function(){
-			private_mainDom.appendChild(me.dom);
+		showMask.call(this,function(){
+			private_allCnt.appendChild(me.dom);
 			
 			var newPosition = adaption(300,outerHeight(me.dom));
 			setCSS(me.dom,{
-				top : newPosition.top,
-				left : newPosition.left
+				'top' : newPosition.top,
+				'left' : newPosition.left
 			});
 			openAnimation(me.dom,me._from,100,80,function(){
 				//处理是否易于关闭
@@ -671,18 +685,18 @@
 		this.dom.appendChild(utils.createDom(confirm_html)[0]);
 		
 		//确定
-		utils.bind(this.dom,'click','.UI_pop_confirm_ok',function(){
+		bindEvent(this.dom,'click','.UI_pop_confirm_ok',function(){
 			//根据执行结果判断是否要关闭弹框
 			callback ? ((callback(me.inputDom.value) != false) && me.close()) : me.close();
 		});
 		//取消
-		utils.bind(this.dom,'click','.UI_pop_confirm_cancel',function(){
+		bindEvent(this.dom,'click','.UI_pop_confirm_cancel',function(){
 			me.close();
 		});
 
 		//显示蒙层
-		showMask(this._mask,function(){
-			private_mainDom.appendChild(me.dom);
+		showMask.call(this,function(){
+			private_allCnt.appendChild(me.dom);
 			var newPosition = adaption(300,outerHeight(me.dom));
 			setCSS(me.dom,{
 				top : newPosition.top,
@@ -708,18 +722,20 @@
 	 **/
 	function PROMPT(text,time,param){
 		var param = param || {};
-		
+		var me = this;
 		this.dom = utils.createDom(prompt_tpl)[0];
 		this._from = param.from || 'bottom';
+		this._mask = param.mask ? true : false;
 		this.tips(text,time);
 		
 		// create pop
 		setCSS(this.dom,{
 			top : private_winH/3 + private_scrollTop
 		});
-		private_mainDom.appendChild(this.dom);
-		
-		openAnimation(this.dom,this._from,100,30);
+		showMask.call(this,function(){
+			private_allCnt.appendChild(me.dom);
+			openAnimation(me.dom,me._from,100,30);
+		});
 	}
 	PROMPT.prototype.close = closeAnimation(80);
 	PROMPT.prototype.tips = function(txt,time){
@@ -755,12 +771,12 @@
 			'top' : isNum(param.top) ? param.top : 300,
 			'left' : isNum(param.left) ? param.left : 800
 		});
-		
-		private_mainDom.appendChild(this.dom);
-		
-		openAnimation(this.dom,this._from,100,80,function(){
-			//处理是否易于关闭
-			easyCloseHandle.call(me,true);
+		showMask.call(this,function(){
+			private_allCnt.appendChild(me.dom);
+			openAnimation(me.dom,me._from,100,80,function(){
+				//处理是否易于关闭
+				easyCloseHandle.call(me,true);
+			});
 		});
 	}
 	PLANE.prototype.close = closeAnimation(200);
@@ -782,7 +798,7 @@
 		
 		
 		//关闭事件
-		utils.bind(this.dom,'click','.UI_close',function(){
+		bindEvent(this.dom,'click','.UI_close',function(){
 			me.close();
 		});
 
@@ -811,9 +827,9 @@
 			cssObj.top = private_scrollTop + (private_winH - cssObj.height)/2
 		}
 		//打开蒙层
-		showMask(this._mask,function(){
+		showMask.call(this,function(){
 			setCSS(me.dom,cssObj);
-			private_mainDom.appendChild(me.dom);
+			private_allCnt.appendChild(me.dom);
 			
 			openAnimation(me.dom,me._from,200,400,function(){
 				setCSS(private_body,{
@@ -864,25 +880,25 @@
 		//绑定事件
 		var btns = findByClassName(this.dom,'UI_select_btn');
 		utils.each(btns,function(index,btn){
-			utils.bind(btn,'click',function(){
+			bindEvent(btn,'click',function(){
 				fns[index] && fns[index]();
 				me.close();
 			});
 		});
 		
 		//显示蒙层
-		showMask(this._mask,function(){
+		showMask.call(this,function(){
 			if(private_docW < 640 && !isIE678){
 				//手机版
 				me._from = 'bottom';
-				private_mainDom.appendChild(me.dom);
+				private_allCnt.appendChild(me.dom);
 			}else{
 				var cssObj = {
 					top : param.top || 100,
 					left : param.left || 100,
 					width : param.width || 200
 				};
-				private_mainDom.appendChild(me.dom);
+				private_allCnt.appendChild(me.dom);
 				
 				setCSS(me.dom,cssObj);
 				var newSize = fix_position(cssObj.top,cssObj.left,cssObj.width,outerHeight(me.dom));
@@ -1091,7 +1107,7 @@
 		if (prop == "opacity") {
 			elem.style.filter = 'alpha(opacity=' + (value * 100)+ ')';
 			value = value;
-		} else if ( isNum(value) ){
+		} else if ( isNum(value) && prop != 'zIndex'){
 			value = value + "px";
 		}
 		elem.style[prop] = value;
