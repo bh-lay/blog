@@ -39,13 +39,56 @@ define(function(require,exports){
 	var item_tpl = ['<% for(var i=0,total=list.length;i<total;i++){%>',
 		'<div class="l_com_item">',
 			'<div class="l_com_item_main">',
-				'<%=list[i].content %>,<%=list[i].time %>,<%=list[i].uid %>',
+				'<div class="l_com_item_content"><%=list[i].content %>,<%=list[i].uid %></div>',
+				'<div class="l_com_item_footer">',
+					'<div class="l_com_item_time"><%= list[i].time %></div>',
+				'</div>',
 			'</div>',
 			'<div class="l_com_item_avatar">',
 				'<img src="<% if(list[i].user.avatar){ %><%=list[i].user.avatar%><% }else{ %>http://layasset.qiniudn.com/user/default.jpg<% } %>"/>',
 			'</div>',
 		'</div>',
 	'<%}%>'].join('');
+	
+	/**
+ * @param (timestamp/Date,'{y}-{m}-{d} {h}:{m}:{s}')
+ * 
+ * y:year
+ * m:months
+ * d:date
+ * h:hour
+ * i:minutes
+ * s:second
+ * a:day
+ */
+function parseTime(time,format){
+	if(arguments.length==0){
+		return null;
+	}
+	var format = format ||'{y}-{m}-{d} {h}:{i}:{s}';
+	
+	if(typeof(time) == "object"){
+		var date = time;
+	}else{
+		var date = new Date(parseInt(time));
+	}
+	
+	var formatObj = {
+		y : date.getYear()+1900,
+		m : date.getMonth()+1,
+		d : date.getDate(),
+		h : date.getHours(),
+		i : date.getMinutes(),
+		s : date.getSeconds(),
+		a : date.getDay(),
+	};
+	
+	var time_str = format.replace(/{(y|m|d|h|i|s|a)}/g,function(){
+		return formatObj[arguments[1]]||arguments[0];
+	});
+	return time_str;
+}
+	
 	
 	//处理自定义事件
 	function ON(eventName,callback){
@@ -185,7 +228,7 @@ define(function(require,exports){
 			$textarea.focus();
 		}).on('click','.l_sendBox_avatar',function(e){
 			var btn = $(this)[0];
-			if(me.private_hasLogin){
+			if(private_hasLogin){
 				L.user.infoPanel();
 			}else{
 				showLoginPanel.call(me,btn,e)
@@ -295,6 +338,10 @@ define(function(require,exports){
 					var DATA = data.data;
 					me.total = DATA.count;
 					me.list.concat(DATA.list);
+					
+					for(var i=0,total=DATA.list.length;i<total;i++){
+						DATA.list[i].time = parseTime(DATA.list[i].time,"{y}年{m}月{d}日 {h}:{i}");
+					}
 					var html = me.render(DATA);
 					$(me.dom).append(html);
 					if(me.total == 0){

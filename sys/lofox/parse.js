@@ -24,7 +24,7 @@ exports.cookie = function parseCookie(str){
 }
 
 /**
- * @param (timestamp/Date,'{y}-{m}-{d} {h}:{m}:{s}')
+ * @param (timestamp/Date,'{y}-{m}-{d} {h}:{i}:{s}')
  * 
  * y:year
  * m:months

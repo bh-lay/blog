@@ -169,18 +169,23 @@ window.L = window.L || {};
  *   L.user.info();
  */
 (function(exports){
-
+	var userInfo_tpl = ['<div class="userInfoPanel" style="padding:20px;">',
+		'用户名：<%=username%><br/><br/>',
+		'Email：<%=email%><br/><br/>',
+		'<img src="<%=avatar%>" />',
+	'</div>'].join('');
+	var render = L.tplEngine(userInfo_tpl);
 	exports.user = exports.user || {};
 	exports.user.infoPanel = function(callback){
-		UI.cover({
+		var cover = UI.cover({
 			'from' : 'right',
 			'width' : 400,
 			'right' : 0,
 			'mask' : true
 		});
-	//	L.dataBase.user(function(err,user){
-		
-	//	});
+		L.dataBase.user(function(err,user){
+			cover.cntDom.innerHTML = render(user);
+		});
 	};
 })(L);
 
