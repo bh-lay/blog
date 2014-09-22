@@ -14,7 +14,7 @@ function login(connect,user,callback){
 			session_this.set({
 				'user_group' : user_group,
 				'username' : user['username'], 
-				'user_id' : userid,
+				'uid' : userid,
 				'avatar' : '',
 				'power_data' : power_data
 			});
@@ -45,7 +45,6 @@ exports.github = function (connect,app){
 	}
 	github.get_token(code,function(err,data){
 		if(err){
-			console.log(err);
 			sendResult({
 				'code' : 201,
 				'msg' : '获取token失败',
@@ -129,5 +128,4 @@ exports.github = function (connect,app){
 			});
 		});
 	});
-
 };

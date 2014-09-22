@@ -23,9 +23,10 @@ function send (status,headers,content){
 	headers['server'] = 'nodejs';
 	headers['Connection'] = 'keep-alive';
 	headers['Content-Encoding'] = 'gzip';
-	
-	this.response.writeHeader(status,headers);
-	
+	this.response.statusCode = status;
+	for(var i in headers){
+		this.response.setHeader(i,headers[i]);
+	}
 	var content = content || null;
 	
 	if(content){

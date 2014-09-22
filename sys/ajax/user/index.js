@@ -346,13 +346,19 @@ exports.detail = function (connect,app,userID){
 	parse.request(connect.request,function(err,data){
 		if(err){
 			connect.write('json',{
-				'code' : 2,
+				'code' : 201,
 				'msg' : ''
 			});
 			return
 		}
 		if(data.uid){
 			getUserDetail(data.uid,function(err,detail){
+				if(err){
+					connect.write('json',{
+						'code' : 201
+					});
+					return;
+				}
 				connect.write('json',{
 					'code' : 200,
 					'detail' : detail
@@ -362,6 +368,12 @@ exports.detail = function (connect,app,userID){
 			connect.session(function(session_this){
 				var uid = session_this.get('uid');
 				getUserDetail(uid,function(err,detail){
+					if(err){
+						connect.write('json',{
+							'code' : 201
+						});
+						return;
+					}
 					connect.write('json',{
 						'code' : 200,
 						'detail' : detail
