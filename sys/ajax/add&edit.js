@@ -208,7 +208,7 @@ exports.render = function (connect,app){
 		if(err){
 			connect.write('json',{
 				'code':2,
-				'msg':error
+				'msg':err
 			});
 			return
 		}

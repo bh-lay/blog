@@ -99,10 +99,14 @@ define && define(function(require,exports){
 			dom.html(new_html);
 			admin.formToAjax(dom,{
 				'onSubmit' : function(data){
-					UI.prompt('正在提交分享修改！');
+					UI.prompt('正在提交分享修改！',0);
 				},
 				'onResponse' : function(data){
-					UI.prompt('分享发布完毕');
+					if(data && data.code == 200){
+						UI.prompt('分享发布完毕');
+					}else{
+						UI.prompt(data.msg || '分享发布失败');
+					}
 					sendFn && sendFn();
 				}
 			});

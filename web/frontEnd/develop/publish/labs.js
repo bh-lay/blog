@@ -89,16 +89,21 @@ define && define(function(require,exports){
 	}
 	//发布实验室内容
 	function LABS(dom,id,sendFn){
+		var alert;
 		if(!id){
 			var new_html = valueInit(labs_tpl,{});
 			
 			dom.html(new_html);
 			admin.formToAjax(dom,{
 				'onSubmit' : function(data){
-					UI.prompt('正在提交实验室的修改！');
+					alert = UI.prompt('正在发布实验室！',0);
 				},
 				'onResponse' : function(data){
-					UI.prompt('实验室发布完毕');
+					if(data && data.code == 200){
+						alert.tips('实验室发布完毕');
+					}else{
+						alert.tips(data.msg || '实验室发布失败');
+					}
 					sendFn && sendFn();
 				}
 			});
@@ -116,10 +121,14 @@ define && define(function(require,exports){
 			mditor.bind(dom.find('textarea.mditor'));
 			admin.formToAjax(dom,{
 				'onSubmit' : function(data){
-					UI.prompt('正在提交实验室修改！');
+					alert = UI.prompt('正在提交实验室的修改！',0);
 				},
 				'onResponse' : function(data){
-					UI.prompt('实验室修改完毕');
+					if(data && data.code == 200){
+						alert.tips('实验室修改完毕');
+					}else{
+						alert.tips(data.msg || '实验室修改失败');
+					}
 					sendFn && sendFn();
 				}
 			});

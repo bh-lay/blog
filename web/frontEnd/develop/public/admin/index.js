@@ -226,6 +226,10 @@ window.admin = window.admin || {};
 	});
 })(window.admin);
 
+/**
+ * ajax交互
+ *
+ **/
 $(function(exports){
 	function sendPOST(url,callback){
 		$.ajax({

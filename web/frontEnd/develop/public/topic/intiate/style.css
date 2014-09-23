@@ -8,10 +8,14 @@ Blog:	http://bh-lay.com
 Author URI:
 ******************************
 **********************************/
-body{background: url(bj.png)}
+html,body{
+	height: auto;
+	overflow: auto;
+}
+body{background: url(bj.png);}
 .clear{clear: both;}
 .tips{color:#666; margin:0px 10px 20px;padding:10px 5px; text-indent:2em;border:1px solid #ddd;border-radius:4px;background-color:#fff;overflow:hidden;}
-.containter{width: 980px;margin:auto;padding-top:40px;}
+.containter{width: 980px;margin:auto;}
 
 /*瀑布流页面*/
 .hangTitle{height:100px;margin:0px 10px 20px;padding:20px 40px;background:url("intiate.jpg") #000;color:#fff;border-radius:0px 0px 8px 8px;_overflow:hidden;}

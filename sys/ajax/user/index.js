@@ -146,17 +146,11 @@ function login_handle(connect,session_this,username,password){
 			});
 			return
 		}
-		collection.find({"$or": [{'username':username},{'email':username}]}).toArray(function(err, docs) {
-			
+		collection.find({
+			'email':username,
+			'password':password
+		}).toArray(function(err, docs) {
 			if(docs.length > 0){
-				if( docs[0]['password'] != password){
-					//密码错了
-					connect.write('json',{
-						'code':2,
-						'msg':'二货，帐号密码输错了吧！'
-					});
-					return
-				}
 				var user = docs[0];
 				var user_group = user['user_group'];
 				get_power(method,user_group,function(power_data){
@@ -169,17 +163,16 @@ function login_handle(connect,session_this,username,password){
 						'power_data' : power_data
 					});
 					if(user.password){
-						delete user.parseword;
+						delete user.password;
 					}
 					
 					connect.write('json',{
 						'code':200,
-						'user' : user,
-						'msg':'login success!'
+						'user' : user
 					});
 				});
 			}else{
-				//账号错了
+				//账号or密码 错了
 				connect.write('json',{
 					'code':2,
 					'msg':'二货，帐号密码输错了吧！'
@@ -275,17 +268,17 @@ exports.login = function (connect,app){
 		return
 	}
 	parse.request(req,function(error,data){
-		var username = data['username'];
+		var email = data['email'];
 		var password = data['password'] || '';
 		password = parse.md5(password);
-		if(!username||password.length<2){
+		if(!email||password.length<2){
 			connect.write('json',{
 				'code':2,
-				'msg':'please input username and password !'
+				'msg':'please input email and password !'
 			});
 		}else{
 			connect.session(function(session_this){
-				login_handle(connect,session_this,username,password);
+				login_handle(connect,session_this,email,password);
 			});
 		}
 	});
