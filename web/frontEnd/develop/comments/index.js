@@ -10,36 +10,32 @@ define(function(require,exports){
 		'<div class="l_com_list">',
 		'</div>',
 	'</div>'].join('');
-	var sendBox_tpl = ['<div class="l_sendBox">',
-		'<div class="l_sendBox_main">',
-			'<div class="l_send_textarea">',
-				'<textarea name="content" spellcheck="false"></textarea>',
-				'<div class="l_send_placeholder">^_^ 写点啥吧！</div>',
+var sendBox_tpl = ['<div class="l_sendBox">',
+		'<div class="l_send_textarea">',
+			'<textarea name="content" spellcheck="false"></textarea>',
+			'<div class="l_send_placeholder"><span class="l_sendBox_name"></span> 写点啥吧！</div>',
+		'</div>',
+		'<div class="l_send_footer">',
+			'<div class="l_send_footer_left">',
+				'<a href="#" class="l_send_face l_send_btnA">表情</a>',
 			'</div>',
-			'<div class="l_send_tools">',
-				'<div class="l_send_tools_left">',
-					'<a href="#" class="l_send_face"></a>',
-				'</div>',
-				'<div class="l_send_tools_right">',
-					'<div class="l_send_count"><b>500</b><i>/</i><span>500</span></div>',
-					'<a href="#" class="l_send_submit">发布</a>',
-				'</div>',
+			'<div class="l_send_footer_right">',
+				'<div class="l_send_count"><b>500</b><i>/</i><span>500</span></div>',
+				'<a href="#" class="l_send_submit l_send_btnA">发布</a>',
 			'</div>',
 		'</div>',
-		'<div class="l_sendBox_side">',
-			'<div class="l_sendBox_avatar">',
-				'<img src="http://layasset.qiniudn.com/user/default.jpg" />',
-				'<a href="javascript:void(0)" class="l_send_login">雁过留名</a>',
-			'</div>',
-			'<div class="l_sendBox_name"></div>',
+		'<div class="l_sendBox_avatar">',
+			'<img src="http://layasset.qiniudn.com/user/default.jpg" />',
+			'<a href="javascript:void(0)" class="l_send_login">雁过留名</a>',
 		'</div>',
 	'</div>'].join('');
 	
 	
 	var item_tpl = ['<% for(var i=0,total=list.length;i<total;i++){%>',
-		'<div class="l_com_item">',
+		'<div class="l_com_item" data-uid="<%=list[i].uid %>">',
 			'<div class="l_com_item_main">',
-				'<div class="l_com_item_content"><%=list[i].content %>,<%=list[i].uid %></div>',
+				'<div class="l_com_item_caption"><%=list[i].user.username%></div>',
+				'<div class="l_com_item_content"><%=list[i].content %></div>',
 				'<div class="l_com_item_footer">',
 					'<div class="l_com_item_time"><%= list[i].time %></div>',
 				'</div>',
@@ -83,8 +79,13 @@ function parseTime(time,format){
 		a : date.getDay(),
 	};
 	
-	var time_str = format.replace(/{(y|m|d|h|i|s|a)}/g,function(){
-		return formatObj[arguments[1]]||arguments[0];
+	var time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g,function(result,key){
+		console.log(result,key)
+		var value = formatObj[key];
+		if(result.length > 3 && value < 10){
+			value = '0' + value;
+		}
+		return value || 0;
 	});
 	return time_str;
 }
@@ -233,7 +234,7 @@ function parseTime(time,format){
 			}else{
 				showLoginPanel.call(me,btn,e)
 			}
-		}).on('click','.l_send_tools',function(){
+		}).on('click','.l_send_footer',function(){
 			$textarea.focus();
 		}).on('click','.l_send_submit',function(){
 			sendComment({
@@ -340,7 +341,7 @@ function parseTime(time,format){
 					me.list.concat(DATA.list);
 					
 					for(var i=0,total=DATA.list.length;i<total;i++){
-						DATA.list[i].time = parseTime(DATA.list[i].time,"{y}年{m}月{d}日 {h}:{i}");
+						DATA.list[i].time = parseTime(DATA.list[i].time,"{y}年{m}月{d}日 {h}:{ii}");
 					}
 					var html = me.render(DATA);
 					$(me.dom).append(html);

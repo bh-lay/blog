@@ -170,9 +170,9 @@ window.L = window.L || {};
  */
 (function(exports){
 	var userInfo_tpl = ['<div class="userInfoPanel" style="padding:20px;">',
-		'用户名：<%=username%><br/><br/>',
-		'Email：<%=email%><br/><br/>',
-		'<img src="<%=avatar%>" />',
+		'用户名：<%=user.username%><br/><br/>',
+		'Email：<%=user.email%><br/><br/>',
+		'<img src="<%=user.avatar%>" />',
 	'</div>'].join('');
 	var render = L.tplEngine(userInfo_tpl);
 	exports.user = exports.user || {};
@@ -184,7 +184,7 @@ window.L = window.L || {};
 			'mask' : true
 		});
 		L.dataBase.user(function(err,user){
-			cover.cntDom.innerHTML = render(user);
+			cover.cntDom.innerHTML = render({'user':user});
 		});
 	};
 })(L);
