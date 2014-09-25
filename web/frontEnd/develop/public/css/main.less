@@ -78,7 +78,8 @@
 	padding: 0px;
 	overflow: hidden;
 	background: #666;
-	.transition(0.2s, ease-out);
+	opacity: 0.5;
+	.transition(0.1s, ease-out);
 }
 
 .l_send_footer_left {
@@ -125,21 +126,22 @@
 .l_sendBox_active {
 	.l_send_footer {
 		height: @sendBox_footer_height;
+		opacity: 1;
 	}
 	.l_sendBox_avatar{
-		left: -70px;
-		opacity: 0.5;
+		left: -80px;
+		opacity: 0.2;
 	}
 }
 
 
 .l_sendBox_avatar {
 	position: absolute;
-	top: 5px;
-	left: 5px;
-	width: 70px;
-	height: 70px;
-	.transition(0.2s, ease-out);
+	top: 0px;
+	left: 0px;
+	width: 80px;
+	height: 80px;
+	.transition(0.3s, ease-out);
 	overflow: hidden;
 	background: #333;
 	opacity: 1;

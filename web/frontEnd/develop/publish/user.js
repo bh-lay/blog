@@ -62,16 +62,21 @@ define(function(require,exports){
 	}
 	//用户模块
 	return function(dom,id,sendFn){
+		var alert;
 		if(!id){
 			var new_html = valueInit(share_tpl,{});
 			
 			dom.html(new_html);
 			admin.formToAjax(dom,{
 				'onSubmit' : function(data){
-					UI.prompt('正在提交用户创建！');
+					alert = UI.prompt('正在提交用户创建！',0);
 				},
 				'onResponse' : function(data){
-					UI.prompt('用户创建完毕');
+					if(data && data.code == 200){
+						alert.tips('用户创建完毕');
+					}else{
+						alert.tips(data.msg || '用户创建失败');
+					}
 					sendFn && sendFn();
 				}
 			});
@@ -87,10 +92,14 @@ define(function(require,exports){
 			dom.html(new_html);
 			admin.formToAjax(dom,{
 				'onSubmit' : function(data){
-					UI.prompt('正在提交用户修改！');
+					alert = UI.prompt('正在提交用户修改！');
 				},
 				'onResponse' : function(data){
-					UI.prompt('用户修改完毕');
+					if(data && data.code == 200){
+						alert.tips('用户修改完毕');
+					}else{
+						alert.tips(data.msg || '用户修改失败');
+					}
 					sendFn && sendFn();
 				}
 			});

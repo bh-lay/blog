@@ -290,6 +290,7 @@ exports.exist = function(connect,app){
 	connect.session(function(session_this){
 		session_this.set({
 			'user_group' : 'guest',
+			'uid' : '',
 			'power_data' : []
 		});
 		connect.write('json',{

@@ -83,7 +83,7 @@ window.L = window.L || {};
  */
 (function(exports){
 	var baseTpl = ['<div class="l_login_panel">',
-		'用户名: <input name="username" type="text" /><br/>',
+		'邮箱: <input name="email" type="text" /><br/>',
 		'密码: <input name="password" type="password" /><br/>',
 		'<input type="submit" value="登录" /><br/>',
 	'</div>'].join('');
@@ -108,13 +108,13 @@ window.L = window.L || {};
 		});
 		var $popDom = $(pop.dom);
 		$popDom.on('click','input[type="submit"]',function(){
-			var username = $popDom.find('input[name="username"]').val();
+			var email = $popDom.find('input[name="email"]').val();
 			var password = $popDom.find('input[name="password"]').val();
 			$.ajax({
 				'url' : '/ajax/user/login',
 				'type' : 'POST',
 				'data' : {
-					'username' : username,
+					'email' : email,
 					'password' : password
 				},
 				'success' : function(data){
@@ -172,6 +172,7 @@ window.L = window.L || {};
 	var userInfo_tpl = ['<div class="userInfoPanel" style="padding:20px;">',
 		'用户名：<%=user.username%><br/><br/>',
 		'Email：<%=user.email%><br/><br/>',
+		'<div class="userInfoPanel-exist">退出</div>',
 		'<img src="<%=user.avatar%>" />',
 	'</div>'].join('');
 	var render = L.tplEngine(userInfo_tpl);
@@ -183,6 +184,16 @@ window.L = window.L || {};
 			'right' : 0,
 			'mask' : true
 		});
+		$(cover.dom).on('click','.userInfoPanel-exist',function(){
+			$.ajax({
+				'url' : '/ajax/user/exist',
+				'type' : 'POST',
+				'success' : function(data){
+					console.log(data);
+				}
+			});
+		})
+		
 		L.dataBase.user(function(err,user){
 			cover.cntDom.innerHTML = render({'user':user});
 		});

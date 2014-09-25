@@ -69,12 +69,13 @@
   padding: 0px;
   overflow: hidden;
   background: #666;
-  transition: 0.2s ease-out;
-  -moz-transition: 0.2s ease-out;
+  opacity: 0.5;
+  transition: 0.1s ease-out;
+  -moz-transition: 0.1s ease-out;
   /* Firefox 4 */
-  -webkit-transition: 0.2s ease-out;
+  -webkit-transition: 0.1s ease-out;
   /* Safari �� Chrome */
-  -o-transition: 0.2s ease-out;
+  -o-transition: 0.1s ease-out;
   /* Opera */
 }
 .l_send_footer_left {
@@ -122,23 +123,24 @@
 }
 .l_sendBox_active .l_send_footer {
   height: 34px;
+  opacity: 1;
 }
 .l_sendBox_active .l_sendBox_avatar {
-  left: -70px;
-  opacity: 0.5;
+  left: -80px;
+  opacity: 0.2;
 }
 .l_sendBox_avatar {
   position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 70px;
-  height: 70px;
-  transition: 0.2s ease-out;
-  -moz-transition: 0.2s ease-out;
+  top: 0px;
+  left: 0px;
+  width: 80px;
+  height: 80px;
+  transition: 0.3s ease-out;
+  -moz-transition: 0.3s ease-out;
   /* Firefox 4 */
-  -webkit-transition: 0.2s ease-out;
+  -webkit-transition: 0.3s ease-out;
   /* Safari �� Chrome */
-  -o-transition: 0.2s ease-out;
+  -o-transition: 0.3s ease-out;
   /* Opera */
   overflow: hidden;
   background: #333;

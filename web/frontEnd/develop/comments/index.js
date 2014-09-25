@@ -10,7 +10,7 @@ define(function(require,exports){
 		'<div class="l_com_list">',
 		'</div>',
 	'</div>'].join('');
-var sendBox_tpl = ['<div class="l_sendBox">',
+	var sendBox_tpl = ['<div class="l_sendBox">',
 		'<div class="l_send_textarea">',
 			'<textarea name="content" spellcheck="false"></textarea>',
 			'<div class="l_send_placeholder"><span class="l_sendBox_name"></span> 写点啥吧！</div>',
@@ -47,48 +47,47 @@ var sendBox_tpl = ['<div class="l_sendBox">',
 	'<%}%>'].join('');
 	
 	/**
- * @param (timestamp/Date,'{y}-{m}-{d} {h}:{m}:{s}')
- * 
- * y:year
- * m:months
- * d:date
- * h:hour
- * i:minutes
- * s:second
- * a:day
- */
-function parseTime(time,format){
-	if(arguments.length==0){
-		return null;
-	}
-	var format = format ||'{y}-{m}-{d} {h}:{i}:{s}';
-	
-	if(typeof(time) == "object"){
-		var date = time;
-	}else{
-		var date = new Date(parseInt(time));
-	}
-	
-	var formatObj = {
-		y : date.getYear()+1900,
-		m : date.getMonth()+1,
-		d : date.getDate(),
-		h : date.getHours(),
-		i : date.getMinutes(),
-		s : date.getSeconds(),
-		a : date.getDay(),
-	};
-	
-	var time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g,function(result,key){
-		console.log(result,key)
-		var value = formatObj[key];
-		if(result.length > 3 && value < 10){
-			value = '0' + value;
+	 * @param (timestamp/Date,'{y}-{m}-{d} {h}:{m}:{s}')
+	 * 
+	 * y:year
+	 * m:months
+	 * d:date
+	 * h:hour
+	 * i:minutes
+	 * s:second
+	 * a:day
+	 */
+	function parseTime(time,format){
+		if(arguments.length==0){
+			return null;
 		}
-		return value || 0;
-	});
-	return time_str;
-}
+		var format = format ||'{y}-{m}-{d} {h}:{i}:{s}';
+		
+		if(typeof(time) == "object"){
+			var date = time;
+		}else{
+			var date = new Date(parseInt(time));
+		}
+		
+		var formatObj = {
+			y : date.getYear()+1900,
+			m : date.getMonth()+1,
+			d : date.getDate(),
+			h : date.getHours(),
+			i : date.getMinutes(),
+			s : date.getSeconds(),
+			a : date.getDay(),
+		};
+		
+		var time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g,function(result,key){
+			var value = formatObj[key];
+			if(result.length > 3 && value < 10){
+				value = '0' + value;
+			}
+			return value || 0;
+		});
+		return time_str;
+	}
 	
 	
 	//处理自定义事件
@@ -269,7 +268,12 @@ function parseTime(time,format){
 			});
 			
 			var length = $textarea.val().length;
-			$countRest.html(me.limit - length);
+			var rest_length = me.limit - length;
+			var show_txt = rest_length;
+			if(rest_length < 0){
+				show_txt = '<font color="#f50">' + Math.abs(rest_length) + '</font>';
+			}
+			$countRest.html(show_txt);
 		}).on('login',function(user){
 			setAvatar.call(me,user);
 			private_hasLogin = true;
