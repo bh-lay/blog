@@ -21,20 +21,36 @@ define(function(require,exports){
 			'</div>',
 			'<div class="l_send_footer_right">',
 				'<div class="l_send_count"><b>500</b><i>/</i><span>500</span></div>',
-				'<a href="#" class="l_send_submit l_send_btnA">发布</a>',
+				'<a href="#" class="l_send_btnA l_send_footer_login">登录</a>',
+				'<a href="#" class="l_send_btnA l_send_submit">发布</a>',
 			'</div>',
 		'</div>',
-		'<div class="l_sendBox_avatar">',
+		'<div class="l_send_avatar">',
 			'<img src="http://layasset.qiniudn.com/user/default.jpg" />',
-			'<a href="javascript:void(0)" class="l_send_login">雁过留名</a>',
+			'<a href="javascript:void(0)">登录</a>',
 		'</div>',
 	'</div>'].join('');
 	
+	var loginPanel_tpl = ['<div class="l_send_loginPanel">',
+		'<div class="l_send_login_btn">',
+			'<a href="#" data-type="github">github</a>',
+			'<a href="#" data-type="sina">微博</a>',
+			'<a href="#" data-type="account">帐号</a>',
+		'</div>',
+		'<div class="l_send_userDefine">',
+			'<div class="l_send_userDefine_cnt">',
+				'<input type="text" placeholder="昵称" />',
+				'<input type="text" placeholder="个人博客" />',
+				'<input type="button" />',
+			'</div>',
+		'</div>',
+		'<div class="l_send_loginPanel_or">OR</div>',
+	'</div>'].join('');
 	
 	var item_tpl = ['<% for(var i=0,total=list.length;i<total;i++){%>',
 		'<div class="l_com_item" data-uid="<%=list[i].uid %>">',
 			'<div class="l_com_item_main">',
-				'<div class="l_com_item_caption"><%=list[i].user.username%></div>',
+				'<div class="l_com_item_caption"><%=list[i].user.username || "匿名用户"%></div>',
 				'<div class="l_com_item_content"><%=list[i].content %></div>',
 				'<div class="l_com_item_footer">',
 					'<div class="l_com_item_time"><%= list[i].time %></div>',
@@ -121,9 +137,9 @@ define(function(require,exports){
 		if(user && user.username){
 			var $allDom = $(this.dom);
 			$allDom.find('.l_sendBox_name').html(user.username);
-			$allDom.find('.l_send_login').remove();
+			$allDom.find('.l_send_avatar a').remove();
 			if(user.avatar){
-				$allDom.find('.l_sendBox_avatar img').attr('src',user.avatar);
+				$allDom.find('.l_send_avatar img').attr('src',user.avatar);
 			}
 		}
 	}
@@ -131,12 +147,36 @@ define(function(require,exports){
 	 * 显示登录界面
 	 */
 	var activeLoginPanel = null;
-	function showLoginPanel(btn,events){
+	function showLoginPanel($allDom){
+		
 		if(activeLoginPanel){
 			activeLoginPanel.close();
 			return;
 		}
 		var me = this;
+		var offset = $allDom.offset();
+		activeLoginPanel = UI.pop({
+			//'title' : 'sdfg',
+			'html' : loginPanel_tpl,
+			'from' : 'left',
+			'width' : 400,
+			'top' : offset.top - 20,
+			'left' : offset.left + ($allDom.width() - 400)/2,
+			'closeFn' : function(){
+				activeLoginPanel = null;
+			}
+		});
+		function callbackHandle(data){
+			if(data.code != 200){
+				UI.prompt('登录失败',3000);
+				return;
+			}
+			var user = data.user;
+			//触发自定义事件“login”
+			EMIT.call(me,'login',[user]);
+		}
+		return
+		
 		activeLoginPanel = UI.select([
 			['帐号登录',function(){
 				L.login('account',callbackHandle);
@@ -145,9 +185,7 @@ define(function(require,exports){
 				L.login('github',callbackHandle);
 			}]
 		],{
-			'from' : 'bottom',
-			'top' : events.clientY + 2,
-			'left' : events.clientX + 5,
+			'from' : 'left',
 			'closeFn' : function(){
 				activeLoginPanel = null;
 			}
@@ -223,15 +261,15 @@ define(function(require,exports){
 			},200);
 		});
 		
-		
+		var loginPanel = $(me.dom).find('.l_send_loginPanel');
 		$(this.dom).on('click','.l_send_placeholder',function(){
 			$textarea.focus();
-		}).on('click','.l_sendBox_avatar',function(e){
+		}).on('click','.l_send_avatar',function(e){
 			var btn = $(this)[0];
 			if(private_hasLogin){
 				L.user.infoPanel();
 			}else{
-				showLoginPanel.call(me,btn,e)
+				showLoginPanel.call(me,$allDom)
 			}
 		}).on('click','.l_send_footer',function(){
 			$textarea.focus();
@@ -242,6 +280,10 @@ define(function(require,exports){
 			},function(){
 				console.log(arguments);
 			});
+		}).on('click','.l_send_face',function(){
+			UI.prompt('表情正在开发中！');
+		}).on('click','.l_send_footer_login',function(e){
+			showLoginPanel.call(me,$allDom)
 		});
 	}
 	//绑定对象自定义事件
@@ -290,7 +332,7 @@ define(function(require,exports){
 		this.dom = $(sendBox_tpl)[0];
 		this.limit = param.limit || 500;
 		this.text = '';
-		
+		this.userDefine = {};
 		$(dom).html($(this.dom));
 		
 		//绑定dom事件

@@ -70,10 +70,12 @@
 	text-indent: 90px;
 	font-size: 18px;
 	color: #aaa;
-	cursor: text
+	cursor: text;
+	background: #fff;
 }
 
 .l_send_footer {
+	position: relative;
 	height: 0px;
 	padding: 0px;
 	overflow: hidden;
@@ -123,19 +125,8 @@
 		color: #aaa;
 	}
 }
-.l_sendBox_active {
-	.l_send_footer {
-		height: @sendBox_footer_height;
-		opacity: 1;
-	}
-	.l_sendBox_avatar{
-		left: -80px;
-		opacity: 0.2;
-	}
-}
 
-
-.l_sendBox_avatar {
+.l_send_avatar {
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -150,25 +141,94 @@
 		width: 100%;
 		height: 100%;
 	}
+	a {
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: block;
+		width: 100%;
+		text-align: center;
+		line-height: 80px;
+		font-size: 18px;
+		color: #fff;
+		background: #000;
+		background: rgba(0,0,0,0.5);
+		.transition(0.3s)
+	}
 }
-.l_send_login {
-	position: absolute;
-	top: 0;
-	left: 0;
-	display: block;
-	width: 100%;
-	text-align: center;
-	line-height: 80px;
-	font-size: 16px;
-	color: #fff;
-	background: #000;
-	background: rgba(0,0,0,0.5);
-	.transition(0.3s)
-}
+
 
 .l_send_login:hover {
 	color: #fff
 }
+
+.l_send_loginPanel{
+	position: relative;
+	overflow: hidden;
+	background: #777;
+}
+.l_send_login_btn{
+	width: 100px;
+	float: left;
+	background: #fff;
+	overflow: hidden;
+	a{
+		display: block;
+		height: 42px;
+		margin-top: -1px;
+		line-height: 42px;
+		border-top: 1px solid #ddd;
+		text-align: center;
+		font-size: 16px;
+		color: #333;
+		&:hover{
+			background: #fafafa;
+		}
+	}
+}
+.l_send_userDefine{
+	width: 300px;
+	float: left;
+}
+.l_send_userDefine_cnt{
+	position: relative;
+	width: 200px;
+	top: 30px;
+	left: 50px;
+	overflow: hidden;
+	input{
+		display: bock;
+		width: 100%;
+		border: none;
+		font-family: inherit;
+	}
+}
+.l_send_loginPanel_or{
+	position : absolute;
+	top: 50%;
+	left: 90px;
+	width: 26px;
+	height: 26px;
+	margin-top: -14px;
+	line-height: 24px;
+	background: #777;
+	text-align: center;
+	font-size: 14px;
+	color: #ddd;
+	border-radius: 13px;
+}
+
+.l_sendBox_active {
+	.l_send_footer {
+		height: @sendBox_footer_height;
+		opacity: 1;
+	}
+	.l_send_avatar{
+		left: -80px;
+		opacity: 0.2;
+	}
+}
+
 
 .l_com_list {
 	background: #fff;
@@ -203,6 +263,8 @@
 	line-height: 1.5;
 	font-size: 14px;
 	color: #333;
+	word-wrap: break-word;
+	word-break: break-all;
 }
 .l_com_item_time{
 	color: #aaa;
