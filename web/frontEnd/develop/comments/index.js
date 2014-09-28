@@ -31,22 +31,6 @@ define(function(require,exports){
 		'</div>',
 	'</div>'].join('');
 	
-	var loginPanel_tpl = ['<div class="l_send_loginPanel">',
-		'<div class="l_send_login_btn">',
-			'<a href="#" data-type="github">github</a>',
-			'<a href="#" data-type="sina">微博</a>',
-			'<a href="#" data-type="account">帐号</a>',
-		'</div>',
-		'<div class="l_send_userDefine">',
-			'<div class="l_send_userDefine_cnt">',
-				'<input type="text" placeholder="昵称" />',
-				'<input type="text" placeholder="个人博客" />',
-				'<input type="button" />',
-			'</div>',
-		'</div>',
-		'<div class="l_send_loginPanel_or">OR</div>',
-	'</div>'].join('');
-	
 	var item_tpl = ['<% for(var i=0,total=list.length;i<total;i++){%>',
 		'<div class="l_com_item" data-uid="<%=list[i].uid %>">',
 			'<div class="l_com_item_main">',
@@ -153,20 +137,15 @@ define(function(require,exports){
 			activeLoginPanel.close();
 			return;
 		}
-		var me = this;
 		var offset = $allDom.offset();
-		activeLoginPanel = UI.pop({
-			//'title' : 'sdfg',
-			'html' : loginPanel_tpl,
-			'from' : 'left',
-			'width' : 400,
+		activeLoginPanel = L.login({
+			'defaults' : 'account',
 			'top' : offset.top - 20,
 			'left' : offset.left + ($allDom.width() - 400)/2,
 			'closeFn' : function(){
 				activeLoginPanel = null;
 			}
-		});
-		function callbackHandle(data){
+		},function (data){
 			if(data.code != 200){
 				UI.prompt('登录失败',3000);
 				return;
@@ -174,32 +153,7 @@ define(function(require,exports){
 			var user = data.user;
 			//触发自定义事件“login”
 			EMIT.call(me,'login',[user]);
-		}
-		return
-		
-		activeLoginPanel = UI.select([
-			['帐号登录',function(){
-				L.login('account',callbackHandle);
-			}],
-			['github登录',function(){
-				L.login('github',callbackHandle);
-			}]
-		],{
-			'from' : 'left',
-			'closeFn' : function(){
-				activeLoginPanel = null;
-			}
 		});
-		function callbackHandle(data){
-			if(data.code != 200){
-				UI.prompt('登录失败',3000);
-				return;
-			}
-			var user = data.user;
-			//触发自定义事件“login”
-			EMIT.call(me,'login',[user]);
-		}
-			
 	}
 	/**
 	 * 发送评论

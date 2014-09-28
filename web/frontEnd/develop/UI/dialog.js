@@ -2,7 +2,7 @@
  * @author bh-lay
  * 
  * @github https://github.com/bh-lay/UI
- * @modified 2014-9-18 17:0
+ * @modified 2014-9-28 10:9
  * 
  **/
 
@@ -591,12 +591,12 @@
 		bindEvent(me.dom,'click','.UI_pop_close',function(){
 			me.close();
 		});
+	
+		//插入内容
+		me.cntDom.innerHTML = param.html || '';
 		
 		showMask.call(me,function(){
 			var this_width = Math.min(param.width || 600,private_docW-20);
-			
-			//插入内容
-			me.cntDom.innerHTML = param.html || '';
 			
 			//设置宽度，为计算位置尺寸做准备
 			setCSS(me.dom,{

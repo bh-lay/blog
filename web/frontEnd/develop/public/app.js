@@ -82,48 +82,42 @@ window.L = window.L || {};
  *   L.dataBase.user(fn);
  */
 (function(exports){
-	var baseTpl = ['<div class="l_login_panel">',
-		'邮箱: <input name="email" type="text" /><br/>',
-		'密码: <input name="password" type="password" /><br/>',
-		'<input type="submit" value="登录" /><br/>',
+		
+	var loginPanel_tpl = ['<div class="l_loginPanel">',
+		'<div class="l_loginPanel_tabs">',
+			'<a href="#" data-type="github"><i class="layIcon">A</i>github</a>',
+			'<a href="#" data-type="sina">微博</a>',
+			'<a href="#" data-type="account">帐号</a>',
+			'<a href="#" data-type="define">游客</a>',
+		'</div>',
+		'<div class="l_loginPanel_cnts">',
+			'<div class="l_loginPanel_item">',
+				'<div class="l_loginPanel_github">',
+					'使用github帐号登录',
+				'</div>',
+			'</div>',
+			'<div class="l_loginPanel_item">',
+				'<div class="l_loginPanel_sina">',
+					'新浪微博登录尚未开发',
+				'</div>',
+			'</div>',
+			'<div class="l_loginPanel_item">',
+				'<div class="l_loginPanel_account">',
+					'<input name="email" type="text" placeholder="邮箱"/>',
+					'<input name="password" type="password" placeholder="密码"/>',
+					'<input type="button" value="登录" />',
+				'</div>',
+			'</div>',
+			'<div class="l_loginPanel_item">',
+				'<div class="l_loginPanel_define">',
+					'<input type="text" placeholder="昵称" />',
+					'<input type="text" placeholder="个人主页" />',
+					'<input type="button" value="确定" />',
+				'</div>',
+			'</div>',
+		'</div>',
+		'<div class="l_loginPanel_arrow">◆</div>',
 	'</div>'].join('');
-	function getMyInfo(callback){
-		$.ajax({
-			'url' : '/ajax/user/detail',
-			'type' : 'POST',
-			'success' : function(data){
-				if(data && data.code == 200){
-					callback && callback(null,data.detail);
-				}else{
-					callback && callback('error');
-				}
-			}
-		});
-	}
-	function loginPop(callback){
-		var pop = UI.pop({
-			'mask' : true,
-			'width' : 400,
-			'html' : baseTpl
-		});
-		var $popDom = $(pop.dom);
-		$popDom.on('click','input[type="submit"]',function(){
-			var email = $popDom.find('input[name="email"]').val();
-			var password = $popDom.find('input[name="password"]').val();
-			$.ajax({
-				'url' : '/ajax/user/login',
-				'type' : 'POST',
-				'data' : {
-					'email' : email,
-					'password' : password
-				},
-				'success' : function(data){
-					pop.close();
-					callback && callback(data);
-				}
-			})
-		});
-	}
 	
 	//存储当前用户的信息
 	var userInfo = null;
@@ -138,15 +132,88 @@ window.L = window.L || {};
 		LoginCallbacks = [];
 	};
 	
-	exports.login = function (type,callback){
+	function getMyInfo(callback){
+		$.ajax({
+			'url' : '/ajax/user/detail',
+			'type' : 'POST',
+			'success' : function(data){
+				if(data && data.code == 200){
+					callback && callback(null,data.detail);
+				}else{
+					callback && callback('error');
+				}
+			}
+		});
+	}
+	function LOGIN(param,callback){
+		var me = this;
+		
+		var pop = UI.pop({
+			'mask' : true,
+			'width' : 400,
+			'html' : loginPanel_tpl,
+			'mask' : false,
+			'closeFn' : param.closeFn
+		});
+		var $popDom = $(pop.dom);
+		this.callback = callback;
+		this.$arrow = $popDom.find('.l_loginPanel_arrow');
+		this.$cnts_item = $popDom.find('.l_loginPanel_item');
+		
+		$popDom.on('click','.l_loginPanel_tabs a',function(){
+			var type = $(this).attr('data-type');
+			me.tab(type);
+		}).on('click','input[type="submit"]',function(){
+			var email = $popDom.find('input[name="email"]').val();
+			var password = $popDom.find('input[name="password"]').val();
+			$.ajax({
+				'url' : '/ajax/user/login',
+				'type' : 'POST',
+				'data' : {
+					'email' : email,
+					'password' : password
+				},
+				'success' : function(data){
+					pop.close();
+					me.callback && me.callback(data);
+				}
+			})
+		});
+		//登录
+		this.tab('define');
+	}
+	LOGIN.prototype.tab = function(type){
+		var index,
+			me = this;
 		switch(type){
 			case 'github':
-				LoginCallbacks.push(callback);
+				index = 0;
+				LoginCallbacks.push(this.callback);
 				window.open('https://github.com/login/oauth/authorize?client_id=150e88277697b41e0702&redirect_uri=http://bh-lay.com/snsLogin/github/');
 			break
+			case 'sina':
+				index = 1;
+			break
+			case 'define':
+				index = 3;
+			break
+			//account
 			default:
-				loginPop(callback);
+				index = 2;
 		}
+		this.$arrow.css('top',index*40);
+		this.$cnts_item.not(this.$cnts_item.eq(index)).animate({
+			'left' : '-100%'
+		},100,function(){
+			me.$cnts_item.eq(index).css({
+				'left' : 0,
+				'display' : 'none'
+			}).fadeIn(200);
+		});
+	};
+	
+	exports.login = function (param,callback){
+		return new LOGIN(param,callback);
 	};
 	
 	exports.dataBase = exports.dataBase || {};
