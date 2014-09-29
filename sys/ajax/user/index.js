@@ -323,8 +323,8 @@ function getUserDetail(userID,callback){
 	method.open({'collection_name':'user'},function(err,collection){
 		collection.find({id:userID}).toArray(function(err, docs) {
 			method.close();
-			if(err){
-				callback && callback(err);
+			if(err || docs.length == 0){
+				callback && callback(err || 'error');
 				return;
 			}
 			var item = docs[0];
@@ -341,7 +341,7 @@ exports.detail = function (connect,app,userID){
 		if(err){
 			connect.write('json',{
 				'code' : 201,
-				'msg' : ''
+				'msg' : err
 			});
 			return
 		}

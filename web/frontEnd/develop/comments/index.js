@@ -132,11 +132,11 @@ define(function(require,exports){
 	 */
 	var activeLoginPanel = null;
 	function showLoginPanel($allDom){
-		
 		if(activeLoginPanel){
 			activeLoginPanel.close();
 			return;
 		}
+		var me = this;
 		var offset = $allDom.offset();
 		activeLoginPanel = L.login({
 			'defaults' : 'account',

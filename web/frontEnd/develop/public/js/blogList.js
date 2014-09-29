@@ -72,6 +72,15 @@ define(function(require,exports){
 		
 		this.dom.append(this_dom);
 		this_dom.fadeIn(200);
+		
+		var img = this_dom.find('img')[0];
+		if(img){
+			img.onload = function(){
+				this_dom.css('max-width',this.width);
+			}
+		}else{
+			this_dom.css('max-width',500);
+		}
 	};
 	
 	return function(dom,param){

@@ -470,9 +470,17 @@
   overflow: hidden;
 }
 .articleItem {
-  margin: 0px 10px 20px 10px;
+  width: 100%;
+  margin: 0px auto 20px;
   overflow: hidden;
-  background: #ffffff;
+  background: #fff;
+  transition: 0.4s linear;
+  -moz-transition: 0.4s linear;
+  /* Firefox 4 */
+  -webkit-transition: 0.4s linear;
+  /* Safari �� Chrome */
+  -o-transition: 0.4s linear;
+  /* Opera */
 }
 .artItCpt a {
   display: block;
