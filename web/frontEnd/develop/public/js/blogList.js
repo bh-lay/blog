@@ -1,3 +1,4 @@
+
 /**
  * blogList page
  *  
@@ -5,7 +6,7 @@
 
 
 define(function(require,exports){
-	var blogTemp =  ['<div class="articleItem" articleId="<%=id %>"',
+	var blogTemp =  ['<div class="articleItem" articleId="<%=id %>">',
 		'<div class="artItCnt">',
 			'<% if(cover){ %>',
 			'<div class="artItPic">',
@@ -76,10 +77,10 @@ define(function(require,exports){
 		var img = this_dom.find('img')[0];
 		if(img){
 			img.onload = function(){
-				this_dom.css('max-width',this.width);
+//				this_dom.css('max-width',this.width);
 			}
 		}else{
-			this_dom.css('max-width',500);
+//			this_dom.css('max-width',500);
 		}
 	};
 	
@@ -99,12 +100,13 @@ define(function(require,exports){
 			list.more();
 		});
 		
-		
 		var list = new LIST($list);
 		list.more();
 		list.onLoadStart = function(){
 			$addMore.addClass('blog_addMore_loading');
 		};
+		
+		
 		list.onLoaded = function(){
 			if(this.skip >= this.count){
 				$addMore.hide();
@@ -112,7 +114,6 @@ define(function(require,exports){
 				$addMore.removeClass('blog_addMore_loading');
 			}
 		};
-		
 	};
 });
 

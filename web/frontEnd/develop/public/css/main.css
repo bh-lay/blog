@@ -466,12 +466,8 @@
     width: 100%;
   }
 }
-.articleList {
-  overflow: hidden;
-}
 .articleItem {
-  width: 100%;
-  margin: 0px auto 20px;
+  margin-bottom: 12px;
   overflow: hidden;
   background: #fff;
   transition: 0.4s linear;
@@ -537,9 +533,6 @@
   color: #333333;
 }
 .blog_addMore {
-  clear: both;
-  margin: 0px 10px;
-  border-radius: 4px;
   overflow: hidden;
   text-align: center;
 }
@@ -556,11 +549,11 @@
   height: 40px;
   line-height: 40px;
   background: #fff;
-  color: #333333;
+  color: #333;
 }
 .blog_addMore a:hover {
   background: #ccc;
-  color: #000000;
+  color: #000;
 }
 .blog_addMore a:active {
   background: #666;
