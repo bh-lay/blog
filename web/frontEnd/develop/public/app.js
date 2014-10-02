@@ -356,9 +356,7 @@ seajs.use([
 		'.myCard_cpt h3{line-height:20px;font-size:16px;color:#fff;font-weight:bold;}',
 		'.myCard_cpt p{line-height:20px;font-size:14px;color:#fff;}',
 	'</style><div class="myCard">',
-		'<div class="myCard_header">',
-			
-		'</div>',
+		'<div class="myCard_header"></div>',
 		'<div class="myCard_info">',
 			'<div class="myCard_cover">',
 			'</div>',
