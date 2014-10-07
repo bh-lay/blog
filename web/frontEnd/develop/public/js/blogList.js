@@ -116,36 +116,3 @@ define(function(require,exports){
 		};
 	};
 });
-
-
-
-
-
-/**	
-var scrollDom = dom.find('.articleListCnt')[0];
-	var $scrollBody = dom.find('.articleList');
-	function handle(event) {  
-		var delta = 0;  
-		if (!event) // For IE.  
-			event = window.event;  
-		if (event.wheelDelta) { // IE/Opera
-			delta = event.wheelDelta / 120;  
-		} else if (event.detail) {  
-			delta = -event.detail / 3;  
-		}
-		
-		var left = parseInt($scrollBody.css('marginLeft'));
-		
-		left += -100 * delta;
-		if(left > 0){
-			left = 0;
-		}
-		$scrollBody.css('marginLeft' ,left);
-		
-		event.preventDefault && event.preventDefault();  
-		event.returnValue = false;  
-	}
-
-	scrollDom.addEventListener && scrollDom.addEventListener('DOMMouseScroll', handle, false);
-	scrollDom.onmousewheel = scrollDom.onmousewheel = handle;
-	*/
