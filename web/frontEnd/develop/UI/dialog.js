@@ -2,7 +2,7 @@
  * @author bh-lay
  * 
  * @github https://github.com/bh-lay/UI
- * @modified 2014-9-28 10:9
+ * @modified 2014-10-8 17:17
  * 
  **/
 
@@ -341,17 +341,6 @@
 		}
 		maskObjs.push([this,zIndex]);
 	}
-	//在指定DOM后插入新DOM
-	function insertAfter(newElement, targetElement){
-		var parent = targetElement.parentNode;
-		if (parent.lastChild == targetElement) {
-			// 如果最后的节点是目标元素，则直接追加
-			parent.appendChild(newElement);
-		} else {
-			//插入到目标元素的下一个兄弟节点之前
-			parent.insertBefore(newElement, targetElement.nextSibling);
-		}
-	}
 	
 	/**
 	 * 计算动画所需的方向及目标值
@@ -393,18 +382,16 @@
 	 *   创建一个dom用来完成动画
 	 *   动画结束，设置dom为结束样式
 	 **/
-	var openAnimation = isIE678 ? function (a,b,c,d,fn){
-		fn && fn();
-	} : function (DOM,from,time,animation_range,fn){
-		if(!from || from == 'none' || !animation_range){
+	function openAnimation(DOM,from,time,animation_range,fn){
+		//ie系列或无from信息，不显示效果
+		if(isIE678 || !from || from == 'none' || !animation_range){
 			fn && fn();
-			//不需要动画
 			return
 		}
-		var offset = utils.offset(DOM);
 		
-		//动画第一帧css
-		var cssStart = {},
+		var offset = utils.offset(DOM),
+			//动画第一帧css
+			cssStart = {},
 			//动画需要改变的css
 			cssAnim = {};
 		
@@ -433,18 +420,10 @@
 		}
 		//拷贝dom用来完成动画
 		var html = DOM.outerHTML;
-		//FIXME 过滤iframe正则随便写的
+		//FIXME 过滤iframe正则
 		html = html.replace(/<iframe.+>\s*<\/iframe>/ig,'');
 		var animDom = utils.createDom(html)[0];
-		//为了效果跟流畅，隐藏内容部分
-		var cntDom = findByClassName(animDom,'UI_cnt')[0];
-		insertAfter(animDom,DOM);
-		if(cntDom){
-			setCSS(animDom,{
-				'height' : outerHeight(DOM)
-			});
-			cntDom.innerHTML = '';
-		}
+		utils.insertAfter(animDom,DOM);
 		
 		
 		//隐藏真实dom
@@ -466,7 +445,7 @@
 			});
 			fn && fn();
 		});
-	};
+	}
 	/**
 	 * 处理对象关闭及结束动画
 	 */
@@ -484,6 +463,7 @@
 			var DOM = me.dom;
 			fn && fn.call(me);
 			function endFn(){
+				//删除dom
 				utils.removeNode(DOM);
 				me.closeFn && me.closeFn();
 				/**
@@ -511,8 +491,8 @@
 					}
 				}
 			}
-			
-			if(isIE678){
+			//ie系列或无from信息，不显示效果
+			if(isIE678 || from == 'none'){
 				endFn();
 				return
 			}
@@ -520,26 +500,34 @@
 			var time = isNum(time) ? time : parseInt(time_define) || 80;
 			var from = me._from;
 			
-			var range = animation_range || 80;
-			
-			var cssEnd = {
-				'opacity' : 0
-			};
 			if(from && from.tagName && from.parentNode){
-				utils.zoomOut(DOM,time,function(){
-					endFn();
+				//缩放回启动按钮
+				var offset =  utils.offset(from);
+				setCSS(DOM,{
+					'overflow' : 'hidden',
+					'width' : outerWidth(DOM),
+					'height' : outerHeight(DOM)
+				});
+				animation(DOM,{
+					'top' : offset.top,
+					'left' : offset.left,
+					'width' : outerWidth(from),
+					'height' : outerHeight(from),
+					'opacity' : 0.5
+				},time,function(){
+					animation(DOM,{
+						'opacity' : 0
+					},100,endFn);
 				});
 			}else if(typeof(from) == 'string'){
 				
-				var countResult = countAnimation(DOM,from,-range);
+				var range = animation_range || 80,
+					countResult = countAnimation(DOM,from,-range),
+					cssEnd = {'opacity' : 0};
 				cssEnd[countResult[0]] = countResult[2];
 				
 				//动画开始
-				animation(DOM,cssEnd,time,'SineEaseIn',function(){
-					endFn();
-				});
-			}else{
-				endFn();
+				animation(DOM,cssEnd,time,'SineEaseIn',endFn);
 			}
 		}
 	}
@@ -615,7 +603,7 @@
 		});
 	}
 	//使用close方法
-	POP.prototype.close = closeAnimation(500);
+	POP.prototype.close = closeAnimation(300);
 	POP.prototype.adapt = function(){
 		adaption(this.dom,null,100);
 	};
@@ -795,7 +783,7 @@
 		//记录body的scrollY设置
 		me._bodyOverflowY = getCSS(private_body,'overflowY');
 		var cssObj = {
-			'width' : isNum(param.width) ? Math.min(private_docW,param.width) : null,
+			'width' : isNum(param.width) ? Math.min(private_docW,param.width) : private_docW,
 			'height' : isNum(param.height) ? Math.min(private_winH,param.height) : private_winH
 		};
 		//水平定位
@@ -804,8 +792,7 @@
 		}else if(isNum(param.left)){
 			cssObj.left = param.left;
 		}else{
-			cssObj.position = 'relative';
-			cssObj.margin = 'auto';
+			cssObj.left = (private_docW - cssObj.width)/2;
 		}
 		//垂直定位
 		if(isNum(param.bottom)){
@@ -1266,6 +1253,11 @@
 	}
 	/**
 	 * 兼容css3、js动画
+	 * @param elem dom对象
+	 * @param cssObj 动画对象
+	 * @param durtime 持续时间
+	 * @param [animType] 缓动类型
+	 * @param [callback] 回调
 	 */
 	function animation(elem,cssObj,durtime,a,b) {
         var animType = "Linear",
@@ -1437,41 +1429,6 @@
 				}
 			}
 		})(),
-		//缩小，淡出
-		zoomOut :  private_css3 ? function(DOM,time,fn){
-			var op = getStyle(DOM,'opacity');
-			
-			css_anim(DOM,{
-				'-webkit-transform' : 'scale(0.5)',
-				opacity : 0
-			},time,null,function(){
-				setCss(DOM,{
-					'-webkit-transform' : 'scale(1)',
-					opacity : op
-				});
-				fn && fn.call(DOM);
-			});
-
-		} : function (DOM,time,fn){
-			var op = getStyle(DOM,'opacity');
-			DOM.style.overflow = 'hidden';
-			var width = getStyle(DOM,'width');
-			var height = outerHeight(DOM);
-			var left = getStyle(DOM,'left') || 0;
-			var top = getStyle(DOM,'top') || 0;
-			
-			animation(DOM,{
-				width : width/2,
-				height : height/2,
-				left : (left + width/4),
-				top : (top + height/4),
-				opacity : 0
-			},time,function(){
-				DOM.style.opacity = op;
-				DOM.style.display = 'none';
-				fn && fn.call(DOM);
-			});
-		},
 		//通用拖动方法
 		drag : function drag(handle_dom,dom,param){
 			var param = param || {};
@@ -1512,6 +1469,17 @@
 			var a = document.createElement('div');
 			a.innerHTML = html;
 			return a.childNodes;
+		},
+		//在指定DOM后插入新DOM
+		insertAfter : function (newElement, targetElement){
+			var parent = targetElement.parentNode;
+			if (parent.lastChild == targetElement) {
+				//如果最后的节点是目标元素，则直接追加
+				parent.appendChild(newElement);
+			} else {
+				//插入到目标元素的下一个兄弟节点之前
+				parent.insertBefore(newElement, targetElement.nextSibling);
+			}
 		},
 		//移除dom节点
 		removeNode : function (elem){  
