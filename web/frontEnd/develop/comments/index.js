@@ -22,13 +22,12 @@ define(function(require,exports){
 				'</div>',
 				'<div class="l_send_footer_right">',
 					'<div class="l_send_count"><b>500</b><i>/</i><span>500</span></div>',
-					'<a href="#" class="l_send_btnA l_send_toggle_flip">denglu</a>',
+					'<a href="#" class="l_send_btnA l_send_toggle_flip">雁过留名</a>',
 					'<a href="#" class="l_send_btnA l_send_submit">发布</a>',
 				'</div>',
 			'</div>',
 			'<div class="l_send_avatar l_send_toggle_flip">',
 				'<img src="http://layasset.qiniudn.com/user/default.jpg" />',
-				'<a href="javascript:void(0)">登录</a>',
 			'</div>',
 		'</div>',
 		'<div class="l_sendBox_card_back">',
@@ -131,7 +130,6 @@ define(function(require,exports){
 		if(user && user.username){
 			var $allDom = $(this.dom);
 			$allDom.find('.l_sendBox_name').html(user.username);
-			$allDom.find('.l_send_avatar a').remove();
 			if(user.avatar){
 				$allDom.find('.l_send_avatar img').attr('src',user.avatar);
 			}
