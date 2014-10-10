@@ -113,8 +113,51 @@
 
 .l_sendBox {
 	position: relative;
-	background: #fff;
+	-webkit-perspective: 800px;
+	-moz-perspective: 800px;
+	-ms-perspective: 800px;
+	-o-perspective: 800px;
+	perspective: 800px;
+}
+
+.l_sendBox_card_front,
+.l_sendBox_card_back{
 	overflow: hidden;
+	-webkit-backface-visibility: hidden;
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	-webkit-transition: all 0.6s ease-out;
+	-moz-transition: all 0.6s ease-out;
+	transition: all 0.6s ease-out;
+}
+.l_sendBox_card_front{
+	background: #fff;
+	position: relative;
+	-webkit-transform: rotateX(360deg);
+	-moz-transform: rotateX(360deg);
+	transform: rotateX(360deg);
+}
+.l_sendBox_card_back{
+	background: #333;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+	-webkit-transform: rotateX(180deg);
+	-moz-transform: rotateX(180deg);
+	transform: rotateX(180deg);
+}
+.l_sendBox.flipped .l_sendBox_card_front{
+	-webkit-transform: rotateX(180deg);
+	-moz-transform: rotateX(180deg);
+	transform: rotateX(180deg);
+}
+.l_sendBox.flipped .l_sendBox_card_back{
+	-webkit-transform: rotateX(0deg);
+	-moz-transform: rotateX(0deg);
+	transform: rotateX(0deg);
 }
 
 .l_send_textarea {
@@ -206,6 +249,25 @@
 	}
 }
 
+
+.l_send_login_panel{
+	position: relative;
+	width: 100%;
+	padding: 0px;
+	.transition(0.1s, ease-out);
+	overflow: hidden;
+	input{
+		display: block;
+		float: left;
+		width: 140px;
+		height: 30px;
+		border: none;
+		border-radius: 4px;
+		margin: 0 0 10px 10px ;
+		text-indent: 0.5em;
+		font-family: inherit;
+	}
+}
 .l_send_avatar {
 	position: absolute;
 	top: 0px;
@@ -237,7 +299,6 @@
 	}
 }
 
-
 .l_send_login:hover {
 	color: #fff
 }
@@ -247,12 +308,15 @@
 		height: @sendBox_footer_height;
 		opacity: 1;
 	}
+	.l_send_login_panel{
+		left: 0;
+		opacity: 1;
+	}
 	.l_send_avatar{
 		left: -80px;
 		opacity: 0.2;
 	}
 }
-
 
 .l_com_list {
 	background: #fff;

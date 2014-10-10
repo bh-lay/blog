@@ -11,23 +11,33 @@ define(function(require,exports){
 		'</div>',
 	'</div>'].join('');
 	var sendBox_tpl = ['<div class="l_sendBox">',
-		'<div class="l_send_textarea">',
-			'<textarea name="content" spellcheck="false"></textarea>',
-			'<div class="l_send_placeholder"><span class="l_sendBox_name"></span> 写点啥吧！</div>',
-		'</div>',
-		'<div class="l_send_footer">',
-			'<div class="l_send_footer_left">',
-				'<a href="#" class="l_send_face l_send_btnA">表情</a>',
+		'<div class="l_sendBox_card_front">',
+			'<div class="l_send_textarea">',
+				'<textarea name="content" spellcheck="false"></textarea>',
+				'<div class="l_send_placeholder"><span class="l_sendBox_name"></span> 写点啥吧！</div>',
 			'</div>',
-			'<div class="l_send_footer_right">',
-				'<div class="l_send_count"><b>500</b><i>/</i><span>500</span></div>',
-				'<a href="#" class="l_send_btnA l_send_footer_login">登录</a>',
-				'<a href="#" class="l_send_btnA l_send_submit">发布</a>',
+			'<div class="l_send_footer">',
+				'<div class="l_send_footer_left">',
+					'<a href="#" class="l_send_face l_send_btnA">表情</a>',
+				'</div>',
+				'<div class="l_send_footer_right">',
+					'<div class="l_send_count"><b>500</b><i>/</i><span>500</span></div>',
+					'<a href="#" class="l_send_btnA l_send_toggle_flip">denglu</a>',
+					'<a href="#" class="l_send_btnA l_send_submit">发布</a>',
+				'</div>',
+			'</div>',
+			'<div class="l_send_avatar l_send_toggle_flip">',
+				'<img src="http://layasset.qiniudn.com/user/default.jpg" />',
+				'<a href="javascript:void(0)">登录</a>',
 			'</div>',
 		'</div>',
-		'<div class="l_send_avatar">',
-			'<img src="http://layasset.qiniudn.com/user/default.jpg" />',
-			'<a href="javascript:void(0)">登录</a>',
+		'<div class="l_sendBox_card_back">',
+			'<div class="l_send_login_panel">',
+				'<input type="text" placeholder="尊姓大名" />',
+				'<input type="text" placeholder="邮箱" />',
+				'<input type="text" placeholder="博客" />',
+				'<a href="javascript:void(0)" class="l_send_toggle_flip" style="color:#fff;">翻转</a>',
+			'</div>',
 		'</div>',
 	'</div>'].join('');
 	
@@ -215,15 +225,15 @@ define(function(require,exports){
 			},200);
 		});
 		
-		var loginPanel = $(me.dom).find('.l_send_loginPanel');
-		$(this.dom).on('click','.l_send_placeholder',function(){
+		$allDom.on('click','.l_send_placeholder',function(){
 			$textarea.focus();
-		}).on('click','.l_send_avatar',function(e){
+		}).on('click','.l_send_toggle_flip',function(e){
 			var btn = $(this)[0];
 			if(private_hasLogin){
 				L.user.infoPanel();
 			}else{
-				showLoginPanel.call(me,$allDom)
+				//showLoginPanel.call(me,$allDom)
+				$allDom.toggleClass('flipped');
 			}
 		}).on('click','.l_send_footer',function(){
 			$textarea.focus();
@@ -236,8 +246,6 @@ define(function(require,exports){
 			});
 		}).on('click','.l_send_face',function(){
 			UI.prompt('表情正在开发中！');
-		}).on('click','.l_send_footer_login',function(e){
-			showLoginPanel.call(me,$allDom)
 		});
 	}
 	//绑定对象自定义事件
