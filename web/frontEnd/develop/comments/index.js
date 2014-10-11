@@ -14,7 +14,7 @@ define(function(require,exports){
 		'<div class="l_sendBox_card_front">',
 			'<div class="l_send_textarea">',
 				'<textarea name="content" spellcheck="false"></textarea>',
-				'<div class="l_send_placeholder"><span class="l_sendBox_name"></span> 写点啥吧！</div>',
+				'<div class="l_send_placeholder"><span class="l_sendBox_name"></span> 壮士，敢不敢留个言！</div>',
 			'</div>',
 			'<div class="l_send_footer">',
 				'<div class="l_send_footer_left">',
@@ -127,12 +127,14 @@ define(function(require,exports){
 	 *
 	 */
 	function setAvatar(user){
+		var $allDom = $(this.dom);
 		if(user && user.username){
-			var $allDom = $(this.dom);
 			$allDom.find('.l_sendBox_name').html(user.username);
 			if(user.avatar){
 				$allDom.find('.l_send_avatar img').attr('src',user.avatar);
 			}
+		}else{
+			$allDom.find('.l_send_avatar').hide();
 		}
 	}
 	/**
@@ -191,7 +193,6 @@ define(function(require,exports){
 		var me = this;
 		var $allDom = $(this.dom);
 		var $textarea = $allDom.find('textarea');
-		var $placeholder = $allDom.find('.l_send_placeholder');
 		
 		
 		var delay;
@@ -212,13 +213,11 @@ define(function(require,exports){
 		$textarea.on('focus',function(){
 			clearTimeout(focusDelay);
 			$allDom.addClass('l_sendBox_active');
-			$placeholder.fadeOut(100);
 		}).on('focusout',function(){
 			clearTimeout(focusDelay);
 			focusDelay = setTimeout(function(){
 				if(me.text.length == 0){
 					$allDom.removeClass('l_sendBox_active');
-					$placeholder.fadeIn(100);
 				}
 			},200);
 		});
@@ -304,8 +303,8 @@ define(function(require,exports){
 				private_hasLogin = false;
 			}else if(user){
 				private_hasLogin = true;
-				setAvatar.call(me,user);
 			}
+			setAvatar.call(me,user);
 		});
 	}
 	sendBox.prototype = {
