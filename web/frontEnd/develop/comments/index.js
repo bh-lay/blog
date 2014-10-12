@@ -11,6 +11,7 @@ define(function(require,exports){
 		'</div>',
 	'</div>'].join('');
 	var sendBox_tpl = ['<div class="l_sendBox">',
+		'<div class="l_sendBox_card">',
 		'<div class="l_sendBox_card_front">',
 			'<div class="l_send_textarea">',
 				'<textarea name="content" spellcheck="false"></textarea>',
@@ -37,6 +38,7 @@ define(function(require,exports){
 				'<input type="text" placeholder="博客" />',
 				'<a href="javascript:void(0)" class="l_send_toggle_flip" style="color:#fff;">翻转</a>',
 			'</div>',
+		'</div>',
 		'</div>',
 	'</div>'].join('');
 	

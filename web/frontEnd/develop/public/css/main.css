@@ -111,16 +111,20 @@
   -o-perspective: 800px;
   perspective: 800px;
 }
-.l_sendBox_card_front,
-.l_sendBox_card_back {
-  overflow: hidden;
-  -webkit-backface-visibility: hidden;
+.l_sendBox_card {
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
   transform-style: preserve-3d;
   -webkit-transition: all 0.6s ease-out;
   -moz-transition: all 0.6s ease-out;
   transition: all 0.6s ease-out;
+}
+.l_sendBox_card_front,
+.l_sendBox_card_back {
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 .l_sendBox_card_front {
   background: #fff;
@@ -141,15 +145,10 @@
   -moz-transform: rotateX(180deg);
   transform: rotateX(180deg);
 }
-.l_sendBox.flipped .l_sendBox_card_front {
+.l_sendBox.flipped .l_sendBox_card {
   -webkit-transform: rotateX(180deg);
   -moz-transform: rotateX(180deg);
   transform: rotateX(180deg);
-}
-.l_sendBox.flipped .l_sendBox_card_back {
-  -webkit-transform: rotateX(0deg);
-  -moz-transform: rotateX(0deg);
-  transform: rotateX(0deg);
 }
 .l_send_textarea {
   position: relative;
