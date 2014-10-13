@@ -10,21 +10,21 @@ define(function(require,exports){
 		'<div class="l_com_list">',
 		'</div>',
 	'</div>'].join('');
-	var sendBox_tpl = ['<div class="l_sendBox">',
+	var sendBox_tpl = ['<div class="l_sendBox flipped" spellcheck="false">',
 		'<div class="l_sendBox_card">',
 		'<div class="l_sendBox_card_front">',
 			'<div class="l_send_textarea">',
-				'<textarea name="content" spellcheck="false"></textarea>',
+				'<textarea name="content"></textarea>',
 				'<div class="l_send_placeholder"><span class="l_sendBox_name"></span> 壮士，敢不敢留个言！</div>',
 			'</div>',
 			'<div class="l_send_footer">',
 				'<div class="l_send_footer_left">',
 					'<a href="#" class="l_send_face l_send_btnA">表情</a>',
+					'<div class="l_send_count"><b>500</b><i>/</i><span>500</span></div>',
 				'</div>',
 				'<div class="l_send_footer_right">',
-					'<div class="l_send_count"><b>500</b><i>/</i><span>500</span></div>',
-					'<a href="#" class="l_send_btnA l_send_toggle_flip">雁过留名</a>',
-					'<a href="#" class="l_send_btnA l_send_submit">发布</a>',
+					'<a href="javascript:void(0)" class="l_send_btnB l_send_username l_send_toggle_flip">报上名来</a>',
+					'<a href="javascript:void(0)" class="l_send_btnA l_send_submit">发布</a>',
 				'</div>',
 			'</div>',
 			'<div class="l_send_avatar l_send_toggle_flip">',
@@ -32,11 +32,13 @@ define(function(require,exports){
 			'</div>',
 		'</div>',
 		'<div class="l_sendBox_card_back">',
+			'<a href="javascript:void(0)" class="l_send_login_panel_close l_send_toggle_flip">×</a>',
 			'<div class="l_send_login_panel">',
-				'<input type="text" placeholder="尊姓大名" />',
-				'<input type="text" placeholder="邮箱" />',
-				'<input type="text" placeholder="博客" />',
-				'<a href="javascript:void(0)" class="l_send_toggle_flip" style="color:#fff;">翻转</a>',
+				'<div class="l_send_login_panel_body">',
+					'<p><span>我是</span><input type="text" autocomplete="off" name="username" placeholder="韩梅梅"/></p>',
+					'<p><span>有个常用邮箱</span><input type="text" autocomplete="off" name="email" placeholder="xxx@qq.cn"/></p>',
+					'<p><span>还有一个牛逼轰轰的博客</span><input type="text" autocomplete="off" name="blog" placeholder="xxx.me"/></p>',
+				'</div>',
 			'</div>',
 		'</div>',
 		'</div>',
@@ -197,11 +199,12 @@ define(function(require,exports){
 		var $textarea = $allDom.find('textarea');
 		
 		
-		var delay;
+		var inputDelay,
+			focusDelay;
 		$textarea.on('keyup keydown change propertychange input paste',function(){
-			clearTimeout(delay);
-			delay = setTimeout(function(){
-				var newVal = $textarea.val();
+			clearTimeout(inputDelay);
+			inputDelay = setTimeout(function(){
+				var newVal = $.trim($textarea.val());
 				//校验字符是否发生改变
 				if(newVal == me.text){
 					return
@@ -210,9 +213,7 @@ define(function(require,exports){
 				//触发自定义事件“change”
 				EMIT.call(me,'change');
 			},80);
-		});
-		var focusDelay;
-		$textarea.on('focus',function(){
+		}).on('focus',function(){
 			clearTimeout(focusDelay);
 			$allDom.addClass('l_sendBox_active');
 		}).on('focusout',function(){
@@ -228,6 +229,9 @@ define(function(require,exports){
 			$textarea.focus();
 		}).on('click','.l_send_toggle_flip',function(e){
 			var btn = $(this)[0];
+			setTimeout(function(){
+				$textarea.focusout();
+			});
 			if(private_hasLogin){
 				L.user.infoPanel();
 			}else{
@@ -237,6 +241,14 @@ define(function(require,exports){
 		}).on('click','.l_send_footer',function(){
 			$textarea.focus();
 		}).on('click','.l_send_submit',function(){
+			if(me.text.length == 0){
+				UI.prompt('你丫倒写点东西啊！',null,{
+					'top' : $(this).offset().top + 40
+				});
+			}else{
+				$allDom.toggleClass('flipped');
+			}
+			return
 			sendComment({
 				'id' : me.id,
 				'text' : me.text
@@ -245,6 +257,9 @@ define(function(require,exports){
 			});
 		}).on('click','.l_send_face',function(){
 			UI.prompt('表情正在开发中！');
+		}).on('keyup keydown change propertychange input paste','input',function(){
+			$(this).width(0);
+			$(this).width($(this)[0].scrollWidth+10);
 		});
 	}
 	//绑定对象自定义事件

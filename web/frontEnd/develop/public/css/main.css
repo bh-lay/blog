@@ -81,12 +81,12 @@
   font-size: 35px;
   color: #777;
   border-radius: 13px;
-  transition: 0.2s linear;
-  -moz-transition: 0.2s linear;
+  transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
   /* Firefox 4 */
-  -webkit-transition: 0.2s linear;
+  -webkit-transition: all 0.2s linear;
   /* Safari �� Chrome */
-  -o-transition: 0.2s linear;
+  -o-transition: all 0.2s linear;
   /* Opera */
 }
 /**
@@ -105,6 +105,7 @@
 }
 .l_sendBox {
   position: relative;
+  z-index: 10;
   -webkit-perspective: 800px;
   -moz-perspective: 800px;
   -ms-perspective: 800px;
@@ -139,13 +140,8 @@
   width: 100%;
   height: 100%;
   min-height: 120px;
-  top: 0px;
+  bottom: 0px;
   left: 0px;
-  -webkit-transform: rotateX(180deg);
-  -moz-transform: rotateX(180deg);
-  transform: rotateX(180deg);
-}
-.l_sendBox.flipped .l_sendBox_card {
   -webkit-transform: rotateX(180deg);
   -moz-transform: rotateX(180deg);
   transform: rotateX(180deg);
@@ -167,12 +163,12 @@
   line-height: 24px;
   font-size: 16px;
   color: #333;
-  transition: 0.2s ease;
-  -moz-transition: 0.2s ease;
+  transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
   /* Firefox 4 */
-  -webkit-transition: 0.2s ease;
+  -webkit-transition: all 0.2s ease;
   /* Safari �� Chrome */
-  -o-transition: 0.2s ease;
+  -o-transition: all 0.2s ease;
   /* Opera */
 }
 .l_send_textarea textarea:focus {
@@ -201,12 +197,12 @@
   overflow: hidden;
   background: #666;
   opacity: 0.5;
-  transition: 0.1s ease-out;
-  -moz-transition: 0.1s ease-out;
+  transition: all 0.1s ease-out;
+  -moz-transition: all 0.1s ease-out;
   /* Firefox 4 */
-  -webkit-transition: 0.1s ease-out;
+  -webkit-transition: all 0.1s ease-out;
   /* Safari �� Chrome */
-  -o-transition: 0.1s ease-out;
+  -o-transition: all 0.1s ease-out;
   /* Opera */
 }
 .l_send_footer_left {
@@ -218,29 +214,49 @@
 .l_send_btnA {
   display: inline-block;
   padding: 0px 20px;
+  font-size: 15px;
   height: 34px;
   line-height: 34px;
   color: #fff;
-  transition: 0.1s linear;
-  -moz-transition: 0.1s linear;
+  transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
   /* Firefox 4 */
-  -webkit-transition: 0.1s linear;
+  -webkit-transition: all 0.1s linear;
   /* Safari �� Chrome */
-  -o-transition: 0.1s linear;
+  -o-transition: all 0.1s linear;
   /* Opera */
 }
 .l_send_btnA:hover {
   background: #ccc;
   color: #333333;
 }
+.l_send_btnB {
+  display: inline-block;
+  padding: 0px 20px;
+  font-size: 12px;
+  height: 34px;
+  line-height: 34px;
+  color: #eee;
+  transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  /* Firefox 4 */
+  -webkit-transition: all 0.1s linear;
+  /* Safari �� Chrome */
+  -o-transition: all 0.1s linear;
+  /* Opera */
+}
+.l_send_btnB:hover {
+  color: #ddd;
+  text-decoration: underline;
+}
 .l_send_count {
-  float: left;
+  display: inline-block;
   line-height: 34px;
   padding-right: 20px;
 }
 .l_send_count b {
   font-size: 14px;
-  color: #eee;
+  color: #ddd;
   font-weight: normal;
 }
 .l_send_count i {
@@ -253,29 +269,77 @@
   color: #aaa;
 }
 /** �û���Ϣ **/
+.l_send_login_panel_close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  color: #fff;
+  font-size: 20px;
+}
 .l_send_login_panel {
-  position: relative;
-  width: 100%;
-  padding: 0px;
-  transition: 0.1s ease-out;
-  -moz-transition: 0.1s ease-out;
-  /* Firefox 4 */
-  -webkit-transition: 0.1s ease-out;
-  /* Safari �� Chrome */
-  -o-transition: 0.1s ease-out;
-  /* Opera */
+  display: table;
+  height: 100%;
+  line-height: 2;
   overflow: hidden;
+  transition: all 0.1s ease-out;
+  -moz-transition: all 0.1s ease-out;
+  /* Firefox 4 */
+  -webkit-transition: all 0.1s ease-out;
+  /* Safari �� Chrome */
+  -o-transition: all 0.1s ease-out;
+  /* Opera */
+}
+.l_send_login_panel .l_send_login_panel_body {
+  display: table-cell;
+  vertical-align: middle;
+  padding-left: 20px;
+}
+.l_send_login_panel p {
+  float: left;
+  margin-right: 1em;
+}
+.l_send_login_panel span {
+  display: inline-block;
+  vertical-align: bottom;
+  color: #ddd;
+  font-size: 12px;
+  line-height: 14px;
 }
 .l_send_login_panel input {
-  display: block;
-  float: left;
-  width: 140px;
+  display: inline-block;
+  width: 50px;
   height: 30px;
+  padding: 0 0 0 10px;
   border: none;
-  border-radius: 4px;
-  margin: 0 0 10px 10px ;
-  text-indent: 0.5em;
+  background: transparent;
+  border-bottom: 1px solid #777;
+  color: #fff;
+  font-size: 18px;
   font-family: inherit;
+  transition: border-color 0.2s linear;
+  -moz-transition: border-color 0.2s linear;
+  /* Firefox 4 */
+  -webkit-transition: border-color 0.2s linear;
+  /* Safari �� Chrome */
+  -o-transition: border-color 0.2s linear;
+  /* Opera */
+}
+.l_send_login_panel input:focus {
+  outline: none;
+  border-bottom-color: #fff;
+}
+.l_send_login_panel input[name="username"] {
+  min-width: 3.5em;
+}
+.l_send_login_panel input[name="email"] {
+  min-width: 6em;
+}
+.l_send_login_panel input[name="blog"] {
+  min-width: 4em;
 }
 .l_send_avatar {
   position: absolute;
@@ -283,12 +347,12 @@
   left: 0px;
   width: 80px;
   height: 80px;
-  transition: 0.3s ease-out;
-  -moz-transition: 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
   /* Firefox 4 */
-  -webkit-transition: 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
   /* Safari �� Chrome */
-  -o-transition: 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
   /* Opera */
   overflow: hidden;
   background: #333;
@@ -298,9 +362,6 @@
   position: relative;
   width: 100%;
   height: 100%;
-}
-.l_send_login:hover {
-  color: #ffffff;
 }
 @keyframes placeholderClose {
   0% {
@@ -354,6 +415,7 @@
     height: 0;
   }
 }
+/*�۽�״̬*/
 .l_sendBox_active .l_send_footer {
   height: 34px;
   opacity: 1;
@@ -372,18 +434,29 @@
   -webkit-animation: placeholderClose 0.2s forwards;
   -o-animation: placeholderClose 0.2s forwards;
 }
+/** ��ת״̬ **/
+.l_sendBox.flipped .l_send_footer {
+  height: 34px;
+  opacity: 1;
+}
+.l_sendBox.flipped .l_sendBox_card {
+  -webkit-transform: rotateX(180deg);
+  -moz-transform: rotateX(180deg);
+  transform: rotateX(180deg);
+}
+/** list **/
 .l_com_list {
   background: #fff;
 }
 .l_com_item {
   position: relative;
   border-top: 1px solid #eee;
-  transition: 0.1s linear;
-  -moz-transition: 0.1s linear;
+  transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
   /* Firefox 4 */
-  -webkit-transition: 0.1s linear;
+  -webkit-transition: all 0.1s linear;
   /* Safari �� Chrome */
-  -o-transition: 0.1s linear;
+  -o-transition: all 0.1s linear;
   /* Opera */
   cursor: default;
 }
@@ -532,12 +605,12 @@
   line-height: 40px;
   font-size: 14px;
   text-align: center;
-  transition: 0.2s linear;
-  -moz-transition: 0.2s linear;
+  transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
   /* Firefox 4 */
-  -webkit-transition: 0.2s linear;
+  -webkit-transition: all 0.2s linear;
   /* Safari �� Chrome */
-  -o-transition: 0.2s linear;
+  -o-transition: all 0.2s linear;
   /* Opera */
 }
 .webLink_cnt a:hover {
@@ -582,12 +655,12 @@
   margin-bottom: 12px;
   overflow: hidden;
   background: #fff;
-  transition: 0.4s linear;
-  -moz-transition: 0.4s linear;
+  transition: all 0.4s linear;
+  -moz-transition: all 0.4s linear;
   /* Firefox 4 */
-  -webkit-transition: 0.4s linear;
+  -webkit-transition: all 0.4s linear;
   /* Safari �� Chrome */
-  -o-transition: 0.4s linear;
+  -o-transition: all 0.4s linear;
   /* Opera */
 }
 .artItCpt a {
@@ -600,12 +673,12 @@
   font-size: 16px;
   color: #333;
   outline: none;
-  transition: 0.2s linear;
-  -moz-transition: 0.2s linear;
+  transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
   /* Firefox 4 */
-  -webkit-transition: 0.2s linear;
+  -webkit-transition: all 0.2s linear;
   /* Safari �� Chrome */
-  -o-transition: 0.2s linear;
+  -o-transition: all 0.2s linear;
   /* Opera */
 }
 .artItCpt a:hover {
@@ -778,12 +851,12 @@
   height: 300px;
   margin: 0px auto;
   overflow: hidden;
-  transition: 0.2s linear;
-  -moz-transition: 0.2s linear;
+  transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
   /* Firefox 4 */
-  -webkit-transition: 0.2s linear;
+  -webkit-transition: all 0.2s linear;
   /* Safari �� Chrome */
-  -o-transition: 0.2s linear;
+  -o-transition: all 0.2s linear;
   /* Opera */
   background-size: cover;
   background-position: center;
@@ -804,12 +877,12 @@
   display: block;
   padding: 10px;
   border-bottom: 1px dashed #eee;
-  transition: 0.2s linear;
-  -moz-transition: 0.2s linear;
+  transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
   /* Firefox 4 */
-  -webkit-transition: 0.2s linear;
+  -webkit-transition: all 0.2s linear;
   /* Safari �� Chrome */
-  -o-transition: 0.2s linear;
+  -o-transition: all 0.2s linear;
   /* Opera */
 }
 .labsList .lab_item .lab_title a:hover {
@@ -928,12 +1001,12 @@
   max-width: 100%;
   min-height: 100%;
   margin: 0px auto;
-  transition: 0.1s linear;
-  -moz-transition: 0.1s linear;
+  transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
   /* Firefox 4 */
-  -webkit-transition: 0.1s linear;
+  -webkit-transition: all 0.1s linear;
   /* Safari �� Chrome */
-  -o-transition: 0.1s linear;
+  -o-transition: all 0.1s linear;
   /* Opera */
 }
 .opus_cover a:hover img {
@@ -1159,12 +1232,12 @@
   display: block;
   width: 100%;
   min-height: 100%;
-  transition: 0.5s linear;
-  -moz-transition: 0.5s linear;
+  transition: all 0.5s linear;
+  -moz-transition: all 0.5s linear;
   /* Firefox 4 */
-  -webkit-transition: 0.5s linear;
+  -webkit-transition: all 0.5s linear;
   /* Safari �� Chrome */
-  -o-transition: 0.5s linear;
+  -o-transition: all 0.5s linear;
   /* Opera */
 }
 .shareList li a strong {
@@ -1184,12 +1257,12 @@
   text-overflow: ellipsis;
   padding: 0px 10px;
   background: linear-gradient(rgba(255, 255, 255, 0), #ffffff);
-  transition: 0.1s linear;
-  -moz-transition: 0.1s linear;
+  transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
   /* Firefox 4 */
-  -webkit-transition: 0.1s linear;
+  -webkit-transition: all 0.1s linear;
   /* Safari �� Chrome */
-  -o-transition: 0.1s linear;
+  -o-transition: all 0.1s linear;
   /* Opera */
 }
 .shareList li a:hover img {
