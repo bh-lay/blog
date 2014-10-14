@@ -188,6 +188,13 @@ define(function(require,exports){
 			'data' : {
 				'id' : data.id,
 				'content' : data.text,
+				'test' : {
+					'test1' : 123,
+					'test2' : {
+					  'test3' : 53,
+					  'test4' : 54
+					}
+				},
 				//如果为登录用户，则不发送用户信息
 				'user' : (data.user.id ? null :  data.user)
 			},

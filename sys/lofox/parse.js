@@ -69,6 +69,37 @@ exports.createID = function(){
 	return id;
 }
 
+
+function parser_data(input){
+	if(!input || input.length == 0){
+		return {};
+	}
+	
+	var split = input.split(/\&/);
+	var obj = {};
+	split.forEach(function(item){
+		var item_split = item.split(/\=/);
+			item_split[0] = querystring.unescape(item_split[0]);
+		var value = querystring.unescape(item_split[1]);
+		
+		var test_key = item_split[0].match(/^(.+?)\[/);
+		if(test_key){
+			var key = test_key[1];
+			obj[key] = obj[key] || {};
+			var objjjj = obj[key];
+			item_split[0].replace(/\[(.+?)\]/g,function(a,b){
+				objjjj[b] = {}
+				objjjj = objjjj[b];
+				return '';
+			});
+			objjjj = value;
+			console.log('value',obj,objjjj,value);
+		}else{
+			obj[item_split[0]] = value;
+		}
+	});
+	return obj;
+}
 /**
  * parse request data
  * callBack(err, fields, files);
@@ -80,12 +111,30 @@ exports.request = function(req,callBack){
 
 	var method = req['method']||'';
 	var fields = querystring.parse(req.url.split('?')[1]);
-	
+	var content_type = req['headers']['content-type'];
+		
 	if(method == 'POST' || method =='post'){
+		if(content_type = 'application/x-www-form-urlencoded'){
+			 var postData = "";
+			// 数据块接收中
+			req.addListener("data", function (postDataChunk) {
+				postData += postDataChunk;
+			});
+			// 数据接收完毕，执行回调函数
+			req.addListener("end", function () {
+				//FIXME 未完成的解析部分
+			//	var params = parser_data(postData);
+				var params = querystring.parse(postData);
+				callBack(null,params);
+				
+			});
+			
+			return false;
+		}
+		
 		var form = new formidable.IncomingForm();
 		form.uploadDir = "./cache/upload";
 		//form.keepExtensions = true;
-		
 		form.parse(req, function(error, fields_post, files) {
 			// @FIXME when i upload more than one file ,the arguments files is only single file
 			// but i can get all files information form form.openedFiles
