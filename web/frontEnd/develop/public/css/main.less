@@ -136,14 +136,13 @@
 	backface-visibility: hidden;
 }
 .l_sendBox_card_front{
-	background: #fff;
 	position: relative;
+	overflow: hidden;
 	-webkit-transform: rotateX(360deg);
 	-moz-transform: rotateX(360deg);
 	transform: rotateX(360deg);
 }
 .l_sendBox_card_back{
-	background: #333;
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -193,6 +192,11 @@
 	overflow: hidden;
 	border: 2px solid #aaa;
 	box-sizing: border-box;
+	span{
+		padding: 0 10px 0 60px;
+		font-size: 20px;
+		color: #555;
+	}
 }
 
 .l_send_footer {
@@ -275,9 +279,11 @@
 }
 .l_send_login_panel{
 	display:table;
+	width: 100%;
 	height: 100%;
 	line-height: 2;
 	overflow: hidden;
+	background: #333;
 	.transition(0.1s, ease-out);
 	.l_send_login_panel_body{
 		display:table-cell;
@@ -286,7 +292,7 @@
 	}
 	p{
 		float: left;
-		margin-right: 1em;
+		padding: 6px 20px 6px 0;
 	}
 	span{
 		display: inline-block;
@@ -321,14 +327,27 @@
 	input[name="blog"]{
 		min-width: 4em;
 	}
+	a{
+		display: inline-block;
+		height: 30px;
+		line-height: 30px;
+		border: 1px dotted #555;
+		color: #aaa;
+		padding: 0 10px;
+		&:hover{
+			color: #fff;
+			background: #555;
+			border-color: #888;
+		}
+	}
 }
 .l_send_avatar {
 	position: absolute;
-	top: 0px;
-	left: 0px;
-	width: 80px;
-	height: 80px;
-	.transition(0.3s, ease-out);
+	top: 2px;
+	left: 2px;
+	width: 76px;
+	height: 76px;
+	.transition(0.1s, ease-out);
 	overflow: hidden;
 	background: #333;
 	opacity: 1;
@@ -390,10 +409,6 @@
 .l_sendBox_active {
 	.l_send_footer {
 		height: @sendBox_footer_height;
-		opacity: 1;
-	}
-	.l_send_login_panel{
-		left: 0;
 		opacity: 1;
 	}
 	.l_send_avatar{

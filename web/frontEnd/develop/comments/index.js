@@ -3,19 +3,19 @@
 define(function(require,exports){
 	var mirror = require('comments/mirror.js');
 	var selection = require('comments/selection.js');
-	var private_hasLogin = false;
+	var private_userInfo = null;
 	
 	var baseTpl = ['<div class="l_comments">',
 		'<div class="l_com_sendBox"></div>',
 		'<div class="l_com_list">',
 		'</div>',
 	'</div>'].join('');
-	var sendBox_tpl = ['<div class="l_sendBox flipped" spellcheck="false">',
+	var sendBox_tpl = ['<div class="l_sendBox" spellcheck="false">',
 		'<div class="l_sendBox_card">',
 		'<div class="l_sendBox_card_front">',
 			'<div class="l_send_textarea">',
 				'<textarea name="content"></textarea>',
-				'<div class="l_send_placeholder"><span class="l_sendBox_name"></span> 壮士，敢不敢留个言！</div>',
+				'<div class="l_send_placeholder"><span></span>敢不敢留个言！</div>',
 			'</div>',
 			'<div class="l_send_footer">',
 				'<div class="l_send_footer_left">',
@@ -38,6 +38,7 @@ define(function(require,exports){
 					'<p><span>我是</span><input type="text" autocomplete="off" name="username" placeholder="韩梅梅"/></p>',
 					'<p><span>有个常用邮箱</span><input type="text" autocomplete="off" name="email" placeholder="xxx@qq.cn"/></p>',
 					'<p><span>还有一个牛逼轰轰的博客</span><input type="text" autocomplete="off" name="blog" placeholder="xxx.me"/></p>',
+					'<p><a href="javascript:void(0)" class="l_send_changeUserInfo">确定</a></p>',
 				'</div>',
 			'</div>',
 		'</div>',
@@ -127,17 +128,24 @@ define(function(require,exports){
 	
 	
 	/**
-	 * 设置头像
+	 * 设置用户信息
 	 *
 	 */
-	function setAvatar(user){
+	function setUserInfoToUI(user){
 		var $allDom = $(this.dom);
 		if(user && user.username){
-			$allDom.find('.l_sendBox_name').html(user.username);
+			$allDom.find('.l_send_placeholder span').html(user.username);
+			$allDom.find('.l_send_username').html(user.username);
+			$allDom.find('input[name="username"]').val(user.username).trigger('change');
+			$allDom.find('input[name="email"]').val(user.email).trigger('change');
+			$allDom.find('input[name="blog"]').val(user.blog).trigger('change');
+			
+			
 			if(user.avatar){
 				$allDom.find('.l_send_avatar img').attr('src',user.avatar);
 			}
 		}else{
+			$allDom.find('.l_send_placeholder span').hide();
 			$allDom.find('.l_send_avatar').hide();
 		}
 	}
@@ -176,13 +184,16 @@ define(function(require,exports){
 	function sendComment(data,callback){
 		$.ajax({
 			'url' : '/ajax/comments/add',
+			'type' : 'POST',
 			'data' : {
 				'id' : data.id,
-				'content' : data.text
+				'content' : data.text,
+				//如果为登录用户，则不发送用户信息
+				'user' : (data.user.id ? null :  data.user)
 			},
 			'success' : function(data){
 				if(data.code && data.code == 200){
-					callback && callback(null);
+					callback && callback(null,data.data);
 				}else{
 					callback && callback('fail');
 				}
@@ -232,12 +243,8 @@ define(function(require,exports){
 			setTimeout(function(){
 				$textarea.focusout();
 			});
-			if(private_hasLogin){
-				L.user.infoPanel();
-			}else{
-				//showLoginPanel.call(me,$allDom)
-				$allDom.toggleClass('flipped');
-			}
+			//showLoginPanel.call(me,$allDom)
+			$allDom.toggleClass('flipped');
 		}).on('click','.l_send_footer',function(){
 			$textarea.focus();
 		}).on('click','.l_send_submit',function(){
@@ -245,21 +252,44 @@ define(function(require,exports){
 				UI.prompt('你丫倒写点东西啊！',null,{
 					'top' : $(this).offset().top + 40
 				});
+			}else if(private_userInfo){
+				sendComment({
+					'id' : me.id,
+					'text' : me.text,
+					'user' : private_userInfo
+				},function(err,data){
+					if(err){
+						//触发自定义事件“sendToServiceError”
+						EMIT.call(me,'sendToServiceError');
+					}else{
+						EMIT.call(me,'sendToServicesuccess',[data]);
+					}
+				});
 			}else{
 				$allDom.toggleClass('flipped');
 			}
-			return
-			sendComment({
-				'id' : me.id,
-				'text' : me.text
-			},function(){
-				console.log(arguments);
-			});
+			
 		}).on('click','.l_send_face',function(){
 			UI.prompt('表情正在开发中！');
 		}).on('keyup keydown change propertychange input paste','input',function(){
 			$(this).width(0);
 			$(this).width($(this)[0].scrollWidth+10);
+		}).on('click','.l_send_changeUserInfo',function(){
+			L.dataBase.setLocalUser({
+				'username' : $allDom.find('input[name="username"]').val(),
+				'email' : $allDom.find('input[name="email"]').val(),
+				'blog' : $allDom.find('input[name="blog"]').val()
+			});
+			//更新用户信息
+			L.dataBase.user(function(err,user){
+				if(err){
+					private_userInfo = null;
+				}else if(user){
+					private_userInfo = user;
+				}
+				setUserInfoToUI.call(me,user);
+				$allDom.toggleClass('flipped');
+			},false);
 		});
 	}
 	//绑定对象自定义事件
@@ -272,7 +302,7 @@ define(function(require,exports){
 		
 		//监听字符变化事件
 		this.on('change',function (){
-			var height = text_mirror.refresh().realHeight;
+			var height = text_mirror.refresh().realHeight + 20;
 			var overflow = 'hidden';
 			if(height < 80){
 				height = 80;
@@ -293,8 +323,14 @@ define(function(require,exports){
 			}
 			$countRest.html(show_txt);
 		}).on('login',function(user){
-			setAvatar.call(me,user);
-			private_hasLogin = true;
+			//设置用户信息
+			setUserInfoToUI.call(me,user);
+			private_userInfo = user;
+		}).on('sendToServiceError',function(){
+			UI.prompt('网络出错，没发成功！');
+		}).on('sendToServicesuccess',function(){
+			$textarea.val('').trigger('change');
+			UI.prompt('发布成功！');
 		});
 		
 	}
@@ -317,11 +353,11 @@ define(function(require,exports){
 		bindCustomEvent.call(this);
 		L.dataBase.user(function(err,user){
 			if(err){
-				private_hasLogin = false;
+				private_userInfo = null;
 			}else if(user){
-				private_hasLogin = true;
+				private_userInfo = user;
 			}
-			setAvatar.call(me,user);
+			setUserInfoToUI.call(me,user);
 		});
 	}
 	sendBox.prototype = {

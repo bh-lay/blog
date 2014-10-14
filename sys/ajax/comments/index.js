@@ -18,19 +18,20 @@ var list = require('./list.js');
 
 //接口
 exports.add = function (connect,app){
-	var data = connect.url.search;
-	connect.session(function(session_this){
-		data.uid = session_this.get('uid');
-		add(data,function(err,data){
-			var json = {
-				'code' : 200
-			}
-			if(err){
-				json.code = 201
-			}else{
-				json.data = data;
-			}
-			connect.write('json',json);
+	parse.request(connect.request,function(err,data){
+		connect.session(function(session_this){
+			data.uid = session_this.get('uid');
+			add(data,function(err,data){
+				var json = {
+					'code' : 200
+				}
+				if(err){
+					json.code = 201
+				}else{
+					json.data = data;
+				}
+				connect.write('json',json);
+			});
 		});
 	});
 }
