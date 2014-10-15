@@ -69,33 +69,51 @@ exports.createID = function(){
 	return id;
 }
 
-
+/**
+ * 格式化GET/POST的数据
+ *  弥补querystring.parse的不足（不能解析多维数据）
+ *  act=delete&user[id]&school[classA][studentA]=xiaoming
+ *
+ */
 function parser_data(input){
 	if(!input || input.length == 0){
 		return {};
 	}
 	
+	//用字段分隔符分离字符
 	var split = input.split(/\&/);
 	var obj = {};
+	//遍历各个字段
 	split.forEach(function(item){
-		var item_split = item.split(/\=/);
+		//分离键名与键值
+		var item_split = item.split(/\=/),
+			value = querystring.unescape(item_split[1]);
 			item_split[0] = querystring.unescape(item_split[0]);
-		var value = querystring.unescape(item_split[1]);
 		
+		//检测键名是否包含子对象（user[id]）
 		var test_key = item_split[0].match(/^(.+?)\[/);
-		if(test_key){
+		if(!test_key){
+			//不包含子对象，直接赋值
+			obj[item_split[0]] = value;
+		}else{
+			//包含子对象，拼命解析开始
+			
+			//获取最顶层键名，构建对象
 			var key = test_key[1];
 			obj[key] = obj[key] || {};
-			var objjjj = obj[key];
+			
+			var nextObj = obj[key];
+			var lastObj,lastKey;
+			//使用正则模拟递归 遍历子对象（school[classA][studentA]）
 			item_split[0].replace(/\[(.+?)\]/g,function(a,b){
-				objjjj[b] = {}
-				objjjj = objjjj[b];
+				lastObj = nextObj;
+				lastKey = b;
+				lastObj[lastKey] = lastObj[lastKey] || {}
+				nextObj = lastObj[lastKey];
 				return '';
 			});
-			objjjj = value;
-			console.log('value',obj,objjjj,value);
-		}else{
-			obj[item_split[0]] = value;
+			//赋值
+			lastObj[lastKey] = value;
 		}
 	});
 	return obj;
@@ -110,7 +128,7 @@ exports.request = function(req,callBack){
 	}
 
 	var method = req['method']||'';
-	var fields = querystring.parse(req.url.split('?')[1]);
+	var fields = parser_data(req.url.split('?')[1]);
 	var content_type = req['headers']['content-type'];
 		
 	if(method == 'POST' || method =='post'){
@@ -122,13 +140,15 @@ exports.request = function(req,callBack){
 			});
 			// 数据接收完毕，执行回调函数
 			req.addListener("end", function () {
-				//FIXME 未完成的解析部分
-			//	var params = parser_data(postData);
-				var params = querystring.parse(postData);
-				callBack(null,params);
-				
+				var fields_post = parser_data(postData);
+				//将URL上的参数非强制性的增加到post数据上
+				for(var i in fields){
+					if(!fields_post[i]){
+						fields_post[i] = fields[i];
+					}
+				}
+				callBack(null,fields_post);
 			});
-			
 			return false;
 		}
 		
