@@ -459,6 +459,58 @@
   -moz-transform: rotateX(180deg);
   transform: rotateX(180deg);
 }
+@keyframes insert {
+  0% {
+    opacity: 0.2;
+    height: 0;
+  }
+  50% {
+    opacity: 0.2;
+    height: 110px;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-moz-keyframes insert {
+  0% {
+    opacity: 0.2;
+    height: 0;
+  }
+  50% {
+    opacity: 0.2;
+    height: 110px;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes insert {
+  0% {
+    opacity: 0.2;
+    height: 0;
+  }
+  50% {
+    opacity: 0.2;
+    height: 110px;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-o-keyframes insert {
+  0% {
+    opacity: 0.2;
+    height: 0;
+  }
+  50% {
+    opacity: 0.2;
+    height: 110px;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 /** list **/
 .l_com_list {
   background: #fff;
@@ -474,12 +526,19 @@
   -o-transition: all 0.1s linear;
   /* Opera */
   cursor: default;
+  overflow: hidden;
 }
 .l_com_item:nth-child(1) {
   border: none;
 }
 .l_com_item:hover {
   background: #f8f8f8;
+}
+.l_com_item_ani-insert {
+  animation: insert 2s;
+  -moz-animation: insert 2s;
+  -webkit-animation: insert 2s;
+  -o-animation: insert 2s;
 }
 .l_com_item_main {
   position: relative;

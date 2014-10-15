@@ -45,20 +45,20 @@ define(function(require,exports){
 		'</div>',
 	'</div>'].join('');
 	
-	var item_tpl = ['<% for(var i=0,total=list.length;i<total;i++){%>',
-		'<div class="l_com_item" data-uid="<%=list[i].uid %>">',
+	var item_tpl = ['{@each list as it}',
+		'<div class="l_com_item" data-uid="${it.uid}" data-cid="${it.cid}">',
 			'<div class="l_com_item_main">',
-				'<div class="l_com_item_caption"><%=list[i].user.username || "匿名用户"%></div>',
-				'<div class="l_com_item_content"><%=list[i].content %></div>',
+				'<div class="l_com_item_caption">{@if it.user.blog}<a href="${it.user.blog}">${it.user.username}</a>{@else}${it.user.username}{@/if} </div>',
+				'<div class="l_com_item_content">${it.content}</div>',
 				'<div class="l_com_item_footer">',
-					'<div class="l_com_item_time"><%= list[i].time %></div>',
+					'<div class="l_com_item_time">${it.time}</div>',
 				'</div>',
 			'</div>',
 			'<div class="l_com_item_avatar">',
-				'<img src="<% if(list[i].user.avatar){ %><%=list[i].user.avatar%><% }else{ %>http://layasset.qiniudn.com/user/default.jpg<% } %>"/>',
+				'<img src="{@if it.user.avatar}${it.user.avatar}{@else}http://layasset.qiniudn.com/user/default.jpg{@/if}"/>',
 			'</div>',
 		'</div>',
-	'<%}%>'].join('');
+	'{@/each}'].join('');
 	
 	/**
 	 * @param (timestamp/Date,'{y}-{m}-{d} {h}:{m}:{s}')
@@ -102,7 +102,22 @@ define(function(require,exports){
 		});
 		return time_str;
 	}
-	
+	/**
+	 * 格式化网址
+	 *
+	 */
+	function parseUrl(input){
+		var output = null;
+		//是否符合网址规范
+		if(typeof(input) == 'string' && input.match(/[\w-]+\.\w{2,4}/) ){
+		
+			//缺少协议
+			if( !input.match(/^http(?:s|)\:\/\//) ){
+				output = 'http://' + input;
+			}
+		}
+		return output;
+	}
 	
 	//处理自定义事件
 	function ON(eventName,callback){
@@ -186,15 +201,8 @@ define(function(require,exports){
 			'url' : '/ajax/comments/add',
 			'type' : 'POST',
 			'data' : {
-				'id' : data.id,
+				'cid' : data.id,
 				'content' : data.text,
-				'test' : {
-					'test1' : 123,
-					'test2' : {
-					  'test3' : 53,
-					  'test4' : 54
-					}
-				},
 				//如果为登录用户，则不发送用户信息
 				'user' : (data.user.id ? null :  data.user)
 			},
@@ -264,12 +272,12 @@ define(function(require,exports){
 					'id' : me.id,
 					'text' : me.text,
 					'user' : private_userInfo
-				},function(err,data){
+				},function(err,item){
 					if(err){
 						//触发自定义事件“sendToServiceError”
 						EMIT.call(me,'sendToServiceError');
 					}else{
-						EMIT.call(me,'sendToServicesuccess',[data]);
+						EMIT.call(me,'sendToServicesuccess',[item]);
 					}
 				});
 			}else{
@@ -377,8 +385,9 @@ define(function(require,exports){
 	 * 列表类
 	 *
 	 */
-	function list(dom,id){
-		this.id = id;
+	function list(dom,cid){
+		//comment id
+		this.cid = cid;
 		this.list = [];
 		this.skip = 0;
 		this.limit = 30;
@@ -388,6 +397,15 @@ define(function(require,exports){
 		
 		this.getMore();
 	}
+	list.prototype.addItem = function(item){
+		
+		var html = juicer(item_tpl,{
+			'list' : [item]
+		});
+		var $item = $(html).hide();
+		$(this.dom).prepend($item);
+		$item.addClass('l_com_item_ani-insert');
+	};
 	list.prototype.getMore = function(callback){
 		if(this._status == 'loading'){
 			return;
@@ -397,7 +415,7 @@ define(function(require,exports){
 		$.ajax({
 			'url' : '/ajax/comments/list',
 			'data' : {
-				'id' : this.id
+				'cid' : this.cid
 			},
 			'success' : function(data){
 				if(data.code && data.code == 200){
@@ -407,8 +425,12 @@ define(function(require,exports){
 					
 					for(var i=0,total=DATA.list.length;i<total;i++){
 						DATA.list[i].time = parseTime(DATA.list[i].time,"{y}年{m}月{d}日 {h}:{ii}");
+						
+						if(DATA.list[i].user.blog){
+							DATA.list[i].user.blog = parseUrl(DATA.list[i].user.blog);
+						}
 					}
-					var html = me.render(DATA);
+					var html = juicer(item_tpl,DATA);
 					$(me.dom).append(html);
 					if(me.total == 0){
 						$(me.dom).append('<div class="l_com_list_noData">来的真早，快抢沙发！</div>');
@@ -417,18 +439,20 @@ define(function(require,exports){
 			}
 		});
 	};
-	list.prototype.render = L.tplEngine(item_tpl);
 	
 	
 	exports.sendBox = sendBox;
 	exports.list = list;
 	exports.init = function(dom,id){
-		
+		var me = this;
 		this.dom = $(baseTpl)[0];
 		this.id = id;
 		$(dom).html($(this.dom));
 		
 		this.sendBox = new sendBox($(this.dom).find('.l_com_sendBox')[0],id);
 		this.list = new list($(this.dom).find('.l_com_list')[0],id);
+		this.sendBox.on('sendToServicesuccess',function(item){
+			me.list.addItem(item);
+		})
 	};
 });
