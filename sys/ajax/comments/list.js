@@ -25,7 +25,7 @@ function getUserInfo(id,callback){
 //获取评论列表
 module.exports = function(data,callback){
 	var data = data,
-		id = data['id'],
+		cid = data['cid'],
 		limit_num = parseInt(data['limit']) || 10,
 		skip_num = parseInt(data['skip']) || 0;
 	
@@ -42,9 +42,9 @@ module.exports = function(data,callback){
 			return
 		}
 		
-		collection.find({'id' : id},{limit:limit_num}).sort({time:-1}).skip(skip_num).toArray(function(err, docs) {
+		collection.find({'cid' : cid},{limit:limit_num}).sort({time:-1}).skip(skip_num).toArray(function(err, docs) {
 			//count the all list
-			collection.count({'id' : id},function(err,count){
+			collection.count({'cid' : cid},function(err,count){
 				resJSON['count'] = count;
 				method.close();
 				if(err){
@@ -63,10 +63,11 @@ module.exports = function(data,callback){
 						docs.forEach(function(item){
 							if(users[item.uid]){
 								item.user = users[item.uid];
-							}else if(item.user && typeof(item.user) == "object"){
+							}else if(item.user != null && typeof(item.user) == "object"){
+								
 								delete item.user.email;
 							}else{
-								item.user || {};
+								item.user = {};
 							}
 						});
 						resJSON['list'] = docs;

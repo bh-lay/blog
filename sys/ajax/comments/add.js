@@ -7,10 +7,10 @@ module.exports = function(data,callback){
 	var item = {
 		'content' : parse.encodeHtml(data.content),
 		'time' : new Date().getTime(),
-		'id' : data.id
+		'cid' : data.cid
 	};
-	if(!item.id){
-		callback && callback('missing argument : id');
+	if(!item.cid){
+		callback && callback('missing argument : cid');
 		return;
 	}
 	//登录用户只记id，本地用户记录对象
