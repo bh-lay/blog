@@ -79,6 +79,7 @@ window.L = window.L || {};
 seajs.use([
 	'util/lofox_1_0.js',
 	'public/base/user.js',
+	'lib/juicer.js',
 	'lib/md5.js',
 	'UI/dialog.js'
 ],function(){
