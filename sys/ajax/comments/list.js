@@ -46,7 +46,6 @@ module.exports = function(data,callback){
 			//count the all list
 			collection.count({'id' : id},function(err,count){
 				resJSON['count'] = count;
-				
 				method.close();
 				if(err){
 					callback&&callback(err);
@@ -62,7 +61,13 @@ module.exports = function(data,callback){
 					});
 					function endFn(){
 						docs.forEach(function(item){
-							item.user = users[item.uid] || {};
+							if(users[item.uid]){
+								item.user = users[item.uid];
+							}else if(item.user && typeof(item.user) == "object"){
+								delete item.user.email;
+							}else{
+								item.user || {};
+							}
 						});
 						resJSON['list'] = docs;
 						callback&&callback(null,resJSON);
