@@ -138,9 +138,9 @@
 .l_sendBox_card_front{
 	position: relative;
 	overflow: hidden;
-	-webkit-transform: rotateX(360deg);
-	-moz-transform: rotateX(360deg);
-	transform: rotateX(360deg);
+	-webkit-transform: rotateX(0deg);
+	-moz-transform: rotateX(0deg);
+	transform: rotateX(0deg);
 }
 .l_sendBox_card_back{
 	position: absolute;
@@ -224,10 +224,10 @@
 	height: @sendBox_footer_height;
 	line-height: @sendBox_footer_height;
 	color: #fff;
-	.transition(0.1s);
+	.transition(0.2s);
 	&:hover {
-		background: #ccc;
-		color: #333
+		background: #888;
+		color: #fff
 	}
 }
 .l_send_btnB {
@@ -248,7 +248,7 @@
 .l_send_count {
 	display: inline-block;
 	line-height: @sendBox_footer_height;
-	padding-right: 20px;
+	padding: 0 10px;
 	b{
 		font-size: 14px;
 		color: #ddd;
@@ -316,6 +316,18 @@
 		&:focus{
 			outline: none;
 			border-bottom-color: #fff;
+		}
+		&::-webkit-input-placeholder {
+			color:    #555;
+		}
+		&:-moz-placeholder {
+			color:    #555;
+		}
+		&::-moz-placeholder {
+			color:    #555;
+		}
+		&:-ms-input-placeholder {
+			color:    #555;
 		}
 	}
 	input[name="username"]{
@@ -497,7 +509,12 @@
 .l_com_list {
 	background: #fff;
 }
-
+.l_com_list_noData{
+	padding: 30px 20px; 
+	line-height: 20px;
+	font-size: 16px;
+	color: #666;
+}
 .l_com_item {
 	position: relative;
 	border-top: 1px solid #eee;

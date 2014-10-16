@@ -261,7 +261,7 @@ seajs.use([
 	lofox.set('/bless',function(){
 		basePage = 'indexList';
 		this.title('留言板_小剧客栈');
-		L.nav.setCur('blog');
+		L.nav.setCur('/');
 		var dom = ani();
 		seajs.use('comments/index.js',function(comments){
 			dom.html('<div class="l_row"><div class="l_col_12"></div></div>');

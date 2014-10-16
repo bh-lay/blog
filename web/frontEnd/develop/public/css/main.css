@@ -130,9 +130,9 @@
 .l_sendBox_card_front {
   position: relative;
   overflow: hidden;
-  -webkit-transform: rotateX(360deg);
-  -moz-transform: rotateX(360deg);
-  transform: rotateX(360deg);
+  -webkit-transform: rotateX(0deg);
+  -moz-transform: rotateX(0deg);
+  transform: rotateX(0deg);
 }
 .l_sendBox_card_back {
   position: absolute;
@@ -222,17 +222,17 @@
   height: 34px;
   line-height: 34px;
   color: #fff;
-  transition: all 0.1s linear;
-  -moz-transition: all 0.1s linear;
+  transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
   /* Firefox 4 */
-  -webkit-transition: all 0.1s linear;
+  -webkit-transition: all 0.2s linear;
   /* Safari �� Chrome */
-  -o-transition: all 0.1s linear;
+  -o-transition: all 0.2s linear;
   /* Opera */
 }
 .l_send_btnA:hover {
-  background: #ccc;
-  color: #333333;
+  background: #888;
+  color: #ffffff;
 }
 .l_send_btnB {
   display: inline-block;
@@ -256,7 +256,7 @@
 .l_send_count {
   display: inline-block;
   line-height: 34px;
-  padding-right: 20px;
+  padding: 0 10px;
 }
 .l_send_count b {
   font-size: 14px;
@@ -337,6 +337,18 @@
 .l_send_login_panel input:focus {
   outline: none;
   border-bottom-color: #fff;
+}
+.l_send_login_panel input::-webkit-input-placeholder {
+  color: #555;
+}
+.l_send_login_panel input:-moz-placeholder {
+  color: #555;
+}
+.l_send_login_panel input::-moz-placeholder {
+  color: #555;
+}
+.l_send_login_panel input:-ms-input-placeholder {
+  color: #555;
 }
 .l_send_login_panel input[name="username"] {
   min-width: 3.5em;
@@ -514,6 +526,12 @@
 /** list **/
 .l_com_list {
   background: #fff;
+}
+.l_com_list_noData {
+  padding: 30px 20px;
+  line-height: 20px;
+  font-size: 16px;
+  color: #666;
 }
 .l_com_item {
   position: relative;

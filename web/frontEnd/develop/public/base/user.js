@@ -180,7 +180,9 @@
 					if(user){
 						userInfo = JSON.parse(user);
 						//增加gravatar头像(md5邮箱)
-						userInfo.avatar = 'http://www.gravatar.com/avatar/' + hex_md5(userInfo.email);
+						if(userInfo.email.length){
+							userInfo.avatar = 'http://www.gravatar.com/avatar/' + hex_md5(userInfo.email);
+						}
 						callback && callback(null,userInfo,'local');
 					}else{
 						callback && callback('未登录');

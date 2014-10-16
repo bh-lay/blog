@@ -28,7 +28,7 @@ define(function(require,exports){
 				'</div>',
 			'</div>',
 			'<div class="l_send_avatar l_send_toggle_flip">',
-				'<img src="http://layasset.qiniudn.com/user/default.jpg" />',
+				'<img src="" />',
 			'</div>',
 		'</div>',
 		'<div class="l_sendBox_card_back">',
@@ -146,23 +146,20 @@ define(function(require,exports){
 	 * 设置用户信息
 	 *
 	 */
-	function setUserInfoToUI(user){
+	function setUserInfoToUI(userInput){
 		var $allDom = $(this.dom);
-		if(user && user.username){
-			$allDom.find('.l_send_placeholder span').html(user.username);
-			$allDom.find('.l_send_username').html(user.username);
-			$allDom.find('input[name="username"]').val(user.username).trigger('change');
-			$allDom.find('input[name="email"]').val(user.email).trigger('change');
-			$allDom.find('input[name="blog"]').val(user.blog).trigger('change');
-			
-			
-			if(user.avatar){
-				$allDom.find('.l_send_avatar img').attr('src',user.avatar);
-			}
-		}else{
-			$allDom.find('.l_send_placeholder span').hide();
-			$allDom.find('.l_send_avatar').hide();
+		var user = {
+			'username' : userInput.username || '',
+			'email' : userInput.email || '',
+			'blog' : userInput.blog || '',
+			'avatar' : userInput.avatar || 'http://layasset.qiniudn.com/user/default.jpg'
 		}
+		$allDom.find('.l_send_placeholder span').html(user.username);
+		$allDom.find('.l_send_username').html(user.username);
+		$allDom.find('input[name="username"]').val(user.username).trigger('change');
+		$allDom.find('input[name="email"]').val(user.email).trigger('change');
+		$allDom.find('input[name="blog"]').val(user.blog).trigger('change');
+		$allDom.find('.l_send_avatar img').attr('src',user.avatar);
 	}
 	/**
 	 * 显示登录界面
@@ -197,6 +194,16 @@ define(function(require,exports){
 	 *
 	 */
 	function sendComment(data,callback){
+		var user;
+		if(data.user.id){
+			user = null;
+		}else if(data.user && data.user.username.length > 0){
+			user = data.user;
+		}else{
+			callback && callback('未登录');
+			return
+		}
+		
 		$.ajax({
 			'url' : '/ajax/comments/add',
 			'type' : 'POST',
@@ -204,7 +211,7 @@ define(function(require,exports){
 				'cid' : data.id,
 				'content' : data.text,
 				//如果为登录用户，则不发送用户信息
-				'user' : (data.user.id ? null :  data.user)
+				'user' : user
 			},
 			'success' : function(data){
 				if(data.code && data.code == 200){
@@ -258,14 +265,14 @@ define(function(require,exports){
 			setTimeout(function(){
 				$textarea.focusout();
 			});
-			//showLoginPanel.call(me,$allDom)
 			$allDom.toggleClass('flipped');
 		}).on('click','.l_send_footer',function(){
 			$textarea.focus();
 		}).on('click','.l_send_submit',function(){
 			if(me.text.length == 0){
 				UI.prompt('你丫倒写点东西啊！',null,{
-					'top' : $(this).offset().top + 40
+					'top' : $(this).offset().top + 40,
+					'from' : $(this)[0]
 				});
 			}else if(private_userInfo){
 				sendComment({
@@ -274,7 +281,6 @@ define(function(require,exports){
 					'user' : private_userInfo
 				},function(err,item){
 					if(err){
-						//触发自定义事件“sendToServiceError”
 						EMIT.call(me,'sendToServiceError');
 					}else{
 						EMIT.call(me,'sendToServicesuccess',[item]);
@@ -285,15 +291,32 @@ define(function(require,exports){
 			}
 			
 		}).on('click','.l_send_face',function(){
-			UI.prompt('表情正在开发中！');
+			UI.prompt('表情正在开发中！',null,{
+				'from' : $(this)[0]
+			});
 		}).on('keyup keydown change propertychange input paste','input',function(){
 			$(this).width(0);
 			$(this).width($(this)[0].scrollWidth+10);
 		}).on('click','.l_send_changeUserInfo',function(){
+			var username = $allDom.find('input[name="username"]').val();
+			var email = $allDom.find('input[name="email"]').val();
+			var blog = $allDom.find('input[name="blog"]').val();
+			if(username.length < 1){
+				UI.prompt('大哥，告诉我你叫什么呗！',null,{
+				  'from' : $(this)[0]
+				});
+				return;
+			}
+			if(blog.length && !parseUrl(blog)){
+				UI.prompt('博客地址是对的么？',null,{
+				  'from' : $(this)[0]
+				});
+				return;
+			}
 			L.dataBase.setLocalUser({
-				'username' : $allDom.find('input[name="username"]').val(),
-				'email' : $allDom.find('input[name="email"]').val(),
-				'blog' : $allDom.find('input[name="blog"]').val()
+				'username' : username,
+				'email' : email,
+				'blog' : blog
 			});
 			//更新用户信息
 			L.dataBase.user(function(err,user){
@@ -398,13 +421,14 @@ define(function(require,exports){
 		this.getMore();
 	}
 	list.prototype.addItem = function(item){
-		
+		item.time = '刚刚';
 		var html = juicer(item_tpl,{
 			'list' : [item]
 		});
-		var $item = $(html).hide();
+		var $item = $(html);
 		$(this.dom).prepend($item);
 		$item.addClass('l_com_item_ani-insert');
+		$(this.dom).find('.l_com_list_noData').fadeOut(100);
 	};
 	list.prototype.getMore = function(callback){
 		if(this._status == 'loading'){
@@ -424,7 +448,7 @@ define(function(require,exports){
 					me.list.concat(DATA.list);
 					
 					for(var i=0,total=DATA.list.length;i<total;i++){
-						DATA.list[i].time = parseTime(DATA.list[i].time,"{y}年{m}月{d}日 {h}:{ii}");
+						DATA.list[i].time = parseTime(DATA.list[i].time,"{h}:{ii} {y}-{m}-{d}");
 						
 						if(DATA.list[i].user.blog){
 							DATA.list[i].user.blog = parseUrl(DATA.list[i].user.blog);
