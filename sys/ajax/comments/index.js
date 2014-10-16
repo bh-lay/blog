@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @author bh-lay
  * 
  * /ajax/user
@@ -24,28 +24,32 @@ exports.add = function (connect,app){
 		connect.session(function(session_this){
 			//获取评论计数
 			var comment_count = session_this.get('comment_count') || 0;
-			
 			//上次清除评论计数的时间
-			var last_clear_time = session_this.get('comment_count_clear') || new Date().getTime();
+			var comment_last_clear_time = session_this.get('comment_last_clear_time') || new Date().getTime() - time_limit * 2;
+			
 			var now = new Date().getTime();
 			//时间间隔在限制之外
-			if(now - last_clear_time > ){
+			if(now - comment_last_clear_time > time_limit){
 				//评论计数置为一
 				session_this.set({
-					'comment_count' : 1;
+					'comment_count' : 1,
+					'comment_last_clear_time' : now
 				});
 			}else{
 				//指定时间内 评论数超过上限
 				if(comment_count >= count_limit){
 					connect.write('json',{
-						'code' : 403
-						'评论频率过快，请歇息片刻！'
+						'code' : 403,
+						'msg' : '评论频率过快，请歇息片刻！',
+						'now' : now,
+						'comment_last_clear_time' : comment_last_clear_time,
+						'comment_count' : comment_count
 					});
 					return;
 				}else{
 					//评论计数加一
 					session_this.set({
-						'comment_count' : comment_count + 1;
+						'comment_count' : comment_count + 1
 					});
 				}
 			}
@@ -81,4 +85,4 @@ exports.list = function (connect,app){
 		}
 		connect.write('json',json);
 	});
-}
+};
