@@ -345,6 +345,7 @@ exports.detail = function (connect,app,userID){
 			});
 			return
 		}
+		//获取指定用户信息
 		if(data.uid){
 			getUserDetail(data.uid,function(err,detail){
 				if(err){
@@ -359,7 +360,13 @@ exports.detail = function (connect,app,userID){
 				});
 			});
 		}else{
+		//获取自己的用户信息
 			connect.session(function(session_this){
+				//session存入comment预留信息
+				session_this.set({
+					'comment_auth' : 'ready'
+				});
+				
 				var uid = session_this.get('uid');
 				getUserDetail(uid,function(err,detail){
 					if(err){

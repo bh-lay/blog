@@ -2,6 +2,24 @@
 var mongo = require('../../lofox/DB.js');
 var parse = require('../../lofox/parse.js');
 
+function getUserInfo(id,callback){
+	var method = mongo.start();
+	method.open({'collection_name':'user'},function(err,collection){
+		if(err){
+			callback && callback(err);
+			return;
+		}
+		collection.find({'id' : id}).toArray(function(err, docs) {
+			method.close();
+			if(err || docs.length == 0){
+				callback && callback(err);
+				return;
+			}
+			delete docs[0]['password'];
+			callback && callback(null,docs[0]);
+		});
+	});
+}
 //增加一条评论
 module.exports = function(data,callback){
 	var item = {
@@ -27,7 +45,18 @@ module.exports = function(data,callback){
 			if(err) {
 				callback && callback(err);
 			}else {
-				callback && callback(null,item);
+				if(data.uid){
+					//获取用户信息
+					getUserInfo(data.uid,function(err,userInfo){
+						if(!err){
+							item.user = userInfo;
+						}
+						callback && callback(null,item);
+					});
+				}else{
+					callback && callback(null,item);
+				}
+			
 			}
 			method.close();
 		});

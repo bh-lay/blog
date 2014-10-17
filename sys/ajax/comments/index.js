@@ -14,14 +14,24 @@ var parse = require('../../lofox/parse.js');
 var add = require('./add.js');
 var list = require('./list.js');
 
-//一分钟限制十个回复
-var time_limit = 60 * 1000;
+//二分钟限制十个回复
+var time_limit = 2 * 60 * 1000;
 var count_limit = 10;
 
-//接口
+//增加回复/评论
 exports.add = function (connect,app){
+
 	parse.request(connect.request,function(err,data){
 		connect.session(function(session_this){
+			//检测认证信息
+			var comment_auth = session_this.get('comment_auth');
+			if(comment_auth != 'ready'){
+				//不是正常用户，阻止评论
+				connect.write('json',{
+					'code' : 201
+				});
+				return
+			}
 			//获取评论计数
 			var comment_count = session_this.get('comment_count') || 0;
 			//上次清除评论计数的时间
@@ -40,10 +50,7 @@ exports.add = function (connect,app){
 				if(comment_count >= count_limit){
 					connect.write('json',{
 						'code' : 403,
-						'msg' : '评论频率过快，请歇息片刻！',
-						'now' : now,
-						'comment_last_clear_time' : comment_last_clear_time,
-						'comment_count' : comment_count
+						'msg' : '评论频率过快，请歇息片刻！'
 					});
 					return;
 				}else{
