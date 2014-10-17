@@ -1,6 +1,15 @@
 /**
  * ����Minxin
  **/
+/** ��ʾ��Ϣ **/
+.l_alert_info {
+  border: 1px solid #bce8f1;
+  background: #d9edf7;
+  color: #31708f;
+  padding: 15px 20px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
 /**�û���¼��**/
 .l_loginPanel {
   position: relative;

@@ -6,6 +6,9 @@ define(function(require,exports){
 	var private_userInfo = null;
 	
 	var baseTpl = ['<div class="l_comments">',
+		'<div class="l_alert_info">',
+			'小剧最新开发了评论模块，原评论数据正在迁移中，请稍候！',
+		'</div>',
 		'<div class="l_com_sendBox"></div>',
 		'<div class="l_com_list">',
 		'</div>',
@@ -15,7 +18,7 @@ define(function(require,exports){
 		'<div class="l_sendBox_card_front">',
 			'<div class="l_send_textarea">',
 				'<textarea name="content"></textarea>',
-				'<div class="l_send_placeholder"><span></span>敢不敢留个言！</div>',
+				'<div class="l_send_placeholder"><span></span>敢不敢写点啥！</div>',
 			'</div>',
 			'<div class="l_send_footer">',
 				'<div class="l_send_footer_left">',
