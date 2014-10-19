@@ -45,7 +45,7 @@ module.exports = function(grunt){
 					src:["**/*.js"],
 					filter:"isFile",
 					dest:"build/",
-					ext:".js"
+					ext:'.js'
 				}]
 			}
 		},
@@ -78,7 +78,7 @@ module.exports = function(grunt){
 			common: {
 				expand: true,
 				cwd:'build/',
-				src: ['**/*.js', '**/!*.min.js'],
+				src: ['**/*.js', '!**/*.min.js'],
 				dest: 'build/',
 				ext:".js"
 			}
@@ -116,5 +116,12 @@ module.exports = function(grunt){
 	//压缩css、js（混淆）
 	grunt.registerTask('min', ['uglify','cssmin']);
 	//一键完成
-	grunt.registerTask('default', ['transport:common','concat:common','copy:copyAll','copy:seaJS','uglify:common','cssmin:common']);
+	grunt.registerTask('default', [
+		'transport:common',
+		'concat:common',
+		'copy:copyAll',
+		'copy:seaJS',
+		'uglify:common',
+		'cssmin:common'
+	]);
 }
