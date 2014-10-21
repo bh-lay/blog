@@ -21,11 +21,8 @@ define(function(require,exports){
 		'<div class="opus_detail">',
 			'<div class="photo"><img src="${opus_pic}" alt="${title}" /></div>',
 			'<div class="text">$${content}</div>',
-			'<div class="youyan"><!-- UY BEGIN -->',
-				'<div id="uyan_frame"></div>',
-				'<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1605927" async=""></script>',
-			'<!-- UY END --></div>',
 		'</div>',
+		'<div class="comments_frame"></div>',
 	'</div></div>'].join('');
 	
 	
@@ -64,6 +61,11 @@ define(function(require,exports){
 			var this_html = juicer(template,detail);
 			this_html&&dom.html(this_html);
 			render_over&&render_over(title);
+			
+			var commentDom = dom.find('.comments_frame');
+			seajs.use('comments/index.js',function(comments){
+				new comments.init(commentDom,'opus-' + id);
+			});
 		});
 	};
 });

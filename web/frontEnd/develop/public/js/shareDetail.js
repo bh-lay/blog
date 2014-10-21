@@ -12,14 +12,7 @@ define(function(require,exports){
 			'<p><span>分享时间：${time_show} </span></p>',
 		'</div>',
 		'<div class="article">$${content}</div>',
-		'<div class="youyan">',
-			'评论模块为第三方应用，小聚正在努力开发自己的评论系统，敬请期待！',
-			'<div id="uyan_frame"></div>',
-			'<script type="text/javascript">',
-				'var uyan_config = {"du":"bh-lay.com"};',
-			'</script>',
-			'<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1605927" async=""></script>',
-		'</div>',
+		'<div class="comments_frame"></div>',
 	'</div>'].join('');
 	
 	function getData(id,fn){
@@ -54,6 +47,10 @@ define(function(require,exports){
 		getData(id,function(html,title){
 			html&&dom.html(html);
 			render_over&&render_over(title);
+			var commentDom = dom.find('.comments_frame');
+			seajs.use('comments/index.js',function(comments){
+				new comments.init(commentDom,'blog-' + id);
+			});
 		});
 	//	}
 		

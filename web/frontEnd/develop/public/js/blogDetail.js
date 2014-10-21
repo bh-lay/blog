@@ -15,7 +15,7 @@ define(function(require,exports){
 			'<div class="tag"><strong>本文关键字：</strong>${tags}</div>',
 			'<div class="pageUrl"><strong>转载请注明来源：</strong>http://bh-lay.com/blog/${id}</div>',
 		'</div>',
-		'<div class="comments_frame">',
+		'<div class="comments_frame"></div>',
 	'</div>'].join('');
 	
 	function getData(id,fn){
