@@ -3,6 +3,7 @@
 define(function(require,exports){
 	var mirror = require('comments/mirror.js');
 	var selection = require('comments/selection.js');
+	var pagination = require('util/pagination.js');
 	var private_userInfo = null;
 	
 	var baseTpl = ['<div class="l_comments">',
@@ -13,6 +14,7 @@ define(function(require,exports){
 		'<div class="l_com_list">',
 		'</div>',
 	'</div>'].join('');
+	
 	var sendBox_tpl = ['<div class="l_sendBox" spellcheck="false">',
 		'<div class="l_sendBox_card">',
 		'<div class="l_sendBox_card_front">',
@@ -46,6 +48,11 @@ define(function(require,exports){
 			'</div>',
 		'</div>',
 		'</div>',
+	'</div>'].join('');
+	
+	var list_tpl = ['<div>',
+		'<div class="l_com_list_cnt"></div>',
+		'<div class="l_com_list_pagination"></div>',
 	'</div>'].join('');
 	
 	var item_tpl = ['{@each list as it}',
@@ -406,22 +413,51 @@ define(function(require,exports){
 	};
 	
 	
-	
 	/**
 	 * 列表类
 	 *
 	 */
 	function list(dom,cid){
+		var me = this;
 		//comment id
 		this.cid = cid;
 		this.list = [];
 		this.skip = 0;
-		this.limit = 30;
+		this.limit = 15;
 		this.total = 0;
 		this._status = 'normal';
-		this.dom = dom;
+		this.dom = $(list_tpl)[0];
 		
-		this.getMore();
+		$(dom).html(this.dom);
+
+		this.getData(0,function(err,data){
+			var html = juicer(item_tpl,data);
+			$(me.dom).find('.l_com_list_cnt').html(html);
+			
+			if(me.total == 0){
+				$(me.dom).append('<div class="l_com_list_noData">来的真早，快抢沙发！</div>');
+			}else{
+				//分页组件
+				var page = new pagination($(dom).find('.l_com_list_pagination'),{
+					'list_count' : me.total,
+					'page_cur' : 0,
+					'page_list_num' : me.limit,
+					'max_page_btn' : 6
+				});
+				page.jump = function(num){
+					
+					me.getData((num-1)*me.limit,function(err,data){
+						if(err){
+							console.log('error');
+							return
+						}
+						var html = juicer(item_tpl,data);
+						$(me.dom).find('.l_com_list_cnt').html(html);
+					});
+				};
+			}
+		});
+		
 	}
 	list.prototype.addItem = function(item){
 		item.time = '刚刚';
@@ -433,7 +469,8 @@ define(function(require,exports){
 		$item.addClass('l_com_item_ani-insert');
 		$(this.dom).find('.l_com_list_noData').fadeOut(100);
 	};
-	list.prototype.getMore = function(callback){
+	list.prototype.getData = function(skip,callback){
+		
 		if(this._status == 'loading'){
 			return;
 		}
@@ -442,9 +479,12 @@ define(function(require,exports){
 		$.ajax({
 			'url' : '/ajax/comments/list',
 			'data' : {
-				'cid' : this.cid
+				'cid' : this.cid,
+				'skip' : skip || 0,
+				'limit' : me.limit
 			},
 			'success' : function(data){
+				me._status = 'loaded';
 				if(data.code && data.code == 200){
 					var DATA = data.data;
 					me.total = DATA.count;
@@ -457,11 +497,7 @@ define(function(require,exports){
 							DATA.list[i].user.blog = parseUrl(DATA.list[i].user.blog);
 						}
 					}
-					var html = juicer(item_tpl,DATA);
-					$(me.dom).append(html);
-					if(me.total == 0){
-						$(me.dom).append('<div class="l_com_list_noData">来的真早，快抢沙发！</div>');
-					}
+					callback && callback(null,DATA);
 				}
 			}
 		});

@@ -9,7 +9,7 @@ module.exports = {
 	'ip' : '0.0.0.0',
 	'port' : 80,
 	//前端静态资源根目录
-	'frontEnd_root' : '/frontEnd/build/',
+	'frontEnd_root' : '/frontEnd/develop/',
 	//图床
 	'img_domain' : 'http://layasset.qiniudn.com',
 	'mongo' : {

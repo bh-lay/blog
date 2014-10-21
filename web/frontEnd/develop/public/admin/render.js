@@ -113,7 +113,8 @@ window.admin.render = window.admin.render || {};
 			var page = admin.pageList(dom.find('.page'),{
 				'list_count' : data.count,
 				'page_cur' : 0,
-				'page_list_num' : page_list_num
+				'page_list_num' : page_list_num,
+				'max_page_btn' : 5
 			});
 			page.jump = function(num){
 				//console.log(num,12);

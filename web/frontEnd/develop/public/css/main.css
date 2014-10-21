@@ -10,6 +10,42 @@
   border-radius: 4px;
   margin-bottom: 20px;
 }
+/**��ҳ����**/
+.pagination li {
+  display: inline-block;
+  vertical-align: text-top;
+}
+.pagination span,
+.pagination a {
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  padding: 0px 15px;
+  background: #fff;
+  font-size: 14px;
+  color: #555;
+  transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  /* Firefox 4 */
+  -webkit-transition: all 0.1s linear;
+  /* Safari �� Chrome */
+  -o-transition: all 0.1s linear;
+  /* Opera */
+}
+.pagination a:hover {
+  background: #eee;
+  color: #333;
+}
+.pagination .active span {
+  background: #333;
+  color: #fff;
+  font-size: 22px;
+  cursor: default;
+}
+.pagination .disabled span {
+  color: #bbb;
+  cursor: default;
+}
 /**�û���¼��**/
 .l_loginPanel {
   position: relative;
@@ -107,7 +143,7 @@
   background: #dddddd;
 }
 .l_comments {
-  padding-top: 50px;
+  padding: 50px 0;
 }
 .l_com_sendBox {
   margin-bottom: 30px;
@@ -533,8 +569,11 @@
   }
 }
 /** list **/
-.l_com_list {
+.l_com_list_cnt {
   background: #fff;
+}
+.l_com_list_pagination {
+  padding-top: 20px;
 }
 .l_com_list_noData {
   padding: 30px 20px;
