@@ -77,7 +77,7 @@ app.get('/snsLogin/{from}', function(data,connect){
  *
  */
  
-//博客
+//通用增加&编辑
 var ajax_add_edit = require('./ajax/add&edit.js');
 app.get('/ajax/add_edit', function(data,connect){
 	ajax_add_edit.render(connect,app);
