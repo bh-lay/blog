@@ -40,14 +40,17 @@ window.L = window.L || {};
  */
 (function(exports){
 	var baseDomain = app_config.imgDomain;
-	exports.qiniu = function(url){
-		if(!url || url.length == 0){
-			return url;
-		}else if(url[0] == '/'){
-			return baseDomain + url;
-		}else{
-			return url;
+	exports.qiniu = function(url,config){
+		var src = url;
+		if(typeof(url) == 'string' && url.length > 0 && url[0] == '/'){
+			src = baseDomain + url
+			if(config){
+				w = config.width || config.height;
+				h = config.height || config.width;
+				src = src + '?imageView/1/w/' + w + '/h/' + h + '/q/85';
+			}
 		}
+		return src;
 	}
 })(L);
 

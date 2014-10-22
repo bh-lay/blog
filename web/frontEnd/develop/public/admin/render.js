@@ -19,25 +19,37 @@ window.admin.render = window.admin.render || {};
 			'<p>人生就此荒废你开心么？</p>',
 			'<p><a class="btn btn-primary btn-lg" href="/" target="_blank" role="button">去看看博客</a></p>',
 		'</div>',
-	'</div>',
-	'<div class="col-md-4">',
-		'<div class="custom-mb20">',
-			'<a class="btn btn-default btn-block custom-lofox" href="/admin/gallery">图库</a>',
-		'</div>',
-		'<div class="custom-mb20">',
-			'<div class="btn-group btn-group-sm btn-group-justified">',
-				'<a class="btn btn-default custom-publish" href="javascript:void(0)" data-type="article">写博文</a>',
-				'<a class="btn btn-default custom-publish" href="javascript:void(0)" data-type="share">发分享</a>',
-				'<a class="btn btn-default custom-publish" href="javascript:void(0)" data-type="labs">实验室</a>',
-				'<a class="btn btn-default custom-publish" href="javascript:void(0)" data-type="opus">传作品</a>',
-				'<a class="btn btn-default custom-publish" href="javascript:void(0)" data-type="friends">加友链</a>',
-			'</div>',
-		'</div>',
 		'<div class="list-group">',
 			'<a class="list-group-item" href="/ajax/clear_cache?type=all"  data-action-ajax="清除缓存成功" >清除<strong>所有</strong>缓存</a>',
 			'<a class="list-group-item" href="/ajax/clear_cache?type=chip" data-action-ajax="清除缓存成功" >清除片段缓存</a>',
 			'<a class="list-group-item" href="/ajax/clear_cache?type=ajax" data-action-ajax="清除缓存成功" >清除ajax缓存</a>',
 			'<a class="list-group-item" href="/ajax/clear_cache?type=html" data-action-ajax="清除缓存成功" >清除页面缓存</a>',
+		'</div>',
+	'</div>',
+	'<div class="col-md-4">',
+		'<div class="panel custom-mb20">',
+			'<div class="panel-body">',
+				'<h3>发布台<small>增加博客内容</small></h3>',
+				'<div class="list-group">',
+					'<a class="list-group-item custom-publish" href="javascript:void(0)" data-type="article">写博文</a>',
+					'<a class="list-group-item custom-publish" href="javascript:void(0)" data-type="share">发分享</a>',
+					'<a class="list-group-item custom-publish" href="javascript:void(0)" data-type="labs">实验室</a>',
+					'<a class="list-group-item custom-publish" href="javascript:void(0)" data-type="opus">传作品</a>',
+					'<a class="list-group-item custom-publish" href="javascript:void(0)" data-type="friends">加友链</a>',
+				'</div>',
+			'</div>',
+		'</div>',
+		'<div class="panel custom-mb20">',
+			'<div class="panel-body">',
+				'<h3>图库<small>静态资源管理</small></h3>',
+				'<p>远程镜像至七牛云存储，新增操作直接上传即可。修改或删除操作需要进入七牛后台进行重复操作。</p>',
+				'<a class="btn btn-info custom-lofox" href="/admin/gallery">进入图库</a>',
+			'</div>',
+		'</div>',
+		'<div class="panel custom-mb20">',
+			'<div class="panel-body">',
+				'<a class="btn btn-default custom-lofox" href="/admin/comments">评论管理</a>',
+			'</div>',
 		'</div>',
 	'</div>'].join('');
 	function INDEX(dom){
@@ -130,7 +142,7 @@ window.admin.render = window.admin.render || {};
 			};
 		});
 	}
-	exports.article = function(dom,id){
+	exports.article = function(dom){
 		listPage(dom);
 	};
 })(window.admin.render);

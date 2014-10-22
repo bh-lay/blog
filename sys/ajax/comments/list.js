@@ -21,11 +21,60 @@ function getUserInfo(id,callback){
 	});
 }
 
+/**
+ * 处理评论数据
+ *
+ **/
+function handleData(docs,callback){
+
+	var users = {};
+	var list = [];
+	var uidsLength = 0;
+	var overLength = 0;
+	//获取所有需要的用户id
+	docs.forEach(function(item){
+		if(item.uid){
+			users[item.uid] = {};
+		}
+	});
+	function endFn(){
+		docs.forEach(function(item){
+			if(users[item.uid]){
+				item.user = users[item.uid];
+			}else if(item.user != null && typeof(item.user) == "object"){
+				
+				delete item.user.email;
+			}else{
+				item.user = {};
+			}
+		});
+		list = docs;
+		callback&&callback(list);
+	}
+	
+	//遍历所有需要的用户id
+	for(var key in users){
+		uidsLength++;
+		//获取用户信息
+		getUserInfo(key,function(err,userInfo){
+			overLength++;
+			if(!err){
+				users[key] = userInfo;
+			}
+			if(overLength == uidsLength){
+				endFn();
+			}
+		});
+	}
+	if(uidsLength == 0){
+		endFn();
+	}
+}
 
 //获取评论列表
 module.exports = function(data,callback){
 	var data = data,
-		cid = data['cid'],
+		cid = data['cid'] || '',
 		limit_num = parseInt(data['limit']) || 10,
 		skip_num = parseInt(data['skip']) || 0;
 	
@@ -42,55 +91,24 @@ module.exports = function(data,callback){
 			return
 		}
 		
-		collection.find({'cid' : cid},{limit:limit_num}).sort({time:-1}).skip(skip_num).toArray(function(err, docs) {
+		var queryObj = cid.length > 1 ? {'cid' : cid} : {};
+		
+		collection.find(queryObj,{limit:limit_num}).sort({time:-1}).skip(skip_num).toArray(function(err, docs) {
+			if(err){
+				callback&&callback(err);
+				return;
+			}
 			//count the all list
-			collection.count({'cid' : cid},function(err,count){
+			collection.count(queryObj,function(err,count){
 				resJSON['count'] = count;
 				method.close();
 				if(err){
 					callback&&callback(err);
 				}else{
-					var users = {};
-					var uidsLength = 0;
-					var overLength = 0;
-					//获取所有需要的用户id
-					docs.forEach(function(item){
-						if(item.uid){
-							users[item.uid] = {};
-						}
+					handleData(docs,function(list){
+						resJSON['list'] = list;
+						callback&&callback(err,resJSON);
 					});
-					function endFn(){
-						docs.forEach(function(item){
-							if(users[item.uid]){
-								item.user = users[item.uid];
-							}else if(item.user != null && typeof(item.user) == "object"){
-								
-								delete item.user.email;
-							}else{
-								item.user = {};
-							}
-						});
-						resJSON['list'] = docs;
-						callback&&callback(null,resJSON);
-					}
-					
-					//遍历所有需要的用户id
-					for(var key in users){
-						uidsLength++;
-						//获取用户信息
-						getUserInfo(key,function(err,userInfo){
-							overLength++;
-							if(!err){
-								users[key] = userInfo;
-							}
-							if(overLength == uidsLength){
-								endFn();
-							}
-						});
-					}
-					if(uidsLength == 0){
-						endFn();
-					}
 				}
 			});
 		});

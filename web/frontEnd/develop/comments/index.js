@@ -7,9 +7,6 @@ define(function(require,exports){
 	var private_userInfo = null;
 	
 	var baseTpl = ['<div class="l_comments">',
-		'<div class="l_alert_info">',
-			'小剧最新开发了评论模块，原评论数据正在迁移中，请稍候！',
-		'</div>',
 		'<div class="l_com_sendBox"></div>',
 		'<div class="l_com_list">',
 		'</div>',

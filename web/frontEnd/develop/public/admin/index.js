@@ -61,6 +61,7 @@ window.admin = window.admin || {};
 	seajs.use([
 		'util/lofox_1_0.js',
 		'UI/dialog.js',
+		'lib/juicer.js',
 		'public/admin/render.js',
 		'lib/jquery/jquery.easing.1.3.min.js'
 	],function(){
@@ -142,6 +143,17 @@ window.admin = window.admin || {};
 			var dom = domCnt.find('.col-md-12');
 			seajs.use('gallery/index.js',function(gallery){
 				gallery.init(dom);
+			});
+		});
+		//评论管理
+		lofox.set('/admin/comments',function(){
+			this.title('评论管理');
+			
+			var domCnt = createDom(mainDom);
+			domCnt.html('<div class="col-md-12"></div>');
+			var dom = domCnt.find('.col-md-12');
+			seajs.use('public/admin/comments_list.js',function(list_fn){
+				list_fn(dom);
 			});
 		});
 		//发布相关
@@ -391,6 +403,41 @@ formToAjax.prototype = {
 /***
  * 分页 页码
  **/
+
+function pageListRender(){
+	var txt = '';
+
+	if (this.page_cur > 1) {
+		txt += '<li><a data-page="prev" href="javascript:void(0)" >上一页</a></li>';
+	}else{
+		txt += '<li class="disabled"><span>上一页</span></li>';
+	}
+	var btn_num = 0;
+	var start_num = 0;
+	if(this.page_num > this.max_page_btn){
+		start_num =  this.page_cur - Math.floor(this.max_page_btn/2);
+	}
+	
+	
+	start_num = Math.max(start_num,1);
+	for(; start_num < this.page_num + 1; start_num++) {
+		if(start_num != this.page_cur){
+			txt += '<li><a data-page="jump" href="javascript:void(0)">' + start_num + '</a></li>';
+		}else{
+			txt += '<li class="active"><span>'+ start_num +'</span></li>';
+		}
+		btn_num++;
+		if(btn_num >= this.max_page_btn){
+			break;
+		}
+	}
+	if (this.page_num - this.page_cur >= 1) {
+		txt += '<li><a data-page="next" href="javascript:void(0)">下一页</a></li>';
+	}else{
+		txt += '<li class="disabled"><span>下一页</span></li>';
+	}
+	this.dom.html(txt);
+}
 function pageList(dom,param){
 	var param = param || {};
 	var this_page = this;
@@ -398,6 +445,7 @@ function pageList(dom,param){
 	this.page_cur = param.page_cur || 1;
 	this.page_list_num = param.page_list_num || 15;
 	this.page_num = Math.ceil(this.list_count / this.page_list_num);
+	this.max_page_btn = param.max_page_btn || 50;
 	this.jump = null;
 	this.dom = $('<ul class="pagination"></ul>');
 	
@@ -413,37 +461,16 @@ function pageList(dom,param){
 		this_page.jumpTo(num);
 	});
 	dom.html(this.dom);
-	this.render();
+	pageListRender.call(this);
 }
 pageList.prototype = {
 	'jumpTo' : function(num){
 		this.page_cur = num;
-		this.render();
+		pageListRender.call(this);
 		this.jump && this.jump(num);
-	},
-	'render' : function(){
-		var txt = '';
-
-		if (this.page_cur > 1) {
-			txt += '<li><a data-page="prev" href="javascript:void(0)" >上一页</a></li>';
-		}else{
-			txt += '<li class="disabled"><span>上一页</span></li>';
-		}
-		for(var i = 0; i < this.page_num; i++) {
-			if(i+1 != this.page_cur){
-				txt += '<li><a data-page="jump" href="javascript:void(0)">' + (i + 1) + '</a></li>';
-			}else{
-				txt += '<li class="disabled"><a href="javascript:void(0)">'+ (i + 1) +'</a></li>';
-			}
-		}
-		if (this.page_num - this.page_cur >= 1) {
-			txt += '<li><a data-page="next" href="javascript:void(0)">下一页</a></li>';
-		}else{
-			txt += '<li class="disabled"><span>下一页</span></li>';
-		}
-		this.dom.html(txt);
 	}
 };
+
 
 /**
  * 格式化日期

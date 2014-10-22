@@ -12,7 +12,7 @@
 	html{min-height:100%; }
 	body{padding-top:60px;
 		font-family: "Microsoft Yahei";
-		background : #ccc;
+		background : #444;
 	}
 	.navbar {
 	  min-height: 38px;
@@ -28,13 +28,12 @@
 		margin:4px 10px 0px 0px;
 	}
 	.navbar-default{box-shadow:0px 0px 5px rgba(0,0,0,0.7);background:#fff;border:none;}
-	.breadcrumb{background: #fff;}
 	.mainCnt{position:relative;min-height:500px;overflow: hidden;}
 	.mainCnt_body{position:relative;width:100%;}
 	.custom-listTable{background:#ddd;border-radius: 0px;}
 	.custom-listTable tr{background: #fff;}
 	.custom-listTable .btn{margin-right:10px;}
-	.custom-footer{background:#444;color:#fff;}
+	.custom-footer{background:#333;color:#fff;}
 	.custom-subFooter{background:#333;color:#fff;}
 	.custom-mb10{margin-bottom:10px;}
 	.custom-mb20{margin-bottom:20px;}
@@ -42,54 +41,47 @@
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-<div class="container">
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <a href="/admin" class="navbar-brand custom-lofox">小剧客栈</a>
-  </div>
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a href="/admin" class="navbar-brand custom-lofox">小剧客栈</a>
+		</div>
 
-  <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-nav">
-      <li><a class="custom-lofox" href="/admin/article">博文</a></li>
-      <li><a class="custom-lofox" href="/admin/share">分享</a></li>
-	  <li><a class="custom-lofox" href="/admin/opus">作品</a></li>
-	  <li><a class="custom-lofox" href="/admin/labs">实验室</a></li>
-      <li><a class="custom-lofox" href="/admin/friends">友情链接</a></li>
-	  <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">工具 <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-     	  <li><a class="custom-lofox" href="/admin/publish">发布</a></li>
-		  <li><a class="custom-lofox" href="/admin/gallery">图库</a></li>
-        </ul>
-      </li>
-	  <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">用户 <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a class="custom-lofox" href="/admin/user/list">用户管理</a></li>
-     	  <li><a class="custom-lofox" href="/admin/user/group">用 户 组</a></li>
-	 	  <li><a class="custom-lofox" href="/admin/user/power">权限列表</a></li>
-        </ul>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-       <li class="dropdown">
-        <a href="#" title="{username}" class="dropdown-toggle" data-toggle="dropdown">
-        	<span class="glyphicon glyphicon-user"></span>
-        	${username}
-        	 <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><a class="custom-lofox" href="/admin/user/user.html?userid=${userid}">改密</a></li>
-          <li><a href="/ajax/user/exist" data-action-ajaxConfirm="二逼，是不是不玩儿啦！"><span class="glyphicon glyphicon-off"></span>退出</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div><!-- /.navbar-collapse -->
-</div>
+		<div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li><a class="custom-lofox" href="/admin/article">博文</a></li>
+				<li><a class="custom-lofox" href="/admin/share">分享</a></li>
+				<li><a class="custom-lofox" href="/admin/opus">作品</a></li>
+				<li><a class="custom-lofox" href="/admin/labs">实验室</a></li>
+				<li><a class="custom-lofox" href="/admin/friends">友情链接</a></li>
+				<li><a class="custom-lofox" href="/admin/gallery">图库</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">用户 <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a class="custom-lofox" href="/admin/user/list">用户管理</a></li>
+						<li><a class="custom-lofox" href="/admin/user/group">用 户 组</a></li>
+						<li><a class="custom-lofox" href="/admin/user/power">权限列表</a></li>
+					</ul>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="#" title="{username}" class="dropdown-toggle" data-toggle="dropdown">
+						<span class="glyphicon glyphicon-user"></span>${username}<b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a class="custom-lofox" href="/admin/user/user.html?userid=${userid}">改密</a></li>
+						<li><a href="/ajax/user/exist" data-action-ajaxConfirm="二逼，是不是不玩儿啦！"><span class="glyphicon glyphicon-off"></span>退出</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</div>
 </nav> 
 <div class="container bs-docs-container">
 	<div class="row">
