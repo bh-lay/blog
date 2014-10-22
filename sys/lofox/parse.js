@@ -79,7 +79,6 @@ function parser_data(input){
 	if(!input || input.length == 0){
 		return {};
 	}
-	
 	//用字段分隔符分离字符
 	var split = input.split(/\&/);
 	var obj = {};
@@ -132,7 +131,7 @@ exports.request = function(req,callBack){
 	var content_type = req['headers']['content-type'];
 		
 	if(method == 'POST' || method =='post'){
-		if(content_type = 'application/x-www-form-urlencoded'){
+		if(content_type == 'application/x-www-form-urlencoded'){
 			 var postData = "";
 			// 数据块接收中
 			req.addListener("data", function (postDataChunk) {
