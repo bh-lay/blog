@@ -46,6 +46,48 @@
   color: #bbb;
   cursor: default;
 }
+.blogListLayer {
+  position: absolute;
+  width: 900px;
+  height: 100%;
+  max-width: 100%;
+  top: 0;
+  right: -100%;
+  z-index: 101;
+  overflow: auto;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+  background: #fff;
+  transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  /* Firefox 4 */
+  -webkit-transition: all 0.5s ease-out;
+  /* Safari �� Chrome */
+  -o-transition: all 0.5s ease-out;
+  /* Opera */
+}
+.blogDetailLayer {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  bottom: -100%;
+  left: 0;
+  z-index: 101;
+  overflow: auto;
+  background: #fff;
+  transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  /* Firefox 4 */
+  -webkit-transition: all 0.5s ease-out;
+  /* Safari �� Chrome */
+  -o-transition: all 0.5s ease-out;
+  /* Opera */
+}
+.blogListLayer.show {
+  right: 0;
+}
+.blogDetailLayer.show {
+  bottom: 0;
+}
 /**�û���¼��**/
 .l_loginPanel {
   position: relative;
@@ -598,7 +640,7 @@
   border: none;
 }
 .l_com_item:hover {
-  background: #f8f8f8;
+  background: #eee;
 }
 .l_com_item_ani-insert {
   animation: insert 2s;

@@ -8,29 +8,64 @@ var app = new app_factory(CONFIG.port);
 
 app.set('staticFileRoot','../web/')
 
+
+/**
+ * 选择静态、动态视图版本
+ *
+ */
+function views_select(connect,callback){
+	//cookie有相应字段
+	if(connect.cookie('ui_version') == 'js'){
+		//读取缓存
+		app.cache.html('singlePage',function(this_cache){
+			connect.write('html',200,this_cache);
+		},function(save_cache){
+			//获取单页面视图
+			app.views('singlePage',{
+				'title' : '我的博客',
+				'keywords' : '剧中人,bh-lay,网站建设,网页设计,设计师',
+				'description' : '小剧客栈是剧中人精心营造的一个向广大设计爱好者、喜欢剧中人开放的博客，小剧希望用设计师鞭策自己，愿意和你共同分享，一起进步！'
+			},function(err,html){
+				save_cache(html);
+			});
+		});
+	}else{
+		//无cookie标识，执行回调默认视图
+		callback && callback();
+	}
+}
+
 //首页、留言板
 var index = require('./controller/index.js');
 app.get([
 	'/',
 	'/bless'
-	], function(data,connect){
-	index.deal(connect,app);
+], function(data,connect){
+	views_select(connect,function(){
+		index.deal(connect,app);
+	});
 });
 
 //博客
 var blog = require('./controller/blog.js');
 app.get('/blog', function(data,connect){
-	blog.list(connect,app);
+	views_select(connect,function(){
+		blog.list(connect,app);
+	});
 });
 app.get('/blog/{id}', function(data,connect){
-	blog.detail(connect,app,data.id);
+	views_select(connect,function(){
+		blog.detail(connect,app,data.id);
+	});
 });
 
 
 //实验室
 var labs = require('./controller/labs.js');
 app.get('/labs', function(data,connect){
-	labs.list(connect,app);
+	views_select(connect,function(){
+		labs.list(connect,app);
+	});
 });
 app.get('/labs/{name}', function(data,connect){
 	labs.detail(connect,app,data.name);
@@ -39,19 +74,27 @@ app.get('/labs/{name}', function(data,connect){
 //作品
 var opus = require('./controller/opus.js');
 app.get('/opus', function(data,connect){
-	opus.list(connect,app);
+	views_select(connect,function(){
+		opus.list(connect,app);
+	});
 });
 app.get('/opus/{id}', function(data,connect){
-	opus.detail(connect,app,data.id);
+	views_select(connect,function(){
+		opus.detail(connect,app,data.id);
+	});
 });
 
 //分享
 var share = require('./controller/share.js');
 app.get('/share', function(data,connect){
-	share.list(connect,app);
+	views_select(connect,function(){
+		share.list(connect,app);
+	});
 });
 app.get('/share/{id}', function(data,connect){
-	share.detail(connect,app,data.id);
+	views_select(connect,function(){
+		share.detail(connect,app,data.id);
+	});
 });
 
 //后台

@@ -24,9 +24,6 @@
 })();
 
 
-//删除为搜索引擎提供的dom
-$('.sourceCode').remove();
-
 //增加github图片
 $('body').append('<a href="https:github.com/bh-lay/blog" target="_blank" class="github-link"></a>');
 
@@ -133,7 +130,8 @@ seajs.use([
 		basePage = 'indexList';
 		this.title('我的博客_小剧客栈');
 		L.nav.setCur('blog');
-		var dom = ani();
+		var dom = $('.blogListLayer');
+		dom.addClass('show');
 		seajs.use('public/js/blogList.js',function(blogList){
 			blogList(dom);
 		});
@@ -143,7 +141,8 @@ seajs.use([
 	 */
 	lofox.set('/blog/{id}',function(param){
 		this.title('我的博客_小剧客栈');
-		L.nav.setCur('blog');
+		var dom = $('.blogDetailLayer');
+		dom.addClass('show');
 		activeCover = UI.cover({
 			'from' : 'bottom',
 			'width' : 900,

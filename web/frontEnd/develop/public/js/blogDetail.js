@@ -6,6 +6,7 @@ define(function(require,exports){
 	require('lib/juicer.js');
 
 	var template = ['<div class="blog_article">',
+		'<div class="l_row">',
 		'<div class="articletop">',
 			'<h1>${title}</h1>',
 			'<p><span>时间：${time_show} </span><span>作者：${author}</span></p>',
@@ -15,7 +16,8 @@ define(function(require,exports){
 			'<div class="tag"><strong>本文关键字：</strong>${tags}</div>',
 			'<div class="pageUrl"><strong>转载请注明来源：</strong>http://bh-lay.com/blog/${id}</div>',
 		'</div>',
-		'<div class="comments_frame"></div>',
+		'</div>',
+		'<div class="comments_frame"><div class="l_row"></div></div>',
 	'</div>'].join('');
 	
 	function getData(id,fn){
@@ -50,7 +52,7 @@ define(function(require,exports){
 			html&&dom.html(html);
 			var commentDom = dom.find('.comments_frame');
 			seajs.use('comments/index.js',function(comments){
-				new comments.init(commentDom,'blog-' + id);
+				new comments.init(commentDom.find('.l_row'),'blog-' + id);
 			});
 		});
 	};
