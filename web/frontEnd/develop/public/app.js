@@ -24,9 +24,6 @@
 })();
 
 
-//增加github图片
-$('body').append('<a href="https:github.com/bh-lay/blog" target="_blank" class="github-link"></a>');
-
 
 window.L = window.L || {};
 
@@ -143,20 +140,8 @@ seajs.use([
 		this.title('我的博客_小剧客栈');
 		var dom = $('.blogDetailLayer');
 		dom.addClass('show');
-		activeCover = UI.cover({
-			'from' : 'bottom',
-			'width' : 900,
-			'mask' : true,
-			'closeFn' : function(){
-				activeCover = null;
-				lofox.push('/blog');
-				if(basePage != 'indexList'){
-					lofox.refresh();
-				}
-			}
-		});
 		seajs.use('public/js/blogDetail.js',function(blogDetail){
-			blogDetail($(activeCover.cntDom),param.id,function(title){
+			blogDetail(dom,param.id,function(title){
 				lofox.title(title);
 			});
 		});
