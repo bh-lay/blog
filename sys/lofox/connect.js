@@ -134,9 +134,13 @@ CONNECT.prototype['write'] = function(type,a,b,c){
 	}
 }
 /**
- *	//获取cookie
+ *	//获取完整cookie
  *	connect.cookie();
- *	//写入cookie
+ *
+ *	//获取特定cookie
+ *	connect.cookie('sessionverify');
+ *
+ * //写入cookie
  *	connect.cookie({
  *		'session_verify' : sessionID,
  *		'path' : '/',
@@ -146,8 +150,8 @@ CONNECT.prototype['write'] = function(type,a,b,c){
  *		'path':'/admin'
  *	}); 
  */
-CONNECT.prototype['cookie'] = function(){
-	if(arguments.length){
+CONNECT.prototype['cookie'] = function(input){
+	if(typeof(input) == 'object'){
 		//写入cookie
 		var cookieObj = arguments;
 		for(var i in cookieObj){
@@ -158,6 +162,8 @@ CONNECT.prototype['cookie'] = function(){
 			}
 			this.response.setHeader('Set-Cookie',cookie_str);	
 		}
+	}else if(typeof(input) == 'string'){
+		return parseCookie(this.request.headers.cookie || '')[input];
 	}else{
 		//获取cookie
 		return parseCookie(this.request.headers.cookie || '');
