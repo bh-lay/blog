@@ -22,9 +22,18 @@
 	<div class="contlayer"></div>
 	<div class="sourceCode">${sourceCode}</div>
 {{{navigation}}}
-<script type="text/javascript" src="/frontEnd/jquery.js"></script>
-<script type="text/javascript" src="/frontEnd/lib/sea.js"></script>
-<script type="text/javascript" src="/frontEnd/public/app.js"></script>
+<script type="text/javascript" src="${frontEnd_base}lib/jquery/jquery.js"></script>
+<script type="text/javascript" src="${frontEnd_base}lib/sea.js"></script>
+<script type="text/javascript">
+	var app_config = {
+		'frontEnd_base' : '${frontEnd_base}',
+		'imgDomain' : '${img_domain}'
+	};
+	seajs.config({
+	  'base' : '${frontEnd_base}'
+	});
+</script>
+<script type="text/javascript" src="${frontEnd_base}public/app.js"></script>
 {{{baiduAndGoogleTongji}}}
 </body>
 </html>

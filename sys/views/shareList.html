@@ -11,16 +11,13 @@
 <link rel="apple-touch-icon" sizes="72x72" href="touch-icon-ipad.png" />
 <link rel="apple-touch-icon" sizes="114x114" href="touch-icon-iphone-retina.png" />
 <link rel="apple-touch-icon" sizes="144x144" href="touch-icon-ipad-retina.png" />
-<link rel="stylesheet" type="text/css" href="${frontEnd_base}public/css/common.css" />
-<link rel="stylesheet" type="text/css" href="${frontEnd_base}public/css/main.css"/>
+<link href="${frontEnd_base}lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 <body>
-	<div class="gallayer">
-		<div class="galBj"></div>
-		<div class="galMask"></div>
-	</div>
-	<div class="contlayer"></div>
-	<div class="sourceCode"><div class="labsList">
+{{{navigation_bootstrap}}}
+<div class="container">
+	<div class="row">
+		<div class="labsList">
 <ul>{@each list as it,index}
 		<li>
 			<a href="/share/${it.id}" title="${it.title}" lofox="true" target="_self" >
@@ -29,20 +26,17 @@
 			</a>
 		</li>
 	{@/each}</ul>
-	</div></div>
-{{{navigation}}}
+	</div>
+	</div>
+</div>
 <script type="text/javascript" src="${frontEnd_base}lib/jquery/jquery.js"></script>
-<script type="text/javascript" src="${frontEnd_base}lib/sea.js"></script>
+<script type="text/javascript" src="${frontEnd_base}lib/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	var app_config = {
 		'frontEnd_base' : '${frontEnd_base}',
 		'imgDomain' : '${img_domain}'
 	};
-	seajs.config({
-	  'base' : '${frontEnd_base}'
-	});
 </script>
-<script type="text/javascript" src="${frontEnd_base}public/app.js"></script>
 {{{baiduAndGoogleTongji}}}
 </body>
 </html>

@@ -11,16 +11,11 @@
 <link rel="apple-touch-icon" sizes="72x72" href="touch-icon-ipad.png" />
 <link rel="apple-touch-icon" sizes="114x114" href="touch-icon-iphone-retina.png" />
 <link rel="apple-touch-icon" sizes="144x144" href="touch-icon-ipad-retina.png" />
-<link href="${frontEnd_base}public/css/common.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="${frontEnd_base}public/css/main.css"/>
+<link href="${frontEnd_base}lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 <body>
-<div class="gallayer">
-		<div class="galBj"></div>
-		<div class="galMask"></div>
-</div>
-<div class="contlayer"></div>
-<div class="sourceCode">
+{{{navigation_bootstrap}}}
+	<div class="container">
 	<div class="golCnt">
 		<div class="TagLine">小剧作品，一次次小小的进步，成就平凡的自己！</div>
 		<div id="focusTitle">
@@ -35,25 +30,20 @@
 				</ul>
 			</div>
 		</div>
-		<div class="opus_detail">
+		<div class="panel">
 			<div class="photo"><img src="${opus_pic}" alt="${title}" /></div>
 			<div class="text">$${content}</div>
 		</div>
 	</div>
 </div>
-{{{navigation}}}
 <script type="text/javascript" src="${frontEnd_base}lib/jquery/jquery.js"></script>
-<script type="text/javascript" src="${frontEnd_base}lib/sea.js"></script>
+<script type="text/javascript" src="${frontEnd_base}lib/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	var app_config = {
 		'frontEnd_base' : '${frontEnd_base}',
 		'imgDomain' : '${img_domain}'
 	};
-	seajs.config({
-	  'base' : '${frontEnd_base}'
-	});
 </script>
-<script type="text/javascript" src="${frontEnd_base}public/app.js"></script>
 {{{baiduAndGoogleTongji}}}
 </body>
 </html>

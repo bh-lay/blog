@@ -11,43 +11,33 @@
 <link rel="apple-touch-icon" sizes="72x72" href="touch-icon-ipad.png" />
 <link rel="apple-touch-icon" sizes="114x114" href="touch-icon-iphone-retina.png" />
 <link rel="apple-touch-icon" sizes="144x144" href="touch-icon-ipad-retina.png" />
-<link rel="stylesheet" type="text/css" href="${frontEnd_base}public/css/common.css"/>
-<link rel="stylesheet" type="text/css" href="${frontEnd_base}public/css/main.css"/>
+<link href="${frontEnd_base}lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 <body>
-	<div class="gallayer">
-		<div class="galBj"></div>
-		<div class="galMask"></div>
-	</div>
-	<div class="contlayer"></div>
-	<div class="sourceCode">
-	
-	<div class="articletop">
+{{{navigation_bootstrap}}}
+	<div class="container">
+		<div class="articletop">
 <h1>${title}</h1>
 	<p>
 		<span>时间：${time_show} </span>
 		<span>作者：${author}</span>
 	</p>
 </div>
-<div class="text md_html">$${content}</div>
+<div class="panel">$${content}</div>
 <div class="copylink">
 	<div class="tag"><strong>本文关键字：</strong>${tags}</div>
 	<div class="pageUrl"><strong>转载请注明来源：</strong>http://bh-lay.com/blog/${id}</div>
 </div>
+
 	</div>
-{{{navigation}}}
 <script type="text/javascript" src="${frontEnd_base}lib/jquery/jquery.js"></script>
-<script type="text/javascript" src="${frontEnd_base}lib/sea.js"></script>
+<script type="text/javascript" src="${frontEnd_base}lib/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	var app_config = {
 		'frontEnd_base' : '${frontEnd_base}',
 		'imgDomain' : '${img_domain}'
 	};
-	seajs.config({
-	  'base' : '${frontEnd_base}'
-	});
 </script>
-<script type="text/javascript" src="${frontEnd_base}public/app.js"></script>
 {{{baiduAndGoogleTongji}}}
 </body>
 </html>

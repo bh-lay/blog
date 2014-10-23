@@ -36,7 +36,7 @@ function getList(callback){
 		collection.find({}, {limit:10}).sort({id:-1}).toArray(function(err, docs) {
 			method.close();
 			for(var i in docs){
-				docs[i].time_show = parse.time(docs[i].time_show ,'{y}-{m}-{d}');
+				docs[i].time_show = parse.time(docs[i].time_show ,'{y}年-{m}月-{d}日');
 				docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? CONFIG.img_domain + docs[i].cover : docs[i].cover;
 			}
 			callback && callback(null,docs);
