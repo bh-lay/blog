@@ -1,5 +1,6 @@
+@charset "UTF-8";
 /**
- * ����Minxin
+ * 定义Minxin
  **/
 /** ��ʾ��Ϣ **/
 .l_alert_info {
@@ -26,11 +27,8 @@
   color: #555;
   transition: all 0.1s linear;
   -moz-transition: all 0.1s linear;
-  /* Firefox 4 */
   -webkit-transition: all 0.1s linear;
-  /* Safari �� Chrome */
   -o-transition: all 0.1s linear;
-  /* Opera */
 }
 .pagination a:hover {
   background: #eee;
@@ -46,47 +44,389 @@
   color: #bbb;
   cursor: default;
 }
-.blogListLayer {
-  position: absolute;
-  width: 900px;
-  height: 100%;
-  max-width: 100%;
-  top: 0;
-  right: -100%;
-  z-index: 101;
-  overflow: auto;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
-  background: #fff;
-  transition: all 0.5s ease-out;
-  -moz-transition: all 0.5s ease-out;
-  /* Firefox 4 */
-  -webkit-transition: all 0.5s ease-out;
-  /* Safari �� Chrome */
-  -o-transition: all 0.5s ease-out;
-  /* Opera */
-}
-.blogDetailLayer {
+/**Ӧ��������**/
+.app_layer {
   position: absolute;
   height: 100%;
   width: 100%;
-  bottom: -100%;
+  top: 0;
+  right: 0;
+  overflow: hidden;
+}
+.app_nav {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 0px;
+  height: 100%;
+}
+.app_container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 40px;
+  height: 100%;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+.nav_main {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  width: 40px;
+  height: 100%;
+  background: #333;
+  z-index: 2;
+}
+.nav {
+  padding-top: 40px;
+}
+.nav li {
+  display: block;
+  margin-bottom: 10px;
+}
+.nav .cur a {
+  color: #ffffff;
+}
+.nav a {
+  display: block;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  outline: none;
+  color: #888;
+  white-space: nowarp;
+  overflow: hidden;
+  transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -webkit-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
+}
+.nav a:hover {
+  width: 150px;
+  text-decoration: none;
+  background: #fff;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+  color: #333;
+  transition: all 0s linear;
+  -moz-transition: all 0s linear;
+  -webkit-transition: all 0s linear;
+  -o-transition: all 0s linear;
+}
+.nav a:hover strong {
+  display: inline-block;
+}
+.nav a i {
+  display: inline-block;
+  width: 40px;
+  text-align: center;
+  font-family: "layIcon";
+  margin-right: 5px;
+  font-size: 22px;
+  font-style: normal;
+}
+.nav a strong {
+  font-weight: normal;
+  font-size: 14px;
+}
+.navLink {
+  overflow: hidden;
+  display: none;
+}
+.navLink li {
+  height: 20px;
+  float: left;
+  padding: 10px;
+}
+.navLink li a {
+  line-height: 20px;
+  padding: 0px 5px;
+  font-size: 12px;
+}
+.nav_mask {
+  position: fixed;
+  top: 0;
   left: 0;
-  z-index: 1001;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  opacity: 0;
+  z-index: 1;
+  display: none;
+  transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+}
+.nav_moreBtn {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 5px;
+  left: 5px;
+  overflow: hidden;
+  background: #333;
+  border-radius: 4px;
+  z-index: 3;
+  display: none;
+}
+.nav_Btn_ico {
+  display: block;
+  position: absolute;
+  left: 4px;
+  width: 22px;
+  height: 4px;
+  border-radius: 2px;
+  background: #fff;
+  transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+}
+.nav_Btn_ico_1 {
+  top: 5px;
+}
+.nav_Btn_ico_2 {
+  top: 13px;
+}
+.nav_Btn_ico_3 {
+  top: 21px;
+}
+@media screen and (max-width: 660px) {
+  .app_container {
+    left: 0px;
+    width: 100%;
+    transition: all 0.4s ease-out;
+    -moz-transition: all 0.4s ease-out;
+    -webkit-transition: all 0.4s ease-out;
+    -o-transition: all 0.4s ease-out;
+  }
+  .nav_moreBtn {
+    display: block;
+    transition: all 0.4s ease-out;
+    -moz-transition: all 0.4s ease-out;
+    -webkit-transition: all 0.4s ease-out;
+    -o-transition: all 0.4s ease-out;
+  }
+  .nav_main {
+    width: 150px;
+    left: -150px;
+    transition: all 0.4s ease-out;
+    -moz-transition: all 0.4s ease-out;
+    -webkit-transition: all 0.4s ease-out;
+    -o-transition: all 0.4s ease-out;
+  }
+  .nav {
+    padding-top: 70px;
+  }
+  .nav a:hover {
+    background: transparent;
+    color: #aaa;
+    box-shadow: none;
+  }
+  .nav a strong {
+    display: inline-block;
+  }
+  .nav_slidedown .nav_main {
+    left: 0px;
+  }
+  .nav_slidedown .app_container {
+    left: 150px;
+    width: 100%;
+  }
+  .nav_slidedown .nav_moreBtn {
+    top: 20px;
+    left: 60px;
+  }
+  .nav_slidedown .nav_mask {
+    display: block;
+    opacity: 0.2;
+  }
+  .nav_slidedown .nav_Btn_ico_1 {
+    top: 14px;
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
+  .nav_slidedown .nav_Btn_ico_2 {
+    top: 14px;
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+  }
+  .nav_slidedown .nav_Btn_ico_3 {
+    opacity: 0;
+    bottom: 31px;
+  }
+}
+.listLayer {
+  position: absolute;
+  width: 500px;
+  max-width: 100%;
+  height: 100%;
+  top: 0;
+  left: -100%;
+  overflow: auto;
+  background: #eee;
+  transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  -webkit-transition: all 0.5s ease-out;
+  -o-transition: all 0.5s ease-out;
+}
+.detailLayer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: -100%;
   overflow: auto;
   background: #fff;
   transition: all 0.5s ease-out;
   -moz-transition: all 0.5s ease-out;
-  /* Firefox 4 */
   -webkit-transition: all 0.5s ease-out;
-  /* Safari �� Chrome */
   -o-transition: all 0.5s ease-out;
-  /* Opera */
 }
-.blogListLayer.show {
-  right: 0;
+.panellayer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: auto;
 }
-.blogDetailLayer.show {
-  bottom: 0;
+.listLayer.show {
+  left: 0;
+}
+.listLayer.push_out {
+  left: 100%;
+}
+.detailLayer.show {
+  left: 0;
+}
+.tongji {
+  width: 0px;
+  height: 0px;
+  overflow: hidden;
+}
+.gallayer {
+  position: fixed;
+  z-index: 0;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background: #eeeeee;
+}
+.galBj {
+  position: absolute;
+  z-index: 11;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center center;
+}
+.galMask {
+  position: absolute;
+  z-index: 12;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  text-indent: -100em;
+  background: url("../images/mask.png");
+}
+.galBj_mask {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  -webkit-mask-image: url("../images/mask_bj.png");
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center center;
+  -webkit-mask-size: 300%;
+  -webkit-animation: circle_zoom 1s;
+}
+@-webkit-keyframes circle_zoom {
+  0% {
+    opacity: 0;
+    -webkit-mask-size: 30%;
+    -webkit-animation-timing-function: ease-in;
+  }
+  80% {
+    opacity: 1;
+    -webkit-mask-size: 60%;
+    -webkit-animation-timing-function: ease-in;
+  }
+  100% {
+    opacity: 1;
+    -webkit-mask-size: 300%;
+  }
+}
+@keyframes zoomin {
+  0% {
+    transform: scale(0.1);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@-moz-keyframes zoomin {
+  0% {
+    -moz-transform: scale(0.1);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    -moz-transform: scale(1);
+  }
+}
+@-webkit-keyframes zoomin {
+  0% {
+    -webkit-transform: scale(0.1);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1);
+  }
+}
+@-o-keyframes zoomin {
+  0% {
+    -o-transform: scale(0.1);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    -o-transform: scale(1);
+  }
+}
+.zoomin {
+  animation: zoomin 0.5s;
+  -moz-animation: zoomin 0.5s;
+  -webkit-animation: zoomin 0.5s;
+  -o-animation: zoomin 0.5s;
+}
+.zoomout {
+  transform: scale(0.1);
+  -moz-transform: scale(0.1);
+  -webkit-transform: scale(0.1);
+  -o-transform: scale(0.1);
+  opacity: 0;
+  transition: 0.7s;
 }
 /**�û���¼��**/
 .l_loginPanel {
@@ -170,11 +510,8 @@
   border-radius: 13px;
   transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
-  /* Firefox 4 */
   -webkit-transition: all 0.2s linear;
-  /* Safari �� Chrome */
   -o-transition: all 0.2s linear;
-  /* Opera */
 }
 /**
  * ����ģ��
@@ -238,7 +575,6 @@
 .l_send_textarea textarea {
   position: relative;
   display: block;
-  box-sizing: border-box;
   width: 100%;
   height: 80px;
   padding: 4px 10px;
@@ -251,11 +587,11 @@
   color: #333;
   transition: all 0.2s ease;
   -moz-transition: all 0.2s ease;
-  /* Firefox 4 */
   -webkit-transition: all 0.2s ease;
-  /* Safari �� Chrome */
   -o-transition: all 0.2s ease;
-  /* Opera */
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
 .l_send_textarea textarea:focus {
   outline: none;
@@ -275,6 +611,8 @@
   overflow: hidden;
   border: 2px solid #aaa;
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
 .l_send_placeholder span {
   padding: 0 10px 0 60px;
@@ -290,11 +628,8 @@
   opacity: 0.5;
   transition: all 0.1s ease-out;
   -moz-transition: all 0.1s ease-out;
-  /* Firefox 4 */
   -webkit-transition: all 0.1s ease-out;
-  /* Safari �� Chrome */
   -o-transition: all 0.1s ease-out;
-  /* Opera */
 }
 .l_send_footer_left {
   float: left;
@@ -311,11 +646,8 @@
   color: #fff;
   transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
-  /* Firefox 4 */
   -webkit-transition: all 0.2s linear;
-  /* Safari �� Chrome */
   -o-transition: all 0.2s linear;
-  /* Opera */
 }
 .l_send_btnA:hover {
   background: #888;
@@ -330,11 +662,8 @@
   color: #eee;
   transition: all 0.1s linear;
   -moz-transition: all 0.1s linear;
-  /* Firefox 4 */
   -webkit-transition: all 0.1s linear;
-  /* Safari �� Chrome */
   -o-transition: all 0.1s linear;
-  /* Opera */
 }
 .l_send_btnB:hover {
   color: #ddd;
@@ -380,11 +709,8 @@
   background: #333;
   transition: all 0.1s ease-out;
   -moz-transition: all 0.1s ease-out;
-  /* Firefox 4 */
   -webkit-transition: all 0.1s ease-out;
-  /* Safari �� Chrome */
   -o-transition: all 0.1s ease-out;
-  /* Opera */
 }
 .l_send_login_panel .l_send_login_panel_body {
   display: table-cell;
@@ -415,11 +741,8 @@
   font-family: inherit;
   transition: border-color 0.2s linear;
   -moz-transition: border-color 0.2s linear;
-  /* Firefox 4 */
   -webkit-transition: border-color 0.2s linear;
-  /* Safari �� Chrome */
   -o-transition: border-color 0.2s linear;
-  /* Opera */
 }
 .l_send_login_panel input:focus {
   outline: none;
@@ -467,11 +790,8 @@
   height: 76px;
   transition: all 0.1s ease-out;
   -moz-transition: all 0.1s ease-out;
-  /* Firefox 4 */
   -webkit-transition: all 0.1s ease-out;
-  /* Safari �� Chrome */
   -o-transition: all 0.1s ease-out;
-  /* Opera */
   overflow: hidden;
   background: #333;
   opacity: 1;
@@ -622,17 +942,15 @@
   line-height: 20px;
   font-size: 16px;
   color: #666;
+  background: #f4f4f4;
 }
 .l_com_item {
   position: relative;
   border-top: 1px solid #eee;
   transition: all 0.1s linear;
   -moz-transition: all 0.1s linear;
-  /* Firefox 4 */
   -webkit-transition: all 0.1s linear;
-  /* Safari �� Chrome */
   -o-transition: all 0.1s linear;
-  /* Opera */
   cursor: default;
   overflow: hidden;
 }
@@ -774,9 +1092,6 @@
   overflow: hidden;
 }
 .webLink_cnt a {
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   display: block;
   width: 50%;
   float: left;
@@ -789,11 +1104,11 @@
   text-align: center;
   transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
-  /* Firefox 4 */
   -webkit-transition: all 0.2s linear;
-  /* Safari �� Chrome */
   -o-transition: all 0.2s linear;
-  /* Opera */
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
 .webLink_cnt a:hover {
   background: #f6f6f6;
@@ -839,11 +1154,8 @@
   background: #fff;
   transition: all 0.4s linear;
   -moz-transition: all 0.4s linear;
-  /* Firefox 4 */
   -webkit-transition: all 0.4s linear;
-  /* Safari �� Chrome */
   -o-transition: all 0.4s linear;
-  /* Opera */
 }
 .artItCpt a {
   display: block;
@@ -857,11 +1169,8 @@
   outline: none;
   transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
-  /* Firefox 4 */
   -webkit-transition: all 0.2s linear;
-  /* Safari �� Chrome */
   -o-transition: all 0.2s linear;
-  /* Opera */
 }
 .artItCpt a:hover {
   background: #eee;
@@ -1035,11 +1344,8 @@
   overflow: hidden;
   transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
-  /* Firefox 4 */
   -webkit-transition: all 0.2s linear;
-  /* Safari �� Chrome */
   -o-transition: all 0.2s linear;
-  /* Opera */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1061,11 +1367,8 @@
   border-bottom: 1px dashed #eee;
   transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
-  /* Firefox 4 */
   -webkit-transition: all 0.2s linear;
-  /* Safari �� Chrome */
   -o-transition: all 0.2s linear;
-  /* Opera */
 }
 .labsList .lab_item .lab_title a:hover {
   border-bottom-style: solid;
@@ -1076,6 +1379,8 @@
   width: 100%;
   padding: 10px;
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
 .labsList .lab_item .lab_info p {
   color: #333;
@@ -1185,11 +1490,8 @@
   margin: 0px auto;
   transition: all 0.1s linear;
   -moz-transition: all 0.1s linear;
-  /* Firefox 4 */
   -webkit-transition: all 0.1s linear;
-  /* Safari �� Chrome */
   -o-transition: all 0.1s linear;
-  /* Opera */
 }
 .opus_cover a:hover img {
   opacity: 0.8;
@@ -1416,15 +1718,11 @@
   min-height: 100%;
   transition: all 0.5s linear;
   -moz-transition: all 0.5s linear;
-  /* Firefox 4 */
   -webkit-transition: all 0.5s linear;
-  /* Safari �� Chrome */
   -o-transition: all 0.5s linear;
-  /* Opera */
 }
 .shareList li a strong {
   display: block;
-  box-sizing: border-box;
   width: 100%;
   height: 50px;
   position: absolute;
@@ -1441,11 +1739,11 @@
   background: linear-gradient(rgba(255, 255, 255, 0), #ffffff);
   transition: all 0.1s linear;
   -moz-transition: all 0.1s linear;
-  /* Firefox 4 */
   -webkit-transition: all 0.1s linear;
-  /* Safari �� Chrome */
   -o-transition: all 0.1s linear;
-  /* Opera */
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
 .shareList li a:hover img {
   opacity: 0.7;

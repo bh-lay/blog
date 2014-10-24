@@ -84,29 +84,87 @@ seajs.use([
 	var dom = $('.contlayer');
 	var activeCover = null;
 	var basePage;
-	function ani(){
-		var oldDom = dom.find('.contlayer_body');
-		var newDom = $('<div class="contlayer_body"><div class="contlayer_loading">正在加载</div></div>');
-		if(oldDom.length != 0){
-			oldDom.css({
-				'position' : 'absolute',
-				'overflow': 'hidden'
-			});
-			newDom.hide();
-			oldDom.animate({
-				'top': '100%'
-			},400,function(){
-				oldDom.remove();
-				dom.append(newDom);
-				newDom.fadeIn(100,function(){
-					newDom.css('position','relative');
-				});
-			});
-		}else{
-			dom.append(newDom);
+	
+	var active_panel_dom = null;
+	var active_list_dom = null;
+	var active_detail_dom = null;
+	//删除列表dom
+	function removeListDom(){
+		var oldListDom = active_list_dom;
+		if(oldListDom){
+			active_list_dom = null;
+			oldListDom.removeClass('show');
+			setTimeout(function(){
+				oldListDom.remove();
+			},1000);
 		}
+	}
+	//删除详细信息dom
+	function removeDetailDom(){
+		var oldDetailDom = active_detail_dom;
+		if(oldDetailDom){
+			active_detail_dom = null;
+			oldDetailDom.removeClass('show');
+			setTimeout(function(){
+				oldDetailDom.remove();
+			},1000);
+		}
+	}
+	//删除单页dom
+	function removePanelDom(){
+		var old_panel_dom = active_panel_dom;
+		if(old_panel_dom){
+			active_panel_dom = null;
+			old_panel_dom.addClass('zoomout');
+			setTimeout(function(){
+				old_panel_dom.remove();
+			},1000);
+		}
+	}
+	
+	var container = $('.app_container');
+	//显示单页dom
+	function showPanel(){
+		var newDom = $('<div class="panellayer"></div>');
+		container.append(newDom);
+		removeListDom();
+		removeDetailDom();
+		removePanelDom();
+		
+		active_panel_dom = newDom;
+		newDom.addClass('zoomin');
 		return newDom;
 	}
+	//显示列表dom
+	function showList(){
+		removeListDom();
+		removeDetailDom();
+		removePanelDom();
+		
+		var newDom = $('<div class="listLayer"></div>');
+		container.append(newDom);
+		setTimeout(function(){
+			newDom.addClass('show');
+		},80);
+		active_list_dom = newDom;
+		return newDom;
+	}
+	//显示详细信息dom
+	function showDetail(){
+		removeDetailDom();
+		removePanelDom();
+		var newDom = $('<div class="detailLayer"></div>');
+		container.append(newDom);
+		setTimeout(function(){
+			newDom.addClass('show');
+			if(active_list_dom){
+				active_list_dom.addClass('push_out');
+			}
+		},80);
+		active_detail_dom = newDom;
+		return newDom;
+	}
+	
 	/**
 	 * 首页
 	 */
@@ -114,7 +172,7 @@ seajs.use([
 		basePage = 'index';
 		this.title('小剧客栈_剧中人的个人空间 网页设计师博客 互动设计学习者');
 		L.nav.setCur('/');
-		var dom = ani();
+		var dom = showPanel();
 		
 		seajs.use('public/js/index.js',function(indexPage){
 			indexPage(dom);
@@ -127,8 +185,8 @@ seajs.use([
 		basePage = 'indexList';
 		this.title('我的博客_小剧客栈');
 		L.nav.setCur('blog');
-		var dom = $('.blogListLayer');
-		dom.addClass('show');
+		var dom = showList();
+		
 		seajs.use('public/js/blogList.js',function(blogList){
 			blogList(dom);
 		});
@@ -138,8 +196,8 @@ seajs.use([
 	 */
 	lofox.set('/blog/{id}',function(param){
 		this.title('我的博客_小剧客栈');
-		var dom = $('.blogDetailLayer');
-		dom.addClass('show');
+		L.nav.setCur('blog');
+		var dom = showDetail();
 		seajs.use('public/js/blogDetail.js',function(blogDetail){
 			blogDetail(dom,param.id,function(title){
 				lofox.title(title);
@@ -153,7 +211,7 @@ seajs.use([
 		basePage = 'shareList';
 		this.title('我的分享_小剧客栈');
 		L.nav.setCur('share');
-		var dom = ani();
+		var dom = showList();
 		seajs.use('public/js/shareList.js',function(shareList){
 			shareList(dom);
 		});
@@ -164,22 +222,10 @@ seajs.use([
 	lofox.set('/share/{id}',function(param){
 		this.title('我的分享_小剧客栈');
 		L.nav.setCur('share');
-		
-		activeCover = UI.cover({
-			'from' : 'bottom',
-			'width' : 900,
-			'mask' : true,
-			'closeFn' : function(){
-				activeCover = null;
-				lofox.push('/share');
-				if(basePage != 'shareList'){
-					lofox.refresh();
-				}
-			}
-		});
-		
+		var dom = showDetail();
+
 		seajs.use('public/js/shareDetail.js',function(shareDetail){
-			shareDetail($(activeCover.cntDom),param.id);
+			shareDetail(dom,param.id);
 		});
 	});
 	
@@ -187,7 +233,7 @@ seajs.use([
 	lofox.set('/opus',function(){
 		this.title('作品_小剧客栈');
 		L.nav.setCur('opus');
-		var dom = ani();
+		var dom = showList();
 		seajs.use('public/js/opusList.js',function(opusList){
 			opusList(dom);
 		});
@@ -196,7 +242,7 @@ seajs.use([
 	lofox.set('/opus/{id}',function(param){
 		this.title('作品_小剧客栈');
 		L.nav.setCur('opus');
-		var dom = ani();
+		var dom = showDetail();
 		seajs.use('public/js/opusDetail.js',function(opusDetail){
 			opusDetail(dom,param.id);
 		});
@@ -208,7 +254,7 @@ seajs.use([
 		this.title('实验室_小剧客栈');
 		
 		L.nav.setCur('labs');
-		var dom = ani();
+		var dom = showList();
 		seajs.use('public/js/labsList.js',function(labsList){
 			labsList(dom);
 		});
@@ -216,40 +262,18 @@ seajs.use([
 	//实验室详情页
 	lofox.set('/labs/{id}',function(param){
 		this.title('实验室_小剧客栈');
-
-		activeCover = UI.cover({
-			'from' : 'bottom',
-			'mask' : true,
-			'html' : '<iframe class="UI-plugin-iframe" src="/labs/' + param.id + '"></iframe>',
-			'closeFn' : function(){
-				activeCover = null;
-				lofox.push('/labs');
-				if(basePage != 'labsList'){
-					lofox.refresh();
-				}
-			}
-		});
-	});
-	//留言板
-	lofox.set('/demo/bless.html',function(param){
-		this.title('留言板_小剧客栈');
-		L.nav.setCur('');
-		var dom = ani();
-		dom.html(['<div class="l_row"><div class="l_col_12"><div style="background: #fff;margin:100px auto 50px;padding:20px;border-radius :8px;">',
-			'<div id="uyan_frame"></div>',
-			'<script type="text/javascript">var uyan_config = {"du":"bh-lay.com"};</script>',
-			'<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1605927" async=""></script>',
-		'</div></div></div>'].join(''));
+		var dom = showDetail();
+		dom.html('<iframe class="UI-plugin-iframe" src="/labs/' + param.id + '"></iframe>');
 	});
 	
 	/**
-	 * 留言板2
+	 * 留言板
 	 */
 	lofox.set('/bless',function(){
 		basePage = 'indexList';
 		this.title('留言板_小剧客栈');
 		L.nav.setCur('/');
-		var dom = ani();
+		var dom = showPanel();
 		seajs.use('comments/index.js',function(comments){
 			dom.html('<div class="l_row"><div class="l_col_12"></div></div>');
 			new comments.init(dom.find('.l_col_12')[0],'define-1');
@@ -265,13 +289,6 @@ seajs.use([
 			activeCover.close();
 			activeCover = null;
 		}
-		
-		delete(uyan_c_g);
-		delete(uyan_loaded);
-		delete(uyan_s_g);
-		delete(uyan_style_loaded);
-		delete(uyan_style_loaded_over);
-		window.uyan_config = window.uyan_config || {"du":"bh-lay.com"};
 	});
 	
 	$('body').on('click','a[lofox="true"]',function(){
@@ -298,25 +315,16 @@ seajs.use([
  */
 (function(ex){
 	var init=function(){
-		var tips = null;
-		$('.nav_tool a').click(function(){
-			if($('.navLayer').hasClass('nav_slidedown')){
-				$('.navLayer').removeClass('nav_slidedown');
-			}else{
-				$('.navLayer').addClass('nav_slidedown');
-			}
+		$('.app_layer a').click(function(){
+			$('.app_layer').toggleClass('nav_slidedown');
 		});
 		
 		$('.nav_main a').each(function(){
 		  $(this).attr('title','')
 		});
 		
-		$('.nav_main').on('click',function(){
-			if($('.navLayer').hasClass('nav_slidedown')){
-				$('.navLayer').removeClass('nav_slidedown');
-			}else{
-				//貌似不需要else
-			}
+		$('.nav_main,.nav_mask').on('click',function(){
+			$('.app_layer').removeClass('nav_slidedown');
 		});
 	};
 
@@ -324,8 +332,8 @@ seajs.use([
 		if(page == '/'){
 			page = 'index';
 		}
-		$('.navLayer .nav li').removeClass('cur');
-		$('.navLayer .nav li[page='+page+']').addClass('cur');
+		$('.app_nav .nav li').removeClass('cur');
+		$('.app_nav .nav li[page='+page+']').addClass('cur');
 	};
 	ex.nav = init;
 	ex.nav.setCur = setCur;
