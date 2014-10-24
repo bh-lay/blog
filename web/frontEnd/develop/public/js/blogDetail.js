@@ -6,7 +6,7 @@ define(function(require,exports){
 	require('lib/juicer.js');
 
 	var template = ['<div class="blog_article">',
-		'<div class="l_row">',
+		'<div class="l_row"><div class="l_col-12">',
 		'<div class="articletop">',
 			'<h1>${title}</h1>',
 			'<p><span>时间：${time_show} </span><span>作者：${author}</span></p>',
@@ -16,7 +16,7 @@ define(function(require,exports){
 			'<div class="tag"><strong>本文关键字：</strong>${tags}</div>',
 			'<div class="pageUrl"><strong>转载请注明来源：</strong>http://bh-lay.com/blog/${id}</div>',
 		'</div>',
-		'</div>',
+		'</div></div>',
 		'<div class="comments_frame"><div class="l_row"></div></div>',
 	'</div>'].join('');
 	

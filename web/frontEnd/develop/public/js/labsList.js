@@ -4,15 +4,17 @@
  */
 define(function(require,exports){
 	
-	var temp = ['<li><div class="lab_item">',
-		'<a class="lab_cover" lofox="true" href="/labs/<%=name %>" title="<%=title%>" style="background-image:url(<%=cover %>)"></a>',
+	var temp = ['<div class="lab_item">',
+		'<a class="lab_cover" lofox="true" href="/labs/<%=name %>" title="<%=title%>">',
+			'<img src="<%=cover %>" />',
+		'</a>',
 		'<h4 class="lab_title">',
 			'<a href="/labs/<%=name %>" lofox="true" title="<%=title %>"><%=title %></a>',
 		'</h4>',
 		'<div class="lab_info">',
 			'<p><%=intro %></p>',
 		'</div>',
-	'</div></li>'].join('');
+	'</div>'].join('');
 	
 	var render = L.tplEngine(temp);
 	var limit = 20,
@@ -59,7 +61,7 @@ define(function(require,exports){
 	return function(dom,param){
 		skip = 0;
 		getData(function(list){
-			dom.html('<ul class="labsList"></ul>');
+			dom.html('<div class="labsList"></div>');
 			var this_html = '',
 				this_dom = dom.find('.labsList');
 			for(var i=0,total=list.length;i<total;i++){

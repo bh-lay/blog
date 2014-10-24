@@ -275,7 +275,7 @@
 	top: 0;
 	left: -100%;
 	overflow: auto;
-	background: #eee;
+	background: #fff;
 	.transition(0.5s,ease-out);
 }
 .detailLayer{
@@ -1161,59 +1161,50 @@
 
 /** 博文列表页 **/
 .articleListCnt {
-	margin: auto;
-	padding: 50px 0px;
-	overflow: hidden;
-	width: 800px
-}
 
-@media screen and (max-width: 900px) {
-	.articleListCnt {
-		width: 550px
-	}
 }
-
-@media screen and (max-width: 600px) {
-	.articleListCnt {
-		width: 100%
-	}
-}
-
 .articleList {
+	padding: 20px 10px;
 }
+
 
 .articleItem {
-	margin-bottom: 12px;
+	margin-bottom: 20px;
 	overflow: hidden;
 	background: #fff;
+	border-bottom: 1px solid #ddd;
 	.transition(0.4s);
 }
 
-.artItCpt a {
-	display: block;
-	padding: 10px 5px;
-	border-bottom: 1px solid #ddd;
-	font-weight: normal;
-	line-height: 22px;
-	text-align: center;
-	font-size: 16px;
-	color: #333;
-	outline: none;
-	.transition(0.2s);
+.artItCpt {
+	a {
+		display: block;
+		padding: 10px 5px;
+		font-weight: normal;
+		line-height: 22px;
+		text-align: center;
+		font-size: 16px;
+		color: #333;
+		outline: none;
+		.transition(0.2s);
+		
+		&:hover {
+			color: #000;
+			text-decoration: underline;
+		}
+	}
 }
-
-.artItCpt a:hover {
-	background: #eee;
-	color: #000
+.artItPic{
+	a{
+		display: block;
+	}
+	img {
+		display: block;
+		background: #eee;
+		max-width: 100%;
+		margin: auto;
+	}
 }
-
-.artItPic img {
-	display: block;
-	background: #eee;
-	max-width: 100%;
-	margin: auto
-}
-
 .artItInfo {
 	padding: 10px 20px;
 	line-height: 150%;
@@ -1222,26 +1213,10 @@
 	text-indent: 2em
 }
 
-.artItTag {
-	padding: 0px 20px;
-	line-height: 24px;
-	margin-bottom: 10px;
-	font-size: 14px;
-	color: #666;
-	word-break: break-word
-}
-
 .artItTime {
 	color: #aaa;
 	font-size: 14px;
 	padding: 10px 20px 20px
-}
-
-.artItFrom {
-	padding: 0px 20px;
-	line-height: 30px;
-	font-size: 14px;
-	color: #333
 }
 
 .blog_addMore {
@@ -1348,107 +1323,66 @@
 	}
 }
 
+/**实验室列表**/
 .labsList {
-	padding: 100px 0px;
+	padding: 20px 10px;
 	overflow: hidden;
 	margin: auto;
 	overflow: hidden
 }
-
-@media screen and (max-width: 1960px) {
-	.labsList {
-		width: 1600px
-	}
-}
-
-@media screen and (max-width: 1640px) {
-	.labsList {
-		width: 1280px
-	}
-}
-
-@media screen and (max-width: 1320px) {
-	.labsList {
-		width: 960px
-	}
-}
-
-@media screen and (max-width: 1000px) {
-	.labsList {
-		width: 640px
-	}
-}
-
-@media screen and (max-width: 680px) {
-	.labsList {
-		width: 320px
-	}
-}
-
-.labsList li {
-	float: left;
-	width: 320px
-}
-
-.labsList .lab_item {
+.lab_item {
 	position: relative;
-	height: 440px;
-	margin: 0px 10px 20px;
+	margin-bottom: 20px;
 	background: #fff;
-	overflow: hidden
-}
-
-.labsList .lab_item .lab_cover {
-	display: block;
-	height: 300px;
-	margin: 0px auto;
 	overflow: hidden;
-	.transition(0.2s);
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-color: #666
+	
+	.lab_cover {
+		display: block;
+		margin: 0px auto;
+		.transition(0.2s);
+		img{
+			display: block;
+			margin: auto;
+			max-width: 100%;
+		}
+		&:hover{
+			opacity: 0.8
+		}
+		
+	}
+	.lab_title {
+		font-weight: normal;
+		line-height: 30px;
+		color: #333;
+		font-size: 20px;
+		text-align: center;
+		a {
+			display: block;
+			padding: 10px;
+			border-bottom: 1px dashed #eee;
+			.transition(0.2s);
+			&:hover {
+				border-bottom-style: solid;
+				background: #eee;
+				color: #0a4
+			}
+		}
+	}
+	.lab_info {
+		width: 100%;
+		padding: 10px;
+		.borderbox();
+		p {
+			color: #333;
+			font-size: 12px;
+			opacity: 0.7;
+			line-height: 16px;
+			text-indent: 2em;
+			text-align: justify
+		}
+	}
 }
 
-.labsList .lab_item .lab_cover:hover {
-	opacity: 0.8
-}
-
-.labsList .lab_item .lab_title {
-	font-weight: normal;
-	line-height: 30px;
-	color: #333;
-	font-size: 20px;
-	text-align: center
-}
-
-.labsList .lab_item .lab_title a {
-	display: block;
-	padding: 10px;
-	border-bottom: 1px dashed #eee;
-	.transition(0.2s);
-}
-
-.labsList .lab_item .lab_title a:hover {
-	border-bottom-style: solid;
-	background: #eee;
-	color: #0a4
-}
-
-.labsList .lab_item .lab_info {
-	width: 100%;
-	padding: 10px;
-	.borderbox();
-}
-
-.labsList .lab_item .lab_info p {
-	color: #333;
-	font-size: 12px;
-	opacity: 0.7;
-	line-height: 16px;
-	text-indent: 2em;
-	text-align: justify
-}
 
 .labs_info {
 	height: 140px;
@@ -1524,150 +1458,88 @@
 	text-decoration: underline
 }
 
+/**作品**/
 .opusList {
 	padding: 100px 0px;
-	margin: auto
+	margin: auto;
+	ul {
+		overflow: hidden;
+	}
+	
 }
 
-.opusList ul {
-	overflow: hidden;
-	zoom: 1
-}
 
 .opusList ul li {
-	width: 280px;
-	float: left;
+	position: relative;
+	padding: 10px 10px 10px 120px;
 	margin: 0px 10px 20px;
 	background: #fff;
 	overflow: hidden;
-	border-radius: 4px
+	border-bottom: 1px dashed #ddd;
 }
-
 .opus_cover {
-	width: 100%;
-	height: 160px
-}
-
-.opus_cover a {
-	display: block;
-	width: 100%;
-	height: 100%;
-	background: #fff;
-	position: relative;
-	overflow: hidden
-}
-
-.opus_cover a img {
-	display: block;
-	min-width: 280px;
-	max-width: 100%;
-	min-height: 100%;
-	margin: 0px auto;
-	.transition(0.1s);
-}
-
-.opus_cover a:hover img {
-	opacity: 0.8
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	width: 100px;
+	height: 100px;
+	background: #aaa;
+	img {
+		display: block;
+		width: 100px;
+		height: 100px;
+		margin: 0px auto;
+	}
 }
 
 .opus_info {
-	height: 140px;
-	box-shadow: 0px 0px 15px #000;
 	position: relative;
-	background: #fff
-}
-
-.opus_info h3 {
-	height: 50px;
-	position: relative;
-	margin-bottom: 8px;
-	border-bottom: 1px dashed #ddd
-}
-
-.opus_info h3 a {
-	display: block;
-	width: 260px;
-	height: 26px;
-	line-height: 26px;
-	padding: 12px 10px 0px;
-	overflow: hidden;
-	font-size: 17px;
-	font-weight: normal;
-	color: #333
-}
-
-.opus_info h3 a:hover {
-	position: absolute;
-	height: auto;
-	padding: 12px 10px 13px;
-	background: url(../images/mask.png) #080;
-	color: #fff
-}
-
-.opus_info h3 a:active {
-	background: url(../images/mask.png) #060;
-	color: #fff
-}
-
-.opus_info p {
-	height: 18px;
-	line-height: 16px;
-	padding: 9px 10px
-}
-
-.opus_info p strong {
-	display: block;
-	height: 30px;
-	float: left;
-	font-size: 14px;
-	font-weight: normal;
-	color: #333
-}
-
-.opus_info p span {
-	display: inline-block;
-	padding: 0px 4px;
-	font-size: 14px;
-	color: #888
-}
-
-.opus_info p a {
-	display: block;
-	width: 190px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	color: #888
-}
-
-.opus_info p a:hover {
-	color: #333;
-	text-decoration: underline
-}
-
-@media screen and (min-width: 900px) {
-	.opusList {
-		width: 900px
+	background: #fff;
+	h3 {
+		height: 30px;
+		line-height: 30px;
+		position: relative;
+		margin-bottom: 8px;
+		a {
+			display: block;
+			width: 260px;
+			overflow: hidden;
+			font-size: 16px;
+			font-weight: normal;
+			color: #333;
+			&:hover {
+				color: #333
+			}
+		}
 	}
-}
-
-@media screen and (max-width: 899px) and (min-width: 600px) {
-	.opusList {
-		width: 600px
-	}
-}
-
-@media screen and (max-width: 599px) {
-	.opusList {
-		width: auto;
-		margin: 0px 10px
-	}
-
-	.opusList ul li {
-		width: 100%;
-		max-width: 500px;
-		float: none;
-		margin: 0px auto 20px;
-		border-radius: 0px
+	p {
+		line-height: 18px;
+		padding: 6px 0;
+		strong {
+			display: block;
+			height: 30px;
+			float: left;
+			font-size: 14px;
+			font-weight: normal;
+			color: #333
+		}
+		span {
+			display: inline-block;
+			padding: 0px 4px;
+			font-size: 14px;
+			color: #888
+		}
+		a {
+			display: block;
+			width: 190px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			color: #888;
+			&::hover {
+				color: #333;
+				text-decoration: underline
+			}
+		}
 	}
 }
 
@@ -1797,92 +1669,59 @@
 
 /** 分享列表 **/
 .shareList {
-	padding: 100px 0px;
+	padding: 20px 0;
 	overflow: hidden;
-	zoom: 1
 }
 
 .shareList li {
-	width: 20%;
-	height: 160px;
-	float: left
-}
-
-.shareList li a {
-	display: block;
-	width: 100%;
-	height: 100%;
-	background: #fff;
 	position: relative;
-	overflow: hidden
-}
-
-.shareList li a img {
-	display: block;
-	width: 100%;
-	min-height: 100%;
-	.transition(0.5s);
-}
-
-.shareList li a strong {
-	display: block;
-	width: 100%;
-	height: 50px;
-	position: absolute;
-	bottom: -100px;
-	left: 0px;
-	overflow: hidden;
-	color: #000;
-	font-weight: normal;
-	line-height: 50px;
-	text-align: justify;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	padding: 0px 10px;
-	background: linear-gradient(rgba(255,255,255,0), #fff);
-	.transition(0.1s);
+	min-height: 120px;
+	padding: 0px 10px 10px 120px;
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 20px;
 	.borderbox();
-}
-
-.shareList li a:hover img {
-	opacity: 0.7
-}
-
-.shareList li a:hover strong {
-	bottom: 0px
-}
-
-.shareList li a:active img {
-	opacity: 0.3
-}
-
-@media screen and (max-width: 1000px) {
-	.shareList li {
-		width: 25%
+	.shareItem_cover{
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		width: 100px;
+		height: 100px;
+		background: #aaa;
+		img {
+			display: block;
+			width: 100px;
+			height: 100px;
+			margin: 0px auto;
+			.transition(0.5s);
+		}
+	}
+	.shareItem_title{
+		strong {
+			display: block;
+			height: 50px;
+			line-height: 50px;
+			overflow: hidden;
+			color: #000;
+			font-weight: normal;
+			font-size: 16px;
+			text-align: justify;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+	}
+	p{
+		color: #aaa;
 	}
 }
-
-@media screen and (max-width: 760px) {
-	.shareList li {
-		width: 33.3%
+.shareList li a:hover {
+	img {
+		opacity: 0.7
 	}
-}
-
-@media screen and (max-width: 500px) {
-	.shareList li {
-		width: 50%
-	}
-
-	.shareList li a strong {
+	strong {
 		bottom: 0px
 	}
 }
 
-@media screen and (max-width: 340px) {
-	.shareList li {
-		width: 100%
-	}
-}
 
 .shareDetail {
 	background: #fff;

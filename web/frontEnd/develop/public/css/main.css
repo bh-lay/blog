@@ -267,7 +267,7 @@
   top: 0;
   left: -100%;
   overflow: auto;
-  background: #eee;
+  background: #fff;
   transition: all 0.5s ease-out;
   -moz-transition: all 0.5s ease-out;
   -webkit-transition: all 0.5s ease-out;
@@ -1132,26 +1132,14 @@
   }
 }
 /** �����б�ҳ **/
-.articleListCnt {
-  margin: auto;
-  padding: 50px 0px;
-  overflow: hidden;
-  width: 800px;
-}
-@media screen and (max-width: 900px) {
-  .articleListCnt {
-    width: 550px;
-  }
-}
-@media screen and (max-width: 600px) {
-  .articleListCnt {
-    width: 100%;
-  }
+.articleList {
+  padding: 20px 10px;
 }
 .articleItem {
-  margin-bottom: 12px;
+  margin-bottom: 20px;
   overflow: hidden;
   background: #fff;
+  border-bottom: 1px solid #ddd;
   transition: all 0.4s linear;
   -moz-transition: all 0.4s linear;
   -webkit-transition: all 0.4s linear;
@@ -1160,7 +1148,6 @@
 .artItCpt a {
   display: block;
   padding: 10px 5px;
-  border-bottom: 1px solid #ddd;
   font-weight: normal;
   line-height: 22px;
   text-align: center;
@@ -1173,8 +1160,11 @@
   -o-transition: all 0.2s linear;
 }
 .artItCpt a:hover {
-  background: #eee;
-  color: #000000;
+  color: #000;
+  text-decoration: underline;
+}
+.artItPic a {
+  display: block;
 }
 .artItPic img {
   display: block;
@@ -1189,24 +1179,10 @@
   color: #888;
   text-indent: 2em;
 }
-.artItTag {
-  padding: 0px 20px;
-  line-height: 24px;
-  margin-bottom: 10px;
-  font-size: 14px;
-  color: #666;
-  word-break: break-word;
-}
 .artItTime {
   color: #aaa;
   font-size: 14px;
   padding: 10px 20px 20px;
-}
-.artItFrom {
-  padding: 0px 20px;
-  line-height: 30px;
-  font-size: 14px;
-  color: #333333;
 }
 .blog_addMore {
   overflow: hidden;
@@ -1296,72 +1272,42 @@
     font-size: 24px;
   }
 }
+/**ʵ�����б�**/
 .labsList {
-  padding: 100px 0px;
+  padding: 20px 10px;
   margin: auto;
   overflow: hidden;
 }
-@media screen and (max-width: 1960px) {
-  .labsList {
-    width: 1600px;
-  }
-}
-@media screen and (max-width: 1640px) {
-  .labsList {
-    width: 1280px;
-  }
-}
-@media screen and (max-width: 1320px) {
-  .labsList {
-    width: 960px;
-  }
-}
-@media screen and (max-width: 1000px) {
-  .labsList {
-    width: 640px;
-  }
-}
-@media screen and (max-width: 680px) {
-  .labsList {
-    width: 320px;
-  }
-}
-.labsList li {
-  float: left;
-  width: 320px;
-}
-.labsList .lab_item {
+.lab_item {
   position: relative;
-  height: 440px;
-  margin: 0px 10px 20px;
+  margin-bottom: 20px;
   background: #fff;
   overflow: hidden;
 }
-.labsList .lab_item .lab_cover {
+.lab_item .lab_cover {
   display: block;
-  height: 300px;
   margin: 0px auto;
-  overflow: hidden;
   transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
   -webkit-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: #666666;
 }
-.labsList .lab_item .lab_cover:hover {
+.lab_item .lab_cover img {
+  display: block;
+  margin: auto;
+  max-width: 100%;
+}
+.lab_item .lab_cover:hover {
   opacity: 0.8;
 }
-.labsList .lab_item .lab_title {
+.lab_item .lab_title {
   font-weight: normal;
   line-height: 30px;
   color: #333;
   font-size: 20px;
   text-align: center;
 }
-.labsList .lab_item .lab_title a {
+.lab_item .lab_title a {
   display: block;
   padding: 10px;
   border-bottom: 1px dashed #eee;
@@ -1370,19 +1316,19 @@
   -webkit-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
 }
-.labsList .lab_item .lab_title a:hover {
+.lab_item .lab_title a:hover {
   border-bottom-style: solid;
   background: #eee;
   color: #00aa44;
 }
-.labsList .lab_item .lab_info {
+.lab_item .lab_info {
   width: 100%;
   padding: 10px;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
 }
-.labsList .lab_item .lab_info p {
+.lab_item .lab_info p {
   color: #333;
   font-size: 12px;
   opacity: 0.7;
@@ -1454,86 +1400,60 @@
   color: #333;
   text-decoration: underline;
 }
+/**��Ʒ**/
 .opusList {
   padding: 100px 0px;
   margin: auto;
 }
 .opusList ul {
   overflow: hidden;
-  zoom: 1;
 }
 .opusList ul li {
-  width: 280px;
-  float: left;
+  position: relative;
+  padding: 10px 10px 10px 120px;
   margin: 0px 10px 20px;
   background: #fff;
   overflow: hidden;
-  border-radius: 4px;
+  border-bottom: 1px dashed #ddd;
 }
 .opus_cover {
-  width: 100%;
-  height: 160px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 100px;
+  height: 100px;
+  background: #aaa;
 }
-.opus_cover a {
+.opus_cover img {
   display: block;
-  width: 100%;
-  height: 100%;
-  background: #fff;
-  position: relative;
-  overflow: hidden;
-}
-.opus_cover a img {
-  display: block;
-  min-width: 280px;
-  max-width: 100%;
-  min-height: 100%;
+  width: 100px;
+  height: 100px;
   margin: 0px auto;
-  transition: all 0.1s linear;
-  -moz-transition: all 0.1s linear;
-  -webkit-transition: all 0.1s linear;
-  -o-transition: all 0.1s linear;
-}
-.opus_cover a:hover img {
-  opacity: 0.8;
 }
 .opus_info {
-  height: 140px;
-  box-shadow: 0px 0px 15px #000;
   position: relative;
-  background: #ffffff;
+  background: #fff;
 }
 .opus_info h3 {
-  height: 50px;
+  height: 30px;
+  line-height: 30px;
   position: relative;
   margin-bottom: 8px;
-  border-bottom: 1px dashed #dddddd;
 }
 .opus_info h3 a {
   display: block;
   width: 260px;
-  height: 26px;
-  line-height: 26px;
-  padding: 12px 10px 0px;
   overflow: hidden;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: normal;
-  color: #333333;
+  color: #333;
 }
 .opus_info h3 a:hover {
-  position: absolute;
-  height: auto;
-  padding: 12px 10px 13px;
-  background: url(../images/mask.png) #008800;
-  color: #ffffff;
-}
-.opus_info h3 a:active {
-  background: url(../images/mask.png) #006600;
-  color: #ffffff;
+  color: #333333;
 }
 .opus_info p {
-  height: 18px;
-  line-height: 16px;
-  padding: 9px 10px;
+  line-height: 18px;
+  padding: 6px 0;
 }
 .opus_info p strong {
   display: block;
@@ -1554,34 +1474,11 @@
   width: 190px;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #888888;
+  color: #888;
 }
-.opus_info p a:hover {
+.opus_info p a::hover {
   color: #333;
   text-decoration: underline;
-}
-@media screen and (min-width: 900px) {
-  .opusList {
-    width: 900px;
-  }
-}
-@media screen and (max-width: 899px) and (min-width: 600px) {
-  .opusList {
-    width: 600px;
-  }
-}
-@media screen and (max-width: 599px) {
-  .opusList {
-    width: auto;
-    margin: 0px 10px;
-  }
-  .opusList ul li {
-    width: 100%;
-    max-width: 500px;
-    float: none;
-    margin: 0px auto 20px;
-    border-radius: 0px;
-  }
 }
 .opus_detail {
   line-height: 2;
@@ -1695,87 +1592,57 @@
 }
 /** �����б� **/
 .shareList {
-  padding: 100px 0px;
+  padding: 20px 0;
   overflow: hidden;
-  zoom: 1;
 }
 .shareList li {
-  width: 20%;
-  height: 160px;
-  float: left;
-}
-.shareList li a {
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: #fff;
   position: relative;
-  overflow: hidden;
+  min-height: 120px;
+  padding: 0px 10px 10px 120px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
-.shareList li a img {
+.shareList li .shareItem_cover {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 100px;
+  height: 100px;
+  background: #aaa;
+}
+.shareList li .shareItem_cover img {
   display: block;
-  width: 100%;
-  min-height: 100%;
+  width: 100px;
+  height: 100px;
+  margin: 0px auto;
   transition: all 0.5s linear;
   -moz-transition: all 0.5s linear;
   -webkit-transition: all 0.5s linear;
   -o-transition: all 0.5s linear;
 }
-.shareList li a strong {
+.shareList li .shareItem_title strong {
   display: block;
-  width: 100%;
   height: 50px;
-  position: absolute;
-  bottom: -100px;
-  left: 0px;
+  line-height: 50px;
   overflow: hidden;
   color: #000;
   font-weight: normal;
-  line-height: 50px;
+  font-size: 16px;
   text-align: justify;
   white-space: nowrap;
   text-overflow: ellipsis;
-  padding: 0px 10px;
-  background: linear-gradient(rgba(255, 255, 255, 0), #ffffff);
-  transition: all 0.1s linear;
-  -moz-transition: all 0.1s linear;
-  -webkit-transition: all 0.1s linear;
-  -o-transition: all 0.1s linear;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
+}
+.shareList li p {
+  color: #aaa;
 }
 .shareList li a:hover img {
   opacity: 0.7;
 }
 .shareList li a:hover strong {
   bottom: 0px;
-}
-.shareList li a:active img {
-  opacity: 0.3;
-}
-@media screen and (max-width: 1000px) {
-  .shareList li {
-    width: 25%;
-  }
-}
-@media screen and (max-width: 760px) {
-  .shareList li {
-    width: 33.3%;
-  }
-}
-@media screen and (max-width: 500px) {
-  .shareList li {
-    width: 50%;
-  }
-  .shareList li a strong {
-    bottom: 0px;
-  }
-}
-@media screen and (max-width: 340px) {
-  .shareList li {
-    width: 100%;
-  }
 }
 .shareDetail {
   background: #fff;

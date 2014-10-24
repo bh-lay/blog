@@ -39,14 +39,17 @@ define(function(require,exports){
 		});
 	};
 	return function(dom,param){
-		var temp = ['<li><a href="/share/<%=id %>" title="<%=title %>" lofox="true" target="_self" >',
-			'<img src="<%=cover %>" alt="<%=title %>" />',
-			'<strong><%=title %></strong>',
-		'</a></li>'].join('');
+		var temp = ['<li>',
+			'<a href="/share/<%=id %>" title="<%=title %>" lofox="true" class="shareItem_cover" target="_self" >',
+				'<img src="<%=cover %>" alt="<%=title %>" />',
+			'</a>',
+			'<a href="/share/<%=id %>" title="<%=title %>" lofox="true" class="shareItem_title" target="_self" ><strong><%=title %></strong></a>',
+			'<p><%= intro %></p>',
+		'</li>'].join('');
 		var render = L.tplEngine(temp);
 		skip = 0;
 		getData(function(list){
-			dom.html('<div class="l_row"><div class="l_col_12"><ul class="shareList"></ul></div></div>');
+			dom.html('<ul class="shareList"></ul>');
 			var this_html = '';
 			
 			for(var i=0,total=list.length;i<total;i++){

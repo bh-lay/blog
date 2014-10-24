@@ -5,11 +5,9 @@
 define(function(require,exports){
 	
 	var item_tpl = ['<li>',
-		'<div class="opus_cover">',
-			'<a href="/opus/<%=id %>" title="<%=title %>" target="_self" lofox="true" >',
-				'<img src="<%=cover %>" alt="<%=title %>" />',
-			'</a>',
-		'</div>',
+		'<a href="/opus/<%=id %>" title="<%=title %>" target="_self" lofox="true" class="opus_cover" >',
+			'<img src="<%=cover %>" alt="<%=title %>" />',
+		'</a>',
 		'<div class="opus_info">',
 			'<h3><a href="/opus/<%=id %>" target="_self" lofox="true" ><%=title %></a></h3>',
 			'<p><strong>开发范围：</strong>',
