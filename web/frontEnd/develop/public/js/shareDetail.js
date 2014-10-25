@@ -7,12 +7,14 @@ define(function(require,exports){
 	require('lib/juicer.js');
 	
 	var template = ['<div class="shareDetail">',
-		'<div class="articletop">',
-			'<h1>${title}</h1>',
-			'<p><span>分享时间：${time_show} </span></p>',
+		'<div class="l_row">',
+			'<div class="articletop">',
+				'<h1>${title}</h1>',
+				'<p><span>分享时间：${time_show} </span></p>',
+			'</div>',
+			'<div class="article">$${content}</div>',
 		'</div>',
-		'<div class="article">$${content}</div>',
-		'<div class="comments_frame"></div>',
+		'<div class="comments_frame"><div class="l_row"></div></div>',
 	'</div>'].join('');
 	
 	function getData(id,fn){
@@ -47,7 +49,7 @@ define(function(require,exports){
 		getData(id,function(html,title){
 			html&&dom.html(html);
 			render_over&&render_over(title);
-			var commentDom = dom.find('.comments_frame');
+			var commentDom = dom.find('.comments_frame .l_row');
 			seajs.use('comments/index.js',function(comments){
 				new comments.init(commentDom,'blog-' + id);
 			});

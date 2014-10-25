@@ -1283,6 +1283,7 @@
   margin-bottom: 20px;
   background: #fff;
   overflow: hidden;
+  border-bottom: 1px solid #ddd;
 }
 .lab_item .lab_cover {
   display: block;
@@ -1310,14 +1311,12 @@
 .lab_item .lab_title a {
   display: block;
   padding: 10px;
-  border-bottom: 1px dashed #eee;
   transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
   -webkit-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
 }
 .lab_item .lab_title a:hover {
-  border-bottom-style: solid;
   background: #eee;
   color: #00aa44;
 }
@@ -1346,7 +1345,6 @@
   height: 50px;
   position: relative;
   margin-bottom: 8px;
-  border-bottom: 1px dashed #dddddd;
 }
 .labs_info h3 a {
   display: block;
@@ -1402,7 +1400,7 @@
 }
 /**��Ʒ**/
 .opusList {
-  padding: 100px 0px;
+  padding: 30px 0px;
   margin: auto;
 }
 .opusList ul {
@@ -1646,7 +1644,7 @@
 }
 .shareDetail {
   background: #fff;
-  margin: 60px auto;
+  padding-top: 20px;
 }
 .articletop {
   border-bottom: 1px dashed #ccc;

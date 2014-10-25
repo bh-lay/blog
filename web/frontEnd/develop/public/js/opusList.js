@@ -4,27 +4,26 @@
  */
 define(function(require,exports){
 	
-	var item_tpl = ['<li>',
-		'<a href="/opus/<%=id %>" title="<%=title %>" target="_self" lofox="true" class="opus_cover" >',
-			'<img src="<%=cover %>" alt="<%=title %>" />',
+	var item_tpl = ['{@each list as it}<li>',
+		'<a href="/opus/${it.id}" title="${it.title}" target="_self" lofox="true" class="opus_cover" >',
+			'<img src="${it.cover}?imgView/1/w/100/h/100/85" alt="${it.title}" />',
 		'</a>',
 		'<div class="opus_info">',
-			'<h3><a href="/opus/<%=id %>" target="_self" lofox="true" ><%=title %></a></h3>',
+			'<h3><a href="/opus/${it.id}" target="_self" lofox="true" >${it.title}</a></h3>',
 			'<p><strong>开发范围：</strong>',
-				'<% for(var i=0;i<work_range.length;i++){ %>',
-					'<span><%=work_range[i] %></span>',
-				'<% } %>',
+				'{@each it.work_range as key }',
+					'<span>${key}</span>',
+				'{@/each}',
 			'</p>',
 			'<p><strong>在线地址：</strong>',
-				'<% if(online_url){ %>',
-					'<a href="<%=online_url %>"><%=online_url %></a>',
-				'<% }else{ %>',
+				'{@if it.online_url}',
+					'<a href="${it.online_url}">${it.online_url}</a>',
+				'{@else}',
 					'<span>无在线地址</span>',
-				'<% } %>',
+				'{@/if}',
 			'</p>',
 		'</div>',
-	'</li>'].join('');
-	var render = L.tplEngine(item_tpl);
+	'</li>{@/each}'].join('');
 	
 	var limit = 20,
 		 skip = 0,
@@ -72,12 +71,10 @@ define(function(require,exports){
 		skip = 0;
 		getData(function(list){
 			dom.html('<div class="golCnt"><div class="opusList"><ul></ul></div></div>');
-			var this_html = '',
-				this_dom = dom.find('.opusList ul');
-			
-			for(var i=0,total=list.length;i<total;i++){
-				this_html += render(list[i]);
-			}
+			var this_html = juicer(item_tpl,{
+				'list' : list
+			});
+			var this_dom = dom.find('.opusList ul');
 			insert({
 				'end' : (skip>=count)?true:false,
 				'html' : this_html,
