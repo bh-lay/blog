@@ -1482,12 +1482,9 @@
   line-height: 2;
   margin: 40px auto;
   padding: 25px;
-  background-color: #fff;
   font-size: 14px;
   overflow: hidden;
   position: relative;
-  border-radius: 4px;
-  box-shadow: 1px 1px 2px #666666;
 }
 .opus_detail a {
   color: #44aa00;

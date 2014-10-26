@@ -12,6 +12,7 @@
 <link rel="apple-touch-icon" sizes="114x114" href="touch-icon-iphone-retina.png" />
 <link rel="apple-touch-icon" sizes="144x144" href="touch-icon-ipad-retina.png" />
 <link href="${frontEnd_base}lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="${frontEnd_base}public/css/bootstrap_plugin.css" rel="stylesheet" media="screen">
 </head>
 <body>
 {{{navigation_bootstrap}}}
@@ -24,14 +25,16 @@
 		<div class="text">$${content}</div>
 	</div>
 </div>
-<script type="text/javascript" src="${frontEnd_base}lib/jquery/jquery.js"></script>
-<script type="text/javascript" src="${frontEnd_base}lib/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	var app_config = {
 		'frontEnd_base' : '${frontEnd_base}',
 		'imgDomain' : '${img_domain}'
 	};
 </script>
+<script type="text/javascript" src="${frontEnd_base}lib/jquery/jquery.js"></script>
+<script type="text/javascript" src="${frontEnd_base}lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${frontEnd_base}public/js/bootstrap_plugin.js"></script>
+{{{footer}}}
 {{{baiduAndGoogleTongji}}}
 </body>
 </html>

@@ -12,12 +12,12 @@
 <link rel="apple-touch-icon" sizes="114x114" href="touch-icon-iphone-retina.png" />
 <link rel="apple-touch-icon" sizes="144x144" href="touch-icon-ipad-retina.png" />
 <link href="${frontEnd_base}lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="${frontEnd_base}public/css/bootstrap_plugin.css" rel="stylesheet" media="screen">
 </head>
 <body>
 {{{navigation_bootstrap}}}
 	<div class="container">
-	<div class="golCnt">
-		<div class="TagLine">小剧作品，一次次小小的进步，成就平凡的自己！</div>
+	<div class="row article">
 		<div id="focusTitle">
 			{@if cover}
 				<img src="${cover}" alt="${title}" class="topicImg" />
@@ -36,14 +36,16 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="${frontEnd_base}lib/jquery/jquery.js"></script>
-<script type="text/javascript" src="${frontEnd_base}lib/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	var app_config = {
 		'frontEnd_base' : '${frontEnd_base}',
 		'imgDomain' : '${img_domain}'
 	};
 </script>
+<script type="text/javascript" src="${frontEnd_base}lib/jquery/jquery.js"></script>
+<script type="text/javascript" src="${frontEnd_base}lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${frontEnd_base}public/js/bootstrap_plugin.js"></script>
+{{{footer}}}
 {{{baiduAndGoogleTongji}}}
 </body>
 </html>

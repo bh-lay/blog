@@ -22,7 +22,8 @@ define(function(require,exports){
 			'<div class="photo"><img src="${opus_pic}" alt="${title}" /></div>',
 			'<div class="text">$${content}</div>',
 		'</div>',
-		'<div class="comments_frame"></div>',
+		'</div></div>',
+		'<div class="comments_frame"><div class="l_row"></div></div>',
 	'</div></div>'].join('');
 	
 	
@@ -62,7 +63,7 @@ define(function(require,exports){
 			this_html&&dom.html(this_html);
 			render_over&&render_over(title);
 			
-			var commentDom = dom.find('.comments_frame');
+			var commentDom = dom.find('.comments_frame .l_row');
 			seajs.use('comments/index.js',function(comments){
 				new comments.init(commentDom,'opus-' + id);
 			});

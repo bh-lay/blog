@@ -12,53 +12,40 @@
 <link rel="apple-touch-icon" sizes="114x114" href="touch-icon-iphone-retina.png" />
 <link rel="apple-touch-icon" sizes="144x144" href="touch-icon-ipad-retina.png" />
 <link href="${frontEnd_base}lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-<style type="text/css">
-.define-list{
-	-webkit-column-width:360px;
-	-moz-column-width:360px;
-	-o-colum-width:360px;
-	-webkit-column-gap:20px;
-	-moz-column-gap:20px;
-	-o-column-gap:20px;
-}
-.define-item{
-	display:inline-block;
-	position:relative;
-}
-</style>
+<link href="${frontEnd_base}public/css/bootstrap_plugin.css" rel="stylesheet" media="screen">
 </head>
 <body>
 {{{navigation_bootstrap}}}
 <div class="container">
-	<div class="row define-list">
-	{@each list as it,index}
-		<div class="define-item">
-		<div class="thumbnail">
-			{@if it.cover}
-				<a href="/blog/${it.id}" title="${it.title}" target="_self" >
-					<img src="${it.cover}" alt="${it.title}" />
+	<div class="define-list">
+		<div class="col-sm-8">
+			{@each list as it,index}
+			<div class="media define-item">
+				{@if it.cover}
+				<a class="pull-left" href="/blog/${it.id}" title="${it.title}" target="_self" >
+					<img class="media-object" src="${it.cover}?imageView/1/w/120/h/120/q/85" alt="${it.title}" />
 				</a>
-			{@/if}
-		  <div class="caption">
-			<h3><a href="/blog/${it.id}" title="${it.title}" lofox="true" target="_self" >${it.title}</a></h3>
-			<p>${it.intro}</p>
-			<p>${it.time_show}</p>
-			<p><a href="/blog/${it.id}"  class="btn btn-primary" role="button">查看全文</a></p>
-		  </div>
+				{@/if}
+				<div class="media-body">
+					<h4 class="media-heading"><a href="/blog/${it.id}" title="${it.title}" lofox="true" target="_self" >${it.title}</a></h4>
+					<p>${it.intro}</p>
+				</div>
+			</div>
+			{@/each}
 		</div>
-	  </div>
-	  
-	{@/each}
+		<div class="col-sm-4"></div>
 	</div>
 </div>
-<script type="text/javascript" src="${frontEnd_base}lib/jquery/jquery.js"></script>
-<script type="text/javascript" src="${frontEnd_base}lib/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	var app_config = {
 		'frontEnd_base' : '${frontEnd_base}',
 		'imgDomain' : '${img_domain}'
 	};
 </script>
+<script type="text/javascript" src="${frontEnd_base}lib/jquery/jquery.js"></script>
+<script type="text/javascript" src="${frontEnd_base}lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${frontEnd_base}public/js/bootstrap_plugin.js"></script>
+{{{footer}}}
 {{{baiduAndGoogleTongji}}}
 </body>
 </html>
