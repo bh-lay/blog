@@ -17,17 +17,22 @@
 <body>
 {{{navigation_bootstrap}}}
 <div class="container">
-	<div class="row">
-{@each list as it,index}
-<div class="col-sm-6 col-md-4">
-	<div class="thumbnail">
-		<a href="/labs/${it.name}" title="${it.title}" lofox="true" target="_self" >
-			<img src="${it.cover}?imageView/1/w/300/h/400/q/85" alt="${it.title}" />
-			<h3>${it.title}</h3>
-		</a>
-	</div>
-</div>
-{@/each}
+	<div class="row define-list">
+		<div class="col-sm-8">
+		{@each list as it,index}
+			<div class="media define-item">
+				<a class="pull-left" href="/labs/${it.name}" title="${it.title}" target="_self" >
+					<img class="media-object" src="${it.cover}?imageView/1/w/100/h/100/q/85" alt="${it.title}" />
+				</a>
+				<div class="media-body">
+					<h4 class="media-heading"><a href="/labs/${it.name}" title="${it.title}" lofox="true" target="_self" >${it.title}</a></h4>
+					<p>${it.intro}</p>
+				</div>
+			</div>
+		{@/each}
+		<div class="col-sm-4">
+		</div>
+		</div>
 	</div>
 </div>
 <script type="text/javascript">
