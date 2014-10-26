@@ -17,6 +17,10 @@
 .toNewVersion i {
   margin-right: 5px;
 }
+.toNewVersion:hover {
+  color: #fff;
+  text-decoration: none;
+}
 .define-list {
   padding: 20px 0px;
 }

@@ -46,20 +46,10 @@ function isShowedToday(){
  * 显示版本提示框
  *
  */
-function showTips(){
-	var $btn = $('.toNewVersion');
-	//检测浏览器
-	if(!isAdvancedBrowser()){
-		$btn.hide();
-		return;
-	}
-	//检测是否已经显示过
-	if(isShowedToday()){
-		return;
-	}
+function showTips(btn){
 	UI.pop({
 		'html': 'gun',
-		'from': $btn[0],
+		'from': btn,
 		'mask': true,
 		'closeFn' : function(){
 			//alert('123467');
@@ -74,9 +64,25 @@ function showTips(){
 		}
 	});
 }
+function version_init(){
+	var $btn = $('.toNewVersion');
+	//检测浏览器
+	if(!isAdvancedBrowser()){
+		$btn.hide();
+		return;
+	}
+	//检测是否已经显示过
+	if(isShowedToday()){
+		return;
+	}
+	setTimeout(function(){
+		showTips($btn[0]);
+	},1000);
+	$btn.click(function(){
+		showTips($btn[0]);
+	});
+}
 
 $.getScript(app_config.frontEnd_base + 'UI/dialog.js',function(){
-	setTimeout(function(){
-		showTips();
-	},1000);
+	version_init();
 });
