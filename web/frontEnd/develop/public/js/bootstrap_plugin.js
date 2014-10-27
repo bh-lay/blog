@@ -43,9 +43,8 @@ function isShowedToday(){
 	} 
 }
 var changeVersionTpl = ['<div style="text-align:center;padding: 20px 10px;">',
-	'<p>哇，你的浏览器真高级！</p>',
 	'<p>快试试</p>',
-	'<h3>高逼格模式</h3>',
+	'<h3>尝鲜版</h3>',
 '</div>'].join('');
 /**
  * 显示版本提示框
@@ -60,7 +59,7 @@ function showTips(btn){
 	active_pop = UI.pop({
 		'html': changeVersionTpl,
 		'from': btn,
-		'width': 450,
+		'width': 600,
 		'closeFn' : function(){
 			active_pop = null;
 			var DATE = new Date();
@@ -79,11 +78,12 @@ function showTips(btn){
 	});
 }
 function version_init(){
-	var $btn = $('.toNewVersion');
+	
+	
 	//检测浏览器
-	if(!isAdvancedBrowser()){
-		$btn.remove();
-	}else{
+	if(isAdvancedBrowser()){
+		var $btn = $('<a href="javascript:void(0)" class="toNewVersion"><i class="glyphicon glyphicon-send"></i>尝鲜版</a>');
+		$('body').append($btn);
 		$btn.click(function(){
 			showTips($btn[0]);
 		});
@@ -98,3 +98,19 @@ function version_init(){
 $.getScript(app_config.frontEnd_base + 'UI/dialog.js',function(){
 	version_init();
 });
+
+
+//评论模块
+var $comments = $('.comments_area');
+if($comments.length){
+	var html;
+	if(isAdvancedBrowser()){
+		html = ['<div class="panel panel-default">',
+			'<div class="panel-heading">评论</div>',
+			'<div class="panel-body">',
+				'<h3>评论，请移步尝鲜版！</h3><a href="javascript:void(0)" type="button" class="btn btn-info">进入尝鲜版</a>',
+			'</div>',
+		'</div>'].join('');
+	}
+	$comments.html(html);
+}

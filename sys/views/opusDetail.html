@@ -16,8 +16,8 @@
 </head>
 <body>
 {{{navigation_bootstrap}}}
-	<div class="container">
-	<div class="row article">
+<div class="container">
+	<div class="row">
 		<div id="focusTitle">
 			{@if cover}
 				<img src="${cover}" alt="${title}" class="topicImg" />
@@ -32,8 +32,10 @@
 		</div>
 		<div class="panel">
 			<div class="photo"><img src="${opus_pic}" alt="${title}" /></div>
-			<div class="text">$${content}</div>
+			<div class="article">$${content}</div>
 		</div>
+		
+		<div class="comments_area"></div>
 	</div>
 </div>
 <script type="text/javascript">
