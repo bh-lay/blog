@@ -16,8 +16,7 @@ var mime = {
 	'rar' : 'application/zip',
 	'zip' : 'application/zip',
 	'pdf' : 'application/pdf',
-	'txt' : 'text/plain',
-	'mp3' : 'audio/mpeg'
+	'txt' : 'text/plain'
 };
 
 /*read static resources*/
