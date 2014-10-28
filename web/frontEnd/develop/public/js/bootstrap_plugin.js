@@ -1,26 +1,43 @@
-
+/**
+ * 判断是否支持css属性
+ * 兼容css3
+ */
+var supports = (function() {
+	var styles = document.createElement('div').style,
+		vendors = 'Webkit Khtml Ms O Moz'.split(/\s/);
+	
+	return function(prop) {
+		var returns = false;
+		if ( prop in styles ){
+			returns = prop;
+		}else{
+			prop = prop.replace(/^[a-z]/, function(val) {
+				return val.toUpperCase();
+			});
+			for(var i=0,total=vendors.length;i<total;i++){
+				if ( vendors[i] + prop in styles ) {
+					returns = ('-' + vendors[i] + '-' + prop).toLowerCase();
+				}
+			}
+		}
+		return returns;
+	};
+})();
+/**
+ * 是否支持 canvas
+ */
+function supports_canvas() {
+  return !!document.createElement('canvas').getContext;
+}
 /**
  * 检测是否为高级浏览器
  *
  */
 function isAdvancedBrowser(){
-	var browser = navigator.appName 
-	var b_version = navigator.appVersion 
-	var version = b_version.split(";"); 
-	var trim_Version = version[1] ? version[1].replace(/[ ]/g,"") : ''; 
-	var isIe678 = false;
-	if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE6.0"){
-		isIe678 = true;
-	} else if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE7.0"){
-		isIe678 = true;
-	}else if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE8.0"){
-		isIe678 = true;
-	}
-	
-	if(isIe678){
-		return false;
-	}else{
+	if(supports('transition') && supports('transform') && supports_canvas()){
 		return true;
+	}else{
+		return false;
 	}
 }
 /**
@@ -56,7 +73,7 @@ var changeVersionTpl = ['<div class="newVersionPop">',
 		'<p class="nVP_1">你竟然还在使用<span>屌丝版</span></p>',
 		'<p class="nVP_2">小剧已为高级浏览器单独做了开发</p>',
 		'<p class="nVP_3"><a href="javascript:void(0)">使用尝鲜版</a></p>',
-		'<p class=nVP_4><a href="javascript:void(0)">搞什么鬼，还分版本？</a></p>',
+		'<p class=nVP_4><a target="_blank" href="/blog/14955f2a02b">搞什么鬼，还分版本？</a></p>',
 	'</div>',
 '</div>'].join('');
 /**
