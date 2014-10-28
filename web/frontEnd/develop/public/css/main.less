@@ -71,7 +71,7 @@
 
 
 
-.nav_main {
+.nav_body {
 	position: relative;
 	top: 0px;
 	left: 0px;
@@ -82,73 +82,84 @@
 }
 
 .nav {
-	padding-top: 40px
-}
-
-.nav li {
-	display: block;
-	margin-bottom: 10px
-}
-
-.nav .cur a {
-	color: #fff
-}
-
-.nav a {
-	display: block;
-	width: 100%;
-	height: 40px;
-	line-height: 40px;
-	outline: none;
-	color: #888;
-	white-space: nowarp;
-	overflow: hidden;
-	.transition(0.1s);
-}
-
-.nav a:hover {
-	width: 150px;
-	text-decoration: none;
-	background: #fff;
-	box-shadow: 1px 1px 2px rgba(0,0,0,0.6);
-	color: #333;
-	.transition(0s);
-}
-
-.nav a:hover strong {
-	display: inline-block
-}
-
-.nav a i {
-	display: inline-block;
-	width: 40px;
-	text-align: center;
-	font-family: "layIcon";
-	margin-right: 5px;
-	font-size: 22px;
-	font-style: normal
-}
-
-.nav a strong {
-	font-weight: normal;
-	font-size: 14px
+	padding-top: 40px;
+	li {
+		display: block;
+		margin-bottom: 10px
+	}
+	.cur a {
+		color: #fff
+	}
+	a {
+		display: block;
+		width: 100%;
+		height: 40px;
+		line-height: 40px;
+		outline: none;
+		color: #888;
+		white-space: nowarp;
+		overflow: hidden;
+		.transition(0.1s);
+		i {
+			display: inline-block;
+			width: 40px;
+			text-align: center;
+			font-family: "layIcon";
+			margin-right: 5px;
+			font-size: 22px;
+			font-style: normal
+		}
+		strong {
+			font-weight: normal;
+			font-size: 14px
+		}
+		&:hover {
+			width: 150px;
+			text-decoration: none;
+			background: #fff;
+			box-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+			color: #333;
+			.transition(0s);
+			strong {
+				display: inline-block
+			}
+		}
+	}
 }
 
 .navLink {
 	overflow: hidden;
-	display: none
-}
+	display: none;
+	li {
+		height: 20px;
+		float: left;
+		padding: 10px;
+		a {
+			line-height: 20px;
+			padding: 0px 5px;
+			font-size: 12px
+		}
+	}
 
-.navLink li {
-	height: 20px;
-	float: left;
-	padding: 10px
 }
-
-.navLink li a {
-	line-height: 20px;
-	padding: 0px 5px;
-	font-size: 12px
+.nav_bottom{
+	position: absolute;
+	width: 100%;
+	left: 0;
+	bottom: 0;
+	padding: 0 0 20px;
+	a{
+		padding: 10px 0;
+		display: block;
+		text-align: center;
+		color: #aaa;
+	}
+	i {
+		display: inline-block;
+		font-family: "layIcon";
+		font-size: 22px;
+		font-style: normal
+	}
 }
 .nav_mask{
 	position:fixed;
@@ -211,7 +222,7 @@
 		.transition(0.4s,ease-out);
 	}
 
-	.nav_main {
+	.nav_body {
 		width: 150px;
 		left: -150px;
 		.transition(0.4s,ease-out);
@@ -231,7 +242,7 @@
 	}
 
 	.nav_slidedown{
-		.nav_main {
+		.nav_body {
 			left: 0px
 		}
 		.app_container{
@@ -306,8 +317,21 @@
 	left: 0;
 }
 
-
-
+.setting_pop{
+	
+}
+.backToOldVersion{
+	display: block;
+	height: 80px;
+	line-height: 80px;
+	text-align: center;
+	color: #555;
+	.transition(0.3s);
+	&:hover{
+		color: #000;
+	}
+	
+}
 
 .tongji {
 	width: 0px;
@@ -434,6 +458,7 @@
 	}
 }
 .zoomin{
+	overflow: hidden;
 	animation: zoomin 0.5s;
 	-moz-animation: zoomin 0.5s;
 	-webkit-animation: zoomin 0.5s;
@@ -445,6 +470,7 @@
 	-webkit-transform: scale(0.1);
 	-o-transform: scale(0.1);
 	opacity: 0;
+	overflow: hidden;
 	transition: 0.7s;
 }
 
@@ -553,7 +579,7 @@
 
 .l_sendBox {
 	position: relative;
-	z-index: 10;
+	z-index: 1;
 	-webkit-perspective: 800px;
 	-moz-perspective: 800px;
 	-ms-perspective: 800px;
@@ -1289,10 +1315,6 @@
 .article .topicImg {
 	display: block;
 	margin: auto
-}
-
-.copylink {
-	margin: 10px 20px
 }
 
 .labshow {

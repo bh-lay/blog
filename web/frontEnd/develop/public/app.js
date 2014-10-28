@@ -130,9 +130,12 @@ seajs.use([
 		removeListDom();
 		removeDetailDom();
 		removePanelDom();
+		newDom.addClass('zoomin');
+		setTimeout(function(){
+			newDom.removeClass('zoomin');
+		},1000);
 		
 		active_panel_dom = newDom;
-		newDom.addClass('zoomin');
 		return newDom;
 	}
 	//显示列表dom
@@ -299,6 +302,8 @@ seajs.use([
 		},20);
 		return false;
 	});
+	
+	
 	L.push = function(url){
 		lofox.push(url)
 	}
@@ -319,12 +324,33 @@ seajs.use([
 			$('.app_layer').toggleClass('nav_slidedown');
 		});
 		
-		$('.nav_main a').each(function(){
+		$('.nav_body a').each(function(){
 		  $(this).attr('title','')
 		});
 		
-		$('.nav_main,.nav_mask').on('click',function(){
+		$('.nav_body,.nav_mask').on('click',function(){
 			$('.app_layer').removeClass('nav_slidedown');
+		});
+		var active_pop;
+		$('.nav_setting').click(function(){
+			if(active_pop){
+				return;
+			}
+			var offset = $(this).offset();
+			active_pop = UI.pop({
+				'title' : '设置',
+				'from': $(this)[0],
+				'width': 400,
+				'html': '<div class="setting_pop"><a class="backToOldVersion" href="javascript:void(0)">回到屌丝版</a></div>',
+				'closeFn': function(){
+					active_pop = null;
+				}
+			});
+			
+			$(active_pop.dom).on('click','.backToOldVersion',function(){
+				document.cookie = 'ui_version=j1s;path=/;max-age=0';
+				window.location.reload();
+			});
 		});
 	};
 
@@ -385,30 +411,30 @@ seajs.use([
 			{'src': app_config.frontEnd_base + 'public/images/gallery/coast.jpg','alt':'江边'}
 		]
 	};
+	/**
+	 * 判断是否支持css属性
+	 * 兼容css3
+	 */
 	var supports = (function() {
-   	var div = document.createElement('div'),
-	      vendors = 'Khtml Ms O Moz Webkit'.split(' '),
-	      len = vendors.length;
-	  
-	   return function(prop) {
-	      if ( prop in div.style ){
-	      	return true;
-	      }
-	  
-	      prop = prop.replace(/^[a-z]/, function(val) {
-	         return val.toUpperCase();
-	      });
-	
-			for(var i = 0; i<len; i++){
-				if ( vendors[len] + prop in div.style ) {
-	            // browser supports box-shadow. Do what you need.
-	            // Or use a bang (!) to test if the browser doesn't.
-	            break 
-	            return true;
-	         }
+		var styles = document.createElement('div').style,
+			vendors = 'Webkit Khtml Ms O Moz'.split(/\s/);
+		
+		return function(prop) {
+			var returns = false;
+			if ( prop in styles ){
+				returns = prop;
+			}else{
+				prop = prop.replace(/^[a-z]/, function(val) {
+					return val.toUpperCase();
+				});
+				for(var i=0,total=vendors.length;i<total;i++){
+					if ( vendors[i] + prop in styles ) {
+						returns = ('-' + vendors[i] + '-' + prop).toLowerCase();
+					}
+				}
 			}
-	      return false;
-	   };
+			return returns;
+		};
 	})();
 	
 	function loadImg(src,parm){

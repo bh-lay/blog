@@ -12,10 +12,6 @@ define(function(require,exports){
 			'<p><span>时间：${time_show} </span><span>作者：${author}</span></p>',
 		'</div>',
 		'<div class="article">$${content}</div>',
-		'<div class="copylink">',
-			'<div class="tag"><strong>本文关键字：</strong>${tags}</div>',
-			'<div class="pageUrl"><strong>转载请注明来源：</strong>http://bh-lay.com/blog/${id}</div>',
-		'</div>',
 		'</div></div>',
 		'<div class="comments_frame"><div class="l_row"></div></div>',
 	'</div>'].join('');
