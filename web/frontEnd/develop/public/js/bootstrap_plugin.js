@@ -28,7 +28,7 @@ function isAdvancedBrowser(){
  */
 function isShowedToday(){
 	var cookie_str = document.cookie || '';
-	var time_match = cookie_str.match(/last_show_version_time=(.+?);/);
+	var time_match = cookie_str.match(/last_show_version_time=(.+?)(;|$)/);
 	if(!time_match){
 		return false;
 	}else{
