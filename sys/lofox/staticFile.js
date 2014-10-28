@@ -73,7 +73,7 @@ function readFile(realPath,req,responseFile,notFound) {
 				
 				if(req.headers['if-modified-since'] && (lastModified == req.headers['if-modified-since'])) {
 					
-					responseFile(304,"Not Modified");
+					responseFile(304);
 					
 				} else {
 					var maxAge = 60 * 60 * 24 * 365;
