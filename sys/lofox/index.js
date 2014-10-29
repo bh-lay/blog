@@ -116,7 +116,6 @@ function APP(port){
 		
 		var new_connect = new connect(req,res);
 		var path = new_connect.url;
-		console.log(path);
 		var pathNode = pathParser(path.pathname);
 		var result = findUrlInMaps(pathNode,me.MAPS);
 		
@@ -148,6 +147,7 @@ function APP(port){
 	});
 	
 	server.listen(port, 0,0,0,0);
+	console.log('server start with port ' + port);
 };
 
 /**

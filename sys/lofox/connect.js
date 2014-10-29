@@ -36,17 +36,14 @@ function send (status,headers,content){
 	}else{
 		this.response.end();
 	}
-	return
 	// logger ////////////////////////////////////
-	var logger = {
+	console.log({
 		'time':new Date(),
-		'ip':this.request['connection']['remoteAddress'],
-		'ip2' : this.request['headers']['x-forwarded-for'] ,
+		'status' : status,
+		'ip': this.ip(),
 		'url':this.request.url,
-		'user-agent':this.request.headers['user-agent'],
-		'status' : status
-	};
-	console.log(logger);
+		'user-agent':this.request.headers['user-agent']
+	});
 }
 //格式化cookie
 function parseCookie(str){
@@ -200,6 +197,9 @@ CONNECT.prototype['session'] = function(callback){
 	}
 };
 //	var IP = req['connection']['remoteAddress'];
+CONNECT.prototype['ip'] = function(){
+	return this.request['headers']['x-forwarded-for'] || this.request['connection']['remoteAddress'];
+}
 //	var userAgent = req['headers']['user-agent'];
 
 module.exports = CONNECT;
