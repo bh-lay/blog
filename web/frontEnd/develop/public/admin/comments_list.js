@@ -24,7 +24,6 @@ define(function(){
 			'url' : '/ajax/comments/list',
 			'type' : 'GET',
 			'data' : {
-				'act' : 'get_list',
 				'skip' : start,
 				'limit' : limit
 			},

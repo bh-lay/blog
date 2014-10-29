@@ -23,12 +23,11 @@ function getUserInfo(id,callback){
 
 /**
  * 处理评论数据
+ *  增加用户信息
  *
  **/
 function handleData(docs,callback){
-
 	var users = {};
-	var list = [];
 	var uidsLength = 0;
 	var overLength = 0;
 	//获取所有需要的用户id
@@ -37,37 +36,39 @@ function handleData(docs,callback){
 			users[item.uid] = {};
 		}
 	});
+	/**
+	 * 处理用户信息字段
+	 */
 	function endFn(){
 		docs.forEach(function(item){
 			if(users[item.uid]){
 				item.user = users[item.uid];
 			}else if(item.user != null && typeof(item.user) == "object"){
-				
 				delete item.user.email;
 			}else{
 				item.user = {};
 			}
 		});
-		list = docs;
-		callback&&callback(list);
+		callback&&callback(docs);
 	}
 	
-	//遍历所有需要的用户id
-	for(var key in users){
-		uidsLength++;
-		//获取用户信息
-		getUserInfo(key,function(err,userInfo){
-			overLength++;
-			if(!err){
-				users[key] = userInfo;
-			}
-			if(overLength == uidsLength){
-				endFn();
-			}
-		});
-	}
 	if(uidsLength == 0){
 		endFn();
+	}else{
+		//遍历所有需要的用户id
+		for(var id in users){
+			uidsLength++;
+			//获取单个用户信息
+			getUserInfo(id,function(err,userInfo){
+				overLength++;
+				if(!err){
+					users[id] = userInfo;
+				}
+				if(overLength == uidsLength){
+					endFn();
+				}
+			});
+		}
 	}
 }
 
@@ -78,11 +79,6 @@ module.exports = function(data,callback){
 		limit_num = parseInt(data['limit']) || 10,
 		skip_num = parseInt(data['skip']) || 0;
 	
-	var resJSON = {
-		'limit':limit_num,
-		'skip':skip_num,
-	};
-	
 	var method = mongo.start();
 	method.open({'collection_name':'comments'},function(err,collection){
 		if(err){
@@ -91,7 +87,10 @@ module.exports = function(data,callback){
 			return
 		}
 		
-		var queryObj = cid.length > 1 ? {'cid' : cid} : {};
+		var queryObj = {};
+		if(data['cid'] && data['cid'].length > 1){
+			queryObj.cid = data['cid'];
+		}
 		
 		collection.find(queryObj,{limit:limit_num}).sort({time:-1}).skip(skip_num).toArray(function(err, docs) {
 			if(err){
@@ -100,14 +99,15 @@ module.exports = function(data,callback){
 			}
 			//count the all list
 			collection.count(queryObj,function(err,count){
-				resJSON['count'] = count;
 				method.close();
 				if(err){
 					callback&&callback(err);
 				}else{
 					handleData(docs,function(list){
-						resJSON['list'] = list;
-						callback&&callback(err,resJSON);
+						callback&&callback(err,{
+							'count': count,
+							'list': list
+						});
 					});
 				}
 			});

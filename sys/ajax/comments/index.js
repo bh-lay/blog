@@ -86,7 +86,7 @@ exports.list = function (connect,app){
 			'code' : 200
 		}
 		if(err){
-			json.code = 201
+			json.code = 201;
 		}else{
 			json.data = jsonData;
 		}
