@@ -24,7 +24,7 @@
   padding: 0px 15px;
   background: #fff;
   font-size: 14px;
-  color: #555;
+  color: #428bca;
   transition: all 0.1s linear;
   -moz-transition: all 0.1s linear;
   -webkit-transition: all 0.1s linear;
@@ -35,7 +35,7 @@
   color: #333;
 }
 .pagination .active span {
-  background: #333;
+  background: #428bca;
   color: #fff;
   font-size: 22px;
   cursor: default;
@@ -43,6 +43,21 @@
 .pagination .disabled span {
   color: #bbb;
   cursor: default;
+}
+@media (max-width: 660px) {
+  .pagination {
+    text-align: center;
+  }
+  .pagination li {
+    display: none;
+  }
+  .pagination .pagination_prev,
+  .pagination .pagination_next {
+    display: inline-block;
+    border-radius: 20px;
+    margin: 0px 10px;
+    overflow: hidden;
+  }
 }
 /**Ӧ��������**/
 .app_layer {

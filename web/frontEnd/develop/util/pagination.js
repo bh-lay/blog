@@ -8,9 +8,9 @@ define(function(require,exports){
 		var txt = '';
 
 		if (this.page_cur > 1) {
-			txt += '<li><a data-page="prev" href="javascript:void(0)" >上一页</a></li>';
+			txt += '<li class="pagination_prev"><a data-page="prev" href="javascript:void(0)" >上一页</a></li>';
 		}else{
-			txt += '<li class="disabled"><span>上一页</span></li>';
+			txt += '<li class="pagination_prev disabled"><span>上一页</span></li>';
 		}
 		var btn_num = 0;
 		var start_num = 0;
@@ -32,9 +32,9 @@ define(function(require,exports){
 			}
 		}
 		if (this.page_num - this.page_cur >= 1) {
-			txt += '<li><a data-page="next" href="javascript:void(0)">下一页</a></li>';
+			txt += '<li class="pagination_next"><a data-page="next" href="javascript:void(0)">下一页</a></li>';
 		}else{
-			txt += '<li class="disabled"><span>下一页</span></li>';
+			txt += '<li class="pagination_next disabled"><span>下一页</span></li>';
 		}
 		this.dom.html(txt);
 	}

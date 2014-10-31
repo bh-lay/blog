@@ -25,7 +25,7 @@
 	padding: 0px 15px;
 	background: #fff;
 	font-size: 14px;
-	color: #555;
+	color: #428bca;
 	.transition(0.1s);
 }
 .pagination a:hover{
@@ -33,7 +33,7 @@
 	color: #333;
 }
 .pagination .active span{
-	background: #333;
+	background: #428bca;
 	color: #fff;
 	font-size: 22px;
 	cursor: default;
@@ -42,7 +42,21 @@
 	color: #bbb;
 	cursor: default;
 }
-
+@media (max-width: 660px) {
+	.pagination{
+		text-align: center;
+		li{
+			display: none;
+		}
+		.pagination_prev,
+		.pagination_next{
+			display: inline-block;
+			border-radius: 20px;
+			margin: 0px 10px;
+			overflow: hidden;
+		}
+	}
+}
 /**Ó¦ÓÃÖ÷ÈÝÆ÷**/
 .app_layer{
 	position: absolute;
