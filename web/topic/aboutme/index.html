@@ -9,7 +9,6 @@
 	<meta name="Resource-type" content="Document" />
 	<link rel="stylesheet" type="text/css" href="jquery.fullPage.css" />
 	<style type="text/css">
-		@CHARSET "ISO-8859-1";
 /* Reset CSS
  * --------------------------------------- */
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,
@@ -57,8 +56,7 @@ abbr,acronym { border: 0;}
  * --------------------------------------- */
 body{
 	font-family: Microsoft Yahei,helvetica;
-	color: #333;
-	color: rgba(0,0,0,0.5);
+	color: #fff;
 }
 .wrap{
 	margin-left: auto;
@@ -78,13 +76,17 @@ p{
 	background-size: cover;
 }
 #section0{
-	background-image: url(night.jpg);
+	background-image: url(aboutme.jpg);
 }
 #section1{
-	background-image: url(work.jpg);
+	background-image: url(night.jpg);
 }
 #section3 p{
 	color: #fff;
+}
+#section4 {
+	background-image: url(work.jpg);
+	color: #000;
 }
 	</style>
 	<!--[if IE]>
@@ -98,7 +100,8 @@ p{
 	<div class="section " id="section0">
 			<img src="logo.png" alt="我是剧中人">
 			<p>90后天蝎男</p>
-			<p>前端工程师、全栈开发者</p>
+			<p>前端工程师</p>
+			<p>全栈开发尝试者</p>
 	</div>
 	<div class="section" id="section1">
 			<p>目前就职于上海矩方</p>
@@ -106,11 +109,11 @@ p{
 			<p>前上海易班前端工程师</p>
 	</div>
 	<div class="section" id="section2">
-			<p>喜欢设计上的学习与尝试</p>
+			<p>喜欢设计</p>
 			<p>热衷于交互、用户体验的开发与优化</p>
 	</div>
 	<div class="section" id="section3">
-			<p>爱好nodeJS的开发</p>
+			<p>爱好nodeJS开发</p>
 			<img src="nodejs.png"/>
 	</div>
 	<div class="section" id="section4">
@@ -128,7 +131,10 @@ p{
 				anchors: ['firstPage', 'secondPage', '3rdPage', '4thpage', 'lastPage'],
 				navigation:true,
 				scrollingSpeed: 800,
-				css3: true
+				css3: true,
+				afterLoad : function(){
+					console.log(arguments);
+				}
 			});
 
 		});
