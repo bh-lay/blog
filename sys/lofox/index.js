@@ -13,7 +13,7 @@ var cache = require('./cache.js');
 var staticFile = require('./staticFile.js');
 var url_redirect = require('../conf/301url');
 var config = require('../conf/app_config');
-
+var pagination = require('./utils/pagination.js');
 /**
  * 格式化path 
  */
@@ -186,6 +186,9 @@ APP.prototype.rest = function(callback){
 };
 APP.prototype.views = views;
 APP.prototype.cache = cache;
+APP.prototype.utils = {
+	'pagination' : pagination
+};
 APP.prototype.config = config;
 
 module.exports = APP;
