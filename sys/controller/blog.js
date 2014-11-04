@@ -21,41 +21,68 @@ function getDetail(id,callback){
 				callback && callback('哇塞，貌似这篇博文不存在哦!');
 			}else{
 				docs[0].time_show = parse.time(docs[0].time_show ,'{y}-{m}-{d}');
-			//	docs[0].content = markdown.parse(docs[0].content);
 				docs[0].content = converter.makeHtml(docs[0].content);
-			//	callback&&callback(docs[0].content);
 				callback&&callback(null,docs[0]);
 			}
 		});
 	});
 }
 
-function getList(callback){
+function getList(param,callback){
 	var method = mongo.start();
+	var param = param || {};
+	var skip = param.skip || 0;
+	var limit = param.limit || 10;
+	
 	method.open({'collection_name':'article'},function(err,collection){
-		collection.find({}, {limit:10}).sort({id:-1}).toArray(function(err, docs) {
-			method.close();
-			for(var i in docs){
-				docs[i].time_show = parse.time(docs[i].time_show ,'{y}年-{m}月-{d}日');
-				docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? CONFIG.img_domain + docs[i].cover : docs[i].cover;
-			}
-			callback && callback(null,docs);
+		collection.count(function(err,count){
+			collection.find({}, {
+				limit:limit
+			}).sort({id:-1}).skip(skip).toArray(function(err, docs) {
+				method.close();
+				for(var i in docs){
+					docs[i].time_show = parse.time(docs[i].time_show ,'{y}年-{m}月-{d}日');
+					docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? CONFIG.img_domain + docs[i].cover : docs[i].cover;
+				}
+				callback && callback(null,docs,{
+					'count' : count,
+					'skip' : skip,
+					'limit' : limit
+				});
+			});
 		});
 	});
 };
 exports.list = function (connect,app){
-	app.cache.html('blog_list',function(this_cache){
+	
+	var data = connect.url.search;
+	
+	var page = data.page || 1;
+	
+	var cache_name = 'blog_list_' + page;
+	app.cache.html(cache_name,function(this_cache){
 		//do something with this_cache
 		connect.write('html',200,this_cache);
 	},function(save_cache){
 		//if none of cache,do this Fn
-		getList(function(err,list){
+		getList({
+			'skip' : (page-1) * 10,
+			'limit': 10
+		},function(err,list,data){
+			var page_html = app.utils.pagination({
+				'list_count' : data.count,
+				'page_list_num': data.limit,
+				'page_cur': page,
+				'max_page_btn': 10,
+				'base_url' : '/blog?page={num}'
+			});
 			//获取视图
 			app.views('blogList',{
 				'title' : '我的博客',
 				'keywords' : '剧中人,bh-lay,网站建设,网页设计,设计师',
 				'description' : '小剧客栈是剧中人精心营造的一个向广大设计爱好者、喜欢剧中人开放的博客，小剧希望用设计师鞭策自己，愿意和你共同分享，一起进步！',
-				'list' : list
+				'list' : list,
+				'pagination' : page_html
 			},function(err,html){
 				save_cache(html);
 			});
