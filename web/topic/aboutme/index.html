@@ -88,6 +88,28 @@ p{
 	background-image: url(work.jpg);
 	color: #000;
 }
+#section5 img:hover{
+	transform: scale(2);
+}
+.section5_cnt{
+	position: relative;
+	max-width: 700px;
+	margin:auto;
+}
+.section5_left{
+	position: absolute;
+	width: 240px;
+	top: 0;
+	left: 0;
+}
+.section5_right{
+	position: relative;
+	padding-left: 240px;
+}
+.github-widget-user{
+	font-size: 14px;
+	text-align: left;
+}
 	</style>
 	<!--[if IE]>
 		<script type="text/javascript">
@@ -119,16 +141,29 @@ p{
 	<div class="section" id="section4">
 			<p>酷爱造轮子，目前正在痛改前非！</p>
 	</div>
+	<div class="section" id="section5">
+		<div class="section5_cnt">
+			<div class="section5_right">
+				<img src="github.png" />
+				<p>常混迹于github</p>
+				<img src="github.png" />
+				<p>常混迹于github</p>
+				
+			</div>
+			<div class="section5_left"><div class="github-widget-user" data-user="bh-lay"></div></div>
+		</div>
+	</div>
 </div>
 
 <script src="jquery.min.js"></script>
 <script src="jquery-ui.min.js"></script>
 <script type="text/javascript" src="jquery.fullPage.js"></script>
+<script type="text/javascript" src="jquery-github-user-widget.js"></script>
 <script type="text/javascript">
 		$(document).ready(function() {
 			$('#fullpage').fullpage({
-				sectionsColor: ['whitesmoke', '#4BBFC3', '#7BAABE', '#151911', '#ccddff'],
-				anchors: ['firstPage', 'secondPage', '3rdPage', '4thpage', 'lastPage'],
+				sectionsColor: ['whitesmoke', '#4BBFC3', '#7BAABE', '#151911', '#ccddff', '#7BAABE'],
+				anchors: ['page1', 'page2', 'page3', 'page4', 'page5','page6'],
 				navigation:true,
 				scrollingSpeed: 800,
 				css3: true,
@@ -139,6 +174,5 @@ p{
 
 		});
 </script>
-
 </body>
 </html>
