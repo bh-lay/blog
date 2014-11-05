@@ -58,17 +58,30 @@ body{
 	font-family: Microsoft Yahei,helvetica;
 	color: #fff;
 }
+
 .wrap{
-	margin-left: auto;
-	margin-right: auto;
-	width: 960px;
 	position: relative;
+	max-width: 700px;
+	margin:auto;
+	
+	-webkit-transform: scale(0.2);
+	-moz-transform: scale(0.2);
+	transform: scale(0.2);
+	opacity: 0;
+	transition: all 1s ease-out;
+}
+.active .wrap{
+	-webkit-transform: scale(1);
+	-moz-transform: scale(1);
+	transform: scale(1);
+	opacity: 1;
 }
 h1{
-	font-size: 3em;
+	font-size: 2em;
+	margin-bottom: 1em;
 }
 p{
-	font-size: 2em;
+	font-size: 1.5em;
 }
 .section{
 	text-align: center;
@@ -81,34 +94,42 @@ p{
 #section1{
 	background-image: url(night.jpg);
 }
+#section2{
+	background-image: url(work.jpg);
+}
+#section2 p{
+	color: #000;
+}
 #section3 p{
 	color: #fff;
 }
-#section4 {
-	background-image: url(work.jpg);
-	color: #000;
+#section4 h1{
+	color: #fff;
 }
-#section5 img:hover{
-	transform: scale(2);
-}
-.section5_cnt{
-	position: relative;
-	max-width: 700px;
-	margin:auto;
-}
-.section5_left{
+.section4_left{
 	position: absolute;
 	width: 240px;
 	top: 0;
 	left: 0;
 }
-.section5_right{
+.section4_right{
 	position: relative;
-	padding-left: 240px;
+	padding-left: 300px;
+	height: 560px;
+}
+.section4_right small a{
+	font-size: 14px;
+	color: #03a;
+}
+.section4_right small a:hover{
+	text-decoration: underline;
 }
 .github-widget-user{
 	font-size: 14px;
 	text-align: left;
+}
+.github-widget-user p{
+	font-size: 1em;
 }
 	</style>
 	<!--[if IE]>
@@ -120,35 +141,42 @@ p{
 <body>
 <div id="fullpage">
 	<div class="section " id="section0">
+		<div class="wrap">
 			<img src="logo.png" alt="我是剧中人">
 			<p>90后天蝎男</p>
 			<p>前端工程师</p>
 			<p>全栈开发尝试者</p>
+		</div>
 	</div>
 	<div class="section" id="section1">
+		<div class="wrap">
 			<p>目前就职于上海矩方</p>
 			<p>担任法国凯捷技术顾问</p>
 			<p>前上海易班前端工程师</p>
+		</div>
 	</div>
 	<div class="section" id="section2">
+		<div class="wrap">
 			<p>喜欢设计</p>
-			<p>热衷于交互、用户体验的开发与优化</p>
+			<p>热衷于用户体验的实现与优化</p>
+			<p>更酷爱造轮子（这是病，得治）</p>
+		</div>
 	</div>
 	<div class="section" id="section3">
+		<div class="wrap">
 			<p>爱好nodeJS开发</p>
 			<img src="nodejs.png"/>
+		</div>
 	</div>
 	<div class="section" id="section4">
-			<p>酷爱造轮子，目前正在痛改前非！</p>
-	</div>
-	<div class="section" id="section5">
-		<div class="section5_cnt">
-			<div class="section5_right">
-				<p>常混迹于github</p>
-				<img src="github.png" />
-				
+		<div class="wrap">
+			<div class="section4_right">
+				<img class="github_ico" src="github.png" />
+				<h1>常混迹于github</h1>
+				<p>←github名片（本人造的，你造吗）</p>
+				<p><small><a href="https://github.com/bh-lay/github-widget-user" target="_blank">jquery-github-user-widget.js</a></small></p>
 			</div>
-			<div class="section5_left"><div class="github-widget-user" data-user="bh-lay"></div></div>
+			<div class="section4_left"><div class="github-widget-user" data-user="bh-lay"></div></div>
 		</div>
 	</div>
 </div>
@@ -163,7 +191,7 @@ p{
 				sectionsColor: ['whitesmoke', '#4BBFC3', '#7BAABE', '#151911', '#ccddff', '#7BAABE'],
 				anchors: ['page1', 'page2', 'page3', 'page4', 'page5','page6'],
 				navigation:true,
-				scrollingSpeed: 800,
+				scrollingSpeed: 600,
 				css3: true,
 				afterLoad : function(){
 					console.log(arguments);
