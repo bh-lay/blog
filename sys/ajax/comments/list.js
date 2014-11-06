@@ -15,8 +15,11 @@ function getUserInfo(id,callback){
 				callback && callback(err);
 				return;
 			}
-			delete docs[0]['password'];
-			callback && callback(null,docs[0]);
+			callback && callback(null,{
+				'avatar': docs[0].avatar,
+				'id': docs[0].id,
+				'username': docs[0].username
+			});
 		});
 	});
 }
@@ -27,19 +30,11 @@ function getUserInfo(id,callback){
  *
  **/
 function handleData(docs,callback){
-	var users = {};
-	var uidsLength = 0;
-	var overLength = 0;
-	//获取所有需要的用户id
-	docs.forEach(function(item){
-		if(item.uid){
-			users[item.uid] = {};
-		}
-	});
 	/**
-	 * 处理用户信息字段
+	 * 统一调用回调
 	 */
 	function endFn(){
+		//处理用户信息字段
 		docs.forEach(function(item){
 			if(users[item.uid]){
 				item.user = users[item.uid];
@@ -52,19 +47,30 @@ function handleData(docs,callback){
 		callback&&callback(docs);
 	}
 	
+	var users = {};
+	var uidsLength = 0;
+	var overLength = 0;
+	
+	//获取所有需要的用户id
+	docs.forEach(function(item){
+		var uid = item.uid;
+		if(uid && !users[uid]){
+			users[uid] = {};
+			uidsLength++;
+		}
+	});
 	if(uidsLength == 0){
 		endFn();
 	}else{
 		//遍历所有需要的用户id
 		for(var id in users){
-			uidsLength++;
 			//获取单个用户信息
 			getUserInfo(id,function(err,userInfo){
 				overLength++;
 				if(!err){
 					users[id] = userInfo;
 				}
-				if(overLength == uidsLength){
+				if(overLength >= uidsLength){
 					endFn();
 				}
 			});
