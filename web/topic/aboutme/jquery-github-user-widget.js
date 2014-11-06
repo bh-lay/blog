@@ -87,6 +87,6 @@
 		//查找并生成默认的widget
 		setTimeout(function(){
 			$('.github-widget-user').github_user_widget();
-		});
+		},100);
 	});
 })(jQuery);

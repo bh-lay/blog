@@ -3,10 +3,10 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>关于剧中人</title>
-	<meta name="author" content="Alvaro Trigo Lopez" />
+	<meta name="author" content="bh-lay" />
 	<meta name="description" content="剧中人，90后前端开发，全栈开发实践者。" />
 	<meta name="keywords"  content="剧中人,小剧客栈,前端开发" />
-	<meta name="Resource-type" content="Document" />
+	<meta content="width=device-width, initial-scale=0.5, user-scalable=0" name="viewport">
 	<link rel="stylesheet" type="text/css" href="jquery.fullPage.css" />
 	<style type="text/css">
 /* Reset CSS
@@ -59,22 +59,57 @@ body{
 	color: #fff;
 }
 
+@-webkit-keyframes bounce{
+0%,20%,50%,80%,100%{-webkit-transform:translateY(0)}
+40%{-webkit-transform:translateY(-30px)}
+60%{-webkit-transform:translateY(-15px)}
+}
+@-moz-keyframes bounce{
+0%,20%,50%,80%,100%{-moz-transform:translateY(0)}
+40%{-moz-transform:translateY(-30px)}
+60%{-moz-transform:translateY(-15px)}
+}
+
+@-webkit-keyframes flipInX{
+0%{-webkit-transform:perspective(400px) rotateX(90deg);
+opacity:0}
+40%{-webkit-transform:perspective(400px) rotateX(-10deg)}
+70%{-webkit-transform:perspective(400px) rotateX(10deg)}
+100%{-webkit-transform:perspective(400px) rotateX(0deg);
+opacity:1}
+}
+@-moz-keyframes flipInX{
+0%{-moz-transform:perspective(400px) rotateX(90deg);
+opacity:0}
+40%{-moz-transform:perspective(400px) rotateX(-10deg)}
+70%{-moz-transform:perspective(400px) rotateX(10deg)}
+100%{-moz-transform:perspective(400px) rotateX(0deg);
+opacity:1}
+}
+.down{
+	position: absolute;
+	display: block;
+	bottom: 10px;
+	left: 50%;
+	width: 50px;
+	height: 28px;
+	margin-left: -25px;
+	background: url(down.png);
+}
+.active .down{
+	-webkit-animation:bounce 1s 2s ease both;
+	-moz-animation:bounce 1s 2s ease both;
+}
 .wrap{
 	position: relative;
 	max-width: 700px;
 	margin:auto;
-	
-	-webkit-transform: scale(0.2);
-	-moz-transform: scale(0.2);
-	transform: scale(0.2);
-	opacity: 0;
-	transition: all 1s ease-out;
+	padding: 0px 10px;
+	transition: all 0.2s;
 }
 .active .wrap{
-	-webkit-transform: scale(1);
-	-moz-transform: scale(1);
-	transform: scale(1);
-	opacity: 1;
+	-webkit-animation:flipInX .6s .5s ease both;
+	-moz-animation:flipInX .6s .5s ease both;
 }
 h1{
 	font-size: 2em;
@@ -110,11 +145,12 @@ p{
 	position: absolute;
 	width: 240px;
 	top: 0;
-	left: 0;
+	left: 10px;
 }
 .section4_right{
 	position: relative;
-	padding-left: 300px;
+	padding-left: 260px;
+	padding-top: 100px;
 	height: 560px;
 }
 .section4_right small a{
@@ -130,6 +166,23 @@ p{
 }
 .github-widget-user p{
 	font-size: 1em;
+}
+
+#section5 .wrap{
+	text-align: right;
+}
+#section5 a{
+	display: inline-block;
+	width: 200px;
+	text-align: center;
+	line-height:40px;
+	font-size: 16px;
+	font-weight: normal;
+	color: #555;
+	background: #fff;
+}
+#section5 a:hover{
+	background: #eee;
 }
 	</style>
 	<!--[if IE]>
@@ -147,13 +200,15 @@ p{
 			<p>前端工程师</p>
 			<p>全栈开发尝试者</p>
 		</div>
+		<a href="#page2" class="down"></a>
 	</div>
 	<div class="section" id="section1">
 		<div class="wrap">
 			<p>目前就职于上海矩方</p>
 			<p>担任法国凯捷技术顾问</p>
-			<p>前上海易班前端工程师</p>
+			<p><br/>前上海易班前端工程师</p>
 		</div>
+		<a href="#page3" class="down"></a>
 	</div>
 	<div class="section" id="section2">
 		<div class="wrap">
@@ -161,12 +216,14 @@ p{
 			<p>热衷于用户体验的实现与优化</p>
 			<p>更酷爱造轮子（这是病，得治）</p>
 		</div>
+		<a href="#page4" class="down"></a>
 	</div>
 	<div class="section" id="section3">
 		<div class="wrap">
 			<p>爱好nodeJS开发</p>
-			<img src="nodejs.png"/>
+			<img src="nodejs.gif"/>
 		</div>
+		<a href="#page5" class="down"></a>
 	</div>
 	<div class="section" id="section4">
 		<div class="wrap">
@@ -178,12 +235,21 @@ p{
 			</div>
 			<div class="section4_left"><div class="github-widget-user" data-user="bh-lay"></div></div>
 		</div>
+		<a href="#page6" class="down"></a>
+	</div>
+	<div class="section" id="section5">
+		<div class="wrap">
+			<h1>关于我的博客</h1>
+			<p>博客于2012年3月建立</p>
+			<p>从毕业前夕，一直伴随我成长至今</p>
+			<p>是我造的所有轮子的发源地</p>
+			<p><br/><a href="/" target="_blank">看看小剧客栈</a></p>
+		</div>
 	</div>
 </div>
-
 <script src="jquery.min.js"></script>
 <script src="jquery-ui.min.js"></script>
-<script type="text/javascript" src="jquery.fullPage.js"></script>
+<script type="text/javascript" src="jquery.fullPage.min.js"></script>
 <script type="text/javascript" src="jquery-github-user-widget.js"></script>
 <script type="text/javascript">
 		$(document).ready(function() {
