@@ -118,6 +118,28 @@ h1{
 p{
 	font-size: 1.5em;
 }
+.section_loading{
+	position: fixed;
+	top:0;
+	left:0;
+	width: 100%;
+	height: 100%;
+	z-index: 1000;
+	background: #eee;
+}
+.section_loading p{
+	position: absolute;
+	width: 300px;
+	height: 50px;
+	top: 50%;
+	left: 50%;
+	margin: -25px 0 0 -150px;
+	line-height: 50px;
+	text-align:center;
+	font-size: 26px;
+	letter-spacing: 2px;
+	color: #777;
+}
 .section{
 	text-align: center;
 	background-position: center center;
@@ -247,6 +269,7 @@ p{
 		</div>
 	</div>
 </div>
+<div class="section_loading"><p>玩命儿加载中……</p></div>
 <script src="jquery.min.js"></script>
 <script src="jquery-ui.min.js"></script>
 <script type="text/javascript" src="jquery.fullPage.min.js"></script>
@@ -263,8 +286,13 @@ p{
 					console.log(arguments);
 				}
 			});
-
+			$('.section_loading').fadeOut(800);
 		});
+</script><div class="tongji">
+<script type="text/javascript">
+	var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+	document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F0f6bfc1dac208f86e5effd5f2d59027d' type='text/javascript'%3E%3C/script%3E"));
 </script>
+</div>
 </body>
 </html>
