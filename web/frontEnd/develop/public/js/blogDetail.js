@@ -9,7 +9,7 @@ define(function(require,exports){
 		'<div class="l_row"><div class="l_col-12">',
 		'<div class="articletop">',
 			'<h1>${title}</h1>',
-			'<p><span>时间：${time_show} </span><span>作者：${author}</span></p>',
+			'<p><span>发布时间：${time_show} </span></p>',
 		'</div>',
 		'<div class="article">$${content}</div>',
 		'</div></div>',
