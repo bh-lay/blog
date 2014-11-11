@@ -97,4 +97,7 @@ seajs.use([
 	});
 	//代码高亮
 	hljs.initHighlighting();
+	if(top != window){
+		$('.l-mini-nav').remove();
+	}
 });
