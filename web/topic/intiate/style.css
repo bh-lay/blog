@@ -8,14 +8,91 @@ Blog:	http://bh-lay.com
 Author URI:
 ******************************
 **********************************/
-html,body{
-	height: auto;
-	overflow: auto;
+body,
+div,
+ul,
+ol,
+li,
+dl,
+dt,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0px;
+  padding: 0px;
+}
+img {
+  border: none;
+}
+ul,
+ol,
+li,
+form,
+dl {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: #333333;
+}
+a:hover {
+  color: #55cc00;
+}
+TD {
+  color: #777;
+  font-size: 12px;
+  padding: 10px;
+}
+.fix {
+  zoom: 1;
+}
+.fix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  overflow: hidden;
+}
+html,
+body {
+  color: #333;
+  font-size: 14px;
+  font-family: "Microsoft YaHei", tahoma, arial, simsun, "宋体";
+}
+.container {
+  width: 980px;
+  margin: auto;
+  zoom: 1;
+}
+.container:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  overflow: hidden;
+}
+
+.l-mini-nav{
+	height: 24px;
+	line-height: 24px;
+	background:#f5f5f5;
+	border-bottom: 1px solid #ccc;
+}
+.l-mini-nav a{
+	font-size: 12px;
+	color: #666;
+}
+.l-mini-nav a:hover{
+	text-decoration: underline;
+	color: #333;
 }
 body{background: url(bj.png);}
-.clear{clear: both;}
 .tips{color:#666; margin:0px 10px 20px;padding:10px 5px; text-indent:2em;border:1px solid #ddd;border-radius:4px;background-color:#fff;overflow:hidden;}
-.containter{width: 980px;margin:auto;}
 
 /*瀑布流页面*/
 .hangTitle{height:100px;margin:0px 10px 20px;padding:20px 40px;background:url("intiate.jpg") #000;color:#fff;border-radius:0px 0px 8px 8px;_overflow:hidden;}
