@@ -13,6 +13,12 @@
 <link rel="apple-touch-icon" sizes="144x144" href="touch-icon-ipad-retina.png" />
 <link href="${frontEnd_base}lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="${frontEnd_base}public/css/bootstrap_plugin.css" rel="stylesheet" media="screen">
+<!--[if IE]>
+<script>
+(function(){if(!/*@cc_on!@*/0)return;var e = "abbr,article,aside,audio,bb,canvas,datagrid,datalist,details,dialog,eventsource,figure,footer,header,hgroup,mark,menu,meter,nav,output,progress,section,time,video".split(','),i=e.length;while(i--){document.createElement(e[i])}})()
+</script>
+<script type="text/javascript" src="${frontEnd_base}lib/respond.js"></script>
+<![endif]-->
 </head>
 <body>
 {{{navigation_bootstrap}}}
@@ -21,11 +27,11 @@
 		<div class="col-sm-8">
 		{@each list as it,index}
 			<div class="media define-item">
-				<a class="pull-left" href="/labs/${it.name}" title="${it.title}" target="_self" >
+				<a class="pull-left" href="/labs/${it.name}" title="${it.title}" target="_blank" >
 					<img class="media-object" src="${it.cover}?imageView/1/w/100/h/100/q/85" alt="${it.title}" />
 				</a>
 				<div class="media-body">
-					<h4 class="media-heading"><a href="/labs/${it.name}" title="${it.title}" lofox="true" target="_self" >${it.title}</a></h4>
+					<h4 class="media-heading"><a href="/labs/${it.name}" title="${it.title}" target="_blank" >${it.title}</a></h4>
 					<p>${it.intro}</p>
 				</div>
 			</div>

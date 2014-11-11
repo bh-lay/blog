@@ -128,15 +128,21 @@ function version_init(){
 $.getScript(app_config.frontEnd_base + 'UI/dialog.js',function(){
 	version_init();
 	$('.nav_comment_link').click(function(){
-		UI.confirm({
-			'text' : '仅在“尝鲜版”下可用',
-			'from' : $(this)[0],
-			'mask' : false,
-			'btns' : ['进入尝鲜版','保持现状'],
-			'callback' : function(){
-				jumpToNewVersion();
-			}
-		});
+		if(isAdvancedBrowser()){
+			UI.confirm({
+				'text' : '仅在“尝鲜版”下可用',
+				'from' : $(this)[0],
+				'mask' : false,
+				'btns' : ['进入尝鲜版','保持现状'],
+				'callback' : function(){
+					jumpToNewVersion();
+				}
+			});
+		}else{
+			UI.confirm({
+				'text' : '浏览器太老旧，请升级！'
+			});
+		}
 		return false;
 	});
 });
