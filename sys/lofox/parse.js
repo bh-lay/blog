@@ -79,42 +79,37 @@ function parser_data(input){
 	if(!input || input.length == 0){
 		return {};
 	}
-	//用字段分隔符分离字符
-	var split = input.split(/\&/);
+	//querystring初步解析数据
+	var data = querystring.parse(input);
 	var obj = {};
 	//遍历各个字段
-	split.forEach(function(item){
-		//分离键名与键值
-		var item_split = item.split(/\=/),
-			value = querystring.unescape(item_split[1]);
-			item_split[0] = querystring.unescape(item_split[0]);
-		
+	for(var key in data){
+		var value = data[key];
 		//检测键名是否包含子对象（user[id]）
-		var test_key = item_split[0].match(/^(.+?)\[/);
+		var test_key = key.match(/^(.+?)\[/);
 		if(!test_key){
 			//不包含子对象，直接赋值
-			obj[item_split[0]] = value;
+			obj[key] = value;
 		}else{
 			//包含子对象，拼命解析开始
 			
 			//获取最顶层键名，构建对象
-			var key = test_key[1];
-			obj[key] = obj[key] || {};
+			var firstKey = test_key[1];
+			obj[firstKey] = obj[firstKey] || {};
 			
-			var nextObj = obj[key];
+			var nextObj = obj[firstKey];
 			var lastObj,lastKey;
 			//使用正则模拟递归 遍历子对象（school[classA][studentA]）
-			item_split[0].replace(/\[(.+?)\]/g,function(a,b){
+			key.replace(/\[(.+?)\]/g,function(a,b){
 				lastObj = nextObj;
 				lastKey = b;
 				lastObj[lastKey] = lastObj[lastKey] || {}
 				nextObj = lastObj[lastKey];
-				return '';
 			});
 			//赋值
 			lastObj[lastKey] = value;
 		}
-	});
+	}
 	return obj;
 }
 /**
