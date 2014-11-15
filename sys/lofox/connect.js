@@ -98,6 +98,8 @@ function CONNECT(req,res){
 	this.request = req;
 	this.response = res;
 	this._session = null;
+	//是否已向客户端发送信息体
+	this._sended = false;
 }
 /**	//向客户端发送信息
  *	connect.write('json',{
@@ -112,6 +114,13 @@ function CONNECT(req,res){
  *	connect.write('error','something wrong');
  */
 CONNECT.prototype['write'] = function(type,a,b,c){
+	if(this._sended){
+		console.log('------------------------------------------------');
+		console.log(arguments);
+		console.log('------------------------------------------------');
+		return;
+	}
+	this._sended = true;
 	switch(type){
 		case 'json':
 			sendJSON.call(this,a);
