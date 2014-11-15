@@ -56,7 +56,7 @@ define(function(require,exports){
 		'<div class="l_com_item" data-uid="${it.uid}" data-cid="${it.cid}">',
 			'<div class="l_com_item_main">',
 				'<div class="l_com_item_caption">{@if it.user.blog}<a href="${it.user.blog}">${it.user.username}</a>{@else}${it.user.username}{@/if} </div>',
-				'<div class="l_com_item_content">${it.content}</div>',
+				'<div class="l_com_item_content">$${it.content}</div>',
 				'<div class="l_com_item_footer">',
 					'<div class="l_com_item_time">${it.time}</div>',
 				'</div>',
