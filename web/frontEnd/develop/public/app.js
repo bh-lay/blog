@@ -3,27 +3,54 @@
  * Blog : http://bh-lay.com/
  * Copyright (c) 2012-2018
 **/
-
-(function(){
-	var browser = navigator.appName 
-	var b_version = navigator.appVersion 
-	var version = b_version.split(";"); 
-	var trim_Version = version[1] ? version[1].replace(/[ ]/g,"") : ''; 
-	var isIe678 = false;
-	if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE6.0"){
-		isIe678 = true;
-	} else if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE7.0"){
-		isIe678 = true;
-	}else if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE8.0"){
-		isIe678 = true;
-	}
+/**
+ * 判断是否支持css属性
+ * 兼容css3
+ */
+var supports = (function() {
+	var styles = document.createElement('div').style,
+		vendors = 'Webkit Khtml Ms O Moz'.split(/\s/);
 	
-	if(isIe678){
-		window.location.href = '/topic/notSupport.html';
-	}
+	return function(prop) {
+		var returns = false;
+		if ( prop in styles ){
+			returns = prop;
+		}else{
+			prop = prop.replace(/^[a-z]/, function(val) {
+				return val.toUpperCase();
+			});
+			for(var i=0,total=vendors.length;i<total;i++){
+				if ( vendors[i] + prop in styles ) {
+					returns = ('-' + vendors[i] + '-' + prop).toLowerCase();
+				}
+			}
+		}
+		return returns;
+	};
 })();
+/**
+ * 是否支持 canvas
+ */
+function supports_canvas() {
+  return !!document.createElement('canvas').getContext;
+}
+/**
+ * 检测是否为高级浏览器
+ *
+ */
+function isAdvancedBrowser(){
+	if(supports('transition') && supports('transform') && supports_canvas()){
+		return true;
+	}else{
+		return false;
+	}
+}
 
-
+//屌丝就用屌丝版
+if(!isAdvancedBrowser()){
+	document.cookie = 'ui_version=j1s;path=/;max-age=0';
+	window.location.reload();
+}
 
 window.L = window.L || {};
 

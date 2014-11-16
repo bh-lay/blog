@@ -67,6 +67,7 @@ function jumpToNewVersion(){
 		document.cookie='ui_version=js;path=/';
 		window.location.reload();
 }
+var tips_tpl = ['<a href="javascript:void(0)" class="toNewVersion"><i class="glyphicon glyphicon-send"></i>尝鲜版</a>'].join('');
 var changeVersionTpl = ['<div class="newVersionPop">',
 	'<div class="nVP_bj"><img src="http://layasset.qiniudn.com/images/version_switch.jpg" /></div>',
 	'<div class="nVP_txt">',
@@ -104,13 +105,11 @@ function showTips(btn){
 	});
 }
 function version_init(){
-	
-	
 	//检测浏览器
 	if(isAdvancedBrowser()){
-		var $btn = $('<a href="javascript:void(0)" class="toNewVersion"><i class="glyphicon glyphicon-send"></i>尝鲜版</a>');
+		var $btn = $(tips_tpl);
 		$btn.css('left','-200px');
-		$('body').append($btn);
+		$('.navbar').next().after($btn);
 		$btn.animate({
 			'left':0
 		},200);
