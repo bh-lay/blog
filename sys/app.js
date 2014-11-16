@@ -197,19 +197,14 @@ app.get('/ajax/del', function(data,connect){
 
 //评论
 var ajax_comments = require('./ajax/comments/index.js');
-app.get('/ajax/comments/{act}', function(data,connect){
-	switch(data.act){
-		case 'add':
-			ajax_comments.add(connect,app);
-		break
-		case 'list':
-			ajax_comments.list(connect,app);
-		break
-		default :
-			connect.write('json',{
-				'code' : 500
-			})
-	}
+app.get('/ajax/comments/add', function(data,connect){
+	ajax_comments.add(connect,app);	
+});
+app.get('/ajax/comments/list', function(data,connect){
+	ajax_comments.list(connect,app);	
+});
+app.get('/ajax/comments/del', function(data,connect){
+	ajax_comments.del(connect,app);
 });
 
 //用户

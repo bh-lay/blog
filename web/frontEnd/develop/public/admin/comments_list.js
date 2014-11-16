@@ -1,6 +1,6 @@
 
 /**
- * 博文列表页
+ * 评论列表页
  * @param {Object} dom
  * @param {String|Number} [id] article ID
  **/
@@ -11,9 +11,16 @@ define(function(){
 				'<img width="50" height="50" src="{@if it.user.avatar}${it.user.avatar}{@else}http://layasset.qiniudn.com/user/default.jpg{@/if}"/>',
 			'</div>',
 			'<div class="media-body">',
-				'<h4 class="media-heading">{@if it.user.blog}<a href="${it.user.blog}">${it.user.username}</a>{@else}${it.user.username}{@/if} </h4>',
-				'<p">${it.content}</p>',
-				'<div class="l_com_item_time">${it.time}</div>',
+				'<div class="media-heading">',
+					'{@if it.user.blog}<a href="${it.user.blog}">${it.user.username}</a>{@else}<span>${it.user.username}</span>{@/if}',
+					'<small> ${it.time}</small>',
+				'</div>',
+				'<p>$${it.content}</p>',
+				'<div class="media-tools">',
+					'<a class="btn btn-default btn-xs" title="删除" href="/ajax/comments/del?id=${it._id}" data-item-selector=".media" data-action-del="三思啊，删了可就没啦！">',
+						'<span class="glyphicon glyphicon-remove"></span>',
+					'</a>',
+				'</div>',
 			'</div>',
 		'</div>',
 	'{@/each}</div></div>'].join('');
