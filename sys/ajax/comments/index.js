@@ -13,6 +13,7 @@
 var parse = require('../../lofox/parse.js');
 var add = require('./add.js');
 var list = require('./list.js');
+var del = require('./del.js');
 
 //二分钟限制十个回复
 var time_limit = 2 * 60 * 1000;
@@ -20,7 +21,6 @@ var count_limit = 10;
 
 //增加回复/评论
 exports.add = function (connect,app){
-
 	parse.request(connect.request,function(err,data){
 		connect.session(function(session_this){
 			//检测认证信息
@@ -92,4 +92,46 @@ exports.list = function (connect,app){
 		}
 		connect.write('json',json);
 	});
+};
+//删除
+exports.del = function (connect,app){
+	if(connect.request.method != 'POST'){
+		connect.write('json',{
+			'code' : 201,
+			'msg' : 'please use POST to delete !'
+		});
+	}
+	
+	var data = connect.url.search;
+	var ID = data['id'] || '';
+	var need_power = 17;
+	if(ID.length<2){
+		connect.write('json',{
+			'code' : 2,
+			'msg' : 'please input [id] for del !'
+		});
+	}else{
+		connect.session(function(session_this){
+			//校验权限
+			if(session_this.power(need_power)){
+				del(ID,function(err){
+					if(err){
+						connect.write('json',{
+							'code' : 500
+						});
+					}else{
+						connect.write('json',{
+							'code' : 200
+						});
+						//清除所有缓存
+						app.cache.clear('all');
+					}
+				});
+			}else{
+				connect.write('json',{
+					'code' : 201
+				});
+			}
+		});
+	}
 };

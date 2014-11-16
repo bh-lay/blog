@@ -116,3 +116,5 @@ exports.get_power = function (user_group,callback){
 		});
 	});
 }
+
+exports.ObjectID = mongodb.ObjectID;

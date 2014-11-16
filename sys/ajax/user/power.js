@@ -102,8 +102,7 @@ function this_control(data,callback){
 	}
 }
 
-exports.render = function (req,res_this,path){
-	
+exports.render = function (req,res_this,path){	
 	var url = req.url;
 	var pathnode = path.pathnode;
 	if(pathnode.length == 2){
