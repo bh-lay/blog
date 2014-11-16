@@ -1,3 +1,7 @@
+
+
+jQuery(function($){$(document).ready(function(){var contentButton = [];var contentTop = [];var content = [];var lastScrollTop = 0;var scrollDir = '';var itemClass = '';var itemHover = '';var menuSize = null;var stickyHeight = 0;var stickyMarginB = 0;var currentMarginT = 0;var topMargin = 0;$(window).scroll(function(event){var st = $(this).scrollTop();if (st > lastScrollTop){scrollDir = 'down';} else {scrollDir = 'up';}lastScrollTop = st;});$.fn.stickUp = function( options ) {$(this).addClass('stuckMenu');var objn = 0;if(options != null) {for(var o in options.parts) {if (options.parts.hasOwnProperty(o)){content[objn] = options.parts[objn];objn++;}}if(objn == 0) {console.log('error:needs arguments');}itemClass = options.itemClass;itemHover = options.itemHover;if(options.topMargin != null) {if(options.topMargin == 'auto') {topMargin = parseInt($('.stuckMenu').css('margin-top'));} else {if(isNaN(options.topMargin) && options.topMargin.search("px") > 0){topMargin = parseInt(options.topMargin.replace("px",""));} else if(!isNaN(parseInt(options.topMargin))) {topMargin = parseInt(options.topMargin);} else {console.log("incorrect argument, ignored.");topMargin = 0;}	}} else {topMargin = 0;}menuSize = $('.'+itemClass).size();}stickyHeight = parseInt($(this).height());stickyMarginB = parseInt($(this).css('margin-bottom'));currentMarginT = parseInt($(this).next().closest('div').css('margin-top'));vartop = parseInt($(this).offset().top);};$(document).on('scroll', function() {varscroll = parseInt($(document).scrollTop());if(menuSize != null){for(var i=0;i < menuSize;i++){contentTop[i] = $('#'+content[i]+'').offset().top;function bottomView(i) {contentView = $('#'+content[i]+'').height()*.4;testView = contentTop[i] - contentView;if(varscroll > testView){$('.'+itemClass).removeClass(itemHover);$('.'+itemClass+':eq('+i+')').addClass(itemHover);} else if(varscroll < 50){$('.'+itemClass).removeClass(itemHover);$('.'+itemClass+':eq(0)').addClass(itemHover);}}if(scrollDir == 'down' && varscroll > contentTop[i]-50 && varscroll < contentTop[i]+50) {$('.'+itemClass).removeClass(itemHover);$('.'+itemClass+':eq('+i+')').addClass(itemHover);}if(scrollDir == 'up') {bottomView(i);}}}if(vartop < varscroll + topMargin){$('.stuckMenu').addClass('isStuck');$('.stuckMenu').next().closest('div').css({'margin-top': stickyHeight + stickyMarginB + currentMarginT + 'px'}, 10);$('.stuckMenu').css("position","fixed");$('.isStuck').css({top: '0px'}, 10, function(){});};if(varscroll + topMargin < vartop){$('.stuckMenu').removeClass('isStuck');$('.stuckMenu').next().closest('div').css({'margin-top': currentMarginT + 'px'}, 10);$('.stuckMenu').css("position","relative");};});});});
+
 /**
  * 判断是否支持css属性
  * 兼容css3
@@ -64,10 +68,14 @@ function isShowedToday(){
  * 进入尝鲜版
  */
 function jumpToNewVersion(){
-		document.cookie='ui_version=js;path=/';
-		window.location.reload();
+	document.cookie='ui_version=js;path=/';
+	window.location.reload();
 }
-var tips_tpl = ['<a href="javascript:void(0)" class="toNewVersion"><i class="glyphicon glyphicon-send"></i>尝鲜版</a>'].join('');
+var tips_tpl = ['<div class="newVersionTips">',
+	'<div>',
+		'<button type="button" class="btn btn-success"><i class="glyphicon glyphicon-send"></i> 尝鲜版</button>',
+	'</div>',
+'</div>'].join('');
 var changeVersionTpl = ['<div class="newVersionPop">',
 	'<div class="nVP_bj"><img src="http://layasset.qiniudn.com/images/version_switch.jpg" /></div>',
 	'<div class="nVP_txt">',
@@ -107,12 +115,9 @@ function showTips(btn){
 function version_init(){
 	//检测浏览器
 	if(isAdvancedBrowser()){
-		var $btn = $(tips_tpl);
-		$btn.css('left','-200px');
-		$('.navbar').next().after($btn);
-		$btn.animate({
-			'left':0
-		},200);
+		var $tips = $(tips_tpl);
+		var $btn = $tips.find('button');
+		$('.navbar').before($tips);
 		$btn.click(function(){
 			showTips($btn[0]);
 		});
@@ -126,6 +131,15 @@ function version_init(){
 }
 $.getScript(app_config.frontEnd_base + 'UI/dialog.js',function(){
 	version_init();
+	
+	jQuery(function($) {
+		$(document).ready( function() {
+			$('.navbar').stickUp({
+				itemHover: 'active',
+				topMargin: 'auto'
+			});
+		});
+	});
 	$('.nav_comment_link').click(function(){
 		if(isAdvancedBrowser()){
 			UI.confirm({
