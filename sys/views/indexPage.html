@@ -21,8 +21,8 @@
 <![endif]-->
 </head>
 <body>
-{{{navigation_bootstrap}}}
-{{{indexMain}}}
+<include name="navigation_bootstrap" active="index"/>
+<include name="indexMain"/>
 <script type="text/javascript">
 	var app_config = {
 		'frontEnd_base' : '${frontEnd_base}',
@@ -32,7 +32,7 @@
 <script type="text/javascript" src="${frontEnd_base}lib/jquery/jquery.js"></script>
 <script type="text/javascript" src="${frontEnd_base}lib/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${frontEnd_base}public/js/bootstrap_plugin.js"></script>
-{{{footer}}}
-{{{baiduAndGoogleTongji}}}
+<include name="footer"/>
+<include name="baiduAndGoogleTongji"/>
 </body>
 </html>

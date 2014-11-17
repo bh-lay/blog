@@ -13,32 +13,59 @@ var fs = require('fs');
 var component = require('./component');
 var juicer = require('juicer');
 var baseRoot = './views/';
-
-function replaceComponent(temp,callback){
-	var need_temp = [],
-		temp_data = {},
-		over_count = 0;
-		temp.replace(/\{{{(\w*)}}}/g,function(a,b){
-			need_temp.push(b);
+/**
+ * 获取components 配置
+ *
+ * @param String input ……<include name="navigation_bootstrap"  active="index"/>……
+ * @returns {name:'navigation_bootstrap',active:'index'}
+ */
+function getComponentsConfig(input){
+	var strArray = input.match(/\<include([^\/])+\/>/g) || [];
+	var confArray = [];
+	strArray.forEach(function(item,index){
+		var data = {};
+		//过滤多余的字符
+		item = item.replace(/^<include\s+|\/>|"|'$/g,'');
+		//分离参数
+		var dataArray = item.split(/\s+/) || [];
+		
+		dataArray.forEach(function(it){
+			var itemSplit = it.split(/=/);
+			var key = itemSplit[0];
+			var value = itemSplit[1];
+			data[key] = value;
 		});
+		confArray.push(data);
+	});
+	return confArray;
+}
+function replaceComponent(temp,callback){
+	var need_temp = getComponentsConfig(temp),
+		temp_result = {},
+		over_count = 0;
+	
 	var total = need_temp.length;
 	
-	for(var i=0;i<total;i++){
-		(function(i){
-			component.get(need_temp[i],null,function(err,componentStr){
-				temp_data[need_temp[i]] = componentStr;
-				all_callBack(temp_data)
-			});
-		})(i);
-	}
+	//没有用到components
 	if(total == 0){
 		callback(null,temp);
+	}else{
+		for(var i=0;i<total;i++){
+			(function(i){
+				var data = need_temp[i];
+				var name = data.name;
+				component.get(name,data,function(err,componentStr){
+					temp_result[name] = componentStr;
+					all_callBack()
+				});
+			})(i);
+		}
 	}
-	function all_callBack(temp_data){
+	function all_callBack(){
 		over_count++;
 		if(over_count == total){
-			var html = temp.replace(/\{{{(\w*)}}}/g,function(a,b){
-				return temp_data[b] || a;
+			var html = temp.replace(/\<include\s+name\s*=\s*(?:"|')(\w+)(?:"|')([^\/])*\/>/g,function(includeStr,name){
+				return temp_result[name] || includeStr;
 			});
 			callback(null,html);
 		}
@@ -60,26 +87,10 @@ module.exports = function(URI,data,callback){
 		}
 		//替换变量
 		fileStr = juicer(fileStr,data);
-//		fileStr = fileStr.replace(/\${(\w*)}/g,function(a,b){
-//			return data[b] || '';
-//		});
 		
 		//解析模版的component
 		replaceComponent(fileStr,function(err,txt){
-			var temp = txt;
-			//查找脚本文件
-			fs.exists(realPath + '.js', function(exists) {
-				if(!exists){
-					//没有脚本文件，直接返回模版内容
-					callback && callback(null,temp);
-					return ;
-				}
-				
-				//执行视图对应的脚本文件
-				require(realPath + '.js').produce(temp,null,function(){
-					
-				});
-			});
+			callback && callback(err,txt);
 		});
 	});
 };
