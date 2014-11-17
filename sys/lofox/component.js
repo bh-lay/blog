@@ -15,7 +15,6 @@ exports.get = function(URI,data,callback){
 	//读取
 	fs.readFile(realPath + '.html', "utf8",function(err,txt){
 		if(err){
-			console.log(err);
 			callback && callback(err);
 			return
 		}

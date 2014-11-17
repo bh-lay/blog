@@ -1,11 +1,20 @@
+.navbar-cnt {
+  height: 50px;
+}
 .navbar {
   width: 100%;
   border-radius: 0;
+  border: none;
   margin: 0;
   z-index: 1000;
 }
 .navbar-brand {
   padding: 10px;
+}
+.navbar-brand img {
+  display: block;
+  width: 30px;
+  height: 30px;
 }
 .newVersionTips {
   background: #0A64A4;
@@ -15,6 +24,8 @@
   position: relative;
   width: 700px;
   height: 430px;
+  margin: auto;
+  background: #fff;
 }
 .newVersionPop .nVP_bj {
   position: relative;
