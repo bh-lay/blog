@@ -18,7 +18,7 @@
 }
 .newVersionTips {
   background: #0A64A4;
-  padding: 30px;
+  padding: 20px;
 }
 .newVersionPop {
   position: relative;
@@ -32,6 +32,20 @@
 }
 .newVersionPop .nVP_bj img {
   width: 100%;
+}
+.newVersionPop .nVP_close {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 0;
+  right: 0;
+  text-align: center;
+  font: bold 20px/50px "simsun";
+  color: #ccc;
+}
+.newVersionPop .nVP_close:hover {
+  color: #333;
+  text-decoration: none;
 }
 .newVersionPop .nVP_txt {
   position: absolute;
@@ -68,6 +82,7 @@
 }
 .newVersionPop .nVP_3 a:hover {
   background: #4d3835;
+  text-decoration: none;
 }
 .newVersionPop .nVP_4 a {
   line-height: 20px;

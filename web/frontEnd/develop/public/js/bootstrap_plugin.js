@@ -84,7 +84,7 @@ function jumpToNewVersion(){
 }
 var tips_tpl = ['<div class="newVersionTips">',
 	'<div class="container">',
-		'<button type="button" class="btn btn-success"><i class="glyphicon glyphicon-send"></i> 尝鲜版</button>',
+		'<button type="button" class="btn btn-success btn-sm toNewVersion"><i class="glyphicon glyphicon-send"></i> 进入尝鲜版</button>',
 	'</div>',
 '</div>'].join('');
 var changeVersionTpl = ['<div class="newVersionPop">',
@@ -92,9 +92,10 @@ var changeVersionTpl = ['<div class="newVersionPop">',
 		'<div class="nVP_txt">',
 			'<p class="nVP_1">你竟然还在使用<span>屌丝版</span></p>',
 			'<p class="nVP_2">小剧已为高级浏览器单独做了开发</p>',
-			'<p class="nVP_3"><a href="javascript:void(0)">使用尝鲜版</a></p>',
+			'<p class="nVP_3"><a href="javascript:void(0)" class="toNewVersion">使用尝鲜版</a></p>',
 			'<p class=nVP_4><a target="_blank" href="/blog/14955f2a02b">搞什么鬼，还分版本？</a></p>',
 		'</div>',
+		'<a href="javascript:void(0)" class="nVP_close">×</a>',
 	'</div>'].join('');
 /**
  * 显示版本提示框
@@ -104,16 +105,17 @@ function version_init(){
 	//检测浏览器
 	if(isAdvancedBrowser()){
 		var $tips = $(tips_tpl);
-		var $btn = $tips.find('button');
 		$('.navbar').parent().before($tips);
-		$btn.click(function(){
-			jumpToNewVersion();
-		});
 		//检测是否已经显示过
 		if(!isShowedToday()){
+			$tips.find('.container').hide();
 			var $pop = $(changeVersionTpl).hide();
 			$tips.prepend($pop);
-			$pop.slideDown(80);
+			$pop.slideDown(2000);
+			$pop.on('click','.nVP_close',function(){
+				$pop.slideUp(200);
+				$tips.find('.container').slideDown(200);
+			});
 			
 			var DATE = new Date();
 			var month = DATE.getMonth() + 1;
@@ -129,6 +131,9 @@ $.getScript(app_config.frontEnd_base + 'UI/dialog.js',function(){
 		'dom' : $('.navbar'),
 		'scopeDom' : $('.page-body'),
 		'fixed_top' : 0
+	});
+	$('body').on('click','.toNewVersion',function(){
+		jumpToNewVersion();
 	});
 	$('.nav_comment_link').click(function(){
 		if(isAdvancedBrowser()){
