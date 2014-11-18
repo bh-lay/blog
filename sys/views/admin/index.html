@@ -9,23 +9,23 @@
 <link href="${frontEnd_base}lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="/favicon.ico" rel="shortcut icon"/>
 <style type="text/css">
+ /* Box-sizing resets
+ *
+ * 为了避免 Bootstrap 设置的全局盒模型所带来的影响，可以重置单个页面元素或覆盖整个区域的盒模型。
+ */
+/* Option 2A: 通过 CSS 代码重置整个区域 */
+.reset-box-sizing,
+.reset-box-sizing *,
+.reset-box-sizing *:before,
+.reset-box-sizing *:after {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
 	html{min-height:100%; }
 	body{padding-top:60px;
 		font-family: "Microsoft Yahei";
 		background : #444;
-	}
-	.navbar {
-	  min-height: 38px;
-	}
-	.nav > li > a {
-	  padding: 7px 15px;
-	}
-	.navbar-brand {
-	  padding: 7px 15px;
-	}
-	.navbar-toggle{
-		padding:6px 10px;
-		margin:4px 10px 0px 0px;
 	}
 	.navbar-default{box-shadow:0px 0px 5px rgba(0,0,0,0.7);background:#fff;border:none;}
 	.mainCnt{position:relative;min-height:500px;overflow: hidden;}
@@ -37,6 +37,13 @@
 	.custom-subFooter{background:#333;color:#fff;}
 	.custom-mb10{margin-bottom:10px;}
 	.custom-mb20{margin-bottom:20px;}
+    .custom-editor{
+        margin: 10px 0;
+    }
+    #editor {
+        width: 100%;
+        min-height: 500px;
+    }
 </style>
 </head>
 <body>

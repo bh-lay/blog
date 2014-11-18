@@ -76,7 +76,9 @@ window.admin = window.admin || {};
 		lofox.set('/admin/',function(){
 			this.title('后台首页');
 			var dom = createDom(mainDom);
-			admin.render.index(dom);
+			seajs.use('public/admin/indexPage.js',function(renderFn){
+				renderFn(dom);
+			});
 		});
 		//博文页
 		lofox.set('/admin/article',function(){
@@ -133,6 +135,15 @@ window.admin = window.admin || {};
 			
 			var dom = createDom(mainDom);
 			admin.render.friends(dom);
+		});
+		//编辑在线文件
+		lofox.set('/admin/file_edit',function(){
+			this.title('编辑代码');
+			
+			var dom = createDom(mainDom);
+			seajs.use('public/admin/file_edit.js',function(editor){
+				editor(dom);
+			});
 		});
 		//图库
 		lofox.set('/admin/gallery',function(){

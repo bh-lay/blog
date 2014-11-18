@@ -1,3 +1,16 @@
+/* Box-sizing resets
+ *
+ * 为了避免 Bootstrap 设置的全局盒模型所带来的影响，可以重置单个页面元素或覆盖整个区域的盒模型。
+ */
+/* Option 2A: 通过 CSS 代码重置整个区域 */
+.reset-box-sizing,
+.reset-box-sizing *,
+.reset-box-sizing *:before,
+.reset-box-sizing *:after {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
 .navbar-cnt {
   height: 50px;
 }
