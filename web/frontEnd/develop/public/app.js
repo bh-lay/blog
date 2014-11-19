@@ -291,7 +291,7 @@ seajs.use([
 		setTimeout(function(){
 			lofox.push(url);
 			lofox.refresh();
-		},20);
+		});
 		return false;
 	});
 	
@@ -316,9 +316,9 @@ seajs.use([
              $('body').toggleClass('nav_slidedown');
 		});
 		$('.app_nav .nav a').click(function(){
-            setTimeout(function(){
+     //       setTimeout(function(){
                 $('body').toggleClass('nav_slidedown');
-            },800);
+      //      },400);
 		});
 		
 		$('.nav_body a').each(function(){

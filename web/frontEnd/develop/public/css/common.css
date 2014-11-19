@@ -224,15 +224,10 @@ body {
   list-style-type: decimal;
 }
 .article pre {
-  border: 1px solid #eee;
-  font-family: inherit;
   padding: 5px 10px;
-  background: #f8f8f8;
-  color: #555;
   overflow-x: auto;
   font-size: 13px;
   line-height: 1.8;
-  border-radius: 4px;
 }
 .article code {
   font-family: inherit;
@@ -253,6 +248,9 @@ body {
 .hljs {
   display: block;
   padding: 0.5em;
+  color: #ddd;
+  background: #333;
+  font-family: Monaco, Consolas, "Lucida Console", monospace;
 }
 .profile .hljs-header *,
 .ini .hljs-title,
@@ -260,8 +258,7 @@ body {
   color: #ffffff;
 }
 .hljs-comment {
-  color: #bbb;
-  font-style: italic;
+  color: #666;
 }
 .hljs-string,
 .hljs-symbol,
@@ -273,10 +270,10 @@ body {
 .ini .hljs-value,
 .clojure .hljs-attribute,
 .coffeescript .hljs-attribute {
-  color: #ff3300;
+  color: #a0c874;
 }
 .hljs-number {
-  color: #330000;
+  color: #66dd00;
 }
 .hljs-built_in,
 .hljs-literal,
@@ -296,10 +293,10 @@ body {
 .hljs-flow,
 .hljs-inheritance,
 .parser3 .hljs-variable {
-  color: #000000;
+  color: #59B524;
 }
 .hljs-keyword {
-  color: #222;
+  color: #888;
   font-weight: bold;
 }
 .hljs-title,
@@ -324,7 +321,7 @@ body {
 .avrasm .hljs-label,
 .tex .hljs-formula,
 .tex .hljs-formula * {
-  color: #bb1166;
+  color: #a0c874;
 }
 .hljs-yardoctag,
 .hljs-phpdoc,
