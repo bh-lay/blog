@@ -3,7 +3,9 @@
  * 定义Minxin
  **/
 body {
+  overflow-x: hidden;
   overflow-y: scroll;
+  background: #eee;
 }
 /** 提示信息 **/
 .l_alert_info {
@@ -63,16 +65,17 @@ body {
   }
 }
 /**应用主容器**/
+.app_container {
+  position: relative;
+  margin-left: 40px;
+}
 .app_nav {
   position: fixed;
   top: 0px;
   left: 0px;
   width: 0px;
   height: 100%;
-}
-.app_container {
-  position: relative;
-  margin-left: 40px;
+  z-index: 4000;
 }
 .nav_body {
   position: relative;
@@ -156,8 +159,10 @@ body {
   padding: 0 0 20px;
 }
 .nav_bottom a {
-  padding: 10px 0;
   display: block;
+  width: 50px;
+  margin: auto;
+  padding: 10px 0;
   text-align: center;
   color: #aaa;
 }
@@ -184,15 +189,23 @@ body {
 }
 .nav_moreBtn {
   position: absolute;
-  width: 30px;
-  height: 30px;
-  top: 5px;
-  left: 5px;
-  overflow: hidden;
-  background: #333;
-  border-radius: 4px;
+  width: 40px;
+  height: 40px;
+  top: 0;
+  left: 0;
   z-index: 3;
   display: none;
+}
+.nav_moreBtn:before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  left: -40px;
+  display: block;
+  width: 80px;
+  height: 80px;
+  border-radius: 80px;
+  background: #333;
 }
 .nav_Btn_ico {
   display: block;
@@ -202,10 +215,10 @@ body {
   height: 4px;
   border-radius: 2px;
   background: #fff;
-  transition: all 0.2s linear;
-  -moz-transition: all 0.2s linear;
-  -webkit-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
+  transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -webkit-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
 }
 .nav_Btn_ico_1 {
   top: 5px;
@@ -218,27 +231,28 @@ body {
 }
 @media screen and (max-width: 660px) {
   .app_container {
-    left: 0px;
+    margin-left: 0;
+    left: 0;
     width: 100%;
-    transition: all 0.4s ease-out;
-    -moz-transition: all 0.4s ease-out;
-    -webkit-transition: all 0.4s ease-out;
-    -o-transition: all 0.4s ease-out;
+    transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -webkit-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
   }
   .nav_moreBtn {
     display: block;
-    transition: all 0.4s ease-out;
-    -moz-transition: all 0.4s ease-out;
-    -webkit-transition: all 0.4s ease-out;
-    -o-transition: all 0.4s ease-out;
+    transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -webkit-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
   }
   .nav_body {
-    width: 150px;
-    left: -150px;
-    transition: all 0.4s ease-out;
-    -moz-transition: all 0.4s ease-out;
-    -webkit-transition: all 0.4s ease-out;
-    -o-transition: all 0.4s ease-out;
+    width: 200px;
+    left: -200px;
+    transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -webkit-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
   }
   .nav {
     padding-top: 70px;
@@ -251,20 +265,23 @@ body {
   .nav a strong {
     display: inline-block;
   }
+  .nav_slidedown {
+    overflow: hidden;
+  }
   .nav_slidedown .nav_body {
     left: 0px;
   }
   .nav_slidedown .app_container {
-    left: 150px;
+    left: 200px;
     width: 100%;
-  }
-  .nav_slidedown .nav_moreBtn {
-    top: 20px;
-    left: 60px;
   }
   .nav_slidedown .nav_mask {
     display: block;
     opacity: 0.2;
+  }
+  .nav_slidedown .nav_moreBtn {
+    top: 20px;
+    left: 80px;
   }
   .nav_slidedown .nav_Btn_ico_1 {
     top: 14px;
@@ -287,16 +304,15 @@ body {
   position: relative;
   width: 500px;
   max-width: 100%;
-  height: 100%;
+  margin: auto;
   background: #fff;
 }
 .detailLayer {
   position: relative;
+  max-width: 1000px;
+  margin: auto;
   background: #fff;
-  transition: all 0.5s ease-out;
-  -moz-transition: all 0.5s ease-out;
-  -webkit-transition: all 0.5s ease-out;
-  -o-transition: all 0.5s ease-out;
+  overflow: auto;
 }
 .panellayer {
   position: relative;

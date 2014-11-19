@@ -5,11 +5,11 @@
 define(function(require,exports){
 	
 	var temp = ['<div class="lab_item">',
-		'<a class="lab_cover" lofox="true" href="/labs/<%=name %>" title="<%=title%>">',
+		'<a class="lab_cover" href="/labs/<%=name %>" target="_blank" title="<%=title%>">',
 			'<img src="<%=cover %>" />',
 		'</a>',
 		'<h4 class="lab_title">',
-			'<a href="/labs/<%=name %>" lofox="true" title="<%=title %>"><%=title %></a>',
+			'<a href="/labs/<%=name %>" target="_blank" title="<%=title %>"><%=title %></a>',
 		'</h4>',
 		'<div class="lab_info">',
 			'<p><%=intro %></p>',

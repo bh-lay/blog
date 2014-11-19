@@ -45,6 +45,11 @@ function isAdvancedBrowser(){
 		return false;
 	}
 }
+/**
+ * 检测是否为手机浏览器
+ *
+ */
+var isMobileBrowser = $(window).width() < 720 ? true : false;
 
 //屌丝就用屌丝版
 if(!isAdvancedBrowser()){
@@ -121,8 +126,9 @@ seajs.use([
 			$old.addClass('fadeOutRight');
 			setTimeout(function(){
 				$old.remove();
+                $('html,body').scrollTop(0);
                 callback && callback();
-			},1000);
+			},500);
 		}else{
             callback && callback();
         }
@@ -254,12 +260,6 @@ seajs.use([
 			labsList(dom);
 		});
 	});
-	//实验室详情页
-	lofox.set('/labs/{id}',function(param){
-		this.title('实验室_小剧客栈');
-		var dom = showDetail();
-		dom.html('<iframe class="UI-plugin-iframe" src="/labs/' + param.id + '"></iframe>');
-	});
 	
 	/**
 	 * 留言板
@@ -312,16 +312,21 @@ seajs.use([
  */
 (function(ex){
 	var init=function(){
-		$('.app_layer a').click(function(){
-			$('.app_layer').toggleClass('nav_slidedown');
+        $('.nav_moreBtn').click(function(){
+             $('body').toggleClass('nav_slidedown');
+		});
+		$('.app_nav .nav a').click(function(){
+            setTimeout(function(){
+                $('body').toggleClass('nav_slidedown');
+            },800);
 		});
 		
 		$('.nav_body a').each(function(){
 		  $(this).attr('title','')
 		});
 		
-		$('.nav_body,.nav_mask').on('click',function(){
-			$('.app_layer').removeClass('nav_slidedown');
+		$('.nav_mask').on('click',function(){
+			$('body').removeClass('nav_slidedown');
 		});
 		var active_pop;
 		$('.nav_setting').click(function(){
@@ -403,31 +408,6 @@ seajs.use([
 			{'src': app_config.frontEnd_base + 'public/images/gallery/coast.jpg','alt':'江边'}
 		]
 	};
-	/**
-	 * 判断是否支持css属性
-	 * 兼容css3
-	 */
-	var supports = (function() {
-		var styles = document.createElement('div').style,
-			vendors = 'Webkit Khtml Ms O Moz'.split(/\s/);
-		
-		return function(prop) {
-			var returns = false;
-			if ( prop in styles ){
-				returns = prop;
-			}else{
-				prop = prop.replace(/^[a-z]/, function(val) {
-					return val.toUpperCase();
-				});
-				for(var i=0,total=vendors.length;i<total;i++){
-					if ( vendors[i] + prop in styles ) {
-						returns = ('-' + vendors[i] + '-' + prop).toLowerCase();
-					}
-				}
-			}
-			return returns;
-		};
-	})();
 	
 	function loadImg(src,parm){
 		var parm = parm||{},
@@ -456,61 +436,6 @@ seajs.use([
 		}
 		img.src=src;
 	};
-	function JS_show(data,bj){
-		var data = data,
-			bj = bj,
-			total = data.length;
-	
-		var bjDom = $('<img/>').hide();
-	
-		bj.html(bjDom);
-		show(0,bjDom,data);
-		$(window).on('resize',function(){
-			fixImg(bjDom);
-		});
-		
-		function fixImg(img){
-			var size = img.attr('data').split('-');
-			var imgW = size[0];
-			var imgH = size[1];
-			var winW = $(window).width();
-			var winH = $(window).height();
-			if(winW/winH > imgW/imgH){
-				img.css({
-					'width':winW,
-					'height':winW*imgH/imgW,
-					'marginTop':-(winW*imgH/imgW-winH)/2,
-					'marginLeft':0
-				});
-			}else{
-				img.css({
-					'width':winH*imgW/imgH,
-					'height':winH,
-					'marginTop':0,
-					'marginLeft':-(winH*imgW/imgH-winW)/2
-				});
-			}
-		}
-		function show(i,dom,data){
-			loadImg(data[i].src,{'loadFn':function(imgW,imgH){
-				
-				bj.fadeOut(1000,function(){
-					dom.attr({
-						'src' : data[i].src,
-						'alt' : data[i].alt || '',
-						'data' : (imgW+'-'+imgH)
-					});
-					fixImg(dom);
-					bj.fadeIn(800);
-					setTimeout(function(){
-						i++;
-						i==total&&(i=0);
-						show(i,dom,data);
-					},config.delay)
-				});
-			}});
-		}
-	}
 	function CSS3(data,bj){
 		var data = data,
 			isWebkit = false,
@@ -546,12 +471,15 @@ seajs.use([
 		}
 	}
 	ex.gallery = function(){
-		var bj = $('.gallayer .galBj'),
+		if (!supports('backgroundSize') || isMobileBrowser){
+            return
+        }
+        
+		var $gallery = $('<div class="gallayer"><div class="galBj"></div><div class="galMask"></div></div>').hide();
+            $bj = $gallery.find('.galBj'),
 			data = config['coverData'];
-		if (supports('backgroundSize')){
-			CSS3(data,bj);
-		}else{
-			JS_show(data,bj);
-		}
+        $('body').prepend($gallery);
+        $gallery.fadeIn(200);
+        CSS3(data,$bj);
 	}
 }(L));

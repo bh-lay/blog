@@ -569,8 +569,8 @@ body {
   transition: 0.7s;
 }
 .fadeInLeft {
-  -webkit-animation: fadeInLeft 1s .2s ease both;
-  -moz-animation: fadeInLeft 1s .2s ease both;
+  -webkit-animation: fadeInLeft 0.5s ease both;
+  -moz-animation: fadeInLeft 0.5s ease both;
 }
 .fadeInLeftBig {
   -webkit-animation: fadeInLeftBig 1s .2s ease both;
@@ -581,8 +581,8 @@ body {
   -moz-animation: fadeOutLeft 1s .2s ease both;
 }
 .fadeOutRight {
-  -webkit-animation: fadeOutRight 1s .2s ease both;
-  -moz-animation: fadeOutRight 1s .2s ease both;
+  -webkit-animation: fadeOutRight 0.5s ease both;
+  -moz-animation: fadeOutRight 0.5s ease both;
 }
 .bounceOut {
   -webkit-animation: bounceOut 1s .2s ease both;
