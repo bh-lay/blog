@@ -7,15 +7,13 @@ define(function(require,exports){
 	require('lib/juicer.js');
 	
 	var template = ['<div class="shareDetail">',
-		'<div class="l_row">',
-			'<div class="articletop">',
-				'<h1>${title}</h1>',
-				'<p><span>分享时间：${time_show} </span></p>',
-			'</div>',
-			'<div class="article">$${content}</div>',
-		'</div>',
-		'<div class="comments_frame"><div class="l_row"></div></div>',
-	'</div>'].join('');
+        '<div class="articletop">',
+            '<h1>${title}</h1>',
+            '<p><span>分享时间：${time_show} </span></p>',
+        '</div>',
+        '<div class="article">$${content}</div>',
+	'</div>',
+    '<div class="comments_frame"></div>'].join('');
 	
 	function getData(id,fn){
 		$.ajax({
@@ -51,7 +49,7 @@ define(function(require,exports){
 			console.log(dom);
 			html&&dom.html(html);
 			render_over&&render_over(title);
-			var commentDom = dom.find('.comments_frame .l_row');
+			var commentDom = dom.find('.comments_frame');
 			seajs.use('comments/index.js',function(comments){
 				new comments.init(commentDom,'blog-' + id);
 			});

@@ -4,7 +4,7 @@
  */
 define(function(require,exports){
 	require('lib/juicer.js');
-	var template = ['<div class="l_row"><div class="l_col_12">',
+	var template = ['<div class="">',
 		'<div class="TagLine">小剧作品，一次次小小的进步，成就平凡的自己！</div>',
 		'<div id="focusTitle">',
 			'{@if cover}',
@@ -23,8 +23,8 @@ define(function(require,exports){
 			'<div class="text">$${content}</div>',
 		'</div>',
 		'</div></div>',
-		'<div class="comments_frame"><div class="l_row"></div></div>',
-	'</div></div>'].join('');
+		'<div class="comments_frame"></div>',
+	'</div>'].join('');
 	
 	
 	function getData(id,fn){
@@ -63,7 +63,7 @@ define(function(require,exports){
 			this_html&&dom.html(this_html);
 			render_over&&render_over(title);
 			
-			var commentDom = dom.find('.comments_frame .l_row');
+			var commentDom = dom.find('.comments_frame');
 			seajs.use('comments/index.js',function(comments){
 				new comments.init(commentDom,'opus-' + id);
 			});

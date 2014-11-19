@@ -164,8 +164,13 @@ body {
   }
 }
 .article {
-  padding: 10px;
+  padding: 20px;
   font-family: "Microsoft Yahei";
+}
+.article img {
+  display: block;
+  max-width: 100%;
+  margin: auto;
 }
 .article h1,
 .article h2,
@@ -195,10 +200,10 @@ body {
   font-size: 12px;
 }
 .article p {
-  line-height: 2;
-  text-indent: 2em;
+  line-height: 1.8;
   margin: 1em 0;
-  color: #444444;
+  font-size: 14px;
+  color: #333333;
 }
 .article ul {
   margin: 1em 0;
