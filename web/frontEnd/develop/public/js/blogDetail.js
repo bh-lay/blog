@@ -4,17 +4,16 @@
  */
 define(function(require,exports){
 	require('lib/juicer.js');
+    require('lib/highlight/highlight.pack.js');
 
 	var template = ['<div class="blog_article">',
-		'<div class="l_row"><div class="l_col-12">',
 		'<div class="articletop">',
 			'<h1>${title}</h1>',
 			'<p><span>发布时间：${time_show} </span></p>',
 		'</div>',
 		'<div class="article">$${content}</div>',
 		'</div></div>',
-		'<div class="comments_frame"><div class="l_row"></div></div>',
-	'</div>'].join('');
+		'<div class="comments_frame"></div>'].join('');
 	
 	function getData(id,fn){
 		$.ajax({
@@ -47,8 +46,14 @@ define(function(require,exports){
 			callback && callback(title);
 			html&&dom.html(html);
 			var commentDom = dom.find('.comments_frame');
+            
+            //代码高亮
+            dom.find('pre').each(function(){
+                hljs.highlightBlock(this);
+            });
+            
 			seajs.use('comments/index.js',function(comments){
-				new comments.init(commentDom.find('.l_row'),'blog-' + id);
+				new comments.init(commentDom,'blog-' + id);
 			});
 		});
 	};
