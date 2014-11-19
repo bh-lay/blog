@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @author:bh-lay
  * Blog : http://bh-lay.com/
  * Copyright (c) 2012-2018
@@ -112,86 +112,51 @@ seajs.use([
 	var activeCover = null;
 	var basePage;
 	
-	var active_panel_dom = null;
-	var active_list_dom = null;
-	var active_detail_dom = null;
-	//删除列表dom
-	function removeListDom(){
-		var oldListDom = active_list_dom;
-		if(oldListDom){
-			active_list_dom = null;
-			oldListDom.removeClass('show');
+	var $active_page = null;
+	//老的page dom
+	function removePageDom(callback){
+		if($active_page){
+            var $old = $active_page;
+			$active_page = null;
+			$old.addClass('fadeOutRight');
 			setTimeout(function(){
-				oldListDom.remove();
+				$old.remove();
+                callback && callback();
 			},1000);
-		}
+		}else{
+            callback && callback();
+        }
 	}
-	//删除详细信息dom
-	function removeDetailDom(){
-		var oldDetailDom = active_detail_dom;
-		if(oldDetailDom){
-			active_detail_dom = null;
-			oldDetailDom.removeClass('show');
-			setTimeout(function(){
-				oldDetailDom.remove();
-			},1000);
-		}
-	}
-	//删除单页dom
-	function removePanelDom(){
-		var old_panel_dom = active_panel_dom;
-		if(old_panel_dom){
-			active_panel_dom = null;
-			old_panel_dom.addClass('zoomout');
-			setTimeout(function(){
-				old_panel_dom.remove();
-			},1000);
-		}
-	}
-	
 	var container = $('.app_container');
 	//显示单页dom
 	function showPanel(){
 		var newDom = $('<div class="panellayer"></div>');
-		container.append(newDom);
-		removeListDom();
-		removeDetailDom();
-		removePanelDom();
-		newDom.addClass('zoomin');
-		setTimeout(function(){
-			newDom.removeClass('zoomin');
-		},1000);
-		
-		active_panel_dom = newDom;
+        removePageDom(function(){
+            container.append(newDom);
+            newDom.addClass('fadeInLeft');
+        });
+		$active_page = newDom;
 		return newDom;
 	}
 	//显示列表dom
 	function showList(){
-		removeListDom();
-		removeDetailDom();
-		removePanelDom();
-		
 		var newDom = $('<div class="listLayer"></div>');
-		container.append(newDom);
-		setTimeout(function(){
-			newDom.addClass('show');
-		},80);
-		active_list_dom = newDom;
+        removePageDom(function(){
+            container.append(newDom);
+            newDom.addClass('fadeInLeft');
+        });
+		$active_page = newDom;
 		return newDom;
 	}
 	//显示详细信息dom
 	function showDetail(){
-		removeDetailDom();
-		removePanelDom();
 		var newDom = $('<div class="detailLayer"></div>');
-		container.append(newDom);
-		setTimeout(function(){
-			newDom.addClass('show');
-			if(active_list_dom){
-				active_list_dom.addClass('push_out');
-			}
-		},80);
-		active_detail_dom = newDom;
+        removePageDom(function(){
+            container.append(newDom);
+			newDom.addClass('fadeInLeft');
+		
+        });
+		$active_page = newDom;
 		return newDom;
 	}
 	
