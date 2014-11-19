@@ -462,7 +462,7 @@ define(function(require,exports){
 			'list' : [item]
 		});
 		var $item = $(html);
-		$(this.dom).prepend($item);
+		$(this.dom).find('.l_com_list_cnt').prepend($item);
 		$item.addClass('l_com_item_ani-insert');
 		$(this.dom).find('.l_com_list_noData').fadeOut(100);
 	};
