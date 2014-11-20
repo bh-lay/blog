@@ -247,10 +247,12 @@ body {
 }
 .hljs {
   display: block;
+  max-height: 200px;
   padding: 0.5em;
   color: #ddd;
-  background: #333;
   font-family: Monaco, Consolas, "Lucida Console", monospace;
+  background: #333;
+  overflow: auto;
 }
 .profile .hljs-header *,
 .ini .hljs-title,
