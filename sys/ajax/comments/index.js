@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @author bh-lay
  * 
  * /ajax/user

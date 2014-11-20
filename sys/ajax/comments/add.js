@@ -1,4 +1,4 @@
-
+ï»¿
 var mongo = require('../../lofox/DB.js');
 var parse = require('../../lofox/parse.js');
 
@@ -20,7 +20,7 @@ function getUserInfo(id,callback){
 		});
 	});
 }
-//Ôö¼ÓÒ»ÌõÆÀÂÛ
+//å¢åŠ ä¸€æ¡è¯„è®º
 module.exports = function(data,callback){
 	var item = {
 		'content' : parse.encodeHtml(data.content),
@@ -31,7 +31,7 @@ module.exports = function(data,callback){
 		callback && callback('missing argument : cid');
 		return;
 	}
-	//µÇÂ¼ÓÃ»§Ö»¼Çid£¬±¾µØÓÃ»§¼ÇÂ¼¶ÔÏó
+	//ç™»å½•ç”¨æˆ·åªè®°idï¼Œæœ¬åœ°ç”¨æˆ·è®°å½•å¯¹è±¡
 	if(data.uid){
 		item.uid = data.uid;
 	}else{
@@ -46,7 +46,7 @@ module.exports = function(data,callback){
 				callback && callback(err);
 			}else {
 				if(data.uid){
-					//»ñÈ¡ÓÃ»§ĞÅÏ¢
+					//è·å–ç”¨æˆ·ä¿¡æ¯
 					getUserInfo(data.uid,function(err,userInfo){
 						if(!err){
 							item.user = userInfo;

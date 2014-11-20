@@ -121,12 +121,18 @@ exports.request = function(req,callBack){
 		return 
 	}
 
-	var method = req['method']||'';
+	var method = (req['method']||'').toLocaleLowerCase();
 	var fields = parser_data(req.url.split('?')[1]);
-	var content_type = req['headers']['content-type'];
+    
+	if(method == 'get'){
+		callBack(null,fields,[]);
+    }else{
+        //直接取到的content-type，可能为“application/x-www-form-urlencoded; charset=UTF-8”
+        var content_type = req['headers']['content-type'] || '';
+        //FIXME 猥琐的处理方式
+        content_type = content_type.split(';')[0]
 		
-	if(method == 'POST' || method =='post'){
-		if(content_type == 'application/x-www-form-urlencoded'){
+        if(content_type == 'application/x-www-form-urlencoded'){
 			 var postData = "";
 			// 数据块接收中
 			req.addListener("data", function (postDataChunk) {
@@ -143,30 +149,25 @@ exports.request = function(req,callBack){
 				}
 				callBack(null,fields_post);
 			});
-			return false;
-		}
-		
-		var form = new formidable.IncomingForm();
-		form.uploadDir = "./cache/upload";
-		//form.keepExtensions = true;
-		form.parse(req, function(error, fields_post, files) {
-			// @FIXME when i upload more than one file ,the arguments files is only single file
-			// but i can get all files information form form.openedFiles
-			// it confused me
-			
-			files = form.openedFiles;
-			//将URL上的参数非强制性的增加到post数据上
-			for(var i in fields){
-				if(!fields_post[i]){
-					fields_post[i] = fields[i];
-				}
-			}
-			
-			callBack(error,fields_post, files);
-		
-		});
-	}else{
-		callBack(null,fields,[]);
+		}else{
+            var form = new formidable.IncomingForm();
+            form.uploadDir = "./cache/upload";
+            //form.keepExtensions = true;
+            form.parse(req, function(error, fields_post, files) {
+                // @FIXME when i upload more than one file ,the arguments files is only single file
+                // but i can get all files information form form.openedFiles
+                // it confused me
+
+                files = form.openedFiles;
+                //将URL上的参数非强制性的增加到post数据上
+                for(var i in fields){
+                    if(!fields_post[i]){
+                        fields_post[i] = fields[i];
+                    }
+                }
+                callBack(error,fields_post, files);
+            });
+        }
 	}
 }
 

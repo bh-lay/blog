@@ -25,16 +25,16 @@ function getUserInfo(id,callback){
 }
 
 /**
- * 处理评论数据
- *  增加用户信息
+ * 澶勭悊璇勮鏁版嵁
+ *  澧炲姞鐢ㄦ埛淇℃伅
  *
  **/
 function handleData(docs,callback){
 	/**
-	 * 统一调用回调
+	 * 缁熶竴璋冪敤鍥炶皟
 	 */
 	function endFn(){
-		//处理用户信息字段
+		//澶勭悊鐢ㄦ埛淇℃伅瀛楁
 		docs.forEach(function(item){
 			if(users[item.uid]){
 				item.user = users[item.uid];
@@ -51,7 +51,7 @@ function handleData(docs,callback){
 	var uidsLength = 0;
 	var overLength = 0;
 	
-	//获取所有需要的用户id
+	//鑾峰彇鎵�鏈夐渶瑕佺殑鐢ㄦ埛id
 	docs.forEach(function(item){
 		var uid = item.uid;
 		if(uid && !users[uid]){
@@ -62,9 +62,9 @@ function handleData(docs,callback){
 	if(uidsLength == 0){
 		endFn();
 	}else{
-		//遍历所有需要的用户id
+		//閬嶅巻鎵�鏈夐渶瑕佺殑鐢ㄦ埛id
 		for(var id in users){
-			//获取单个用户信息
+			//鑾峰彇鍗曚釜鐢ㄦ埛淇℃伅
 			getUserInfo(id,function(err,userInfo){
 				overLength++;
 				if(!err){
@@ -78,7 +78,7 @@ function handleData(docs,callback){
 	}
 }
 
-//获取评论列表
+//鑾峰彇璇勮鍒楄〃
 module.exports = function(data,callback){
 	var data = data,
 		cid = data['cid'] || '',
