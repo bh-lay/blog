@@ -71,7 +71,8 @@
 		});
 	}
 	function LOGIN(param,callback){
-		var me = this;
+		param = param || {};
+        var me = this;
 		
 		var pop = UI.pop({
 			'mask' : true,

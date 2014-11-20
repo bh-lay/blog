@@ -316,6 +316,7 @@ a:active {
   position: relative;
   max-width: 800px;
   margin: auto;
+  overflow: hidden;
 }
 .panellayer {
   position: relative;
@@ -618,77 +619,6 @@ a:active {
 .l_send_count span {
   font-size: 12px;
   color: #aaa;
-}
-/** 用户信息 **/
-.l_sendBox_user {
-  position: relative;
-  vertical-align: middle;
-  padding-left: 20px;
-}
-.l_sendBox_user p {
-  float: left;
-  padding: 6px 20px 6px 0;
-}
-.l_sendBox_user span {
-  display: inline-block;
-  vertical-align: bottom;
-  color: #ddd;
-  font-size: 12px;
-  line-height: 14px;
-}
-.l_sendBox_user input {
-  display: inline-block;
-  width: 50px;
-  height: 30px;
-  padding: 0 0 0 10px;
-  border: none;
-  background: transparent;
-  border-bottom: 1px solid #777;
-  color: #fff;
-  font-size: 18px;
-  font-family: inherit;
-  transition: border-color 0.2s linear;
-  -moz-transition: border-color 0.2s linear;
-  -webkit-transition: border-color 0.2s linear;
-  -o-transition: border-color 0.2s linear;
-}
-.l_sendBox_user input:focus {
-  outline: none;
-  border-bottom-color: #fff;
-}
-.l_sendBox_user input::-webkit-input-placeholder {
-  color: #555;
-}
-.l_sendBox_user input:-moz-placeholder {
-  color: #555;
-}
-.l_sendBox_user input::-moz-placeholder {
-  color: #555;
-}
-.l_sendBox_user input:-ms-input-placeholder {
-  color: #555;
-}
-.l_sendBox_user input[name="username"] {
-  min-width: 3.5em;
-}
-.l_sendBox_user input[name="email"] {
-  min-width: 6em;
-}
-.l_sendBox_user input[name="blog"] {
-  min-width: 4em;
-}
-.l_sendBox_user a {
-  display: inline-block;
-  height: 30px;
-  line-height: 30px;
-  border: 1px dotted #555;
-  color: #aaa;
-  padding: 0 10px;
-}
-.l_sendBox_user a:hover {
-  color: #fff;
-  background: #555;
-  border-color: #888;
 }
 .l_send_avatar {
   position: absolute;

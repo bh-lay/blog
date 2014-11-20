@@ -146,6 +146,7 @@ define(function(require,exports){
 	 *
 	 */
 	function setUserInfoToUI(userInput){
+        userInput = userInput || {};
 		var $allDom = $(this.dom);
 		var user = {
 			'username' : userInput.username || '',
@@ -155,9 +156,6 @@ define(function(require,exports){
 		}
 		$allDom.find('.l_send_placeholder span').html(user.username);
 		$allDom.find('.l_send_username').html(user.username);
-		$allDom.find('input[name="username"]').val(user.username).trigger('change');
-		$allDom.find('input[name="email"]').val(user.email).trigger('change');
-		$allDom.find('input[name="blog"]').val(user.blog).trigger('change');
 		$allDom.find('.l_send_avatar img').attr('src',user.avatar);
 	}
 	/**
@@ -223,7 +221,12 @@ define(function(require,exports){
 	}
     function showUser(){
         UI.pop({
-            'html' : user_tpl
+            'title' : '雁过留名',
+            'width' : 300,
+            'html' : user_tpl,
+            'confirm' : function(){
+                
+            }
         });
     }
 	/**
