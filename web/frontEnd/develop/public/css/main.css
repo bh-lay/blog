@@ -1200,10 +1200,6 @@ a:active {
   padding: 40px 0px 20px;
   margin-bottom: 20px;
 }
-.articletop h1 {
-  font-size: 30px;
-  font-weight: normal;
-}
 .articletop p {
   color: #666666;
 }
@@ -1228,11 +1224,6 @@ a:active {
 }
 .article .youyan {
   padding-top: 20px;
-}
-@media screen and (max-width: 1000px) {
-  .articletop h1 {
-    font-size: 24px;
-  }
 }
 /**实验室列表**/
 .labsList {
@@ -1613,10 +1604,6 @@ a:active {
   padding: 40px 0px 20px;
   margin-bottom: 20px;
 }
-.articletop h1 {
-  font-size: 30px;
-  font-weight: normal;
-}
 .articletop p {
   color: #666666;
 }
@@ -1632,6 +1619,7 @@ a:active {
 .articletop h1 {
   font-size: 30px;
   font-weight: normal;
+  margin-bottom: 20px;
 }
 .articletop p {
   color: #666666;
