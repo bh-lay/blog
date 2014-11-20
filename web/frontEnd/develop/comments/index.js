@@ -13,8 +13,7 @@ define(function(require,exports){
 	'</div>'].join('');
 	
 	var sendBox_tpl = ['<div class="l_sendBox" spellcheck="false">',
-		'<div class="l_sendBox_card">',
-		'<div class="l_sendBox_card_front">',
+		'<div class="l_sendBox_main">',
 			'<div class="l_send_textarea">',
 				'<textarea name="content"></textarea>',
 				'<div class="l_send_placeholder"><span></span>敢不敢写点啥！</div>',
@@ -25,28 +24,21 @@ define(function(require,exports){
 					'<div class="l_send_count"><b>500</b><i>/</i><span>500</span></div>',
 				'</div>',
 				'<div class="l_send_footer_right">',
-					'<a href="javascript:void(0)" class="l_send_btnB l_send_username l_send_toggle_flip">报上名来</a>',
+					'<a href="javascript:void(0)" class="l_send_btnB l_send_username l_send_userInfo">报上名来</a>',
 					'<a href="javascript:void(0)" class="l_send_btnA l_send_submit">发布</a>',
 				'</div>',
 			'</div>',
-			'<div class="l_send_avatar l_send_toggle_flip">',
+			'<div class="l_send_avatar l_send_userInfo">',
 				'<img src="" />',
 			'</div>',
 		'</div>',
-		'<div class="l_sendBox_card_back">',
-			'<a href="javascript:void(0)" class="l_send_login_panel_close l_send_toggle_flip">×</a>',
-			'<div class="l_send_login_panel">',
-				'<div class="l_send_login_panel_body">',
-					'<p><span>我是</span><input type="text" autocomplete="off" name="username" placeholder="韩梅梅"/></p>',
-					'<p><span>有个常用邮箱</span><input type="text" autocomplete="off" name="email" placeholder="xxx@qq.cn"/></p>',
-					'<p><span>还有一个牛逼轰轰的博客</span><input type="text" autocomplete="off" name="blog" placeholder="xxx.me"/></p>',
-					'<p><a href="javascript:void(0)" class="l_send_changeUserInfo">确定</a></p>',
-				'</div>',
-			'</div>',
-		'</div>',
-		'</div>',
 	'</div>'].join('');
-	
+	var user_tpl = ['<div class="l_sendBox_user">',
+        '<p><span>我是</span><input type="text" autocomplete="off" name="username" placeholder="韩梅梅"/></p>',
+        '<p><span>有个常用邮箱</span><input type="text" autocomplete="off" name="email" placeholder="xxx@qq.cn"/></p>',
+        '<p><span>还有一个牛逼轰轰的博客</span><input type="text" autocomplete="off" name="blog" placeholder="xxx.me"/></p>',
+        '<p><a href="javascript:void(0)" class="l_send_changeUserInfo">确定</a></p>',
+    '</div>'].join('');
 	var list_tpl = ['<div>',
 		'<div class="l_com_list_cnt"></div>',
 		'<div class="l_com_list_pagination"></div>',
@@ -229,6 +221,11 @@ define(function(require,exports){
 			}
 		});
 	}
+    function showUser(){
+        UI.pop({
+            'html' : user_tpl
+        });
+    }
 	/**
 	 * 绑定dom事件
 	 */
@@ -267,12 +264,8 @@ define(function(require,exports){
 		
 		$allDom.on('click','.l_send_placeholder',function(){
 			$textarea.focus();
-		}).on('click','.l_send_toggle_flip',function(e){
-			var btn = $(this)[0];
-			setTimeout(function(){
-				$textarea.focusout();
-			});
-			$allDom.toggleClass('flipped');
+		}).on('click','.l_send_userInfo',function(e){
+			showUser()
 		}).on('click','.l_send_footer',function(){
 			$textarea.focus();
 		}).on('click','.l_send_submit',function(){
@@ -294,7 +287,7 @@ define(function(require,exports){
 					}
 				});
 			}else{
-				$allDom.toggleClass('flipped');
+				showUser()
 			}
 			
 		}).on('click','.l_send_face',function(){
@@ -333,7 +326,7 @@ define(function(require,exports){
 					private_userInfo = user;
 				}
 				setUserInfoToUI.call(me,user);
-				$allDom.toggleClass('flipped');
+				showUser()
 			},false);
 		});
 	}

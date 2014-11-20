@@ -495,47 +495,10 @@ a:active {
 .l_com_sendBox {
   margin-bottom: 30px;
 }
-.l_sendBox {
+.l_sendBox_main {
   position: relative;
   z-index: 1;
-  -webkit-perspective: 800px;
-  -moz-perspective: 800px;
-  -ms-perspective: 800px;
-  -o-perspective: 800px;
-  perspective: 800px;
-}
-.l_sendBox_card {
-  -webkit-transform-style: preserve-3d;
-  -moz-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  -webkit-transition: all 0.6s ease-out;
-  -moz-transition: all 0.6s ease-out;
-  transition: all 0.6s ease-out;
-}
-.l_sendBox_card_front,
-.l_sendBox_card_back {
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -o-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-.l_sendBox_card_front {
-  position: relative;
   overflow: hidden;
-  -webkit-transform: rotateX(0deg);
-  -moz-transform: rotateX(0deg);
-  transform: rotateX(0deg);
-}
-.l_sendBox_card_back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  min-height: 120px;
-  bottom: 0px;
-  left: 0px;
-  -webkit-transform: rotateX(180deg);
-  -moz-transform: rotateX(180deg);
-  transform: rotateX(180deg);
 }
 .l_send_textarea {
   position: relative;
@@ -657,46 +620,23 @@ a:active {
   color: #aaa;
 }
 /** 用户信息 **/
-.l_send_login_panel_close {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  line-height: 30px;
-  color: #fff;
-  font-size: 20px;
-}
-.l_send_login_panel {
-  display: table;
-  width: 100%;
-  height: 100%;
-  line-height: 2;
-  overflow: hidden;
-  background: #333;
-  transition: all 0.1s ease-out;
-  -moz-transition: all 0.1s ease-out;
-  -webkit-transition: all 0.1s ease-out;
-  -o-transition: all 0.1s ease-out;
-}
-.l_send_login_panel .l_send_login_panel_body {
-  display: table-cell;
+.l_sendBox_user {
+  position: relative;
   vertical-align: middle;
   padding-left: 20px;
 }
-.l_send_login_panel p {
+.l_sendBox_user p {
   float: left;
   padding: 6px 20px 6px 0;
 }
-.l_send_login_panel span {
+.l_sendBox_user span {
   display: inline-block;
   vertical-align: bottom;
   color: #ddd;
   font-size: 12px;
   line-height: 14px;
 }
-.l_send_login_panel input {
+.l_sendBox_user input {
   display: inline-block;
   width: 50px;
   height: 30px;
@@ -712,32 +652,32 @@ a:active {
   -webkit-transition: border-color 0.2s linear;
   -o-transition: border-color 0.2s linear;
 }
-.l_send_login_panel input:focus {
+.l_sendBox_user input:focus {
   outline: none;
   border-bottom-color: #fff;
 }
-.l_send_login_panel input::-webkit-input-placeholder {
+.l_sendBox_user input::-webkit-input-placeholder {
   color: #555;
 }
-.l_send_login_panel input:-moz-placeholder {
+.l_sendBox_user input:-moz-placeholder {
   color: #555;
 }
-.l_send_login_panel input::-moz-placeholder {
+.l_sendBox_user input::-moz-placeholder {
   color: #555;
 }
-.l_send_login_panel input:-ms-input-placeholder {
+.l_sendBox_user input:-ms-input-placeholder {
   color: #555;
 }
-.l_send_login_panel input[name="username"] {
+.l_sendBox_user input[name="username"] {
   min-width: 3.5em;
 }
-.l_send_login_panel input[name="email"] {
+.l_sendBox_user input[name="email"] {
   min-width: 6em;
 }
-.l_send_login_panel input[name="blog"] {
+.l_sendBox_user input[name="blog"] {
   min-width: 4em;
 }
-.l_send_login_panel a {
+.l_sendBox_user a {
   display: inline-block;
   height: 30px;
   line-height: 30px;
@@ -745,7 +685,7 @@ a:active {
   color: #aaa;
   padding: 0 10px;
 }
-.l_send_login_panel a:hover {
+.l_sendBox_user a:hover {
   color: #fff;
   background: #555;
   border-color: #888;
@@ -835,16 +775,6 @@ a:active {
   -moz-animation: placeholderClose 0.2s forwards;
   -webkit-animation: placeholderClose 0.2s forwards;
   -o-animation: placeholderClose 0.2s forwards;
-}
-/** 翻转状态 **/
-.l_sendBox.flipped .l_send_footer {
-  height: 34px;
-  opacity: 1;
-}
-.l_sendBox.flipped .l_sendBox_card {
-  -webkit-transform: rotateX(180deg);
-  -moz-transform: rotateX(180deg);
-  transform: rotateX(180deg);
 }
 @keyframes insert {
   0% {

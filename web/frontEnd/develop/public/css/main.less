@@ -504,48 +504,12 @@ a,a:active{
 .l_com_sendBox {
 	margin-bottom: 30px
 }
-
 .l_sendBox {
+}
+.l_sendBox_main{
 	position: relative;
 	z-index: 1;
-	-webkit-perspective: 800px;
-	-moz-perspective: 800px;
-	-ms-perspective: 800px;
-	-o-perspective: 800px;
-	perspective: 800px;
-}
-.l_sendBox_card{
-	-webkit-transform-style: preserve-3d;
-	-moz-transform-style: preserve-3d;
-	transform-style: preserve-3d;
-	-webkit-transition: all 0.6s ease-out;
-	-moz-transition: all 0.6s ease-out;
-	transition: all 0.6s ease-out;
-}
-.l_sendBox_card_front,
-.l_sendBox_card_back{
-	-webkit-backface-visibility: hidden;
-	-moz-backface-visibility: hidden;
-	-o-backface-visibility: hidden;
-	backface-visibility: hidden;
-}
-.l_sendBox_card_front{
-	position: relative;
-	overflow: hidden;
-	-webkit-transform: rotateX(0deg);
-	-moz-transform: rotateX(0deg);
-	transform: rotateX(0deg);
-}
-.l_sendBox_card_back{
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	min-height: 120px;
-	bottom: 0px;
-	left: 0px;
-	-webkit-transform: rotateX(180deg);
-	-moz-transform: rotateX(180deg);
-	transform: rotateX(180deg);
+    overflow:hidden;
 }
 
 .l_send_textarea {
@@ -584,8 +548,8 @@ a,a:active{
 	cursor: text;
 	background: #fff;
 	overflow: hidden;
-	border: 2px solid #aaa;
-	.borderbox();
+    border: 2px solid #aaa;
+    .borderbox();
 	span{
 		padding: 0 10px 0 60px;
 		font-size: 20px;
@@ -660,30 +624,10 @@ a,a:active{
 }
 
 /** 用户信息 **/
-.l_send_login_panel_close{
-	position: absolute;
-	top: 5px;
-	right: 5px;
-	width: 30px;
-	height: 30px;
-	text-align:center;
-	line-height: 30px;
-	color: #fff;
-	font-size: 20px;
-}
-.l_send_login_panel{
-	display:table;
-	width: 100%;
-	height: 100%;
-	line-height: 2;
-	overflow: hidden;
-	background: #333;
-	.transition(0.1s, ease-out);
-	.l_send_login_panel_body{
-		display:table-cell;
-		vertical-align: middle;
-		padding-left: 20px;
-	}
+.l_sendBox_user{
+    position: relative;
+	vertical-align: middle;
+	padding-left: 20px;
 	p{
 		float: left;
 		padding: 6px 20px 6px 0;
@@ -826,20 +770,6 @@ a,a:active{
 		-moz-animation:placeholderClose 0.2s forwards;
 		-webkit-animation:placeholderClose 0.2s forwards;
 		-o-animation:placeholderClose 0.2s forwards;
-	}
-}
-
-/** 翻转状态 **/
-.l_sendBox.flipped{
-	.l_send_footer {
-		height: @sendBox_footer_height;
-		opacity: 1;
-	}
-	.l_sendBox_card{
-		-webkit-transform: rotateX(180deg);
-		-moz-transform: rotateX(180deg);
-		transform: rotateX(180deg);
-		
 	}
 }
 
