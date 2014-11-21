@@ -76,6 +76,9 @@ body {
   font-family: "layIcon";
   font-style: normal;
 }
+.l-icon-face:after {
+  content: '\0055';
+}
 .piclist {
   width: 488px;
   margin: 20px auto;

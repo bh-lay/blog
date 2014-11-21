@@ -163,7 +163,7 @@ a,a:active{
 	padding: 0 0 20px;
 	a{
 		display: block;
-        width: 50px;
+        width: 40px;
         margin: auto;
 		padding: 10px 0;
 		text-align: center;
@@ -493,7 +493,7 @@ a,a:active{
  * 评论模块
  *
  **/
-@sendBox_footer_height : 34px;
+@sendBox_footer_height : 30px;
 .comments_frame {
 	margin: 0 10px;
 }
@@ -506,15 +506,70 @@ a,a:active{
 	margin-bottom: 30px
 }
 .l_sendBox {
+    padding: 20px 20px 20px 80px;
+    background: #fff;
+    position: relative;
+    border-radius: 2px;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+
+.l_send_side {
+	position: absolute;
+	top: 20px;
+	left: 0;
+    width: 80px;
+}
+.l_send_avatar{
+    width: 40px;
+    height: 40px;
+    margin: auto;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #aaa;
+    img {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+}
+.l_send_username{
+    display: block;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 12px;
+    line-height: 14px;
+    color: #000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &:hover{
+        color: #f60;
+    }
 }
 .l_sendBox_main{
 	position: relative;
 	z-index: 1;
-    overflow:hidden;
+
 }
 
 .l_send_textarea {
+    border: 1px solid #ddd;
 	position: relative;
+    &:before{
+        content: '';
+        position: absolute;
+        display: block;
+        width: 14px;
+        height: 14px;
+        top: 14px;
+        left: -7px;
+        border: 1px solid #ddd;
+        border-width: 0 0 1px 1px;
+        background: #fff;
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
     textarea {
         position: relative;
         display: block;
@@ -543,27 +598,19 @@ a,a:active{
 	width: 100%;
 	height: 100%;
 	line-height: 80px;
-	text-indent: 2em;
+	text-indent: 1em;
 	font-size: 18px;
 	color: #aaa;
 	cursor: text;
 	background: #fff;
-	overflow: hidden;
-    border: 2px solid #aaa;
-    .borderbox();
-	span{
-		padding: 0 10px 0 60px;
-		font-size: 20px;
-		color: #555;
-	}
 }
 
 .l_send_footer {
 	position: relative;
 	height: 0px;
-	padding: 0px;
+	padding: 0;
 	overflow: hidden;
-	background: #666;
+	background: #fff;
 	opacity: 0.5;
 	.transition(0.1s, ease-out);
 }
@@ -576,70 +623,57 @@ a,a:active{
 	float: right
 }
 
-.l_send_btnA {
-	display: inline-block;
-	padding: 0px 20px;
-	font-size: 15px;
+.l_send_face {
+	display: block;
+    float: left;
+	padding: 0px 5px;
+	font-size: 24px;
 	height: @sendBox_footer_height;
 	line-height: @sendBox_footer_height;
-	color: #fff;
-	.transition(0.2s);
-	&:hover {
-		background: #888;
-		color: #fff
-	}
-}
-.l_send_btnB {
-	display: inline-block;
-	padding: 0px 20px;
-	font-size: 12px;
-	height: @sendBox_footer_height;
-	line-height: @sendBox_footer_height;
-	color: #eee;
+	color: #bbb;
 	.transition(0.1s);
 	&:hover {
-		color: #ddd;
-		text-decoration: underline;
+		color: #f70;
 	}
 }
-
-
 .l_send_count {
-	display: inline-block;
+	display: block;
+    float: left;
 	line-height: @sendBox_footer_height;
 	padding: 0 10px;
+    display: none;
 	b{
 		font-size: 14px;
-		color: #ddd;
+		color: #aaa;
 		font-weight: normal;
 	}
 	i{
 		font-style: normal;
 		font-size: 16px;
-		color: #888;
+		color: #ddd;
 	}
 	span{
 		font-size: 12px;
-		color: #aaa;
+		color: #ccc;
+	}
+}
+.l_send_submit {
+	display: inline-block;
+	padding: 0px 20px;
+	font-size: 12px;
+	height: @sendBox_footer_height;
+	line-height: @sendBox_footer_height;
+	color: #fff;
+    background: #f90;
+    border-radius: 2px;
+	.transition(0.1s);
+	&:hover {
+		color: #fff;
+        background: #f70;
+		text-decoration: none;
 	}
 }
 
-.l_send_avatar {
-	position: absolute;
-	top: 2px;
-	left: 2px;
-	width: 76px;
-	height: 76px;
-	.transition(0.1s, ease-out);
-	overflow: hidden;
-	background: #333;
-	opacity: 1;
-	img {
-		position: relative;
-		width: 100%;
-		height: 100%;
-	}
-}
 
 @keyframes placeholderClose{
 	0%   {opacity: 1;}
@@ -652,7 +686,6 @@ a,a:active{
 		width: 0;
 	}
 }
-
 @-moz-keyframes placeholderClose {
 	0%   {opacity: 1;}
 	99%  {
@@ -664,7 +697,6 @@ a,a:active{
 		width: 0;
 	}
 }
-
 @-webkit-keyframes placeholderClose{
 	0%   {opacity: 1;}
 	99%  {
@@ -676,28 +708,17 @@ a,a:active{
 		width: 0;
 	}
 }
-
-@-o-keyframes placeholderClose{
-	0%   {opacity: 1;}
-	99%  {
-		opacity: 0;
-		height: 100%;
-	}
-	100% {
-		opacity: 0;
-		height: 0;
-	}
-}
 /*聚焦状态*/
 .l_sendBox_active {
 	.l_send_footer {
 		height: @sendBox_footer_height;
+        padding-top: 10px;
 		opacity: 1;
 	}
-	.l_send_avatar{
-		left: -80px;
-		opacity: 0.2;
-	}
+    .l_send_textarea,.l_send_textarea:before{
+        border-color: #fa0;
+        .transition(0.2s);
+    }
 	.l_send_placeholder{
 		animation:placeholderClose 0.2s forwards;
 		-moz-animation:placeholderClose 0.2s forwards;
@@ -828,6 +849,7 @@ a,a:active{
 	height: 50px;
 	overflow: hidden;
 	background: #333;
+    border-radius: 100%;
 	img{
 		width : 100%;
 		height: 100%;

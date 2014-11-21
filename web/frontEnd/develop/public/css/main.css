@@ -165,7 +165,7 @@ a:active {
 }
 .nav_bottom a {
   display: block;
-  width: 50px;
+  width: 40px;
   margin: auto;
   padding: 10px 0;
   text-align: center;
@@ -496,13 +496,68 @@ a:active {
 .l_com_sendBox {
   margin-bottom: 30px;
 }
+.l_sendBox {
+  padding: 20px 20px 20px 80px;
+  background: #fff;
+  position: relative;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+.l_send_side {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 80px;
+}
+.l_send_avatar {
+  width: 40px;
+  height: 40px;
+  margin: auto;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #aaa;
+}
+.l_send_avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.l_send_username {
+  display: block;
+  padding: 10px 0;
+  text-align: center;
+  font-size: 12px;
+  line-height: 14px;
+  color: #000;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.l_send_username:hover {
+  color: #f60;
+}
 .l_sendBox_main {
   position: relative;
   z-index: 1;
-  overflow: hidden;
 }
 .l_send_textarea {
+  border: 1px solid #ddd;
   position: relative;
+}
+.l_send_textarea:before {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 14px;
+  height: 14px;
+  top: 14px;
+  left: -7px;
+  border: 1px solid #ddd;
+  border-width: 0 0 1px 1px;
+  background: #fff;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 .l_send_textarea textarea {
   position: relative;
@@ -535,28 +590,18 @@ a:active {
   width: 100%;
   height: 100%;
   line-height: 80px;
-  text-indent: 2em;
+  text-indent: 1em;
   font-size: 18px;
   color: #aaa;
   cursor: text;
   background: #fff;
-  overflow: hidden;
-  border: 2px solid #aaa;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-}
-.l_send_placeholder span {
-  padding: 0 10px 0 60px;
-  font-size: 20px;
-  color: #555;
 }
 .l_send_footer {
   position: relative;
   height: 0px;
-  padding: 0px;
+  padding: 0;
   overflow: hidden;
-  background: #666;
+  background: #fff;
   opacity: 0.5;
   transition: all 0.1s ease-out;
   -moz-transition: all 0.1s ease-out;
@@ -569,75 +614,61 @@ a:active {
 .l_send_footer_right {
   float: right;
 }
-.l_send_btnA {
-  display: inline-block;
-  padding: 0px 20px;
-  font-size: 15px;
-  height: 34px;
-  line-height: 34px;
-  color: #fff;
-  transition: all 0.2s linear;
-  -moz-transition: all 0.2s linear;
-  -webkit-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
-}
-.l_send_btnA:hover {
-  background: #888;
-  color: #ffffff;
-}
-.l_send_btnB {
-  display: inline-block;
-  padding: 0px 20px;
-  font-size: 12px;
-  height: 34px;
-  line-height: 34px;
-  color: #eee;
+.l_send_face {
+  display: block;
+  float: left;
+  padding: 0px 5px;
+  font-size: 24px;
+  height: 30px;
+  line-height: 30px;
+  color: #bbb;
   transition: all 0.1s linear;
   -moz-transition: all 0.1s linear;
   -webkit-transition: all 0.1s linear;
   -o-transition: all 0.1s linear;
 }
-.l_send_btnB:hover {
-  color: #ddd;
-  text-decoration: underline;
+.l_send_face:hover {
+  color: #f70;
 }
 .l_send_count {
-  display: inline-block;
-  line-height: 34px;
+  display: block;
+  float: left;
+  line-height: 30px;
   padding: 0 10px;
+  display: none;
 }
 .l_send_count b {
   font-size: 14px;
-  color: #ddd;
+  color: #aaa;
   font-weight: normal;
 }
 .l_send_count i {
   font-style: normal;
   font-size: 16px;
-  color: #888;
+  color: #ddd;
 }
 .l_send_count span {
   font-size: 12px;
-  color: #aaa;
+  color: #ccc;
 }
-.l_send_avatar {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 76px;
-  height: 76px;
-  transition: all 0.1s ease-out;
-  -moz-transition: all 0.1s ease-out;
-  -webkit-transition: all 0.1s ease-out;
-  -o-transition: all 0.1s ease-out;
-  overflow: hidden;
-  background: #333;
-  opacity: 1;
+.l_send_submit {
+  display: inline-block;
+  padding: 0px 20px;
+  font-size: 12px;
+  height: 30px;
+  line-height: 30px;
+  color: #fff;
+  background: #f90;
+  border-radius: 2px;
+  transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -webkit-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
 }
-.l_send_avatar img {
-  position: relative;
-  width: 100%;
-  height: 100%;
+.l_send_submit:hover {
+  color: #fff;
+  background: #f70;
+  text-decoration: none;
 }
 @keyframes placeholderClose {
   0% {
@@ -678,27 +709,19 @@ a:active {
     width: 0;
   }
 }
-@-o-keyframes placeholderClose {
-  0% {
-    opacity: 1;
-  }
-  99% {
-    opacity: 0;
-    height: 100%;
-  }
-  100% {
-    opacity: 0;
-    height: 0;
-  }
-}
 /*聚焦状态*/
 .l_sendBox_active .l_send_footer {
-  height: 34px;
+  height: 30px;
+  padding-top: 10px;
   opacity: 1;
 }
-.l_sendBox_active .l_send_avatar {
-  left: -80px;
-  opacity: 0.2;
+.l_sendBox_active .l_send_textarea,
+.l_sendBox_active .l_send_textarea:before {
+  border-color: #fa0;
+  transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
 }
 .l_sendBox_active .l_send_placeholder {
   animation: placeholderClose 0.2s forwards;
@@ -825,6 +848,7 @@ a:active {
   height: 50px;
   overflow: hidden;
   background: #333;
+  border-radius: 100%;
 }
 .l_com_item_avatar img {
   width: 100%;

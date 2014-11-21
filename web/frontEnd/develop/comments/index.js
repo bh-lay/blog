@@ -13,23 +13,23 @@ define(function(require,exports){
 	'</div>'].join('');
 	
 	var sendBox_tpl = ['<div class="l_sendBox" spellcheck="false">',
+        '<div class="l_send_side">',
+            '<div class="l_send_avatar"><img src="" /></div>',
+            '<a href="javascript:void(0)" class="l_send_username">报上名来</a>',
+        '</div>',
 		'<div class="l_sendBox_main">',
 			'<div class="l_send_textarea">',
 				'<textarea name="content"></textarea>',
-				'<div class="l_send_placeholder"><span></span>敢不敢写点啥！</div>',
+				'<div class="l_send_placeholder">敢不敢写点啥！</div>',
 			'</div>',
 			'<div class="l_send_footer">',
 				'<div class="l_send_footer_left">',
-					'<a href="#" class="l_send_face l_send_btnA">表情</a>',
+					'<a href="javascript:void(0)" title="插入表情" class="l_send_face"><span class="l-icon l-icon-face"></span></a>',
 					'<div class="l_send_count"><b>500</b><i>/</i><span>500</span></div>',
 				'</div>',
 				'<div class="l_send_footer_right">',
-					'<a href="javascript:void(0)" class="l_send_btnB l_send_username l_send_userInfo">报上名来</a>',
-					'<a href="javascript:void(0)" class="l_send_btnA l_send_submit">发布</a>',
+					'<a href="javascript:void(0)" class="l_send_submit">发布</a>',
 				'</div>',
-			'</div>',
-			'<div class="l_send_avatar l_send_userInfo">',
-				'<img src="" />',
 			'</div>',
 		'</div>',
 	'</div>'].join('');
@@ -154,37 +154,9 @@ define(function(require,exports){
 			'blog' : userInput.blog || '',
 			'avatar' : userInput.avatar || 'http://layasset.qiniudn.com/user/default.jpg'
 		}
-		$allDom.find('.l_send_placeholder span').html(user.username);
-		$allDom.find('.l_send_username').html(user.username);
+        var screen_name = user.username || '雁过留名';
+		$allDom.find('.l_send_username').html(screen_name).attr('title',screen_name);
 		$allDom.find('.l_send_avatar img').attr('src',user.avatar);
-	}
-	/**
-	 * 显示登录界面
-	 */
-	var activeLoginPanel = null;
-	function showLoginPanel($allDom){
-		if(activeLoginPanel){
-			activeLoginPanel.close();
-			return;
-		}
-		var me = this;
-		var offset = $allDom.offset();
-		activeLoginPanel = L.login({
-			'defaults' : 'account',
-			'top' : offset.top - 20,
-			'left' : offset.left + ($allDom.width() - 400)/2,
-			'closeFn' : function(){
-				activeLoginPanel = null;
-			}
-		},function (data){
-			if(data.code != 200){
-				UI.prompt('登录失败',3000);
-				return;
-			}
-			var user = data.user;
-			//触发自定义事件“login”
-			EMIT.call(me,'login',[user]);
-		});
 	}
 	/**
 	 * 发送评论
@@ -219,15 +191,63 @@ define(function(require,exports){
 			}
 		});
 	}
-    function showUser(){
-        UI.pop({
+    /**
+     * 询问用户信息
+     *
+     */
+    function askForUserInfo(){
+        var me = this;
+        //用户信息
+        var user = private_userInfo;
+        
+        var pop = UI.pop({
             'title' : '雁过留名',
             'width' : 300,
             'html' : user_tpl,
-            'confirm' : function(){
-                
-            }
+            'confirm' : confirmFn
         });
+        
+        var $elem = $(pop.dom),
+            $username = $elem.find('input[name="username"]'),
+            $email = $elem.find('input[name="email"]'),
+            $blog = $elem.find('input[name="blog"]');
+        
+        if(user){
+            $username.val(user.username || '');
+            $email.val(user.email || '');
+            $blog.val(user.blog || '');
+        }
+        function confirmFn(){
+            var username = $username.val();
+            var email = $email.val();
+            var blog = $blog.val();
+            if(username.length < 1){
+                UI.prompt('大哥，告诉我你叫什么呗！',null,{
+                  'from' : 'top'
+                });
+                return false;
+            }
+            if(blog.length && !parseUrl(blog)){
+                UI.prompt('博客地址是对的么？',null,{
+                  'from' : 'top'
+                });
+                return false;
+            }
+            L.dataBase.setLocalUser({
+                'username' : username,
+                'email' : email,
+                'blog' : blog
+            });
+            //更新用户信息
+            L.dataBase.user(function(err,user){
+                if(err){
+                    private_userInfo = null;
+                }else if(user){
+                    private_userInfo = user;
+                }
+                EMIT.call(me,'login',[private_userInfo]);
+            },false);
+        }
     }
 	/**
 	 * 绑定dom事件
@@ -237,7 +257,6 @@ define(function(require,exports){
 		var me = this;
 		var $allDom = $(this.dom);
 		var $textarea = $allDom.find('textarea');
-		
 		
 		var inputDelay,
 			focusDelay;
@@ -267,13 +286,17 @@ define(function(require,exports){
 		
 		$allDom.on('click','.l_send_placeholder',function(){
 			$textarea.focus();
-		}).on('click','.l_send_userInfo',function(e){
-			showUser()
-		}).on('click','.l_send_footer',function(){
-			$textarea.focus();
+		}).on('click','.l_send_username,.l_send_avatar',function(e){
+        	askForUserInfo.call(me)
 		}).on('click','.l_send_submit',function(){
+            $textarea.focus();
 			if(me.text.length == 0){
 				UI.prompt('你丫倒写点东西啊！',null,{
+					'top' : $(this).offset().top + 40,
+					'from' : $(this)[0]
+				});
+			}else if(me.text.length > 500){
+				UI.prompt('这是要刷屏的节奏么！',null,{
 					'top' : $(this).offset().top + 40,
 					'from' : $(this)[0]
 				});
@@ -290,47 +313,14 @@ define(function(require,exports){
 					}
 				});
 			}else{
-				showUser()
+				askForUserInfo.call(me);
 			}
 			
 		}).on('click','.l_send_face',function(){
+            $textarea.focus();
 			UI.prompt('表情正在开发中！',null,{
 				'from' : $(this)[0]
 			});
-		}).on('keyup keydown change propertychange input paste','input',function(){
-			$(this).width(0);
-			$(this).width($(this)[0].scrollWidth+10);
-		}).on('click','.l_send_changeUserInfo',function(){
-			var username = $allDom.find('input[name="username"]').val();
-			var email = $allDom.find('input[name="email"]').val();
-			var blog = $allDom.find('input[name="blog"]').val();
-			if(username.length < 1){
-				UI.prompt('大哥，告诉我你叫什么呗！',null,{
-				  'from' : $(this)[0]
-				});
-				return;
-			}
-			if(blog.length && !parseUrl(blog)){
-				UI.prompt('博客地址是对的么？',null,{
-				  'from' : $(this)[0]
-				});
-				return;
-			}
-			L.dataBase.setLocalUser({
-				'username' : username,
-				'email' : email,
-				'blog' : blog
-			});
-			//更新用户信息
-			L.dataBase.user(function(err,user){
-				if(err){
-					private_userInfo = null;
-				}else if(user){
-					private_userInfo = user;
-				}
-				setUserInfoToUI.call(me,user);
-				showUser()
-			},false);
 		});
 	}
 	//绑定对象自定义事件
@@ -338,7 +328,8 @@ define(function(require,exports){
 		var me = this;
 		var $allDom = $(this.dom);
 		var $textarea = $allDom.find('textarea');
-		var $countRest = $allDom.find('.l_send_count b');
+        var $count = $allDom.find('.l_send_count');
+		var $countRest = $count.find('b');
 		var text_mirror = mirror($textarea);
 		
 		//监听字符变化事件
@@ -359,10 +350,15 @@ define(function(require,exports){
 			var length = $textarea.val().length;
 			var rest_length = me.limit - length;
 			var show_txt = rest_length;
-			if(rest_length < 0){
-				show_txt = '<font color="#f50">' + Math.abs(rest_length) + '</font>';
-			}
-			$countRest.html(show_txt);
+            if(length > 200){
+                $count.show();
+                if(rest_length < 0){
+				    show_txt = '<font color="#f50">' + Math.abs(rest_length) + '</font>';
+                }
+                $countRest.html(show_txt);
+            }else{
+                $count.hide();
+            }
 		}).on('login',function(user){
 			//设置用户信息
 			setUserInfoToUI.call(me,user);
@@ -406,6 +402,10 @@ define(function(require,exports){
 	};
 	
 	
+    
+    
+    
+    
 	/**
 	 * 列表类
 	 *
