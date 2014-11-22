@@ -6,22 +6,24 @@
 
 
 define(function(require,exports){
+	var pagination = require('util/pagination.js');
+	
 	var blogTemp =  ['<div class="articleItem" articleId="<%=id %>">',
 		'<div class="artItCnt">',
-			'<% if(cover){ %>',
+		/**	'<% if(cover){ %>',
 			'<div class="artItPic">',
 				'<a href="/blog/<%=id %>" title="<%=title %>" lofox="true" target="_self" >',
 					'<img src="<%=cover %>" alt="<%=title %>" />',
 				'</a>',
 			'</div>',
 			'<% } %>',
-			'<div class="artItCpt">',
+		**/	'<div class="artItCpt">',
 				'<a href="/blog/<%=id %>" title="<%=title %>" lofox="true" target="_self" >',
 					'<%=title %>',
 				'</a>',
 			'</div>',
-			'<div class="artItInfo"><p><%=intro %></p></div>',
-			'<div class="artItTime"><%=time_show %></div>',
+		//	'<div class="artItInfo"><p><%=intro %></p></div>',
+		//	'<div class="artItTime"><%=time_show %></div>',
 		//	'<div class="artItTag">${it.tags}</div>',
 		'</div>',
 	'</div>'].join('');
@@ -35,9 +37,12 @@ define(function(require,exports){
 		this.onLoaded = null;
 	}
 	LIST.prototype.render = L.tplEngine(blogTemp);
-	LIST.prototype['more'] = function(){
+	LIST.prototype['renderPage'] = function(index){
 		var me = this;
 		this.onLoadStart && this.onLoadStart();
+		this.skip = (index || 0) * this.limit;
+		
+		this.dom.html('');
 		$.ajax({
 			'type' : 'GET' ,
 			'url' : '/ajax/blog',
@@ -76,15 +81,6 @@ define(function(require,exports){
 		
 		this.dom.append(this_dom);
 		this_dom.fadeIn(200);
-		
-		var img = this_dom.find('img')[0];
-		if(img){
-			img.onload = function(){
-//				this_dom.css('max-width',this.width);
-			}
-		}else{
-//			this_dom.css('max-width',500);
-		}
 	};
 	
 	return function(dom,param){
@@ -94,28 +90,25 @@ define(function(require,exports){
 				'<a href="javascript:void(0)">加载更多</a>',
 				'<span>正在加载……</span>',
 			'</div>',
+			'<div class="pagination_cnt"></div>',
 		'</div>'].join(''));
 		
 		var $list = dom.find('.articleList');
-		var $addMore = dom.find('.blog_addMore');
-
-		dom.on('click','.blog_addMore',function(){
-			list.more();
-		});
+		var $page_cnt = dom.find('.pagination_cnt');
 		
 		var list = new LIST($list);
-		list.more();
-		list.onLoadStart = function(){
-			$addMore.addClass('blog_addMore_loading');
-		};
-		
-		
-		list.onLoaded = function(){
-			if(this.skip >= this.count){
-				$addMore.hide();
-			}else{
-				$addMore.removeClass('blog_addMore_loading');
-			}
+		list.renderPage(1);
+		//分页组件
+		var page = new pagination($page_cnt,{
+			'list_count' : 1000,
+			'page_cur' : 0,
+			'page_list_num' : 10,
+			'max_page_btn' : 8
+		});
+		console.log(pagination,page,1111)
+		page.jump = function(num){
+			//console.log(num,12);
+			//list.more();
 		};
 	};
 });

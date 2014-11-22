@@ -34,10 +34,9 @@ define(function(require,exports){
 		'</div>',
 	'</div>'].join('');
 	var user_tpl = ['<div class="l_sendBox_user">',
-        '<p><span>我是</span><input type="text" autocomplete="off" name="username" placeholder="韩梅梅"/></p>',
-        '<p><span>有个常用邮箱</span><input type="text" autocomplete="off" name="email" placeholder="xxx@qq.cn"/></p>',
-        '<p><span>还有一个牛逼轰轰的博客</span><input type="text" autocomplete="off" name="blog" placeholder="xxx.me"/></p>',
-        '<p><a href="javascript:void(0)" class="l_send_changeUserInfo">确定</a></p>',
+        '<p><input type="text" autocomplete="off" name="username" placeholder="昵称"/></p>',
+        '<p><input type="text" autocomplete="off" name="email" placeholder="xxx@qq.cn"/></p>',
+        '<p><input type="text" autocomplete="off" name="blog" placeholder="xxx.me"/></p>',
     '</div>'].join('');
 	var list_tpl = ['<div>',
 		'<div class="l_com_list_cnt"></div>',
@@ -204,6 +203,7 @@ define(function(require,exports){
             'title' : '雁过留名',
             'width' : 300,
             'html' : user_tpl,
+			'easyClose' : false,
             'confirm' : confirmFn
         });
         

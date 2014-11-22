@@ -729,6 +729,34 @@ a:active {
   -webkit-animation: placeholderClose 0.2s forwards;
   -o-animation: placeholderClose 0.2s forwards;
 }
+.l_sendBox_user {
+  overflow: hidden;
+}
+.l_sendBox_user p {
+  margin-top: -1px;
+  border-top: 1px solid #ccc;
+}
+.l_sendBox_user input {
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
+  line-height: 15px;
+  border: none;
+  font-size: 16px;
+  font-family: inherit;
+  color: #333;
+  transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+.l_sendBox_user input:focus {
+  outline: none;
+  background: #f4f4f4;
+}
 @keyframes insert {
   0% {
     opacity: 0.2;

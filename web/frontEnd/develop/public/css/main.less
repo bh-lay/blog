@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 @import "core.less";
 @nav_slide_durtime:0.3s;
 @nav_slide_width: 200px;
@@ -724,6 +724,30 @@ a,a:active{
 		-moz-animation:placeholderClose 0.2s forwards;
 		-webkit-animation:placeholderClose 0.2s forwards;
 		-o-animation:placeholderClose 0.2s forwards;
+	}
+}
+
+.l_sendBox_user{
+	overflow: hidden;
+	p{
+		margin-top: -1px;
+		border-top: 1px solid #ccc;
+	}
+	input{
+		display: block;
+		width: 100%;
+		padding: 10px 15px;
+		line-height: 15px;
+		border: none;
+		font-size: 16px;
+		font-family: inherit;
+		color: #333;
+		.transition(0.2s);
+		.borderbox();
+		&:focus{
+			outline: none;
+			background: #f4f4f4;
+		}
 	}
 }
 
