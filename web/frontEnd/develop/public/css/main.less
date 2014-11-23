@@ -2,6 +2,13 @@
 @import "core.less";
 @nav_slide_durtime:0.3s;
 @nav_slide_width: 200px;
+.cardShadow{
+	overflow: hidden;
+	background: #fff;
+	border-radius: 2px;
+	box-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+
 
 body{
     overflow-x: hidden;
@@ -492,8 +499,7 @@ a,a:active{
     padding: 20px 20px 20px 80px;
     background: #fff;
     position: relative;
-    border-radius: 2px;
-    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+	.cardShadow();
 }
 
 .l_send_side {
@@ -594,8 +600,8 @@ a,a:active{
 	padding: 0;
 	overflow: hidden;
 	background: #fff;
-	opacity: 0.5;
-	.transition(0.1s, ease-out);
+	opacity: 0;
+	.transition(0.1s);
 }
 
 .l_send_footer_left {
@@ -795,6 +801,7 @@ a,a:active{
 }
 .l_com_list_cnt {
 	background: #fff;
+	.cardShadow();
 }
 .l_com_list_pagination{
 	padding-top: 20px;
@@ -802,9 +809,8 @@ a,a:active{
 .l_com_list_noData{
 	padding: 30px 20px; 
 	line-height: 20px;
-	font-size: 16px;
+	font-size: 18px;
 	color: #666;
-	background: #f4f4f4;
 }
 .l_com_item {
 	position: relative;
@@ -873,9 +879,8 @@ a,a:active{
 .index_intro {
 	margin-bottom: 20px;
 	text-align: center;
-	background: #fff;
-	border-radius: 4px;
-	overflow: hidden
+	overflow: hidden;
+	.cardShadow();
 }
 
 .index_intro_cpt {
@@ -1007,7 +1012,7 @@ a,a:active{
 
 /** 博文列表页 **/
 .articleListCnt {
-	max-width: 440px;
+	max-width: 420px;
 	margin: auto;
 	padding: 20px 10px;
 }
@@ -1017,10 +1022,7 @@ a,a:active{
 
 .articleItem {
 	margin-bottom: 20px;
-	overflow: hidden;
-	background: #fff;
-	border-radius: 2px;
-	box-shadow: 0 0 2px rgba(0,0,0,0.2);
+	.cardShadow();
 }
 
 .artItCpt {
@@ -1073,9 +1075,7 @@ a,a:active{
 }
 .blog_article {
 	margin-bottom: 20px;
-	background: #fff;
-    box-shadow: 0 0 2px rgba(0,0,0,0.2);
-    border-radius: 2px;
+	.cardShadow();
 }
 
 .article_cover {
@@ -1134,18 +1134,20 @@ a,a:active{
 
 /**实验室列表**/
 .labsList {
-	max-width: 500px;
+	width: 1080px;
 	margin: auto;
-	padding: 20px 10px;
+	padding: 40px 10px;
 	overflow: hidden;
 	overflow: hidden
 }
 .lab_item {
 	position: relative;
-	margin-bottom: 20px;
+	width: 320px;
+	height: 360px;
+	float: left;
+	margin: 0 20px 40px;
 	background: #fff;
 	overflow: hidden;
-	border-bottom: 1px solid #ddd;
 	
 	.lab_cover {
 		display: block;
@@ -1162,25 +1164,22 @@ a,a:active{
 		
 	}
 	.lab_title {
-		font-weight: normal;
+		padding: 10px;
 		line-height: 30px;
+		font-weight: normal;
 		color: #333;
 		font-size: 20px;
 		text-align: center;
 		a {
-			display: block;
-			padding: 10px;
 			.transition(0.2s);
 			&:hover {
-				background: #eee;
-				color: #0a4
+				text-decoration: underline;
+				color: #000
 			}
 		}
 	}
 	.lab_info {
-		width: 100%;
-		padding: 10px;
-		.borderbox();
+		padding: 10px 10px 20px;
 		p {
 			color: #333;
 			font-size: 12px;
@@ -1191,95 +1190,38 @@ a,a:active{
 		}
 	}
 }
-
-
-.labs_info {
-	height: 140px;
-	box-shadow: 0px 0px 15px #000;
-	position: relative;
-	background: #fff
+@media(max-width:1200px){
+	.labsList{
+		width: 720px;
+	}
 }
-
-.labs_info h3 {
-	height: 50px;
-	position: relative;
-	margin-bottom: 8px;
+@media(max-width:780px){
+	.labsList{
+		width: auto;
+	}
+	.lab_item{
+		float: none;
+		width: auto;
+		margin: 0 10px 20px;
+		height: auto;
+		.lab_cover img{
+			width: 100%;
+		}
+	}
 }
-
-.labs_info h3 a {
-	display: block;
-	width: 260px;
-	height: 26px;
-	line-height: 26px;
-	padding: 12px 10px 0px;
-	overflow: hidden;
-	font-size: 17px;
-	font-weight: normal;
-	color: #333
-}
-
-.labs_info h3 a:hover {
-	position: absolute;
-	height: auto;
-	padding: 12px 10px 13px;
-	background: url(../images/mask.png) #080;
-	color: #fff
-}
-
-.labs_info h3 a:active {
-	background: url(../images/mask.png) #060;
-	color: #fff
-}
-
-.labs_info p {
-	height: 18px;
-	line-height: 16px;
-	padding: 9px 10px
-}
-
-.labs_info p strong {
-	display: block;
-	height: 30px;
-	float: left;
-	font-size: 14px;
-	font-weight: normal;
-	color: #333
-}
-
-.labs_info p span {
-	display: inline-block;
-	padding: 0px 4px;
-	font-size: 14px;
-	color: #888
-}
-
-.labs_info p a {
-	display: block;
-	width: 190px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	color: #888
-}
-
-.labs_info p a:hover {
-	color: #333;
-	text-decoration: underline
-}
-
 /** 我的作品 **/
 .opusList {
 	max-width: 700px;
 	margin: auto;
-	padding: 30px 0px;
-	padding: 10px;
+	padding: 20px 10px;
 	ul {
-		overflow: hidden;
+		.cardShadow();
 		li {
 			position: relative;
 			padding: 10px 10px 10px 120px;
-			margin: 0px 0 20px;
-			background: #fff;
 			overflow: hidden;
+			margin-bottom: -1px;
+			border-bottom: 1px solid #ddd;
 		}
 	}	
 }
@@ -1300,7 +1242,6 @@ a,a:active{
 
 .opus_info {
 	position: relative;
-	background: #fff;
 	h3 {
 		height: 30px;
 		line-height: 30px;
@@ -1314,7 +1255,8 @@ a,a:active{
 			font-weight: normal;
 			color: #333;
 			&:hover {
-				color: #333
+				color: #333;
+				text-decoration: underline;
 			}
 		}
 	}
@@ -1341,7 +1283,7 @@ a,a:active{
 			overflow: hidden;
 			text-overflow: ellipsis;
 			color: #888;
-			&::hover {
+			&:hover {
 				color: #333;
 				text-decoration: underline
 			}
@@ -1354,10 +1296,8 @@ a,a:active{
 	padding: 60px 10px 40px;
 	.article {
 		position: relative;
-		background: #fff;
 		margin-bottom: 20px;
-		box-shadow: 0 0 2px rgba(0,0,0,0.2);
-		border-radius: 2px;
+		.cardShadow();
 	}
 }
 
@@ -1414,18 +1354,18 @@ a,a:active{
 .shareList {
 	max-width: 500px;
 	margin: auto;
-	padding: 20px 0;
-	overflow: hidden;
-	background: #fff;
+	padding: 20px 10px;
+	ul{
+		.cardShadow()
+	}
 }
 
 .shareList li {
 	position: relative;
 	min-height: 120px;
+	margin-bottom: -1px;
 	padding: 0px 10px 10px 120px;
-	border-bottom: 1px solid #ccc;
-	margin-bottom: 20px;
-	.borderbox();
+	border-bottom: 1px solid #ddd;
 	.shareItem_cover{
 		position: absolute;
 		top: 10px;
@@ -1442,8 +1382,8 @@ a,a:active{
 		}
 	}
 	.shareItem_title{
+		color: #000;
 		strong {
-			display: block;
 			height: 50px;
 			line-height: 50px;
 			overflow: hidden;
@@ -1453,6 +1393,9 @@ a,a:active{
 			text-align: justify;
 			white-space: nowrap;
 			text-overflow: ellipsis;
+		}
+		&:hover{
+			text-decoration: underline;
 		}
 	}
 	p{
@@ -1476,7 +1419,5 @@ a,a:active{
 }
 .shareDetail_article{
 	margin-bottom: 20px;
-	border-radius: 2px;
-	box-shadow: 0 0 2px rgba(0,0,0,0.2);
-	background: #fff;
+	.cardShadow();
 }

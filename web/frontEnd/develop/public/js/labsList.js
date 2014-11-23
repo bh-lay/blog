@@ -44,7 +44,12 @@ define(function(require,exports){
 				for(var i = 0,total = list.length;i<total;i++){
 					list[i]['work_range'] = list[i]['work_range']?list[i]['work_range'].split(/\,/):['暂未填写'];
 					//使用七牛图床
-					list[i].cover = L.qiniu(list[i].cover);
+					//使用七牛图床
+					list[i].cover = L.qiniu(list[i].cover,{
+						'type' : 'cover',
+						'width' : 320,
+						'height': 240
+					});
 				}
 				callback&&callback(list);
 			}

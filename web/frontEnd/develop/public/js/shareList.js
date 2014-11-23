@@ -31,13 +31,6 @@ define(function(require,exports){
 			}
 		});
 	};
-	var start = function(){
-		$('.shareList').on('mouseenter','a',function(){
-			$(this).find('strong').stop().animate({'bottom':0},200);
-		}).on('mouseleave','a',function(){
-			$(this).find('strong').stop().animate({'bottom':-100},200);
-		});
-	};
 	return function(dom,param){
 		var temp = ['<li>',
 			'<a href="/share/<%=id %>" title="<%=title %>" lofox="true" class="shareItem_cover" target="_self" >',
@@ -49,7 +42,7 @@ define(function(require,exports){
 		var render = L.tplEngine(temp);
 		skip = 0;
 		getData(function(list){
-			dom.html('<ul class="shareList"></ul>');
+			dom.html('<div class="shareList"><ul></ul></div>');
 			var this_html = '';
 			
 			for(var i=0,total=list.length;i<total;i++){
@@ -60,9 +53,8 @@ define(function(require,exports){
 			insert({
 				'end' : (skip>=count)?true:false,
 				'html' : this_html,
-				'dom' : dom.find('.shareList')
+				'dom' : dom.find('.shareList ul')
 			});
-			start();
 		});
 	};
 });

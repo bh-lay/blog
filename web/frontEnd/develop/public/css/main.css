@@ -2,6 +2,12 @@
 /**
  * 定义Minxin
  **/
+.cardShadow {
+  overflow: hidden;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
 body {
   overflow-x: hidden;
   overflow-y: scroll;
@@ -479,8 +485,9 @@ a:active {
 }
 .l_sendBox {
   padding: 20px 20px 20px 80px;
-  background: #fff;
   position: relative;
+  overflow: hidden;
+  background: #fff;
   border-radius: 2px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
@@ -583,11 +590,11 @@ a:active {
   padding: 0;
   overflow: hidden;
   background: #fff;
-  opacity: 0.5;
-  transition: all 0.1s ease-out;
-  -moz-transition: all 0.1s ease-out;
-  -webkit-transition: all 0.1s ease-out;
-  -o-transition: all 0.1s ease-out;
+  opacity: 0;
+  transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -webkit-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
 }
 .l_send_footer_left {
   float: left;
@@ -792,7 +799,10 @@ a:active {
 }
 /** list **/
 .l_com_list_cnt {
+  overflow: hidden;
   background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
 .l_com_list_pagination {
   padding-top: 20px;
@@ -800,9 +810,8 @@ a:active {
 .l_com_list_noData {
   padding: 30px 20px;
   line-height: 20px;
-  font-size: 16px;
+  font-size: 18px;
   color: #666;
-  background: #f4f4f4;
 }
 .l_com_item {
   position: relative;
@@ -872,9 +881,10 @@ a:active {
 .index_intro {
   margin-bottom: 20px;
   text-align: center;
-  background: #fff;
-  border-radius: 4px;
   overflow: hidden;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
 .index_intro_cpt {
   padding: 20px 0px;
@@ -994,7 +1004,7 @@ a:active {
 }
 /** 博文列表页 **/
 .articleListCnt {
-  max-width: 440px;
+  max-width: 420px;
   margin: auto;
   padding: 20px 10px;
 }
@@ -1051,9 +1061,10 @@ a:active {
 }
 .blog_article {
   margin-bottom: 20px;
+  overflow: hidden;
   background: #fff;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
 .article_cover {
   text-align: center;
@@ -1101,17 +1112,19 @@ a:active {
 }
 /**实验室列表**/
 .labsList {
-  max-width: 500px;
+  width: 1080px;
   margin: auto;
-  padding: 20px 10px;
+  padding: 40px 10px;
   overflow: hidden;
 }
 .lab_item {
   position: relative;
-  margin-bottom: 20px;
+  width: 320px;
+  height: 360px;
+  float: left;
+  margin: 0 20px 40px;
   background: #fff;
   overflow: hidden;
-  border-bottom: 1px solid #ddd;
 }
 .lab_item .lab_cover {
   display: block;
@@ -1130,30 +1143,25 @@ a:active {
   opacity: 0.8;
 }
 .lab_item .lab_title {
-  font-weight: normal;
+  padding: 10px;
   line-height: 30px;
+  font-weight: normal;
   color: #333;
   font-size: 20px;
   text-align: center;
 }
 .lab_item .lab_title a {
-  display: block;
-  padding: 10px;
   transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
   -webkit-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
 }
 .lab_item .lab_title a:hover {
-  background: #eee;
-  color: #00aa44;
+  text-decoration: underline;
+  color: #000000;
 }
 .lab_item .lab_info {
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
+  padding: 10px 10px 20px;
 }
 .lab_item .lab_info p {
   color: #333;
@@ -1163,85 +1171,43 @@ a:active {
   text-indent: 2em;
   text-align: justify;
 }
-.labs_info {
-  height: 140px;
-  box-shadow: 0px 0px 15px #000;
-  position: relative;
-  background: #ffffff;
+@media (max-width: 1200px) {
+  .labsList {
+    width: 720px;
+  }
 }
-.labs_info h3 {
-  height: 50px;
-  position: relative;
-  margin-bottom: 8px;
-}
-.labs_info h3 a {
-  display: block;
-  width: 260px;
-  height: 26px;
-  line-height: 26px;
-  padding: 12px 10px 0px;
-  overflow: hidden;
-  font-size: 17px;
-  font-weight: normal;
-  color: #333333;
-}
-.labs_info h3 a:hover {
-  position: absolute;
-  height: auto;
-  padding: 12px 10px 13px;
-  background: url(../images/mask.png) #008800;
-  color: #ffffff;
-}
-.labs_info h3 a:active {
-  background: url(../images/mask.png) #006600;
-  color: #ffffff;
-}
-.labs_info p {
-  height: 18px;
-  line-height: 16px;
-  padding: 9px 10px;
-}
-.labs_info p strong {
-  display: block;
-  height: 30px;
-  float: left;
-  font-size: 14px;
-  font-weight: normal;
-  color: #333333;
-}
-.labs_info p span {
-  display: inline-block;
-  padding: 0px 4px;
-  font-size: 14px;
-  color: #888888;
-}
-.labs_info p a {
-  display: block;
-  width: 190px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: #888888;
-}
-.labs_info p a:hover {
-  color: #333;
-  text-decoration: underline;
+@media (max-width: 780px) {
+  .labsList {
+    width: auto;
+  }
+  .lab_item {
+    float: none;
+    width: auto;
+    margin: 0 10px 20px;
+    height: auto;
+  }
+  .lab_item .lab_cover img {
+    width: 100%;
+  }
 }
 /** 我的作品 **/
 .opusList {
   max-width: 700px;
   margin: auto;
-  padding: 30px 0px;
-  padding: 10px;
+  padding: 20px 10px;
 }
 .opusList ul {
   overflow: hidden;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
 .opusList ul li {
   position: relative;
   padding: 10px 10px 10px 120px;
-  margin: 0px 0 20px;
-  background: #fff;
   overflow: hidden;
+  margin-bottom: -1px;
+  border-bottom: 1px solid #ddd;
 }
 .opus_cover {
   position: absolute;
@@ -1259,7 +1225,6 @@ a:active {
 }
 .opus_info {
   position: relative;
-  background: #fff;
 }
 .opus_info h3 {
   height: 30px;
@@ -1276,7 +1241,8 @@ a:active {
   color: #333;
 }
 .opus_info h3 a:hover {
-  color: #333333;
+  color: #333;
+  text-decoration: underline;
 }
 .opus_info p {
   line-height: 18px;
@@ -1303,7 +1269,7 @@ a:active {
   text-overflow: ellipsis;
   color: #888;
 }
-.opus_info p a::hover {
+.opus_info p a:hover {
   color: #333;
   text-decoration: underline;
 }
@@ -1314,10 +1280,11 @@ a:active {
 }
 .opus_detail .article {
   position: relative;
-  background: #fff;
   margin-bottom: 20px;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  background: #fff;
   border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
 .opus_caption {
   position: relative;
@@ -1371,19 +1338,20 @@ a:active {
 .shareList {
   max-width: 500px;
   margin: auto;
-  padding: 20px 0;
+  padding: 20px 10px;
+}
+.shareList ul {
   overflow: hidden;
   background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
 .shareList li {
   position: relative;
   min-height: 120px;
+  margin-bottom: -1px;
   padding: 0px 10px 10px 120px;
-  border-bottom: 1px solid #ccc;
-  margin-bottom: 20px;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
+  border-bottom: 1px solid #ddd;
 }
 .shareList li .shareItem_cover {
   position: absolute;
@@ -1403,8 +1371,10 @@ a:active {
   -webkit-transition: all 0.5s linear;
   -o-transition: all 0.5s linear;
 }
+.shareList li .shareItem_title {
+  color: #000;
+}
 .shareList li .shareItem_title strong {
-  display: block;
   height: 50px;
   line-height: 50px;
   overflow: hidden;
@@ -1414,6 +1384,9 @@ a:active {
   text-align: justify;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+.shareList li .shareItem_title:hover {
+  text-decoration: underline;
 }
 .shareList li p {
   color: #aaa;
@@ -1431,7 +1404,8 @@ a:active {
 }
 .shareDetail_article {
   margin-bottom: 20px;
+  overflow: hidden;
+  background: #fff;
   border-radius: 2px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
-  background: #fff;
 }

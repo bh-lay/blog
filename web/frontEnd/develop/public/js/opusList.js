@@ -70,11 +70,11 @@ define(function(require,exports){
 		var render_over = this.render_over || null;
 		skip = 0;
 		getData(function(list){
-			dom.html('<div class="golCnt"><div class="opusList"><ul></ul></div></div>');
+			dom.html('<div class="opusList"><ul></ul></div>');
 			var this_html = juicer(item_tpl,{
 				'list' : list
 			});
-			var this_dom = dom.find('.opusList ul');
+			var this_dom = dom.find('ul');
 			insert({
 				'end' : (skip>=count)?true:false,
 				'html' : this_html,

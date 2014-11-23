@@ -428,7 +428,7 @@ define(function(require,exports){
 			$(me.dom).find('.l_com_list_cnt').html(html);
 			
 			if(me.total == 0){
-				$(me.dom).prepend('<div class="l_com_list_noData">来的真早，快抢沙发！</div>');
+				$(me.dom).find('.l_com_list_cnt').prepend('<div class="l_com_list_noData">来的真早，快抢沙发！</div>');
 			}else{
 				//分页组件
 				var page = new pagination($(dom).find('.l_com_list_pagination'),{
