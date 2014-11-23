@@ -308,11 +308,10 @@ a,a:active{
 	width: 500px;
 	max-width: 100%;
 	margin: auto;
-	background: #fff;
 }
 .detailLayer{
 	position: relative;
-    max-width: 800px;
+    max-width: 700px;
     margin: auto;
     overflow: hidden;
 }
@@ -495,15 +494,13 @@ a,a:active{
  **/
 @sendBox_footer_height : 30px;
 .comments_frame {
-	margin: 0 10px;
 }
 
 .l_comments {
-	padding: 50px 0;
 }
 
 .l_com_sendBox {
-	margin-bottom: 30px
+	margin-bottom: 20px
 }
 .l_sendBox {
     padding: 20px 20px 20px 80px;
@@ -1024,10 +1021,10 @@ a,a:active{
 
 /** 博文列表页 **/
 .articleListCnt {
-
+	padding: 20px 10px;
 }
 .articleList {
-	padding: 20px 10px;
+	
 }
 
 
@@ -1035,8 +1032,8 @@ a,a:active{
 	margin-bottom: 20px;
 	overflow: hidden;
 	background: #fff;
-	border-bottom: 1px solid #ddd;
-	.transition(0.4s);
+	border-radius: 2px;
+	box-shadow: 0 0 2px rgba(0,0,0,0.2);
 }
 
 .artItCpt {
@@ -1082,46 +1079,12 @@ a,a:active{
 	padding: 10px 20px 20px
 }
 
-.blog_addMore {
-	overflow: hidden;
-	text-align: center;
-	span {
-		display: block;
-		height: 40px;
-		line-height: 40px;
-		background: #888;
-		color: #fff;
-		display: none;
-	}
-	a {
-		display: block;
-		height: 40px;
-		line-height: 40px;
-		background: #fff;
-		color: #333;
-		&:hover {
-			background: #ccc;
-			color: #000;
-		}
-		&:active {
-			background: #666;
-			color: #fff
-		}
-	}
+.blogDetail{
+	padding: 60px 10px 40px;
 }
-
-.blog_addMore.blog_addMore_loading {
-	span {
-		display: block
-	}
-	a {
-		display: none
-	}
-}
-
 .blog_article {
+	margin-bottom: 20px;
 	background: #fff;
-	margin: 60px 10px 20px;
     box-shadow: 0 0 2px rgba(0,0,0,0.2);
     border-radius: 2px;
 }
@@ -1133,8 +1096,13 @@ a,a:active{
 .articletop {
 	border-bottom: 1px dashed #ccc;
 	text-align: center;
-	padding: 40px 0px 20px;
-	margin-bottom: 20px
+	padding: 40px 20px 20px;
+	margin-bottom: 20px;
+	h1{
+		font-weight: normal;
+		line-height: 1.5;
+		margin-bottom: 1em;
+	}
 }
 
 .articletop p {
@@ -1144,6 +1112,12 @@ a,a:active{
 .article .topicImg {
 	display: block;
 	margin: auto
+}
+
+@media screen and (max-width: 1000px) {
+	.articletop h1 {
+		font-size: 24px
+	}
 }
 
 .labshow {
@@ -1302,24 +1276,21 @@ a,a:active{
 	text-decoration: underline
 }
 
-/**作品**/
+/** 我的作品 **/
 .opusList {
 	padding: 30px 0px;
 	margin: auto;
+	padding: 10px;
 	ul {
 		overflow: hidden;
-	}
-	
-}
-
-
-.opusList ul li {
-	position: relative;
-	padding: 10px 10px 10px 120px;
-	margin: 0px 10px 20px;
-	background: #fff;
-	overflow: hidden;
-	border-bottom: 1px dashed #ddd;
+		li {
+			position: relative;
+			padding: 10px 10px 10px 120px;
+			margin: 0px 0 20px;
+			background: #fff;
+			overflow: hidden;
+		}
+	}	
 }
 .opus_cover {
 	position: absolute;
@@ -1386,127 +1357,71 @@ a,a:active{
 		}
 	}
 }
+.opus_detail{
+	padding: 60px 10px 40px;
+	.article {
+		position: relative;
+		background: #fff;
+		margin-bottom: 20px;
+		box-shadow: 0 0 2px rgba(0,0,0,0.2);
+		border-radius: 2px;
+	}
+}
 
-.opus_detail {
+.opus_caption {
 	position: relative;
-	padding: 25px;
-	overflow: hidden;
-	background: #fff;
-	margin: 60px 10px 20px;
-    box-shadow: 0 0 2px rgba(0,0,0,0.2);
-    border-radius: 2px;
-	a {
-		color: #4a0
-	}
-	a:hover {
-		color: #000;
-		text-decoration: underline;
-	}
-	h3,h4,h5,h6,p,dl {
-		margin: 1em 0em
-	}
-	p {
-		text-indent: 2em
-	}
-}
-
-.opus_detailtop {
-	border-bottom: 1px dashed #ccc;
-	text-align: center;
-	margin: 20px 0px;
-	h1 {
-		font-size: 30px;
-		font-weight: normal
-	}
-	p {
-		color: #666
-	}
-}
-
-.opus_detail ol,.opus_detail ul,.opus_detail dd {
-	padding-left: 4em
-}
-
-.opus_detail li {
-	list-style-type: decimal
-}
-
-.opus_detail img {
-	max-width: 100%;
-	display: block;
-	margin: auto
-}
-
-.opus_detail .topicImg {
-	display: block;
-	margin: auto
-}
-
-/** 我的作品 **/
-#focusTitle {
 	min-height: 120px;
 	overflow: hidden;
-	margin: 30px 10px;
 	border: 1px solid #fff;
 	background: #fff;
 	background: rgba(255,255,255,0.5);
-	position: relative
+	margin-bottom: 20px;
+	img {
+		height: 100px;
+		padding: 10px;
+		position: absolute;
+		top: 0px;
+		left: 0px
+	}
+	.info {
+		position: relative;
+		padding: 15px 15px 15px 130px
+	}
+	h1 {
+		padding-bottom: 20px;
+		border-bottom: 1px solid #aaa;
+		font-size: 20px;
+		letter-spacing: 0.5em;
+		font-weight: normal;
+		color: #000
+	}
+	ul {
+		font-size: 16px;
+		padding-top: 20px
+	}
+	li {
+		float: left;
+		width: 50%;
+		color: #666
+	}
+	strong {
+		padding-right: 10px;
+		font-weight: normal
+	}
 }
-
-#focusTitle img {
-	height: 100px;
-	padding: 10px;
-	position: absolute;
-	top: 0px;
-	left: 0px
-}
-
-#focusTitle .info {
-	position: relative;
-	padding: 15px 15px 15px 130px
-}
-
-#focusTitle h1 {
-	padding-bottom: 20px;
-	border-bottom: 1px solid #aaa;
-	font-size: 20px;
-	letter-spacing: 0.5em;
-	font-weight: normal;
-	color: #000
-}
-
-#focusTitle ul {
-	font-size: 16px;
-	padding-top: 20px
-}
-
-#focusTitle li {
-	float: left;
-	width: 50%;
-	color: #666
-}
-
-#focusTitle strong {
-	padding-right: 10px;
-	font-weight: normal
-}
-
 .TagLine {
 	height: 50px;
-	margin: 80px 20px 40px;
+	margin-bottom: 20px;
 	background: url(../images/tagline.png) no-repeat;
 	text-indent: -100em;
 	overflow: hidden
-}
-
-.opus_detail .youyan {
-	padding-top: 20px
 }
 
 /** 分享列表 **/
 .shareList {
 	padding: 20px 0;
 	overflow: hidden;
+	background: #fff;
 }
 
 .shareList li {
@@ -1560,54 +1475,11 @@ a,a:active{
 
 
 .shareDetail {
+	padding: 60px 10px 40px;
+}
+.shareDetail_article{
+	margin-bottom: 20px;
+	border-radius: 2px;
+	box-shadow: 0 0 2px rgba(0,0,0,0.2);
 	background: #fff;
-	padding-top: 20px;
-	margin: 10px;
-}
-
-.articletop {
-	border-bottom: 1px dashed #ccc;
-	text-align: center;
-	padding: 40px 0px 20px;
-	margin-bottom: 20px
-}
-
-.articletop p {
-	color: #666
-}
-
-.article .topicImg {
-	display: block;
-	margin: auto
-}
-
-.articletop {
-	border-bottom: 1px dashed #ccc;
-	text-align: center;
-	margin: 20px 0px
-}
-
-.articletop h1 {
-	font-size: 30px;
-	font-weight: normal;
-    margin-bottom: 20px;
-}
-
-.articletop p {
-	color: #666
-}
-
-.article .topicImg {
-	display: block;
-	margin: auto
-}
-
-.article .youyan {
-	padding-top: 20px
-}
-
-@media screen and (max-width: 1000px) {
-	.articletop h1 {
-		font-size: 24px
-	}
 }

@@ -20,7 +20,7 @@ define(function(require,exports){
 		'<div class="l_sendBox_main">',
 			'<div class="l_send_textarea">',
 				'<textarea name="content"></textarea>',
-				'<div class="l_send_placeholder">敢不敢写点啥！</div>',
+				'<div class="l_send_placeholder">评论屌一点，BUG少一点！</div>',
 			'</div>',
 			'<div class="l_send_footer">',
 				'<div class="l_send_footer_left">',
@@ -428,7 +428,7 @@ define(function(require,exports){
 			$(me.dom).find('.l_com_list_cnt').html(html);
 			
 			if(me.total == 0){
-				$(me.dom).append('<div class="l_com_list_noData">来的真早，快抢沙发！</div>');
+				$(me.dom).prepend('<div class="l_com_list_noData">来的真早，快抢沙发！</div>');
 			}else{
 				//分页组件
 				var page = new pagination($(dom).find('.l_com_list_pagination'),{

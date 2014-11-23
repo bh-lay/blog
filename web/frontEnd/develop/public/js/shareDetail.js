@@ -7,13 +7,15 @@ define(function(require,exports){
 	require('lib/juicer.js');
 	
 	var template = ['<div class="shareDetail">',
-        '<div class="articletop">',
-            '<h1>${title}</h1>',
-            '<p><span>分享时间：${time_show} </span></p>',
-        '</div>',
-        '<div class="article">$${content}</div>',
-	'</div>',
-    '<div class="comments_frame"></div>'].join('');
+		'<div class="shareDetail_article">',
+			'<div class="articletop">',
+				'<h1>${title}</h1>',
+				'<p><span>分享时间：${time_show} </span></p>',
+			'</div>',
+			'<div class="article">$${content}</div>',
+		'</div>',
+		'<div class="comments_frame"></div>',
+	'</div>'].join('');
 	
 	function getData(id,fn){
 		$.ajax({

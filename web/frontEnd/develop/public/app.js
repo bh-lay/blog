@@ -114,8 +114,6 @@ seajs.use([
 ],function(){
 	var lofox = new util.lofox();
 	var dom = $('.contlayer');
-	var activeCover = null;
-	var basePage;
 	
 	var $active_page = null;
 	//老的page dom
@@ -170,7 +168,6 @@ seajs.use([
 	 * 首页
 	 */
 	lofox.set('/',function(){
-		basePage = 'index';
 		this.title('小剧客栈_剧中人的个人空间 网页设计师博客 互动设计学习者');
 		L.nav.setCur('/');
 		var dom = showPanel();
@@ -182,14 +179,13 @@ seajs.use([
 	/**
 	 * 博文列表
 	 */
-	lofox.set('/blog',function(){
-		basePage = 'indexList';
+	lofox.set('/blog',function(param,pathnde,search){
 		this.title('我的博客_小剧客栈');
 		L.nav.setCur('blog');
 		var dom = showList();
 		
 		seajs.use('public/js/blogList.js',function(blogList){
-			blogList(dom);
+			blogList(dom,search);
 		});
 	});
 	/**
@@ -209,7 +205,6 @@ seajs.use([
 	 * 我的分享列表
 	 */
 	lofox.set('/share',function(){
-		basePage = 'shareList';
 		this.title('我的分享_小剧客栈');
 		L.nav.setCur('share');
 		var dom = showList();
@@ -249,9 +244,7 @@ seajs.use([
 		});
 	});
 	//实验室列表页
-	lofox.set('/labs',function(){
-		basePage = 'labsList';
-		
+	lofox.set('/labs',function(){		
 		this.title('实验室_小剧客栈');
 		
 		L.nav.setCur('labs');
@@ -265,7 +258,6 @@ seajs.use([
 	 * 留言板
 	 */
 	lofox.set('/bless',function(){
-		basePage = 'indexList';
 		this.title('留言板_小剧客栈');
 		L.nav.setCur('/');
 		var dom = showPanel();
@@ -279,11 +271,6 @@ seajs.use([
 	 * 监听页面跳转
 	 */
 	lofox.on('change',function(url){
-		if(activeCover){
-			activeCover.closeFn = null;
-			activeCover.close();
-			activeCover = null;
-		}
 	});
 	
 	$('body').on('click','a[lofox="true"]',function(){
@@ -298,7 +285,10 @@ seajs.use([
 	
 	L.push = function(url){
 		lofox.push(url)
-	}
+	};
+	L.refresh = function(){
+		lofox.refresh()
+	};
 	L.gallery();
 	L.nav();
 });

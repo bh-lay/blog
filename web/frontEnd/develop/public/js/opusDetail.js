@@ -4,9 +4,9 @@
  */
 define(function(require,exports){
 	require('lib/juicer.js');
-	var template = ['<div class="">',
+	var template = ['<div class="opus_detail">',
 		'<div class="TagLine">小剧作品，一次次小小的进步，成就平凡的自己！</div>',
-		'<div id="focusTitle">',
+		'<div class="opus_caption">',
 			'{@if cover}',
 				'<img src="${cover}" alt="${title}" class="topicImg" />',
 			'{@/if}',
@@ -18,11 +18,10 @@ define(function(require,exports){
 				'</ul>',
 			'</div>',
 		'</div>',
-		'<div class="opus_detail">',
+		'<div class="article">',
 			'<div class="photo"><img src="${opus_pic}" alt="${title}" /></div>',
 			'<div class="text">$${content}</div>',
 		'</div>',
-		'</div></div>',
 		'<div class="comments_frame"></div>',
 	'</div>'].join('');
 	

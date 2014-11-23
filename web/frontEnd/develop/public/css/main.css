@@ -310,11 +310,10 @@ a:active {
   width: 500px;
   max-width: 100%;
   margin: auto;
-  background: #fff;
 }
 .detailLayer {
   position: relative;
-  max-width: 800px;
+  max-width: 700px;
   margin: auto;
   overflow: hidden;
 }
@@ -487,14 +486,8 @@ a:active {
  * 评论模块
  *
  **/
-.comments_frame {
-  margin: 0 10px;
-}
-.l_comments {
-  padding: 50px 0;
-}
 .l_com_sendBox {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 .l_sendBox {
   padding: 20px 20px 20px 80px;
@@ -1012,18 +1005,15 @@ a:active {
   }
 }
 /** 博文列表页 **/
-.articleList {
+.articleListCnt {
   padding: 20px 10px;
 }
 .articleItem {
   margin-bottom: 20px;
   overflow: hidden;
   background: #fff;
-  border-bottom: 1px solid #ddd;
-  transition: all 0.4s linear;
-  -moz-transition: all 0.4s linear;
-  -webkit-transition: all 0.4s linear;
-  -o-transition: all 0.4s linear;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
 .artItCpt a {
   display: block;
@@ -1064,42 +1054,12 @@ a:active {
   font-size: 14px;
   padding: 10px 20px 20px;
 }
-.blog_addMore {
-  overflow: hidden;
-  text-align: center;
-}
-.blog_addMore span {
-  display: block;
-  height: 40px;
-  line-height: 40px;
-  background: #888;
-  color: #fff;
-  display: none;
-}
-.blog_addMore a {
-  display: block;
-  height: 40px;
-  line-height: 40px;
-  background: #fff;
-  color: #333;
-}
-.blog_addMore a:hover {
-  background: #ccc;
-  color: #000;
-}
-.blog_addMore a:active {
-  background: #666;
-  color: #ffffff;
-}
-.blog_addMore.blog_addMore_loading span {
-  display: block;
-}
-.blog_addMore.blog_addMore_loading a {
-  display: none;
+.blogDetail {
+  padding: 60px 10px 40px;
 }
 .blog_article {
+  margin-bottom: 20px;
   background: #fff;
-  margin: 60px 10px 20px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   border-radius: 2px;
 }
@@ -1109,8 +1069,13 @@ a:active {
 .articletop {
   border-bottom: 1px dashed #ccc;
   text-align: center;
-  padding: 40px 0px 20px;
+  padding: 40px 20px 20px;
   margin-bottom: 20px;
+}
+.articletop h1 {
+  font-weight: normal;
+  line-height: 1.5;
+  margin-bottom: 1em;
 }
 .articletop p {
   color: #666666;
@@ -1118,6 +1083,11 @@ a:active {
 .article .topicImg {
   display: block;
   margin: auto;
+}
+@media screen and (max-width: 1000px) {
+  .articletop h1 {
+    font-size: 24px;
+  }
 }
 .labshow {
   border: 1px solid #ddd;
@@ -1263,10 +1233,11 @@ a:active {
   color: #333;
   text-decoration: underline;
 }
-/**作品**/
+/** 我的作品 **/
 .opusList {
   padding: 30px 0px;
   margin: auto;
+  padding: 10px;
 }
 .opusList ul {
   overflow: hidden;
@@ -1274,10 +1245,9 @@ a:active {
 .opusList ul li {
   position: relative;
   padding: 10px 10px 10px 120px;
-  margin: 0px 10px 20px;
+  margin: 0px 0 20px;
   background: #fff;
   overflow: hidden;
-  border-bottom: 1px dashed #ddd;
 }
 .opus_cover {
   position: absolute;
@@ -1344,83 +1314,36 @@ a:active {
   text-decoration: underline;
 }
 .opus_detail {
+  padding: 60px 10px 40px;
+}
+.opus_detail .article {
   position: relative;
-  padding: 25px;
-  overflow: hidden;
   background: #fff;
-  margin: 60px 10px 20px;
+  margin-bottom: 20px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   border-radius: 2px;
 }
-.opus_detail a {
-  color: #44aa00;
-}
-.opus_detail a:hover {
-  color: #000;
-  text-decoration: underline;
-}
-.opus_detail h3,
-.opus_detail h4,
-.opus_detail h5,
-.opus_detail h6,
-.opus_detail p,
-.opus_detail dl {
-  margin: 1em 0em;
-}
-.opus_detail p {
-  text-indent: 2em;
-}
-.opus_detailtop {
-  border-bottom: 1px dashed #ccc;
-  text-align: center;
-  margin: 20px 0px;
-}
-.opus_detailtop h1 {
-  font-size: 30px;
-  font-weight: normal;
-}
-.opus_detailtop p {
-  color: #666666;
-}
-.opus_detail ol,
-.opus_detail ul,
-.opus_detail dd {
-  padding-left: 4em;
-}
-.opus_detail li {
-  list-style-type: decimal;
-}
-.opus_detail img {
-  max-width: 100%;
-  display: block;
-  margin: auto;
-}
-.opus_detail .topicImg {
-  display: block;
-  margin: auto;
-}
-/** 我的作品 **/
-#focusTitle {
+.opus_caption {
+  position: relative;
   min-height: 120px;
   overflow: hidden;
-  margin: 30px 10px;
   border: 1px solid #fff;
   background: #fff;
   background: rgba(255, 255, 255, 0.5);
-  position: relative;
+  margin-bottom: 20px;
 }
-#focusTitle img {
+.opus_caption img {
   height: 100px;
   padding: 10px;
   position: absolute;
   top: 0px;
   left: 0px;
 }
-#focusTitle .info {
+.opus_caption .info {
   position: relative;
   padding: 15px 15px 15px 130px;
 }
-#focusTitle h1 {
+.opus_caption h1 {
   padding-bottom: 20px;
   border-bottom: 1px solid #aaa;
   font-size: 20px;
@@ -1428,33 +1351,31 @@ a:active {
   font-weight: normal;
   color: #000000;
 }
-#focusTitle ul {
+.opus_caption ul {
   font-size: 16px;
   padding-top: 20px;
 }
-#focusTitle li {
+.opus_caption li {
   float: left;
   width: 50%;
   color: #666666;
 }
-#focusTitle strong {
+.opus_caption strong {
   padding-right: 10px;
   font-weight: normal;
 }
 .TagLine {
   height: 50px;
-  margin: 80px 20px 40px;
+  margin-bottom: 20px;
   background: url(../images/tagline.png) no-repeat;
   text-indent: -100em;
   overflow: hidden;
-}
-.opus_detail .youyan {
-  padding-top: 20px;
 }
 /** 分享列表 **/
 .shareList {
   padding: 20px 0;
   overflow: hidden;
+  background: #fff;
 }
 .shareList li {
   position: relative;
@@ -1506,45 +1427,11 @@ a:active {
   bottom: 0px;
 }
 .shareDetail {
+  padding: 60px 10px 40px;
+}
+.shareDetail_article {
+  margin-bottom: 20px;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   background: #fff;
-  padding-top: 20px;
-  margin: 10px;
-}
-.articletop {
-  border-bottom: 1px dashed #ccc;
-  text-align: center;
-  padding: 40px 0px 20px;
-  margin-bottom: 20px;
-}
-.articletop p {
-  color: #666666;
-}
-.article .topicImg {
-  display: block;
-  margin: auto;
-}
-.articletop {
-  border-bottom: 1px dashed #ccc;
-  text-align: center;
-  margin: 20px 0px;
-}
-.articletop h1 {
-  font-size: 30px;
-  font-weight: normal;
-  margin-bottom: 20px;
-}
-.articletop p {
-  color: #666666;
-}
-.article .topicImg {
-  display: block;
-  margin: auto;
-}
-.article .youyan {
-  padding-top: 20px;
-}
-@media screen and (max-width: 1000px) {
-  .articletop h1 {
-    font-size: 24px;
-  }
 }

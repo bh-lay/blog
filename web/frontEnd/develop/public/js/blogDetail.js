@@ -6,14 +6,16 @@ define(function(require,exports){
 	require('lib/juicer.js');
     require('lib/highlight/highlight.pack.js');
 
-	var template = ['<div class="blog_article">',
-		'<div class="articletop">',
-			'<h1>${title}</h1>',
-			'<p><span>发布时间：${time_show} </span></p>',
+	var template = ['<div class="blogDetail">',
+		'<div class="blog_article">',
+			'<div class="articletop">',
+				'<h1>${title}</h1>',
+				'<p><span>发布时间：${time_show} </span></p>',
+			'</div>',
+			'<div class="article">$${content}</div>',
 		'</div>',
-		'<div class="article">$${content}</div>',
-		'</div></div>',
-		'<div class="comments_frame"></div>'].join('');
+		'<div class="comments_frame"></div>',
+	'</div>'].join('');
 	
 	function getData(id,fn){
 		$.ajax({
