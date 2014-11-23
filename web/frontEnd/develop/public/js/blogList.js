@@ -44,9 +44,10 @@ define(function(require,exports){
 					var date = new Date(parseInt(list[i].time_show));
 					list[i].time_show = (date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+ date.getDate();
 					//使用七牛图床
+					
 					list[i].cover = L.qiniu(list[i].cover,{
-						'width' : 300,
-						'height' : 100
+						'type' : 'zoom',
+						'width' : 440,
 					});
 				}
 				

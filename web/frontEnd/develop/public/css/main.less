@@ -21,53 +21,7 @@ a,a:active{
 	border-radius: 4px;
 	margin-bottom: 20px;
 }
-/**分页组件**/
-.pagination{
-}
-.pagination li{
-	display: inline-block;
-	vertical-align: text-top;
-}
-.pagination span,
-.pagination a{
-	display: block;
-	height: 40px;
-	line-height: 40px;
-	padding: 0px 15px;
-	background: #fff;
-	font-size: 14px;
-	color: #428bca;
-	.transition(0.1s);
-}
-.pagination a:hover{
-	background: #eee;
-	color: #333;
-}
-.pagination .active span{
-	background: #428bca;
-	color: #fff;
-	font-size: 22px;
-	cursor: default;
-}
-.pagination .disabled span{
-	color: #bbb;
-	cursor: default;
-}
-@media (max-width: 660px) {
-	.pagination{
-		text-align: center;
-		li{
-			display: none;
-		}
-		.pagination_prev,
-		.pagination_next{
-			display: inline-block;
-			border-radius: 20px;
-			margin: 0px 10px;
-			overflow: hidden;
-		}
-	}
-}
+
 /**应用主容器**/
 .app_container {
 	position: relative;
@@ -75,7 +29,9 @@ a,a:active{
 }
 
 
-
+/**
+ * 导航
+ */
 .app_nav {
 	position: fixed;
 	top: 0px;
@@ -301,22 +257,52 @@ a,a:active{
 		}
 	}
 }
-
-
-.listLayer{
-	position: relative;
-	width: 500px;
-	max-width: 100%;
-	margin: auto;
+/**分页组件**/
+.pagination{
 }
-.detailLayer{
-	position: relative;
-    max-width: 700px;
-    margin: auto;
-    overflow: hidden;
+.pagination li{
+	display: inline-block;
+	vertical-align: text-top;
 }
-.panellayer {
-	position: relative;
+.pagination span,
+.pagination a{
+	display: block;
+	height: 40px;
+	line-height: 40px;
+	padding: 0px 15px;
+	background: #fff;
+	font-size: 14px;
+	color: #428bca;
+	.transition(0.1s);
+}
+.pagination a:hover{
+	background: #eee;
+	color: #333;
+}
+.pagination .active span{
+	background: #428bca;
+	color: #fff;
+	font-size: 22px;
+	cursor: default;
+}
+.pagination .disabled span{
+	color: #bbb;
+	cursor: default;
+}
+@media (max-width: 660px) {
+	.pagination{
+		text-align: center;
+		li{
+			display: none;
+		}
+		.pagination_prev,
+		.pagination_next{
+			display: inline-block;
+			border-radius: 20px;
+			margin: 0px 10px;
+			overflow: hidden;
+		}
+	}
 }
 
 .backToOldVersion{
@@ -1021,10 +1007,11 @@ a,a:active{
 
 /** 博文列表页 **/
 .articleListCnt {
+	max-width: 440px;
+	margin: auto;
 	padding: 20px 10px;
 }
 .articleList {
-	
 }
 
 
@@ -1080,6 +1067,8 @@ a,a:active{
 }
 
 .blogDetail{
+	max-width: 700px;
+	margin: auto;
 	padding: 60px 10px 40px;
 }
 .blog_article {
@@ -1145,9 +1134,10 @@ a,a:active{
 
 /**实验室列表**/
 .labsList {
+	max-width: 500px;
+	margin: auto;
 	padding: 20px 10px;
 	overflow: hidden;
-	margin: auto;
 	overflow: hidden
 }
 .lab_item {
@@ -1278,8 +1268,9 @@ a,a:active{
 
 /** 我的作品 **/
 .opusList {
-	padding: 30px 0px;
+	max-width: 700px;
 	margin: auto;
+	padding: 30px 0px;
 	padding: 10px;
 	ul {
 		overflow: hidden;
@@ -1358,6 +1349,8 @@ a,a:active{
 	}
 }
 .opus_detail{
+	max-width: 700px;
+	margin: auto;
 	padding: 60px 10px 40px;
 	.article {
 		position: relative;
@@ -1419,6 +1412,8 @@ a,a:active{
 
 /** 分享列表 **/
 .shareList {
+	max-width: 500px;
+	margin: auto;
 	padding: 20px 0;
 	overflow: hidden;
 	background: #fff;
@@ -1475,6 +1470,8 @@ a,a:active{
 
 
 .shareDetail {
+	max-width: 700px;
+	margin: auto;
 	padding: 60px 10px 40px;
 }
 .shareDetail_article{

@@ -65,15 +65,33 @@ window.L = window.L || {};
  * L.qiniu(url,config);
  */
 (function(exports){
+	function cover(url,config){
+		w = config.width || config.height;
+		h = config.height || config.width;
+		return url + '?imageView/1/w/' + w + '/h/' + h + '/q/85';
+	}
+	function zoom(url,config){
+		var confStr;
+		if(config.width){
+			confStr = 'w/' + config.width
+		}else{
+			confStr = 'h/' + config.height
+		}
+		
+		return url + '?imageView2/2/' + confStr + '/q/85';
+	}
 	var baseDomain = app_config.imgDomain;
 	exports.qiniu = function(url,config){
 		var src = url;
 		if(typeof(url) == 'string' && url.length > 0 && url[0] == '/'){
 			src = baseDomain + url
 			if(config){
-				w = config.width || config.height;
-				h = config.height || config.width;
-				src = src + '?imageView/1/w/' + w + '/h/' + h + '/q/85';
+				if(config.type == "zoom"){
+					src = zoom(src,config);
+				}else{
+					//config.type == "cover"
+					src = cover(src,config);
+				}
 			}
 		}
 		return src;
@@ -116,7 +134,7 @@ seajs.use([
 	var dom = $('.contlayer');
 	
 	var $active_page = null;
-	//老的page dom
+	//移除老的page dom
 	function removePageDom(callback){
 		if($active_page){
             var $old = $active_page;
@@ -133,32 +151,11 @@ seajs.use([
 	}
 	var container = $('.app_container');
 	//显示单页dom
-	function showPanel(){
-		var newDom = $('<div class="panellayer"></div>');
+	function getNewPage(){
+		var newDom = $('<div></div>');
         removePageDom(function(){
             container.append(newDom);
             newDom.addClass('fadeInLeft');
-        });
-		$active_page = newDom;
-		return newDom;
-	}
-	//显示列表dom
-	function showList(){
-		var newDom = $('<div class="listLayer"></div>');
-        removePageDom(function(){
-            container.append(newDom);
-            newDom.addClass('fadeInLeft');
-        });
-		$active_page = newDom;
-		return newDom;
-	}
-	//显示详细信息dom
-	function showDetail(){
-		var newDom = $('<div class="detailLayer"></div>');
-        removePageDom(function(){
-            container.append(newDom);
-			newDom.addClass('fadeInLeft');
-		
         });
 		$active_page = newDom;
 		return newDom;
@@ -170,7 +167,7 @@ seajs.use([
 	lofox.set('/',function(){
 		this.title('小剧客栈_剧中人的个人空间 网页设计师博客 互动设计学习者');
 		L.nav.setCur('/');
-		var dom = showPanel();
+		var dom = getNewPage();
 		
 		seajs.use('public/js/index.js',function(indexPage){
 			indexPage(dom);
@@ -182,7 +179,7 @@ seajs.use([
 	lofox.set('/blog',function(param,pathnde,search){
 		this.title('我的博客_小剧客栈');
 		L.nav.setCur('blog');
-		var dom = showList();
+		var dom = getNewPage();
 		
 		seajs.use('public/js/blogList.js',function(blogList){
 			blogList(dom,search);
@@ -194,7 +191,7 @@ seajs.use([
 	lofox.set('/blog/{id}',function(param){
 		this.title('我的博客_小剧客栈');
 		L.nav.setCur('blog');
-		var dom = showDetail();
+		var dom = getNewPage();
 		seajs.use('public/js/blogDetail.js',function(blogDetail){
 			blogDetail(dom,param.id,function(title){
 				lofox.title(title);
@@ -207,7 +204,7 @@ seajs.use([
 	lofox.set('/share',function(){
 		this.title('我的分享_小剧客栈');
 		L.nav.setCur('share');
-		var dom = showList();
+		var dom = getNewPage();
 		seajs.use('public/js/shareList.js',function(shareList){
 			shareList(dom);
 		});
@@ -218,7 +215,7 @@ seajs.use([
 	lofox.set('/share/{id}',function(param){
 		this.title('我的分享_小剧客栈');
 		L.nav.setCur('share');
-		var dom = showDetail();
+		var dom = getNewPage();
 
 		seajs.use('public/js/shareDetail.js',function(shareDetail){
 			shareDetail(dom,param.id);
@@ -229,7 +226,7 @@ seajs.use([
 	lofox.set('/opus',function(){
 		this.title('作品_小剧客栈');
 		L.nav.setCur('opus');
-		var dom = showList();
+		var dom = getNewPage();
 		seajs.use('public/js/opusList.js',function(opusList){
 			opusList(dom);
 		});
@@ -238,7 +235,7 @@ seajs.use([
 	lofox.set('/opus/{id}',function(param){
 		this.title('作品_小剧客栈');
 		L.nav.setCur('opus');
-		var dom = showDetail();
+		var dom = getNewPage();
 		seajs.use('public/js/opusDetail.js',function(opusDetail){
 			opusDetail(dom,param.id);
 		});
@@ -248,7 +245,7 @@ seajs.use([
 		this.title('实验室_小剧客栈');
 		
 		L.nav.setCur('labs');
-		var dom = showList();
+		var dom = getNewPage();
 		seajs.use('public/js/labsList.js',function(labsList){
 			labsList(dom);
 		});
@@ -260,7 +257,7 @@ seajs.use([
 	lofox.set('/bless',function(){
 		this.title('留言板_小剧客栈');
 		L.nav.setCur('/');
-		var dom = showPanel();
+		var dom = getNewPage();
 		seajs.use('comments/index.js',function(comments){
 			dom.html('<div class="l_row"><div class="l_col_12"></div></div>');
 			new comments.init(dom.find('.l_col_12')[0],'define-1');
@@ -306,9 +303,7 @@ seajs.use([
              $('body').toggleClass('nav_slidedown');
 		});
 		$('.app_nav .nav a').click(function(){
-     //       setTimeout(function(){
-                $('body').toggleClass('nav_slidedown');
-      //      },400);
+			$('body').removeClass('nav_slidedown');
 		});
 		
 		$('.nav_body a').each(function(){
