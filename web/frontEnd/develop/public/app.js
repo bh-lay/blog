@@ -122,15 +122,8 @@ window.L = window.L || {};
 	};
 })(L);
 
-
-seajs.use([
-	'util/lofox_1_0.js',
-	'public/base/user.js',
-	'lib/juicer.js',
-	'lib/md5.js',
-	'UI/dialog.js'
-],function(){
-	var lofox = new util.lofox();
+function routerHandle(){
+    var lofox = new util.lofox();
 	var dom = $('.contlayer');
 	
 	var $active_page = null;
@@ -277,16 +270,36 @@ seajs.use([
 		});
 		return false;
 	});
+}
+
+seajs.use([
+	'public/base/user.js',
+	'util/lofox_1_0.js',
+	'lib/juicer.js',
+	'UI/dialog.js'
+],function(user){
+    //绑定路由
+    routerHandle();
+
+    //显示背景图
+    if (supports('backgroundSize') && !isMobileBrowser){
+        L.gallery();
+    }
+    //开始导航
+    L.nav();
+   setTimeout(function(){
+       $('.app_mask').fadeOut(500,function(){
+           $(this).remove();
+       });
+   },500);
 	
-	
+    L.user = user;
 	L.push = function(url){
 		lofox.push(url)
 	};
 	L.refresh = function(){
 		lofox.refresh()
 	};
-	L.gallery();
-	L.nav();
 });
 
 
@@ -455,10 +468,6 @@ seajs.use([
 		}
 	}
 	ex.gallery = function(){
-		if (!supports('backgroundSize') || isMobileBrowser){
-            return
-        }
-        
 		var $gallery = $('<div class="gallayer"><div class="galBj"></div><div class="galMask"></div></div>').hide();
             $bj = $gallery.find('.galBj'),
 			data = config['coverData'];

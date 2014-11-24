@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import "core.less";
+@import "_core.less";
 
 body,div,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,p {
 	margin: 0px;
@@ -159,8 +159,12 @@ html,body {
 	}
 }
 
+/**
+ * 文章模块
+ */
 .article {
 	padding: 20px;
+    font-size: 14px;
 	font-family: "Microsoft Yahei";
 	img {
 		display: block;
@@ -201,7 +205,7 @@ html,body {
 .article p {
 	line-height: 1.8;
 	margin: 1em 0;
-    font-size: 14px;
+    font-size: 1em;
 	color: #333
 }
 
@@ -228,14 +232,18 @@ html,body {
 }
 
 .article pre {
-	padding: 5px 10px;
 	overflow-x: auto;
 	font-size: 13px;
 	line-height: 1.8;
 }
 
 .article code {
-	font-family: inherit
+    margin: 0 0.5em;
+    padding: 0 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+	font-family: inherit;
+    background: #f7f7f7;
 }
 
 .article a {
@@ -255,11 +263,73 @@ html,body {
 }
 
 
-.hljs {
+
+/*定制的loading动画*/
+.l-loading-panel{
+    max-width: 360px;
+    margin: 200px auto 0;
+    padding: 40px 0;
+    .cardShadow();
+    p{
+        padding: 20px 0 0;
+        text-align: center;
+        color: #333;
+        font-size: 14px;
+        line-height:20px;
+    }
+}
+.l-loading {
+	position: relative;
+	display: block;
+    margin: auto;
+	height  : 50px;
+	width : 50px;
+	border : 1px solid #555;
+	border-radius : 50%;
+	animation : rond 2s infinite;
+	-webkit-animation : rond 2s infinite;
+}
+.l-loading:after{
+	content: '';
+	position : absolute;
+	height : 8px;
+	width : 8px;
+	top : -4px;
+	left : 21px;
+	background : #555;
+	border-radius : 100%;
+}
+@keyframes rond {
+  0% {transform : rotate(0deg);}
+  100% {transform : rotate(360deg);}
+}
+
+@-webkit-keyframes rond {
+  0% {-webkit-transform : rotate(0deg);}
+  100% {-webkit-transform : rotate(360deg);}
+}
+
+/** 提示信息 **/
+.l_alert_info{
+	border: 1px solid #bce8f1;
+	background: #d9edf7;
+	color: #31708f;
+	padding: 15px 20px;
+	border-radius: 4px;
+	margin-bottom: 20px;
+}
+
+/**
+ * 代码高亮
+ */
+.hljs code{
 	display: block;
     max-height: 200px;
 	padding: 0.5em;
 	color:#ddd;
+    border: none;
+    margin: 0;
+    border-radius: 0;
 	font-family: Monaco, Consolas, "Lucida Console", monospace;
 	background: #333;
     overflow: auto;
@@ -352,6 +422,19 @@ html,body {
 }
 
 
+/**
+ * 卡片类
+ */
+.cardShadow{
+	background: #fff;
+	border-radius: 2px;
+	box-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+
+/**
+ * CSS3动画
+ *
+ */
 @-webkit-keyframes fadeInLeftBig{
     0%{
         opacity:0;

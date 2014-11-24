@@ -7,8 +7,11 @@
  *		info:用户信息
  *		type：用户类型（online、local）
  */
-(function(exports){
-	var loginPanel_tpl = ['<div class="l_loginPanel">',
+
+define(function(require,exports){
+    require('lib/md5.js');
+    
+    	var loginPanel_tpl = ['<div class="l_loginPanel">',
 		'<div class="l_loginPanel_tabs">',
 			'<a href="#" data-type="github"><i class="layIcon">A</i>github</a>',
 			'<a href="#" data-type="sina">微博</a>',
@@ -149,13 +152,12 @@
 			}).fadeIn(200);
 		});
 	};
-	
+    
+    
 	exports.login = function (param,callback){
 		return new LOGIN(param,callback);
 	};
-	
-	exports.dataBase = exports.dataBase || {};
-	exports.dataBase.setLocalUser = function(data){
+	exports.setLocalUser = function(data){
 		var data_str = JSON.stringify({
 			'username' : data.username,
 			'email' : data.email,
@@ -163,7 +165,7 @@
 		});
 		localStorage.setItem("userInfo",data_str);
 	};
-	exports.dataBase.user = function(callback,useCacheFlag){
+	exports.info = function(callback,useCacheFlag){
 		var useCache = typeof(useCacheFlag) == 'boolean' ? useCacheFlag : true;
 		//是否已有用户信息缓存
 		if(useCache && userInfo){
@@ -192,43 +194,4 @@
 			});
 		}
 	};
-})(L);
-
-/**
- * 全局用户UI
- *   L.user.info();
- */
-(function(exports){
-	var userInfo_tpl = ['<div class="userInfoPanel" style="padding:20px;">',
-		'用户名：<%=user.username%><br/><br/>',
-		'Email：<%=user.email%><br/><br/>',
-		'<div class="userInfoPanel-exist">退出</div>',
-		'<img src="<%=user.avatar%>" />',
-	'</div>'].join('');
-	var render = L.tplEngine(userInfo_tpl);
-	exports.user = exports.user || {};
-	exports.user.infoPanel = function(callback){
-		L.dataBase.user(function(err,user){
-			if(err){
-				UI.prompt('用户未登录');
-				return;
-			}
-			var cover = UI.cover({
-				'from' : 'right',
-				'width' : 400,
-				'right' : 0,
-				'mask' : true
-			});
-			$(cover.dom).on('click','.userInfoPanel-exist',function(){
-				$.ajax({
-					'url' : '/ajax/user/exist',
-					'type' : 'POST',
-					'success' : function(data){
-						console.log(data);
-					}
-				});
-			});
-			cover.cntDom.innerHTML = render({'user':user});
-		});
-	};
-})(L);
+});

@@ -2,23 +2,259 @@
 /**
  * 定义Minxin
  **/
-/**
- * 卡片类
- */
-.cardShadow {
-  background: #fff;
-  border-radius: 2px;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+body,
+div,
+ul,
+ol,
+li,
+dl,
+dt,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0px;
+  padding: 0px;
 }
+img {
+  border: none;
+}
+ul,
+ol,
+li,
+form,
+dl {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: #333333;
+}
+a:hover {
+  color: #55cc00;
+}
+TD {
+  color: #777;
+  font-size: 12px;
+  padding: 10px;
+}
+.fix {
+  display: inline-block;
+  zoom: 1;
+}
+.fix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+html,
 body {
-  overflow-x: hidden;
-  overflow-y: scroll;
-  background: #eee;
+  position: relative;
+  min-width: 320px;
+  color: #333;
+  font-size: 14px;
+  font-family: "Microsoft YaHei", tahoma, arial, simsun, "宋体";
 }
-a,
-a:active {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  -webkit-tap-highlight-color: transparent;
+@font-face {
+  font-family: "layIcon";
+  src: url("../fonts/layicon-webfont.eot");
+  src: url("../fonts/layicon-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/layicon-webfont.woff") format("woff"), url("../fonts/layicon-webfont.ttf") format("truetype"), url("../fonts/layicon-webfont.svg#layIcon-webfont") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+.layIcon {
+  font-family: "layIcon";
+  font-style: normal;
+}
+.l-icon {
+  font-family: "layIcon";
+  font-style: normal;
+}
+.l-icon-face:after {
+  content: '\0055';
+}
+.piclist {
+  width: 488px;
+  margin: 20px auto;
+  border: 1px solid #aaa;
+  position: relative;
+  overflow: hidden;
+  padding: 10px;
+}
+.piclist img {
+  width: 100px;
+  cursor: pointer;
+  height: 80px;
+  display: inline;
+  float: left;
+  background-color: #aaa;
+  margin: 10px;
+  border: 1px solid #aaa;
+  line-height: 80px;
+  text-align: center;
+}
+.l_row {
+  width: 1200px;
+  margin: auto;
+  zoom: 1;
+}
+.l_row:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.l_row .l_col_1,
+.l_row .l_col_2,
+.l_row .l_col_4,
+.l_row .l_col_6,
+.l_row .l_col_8,
+.l_row .l_col_12 {
+  position: relative;
+  padding: 0px 10px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+.l_row .l_col_1,
+.l_row .l_col_2,
+.l_row .l_col_4,
+.l_row .l_col_6,
+.l_row .l_col_8 {
+  float: left;
+}
+.l_row .l_col_1 {
+  width: 8.33333%;
+}
+.l_row .l_col_2 {
+  width: 16.66667%;
+}
+.l_row .l_col_4 {
+  width: 33.33333%;
+}
+.l_row .l_col_6 {
+  width: 50%;
+}
+.l_row .l_col_8 {
+  width: 66.66667%;
+}
+.l_row .l_col_12 {
+  width: 100%;
+}
+@media screen and (max-width: 1300px) {
+  .l_row {
+    width: 960px;
+  }
+}
+@media screen and (max-width: 980px) {
+  .l_row {
+    width: 100%;
+  }
+  .l_row .l_col_1,
+  .l_row .l_col_2,
+  .l_row .l_col_4,
+  .l_row .l_col_6,
+  .l_row .l_col_8 {
+    width: 100%;
+    float: none;
+  }
+}
+/**
+ * 文章模块
+ */
+.article {
+  padding: 20px;
+  font-size: 14px;
+  font-family: "Microsoft Yahei";
+}
+.article img {
+  display: block;
+  max-width: 100%;
+  margin: auto;
+}
+.article h1,
+.article h2,
+.article h3,
+.article h4,
+.article h5,
+.article h6 {
+  font-weight: normal;
+  margin: 1.8em 0 0;
+}
+.article h1 {
+  font-size: 2em;
+}
+.article h2 {
+  font-size: 1.7em;
+}
+.article h3 {
+  font-size: 1.4em;
+}
+.article h4 {
+  font-size: 1.25em;
+}
+.article h5 {
+  font-size: 1.1em;
+}
+.article h6 {
+  font-size: 1em;
+}
+.article p {
+  line-height: 1.8;
+  margin: 1em 0;
+  font-size: 1em;
+  color: #333333;
+}
+.article ul {
+  margin: 1em 0;
+  padding-left: 1em;
+  list-style-type: disc;
+}
+.article ul li {
+  margin-left: 1em;
+  list-style-type: disc;
+}
+.article ol {
+  margin: 1em 0;
+  padding-left: 1em;
+  list-style-type: decimal;
+}
+.article ol li {
+  margin-left: 1em;
+  list-style-type: decimal;
+}
+.article pre {
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.article code {
+  margin: 0 0.5em;
+  padding: 0 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+  background: #f7f7f7;
+}
+.article a {
+  color: #333;
+  padding: 0px 0.5em;
+  text-decoration: underline;
+}
+.article a:hover {
+  color: #000;
+  background: #f2f2f2;
+  text-decoration: underline;
+}
+.article img {
+  max-width: 100%;
 }
 /*定制的loading动画*/
 .l-loading-panel {
@@ -82,10 +318,405 @@ a:active {
   border-radius: 4px;
   margin-bottom: 20px;
 }
+/**
+ * 代码高亮
+ */
+.hljs code {
+  display: block;
+  max-height: 200px;
+  padding: 0.5em;
+  color: #ddd;
+  border: none;
+  margin: 0;
+  border-radius: 0;
+  font-family: Monaco, Consolas, "Lucida Console", monospace;
+  background: #333;
+  overflow: auto;
+}
+.profile .hljs-header *,
+.ini .hljs-title,
+.nginx .hljs-title {
+  color: #ffffff;
+}
+.hljs-comment {
+  color: #666;
+}
+.hljs-string,
+.hljs-symbol,
+.diff .hljs-change,
+.hljs-regexp,
+.xml .hljs-attribute,
+.smalltalk .hljs-char,
+.xml .hljs-value,
+.ini .hljs-value,
+.clojure .hljs-attribute,
+.coffeescript .hljs-attribute {
+  color: #a0c874;
+}
+.hljs-number {
+  color: #66dd00;
+}
+.hljs-built_in,
+.hljs-literal,
+.vhdl .hljs-typename,
+.go .hljs-constant,
+.go .hljs-typename,
+.ini .hljs-keyword,
+.lua .hljs-title,
+.perl .hljs-variable,
+.php .hljs-variable,
+.mel .hljs-variable,
+.django .hljs-variable,
+.css .funtion,
+.smalltalk .method,
+.hljs-hexcolor,
+.hljs-important,
+.hljs-flow,
+.hljs-inheritance,
+.parser3 .hljs-variable {
+  color: #59B524;
+}
+.hljs-keyword {
+  color: #888;
+  font-weight: bold;
+}
+.hljs-title,
+.ruby .hljs-constant,
+.vala .hljs-constant,
+.hljs-parent,
+.hljs-deletion,
+.hljs-template_tag,
+.css .hljs-keyword,
+.objectivec .hljs-class .hljs-id,
+.smalltalk .hljs-class,
+.lisp .hljs-keyword,
+.apache .hljs-tag,
+.nginx .hljs-variable,
+.hljs-envvar,
+.bash .hljs-variable,
+.go .hljs-built_in,
+.vbscript .hljs-built_in,
+.lua .hljs-built_in,
+.rsl .hljs-built_in,
+.tail,
+.avrasm .hljs-label,
+.tex .hljs-formula,
+.tex .hljs-formula * {
+  color: #a0c874;
+}
+.hljs-yardoctag,
+.hljs-phpdoc,
+.profile .hljs-header,
+.ini .hljs-title,
+.apache .hljs-tag,
+.parser3 .hljs-title {
+  font-weight: bold;
+}
+.coffeescript .javascript,
+.javascript .xml,
+.tex .hljs-formula,
+.xml .javascript,
+.xml .vbscript,
+.xml .css,
+.xml .hljs-cdata {
+  opacity: 0.6;
+}
+.hljs-params {
+  color: #666666;
+}
+.github-link {
+  position: fixed;
+  z-index: 4000;
+  display: block;
+  left: 40px;
+  bottom: 0px;
+  width: 60px;
+  height: 60px;
+  background: url(../images/github-left.png) top right;
+  transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -webkit-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
+}
+.github-link:hover {
+  width: 70px;
+  height: 70px;
+}
+@media screen and (max-width: 660px) {
+  .github-link {
+    left: 0px;
+  }
+}
+.UI-plugin-iframe {
+  display: block;
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+.l-mini-nav {
+  height: 24px;
+  line-height: 24px;
+  background: #f5f5f5;
+  border-bottom: 1px solid #ccc;
+}
+.l-mini-nav a {
+  font-size: 12px;
+  color: #666;
+}
+.l-mini-nav a:hover {
+  text-decoration: underline;
+  color: #333;
+}
+/**
+ * 卡片类
+ */
+.cardShadow {
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+/**
+ * CSS3动画
+ *
+ */
+@-webkit-keyframes fadeInLeftBig {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-2000px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
+}
+@-moz-keyframes fadeInLeftBig {
+  0% {
+    opacity: 0;
+    -moz-transform: translateX(-2000px);
+  }
+  100% {
+    opacity: 1;
+    -moz-transform: translateX(0);
+  }
+}
+@-webkit-keyframes fadeOutLeftBig {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateX(-2000px);
+  }
+}
+@-moz-keyframes fadeOutLeftBig {
+  0% {
+    opacity: 1;
+    -moz-transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    -moz-transform: translateX(-2000px);
+  }
+}
+@-webkit-keyframes fadeOutLeft {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateX(-20px);
+  }
+}
+@-moz-keyframes fadeOutLeft {
+  0% {
+    opacity: 1;
+    -moz-transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    -moz-transform: translateX(-20px);
+  }
+}
+@-webkit-keyframes fadeOutRight {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateX(20px);
+  }
+}
+@-moz-keyframes fadeOutRight {
+  0% {
+    opacity: 1;
+    -moz-transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    -moz-transform: translateX(20px);
+  }
+}
+@-webkit-keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
+}
+@-moz-keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    -moz-transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    -moz-transform: translateX(0);
+  }
+}
+@keyframes zoomin {
+  0% {
+    transform: scale(0.1);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@-moz-keyframes zoomin {
+  0% {
+    -moz-transform: scale(0.1);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    -moz-transform: scale(1);
+  }
+}
+@-webkit-keyframes zoomin {
+  0% {
+    -webkit-transform: scale(0.1);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1);
+  }
+}
+@-webkit-keyframes bounceOut {
+  0% {
+    -webkit-transform: scale(1);
+  }
+  25% {
+    -webkit-transform: scale(0.95);
+  }
+  50% {
+    opacity: 1;
+    -webkit-transform: scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(0.3);
+  }
+}
+@-moz-keyframes bounceOut {
+  0% {
+    -moz-transform: scale(1);
+  }
+  25% {
+    -moz-transform: scale(0.95);
+  }
+  50% {
+    opacity: 1;
+    -moz-transform: scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    -moz-transform: scale(0.3);
+  }
+}
+.zoomin {
+  overflow: hidden;
+  animation: zoomin 0.5s;
+  -moz-animation: zoomin 0.5s;
+  -webkit-animation: zoomin 0.5s;
+  -o-animation: zoomin 0.5s;
+}
+.zoomout {
+  transform: scale(0.1);
+  -moz-transform: scale(0.1);
+  -webkit-transform: scale(0.1);
+  -o-transform: scale(0.1);
+  opacity: 0;
+  overflow: hidden;
+  transition: 0.7s;
+}
+.fadeInLeft {
+  -webkit-animation: fadeInLeft 0.5s ease both;
+  -moz-animation: fadeInLeft 0.5s ease both;
+}
+.fadeInLeftBig {
+  -webkit-animation: fadeInLeftBig 1s .2s ease both;
+  -moz-animation: fadeInLeftBig 1s 0.2s ease both;
+}
+.fadeOutLeft {
+  -webkit-animation: fadeOutLeft 1s .2s ease both;
+  -moz-animation: fadeOutLeft 1s .2s ease both;
+}
+.fadeOutRight {
+  -webkit-animation: fadeOutRight 0.5s ease both;
+  -moz-animation: fadeOutRight 0.5s ease both;
+}
+.bounceOut {
+  -webkit-animation: bounceOut 1s .2s ease both;
+  -moz-animation: bounceOut 1s .2s ease both;
+}
+body {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background: #eee;
+}
+a,
+a:active {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+}
 /**应用主容器**/
 .app_container {
   position: relative;
   margin-left: 40px;
+}
+.app_mask {
+  position: fixed;
+  display: table;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #eee;
+  z-index: 5000;
+}
+.app_mask_cnt {
+  display: table-cell;
+  vertical-align: middle;
+}
+.app_mask_cnt p {
+  padding-top: 20px;
+  font-size: 14px;
+  color: #333;
+  text-align: center;
 }
 /**
  * 导航

@@ -4,8 +4,8 @@ define(function(require,exports){
 	var mirror = require('comments/mirror.js');
 	var selection = require('comments/selection.js');
 	var pagination = require('util/pagination.js');
-	var private_userInfo = null;
 	
+    var private_userInfo = null;
 	var baseTpl = ['<div class="l_comments">',
 		'<div class="l_com_sendBox"></div>',
 		'<div class="l_com_list">',
@@ -233,13 +233,13 @@ define(function(require,exports){
                 });
                 return false;
             }
-            L.dataBase.setLocalUser({
+            L.user.setLocalUser({
                 'username' : username,
                 'email' : email,
                 'blog' : blog
             });
             //更新用户信息
-            L.dataBase.user(function(err,user){
+            L.user.info(function(err,user){
                 if(err){
                     private_userInfo = null;
                 }else if(user){
@@ -388,7 +388,7 @@ define(function(require,exports){
 		bindDomEvent.call(this);
 		//绑定对象自定义事件
 		bindCustomEvent.call(this);
-		L.dataBase.user(function(err,user){
+		L.user.info(function(err,user){
 			if(err){
 				private_userInfo = null;
 			}else if(user){
