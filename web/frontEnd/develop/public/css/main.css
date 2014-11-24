@@ -2,8 +2,10 @@
 /**
  * 定义Minxin
  **/
+/**
+ * 卡片类
+ */
 .cardShadow {
-  overflow: hidden;
   background: #fff;
   border-radius: 2px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
@@ -23,10 +25,16 @@ a:active {
   max-width: 360px;
   margin: 200px auto 0;
   padding: 40px 0;
-  overflow: hidden;
   background: #fff;
   border-radius: 2px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+.l-loading-panel p {
+  padding: 20px 0 0;
+  text-align: center;
+  color: #333;
+  font-size: 14px;
+  line-height: 20px;
 }
 .l-loading {
   position: relative;
@@ -1249,7 +1257,6 @@ a:active {
   padding: 20px 10px;
 }
 .opusList ul {
-  overflow: hidden;
   background: #fff;
   border-radius: 2px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
@@ -1393,7 +1400,6 @@ a:active {
   padding: 20px 10px;
 }
 .shareList ul {
-  overflow: hidden;
   background: #fff;
   border-radius: 2px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
@@ -1449,6 +1455,13 @@ a:active {
 .shareList li a:hover strong {
   bottom: 0px;
 }
+/**
+ * 留言板
+ *
+ */
+.blessPage {
+  padding-top: 20px;
+}
 .shareDetail {
   max-width: 700px;
   margin: auto;
@@ -1456,7 +1469,6 @@ a:active {
 }
 .shareDetail_article {
   margin-bottom: 20px;
-  overflow: hidden;
   background: #fff;
   border-radius: 2px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);

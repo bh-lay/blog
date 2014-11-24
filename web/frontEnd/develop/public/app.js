@@ -152,7 +152,7 @@ seajs.use([
 	var container = $('.app_container');
 	//显示单页dom
 	function getNewPage(){
-		var newDom = $('<div class="page"><div class="l-loading-panel"><span class="l-loading"></span></div></div>');
+		var newDom = $('<div class="page"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载模块</p></div></div>');
         removePageDom(function(){
             container.append(newDom);
             newDom.addClass('fadeInLeft');
@@ -259,7 +259,7 @@ seajs.use([
 		L.nav.setCur('/');
 		var dom = getNewPage();
 		seajs.use('comments/index.js',function(comments){
-			dom.html('<div class="l_row"><div class="l_col_12"></div></div>');
+			dom.html('<div class="l_row blessPage"><div class="l_col_12"></div></div>');
 			new comments.init(dom.find('.l_col_12')[0],'define-1');
 		});
 	});
@@ -267,8 +267,7 @@ seajs.use([
 	/**
 	 * 监听页面跳转
 	 */
-	lofox.on('change',function(url){
-	});
+	//lofox.on('change',function(url){});
 	
 	$('body').on('click','a[lofox="true"]',function(){
 		var url = $(this).attr('href');

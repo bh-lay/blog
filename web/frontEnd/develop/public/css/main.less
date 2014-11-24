@@ -2,12 +2,6 @@
 @import "core.less";
 @nav_slide_durtime:0.3s;
 @nav_slide_width: 200px;
-.cardShadow{
-	overflow: hidden;
-	background: #fff;
-	border-radius: 2px;
-	box-shadow: 0 0 2px rgba(0,0,0,0.2);
-}
 
 
 body{
@@ -25,6 +19,13 @@ a,a:active{
     margin: 200px auto 0;
     padding: 40px 0;
     .cardShadow();
+    p{
+        padding: 20px 0 0;
+        text-align: center;
+        color: #333;
+        font-size: 14px;
+        line-height:20px;
+    }
 }
 .l-loading {
 	position: relative;
@@ -537,6 +538,7 @@ a,a:active{
     padding: 20px 20px 20px 80px;
     background: #fff;
     position: relative;
+	overflow: hidden;
 	.cardShadow();
 }
 
@@ -839,6 +841,7 @@ a,a:active{
 }
 .l_com_list_cnt {
 	background: #fff;
+	overflow: hidden;
 	.cardShadow();
 }
 .l_com_list_pagination{
@@ -1060,6 +1063,7 @@ a,a:active{
 
 .articleItem {
 	margin-bottom: 20px;
+	overflow: hidden;
 	.cardShadow();
 }
 
@@ -1113,6 +1117,7 @@ a,a:active{
 }
 .blog_article {
 	margin-bottom: 20px;
+	overflow: hidden;
 	.cardShadow();
 }
 
@@ -1340,6 +1345,7 @@ a,a:active{
 	.article {
 		position: relative;
 		margin-bottom: 20px;
+        overflow: hidden;
 		.cardShadow();
 	}
 }
@@ -1452,6 +1458,14 @@ a,a:active{
 	strong {
 		bottom: 0px
 	}
+}
+
+/**
+ * 留言板
+ *
+ */
+.blessPage{
+    padding-top: 20px;
 }
 
 

@@ -41,20 +41,14 @@ define(function(require,exports){
 		});
 	};
 	return function(dom,id){
-		var render_over = this.render_over || null;
-		
-	//	if(param['init']){
 		var dom = dom,
 			 id = id || null;
 		getData(id,function(html,title){
 			html&&dom.html(html);
-			render_over&&render_over(title);
 			var commentDom = dom.find('.comments_frame');
 			seajs.use('comments/index.js',function(comments){
 				new comments.init(commentDom,'blog-' + id);
 			});
 		});
-	//	}
-		
 	};
 });

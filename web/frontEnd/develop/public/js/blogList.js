@@ -7,7 +7,10 @@
 
 define(function(require,exports){
 	var pagination = require('util/pagination.js');
-	
+	var baseTpl = ['<div class="articleListCnt">',
+			'<div class="articleList"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载数据</p></div></div>',
+			'<div class="pagination_cnt"></div>',
+		'</div>'].join('');
 	var blogTemp =  ['<div class="articleItem" articleId="<%=id %>">',
 		'<div class="artItCnt">',
 			'<% if(cover){ %>',
@@ -86,16 +89,15 @@ define(function(require,exports){
 	};
 	
 	return function(dom,param){
-		dom.html(['<div class="articleListCnt">',
-			'<div class="articleList"></div>',
-			'<div class="pagination_cnt"></div>',
-		'</div>'].join(''));
-		
-		var $list = dom.find('.articleList');
-		var $page_cnt = dom.find('.pagination_cnt');
-		
-		var list = new LIST($list);
+        //插入基本模版
+        dom.html(baseTpl);
+        var $list = dom.find('.articleList');
+        var $page_cnt = dom.find('.pagination_cnt');
+        //获取当前页数
 		var pageIndex = param.page || 1;
+        //创建列表对象
+        var list = new LIST($list);
+        //渲染初始页
 		list.renderPage(pageIndex,function(){
 			//分页组件
 			var page = new pagination($page_cnt,{

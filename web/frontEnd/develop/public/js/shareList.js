@@ -7,12 +7,6 @@ define(function(require,exports){
 	var limit = 10,
 		 skip = 0,
 		 count = 0;
-	var insert = function(param){
-		var this_html = $(param['html']),
-			this_dom = param['dom'];
-
-		this_dom.html(this_html);
-	};
 	var getData = function(fn){
 		$.ajax({
 			'type' : 'GET' ,
@@ -50,11 +44,8 @@ define(function(require,exports){
 				list[i].cover = L.qiniu(list[i].cover);
 				this_html += render(list[i]);
 			}
-			insert({
-				'end' : (skip>=count)?true:false,
-				'html' : this_html,
-				'dom' : dom.find('.shareList ul')
-			});
+            
+            dom.find('.shareList ul').html(this_html);
 		});
 	};
 });

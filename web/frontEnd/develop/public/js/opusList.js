@@ -29,12 +29,6 @@ define(function(require,exports){
 		 skip = 0,
 		 count = null,
 		 dom;
-
-	var insert = function(param){
-		var this_html = $(param['html']),
-			this_dom = param['dom'];
-		this_dom.append(this_html);
-	};
 	var getData = function(callback){
 		$.ajax({
 			'type' : 'GET' ,
@@ -57,31 +51,15 @@ define(function(require,exports){
 			}
 		});
 	};
-	var start = function(){
-		
-		$('.shareList').on('mouseenter','a',function(){
-			$(this).find('strong').stop().animate({'bottom':0},200);
-		}).on('mouseleave','a',function(){
-			$(this).find('strong').stop().animate({'bottom':-100},200);
-		});
-	};
 	
 	return function(dom,param){
-		var render_over = this.render_over || null;
 		skip = 0;
 		getData(function(list){
 			dom.html('<div class="opusList"><ul></ul></div>');
 			var this_html = juicer(item_tpl,{
 				'list' : list
 			});
-			var this_dom = dom.find('ul');
-			insert({
-				'end' : (skip>=count)?true:false,
-				'html' : this_html,
-				'dom' : this_dom
-			});
-			start();
-			render_over&&render_over();
+            dom.find('ul').append(this_html);
 		});
 	};
 });
