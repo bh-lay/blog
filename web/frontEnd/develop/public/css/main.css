@@ -76,6 +76,21 @@ body {
   font-family: "layIcon";
   font-style: normal;
 }
+.l-icon-book:after {
+  content: '\0045';
+}
+.l-icon-code:after {
+  content: '\0046';
+}
+.l-icon-beaker:after {
+  content: '\0047';
+}
+.l-icon-share:after {
+  content: '\0048';
+}
+.l-icon-layLogo:after {
+  content: '\0049';
+}
 .l-icon-face:after {
   content: '\0055';
 }
@@ -686,7 +701,7 @@ body {
 body {
   overflow-x: hidden;
   overflow-y: scroll;
-  background: #eee;
+  background: url("../images/mask.png") #eeeeee;
 }
 a,
 a:active {
@@ -745,9 +760,6 @@ a:active {
   display: block;
   margin-bottom: 10px;
 }
-.nav .cur a {
-  color: #ffffff;
-}
 .nav a {
   display: block;
   width: 100%;
@@ -767,27 +779,14 @@ a:active {
   width: 40px;
   text-align: center;
   font-family: "layIcon";
-  margin-right: 5px;
   font-size: 22px;
   font-style: normal;
 }
-.nav a strong {
-  font-weight: normal;
-  font-size: 14px;
-}
 .nav a:hover {
-  width: 150px;
-  text-decoration: none;
-  background: #fff;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
-  color: #333;
-  transition: all 0s linear;
-  -moz-transition: all 0s linear;
-  -webkit-transition: all 0s linear;
-  -o-transition: all 0s linear;
+  color: #ddd;
 }
-.nav a:hover strong {
-  display: inline-block;
+.nav .cur a {
+  color: #ffffff;
 }
 .navLink {
   overflow: hidden;
@@ -881,6 +880,30 @@ a:active {
 .nav_Btn_ico_3 {
   top: 21px;
 }
+.nav_tips {
+  position: relative;
+  float: left;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 30px 0 20px;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  background: #333;
+  color: #fff;
+}
+.nav_tips:before {
+  content: '◆';
+  position: absolute;
+  diaplay: block;
+  top: 10px;
+  left: -10px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  font-size: 20px;
+  color: #333;
+}
 @media screen and (max-width: 660px) {
   .app_container {
     margin-left: 0;
@@ -914,8 +937,8 @@ a:active {
     color: #aaa;
     box-shadow: none;
   }
-  .nav a strong {
-    display: inline-block;
+  .nav a:after {
+    content: attr(data-title);
   }
   .nav_slidedown {
     overflow: hidden;

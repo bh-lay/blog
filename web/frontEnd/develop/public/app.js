@@ -317,10 +317,30 @@ seajs.use([
 		$('.app_nav .nav a').click(function(){
 			$('body').removeClass('nav_slidedown');
 		});
-		
-		$('.nav_body a').each(function(){
-		  $(this).attr('title','')
-		});
+		if(!isMobileBrowser){
+            var active_plane;
+            var delay;
+            $('.nav a').on('mouseenter',function(){
+                active_plane && active_plane.close();
+                var offset = $(this).offset();
+                var title  = $(this).attr('data-title');
+                clearTimeout(delay);
+                delay = setTimeout(function(){
+                    active_plane = UI.plane({
+                        'top' : offset.top,
+                        'left' : 50,
+                        'html' : '<div class="nav_tips">' + title + '</div>',
+                        'from' : 'right',
+                        'closeFn' : function(){
+                            active_plane = null;
+                        }
+                    });
+                },200);
+            }).on('mouseleave',function(){
+                clearTimeout(delay);
+                active_plane && active_plane.close();
+            });
+        }
 		
 		$('.nav_mask').on('click',function(){
 			$('body').removeClass('nav_slidedown');

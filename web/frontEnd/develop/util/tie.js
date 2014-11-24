@@ -34,7 +34,6 @@ window.util = window.util || {};
 				}else if(this.state == 'mid'){
 					top = scrollTop - this.minScrollTop;
 				}
-				alert(this.state + top);
 				this.dom.animate({
 					'top' : top
 				},100).css({

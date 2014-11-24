@@ -9,7 +9,7 @@
 body{
     overflow-x: hidden;
     overflow-y: scroll;
-    background: #eee;
+    background: url("../images/mask.png") #eee;
 }
 a,a:active{
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
@@ -69,9 +69,6 @@ a,a:active{
 		display: block;
 		margin-bottom: 10px
 	}
-	.cur a {
-		color: #fff
-	}
 	a {
 		display: block;
 		width: 100%;
@@ -87,25 +84,17 @@ a,a:active{
 			width: 40px;
 			text-align: center;
 			font-family: "layIcon";
-			margin-right: 5px;
 			font-size: 22px;
 			font-style: normal
 		}
-		strong {
-			font-weight: normal;
-			font-size: 14px
-		}
 		&:hover {
-			width: 150px;
-			text-decoration: none;
-			background: #fff;
-			box-shadow: 1px 1px 2px rgba(0,0,0,0.6);
-			color: #333;
-			.transition(0s);
-			strong {
-				display: inline-block
-			}
+            color: #ddd;
 		}
+	}
+	.cur{
+        a {
+		  color: #fff
+        }
 	}
 }
 
@@ -201,7 +190,31 @@ a,a:active{
 .nav_Btn_ico_3 {
 	top: 21px
 }
-
+.nav_tips{
+    position: relative;
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 30px 0 20px;
+    border-radius: 2px;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+    background: #333;
+    color: #fff;
+    &:before{
+        content: '◆';
+        position: absolute;
+        diaplay: block;
+        top: 10px;
+        left: -10px;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+        font-size: 20px;
+        color: #333;
+        
+    }
+}
 @media screen and (max-width: 660px) {
 	.app_container {
 		margin-left: 0;
@@ -223,16 +236,17 @@ a,a:active{
 
 	.nav {
 		padding-top: 70px;
-	}
-	.nav a:hover{
-		background: transparent;
-		color: #aaa;
-		box-shadow: none;
-	}
-
-	.nav a	strong {
-		display: inline-block
-	}
+        a{
+            &:hover{
+                background: transparent;
+                color: #aaa;
+                box-shadow: none;
+            }
+            &:after{
+                content: attr(data-title)
+            }
+        }
+    }
 
 	.nav_slidedown{
         overflow: hidden;
