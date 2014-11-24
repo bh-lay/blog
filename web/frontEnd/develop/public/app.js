@@ -152,7 +152,7 @@ seajs.use([
 	var container = $('.app_container');
 	//显示单页dom
 	function getNewPage(){
-		var newDom = $('<div></div>');
+		var newDom = $('<div class="page"><div class="l-loading-panel"><span class="l-loading"></span></div></div>');
         removePageDom(function(){
             container.append(newDom);
             newDom.addClass('fadeInLeft');
