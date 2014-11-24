@@ -122,8 +122,7 @@ window.L = window.L || {};
 	};
 })(L);
 
-function routerHandle(){
-    var lofox = new util.lofox();
+function routerHandle(lofox){
 	var dom = $('.contlayer');
 	
 	var $active_page = null;
@@ -279,7 +278,8 @@ seajs.use([
 	'UI/dialog.js'
 ],function(user){
     //绑定路由
-    routerHandle();
+    var lofox = new util.lofox();
+    routerHandle(lofox);
 
     //显示背景图
     if (supports('backgroundSize') && !isMobileBrowser){
