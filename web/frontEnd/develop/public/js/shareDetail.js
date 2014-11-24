@@ -47,8 +47,6 @@ define(function(require,exports){
 		var dom = dom,
 			 id = id || null;
 		getData(id,function(html,title){
-			
-			console.log(dom);
 			html&&dom.html(html);
 			render_over&&render_over(title);
 			var commentDom = dom.find('.comments_frame');

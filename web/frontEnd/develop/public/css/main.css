@@ -1229,12 +1229,17 @@ a:active {
   }
   .lab_item {
     float: none;
-    width: auto;
-    margin: 0 10px 20px;
-    height: auto;
+    width: 360;
+    margin: 0 auto 20px;
   }
   .lab_item .lab_cover img {
     width: 100%;
+  }
+}
+@media (max-width: 380px) {
+  .lab_item {
+    width: auto;
+    height: auto;
   }
 }
 /** 我的作品 **/
