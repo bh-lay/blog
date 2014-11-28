@@ -26,24 +26,24 @@ define(function(require,exports){
 		});
 	};
 	return function(dom,param){
-		var temp = ['<li>',
-			'<a href="/share/<%=id %>" title="<%=title %>" lofox="true" class="shareItem_cover" target="_self" >',
-				'<img src="<%=cover %>" alt="<%=title %>" />',
+		var temp = ['{@each list as it}<li>',
+			'<a href="/share/${it.id}" title="${it.title}" lofox="true" class="shareItem_cover" target="_self" >',
+				'<img src="${it.cover}" alt="${it.title}" />',
 			'</a>',
-			'<a href="/share/<%=id %>" title="<%=title %>" lofox="true" class="shareItem_title" target="_self" ><strong><%=title %></strong></a>',
-			'<p><%= intro %></p>',
-		'</li>'].join('');
-		var render = L.tplEngine(temp);
+			'<a href="/share/${it.id}" title="${it.title}" lofox="true" class="shareItem_title" target="_self" ><strong>${it.title}</strong></a>',
+			'<p>${it.intro}</p>',
+		'</li>{@/each}'].join('');
 		skip = 0;
 		getData(function(list){
 			dom.html('<div class="shareList"><ul></ul></div>');
-			var this_html = '';
 			
 			for(var i=0,total=list.length;i<total;i++){
 				//使用七牛图床
 				list[i].cover = L.qiniu(list[i].cover);
-				this_html += render(list[i]);
 			}
+			var this_html = juicer(temp,{
+                'list' : list
+            });
             
             dom.find('.shareList ul').html(this_html);
 		});
