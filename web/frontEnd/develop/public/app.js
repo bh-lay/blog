@@ -293,7 +293,7 @@ seajs.use([
 		$('.app_nav .nav a').click(function () {
 			$('body').removeClass('nav_slidedown');
 		});
-		if (!isSupportTouch) {
+		if (!isSupportTouch && $(window).width() > 720) {
             var active_plane;
             var delay;
             $('.nav a').on('mouseenter', function () {

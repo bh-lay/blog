@@ -59,7 +59,7 @@ body {
   min-width: 320px;
   color: #333;
   font-size: 14px;
-  font-family: "Microsoft YaHei", tahoma, arial, simsun, "宋体";
+  font-family: Helvetica, STHeiti STXihei, Microsoft JhengHei, Microsoft YaHei, Tohoma, Arial;
 }
 @font-face {
   font-family: "layIcon";
@@ -268,8 +268,8 @@ body {
   background: #f2f2f2;
   text-decoration: underline;
 }
-.article img {
-  max-width: 100%;
+.article *:nth-child(1) {
+  margin-top: 1em !important;
 }
 /*定制的loading动画*/
 .l-loading-panel {
@@ -472,7 +472,6 @@ body {
   height: 24px;
   line-height: 24px;
   background: #f5f5f5;
-  border-bottom: 1px solid #ccc;
 }
 .l-mini-nav a {
   font-size: 12px;

@@ -1,3 +1,997 @@
-.labs_detail_title{padding:80px 0px 30px;background:url("../images/greyBj.png") #fff;border-bottom:1px solid #eee}.labs_detail_title h1{padding:0px 10px;line-height:30px;font-size:30px;font-weight:normal;color:#222;margin:30px 0px 90px}.labs_detail_bar{width:100%;height:0px;position:absolute;z-index:50}.labs_detail_bar .labs_detail_bar_body{width:100%;padding-top:20px}.labs_detail_bar .labs_detail_bar_body .labs_detail_bar_cnt{height:40px;margin:auto;max-width:300px;background:#fff;border-radius:4px;_border:1px solid #bbb;box-shadow:1px 1px 3px rgba(0,0,0,0.7);overflow:hidden}.labs_detail_bar .labs_detail_bar_body .labs_detail_bar_cnt a{display:block;width:25%;float:left;height:40px;line-height:40px;color:#2c3e50;text-align:center;transition:0.2s;-moz-transition-duration:0.2s;-webkit-transition-duration:0.2s;-o-transition-duration:0.2s}.labs_detail_bar .labs_detail_bar_body .labs_detail_bar_cnt a:hover{background:#eee}.labs_detail_doc{padding:120px 0px 20px;background:#fff}.labs_detail_download{background:#eee;padding-top:130px;min-height:500px}.labs_detail_download_title{width:160px;height:40px;margin:0px auto 80px;background:url("../images/labs.png") 0px 0px}.labs_detail_download_linkTxt{max-width:460px;height:100px;overflow:hidden;margin:0 auto}@media screen and (max-width: 500px){.labs_detail_download_linkTxt{margin:0 10px}}.labs_detail_download_linkTxt ul{width:400%;height:90px}.labs_detail_download_linkTxt ul li{width:25%;height:90px;position:relative;float:left;text-align:center;background:#2c3e50}.labs_detail_download_linkTxt ul li h6{height:30px;padding-top:15px;line-height:30px;color:#fff;font-size:18px;font-weight:normal}.labs_detail_download_linkTxt ul li p,.labs_detail_download_linkTxt ul li p a{height:24px;line-height:24px;font-size:14px;color:#999}.labs_detail_download_linkTxt ul li p a:hover,.labs_detail_download_linkTxt ul li p a a:hover{color:#fff;text-decoration:underline}.labs_detail_download_linkTxt ul li .labs_arrow{position:absolute;bottom:0;left:50%;margin:0px 0px -10px -10px;width:20px;height:20px;line-height:20px;color:#2c3e50;font-size:20px;font-family:"Simsun"}.labs_detail_download_linkTxt ul .labs_link_github .labs_arrow{margin-left:-165px}.labs_detail_download_linkTxt ul .labs_link_zip .labs_arrow{margin-left:145px}@media screen and (max-width: 600px){.labs_detail_download_linkTxt ul .labs_link_github .labs_arrow{margin-left:-120px}.labs_detail_download_linkTxt ul .labs_link_zip .labs_arrow{margin-left:105px}}
-.labs_detail_download_link{text-align:center;padding:10px 0px 30px;margin-bottom:100px}.labs_detail_download_link a{display:inline-block;margin:0px 40px 40px;color:#aaa;transition:0.2s;-moz-transition-duration:0.2s;-webkit-transition-duration:0.2s;-o-transition-duration:0.2s;font-size:60px}.labs_detail_download_link a:hover{color:#666}.labs_detail_download_link a.active{color:#000}@media screen and (max-width: 600px){.labs_detail_download_link a{margin:0px 20px 40px}}
-.labs_detail_github{background:#2c3e50;padding:120px 0px 100px;min-height:450px;position:relative}.labs_detail_github .labsDeGit_loading{width:100px;height:100px;position:absolute;top:50%;left:50%;margin:-50px 0px 0px -50px;text-align:center;line-height:100px;color:#fff;font-size:30px}.labs_detail_github .labsDeGit_cpt{height:50px;line-height:50px;font-size:36px;color:#fff;text-align:center;margin-bottom:60px}.labs_detail_github .labsGitNoResult{color:#fff;text-align:center}.labs_detail_github .labsGitNoResult h3{font-weight:normal;font-size:24px;margin-bottom:10px}.labs_detail_github .labsGitNoResult h5{font-weight:normal;font-size:18px}.labs_detail_github .labsGitNoResult p{font-size:12px;opacity:0.5}.labs_detail_github .labsDeGit_user{width:184px;margin:0px auto 40px;background:#fff}.labs_detail_github .labsDeGit_user .labsDeGitUser_cover{display:block;width:184px;height:184px}.labs_detail_github .labsDeGit_user .labsDeGitUser_cover img{display:block;width:184px;height:184px}.labs_detail_github .labsDeGit_user .labsDeGitUser_name a{display:block;height:40px;line-height:40px;text-align:center;border-bottom:1px solid #f4f4f4;transition:0.4s;-moz-transition-duration:0.4s;-webkit-transition-duration:0.4s;-o-transition-duration:0.4s}.labs_detail_github .labsDeGit_user .labsDeGitUser_name a:hover{background:#f4f4f4}.labs_detail_github .labsDeGit_user .labsDeGitUser_name strong{color:#333;font-size:18px;font-weight:normal;margin-right:10px}.labs_detail_github .labsDeGit_user .labsDeGitUser_name span{color:#aaa;font-size:14px}.labs_detail_github .labsDeGit_user .labsDeGitUser_data{height:45px}.labs_detail_github .labsDeGit_user .labsDeGitUser_data a{display:block;width:33.3%;height:45px;float:left;text-align:center;transition:0.4s;-moz-transition-duration:0.4s;-webkit-transition-duration:0.4s;-o-transition-duration:0.4s}.labs_detail_github .labsDeGit_user .labsDeGitUser_data a strong{display:block;font-weight:normal;line-height:25px;color:#555;font-size:16px}.labs_detail_github .labsDeGit_user .labsDeGitUser_data a span{display:block;line-height:15px;color:#bbb;font-size:12px;letter-spacing:-1px}.labs_detail_github .labsDeGit_user .labsDeGitUser_data a:hover{background:#f4f4f4}.labs_detail_github .labsDeGit_repos{margin:0px 10px;background:#fff}.labs_detail_github .labsDeGit_repos .labsDeGitRepos_cpt{height:40px;border-bottom:1px solid #f4f4f4}.labs_detail_github .labsDeGit_repos .labsDeGitRepos_cpt .labsDeGitRepos_cpt_logo{height:40px;float:left;padding:0px 10px 0px 20px;line-height:40px;color:#aaa}.labs_detail_github .labsDeGit_repos .labsDeGitRepos_cpt .labsDeGitRepos_cpt_root{line-height:40px}.labs_detail_github .labsDeGit_repos .labsDeGitRepos_cpt .labsDeGitRepos_cpt_root a{color:#777}.labs_detail_github .labsDeGit_repos .labsDeGitRepos_cpt .labsDeGitRepos_cpt_root a:hover{color:#222;text-decoration:underline}.labs_detail_github .labsDeGit_repos .labsDeGitRepos_cnt{overflow:hidden}.labs_detail_github .labsDeGit_repos .labsDeGitRepos_cnt a{display:block;width:33.3333%;height:100px;float:left;text-align:center}.labs_detail_github .labsDeGit_repos .labsDeGitRepos_cnt a .labsDeGitRepos_cnt_ico{display:block;height:60px;line-height:60px;font-size:30px;color:#666}.labs_detail_github .labsDeGit_repos .labsDeGitRepos_cnt a strong{display:block;height:40px;line-height:40px;color:#333;font-size:16px;font-weight:normal}.labs_detail_github .labsDeGit_repos .labsDeGitRepos_cnt a:hover{background:#f4f4f4}.labs_detail_demo{position:relative;height:600px}.labs_detail_demo iframe{width:100%;height:100%}.labs_detail_demo .labsDeDemo_btn{position:absolute;width:200px;padding:10px 0px 7px;top:50px;right:0px;background:#2c3e50;text-align:center;border-radius:8px 0px 0px 8px}.labs_detail_demo .labsDeDemo_btn p{line-height:16px;color:#566573;font-size:12px}.labs_detail_demo .labsDeDemo_btn a{line-height:25px;font-size:14px;color:#fff}.labs_detail_demo .labsDeDemo_btn a:hover{text-decoration:underline}.labs_footer{padding:50px 0px;background:#eee;text-align:center}.labs_footer h3{margin-bottom:15px;font-size:14px;font-weight:normal;color:#666}.labs_footer p{line-height:24px;font-size:12px;color:#888}.labs_footer a{padding:0px 5px;text-decoration:underline;color:#888}.labs_footer a:hover{color:#333}
+@charset "UTF-8";
+/**
+ * 定义Minxin
+ **/
+body,
+div,
+ul,
+ol,
+li,
+dl,
+dt,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0px;
+  padding: 0px;
+}
+img {
+  border: none;
+}
+ul,
+ol,
+li,
+form,
+dl {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: #333333;
+}
+a:hover {
+  color: #55cc00;
+}
+TD {
+  color: #777;
+  font-size: 12px;
+  padding: 10px;
+}
+.fix {
+  display: inline-block;
+  zoom: 1;
+}
+.fix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+html,
+body {
+  position: relative;
+  min-width: 320px;
+  color: #333;
+  font-size: 14px;
+  font-family: Helvetica, STHeiti STXihei, Microsoft JhengHei, Microsoft YaHei, Tohoma, Arial;
+}
+@font-face {
+  font-family: "layIcon";
+  src: url("../fonts/layicon-webfont.eot");
+  src: url("../fonts/layicon-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/layicon-webfont.woff") format("woff"), url("../fonts/layicon-webfont.ttf") format("truetype"), url("../fonts/layicon-webfont.svg#layIcon-webfont") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+.layIcon {
+  font-family: "layIcon";
+  font-style: normal;
+}
+.l-icon {
+  font-family: "layIcon";
+  font-style: normal;
+}
+.l-icon-book:after {
+  content: '\0045';
+}
+.l-icon-code:after {
+  content: '\0046';
+}
+.l-icon-beaker:after {
+  content: '\0047';
+}
+.l-icon-share:after {
+  content: '\0048';
+}
+.l-icon-layLogo:after {
+  content: '\0049';
+}
+.l-icon-face:after {
+  content: '\0055';
+}
+.piclist {
+  width: 488px;
+  margin: 20px auto;
+  border: 1px solid #aaa;
+  position: relative;
+  overflow: hidden;
+  padding: 10px;
+}
+.piclist img {
+  width: 100px;
+  cursor: pointer;
+  height: 80px;
+  display: inline;
+  float: left;
+  background-color: #aaa;
+  margin: 10px;
+  border: 1px solid #aaa;
+  line-height: 80px;
+  text-align: center;
+}
+.l_row {
+  width: 1200px;
+  margin: auto;
+  zoom: 1;
+}
+.l_row:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.l_row .l_col_1,
+.l_row .l_col_2,
+.l_row .l_col_4,
+.l_row .l_col_6,
+.l_row .l_col_8,
+.l_row .l_col_12 {
+  position: relative;
+  padding: 0px 10px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+.l_row .l_col_1,
+.l_row .l_col_2,
+.l_row .l_col_4,
+.l_row .l_col_6,
+.l_row .l_col_8 {
+  float: left;
+}
+.l_row .l_col_1 {
+  width: 8.33333%;
+}
+.l_row .l_col_2 {
+  width: 16.66667%;
+}
+.l_row .l_col_4 {
+  width: 33.33333%;
+}
+.l_row .l_col_6 {
+  width: 50%;
+}
+.l_row .l_col_8 {
+  width: 66.66667%;
+}
+.l_row .l_col_12 {
+  width: 100%;
+}
+@media screen and (max-width: 1300px) {
+  .l_row {
+    width: 960px;
+  }
+}
+@media screen and (max-width: 980px) {
+  .l_row {
+    width: 100%;
+  }
+  .l_row .l_col_1,
+  .l_row .l_col_2,
+  .l_row .l_col_4,
+  .l_row .l_col_6,
+  .l_row .l_col_8 {
+    width: 100%;
+    float: none;
+  }
+}
+/**
+ * 文章模块
+ */
+.article {
+  padding: 20px;
+  font-size: 14px;
+  font-family: "Microsoft Yahei";
+}
+.article img {
+  display: block;
+  max-width: 100%;
+  margin: auto;
+}
+.article h1,
+.article h2,
+.article h3,
+.article h4,
+.article h5,
+.article h6 {
+  font-weight: normal;
+  margin: 1.8em 0 0;
+}
+.article h1 {
+  font-size: 2em;
+}
+.article h2 {
+  font-size: 1.7em;
+}
+.article h3 {
+  font-size: 1.4em;
+}
+.article h4 {
+  font-size: 1.25em;
+}
+.article h5 {
+  font-size: 1.1em;
+}
+.article h6 {
+  font-size: 1em;
+}
+.article p {
+  line-height: 1.8;
+  margin: 1em 0;
+  font-size: 1em;
+  color: #333333;
+}
+.article ul {
+  margin: 1em 0;
+  padding-left: 1em;
+  list-style-type: disc;
+}
+.article ul li {
+  margin-left: 1em;
+  list-style-type: disc;
+}
+.article ol {
+  margin: 1em 0;
+  padding-left: 1em;
+  list-style-type: decimal;
+}
+.article ol li {
+  margin-left: 1em;
+  list-style-type: decimal;
+}
+.article pre {
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.article code {
+  margin: 0 0.5em;
+  padding: 0 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+  background: #f7f7f7;
+}
+.article a {
+  color: #333;
+  padding: 0px 0.5em;
+  text-decoration: underline;
+}
+.article a:hover {
+  color: #000;
+  background: #f2f2f2;
+  text-decoration: underline;
+}
+.article *:nth-child(1) {
+  margin-top: 1em !important;
+}
+/*定制的loading动画*/
+.l-loading-panel {
+  max-width: 360px;
+  margin: 200px auto 0;
+  padding: 40px 0;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+.l-loading-panel p {
+  padding: 20px 0 0;
+  text-align: center;
+  color: #333;
+  font-size: 14px;
+  line-height: 20px;
+}
+.l-loading {
+  position: relative;
+  display: block;
+  margin: auto;
+  height: 50px;
+  width: 50px;
+  border: 1px solid #555;
+  border-radius: 50%;
+  animation: rond 2s infinite;
+  -webkit-animation: rond 2s infinite;
+}
+.l-loading:after {
+  content: '';
+  position: absolute;
+  height: 8px;
+  width: 8px;
+  top: -4px;
+  left: 21px;
+  background: #555;
+  border-radius: 100%;
+}
+@keyframes rond {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes rond {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+/** 提示信息 **/
+.l_alert_info {
+  border: 1px solid #bce8f1;
+  background: #d9edf7;
+  color: #31708f;
+  padding: 15px 20px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+/**
+ * 代码高亮
+ */
+.hljs code {
+  display: block;
+  max-height: 200px;
+  padding: 0.5em;
+  color: #ddd;
+  border: none;
+  margin: 0;
+  border-radius: 0;
+  font-family: Monaco, Consolas, "Lucida Console", monospace;
+  background: #333;
+  overflow: auto;
+}
+.profile .hljs-header *,
+.ini .hljs-title,
+.nginx .hljs-title {
+  color: #ffffff;
+}
+.hljs-comment {
+  color: #666;
+}
+.hljs-string,
+.hljs-symbol,
+.diff .hljs-change,
+.hljs-regexp,
+.xml .hljs-attribute,
+.smalltalk .hljs-char,
+.xml .hljs-value,
+.ini .hljs-value,
+.clojure .hljs-attribute,
+.coffeescript .hljs-attribute {
+  color: #a0c874;
+}
+.hljs-number {
+  color: #66dd00;
+}
+.hljs-built_in,
+.hljs-literal,
+.vhdl .hljs-typename,
+.go .hljs-constant,
+.go .hljs-typename,
+.ini .hljs-keyword,
+.lua .hljs-title,
+.perl .hljs-variable,
+.php .hljs-variable,
+.mel .hljs-variable,
+.django .hljs-variable,
+.css .funtion,
+.smalltalk .method,
+.hljs-hexcolor,
+.hljs-important,
+.hljs-flow,
+.hljs-inheritance,
+.parser3 .hljs-variable {
+  color: #59B524;
+}
+.hljs-keyword {
+  color: #888;
+  font-weight: bold;
+}
+.hljs-title,
+.ruby .hljs-constant,
+.vala .hljs-constant,
+.hljs-parent,
+.hljs-deletion,
+.hljs-template_tag,
+.css .hljs-keyword,
+.objectivec .hljs-class .hljs-id,
+.smalltalk .hljs-class,
+.lisp .hljs-keyword,
+.apache .hljs-tag,
+.nginx .hljs-variable,
+.hljs-envvar,
+.bash .hljs-variable,
+.go .hljs-built_in,
+.vbscript .hljs-built_in,
+.lua .hljs-built_in,
+.rsl .hljs-built_in,
+.tail,
+.avrasm .hljs-label,
+.tex .hljs-formula,
+.tex .hljs-formula * {
+  color: #a0c874;
+}
+.hljs-yardoctag,
+.hljs-phpdoc,
+.profile .hljs-header,
+.ini .hljs-title,
+.apache .hljs-tag,
+.parser3 .hljs-title {
+  font-weight: bold;
+}
+.coffeescript .javascript,
+.javascript .xml,
+.tex .hljs-formula,
+.xml .javascript,
+.xml .vbscript,
+.xml .css,
+.xml .hljs-cdata {
+  opacity: 0.6;
+}
+.hljs-params {
+  color: #666666;
+}
+.github-link {
+  position: fixed;
+  z-index: 4000;
+  display: block;
+  left: 40px;
+  bottom: 0px;
+  width: 60px;
+  height: 60px;
+  background: url(../images/github-left.png) top right;
+  transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -webkit-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
+}
+.github-link:hover {
+  width: 70px;
+  height: 70px;
+}
+@media screen and (max-width: 660px) {
+  .github-link {
+    left: 0px;
+  }
+}
+.UI-plugin-iframe {
+  display: block;
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+.l-mini-nav {
+  height: 24px;
+  line-height: 24px;
+  background: #f5f5f5;
+}
+.l-mini-nav a {
+  font-size: 12px;
+  color: #666;
+}
+.l-mini-nav a:hover {
+  text-decoration: underline;
+  color: #333;
+}
+/**
+ * 卡片类
+ */
+.cardShadow {
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+/**
+ * CSS3动画
+ *
+ */
+@-webkit-keyframes fadeInLeftBig {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-2000px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
+}
+@-moz-keyframes fadeInLeftBig {
+  0% {
+    opacity: 0;
+    -moz-transform: translateX(-2000px);
+  }
+  100% {
+    opacity: 1;
+    -moz-transform: translateX(0);
+  }
+}
+@-webkit-keyframes fadeOutLeftBig {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateX(-2000px);
+  }
+}
+@-moz-keyframes fadeOutLeftBig {
+  0% {
+    opacity: 1;
+    -moz-transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    -moz-transform: translateX(-2000px);
+  }
+}
+@-webkit-keyframes fadeOutLeft {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateX(-20px);
+  }
+}
+@-moz-keyframes fadeOutLeft {
+  0% {
+    opacity: 1;
+    -moz-transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    -moz-transform: translateX(-20px);
+  }
+}
+@-webkit-keyframes fadeOutRight {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateX(20px);
+  }
+}
+@-moz-keyframes fadeOutRight {
+  0% {
+    opacity: 1;
+    -moz-transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    -moz-transform: translateX(20px);
+  }
+}
+@-webkit-keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
+}
+@-moz-keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    -moz-transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    -moz-transform: translateX(0);
+  }
+}
+@keyframes zoomin {
+  0% {
+    transform: scale(0.1);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@-moz-keyframes zoomin {
+  0% {
+    -moz-transform: scale(0.1);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    -moz-transform: scale(1);
+  }
+}
+@-webkit-keyframes zoomin {
+  0% {
+    -webkit-transform: scale(0.1);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1);
+  }
+}
+@-webkit-keyframes bounceOut {
+  0% {
+    -webkit-transform: scale(1);
+  }
+  25% {
+    -webkit-transform: scale(0.95);
+  }
+  50% {
+    opacity: 1;
+    -webkit-transform: scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(0.3);
+  }
+}
+@-moz-keyframes bounceOut {
+  0% {
+    -moz-transform: scale(1);
+  }
+  25% {
+    -moz-transform: scale(0.95);
+  }
+  50% {
+    opacity: 1;
+    -moz-transform: scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    -moz-transform: scale(0.3);
+  }
+}
+.zoomin {
+  overflow: hidden;
+  animation: zoomin 0.5s;
+  -moz-animation: zoomin 0.5s;
+  -webkit-animation: zoomin 0.5s;
+  -o-animation: zoomin 0.5s;
+}
+.zoomout {
+  transform: scale(0.1);
+  -moz-transform: scale(0.1);
+  -webkit-transform: scale(0.1);
+  -o-transform: scale(0.1);
+  opacity: 0;
+  overflow: hidden;
+  transition: 0.7s;
+}
+.fadeInLeft {
+  -webkit-animation: fadeInLeft 0.5s ease both;
+  -moz-animation: fadeInLeft 0.5s ease both;
+}
+.fadeInLeftBig {
+  -webkit-animation: fadeInLeftBig 1s .2s ease both;
+  -moz-animation: fadeInLeftBig 1s 0.2s ease both;
+}
+.fadeOutLeft {
+  -webkit-animation: fadeOutLeft 1s .2s ease both;
+  -moz-animation: fadeOutLeft 1s .2s ease both;
+}
+.fadeOutRight {
+  -webkit-animation: fadeOutRight 0.5s ease both;
+  -moz-animation: fadeOutRight 0.5s ease both;
+}
+.bounceOut {
+  -webkit-animation: bounceOut 1s .2s ease both;
+  -moz-animation: bounceOut 1s .2s ease both;
+}
+.labs_detail_title {
+  padding: 80px 0px 100px;
+  background: #2ba3d4;
+  border-bottom: 1px solid #eee;
+}
+.labs_detail_title h1 {
+  padding: 0px 10px;
+  line-height: 30px;
+  font-size: 30px;
+  font-weight: normal;
+  color: #fff;
+  margin: 30px 0px 80px;
+}
+.labs_detail_title a {
+  display: block;
+  width: 140px;
+  height: 50px;
+  margin-left: 10px;
+  line-height: 50px;
+  text-align: center;
+  font-size: 16px;
+  color: #2ba3d4;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+}
+.labs_detail_title a i {
+  margin-right: 5px;
+}
+.labs_detail_title a:hover {
+  background: #aff;
+}
+.labs_detail_bar {
+  width: 100%;
+  height: 0px;
+  position: absolute;
+  z-index: 50;
+}
+.labs_detail_bar .labs_detail_bar_body {
+  width: 100%;
+  padding-top: 20px;
+}
+.labs_detail_bar .labs_detail_bar_body .l_row {
+  height: 1px;
+}
+.labs_detail_bar_cnt {
+  position: relative;
+  float: right;
+  right: 10px;
+  width: 60px;
+  background: #fff;
+  border-radius: 4px;
+  _border: 1px solid #bbb;
+  overflow: hidden;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+.labs_detail_bar_cnt a {
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  color: #2c3e50;
+  text-align: center;
+  font-size: 16px;
+  transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+}
+.labs_detail_bar_cnt a:hover {
+  background: #eeeeee;
+}
+.labs_detail_doc {
+  padding: 0 0px 20px;
+  background: #ffffff;
+}
+.labs_detail_download {
+  background: #eee;
+  padding-top: 130px;
+  min-height: 500px;
+}
+.labs_detail_download_title {
+  width: 160px;
+  height: 40px;
+  margin: 0px auto 80px;
+  background: url("../images/labs.png") 0px 0px;
+}
+.labs_detail_download_linkTxt {
+  max-width: 460px;
+  height: 100px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+@media screen and (max-width: 500px) {
+  .labs_detail_download_linkTxt {
+    margin: 0 10px;
+  }
+}
+.labs_detail_download_linkTxt ul {
+  width: 400%;
+  height: 90px;
+}
+.labs_detail_download_linkTxt ul li {
+  width: 25%;
+  height: 90px;
+  position: relative;
+  float: left;
+  text-align: center;
+  background: #2c3e50;
+}
+.labs_detail_download_linkTxt ul li h6 {
+  height: 30px;
+  padding-top: 15px;
+  line-height: 30px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: normal;
+}
+.labs_detail_download_linkTxt ul li p,
+.labs_detail_download_linkTxt ul li p a {
+  height: 24px;
+  line-height: 24px;
+  font-size: 14px;
+  color: #999999;
+}
+.labs_detail_download_linkTxt ul li p a:hover,
+.labs_detail_download_linkTxt ul li p a a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+.labs_detail_download_linkTxt ul li .labs_arrow {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin: 0px 0px -10px -10px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  color: #2c3e50;
+  font-size: 20px;
+  font-family: "Simsun";
+}
+.labs_detail_download_linkTxt ul .labs_link_github .labs_arrow {
+  margin-left: -165px;
+}
+.labs_detail_download_linkTxt ul .labs_link_zip .labs_arrow {
+  margin-left: 145px;
+}
+@media screen and (max-width: 600px) {
+  .labs_detail_download_linkTxt ul .labs_link_github .labs_arrow {
+    margin-left: -120px;
+  }
+  .labs_detail_download_linkTxt ul .labs_link_zip .labs_arrow {
+    margin-left: 105px;
+  }
+}
+.labs_detail_download_link {
+  text-align: center;
+  padding: 10px 0px 30px;
+  margin-bottom: 100px;
+}
+.labs_detail_download_link a {
+  display: inline-block;
+  margin: 0px 40px 40px;
+  color: #aaa;
+  transition: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  font-size: 60px;
+}
+.labs_detail_download_link a:hover {
+  color: #666666;
+}
+.labs_detail_download_link a.active {
+  color: #000000;
+}
+@media screen and (max-width: 600px) {
+  .labs_detail_download_link a {
+    margin: 0px 20px 40px;
+  }
+}
+.labs_detail_github {
+  background: #2c3e50;
+  padding: 120px 0px 100px;
+  min-height: 450px;
+  position: relative;
+}
+.labs_detail_github .labsDeGit_loading {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -50px 0px 0px -50px;
+  text-align: center;
+  line-height: 100px;
+  color: #fff;
+  font-size: 30px;
+}
+.labsDeGit_cpt {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 60px;
+}
+.labsDeGit_cpt i {
+  font-size: 120px;
+}
+.labsDeGit_cpt p {
+  height: 50px;
+  line-height: 50px;
+  font-size: 26px;
+}
+.labsDeGit_repos {
+  max-width: 400px;
+  margin: auto;
+  background: #fff;
+}
+.labsDeGit_repos .labsDeGitRepos_cpt {
+  height: 40px;
+  border-bottom: 1px solid #f4f4f4;
+}
+.labsDeGit_repos .labsDeGitRepos_cpt .labsDeGitRepos_cpt_logo {
+  height: 40px;
+  float: left;
+  padding: 0px 10px 0px 20px;
+  line-height: 40px;
+  color: #aaaaaa;
+}
+.labsDeGit_repos .labsDeGitRepos_cpt .labsDeGitRepos_cpt_root {
+  line-height: 40px;
+}
+.labsDeGit_repos .labsDeGitRepos_cpt .labsDeGitRepos_cpt_root a {
+  color: #777;
+}
+.labsDeGit_repos .labsDeGitRepos_cpt .labsDeGitRepos_cpt_root a:hover {
+  color: #222;
+  text-decoration: underline;
+}
+.labsDeGit_repos .labsDeGitRepos_cnt {
+  overflow: hidden;
+}
+.labsDeGit_repos .labsDeGitRepos_cnt a {
+  display: block;
+  width: 33.3333%;
+  height: 100px;
+  float: left;
+  text-align: center;
+}
+.labsDeGit_repos .labsDeGitRepos_cnt a .labsDeGitRepos_cnt_ico {
+  display: block;
+  height: 60px;
+  line-height: 60px;
+  font-size: 30px;
+  color: #666666;
+}
+.labsDeGit_repos .labsDeGitRepos_cnt a strong {
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  color: #333;
+  font-size: 16px;
+  font-weight: normal;
+}
+.labsDeGit_repos .labsDeGitRepos_cnt a:hover {
+  background: #f4f4f4;
+}
+.labs_footer {
+  padding: 50px 0px;
+  background: #eee;
+  text-align: center;
+}
+.labs_footer h3 {
+  margin-bottom: 15px;
+  font-size: 14px;
+  font-weight: normal;
+  color: #666666;
+}
+.labs_footer p {
+  line-height: 24px;
+  font-size: 12px;
+  color: #888888;
+}
+.labs_footer a {
+  padding: 0px 5px;
+  text-decoration: underline;
+  color: #888888;
+}
+.labs_footer a:hover {
+  color: #333333;
+}
+.tongji {
+  height: 0;
+  overflow: hidden;
+}

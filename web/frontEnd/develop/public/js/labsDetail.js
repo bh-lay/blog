@@ -3,17 +3,16 @@
  *  
  */
 
-//console.log('1111111',self.frameElement)
 seajs.use([
 	'util/tie.js',
 	'lib/highlight/highlight.pack.js'
 ],function(){
 	util.tie({
-		'dom' : $('.labs_detail_bar_body'),
+		'dom' : $('.labs_detail_bar_cnt'),
 		'scopeDom' : $('.labs_detail_cnt'),
-		'scrollDom' : $('body'),
 		'fixed_top' : 10
 	});
+    
 	
 	//下载部分
 	var btn = $('.labs_detail_download_link a');
@@ -29,61 +28,31 @@ seajs.use([
 	});
 	//处理github异步数据
 	function getRepoData(repo_name,callback){
+        var split_array = repo_name.split('/'),
+            user_login = split_array[1],
+            repos_name = split_array[2];
 		$.ajax({
 			url: 'https://api.github.com/repos/' + repo_name,
 			dataType: 'jsonp',
 			success: function(d){
-				var repo = d.data;
-				if(d && d.meta && d.meta.status == 200){
-					callback && callback(null,repo);
-				}else{
-					callback && callback(d.message || '受限');
-				}
-			} 
-		});
-	}
-	function getUserData(username,callback){
-		$.ajax({
-			url: 'https://api.github.com/users/' + username,
-			dataType: 'jsonp',
-			success: function(d){
-				var user = d.data;
-				callback && callback(null,user);
+				var repo = d.data || {};
+                repo['user_login'] = user_login;
+                repo['repos_name'] = repo.name || repos_name;
+                repo['repos_watchers_count'] = repo.watchers_count || '未获取到';
+                repo['repos_forks_count'] = repo.forks_count || '未获取到';
+                repo['repos_stargazers_count'] = repo.stargazers_count || '未获取到';
+                repo['repos_watchers_count'] = repo.watchers || '未获取到';
+                callback && callback(repo);
 			} 
 		});
 	}
 	var repos_name = $('.labs_detail_github').attr('data-repo');
-	var this_data = {};
-	getRepoData(repos_name,function(err,data){
-		if(err){
-			var noResult_tpl = $('#githubNoResult-temp').html();
-			$('.labs_detail_github .labsDeGit_cnt').html(noResult_tpl);
-			return
-		}
+	getRepoData(repos_name,function(data){
 		var temp = $('#github-temp').html();
-		this_data['user_avatar'] = data.owner.avatar_url;
-		this_data['user_login'] = data.owner.login;
-		this_data['repos_name'] = data.name;
-		this_data['repos_watchers_count'] = data.watchers_count;
-		this_data['repos_forks_count'] = data.forks_count;
-		this_data['repos_stargazers_count'] = data.stargazers_count;
-		this_data['repos_watchers_count'] = data.watchers;
-		getUserData(this_data['user_login'],function(err,user_data){
-			this_data['user_repos_count'] = user_data.public_repos;
-			this_data['user_followers_count'] = user_data.followers;
-			this_data['user_following_count'] = user_data.following;
-			this_data['user_name'] = user_data.name;
-			var this_html = temp.replace(/{(\w*)}/g,function(a,b){
-				if(typeof(this_data[b]) == 'undefined'){
-					return '====';
-				}else{
-					return this_data[b];
-				}
-				
-			});
-			$('.labs_detail_github .labsDeGit_cnt').html(this_html);
-			
-		});
+        var this_html = temp.replace(/{(\w*)}/g,function(a,b){
+            return data[b] || '';
+        });
+        $('.labs_detail_github .labsDeGit_cnt').html(this_html);
 	});
 	
 	//demo部分
@@ -95,9 +64,8 @@ seajs.use([
 	$(window).resize(function(){
 		autoHeight();
 	});
-	//代码高亮
-	hljs.initHighlighting();
-	if(top != window){
-		$('.l-mini-nav').remove();
-	}
+    //代码高亮
+    $('pre').each(function(){
+        hljs.highlightBlock(this);
+    });
 });
