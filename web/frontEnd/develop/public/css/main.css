@@ -748,7 +748,7 @@ a:active {
 }
 .nav li {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 .nav a {
   display: block;
@@ -1213,7 +1213,7 @@ a:active {
   display: block;
   padding: 10px 0;
   text-align: center;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 14px;
   color: #000;
   white-space: nowrap;
@@ -1279,7 +1279,7 @@ a:active {
   line-height: 80px;
   text-indent: 1em;
   font-size: 18px;
-  color: #aaa;
+  color: #888;
   cursor: text;
   background: #fff;
 }
@@ -1831,6 +1831,7 @@ a:active {
 }
 .lab_item .lab_cover img {
   display: block;
+  height: 240px;
   margin: auto;
   max-width: 100%;
 }
@@ -1882,6 +1883,7 @@ a:active {
   }
   .lab_item .lab_cover img {
     width: 100%;
+    height: auto;
   }
 }
 @media (max-width: 380px) {

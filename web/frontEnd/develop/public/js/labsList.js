@@ -49,12 +49,12 @@ define(function(require,exports){
 	};
 	return function(dom,param){
 		skip = 0;
+        dom.html('<div class="labsList"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载数据</p></div></div>');
 		getData(function(list){
-			dom.html('<div class="labsList"></div>');
 			var this_html = juicer(temp,{
                 'list' : list
             });
-            dom.find('.labsList').append(this_html);
+            dom.find('.labsList').html(this_html);
 		});
 	};
 });

@@ -101,7 +101,7 @@ define(function(require,exports){
 				'list_count' : list.count,
 				'page_cur' : pageIndex,
 				'page_list_num' : list.limit,
-				'max_page_btn' : 8
+				'max_page_btn' : 7
 			});
 			page.jump = function(num){
 				L.push('/blog?page=' + num);

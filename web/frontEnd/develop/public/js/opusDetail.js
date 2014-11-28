@@ -53,7 +53,6 @@ define(function(require,exports){
 	return function(dom,id){
 		var render_over = this.render_over || null;
 		var param = param || {},
-			 dom = dom || $('.contlayer'),
 			 id = id || null;
 
 

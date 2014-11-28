@@ -4,7 +4,7 @@
  */
 define(function(require,exports){
 	
-	var item_tpl = ['{@each list as it}<li>',
+	var item_tpl = ['<ul>{@each list as it}<li>',
 		'<a href="/opus/${it.id}" title="${it.title}" target="_self" lofox="true" class="opus_cover" >',
 			'<img src="${it.cover}?imgView/1/w/100/h/100/85" alt="${it.title}" />',
 		'</a>',
@@ -23,7 +23,7 @@ define(function(require,exports){
 				'{@/if}',
 			'</p>',
 		'</div>',
-	'</li>{@/each}'].join('');
+	'</li>{@/each}</ul>'].join('');
 	
 	var limit = 20,
 		 skip = 0,
@@ -55,11 +55,11 @@ define(function(require,exports){
 	return function(dom,param){
 		skip = 0;
 		getData(function(list){
-			dom.html('<div class="opusList"><ul></ul></div>');
+			dom.html('<div class="opusList"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载数据</p></div></div>');
 			var this_html = juicer(item_tpl,{
 				'list' : list
 			});
-            dom.find('ul').append(this_html);
+            dom.find('.opusList').html(this_html);
 		});
 	};
 });
