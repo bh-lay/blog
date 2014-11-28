@@ -4,18 +4,19 @@
  */
 define(function(require,exports){
 	
-	var temp = ['{@each list as it}<div class="lab_item">',
-		'<a class="lab_cover" href="/labs/${it.name}" target="_blank" title="${it.title}">',
-			'<img src="${it.cover}" />',
+	var temp = ['<div class="lab_item">',
+		'<a class="lab_cover" href="/labs/<%=name %>" target="_blank" title="<%=title%>">',
+			'<img src="<%=cover %>" />',
 		'</a>',
 		'<h4 class="lab_title">',
-			'<a href="/labs/${it.name}" target="_blank" title="${it.title}">${it.title}</a>',
+			'<a href="/labs/<%=name %>" target="_blank" title="<%=title %>"><%=title %></a>',
 		'</h4>',
 		'<div class="lab_info">',
-			'<p>${it.intro}</p>',
+			'<p><%=intro %></p>',
 		'</div>',
-	'</div>{@/each}'].join('');
+	'</div>'].join('');
 	
+	var render = L.tplEngine(temp);
 	var limit = 20,
 		 skip = 0,
 		 count = null,
@@ -51,9 +52,10 @@ define(function(require,exports){
 		skip = 0;
 		getData(function(list){
 			dom.html('<div class="labsList"></div>');
-			var this_html = juicer(temp,{
-                'list' : list
-            });
+			var this_html = '';
+			for(var i=0,total=list.length;i<total;i++){
+				this_html += render(list[i]);
+			}
             dom.find('.labsList').append(this_html);
 		});
 	};
