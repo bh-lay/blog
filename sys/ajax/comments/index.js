@@ -10,7 +10,7 @@
 	});
  */
 
-var parse = require('../../lofox/parse.js');
+var parse = require('../../core/parse.js');
 var add = require('./add.js');
 var list = require('./list.js');
 var del = require('./del.js');

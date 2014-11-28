@@ -3,8 +3,8 @@
  * 
  */
 
-var mongo = require('../lofox/DB.js');
-var parse = require('../lofox/parse.js');
+var mongo = require('../core/DB.js');
+var parse = require('../core/parse.js');
 
 function add(parm,collection_name,callback){
 	var parm = parm;

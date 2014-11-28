@@ -1,7 +1,7 @@
 /**
  * @author bh-lay
  */
-var parse = require('../lofox/parse.js');
+var parse = require('../core/parse.js');
  
 exports.render = function (connect,app){
 	if(connect.request.method != 'POST'){

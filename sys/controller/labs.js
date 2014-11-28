@@ -1,8 +1,8 @@
 /**
  * @author bh-lay
  */
-var parse = require('../lofox/parse');
-var mongo = require('../lofox/DB.js');
+var parse = require('../core/parse');
+var mongo = require('../core/DB.js');
 
 var showdown = require('../lib/showdown/showdown.js');
 var converter = new showdown.converter();

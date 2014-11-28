@@ -10,8 +10,8 @@
 	});
  */
 
-var mongo = require('../../lofox/DB.js');
-var parse = require('../../lofox/parse.js');
+var mongo = require('../../core/DB.js');
+var parse = require('../../core/parse.js');
 //增加一条用户记录
 function add(parm,callback){
 	var parm = parm;

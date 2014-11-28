@@ -1,9 +1,7 @@
-﻿/**
+/**
  * @author bh-lay
- * @github https://github.com/bh-lay/lofox
  * @version 1.0
  * @modified 2014-6-27 23:14
- *  location fox
  */
 
 var http = require('http');

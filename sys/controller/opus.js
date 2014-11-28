@@ -1,8 +1,8 @@
 /**
  * @author bh-lay
  */
-var parse = require('../lofox/parse');
-var mongo = require('../lofox/DB.js');
+var parse = require('../core/parse');
+var mongo = require('../core/DB.js');
 
 function list_page(callback){
 	var method = mongo.start();

@@ -2,7 +2,7 @@
  * @author bh-lay
  */
 var github = require('../lib/githubSDK.js');
-var DB = require('../lofox/DB.js');
+var DB = require('../core/DB.js');
 
 function login(connect,user,callback){
 	connect.session(function(session_this){

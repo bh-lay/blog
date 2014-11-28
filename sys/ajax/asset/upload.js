@@ -4,7 +4,7 @@
  */
 
 var fs = require('fs');
-var parse = require('../../lofox/parse');
+var parse = require('../../core/parse');
 var assetPath = "../../asset/";
 
 exports.upload = function (req,callback){

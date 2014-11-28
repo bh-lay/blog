@@ -16,7 +16,7 @@
 ***************************************************************/
 
 var querystring = require('querystring');
-var mongo = require('../lofox/DB.js');
+var mongo = require('../core/DB.js');
 
 var del_conf = {
 	'blog' : {

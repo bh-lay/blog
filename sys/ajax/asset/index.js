@@ -1,7 +1,7 @@
 /**
  * @author bh-lay
  */
-var parse = require('../../lofox/parse');
+var parse = require('../../core/parse');
 var read = require('./fileList');
 var upload = require('./upload');
 var del = require('./delete');

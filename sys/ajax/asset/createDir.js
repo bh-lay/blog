@@ -4,7 +4,7 @@
  */
 
 var fs = require('fs');
-var parse = require('../../lofox/parse.js');
+var parse = require('../../core/parse.js');
 var assetPath = "../../asset/";
 
 exports.createDir = function (req,callback){

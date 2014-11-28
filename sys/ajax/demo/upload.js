@@ -4,7 +4,7 @@
  */
 
 var fs = require('fs');
-var parse = require('../../lofox/parse.js');
+var parse = require('../../core/parse.js');
 
 exports.upload = function (req,callback){
 	var json = {

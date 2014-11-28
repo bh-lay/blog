@@ -1,5 +1,5 @@
 
-var mongo = require('../../lofox/DB.js');
+var mongo = require('../../core/DB.js');
 
 
 function getUserInfo(id,callback){
