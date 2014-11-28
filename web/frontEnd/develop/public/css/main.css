@@ -2033,83 +2033,10 @@ a:active {
   text-indent: -100em;
   overflow: hidden;
 }
-/** 分享列表 **/
-.shareList {
-  max-width: 500px;
-  margin: auto;
-  padding: 20px 10px;
-}
-.shareList ul {
-  background: #fff;
-  border-radius: 2px;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
-}
-.shareList li {
-  position: relative;
-  min-height: 120px;
-  margin-bottom: -1px;
-  padding: 0px 10px 10px 120px;
-  border-bottom: 1px solid #ddd;
-}
-.shareList li .shareItem_cover {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  width: 100px;
-  height: 100px;
-  background: #aaa;
-}
-.shareList li .shareItem_cover img {
-  display: block;
-  width: 100px;
-  height: 100px;
-  margin: 0px auto;
-  transition: all 0.5s linear;
-  -moz-transition: all 0.5s linear;
-  -webkit-transition: all 0.5s linear;
-  -o-transition: all 0.5s linear;
-}
-.shareList li .shareItem_title {
-  color: #000;
-}
-.shareList li .shareItem_title strong {
-  height: 50px;
-  line-height: 50px;
-  overflow: hidden;
-  color: #000;
-  font-weight: normal;
-  font-size: 16px;
-  text-align: justify;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-.shareList li .shareItem_title:hover {
-  text-decoration: underline;
-}
-.shareList li p {
-  color: #aaa;
-}
-.shareList li a:hover img {
-  opacity: 0.7;
-}
-.shareList li a:hover strong {
-  bottom: 0px;
-}
 /**
  * 留言板
  *
  */
 .blessPage {
   padding-top: 20px;
-}
-.shareDetail {
-  max-width: 700px;
-  margin: auto;
-  padding: 60px 10px 40px;
-}
-.shareDetail_article {
-  margin-bottom: 20px;
-  background: #fff;
-  border-radius: 2px;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }

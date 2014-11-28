@@ -163,30 +163,6 @@ function routerHandle(lofox) {
 			});
 		});
 	});
-	/**
-	 * 我的分享列表
-	 */
-	lofox.set('/share', function () {
-		this.title('我的分享_小剧客栈');
-		L.nav.setCur('share');
-		var dom = getNewPage();
-		seajs.use('public/js/shareList.js', function (shareList) {
-			shareList(dom);
-		});
-	});
-	/**
-	 * 我的分享详细
-	 */
-	lofox.set('/share/{id}', function (param) {
-		this.title('我的分享_小剧客栈');
-		L.nav.setCur('share');
-		var dom = getNewPage();
-
-		seajs.use('public/js/shareDetail.js', function (shareDetail) {
-			shareDetail(dom,param.id);
-		});
-	});
-	
 	//作品列表页
 	lofox.set('/opus', function () {
 		this.title('作品_小剧客栈');

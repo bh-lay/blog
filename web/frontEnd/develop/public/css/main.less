@@ -1378,66 +1378,6 @@ a,a:active{
 	overflow: hidden
 }
 
-/** 分享列表 **/
-.shareList {
-	max-width: 500px;
-	margin: auto;
-	padding: 20px 10px;
-	ul{
-		.cardShadow()
-	}
-}
-
-.shareList li {
-	position: relative;
-	min-height: 120px;
-	margin-bottom: -1px;
-	padding: 0px 10px 10px 120px;
-	border-bottom: 1px solid #ddd;
-	.shareItem_cover{
-		position: absolute;
-		top: 10px;
-		left: 10px;
-		width: 100px;
-		height: 100px;
-		background: #aaa;
-		img {
-			display: block;
-			width: 100px;
-			height: 100px;
-			margin: 0px auto;
-			.transition(0.5s);
-		}
-	}
-	.shareItem_title{
-		color: #000;
-		strong {
-			height: 50px;
-			line-height: 50px;
-			overflow: hidden;
-			color: #000;
-			font-weight: normal;
-			font-size: 16px;
-			text-align: justify;
-			white-space: nowrap;
-			text-overflow: ellipsis;
-		}
-		&:hover{
-			text-decoration: underline;
-		}
-	}
-	p{
-		color: #aaa;
-	}
-}
-.shareList li a:hover {
-	img {
-		opacity: 0.7
-	}
-	strong {
-		bottom: 0px
-	}
-}
 
 /**
  * 留言板
@@ -1445,15 +1385,4 @@ a,a:active{
  */
 .blessPage{
     padding-top: 20px;
-}
-
-
-.shareDetail {
-	max-width: 700px;
-	margin: auto;
-	padding: 60px 10px 40px;
-}
-.shareDetail_article{
-	margin-bottom: 20px;
-	.cardShadow();
 }

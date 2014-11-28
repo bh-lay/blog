@@ -84,19 +84,6 @@ app.get('/opus/{id}', function(data,connect){
 	});
 });
 
-//分享
-var share = require('./controller/share.js');
-app.get('/share', function(data,connect){
-	views_select(connect,function(){
-		share.list(connect,app);
-	});
-});
-app.get('/share/{id}', function(data,connect){
-	views_select(connect,function(){
-		share.detail(connect,app,data.id);
-	});
-});
-
 //后台
 var admin = require('./controller/admin.js');
 app.get('/admin/*', function(data,connect){
