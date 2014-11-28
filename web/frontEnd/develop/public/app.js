@@ -293,10 +293,10 @@ seajs.use([
 		$('.app_nav .nav a').click(function () {
 			$('body').removeClass('nav_slidedown');
 		});
-		if (!isSupportTouch && $(window).width() > 720) {
-            var active_plane;
-            var delay;
-            $('.nav a').on('mouseenter', function () {
+        var active_plane;
+        var delay;
+        $('.nav a').on('mouseenter', function () {
+            if (!isSupportTouch && $(window).width() > 660) {
                 active_plane && active_plane.close();
                 var offset = $(this).offset(),
                     title  = $(this).attr('data-title');
@@ -312,11 +312,11 @@ seajs.use([
                         }
                     });
                 }, 200);
-            }).on('mouseleave', function () {
-                clearTimeout(delay);
-                active_plane && active_plane.close();
-            });
-        }
+            }
+        }).on('mouseleave', function () {
+            clearTimeout(delay);
+            active_plane && active_plane.close();
+        });
 		
 		$('.nav_mask').on('click', function () {
 			$('body').removeClass('nav_slidedown');
