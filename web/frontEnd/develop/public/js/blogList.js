@@ -11,25 +11,26 @@ define(function(require,exports){
 			'<div class="articleList"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载数据</p></div></div>',
 			'<div class="pagination_cnt"></div>',
 		'</div>'].join('');
-	var blogTemp =  ['<div class="articleItem" articleId="<%=id %>">',
+	var blogTemp =  ['{@each list as it}<li>',
+        '<div class="articleItem" articleId="${it.id}">',
 		'<div class="artItCnt">',
-			'<% if(cover){ %>',
+            '{@if it.cover}',
 			'<div class="artItPic">',
-				'<a href="/blog/<%=id %>" title="<%=title %>" lofox="true" target="_self" >',
-					'<img src="<%=cover %>" alt="<%=title %>" />',
+				'<a href="/blog/${it.id}" title="${it.title}" lofox="true" target="_self" >',
+					'<img src="${it.cover}" alt="${it.title}" />',
 				'</a>',
 			'</div>',
-			'<% } %>',
+			'{@/if}',
 			'<div class="artItCpt">',
-				'<a href="/blog/<%=id %>" title="<%=title %>" lofox="true" target="_self" >',
-					'<%=title %>',
+				'<a href="/blog/${it.id}" title="${it.title}" lofox="true" target="_self" >',
+					'${it.title}',
 				'</a>',
 			'</div>',
-			'<div class="artItInfo"><p><%=intro %></p></div>',
-			'<div class="artItTime"><%=time_show %></div>',
-		//	'<div class="artItTag">${it.tags}</div>',
+			'<div class="artItInfo"><p>${it.intro}</p></div>',
+			'<div class="artItTime">${it.time_show}</div>',
 		'</div>',
-	'</div>'].join('');
+	'</div>',
+    '{@/each}'].join('');
 	
 	function getData(skip,limit,callback){
 		$.ajax({
@@ -66,23 +67,19 @@ define(function(require,exports){
 		this.onLoadStart = null;
 		this.onLoaded = null;
 	}
-	LIST.prototype.render = L.tplEngine(blogTemp);
 	LIST.prototype['renderPage'] = function(index,callback){
 		var me = this;
 		this.onLoadStart && this.onLoadStart();
 		this.skip = (index-1 || 0) * this.limit;
 		
-		this.dom.html('');
-		
 		getData(this.skip,this.limit,function(err,list,count){
 			me.count = count;
 			me.skip += me.limit;
-			list.forEach(function(item,index){
-				var html = me.render(item);
-				var this_dom = $(html);
-		
-				me.dom.append(this_dom);
-			});
+            
+            var html = juicer(blogTemp,{
+                'list' : list
+            });
+            me.dom.html(html);
 			callback && callback();
 			me.onLoaded && me.onLoaded.call(me);
 		});
