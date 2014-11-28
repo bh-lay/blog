@@ -53,14 +53,13 @@
 
 .labs_detail_bar_cnt {
     position: relative;
-	float: right;
-    right: 10px;
+    margin-left: -60px;
 	width: 60px;
 	background: #fff;
 	border-radius: 4px;
 	_border: 1px solid #bbb;
 	overflow: hidden;
-	box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+	box-shadow: 1px 1px 3px rgba(0,0,0,0.6);
     a{
         display: block;
         height: 40px;
@@ -75,6 +74,11 @@
     }
 }
 
+@media screen and (max-width: 1100px) {
+    .labs_detail_bar_cnt{
+        margin-left: 10px;
+    }
+}
 .labs_detail_doc {
 	padding: 0 0px 20px;
 	background: #fff
@@ -82,8 +86,8 @@
 
 .labs_detail_download {
 	background: #eee;
-	padding-top: 130px;
-	min-height: 500px
+	padding-top: 100px;
+	min-height: 400px
 }
 
 .labs_detail_download_title {

@@ -2,7 +2,7 @@
  * @author bh-lay
  * 
  * @github https://github.com/bh-lay/UI
- * @modified 2014-10-31 15:55
+ * @modified 2014-11-27 16:55
  * 
  **/
 
@@ -399,7 +399,7 @@
 	 *   创建一个dom用来完成动画
 	 *   动画结束，设置dom为结束样式
 	 **/
-	function openAnimation(animation_range,fn){
+	function openAnimation(fn){
 		var me = this;
 		var DOM = me.dom;
 		var from = me._from;
@@ -410,7 +410,7 @@
 		showMask.call(me);
 		
 		//ie系列或无from信息，不显示效果
-		if(isIE678 || !from || from == 'none' || !animation_range){
+		if(isIE678 || !from || from == 'none'){
 			fn && fn();
 			return
 		}
@@ -438,44 +438,24 @@
 			};
 		//参数是字符串
 		}else if(typeof(from) == 'string'){
-			var countResult = countTranslate(from,animation_range);
+			var countResult = countTranslate(from,40);
 			cssStart.transform = 'translate' + countResult[0] + '(' + countResult[1] + 'px)';
 			cssAnim.transform = 'translateX(0) translateY(0)';
 		}
-		//拷贝dom用来完成动画
-		var html = DOM.outerHTML;
-		//FIXME 过滤iframe正则
-		html = html.replace(/<iframe.+>\s*<\/iframe>/ig,'');
-		var animDom = utils.createDom(html)[0];
-		utils.insertAfter(animDom,DOM);
 		
-		
-		//隐藏真实dom
-		setCSS(DOM,{
-			'display' : 'none'
-		});
-		
-		//放置于初始位置
+		//先隐藏
 		cssStart.opacity = 0;
 		
-		setCSS(animDom,cssStart);
+		setCSS(DOM,cssStart);
 		//动画开始
 		cssAnim.opacity = 1;
-		animation(animDom,cssAnim,time,'ease-out',function(){
-			//删除动画dom
-			utils.removeNode(animDom);
-			//显示真实dom
-			setCSS(DOM,{
-				'display' : 'block'
-			});
-			fn && fn();
-		});
+		animation(DOM,cssAnim,time,'ease-out',fn);
 	}
 	
 	/**
 	 * 处理对象关闭及结束动画
 	 */
-	function closeAnimation(time_define,animation_range,fn){
+	function closeAnimation(time_define,fn){
 		return function(time){
 			var me = this;
 			
@@ -511,7 +491,6 @@
 			
 			var time = isNum(time) ? time : parseInt(time_define) || 80;
 			var from = me._from;
-			animation_range = animation_range || 80
 			if(from && from.tagName && from.parentNode){
 				//缩放回启动按钮
 				var offset =  utils.offset(from);
@@ -532,7 +511,7 @@
 					},100,removeDom);
 				});
 			}else if(typeof(from) == 'string'){
-				var countResult = countTranslate(from,animation_range);				
+				var countResult = countTranslate(from,40);			
 				//动画开始
 				animation(DOM,{
 					'opacity' : 0,
@@ -608,7 +587,7 @@
 		easyCloseHandle.call(me,param.easyClose,true);
 		
 		//开场动画
-		openAnimation.call(me,80);
+		openAnimation.call(me);
 	}
 	//使用close方法
 	POP.prototype.close = closeAnimation(300);
@@ -638,7 +617,7 @@
 		
 		//处理是否易于关闭
 		easyCloseHandle.call(me,param.easyClose,true);
-		openAnimation.call(me,80);
+		openAnimation.call(me);
 	}
 	CONFIRM.prototype.close = closeAnimation(200);
 	CONFIRM.prototype.adapt = ADAPT;
@@ -684,7 +663,7 @@
 		
 		//处理是否易于关闭
 		easyCloseHandle.call(me,param.easyClose,true);
-		openAnimation.call(me,80,function(){
+		openAnimation.call(me,function(){
 			me.inputDom.focus();
 		});
 		
@@ -712,7 +691,7 @@
 		private_allCnt.appendChild(me.dom);
 		adaption(me.dom);
 		
-		openAnimation.call(me,30);
+		openAnimation.call(me);
 	}
 	PROMPT.prototype.close = closeAnimation(80);
 	PROMPT.prototype.tips = function(txt,time){
@@ -751,7 +730,7 @@
 		private_allCnt.appendChild(me.dom);
 		//处理是否易于关闭
 		easyCloseHandle.call(me,true);
-		openAnimation.call(me,80);
+		openAnimation.call(me);
 	}
 	PLANE.prototype.close = closeAnimation(200);
 	PLANE.prototype.adapt = ADAPT;
@@ -804,7 +783,7 @@
 		
 		//处理是否易于关闭
 		easyCloseHandle.call(me,true);
-		openAnimation.call(me,400,function(){
+		openAnimation.call(me,function(){
 			setCSS(private_body,{
 				'overflowY' : 'hidden'
 			});
@@ -813,7 +792,7 @@
 		me.cntDom.innerHTML = param.html || '';
 	}
 	//使用close方法
-	COVER.prototype.close = closeAnimation(400,500,function(){
+	COVER.prototype.close = closeAnimation(400,function(){
 		setCSS(this.cntDom,{
 			'overflowY' : 'hidden'
 		});
@@ -876,7 +855,7 @@
 			});
 		}
 		easyCloseHandle.call(me,param.easyClose,true);
-		openAnimation.call(me,400);
+		openAnimation.call(me);
 		
 	}
 	SELECT.prototype.close = closeAnimation(200);
