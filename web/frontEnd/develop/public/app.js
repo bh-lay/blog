@@ -43,7 +43,7 @@ var isSupportTouch = document.hasOwnProperty("ontouchend") ? true : false;
  *
  */
 var isAdvancedBrowser = (supports('transition') && supports('transform') && supports_canvas) ? true : false;
-var isMobileBrowser = ($(window).width() && isSupportTouch) < 720 ? true : false;
+var isMobileBrowser = ($(window).width() < 720 && isSupportTouch) ? true : false;
 
 
 

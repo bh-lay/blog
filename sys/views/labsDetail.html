@@ -2,22 +2,21 @@
 <html lang="en-US">
 <head>
 <meta charset="UTF-8">
-<title>${title}_小剧客栈</title>
-<meta name="keywords" content="${keywords}" />
-<meta name="description" content="${description}" />
+<title>${{title}}_小剧客栈</title>
+<meta name="keywords" content="${{keywords}}" />
+<meta name="description" content="${{description}}" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 <link href="/favicon.ico" rel="shortcut icon"/>
 <link rel="apple-touch-icon" href="touch-icon-iphone.png" />
 <link rel="apple-touch-icon" sizes="72x72" href="touch-icon-ipad.png" />
 <link rel="apple-touch-icon" sizes="114x114" href="touch-icon-iphone-retina.png" />
 <link rel="apple-touch-icon" sizes="144x144" href="touch-icon-ipad-retina.png" />
-<link rel="stylesheet" type="text/css" href="${frontEnd_base}public/css/common.css"/>
-<link rel="stylesheet" type="text/css" href="${frontEnd_base}public/css/labsDetail.css" />
-<link rel="stylesheet" type="text/css" href="${frontEnd_base}lib/Font-Awesome-3.2.1/css/font-awesome.min.css"/><!--[if IE]>
+<link rel="stylesheet" type="text/css" href="${{frontEnd_base}}public/css/labsDetail.css" />
+<link rel="stylesheet" type="text/css" href="${{frontEnd_base}}lib/Font-Awesome-3.2.1/css/font-awesome.min.css"/><!--[if IE]>
 <script>
 (function(){if(!/*@cc_on!@*/0)return;var e = "abbr,article,aside,audio,bb,canvas,datagrid,datalist,details,dialog,eventsource,figure,footer,header,hgroup,mark,menu,meter,nav,output,progress,section,time,video".split(','),i=e.length;while(i--){document.createElement(e[i])}})()
 </script>
-<script type="text/javascript" src="${frontEnd_base}lib/respond.js"></script>
+<script type="text/javascript" src="${{frontEnd_base}}lib/respond.js"></script>
 <![endif]-->
 <style type="text/css">
   html,body{overflow: auto;}
@@ -31,7 +30,7 @@
 </div>
 	<div class="labs_detail_title">
 		<div class="l_row">
-			<h1>${title}</h1>
+			<h1>${{title}}</h1>
 		</div>
 	</div>
 	<div class="labs_detail_bar">
@@ -50,18 +49,18 @@
 		<a name="doc"></a>
 		<div class="labs_detail_doc">
 			<div class="l_row">
-				<div class="article">$${content}</div>
+				<div class="article">$${{content}}</div>
 			</div>
 		</div>
 		<a name="demo_link"></a>
-		<div class="labs_detail_demo" data-demopath="${demo_url}">
+		<div class="labs_detail_demo" data-demopath="${{demo_url}}">
 			<!--<a href="javascript:void(0)" class="">
 				<span class="icon-eye-open"></span>查看demo
 			</a>-->
-			<iframe src="${demo_url}" frameborder="0"></iframe>
+			<iframe src="${{demo_url}}" frameborder="0"></iframe>
 			<div class="labsDeDemo_btn">
 				<p>当前demo为iframe</p>
-				<a href="${demo_url}" target="_blank" ><i class="icon-share-alt"></i> 新窗口查看</a>
+				<a href="${{demo_url}}" target="_blank" ><i class="icon-share-alt"></i> 新窗口查看</a>
 			</div>
 		</div>
 		<a name="download"></a>
@@ -74,17 +73,17 @@
 						<ul>
 							<li class="labs_link_github">
 								<h6>git</h6>
-								<p>git://github.com/${git_full_name}.git</p>
+								<p>git://github.com/${{git_full_name}}.git</p>
 								<div class="labs_arrow">◆</div>
 							</li>
 							<li class="labs_link_svn">
 								<h6>Subversion</h6>
-								<p>https://github.com/${git_full_name}</p>
+								<p>https://github.com/${{git_full_name}}</p>
 								<div class="labs_arrow">◆</div>
 							</li>
 							<li class="labs_link_zip">
 								<h6>Zip</h6>
-								<p><a title="下载压缩包" href="https://github.com/${git_full_name}/zipball/master">https://github.com/${git_full_name}/zipball/master</a></p>
+								<p><a title="下载压缩包" href="https://github.com/${{git_full_name}}/zipball/master">https://github.com/${{git_full_name}}/zipball/master</a></p>
 								<div class="labs_arrow">◆</div>
 							</li>
 						</ul>
@@ -176,17 +175,17 @@
 	<p>小剧猜想，是不是你刷新过快了呢！</p>
 </div>
 </script>
-<script type="text/javascript" src="${frontEnd_base}lib/jquery/jquery.js"></script>
-<script type="text/javascript" src="${frontEnd_base}lib/sea.js"></script>
+<script type="text/javascript" src="${{frontEnd_base}}lib/jquery/jquery.js"></script>
+<script type="text/javascript" src="${{frontEnd_base}}lib/sea.js"></script>
 <script type="text/javascript">
 	var app_config = {
-		'frontEnd_base' : '${frontEnd_base}',
-		'imgDomain' : '${img_domain}'
+		'frontEnd_base' : '${{frontEnd_base}}',
+		'imgDomain' : '${{img_domain}}'
 	};
 	seajs.config({
-	  'base' : '${frontEnd_base}'
+	  'base' : '${{frontEnd_base}}'
 	});
-	seajs.use('${frontEnd_base}public/js/labsDetail.js');
+	seajs.use('${{frontEnd_base}}public/js/labsDetail.js');
 </script>
 <include name="baiduAndGoogleTongji"/>
 </body>

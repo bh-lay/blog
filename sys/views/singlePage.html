@@ -2,16 +2,16 @@
 <html lang="en-US">
     <head>
         <meta charset="UTF-8">
-        <title>${title}_小剧客栈</title>
-        <meta name="keywords" content="${keywords}" />
-        <meta name="description" content="${description}" />
+        <title>${{title}}_小剧客栈</title>
+        <meta name="keywords" content="${{keywords}}" />
+        <meta name="description" content="${{description}}" />
         <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
         <link href="/favicon.ico" rel="shortcut icon"/>
         <link rel="apple-touch-icon" href="touch-icon-iphone.png" />
         <link rel="apple-touch-icon" sizes="72x72" href="touch-icon-ipad.png" />
         <link rel="apple-touch-icon" sizes="114x114" href="touch-icon-iphone-retina.png" />
         <link rel="apple-touch-icon" sizes="144x144" href="touch-icon-ipad-retina.png" />
-        <link rel="stylesheet" type="text/css" href="${frontEnd_base}public/css/main.css"/>
+        <link rel="stylesheet" type="text/css" href="${{frontEnd_base}}public/css/main.css"/>
     </head>
     <body>
 <include name="navigation"/>
@@ -22,18 +22,18 @@
                 <p>小剧正在拼命加载资源</p>
             </div>
         </div>
-        <script type="text/javascript" src="${frontEnd_base}lib/jquery/jquery-2.0.0.js"></script>
-        <script type="text/javascript" src="${frontEnd_base}lib/sea.js"></script>
+        <script type="text/javascript" src="${{frontEnd_base}}lib/jquery/jquery-2.0.0.js"></script>
+        <script type="text/javascript" src="${{frontEnd_base}}lib/sea.js"></script>
         <script type="text/javascript">
             var app_config = {
-                'frontEnd_base' : '${frontEnd_base}',
-                'imgDomain' : '${img_domain}'
+                'frontEnd_base' : '${{frontEnd_base}}',
+                'imgDomain' : '${{img_domain}}'
             };
             seajs.config({
-              'base' : '${frontEnd_base}'
+              'base' : '${{frontEnd_base}}'
             });
         </script>
-        <script type="text/javascript" src="${frontEnd_base}public/app.js"></script>
+        <script type="text/javascript" src="${{frontEnd_base}}public/app.js"></script>
 <include name="baiduAndGoogleTongji"/>
 </body>
 </html>

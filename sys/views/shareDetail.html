@@ -2,22 +2,22 @@
 <html lang="en-US">
 <head>
 <meta charset="UTF-8">
-<title>${title}_小剧客栈</title>
-<meta name="keywords" content="${keywords}" />
-<meta name="description" content="${description}" />
+<title>${{title}}_小剧客栈</title>
+<meta name="keywords" content="${{keywords}}" />
+<meta name="description" content="${{description}}" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 <link href="/favicon.ico" rel="shortcut icon"/>
 <link rel="apple-touch-icon" href="touch-icon-iphone.png" />
 <link rel="apple-touch-icon" sizes="72x72" href="touch-icon-ipad.png" />
 <link rel="apple-touch-icon" sizes="114x114" href="touch-icon-iphone-retina.png" />
 <link rel="apple-touch-icon" sizes="144x144" href="touch-icon-ipad-retina.png" />
-<link href="${frontEnd_base}lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-<link href="${frontEnd_base}public/css/bootstrap_plugin.css" rel="stylesheet" media="screen">
+<link href="${{frontEnd_base}}lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="${{frontEnd_base}}public/css/bootstrap_plugin.css" rel="stylesheet" media="screen">
 <!--[if IE]>
 <script>
 (function(){if(!/*@cc_on!@*/0)return;var e = "abbr,article,aside,audio,bb,canvas,datagrid,datalist,details,dialog,eventsource,figure,footer,header,hgroup,mark,menu,meter,nav,output,progress,section,time,video".split(','),i=e.length;while(i--){document.createElement(e[i])}})()
 </script>
-<script type="text/javascript" src="${frontEnd_base}lib/respond.js"></script>
+<script type="text/javascript" src="${{frontEnd_base}}lib/respond.js"></script>
 <![endif]-->
 </head>
 <body>
@@ -25,22 +25,22 @@
 <div class="container page-body">
 	<div class="article">
 		<div class="articletop">
-			<h1>${title}</h1>
-			<p><span>分享时间：${time_show} </span></p>
+			<h1>${{title}}</h1>
+			<p><span>分享时间：${{time_show}} </span></p>
 		</div>
-		<div class="text">$${content}</div>
+		<div class="text">$${{content}}</div>
 	</div>
 	<div class="comments_area"></div>
 </div>
 <script type="text/javascript">
 	var app_config = {
-		'frontEnd_base' : '${frontEnd_base}',
-		'imgDomain' : '${img_domain}'
+		'frontEnd_base' : '${{frontEnd_base}}',
+		'imgDomain' : '${{img_domain}}'
 	};
 </script>
-<script type="text/javascript" src="${frontEnd_base}lib/jquery/jquery.js"></script>
-<script type="text/javascript" src="${frontEnd_base}lib/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${frontEnd_base}public/js/bootstrap_plugin.js"></script>
+<script type="text/javascript" src="${{frontEnd_base}}lib/jquery/jquery.js"></script>
+<script type="text/javascript" src="${{frontEnd_base}}lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${{frontEnd_base}}public/js/bootstrap_plugin.js"></script>
 <include name="footer"/>
 <include name="baiduAndGoogleTongji"/>
 </body>

@@ -6,7 +6,7 @@
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<link href="${frontEnd_base}lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="${{frontEnd_base}}lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="/favicon.ico" rel="shortcut icon"/>
 <style type="text/css">
  /* Box-sizing resets
@@ -120,19 +120,19 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="${frontEnd_base}lib/jquery/jquery.js"></script>
-<script type="text/javascript" src="${frontEnd_base}lib/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${frontEnd_base}lib/sea.js" ></script>
+<script type="text/javascript" src="${{frontEnd_base}}lib/jquery/jquery.js"></script>
+<script type="text/javascript" src="${{frontEnd_base}}lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${{frontEnd_base}}lib/sea.js" ></script>
 <script type="text/javascript">
 	seajs.config({
-	  'base' : '${frontEnd_base}'
+	  'base' : '${{frontEnd_base}}'
 	});
 	var admin_dataBase = {
-		'username' : '${username}',
-		'userid' : '${userid}',
-		'frontEnd_base' : '${frontEnd_base}'
+		'username' : '${{username}}',
+		'userid' : '${{userid}}',
+		'frontEnd_base' : '${{frontEnd_base}}'
 	};
 </script>
-<script type="text/javascript" src="${frontEnd_base}public/admin/index.js"></script>
+<script type="text/javascript" src="${{frontEnd_base}}public/admin/index.js"></script>
 </body>
 </html>
