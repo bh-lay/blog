@@ -8,6 +8,8 @@ module.exports = {
 	'/about/':'/blog',
 	'/lab':'/blog',
 	'/lab/':'/blog',
+	'/share':'/blog',
+	'/share/':'/blog',
 	'/writing':'/blog',
 	'/writing/':'/blog',
 	'/Tutorials':'/blog',

@@ -12,31 +12,23 @@
 <link rel="apple-touch-icon" sizes="114x114" href="touch-icon-iphone-retina.png" />
 <link rel="apple-touch-icon" sizes="144x144" href="touch-icon-ipad-retina.png" />
 <link rel="stylesheet" type="text/css" href="${{frontEnd_base}}public/css/labsDetail.css" />
-<link rel="stylesheet" type="text/css" href="${{frontEnd_base}}lib/Font-Awesome-3.2.1/css/font-awesome.min.css"/><!--[if IE]>
-<script>
-(function(){if(!/*@cc_on!@*/0)return;var e = "abbr,article,aside,audio,bb,canvas,datagrid,datalist,details,dialog,eventsource,figure,footer,header,hgroup,mark,menu,meter,nav,output,progress,section,time,video".split(','),i=e.length;while(i--){document.createElement(e[i])}})()
-</script>
-<script type="text/javascript" src="${{frontEnd_base}}lib/respond.js"></script>
-<![endif]-->
-<style type="text/css">
-  html,body{overflow: auto;}
-</style>
+<link rel="stylesheet" type="text/css" href="${{frontEnd_base}}lib/Font-Awesome-3.2.1/css/font-awesome.min.css"/>
 </head>
 <body>
 <div class="l-mini-nav">
-	<div class="l_row">
+	<div class="lab_container">
 		<a href="/">回到首页</a>
 	</div>
 </div>
 	<div class="labs_detail_title">
-		<div class="l_row">
+		<div class="lab_container">
 			<h1>${{title}}</h1>
             <a href="${{demo_url}}" target="_blank"><i class="icon-desktop"></i>查看demo</a>
 		</div>
 	</div>
 	<div class="labs_detail_bar">
 		<div class="labs_detail_bar_body">
-			<div class="l_row">
+			<div class="lab_container">
 				<div class="labs_detail_bar_cnt">
 					<a href="#doc" title="下载"><i class="icon-book"></i></a>
 					<a href="#download" title="下载"><i class="icon-cloud-download"></i></a>
@@ -48,13 +40,13 @@
 	<div class="labs_detail_cnt">
 		<a name="doc"></a>
 		<div class="labs_detail_doc">
-			<div class="l_row">
+			<div class="lab_container">
 				<div class="article">$${{content}}</div>
 			</div>
 		</div>
 		<a name="download"></a>
 		<div class="labs_detail_download">
-			<div class="l_row">
+			<div class="lab_container">
 				<div class="l_col_12">
 					<div class="labs_detail_download_title">
 					</div>
@@ -91,7 +83,7 @@
                 <i class="icon-github"></i>
                 <p>I'm in Github</p>
             </div>
-			<div class="l_row labsDeGit_cnt">
+			<div class="lab_container labsDeGit_cnt">
 				<div class="l_col_12 labsDeGit_loading">
 					<span class="icon-spinner icon-spin"></span>
 				</div>
@@ -99,7 +91,7 @@
 		</div>
 	</div>
 	<div class="labs_footer">
-		<div class="l_row">
+		<div class="lab_container">
 			<h3>实验室下的功能模块全部托管在github上，开源、免费！</h3>
 			<p>目前实验室下仅收录剧中人自建项目，欲查看小剧使用的其他优秀工具请移步<a href="https://github.com/bh-lay"><i class="icon-github"></i>我的github</a>。</p>
 			<p>欢迎在github上commit你的代码或提出一些合理性的issue。</p>
