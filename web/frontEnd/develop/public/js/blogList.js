@@ -11,7 +11,7 @@ define(function(require,exports){
 			'<div class="articleList"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载数据</p></div></div>',
 			'<div class="pagination_cnt"></div>',
 		'</div>'].join('');
-	var blogTemp =  ['{@each list as it}<li>',
+	var blogTemp =  ['<ul>{@each list as it}<li>',
         '<div class="articleItem" articleId="${it.id}">',
 		'<div class="artItCnt">',
             '{@if it.cover}',
@@ -30,7 +30,7 @@ define(function(require,exports){
 			'<div class="artItTime">${it.time_show}</div>',
 		'</div>',
 	'</div>',
-    '{@/each}'].join('');
+    '{@/each}</ul>'].join('');
 	
 	function getData(skip,limit,callback){
 		$.ajax({
