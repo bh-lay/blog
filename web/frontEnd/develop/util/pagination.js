@@ -1,4 +1,4 @@
-﻿
+
 
 /***
  * 分页 页码
@@ -6,7 +6,9 @@
 define(function(require,exports){
 	function render(){
 		var txt = '';
-
+        if(this.page_num < 2){
+            return;
+        }
 		if (this.page_cur > 1) {
 			txt += '<li class="pagination_prev"><a data-page="prev" href="javascript:void(0)" >上一页</a></li>';
 		}else{
