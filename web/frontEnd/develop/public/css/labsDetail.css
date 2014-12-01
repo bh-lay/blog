@@ -76,6 +76,9 @@ body {
   font-family: "layIcon";
   font-style: normal;
 }
+.l-icon-circle:after {
+  content: '\0044';
+}
 .l-icon-book:after {
   content: '\0045';
 }

@@ -121,6 +121,9 @@ function routerHandle(lofox) {
         removePageDom(function () {
             container.append(newDom);
             newDom.addClass('fadeInLeft');
+            setTimeout(function(){
+                newDom.removeClass('fadeInLeft');
+            },1000);
         });
 		$active_page = newDom;
 		return newDom;

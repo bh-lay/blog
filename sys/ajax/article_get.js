@@ -55,7 +55,7 @@ function get_list(data,callback){
 	var method = mongo.start();
 	method.open({'collection_name':'article'},function(err,collection){
       //count the all list
-		collection.count(function(err,count){
+		collection.count(findKeys,function(err,count){
 			resJSON['count'] = count;
 			
 			collection.find(findKeys,{limit:limit_num}).sort({time_show:-1}).skip(skip_num).toArray(function(err, docs) {

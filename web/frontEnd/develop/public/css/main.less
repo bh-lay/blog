@@ -1031,12 +1031,121 @@ a,a:active{
 		border-left: none
 	}
 }
-
+.blank-content{
+    padding: 100px 20px;
+    margin-bottom: 20px;
+    .cardShadow();
+    p{
+        position: relative;
+        width: 120px;
+        height: 60px;
+        padding-top: 60px;
+        margin: auto;
+        border: 1px solid #aaa;
+        border-radius: 100%;
+        line-height: 40px;
+        text-align: center;
+        font-size: 18px;
+        color: #333;
+        &:before{
+            content: '！';
+            position: absolute;
+            display: block;
+            top:0;
+            left: 0;
+            width: 100%;
+            padding-top: 20px;
+            line-height: 40px;
+            text-align: center;
+            font-size: 50px;
+            color: #f70;
+            z-index: 0;
+        }
+    }
+}
 /** 博文列表页 **/
-.articleListCnt {
-	max-width: 420px;
+.articleListPage{
+	width: 620px;
 	margin: auto;
-	padding: 20px 10px;
+	padding: 20px 0;
+    &:after{
+        content: '';
+        display: block;
+        height: 0;
+        overflow: hidden;
+        clear: both;
+    }
+}
+.articleListPage-side{
+	width: 200px;
+    float: left;
+}
+.articleListPage-tags{
+    position: fixed;
+	width: 200px;
+    height: 200px;
+    .cardShadow();
+    .caption{
+        font-size: 14px;
+        font-weight: bold;
+        color: #333;
+        line-height: 20px;
+        padding: 9px 20px;
+        border-bottom: 1px solid #f4f4f4;
+    }
+    .content{
+        padding: 20px 10px;
+    }
+    a{
+        position: relative;
+        display: inline-block;
+        max-width: 100%;
+        height: 24px;
+        margin: 0 15px 10px 0;
+        line-height: 24px;
+        padding: 0 10px 0 20px;
+        border-radius: 0 4px 4px 0;
+        background: #ddd;
+        font-size: 12px;
+        color: #333;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        .borderbox();
+        &:before{
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-width: 12px 12px 12px 0;
+            border-color: #fff transparent #fff transparent;
+            border-style: solid;
+        }
+        &:after{
+            position: absolute;
+            content: '';
+            width: 4px;
+            height: 4px;
+            top: 10px;
+            left: 8px;
+            border-radius: 100%;
+            background: #fff;
+        }
+        &:hover{
+            background: #333;
+            color: #fff;
+        }
+        &.active{
+            background: #f70;
+            color: #fff;
+        }
+    }
+}
+.articleListPage-main{
+	width: 400px;
+    float: right;
 }
 .articleList {
 }
@@ -1051,7 +1160,7 @@ a,a:active{
 .artItCpt {
 	a {
 		display: block;
-		padding: .5em 1em;
+		padding: 1em 1em .2em;
 		font-weight: normal;
 		line-height: 1.5em;
 		text-align: center;
@@ -1125,6 +1234,24 @@ a,a:active{
 	margin: auto
 }
 
+@media(max-width:780px){
+    .articleListPage{
+        width: auto;
+        padding: 20px 10px;
+    }
+    .articleListPage-side,
+    .articleListPage-main{
+        float: none;
+        width: auto;
+        max-width: 400px;
+        margin: auto;
+    }
+	.articleListPage-tags{
+        position: static;
+        width: auto;
+        margin-bottom: 30px;
+    }
+}
 @media screen and (max-width: 1000px) {
 	.articletop h1 {
 		font-size: 24px
