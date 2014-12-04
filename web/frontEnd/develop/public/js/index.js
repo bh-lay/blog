@@ -26,12 +26,12 @@ define(function(require,exports){
 		'</div>',
 		'<div class="webLink"><div class="webLink_cpt">我的小伙伴</div>',
 		'<div class="webLink_cnt">',
-			'<a target="_blank" href="http://www.w3clover.com">W3C爱好者</a>',
 			'<a target="_blank" href="http://www.z990.com">小林Design</a>',
 			'<a target="_blank" href="http://www.zhuwenlong.com/">Mofei梦的起飞</a>',
+			'<a target="_blank" href="http://www.w3clover.com">W3C爱好者</a>',
 			'<a target="_blank" href="http://www.hankewins.com/">前端生活</a>',
 			'<a target="_blank" href="http://www.woween.com">何东杰的网络日记</a>',
-			'<a target="_blank" href="http://www.w3cfuns.com/">前端开发网</a>',
+			'<a target="_blank" href="http://www.siyonli.com/">大晚的小窝</a>',
 		'</div></div>',
 	'</div>'].join('');
 	
