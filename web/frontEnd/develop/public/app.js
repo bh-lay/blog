@@ -123,7 +123,7 @@ function routerHandle(lofox) {
             newDom.addClass('fadeInLeft');
             setTimeout(function(){
                 newDom.removeClass('fadeInLeft');
-            },1000);
+            },500);
         });
 		$active_page = newDom;
 		return newDom;
