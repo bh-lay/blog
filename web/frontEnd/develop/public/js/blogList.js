@@ -11,7 +11,7 @@ define(function(require,exports){
         '<div class="articleListPage-side">',
             '<div class="articleListPage-tags">',
                 '<div class="caption">标签</div>',
-                '<div class="content"><a data-tag="null" href="javascript:void(0)">全部</a><a href="javascript:void(0)">css3</a><a href="javascript:void(0)">javascript</a><a href="javascript:void(0)">placeholder</a></div>',
+                '<div class="content"><a data-tag="null" href="javascript:void(0)">全部</a><a href="javascript:void(0)">css3</a><a href="javascript:void(0)">javascript</a><a href="javascript:void(0)">生活</a></div>',
             '</div>',
         '</div>',
         '<div class="articleListPage-main">',
