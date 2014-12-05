@@ -13,13 +13,9 @@
 		<div class="panel-body">
 			<h2>我的小伙伴</h2>
 			<ul class="list-group">
-				<li class="list-group-item"><a target="_blank" href="http://www.siyonli.com/">大晚的小窝</a></li>
-				<li class="list-group-item"><a target="_blank" href="http://www.w3clover.com">W3C爱好者</a></li>
-				<li class="list-group-item"><a target="_blank" href="http://www.z990.com">小林Design</a></li>
-				<li class="list-group-item"><a target="_blank" href="http://www.zhuwenlong.com/">Mofei梦的起飞</a></li>
-				<li class="list-group-item"><a target="_blank" href="http://www.hankewins.com/">前端生活</a></li>
-				<li class="list-group-item"><a target="_blank" href="http://www.woween.com">何东杰的网络日记</a></li>
-				<li class="list-group-item"><a target="_blank" href="http://www.w3cfuns.com/">前端开发网</a></li>
+				{{@each list as it}}
+					<li class="list-group-item"><a target="_blank" href="${{it.url}}">${{it.title}}</a></li>
+				{{@/each}}
 			</ul>
 		</div>
 	</div>
