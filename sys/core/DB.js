@@ -91,16 +91,12 @@ exports.add_user = function (parm,callback){
 	var method = new START();
 		
 	method.open({'collection_name':'user'},function(err,collection){
-	
-		collection.find({}, {}).toArray(function(err, docs) {
-	
-			parm.id = parse.createID();
+		parm.id = parse.createID();
 
-			collection.insert(parm,function(err,result){
-				
-				method.close();
-				callback && callback(err,parm.id);
-			});
+		collection.insert(parm,function(err,result){
+
+			method.close();
+			callback && callback(err,parm.id);
 		});
 	});
 };
