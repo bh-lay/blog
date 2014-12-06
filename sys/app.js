@@ -111,9 +111,15 @@ app.get('/snsLogin/{from}', function(data,connect){
  * ajax
  *
  */
- 
-//通用增加&编辑
+var ajax_user = require('./ajax/user/index');
 var ajax_add_edit = require('./ajax/add&edit.js');
+var ajax_comments = require('./ajax/comments/index.js');
+var ajax_del = require('./ajax/del');
+var ajax_user_group = require('./ajax/user/user_group_add&edit');
+var ajax_power = require('./ajax/user/power');
+var ajax_demo = require('./ajax/demo/index');
+var ajax_tag =  require('./ajax/tag/index.js');
+//通用增加&编辑
 app.get('/ajax/add_edit', function(data,connect){
 	ajax_add_edit.render(connect,app);
 });
@@ -186,7 +192,7 @@ app.get('/ajax/del', function(data,connect){
 //评论
 app.get('/ajax/comments/{mark}', function(data,connect){
 	var mark = data.mark;
-	//按照ajax模块提供接口
+	//尝试使用ajax模块提供接口
 	if(ajax_comments[mark]){
 		ajax_comments[mark](connect,app);
 	}else{
@@ -196,12 +202,25 @@ app.get('/ajax/comments/{mark}', function(data,connect){
 	}
 });
 
+//标签模块
+app.get('/ajax/tag/{act}', function(data,connect){
+	var act = data.act;
+	//尝试使用ajax模块提供接口
+	if(ajax_tag[act]){
+		ajax_tag[act](connect,app);
+	}else{
+		connect.write('json',{
+			'code' : 500
+		});
+	}
+});
+
 //用户
-app.get('/ajax/user/{mark}', function(data,connect){
-	var mark = data.mark;
-	//按照ajax模块提供接口
-	if(ajax_user[mark]){
-		ajax_user[mark](connect,app);
+app.get('/ajax/user/{act}', function(data,connect){
+	var act = data.act;
+	//尝试使用ajax模块提供接口
+	if(ajax_user[act]){
+		ajax_user[act](connect,app);
 	}else{
 		connect.write('json',{
 			'code' : 500
