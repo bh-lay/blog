@@ -158,13 +158,11 @@ app.get('/ajax/asset/*', function(data,connect){
 });
 
 //前端演示用的demo
-var ajax_demo = require('./ajax/demo/index');
 app.get('/ajax/demo/*', function(data,connect){
 	ajax_demo.render(connect,app);
 });
 
 //权限
-var ajax_power = require('./ajax/user/power');
 app.get('/ajax/power', function(data,connect){
 	connect.write('json',{
 		'code' : 500
@@ -173,58 +171,40 @@ app.get('/ajax/power', function(data,connect){
 });
 
 //用户组
-var ajax_user_group = require('./ajax/user/user_group_add&edit');
 app.get('/ajax/user_group', function(data,connect){
 	connect.write('json',{
 		'code' : 500
-	})
+	});
 //	ajax_user_group.render(connect,app);
 });
 
 //公用删除接口
-var ajax_del = require('./ajax/del');
 app.get('/ajax/del', function(data,connect){
 	ajax_del.render(connect,app);
 });
 
 //评论
-var ajax_comments = require('./ajax/comments/index.js');
-app.get('/ajax/comments/add', function(data,connect){
-	ajax_comments.add(connect,app);	
-});
-app.get('/ajax/comments/list', function(data,connect){
-	ajax_comments.list(connect,app);	
-});
-app.get('/ajax/comments/del', function(data,connect){
-	ajax_comments.del(connect,app);
+app.get('/ajax/comments/{mark}', function(data,connect){
+	var mark = data.mark;
+	//按照ajax模块提供接口
+	if(ajax_comments[mark]){
+		ajax_comments[mark](connect,app);
+	}else{
+		connect.write('json',{
+			'code' : 500
+		});
+	}
 });
 
 //用户
-var ajax_user = require('./ajax/user/index');
 app.get('/ajax/user/{mark}', function(data,connect){
-	switch(data.mark){
-		case 'add_edit':
-			ajax_user.add_edit(connect,app);
-		break
-		case 'signup':
-			ajax_user.signup(connect,app);
-		break
-		case 'login':
-			ajax_user.login(connect,app);
-		break
-		case 'exist':
-			ajax_user.exist(connect,app);
-		break
-		case 'list':
-			ajax_user.list(connect,app);
-		break
-		case 'detail':
-			ajax_user.detail(connect,app);
-		break
-		default :
-			connect.write('json',{
-				'code' : 500
-			});
-			
+	var mark = data.mark;
+	//按照ajax模块提供接口
+	if(ajax_user[mark]){
+		ajax_user[mark](connect,app);
+	}else{
+		connect.write('json',{
+			'code' : 500
+		});
 	}
 });
