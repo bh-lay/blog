@@ -35,14 +35,19 @@ function views_select(connect,callback){
 	}
 }
 
-//首页、留言板
+//首页
 var index = require('./controller/index.js');
-app.get([
-	'/',
-	'/bless'
-], function(data,connect){
+app.get('/', function(data,connect){
 	views_select(connect,function(){
 		index.deal(connect,app);
+	});
+});
+//留言
+app.get('/bless', function(data,connect){
+	views_select(connect,function(){
+		connect.write('define',307,{
+			location:'/'
+ 		});
 	});
 });
 
