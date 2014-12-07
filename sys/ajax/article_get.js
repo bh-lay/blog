@@ -50,7 +50,6 @@ function get_list(data,callback){
 	//过滤标签
 	if(data.tag){
 		findKeys.tags = data.tag;
-		
 	}
 	var method = mongo.start();
 	method.open({'collection_name':'article'},function(err,collection){

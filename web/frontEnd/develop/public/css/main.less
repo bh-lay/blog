@@ -1083,7 +1083,7 @@ a,a:active{
 .articleListPage-tags{
     position: fixed;
 	width: 200px;
-    height: 200px;
+    min-height: 100px;
     .cardShadow();
     .caption{
         font-size: 14px;
@@ -1094,7 +1094,7 @@ a,a:active{
         border-bottom: 1px solid #f4f4f4;
     }
     .content{
-        padding: 20px 10px;
+        padding: 20px 0px 10px 10px;
     }
     a{
         position: relative;
@@ -1112,6 +1112,10 @@ a,a:active{
         text-overflow: ellipsis;
         white-space: nowrap;
         .borderbox();
+		span{
+			opacity: .5;
+			padding: 0 0 0 5px;
+		}
         &:before{
             position: absolute;
             content: '';
@@ -1148,6 +1152,9 @@ a,a:active{
     float: right;
 }
 .articleList {
+	.l-loading-panel{
+		margin-top: 0;
+	}
 }
 
 

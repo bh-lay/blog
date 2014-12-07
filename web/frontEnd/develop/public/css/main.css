@@ -1758,7 +1758,7 @@ a:active {
 .articleListPage-tags {
   position: fixed;
   width: 200px;
-  height: 200px;
+  min-height: 100px;
   background: #fff;
   border-radius: 2px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
@@ -1772,7 +1772,7 @@ a:active {
   border-bottom: 1px solid #f4f4f4;
 }
 .articleListPage-tags .content {
-  padding: 20px 10px;
+  padding: 20px 0px 10px 10px;
 }
 .articleListPage-tags a {
   position: relative;
@@ -1792,6 +1792,10 @@ a:active {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
+}
+.articleListPage-tags a span {
+  opacity: .5;
+  padding: 0 0 0 5px;
 }
 .articleListPage-tags a:before {
   position: absolute;
@@ -1825,6 +1829,9 @@ a:active {
 .articleListPage-main {
   width: 400px;
   float: right;
+}
+.articleList .l-loading-panel {
+  margin-top: 0;
 }
 .articleItem {
   margin-bottom: 20px;

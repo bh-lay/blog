@@ -11,7 +11,7 @@ define(function(require,exports){
         '<div class="articleListPage-side">',
             '<div class="articleListPage-tags">',
                 '<div class="caption">标签</div>',
-                '<div class="content"><a data-tag="null" href="javascript:void(0)">全部</a><a href="javascript:void(0)">css3</a><a href="javascript:void(0)">javascript</a><a href="javascript:void(0)">生活</a></div>',
+                '<div class="content"></div>',
             '</div>',
         '</div>',
         '<div class="articleListPage-main">',
@@ -19,6 +19,7 @@ define(function(require,exports){
 			'<div class="pagination_cnt"></div>',
 		'</div>',
     '</div>'].join('');
+	var tag_item_tpl = ['<a data-tag="null" href="javascript:void(0)">全部</a>{@each list as it}<a href="javascript:void(0)" data-tag="${it.name}">${it.name}<span>${it.count}</span></a>{@/each}'].join('');
 	var blogTemp =  ['<ul>{@each list as it}<li>',
         '<div class="articleItem" articleId="${it.id}">',
 		'<div class="artItCnt">',
@@ -68,7 +69,19 @@ define(function(require,exports){
 			}
 		});
 	}
-	
+	function renderTags(dom,callback){
+		$.ajax({
+			'type' : 'GET' ,
+			'url' : '/ajax/tag/list',
+			'success' :function(data){
+				data = data || {};
+				data.list = data.list ? data.list.slice(0,10) : [];
+				var html = juicer(tag_item_tpl,data);
+				dom.html(html);
+				callback && callback();
+			}
+		});
+	}
 	function LIST(dom,tag){
 		this.skip = 0;
 		this.limit = 10;
@@ -108,7 +121,7 @@ define(function(require,exports){
         //获取当前页数
 		var pageIndex = param.page || 1;
         //获取标签名
-        var pageTag = param.tag || null;
+        var pageTag = param.tag ? decodeURI(param.tag) : null;
         //创建列表对象
         var list = new LIST($list,pageTag);
         //渲染初始页
@@ -131,23 +144,27 @@ define(function(require,exports){
 			};
 		});
         //处理标签功能
-        if(pageTag){
-            dom.find('.articleListPage-tags a').each(function(){
-                if(encodeURIComponent($(this).html()) == pageTag){
-                    $(this).addClass('active');
-                }
-            });
-        }else{
-            dom.find('.articleListPage-tags a').eq(0).addClass('active');
-        }
-        dom.on('click','.articleListPage-tags a',function(){
-            var $btn = $(this);
-            if($btn.attr('data-tag') == 'null'){
-                L.push('/blog');
-            }else{
-                L.push('/blog?tag=' + $(this).html());
-            }
-            L.refresh();
-        });
+		
+		renderTags(dom.find('.articleListPage-tags .content'),function(){
+			if(pageTag){
+				dom.find('.articleListPage-tags a').each(function(){
+					if($(this).attr('data-tag') == pageTag){
+						$(this).addClass('active');
+					}
+				});
+			}else{
+				dom.find('.articleListPage-tags a').eq(0).addClass('active');
+			}
+			dom.on('click','.articleListPage-tags a',function(){
+				var $btn = $(this);
+				var tag = $btn.attr('data-tag');
+				if(tag == 'null'){
+					L.push('/blog');
+				}else{
+					L.push('/blog?tag=' + tag);
+				}
+				L.refresh();
+			});
+		});
 	};
 });
