@@ -69,17 +69,28 @@ define(function(require,exports){
 			}
 		});
 	}
-	function renderTags(dom,callback){
+	var private_tag_data = null;
+	function getTag(callback){
+		if(private_tag_data){
+			callback && callback(private_tag_data);
+			return;
+		}
 		$.ajax({
 			'type' : 'GET' ,
 			'url' : '/ajax/tag/list',
 			'success' :function(data){
 				data = data || {};
 				data.list = data.list ? data.list.slice(0,10) : [];
-				var html = juicer(tag_item_tpl,data);
-				dom.html(html);
-				callback && callback();
+				private_tag_data = data;
+				callback && callback(private_tag_data);
 			}
+		});
+	}
+	function renderTags(dom,callback){
+		getTag(function(data){
+			var html = juicer(tag_item_tpl,data);
+			dom.html(html);
+			callback && callback();
 		});
 	}
 	function LIST(dom,tag){

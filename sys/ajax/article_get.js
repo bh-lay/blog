@@ -31,7 +31,6 @@ get_detail
 var mongo = require('../core/DB.js');
 var fs = require('fs');
 var querystring=require('querystring');
-//var markdown = require('markdown');
 var showdown = require('../lib/showdown/showdown.js');
 var converter = new showdown.converter();
 
