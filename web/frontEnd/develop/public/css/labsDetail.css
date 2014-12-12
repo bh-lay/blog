@@ -254,12 +254,13 @@ body {
   line-height: 1.8;
 }
 .article code {
-  margin: 0 0.5em;
-  padding: 0 0.5em;
-  border: 1px solid #ccc;
-  border-radius: 4px;
   font-family: inherit;
-  background: #f7f7f7;
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #099E03;
+  background-color: #F2F9F3;
+  white-space: nowrap;
+  border-radius: 4px;
 }
 .article a {
   color: #333;
@@ -692,7 +693,7 @@ body {
   -moz-animation: bounceOut 1s .2s ease both;
 }
 .lab_container {
-  width: 850px;
+  width: 680px;
   max-width: 100%;
   margin: auto;
 }
@@ -770,7 +771,7 @@ body {
 .labs_detail_bar_cnt a:hover {
   background: #eeeeee;
 }
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 800px) {
   .labs_detail_bar_cnt {
     margin-left: 10px;
   }

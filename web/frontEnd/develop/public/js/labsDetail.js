@@ -41,7 +41,7 @@ seajs.use([
                 repo['repos_watchers_count'] = repo.watchers_count || '未获取到';
                 repo['repos_forks_count'] = repo.forks_count || '未获取到';
                 repo['repos_stargazers_count'] = repo.stargazers_count || '未获取到';
-                repo['repos_watchers_count'] = repo.watchers || '未获取到';
+                repo['repos_watchers_count'] = repo.watchers || 0;
                 callback && callback(repo);
 			} 
 		});
