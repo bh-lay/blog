@@ -121,9 +121,9 @@ function routerHandle(lofox) {
         removePageDom(function () {
             container.append(newDom);
             newDom.addClass('fadeInLeft');
-            setTimeout(function(){
+            setTimeout(function () {
                 newDom.removeClass('fadeInLeft');
-            },500);
+            }, 500);
         });
 		$active_page = newDom;
 		return newDom;
@@ -223,7 +223,7 @@ function routerHandle(lofox) {
 	});
 }
 
-define(function (require,exports) {
+define(function (require, exports) {
     'use strict';
     
     var user = require('public/base/user.js'),
@@ -256,7 +256,7 @@ define(function (require,exports) {
         $('.app_mask').fadeOut(500, function () {
             $(this).remove();
         });
-    },500);
+    }, 500);
 	
 });
 

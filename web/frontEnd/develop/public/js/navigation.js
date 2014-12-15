@@ -46,10 +46,10 @@ define(function () {
 			}
 			var offset = $(this).offset();
 			active_pop = UI.pop({
-				'title' : 'ʨ׃',
+				'title' : '设置',
 				'from': $(this)[0],
 				'width': 400,
-				'html': '<div class="setting_pop"><a class="backToOldVersion" href="javascript:void(0)">ܘսͅ˿Ѧ</a></div>',
+				'html': '<div class="setting_pop"><a class="backToOldVersion" href="javascript:void(0)">我要用屌丝版</a></div>',
 				'closeFn': function () {
 					active_pop = null;
 				}
