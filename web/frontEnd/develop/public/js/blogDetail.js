@@ -3,7 +3,6 @@
  *  
  */
 define(function(require,exports){
-	require('lib/juicer.js');
     require('lib/highlight/highlight.pack.js');
 
 	var template = ['<div class="blogDetail">',

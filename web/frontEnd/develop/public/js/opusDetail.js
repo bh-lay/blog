@@ -3,7 +3,6 @@
  *  
  */
 define(function(require,exports){
-	require('lib/juicer.js');
 	var template = ['<div class="opus_detail">',
 		'<div class="TagLine">小剧作品，一次次小小的进步，成就平凡的自己！</div>',
 		'<div class="opus_caption">',
