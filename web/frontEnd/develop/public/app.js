@@ -49,7 +49,7 @@ var isMobileBrowser = ($(window).width() < 720 && isSupportTouch) ? true : false
 
 //屌丝就用屌丝版
 if (!isAdvancedBrowser) {
-	document.cookie = 'ui_version=j1s;path=/;max-age=0';
+	document.cookie = 'ui_version=html;path=/;';
 	window.location.reload();
 }
 
@@ -317,7 +317,7 @@ seajs.use([
 			});
 			
 			$(active_pop.dom).on('click', '.backToOldVersion', function () {
-				document.cookie = 'ui_version=j1s;path=/;max-age=0';
+				document.cookie = 'ui_version=html;path=/;';
 				window.location.reload();
 			});
 		});
