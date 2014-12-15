@@ -223,18 +223,29 @@ function routerHandle(lofox) {
 	});
 }
 
-seajs.use([
-	'public/base/user.js',
-	'util/lofox_1_0.js',
-	'lib/juicer.js',
-	'UI/dialog.js'
-], function (user) {
+define(function (require,exports) {
     'use strict';
     
+    var user = require('public/base/user.js'),
+	    nav = require('public/js/navigation.js'),
+        gallery = require('public/js/page_background.js');
+	require('util/lofox_1_0.js');
+	require('lib/juicer.js');
+	require('UI/dialog.js');
     //绑定路由
     var lofox = new util.lofox();
     routerHandle(lofox);
 
+    L.user = user;
+    L.gallery = gallery;
+    L.nav = nav;
+	L.push = function (url) {
+		lofox.push(url);
+	};
+	L.refresh = function () {
+		lofox.refresh();
+	};
+    
     //显示背景图
     if (supports('backgroundSize') && !isMobileBrowser) {
         L.gallery();
@@ -247,180 +258,8 @@ seajs.use([
         });
     },500);
 	
-    L.user = user;
-	L.push = function (url) {
-		lofox.push(url);
-	};
-	L.refresh = function () {
-		lofox.refresh();
-	};
 });
 
-
-
-
-/**
- * L.nav()
- * 
- */
-(function (ex) {
-    'use strict';
-	var init = function () {
-        $('.nav_moreBtn').click(function () {
-            $('body').toggleClass('nav_slidedown');
-		});
-		$('.app_nav .nav a').click(function () {
-			$('body').removeClass('nav_slidedown');
-		});
-        var active_plane;
-        var delay;
-        $('.nav a').on('mouseenter', function () {
-            if (!isSupportTouch && $(window).width() > 660) {
-                active_plane && active_plane.close();
-                var offset = $(this).offset(),
-                    title  = $(this).attr('data-title');
-                clearTimeout(delay);
-                delay = setTimeout(function () {
-                    active_plane = UI.plane({
-                        'top' : offset.top,
-                        'left' : 50,
-                        'html' : '<div class="nav_tips">' + title + '</div>',
-                        'from' : 'right',
-                        'closeFn' : function () {
-                            active_plane = null;
-                        }
-                    });
-                }, 200);
-            }
-        }).on('mouseleave', function () {
-            clearTimeout(delay);
-            active_plane && active_plane.close();
-        });
-		
-		$('.nav_mask').on('click', function () {
-			$('body').removeClass('nav_slidedown');
-		});
-		var active_pop;
-		$('.nav_setting').click(function () {
-			if (active_pop) {
-				return;
-			}
-			var offset = $(this).offset();
-			active_pop = UI.pop({
-				'title' : '设置',
-				'from': $(this)[0],
-				'width': 400,
-				'html': '<div class="setting_pop"><a class="backToOldVersion" href="javascript:void(0)">回到屌丝版</a></div>',
-				'closeFn': function () {
-					active_pop = null;
-				}
-			});
-			
-			$(active_pop.dom).on('click', '.backToOldVersion', function () {
-				document.cookie = 'ui_version=html;path=/;';
-				window.location.reload();
-			});
-		});
-	};
-
-	function setCur(page) {
-		if (page === '/') {
-			page = 'index';
-		}
-		$('.app_nav .nav li').removeClass('cur');
-		$('.app_nav .nav li[page=' + page + ']').addClass('cur');
-	}
-	ex.nav = init;
-	ex.nav.setCur = setCur;
-}(L));
-
-/**
- * page background
- * L.gallery() 
- */
-(function (ex) {
-    'use strict';
-	var config = {
-		'delay' : 50000,
-		'coverData' : [
-			{'src': app_config.frontEnd_base + 'public/images/gallery/bamboo.jpg', 'alt': '竹子'},
-			{'src': app_config.frontEnd_base + 'public/images/gallery/coast.jpg', 'alt': '江边'}
-		]
-	};
-	
-	function loadImg(src, param) {
-		var parm = param || {},
-			loadFn = parm.loadFn || null,
-			sizeFn = parm.sizeFn || null,
-			errorFn = parm.errorFn || null;
-		
-		var img = new Image(),
-            timer;
-		if (errorFn) {
-			img.onerror = function () {
-				errorFn();
-			};
-		}
-		if (loadFn) {
-			img.onload = function () {
-				loadFn(img.width, img.height);
-			};
-		}
-		if (sizeFn) {
-			timer = setInterval(function () {
-				if (img.width > 1) {
-					clearInterval(timer);
-					sizeFn(img.width, img.height);
-				}
-			}, 2);
-		}
-		img.src = src;
-	}
-	function CSS3(d, b) {
-		var data = d,
-			isWebkit = false,
-			bj = b,
-			total = data.length;
-		bj.html('');
-		
-		if (supports('webkitAnimation')) {
-			isWebkit = true;
-		}
-		
-		function show(i) {
-			var index = i,
-				src = data[index].src;
-			loadImg(src, {
-                'loadFn' : function () {
-                    var newPic = $('<div class="galBj_mask"></div>');
-                    newPic.css({'backgroundImage' : 'url(' + src + ')'});
-                    bj.html(newPic);
-
-                    if (!isWebkit) {
-                        newPic.hide().fadeIn(1000);
-                    }
-
-                    setTimeout(function () {
-                        bj.css({'backgroundImage' : 'url(' + src + ')'});
-                        newPic.hide();
-                        index++;
-                        index === total && (index = 0);
-                        show(index);
-                    }, config.delay);
-                }
-            });
-		}
-		show(0);
-	}
-	ex.gallery = function () {
-		var $gallery = $('<div class="gallayer"><div class="galBj"></div><div class="galMask"></div></div>').hide(),
-            $bj = $gallery.find('.galBj'),
-			data = config.coverData;
-        $('body').prepend($gallery);
-        $gallery.fadeIn(200);
-        CSS3(data, $bj);
-	};
-}(L));
 
 try {
     console.log("\n\n\n\n\n%c", 'font-size:0;line-height:0;padding:69px 80px 0 0;background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABFCAMAAADq1JG3AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABhQTFRFr6+vhoaG6urqWlpaJiYm0NDQ////AAAAwk8ZEQAAAhNJREFUeNrMmNuW5CAIRQ8C5f//8ZhLTY8JINHMWs1zahegwgF8YisKYpbdmAlaBj9ACKOGqp01LHQOqHRh/UCZ9CmwgD3cydQnwIarQ2OkgRncjtQUsFDNmlAZAyH1gd2dxNW9R7zmJEJg4frYLmF3QJ3gtbCLB1SpdZmIdV5PxFL+DCLe4LWTuQOpLhmuQKzxqmgPnD+QaxpPINdlo3+BWOd9g96BZVBMCVBFay7hd/wDpIiGki3k+AJ9B+XePIL3zl8gPSrJQcXEAXQdJKcHu4+KDyCSpXPcJbaDhnsHIwngZYk2oBMxxQqFvZjhRMwDDWO70WKG7b3oZySKnDzB/iv6DI3tmGHWGSljoPNDYNJB20VpcnIqg24WYQojzvDsgybzYaYitmNmE4gckEyglQjNAWFWgMlL81+A+uuB+ZCXDuX1a/P6xX796b1eHF4vX2ad5IUCa7cAzJ3x1gLs3jC+2+r0Iq+NjrLoNOatjTpqGBMBb4G5UkTwvCsfUmRCLHmK7hRLnpxzie6IziPBaQtEX8OegjMYUgTl7p6Eo8pQtPdeKmVEezxWyL6gaqaDueJ4r8hNjtvqKzc/IjfbJoCUGx5bwC3iw7Av6rwP++HRDHpbmt1P2c7k30sLr1xGaz0ldouJsyIQirvAdeijeIkxwp0PRqzLim4rJ/Fu0Eb23/cFoB3keMvaRX77/o8AAwCZhYbH8b+xCwAAAABJRU5ErkJggg==");');
