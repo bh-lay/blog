@@ -13,20 +13,12 @@ exports.render = function (connect,app){
 	}
 	//FIXME add power check
 	parse.request(connect.request,function(err,data){
-		var type = data.type || '';
-
-		if(type.match(/^(all|chip|html|ajax)$/)){
-			app.cache.clear([type],function(){
-				connect.write('json',{
-					'code': 200,
-					'msg' : 'clear cache :[' + type + '] completely !'
-				});
-			});
-		}else{
-			connect.write('json',{
-				'code' : 201,
-				'msg' : 'please input cache type !'
-			});
-		}
+		var typeStr = data.type || '';
+        app.cache.clear(typeStr,function(){
+            connect.write('json',{
+                'code': 200,
+                'msg' : 'clear cache :[' + typeStr + '] completely !'
+            });
+        });
 	});
 }

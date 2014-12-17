@@ -61,7 +61,10 @@ exports.add = function (connect,app){
 				}
 			}
 		
-		
+		    
+            //清除所有评论缓存
+            app.cache.clear('comment');
+            
 			data.uid = session_this.get('uid');
 			add(data,function(err,data){
 				var json = {
@@ -80,18 +83,26 @@ exports.add = function (connect,app){
 
 //接口
 exports.list = function (connect,app){
+    var url = connect.request.url;
 	var data = connect.url.search;
-	list(data,function(err,jsonData){
-		var json = {
-			'code' : 200
-		}
-		if(err){
-			json.code = 201;
-		}else{
-			json.data = jsonData;
-		}
-		connect.write('json',json);
+    
+    //使用缓存
+	app.cache.use(url,['ajax','comment'],function(this_cache){
+		connect.write('json',this_cache);
+	},function(save_cache){
+        list(data,function(err,jsonData){
+            var json = {
+                'code' : 200
+            }
+            if(err){
+                json.code = 201;
+            }else{
+                json.data = jsonData;
+            }
+			save_cache(JSON.stringify(json));
+        });
 	});
+	
 };
 //删除
 exports.del = function (connect,app){
@@ -124,7 +135,7 @@ exports.del = function (connect,app){
 							'code' : 200
 						});
 						//清除所有缓存
-						app.cache.clear();
+						app.cache.clear('comment');
 					}
 				});
 			}else{

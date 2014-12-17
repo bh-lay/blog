@@ -44,80 +44,83 @@ function cache(cache_path,callback,create_cache){
 					};
 				});
 			});
-			//缓存过多，清除缓存
+			//缓存过多，清空
 			fs.readdir(cache_root,function(err,files){
 				if(err){
 					return
 				}
 				if(files.length > cache_max_num){
-					clear_directory(cache_root);
+					try_del_each_cache();
 				}
 			});
 		}
 	});
 };
 
-//清除目录
-function clear_directory(root_path,callback){
-	
-	fs.readdir(root_path,function(err,files){
+//尝试遍历删除缓存文件
+function try_del_each_cache(callback){
+    if(!callback){
+        callback = function(){
+            return true;
+        };
+    }
+	fs.readdir(cache_root,function(err,files){
 		if(err){
-			callback&&callback(err);
 			return
 		}
 		var total = files.length;
-
+        
 		for(var i = 0;i < total;i++){
-			if(files[i] != 'readMe.md'){
-				fs.unlink(root_path + files[i]);
+			var filename = files[i];
+            var tagsStr = filename.split('--')[0] || '';
+            var fileTags = tagsStr.split('_');
+            if(files[i] != 'readMe.md'){
+                if( callback(fileTags)){
+                    fs.unlink(cache_root + files[i]);
+                }
 			}
 		}
-		callback&&callback(null);
 	});
 }
 
 
 /**
  * 清除缓存
- * cache.clear(root,name,fn)
+ * cache.clear(tags,fn)
  * 
- * root:chip/html/ajax
  */
-function CLEAR(){
-	//filter arguments
-	var root = arguments[0] || '',
-		name = null,
-		callback = null;
-	if(typeof(arguments[1]) == "function"){
-		callback = arguments[1];
-	}else if(typeof(arguments[1]) == "string"){
-		name = arguments[1];
-		if(typeof(arguments[2]) == "function"){
-			callback = arguments[2];
-		}
-	}
-	
-	if(root.match(/^(chip|html|ajax)$/)){
-		var root_path = './cache/' + root + '/';
-		if(name){
-			fs.unlink(root_path + name + '.txt',function(err){
-				callback&&callback(err);
-			});
-		}else{
-			clear_directory(root_path,callback);
-		}
-	}else if(root == 'all'){
-		clear_directory('./cache/chip/');
-		clear_directory('./cache/html/');
-		clear_directory('./cache/ajax/');
-		callback&&callback();
-	}else{
-		callback&&callback('arguments[0] error please use [all|chip|html|ajax]');
-	}
+function CLEAR(tags,callback){
+    //精准清除
+    try_del_each_cache(function(file_tags){
+        //遍历缓存文件的标签
+        for(var i=0,total=file_tags.length; i<total; i++){
+            var file_tag_item = file_tags[i];
+            //遍历待删除缓存标签
+            for(var s=0,all=tags.length; s<all; s++){
+                var clear_tag_item = tags[s];
+                //对比标签，相等就删除
+                if(file_tag_item == clear_tag_item){
+                    return true;
+                }
+            }
+        }
+        callback&&callback();
+        return false;
+    });
 }
 
 //清除缓存
-exports.clear = CLEAR;
+exports.clear = function(tags,callback){
+    if(typeof(tags)=='string' && tags.length > 0){
+        tags = tags.split(',');
+        CLEAR(tags,callback);
+    }else{
+        //暴力清除
+		try_del_each_cache();
+		callback&&callback();
+	}
+    
+};
 
 /**
  * 使用缓存
@@ -137,7 +140,9 @@ exports.use = function (cache_name,tags,callback,create_cache){
         return
     }
     
-	cache_name = cache_name.replace(/\/|\?/g,'_'); 
-    var cache_path = cache_root + tags.join('_') + '--' + cache_name + '.txt';
+	cache_name = cache_name.replace(/\/|\?/g,'_');
+    
+    var tagsStr = tags.join('_');
+    var cache_path = cache_root + tagsStr + '--' + cache_name + '.txt';
     cache(cache_path,callback,create_cache);
 };
