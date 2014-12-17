@@ -65,11 +65,6 @@ function filter_request(connect,callback){
 					data_filter['collection_name'] = 'article';
 					need_power = 3;
 					break
-				case 'share' :
-					data_filter = filter_request.share(data);
-					data_filter['collection_name'] = 'share';
-					need_power = 6;
-					break
 				case 'opus' :
 					data_filter = filter_request.opus(data);
 					data_filter['collection_name'] = 'opus';
@@ -86,7 +81,7 @@ function filter_request(connect,callback){
 					need_power = 3;
 					break
 				default :
-					error = 'please input category [blog,share,opus,blog_friend]';
+					error = 'please input category [blog,opus,blog_friend]';
 			}
 			if(!session_this.power(need_power)){
 				error = 'no power';
@@ -107,25 +102,6 @@ filter_request.blog = function(data){
 		'tags':data['tags'] ? data['tags'].split(/\s*\,\s*/) : [],
 		'author':data['author']||'',
 		'content':data['content'],
-		'intro':data['intro']||data['content'].slice(0,200),
-	};
-	if(!(param['title']&&param['content'])){
-		error = 'please insert complete code !';
-	}
-	return {error:error,data:param};
-}
-
-filter_request.share = function(data){
-	var error = null;
-	var param = {
-		'id' : data['id']||'',
-		'title':decodeURI(data['title']),
-		'cover':data['cover']||'',
-		'time_show':data['time_show']||new Date().getTime(),
-		'tags':data['tags']||'',
-		'content':data['content'],
-		'from':data['from'],
-		'from_url':data['from_url'],
 		'intro':data['intro']||data['content'].slice(0,200),
 	};
 	if(!(param['title']&&param['content'])){

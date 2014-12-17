@@ -129,11 +129,6 @@ var ajax_blog = require('./ajax/article_get');
 app.get('/ajax/blog', function(data,connect){
 	ajax_blog.render(connect,app);
 });
-//分享
-var ajax_share = require('./ajax/share_get');
-app.get('/ajax/share', function(data,connect){
-	ajax_share.render(connect,app);
-});
 //实验室
 var ajax_labs = require('./ajax/labs_get');
 app.get('/ajax/labs', function(data,connect){
