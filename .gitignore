@@ -13,11 +13,10 @@ results
 
 .project
 npm-debug.log
-sys/cache/ajax
-sys/cache/html
-sys/cache/session
-sys/cache/upload
-sys/node_modules
-web/frontEnd/build
-web/frontEnd/dist
-web/frontEnd/node_modules
+sys/temporary/cache/
+sys/temporary/session/
+sys/temporary/upload/
+sys/node_modules/
+web/frontEnd/build/
+web/frontEnd/dist/
+web/frontEnd/node_modules/
