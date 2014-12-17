@@ -27,10 +27,12 @@
         <script type="text/javascript">
             var app_config = {
                 'frontEnd_base' : '${{frontEnd_base}}',
+                'frontEnd_version' : '${{frontEnd_version}}',
                 'imgDomain' : '${{img_domain}}'
             };
             seajs.config({
-              'base' : '${{frontEnd_base}}'
+                'base' : '${{frontEnd_base}}',
+                'map' : [[/^(.*\.(?:css|js))(.*)$/i, '$1?v=${{frontEnd_version}}']]
             });
             seajs.use("public/app.js");
         </script>

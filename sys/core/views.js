@@ -78,6 +78,7 @@ module.exports = function(URI,data,callback){
 	var data = data || {};
 	//增加文件配置
 	data.frontEnd_base = this.config.frontEnd_root;
+	data.frontEnd_version = this.config.frontEnd_version;
 	data.img_domain = this.config.img_domain;
 	
 	//读取模版

@@ -10,6 +10,8 @@ module.exports = {
 	'port' : 80,
 	//前端静态资源根目录
 	'frontEnd_root' : '/frontEnd/develop/',
+    //静态资源版本
+    'frontEnd_version' : '20141217',
 	//图床
 	'img_domain' : 'http://layasset.qiniudn.com',
 	'mongo' : {

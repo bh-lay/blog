@@ -6,7 +6,7 @@
 <meta name="keywords" content="${keywords}" />
 <meta name="description" content="${{description}}" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-<include name="script_bootstrap"/>
+<include name="version_html5_script_bootstrap"/>
 <link href="/favicon.ico" rel="shortcut icon"/>
 <link rel="apple-touch-icon" href="touch-icon-iphone.png" />
 <link rel="apple-touch-icon" sizes="72x72" href="touch-icon-ipad.png" />
@@ -45,14 +45,15 @@
 	</div>
 </div>
 <script type="text/javascript">
-	var app_config = {
-		'frontEnd_base' : '${{frontEnd_base}}',
-		'imgDomain' : '${{img_domain}}'
-	};
+    var app_config = {
+        'frontEnd_base' : '${{frontEnd_base}}',
+        'frontEnd_version' : '${{frontEnd_version}}',
+        'imgDomain' : '${{img_domain}}'
+    };
 </script>
-<script type="text/javascript" src="${{frontEnd_base}}lib/jquery/jquery.js"></script>
-<script type="text/javascript" src="${{frontEnd_base}}lib/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${{frontEnd_base}}public/js/bootstrap_plugin.js"></script>
+<script type="text/javascript" src="${{frontEnd_base}}lib/jquery/jquery.js?v=${{frontEnd_version}}"></script>
+<script type="text/javascript" src="${{frontEnd_base}}lib/bootstrap/js/bootstrap.min.js?v=${{frontEnd_version}}"></script>
+<script type="text/javascript" src="${{frontEnd_base}}public/js/bootstrap_plugin.js?v=${{frontEnd_version}}"></script>
 <include name="footer"/>
 <include name="baiduAndGoogleTongji"/>
 </body>
