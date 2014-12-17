@@ -151,7 +151,7 @@ exports.request = function(req,callBack){
 			});
 		}else{
             var form = new formidable.IncomingForm();
-            form.uploadDir = "./cache/upload";
+            form.uploadDir = "./temporary/upload";
             //form.keepExtensions = true;
             form.parse(req, function(error, fields_post, files) {
                 // @FIXME when i upload more than one file ,the arguments files is only single file

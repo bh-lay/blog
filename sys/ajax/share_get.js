@@ -106,7 +106,7 @@ function this_control(connect,callback){
 exports.render = function (connect,app){
 	var url = connect.request.url;
 
-	app.cache.ajax(url,function(this_cache){
+	app.cache.use(url,['ajax,share'],function(this_cache){
 		connect.write('json',this_cache);
 	},function(save_cache){
 		this_control(connect,function(this_data){

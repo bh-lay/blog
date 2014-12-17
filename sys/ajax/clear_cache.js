@@ -16,7 +16,7 @@ exports.render = function (connect,app){
 		var type = data.type || '';
 
 		if(type.match(/^(all|chip|html|ajax)$/)){
-			app.cache.clear(type,function(){
+			app.cache.clear([type],function(){
 				connect.write('json',{
 					'code': 200,
 					'msg' : 'clear cache :[' + type + '] completely !'

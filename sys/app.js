@@ -17,7 +17,7 @@ function views_select(connect,callback){
 	//cookie有相应字段
 	if(connect.cookie('ui_version') == 'js'){
 		//读取缓存
-		app.cache.html('singlePage',function(this_cache){
+		app.cache.use('singlePage',['html'],function(this_cache){
 			connect.write('html',200,this_cache);
 		},function(save_cache){
 			//获取单页面视图

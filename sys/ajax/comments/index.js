@@ -124,7 +124,7 @@ exports.del = function (connect,app){
 							'code' : 200
 						});
 						//清除所有缓存
-						app.cache.clear('all');
+						app.cache.clear();
 					}
 				});
 			}else{

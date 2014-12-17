@@ -22,7 +22,7 @@ var expire_hour = 24;
 //FIXME 不要忘了删除过期的session
 
 var fs = require('fs');
-var session_root = './cache/session/';
+var session_root = './temporary/session/';
 
 function save_session(){
 	var pathname = this.path;

@@ -2,7 +2,7 @@
 
 exports.deal = function (connect,app){
 	//缓存机制
-	app.cache.html('index_page',function(this_cache){
+	app.cache.use('index_page',['html'],function(this_cache){
 		connect.write('html',200,this_cache);
 	},function(save_cache){
 		//获取视图

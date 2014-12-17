@@ -109,7 +109,7 @@ exports.render = function (req,res_this,path){
 		var search = url.split('?')[1],
 			 data = querystring.parse(search);
 		 
-		cache.ajax(url,function(this_cache){
+		cache.use(url,['ajax'],function(this_cache){
 			res_this.json(this_cache);
 		},function(save_cache){
 			this_control(data,function(this_data){

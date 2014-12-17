@@ -60,7 +60,7 @@ exports.list = function (connect,app){
 	var page = data.page || 1;
 	
 	var cache_name = 'blog_list_' + page;
-	app.cache.html(cache_name,function(this_cache){
+	app.cache.use(cache_name,['html'],function(this_cache){
 		//do something with this_cache
 		connect.write('html',200,this_cache);
 	},function(save_cache){
@@ -91,7 +91,7 @@ exports.list = function (connect,app){
 };
 
 exports.detail = function (connect,app,id){
-	app.cache.html('blog_id_' + id,function(this_cache){
+	app.cache.use('blog_id_' + id,['html'],function(this_cache){
 		connect.write('html',200,this_cache);
 	},function(save_cache){
 		getDetail(id,function(err,data){

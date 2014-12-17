@@ -2,7 +2,7 @@
  * @author bh-lay
  * 
  * @demo
- * 	cache.chip('blog_list',function(this_cache){
+ * 	cache.use('blog_list',['blog','ajax'],function(this_cache){
  * 		//do something with this_cache
  * 	},function(save_cache){
  * 		//if none of cache,do this Fn ,in the end Fn1 with be start
@@ -11,40 +11,45 @@
  */
 var fs = require('fs');
 var cache_max_num = 1000;
+//缓存存放目录
+var cache_root = './temporary/cache/';
 
-function cache(cache_name,callback,create_cache,root){
-	var cache_root = './cache/' + root + '/';
-	var cache_path = cache_root + cache_name + '.txt';
-	
+/**
+ * 读取、生成缓存
+ * 不做参数校验
+ *  cache_path 缓存对应的文件目录
+ *  callback 读取缓存后的回调函数
+ *  create_cache 没有缓存时，生成缓存的回调函数
+ **/
+function cache(cache_path,callback,create_cache){
+    //检测此条缓存是否存在
 	fs.exists(cache_path, function(exists) {
-		if(0 || exists){
-			//get cache from cache directory
+		if(exists){
+			//存在，直接读取缓存
 			fs.readFile(cache_path,'UTF-8',function(err,this_cache){
 				if(err){
 					consele.log('readFile error');
 				}
 				callback(this_cache);
 			});
-			
 		}else{
-			//create cache and save to cache
+			//不存在，调用创建缓存函数
 			create_cache(function(new_cache){
-				callback(new_cache);
-				//save cache to cache directory
+				//通知调用方使用新的缓存
+                callback(new_cache);
+				//保存缓存至对应目录
 				fs.writeFile(cache_path,new_cache,function(err){
 					if(err){
 						console.log('create cache error',cache_name);
 					};
 				});
 			});
-			//try to clear cache
+			//缓存过多，清除缓存
 			fs.readdir(cache_root,function(err,files){
 				if(err){
-					callback&&callback(err);
 					return
 				}
-				var total = files.length;
-				if(total > cache_max_num){
+				if(files.length > cache_max_num){
 					clear_directory(cache_root);
 				}
 			});
@@ -52,6 +57,7 @@ function cache(cache_name,callback,create_cache,root){
 	});
 };
 
+//清除目录
 function clear_directory(root_path,callback){
 	
 	fs.readdir(root_path,function(err,files){
@@ -72,8 +78,8 @@ function clear_directory(root_path,callback){
 
 
 /**
+ * 清除缓存
  * cache.clear(root,name,fn)
- * cache.clear(root,fn)
  * 
  * root:chip/html/ajax
  */
@@ -109,15 +115,29 @@ function CLEAR(){
 		callback&&callback('arguments[0] error please use [all|chip|html|ajax]');
 	}
 }
-// use cache exports
+
+//清除缓存
 exports.clear = CLEAR;
-exports.chip = function(cache_name,callback,create_cache){
-	cache(cache_name,callback,create_cache,'chip');
-};
-exports.html = function(cache_name,callback,create_cache){
-	cache(cache_name,callback,create_cache,'html');
-};
-exports.ajax = function(cache_name,callback,create_cache){
-	var this_name = cache_name.replace(/\/|\?/g,'_'); 
-	cache(this_name,callback,create_cache,'ajax');
+
+/**
+ * 使用缓存
+ * 处理参数校验
+ */
+exports.use = function (cache_name,tags,callback,create_cache){
+    if(typeof(cache_name) != 'string'){
+        console.error('缓存名必须为字符格式');
+        return
+    }
+    if(!tags || tags.length < 1){
+        console.error('缓存必须指定标签');
+        return
+    }
+    if((typeof(callback) != typeof(create_cache)) || (typeof(create_cache) != 'function')){
+        console.error('缓存必须指定回调函数');
+        return
+    }
+    
+	cache_name = cache_name.replace(/\/|\?/g,'_'); 
+    var cache_path = cache_root + tags.join('_') + '--' + cache_name + '.txt';
+    cache(cache_path,callback,create_cache);
 };

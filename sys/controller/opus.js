@@ -37,7 +37,7 @@ function detail_page(id,callback){
 }
 
 exports.list = function(connect,app){
-	app.cache.html('opus_list',function(this_cache){
+	app.cache.use('opus_list',['html'],function(this_cache){
 		connect.write('html',200,this_cache);
 	},function(save_cache){
 		list_page(function(err,list){
@@ -55,7 +55,7 @@ exports.list = function(connect,app){
 };
 
 exports.detail = function(connect,app,id){
-	app.cache.html('opus_id_' + id,function(this_cache){
+	app.cache.use('opus_id_' + id,['html'],function(this_cache){
 		connect.write('html',200,this_cache);
 	},function(save_cache){
 		detail_page(id,function(err,data){

@@ -228,7 +228,7 @@ exports.render = function (connect,app){
 						'id' : data.id,
 						'msg':'edit success !'
 					});
-					app.cache.clear('all');
+					app.cache.clear();
 				}
 			});
 		}else{
@@ -244,7 +244,7 @@ exports.render = function (connect,app){
 						'id' : data.id,
 						'msg':'edit success !'
 					});
-					app.cache.clear('all');
+					app.cache.clear();
 				}
 			});
 		}

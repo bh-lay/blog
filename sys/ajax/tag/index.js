@@ -71,7 +71,7 @@ function getAllBlogTagsList(callback){
 
 //获取所有博文的标签
 exports.allBlogTagsList = function (connect,app){
-	app.cache.ajax('allBlogTagsList',function(this_cache){
+	app.cache.use('allBlogTagsList',['ajax'],function(this_cache){
 		connect.write('json',this_cache);
 	},function(save_cache){
 		getAllBlogTagsList(function(err,list){
@@ -85,7 +85,7 @@ exports.allBlogTagsList = function (connect,app){
 
 
 exports.list = function (connect,app){
-	app.cache.ajax('tagsListB',function(this_cache){
+	app.cache.use('tagsListB',['ajax'],function(this_cache){
 		connect.write('json',this_cache);
 	},function(save_cache){
 		getTagsList(function(err,list){
