@@ -7,7 +7,6 @@ define(function () {
 	var init = function () {
         if(L.supports.touch){
             $('.nav_moreBtn').click(function () {
-                console.log(1234)
                 $('body').toggleClass('nav_slidedown');
             });
         }else{
@@ -19,7 +18,7 @@ define(function () {
                 clearTimeout(delay);
                 delay = setTimeout(function(){
                     $('body').removeClass('nav_slidedown');
-                },600);
+                },200);
             });
             
             $('.nav_body').mouseenter(function () {
@@ -28,7 +27,7 @@ define(function () {
                 clearTimeout(delay);
                 delay = setTimeout(function(){
                     $('body').removeClass('nav_slidedown');
-                },600);
+                },200);
             });
         }
 		$('.app_nav .nav a').click(function () {
