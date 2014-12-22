@@ -240,6 +240,9 @@ define(function (require, exports) {
 	L.refresh = function () {
 		lofox.refresh();
 	};
+    L.supports = {
+        'touch' : isSupportTouch
+    };
     
     //显示背景图
     if (supports('backgroundSize') && !isMobileBrowser) {

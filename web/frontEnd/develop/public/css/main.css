@@ -254,12 +254,13 @@ body {
   line-height: 1.8;
 }
 .article code {
-  margin: 0 0.5em;
-  padding: 0 0.5em;
-  border: 1px solid #ccc;
-  border-radius: 4px;
   font-family: inherit;
-  background: #f7f7f7;
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #099E03;
+  background-color: #F2F9F3;
+  white-space: nowrap;
+  border-radius: 4px;
 }
 .article a {
   color: #333;
@@ -691,94 +692,63 @@ body {
   -webkit-animation: bounceOut 1s .2s ease both;
   -moz-animation: bounceOut 1s .2s ease both;
 }
-body {
-  overflow-x: hidden;
-  overflow-y: scroll;
-  background: url("../images/mask.png") #eeeeee;
-}
-a,
-a:active {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  -webkit-tap-highlight-color: transparent;
-}
-/**应用主容器**/
-.app_container {
-  position: relative;
-  margin-left: 40px;
-}
-.app_mask {
-  position: fixed;
-  display: table;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #eee;
-  z-index: 5000;
-}
-.app_mask_cnt {
-  display: table-cell;
-  vertical-align: middle;
-}
-.app_mask_cnt p {
-  padding-top: 20px;
-  font-size: 18px;
-  color: #333;
-  text-align: center;
-}
 /**
  * 导航
  */
 .app_nav {
   position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 0px;
-  height: 100%;
+  top: 10px;
+  left: 10px;
   z-index: 4000;
 }
 .nav_body {
-  position: relative;
-  top: 0px;
+  position: absolute;
+  top: 40px;
   left: 0px;
-  width: 40px;
-  height: 100%;
-  background: #333;
+  width: 200px;
+  background: #fff;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
   z-index: 2;
+  display: none;
 }
 .nav {
   padding-top: 40px;
 }
-.nav li {
-  display: block;
-  margin-bottom: 20px;
-}
-.nav a {
+.nav li a {
   display: block;
   width: 100%;
   height: 40px;
   line-height: 40px;
   outline: none;
-  color: #888;
-  white-space: nowarp;
+  color: #333;
+  text-indent: 1em;
   overflow: hidden;
   transition: all 0.1s linear;
   -moz-transition: all 0.1s linear;
   -webkit-transition: all 0.1s linear;
   -o-transition: all 0.1s linear;
 }
-.nav a i {
+.nav li a i {
   display: inline-block;
+  vertical-align: middle;
   width: 40px;
   text-align: center;
   font-family: "layIcon";
-  font-size: 22px;
+  font-size: 18px;
   font-style: normal;
 }
-.nav a:hover {
-  color: #ddd;
+.nav li a:after {
+  content: attr(data-title);
+  padding-left: 5px;
+  font-size: 14px;
 }
-.nav .cur a {
+.nav li:hover {
+  background: #eee;
+}
+.nav li.cur {
+  background: #f70;
+}
+.nav li.cur a {
   color: #ffffff;
 }
 .navLink {
@@ -796,11 +766,7 @@ a:active {
   font-size: 12px;
 }
 .nav_bottom {
-  position: absolute;
-  width: 100%;
-  left: 0;
-  bottom: 0;
-  padding: 0 0 20px;
+  padding: 10px 0 20px;
 }
 .nav_bottom a {
   display: block;
@@ -822,14 +788,8 @@ a:active {
   left: 0;
   width: 100%;
   height: 100%;
-  background: #fff;
-  opacity: 0;
   z-index: 1;
   display: none;
-  transition: all 0.2s linear;
-  -moz-transition: all 0.2s linear;
-  -webkit-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
 }
 .nav_moreBtn {
   position: absolute;
@@ -837,136 +797,118 @@ a:active {
   height: 40px;
   top: 0;
   left: 0;
+  background: #fff;
+  opacity: .5;
   z-index: 3;
-  display: none;
+  transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
 }
-.nav_moreBtn:before {
-  content: '';
-  position: absolute;
-  top: -40px;
-  left: -40px;
-  display: block;
-  width: 80px;
-  height: 80px;
-  border-radius: 80px;
-  background: #333;
+.nav_moreBtn:hover {
+  opacity: 1;
 }
 .nav_Btn_ico {
   display: block;
   position: absolute;
-  left: 4px;
   width: 22px;
   height: 4px;
-  border-radius: 2px;
-  background: #fff;
-  transition: all 0.1s linear;
-  -moz-transition: all 0.1s linear;
-  -webkit-transition: all 0.1s linear;
-  -o-transition: all 0.1s linear;
+  left: 9px;
+  border-radius: 4px;
+  background: #333;
+  transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
 }
 .nav_Btn_ico_1 {
-  top: 5px;
+  top: 10px;
 }
 .nav_Btn_ico_2 {
-  top: 13px;
+  top: 18px;
 }
 .nav_Btn_ico_3 {
-  top: 21px;
+  top: 26px;
 }
-.nav_tips {
-  position: relative;
-  float: left;
-  height: 40px;
-  line-height: 40px;
-  padding: 0 30px 0 20px;
-  border-radius: 2px;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
-  background: #333;
-  color: #fff;
+.nav_slidedown .nav_body {
+  display: block;
 }
-.nav_tips:before {
-  content: '◆';
-  position: absolute;
-  diaplay: block;
-  top: 10px;
-  left: -10px;
-  width: 20px;
-  height: 20px;
-  line-height: 20px;
-  text-align: center;
-  font-size: 20px;
-  color: #333;
+.nav_slidedown .nav_mask {
+  display: block;
+}
+.nav_slidedown .nav_moreBtn {
+  opacity: 1;
+}
+.nav_slidedown .nav_Btn_ico_1 {
+  transform: translate(0, 8px) rotate(-45deg);
+  -moz-transform: translate(0, 8px) rotate(-45deg);
+  -webkit-transform: translate(0, 8px) rotate(-45deg);
+  -o-transform: translate(0, 8px) rotate(-45deg);
+}
+.nav_slidedown .nav_Btn_ico_2 {
+  opacity: 0;
+  transform: translate(10px, 0);
+  -moz-transform: translate(10px, 0);
+  -webkit-transform: translate(10px, 0);
+  -o-transform: translate(10px, 0);
+}
+.nav_slidedown .nav_Btn_ico_3 {
+  transform: translate(0, -8px) rotate(45deg);
+  -moz-transform: translate(0, -8px) rotate(45deg);
+  -webkit-transform: translate(0, -8px) rotate(45deg);
+  -o-transform: translate(0, -8px) rotate(45deg);
 }
 @media screen and (max-width: 660px) {
-  .app_container {
-    margin-left: 0;
-    left: 0;
-    width: 100%;
-    transition: all 0.3s ease-out;
-    -moz-transition: all 0.3s ease-out;
-    -webkit-transition: all 0.3s ease-out;
-    -o-transition: all 0.3s ease-out;
+  .nav_mask {
+    background: #fff;
+    opacity: .2;
   }
-  .nav_moreBtn {
-    display: block;
-    transition: all 0.3s ease-out;
-    -moz-transition: all 0.3s ease-out;
-    -webkit-transition: all 0.3s ease-out;
-    -o-transition: all 0.3s ease-out;
+  .app_nav {
+    width: 100%;
+    height: 40px;
+    top: 0;
+    left: 0;
+    background: #fff;
+    box-shadow: 0 0 4px #000;
   }
   .nav_body {
-    width: 200px;
-    left: -200px;
-    transition: all 0.3s ease-out;
-    -moz-transition: all 0.3s ease-out;
-    -webkit-transition: all 0.3s ease-out;
-    -o-transition: all 0.3s ease-out;
-  }
-  .nav {
-    padding-top: 70px;
-  }
-  .nav a:hover {
-    background: transparent;
-    color: #aaa;
+    width: 100%;
     box-shadow: none;
   }
-  .nav a:after {
-    content: attr(data-title);
-  }
-  .nav_slidedown {
-    overflow: hidden;
-  }
-  .nav_slidedown .nav_body {
-    left: 0px;
-  }
-  .nav_slidedown .app_container {
-    left: 200px;
-    width: 100%;
-  }
-  .nav_slidedown .nav_mask {
-    display: block;
-    opacity: 0.2;
-  }
-  .nav_slidedown .nav_moreBtn {
-    top: 20px;
-    left: 80px;
-  }
-  .nav_slidedown .nav_Btn_ico_1 {
-    top: 14px;
-    -moz-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-  }
-  .nav_slidedown .nav_Btn_ico_2 {
-    top: 14px;
-    -moz-transform: rotate(-45deg);
-    -o-transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
-  }
-  .nav_slidedown .nav_Btn_ico_3 {
-    opacity: 0;
-    bottom: 31px;
-  }
+}
+body {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background: url("../images/mask.png") #eeeeee;
+}
+a,
+a:active {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+}
+/**应用主容器**/
+.app_container {
+  position: relative;
+}
+.app_mask {
+  position: fixed;
+  display: table;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #eee;
+  z-index: 5000;
+}
+.app_mask_cnt {
+  display: table-cell;
+  vertical-align: middle;
+}
+.app_mask_cnt p {
+  padding-top: 20px;
+  font-size: 18px;
+  color: #333;
+  text-align: center;
 }
 /**分页组件**/
 .pagination li {
