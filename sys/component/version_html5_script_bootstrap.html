@@ -18,20 +18,18 @@ var blog = {
             vendors = 'Webkit Khtml Ms O Moz'.split(/\s/);
 
         return function(prop) {
-            var returns = false;
             if ( prop in styles ){
-                returns = prop;
+                return prop;
             }else{
                 prop = prop.replace(/^[a-z]/, function(val) {
                     return val.toUpperCase();
                 });
                 for(var i=0,total=vendors.length;i<total;i++){
                     if ( vendors[i] + prop in styles ) {
-                        returns = ('-' + vendors[i] + '-' + prop).toLowerCase();
+                        return ('-' + vendors[i] + '-' + prop).toLowerCase();
                     }
                 }
             }
-            return returns;
         };
     })();
     /**

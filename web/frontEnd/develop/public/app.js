@@ -7,30 +7,25 @@
  * 判断是否支持css属性
  * 兼容css3
  */
-var supports = (function () {
-    'use strict';
-	var styles = document.createElement('div').style,
-		vendors = ['Webkit', 'Khtml', 'Ms', 'O', 'Moz'];
-	
-	return function (prop) {
-		var returns = false,
-            i = 0,
-            total = vendors.length;
-		if (styles.hasOwnProperty(prop)) {
-			returns = prop;
-		} else {
-			prop = prop.replace(/^[a-z]/, function (val) {
-				return val.toUpperCase();
-			});
-			for (i; i < total; i++) {
-				if (styles.hasOwnProperty(vendors[i] + prop)) {
-					returns = ('-' + vendors[i] + '-' + prop).toLowerCase();
-				}
-			}
-		}
-		return returns;
-	};
-}());
+var supports = (function() {
+    var styles = document.createElement('div').style,
+        vendors = 'Webkit Khtml Ms O Moz'.split(/\s/);
+
+    return function(prop) {
+        if ( prop in styles ){
+            return prop;
+        }else{
+            prop = prop.replace(/^[a-z]/, function(val) {
+                return val.toUpperCase();
+            });
+            for(var i=0,total=vendors.length;i<total;i++){
+                if ( vendors[i] + prop in styles ) {
+                    return ('-' + vendors[i] + '-' + prop).toLowerCase();
+                }
+            }
+        }
+    };
+})();
 /**
  * 是否支持 canvas
  * 是否支持touch
