@@ -1,0 +1,142 @@
+
+/** 我的作品 **/
+.opusList {
+	max-width: 700px;
+	margin: auto;
+	padding: 20px 10px;
+	ul {
+		.cardShadow();
+		li {
+			position: relative;
+			padding: 10px 10px 10px 120px;
+			overflow: hidden;
+			margin-bottom: -1px;
+			border-bottom: 1px solid #ddd;
+		}
+	}	
+}
+.opus_cover {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	width: 100px;
+	height: 100px;
+	background: #aaa;
+	img {
+		display: block;
+		width: 100px;
+		height: 100px;
+		margin: 0px auto;
+	}
+}
+
+.opus_info {
+	position: relative;
+	h3 {
+		height: 30px;
+		line-height: 30px;
+		position: relative;
+		margin-bottom: 8px;
+		a {
+			display: block;
+			width: 260px;
+			overflow: hidden;
+			font-size: 16px;
+			font-weight: normal;
+			color: #333;
+			&:hover {
+				color: #333;
+				text-decoration: underline;
+			}
+		}
+	}
+	p {
+		line-height: 18px;
+		padding: 6px 0;
+		strong {
+			display: block;
+			height: 30px;
+			float: left;
+			font-size: 14px;
+			font-weight: normal;
+			color: #333
+		}
+		span {
+			display: inline-block;
+			padding: 0px 4px;
+			font-size: 14px;
+			color: #888
+		}
+		a {
+			display: block;
+			width: 190px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			color: #888;
+			&:hover {
+				color: #333;
+				text-decoration: underline
+			}
+		}
+	}
+}
+.opus_detail{
+	max-width: 700px;
+	margin: auto;
+	padding: 60px 10px 40px;
+	.article {
+		position: relative;
+		margin-bottom: 20px;
+        overflow: hidden;
+		.cardShadow();
+	}
+}
+
+.opus_caption {
+	position: relative;
+	min-height: 120px;
+	overflow: hidden;
+	border: 1px solid #fff;
+	background: #fff;
+	background: rgba(255,255,255,0.5);
+	margin-bottom: 20px;
+	img {
+		height: 100px;
+		padding: 10px;
+		position: absolute;
+		top: 0px;
+		left: 0px
+	}
+	.info {
+		position: relative;
+		padding: 15px 15px 15px 130px
+	}
+	h1 {
+		padding-bottom: 20px;
+		border-bottom: 1px solid #aaa;
+		font-size: 20px;
+		letter-spacing: 0.5em;
+		font-weight: normal;
+		color: #000
+	}
+	ul {
+		font-size: 16px;
+		padding-top: 20px
+	}
+	li {
+		float: left;
+		width: 50%;
+		color: #666
+	}
+	strong {
+		padding-right: 10px;
+		font-weight: normal
+	}
+}
+.TagLine {
+	height: 50px;
+	margin-bottom: 20px;
+	background: url(../images/tagline.png) no-repeat;
+	text-indent: -100em;
+	overflow: hidden
+}

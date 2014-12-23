@@ -1,0 +1,141 @@
+
+/** 首页 **/
+.indeCnt {
+	width: 600px;
+	margin: auto;
+	padding-top: 100px
+}
+
+.index_intro {
+	margin-bottom: 20px;
+	text-align: center;
+	overflow: hidden;
+	.cardShadow();
+}
+
+.index_intro_cpt {
+	padding: 20px 0px;
+	background: url(../images/mask.png) #063;
+	color: #fff
+}
+
+.index_intro_logo {
+	font-size: 120px;
+	line-height: 120px;
+	margin-bottom: 10px
+}
+
+.index_intro_a {
+	font-size: 30px;
+	font-weight: normal;
+	line-height: 40px;
+	letter-spacing: 20px;
+	margin-bottom: 10px
+}
+
+.index_intro_cnt {
+	padding: 20px
+}
+
+.index_intro_b {
+	font-size: 16px;
+	line-height: 20px;
+	margin-bottom: 15px;
+	color: #666
+}
+
+.index_intro_c {
+	color: #333;
+	font-size: 20px;
+	line-height: 20px;
+	margin-bottom: 10px
+}
+
+.index_intro_d {
+	font-size: 12px;
+	line-height: 20px;
+	margin-bottom: 10px;
+	color: #aaa
+}
+
+.some_link {
+	margin-bottom: 20px;
+	background: #fff;
+	overflow: hidden;
+	border-radius: 4px
+}
+
+.some_link a {
+	display: block;
+	float: left;
+	width: 33.33%;
+	height: 40px;
+	line-height: 40px;
+	text-align: center
+}
+
+.webLink {
+	display: table;
+	width: 100%;
+	background: #fff;
+	border-radius: 4px;
+	margin-bottom: 20px
+}
+
+.webLink_cpt {
+	display: table-cell;
+	vertical-align: middle;
+	white-space: nowrap;
+	width: 10%;
+	line-height: 50px;
+	padding: 0px 10px;
+	margin: auto;
+	text-align: center;
+	font-size: 14px;
+	cursor: pointer
+}
+
+.webLink_cnt {
+	display: table-cell;
+	width: 90%;
+	overflow: hidden
+}
+
+.webLink_cnt a {
+	display: block;
+	width: 50%;
+	float: left;
+	margin-top: -1px;
+	border-top: 1px solid #ddd;
+	border-left: 1px solid #ddd;
+	height: 40px;
+	line-height: 40px;
+	font-size: 14px;
+	text-align: center;
+	.transition(0.2s);
+	.borderbox();
+}
+
+.webLink_cnt a:hover {
+	background: #f6f6f6
+}
+
+@media screen and (max-width: 620px) {
+	.indeCnt {
+		width: auto;
+		margin: 0px 10px
+	}
+
+	.webLink,.webLink_cpt,.webLink_cnt {
+		display: block;
+		width: auto
+	}
+
+	.webLink_cnt a {
+		margin: 0px
+	}
+
+	.webLink_cnt a:nth-of-type(odd) {
+		border-left: none
+	}
+}

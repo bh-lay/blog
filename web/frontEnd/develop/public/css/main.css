@@ -883,40 +883,6 @@ body {
     box-shadow: none;
   }
 }
-body {
-  overflow-x: hidden;
-  overflow-y: scroll;
-  background: url("../images/mask.png") #eeeeee;
-}
-a,
-a:active {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  -webkit-tap-highlight-color: transparent;
-}
-/**应用主容器**/
-.app_container {
-  position: relative;
-}
-.app_mask {
-  position: fixed;
-  display: table;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #eee;
-  z-index: 5000;
-}
-.app_mask_cnt {
-  display: table-cell;
-  vertical-align: middle;
-}
-.app_mask_cnt p {
-  padding-top: 20px;
-  font-size: 18px;
-  color: #333;
-  text-align: center;
-}
 /**分页组件**/
 .pagination li {
   display: inline-block;
@@ -964,168 +930,6 @@ a:active {
     margin: 0px 10px;
     overflow: hidden;
   }
-}
-.backToOldVersion {
-  display: block;
-  height: 80px;
-  line-height: 80px;
-  text-align: center;
-  color: #555;
-  transition: all 0.3s linear;
-  -moz-transition: all 0.3s linear;
-  -webkit-transition: all 0.3s linear;
-  -o-transition: all 0.3s linear;
-}
-.backToOldVersion:hover {
-  color: #000;
-}
-.tongji {
-  width: 0px;
-  height: 0px;
-  overflow: hidden;
-}
-.gallayer {
-  position: fixed;
-  z-index: 0;
-  left: 0px;
-  top: 0px;
-  width: 100%;
-  height: 100%;
-  background: #eeeeee;
-}
-.galBj {
-  position: absolute;
-  z-index: 11;
-  left: 0px;
-  top: 0px;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background-size: cover;
-  background-position: center center;
-}
-.galMask {
-  position: absolute;
-  z-index: 12;
-  left: 0px;
-  top: 0px;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  text-indent: -100em;
-  background: url("../images/mask.png");
-}
-.galBj_mask {
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center center;
-  -webkit-mask-image: url("../images/mask_bj.png");
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: center center;
-  -webkit-mask-size: 300%;
-  -webkit-animation: circle_zoom 1s;
-}
-@-webkit-keyframes circle_zoom {
-  0% {
-    opacity: 0;
-    -webkit-mask-size: 30%;
-    -webkit-animation-timing-function: ease-in;
-  }
-  80% {
-    opacity: 1;
-    -webkit-mask-size: 60%;
-    -webkit-animation-timing-function: ease-in;
-  }
-  100% {
-    opacity: 1;
-    -webkit-mask-size: 300%;
-  }
-}
-/**用户登录框**/
-.l_loginPanel {
-  position: relative;
-  overflow: hidden;
-}
-.l_loginPanel_tabs {
-  position: relative;
-  width: 100px;
-  overflow: hidden;
-}
-.l_loginPanel_tabs a {
-  display: block;
-  height: 39px;
-  margin-top: -1px;
-  line-height: 39px;
-  border-top: 1px solid #ddd;
-  text-align: center;
-  font-size: 16px;
-  color: #333;
-}
-.l_loginPanel_tabs a:hover {
-  background: #fafafa;
-}
-.l_loginPanel_cnts {
-  position: absolute;
-  width: 300px;
-  height: 100%;
-  top: 0px;
-  right: 0px;
-  overflow: hidden;
-  background: #777;
-}
-.l_loginPanel_item {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-.l_loginPanel_github,
-.l_loginPanel_sina {
-  line-height: 150px;
-  text-align: center;
-  color: #fff;
-  font-size: 18px;
-}
-.l_loginPanel_account,
-.l_loginPanel_define {
-  padding: 30px 50px 0px;
-  overflow: hidden;
-}
-.l_loginPanel_account input,
-.l_loginPanel_define input {
-  display: bock;
-  width: 100%;
-  height: 24px;
-  margin-bottom: 10px;
-  border: none;
-  line-height: 24px;
-  font-family: inherit;
-  text-indent: 1em;
-  color: #aaa;
-}
-.l_loginPanel_account input:focus,
-.l_loginPanel_define input:focus {
-  background: #f4f4f4;
-  outline: none;
-  color: #333;
-}
-.l_loginPanel_arrow {
-  position: absolute;
-  top: -40px;
-  left: 80px;
-  width: 40px;
-  height: 38px;
-  line-height: 38px;
-  text-align: center;
-  font-size: 35px;
-  color: #777;
-  border-radius: 13px;
-  transition: all 0.2s linear;
-  -moz-transition: all 0.2s linear;
-  -webkit-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
 }
 /**
  * 评论模块
@@ -1653,40 +1457,6 @@ a:active {
     border-left: none;
   }
 }
-.blank-content {
-  padding: 100px 20px;
-  margin-bottom: 20px;
-  background: #fff;
-  border-radius: 2px;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
-}
-.blank-content p {
-  position: relative;
-  width: 120px;
-  height: 60px;
-  padding-top: 60px;
-  margin: auto;
-  border: 1px solid #aaa;
-  border-radius: 100%;
-  line-height: 40px;
-  text-align: center;
-  font-size: 18px;
-  color: #333;
-}
-.blank-content p:before {
-  content: '！';
-  position: absolute;
-  display: block;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding-top: 20px;
-  line-height: 40px;
-  text-align: center;
-  font-size: 50px;
-  color: #f70;
-  z-index: 0;
-}
 /** 博文列表页 **/
 .articleListPage {
   width: 620px;
@@ -1895,96 +1665,6 @@ a:active {
   border-bottom: 1px dashed #ccc;
   margin-left: 4em;
 }
-.article .youyan {
-  padding-top: 20px;
-}
-/**实验室列表**/
-.labsList {
-  width: 1080px;
-  margin: auto;
-  padding: 40px 10px;
-  overflow: hidden;
-}
-.lab_item {
-  position: relative;
-  width: 320px;
-  height: 360px;
-  float: left;
-  margin: 0 20px 40px;
-  background: #fff;
-  overflow: hidden;
-}
-.lab_item .lab_cover {
-  display: block;
-  margin: 0px auto;
-  transition: all 0.2s linear;
-  -moz-transition: all 0.2s linear;
-  -webkit-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
-}
-.lab_item .lab_cover img {
-  display: block;
-  height: 240px;
-  margin: auto;
-  max-width: 100%;
-}
-.lab_item .lab_cover:hover {
-  opacity: 0.8;
-}
-.lab_item .lab_title {
-  padding: 10px;
-  line-height: 30px;
-  font-weight: normal;
-  color: #333;
-  font-size: 20px;
-  text-align: center;
-}
-.lab_item .lab_title a {
-  transition: all 0.2s linear;
-  -moz-transition: all 0.2s linear;
-  -webkit-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
-}
-.lab_item .lab_title a:hover {
-  text-decoration: underline;
-  color: #000000;
-}
-.lab_item .lab_info {
-  padding: 10px 10px 20px;
-}
-.lab_item .lab_info p {
-  color: #333;
-  font-size: 12px;
-  opacity: 0.7;
-  line-height: 16px;
-  text-indent: 2em;
-  text-align: justify;
-}
-@media (max-width: 1200px) {
-  .labsList {
-    width: 720px;
-  }
-}
-@media (max-width: 780px) {
-  .labsList {
-    width: auto;
-  }
-  .lab_item {
-    float: none;
-    width: 360;
-    margin: 0 auto 20px;
-  }
-  .lab_item .lab_cover img {
-    width: 100%;
-    height: auto;
-  }
-}
-@media (max-width: 380px) {
-  .lab_item {
-    width: auto;
-    height: auto;
-  }
-}
 /** 我的作品 **/
 .opusList {
   max-width: 700px;
@@ -2127,6 +1807,323 @@ a:active {
   background: url(../images/tagline.png) no-repeat;
   text-indent: -100em;
   overflow: hidden;
+}
+/**实验室列表**/
+.labsList {
+  width: 1080px;
+  margin: auto;
+  padding: 40px 10px;
+  overflow: hidden;
+}
+.lab_item {
+  position: relative;
+  width: 320px;
+  height: 360px;
+  float: left;
+  margin: 0 20px 40px;
+  background: #fff;
+  overflow: hidden;
+}
+.lab_item .lab_cover {
+  display: block;
+  margin: 0px auto;
+  transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+}
+.lab_item .lab_cover img {
+  display: block;
+  height: 240px;
+  margin: auto;
+  max-width: 100%;
+}
+.lab_item .lab_cover:hover {
+  opacity: 0.8;
+}
+.lab_item .lab_title {
+  padding: 10px;
+  line-height: 30px;
+  font-weight: normal;
+  color: #333;
+  font-size: 20px;
+  text-align: center;
+}
+.lab_item .lab_title a {
+  transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+}
+.lab_item .lab_title a:hover {
+  text-decoration: underline;
+  color: #000000;
+}
+.lab_item .lab_info {
+  padding: 10px 10px 20px;
+}
+.lab_item .lab_info p {
+  color: #333;
+  font-size: 12px;
+  opacity: 0.7;
+  line-height: 16px;
+  text-indent: 2em;
+  text-align: justify;
+}
+@media (max-width: 1200px) {
+  .labsList {
+    width: 720px;
+  }
+}
+@media (max-width: 780px) {
+  .labsList {
+    width: auto;
+  }
+  .lab_item {
+    float: none;
+    width: 360;
+    margin: 0 auto 20px;
+  }
+  .lab_item .lab_cover img {
+    width: 100%;
+    height: auto;
+  }
+}
+@media (max-width: 380px) {
+  .lab_item {
+    width: auto;
+    height: auto;
+  }
+}
+body {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background: url("../images/mask.png") #eeeeee;
+}
+a,
+a:active {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+}
+/**应用主容器**/
+.app_container {
+  position: relative;
+}
+.app_mask {
+  position: fixed;
+  display: table;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #eee;
+  z-index: 5000;
+}
+.app_mask_cnt {
+  display: table-cell;
+  vertical-align: middle;
+}
+.app_mask_cnt p {
+  padding-top: 20px;
+  font-size: 18px;
+  color: #333;
+  text-align: center;
+}
+.backToOldVersion {
+  display: block;
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+  color: #555;
+  transition: all 0.3s linear;
+  -moz-transition: all 0.3s linear;
+  -webkit-transition: all 0.3s linear;
+  -o-transition: all 0.3s linear;
+}
+.backToOldVersion:hover {
+  color: #000;
+}
+.tongji {
+  width: 0px;
+  height: 0px;
+  overflow: hidden;
+}
+.gallayer {
+  position: fixed;
+  z-index: 0;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background: #eeeeee;
+}
+.galBj {
+  position: absolute;
+  z-index: 11;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center center;
+}
+.galMask {
+  position: absolute;
+  z-index: 12;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  text-indent: -100em;
+  background: url("../images/mask.png");
+}
+.galBj_mask {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  -webkit-mask-image: url("../images/mask_bj.png");
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center center;
+  -webkit-mask-size: 300%;
+  -webkit-animation: circle_zoom 1s;
+}
+@-webkit-keyframes circle_zoom {
+  0% {
+    opacity: 0;
+    -webkit-mask-size: 30%;
+    -webkit-animation-timing-function: ease-in;
+  }
+  80% {
+    opacity: 1;
+    -webkit-mask-size: 60%;
+    -webkit-animation-timing-function: ease-in;
+  }
+  100% {
+    opacity: 1;
+    -webkit-mask-size: 300%;
+  }
+}
+/**用户登录框**/
+.l_loginPanel {
+  position: relative;
+  overflow: hidden;
+}
+.l_loginPanel_tabs {
+  position: relative;
+  width: 100px;
+  overflow: hidden;
+}
+.l_loginPanel_tabs a {
+  display: block;
+  height: 39px;
+  margin-top: -1px;
+  line-height: 39px;
+  border-top: 1px solid #ddd;
+  text-align: center;
+  font-size: 16px;
+  color: #333;
+}
+.l_loginPanel_tabs a:hover {
+  background: #fafafa;
+}
+.l_loginPanel_cnts {
+  position: absolute;
+  width: 300px;
+  height: 100%;
+  top: 0px;
+  right: 0px;
+  overflow: hidden;
+  background: #777;
+}
+.l_loginPanel_item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.l_loginPanel_github,
+.l_loginPanel_sina {
+  line-height: 150px;
+  text-align: center;
+  color: #fff;
+  font-size: 18px;
+}
+.l_loginPanel_account,
+.l_loginPanel_define {
+  padding: 30px 50px 0px;
+  overflow: hidden;
+}
+.l_loginPanel_account input,
+.l_loginPanel_define input {
+  display: bock;
+  width: 100%;
+  height: 24px;
+  margin-bottom: 10px;
+  border: none;
+  line-height: 24px;
+  font-family: inherit;
+  text-indent: 1em;
+  color: #aaa;
+}
+.l_loginPanel_account input:focus,
+.l_loginPanel_define input:focus {
+  background: #f4f4f4;
+  outline: none;
+  color: #333;
+}
+.l_loginPanel_arrow {
+  position: absolute;
+  top: -40px;
+  left: 80px;
+  width: 40px;
+  height: 38px;
+  line-height: 38px;
+  text-align: center;
+  font-size: 35px;
+  color: #777;
+  border-radius: 13px;
+  transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+}
+.blank-content {
+  padding: 100px 20px;
+  margin-bottom: 20px;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+.blank-content p {
+  position: relative;
+  width: 120px;
+  height: 60px;
+  padding-top: 60px;
+  margin: auto;
+  border: 1px solid #aaa;
+  border-radius: 100%;
+  line-height: 40px;
+  text-align: center;
+  font-size: 18px;
+  color: #333;
+}
+.blank-content p:before {
+  content: '！';
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-top: 20px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 50px;
+  color: #f70;
+  z-index: 0;
 }
 /**
  * 留言板

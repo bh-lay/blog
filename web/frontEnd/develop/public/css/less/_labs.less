@@ -1,0 +1,84 @@
+
+/**实验室列表**/
+.labsList {
+	width: 1080px;
+	margin: auto;
+	padding: 40px 10px;
+	overflow: hidden;
+	overflow: hidden
+}
+.lab_item {
+	position: relative;
+	width: 320px;
+	height: 360px;
+	float: left;
+	margin: 0 20px 40px;
+	background: #fff;
+	overflow: hidden;
+	.lab_cover {
+		display: block;
+		margin: 0px auto;
+		.transition(0.2s);
+		img{
+			display: block;
+            height: 240px;
+			margin: auto;
+			max-width: 100%;
+		}
+		&:hover{
+			opacity: 0.8
+		}
+		
+	}
+	.lab_title {
+		padding: 10px;
+		line-height: 30px;
+		font-weight: normal;
+		color: #333;
+		font-size: 20px;
+		text-align: center;
+		a {
+			.transition(0.2s);
+			&:hover {
+				text-decoration: underline;
+				color: #000
+			}
+		}
+	}
+	.lab_info {
+		padding: 10px 10px 20px;
+		p {
+			color: #333;
+			font-size: 12px;
+			opacity: 0.7;
+			line-height: 16px;
+			text-indent: 2em;
+			text-align: justify
+		}
+	}
+}
+@media(max-width:1200px){
+	.labsList{
+		width: 720px;
+	}
+}
+@media(max-width:780px){
+	.labsList{
+		width: auto;
+	}
+	.lab_item{
+		float: none;
+		width: 360;
+		margin: 0 auto 20px;
+		.lab_cover img{
+            width: 100%;
+			height: auto
+		}
+	}
+}
+@media(max-width:380px){
+	.lab_item{
+		width: auto;
+		height: auto;
+	}
+}
