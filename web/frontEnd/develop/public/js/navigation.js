@@ -37,6 +37,9 @@ define(function () {
 		$('.nav_mask').on('click', function () {
 			$('body').removeClass('nav_slidedown');
 		});
+        $('.nav-back').click(function(){
+            history.back();
+        });
 		var active_pop;
 		$('.nav_setting').click(function () {
 			if (active_pop) {
@@ -69,5 +72,13 @@ define(function () {
 	}
 	var nav = init;
 	nav.setCur = setCur;
+    nav.back = {
+        show : function(){
+            $('.nav-back').fadeIn(80);
+        },
+        hide : function(){
+            $('.nav-back').fadeOut(80);
+        }
+    };
 	return nav;
 });

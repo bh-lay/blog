@@ -97,6 +97,12 @@ body {
 .l-icon-face:after {
   content: '\0055';
 }
+.l-icon-setting:after {
+  content: '\0060';
+}
+.l-icon-back:after {
+  content: '\005a';
+}
 .piclist {
   width: 488px;
   margin: 20px auto;
@@ -774,13 +780,8 @@ body {
   margin: auto;
   padding: 10px 0;
   text-align: center;
-  color: #aaa;
-}
-.nav_bottom i {
-  display: inline-block;
-  font-family: "layIcon";
   font-size: 22px;
-  font-style: normal;
+  color: #aaa;
 }
 .nav_mask {
   position: fixed;
@@ -790,6 +791,27 @@ body {
   height: 100%;
   z-index: 1;
   display: none;
+}
+.nav-back {
+  position: absolute;
+  display: block;
+  height: 40px;
+  top: 0;
+  left: 80px;
+  padding: 0 20px;
+  line-height: 40px;
+  font-size: 16px;
+  color: #333;
+  background: #fff;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.nav-back i {
+  font-size: 22px;
+  margin-right: 5px;
+}
+.nav-back:hover {
+  box-shadow: 0 0 3px #f70;
 }
 .nav_moreBtn {
   position: absolute;
@@ -876,10 +898,17 @@ body {
   }
   .nav_moreBtn {
     top: 5px;
+    left: auto;
+    right: 10px;
+  }
+  .nav-back {
+    top: 5px;
     left: 10px;
+    box-shadow: 0 0 1px #555;
   }
   .nav_body {
     width: 100%;
+    top: 50px;
     box-shadow: none;
   }
 }
