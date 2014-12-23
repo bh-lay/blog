@@ -206,9 +206,7 @@ function routerHandle(lofox) {
 	/**
 	 * 监听页面跳转
 	 */
-	lofox.on('change', function (url,a,b,c) {
-        console.log(url,a,b,c);
-    });
+	//lofox.on('change', function (url) {});
 	
 	$('body').on('click', 'a[lofox="true"]', function () {
 		var url = $(this).attr('href');
