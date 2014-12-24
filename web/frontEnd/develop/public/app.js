@@ -206,7 +206,13 @@ function routerHandle(lofox) {
 	/**
 	 * 监听页面跳转
 	 */
-	//lofox.on('change', function (url) {});
+	lofox.on('refresh', function (pathData,search) {
+        if(pathData.length > 1){
+            L.nav.back.show();
+        }else{
+            L.nav.back.hide();
+        }
+    });
 	
 	$('body').on('click', 'a[lofox="true"]', function () {
 		var url = $(this).attr('href');

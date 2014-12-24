@@ -282,6 +282,7 @@
 			}else{
 				this._rest && this._rest.call(this,pathData,searchData);
 			}
+			EMIT.call(this,'refresh',[pathData,searchData]);
 		}
 	};
 	

@@ -5,7 +5,7 @@
 define(function () {
     'use strict';
 	var init = function () {
-        if(L.supports.touch){
+        if(!L.supports.touch){
             $('.nav_moreBtn').click(function () {
                 $('body').toggleClass('nav_slidedown');
             });
@@ -74,10 +74,10 @@ define(function () {
 	nav.setCur = setCur;
     nav.back = {
         show : function(){
-            $('.nav-back').fadeIn(80);
+            $('.nav-back').fadeIn(200);
         },
         hide : function(){
-            $('.nav-back').fadeOut(80);
+            $('.nav-back').fadeOut(200);
         }
     };
 	return nav;
