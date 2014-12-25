@@ -6,7 +6,6 @@
 
 //index page
 define(function(require,exports){
-	
 	var temp = ['<div class="indeCnt">',
 		'<div class="index_intro">',
 			'<div class="index_intro_cpt">',
@@ -25,18 +24,32 @@ define(function(require,exports){
 			'<a title="给剧中人留言" href="/bless" lofox="true">留言</a>',
 		'</div>',
 		'<div class="webLink"><div class="webLink_cpt">我的小伙伴</div>',
-		'<div class="webLink_cnt">',
-			'<a target="_blank" href="http://www.z990.com">小林Design</a>',
-			'<a target="_blank" href="http://www.zhuwenlong.com/">Mofei梦的起飞</a>',
-			'<a target="_blank" href="http://www.w3clover.com">W3C爱好者</a>',
-			'<a target="_blank" href="http://www.hankewins.com/">前端生活</a>',
-			'<a target="_blank" href="http://www.woween.com">何东杰的网络日记</a>',
-			'<a target="_blank" href="http://www.siyonli.com/">大晚的小窝</a>',
+		'<div class="webLink_cnt">{@each friends as it}',
+            '<a target="_blank href="${it.url}" title="${it.title}" >',
+                '${it.title}',
+            '</a>',
+        '{@/each}',
 		'</div></div>',
 	'</div>'].join('');
-	
+    function getData(callback){
+		$.ajax({
+			'type' : 'GET' ,
+			'url' : '/ajax/forPage/index',
+			'success' :function(data){
+				callback && callback(null,data);
+			}
+		});
+	}
 	return function(dom,callback){
-		var this_dom = $(temp);
-		dom.html(this_dom);
+        getData(function(err,data){
+            if(err){
+                data = {
+                    friends : []
+                }
+            }
+            var html = juicer(temp,data);
+            var this_dom = $(html);
+            dom.html(this_dom);
+        });
 	};
 });

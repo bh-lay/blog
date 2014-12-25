@@ -119,6 +119,11 @@ var ajax_user_group = require('./ajax/user/user_group_add&edit');
 var ajax_power = require('./ajax/user/power');
 var ajax_demo = require('./ajax/demo/index');
 var ajax_tag =  require('./ajax/tag/index.js');
+var ajax_for_page = require('./ajax/forPage/index.js');
+//尝鲜版首页数据获取
+app.get('/ajax/forPage/index', function(data,connect){
+	ajax_for_page.index(connect,app);
+});
 //通用增加&编辑
 app.get('/ajax/add_edit', function(data,connect){
 	ajax_add_edit.render(connect,app);
