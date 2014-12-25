@@ -10,7 +10,9 @@ var mongo = require('../core/DB');
 exports.produce = function(temp,data,callback){
 	var method = mongo.start();
 	method.open({'collection_name':'blog_friend'},function(err,collection){
-		collection.find({}, {limit:20}).toArray(function(err, docs) {
+		collection.find({
+            isShow: '1'
+        }, {limit:20}).toArray(function(err, docs) {
 			if(err){
 				callback && callback(err);
 				return

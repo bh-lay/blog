@@ -39,7 +39,7 @@ define && define(function(require,exports){
 			'</div>',
 			'<br/><div class="input-group">',
 				'<span class="input-group-addon">是否显示</span>',
-				'<input type="text" class="form-control" name="isShow" value="{isShow}" placeholder="是否显示">',
+				'<input type="text" class="form-control" name="isShow" value="{isShow}" placeholder="1 显示，0不显示 ">',
 			'</div>',
 			'<br/><div class="pub_row_input">',
 				'<input type="hidden" name="id" value="{id}" />',
