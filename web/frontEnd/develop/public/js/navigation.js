@@ -5,7 +5,7 @@
 define(function () {
     'use strict';
 	var init = function () {
-        if(!L.supports.touch){
+        if(L.supports.touch){
             $('.nav_moreBtn').click(function () {
                 $('body').toggleClass('nav_slidedown');
             });
