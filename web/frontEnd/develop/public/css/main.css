@@ -740,12 +740,9 @@ body {
 }
 .nav li a i {
   display: inline-block;
-  vertical-align: middle;
   width: 50px;
   text-align: center;
-  font-family: "layIcon";
   font-size: 18px;
-  font-style: normal;
 }
 .nav li:hover {
   background: #eee;
@@ -845,6 +842,9 @@ body {
   top: 9px;
   box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.4);
 }
+.nav_appname {
+  display: none;
+}
 .nav_moreBtn {
   display: none;
 }
@@ -869,14 +869,34 @@ body {
     background: #fff;
     box-shadow: 0 0 4px #000;
   }
+  .nav_appname {
+    display: block;
+    position: absolute;
+    left: 50%;
+    width: 6em;
+    height: 50px;
+    margin-left: -3em;
+    line-height: 50px;
+    font-size: 20px;
+  }
   .nav_body {
     width: 100%;
     height: auto;
-    top: 50px;
+    top: -300px;
     left: 0;
-    box-shadow: none;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
     background: #fff;
-    display: none;
+    opacity: 0;
+    transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -webkit-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+  }
+  .nav_body .nav {
+    padding-top: 0;
+  }
+  .nav_body .nav li {
+    margin-bottom: 0;
   }
   .nav_body .nav a:after {
     display: inline-block;
@@ -888,7 +908,7 @@ body {
   }
   .nav-back {
     top: 5px;
-    left: 20px;
+    left: 10px;
     border-radius: 4px;
     box-shadow: none;
   }
@@ -929,10 +949,12 @@ body {
     top: 26px;
   }
   .nav_slidedown .nav_body {
-    display: block;
+    top: 50px;
+    opacity: 1;
   }
   .nav_slidedown .nav_mask {
     display: block;
+    background: rgba(255, 255, 255, 0.4);
   }
   .nav_slidedown .nav_Btn_ico_1 {
     transform: translate(0, 8px) rotate(-45deg);
@@ -1414,8 +1436,8 @@ body {
 }
 .index_intro_cpt {
   padding: 20px 0px;
-  background: url(../images/mask.png) #006633;
-  color: #ffffff;
+  background: url(../images/mask.png) #555555;
+  color: #fff;
 }
 .index_intro_logo {
   font-size: 120px;
@@ -1510,7 +1532,7 @@ body {
 .webLink_cnt a:hover {
   background: #f6f6f6;
 }
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 680px) {
   .indeCnt {
     width: auto;
     margin: 0px 10px;

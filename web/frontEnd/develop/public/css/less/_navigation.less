@@ -36,12 +36,9 @@
             .transition(0.1s);
             i {
                 display: inline-block;
-                vertical-align: middle;
                 width: @nav_width;
                 text-align: center;
-                font-family: "layIcon";
                 font-size: 18px;
-                font-style: normal
             }
         }
         &:hover {
@@ -142,7 +139,9 @@
 		box-shadow: 5px 5px 4px rgba(0,0,0,.4);
     }
 }
-
+.nav_appname{
+	display: none;
+}
 .nav_moreBtn{
 	display: none;
 }
@@ -167,15 +166,30 @@
         background: #fff;
         box-shadow: 0 0 4px #000;
     }
+	.nav_appname{
+		display: block;
+		position: absolute;
+		left: 50%;
+		width: 6em;
+		height: 50px;
+		margin-left: -3em;
+		line-height: 50px;
+		font-size: 20px;
+	}
     .nav_body{
         width: 100%;
 		height: auto;
-        top: 50px;
+        top: -300px;
 		left: 0;
-        box-shadow: none;
+        box-shadow: 0 2px 2px rgba(0,0,0,.4);
 		background: #fff;
-		display: none;
+		opacity: 0;
+		.transition(.2s,ease-out);
 		.nav{
+			padding-top: 0;
+			li{
+				margin-bottom: 0;
+			}
 			a:after{
 				display: inline-block;
 				width: 10em;
@@ -189,7 +203,7 @@
 	
 	.nav-back{
 		top: 5px;
-		left: 20px;
+		left: 10px;
 		border-radius: 4px;
 		box-shadow: none;
 		&:hover{
@@ -228,10 +242,12 @@
 	}
 	.nav_slidedown{
 		.nav_body {
-			display: block;
+			top: 50px;
+			opacity: 1;
 		}
 		.nav_mask{
 			display: block;
+			background: rgba(255,255,255,.4);
 		}
 		.nav_Btn_ico_1 {
 			.transform(translate(0,8px) rotate(-45deg));
