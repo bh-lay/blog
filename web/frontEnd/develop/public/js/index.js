@@ -25,7 +25,7 @@ define(function(require,exports){
 		'</div>',
 		'<div class="webLink"><div class="webLink_cpt">我的小伙伴</div>',
 		'<div class="webLink_cnt">{@each friends as it}',
-            '<a target="_blank href="${it.url}" title="${it.title}" >',
+            '<a target="_blank" href="${it.url}" title="${it.title}" >',
                 '${it.title}',
             '</a>',
         '{@/each}',
