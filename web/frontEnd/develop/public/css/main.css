@@ -703,31 +703,35 @@ body {
  */
 .app_nav {
   position: fixed;
-  top: 10px;
-  left: 10px;
+  top: 0;
+  left: 0;
+  height: 100%;
   z-index: 4000;
 }
 .nav_body {
   position: absolute;
-  top: 40px;
-  left: 0px;
-  width: 200px;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 100%;
   background: #fff;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   z-index: 2;
-  display: none;
 }
 .nav {
   padding-top: 40px;
 }
+.nav li {
+  margin-bottom: 10px;
+}
 .nav li a {
   display: block;
   width: 100%;
-  height: 40px;
-  line-height: 40px;
+  height: 50px;
+  line-height: 50px;
   outline: none;
   color: #333;
-  text-indent: 1em;
+  text-align: center;
   overflow: hidden;
   transition: all 0.1s linear;
   -moz-transition: all 0.1s linear;
@@ -737,16 +741,11 @@ body {
 .nav li a i {
   display: inline-block;
   vertical-align: middle;
-  width: 40px;
+  width: 50px;
   text-align: center;
   font-family: "layIcon";
   font-size: 18px;
   font-style: normal;
-}
-.nav li a:after {
-  content: attr(data-title);
-  padding-left: 5px;
-  font-size: 14px;
 }
 .nav li:hover {
   background: #eee;
@@ -756,6 +755,29 @@ body {
 }
 .nav li.cur a {
   color: #ffffff;
+}
+.nav_tips {
+  position: relative;
+  float: left;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 30px 0 20px;
+  border-radius: 2px;
+  background: #333;
+  color: #fff;
+}
+.nav_tips:before {
+  content: '◆';
+  position: absolute;
+  diaplay: block;
+  top: 10px;
+  left: -10px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  font-size: 20px;
+  color: #333;
 }
 .navLink {
   overflow: hidden;
@@ -772,6 +794,10 @@ body {
   font-size: 12px;
 }
 .nav_bottom {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
   padding: 10px 0 20px;
 }
 .nav_bottom a {
@@ -796,94 +822,41 @@ body {
   position: absolute;
   display: block;
   height: 40px;
-  top: 0;
-  left: 80px;
+  top: 10px;
+  left: 50px;
   padding: 0 20px;
   line-height: 40px;
   font-size: 16px;
   color: #333;
   background: #fff;
-  border-radius: 4px;
+  border-radius: 0 4px 4px 0;
   white-space: nowrap;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
 }
 .nav-back i {
   font-size: 22px;
   margin-right: 5px;
 }
 .nav-back:hover {
-  box-shadow: 0 0 3px #f70;
+  top: 9px;
+  box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.4);
 }
 .nav_moreBtn {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  top: 0;
-  left: 0;
-  background: #fff;
-  opacity: .5;
-  z-index: 3;
-  transition: all 0.2s linear;
-  -moz-transition: all 0.2s linear;
-  -webkit-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
+  display: none;
 }
-.nav_moreBtn:hover {
-  opacity: 1;
-}
-.nav_Btn_ico {
-  display: block;
-  position: absolute;
-  width: 22px;
-  height: 4px;
-  left: 9px;
-  border-radius: 4px;
-  background: #333;
-  transition: all 0.2s ease;
-  -moz-transition: all 0.2s ease;
-  -webkit-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
-}
-.nav_Btn_ico_1 {
-  top: 10px;
-}
-.nav_Btn_ico_2 {
-  top: 18px;
-}
-.nav_Btn_ico_3 {
-  top: 26px;
-}
-.nav_slidedown .nav_body {
-  display: block;
-}
-.nav_slidedown .nav_mask {
-  display: block;
-}
-.nav_slidedown .nav_moreBtn {
-  opacity: 1;
-}
-.nav_slidedown .nav_Btn_ico_1 {
-  transform: translate(0, 8px) rotate(-45deg);
-  -moz-transform: translate(0, 8px) rotate(-45deg);
-  -webkit-transform: translate(0, 8px) rotate(-45deg);
-  -o-transform: translate(0, 8px) rotate(-45deg);
-}
-.nav_slidedown .nav_Btn_ico_2 {
-  opacity: 0;
-  transform: translate(10px, 0);
-  -moz-transform: translate(10px, 0);
-  -webkit-transform: translate(10px, 0);
-  -o-transform: translate(10px, 0);
-}
-.nav_slidedown .nav_Btn_ico_3 {
-  transform: translate(0, -8px) rotate(45deg);
-  -moz-transform: translate(0, -8px) rotate(45deg);
-  -webkit-transform: translate(0, -8px) rotate(45deg);
-  -o-transform: translate(0, -8px) rotate(45deg);
+.app_container {
+  margin-left: 50px;
 }
 @media screen and (max-width: 660px) {
-  .nav_mask {
-    background: #fff;
-    opacity: .2;
+  .app_container {
+    margin-left: 0;
+  }
+  .nav_bottom {
+    position: static;
   }
   .app_container {
     padding-top: 50px;
@@ -896,20 +869,89 @@ body {
     background: #fff;
     box-shadow: 0 0 4px #000;
   }
-  .nav_moreBtn {
-    top: 5px;
-    left: auto;
-    right: 10px;
+  .nav_body {
+    width: 100%;
+    height: auto;
+    top: 50px;
+    left: 0;
+    box-shadow: none;
+    background: #fff;
+    display: none;
+  }
+  .nav_body .nav a:after {
+    display: inline-block;
+    width: 10em;
+    content: attr(data-title);
+    padding-left: 5px;
+    font-size: 14px;
+    text-align: left;
   }
   .nav-back {
     top: 5px;
-    left: 10px;
-    box-shadow: 0 0 1px #555;
-  }
-  .nav_body {
-    width: 100%;
-    top: 50px;
+    left: 20px;
+    border-radius: 4px;
     box-shadow: none;
+  }
+  .nav-back:hover {
+    top: 5px;
+    box-shadow: none;
+  }
+  .nav_moreBtn {
+    position: absolute;
+    display: block;
+    width: 40px;
+    height: 40px;
+    top: 5px;
+    right: 10px;
+    background: #fff;
+    z-index: 3;
+  }
+  .nav_Btn_ico {
+    display: block;
+    position: absolute;
+    width: 22px;
+    height: 4px;
+    left: 9px;
+    border-radius: 4px;
+    background: #333;
+    transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+  }
+  .nav_Btn_ico_1 {
+    top: 10px;
+  }
+  .nav_Btn_ico_2 {
+    top: 18px;
+  }
+  .nav_Btn_ico_3 {
+    top: 26px;
+  }
+  .nav_slidedown .nav_body {
+    display: block;
+  }
+  .nav_slidedown .nav_mask {
+    display: block;
+  }
+  .nav_slidedown .nav_Btn_ico_1 {
+    transform: translate(0, 8px) rotate(-45deg);
+    -moz-transform: translate(0, 8px) rotate(-45deg);
+    -webkit-transform: translate(0, 8px) rotate(-45deg);
+    -o-transform: translate(0, 8px) rotate(-45deg);
+  }
+  .nav_slidedown .nav_Btn_ico_2 {
+    opacity: 0;
+    transform: translate(10px, 0);
+    -moz-transform: translate(10px, 0);
+    -webkit-transform: translate(10px, 0);
+    -o-transform: translate(10px, 0);
+  }
+  .nav_slidedown .nav_Btn_ico_3 {
+    transform: translate(0, -8px) rotate(45deg);
+    -moz-transform: translate(0, -8px) rotate(45deg);
+    -webkit-transform: translate(0, -8px) rotate(45deg);
+    -o-transform: translate(0, -8px) rotate(45deg);
   }
 }
 /**分页组件**/
