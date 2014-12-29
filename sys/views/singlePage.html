@@ -7,31 +7,31 @@
         <meta name="description" content="${{description}}" />
         <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
         <include name="favicon_appicon" />
-        <link rel="stylesheet" type="text/css" href="${{frontEnd_base}}public/css/main.css"/>
+        <link rel="stylesheet" type="text/css" href="${{frontEnd_base}}public/css/main.css?v=${{frontEnd_version}}"/>
     </head>
     <body>
 <include name="navigation"/>
-        <div class="app_container"></div>
-        <div class="app_mask">
-            <div class="app_mask_cnt">
-                <span class="l-loading"></span>
-                <p>小剧正在拼命加载资源</p>
-            </div>
-        </div>
-        <script type="text/javascript" src="${{frontEnd_base}}lib/jquery/jquery-2.0.0.js"></script>
-        <script type="text/javascript" src="${{frontEnd_base}}lib/sea.js"></script>
-        <script type="text/javascript">
-            var app_config = {
-                'frontEnd_base' : '${{frontEnd_base}}',
-                'frontEnd_version' : '${{frontEnd_version}}',
-                'imgDomain' : '${{img_domain}}'
-            };
-            seajs.config({
-                'base' : '${{frontEnd_base}}',
-                'map' : [[/^(.*\.(?:css|js))(.*)$/i, '$1?v=${{frontEnd_version}}']]
-            });
-            seajs.use("public/app.js");
-        </script>
+<div class="app_container"></div>
+<div class="app_mask">
+    <div class="app_mask_cnt">
+        <span class="l-loading"></span>
+        <p>小剧正在拼命加载资源</p>
+    </div>
+</div>
+<script type="text/javascript" src="${{frontEnd_base}}lib/jquery/jquery-2.0.0.js"></script>
+<script type="text/javascript" src="${{frontEnd_base}}lib/sea.js"></script>
+<script type="text/javascript">
+    var app_config = {
+        'frontEnd_base' : '${{frontEnd_base}}',
+        'frontEnd_version' : '${{frontEnd_version}}',
+        'imgDomain' : '${{img_domain}}'
+    };
+    seajs.config({
+        'base' : '${{frontEnd_base}}',
+        'map' : [[/^(.*\.(?:css|js))(.*)$/i, '$1?v=${{frontEnd_version}}']]
+    });
+    seajs.use("public/app.js");
+</script>
 <include name="baiduAndGoogleTongji"/>
 </body>
 </html>
