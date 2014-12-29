@@ -38,7 +38,7 @@ var isSupportTouch = document.hasOwnProperty("ontouchend") ? true : false;
  *
  */
 var isAdvancedBrowser = (supports('transition') && supports('transform') && supports_canvas) ? true : false;
-var isMobileBrowser = ($(window).width() < 720 && isSupportTouch) ? true : false;
+var isMobileBrowser = (window.innerWidth < 720 && isSupportTouch) ? true : false;
 
 
 
@@ -48,6 +48,45 @@ if (!isAdvancedBrowser) {
 	window.location.reload();
 }
 
+define(function (require, exports) {
+    'use strict';
+    require('public/js/jquery-2.0.0.js');
+    var user = require('public/base/user.js'),
+	    nav = require('public/js/navigation.js'),
+        gallery = require('public/js/page_background.js');
+	require('util/lofox_1_0.js');
+	require('lib/juicer.js');
+	require('UI/dialog.js');
+    //绑定路由
+    var lofox = new util.lofox();
+    routerHandle(lofox);
+
+    L.user = user;
+    L.gallery = gallery;
+    L.nav = nav;
+	L.push = function (url) {
+		lofox.push(url);
+	};
+	L.refresh = function () {
+		lofox.refresh();
+	};
+    L.supports = {
+        'touch' : isSupportTouch
+    };
+    
+    //显示背景图
+    if (supports('backgroundSize') && !isMobileBrowser) {
+        L.gallery();
+    }
+    //开始导航
+    L.nav();
+    setTimeout(function () {
+        $('.app_mask').fadeOut(500, function () {
+            $(this).remove();
+        });
+    }, 500);
+	
+});
 window.L = window.L || {};
 
 /**
@@ -223,46 +262,6 @@ function routerHandle(lofox) {
 		return false;
 	});
 }
-
-define(function (require, exports) {
-    'use strict';
-    
-    var user = require('public/base/user.js'),
-	    nav = require('public/js/navigation.js'),
-        gallery = require('public/js/page_background.js');
-	require('util/lofox_1_0.js');
-	require('lib/juicer.js');
-	require('UI/dialog.js');
-    //绑定路由
-    var lofox = new util.lofox();
-    routerHandle(lofox);
-
-    L.user = user;
-    L.gallery = gallery;
-    L.nav = nav;
-	L.push = function (url) {
-		lofox.push(url);
-	};
-	L.refresh = function () {
-		lofox.refresh();
-	};
-    L.supports = {
-        'touch' : isSupportTouch
-    };
-    
-    //显示背景图
-    if (supports('backgroundSize') && !isMobileBrowser) {
-        L.gallery();
-    }
-    //开始导航
-    L.nav();
-    setTimeout(function () {
-        $('.app_mask').fadeOut(500, function () {
-            $(this).remove();
-        });
-    }, 500);
-	
-});
 
 
 try {
