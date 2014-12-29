@@ -11,7 +11,7 @@
 define(function(require,exports){
     require('public/js/md5.js');
     
-    	var loginPanel_tpl = ['<div class="l_loginPanel">',
+    var loginPanel_tpl = ['<div class="l_loginPanel">',
 		'<div class="l_loginPanel_tabs">',
 			'<a href="#" data-type="github"><i class="layIcon">A</i>github</a>',
 			'<a href="#" data-type="sina">微博</a>',

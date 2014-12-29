@@ -11,7 +11,7 @@
 	global.util = global.util || {};
 	global.util.mirror = global.util.mirror || factoryFn(global,doc);
 	
-	global.define && global.define(function(){
+	global.define && define(function(){
 		return global.util.mirror;
 	});
 })(window,document,function(window,document){

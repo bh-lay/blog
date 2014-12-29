@@ -2,18 +2,47 @@
  * @author bh-lay
  * 
  * @github: https://github.com/bh-lay/Selection
- * @introduction: https://github.com/bh-lay/Selection/blob/master/README.md
+ * 
+ * @modified 2014-12-29 15:32
  *  
  */
-
-(function(exports){
+window.util = window.util || {};
+(function(global,doc,factoryFn){
+	var factory = factoryFn(doc);
+	//exports for jquery
+	if(global.jQuery && global.jQuery.fn){
+		jQuery.fn.Selection = function(){
+			var tarea = this[0];
+			if(tarea.tagName != 'TEXTAREA'){
+				return this
+			}else if(arguments['length'] > 0){
+				factory.setPosition(tarea,arguments[0],arguments[1]);
+				return this
+			}else{
+				return factory.getPosition(tarea);
+			}
+		};
+		jQuery.fn.insertTxt = function(txt,start,end){
+			factory.insertTxt(this[0],txt,start,end);
+			return this
+		};
+	}
+	
+	//exports for commonJS
+	global.define && define(function(require,exports){
+		exports.insertTxt = factory.insertTxt;
+		exports.Selection = factory.Selection;
+	});
+	
+	global.insertTxt = factory.insertTxt;
+	global.Selection = factory.Selection;
+})(this,document,function(doc){
 	//set
 	var setPosition = (function() {
-		var textarea = document.createElement("textarea");
-		if (textarea.setSelectionRange) {//FF
+		var textarea = doc.createElement("textarea");
+		if (textarea.setSelectionRange) {
 			return function(tarea,start, len) {
 				var len = len || 0;
-				tarea.focus();
 				setTimeout(function(){
 					tarea.focus();
 					tarea.setSelectionRange(start,start+len);
@@ -33,20 +62,21 @@
 	})();
 	//get
 	var getPosition = (function(){
-		var textarea = document.createElement("textarea");
-		if(!textarea.createTextRange){ //not IE
+		var textarea = doc.createElement("textarea");
+		if(typeof(textarea.selectionStart)=='number'){ //not IE
 			return function(tarea){
-				return [tarea.selectionStart,tarea.selectionEnd];
+				
+				return [tarea.selectionStart,tarea.selectionEnd,tarea.value.slice(tarea.selectionStart,tarea.selectionEnd)];
 			}
 		}else{ //IE
 			return function(tarea){
 				var start = 0,
 					 end = 0;
 				tarea.focus();
-				var sTextRange = document.selection.createRange();
-
+				var sTextRange = doc.selection.createRange();
+				
 				if (tarea.tagName == "TEXTAREA") {
-					var oTextRange = document.body.createTextRange();
+					var oTextRange = doc.body.createTextRange();
 					oTextRange.moveToElementText(tarea);
 					for (start = 0; oTextRange.compareEndPoints("StartToStart", sTextRange) < 0; start++) {
 						oTextRange.moveStart('character', 1);
@@ -66,10 +96,12 @@
 						}
 					}
 				}
-				return [start,end];
+				return [start,end,selectedTxt,tarea.value.slice(start,end)];
 			}
 		}
 	})();
+	
+	
 	/**	 
 	 * @method Selection set or get texarea position
 	 * @param {Object} textarea jquery dom
@@ -104,49 +136,27 @@
 		var this_start,this_end;
 		if(typeof(start) == 'undefined'){
 			var pos = getPosition(tarea);
-
+			
 			this_start = pos[0];
 			this_end = pos[1];
 		}else{
 			this_start = parseInt(start);
 			this_end = end || this_start;
 		}
-
+		
 		var allTxt = tarea.value,
 			 frontTxt = allTxt.slice(0,this_start),
 			 endTxt = allTxt.slice(this_end);
 		tarea.value = frontTxt + txt + endTxt;
-
-		tarea.focus();
-		var reSlect_start = frontTxt.length + txt.length;
-		setPosition(tarea,reSlect_start,0);
-		return {
-			'focus' : function(start,end){
-				setPosition(tarea,frontTxt.length + start,end);
-			}
-		}
+		
+		setPosition(tarea ,frontTxt.length + txt.length,0);
 	};
-
-
+	
 	//exports
-	exports.insertTxt = insertTxt;
-	exports.Selection = Selection;
-
-	//exports for jquery
-	if(jQuery && jQuery.fn){
-		jQuery.fn.Selection = function(){
-			var tarea = this[0];
-			if(tarea.tagName != 'TEXTAREA'){
-				return this
-			}else if(arguments['length'] > 0){
-				setPosition(tarea,arguments[0],arguments[1]);
-				return this
-			}else{
-				return getPosition(tarea);
-			}
-		};
-		jQuery.fn.insertTxt = function(txt,start,end){
-			return insertTxt(this[0],txt,start,end);
-		};
-	}
-})(window.util);
+	return {
+		'insertTxt' : insertTxt,
+		'Selection' : Selection,
+		'setPosition' : setPosition,
+		'getPosition' : getPosition
+	};
+});
