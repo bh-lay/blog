@@ -9,7 +9,7 @@
  */
 
 define(function(require,exports){
-    require('public/js/md5.js');
+    var hex_md5 = require('public/js/md5');
     
     var loginPanel_tpl = ['<div class="l_loginPanel">',
 		'<div class="l_loginPanel_tabs">',
