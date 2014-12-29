@@ -3,7 +3,7 @@
  *  
  */
 define(function(require,exports){
-    require('lib/highlight/highlight.pack.js');
+    require('lib/highlight/highlight');
 
 	var template = ['<div class="blogDetail">',
 		'<div class="blog_article">',

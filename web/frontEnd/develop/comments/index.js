@@ -1,9 +1,9 @@
 
 
 define(function(require,exports){
-	var mirror = require('comments/mirror.js');
-	var selection = require('comments/selection.js');
-	var pagination = require('util/pagination.js');
+	var mirror = require('comments/mirror');
+	var selection = require('comments/selection');
+	var pagination = require('util/pagination');
 	
     var private_userInfo = null;
 	var baseTpl = ['<div class="l_comments">',

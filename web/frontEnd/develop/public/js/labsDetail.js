@@ -4,8 +4,8 @@
  */
 
 seajs.use([
-	'util/tie.js',
-	'lib/highlight/highlight.pack.js'
+	'util/tie',
+	'lib/highlight/highlight'
 ],function(){
 	util.tie({
 		'dom' : $('.labs_detail_bar_cnt'),

@@ -49,28 +49,25 @@ if (!isAdvancedBrowser) {
 }
 
 define(function (require, exports) {
-    'use strict';
-    require('public/js/jquery-2.0.0.js');
+    require('public/js/jquery');
 	require('util/lofox_1_0.js');
 	require('public/js/juicer.js');
 	require('UI/dialog.js');
-    var user = require('public/base/user.js'),
-	    nav = require('public/js/navigation.js'),
-        gallery = require('public/js/page_background.js');
     //绑定路由
     var lofox = new util.lofox();
     routerHandle(lofox);
 
-    L.user = user;
-    L.gallery = gallery;
-    L.nav = nav;
+    L.user = require('public/js/user.js');
+    L.gallery = require('public/js/page_background.js');
+    L.nav = require('public/js/navigation.js');
     L.views = {
         'index' : require('public/js/index.js'),
         'blogList' : require('public/js/blogList.js'),
         'blogDetail' : require('public/js/blogDetail.js'),
         'opusList' : require('public/js/opusList.js'),
         'opusDetail' : require('public/js/opusDetail.js'),
-        'labsList' : require('public/js/labsList.js')
+        'labsList' : require('public/js/labsList.js'),
+        'comments' : require('comments/index.js')
     };
 	L.push = function (url) {
 		lofox.push(url);
@@ -207,9 +204,7 @@ function routerHandle(lofox) {
 		this.title('作品_小剧客栈');
 		L.nav.setCur('opus');
 		var dom = getNewPage();
-		seajs.use('public/js/opusList.js', function (opusList) {
-			opusList(dom);
-		});
+		L.views.opusList(dom);
 	});
 	//作品详情页
 	lofox.set('/opus/{id}', function (param) {
@@ -234,10 +229,8 @@ function routerHandle(lofox) {
 		this.title('留言板_小剧客栈');
 		L.nav.setCur('/');
 		var dom = getNewPage();
-		seajs.use('comments/index.js', function (comments) {
-			dom.html('<div class="l_row blessPage"><div class="l_col_12"></div></div>');
-			new comments.init(dom.find('.l_col_12')[0], 'define-1');
-		});
+        dom.html('<div class="l_row blessPage"><div class="l_col_12"></div></div>');
+        new L.views.comments.init(dom.find('.l_col_12')[0], 'define-1');
 	});
 	
 	/**
