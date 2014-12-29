@@ -51,12 +51,12 @@ if (!isAdvancedBrowser) {
 define(function (require, exports) {
     'use strict';
     require('public/js/jquery-2.0.0.js');
+	require('util/lofox_1_0.js');
+	require('public/js/juicer.js');
+	require('UI/dialog.js');
     var user = require('public/base/user.js'),
 	    nav = require('public/js/navigation.js'),
         gallery = require('public/js/page_background.js');
-	require('util/lofox_1_0.js');
-	require('lib/juicer.js');
-	require('UI/dialog.js');
     //绑定路由
     var lofox = new util.lofox();
     routerHandle(lofox);
@@ -64,6 +64,14 @@ define(function (require, exports) {
     L.user = user;
     L.gallery = gallery;
     L.nav = nav;
+    L.views = {
+        'index' : require('public/js/index.js'),
+        'blogList' : require('public/js/blogList.js'),
+        'blogDetail' : require('public/js/blogDetail.js'),
+        'opusList' : require('public/js/opusList.js'),
+        'opusDetail' : require('public/js/opusDetail.js'),
+        'labsList' : require('public/js/labsList.js')
+    };
 	L.push = function (url) {
 		lofox.push(url);
 	};
@@ -171,9 +179,7 @@ function routerHandle(lofox) {
 		L.nav.setCur('/');
 		var dom = getNewPage();
 		
-		seajs.use('public/js/index.js', function (indexPage) {
-			indexPage(dom);
-		});
+		L.views.index(dom);
 	});
 	/**
 	 * 博文列表
@@ -183,9 +189,7 @@ function routerHandle(lofox) {
 		L.nav.setCur('blog');
 		var dom = getNewPage();
 		
-		seajs.use('public/js/blogList.js', function (blogList) {
-			blogList(dom, search);
-		});
+		L.views.blogList(dom, search);
 	});
 	/**
 	 * 博客详细页
@@ -194,11 +198,9 @@ function routerHandle(lofox) {
 		this.title('我的博客_小剧客栈');
 		L.nav.setCur('blog');
 		var dom = getNewPage();
-		seajs.use('public/js/blogDetail.js', function (blogDetail) {
-			blogDetail(dom, param.id, function (title) {
-				lofox.title(title);
-			});
-		});
+		L.views.blogDetail(dom, param.id, function (title) {
+            lofox.title(title);
+        });
 	});
 	//作品列表页
 	lofox.set('/opus', function () {
@@ -214,9 +216,7 @@ function routerHandle(lofox) {
 		this.title('作品_小剧客栈');
 		L.nav.setCur('opus');
 		var dom = getNewPage();
-		seajs.use('public/js/opusDetail.js', function (opusDetail) {
-			opusDetail(dom, param.id);
-		});
+		L.views.opusDetail(dom, param.id);
 	});
 	//实验室列表页
 	lofox.set('/labs', function () {
@@ -224,9 +224,7 @@ function routerHandle(lofox) {
 		
 		L.nav.setCur('labs');
 		var dom = getNewPage();
-		seajs.use('public/js/labsList.js', function (labsList) {
-			labsList(dom);
-		});
+		L.views.labsList(dom);
 	});
 	
 	/**

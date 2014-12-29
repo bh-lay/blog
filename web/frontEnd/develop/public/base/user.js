@@ -9,7 +9,7 @@
  */
 
 define(function(require,exports){
-    require('lib/md5.js');
+    require('public/js/md5.js');
     
     	var loginPanel_tpl = ['<div class="l_loginPanel">',
 		'<div class="l_loginPanel_tabs">',
