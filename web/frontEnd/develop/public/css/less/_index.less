@@ -75,37 +75,24 @@
 	border-radius: 4px;
 	margin-bottom: 20px;
     .caption {
-        display: table-cell;
-        vertical-align: middle;
-        white-space: nowrap;
-        width: 10%;
-        line-height: 50px;
+        line-height: 40px;
         padding: 0px 10px;
         margin: auto;
-        text-align: center;
+        text-indent: 2em;
         font-size: 14px;
-        cursor: pointer
+        border-bottom: 1px solid #ddd;
     }
     .content {
-        display: table-cell;
-        width: 90%;
         overflow: hidden;
+        padding: 20px;
         a {
-            display: block;
-            width: 50%;
-            float: left;
-            margin-top: -1px;
-            border-top: 1px solid #ddd;
-            border-left: 1px solid #ddd;
+            display: inline-block;
             height: 40px;
             line-height: 40px;
+            padding: 0 10px;
             font-size: 14px;
             text-align: center;
             .transition(0.2s);
-            .borderbox();
-            &:hover {
-                background: #f6f6f6
-            }
         }
     }
 }
@@ -115,16 +102,4 @@
     .index_intro{
         font-size: 12px;
     }
-	.webLink,.webLink_cpt,.webLink_cnt {
-		display: block;
-		width: auto
-	}
-
-	.webLink_cnt a {
-		margin: 0px
-	}
-
-	.webLink_cnt a:nth-of-type(odd) {
-		border-left: none
-	}
 }
