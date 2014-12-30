@@ -1,7 +1,39 @@
 @charset "UTF-8";
-@import "_core.less";
-@import "_common.less";
+@import "less/_core.less";
 
+@import "less/_reset.less";
+@import "less/_hljs.less";
+@import "less/_article.less";
+@import "less/_fontface.less";
+
+
+/**
+ * 卡片类
+ */
+.cardShadow{
+	background: #fff;
+	border-radius: 2px;
+	box-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+
+.fix {
+	display: inline-block;
+	zoom: 1
+}
+
+.fix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden
+}
+
+html,body {
+	color: #333;
+	font-size: 14px;
+	font-family: Helvetica, STHeiti STXihei, Microsoft JhengHei, Microsoft YaHei, Tohoma, Arial;
+}
 .lab_container{
     width: 680px;
     max-width: 100%;

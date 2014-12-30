@@ -2,6 +2,46 @@
 /**
  * 定义Minxin
  **/
+body,
+div,
+ul,
+ol,
+li,
+dl,
+dt,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0px;
+  padding: 0px;
+}
+img {
+  border: none;
+}
+ul,
+ol,
+li,
+form,
+dl {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: #333333;
+}
+a:hover {
+  color: #f70;
+}
+TD {
+  color: #777;
+  font-size: 12px;
+  padding: 10px;
+}
 .l-row {
   width: 1200px;
   margin: auto;
@@ -63,278 +103,6 @@
     width: 100%;
     float: none;
   }
-}
-body,
-div,
-ul,
-ol,
-li,
-dl,
-dt,
-dd,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  margin: 0px;
-  padding: 0px;
-}
-img {
-  border: none;
-}
-ul,
-ol,
-li,
-form,
-dl {
-  list-style: none;
-}
-a {
-  text-decoration: none;
-  color: #333333;
-}
-a:hover {
-  color: #f70;
-}
-TD {
-  color: #777;
-  font-size: 12px;
-  padding: 10px;
-}
-.fix {
-  display: inline-block;
-  zoom: 1;
-}
-.fix:after {
-  content: ".";
-  display: block;
-  height: 0;
-  clear: both;
-  visibility: hidden;
-}
-html,
-body {
-  position: relative;
-  min-width: 320px;
-  color: #333;
-  font-size: 14px;
-  font-family: Helvetica, STHeiti STXihei, Microsoft JhengHei, Microsoft YaHei, Tohoma, Arial;
-}
-@font-face {
-  font-family: "layIcon";
-  src: url("../fonts/layicon-webfont.eot");
-  src: url("../fonts/layicon-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/layicon-webfont.woff") format("woff"), url("../fonts/layicon-webfont.ttf") format("truetype"), url("../fonts/layicon-webfont.svg#layIcon-webfont") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
-.layIcon {
-  font-family: "layIcon";
-  font-style: normal;
-}
-.l-icon {
-  font-family: "layIcon";
-  font-style: normal;
-}
-.l-icon-circle:after {
-  content: '\0044';
-}
-.l-icon-book:after {
-  content: '\0045';
-}
-.l-icon-code:after {
-  content: '\0046';
-}
-.l-icon-beaker:after {
-  content: '\0047';
-}
-.l-icon-share:after {
-  content: '\0048';
-}
-.l-icon-layLogo:after {
-  content: '\0049';
-}
-.l-icon-face:after {
-  content: '\0055';
-}
-.l-icon-setting:after {
-  content: '\0060';
-}
-.l-icon-back:after {
-  content: '\005a';
-}
-.piclist {
-  width: 488px;
-  margin: 20px auto;
-  border: 1px solid #aaa;
-  position: relative;
-  overflow: hidden;
-  padding: 10px;
-}
-.piclist img {
-  width: 100px;
-  cursor: pointer;
-  height: 80px;
-  display: inline;
-  float: left;
-  background-color: #aaa;
-  margin: 10px;
-  border: 1px solid #aaa;
-  line-height: 80px;
-  text-align: center;
-}
-/**
- * 文章模块
- */
-.article {
-  padding: 20px;
-  font-size: 14px;
-  font-family: "Microsoft Yahei";
-}
-.article img {
-  display: block;
-  max-width: 100%;
-  margin: auto;
-}
-.article h1,
-.article h2,
-.article h3,
-.article h4,
-.article h5,
-.article h6 {
-  font-weight: normal;
-  margin: 1.8em 0 0;
-}
-.article h1 {
-  font-size: 2em;
-}
-.article h2 {
-  font-size: 1.7em;
-}
-.article h3 {
-  font-size: 1.4em;
-}
-.article h4 {
-  font-size: 1.25em;
-}
-.article h5 {
-  font-size: 1.1em;
-}
-.article h6 {
-  font-size: 1em;
-}
-.article p {
-  line-height: 1.8;
-  margin: 1em 0;
-  font-size: 1em;
-  color: #333333;
-}
-.article ul {
-  margin: 1em 0;
-  padding-left: 1em;
-  list-style-type: disc;
-}
-.article ul li {
-  margin-left: 1em;
-  list-style-type: disc;
-}
-.article ol {
-  margin: 1em 0;
-  padding-left: 1em;
-  list-style-type: decimal;
-}
-.article ol li {
-  margin-left: 1em;
-  list-style-type: decimal;
-}
-.article pre {
-  overflow-x: auto;
-  font-size: 13px;
-  line-height: 1.8;
-}
-.article code {
-  font-family: inherit;
-  padding: 2px 4px;
-  color: #099E03;
-  background-color: #F2F9F3;
-  border-radius: 4px;
-}
-.article a {
-  color: #333;
-  padding: 0px 0.5em;
-  text-decoration: underline;
-}
-.article a:hover {
-  color: #000;
-  background: #f2f2f2;
-  text-decoration: underline;
-}
-.article *:nth-child(1) {
-  margin-top: 1em !important;
-}
-/*定制的loading动画*/
-.l-loading-panel {
-  max-width: 360px;
-  margin: 200px auto 0;
-  padding: 40px 0;
-  background: #fff;
-  border-radius: 2px;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
-}
-.l-loading-panel p {
-  padding: 20px 0 0;
-  text-align: center;
-  color: #333;
-  font-size: 14px;
-  line-height: 20px;
-}
-.l-loading {
-  position: relative;
-  display: block;
-  margin: auto;
-  height: 50px;
-  width: 50px;
-  border: 1px solid #555;
-  border-radius: 50%;
-  animation: rond 2s infinite;
-  -webkit-animation: rond 2s infinite;
-}
-.l-loading:after {
-  content: '';
-  position: absolute;
-  height: 8px;
-  width: 8px;
-  top: -4px;
-  left: 21px;
-  background: #555;
-  border-radius: 100%;
-}
-@keyframes rond {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-@-webkit-keyframes rond {
-  0% {
-    -webkit-transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-  }
-}
-/** 提示信息 **/
-.l_alert_info {
-  border: 1px solid #bce8f1;
-  background: #d9edf7;
-  color: #31708f;
-  padding: 15px 20px;
-  border-radius: 4px;
-  margin-bottom: 20px;
 }
 /**
  * 代码高亮
@@ -433,263 +201,136 @@ body {
 .hljs-params {
   color: #666666;
 }
-.github-link {
-  position: fixed;
-  z-index: 4000;
+/**
+ * 文章模块
+ */
+.article {
+  padding: 20px;
+  font-size: 14px;
+  font-family: "Microsoft Yahei";
+}
+.article img {
   display: block;
-  left: 40px;
-  bottom: 0px;
-  width: 60px;
-  height: 60px;
-  background: url(../images/github-left.png) top right;
-  transition: all 0.1s linear;
-  -moz-transition: all 0.1s linear;
-  -webkit-transition: all 0.1s linear;
-  -o-transition: all 0.1s linear;
+  max-width: 100%;
+  margin: auto;
 }
-.github-link:hover {
-  width: 70px;
-  height: 70px;
+.article h1,
+.article h2,
+.article h3,
+.article h4,
+.article h5,
+.article h6 {
+  font-weight: normal;
+  margin: 1.8em 0 0;
 }
-@media screen and (max-width: 660px) {
-  .github-link {
-    left: 0px;
-  }
+.article h1 {
+  font-size: 2em;
 }
-.UI-plugin-iframe {
-  display: block;
-  border: none;
-  width: 100%;
-  height: 100%;
+.article h2 {
+  font-size: 1.7em;
 }
-.l-mini-nav {
-  height: 24px;
-  line-height: 24px;
-  background: #f5f5f5;
+.article h3 {
+  font-size: 1.4em;
 }
-.l-mini-nav a {
-  font-size: 12px;
-  color: #666;
+.article h4 {
+  font-size: 1.25em;
 }
-.l-mini-nav a:hover {
-  text-decoration: underline;
+.article h5 {
+  font-size: 1.1em;
+}
+.article h6 {
+  font-size: 1em;
+}
+.article p {
+  line-height: 1.8;
+  margin: 1em 0;
+  font-size: 1em;
+  color: #333333;
+}
+.article ul {
+  margin: 1em 0;
+  padding-left: 1em;
+  list-style-type: disc;
+}
+.article ul li {
+  margin-left: 1em;
+  list-style-type: disc;
+}
+.article ol {
+  margin: 1em 0;
+  padding-left: 1em;
+  list-style-type: decimal;
+}
+.article ol li {
+  margin-left: 1em;
+  list-style-type: decimal;
+}
+.article pre {
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.article code {
+  font-family: inherit;
+  padding: 2px 4px;
+  color: #099E03;
+  background-color: #F2F9F3;
+  border-radius: 4px;
+}
+.article a {
   color: #333;
+  padding: 0px 0.5em;
+  text-decoration: underline;
 }
-/**
- * 卡片类
- */
-.cardShadow {
-  background: #fff;
-  border-radius: 2px;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+.article a:hover {
+  color: #000;
+  background: #f2f2f2;
+  text-decoration: underline;
 }
-/**
- * CSS3动画
- *
- */
-@-webkit-keyframes fadeInLeftBig {
-  0% {
-    opacity: 0;
-    -webkit-transform: translateX(-2000px);
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform: translateX(0);
-  }
+.article *:nth-child(1) {
+  margin-top: 1em !important;
 }
-@-moz-keyframes fadeInLeftBig {
-  0% {
-    opacity: 0;
-    -moz-transform: translateX(-2000px);
-  }
-  100% {
-    opacity: 1;
-    -moz-transform: translateX(0);
-  }
+@font-face {
+  font-family: "layIcon";
+  src: url("../fonts/layicon-webfont.eot");
+  src: url("../fonts/layicon-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/layicon-webfont.woff") format("woff"), url("../fonts/layicon-webfont.ttf") format("truetype"), url("../fonts/layicon-webfont.svg#layIcon-webfont") format("svg");
+  font-weight: normal;
+  font-style: normal;
 }
-@-webkit-keyframes fadeOutLeftBig {
-  0% {
-    opacity: 1;
-    -webkit-transform: translateX(0);
-  }
-  100% {
-    opacity: 0;
-    -webkit-transform: translateX(-2000px);
-  }
+.layIcon {
+  font-family: "layIcon";
+  font-style: normal;
 }
-@-moz-keyframes fadeOutLeftBig {
-  0% {
-    opacity: 1;
-    -moz-transform: translateX(0);
-  }
-  100% {
-    opacity: 0;
-    -moz-transform: translateX(-2000px);
-  }
+.l-icon {
+  font-family: "layIcon";
+  font-style: normal;
 }
-@-webkit-keyframes fadeOutLeft {
-  0% {
-    opacity: 1;
-    -webkit-transform: translateX(0);
-  }
-  100% {
-    opacity: 0;
-    -webkit-transform: translateX(-20px);
-  }
+.l-icon-circle:after {
+  content: '\0044';
 }
-@-moz-keyframes fadeOutLeft {
-  0% {
-    opacity: 1;
-    -moz-transform: translateX(0);
-  }
-  100% {
-    opacity: 0;
-    -moz-transform: translateX(-20px);
-  }
+.l-icon-book:after {
+  content: '\0045';
 }
-@-webkit-keyframes fadeOutRight {
-  0% {
-    opacity: 1;
-    -webkit-transform: translateX(0);
-  }
-  100% {
-    opacity: 0;
-    -webkit-transform: translateX(20px);
-  }
+.l-icon-code:after {
+  content: '\0046';
 }
-@-moz-keyframes fadeOutRight {
-  0% {
-    opacity: 1;
-    -moz-transform: translateX(0);
-  }
-  100% {
-    opacity: 0;
-    -moz-transform: translateX(20px);
-  }
+.l-icon-beaker:after {
+  content: '\0047';
 }
-@-webkit-keyframes fadeInLeft {
-  0% {
-    opacity: 0;
-    -webkit-transform: translateX(-20px);
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform: translateX(0);
-  }
+.l-icon-share:after {
+  content: '\0048';
 }
-@-moz-keyframes fadeInLeft {
-  0% {
-    opacity: 0;
-    -moz-transform: translateX(-20px);
-  }
-  100% {
-    opacity: 1;
-    -moz-transform: translateX(0);
-  }
+.l-icon-layLogo:after {
+  content: '\0049';
 }
-@keyframes zoomin {
-  0% {
-    transform: scale(0.1);
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-  }
+.l-icon-face:after {
+  content: '\0055';
 }
-@-moz-keyframes zoomin {
-  0% {
-    -moz-transform: scale(0.1);
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    -moz-transform: scale(1);
-  }
+.l-icon-setting:after {
+  content: '\0060';
 }
-@-webkit-keyframes zoomin {
-  0% {
-    -webkit-transform: scale(0.1);
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: scale(1);
-  }
-}
-@-webkit-keyframes bounceOut {
-  0% {
-    -webkit-transform: scale(1);
-  }
-  25% {
-    -webkit-transform: scale(0.95);
-  }
-  50% {
-    opacity: 1;
-    -webkit-transform: scale(1.1);
-  }
-  100% {
-    opacity: 0;
-    -webkit-transform: scale(0.3);
-  }
-}
-@-moz-keyframes bounceOut {
-  0% {
-    -moz-transform: scale(1);
-  }
-  25% {
-    -moz-transform: scale(0.95);
-  }
-  50% {
-    opacity: 1;
-    -moz-transform: scale(1.1);
-  }
-  100% {
-    opacity: 0;
-    -moz-transform: scale(0.3);
-  }
-}
-.zoomin {
-  overflow: hidden;
-  animation: zoomin 0.5s;
-  -moz-animation: zoomin 0.5s;
-  -webkit-animation: zoomin 0.5s;
-  -o-animation: zoomin 0.5s;
-}
-.zoomout {
-  transform: scale(0.1);
-  -moz-transform: scale(0.1);
-  -webkit-transform: scale(0.1);
-  -o-transform: scale(0.1);
-  opacity: 0;
-  overflow: hidden;
-  transition: 0.7s;
-}
-.fadeInLeft {
-  -webkit-animation: fadeInLeft 0.5s ease both;
-  -moz-animation: fadeInLeft 0.5s ease both;
-}
-.fadeInLeftBig {
-  -webkit-animation: fadeInLeftBig 1s .2s ease both;
-  -moz-animation: fadeInLeftBig 1s 0.2s ease both;
-}
-.fadeOutLeft {
-  -webkit-animation: fadeOutLeft 1s .2s ease both;
-  -moz-animation: fadeOutLeft 1s .2s ease both;
-}
-.fadeOutRight {
-  -webkit-animation: fadeOutRight 0.5s ease both;
-  -moz-animation: fadeOutRight 0.5s ease both;
-}
-.bounceOut {
-  -webkit-animation: bounceOut 1s .2s ease both;
-  -moz-animation: bounceOut 1s .2s ease both;
+.l-icon-back:after {
+  content: '\005a';
 }
 /**
  * 导航
@@ -1981,7 +1622,21 @@ body {
     height: auto;
   }
 }
+/**
+ * 卡片类
+ */
+.cardShadow {
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+html,
 body {
+  position: relative;
+  min-width: 320px;
+  color: #333;
+  font-size: 14px;
+  font-family: Helvetica, STHeiti STXihei, Microsoft JhengHei, Microsoft YaHei, Tohoma, Arial;
   overflow-x: hidden;
   overflow-y: scroll;
   background: url("../images/mask.png") #eeeeee;
@@ -1990,6 +1645,87 @@ a,
 a:active {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-tap-highlight-color: transparent;
+}
+/** 提示信息 **/
+.l_alert_info {
+  border: 1px solid #bce8f1;
+  background: #d9edf7;
+  color: #31708f;
+  padding: 15px 20px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+.UI-plugin-iframe {
+  display: block;
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+.l-mini-nav {
+  height: 24px;
+  line-height: 24px;
+  background: #f5f5f5;
+}
+.l-mini-nav a {
+  font-size: 12px;
+  color: #666;
+}
+.l-mini-nav a:hover {
+  text-decoration: underline;
+  color: #333;
+}
+/*定制的loading动画*/
+.l-loading-panel {
+  max-width: 360px;
+  margin: 200px auto 0;
+  padding: 40px 0;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+.l-loading-panel p {
+  padding: 20px 0 0;
+  text-align: center;
+  color: #333;
+  font-size: 14px;
+  line-height: 20px;
+}
+.l-loading {
+  position: relative;
+  display: block;
+  margin: auto;
+  height: 50px;
+  width: 50px;
+  border: 1px solid #555;
+  border-radius: 50%;
+  animation: loading-rond 2s infinite;
+  -webkit-animation: loading-rond 2s infinite;
+}
+.l-loading:after {
+  content: '';
+  position: absolute;
+  height: 8px;
+  width: 8px;
+  top: -4px;
+  left: 21px;
+  background: #555;
+  border-radius: 100%;
+}
+@keyframes loading-rond {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes loading-rond {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
 /**应用主容器**/
 .app_container {
@@ -2211,10 +1947,236 @@ a:active {
   color: #f70;
   z-index: 0;
 }
+.github-link {
+  position: fixed;
+  z-index: 4000;
+  display: block;
+  right: 0;
+  bottom: 0;
+  width: 60px;
+  height: 60px;
+  background: url(../images/github.png) top left;
+  transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -webkit-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
+}
+.github-link:hover {
+  width: 70px;
+  height: 70px;
+}
 /**
  * 留言板
  *
  */
 .blessPage {
   padding-top: 20px;
+}
+/**
+ * CSS3动画
+ *
+ */
+@-webkit-keyframes fadeInLeftBig {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-2000px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
+}
+@-moz-keyframes fadeInLeftBig {
+  0% {
+    opacity: 0;
+    -moz-transform: translateX(-2000px);
+  }
+  100% {
+    opacity: 1;
+    -moz-transform: translateX(0);
+  }
+}
+@-webkit-keyframes fadeOutLeftBig {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateX(-2000px);
+  }
+}
+@-moz-keyframes fadeOutLeftBig {
+  0% {
+    opacity: 1;
+    -moz-transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    -moz-transform: translateX(-2000px);
+  }
+}
+@-webkit-keyframes fadeOutLeft {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateX(-20px);
+  }
+}
+@-moz-keyframes fadeOutLeft {
+  0% {
+    opacity: 1;
+    -moz-transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    -moz-transform: translateX(-20px);
+  }
+}
+@-webkit-keyframes fadeOutRight {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateX(20px);
+  }
+}
+@-moz-keyframes fadeOutRight {
+  0% {
+    opacity: 1;
+    -moz-transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    -moz-transform: translateX(20px);
+  }
+}
+@-webkit-keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
+}
+@-moz-keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    -moz-transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    -moz-transform: translateX(0);
+  }
+}
+@keyframes zoomin {
+  0% {
+    transform: scale(0.1);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@-moz-keyframes zoomin {
+  0% {
+    -moz-transform: scale(0.1);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    -moz-transform: scale(1);
+  }
+}
+@-webkit-keyframes zoomin {
+  0% {
+    -webkit-transform: scale(0.1);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(1);
+  }
+}
+@-webkit-keyframes bounceOut {
+  0% {
+    -webkit-transform: scale(1);
+  }
+  25% {
+    -webkit-transform: scale(0.95);
+  }
+  50% {
+    opacity: 1;
+    -webkit-transform: scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(0.3);
+  }
+}
+@-moz-keyframes bounceOut {
+  0% {
+    -moz-transform: scale(1);
+  }
+  25% {
+    -moz-transform: scale(0.95);
+  }
+  50% {
+    opacity: 1;
+    -moz-transform: scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    -moz-transform: scale(0.3);
+  }
+}
+.zoomin {
+  overflow: hidden;
+  animation: zoomin 0.5s;
+  -moz-animation: zoomin 0.5s;
+  -webkit-animation: zoomin 0.5s;
+  -o-animation: zoomin 0.5s;
+}
+.zoomout {
+  transform: scale(0.1);
+  -moz-transform: scale(0.1);
+  -webkit-transform: scale(0.1);
+  -o-transform: scale(0.1);
+  opacity: 0;
+  overflow: hidden;
+  transition: 0.7s;
+}
+.fadeInLeft {
+  -webkit-animation: fadeInLeft 0.5s ease both;
+  -moz-animation: fadeInLeft 0.5s ease both;
+}
+.fadeInLeftBig {
+  -webkit-animation: fadeInLeftBig 1s .2s ease both;
+  -moz-animation: fadeInLeftBig 1s 0.2s ease both;
+}
+.fadeOutLeft {
+  -webkit-animation: fadeOutLeft 1s .2s ease both;
+  -moz-animation: fadeOutLeft 1s .2s ease both;
+}
+.fadeOutRight {
+  -webkit-animation: fadeOutRight 0.5s ease both;
+  -moz-animation: fadeOutRight 0.5s ease both;
+}
+.bounceOut {
+  -webkit-animation: bounceOut 1s .2s ease both;
+  -moz-animation: bounceOut 1s .2s ease both;
 }
