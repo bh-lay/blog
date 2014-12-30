@@ -9,7 +9,28 @@ define(function(require,exports){
 	var temp = ['<div class="indeCnt">',
 		'<div class="l-row">',
             '<div class="l-col-8">',
-                '<div class="index-banner"></div>',
+                '<div class="index-banner">',
+'<a class="arrow-left" href="#"></a>', 
+'<a class="arrow-right" href="#"></a>',
+'<div class="swiper-container">',
+  '<div class="swiper-wrapper">',
+	'<div class="swiper-slide">',
+	  '<div class="content-slide">',
+		'<p class="title">Slide with HTML</p>',
+		'<p>You can put any HTML inside of slide with any layout, not only images, even another Swiper!</p>',
+	  '</div>',
+	'</div>',
+	'<div class="swiper-slide">123456 </div>',
+	'<div class="swiper-slide">',
+	  '<div class="content-slide">',
+		'<p class="title">Slide with HTML</p>',
+		'<p>You can put any HTML inside of slide with any layout, not only images, even another Swiper!</p>',
+	  '</div>',
+	'</div>',
+  '</div>',
+'</div>',
+'<div class="swiper-pagination"></div>',
+				'</div>',
                 '<div class="webLink">',
                     '<div class="caption">我的小伙伴</div>',
                     '<div class="content">{@each friends as it}',
@@ -64,6 +85,23 @@ define(function(require,exports){
             var html = juicer(temp,data);
             var this_dom = $(html);
             dom.html(this_dom);
+			
+			window.mySwiper = new Swiper(this_dom.find('.swiper-container')[0],{
+				pagination: this_dom.find('.swiper-pagination')[0],
+				loop:true,
+				grabCursor: true,
+				paginationClickable: true,
+				autoplay: 5000
+			})
+			$('.arrow-left').on('click', function(e){
+				e.preventDefault()
+				mySwiper.swipePrev()
+			})
+			$('.arrow-right').on('click', function(e){
+				e.preventDefault()
+				mySwiper.swipeNext()
+			});
+  
         });
 	};
 });

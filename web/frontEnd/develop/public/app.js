@@ -53,6 +53,7 @@ define(function (require, exports) {
 	require('util/lofox_1_0.js');
 	require('public/js/juicer.js');
 	require('UI/dialog.js');
+	require('public/js/swiper.js');
     //绑定路由
     var lofox = new util.lofox();
     routerHandle(lofox);
