@@ -261,6 +261,9 @@ TD {
 .l-icon-layLogo:after {
   content: '\0049';
 }
+.l-icon-git:after {
+  content: '\0054';
+}
 .l-icon-face:after {
   content: '\0055';
 }
@@ -288,6 +291,19 @@ TD {
   height: 0;
   clear: both;
   visibility: hidden;
+}
+.l-mini-nav {
+  height: 24px;
+  line-height: 24px;
+  background: #f5f5f5;
+}
+.l-mini-nav a {
+  font-size: 12px;
+  color: #666;
+}
+.l-mini-nav a:hover {
+  text-decoration: underline;
+  color: #333;
 }
 html,
 body {

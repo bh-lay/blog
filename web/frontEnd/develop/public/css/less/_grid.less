@@ -40,24 +40,27 @@
         float: none;
     }
 }
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1400px) {
 	.l-row {
+        .transition(.2s);
 		width: 960px
 	}
 }
-@media screen and (max-width: 980px) {
-	.l-row {
-		width: 100%
-	}
-
+@media screen and (max-width: 1100px) {
 	.l-row{
+		width: 700px;
         .l-col-1,
         .l-col-2,
         .l-col-4,
         .l-col-6,
         .l-col-8 {
             width: 100%;
-            float: none
+            float: none;
 	   }
+    }
+}
+@media screen and (max-width: 800px) {
+	.l-row{
+		width: 100%;
     }
 }

@@ -1,77 +1,71 @@
 
 /** 首页 **/
 .indeCnt {
-	width: 600px;
-	margin: auto;
-	padding-top: 100px
+	padding-top: 40px;
 }
 
-.index_intro {
+.index-intro{
+    padding: 4em 0;
 	margin-bottom: 20px;
+    line-height: 1.8em;
 	text-align: center;
 	overflow: hidden;
+    font-size: 14px;
+    color: #aaa;
 	.cardShadow();
+    .logo {
+        color: #333;
+        font-size: 6em;
+        line-height: 1em;
+        margin-bottom: .3em;
+    }
+    .index_intro_a {
+        color: #333;
+        font-size: 2.5em;
+        font-weight: normal;
+        letter-spacing: .2em;
+        margin-bottom: 1em;
+    }
+    .index_intro_b {
+        font-size: 1em;
+    }
+    .index_intro_c {
+        color: #333;
+    }
+    .index_intro_d {
+        font-size: 0.8em;
+        margin-bottom: 1em;
+    }
+    .footer{
+        margin-top: 4em;
+        i{
+            font-size: 18px;
+        }
+        a{
+            padding: 0 1em;
+        }
+    }
 }
 
-.index_intro_cpt {
-	padding: 20px 0px;
-	background: url(../images/mask.png) #555;
-	color: #fff;
-}
-
-.index_intro_logo {
-	font-size: 120px;
-	line-height: 120px;
-	margin-bottom: 10px
-}
-
-.index_intro_a {
-	font-size: 30px;
-	font-weight: normal;
-	line-height: 40px;
-	letter-spacing: 20px;
-	margin-bottom: 10px
-}
-
-.index_intro_cnt {
-	padding: 20px
-}
-
-.index_intro_b {
-	font-size: 16px;
-	line-height: 20px;
-	margin-bottom: 15px;
-	color: #666
-}
-
-.index_intro_c {
-	color: #333;
-	font-size: 20px;
-	line-height: 20px;
-	margin-bottom: 10px
-}
-
-.index_intro_d {
-	font-size: 12px;
-	line-height: 20px;
-	margin-bottom: 10px;
-	color: #aaa
+.index-banner{
+    height: 300px;
+    margin-bottom: 20px;
+    .cardShadow();
 }
 
 .some_link {
+    display: table;
+    width: 100%;
 	margin-bottom: 20px;
 	background: #fff;
 	overflow: hidden;
-	border-radius: 4px
-}
-
-.some_link a {
-	display: block;
-	float: left;
-	width: 33.33%;
-	height: 40px;
-	line-height: 40px;
-	text-align: center
+	border-radius: 4px;
+    a {
+        display: table-cell;
+        height: 40px;
+        line-height: 40px;
+        text-align: center
+    }
 }
 
 .webLink {
@@ -79,53 +73,48 @@
 	width: 100%;
 	background: #fff;
 	border-radius: 4px;
-	margin-bottom: 20px
+	margin-bottom: 20px;
+    .caption {
+        display: table-cell;
+        vertical-align: middle;
+        white-space: nowrap;
+        width: 10%;
+        line-height: 50px;
+        padding: 0px 10px;
+        margin: auto;
+        text-align: center;
+        font-size: 14px;
+        cursor: pointer
+    }
+    .content {
+        display: table-cell;
+        width: 90%;
+        overflow: hidden;
+        a {
+            display: block;
+            width: 50%;
+            float: left;
+            margin-top: -1px;
+            border-top: 1px solid #ddd;
+            border-left: 1px solid #ddd;
+            height: 40px;
+            line-height: 40px;
+            font-size: 14px;
+            text-align: center;
+            .transition(0.2s);
+            .borderbox();
+            &:hover {
+                background: #f6f6f6
+            }
+        }
+    }
 }
 
-.webLink_cpt {
-	display: table-cell;
-	vertical-align: middle;
-	white-space: nowrap;
-	width: 10%;
-	line-height: 50px;
-	padding: 0px 10px;
-	margin: auto;
-	text-align: center;
-	font-size: 14px;
-	cursor: pointer
-}
-
-.webLink_cnt {
-	display: table-cell;
-	width: 90%;
-	overflow: hidden
-}
-
-.webLink_cnt a {
-	display: block;
-	width: 50%;
-	float: left;
-	margin-top: -1px;
-	border-top: 1px solid #ddd;
-	border-left: 1px solid #ddd;
-	height: 40px;
-	line-height: 40px;
-	font-size: 14px;
-	text-align: center;
-	.transition(0.2s);
-	.borderbox();
-}
-
-.webLink_cnt a:hover {
-	background: #f6f6f6
-}
 
 @media screen and (max-width: 680px) {
-	.indeCnt {
-		width: auto;
-		margin: 0px 10px
-	}
-
+    .index_intro{
+        font-size: 12px;
+    }
 	.webLink,.webLink_cpt,.webLink_cnt {
 		display: block;
 		width: auto

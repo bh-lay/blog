@@ -86,14 +86,18 @@ TD {
   width: 100%;
   float: none;
 }
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1400px) {
   .l-row {
+    transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -webkit-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
     width: 960px;
   }
 }
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 1100px) {
   .l-row {
-    width: 100%;
+    width: 700px;
   }
   .l-row .l-col-1,
   .l-row .l-col-2,
@@ -102,6 +106,11 @@ TD {
   .l-row .l-col-8 {
     width: 100%;
     float: none;
+  }
+}
+@media screen and (max-width: 800px) {
+  .l-row {
+    width: 100%;
   }
 }
 /**
@@ -322,6 +331,9 @@ TD {
 }
 .l-icon-layLogo:after {
   content: '\0049';
+}
+.l-icon-git:after {
+  content: '\0054';
 }
 .l-icon-face:after {
   content: '\0055';
@@ -1056,66 +1068,69 @@ TD {
 }
 /** 首页 **/
 .indeCnt {
-  width: 600px;
-  margin: auto;
-  padding-top: 100px;
+  padding-top: 40px;
 }
-.index_intro {
+.index-intro {
+  padding: 4em 0;
   margin-bottom: 20px;
+  line-height: 1.8em;
   text-align: center;
   overflow: hidden;
+  font-size: 14px;
+  color: #aaa;
   background: #fff;
   border-radius: 2px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
-.index_intro_cpt {
-  padding: 20px 0px;
-  background: url(../images/mask.png) #555555;
-  color: #fff;
-}
-.index_intro_logo {
-  font-size: 120px;
-  line-height: 120px;
-  margin-bottom: 10px;
-}
-.index_intro_a {
-  font-size: 30px;
-  font-weight: normal;
-  line-height: 40px;
-  letter-spacing: 20px;
-  margin-bottom: 10px;
-}
-.index_intro_cnt {
-  padding: 20px;
-}
-.index_intro_b {
-  font-size: 16px;
-  line-height: 20px;
-  margin-bottom: 15px;
-  color: #666666;
-}
-.index_intro_c {
+.index-intro .logo {
   color: #333;
-  font-size: 20px;
-  line-height: 20px;
-  margin-bottom: 10px;
+  font-size: 6em;
+  line-height: 1em;
+  margin-bottom: .3em;
 }
-.index_intro_d {
-  font-size: 12px;
-  line-height: 20px;
-  margin-bottom: 10px;
-  color: #aaaaaa;
+.index-intro .index_intro_a {
+  color: #333;
+  font-size: 2.5em;
+  font-weight: normal;
+  letter-spacing: .2em;
+  margin-bottom: 1em;
+}
+.index-intro .index_intro_b {
+  font-size: 1em;
+}
+.index-intro .index_intro_c {
+  color: #333;
+}
+.index-intro .index_intro_d {
+  font-size: 0.8em;
+  margin-bottom: 1em;
+}
+.index-intro .footer {
+  margin-top: 4em;
+}
+.index-intro .footer i {
+  font-size: 18px;
+}
+.index-intro .footer a {
+  padding: 0 1em;
+}
+.index-banner {
+  height: 300px;
+  margin-bottom: 20px;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
 .some_link {
+  display: table;
+  width: 100%;
   margin-bottom: 20px;
   background: #fff;
   overflow: hidden;
   border-radius: 4px;
 }
 .some_link a {
-  display: block;
-  float: left;
-  width: 33.33%;
+  display: table-cell;
   height: 40px;
   line-height: 40px;
   text-align: center;
@@ -1127,7 +1142,7 @@ TD {
   border-radius: 4px;
   margin-bottom: 20px;
 }
-.webLink_cpt {
+.webLink .caption {
   display: table-cell;
   vertical-align: middle;
   white-space: nowrap;
@@ -1139,12 +1154,12 @@ TD {
   font-size: 14px;
   cursor: pointer;
 }
-.webLink_cnt {
+.webLink .content {
   display: table-cell;
   width: 90%;
   overflow: hidden;
 }
-.webLink_cnt a {
+.webLink .content a {
   display: block;
   width: 50%;
   float: left;
@@ -1163,13 +1178,12 @@ TD {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
 }
-.webLink_cnt a:hover {
+.webLink .content a:hover {
   background: #f6f6f6;
 }
 @media screen and (max-width: 680px) {
-  .indeCnt {
-    width: auto;
-    margin: 0px 10px;
+  .index_intro {
+    font-size: 12px;
   }
   .webLink,
   .webLink_cpt,
@@ -1630,10 +1644,7 @@ TD {
   border-radius: 2px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
-html,
 body {
-  position: relative;
-  min-width: 320px;
   color: #333;
   font-size: 14px;
   font-family: Helvetica, STHeiti STXihei, Microsoft JhengHei, Microsoft YaHei, Tohoma, Arial;
@@ -1660,19 +1671,6 @@ a:active {
   border: none;
   width: 100%;
   height: 100%;
-}
-.l-mini-nav {
-  height: 24px;
-  line-height: 24px;
-  background: #f5f5f5;
-}
-.l-mini-nav a {
-  font-size: 12px;
-  color: #666;
-}
-.l-mini-nav a:hover {
-  text-decoration: underline;
-  color: #333;
 }
 /*定制的loading动画*/
 .l-loading-panel {
