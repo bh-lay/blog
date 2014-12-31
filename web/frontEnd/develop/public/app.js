@@ -139,7 +139,8 @@ function routerHandle(lofox) {
     'use strict';
 	var dom = $('.contlayer'),
         container = $('.app_container'),
-        $active_page = null;
+        $active_page = null,
+        o_active_page = null;
 	//移除老的page dom
 	function removePageDom(callback) {
 		if ($active_page) {
@@ -158,6 +159,7 @@ function routerHandle(lofox) {
 	//显示单页dom
 	function getNewPage() {
 		var newDom = $('<div class="page"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载模块</p></div></div>');
+        //移除老的dom
         removePageDom(function () {
             container.append(newDom);
             newDom.addClass('fadeInLeft');
@@ -177,7 +179,7 @@ function routerHandle(lofox) {
 		L.nav.setCur('/');
 		var dom = getNewPage();
 		
-		L.views.index(dom);
+		o_active_page = new L.views.index(dom);
 	});
 	/**
 	 * 博文列表
@@ -187,7 +189,7 @@ function routerHandle(lofox) {
 		L.nav.setCur('blog');
 		var dom = getNewPage();
 		
-		L.views.blogList(dom, search);
+		o_active_page = L.views.blogList(dom, search);
 	});
 	/**
 	 * 博客详细页
@@ -196,7 +198,7 @@ function routerHandle(lofox) {
 		this.title('我的博客_小剧客栈');
 		L.nav.setCur('blog');
 		var dom = getNewPage();
-		L.views.blogDetail(dom, param.id, function (title) {
+		o_active_page = L.views.blogDetail(dom, param.id, function (title) {
             lofox.title(title);
         });
 	});
@@ -205,14 +207,14 @@ function routerHandle(lofox) {
 		this.title('作品_小剧客栈');
 		L.nav.setCur('opus');
 		var dom = getNewPage();
-		L.views.opusList(dom);
+		o_active_page = L.views.opusList(dom);
 	});
 	//作品详情页
 	lofox.set('/opus/{id}', function (param) {
 		this.title('作品_小剧客栈');
 		L.nav.setCur('opus');
 		var dom = getNewPage();
-		L.views.opusDetail(dom, param.id);
+		o_active_page = L.views.opusDetail(dom, param.id);
 	});
 	//实验室列表页
 	lofox.set('/labs', function () {
@@ -220,7 +222,7 @@ function routerHandle(lofox) {
 		
 		L.nav.setCur('labs');
 		var dom = getNewPage();
-		L.views.labsList(dom);
+		o_active_page = L.views.labsList(dom);
 	});
 	
 	/**
@@ -231,20 +233,27 @@ function routerHandle(lofox) {
 		L.nav.setCur('/');
 		var dom = getNewPage();
         dom.html('<div class="l_row blessPage"><div class="l_col_12"></div></div>');
-        new L.views.comments.init(dom.find('.l_col_12')[0], 'define-1');
+        o_active_page = new L.views.comments.init(dom.find('.l_col_12')[0], 'define-1');
 	});
 	
 	/**
-	 * 监听页面跳转
+	 * 监听视图刷新事件
 	 */
 	lofox.on('refresh', function (pathData,search) {
+        //显示隐藏返回按钮
         if(pathData.length > 1){
             L.nav.back.show();
         }else{
             L.nav.back.hide();
         }
     });
-	
+    //视图刷新前，销毁上一个对象
+	lofox.on('beforeRefresh',function(){
+        if(o_active_page && o_active_page.destory){
+            o_active_page.destory();
+        }
+        o_active_page = null;
+    });
 	$('body').on('click', 'a[lofox="true"]', function () {
 		var url = $(this).attr('href');
 		setTimeout(function () {
