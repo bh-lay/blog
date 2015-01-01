@@ -1179,36 +1179,21 @@ TD {
   border-radius: 2px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
-.index-banner .arrow-left {
-  background: #333;
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  margin-top: -15px;
-  width: 17px;
-  height: 30px;
-  z-index: 10;
-}
-.index-banner .arrow-right {
-  background: #333;
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  margin-top: -15px;
-  width: 17px;
-  height: 30px;
-  z-index: 10;
-}
 .index-banner .swiper-container {
   width: 100%;
-  height: 300px;
   overflow: hidden;
+}
+.index-banner .swiper-wrapper {
+  width: 1000%;
 }
 .index-banner .content-slide {
   padding: 20px;
 }
 .index-banner .swiper-slide {
   float: left;
+}
+.index-banner img {
+  width: 100%;
 }
 .index-banner .title {
   font-size: 25px;

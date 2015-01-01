@@ -10,22 +10,22 @@ define(function(require,exports){
 		'<div class="l-row">',
             '<div class="l-col-8">',
                 '<div class="index-banner">',
-'<a class="arrow-left" href="#"></a>', 
-'<a class="arrow-right" href="#"></a>',
 '<div class="swiper-container">',
   '<div class="swiper-wrapper">',
 	'<div class="swiper-slide">',
-	  '<div class="content-slide">',
-		'<p class="title">Slide with HTML</p>',
-		'<p>You can put any HTML inside of slide with any layout, not only images, even another Swiper!</p>',
-	  '</div>',
+		'<img src="/images/banner/1a.jpg">',
 	'</div>',
-	'<div class="swiper-slide">123456 </div>',
 	'<div class="swiper-slide">',
-	  '<div class="content-slide">',
-		'<p class="title">Slide with HTML</p>',
-		'<p>You can put any HTML inside of slide with any layout, not only images, even another Swiper!</p>',
-	  '</div>',
+		'<img src="/images/banner/2a.jpg">',
+	'</div>',
+	'<div class="swiper-slide">',
+		'<img src="/images/banner/3a.jpg">',
+	'</div>',
+	'<div class="swiper-slide">',
+		'<img src="/images/banner/4a.jpg">',
+	'</div>',
+	'<div class="swiper-slide">',
+		'<img src="/images/banner/5a.jpg">',
 	'</div>',
   '</div>',
 '</div>',
@@ -94,15 +94,8 @@ define(function(require,exports){
                     grabCursor: true,
                     paginationClickable: true,
                     autoplay: 5000
-                })
-                this_dom.on('click','.arrow-left', function(e){
-                    e.preventDefault()
-                    me.mySwiper.swipePrev()
-                }).on('click','.arrow-right', function(e){
-                    e.preventDefault()
-                    me.mySwiper.swipeNext()
                 });
-                console.log('me.mySwiper',me.mySwiper);
+				window.sw = me.mySwiper;
             },1000);
         });
 	}
