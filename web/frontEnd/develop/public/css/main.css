@@ -88,10 +88,6 @@ TD {
 }
 @media screen and (max-width: 1400px) {
   .l-row {
-    transition: all 0.2s linear;
-    -moz-transition: all 0.2s linear;
-    -webkit-transition: all 0.2s linear;
-    -o-transition: all 0.2s linear;
     width: 960px;
   }
 }
@@ -1175,6 +1171,8 @@ TD {
 .index-banner {
   position: relative;
   margin-bottom: 20px;
+  max-height: 380px;
+  overflow: hidden;
   background: #fff;
   border-radius: 2px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
@@ -1184,16 +1182,15 @@ TD {
   overflow: hidden;
 }
 .index-banner .swiper-wrapper {
-  width: 1000%;
-}
-.index-banner .content-slide {
-  padding: 20px;
+  width: 100%;
 }
 .index-banner .swiper-slide {
   float: left;
+  width: 100%;
 }
 .index-banner img {
   width: 100%;
+  display: block;
 }
 .index-banner .title {
   font-size: 25px;

@@ -93,9 +93,9 @@ define(function(require,exports){
                     loop:true,
                     grabCursor: true,
                     paginationClickable: true,
+					calculateHeight: true,
                     autoplay: 5000
                 });
-				window.sw = me.mySwiper;
             },1000);
         });
 	}
