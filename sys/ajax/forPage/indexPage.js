@@ -38,7 +38,27 @@ function get_friend_list(callback){
 module.exports = function(callback){
     get_friend_list(function(err,list){
         callback && callback(err,{
-            'friends' : list
+            friends : list,
+			banner : [
+				{
+					img: '/images/banner/1a.jpg'
+				},
+				{
+					img: '/images/banner/2a.jpg'
+				},
+				{
+					img: '/images/banner/3a.jpg'
+				},
+				{
+					img: '/images/banner/4a.jpg'
+				},
+				{
+					img: '/images/banner/5a.jpg'
+				},
+				{
+					img: '/images/banner/6a.jpg'
+				}
+			]
         });
     });
 };
