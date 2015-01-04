@@ -54,9 +54,6 @@ module.exports = function(callback){
 				},
 				{
 					img: '/images/banner/5a.jpg'
-				},
-				{
-					img: '/images/banner/6a.jpg'
 				}
 			]
         });
