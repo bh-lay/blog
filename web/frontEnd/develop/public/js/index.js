@@ -7,24 +7,8 @@
 //index page
 define(function(require,exports){
 	var temp = ['<div class="indeCnt">',
-		'<div class="l-row">',
+		'<div class="l-row index-section">',
 			'<div class="l-col-8">',
-				'<div class="index-banner">',
-					'<div class="swiper-container">',
-						'<div class="swiper-wrapper">',
-							'{@each banner as item}',
-                        	'<div class="swiper-slide">',
-								'{@if item.link}',
-									'<a target="_blank" href="${item.url}" title="${item.title}" ><img src="${item.img}"></a>',
-								'{@else}',
-									'<img src="${item.img}">',
-								'{@/if}',
-							'</div>',
-							'{@/each}',
-						'</div>',
-					'</div>',
-					'<div class="swiper-pagination"></div>',
-				'</div>',
                 '<div class="webLink">',
                     '<div class="caption">我的小伙伴</div>',
                     '<div class="content">{@each friends as it}',
@@ -81,21 +65,10 @@ define(function(require,exports){
             var html = juicer(temp,data);
             var this_dom = $(html);
             dom.html(this_dom);
-			setTimeout(function(){
-                me.mySwiper = new Swiper(this_dom.find('.swiper-container')[0],{
-                    pagination: this_dom.find('.swiper-pagination')[0],
-                    loop:true,
-                    grabCursor: true,
-                    paginationClickable: true,
-					calculateHeight: true,
-                    autoplay: 5000
-                });
-            },1000);
         });
 	}
     view.prototype = {
         destory: function(){
-            this.mySwiper && this.mySwiper.destroy();
         }
     };
     

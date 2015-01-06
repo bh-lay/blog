@@ -2,32 +2,39 @@
  * 导航
  */
 @nav_width: 50px;
+@nav_height: 50px;
+body:before{
+    content: '';
+    display: block;
+    height: @nav_height;
+}
 .app_nav {
 	position: fixed;
 	top: 0;
 	left: 0;
-	height: 100%;
-    z-index: 4000;
+	width: 100%;
+    z-index: 1000;
 }
 .nav_body {
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: @nav_width;
-	height: 100%;
+	width: 100%;
+	height: @nav_height;
 	background: #fff;
 	box-shadow: 0 0 20px rgba(0,0,0,.5);
     z-index:2;
 }
 
 .nav {
-	padding-top: 40px;
+    float: left;
 	li {
-		margin-bottom: 10px;
+        float: left;
+        margin-right: 10px;
         a {
             display: block;
-            width: 100%;
             height: 50px;
+            padding: 0 10px;
             line-height: 50px;
             outline: none;
             color: #333;
@@ -36,10 +43,16 @@
             .transition(0.1s);
             i {
                 display: inline-block;
-                width: @nav_width;
+                margin-right: 6px;
                 text-align: center;
                 font-size: 18px;
             }
+			&:after{
+				display: inline-block;
+				content: attr(data-title);
+				font-size: 14px;
+				text-align: left;
+			}
         }
         &:hover {
             background: #eee;
@@ -54,10 +67,9 @@
 }
 .nav_tips{
 	position:relative;
-	float:left;
 	height:40px;
 	line-height:40px;
-	padding:0 30px 0 20px;
+	text-align: center;
 	border-radius:2px;
 	background:#333;
 	color:#fff;
@@ -65,8 +77,9 @@
 		content:'◆';
 		position:absolute;
 		diaplay:block;
-		top:10px;
-		left:-10px;
+		top:-10px;
+		left:50%;
+        margin-left: -10px;
 		width:20px;
 		height:20px;
 		line-height:20px;
@@ -91,10 +104,7 @@
 
 }
 .nav_bottom{
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	width: 100%;
+	float: right;
 	padding: 10px 0 20px;
 	a{
 		display: block;
@@ -145,13 +155,7 @@
 .nav_moreBtn{
 	display: none;
 }
-.app_container{
-	margin-left: @nav_width;
-}
 @media screen and (max-width: 660px) {
-	.app_container{
-		margin-left: 0;
-	}
 	.nav_bottom{
 		position: static;	
 	}
@@ -190,9 +194,11 @@
         z-index: 2;
 		.transition(.2s,ease);
 		.nav{
+            float: none;
+            margin-right: 0;
 			padding-top: 20px;
 			li{
-				margin-bottom: 0;
+				float: none;
 			}
 			a:after{
 				display: inline-block;

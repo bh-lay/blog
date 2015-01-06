@@ -53,7 +53,6 @@ define(function (require, exports) {
 	require('util/lofox_1_0.js');
 	require('public/js/juicer.js');
 	require('UI/dialog.js');
-	require('public/js/swiper.js');
     //绑定路由
     var lofox = new util.lofox();
     routerHandle(lofox);
@@ -79,7 +78,8 @@ define(function (require, exports) {
     L.supports = {
         'touch' : isSupportTouch
     };
-    
+    //配置弹出层
+    UI.config.zIndex(2000);
     //显示背景图
     if (supports('backgroundSize') && !isMobileBrowser) {
         L.gallery();

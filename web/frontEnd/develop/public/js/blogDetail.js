@@ -7,7 +7,7 @@ define(function(require,exports){
 
 	var template = ['<div class="blogDetail">',
 		'<div class="blog_article">',
-			'<div class="articletop">',
+			'<div class="caption">',
 				'<h1>${title}</h1>',
 				'<p><span>发布时间：${time_show} </span></p>',
 			'</div>',

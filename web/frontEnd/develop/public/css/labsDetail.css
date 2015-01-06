@@ -45,7 +45,7 @@ TD {
 /**
  * 代码高亮
  */
-.hljs code {
+pre.hljs code {
   display: block;
   max-height: 200px;
   padding: 0.5em;
@@ -210,19 +210,17 @@ TD {
 }
 .article code {
   font-family: inherit;
-  padding: 2px 4px;
-  color: #099E03;
-  background-color: #F2F9F3;
+  padding: .2em .4em;
+  color: #f70;
+  background-color: #eee;
   border-radius: 4px;
 }
 .article a {
-  color: #333;
-  padding: 0px 0.5em;
+  padding: 0px .5em;
   text-decoration: underline;
 }
 .article a:hover {
-  color: #000;
-  background: #f2f2f2;
+  color: #f70;
   text-decoration: underline;
 }
 .article *:nth-child(1) {

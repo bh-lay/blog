@@ -2,20 +2,24 @@
 /**
  * 代码高亮
  */
-.hljs code{
-	display: block;
-    max-height: 200px;
-	padding: 0.5em;
-	color:#ddd;
-    border: none;
-    margin: 0;
-    border-radius: 0;
-	font-family: Monaco, Consolas, "Lucida Console", monospace;
-	background: #333;
-    overflow: auto;
+pre.hljs{
+    code{
+        display: block;
+        max-height: 200px;
+        padding: 0.5em;
+        color:#ddd;
+        border: none;
+        margin: 0;
+        border-radius: 0;
+        font-family: Monaco, Consolas, "Lucida Console", monospace;
+        background: #333;
+        overflow: auto;
+    }
 }
 
-.profile .hljs-header *,.ini .hljs-title,.nginx .hljs-title {
+.profile .hljs-header *,
+.ini .hljs-title,
+.nginx .hljs-title {
 	color: #fff
 }
 
@@ -23,7 +27,16 @@
 	color: #666;
 }
 
-.hljs-string,.hljs-symbol,.diff .hljs-change,.hljs-regexp,.xml .hljs-attribute,.smalltalk .hljs-char,.xml .hljs-value,.ini .hljs-value,.clojure .hljs-attribute,.coffeescript .hljs-attribute {
+.hljs-string,
+.hljs-symbol,
+.diff .hljs-change,
+.hljs-regexp,
+.xml .hljs-attribute,
+.smalltalk .hljs-char,
+.xml .hljs-value,
+.ini .hljs-value,
+.clojure .hljs-attribute,
+.coffeescript .hljs-attribute {
 	color: #a0c874
 }
 
@@ -31,7 +44,24 @@
 	color: #6d0
 }
 
-.hljs-built_in,.hljs-literal,.vhdl .hljs-typename,.go .hljs-constant,.go .hljs-typename,.ini .hljs-keyword,.lua .hljs-title,.perl .hljs-variable,.php .hljs-variable,.mel .hljs-variable,.django .hljs-variable,.css .funtion,.smalltalk .method,.hljs-hexcolor,.hljs-important,.hljs-flow,.hljs-inheritance,.parser3 .hljs-variable {
+.hljs-built_in,
+.hljs-literal,
+.vhdl .hljs-typename,
+.go .hljs-constant,
+.go .hljs-typename,
+.ini .hljs-keyword,
+.lua .hljs-title,
+.perl .hljs-variable,
+.php .hljs-variable,
+.mel .hljs-variable,
+.django .hljs-variable,
+.css .funtion,
+.smalltalk .method,
+.hljs-hexcolor,
+.hljs-important,
+.hljs-flow,
+.hljs-inheritance,
+.parser3 .hljs-variable {
 	color: #59B524;
 }
 
@@ -40,7 +70,28 @@
 	font-weight: bold
 }
 
-.hljs-title,.ruby .hljs-constant,.vala .hljs-constant,.hljs-parent,.hljs-deletion,.hljs-template_tag,.css .hljs-keyword,.objectivec .hljs-class .hljs-id,.smalltalk .hljs-class,.lisp .hljs-keyword,.apache .hljs-tag,.nginx .hljs-variable,.hljs-envvar,.bash .hljs-variable,.go .hljs-built_in,.vbscript .hljs-built_in,.lua .hljs-built_in,.rsl .hljs-built_in,.tail,.avrasm .hljs-label,.tex .hljs-formula,.tex .hljs-formula * {
+.hljs-title,
+.ruby .hljs-constant,
+.vala .hljs-constant,
+.hljs-parent,
+.hljs-deletion,
+.hljs-template_tag,
+.css .hljs-keyword,
+.objectivec .hljs-class .hljs-id,
+.smalltalk .hljs-class,
+.lisp .hljs-keyword,
+.apache .hljs-tag,
+.nginx .hljs-variable,
+.hljs-envvar,
+.bash .hljs-variable,
+.go .hljs-built_in,
+.vbscript .hljs-built_in,
+.lua .hljs-built_in,
+.rsl .hljs-built_in,
+.tail,
+.avrasm .hljs-label,
+.tex .hljs-formula,
+.tex .hljs-formula * {
 	color: #a0c874
 }
 

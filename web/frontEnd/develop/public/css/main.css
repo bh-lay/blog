@@ -112,7 +112,7 @@ TD {
 /**
  * 代码高亮
  */
-.hljs code {
+pre.hljs code {
   display: block;
   max-height: 200px;
   padding: 0.5em;
@@ -277,19 +277,17 @@ TD {
 }
 .article code {
   font-family: inherit;
-  padding: 2px 4px;
-  color: #099E03;
-  background-color: #F2F9F3;
+  padding: .2em .4em;
+  color: #f70;
+  background-color: #eee;
   border-radius: 4px;
 }
 .article a {
-  color: #333;
-  padding: 0px 0.5em;
+  padding: 0px .5em;
   text-decoration: underline;
 }
 .article a:hover {
-  color: #000;
-  background: #f2f2f2;
+  color: #f70;
   text-decoration: underline;
 }
 .article *:nth-child(1) {
@@ -343,33 +341,39 @@ TD {
 /**
  * 导航
  */
+body:before {
+  content: '';
+  display: block;
+  height: 50px;
+}
 .app_nav {
   position: fixed;
   top: 0;
   left: 0;
-  height: 100%;
-  z-index: 4000;
+  width: 100%;
+  z-index: 1000;
 }
 .nav_body {
   position: absolute;
   top: 0;
   left: 0;
-  width: 50px;
-  height: 100%;
+  width: 100%;
+  height: 50px;
   background: #fff;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   z-index: 2;
 }
 .nav {
-  padding-top: 40px;
+  float: left;
 }
 .nav li {
-  margin-bottom: 10px;
+  float: left;
+  margin-right: 10px;
 }
 .nav li a {
   display: block;
-  width: 100%;
   height: 50px;
+  padding: 0 10px;
   line-height: 50px;
   outline: none;
   color: #333;
@@ -382,9 +386,15 @@ TD {
 }
 .nav li a i {
   display: inline-block;
-  width: 50px;
+  margin-right: 6px;
   text-align: center;
   font-size: 18px;
+}
+.nav li a:after {
+  display: inline-block;
+  content: attr(data-title);
+  font-size: 14px;
+  text-align: left;
 }
 .nav li:hover {
   background: #eee;
@@ -397,10 +407,9 @@ TD {
 }
 .nav_tips {
   position: relative;
-  float: left;
   height: 40px;
   line-height: 40px;
-  padding: 0 30px 0 20px;
+  text-align: center;
   border-radius: 2px;
   background: #333;
   color: #fff;
@@ -409,8 +418,9 @@ TD {
   content: '◆';
   position: absolute;
   diaplay: block;
-  top: 10px;
-  left: -10px;
+  top: -10px;
+  left: 50%;
+  margin-left: -10px;
   width: 20px;
   height: 20px;
   line-height: 20px;
@@ -433,10 +443,7 @@ TD {
   font-size: 12px;
 }
 .nav_bottom {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
+  float: right;
   padding: 10px 0 20px;
 }
 .nav_bottom a {
@@ -490,13 +497,7 @@ TD {
 .nav_moreBtn {
   display: none;
 }
-.app_container {
-  margin-left: 50px;
-}
 @media screen and (max-width: 660px) {
-  .app_container {
-    margin-left: 0;
-  }
   .nav_bottom {
     position: static;
   }
@@ -539,10 +540,12 @@ TD {
     -o-transition: all 0.2s ease;
   }
   .nav_body .nav {
+    float: none;
+    margin-right: 0;
     padding-top: 20px;
   }
   .nav_body .nav li {
-    margin-bottom: 0;
+    float: none;
   }
   .nav_body .nav a:after {
     display: inline-block;
@@ -1168,54 +1171,6 @@ TD {
     font-size: 12px;
   }
 }
-.index-banner {
-  position: relative;
-  margin-bottom: 20px;
-  max-height: 380px;
-  overflow: hidden;
-  background: #fff;
-  border-radius: 2px;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
-}
-.index-banner .swiper-container {
-  width: 100%;
-  overflow: hidden;
-}
-.index-banner .swiper-wrapper {
-  width: 100%;
-}
-.index-banner .swiper-slide {
-  float: left;
-  width: 100%;
-}
-.index-banner img {
-  width: 100%;
-  display: block;
-}
-.index-banner .title {
-  font-size: 25px;
-  margin-bottom: 10px;
-}
-.index-banner .swiper-pagination {
-  position: absolute;
-  left: 0;
-  text-align: center;
-  bottom: 5px;
-  width: 100%;
-}
-.index-banner .swiper-pagination-switch {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 10px;
-  background: #999;
-  box-shadow: 0px 1px 2px #555 inset;
-  margin: 0 3px;
-  cursor: pointer;
-}
-.index-banner .swiper-active-switch {
-  background: #fff;
-}
 /** 博文列表页 **/
 .articleListPage {
   width: 620px;
@@ -1353,39 +1308,6 @@ TD {
   font-size: 14px;
   padding: 10px 20px 20px;
 }
-.blogDetail {
-  max-width: 700px;
-  margin: auto;
-  padding: 60px 10px 40px;
-}
-.blog_article {
-  margin-bottom: 20px;
-  overflow: hidden;
-  background: #fff;
-  border-radius: 2px;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
-}
-.article_cover {
-  text-align: center;
-}
-.articletop {
-  border-bottom: 1px dashed #ccc;
-  text-align: center;
-  padding: 40px 20px 20px;
-  margin-bottom: 20px;
-}
-.articletop h1 {
-  font-weight: normal;
-  line-height: 1.5;
-  margin-bottom: 1em;
-}
-.articletop p {
-  color: #666666;
-}
-.article .topicImg {
-  display: block;
-  margin: auto;
-}
 @media (max-width: 780px) {
   .articleListPage {
     width: auto;
@@ -1404,25 +1326,47 @@ TD {
     margin-bottom: 30px;
   }
 }
-@media screen and (max-width: 1000px) {
-  .articletop h1 {
-    font-size: 24px;
+.blogDetail {
+  width: 700px;
+  margin: auto;
+  padding: 60px 10px 40px;
+}
+.blog_article {
+  margin-bottom: 20px;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+}
+.blog_article .caption {
+  text-align: center;
+  padding: 4em 1em 1.5em;
+  margin-bottom: 20px;
+}
+.blog_article .caption h1 {
+  font-weight: normal;
+  line-height: 1.5;
+  margin-bottom: .5em;
+}
+.blog_article .caption p {
+  color: #666;
+}
+.blog_article .article {
+  font-size: 1em;
+}
+@media (min-width: 1400px) {
+  .blogDetail {
+    width: 900px;
+  }
+  .blog_article {
+    font-size: 16px;
   }
 }
-.labshow {
-  border: 1px solid #ddd;
-  line-height: 3em;
-  margin: 2em 4em;
-}
-.labshow span {
-  background: #eee;
-  display: inline-block;
-  height: 100%;
-  padding: 0em 2em;
-}
-.labshow a {
-  border-bottom: 1px dashed #ccc;
-  margin-left: 4em;
+@media screen and (max-width: 800px) {
+  .blogDetail {
+    width: auto;
+  }
 }
 /** 我的作品 **/
 .opusList {

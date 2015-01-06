@@ -11,32 +11,35 @@ define(function () {
 		$('.app_nav .nav a').click(function () {
 			$('body').removeClass('nav_slidedown');
 		});
-		
+		/**
 		var active_plane;
         var delay;
-        $('.nav a').on('mouseenter', function () {
+        $('body').on('mouseenter','a', function () {
             if (!isSupportTouch && $(window).width() > 660) {
                 active_plane && active_plane.close();
-                var offset = $(this).offset(),
-                    title  = $(this).attr('data-title');
+                var btn = $(this),
+                    offset = btn.offset(),
+                    title  = btn.attr('title');
                 clearTimeout(delay);
                 delay = setTimeout(function () {
                     active_plane = UI.plane({
-                        'top' : offset.top + 5,
-                        'left' : 55,
+                        'top' : offset.top + btn.height() + 5,
+                        'left' : offset.left + (btn.outerWidth()/2) - 40,
+                        'width' : 80,
                         'html' : '<div class="nav_tips">' + title + '</div>',
-                        'from' : 'right',
+                        'from' : 'bottom',
                         'closeFn' : function () {
                             active_plane = null;
                         }
                     });
                 }, 100);
             }
-        }).on('mouseleave', function () {
+            return false;
+        }).on('mouseleave','a', function () {
             clearTimeout(delay);
             active_plane && active_plane.close();
         });
-		
+		**/
 		
 		$('.nav_mask').on('click', function () {
 			$('body').removeClass('nav_slidedown');
