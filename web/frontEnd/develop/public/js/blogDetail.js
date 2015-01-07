@@ -6,14 +6,18 @@ define(function(require,exports){
     require('lib/highlight/highlight');
 
 	var template = ['<div class="blogDetail">',
-		'<div class="blog_article">',
-			'<div class="caption">',
-				'<h1>${title}</h1>',
-				'<p><span>发布时间：${time_show} </span></p>',
-			'</div>',
-			'<div class="article">$${content}</div>',
-		'</div>',
-		'<div class="comments_frame"></div>',
+        '<div class="l-row">',
+            '<div class="l-col-8">',
+                '<div class="blog_article">',
+                    '<div class="caption">',
+                        '<h1>${title}</h1>',
+                        '<p><span>发布时间：${time_show} </span></p>',
+                    '</div>',
+                    '<div class="article">$${content}</div>',
+                '</div>',
+                '<div class="comments_frame"></div>',
+            '</div>',
+        '</div>',
 	'</div>'].join('');
 	
 	function getData(id,fn){

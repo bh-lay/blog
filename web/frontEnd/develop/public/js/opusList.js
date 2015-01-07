@@ -4,11 +4,11 @@
  */
 define(function(require,exports){
 	
-	var item_tpl = ['<ul>{@each list as it}<li>',
-		'<a href="/opus/${it.id}" title="${it.title}" target="_self" lofox="true" class="opus_cover" >',
+	var item_tpl = ['{@each list as it}<div class="opus-item">',
+		'<a href="/opus/${it.id}" title="${it.title}" target="_self" lofox="true" class="cover" >',
 			'<img src="${it.cover}?imgView/1/w/100/h/100/85" alt="${it.title}" />',
 		'</a>',
-		'<div class="opus_info">',
+		'<div class="info">',
 			'<h3><a href="/opus/${it.id}" target="_self" lofox="true" >${it.title}</a></h3>',
 			'<p><strong>开发范围：</strong>',
 				'{@each it.work_range as key }',
@@ -23,7 +23,7 @@ define(function(require,exports){
 				'{@/if}',
 			'</p>',
 		'</div>',
-	'</li>{@/each}</ul>'].join('');
+	'</div>{@/each}'].join('');
 	
 	var limit = 20,
 		 skip = 0,
@@ -55,7 +55,7 @@ define(function(require,exports){
 	return function(dom,param){
 		skip = 0;
 		getData(function(list){
-			dom.html('<div class="opusList"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载数据</p></div></div>');
+			dom.html('<div class="opusListPage"><div class="l-row"><div class="l-col-8"><div class="opusList"></div></div><div class="l-col-3"></div</div></div>');
 			var this_html = juicer(item_tpl,{
 				'list' : list
 			});

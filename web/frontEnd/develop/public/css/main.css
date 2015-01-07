@@ -677,6 +677,11 @@ body:before {
     overflow: hidden;
   }
 }
+.app-footer {
+  position: relative;
+  min-height: 300px;
+  background: #333;
+}
 /**
  * 评论模块
  *
@@ -1327,8 +1332,6 @@ body:before {
   }
 }
 .blogDetail {
-  width: 700px;
-  margin: auto;
   padding: 60px 10px 40px;
 }
 .blog_article {
@@ -1356,37 +1359,27 @@ body:before {
   font-size: 1em;
 }
 @media (min-width: 1400px) {
-  .blogDetail {
-    width: 900px;
-  }
   .blog_article {
     font-size: 16px;
   }
 }
-@media screen and (max-width: 800px) {
-  .blogDetail {
-    width: auto;
-  }
-}
 /** 我的作品 **/
-.opusList {
-  max-width: 700px;
-  margin: auto;
-  padding: 20px 10px;
+.opusListPage {
+  padding: 20px 0px;
 }
-.opusList ul {
+.opusList {
   background: #fff;
   border-radius: 2px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
-.opusList ul li {
+.opus-item {
   position: relative;
   padding: 10px 10px 10px 120px;
   overflow: hidden;
   margin-bottom: -1px;
   border-bottom: 1px solid #ddd;
 }
-.opus_cover {
+.opus-item .cover {
   position: absolute;
   top: 10px;
   left: 10px;
@@ -1394,22 +1387,22 @@ body:before {
   height: 100px;
   background: #aaa;
 }
-.opus_cover img {
+.opus-item .cover img {
   display: block;
   width: 100px;
   height: 100px;
   margin: 0px auto;
 }
-.opus_info {
+.opus-item .info {
   position: relative;
 }
-.opus_info h3 {
+.opus-item .info h3 {
   height: 30px;
   line-height: 30px;
   position: relative;
   margin-bottom: 8px;
 }
-.opus_info h3 a {
+.opus-item .info h3 a {
   display: block;
   width: 260px;
   overflow: hidden;
@@ -1417,15 +1410,15 @@ body:before {
   font-weight: normal;
   color: #333;
 }
-.opus_info h3 a:hover {
+.opus-item .info h3 a:hover {
   color: #333;
   text-decoration: underline;
 }
-.opus_info p {
+.opus-item .info p {
   line-height: 18px;
   padding: 6px 0;
 }
-.opus_info p strong {
+.opus-item .info p strong {
   display: block;
   height: 30px;
   float: left;
@@ -1433,20 +1426,20 @@ body:before {
   font-weight: normal;
   color: #333333;
 }
-.opus_info p span {
+.opus-item .info p span {
   display: inline-block;
   padding: 0px 4px;
   font-size: 14px;
   color: #888888;
 }
-.opus_info p a {
+.opus-item .info p a {
   display: block;
   width: 190px;
   overflow: hidden;
   text-overflow: ellipsis;
   color: #888;
 }
-.opus_info p a:hover {
+.opus-item .info p a:hover {
   color: #333;
   text-decoration: underline;
 }
