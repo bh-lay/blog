@@ -232,8 +232,8 @@ function routerHandle(lofox) {
 		this.title('留言板_小剧客栈');
 		L.nav.setCur('/');
 		var dom = getNewPage();
-        dom.html('<div class="l_row blessPage"><div class="l_col_12"></div></div>');
-        o_active_page = new L.views.comments.init(dom.find('.l_col_12')[0], 'define-1');
+        dom.html('<div class="l-row blessPage"><div class="l-col-12"></div></div>');
+        o_active_page = new L.views.comments.init(dom.find('.l-col-12')[0], 'define-1');
 	});
 	
 	/**

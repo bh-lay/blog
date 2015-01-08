@@ -43,9 +43,13 @@ TD {
   padding: 10px;
 }
 .l-row {
-  width: 1200px;
+  width: 1260px;
   margin: auto;
   zoom: 1;
+  transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
 }
 .l-row:after {
   content: ".";
@@ -56,6 +60,7 @@ TD {
 }
 .l-row .l-col-1,
 .l-row .l-col-2,
+.l-row .l-col-3,
 .l-row .l-col-4,
 .l-row .l-col-6,
 .l-row .l-col-8,
@@ -73,6 +78,9 @@ TD {
 .l-row .l-col-2 {
   width: 16.66667%;
 }
+.l-row .l-col-3 {
+  width: 25%;
+}
 .l-row .l-col-4 {
   width: 33.33333%;
 }
@@ -86,27 +94,55 @@ TD {
   width: 100%;
   float: none;
 }
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1280px) {
   .l-row {
-    width: 960px;
+    width: 945px;
   }
-}
-@media screen and (max-width: 1100px) {
-  .l-row {
-    width: 700px;
+  .l-row .l-col-1 {
+    width: 16.66666%;
   }
-  .l-row .l-col-1,
-  .l-row .l-col-2,
-  .l-row .l-col-4,
+  .l-row .l-col-2 {
+    width: 25%;
+  }
+  .l-row .l-col-3 {
+    width: 33.333333%;
+  }
+  .l-row .l-col-4 {
+    width: 50%;
+  }
   .l-row .l-col-6,
   .l-row .l-col-8 {
     width: 100%;
     float: none;
   }
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 965px) {
+  .l-row {
+    width: 630px;
+  }
+  .l-row .l-col-1 {
+    width: 25%;
+  }
+  .l-row .l-col-2 {
+    width: 33.3333333%;
+  }
+  .l-row .l-col-3 {
+    width: 50%;
+  }
+  .l-row .l-col-4 {
+    width: 100%;
+    float: none;
+  }
+}
+@media screen and (max-width: 650px) {
   .l-row {
     width: 100%;
+  }
+  .l-row .l-col-1,
+  .l-row .l-col-2,
+  .l-row .l-col-3 {
+    width: 100%;
+    float: none;
   }
 }
 /**
@@ -358,33 +394,37 @@ body:before {
 }
 .app_nav .nav li {
   float: left;
-  margin-right: 10px;
 }
 .app_nav .nav li a {
   display: block;
   height: 50px;
-  padding: 0 10px;
-  line-height: 50px;
+  padding: 0 15px;
   outline: none;
+  overflow: hidden;
+  line-height: 50px;
   color: #333;
   text-align: center;
-  overflow: hidden;
-  transition: all 0.1s linear;
-  -moz-transition: all 0.1s linear;
-  -webkit-transition: all 0.1s linear;
-  -o-transition: all 0.1s linear;
+  font-size: 16px;
+  transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+}
+.app_nav .nav li a i,
+.app_nav .nav li a span {
+  display: inline-block;
+  vertical-align: middle;
+  height: 30px;
+  line-height: 30px;
 }
 .app_nav .nav li a i {
-  display: inline-block;
   margin-right: 6px;
   text-align: center;
-  font-size: 18px;
+  font-size: 24px;
+  display: none;
 }
-.app_nav .nav li a:after {
+.app_nav .nav li:nth-child(1) a i {
   display: inline-block;
-  content: attr(data-title);
-  font-size: 14px;
-  text-align: left;
 }
 .app_nav .nav li:hover {
   background: #eee;
@@ -445,7 +485,6 @@ body:before {
   display: block;
   height: 40px;
   top: 10px;
-  left: 50px;
   padding: 0 20px;
   line-height: 40px;
   font-size: 16px;
@@ -476,9 +515,6 @@ body:before {
 @media screen and (max-width: 660px) {
   .nav_bottom {
     position: static;
-  }
-  .app_container {
-    padding-top: 50px;
   }
   .app_nav {
     width: 100%;
@@ -523,10 +559,11 @@ body:before {
   .nav_body .nav li {
     float: none;
   }
-  .nav_body .nav a:after {
+  .nav_body .nav li a i {
     display: inline-block;
+  }
+  .nav_body .nav li a span {
     width: 10em;
-    content: attr(data-title);
     padding-left: 5px;
     font-size: 14px;
     text-align: left;
@@ -1102,20 +1139,6 @@ body:before {
 .index-intro .footer a {
   padding: 0 1em;
 }
-.some_link {
-  display: table;
-  width: 100%;
-  margin-bottom: 20px;
-  background: #fff;
-  overflow: hidden;
-  border-radius: 4px;
-}
-.some_link a {
-  display: table-cell;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-}
 .webLink {
   display: table;
   width: 100%;
@@ -1156,7 +1179,7 @@ body:before {
 .articleListPage {
   width: 620px;
   margin: auto;
-  padding: 20px 0;
+  padding: 30px 0;
 }
 .articleListPage:after {
   content: '';
@@ -1308,7 +1331,7 @@ body:before {
   }
 }
 .blogDetail {
-  padding: 60px 10px 40px;
+  padding: 30px 0 40px;
 }
 .blog_article {
   margin-bottom: 20px;
@@ -1341,12 +1364,13 @@ body:before {
 }
 /** 我的作品 **/
 .opusListPage {
-  padding: 20px 0px;
+  padding: 30px 0px;
 }
 .opusList {
   background: #fff;
   border-radius: 2px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 }
 .opus-item {
   position: relative;
@@ -1387,7 +1411,7 @@ body:before {
   color: #333;
 }
 .opus-item .info h3 a:hover {
-  color: #333;
+  color: #f70;
   text-decoration: underline;
 }
 .opus-item .info p {
@@ -1482,59 +1506,57 @@ body:before {
 }
 /**实验室列表**/
 .labsList {
-  width: 1080px;
-  margin: auto;
-  padding: 40px 10px;
-  overflow: hidden;
+  padding: 40px 0;
 }
 .lab_item {
   position: relative;
-  width: 320px;
-  height: 360px;
-  float: left;
-  margin: 0 20px 40px;
-  background: #fff;
+  max-width: 340px;
+  height: 340px;
+  margin: 0 auto 20px;
   overflow: hidden;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
-.lab_item .lab_cover {
+.lab_item .cover {
   display: block;
-  margin: 0px auto;
+  height: 220px;
   transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
   -webkit-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
+  overflow: hidden;
 }
-.lab_item .lab_cover img {
+.lab_item .cover img {
   display: block;
-  height: 240px;
   margin: auto;
-  max-width: 100%;
+  width: 100%;
 }
-.lab_item .lab_cover:hover {
+.lab_item .cover:hover {
   opacity: 0.8;
 }
-.lab_item .lab_title {
-  padding: 10px;
-  line-height: 30px;
+.lab_item .title {
+  padding: 15px 10px 0;
+  line-height: 20px;
   font-weight: normal;
   color: #333;
   font-size: 20px;
   text-align: center;
 }
-.lab_item .lab_title a {
+.lab_item .title a {
   transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
   -webkit-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
 }
-.lab_item .lab_title a:hover {
+.lab_item .title a:hover {
   text-decoration: underline;
   color: #000000;
 }
-.lab_item .lab_info {
+.lab_item .info {
   padding: 10px 10px 20px;
 }
-.lab_item .lab_info p {
+.lab_item .info p {
   color: #333;
   font-size: 12px;
   opacity: 0.7;
@@ -1542,29 +1564,15 @@ body:before {
   text-indent: 2em;
   text-align: justify;
 }
-@media (max-width: 1200px) {
-  .labsList {
-    width: 720px;
-  }
-}
-@media (max-width: 780px) {
-  .labsList {
-    width: auto;
-  }
+@media (max-width: 640px) {
   .lab_item {
-    float: none;
-    width: 360;
-    margin: 0 auto 20px;
+    height: auto;
   }
-  .lab_item .lab_cover img {
+  .lab_item .cover {
+    height: auto;
+  }
+  .lab_item .cover img {
     width: 100%;
-    height: auto;
-  }
-}
-@media (max-width: 380px) {
-  .lab_item {
-    width: auto;
-    height: auto;
   }
 }
 /**

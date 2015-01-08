@@ -1,7 +1,6 @@
 /**
  * 导航
  */
-@nav_width: 50px;
 @nav_height: 50px;
 body:before{
     content: '';
@@ -18,29 +17,33 @@ body:before{
 		float: left;
 		li {
 			float: left;
-			margin-right: 10px;
 			a {
 				display: block;
 				height: 50px;
-				padding: 0 10px;
-				line-height: 50px;
+				padding: 0 15px;
 				outline: none;
+				overflow: hidden;
+				line-height: 50px;
 				color: #333;
 				text-align: center;
-				overflow: hidden;
-				.transition(0.1s);
-				i {
+				font-size: 16px;
+				.transition(.2s);
+				i,
+				span{
 					display: inline-block;
+					vertical-align: middle;
+					height: 30px;
+					line-height: 30px;
+				}
+				i {
 					margin-right: 6px;
 					text-align: center;
-					font-size: 18px;
+					font-size: 24px;
+					display: none;
 				}
-				&:after{
-					display: inline-block;
-					content: attr(data-title);
-					font-size: 14px;
-					text-align: left;
-				}
+			}
+			&:nth-child(1) a i{
+				display: inline-block;
 			}
 			&:hover {
 				background: #eee;
@@ -105,7 +108,6 @@ body:before{
     display: block;
 	height: 40px;
 	top: 10px;
-	left: @nav_width;
     padding: 0 20px;
     line-height: 40px;
     font-size: 16px;
@@ -133,9 +135,6 @@ body:before{
 @media screen and (max-width: 660px) {
 	.nav_bottom{
 		position: static;	
-	}
-	.app_container{
-		padding-top: 50px;
 	}
 	.app_nav{
         width: 100%;
@@ -174,14 +173,18 @@ body:before{
 			padding-top: 20px;
 			li{
 				float: none;
-			}
-			a:after{
-				display: inline-block;
-				width: 10em;
-				content: attr(data-title);
-				padding-left: 5px;
-				font-size: 14px;
-				text-align: left;
+				a{
+					i{
+						display: inline-block;
+					}
+					span{
+						width: 10em;
+						padding-left: 5px;
+						font-size: 14px;
+						text-align: left;
+					}
+
+				}
 			}
 		}
     }

@@ -1,38 +1,34 @@
 
 /**实验室列表**/
 .labsList {
-	width: 1080px;
-	margin: auto;
-	padding: 40px 10px;
-	overflow: hidden;
-	overflow: hidden
+	padding: 40px 0;
 }
 .lab_item {
 	position: relative;
-	width: 320px;
-	height: 360px;
-	float: left;
-	margin: 0 20px 40px;
+	max-width: 340px;
+	height: 340px;
+	margin: 0 auto 20px;
 	background: #fff;
 	overflow: hidden;
-	.lab_cover {
+	.cardShadow();
+	.cover {
 		display: block;
-		margin: 0px auto;
+        height: 220px;
 		.transition(0.2s);
+		overflow: hidden;
 		img{
 			display: block;
-            height: 240px;
 			margin: auto;
-			max-width: 100%;
+			width: 100%;
 		}
 		&:hover{
 			opacity: 0.8
 		}
 		
 	}
-	.lab_title {
-		padding: 10px;
-		line-height: 30px;
+	.title {
+		padding: 15px 10px 0;
+		line-height: 20px;
 		font-weight: normal;
 		color: #333;
 		font-size: 20px;
@@ -45,7 +41,7 @@
 			}
 		}
 	}
-	.lab_info {
+	.info {
 		padding: 10px 10px 20px;
 		p {
 			color: #333;
@@ -57,28 +53,14 @@
 		}
 	}
 }
-@media(max-width:1200px){
-	.labsList{
-		width: 720px;
-	}
-}
-@media(max-width:780px){
-	.labsList{
-		width: auto;
-	}
+@media(max-width:640px){
 	.lab_item{
-		float: none;
-		width: 360;
-		margin: 0 auto 20px;
-		.lab_cover img{
-            width: 100%;
-			height: auto
-		}
-	}
-}
-@media(max-width:380px){
-	.lab_item{
-		width: auto;
 		height: auto;
+		.cover{
+			height: auto;
+			img{
+            	width: 100%;
+			}
+		}
 	}
 }
