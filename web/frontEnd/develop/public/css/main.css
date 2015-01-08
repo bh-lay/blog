@@ -405,46 +405,22 @@ body:before {
 .nav li.cur a {
   color: #ffffff;
 }
-.nav_tips {
-  position: relative;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  border-radius: 2px;
-  background: #333;
-  color: #fff;
+.side {
+  float: right;
 }
-.nav_tips:before {
-  content: '◆';
-  position: absolute;
-  diaplay: block;
-  top: -10px;
-  left: 50%;
-  margin-left: -10px;
-  width: 20px;
-  height: 20px;
-  line-height: 20px;
-  text-align: center;
-  font-size: 20px;
-  color: #333;
-}
-.navLink {
-  overflow: hidden;
-  display: none;
-}
-.navLink li {
-  height: 20px;
+.side li {
+  height: 50px;
+  line-height: 50px;
   float: left;
-  padding: 10px;
+  padding: 0 10px;
 }
-.navLink li a {
+.side li a {
   line-height: 20px;
   padding: 0px 5px;
   font-size: 12px;
 }
 .nav_bottom {
   float: right;
-  padding: 10px 0 20px;
 }
 .nav_bottom a {
   display: block;
