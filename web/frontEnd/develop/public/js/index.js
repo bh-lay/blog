@@ -9,6 +9,7 @@ define(function(require,exports){
 	var temp = ['<div class="indeCnt">',
 		'<div class="l-row index-section">',
 			'<div class="l-col-12">',
+				'<div class="l_alert_info">小剧闲的蛋疼，最近又在倒腾改版，新版即将上线！</div>',
                 '<div class="index-intro">',
                     '<div class="logo"><i class="l-icon l-icon-layLogo"></i></div>',
                     '<h1 class="index_intro_a">小剧客栈</h1>',
