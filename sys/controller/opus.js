@@ -41,6 +41,10 @@ exports.list = function(connect,app){
 		connect.write('html',200,this_cache);
 	},function(save_cache){
 		list_page(function(err,list){
+			if(err){
+				app.write('notFound');
+				return
+			}
 			//获取视图
 			app.views('opusList',{
 				'title' : '作品',
@@ -59,6 +63,10 @@ exports.detail = function(connect,app,id){
 		connect.write('html',200,this_cache);
 	},function(save_cache){
 		detail_page(id,function(err,data){
+			if(err){
+				connect.write('notFound');
+				return
+			}
 			//获取视图
 			app.views('opusDetail',{
 				'title' : data.title,
