@@ -353,24 +353,14 @@ body:before {
   width: 100%;
   z-index: 1000;
 }
-.nav_body {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 50px;
-  background: #fff;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-  z-index: 2;
-}
-.nav {
+.app_nav .nav {
   float: left;
 }
-.nav li {
+.app_nav .nav li {
   float: left;
   margin-right: 10px;
 }
-.nav li a {
+.app_nav .nav li a {
   display: block;
   height: 50px;
   padding: 0 10px;
@@ -384,40 +374,50 @@ body:before {
   -webkit-transition: all 0.1s linear;
   -o-transition: all 0.1s linear;
 }
-.nav li a i {
+.app_nav .nav li a i {
   display: inline-block;
   margin-right: 6px;
   text-align: center;
   font-size: 18px;
 }
-.nav li a:after {
+.app_nav .nav li a:after {
   display: inline-block;
   content: attr(data-title);
   font-size: 14px;
   text-align: left;
 }
-.nav li:hover {
+.app_nav .nav li:hover {
   background: #eee;
 }
-.nav li.cur {
+.app_nav .nav li.cur {
   background: #f70;
 }
-.nav li.cur a {
+.app_nav .nav li.cur a {
   color: #ffffff;
 }
-.side {
+.app_nav .side {
   float: right;
 }
-.side li {
+.app_nav .side li {
   height: 50px;
   line-height: 50px;
   float: left;
   padding: 0 10px;
 }
-.side li a {
+.app_nav .side li a {
   line-height: 20px;
   padding: 0px 5px;
   font-size: 12px;
+}
+.nav_body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  z-index: 2;
 }
 .nav_bottom {
   float: right;
