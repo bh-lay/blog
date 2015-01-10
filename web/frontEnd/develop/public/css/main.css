@@ -1092,57 +1092,55 @@ body:before {
   height: 100%;
 }
 /** 首页 **/
-.indeCnt {
-  padding-top: 40px;
+.indeCnt section {
+  font-size: 16px;
 }
-.indeCnt .main {
-  background: #fff;
-}
-.index-intro {
-  max-width: 350px;
-  margin: auto;
-  padding: 4em 0;
+.index-about-blog {
+  padding: 10em 0;
   margin-bottom: 20px;
   line-height: 1.8em;
   text-align: center;
   overflow: hidden;
-  font-size: 14px;
-  color: #aaa;
-  background: #fff;
-  border-radius: 2px;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  color: #000;
 }
-.index-intro .logo {
-  color: #333;
-  font-size: 6em;
+.index-about-blog .logo {
+  font-size: 7em;
   line-height: 1em;
   margin-bottom: .3em;
 }
-.index-intro .index_intro_a {
-  color: #333;
+.index-about-blog .index_intro_a {
   font-size: 2.5em;
   font-weight: normal;
   letter-spacing: .2em;
+  line-height: 1em;
   margin-bottom: 1em;
 }
-.index-intro .index_intro_b {
+.index-about-blog .index_intro_b {
+  line-height: 1em;
   font-size: 1em;
+  opacity: .7;
 }
-.index-intro .index_intro_c {
-  color: #333;
+.index-about-blog .index_intro_c {
+  line-height: 2em;
+  font-size: 1.5em;
 }
-.index-intro .index_intro_d {
-  font-size: 0.8em;
+.index-about-blog .index_intro_d {
+  line-height: 1em;
+  font-size: 1em;
   margin-bottom: 1em;
+  opacity: .7;
 }
-.index-intro .footer {
-  margin-top: 4em;
+.index-aboutme {
+  padding: 100px;
+  background: #fff;
+  text-align: center;
 }
-.index-intro .footer i {
-  font-size: 18px;
-}
-.index-intro .footer a {
-  padding: 0 1em;
+.index-aboutme .avatar {
+  width: 150px;
+  height: 150px;
+  margin: auto;
+  border-radius: 100%;
+  background: url(../images/my-avatar.jpg);
 }
 .webLink {
   max-width: 350px;
@@ -1176,7 +1174,7 @@ body:before {
   -o-transition: all 0.2s linear;
 }
 @media screen and (max-width: 680px) {
-  .index_intro {
+  .indeCnt section {
     font-size: 12px;
   }
 }

@@ -7,12 +7,15 @@
 //index page
 define(function(require,exports){
 	var temp = ['<div class="indeCnt">',
-		'<section class="index-intro">',
+		'<section class="index-about-blog">',
 			'<div class="logo"><i class="l-icon l-icon-layLogo"></i></div>',
 			'<h1 class="index_intro_a">小剧客栈</h1>',
 			'<p class="index_intro_b">一个自称是单页面加响应式的个人博客</p>',
 			'<p class="index_intro_c">nodeJS强力驱动</p>',
 			'<p class="index_intro_d">无耻地没有采用express框架</p>',
+		'</section>',
+		'<section class="index-aboutme">',
+			'<div class="avatar"></div>',
 			'<div class="footer">',
 				'<a href="https://github.com/bh-lay" target="_blank" title="github"><i class="l-icon l-icon-git"></i></a>',
 				'<a href="/topic/aboutme/index.html" target="_blank" title="关于剧中人">关于剧中人</a>',
@@ -21,7 +24,6 @@ define(function(require,exports){
 		'<section class="main">',
 			'<div class="l-row">',
 				'<div class="l-col-12">',
-					'<div class="l_alert_info">小剧闲的蛋疼，最近又在倒腾改版，新版即将上线！</div>',
 
 					'<div class="webLink">',
 						'<div class="caption">我的小伙伴</div>',
