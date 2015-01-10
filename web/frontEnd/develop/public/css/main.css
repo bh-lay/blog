@@ -1118,28 +1118,32 @@ body:before {
 .index-about-blog .index_intro_b {
   line-height: 1em;
   font-size: 1em;
-  opacity: .7;
+  letter-spacing: .2em;
+  opacity: .8;
 }
 .index-about-blog .index_intro_c {
   line-height: 2em;
   font-size: 1.5em;
+  opacity: .9;
 }
 .index-about-blog .index_intro_d {
   line-height: 1em;
   font-size: 1em;
   margin-bottom: 1em;
-  opacity: .7;
+  opacity: .6;
 }
 .index-aboutme {
   padding: 100px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.2);
   text-align: center;
+  margin-bottom: 2em;
 }
 .index-aboutme .avatar {
   width: 150px;
   height: 150px;
   margin: auto;
   border-radius: 100%;
+  border: 5px solid #fff;
   background: url(../images/my-avatar.jpg);
 }
 .webLink {
