@@ -1095,6 +1095,9 @@ body:before {
 .indeCnt {
   padding-top: 40px;
 }
+.indeCnt .main {
+  background: #fff;
+}
 .index-intro {
   max-width: 350px;
   margin: auto;
