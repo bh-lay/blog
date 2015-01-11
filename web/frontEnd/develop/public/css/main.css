@@ -1102,7 +1102,7 @@ body:before {
   text-align: center;
   overflow: hidden;
   color: #000;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.3);
 }
 .index-about-blog .logo {
   font-size: 7em;
@@ -1134,7 +1134,7 @@ body:before {
   opacity: .6;
 }
 .index-aboutme {
-  padding: 100px;
+  padding: 15em 0;
   text-align: center;
   margin-bottom: 2em;
 }
@@ -1212,6 +1212,11 @@ body:before {
 @media screen and (max-width: 680px) {
   .indeCnt section {
     font-size: 12px;
+  }
+}
+@media screen and (max-height: 680px) {
+  .index-aboutme {
+    padding: 8em 0;
   }
 }
 /** 博文列表页 **/
