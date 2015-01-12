@@ -9,8 +9,9 @@
 */
 
 (function(factory) {
-    factory(jQuery);
-//    define(factory);
+    define(function(){
+		return factory;
+	});
 }(function(jQuery) {
 
   // globals

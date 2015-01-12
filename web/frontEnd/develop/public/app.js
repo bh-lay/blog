@@ -51,10 +51,10 @@ if (!isAdvancedBrowser) {
 define(function (require, exports) {
     require('public/js/jquery');
 	require('public/js/juicer.js');
-	require('public/js/nicescroll.js');
 	require('util/lofox_1_0.js');
 	require('UI/dialog.js');
-    
+	var nicescroll_factory = require('public/js/nicescroll.js');
+    nicescroll_factory(jQuery);
     //绑定路由
     var lofox = new util.lofox();
     routerHandle(lofox);
