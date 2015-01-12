@@ -12,6 +12,7 @@
 	text-align: center;
 	overflow: hidden;
     color: #000;
+	background: rgba(255,255,255,.2);
     .logo {
         font-size: 7em;
         line-height: 1em;
@@ -45,17 +46,47 @@
 
 .index-aboutme{
 	padding: 100px;
-	background: rgba(255,255,255,.2);
 	text-align: center;
 	margin-bottom: 2em;
 	.avatar{
 		width: 150px;
 		height: 150px;
-		margin: auto;
+		margin: 0 auto 1.5em;
 		border-radius: 100%;
 		border: 5px solid #fff;
 		background: url(../images/my-avatar.jpg);
 	}
+    h3{
+        font-size: 1.6em;
+        font-weight: normal;
+        margin-bottom: 1em;
+        strong{
+            padding-left: .2em;;
+        }
+    }
+    .footer{
+        a{
+            display: inline-block;
+            vertical-align: middle;
+            height: 2.6em;
+            line-height: 2.6em;
+            padding: 0 1em;
+            .transition(.2s,ease);
+        }
+        .github{
+            border-radius: 4px;
+            color: #fff;
+            background: #f60;
+            i{
+                margin-right: 5px;
+                font-size: 20px;
+                opacity: .7;
+            }
+            &:hover{
+                background: #f90;
+            }
+        }
+    }
 }
 .webLink {
 	max-width: 350px;

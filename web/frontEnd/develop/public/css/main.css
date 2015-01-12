@@ -1102,6 +1102,7 @@ body:before {
   text-align: center;
   overflow: hidden;
   color: #000;
+  background: rgba(255, 255, 255, 0.2);
 }
 .index-about-blog .logo {
   font-size: 7em;
@@ -1134,17 +1135,48 @@ body:before {
 }
 .index-aboutme {
   padding: 100px;
-  background: rgba(255, 255, 255, 0.2);
   text-align: center;
   margin-bottom: 2em;
 }
 .index-aboutme .avatar {
   width: 150px;
   height: 150px;
-  margin: auto;
+  margin: 0 auto 1.5em;
   border-radius: 100%;
   border: 5px solid #fff;
   background: url(../images/my-avatar.jpg);
+}
+.index-aboutme h3 {
+  font-size: 1.6em;
+  font-weight: normal;
+  margin-bottom: 1em;
+}
+.index-aboutme h3 strong {
+  padding-left: .2em;
+}
+.index-aboutme .footer a {
+  display: inline-block;
+  vertical-align: middle;
+  height: 2.6em;
+  line-height: 2.6em;
+  padding: 0 1em;
+  transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+}
+.index-aboutme .footer .github {
+  border-radius: 4px;
+  color: #fff;
+  background: #f60;
+}
+.index-aboutme .footer .github i {
+  margin-right: 5px;
+  font-size: 20px;
+  opacity: .7;
+}
+.index-aboutme .footer .github:hover {
+  background: #f90;
 }
 .webLink {
   max-width: 350px;
