@@ -50,13 +50,15 @@ if (!isAdvancedBrowser) {
 
 define(function (require, exports) {
     require('public/js/jquery');
-	require('util/lofox_1_0.js');
 	require('public/js/juicer.js');
+	require('public/js/nicescroll.js');
+	require('util/lofox_1_0.js');
 	require('UI/dialog.js');
+    
     //绑定路由
     var lofox = new util.lofox();
     routerHandle(lofox);
-
+    
     L.user = require('public/js/user.js');
     L.gallery = require('public/js/page_background.js');
     L.nav = require('public/js/navigation.js');
@@ -84,6 +86,16 @@ define(function (require, exports) {
     if (supports('backgroundSize') && !isMobileBrowser) {
         L.gallery();
     }
+    //nicescrol
+    $('body').niceScroll({
+        zindex : 2001,
+        cursorborder: '1px solid rgba(255,255,255,.2)',
+        railpadding: {
+            right : 1
+        },
+        bouncescroll: true
+    });
+    
     //开始导航
     L.nav();
     setTimeout(function () {
