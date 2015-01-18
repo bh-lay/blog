@@ -1101,55 +1101,52 @@ body:before {
 .indeCnt section {
   font-size: 16px;
 }
-.index-about-blog {
-  padding: 10em 0;
-  margin-bottom: 20px;
-  line-height: 1.8em;
+.index-aboutme {
+  padding: 15em 0;
   text-align: center;
-  overflow: hidden;
-  color: #000;
-  background: rgba(255, 255, 255, 0.3);
+  margin-bottom: 2em;
 }
-.index-about-blog .logo {
-  font-size: 7em;
-  line-height: 1em;
-  margin-bottom: .3em;
+.index-aboutme .avatar {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 1.5em;
+  border-radius: 100%;
+  border: 5px solid #fff;
+  background: url(../images/my-avatar.jpg);
 }
-.index-about-blog .index_intro_a {
-  font-size: 2.5em;
+.index-aboutme h3 {
+  font-size: 1.6em;
   font-weight: normal;
-  letter-spacing: .2em;
-  line-height: 1em;
-  margin-bottom: 1em;
 }
-.index-about-blog .index_intro_b {
-  line-height: 1em;
-  font-size: 1em;
-  letter-spacing: .2em;
-  opacity: .8;
+.index-aboutme h3 strong {
+  padding-left: .2em;
 }
-.index-about-blog .index_intro_c {
-  line-height: 2em;
+.index-aboutme p {
+  font-size: 1.2em;
+}
+.index-aboutme .footer a {
+  display: inline-block;
+  vertical-align: middle;
+  height: 2.6em;
+  line-height: 2.6em;
+  padding: 0 1em;
   font-size: 1.5em;
-  opacity: .9;
-}
-.index-about-blog .index_intro_d {
-  line-height: 1em;
-  font-size: 1em;
-  margin-bottom: 1em;
-  opacity: .6;
+  transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
 }
 .index-about-design {
   margin-bottom: 20px;
   line-height: 1.8em;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.5);
   font-family: "Microsoft Yahei";
 }
 .index-about-design .intro-half {
   width: 50%;
   float: right;
-  padding-top: 4em;
+  padding-top: 3em;
   text-align: right;
 }
 .index-about-design .intro-half h3 {
@@ -1160,17 +1157,25 @@ body:before {
   color: #000;
 }
 .index-about-design .intro-half p {
+  margin-bottom: 2.5em;
+  padding-right: .4em;
   font-size: 1.3em;
   color: #000;
   opacity: .8;
 }
 .index-about-design .intro-half .links {
-  padding-top: 60px;
+  font-size: .85em;
+  color: #333;
+}
+.index-about-design .intro-half .links a {
+  padding: 0 .5em;
+  text-decoration: underline;
 }
 .index-about-design .device-half {
   position: relative;
   width: 50%;
-  height: 270px;
+  padding-top: 3em;
+  height: 180px;
   float: left;
 }
 .index-about-design .device {
@@ -1178,8 +1183,6 @@ body:before {
   bottom: 0;
   border-radius: 8px 8px 0 0;
   background: #444;
-  border: 1px solid #555;
-  border-bottom: none;
 }
 .index-about-design .device:after {
   content: "";
@@ -1255,89 +1258,26 @@ body:before {
   left: 57px;
   border-radius: 100%;
 }
-.index-aboutme {
-  padding: 15em 0;
-  text-align: center;
-  margin-bottom: 2em;
-}
-.index-aboutme .avatar {
-  width: 150px;
-  height: 150px;
-  margin: 0 auto 1.5em;
-  border-radius: 100%;
-  border: 5px solid #fff;
-  background: url(../images/my-avatar.jpg);
-}
-.index-aboutme h3 {
-  font-size: 1.6em;
-  font-weight: normal;
-  margin-bottom: 1em;
-}
-.index-aboutme h3 strong {
-  padding-left: .2em;
-}
-.index-aboutme .footer a {
-  display: inline-block;
-  vertical-align: middle;
-  height: 2.6em;
-  line-height: 2.6em;
-  padding: 0 1em;
-  transition: all 0.2s ease;
-  -moz-transition: all 0.2s ease;
-  -webkit-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
-}
-.index-aboutme .footer .github {
-  border-radius: 4px;
-  color: #fff;
-  background: #f60;
-}
-.index-aboutme .footer .github i {
-  margin-right: 5px;
-  font-size: 20px;
-  opacity: .7;
-}
-.index-aboutme .footer .github:hover {
-  background: #f90;
-}
-.webLink {
-  max-width: 350px;
-  margin: auto;
-  background: #fff;
-  border-radius: 4px;
-  margin-bottom: 20px;
-}
-.webLink .caption {
-  line-height: 40px;
-  padding: 0px 10px;
-  margin: auto;
-  text-indent: 2em;
-  font-size: 14px;
-  border-bottom: 1px solid #ddd;
-}
-.webLink .content {
-  overflow: hidden;
-  padding: 20px;
-}
-.webLink .content a {
-  display: inline-block;
-  height: 40px;
-  line-height: 40px;
-  padding: 0 10px;
-  font-size: 14px;
-  text-align: center;
-  transition: all 0.2s linear;
-  -moz-transition: all 0.2s linear;
-  -webkit-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
-}
-@media screen and (max-width: 680px) {
+@media screen and (max-width: 960px) {
   .index-about-design .intro-half,
   .index-about-design .device-half {
     width: auto;
     float: none;
   }
-  .index-about-design .indeCnt section {
+  .index-about-design .intro-half {
+    text-align: center;
+  }
+}
+.index-about-blog {
+  padding: 10em 0;
+  margin-bottom: 20px;
+  line-height: 1.8em;
+  text-align: center;
+  overflow: hidden;
+  color: #000;
+}
+@media screen and (max-width: 680px) {
+  .indeCnt section {
     font-size: 12px;
   }
 }
