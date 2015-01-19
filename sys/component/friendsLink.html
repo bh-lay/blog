@@ -1,0 +1,16 @@
+<div class="container">
+<div class="row">
+	<div class="col-sm-12">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<h2>我的小伙伴</h2>
+			<ul class="list-group">
+				{{@each list as it}}
+					<li class="list-group-item"><a target="_blank" href="${{it.url}}">${{it.title}}</a></li>
+				{{@/each}}
+			</ul>
+		</div>
+	</div>
+	</div>
+</div>
+</div>

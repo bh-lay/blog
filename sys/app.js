@@ -50,6 +50,11 @@ app.get('/bless', function(data,connect){
  		});
 	});
 });
+//友情链接
+var links = require('./controller/links.js');
+app.get('/links', function(data,connect){
+	links.render(connect,app);
+});
 
 //博客
 var blog = require('./controller/blog.js');
