@@ -1533,6 +1533,7 @@ body:before {
   }
   .articleListPage-side,
   .articleListPage-main {
+    position: static;
     float: none;
     width: auto;
     max-width: 400px;
