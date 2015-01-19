@@ -106,24 +106,21 @@ body:before{
 .nav-back{
 	position: absolute;
     display: block;
+    top: 60px;
+    right: 0;
 	height: 40px;
-	top: 10px;
     padding: 0 20px;
     line-height: 40px;
     font-size: 16px;
     color: #333;
     background: #fff;
-    border-radius: 0 4px 4px 0;
+    border-radius: 4px 0 0 4px;
     white-space: nowrap;
 	box-shadow: 1px 1px 2px rgba(0,0,0,.8);
 	.transition(.2s);
     i{
         font-size: 22px;
         margin-right: 5px;
-    }
-    &:hover{
-		top: 9px;
-		box-shadow: 5px 5px 4px rgba(0,0,0,.4);
     }
 }
 .nav_appname{
@@ -192,6 +189,7 @@ body:before{
 	.nav-back{
 		top: 5px;
 		left: 0;
+        right: auto;
 		border-radius: 4px;
 		box-shadow: none;
         z-index: 4;
