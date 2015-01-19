@@ -8,6 +8,7 @@
 define(function(require,exports){
 	var pagination = require('util/pagination.js');
 	var baseTpl = ['<div class="articleListPage">',
+        '<div class="l-row"><div class="l-col-12">',
         '<div class="articleListPage-side">',
             '<div class="articleListPage-tags">',
                 '<div class="caption">标签</div>',
@@ -18,9 +19,10 @@ define(function(require,exports){
 			'<div class="articleList"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载数据</p></div></div>',
 			'<div class="pagination_cnt"></div>',
 		'</div>',
+        '</div></div>',
     '</div>'].join('');
 	var tag_item_tpl = ['<a data-tag="null" href="javascript:void(0)">全部</a>{@each list as it}<a href="javascript:void(0)" data-tag="${it.name}">${it.name}<span>${it.count}</span></a>{@/each}'].join('');
-	var blogTemp =  ['<ul>{@each list as it}<li>',
+	var blogTemp =  ['{@each list as it}',
         '<div class="articleItem" articleId="${it.id}">',
 		'<div class="artItCnt">',
             '{@if it.cover}',
@@ -39,7 +41,7 @@ define(function(require,exports){
 			'<div class="artItTime">${it.time_show}</div>',
 		'</div>',
 	'</div>',
-    '{@/each}</ul>'].join('');
+    '{@/each}'].join('');
     var empty_tpl = ['<div class="blank-content"><p>啥都木有</p></div>'].join('');
 	
 	function getData(skip,limit,tag,callback){
