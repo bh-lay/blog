@@ -1168,7 +1168,7 @@ body:before {
   font-size: 2em;
   font-weight: normal;
   letter-spacing: .2em;
-  color: #000;
+  color: #333;
 }
 .index-about-design .intro-half p {
   margin-bottom: 2.5em;
@@ -1396,7 +1396,7 @@ body:before {
   clear: both;
 }
 .articleListPage-side {
-  position: fixed;
+  position: absolute;
   width: 200px;
 }
 .articleListPage-tags {

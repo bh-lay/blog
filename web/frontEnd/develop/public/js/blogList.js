@@ -82,7 +82,7 @@ define(function(require,exports){
 			'url' : '/ajax/tag/list',
 			'success' :function(data){
 				data = data || {};
-				data.list = data.list ? data.list.slice(0,10) : [];
+				data.list = data.list ? data.list.slice(0,16) : [];
 				private_tag_data = data;
 				callback && callback(private_tag_data);
 			}

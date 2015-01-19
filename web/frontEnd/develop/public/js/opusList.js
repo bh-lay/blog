@@ -55,7 +55,7 @@ define(function(require,exports){
 	return function(dom,param){
 		skip = 0;
 		getData(function(list){
-			dom.html('<div class="opusListPage"><div class="l-row"><div class="l-col-8"><div class="opusList"></div></div><div class="l-col-3"></div</div></div>');
+			dom.html('<div class="opusListPage"><div class="l-row"><div class="l-col-12"><div class="opusList"></div></div><div class="l-col-3"></div</div></div>');
 			var this_html = juicer(item_tpl,{
 				'list' : list
 			});
