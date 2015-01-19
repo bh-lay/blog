@@ -90,6 +90,7 @@ define(function (require, exports) {
     $('body').niceScroll({
         zindex : 2001,
         cursorborder: '1px solid rgba(255,255,255,.2)',
+        mousescrollstep: 60,
         railpadding: {
             right : 1
         },
