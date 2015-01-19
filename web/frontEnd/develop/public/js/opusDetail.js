@@ -4,6 +4,7 @@
  */
 define(function(require,exports){
 	var template = ['<div class="opus_detail">',
+        '<div class="l-row"><div class="l-col-12">',
 		'<div class="TagLine">小剧作品，一次次小小的进步，成就平凡的自己！</div>',
 		'<div class="opus_caption">',
 			'{@if cover}',
@@ -22,6 +23,7 @@ define(function(require,exports){
 			'<div class="text">$${content}</div>',
 		'</div>',
 		'<div class="comments_frame"></div>',
+        '</div></div>',
 	'</div>'].join('');
 	
 	
