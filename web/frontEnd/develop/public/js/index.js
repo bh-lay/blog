@@ -9,12 +9,13 @@ define(function(require,exports){
 	var temp = ['<div class="indeCnt">',
 		'<section class="index-aboutme">',
 			'<div class="avatar"></div>',
-			'<h3>我是<strong>剧中人</strong></h3>',
+			'<h3>我是剧中人</h3>',
 			'<p>90后天蝎男，前端工程师，全栈开发尝试者</p>',
-			'<p><a target="_blank" href="/topic/aboutme/index.html" title="关于剧中人">关于剧中人</a></p>',
 			'<div class="footer">',
+				'<a target="_blank" href="/topic/aboutme/index.html" title="关于剧中人" class="aboutme"><i class="l-icon l-icon-layLogo"></i></a>',
 				'<a target="_blank" href="https://github.com/bh-lay" title="github" class="github"><i class="l-icon l-icon-git"></i></a>',
-				'<a target="_blank" href="/topic/aboutme/index.html" title="知乎" class="zhihu"><i class="l-icon l-icon-zhihu"></i></a>',
+				'<a target="_blank" href="http://www.zhihu.com/people/imju-zhong-ren" title="知乎" class="zhihu"><i class="l-icon l-icon-zhihu"></i></a>',
+				'<a target="_blank" href="https://dribbble.com/bh_lay" title="dribbble" class="dribbble"><i class="l-icon l-icon-dribbble"></i></a>',
 			'</div>',
 		'</section>',
 		'<section class="index-about-design">',
@@ -23,7 +24,10 @@ define(function(require,exports){
 					'<div class="intro-half">',
 						'<h3>尝试实现响应式设计</h3>',
 						'<p>配合单页架构提升使用体验</p>',
-						'<div class="links">单页组件<a href="#">lofox.js</a><a href="#">iframer</a></div>',
+						'<div class="links">',
+                            '单页组件<a href="http://bh-lay.github.io/lofox/index.html">lofox.js</a>',
+                            '<a href="http://bh-lay.github.io/iframer/app.html">iframer</a>',
+                        '</div>',
 					'</div>',
 					'<div class="device-half">',
 						'<div class="device pc"></div>',
@@ -33,10 +37,19 @@ define(function(require,exports){
 				'</div>',
 			'</div>',
 		'</section>',
-		'<section class="index-about-blog">',
-			'<h1 class="index_intro_a">小剧客栈</h1>',
-			'<p class="index_intro_c">nodeJS强力驱动</p>',
-			'<p class="index_intro_d">无耻地没有采用express框架</p>',
+		'<section class="index-about-backend">',
+			'<div class="l-row">',
+				'<div class="l-col-12">',
+                    '<div class="language">',
+                        '<div class="nodeJS-logo"></div>',
+                        '<p>NODEJS强力驱动</p>',
+                    '</div>',
+                    '<div class="frameworks">',
+                        '<p>无耻地没有使用以下框架</p>',
+                        '<p>express hexo bones rrestjs koa hapi<a target="_blank" href="https://github.com/bh-lay/blog/">博客源码</a></p>',
+				    '</div>',
+				'</div>',
+			'</div>',
 		'</section>',
 	'</div>'].join('');
     function getData(callback){
@@ -50,17 +63,8 @@ define(function(require,exports){
 	}
     function view(dom,callback){
         var me = this;
-        
-        getData(function(err,data){
-            if(err){
-                data = {
-                    friends : []
-                }
-            }
-            var html = juicer(temp,data);
-            var this_dom = $(html);
-            dom.html(this_dom);
-        });
+        var this_dom = $(temp);
+        dom.html(this_dom);
 	}
     view.prototype = {
         destory: function(){

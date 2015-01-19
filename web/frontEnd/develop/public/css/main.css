@@ -1115,26 +1115,42 @@ body:before {
   background: url(../images/my-avatar.jpg);
 }
 .index-aboutme h3 {
+  margin-bottom: .5em;
+  line-height: 1em;
   font-size: 1.6em;
-  font-weight: normal;
-}
-.index-aboutme h3 strong {
-  padding-left: .2em;
 }
 .index-aboutme p {
-  font-size: 1.2em;
+  margin-bottom: 2em;
+  font-size: 1.1em;
 }
 .index-aboutme .footer a {
   display: inline-block;
   vertical-align: middle;
-  height: 2.6em;
-  line-height: 2.6em;
-  padding: 0 1em;
-  font-size: 1.5em;
+  line-height: 1em;
+  padding: 0 .5em;
+  font-size: 1.6em;
+  color: #000;
+  opacity: .7;
   transition: all 0.2s ease;
   -moz-transition: all 0.2s ease;
   -webkit-transition: all 0.2s ease;
   -o-transition: all 0.2s ease;
+}
+.index-aboutme .footer a:hover {
+  position: relative;
+  opacity: 1;
+}
+.index-aboutme .footer a:hover:after {
+  content: attr(title);
+  position: absolute;
+  top: -20px;
+  left: -50%;
+  width: 200%;
+  line-height: 20px;
+  text-align: center;
+  font-size: 12px;
+  color: #fff;
+  background: #555;
 }
 .index-about-design {
   margin-bottom: 20px;
@@ -1146,7 +1162,7 @@ body:before {
 .index-about-design .intro-half {
   width: 50%;
   float: right;
-  padding-top: 3em;
+  padding-top: 5em;
   text-align: right;
 }
 .index-about-design .intro-half h3 {
@@ -1174,7 +1190,7 @@ body:before {
 .index-about-design .device-half {
   position: relative;
   width: 50%;
-  padding-top: 3em;
+  padding-top: 5em;
   height: 180px;
   float: left;
 }
@@ -1268,13 +1284,96 @@ body:before {
     text-align: center;
   }
 }
-.index-about-blog {
-  padding: 10em 0;
+.index-about-backend {
+  padding-top: 12em;
   margin-bottom: 20px;
   line-height: 1.8em;
-  text-align: center;
-  overflow: hidden;
   color: #000;
+  border-bottom: 30px solid #555;
+}
+.index-about-backend .nodeJS-logo {
+  position: absolute;
+  left: 0;
+  bottom: -30px;
+  width: 90px;
+  height: 120px;
+  background: url(../images/index-skin.png) -435px 0;
+}
+.index-about-backend .language {
+  float: left;
+  position: relative;
+  width: 50%;
+  height: 65px;
+  color: #80bd01;
+}
+.index-about-backend .language p {
+  text-indent: 120px;
+  line-height: 50px;
+  font-size: 2.6em;
+}
+.index-about-backend .frameworks {
+  float: left;
+  position: relative;
+  width: 50%;
+  height: 65px;
+}
+.index-about-backend .frameworks p {
+  position: absolute;
+  height: 30px;
+  right: 20px;
+  line-height: 30px;
+  text-align: right;
+}
+.index-about-backend .frameworks p:nth-child(1) {
+  bottom: 0;
+  font-size: 2.14em;
+  color: #555;
+}
+.index-about-backend .frameworks p:nth-child(2) {
+  bottom: -30px;
+  color: #fff;
+}
+.index-about-backend .frameworks a {
+  padding-left: .5em;
+  color: #80bd01;
+}
+.index-about-backend .frameworks a:hover {
+  text-decoration: underline;
+}
+@media screen and (max-width: 960px) {
+  .index-about-backend {
+    border: none;
+  }
+  .index-about-backend .nodeJS-logo {
+    position: static;
+    margin: 0 auto .5em;
+  }
+  .index-about-backend .language {
+    float: none;
+    width: 100%;
+    height: auto;
+    text-align: center;
+  }
+  .index-about-backend .language p {
+    text-indent: 0;
+    margin-bottom: .5em;
+  }
+  .index-about-backend .frameworks {
+    float: none;
+    width: 100%;
+    height: auto;
+  }
+  .index-about-backend .frameworks p {
+    position: static;
+    line-height: 30px;
+    text-align: center;
+  }
+  .index-about-backend .frameworks p:nth-child(1) {
+    margin-bottom: .5em;
+  }
+  .index-about-backend .frameworks p:nth-child(2) {
+    background: #555;
+  }
 }
 @media screen and (max-width: 680px) {
   .indeCnt section {
