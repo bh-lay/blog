@@ -94,7 +94,7 @@ TD {
   width: 100%;
   float: none;
 }
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1370px) {
   .l-row {
     width: 945px;
   }
@@ -1286,7 +1286,7 @@ body:before {
 }
 .index-about-backend {
   padding-top: 12em;
-  margin-bottom: 20px;
+  margin-bottom: 20em;
   line-height: 1.8em;
   color: #000;
   border-bottom: 30px solid #555;
