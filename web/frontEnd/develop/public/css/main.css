@@ -1805,8 +1805,6 @@ body {
   color: #333;
   font-size: 14px;
   font-family: Helvetica, STHeiti STXihei, Microsoft JhengHei, Microsoft YaHei, Tohoma, Arial;
-  overflow-x: hidden;
-  overflow-y: scroll;
   background: url("../images/mask.png") #eeeeee;
 }
 a,
