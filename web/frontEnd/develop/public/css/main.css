@@ -1152,6 +1152,7 @@ body:before {
 }
 .index-about-design {
   margin-bottom: 5em;
+  padding-top: 2em;
   line-height: 1.8em;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.5);
@@ -1273,6 +1274,9 @@ body:before {
   border-radius: 100%;
 }
 @media screen and (max-width: 965px) {
+  .index-about-design {
+    padding-top: 0;
+  }
   .index-about-design .intro-half,
   .index-about-design .device-half {
     width: auto;
@@ -1469,6 +1473,7 @@ body:before {
   color: #fff;
 }
 .articleListPage-main {
+  min-height: 500px;
   padding-left: 220px;
 }
 .articleList {
@@ -1529,7 +1534,6 @@ body:before {
 @media (max-width: 780px) {
   .articleListPage {
     width: auto;
-    padding: 20px 10px;
   }
   .articleListPage-side,
   .articleListPage-main {

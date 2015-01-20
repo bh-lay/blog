@@ -29,6 +29,10 @@
   width: 30px;
   height: 30px;
 }
+.app-footer {
+  height: 300px;
+  background: #333;
+}
 .newVersionTips {
   background: #0A64A4;
   padding: 20px;
@@ -159,4 +163,24 @@
   width: 0;
   height: 0;
   overflow: hidden;
+}
+.index-aboutme {
+  text-align: center;
+  border: none;
+  border-radius: 0;
+  padding: 50px 10px 30px;
+}
+.index-about-design {
+  text-align: center;
+  border: none;
+  border-radius: 0;
+  padding: 50px 10px 30px;
+  background: transparent;
+}
+.index-about-backend {
+  text-align: center;
+  border: none;
+  border-radius: 0;
+  padding: 50px 10px 30px;
+  background: transparent;
 }

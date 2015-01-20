@@ -1,19 +1,4 @@
 /**
- * @author bh-lay
- * @github https://github.com/bh-lay/tie.js
- * @modified 2014-7-25 0:37
- *  location fox
- * 处理既要相对于某个模块固定，又要在其可视时悬浮的页面元素
- * util.tie({
-		'dom' : ,			//需要浮动的元素
-		'scopeDom' : ,		//页面显示时的参照元素
-		'fixed_top' : 20	//悬浮时，距顶部的距离
-	});
- * 
- */
-window.util=window.util||{};(function(c){var b=false;if(navigator.appName=="Microsoft Internet Explorer"){var a=navigator.appVersion.split(";")[1].replace(/[ ]/g,"");if(a=="MSIE6.0"||a=="MSIE7.0"){b=true}}var f=(function(){if(b){return function(h){var g;if(this.state=="min"){g=0}else{if(this.state=="max"){g=this.maxScrollTop-this.minScrollTop}else{if(this.state=="mid"){g=h-this.minScrollTop}}}alert(this.state+g);this.dom.animate({"top":g},100).css({"position":"absolute"})}}else{return function(g){if(this.state=="min"){this.dom.css({"top":0,"position":this._position_first})}else{if(this.state=="max"){this.dom.css({"top":this.maxScrollTop-this.minScrollTop,"position":"absolute"})}else{this.dom.css({"top":this.fix_top,"position":"fixed"})}}}}})();function d(j){var h=this;var j=j||{};this.dom=j["dom"];this.scopeDom=j["scopeDom"];this._position_first=this.dom.css("position");this.fix_top=j["fixed_top"]||0;this.height=null;this.cntH=null;this.minScrollTop=null;this.maxScrollTop=null;this.state="min";var i=j["scrollDom"]||$(window);this.refresh();var g;i.on("scroll",function(){clearTimeout(g);g=setTimeout(function(){h.refresh()},10)})}var e=$(document);d.prototype.refresh=function(){this.height=this.dom.height();this.cntH=this.scopeDom.outerHeight();this.minScrollTop=this.scopeDom.offset().top-this.fix_top;this.maxScrollTop=this.minScrollTop+this.cntH-this.height;var g=e.scrollTop();if(g<this.minScrollTop){this.state="min"}else{if(g>this.maxScrollTop){this.state="max"}else{this.state="mid"}}f.call(this,g)};c.tie=function(g){return new d(g)}})(window.util);
-
-/**
  * 今天是否已经显示过弹框
  */
 function isShowedToday(){
@@ -77,12 +62,6 @@ function version_init(){
 }
 $.getScript(app_config.frontEnd_base + 'UI/dialog.js',function(){
 	version_init();
-	
-	util.tie({
-		'dom' : $('.navbar'),
-		'scopeDom' : $('.page-body'),
-		'fixed_top' : 0
-	});
 	$('body').on('click','.toNewVersion',function(){
 		blog.jumpToNewVersion();
 	});
