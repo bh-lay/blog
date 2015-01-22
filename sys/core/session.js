@@ -27,19 +27,18 @@ var session_root = './temporary/session/';
 function save_session(){
 	var pathname = this.path;
 	var data = JSON.stringify(this);
-//	fs.unlink(pathname,function(){
-		fs.writeFileSync(pathname,data);
-	//	fs.writeFile(pathname,data,function(err){
-	//		if(err){
-	//		};
-	//	});
-//	});
+    fs.writeFileSync(pathname,data);
+    /**
+    fs.unlink(pathname,function(){
+		fs.writeFile(pathname,data);
+	});
+    **/
 }
 //生成session id
 function createSessionID(){
     return new Date().getTime() + Math.ceil(Math.random()*1000);
 }
-//j检测是否为正常session id
+//检测是否为正常session id
 function isNormalSessionID(ID){
     if(ID == +ID && ID.length > 3){
         return true;
