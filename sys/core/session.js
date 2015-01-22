@@ -35,10 +35,22 @@ function save_session(){
 	//	});
 //	});
 }
+//生成session id
+function createSessionID(){
+    return new Date().getTime() + Math.ceil(Math.random()*1000);
+}
+//j检测是否为正常session id
+function isNormalSessionID(ID){
+    if(ID == +ID && ID.length > 3){
+        return true;
+    }else{
+        return false;
+    }
+}
 
 function SESSION(cookieObj,writeCookie,callback){
 	//检测session id 或创建
-	this.sessionID = cookieObj['session_verify'] || new Date().getTime() + Math.ceil(Math.random()*1000);
+	this.sessionID = isNormalSessionID(cookieObj['session_verify']) ? cookieObj['session_verify'] : createSessionID();
 	this.path = session_root + this.sessionID + '.txt';
 	this.power_code = [];
 	
