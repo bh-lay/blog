@@ -27,20 +27,20 @@ seajs.use([
 		btn.eq(index).addClass('active');
 	});
 	//处理github异步数据
-	function getRepoData(repo_name,callback){
-        var split_array = repo_name.split('/'),
-            user_login = split_array[1],
-            repos_name = split_array[2];
+	function getRepoData(input,callback){
+        var split_array = input.split('/'),
+            user_login = split_array[0],
+            repos_name = split_array[1];
 		$.ajax({
-			url: 'https://api.github.com/repos/' + repo_name,
+			url: 'https://api.github.com/repos/' + user_login + '/' + repos_name,
 			dataType: 'jsonp',
 			success: function(d){
 				var repo = d.data || {};
                 repo['user_login'] = user_login;
                 repo['repos_name'] = repo.name || repos_name;
-                repo['repos_watchers_count'] = repo.watchers_count || '未获取到';
-                repo['repos_forks_count'] = repo.forks_count || '未获取到';
-                repo['repos_stargazers_count'] = repo.stargazers_count || '未获取到';
+                repo['repos_watchers_count'] = repo.watchers_count || 0;
+                repo['repos_forks_count'] = repo.forks_count || 0;
+                repo['repos_stargazers_count'] = repo.stargazers_count || 0;
                 repo['repos_watchers_count'] = repo.watchers || 0;
                 callback && callback(repo);
 			} 
