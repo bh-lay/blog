@@ -99,6 +99,17 @@ function findUrlInMaps(inputPath,MAPS){
 }
 
 /**
+ * 检测是否为正常用户
+ */
+function isNormalVisitor(req){
+    var url = req.url;
+    //检测路径中是否包含 ../
+    if(url.match(/\.\.\//)){
+        return true;
+    }
+    return false;
+}
+/**
  * application 类
  *   arguments[0] 端口号
  */
@@ -111,11 +122,15 @@ function APP(port){
 	
 	// server start
 	var server = http.createServer(function (req,res) {
-		
-		var new_connect = new connect(req,res);
-		var path = new_connect.url;
-		var pathNode = pathParser(path.pathname);
-		var result = findUrlInMaps(pathNode,me.MAPS);
+        if(isNormalVisitor(req)){
+            res.writeHead(500);
+            res.end('hello I\'m bh-lay !');
+            return
+        }
+		var new_connect = new connect(req,res),
+            path = new_connect.url,
+            pathNode = pathParser(path.pathname),
+            result = findUrlInMaps(pathNode,me.MAPS);
 		
 		if(result){
 			//第一顺序：执行set方法设置的回调

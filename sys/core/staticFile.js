@@ -22,7 +22,7 @@ var mime = {
 /*read static resources*/
 function readFile(realPath,req,responseFile,notFound) {
 	//匹配文件扩展名
-	var pathname_split = realPath.replace('../','').match(/.\.([^.]+)$/);
+	var pathname_split = realPath.match(/.\.([^.]+)$/);
 	var ext = pathname_split ? pathname_split[1] : null;
 	
 	console.log(pathname_split,ext,2);
