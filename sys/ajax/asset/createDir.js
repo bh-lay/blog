@@ -4,11 +4,11 @@
  */
 
 var fs = require('fs');
-var parse = require('../../core/parse.js');
+var utils = require('../../core/utils/index.js');
 var assetPath = "../../asset/";
 
 exports.createDir = function (req,callback){
-	parse.request(req,function(err,fields,files){
+	utils.parse.request(req,function(err,fields,files){
 		
 		var root = fields.root || '';
 		var dirName = fields.name || '';

@@ -4,11 +4,11 @@
  */
 
 var fs = require('fs');
-var parse = require('../../core/parse');
+var utils = require('../../core/utils/index.js');
 var assetPath = "../../asset/";
 
 exports.upload = function (req,callback){
-	parse.request(req,function(err,fields, files){
+	utils.parse.request(req,function(err,fields, files){
 		var errorFiles = [];
 		if(err){
 			callback && callback(err);

@@ -4,14 +4,14 @@
  */
 
 var fs = require('fs');
-var parse = require('../../core/parse.js');
+var utils = require('../../core/utils/index.js');
 
 exports.upload = function (req,callback){
 	var json = {
 		'code':200,
 		'files' : []
 	}
-	parse.request(req,function(err,fields, files){
+	utils.parse.request(req,function(err,fields, files){
 		var errorFiles = [];
 		if(err){
 			code = 201

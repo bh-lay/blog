@@ -1,6 +1,6 @@
 
 var mongo = require('../../core/DB.js');
-var parse = require('../../core/parse.js');
+var utils = require('../../core/utils/index.js');
 
 function getUserInfo(id,callback){
 	var method = mongo.start();
@@ -23,7 +23,7 @@ function getUserInfo(id,callback){
 //增加一条评论
 module.exports = function(data,callback){
 	var item = {
-		'content' : parse.encodeHtml(data.content),
+		'content' : utils.encodeHtml(data.content),
 		'time' : new Date().getTime(),
 		'cid' : data.cid
 	};

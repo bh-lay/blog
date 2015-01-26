@@ -1,7 +1,7 @@
 /**
  * @author bh-lay
  */
-var parse = require('../core/parse');
+var utils = require('../core/utils/index.js');
 var mongo = require('../core/DB.js');
 
 var showdown = require('../lib/showdown/showdown.js');
@@ -31,7 +31,7 @@ function get_detail(lab_name,callback){
 			if(arguments[1].length==0){
 				callback&&callback('哇塞，貌似这个插件不存在哦!');
 			}else{
-				docs[0].time_show = parse.time(docs[0].time_create ,'{y}-{m}-{d}');
+				docs[0].time_show = utils.parse.time(docs[0].time_create ,'{y}-{m}-{d}');
 			//	docs[0].content = markdown.parse(docs[0].content);
 				docs[0].content = converter.makeHtml(docs[0].content);
 			//	callback&&callback(docs[0].content);

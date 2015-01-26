@@ -4,11 +4,11 @@
  */
 
 var fs = require('fs');
-var parse = require('../../core/parse.js');
+var utils = require('../../core/utils/index.js');
 var assetPath = "../../asset/";
 
 exports.rename = function (req,callback){
-	parse.request(req,function(err,fields,files){
+	utils.parse.request(req,function(err,fields,files){
 		
 		var pathname = fields.pathname || '';
 		var newName = fields.newName || '';

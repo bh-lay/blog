@@ -4,7 +4,7 @@
 
 
 var mongodb = require('mongodb');
-var parse = require('./parse.js');
+var utils = require('./utils/index.js');
 //CONFIG is a global object
 var conf = CONFIG.mongo,
 	host = conf.host,
@@ -91,7 +91,7 @@ exports.add_user = function (parm,callback){
 	var method = new START();
 		
 	method.open({'collection_name':'user'},function(err,collection){
-		parm.id = parse.createID();
+		parm.id = utils.createID();
 
 		collection.insert(parm,function(err,result){
 

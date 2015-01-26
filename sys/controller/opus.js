@@ -1,7 +1,7 @@
 /**
  * @author bh-lay
  */
-var parse = require('../core/parse');
+var utils = require('../core/utils/index.js');
 var mongo = require('../core/DB.js');
 
 function list_page(callback){
@@ -29,7 +29,7 @@ function detail_page(id,callback){
 			if(docs.length==0){
 				callback('哇塞，貌似这作品享不存在哦!');
 			}else{
-				docs[0].opus_time_create = parse.time(docs[0].opus_time_create ,'{y}-{m}-{d}');
+				docs[0].opus_time_create = utils.parse.time(docs[0].opus_time_create ,'{y}-{m}-{d}');
 				callback && callback(null,docs[0]);
 			}
 		});

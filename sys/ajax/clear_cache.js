@@ -1,7 +1,7 @@
 /**
  * @author bh-lay
  */
-var parse = require('../core/parse.js');
+var utils = require('../core/utils/index.js');
  
 exports.render = function (connect,app){
 	if(connect.request.method != 'POST'){
@@ -12,7 +12,7 @@ exports.render = function (connect,app){
 		return;
 	}
 	//FIXME add power check
-	parse.request(connect.request,function(err,data){
+	utils.parse.request(connect.request,function(err,data){
 		var typeStr = data.type || '';
         app.cache.clear(typeStr,function(){
             connect.write('json',{

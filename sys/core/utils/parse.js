@@ -62,13 +62,6 @@ exports.time = function(time,format){
 	return time_str;
 }
 
-//
-exports.createID = function(){
-	var date = new Date();
-	var id = date.getTime().toString(16);
-	return id;
-}
-
 /**
  * 格式化GET/POST的数据
  *  弥补querystring.parse的不足（不能解析多维数据）
@@ -207,13 +200,4 @@ exports.md5 = function(text) {
 		text = text.toString();
 	}
 	return crypto.createHash('md5').update(text).digest('hex');
-};
-
-exports.encodeHtml = function(s){
-	return (typeof s != "string") ? s : s.replace(/"|&|'|<|>|[\x00-\x20]|[\x7F-\xFF]|[\u0100-\u2700]/g,function($0){
-		var c = $0.charCodeAt(0), r = ["&#"];
-		c = (c == 0x20) ? 0xA0 : c;
-		r.push(c); r.push(";");
-		return r.join("");
-	});
 };

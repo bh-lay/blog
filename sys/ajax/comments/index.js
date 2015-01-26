@@ -10,7 +10,7 @@
 	});
  */
 
-var parse = require('../../core/parse.js');
+var utils = require('../../core/utils/index.js');
 var add = require('./add.js');
 var list = require('./list.js');
 var del = require('./del.js');
@@ -21,7 +21,7 @@ var count_limit = 10;
 
 //增加回复/评论
 exports.add = function (connect,app){
-	parse.request(connect.request,function(err,data){
+	utils.parse.request(connect.request,function(err,data){
 		connect.session(function(session_this){
 			//检测认证信息
 			var comment_auth = session_this.get('comment_auth');

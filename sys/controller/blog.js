@@ -4,7 +4,7 @@
  */
 
 
-var parse = require('../core/parse');
+var utils = require('../core/utils/index.js');
 var mongo = require('../core/DB.js');
 var showdown = require('../lib/showdown/showdown.js');
 var converter = new showdown.converter();
@@ -20,7 +20,7 @@ function getDetail(id,callback){
 			if(arguments[1].length==0){
 				callback && callback('哇塞，貌似这篇博文不存在哦!');
 			}else{
-				docs[0].time_show = parse.time(docs[0].time_show ,'{y}-{m}-{d}');
+				docs[0].time_show = utils.parse.time(docs[0].time_show ,'{y}-{m}-{d}');
 				docs[0].content = converter.makeHtml(docs[0].content);
 				callback&&callback(null,docs[0]);
 			}
@@ -41,7 +41,7 @@ function getList(param,callback){
 			}).sort({id:-1}).skip(skip).toArray(function(err, docs) {
 				method.close();
 				for(var i in docs){
-					docs[i].time_show = parse.time(docs[i].time_show ,'{y}年-{m}月-{d}日');
+					docs[i].time_show = utils.parse.time(docs[i].time_show ,'{y}年-{m}月-{d}日');
 					docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? CONFIG.img_domain + docs[i].cover : docs[i].cover;
 				}
 				callback && callback(null,docs,{

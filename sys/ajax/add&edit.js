@@ -4,7 +4,7 @@
  */
 
 var mongo = require('../core/DB.js');
-var parse = require('../core/parse.js');
+var utils = require('../core/utils/index.js');
 
 function add(parm,collection_name,callback){
 	var parm = parm;
@@ -16,7 +16,7 @@ function add(parm,collection_name,callback){
 			callback && callback(err);
 			return
 		}
-		parm.id = parse.createID();
+		parm.id = utils.createID();
 
 		collection.insert(parm,function(err,result){
 			if(err){
@@ -57,7 +57,7 @@ function filter_request(connect,callback){
 				collection_name : null
 			};
 		
-		parse.request(connect.request,function(err,data){
+		utils.parse.request(connect.request,function(err,data){
 			var category = data['category'] || '';
 			switch(category){
 				case 'blog' :

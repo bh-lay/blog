@@ -10,7 +10,7 @@
 
 var fs = require('fs');
 var zlib = require("zlib");
-var parse = require('./parse.js');
+var parse = require('./utils/parse.js');
 var SESSION = require('./session.js');
 
 

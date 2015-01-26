@@ -11,7 +11,7 @@
  */
 
 var mongo = require('../../core/DB.js');
-var parse = require('../../core/parse.js');
+var utils = require('../../core/utils/index.js');
 //增加一条用户记录
 function add(parm,callback){
 	var parm = parm;
@@ -19,7 +19,7 @@ function add(parm,callback){
 	var method = mongo.start();
 		
 	method.open({'collection_name':'user'},function(err,collection){
-		parm.id = parse.createID();
+		parm.id = utils.createID();
 
 		collection.insert(parm,function(err,result){
 			if(err) {
@@ -56,12 +56,12 @@ function edit(parm,callback){
  **/
 function signup(){
 	var that = this;
-	parse.request(this.request,function(error,data){
+	utils.parse.request(this.request,function(error,data){
 		var param = {};
 		param['email'] = data['email'] || null;
-		param['password'] = parse.md5(data['password'] || '');
+		param['password'] = utils.parse.md5(data['password'] || '');
 		param['user_group'] = 'user';
-		param['id'] = parse.createID();
+		param['id'] = utils.createID();
 		if(param['email']&&param['password']){
 			var method = mongo.start();
 			method.open({'collection_name':'user'},function(err,collection){
@@ -191,7 +191,7 @@ exports.add_edit = function (connect,app){
 		var parm = {
 			'id' : data['id'] || '',
 			'username' : data['username'] || '',
-			'password' : data['password'] ? parse.md5(data['password']) : null,
+			'password' : data['password'] ? utils.parse.md5(data['password']) : null,
 			'email' : data['email'] || null,
 			'avatar' : data['avatar'] || null,
 			'user_group' : data['user_group'] || '',
@@ -267,10 +267,10 @@ exports.login = function (connect,app){
 		});
 		return
 	}
-	parse.request(req,function(error,data){
+	utils.parse.request(req,function(error,data){
 		var email = data['email'];
 		var password = data['password'] || '';
-		password = parse.md5(password);
+		password = utils.parse.md5(password);
 		if(!email||password.length<2){
 			connect.write('json',{
 				'code':2,
@@ -302,7 +302,7 @@ exports.exist = function(connect,app){
 
 //获取用户列表
 exports.list = function(connect,app){
-	parse.request(connect.request,function(err,data){
+	utils.parse.request(connect.request,function(err,data){
 		if(err){
 			connect.write('json',{
 				'code' : 2,
@@ -337,7 +337,7 @@ function getUserDetail(userID,callback){
 }
 //获取用户信息
 exports.detail = function (connect,app,userID){
-	parse.request(connect.request,function(err,data){
+	utils.parse.request(connect.request,function(err,data){
 		if(err){
 			connect.write('json',{
 				'code' : 201,

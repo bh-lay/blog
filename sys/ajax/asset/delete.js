@@ -4,7 +4,7 @@
  */
 
 var fs = require('fs');
-var parse = require('../../core/parse.js');
+var utils = require('../../core/utils/index.js');
 var assetPath = "../../asset/";
 
 exports.file = function (req,callback){
@@ -12,7 +12,7 @@ exports.file = function (req,callback){
 		'code' : 200,
 		'msg' : '删除成功'
 	}
-	parse.request(req,function(err,fields, files){
+	utils.parse.request(req,function(err,fields, files){
 		var errorFiles = [];
 		var path = fields.path || '';
 		//消除参数中首尾的｛/｝

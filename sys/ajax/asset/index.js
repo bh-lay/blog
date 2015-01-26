@@ -1,7 +1,7 @@
 /**
  * @author bh-lay
  */
-var parse = require('../../core/parse');
+var utils = require('../../core/utils/index.js');
 var read = require('./fileList');
 var upload = require('./upload');
 var del = require('./delete');
@@ -11,7 +11,7 @@ var createDir = require('./createDir');
 exports.render = function (connect,app){
 	var pathnode = connect.url.pathnode;
 	if(pathnode.length == 2){
-		parse.request(connect.request,function(err,data){
+		utils.parse.request(connect.request,function(err,data){
 			var pathStr = data.path;
 			
 			read.list(pathStr,function(err,files){
