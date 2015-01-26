@@ -8,7 +8,7 @@
 define(function(require,exports){
 	var pagination = require('util/pagination.js');
 	var baseTpl = ['<div class="articleListPage">',
-        '<div class="l-row"><div class="l-col-12">',
+        '<div class="grid-row"><div class="grid-box-full">',
         '<div class="articleListPage-side">',
             '<div class="articleListPage-tags">',
                 '<div class="caption">标签</div>',

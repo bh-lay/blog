@@ -4,7 +4,7 @@
  */
 define(function(require,exports){
 	var template = ['<div class="opus_detail">',
-        '<div class="l-row"><div class="l-col-12">',
+        '<div class="grid-row"><div class="grid-box-full">',
 		'<div class="TagLine">小剧作品，一次次小小的进步，成就平凡的自己！</div>',
 		'<div class="opus_caption">',
 			'{@if cover}',

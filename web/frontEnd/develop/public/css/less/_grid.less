@@ -1,5 +1,11 @@
-.l-row {
+.full-width(){
+    width: 100%;
+    float: none !important;
+}
+
+.grid-row {
 	width: 1260px;
+    position: relative;
 	margin: auto;
 	zoom: 1;
 	.transition(.3s,ease-out);
@@ -10,89 +16,57 @@
         clear: both;
         visibility: hidden
     }
-    .l-col-1,
-    .l-col-2,
-    .l-col-3,
-    .l-col-4,
-    .l-col-6,
-    .l-col-8,
-    .l-col-12 {
+    [class *="grid-box"],
+    [class *="grid-col"] {
         float: left;
-        position: relative;
         padding: 0px 10px;
         .borderbox();
     }
-    .l-col-1 {
-        width: 8.33333%
+    .grid-box{
+        width: 25%;
     }
-    .l-col-2 {
-        width: 16.66667%
+    .grid-box-2{
+        width: 50%;
     }
-    .l-col-3 {
-        width: 25%
-    }
-    .l-col-4 {
-        width: 33.33333%
-    }
-    .l-col-6 {
-        width: 50%
-    }
-    .l-col-8 {
-        width: 66.66667%
-    }
-    .l-col-12 {
+    .grid-box-full{
         width: 100%;
         float: none;
     }
+    .grid-col-1-3{
+        width: 33.3333333%
+    }
+    .grid-col-2-3{
+        width: 66.6666667%
+    }
 }
 @media screen and (max-width: 1370px) {
-	.l-row {
+	.grid-row {
 		width: 945px;
-		.l-col-1{
-			width: 16.66666%;
-		}
-        .l-col-2{
-			width: 25%;
-		}
-        .l-col-3{
+        .grid-box{
 			width: 33.333333%;
 		}
-        .l-col-4{
-			width: 50%;
-		}
-        .l-col-6,
-        .l-col-8 {
-            width: 100%;
-            float: none;
-	   }
 	}
 }
 @media screen and (max-width: 965px) {
-	.l-row{
+	.grid-row{
 		width: 630px;
-		.l-col-1{
-			width: 25%;
-		}
-		.l-col-2{
-			width: 33.3333333%;
-		}
-        .l-col-3{
+        .grid-box{
 			width: 50%;
 		}
-        .l-col-4{
-			width: 100%;
-			float: none;
-		}
+        .grid-box-2{
+           .full-width()
+        }
+        .grid-col-1-3,
+        .grid-col-2-3{
+            .full-width()
+        }
 	}
 }
 @media screen and (max-width: 650px) {
-	.l-row{
+	.grid-row{
 		width: 100%;
-		.l-col-1,
-		.l-col-2,
-		.l-col-3{
-			width: 100%;
-			float: none;
+		.grid-box{
+			.full-width()
 		}
     }
 }

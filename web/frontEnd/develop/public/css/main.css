@@ -42,8 +42,9 @@ TD {
   font-size: 12px;
   padding: 10px;
 }
-.l-row {
+.grid-row {
   width: 1260px;
+  position: relative;
   margin: auto;
   zoom: 1;
   transition: all 0.3s ease-out;
@@ -51,98 +52,69 @@ TD {
   -webkit-transition: all 0.3s ease-out;
   -o-transition: all 0.3s ease-out;
 }
-.l-row:after {
+.grid-row:after {
   content: ".";
   display: block;
   height: 0;
   clear: both;
   visibility: hidden;
 }
-.l-row .l-col-1,
-.l-row .l-col-2,
-.l-row .l-col-3,
-.l-row .l-col-4,
-.l-row .l-col-6,
-.l-row .l-col-8,
-.l-row .l-col-12 {
+.grid-row [class*="grid-box"],
+.grid-row [class*="grid-col"] {
   float: left;
-  position: relative;
   padding: 0px 10px;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
 }
-.l-row .l-col-1 {
-  width: 8.33333%;
-}
-.l-row .l-col-2 {
-  width: 16.66667%;
-}
-.l-row .l-col-3 {
+.grid-row .grid-box {
   width: 25%;
 }
-.l-row .l-col-4 {
-  width: 33.33333%;
-}
-.l-row .l-col-6 {
+.grid-row .grid-box-2 {
   width: 50%;
 }
-.l-row .l-col-8 {
-  width: 66.66667%;
-}
-.l-row .l-col-12 {
+.grid-row .grid-box-full {
   width: 100%;
   float: none;
 }
+.grid-row .grid-col-1-3 {
+  width: 33.3333333%;
+}
+.grid-row .grid-col-2-3 {
+  width: 66.6666667%;
+}
 @media screen and (max-width: 1370px) {
-  .l-row {
+  .grid-row {
     width: 945px;
   }
-  .l-row .l-col-1 {
-    width: 16.66666%;
-  }
-  .l-row .l-col-2 {
-    width: 25%;
-  }
-  .l-row .l-col-3 {
+  .grid-row .grid-box {
     width: 33.333333%;
-  }
-  .l-row .l-col-4 {
-    width: 50%;
-  }
-  .l-row .l-col-6,
-  .l-row .l-col-8 {
-    width: 100%;
-    float: none;
   }
 }
 @media screen and (max-width: 965px) {
-  .l-row {
+  .grid-row {
     width: 630px;
   }
-  .l-row .l-col-1 {
-    width: 25%;
-  }
-  .l-row .l-col-2 {
-    width: 33.3333333%;
-  }
-  .l-row .l-col-3 {
+  .grid-row .grid-box {
     width: 50%;
   }
-  .l-row .l-col-4 {
+  .grid-row .grid-box-2 {
     width: 100%;
-    float: none;
+    float: none !important;
+  }
+  .grid-row .grid-col-1-3,
+  .grid-row .grid-col-2-3 {
+    width: 100%;
+    float: none !important;
   }
 }
 @media screen and (max-width: 650px) {
-  .l-row {
+  .grid-row {
     width: 100%;
   }
-  .l-row .l-col-1,
-  .l-row .l-col-2,
-  .l-row .l-col-3 {
+  .grid-row .grid-box {
     width: 100%;
-    float: none;
+    float: none !important;
   }
 }
 /**
@@ -1152,16 +1124,14 @@ body:before {
 }
 .index-about-design {
   margin-bottom: 5em;
-  padding-top: 2em;
+  padding-top: 5em;
   line-height: 1.8em;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.5);
   font-family: "Microsoft Yahei";
 }
 .index-about-design .intro-half {
-  width: 50%;
   float: right;
-  padding-top: 5em;
   text-align: right;
 }
 .index-about-design .intro-half h3 {
@@ -1188,10 +1158,7 @@ body:before {
 }
 .index-about-design .device-half {
   position: relative;
-  width: 50%;
-  padding-top: 5em;
-  height: 180px;
-  float: left;
+  height: 176px;
 }
 .index-about-design .device {
   position: absolute;
@@ -1207,7 +1174,7 @@ body:before {
 .index-about-design .mobile {
   width: 60px;
   height: 105px;
-  left: 0;
+  left: 10px;
 }
 .index-about-design .mobile:after {
   top: 17px;
@@ -1253,7 +1220,7 @@ body:before {
 .index-about-design .pad {
   width: 117px;
   height: 130px;
-  right: 0;
+  right: 10px;
 }
 .index-about-design .pad:after {
   top: 17px;
@@ -1274,16 +1241,9 @@ body:before {
   border-radius: 100%;
 }
 @media screen and (max-width: 965px) {
-  .index-about-design {
-    padding-top: 0;
-  }
-  .index-about-design .intro-half,
-  .index-about-design .device-half {
-    width: auto;
-    float: none;
-  }
   .index-about-design .intro-half {
     text-align: center;
+    margin-bottom: 3em;
   }
 }
 .index-about-backend {
@@ -2126,7 +2086,7 @@ a:active {
  *
  */
 .blessPage {
-  padding-top: 20px;
+  padding: 20px 0;
 }
 /**
  * CSS3动画

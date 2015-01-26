@@ -4,7 +4,7 @@
  */
 define(function(require,exports){
 	
-	var temp = ['<div class="l-row">{@each list as it}<div class="l-col-3"><div class="lab_item">',
+	var temp = ['<div class="grid-row">{@each list as it}<div class="grid-box"><div class="lab_item">',
 		'<a class="cover" href="/labs/${it.name}" target="_blank" title="${it.title}">',
 			'<img src="${it.cover}" />',
 		'</a>',

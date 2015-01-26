@@ -6,8 +6,8 @@ define(function(require,exports){
     require('lib/highlight/highlight');
 
 	var template = ['<div class="blogDetail">',
-        '<div class="l-row">',
-            '<div class="l-col-12">',
+        '<div class="grid-row">',
+            '<div class="grid-box-full">',
                 '<div class="blog_article">',
                     '<div class="caption">',
                         '<h1>${title}</h1>',
