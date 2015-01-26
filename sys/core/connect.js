@@ -45,23 +45,6 @@ function send (status,headers,content){
 		'user-agent':this.request.headers['user-agent']
 	});
 }
-//格式化cookie
-function parseCookie(str){
-	var str = str ||'';
-	var cookieData = {};
-	
-	var list = str.split(';');
-	
-	for(var i = 0 , t = list.length ; i < t ; i++){
-		var parseList = list[i].split('=');
-		var nameStr = parseList[0]||'';
-		var name = nameStr.replace(/^\s+|\s+$/g,'');
-		var value = parseList[1]||'';
-		
-		cookieData[name] = value;
-	}
-	return cookieData;
-}
 /**
  * response json data
  *   data can be object or string
@@ -115,9 +98,7 @@ function CONNECT(req,res){
  */
 CONNECT.prototype['write'] = function(type,a,b,c){
 	if(this._sended){
-		console.log('------------------------------------------------');
-		console.log(arguments);
-		console.log('------------------------------------------------');
+		//FIXME runing here maybe somthing wrong
 		return;
 	}
 	this._sended = true;
@@ -157,6 +138,7 @@ CONNECT.prototype['write'] = function(type,a,b,c){
  *	}); 
  */
 CONNECT.prototype['cookie'] = function(input){
+    var cookieInRequest = this.request.headers.cookie || '';
 	if(typeof(input) == 'object'){
 		//写入cookie
 		var cookieObj = arguments;
@@ -169,10 +151,11 @@ CONNECT.prototype['cookie'] = function(input){
 			this.response.setHeader('Set-Cookie',cookie_str);	
 		}
 	}else if(typeof(input) == 'string'){
-		return parseCookie(this.request.headers.cookie || '')[input];
+        //获取特定cookie
+		return parse.cookie(cookieInRequest)[input];
 	}else{
-		//获取cookie
-		return parseCookie(this.request.headers.cookie || '');
+		//获取完整cookie
+		return parse.cookie(cookieInRequest);
 	}
 };
 /**

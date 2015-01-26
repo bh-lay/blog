@@ -5,7 +5,7 @@ var querystring = require('querystring');
 var formidable = require('formidable');
 var crypto = require('crypto');
 
-
+//格式化cookie
 exports.cookie = function parseCookie(str){
 	var str = str ||'';
 	var cookieData = {};
