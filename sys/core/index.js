@@ -138,7 +138,7 @@ function APP(port){
 			result.mapsItem.call(this,data,new_connect);
 		}else{
 			//第二顺序：使用静态文件
-			staticFile.read((me.staticFileRoot + path.pathname),req,function(status,headers,content){
+			staticFile.read(me.staticFileRoot ,path.pathname,req,function(status,headers,content){
 				new_connect.write('define',status,headers,content);
 			},function(){
 				//第三顺序：查找301重定向
@@ -186,7 +186,9 @@ APP.prototype.get = function(urls,callback){
  */
 APP.prototype.set = function(key,value){
 	if(key == 'staticFileRoot'){
-		this.staticFileRoot = value;
+        if(value.length){
+            this.staticFileRoot = value.replace(/\/$/,'');
+        }
 	}
 };
 /**

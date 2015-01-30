@@ -20,17 +20,19 @@ var mime = {
 };
 
 /*read static resources*/
-function readFile(realPath,req,responseFile,notFound) {
+function readFile(staticFileRoot,path,req,responseFile,notFound) {
 	//匹配文件扩展名
-	var pathname_split = realPath.match(/.\.([^.]+)$/);
+	var pathname_split = path.match(/.\.([^.]+)$/);
 	var ext = pathname_split ? pathname_split[1] : null;
 	
-	console.log(pathname_split,ext,2);
+    var realPath;
 	//add a default files for directory
 	if(ext == null) {
 		ext = 'html';
-		realPath += '/index.html'
-	}
+		realPath = staticFileRoot + path + '/index.html'
+	}else{
+        realPath = staticFileRoot + path;
+    }
 	var content_type = mime[ext]||'unknown';
 //	if(!mime[ext]){
 		/**
@@ -54,7 +56,7 @@ function readFile(realPath,req,responseFile,notFound) {
 				 */
 				responseFile(500,{
 					'Content-Type' : 'text/plain'
-				},err.toString());
+				},'ext:' + ext + ',realPath:' + realPath);
 				
 				return
 			}
@@ -65,7 +67,7 @@ function readFile(realPath,req,responseFile,notFound) {
 					 */
 					responseFile(500,{
 						'Content-Type' : 'text/plain'
-					},err.toString());
+					},'ext:' + ext + ',realPath:' + realPath);
 					
 					return
 				}
