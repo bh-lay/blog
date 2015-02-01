@@ -668,8 +668,12 @@ body:before {
 }
 .app-footer {
   position: relative;
-  min-height: 300px;
+  padding: 40px 0;
   background: #333;
+  color: #fff;
+}
+.app-footer a {
+  color: #fff;
 }
 /**
  * 评论模块
