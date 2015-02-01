@@ -670,10 +670,16 @@ body:before {
   position: relative;
   padding: 40px 0;
   background: #333;
-  color: #fff;
+  color: #eee;
 }
 .app-footer a {
-  color: #fff;
+  color: #eee;
+}
+.footer-aboutme h3 {
+  font-size: 18px;
+}
+.footer-aboutme p a {
+  padding-right: 10px;
 }
 /**
  * 评论模块
