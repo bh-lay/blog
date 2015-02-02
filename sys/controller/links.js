@@ -7,9 +7,9 @@ exports.render = function (connect,app){
 	},function(save_cache){
 		//获取视图
 		app.views('links',{
-			'title' : '小剧客栈_剧中人的个人空间 网页设计师博客 互动设计学习者',
-			'keywords' : '剧中人,bh-lay,网站建设,网页设计,设计师',
-			'description' : '小剧客栈是剧中人精心营造的一个向广大设计爱好者、喜欢剧中人开放的博客，小剧希望用设计师鞭策自己，愿意和你共同分享，一起进步！'
+			'title' : '我的小伙伴_特大号的WEB屌丝们',
+			'keywords' : '剧中人,程序员,前端工程师,网页设计,设计师',
+			'description' : '一帮程序员,前端工程师,网页设计,设计师，一群纯屌丝！'
 		},function(err,html){
 			save_cache(html);
 		});
