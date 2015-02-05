@@ -243,7 +243,7 @@ function routerHandle(lofox) {
 	 */
 	lofox.set('/bless', function () {
 		this.title('留言板_小剧客栈');
-		L.nav.setCur('/');
+		L.nav.setCur('bless');
 		var dom = getNewPage();
         dom.html('<div class="grid-row blessPage"><div class="grid-box-full"></div></div>');
         o_active_page = new L.views.comments.init(dom.find('.grid-box-full')[0], 'define-1');
