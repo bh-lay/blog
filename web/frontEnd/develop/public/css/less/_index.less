@@ -190,46 +190,33 @@
     padding-top: 12em;
 	margin-bottom: 20em;
     line-height: 1.8em;
+    text-align: center;
     color: #000;
-    border-bottom: 30px solid #555;
     .nodeJS-logo{
-        position: absolute;
-        left: 0;
-        bottom: -30px;
         width: 90px;
         height: 120px;
+        margin:0 auto .5em;
         background: url(../images/index-skin.png) -435px 0;
     }
     .language{
-        float: left;
-        position: relative;
-        width: 50%;
-        height: 65px;
-        color: #80bd01;
         p{
-            text-indent: 120px;
+            color: #80bd01;
+            margin-bottom: .5em;
             line-height: 50px;
             font-size: 2.6em;
         }
     }
     .frameworks{
-        float: left;
-        position: relative;
-        width: 50%;
-        height:  65px;
         p{
-            position: absolute;
             height: 30px;
-            right: 20px;
             line-height: 30px;
-            text-align: right;
             &:nth-child(1){
-                bottom: 0;
-                font-size: 2.14em;
+                margin-bottom: .5em;
+                font-size: 1.5em;
                 color: #555;
             }
             &:nth-child(2){
-                bottom: -30px;
+                background: #555;
                 color: #fff;
             }
         }
@@ -241,41 +228,6 @@
             }
         }
     }
-}
-@media screen and (max-width: 965px) {
-	.index-about-backend{
-        border: none;
-        .nodeJS-logo{
-            position: static;
-            margin:0 auto .5em;
-        }
-        .language{
-            float: none;
-            width: 100%;
-            height: auto;
-            text-align: center;
-            p{
-                text-indent: 0;
-                margin-bottom: .5em;
-            }
-        }
-        .frameworks{
-            float: none;
-            width: 100%;
-            height: auto;
-            p{
-                position: static;
-                line-height: 30px;
-                text-align: center;
-                &:nth-child(1){
-                    margin-bottom: .5em;
-                }
-                &:nth-child(2){
-                    background: #555;
-                }
-            }
-        }
-	}
 }
 
 @media screen and (max-width: 680px) {

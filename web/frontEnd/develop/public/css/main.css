@@ -1261,49 +1261,32 @@ body:before {
   padding-top: 12em;
   margin-bottom: 20em;
   line-height: 1.8em;
+  text-align: center;
   color: #000;
-  border-bottom: 30px solid #555;
 }
 .index-about-backend .nodeJS-logo {
-  position: absolute;
-  left: 0;
-  bottom: -30px;
   width: 90px;
   height: 120px;
+  margin: 0 auto .5em;
   background: url(../images/index-skin.png) -435px 0;
 }
-.index-about-backend .language {
-  float: left;
-  position: relative;
-  width: 50%;
-  height: 65px;
-  color: #80bd01;
-}
 .index-about-backend .language p {
-  text-indent: 120px;
+  color: #80bd01;
+  margin-bottom: .5em;
   line-height: 50px;
   font-size: 2.6em;
 }
-.index-about-backend .frameworks {
-  float: left;
-  position: relative;
-  width: 50%;
-  height: 65px;
-}
 .index-about-backend .frameworks p {
-  position: absolute;
   height: 30px;
-  right: 20px;
   line-height: 30px;
-  text-align: right;
 }
 .index-about-backend .frameworks p:nth-child(1) {
-  bottom: 0;
-  font-size: 2.14em;
+  margin-bottom: .5em;
+  font-size: 1.5em;
   color: #555;
 }
 .index-about-backend .frameworks p:nth-child(2) {
-  bottom: -30px;
+  background: #555;
   color: #fff;
 }
 .index-about-backend .frameworks a {
@@ -1312,41 +1295,6 @@ body:before {
 }
 .index-about-backend .frameworks a:hover {
   text-decoration: underline;
-}
-@media screen and (max-width: 965px) {
-  .index-about-backend {
-    border: none;
-  }
-  .index-about-backend .nodeJS-logo {
-    position: static;
-    margin: 0 auto .5em;
-  }
-  .index-about-backend .language {
-    float: none;
-    width: 100%;
-    height: auto;
-    text-align: center;
-  }
-  .index-about-backend .language p {
-    text-indent: 0;
-    margin-bottom: .5em;
-  }
-  .index-about-backend .frameworks {
-    float: none;
-    width: 100%;
-    height: auto;
-  }
-  .index-about-backend .frameworks p {
-    position: static;
-    line-height: 30px;
-    text-align: center;
-  }
-  .index-about-backend .frameworks p:nth-child(1) {
-    margin-bottom: .5em;
-  }
-  .index-about-backend .frameworks p:nth-child(2) {
-    background: #555;
-  }
 }
 @media screen and (max-width: 680px) {
   .indeCnt section {
