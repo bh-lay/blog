@@ -1,0 +1,22 @@
+@charset "UTF-8";
+@import "less/_core.less";
+@import "less/_reset.less";
+@import "less/_grid.less";
+@import "less/_article.less";
+@import "less/_fontface.less";
+
+.Jumbotron{
+    position: relative;
+    height: 400px;
+    background: #64cccb;
+    background-image: -moz-linear-gradient(top, #336799, #64cccb);
+    background-image: -webkit-gradient(linear, left top, left bottom,color-stop(0, #336799), color-stop(1, #64cccb));
+    .mask{
+        position: absolute;
+        width: 100%;
+        height: 50px;
+        left: 0;
+        bottom: 0;
+    }
+}
+
