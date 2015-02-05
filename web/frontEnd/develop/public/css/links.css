@@ -258,10 +258,11 @@ TD {
 }
 .Jumbotron {
   position: relative;
-  height: 400px;
+  height: 340px;
   background: #64cccb;
   background-image: -moz-linear-gradient(top, #336799, #64cccb);
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #336799), color-stop(1, #64cccb));
+  font-size: 14px;
 }
 .Jumbotron .mask {
   position: absolute;
@@ -269,4 +270,32 @@ TD {
   height: 50px;
   left: 0;
   bottom: 0;
+}
+.Jumbotron h1 {
+  padding: 2em 0 0;
+  font-size: 3em;
+  color: #fff;
+}
+.Jumbotron p {
+  opacity: .6;
+  font-size: 1.8em;
+  color: #fff;
+}
+.myFriends {
+  padding: 20px 10px;
+}
+.myFriends h3 {
+  margin-bottom: 15px;
+}
+.myFriends .guy-item {
+  padding: 20px 10px;
+  margin-bottom: 20px;
+  background: #fff;
+  border-radius: 4PX;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+.tongji {
+  height: 0;
+  line-height: 0;
+  overflow: hidden;
 }

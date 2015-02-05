@@ -7,7 +7,7 @@ exports.render = function (connect,app){
 	},function(save_cache){
 		//获取视图
 		app.views('links',{
-			'title' : '我的小伙伴_特大号的WEB屌丝们',
+			'title' : '前端英雄榜_特大号的WEB屌丝们',
 			'keywords' : '剧中人,程序员,前端工程师,网页设计,设计师',
 			'description' : '一帮程序员,前端工程师,网页设计,设计师，一群纯屌丝！'
 		},function(err,html){
