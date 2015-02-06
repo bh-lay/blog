@@ -256,6 +256,9 @@ TD {
 .l-icon-dribbble:after {
   content: '\006a';
 }
+body {
+  background: #ccc;
+}
 .Jumbotron {
   position: relative;
   height: 340px;
@@ -282,7 +285,7 @@ TD {
   color: #fff;
 }
 .myFriends {
-  padding: 20px 10px;
+  padding: 20px 0;
 }
 .myFriends h3 {
   margin-bottom: 15px;
@@ -291,8 +294,6 @@ TD {
   padding: 20px 10px;
   margin-bottom: 20px;
   background: #fff;
-  border-radius: 4PX;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 .tongji {
   height: 0;

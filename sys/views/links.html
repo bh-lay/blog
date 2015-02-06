@@ -12,14 +12,26 @@
 <body>
 <div class="Jumbotron">
 	<div class="grid-row">
-		<h1>前端英雄榜</h1>
-		<p>紧张开发中</p>
+		<div class="grid-box-full">
+            <h1>前端英雄榜</h1>
+            <p>紧张开发中</p>
+        </div>
 	</div>
-	<div class="mask"><svg width="100%" height="50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 100" preserveAspectRatio="none"><g><polygon xmlns="http://www.w3.org/2000/svg" points="0,100 600,100 600,0" style="fill:#fff;stroke-width:0"/></g></svg></div>
+	<div class="mask"><svg width="100%" height="50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 100" preserveAspectRatio="none"><g><polygon xmlns="http://www.w3.org/2000/svg" points="0,100 600,100 600,0" style="fill:#ccc;stroke-width:0"/></g></svg></div>
 </div>
 <div class="grid-row myFriends">
-    <div class="grid-box-full"><h3>我的小伙伴们</h3></div>
-    <include name="friendsLink"/>
+    <div class="grid-box-full">
+        <h3>我的小伙伴们</h3>
+    </div>
+    {{@each list as it}}
+        <div class="grid-box">
+            <div class="guy-item">
+                <a target="_blank" href="${{it.url}}">${{it.title}}</a>
+                <p>${{it.discription}}</p>
+            </div>
+        </div>
+    {{@/each}}
+    
 </div>
 <script type="text/javascript">
     var app_config = {
