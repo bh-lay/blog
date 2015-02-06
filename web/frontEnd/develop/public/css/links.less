@@ -5,11 +5,11 @@
 @import "less/_article.less";
 @import "less/_fontface.less";
 body{
-    background: #ccc;
+    background: #222;
 }
 .Jumbotron{
     position: relative;
-    height: 340px;
+    height: 300px;
     background: #64cccb;
     background-image: -moz-linear-gradient(top, #336799, #64cccb);
     background-image: -webkit-gradient(linear, left top, left bottom,color-stop(0, #336799), color-stop(1, #64cccb));
@@ -22,7 +22,7 @@ body{
         bottom: 0;
     }
 	h1{
-		padding: 2em 0 0;
+		padding: 1.5em 0 0;
 		font-size:3em;
 		color: #fff;
 	}
@@ -34,13 +34,22 @@ body{
 }
 .myFriends{
 	padding: 20px 0;
+    font-family: "Microsoft Yahei";
 	h3{
 		margin-bottom: 15px;
+        font-weight: normal;
+        color: #fff;
 	}
 	.guy-item{
+        height: 70px;
 		padding: 20px 10px;
 		margin-bottom: 20px;
 		background: #fff;
+        transition:all ease .3s;
+        &:hover{
+            transform: scale(1.3);
+            -webkit-transform: scale(1.1);
+        }
 	}
 }
 .tongji{
