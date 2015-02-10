@@ -414,16 +414,16 @@ body:before {
 }
 .app_nav .side {
   float: right;
+  height: 48px;
+  font-size: 0;
 }
 .app_nav .side li {
+  display: inline-block;
   height: 48px;
   line-height: 48px;
-  float: left;
   padding: 0 10px;
 }
 .app_nav .side li a {
-  line-height: 20px;
-  padding: 0px 5px;
   font-size: 12px;
 }
 .app_nav .side li.cur a {
@@ -483,6 +483,14 @@ body:before {
     height: 48px;
     background: #fff;
     box-shadow: 0 0 4px #000;
+  }
+  .app_nav .side {
+    float: none;
+    text-align: center;
+    border-top: 1px solid #eee;
+  }
+  .app_nav .side li {
+    padding: 0 30px;
   }
   .nav_appname {
     display: block;

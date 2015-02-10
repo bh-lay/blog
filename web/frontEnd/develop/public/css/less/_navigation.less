@@ -58,14 +58,14 @@ body:before{
 	}
 	.side {
 		float: right;
+        height: @nav_height;
+        font-size: 0;
 		li {
+            display: inline-block;
 			height: @nav_height;
 			line-height: @nav_height;
-			float: left;
 			padding:0 10px;
 			a {
-				line-height: 20px;
-				padding: 0px 5px;
 				font-size: 12px
 			}
 			&.cur{
@@ -127,6 +127,14 @@ body:before{
         height: @nav_height;
         background: #fff;
         box-shadow: 0 0 4px #000;
+        .side{
+            float: none;
+            text-align: center;
+            border-top: 1px solid #eee;
+            li{
+                padding: 0 30px;
+            }
+        }
     }
 	.nav_appname{
 		display: block;
@@ -172,7 +180,6 @@ body:before{
 			}
 		}
     }
-	
 	.nav-back{
 		top: 5px;
 		left: 0;
