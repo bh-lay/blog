@@ -16,10 +16,11 @@ define(function () {
 		});
         $('.backToOldVersion').on('click', function () {
             UI.confirm({
-                'text' : '确定要去当屌丝？'
-            },function(){
-                document.cookie = 'ui_version=html;path=/;';
-                window.location.reload();
+                text : '确定要去当屌丝？',
+                callback : function(){
+                    document.cookie = 'ui_version=html;path=/;';
+                    window.location.reload();
+                }
             });
         });
 	};
