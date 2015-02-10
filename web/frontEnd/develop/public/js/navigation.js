@@ -5,20 +5,15 @@
 define(function () {
     'use strict';
 	var init = function () {
-		$('.nav_moreBtn').click(function () {
+		$('.app_nav').on('click','.nav a,.side a',function () {
+			$('body').removeClass('nav_slidedown');
+		}).on('click','.nav_mask', function () {
+			$('body').removeClass('nav_slidedown');
+		}).on('click','.nav-back', function(){
+            history.back();
+        }).on('click','.nav_moreBtn',function () {
 			$('body').toggleClass('nav_slidedown');
 		});
-		$('.app_nav .nav a').click(function () {
-			$('body').removeClass('nav_slidedown');
-		});
-		
-		$('.nav_mask').on('click', function () {
-			$('body').removeClass('nav_slidedown');
-		});
-        $('.nav-back').click(function(){
-            history.back();
-        });
-        console.log('init');
         $('.backToOldVersion').on('click', function () {
             UI.confirm({
                 'text' : '确定要去当屌丝？'
