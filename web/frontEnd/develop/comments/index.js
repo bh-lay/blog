@@ -49,7 +49,8 @@ define(function(require,exports){
 				'<div class="l_com_item_caption">{@if it.user.blog}<a href="${it.user.blog}">${it.user.username}</a>{@else}${it.user.username}{@/if} </div>',
 				'<div class="l_com_item_content">$${it.content}</div>',
 				'<div class="l_com_item_footer">',
-					'<div class="l_com_item_time">${it.time}</div>',
+					'<div class="time">${it.time}</div>',
+					'<a href="javascript:void(0)" class="btn-reply">回复</a>',
 				'</div>',
 			'</div>',
 			'<div class="l_com_item_avatar">',
@@ -450,6 +451,22 @@ define(function(require,exports){
 				};
 			}
 		});
+		$(me.dom).on('click','.btn-reply',function(){
+			var item = $(this).parents('.l_com_item'),
+				reply_for = item.find('.l_com_item_caption').html(),
+				pop = UI.pop({
+					title: '@' + reply_for,
+					mask: true,
+					easyClose: false
+				}),
+				send = new sendBox(pop.cntDom,me.cid);
+				$(send.dom).find('textarea').val('@' + reply_for + ' ');
+				send.on('sendToServicesuccess',function(item){
+					pop.close();
+					me.addItem(item);
+				});
+			
+		});
 		
 	}
 	list.prototype.addItem = function(item){
@@ -509,6 +526,6 @@ define(function(require,exports){
 		this.list = new list($(this.dom).find('.l_com_list')[0],id);
 		this.sendBox.on('sendToServicesuccess',function(item){
 			me.list.addItem(item);
-		})
+		});
 	};
 });

@@ -11,14 +11,14 @@
 }
 
 .l_com_sendBox {
-	margin-bottom: 20px
+	margin-bottom: 20px;
+	.cardShadow();
 }
 .l_sendBox {
     padding: 20px 20px 20px 80px;
     background: #fff;
     position: relative;
 	overflow: hidden;
-	.cardShadow();
 }
 
 .l_send_side {
@@ -370,9 +370,22 @@
 	word-wrap: break-word;
 	word-break: break-all;
 }
-.l_com_item_time{
-	color: #aaa;
-	font-size: 12px;
+.l_com_item_footer{
+	height: 20px;
+	line-height: 20px;
+	.time{
+		float: left;
+		color: #aaa;
+		font-size: 12px;
+	}
+	.btn-reply{
+		color: #aaa;
+		font-size: 12px;
+		float: right;
+		&:hover{
+			color: #333;
+		}
+	}
 }
 .l_com_item_avatar {
 	position: absolute;

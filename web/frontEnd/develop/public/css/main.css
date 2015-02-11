@@ -695,14 +695,15 @@ body:before {
  **/
 .l_com_sendBox {
   margin-bottom: 20px;
-}
-.l_sendBox {
-  padding: 20px 20px 20px 80px;
-  position: relative;
-  overflow: hidden;
   background: #fff;
   border-radius: 2px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+.l_sendBox {
+  padding: 20px 20px 20px 80px;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
 }
 .l_send_side {
   position: absolute;
@@ -1067,9 +1068,22 @@ body:before {
   word-wrap: break-word;
   word-break: break-all;
 }
-.l_com_item_time {
+.l_com_item_footer {
+  height: 20px;
+  line-height: 20px;
+}
+.l_com_item_footer .time {
+  float: left;
   color: #aaa;
   font-size: 12px;
+}
+.l_com_item_footer .btn-reply {
+  color: #aaa;
+  font-size: 12px;
+  float: right;
+}
+.l_com_item_footer .btn-reply:hover {
+  color: #333;
 }
 .l_com_item_avatar {
   position: absolute;
