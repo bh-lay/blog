@@ -455,7 +455,6 @@ define(function(require,exports){
 			var item = $(this).parents('.l_com_item'),
 				reply_for = item.find('.l_com_item_caption').html(),
 				pop = UI.pop({
-					title: '@' + reply_for,
 					mask: true,
 					easyClose: false
 				}),
