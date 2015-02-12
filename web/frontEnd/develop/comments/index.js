@@ -1,9 +1,10 @@
 
 
 define(function(require,exports){
-	var mirror = require('comments/mirror');
-	var selection = require('comments/selection');
-	var pagination = require('util/pagination');
+	var mirror = require('comments/mirror'),
+	    selection = require('comments/selection'),
+	    pagination = require('util/pagination'),
+        face = require('comments/face');
 	
     var default_avatar = 'http://layasset.qiniudn.com/user/default.jpg';
     var private_userInfo = null;
@@ -331,10 +332,15 @@ define(function(require,exports){
 			}
 			
 		}).on('click','.l_send_face',function(){
+            var offset = $(this).offset();
             $textarea.focus();
-			UI.prompt('表情正在开发中！',null,{
-				'from' : $(this)[0]
-			});
+			face({
+                top: offset.top + 25,
+                left: offset.left,
+                onSelect: function(title){
+                    $textarea.insertTxt(':' + title + ':').trigger('change');
+                }
+            });
 		});
 	}
 	//绑定对象自定义事件

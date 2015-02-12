@@ -693,6 +693,27 @@ body:before {
  * 评论模块
  *
  **/
+.face_list {
+  overflow: hidden;
+}
+.face_list a {
+  display: block;
+  float: left;
+  width: 14.2%;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-width: 1px 0 0 1px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+.face_list a span {
+  vertical-align: middle;
+}
+.face_list a:hover {
+  background: #eee;
+}
 .emoji {
   display: inline-block;
   width: 24px;
