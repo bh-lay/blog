@@ -335,7 +335,7 @@ define(function(require,exports){
             var offset = $(this).offset();
             $textarea.focus();
 			face({
-                top: offset.top + 25,
+                top: offset.top,
                 left: offset.left,
                 onSelect: function(title){
                     $textarea.insertTxt(':' + title + ':').trigger('change');
