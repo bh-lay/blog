@@ -5,6 +5,7 @@ define(function(require,exports){
 	var selection = require('comments/selection');
 	var pagination = require('util/pagination');
 	
+    var default_avatar = 'http://layasset.qiniudn.com/user/default.jpg';
     var private_userInfo = null;
 	var baseTpl = ['<div class="l_comments">',
 		'<div class="l_com_sendBox"></div>',
@@ -54,7 +55,7 @@ define(function(require,exports){
 				'</div>',
 			'</div>',
 			'<div class="l_com_item_avatar">',
-				'<img src="{@if it.user.avatar}${it.user.avatar}{@else}http://layasset.qiniudn.com/user/default.jpg{@/if}"/>',
+				'<img src="{@if it.user.avatar}${it.user.avatar}{@else}' + default_avatar + '{@/if}"/>',
 			'</div>',
 		'</div>',
 	'{@/each}'].join('');
@@ -152,12 +153,23 @@ define(function(require,exports){
 			'username' : userInput.username || '',
 			'email' : userInput.email || '',
 			'blog' : userInput.blog || '',
-			'avatar' : userInput.avatar || 'http://layasset.qiniudn.com/user/default.jpg'
+			'avatar' : userInput.avatar || default_avatar
 		}
         var screen_name = user.username || '雁过留名';
 		$allDom.find('.l_send_username').html(screen_name).attr('title',screen_name);
 		$allDom.find('.l_send_avatar img').attr('src',user.avatar);
 	}
+    
+    /**
+     * 转换emoji表情
+     */
+    function strToEmoji(str){
+        return str.replace(/\:(\w+)\:/g,'<span class="emoji s_$1"></span>');
+    }
+    //
+    function avatar_onerror(dom){
+        dom.find('img').attr("onerror",'this.src="' + default_avatar + '";');
+    }
 	/**
 	 * 发送评论
 	 *
@@ -431,7 +443,7 @@ define(function(require,exports){
 		this.getData(0,function(err,data){
 			var html = juicer(item_tpl,data);
 			$(me.dom).find('.l_com_list_cnt').html(html);
-			
+			avatar_onerror($(me.dom));
 			if(me.total == 0){
 				$(me.dom).find('.l_com_list_cnt').prepend('<div class="l_com_list_noData">来的真早，快抢沙发！</div>');
 			}else{
@@ -451,6 +463,7 @@ define(function(require,exports){
 						}
 						var html = juicer(item_tpl,data);
 						$(me.dom).find('.l_com_list_cnt').html(html);
+                        avatar_onerror($(me.dom));
 					});
 				};
 			}
@@ -479,6 +492,8 @@ define(function(require,exports){
 	}
 	list.prototype.addItem = function(item){
 		item.time = '刚刚';
+        item.content = strToEmoji(item.content);
+        
 		var html = juicer(item_tpl,{
 			'list' : [item]
 		});
@@ -486,6 +501,7 @@ define(function(require,exports){
 		$(this.dom).find('.l_com_list_cnt').prepend($item);
 		$item.addClass('l_com_item_ani-insert');
 		$(this.dom).find('.l_com_list_noData').fadeOut(100);
+        avatar_onerror($item);
 	};
 	list.prototype.getData = function(skip,callback){
 		
@@ -510,7 +526,7 @@ define(function(require,exports){
 					
 					for(var i=0,total=DATA.list.length;i<total;i++){
 						DATA.list[i].time = parseTime(DATA.list[i].time,"{h}:{ii} {y}-{m}-{d}");
-						
+						DATA.list[i].content = strToEmoji(DATA.list[i].content);
 						if(DATA.list[i].user.blog){
 							DATA.list[i].user.blog = parseUrl(DATA.list[i].user.blog);
 						}
