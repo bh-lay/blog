@@ -302,9 +302,10 @@ define(function(require,exports){
 					'from' : $(this)[0]
 				});
 			}else if(private_userInfo){
+                var text = me.onBeforeSend ? (me.onBeforeSend(me.text) || me.text) : me.text;
 				sendComment({
 					'id' : me.id,
-					'text' : me.text,
+					'text' : text,
 					'user' : private_userInfo
 				},function(err,item){
 					if(err){
@@ -375,14 +376,14 @@ define(function(require,exports){
 	/**
 	 * sendBox类
 	 */
-	function sendBox(dom,id){
+	function sendBox(dom,id,param){
 		var me = this;
 		var param = param || {};
 		this.id = id;
 		this.dom = $(sendBox_tpl)[0];
-		this.limit = param.limit || 500;
 		this.text = '';
 		this.userDefine = {};
+        this.onBeforeSend = param.onBeforeSend || null;
 		$(dom).html($(this.dom));
 		
 		//绑定dom事件
@@ -453,13 +454,16 @@ define(function(require,exports){
 		});
 		$(me.dom).on('click','.btn-reply',function(){
 			var item = $(this).parents('.l_com_item'),
-				reply_for = item.find('.l_com_item_caption').html(),
+				reply_for = item.find('.l_com_item_caption').text(),
 				pop = UI.pop({
 					mask: true,
 					easyClose: false
 				}),
-				send = new sendBox(pop.cntDom,me.cid);
-				$(send.dom).find('textarea').val('@' + reply_for + ' ');
+				send = new sendBox(pop.cntDom,me.cid,{
+                    onBeforeSend : function(text){
+                        return '@' + reply_for + ' ' + text;
+                    }
+                });
 				send.on('sendToServicesuccess',function(item){
 					pop.close();
 					me.addItem(item);
