@@ -39,7 +39,7 @@ define(function(require,exports){
         '<p><input type="text" autocomplete="off" name="blog" placeholder="xxx.me"/></p>',
     '</div>'].join('');
 	var list_tpl = ['<div>',
-		'<div class="l_com_list_cnt"></div>',
+		'<div class="l_com_list_cnt"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载模块</p></div></div>',
 		'<div class="l_com_list_pagination"></div>',
 	'</div>'].join('');
 	
@@ -398,6 +398,9 @@ define(function(require,exports){
 			}
 			setUserInfoToUI.call(me,user);
 		});
+        if(param.focus){
+            $(this.dom).find('textarea').focus();
+        }
 	}
 	sendBox.prototype = {
 		'on' : ON
@@ -456,19 +459,21 @@ define(function(require,exports){
 			var item = $(this).parents('.l_com_item'),
 				reply_for = item.find('.l_com_item_caption').text(),
 				pop = UI.pop({
+                    title: '回复：' + reply_for,
 					mask: true,
 					easyClose: false
 				}),
 				send = new sendBox(pop.cntDom,me.cid,{
+                    focus: true,
                     onBeforeSend : function(text){
                         return '@' + reply_for + ' ' + text;
                     }
                 });
-				send.on('sendToServicesuccess',function(item){
-					pop.close();
-					me.addItem(item);
-				});
-			
+            $(pop.dom).find('.UI_pop_cpt').css('border','none');
+            send.on('sendToServicesuccess',function(item){
+                pop.close();
+                me.addItem(item);
+            });
 		});
 		
 	}
