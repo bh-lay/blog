@@ -169,7 +169,7 @@ define(function(require,exports){
     }
     //
     function avatar_onerror(dom){
-        dom.find('img').attr("onerror",'this.src="' + default_avatar + '";');
+        dom.find('img').attr("onerror",'(this.src !="' + default_avatar + '") && (this.src="' + default_avatar + '");');
     }
 	/**
 	 * 发送评论
