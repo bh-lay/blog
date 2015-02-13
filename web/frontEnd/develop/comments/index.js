@@ -480,7 +480,8 @@ define(function(require,exports){
 				pop = UI.pop({
                     title: '回复：' + reply_for,
 					mask: true,
-					easyClose: false
+					easyClose: false,
+					from: 'top',
 				}),
 				send = new sendBox(pop.cntDom,me.cid,{
                     focus: true,

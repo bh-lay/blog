@@ -3,6 +3,8 @@
  * Blog : http://bh-lay.com/
  * Copyright (c) 2012-2018
 **/
+
+window.L = window.L || {};
 /**
  * 判断是否支持css属性
  * 兼容css3
@@ -26,27 +28,31 @@ var supports = (function() {
         }
     };
 })();
-/**
- * 是否支持 canvas
- * 是否支持touch
- */
-var supports_canvas = !!document.createElement('canvas').getContext ? true : false;
-var isSupportTouch = document.hasOwnProperty("ontouchend") ? true : false;
-/**
- * 是否为高级浏览器
- * 是否为手机浏览器
- *
- */
-var isAdvancedBrowser = (supports('transition') && supports('transform') && supports_canvas) ? true : false;
-var isMobileBrowser = (window.innerWidth < 720 && isSupportTouch) ? true : false;
-
-
-
-//屌丝就用屌丝版
-if (!isAdvancedBrowser) {
-	document.cookie = 'ui_version=html;path=/;';
-	window.location.reload();
-}
+(function(){
+	/**
+	 * 是否支持 canvas
+	 * 是否支持touch
+	 */
+	var supports_canvas = !!document.createElement('canvas').getContext ? true : false;
+	var isSupportTouch = document.hasOwnProperty("ontouchend") ? true : false;
+	
+	/**
+	 * 是否为高级浏览器
+	 * 是否为手机浏览器
+	 *
+	 */
+	var isAdvancedBrowser = (supports('transition') && supports('transform') && supports_canvas) ? true : false;
+	
+	//屌丝就用屌丝版
+	if (!isAdvancedBrowser) {
+		document.cookie = 'ui_version=html;path=/;';
+		window.location.reload();
+	}
+    L.supports = {
+        'touch' : isSupportTouch
+    };
+	L.isMobileBrowser = (window.innerWidth < 720 && isSupportTouch) ? true : false;
+}());
 
 define(function (require, exports) {
     require('public/js/jquery');
@@ -77,13 +83,10 @@ define(function (require, exports) {
 	L.refresh = function () {
 		lofox.refresh();
 	};
-    L.supports = {
-        'touch' : isSupportTouch
-    };
     //配置弹出层
     UI.config.zIndex(2000);
     //显示背景图
-    if (supports('backgroundSize') && !isMobileBrowser) {
+    if (supports('backgroundSize') && !L.isMobileBrowser) {
         L.gallery();
     }
     //nicescrol
@@ -106,7 +109,6 @@ define(function (require, exports) {
     }, 500);
 	
 });
-window.L = window.L || {};
 
 /**
  *使用七牛云存储
