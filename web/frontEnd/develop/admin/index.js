@@ -136,12 +136,6 @@ define(function(require,exports){
         var dom = createDom(mainDom);
         page_friends(dom);
     });
-    //编辑在线文件
-    lofox.set('/admin/file_edit',function(){
-        this.title('编辑代码');
-        var dom = createDom(mainDom);
-        page_file_edit(dom);
-    });
     //图库
     lofox.set('/admin/gallery',function(){
         this.title('图库');
@@ -156,7 +150,6 @@ define(function(require,exports){
     //评论管理
     lofox.set('/admin/comments',function(){
         this.title('评论管理');
-
         var domCnt = createDom(mainDom);
         domCnt.html('<div class="col-md-12"></div>');
         var dom = domCnt.find('.col-md-12');
