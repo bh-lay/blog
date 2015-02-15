@@ -21,12 +21,12 @@ var baseRoot = './views/';
  * @returns {name:'navigation_bootstrap',active:'index'}
  */
 function getComponentsConfig(input){
-	var strArray = input.match(/\<include([^\/])+\/>/g) || [];
+	var strArray = input.match(/\<include(.+?)\/>/g) || [];
 	var confArray = [];
 	strArray.forEach(function(item,index){
 		var data = {};
 		//过滤多余的字符
-		item = item.replace(/^<include\s+|\/>|"|'$/g,'');
+		item = item.replace(/^<include\s+|"|'|\s*\/>$/g,'');
 		//分离参数
 		var dataArray = item.split(/\s+/) || [];
 		
@@ -38,6 +38,7 @@ function getComponentsConfig(input){
 		});
 		confArray.push(data);
 	});
+	console.log(confArray);
 	return confArray;
 }
 function replaceComponent(temp,callback){
