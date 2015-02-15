@@ -34,7 +34,6 @@ define(function(require,exports){
 	
     var page_friends = require('admin/friends.js'),
         page_index = require('admin/indexPage.js'),
-        page_file_edit = require('admin/file_edit.js'),
         page_comment = require('admin/comments_list.js'),
         article_list = require('admin/article_list.js')
 //        page_index = require(),
