@@ -38,7 +38,6 @@ function getComponentsConfig(input){
 		});
 		confArray.push(data);
 	});
-	console.log(confArray);
 	return confArray;
 }
 function replaceComponent(temp,callback){
@@ -66,7 +65,7 @@ function replaceComponent(temp,callback){
 	function all_callBack(){
 		over_count++;
 		if(over_count == total){
-			var html = temp.replace(/\<include\s+name\s*=\s*(?:"|')(\w+)(?:"|')([^\/])*\/>/g,function(includeStr,name){
+			var html = temp.replace(/\<include\s+name\s*=\s*(?:"|')(.+?)(?:"|')([^\/])*\/>/g,function(includeStr,name){
 				return temp_result[name] || includeStr;
 			});
 			callback(null,html);
