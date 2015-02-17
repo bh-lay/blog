@@ -33,7 +33,6 @@ define(function(require,exports){
 	require('lib/jquery/jquery.easing.1.3.min.js');
 	
     var page_friends = require('admin/friends.js'),
-        page_index = require('admin/indexPage.js'),
         page_comment = require('admin/comments_list.js'),
         article_list = require('admin/article_list.js')
 //        page_index = require(),
@@ -84,7 +83,10 @@ define(function(require,exports){
     lofox.set('/admin/',function(){
         this.title('后台首页');
         var dom = createDom(mainDom);
-        page_index(dom);
+		
+        var tpl = $('#tpl_index_page').html();
+		var txt = tpl.replace('{username}',admin_dataBase.username);
+		dom.html(txt);
     });
     //博文页
     lofox.set('/admin/article',function(){
