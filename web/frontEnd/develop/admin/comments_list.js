@@ -5,26 +5,6 @@
  * @param {String|Number} [id] article ID
  **/
 define(function(){
-	var tpl = ['<div class="panel panel-default"><div class="panel-body">{@each list as it}',
-		'<div class="media" data-uid="${it.uid}" data-cid="${it.cid}">',
-			'<div class="pull-left">',
-				'<img width="50" height="50" src="{@if it.user.avatar}${it.user.avatar}{@else}http://layasset.qiniudn.com/user/default.jpg{@/if}"/>',
-			'</div>',
-			'<div class="media-body">',
-				'<div class="media-heading">',
-					'{@if it.user.blog}<a href="${it.user.blog}">${it.user.username}</a>{@else}<span>${it.user.username}</span>{@/if}',
-					'<small> ${it.time}</small>',
-				'</div>',
-				'<p>$${it.content}</p>',
-				'<div class="media-tools">',
-					'<a class="btn btn-default btn-xs" title="删除" href="/ajax/comments/del?id=${it._id}" data-item-selector=".media" data-action-del="三思啊，删了可就没啦！">',
-						'<span class="glyphicon glyphicon-remove"></span>',
-					'</a>',
-				'</div>',
-			'</div>',
-		'</div>',
-	'{@/each}</div></div>'].join('');
-
 	//获取文章列表
 	function getList(start,limit,callback){
 		$.ajax({
@@ -46,6 +26,7 @@ define(function(){
 	function listPage(dom){
 		//每页显示条数
 		var page_list_num = 8;
+		var tpl = $('#tpl_comments_page').html();
 		dom.html('<div class="list_cnt"></div><div class="page_cnt"></div>');
 		var $list_cnt = dom.find('.list_cnt');
 		var $page_cnt = dom.find('.page_cnt');
