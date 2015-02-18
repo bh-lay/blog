@@ -119,13 +119,13 @@ define(function(require,exports){
         admin.render.userList(dom);
     });
     //用户组页
-    lofox.set('/admin/group',function(){
+    lofox.set('/admin/user/group',function(){
         this.title('用户组列表');
         var dom = createDom(mainDom);
         dom.html('俺是用户组列表页');
     });
     //权限页
-    lofox.set('/admin/power',function(){
+    lofox.set('/admin/user/power',function(){
         this.title('权限页');
         var dom = createDom(mainDom);
         admin.render.powerList(dom);
