@@ -175,8 +175,7 @@ define(function(require,exports){
                     'active' : type,
                     'id' : id,
                     'sendFn' : function(){
-                        admin.push('/admin/');
-                        admin.refresh();
+                        location.back();
                     }
                 });
             });
@@ -202,8 +201,9 @@ define(function(require,exports){
         var id = btn.attr('data-id');
         seajs.use('publish/publish.js',function(publish){
             var cover = UI.cover({
-                'from' : btn[0],
-                'html' : '<div class="container my-publish-cnt"></div>'
+                from : btn[0],
+				easyClose: false,
+                html : '<div class="container my-publish-cnt"></div>'
             });
             publish.init($(cover.dom).find('.my-publish-cnt'),{
                 'active' : type,
