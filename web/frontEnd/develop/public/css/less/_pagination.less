@@ -1,35 +1,36 @@
 
 /**分页组件**/
 .pagination{
-}
-.pagination li{
-	display: inline-block;
-	vertical-align: text-top;
-}
-.pagination span,
-.pagination a{
-	display: block;
-	height: 40px;
-	line-height: 40px;
-	padding: 0px 15px;
-	background: #fff;
-	font-size: 14px;
-	color: #428bca;
-	.transition(0.1s);
-}
-.pagination a:hover{
-	background: #eee;
-	color: #333;
-}
-.pagination .active span{
-	background: #428bca;
-	color: #fff;
-	font-size: 22px;
-	cursor: default;
-}
-.pagination .disabled span{
-	color: #bbb;
-	cursor: default;
+    padding-top: 20px;
+    li{
+        display: inline-block;
+        vertical-align: text-top;
+    }
+    span,
+    a{
+        display: block;
+        height: 40px;
+        line-height: 40px;
+        padding: 0px 15px;
+        background: #fff;
+        font-size: 14px;
+        color: #428bca;
+        .transition(0.1s);
+        &:hover{
+            background: #eee;
+            color: #333;
+        }
+    }
+    .active span{
+        background: #428bca;
+        color: #fff;
+        font-size: 22px;
+        cursor: default;
+    }
+    .disabled span{
+        color: #bbb;
+        cursor: default;
+    }
 }
 @media (max-width: 660px) {
 	.pagination{
