@@ -3,7 +3,13 @@
  *  
  */
 define(function(require,exports){
-	
+	var base_tpl = ['<div class="opusListPage">',
+		'<div class="grid-row">',
+		  '<div class="grid-box-full">',
+		      '<div class="opusList"></div>',
+		  '</div>',
+		'</div>',
+    '</div>'].join('');
 	var item_tpl = ['{@each list as it}<div class="opus-item">',
 		'<a href="/opus/${it.id}" title="${it.title}" target="_self" lofox="true" class="cover" >',
 			'<img src="${it.cover}?imgView/1/w/100/h/100/85" alt="${it.title}" />',
@@ -55,7 +61,7 @@ define(function(require,exports){
 	return function(dom,param){
 		skip = 0;
 		getData(function(list){
-			dom.html('<div class="opusListPage"><div class="grid-row"><div class="grid-box-full"><div class="opusList"></div></div><div class="l-col-3"></div</div></div>');
+			dom.html(base_tpl);
 			var this_html = juicer(item_tpl,{
 				'list' : list
 			});
