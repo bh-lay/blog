@@ -644,6 +644,7 @@ body:before {
   -webkit-transition: all 0.1s linear;
   -o-transition: all 0.1s linear;
 }
+.pagination span:hover,
 .pagination a:hover {
   background: #eee;
   color: #333;

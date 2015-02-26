@@ -5,7 +5,7 @@
  **/
 define(function(require,exports){
 	function render(){
-		var txt = '';
+		var txt = '<ul class="pagination">';
         if(this.page_num < 2){
             return;
         }
@@ -38,6 +38,7 @@ define(function(require,exports){
 		}else{
 			txt += '<li class="pagination_next disabled"><span>下一页</span></li>';
 		}
+        txt += '</ul>';
 		this.dom.html(txt);
 	}
 	function pageList(dom,param){
@@ -49,7 +50,7 @@ define(function(require,exports){
 		this.page_num = Math.ceil(this.list_count / this.page_list_num);
 		this.max_page_btn = param.max_page_btn || 50;
 		this.jump = null;
-		this.dom = $('<ul class="pagination"></ul>');
+		this.dom = $('<div>');
 		
 		this.dom.on('click','a[data-page="jump"]',function(){
 			var num = parseInt($(this).html());
