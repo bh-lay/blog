@@ -62,7 +62,8 @@ TD {
 .grid-row [class*="grid-box"],
 .grid-row [class*="grid-col"] {
   float: left;
-  padding: 0px 10px;
+  padding-left: 10px;
+  padding-right: 10px;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -84,11 +85,11 @@ TD {
 .grid-row .grid-col-2-3 {
   width: 66.6666667%;
 }
-.grid-row .grid-col-1-5 {
-  width: 25%;
+.grid-row .grid-col-fix-300 {
+  width: 300px;
 }
-.grid-row .grid-col-4-5 {
-  width: 75%;
+.grid-row .grid-col-flow-300 {
+  width: calc(100% - 300px);
 }
 @media screen and (max-width: 1300px) {
   .grid-row {
@@ -111,8 +112,8 @@ TD {
   }
   .grid-row .grid-col-1-3,
   .grid-row .grid-col-2-3,
-  .grid-row .grid-col-1-5,
-  .grid-row .grid-col-4-5 {
+  .grid-row .grid-col-fix-300,
+  .grid-row .grid-col-flow-300 {
     width: 100%;
     float: none !important;
   }
@@ -622,6 +623,9 @@ body:before {
   }
 }
 /**分页组件**/
+.pagination {
+  padding-top: 20px;
+}
 .pagination li {
   display: inline-block;
   vertical-align: text-top;
@@ -3708,9 +3712,6 @@ body:before {
   border-radius: 2px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
-.l_com_list_pagination {
-  padding-top: 20px;
-}
 .l_com_list_noData {
   padding: 30px 20px;
   line-height: 20px;
@@ -4422,6 +4423,40 @@ body:before {
     width: 100%;
   }
 }
+.side-waiting-for-design {
+  margin-bottom: 20px;
+  padding: 2em 0;
+  font-size: 14px;
+  text-align: center;
+  color: #ccc;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+.side_card {
+  margin-bottom: 20px;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+.side_card .caption {
+  line-height: 24px;
+  padding: .5em 1em;
+  font-weight: bold;
+  box-shadow: 0 0 2px #aaa;
+}
+.side_card .content {
+  padding: 1em 0;
+  color: #ccc;
+  font-size: 18px;
+  text-align: center;
+}
+@media screen and (max-width: 965px) {
+  .sidebar {
+    padding-top: 20px;
+  }
+}
 /**
  * 卡片类
  */
@@ -4593,26 +4628,6 @@ a:active {
     opacity: 1;
     -webkit-mask-size: 300%;
   }
-}
-.side-waiting-for-design {
-  margin-bottom: 20px;
-  padding: 2em 0;
-  font-size: 14px;
-  text-align: center;
-  color: #ccc;
-  background: #fff;
-  border-radius: 2px;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
-}
-.side_card {
-  margin-bottom: 20px;
-  padding: 1em 0;
-  font-size: 14px;
-  text-align: center;
-  color: #ccc;
-  background: #fff;
-  border-radius: 2px;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
 /**用户登录框**/
 .l_loginPanel {
