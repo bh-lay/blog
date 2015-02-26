@@ -4192,7 +4192,6 @@ body:before {
   background: #fff;
   border-radius: 2px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
-  font-size: 14px;
 }
 .blog_article .caption {
   text-align: center;
@@ -4207,11 +4206,8 @@ body:before {
 .blog_article .caption p {
   color: #666;
 }
-.blog_article .article {
-  font-size: 1em;
-}
 @media (min-width: 1400px) {
-  .blog_article {
+  .article {
     font-size: 16px;
   }
 }
