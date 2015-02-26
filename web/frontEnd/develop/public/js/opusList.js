@@ -3,11 +3,12 @@
  *  
  */
 define(function(require,exports){
-	var base_tpl = ['<div class="opusListPage">',
-		'<div class="grid-row">',
-		  '<div class="grid-box-full">',
-		      '<div class="opusList"></div>',
-		  '</div>',
+    var base_tpl = ['<div class="opusListPage">',
+        '<div class="grid-row">',
+            '<div class="grid-col-4-5">',
+                '<div class="opusList"></div>',
+            '</div>',
+            '<div class="grid-col-1-5">[-latest_comments-][-random_article-]</div>',
 		'</div>',
     '</div>'].join('');
 	var item_tpl = ['{@each list as it}<div class="opus-item">',
@@ -59,9 +60,10 @@ define(function(require,exports){
 	};
 	
 	return function(dom,param){
+        var base_tpl_end = L.tplModule(base_tpl);
+        dom.html(base_tpl_end);
 		skip = 0;
 		getData(function(list){
-			dom.html(base_tpl);
 			var this_html = juicer(item_tpl,{
 				'list' : list
 			});

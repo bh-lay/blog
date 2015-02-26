@@ -83,6 +83,11 @@ define(function (require, exports) {
 	L.refresh = function () {
 		lofox.refresh();
 	};
+    L.tplModule = function(txt){
+        return (txt && txt.length) ? txt.replace(/\[\-(\w+)\-\]/g,function(a,key){
+            return $('#module_' + key).html() || '';
+        }) : '';
+    };
     //配置弹出层
     UI.config.zIndex(2000);
     //显示背景图

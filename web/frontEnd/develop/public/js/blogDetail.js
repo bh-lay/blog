@@ -7,7 +7,7 @@ define(function(require,exports){
 
 	var template = ['<div class="blogDetail">',
         '<div class="grid-row">',
-            '<div class="grid-box-full">',
+            '<div class="grid-col-4-5">',
                 '<div class="blog_article">',
                     '<div class="caption">',
                         '<h1>${title}</h1>',
@@ -17,6 +17,7 @@ define(function(require,exports){
                 '</div>',
                 '<div class="comments_frame"></div>',
             '</div>',
+            '<div class="grid-col-1-5">[-latest_comments-][-random_article-]</div>',
         '</div>',
 	'</div>'].join('');
 	
@@ -29,11 +30,12 @@ define(function(require,exports){
 				'id' : id
 			},
 			'success' :function(data){
+                var tpl = L.tplModule(template);
 				if(data.code == 1){
 					var detail = data['detail'];
 					var date = new Date(parseInt(detail.time_show));
 					detail.time_show = (date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+ date.getDate();
-					var this_html = juicer(template,detail);
+					var this_html = juicer(tpl,detail);
 					fn&&fn(null,this_html,data['detail']['title']);
 				}else{
 					fn&&fn('博客不存在！');

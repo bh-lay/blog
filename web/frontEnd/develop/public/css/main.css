@@ -4605,8 +4605,8 @@ a:active {
 }
 .side-waiting-for-design {
   margin-bottom: 20px;
-  padding: 3em 0;
-  font-size: 1.4em;
+  padding: 2em 0;
+  font-size: 14px;
   text-align: center;
   color: #ccc;
   background: #fff;
