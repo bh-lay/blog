@@ -4425,11 +4425,6 @@ body:before {
 /**
  * 卡片类
  */
-.cardShadow {
-  background: #fff;
-  border-radius: 2px;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
-}
 body {
   color: #333;
   font-size: 14px;
@@ -4602,6 +4597,16 @@ a:active {
 .side-waiting-for-design {
   margin-bottom: 20px;
   padding: 2em 0;
+  font-size: 14px;
+  text-align: center;
+  color: #ccc;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+.side_card {
+  margin-bottom: 20px;
+  padding: 1em 0;
   font-size: 14px;
   text-align: center;
   color: #ccc;

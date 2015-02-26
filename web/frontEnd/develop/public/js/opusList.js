@@ -8,7 +8,7 @@ define(function(require,exports){
             '<div class="grid-col-4-5">',
                 '<div class="opusList"></div>',
             '</div>',
-            '<div class="grid-col-1-5">[-latest_comments-][-random_article-]</div>',
+            '<div class="grid-col-1-5">[-github_links-][-latest_comments-][-random_article-]</div>',
 		'</div>',
     '</div>'].join('');
 	var item_tpl = ['{@each list as it}<div class="opus-item">',
