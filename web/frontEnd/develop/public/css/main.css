@@ -84,6 +84,12 @@ TD {
 .grid-row .grid-col-2-3 {
   width: 66.6666667%;
 }
+.grid-row .grid-col-1-5 {
+  width: 25%;
+}
+.grid-row .grid-col-4-5 {
+  width: 75%;
+}
 @media screen and (max-width: 1370px) {
   .grid-row {
     width: 945px;
@@ -104,7 +110,9 @@ TD {
     float: none !important;
   }
   .grid-row .grid-col-1-3,
-  .grid-row .grid-col-2-3 {
+  .grid-row .grid-col-2-3,
+  .grid-row .grid-col-1-5,
+  .grid-row .grid-col-4-5 {
     width: 100%;
     float: none !important;
   }
@@ -4594,6 +4602,16 @@ a:active {
     opacity: 1;
     -webkit-mask-size: 300%;
   }
+}
+.side-waiting-for-design {
+  margin-bottom: 20px;
+  padding: 3em 0;
+  font-size: 1.4em;
+  text-align: center;
+  color: #ccc;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
 /**用户登录框**/
 .l_loginPanel {

@@ -84,6 +84,12 @@ TD {
 .grid-row .grid-col-2-3 {
   width: 66.6666667%;
 }
+.grid-row .grid-col-1-5 {
+  width: 25%;
+}
+.grid-row .grid-col-4-5 {
+  width: 75%;
+}
 @media screen and (max-width: 1370px) {
   .grid-row {
     width: 945px;
@@ -104,7 +110,9 @@ TD {
     float: none !important;
   }
   .grid-row .grid-col-1-3,
-  .grid-row .grid-col-2-3 {
+  .grid-row .grid-col-2-3,
+  .grid-row .grid-col-1-5,
+  .grid-row .grid-col-4-5 {
     width: 100%;
     float: none !important;
   }
