@@ -7,7 +7,7 @@ define(function(require,exports){
 
 	var template = ['<div class="blogDetail">',
         '<div class="grid-row">',
-            '<div class="grid-col-4-5">',
+            '<div class="grid-col-flow-300">',
                 '<div class="blog_article">',
                     '<div class="caption">',
                         '<h1>${title}</h1>',
@@ -17,7 +17,13 @@ define(function(require,exports){
                 '</div>',
                 '<div class="comments_frame"></div>',
             '</div>',
-            '<div class="grid-col-1-5">[-latest_comments-][-random_article-]</div>',
+            '<div class="grid-col-fix-300 sidebar">',
+                '<div class="side_card">',
+                    '<div class="caption">分享</div>',
+                    '<div class="content">分享</div>',
+                '</div>',
+                '[-latest_comments-][-random_article-]',
+            '</div>',
         '</div>',
 	'</div>'].join('');
 	
