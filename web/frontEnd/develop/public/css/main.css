@@ -4668,8 +4668,8 @@ a:active {
     -webkit-mask-size: 30%;
     -webkit-animation-timing-function: ease-in;
   }
-  80% {
-    opacity: 1;
+  40% {
+    opacity: .6;
     -webkit-mask-size: 60%;
     -webkit-animation-timing-function: ease-in;
   }
