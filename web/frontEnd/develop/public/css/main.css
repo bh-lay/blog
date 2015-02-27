@@ -3826,12 +3826,12 @@ body:before {
   margin-bottom: 2em;
   font-size: 1.1em;
 }
-.index-aboutme .footer a {
+.index-aboutme .my-sns-links a {
   display: inline-block;
   vertical-align: middle;
   line-height: 1em;
   padding: 0 .5em;
-  font-size: 1.6em;
+  font-size: 1.5em;
   color: #000;
   opacity: .7;
   transition: all 0.2s ease;
@@ -3839,21 +3839,8 @@ body:before {
   -webkit-transition: all 0.2s ease;
   -o-transition: all 0.2s ease;
 }
-.index-aboutme .footer a:hover {
-  position: relative;
+.index-aboutme .my-sns-links a:hover {
   opacity: 1;
-}
-.index-aboutme .footer a:hover:after {
-  content: attr(title);
-  position: absolute;
-  top: -20px;
-  left: -50%;
-  width: 200%;
-  line-height: 20px;
-  text-align: center;
-  font-size: 12px;
-  color: #fff;
-  background: #555;
 }
 .index-about-design {
   margin-bottom: 5em;
@@ -4017,6 +4004,14 @@ body:before {
 }
 .index-about-backend .frameworks a:hover {
   text-decoration: underline;
+}
+.index-about-links {
+  padding: 3em 0;
+  text-align: center;
+  background: #fff;
+}
+.index-about-links .btn {
+  margin: 0 10px;
 }
 @media screen and (max-width: 680px) {
   .indeCnt section {
@@ -4464,6 +4459,52 @@ body:before {
   .sidebar {
     padding-top: 20px;
   }
+}
+.btn {
+  display: inline-block;
+  min-width: 40px;
+  height: 32px;
+  padding: 0 1em;
+  line-height: 33px;
+  font-size: 14px;
+  text-align: center;
+  color: #333;
+  background: #fff;
+  border: 1px solid #d3d3d3;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  white-space: nowrap;
+  outline: none;
+  text-decoration: none;
+  transition: all 0.08s linear;
+  -moz-transition: all 0.08s linear;
+  -webkit-transition: all 0.08s linear;
+  -o-transition: all 0.08s linear;
+}
+.btn:hover {
+  color: #333;
+  text-decoration: none;
+  border-color: #c3c3c3;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+}
+.btn.focusme {
+  border: none;
+  padding: 1px 1em;
+  color: #fff;
+  background: #fa7d3c;
+  background: -moz-linear-gradient(top, #fa7d3c 0%, #f55f10 100%);
+  background: -webkit-linear-gradient(top, #fa7d3c 0%, #f55f10 100%);
+  background: -o-linear-gradient(top, #fa7d3c 0%, #f55f10 100%);
+  background: -ms-linear-gradient(top, #fa7d3c 0%, #f55f10 100%);
+  background: linear-gradient(top bottom, #fa7d3c 0%, #f55f10 100%);
+}
+.btn.focusme:hover {
+  background: #f4722e;
+  background: -moz-linear-gradient(top, #f4722e 0%, #f05807 100%);
+  background: -webkit-linear-gradient(top, #f4722e 0%, #f05807 100%);
+  background: -o-linear-gradient(top, #f4722e 0%, #f05807 100%);
+  background: -ms-linear-gradient(top, #f4722e 0%, #f05807 100%);
+  background: linear-gradient(top bottom, #f4722e 0%, #f05807 100%);
 }
 /**
  * 卡片类

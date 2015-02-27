@@ -27,31 +27,18 @@
         margin-bottom: 2em;
 		font-size: 1.1em;
 	}
-    .footer{
+    .my-sns-links{
         a{
             display: inline-block;
             vertical-align: middle;
             line-height: 1em;
             padding: 0 .5em;
-			font-size: 1.6em;
+			font-size: 1.5em;
             color: #000;
             opacity: .7;
             .transition(.2s,ease);
             &:hover{
-                position: relative;
                 opacity: 1;
-                &:after{
-                    content: attr(title);
-                    position: absolute;
-                    top: -20px;
-                    left: -50%;
-                    width: 200%;
-                    line-height: 20px;
-                    text-align: center;
-                    font-size: 12px;
-                    color: #fff;
-                    background: #555;
-                }
             }
         }
 
@@ -229,7 +216,14 @@
         }
     }
 }
-
+.index-about-links{
+    padding: 3em 0;
+    text-align: center;
+    background: #fff;
+    .btn{
+        margin: 0 10px;
+    }
+}
 @media screen and (max-width: 680px) {
 	.indeCnt {
 		section{
