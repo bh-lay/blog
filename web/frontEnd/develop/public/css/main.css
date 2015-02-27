@@ -344,6 +344,15 @@ pre.hljs code {
 .l-icon-layLogo:after {
   content: '\0049';
 }
+.l-icon-weibo:after {
+  content: '\004a';
+}
+.l-icon-qq:after {
+  content: '\004b';
+}
+.l-icon-qzone:after {
+  content: '\004c';
+}
 .l-icon-git:after {
   content: '\0054';
 }
@@ -4423,16 +4432,6 @@ body:before {
   .lab_item .cover img {
     width: 100%;
   }
-}
-.side-waiting-for-design {
-  margin-bottom: 20px;
-  padding: 2em 0;
-  font-size: 14px;
-  text-align: center;
-  color: #ccc;
-  background: #fff;
-  border-radius: 2px;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
 .side_card {
   margin-bottom: 20px;

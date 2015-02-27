@@ -259,6 +259,15 @@ pre.hljs code {
 .l-icon-layLogo:after {
   content: '\0049';
 }
+.l-icon-weibo:after {
+  content: '\004a';
+}
+.l-icon-qq:after {
+  content: '\004b';
+}
+.l-icon-qzone:after {
+  content: '\004c';
+}
 .l-icon-git:after {
   content: '\0054';
 }
