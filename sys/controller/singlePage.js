@@ -1,16 +1,127 @@
 
+var mongo = require('../core/DB.js');
+
+function getUserInfo(id,callback){
+	var method = mongo.start();
+	method.open({'collection_name':'user'},function(err,collection){
+		if(err){
+			callback && callback(err);
+			return;
+		}
+		collection.find({'id' : id}).toArray(function(err, docs) {
+			method.close();
+			if(err || docs.length == 0){
+				callback && callback(err);
+				return;
+			}
+			callback && callback(null,{
+				'avatar': docs[0].avatar,
+				'id': docs[0].id,
+				'username': docs[0].username
+			});
+		});
+	});
+}
+
+/**
+ * 处理评论数据
+ *  增加用户信息
+ *
+ **/
+function handleData(docs,callback){
+	/**
+	 * 统一调用回调
+	 */
+	function endFn(){
+		//处理用户信息字段
+		docs.forEach(function(item){
+			if(users[item.uid]){
+				item.user = users[item.uid];
+			}else if(item.user != null && typeof(item.user) == "object"){
+				delete item.user.email;
+			}else{
+				item.user = {};
+			}
+		});
+		callback&&callback(docs);
+	}
+	
+	var users = {};
+	var uidsLength = 0;
+	var overLength = 0;
+	
+	docs.forEach(function(item){
+		//获取所有需要的用户id
+		var uid = item.uid;
+		if(uid && !users[uid]){
+			users[uid] = {};
+			uidsLength++;
+		}
+		//处理url
+		if(item.cid == 'define-1'){
+			item.url = '/bless';
+		}else{
+			item.url = '/' + item.cid.replace(/\-/g,'/');
+		}
+	});
+	if(uidsLength == 0){
+		endFn();
+	}else{
+		//遍历所有需要的用户id
+		for(var id in users){
+			//获取单个用户信息
+			getUserInfo(id,function(err,userInfo){
+				overLength++;
+				if(!err){
+					users[id] = userInfo;
+				}
+				if(overLength >= uidsLength){
+					endFn();
+				}
+			});
+		}
+	}
+}
+
+//获取最近评论
+function getCommentList(callback){
+	var method = mongo.start();
+	
+	method.open({
+		collection_name: 'comments'
+	},function(err,collection){
+		collection.count(function(err,count){
+			collection.find({}, {
+				limit: 15
+			}).sort({time:-1}).toArray(function(err, docs) {
+				method.close();
+				
+				handleData(docs,function(list){
+					callback&&callback(err,{
+						'count': count,
+						'list': list
+					});
+				});
+			});
+		});
+	});
+};
 exports.render = function (connect,app){
+	
 	//缓存机制
 	app.cache.use('singlePage',['html'],function(this_cache){
 		connect.write('html',200,this_cache);
 	},function(save_cache){
-		//获取单页面视图
-		app.views('singlePage',{
-			'title' : '我的博客',
-			'keywords' : '剧中人,bh-lay,网站建设,网页设计,设计师',
-			'description' : '小剧客栈是剧中人精心营造的一个向广大设计爱好者、喜欢剧中人开放的博客，小剧希望用设计师鞭策自己，愿意和你共同分享，一起进步！'
-		},function(err,html){
-			save_cache(html);
+		getCommentList(function(err,docs){
+			//获取单页面视图
+			app.views('singlePage',{
+				title : '我的博客',
+				keywords : '剧中人,bh-lay,网站建设,网页设计,设计师',
+				description : '小剧客栈是剧中人精心营造的一个向广大设计爱好者、喜欢剧中人开放的博客，小剧希望用设计师鞭策自己，愿意和你共同分享，一起进步！',
+				commentList: JSON.stringify(docs)
+			},function(err,html){
+				save_cache(html);
+			});
 		});
 	});
 }

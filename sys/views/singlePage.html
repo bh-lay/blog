@@ -32,6 +32,11 @@
     });
     seajs.use("public/app.js");
 </script>
+<script type="text/javascript">
+	var app_data = {
+		latest_comments : $${{commentList}}
+	};
+</script>
 <include name="baiduAndGoogleTongji"/>
 <script type="text/template" id="module_latest_comments">
 <div class="side_card"><div class="content"><h3>开发中</h3><p>这儿将会放一些最新的评论！</p></div></div>
