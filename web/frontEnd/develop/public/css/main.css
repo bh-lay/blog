@@ -4649,7 +4649,7 @@ a:active {
   height: 100%;
   overflow: hidden;
   text-indent: -100em;
-  background: url("../images/mask.png");
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABVJREFUeNpiYGBgEGLAA4QIcwACDAAJaABJ6VNbywAAAABJRU5ErkJggg==);
 }
 .galBj_mask {
   width: 100%;
