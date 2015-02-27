@@ -4452,6 +4452,14 @@ body:before {
   font-size: 18px;
   text-align: center;
 }
+.side_card .sns-share a {
+  padding: 0 15px;
+  font-size: 30px;
+  transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+}
 @media screen and (max-width: 965px) {
   .sidebar {
     padding-top: 20px;

@@ -83,19 +83,48 @@ define(function (require, exports) {
 	L.refresh = function () {
 		lofox.refresh();
 	};
+    //模块替换
     L.tplModule = function(txt){
         return (txt && txt.length) ? txt.replace(/\[\-(\w+)\-\]/g,function(a,key){
             return $('#module_' + key).html() || '';
         }) : '';
     };
+
     //配置弹出层
     UI.config.zIndex(2000);
     //显示背景图
     if (supports('backgroundSize') && !L.isMobileBrowser) {
         L.gallery();
     }
+    //开始导航
+    L.nav();
+    //渐隐加载遮罩
+    setTimeout(function () {
+        $('.app_mask').fadeOut(500, function () {
+            $(this).remove();
+        });
+    }, 500);
+    
+    /**
+     * 分享功能
+     *  data-text data-url data-title data-img data-shareto
+     */
+    $('body').on('click','.sns-share a',function(){
+        var $data = $(this).parents('.sns-share'),
+            url = $data.attr('data-url') || location.href,
+            text = encodeURIComponent($data.attr('data-text')) || document.title,
+            title = encodeURIComponent($data.attr('data-title')),
+            img = $data.attr('data-img'),
+            shareto = $(this).attr('data-shareto');
+        var share_url={
+            'weibo':'http://service.weibo.com/share/share.php?title='+text+'+&url='+url+'&source=bookmark&appkey=2861592023&searchPic=false&pic='+img,
+            'qq':'http://share.v.t.qq.com/index.php?c=share&a=index&title='+text+'+&url='+url+'&appkey=&site=bh-lay.com&pic='+img,
+            'qzone':'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?summary='+text+'&url='+url+'&title='+ title+'&pics='+img+'&desc='+text
+        };
+        share_url[shareto] && window.open(share_url[shareto]);
+    })
     //nicescrol
-    $('body').niceScroll({
+    .niceScroll({
         zindex : 2001,
         cursorborder: '1px solid rgba(255,255,255,.2)',
         mousescrollstep: 60,
@@ -104,15 +133,6 @@ define(function (require, exports) {
         },
         bouncescroll: true
     });
-    
-    //开始导航
-    L.nav();
-    setTimeout(function () {
-        $('.app_mask').fadeOut(500, function () {
-            $(this).remove();
-        });
-    }, 500);
-	
 });
 
 /**
