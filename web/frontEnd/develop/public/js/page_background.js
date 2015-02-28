@@ -3,13 +3,6 @@
  */
 define(function () {
     'use strict';
-	var config = {
-		'delay' : 50000,
-		'coverData' : [
-			{'src': app_config.frontEnd_base + 'public/images/gallery/bamboo.jpg', 'alt': '竹子'},
-			{'src': app_config.frontEnd_base + 'public/images/gallery/coast.jpg', 'alt': '江边'}
-		]
-	};
 	
 	function loadImg(src, param) {
 		var parm = param || {},
@@ -39,48 +32,52 @@ define(function () {
 		}
 		img.src = src;
 	}
-	function CSS3(d, b) {
-		var data = d,
-			isWebkit = false,
-			bj = b,
-			total = data.length;
-		bj.html('');
+    function gallery(config) {
+        config = config || {};
+        
+		this.$gallery = $('<div class="gallayer"><div class="galBj"></div><div class="galMask"></div></div>').hide();
+        this.$bj = this.$gallery.find('.galBj');
+        this.delay = config.delay || 6000;
+        this.data = config.data || [];
+        this.isWebkit = L.supports.css('webkitAnimation') ? true : false;
+        
+        $('body').prepend(this.$gallery);
+        this.$gallery.fadeIn(200);
+        
+        if(!config.data.length || !this.$bj){
+            return
+        }
+        
+		this.$bj.html('');
 		
-		if (supports('webkitAnimation')) {
-			isWebkit = true;
-		}
-		
-		function show(i) {
-			var index = i,
-				src = data[index].src;
-			loadImg(src, {
-                'loadFn' : function () {
-                    var newPic = $('<div class="galBj_mask"></div>');
-                    newPic.css({'backgroundImage' : 'url(' + src + ')'});
-                    bj.html(newPic);
-
-                    if (!isWebkit) {
-                        newPic.hide().fadeIn(1000);
-                    }
-
-                    setTimeout(function () {
-                        bj.css({'backgroundImage' : 'url(' + src + ')'});
-                        newPic.hide();
-                        index++;
-                        index === total && (index = 0);
-                        show(index);
-                    }, config.delay);
-                }
-            });
-		}
-		show(0);
+		this.show(0);
 	}
-	return function () {
-		var $gallery = $('<div class="gallayer"><div class="galBj"></div><div class="galMask"></div></div>').hide(),
-            $bj = $gallery.find('.galBj'),
-			data = config.coverData;
-        $('body').prepend($gallery);
-        $gallery.fadeIn(200);
-        CSS3(data, $bj);
-	};
+    gallery.prototype.show = function show(i) {
+		var me = this;
+        var index = i,
+            src = me.data[index].src,
+			total = this.data.length;
+        loadImg(src, {
+            'loadFn' : function () {
+                var newPic = $('<div class="galBj_mask"></div>');
+                newPic.css({
+                    backgroundImage : 'url(' + src + ')'
+                });
+                me.$bj.html(newPic);
+
+                if (!me.isWebkit) {
+                    newPic.hide().fadeIn(1000);
+                }
+
+                setTimeout(function () {
+                    me.$bj.css({'backgroundImage' : 'url(' + src + ')'});
+                    newPic.hide();
+                    index++;
+                    index === total && (index = 0);
+                    me.show(index);
+                }, me.delay);
+            }
+        });
+    };
+	return gallery;
 });

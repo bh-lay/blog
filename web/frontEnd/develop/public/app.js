@@ -5,30 +5,31 @@
 **/
 
 window.L = window.L || {};
-/**
- * 判断是否支持css属性
- * 兼容css3
- */
-var supports = (function() {
-    var styles = document.createElement('div').style,
-        vendors = 'Webkit Khtml Ms O Moz'.split(/\s/);
 
-    return function(prop) {
-        if ( prop in styles ){
-            return prop;
-        }else{
-            prop = prop.replace(/^[a-z]/, function(val) {
-                return val.toUpperCase();
-            });
-            for(var i=0,total=vendors.length;i<total;i++){
-                if ( vendors[i] + prop in styles ) {
-                    return ('-' + vendors[i] + '-' + prop).toLowerCase();
+(function(){
+    /**
+     * 判断是否支持css属性
+     * 兼容css3
+     */
+    var supports = (function() {
+        var styles = document.createElement('div').style,
+            vendors = 'Webkit Khtml Ms O Moz'.split(/\s/);
+
+        return function(prop) {
+            if ( prop in styles ){
+                return prop;
+            }else{
+                prop = prop.replace(/^[a-z]/, function(val) {
+                    return val.toUpperCase();
+                });
+                for(var i=0,total=vendors.length;i<total;i++){
+                    if ( vendors[i] + prop in styles ) {
+                        return ('-' + vendors[i] + '-' + prop).toLowerCase();
+                    }
                 }
             }
-        }
-    };
-})();
-(function(){
+        };
+    })();
 	/**
 	 * 是否支持 canvas
 	 * 是否支持touch
@@ -49,7 +50,8 @@ var supports = (function() {
 		window.location.reload();
 	}
     L.supports = {
-        'touch' : isSupportTouch
+        touch : isSupportTouch,
+        css: supports
     };
 	L.isMobileBrowser = (window.innerWidth < 720 && isSupportTouch) ? true : false;
 }());
@@ -93,8 +95,14 @@ define(function (require, exports) {
     //配置弹出层
     UI.config.zIndex(2000);
     //显示背景图
-    if (supports('backgroundSize') && !L.isMobileBrowser) {
-        L.gallery();
+    if (L.supports.css('backgroundSize') && !L.isMobileBrowser) {
+        new L.gallery({
+            'delay' : 50000,
+            'data' : [
+                {'src': app_config.frontEnd_base + 'public/images/gallery/bamboo.jpg', 'alt': '竹子'},
+                {'src': app_config.frontEnd_base + 'public/images/gallery/coast.jpg', 'alt': '江边'}
+            ]
+        });
     }
     //开始导航
     L.nav();
