@@ -26,7 +26,7 @@ define(function(require,exports){
                         '<a href="#" title=""QQ好友 data-shareto="qq"><i class="l-icon l-icon-qq"></i></a>',
                     '</div>',
                 '</div>',
-                '[-latest_comments-]',
+                '[-github_links-]',
             '</div>',
         '</div>',
 	'</div>'].join('');

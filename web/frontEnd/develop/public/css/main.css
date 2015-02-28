@@ -359,11 +359,14 @@ pre.hljs code {
 .l-icon-face:after {
   content: '\0055';
 }
+.l-icon-back:after {
+  content: '\005a';
+}
 .l-icon-setting:after {
   content: '\0060';
 }
-.l-icon-back:after {
-  content: '\005a';
+.l-icon-person:after {
+  content: '\0064';
 }
 .l-icon-zhihu:after {
   content: '\0069';
@@ -4475,7 +4478,7 @@ body:before {
 }
 .side-github header {
   position: relative;
-  height: 100px;
+  height: 110px;
   background: #555;
 }
 .side-github .logo {
@@ -4488,11 +4491,11 @@ body:before {
   height: 70px;
   overflow: hidden;
   text-align: center;
-  line-height: 100px;
+  line-height: 90px;
 }
 .side-github .avatar {
   position: absolute;
-  bottom: -40px;
+  bottom: -30px;
   left: 50%;
   width: 70px;
   height: 70px;
@@ -4508,18 +4511,31 @@ body:before {
   border-radius: 100%;
 }
 .side-github .main {
-  padding: 50px 0 15px;
+  padding: 40px 0 15px;
   text-align: center;
 }
 .side-github .main h3 {
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: normal;
   margin-bottom: .5em;
+}
+.side-github .main i {
+  margin-right: 6px;
+}
+.side-github .count {
+  border-top: 1px solid #eee;
+}
+.side-github .count:after {
+  content: '';
+  display: block;
+  clear: both;
+  height: 0;
+  overflow: hidden;
 }
 .side-github .count a {
   display: block;
   width: 33.333%;
   float: left;
-  border-top: 1px solid #eee;
   padding: 10px 0;
 }
 .side-github .count a:hover {

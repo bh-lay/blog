@@ -274,11 +274,14 @@ pre.hljs code {
 .l-icon-face:after {
   content: '\0055';
 }
+.l-icon-back:after {
+  content: '\005a';
+}
 .l-icon-setting:after {
   content: '\0060';
 }
-.l-icon-back:after {
-  content: '\005a';
+.l-icon-person:after {
+  content: '\0064';
 }
 .l-icon-zhihu:after {
   content: '\0069';
