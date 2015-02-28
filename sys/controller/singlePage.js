@@ -119,7 +119,7 @@ function getCommentList(callback){
 exports.render = function (connect,app){
 	
 	//缓存机制
-	app.cache.use('singlePage',['html'],function(this_cache){
+	app.cache.use('singlePage',['html','comment'],function(this_cache){
 		connect.write('html',200,this_cache);
 	},function(save_cache){
 		getCommentList(function(err,list){

@@ -77,6 +77,7 @@ define(function (require, exports) {
         opusList : require('public/js/opusList.js'),
         opusDetail : require('public/js/opusDetail.js'),
         labsList : require('public/js/labsList.js'),
+        bless : require('public/js/bless.js'),
         comments : require('comments/index.js')
     };
 	L.push = function (url) {
@@ -281,8 +282,8 @@ function routerHandle(lofox) {
 		this.title('留言板_小剧客栈');
 		L.nav.setCur('bless');
 		var dom = getNewPage();
-        dom.html('<div class="grid-row blessPage"><div class="grid-box-full"></div></div>');
-        o_active_page = new L.views.comments.init(dom.find('.grid-box-full')[0], 'define-1');
+       
+        o_active_page = L.views.bless(dom);
 	});
 	
 	/**
