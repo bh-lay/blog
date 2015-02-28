@@ -19,20 +19,6 @@
     </div>
 </div>
 <include name="footer"/>
-<script type="text/javascript" src="${{frontEnd_base}}lib/sea.js"></script>
-<script type="text/javascript">
-    var app_config = {
-        'frontEnd_base' : '${{frontEnd_base}}',
-        'frontEnd_version' : '${{frontEnd_version}}',
-        'imgDomain' : '${{img_domain}}'
-    };
-    seajs.config({
-        'base' : '${{frontEnd_base}}',
-        'map' : [[/^(.*\.(?:css|js))(.*)$/i, '$1?v=${{frontEnd_version}}']]
-    });
-    seajs.use("public/app.js");
-</script>
-<include name="baiduAndGoogleTongji"/>
 <script type="text/template" id="module_latest_comments">
 <div class="side_card">
 <div class="caption"><strong>最新评论</strong><small>整点更新</small></div>
@@ -54,11 +40,22 @@
 </div>
 </div>
 </script>
-<script type="text/template" id="module_random_article">
-<div class="side_card"><div class="content"><h3>开发中</h3><p>这儿将会放一些随机文章！</p></div></div>
-</script>
 <script type="text/template" id="module_github_links">
-<div class="side_card"><div class="content"><h3>开发中</h3><p>这将会放github链接</p></div></div>
+<div class="side_card"><div class="text"><h3>开发中</h3><p>这将会放github链接</p></div></div>
 </script>
+<script type="text/javascript" src="${{frontEnd_base}}lib/sea.js"></script>
+<script type="text/javascript">
+    var app_config = {
+        'frontEnd_base' : '${{frontEnd_base}}',
+        'frontEnd_version' : '${{frontEnd_version}}',
+        'imgDomain' : '${{img_domain}}'
+    };
+    seajs.config({
+        'base' : '${{frontEnd_base}}',
+        'map' : [[/^(.*\.(?:css|js))(.*)$/i, '$1?v=${{frontEnd_version}}']]
+    });
+    seajs.use("public/app.js");
+</script>
+<include name="baiduAndGoogleTongji"/>
 </body>
 </html>

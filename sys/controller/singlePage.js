@@ -105,7 +105,7 @@ function getCommentList(callback){
 	},function(err,collection){
 		collection.count(function(err,count){
 			collection.find({}, {
-				limit: 8
+				limit: 5
 			}).sort({time:-1}).toArray(function(err, docs) {
 				method.close();
 				

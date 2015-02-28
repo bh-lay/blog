@@ -24,15 +24,22 @@
         font-size: 18px;
         text-align: center;
     }
-    .sns-share{
+}
+.side-sns-share{
+    .content{
+        padding: 1em 0;
+        text-align: center;
         a{
             padding: 0 15px;
-            font-size: 30px;
-            .transition(.2s);
+            font-size: 50px;
+            color: #ddd;
+            .transition(.15s,ease-out);
+            &:hover{
+                color: #f70;
+            }
         }
     }
 }
-
 .side-comments-item{
     display: block;
     padding: 10px;
@@ -65,12 +72,12 @@
             }
         }
         p{
-            padding: .5em 0;
+            padding: .5em 0 0;
             font-size: 14px;
-            color: #333;
+            color: #888;
             word-break: break-word;
             line-height: 1.4em;
-            max-height: 5.6em;
+            max-height: 4.2em;
             overflow: hidden;
         }
     }

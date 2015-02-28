@@ -4457,13 +4457,21 @@ body:before {
   font-size: 18px;
   text-align: center;
 }
-.side_card .sns-share a {
+.side-sns-share .content {
+  padding: 1em 0;
+  text-align: center;
+}
+.side-sns-share .content a {
   padding: 0 15px;
-  font-size: 30px;
-  transition: all 0.2s linear;
-  -moz-transition: all 0.2s linear;
-  -webkit-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
+  font-size: 50px;
+  color: #ddd;
+  transition: all 0.15s ease-out;
+  -moz-transition: all 0.15s ease-out;
+  -webkit-transition: all 0.15s ease-out;
+  -o-transition: all 0.15s ease-out;
+}
+.side-sns-share .content a:hover {
+  color: #f70;
 }
 .side-comments-item {
   display: block;
@@ -4499,12 +4507,12 @@ body:before {
   font-weight: normal;
 }
 .side-comments-item .main p {
-  padding: .5em 0;
+  padding: .5em 0 0;
   font-size: 14px;
-  color: #333;
+  color: #888;
   word-break: break-word;
   line-height: 1.4em;
-  max-height: 5.6em;
+  max-height: 4.2em;
   overflow: hidden;
 }
 .side-comments-item .emoji-box {
