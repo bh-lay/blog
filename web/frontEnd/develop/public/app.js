@@ -61,8 +61,8 @@ define(function (require, exports) {
 	require('public/js/juicer.js');
 	require('util/lofox_1_0.js');
 	require('UI/dialog.js');
-	var nicescroll_factory = require('public/js/nicescroll.js');
-    nicescroll_factory(jQuery);
+	require('public/js/nicescroll.js')(jQuery);
+    
     //绑定路由
     var lofox = new util.lofox();
     routerHandle(lofox);
@@ -94,6 +94,7 @@ define(function (require, exports) {
 
     //配置弹出层
     UI.config.zIndex(2000);
+    
     //显示背景图
     if (L.supports.css('backgroundSize') && !L.isMobileBrowser) {
         new L.gallery({
