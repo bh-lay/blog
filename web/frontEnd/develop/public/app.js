@@ -71,13 +71,13 @@ define(function (require, exports) {
     L.gallery = require('public/js/page_background.js');
     L.nav = require('public/js/navigation.js');
     L.views = {
-        'index' : require('public/js/index.js'),
-        'blogList' : require('public/js/blogList.js'),
-        'blogDetail' : require('public/js/blogDetail.js'),
-        'opusList' : require('public/js/opusList.js'),
-        'opusDetail' : require('public/js/opusDetail.js'),
-        'labsList' : require('public/js/labsList.js'),
-        'comments' : require('comments/index.js')
+        index : require('public/js/index.js'),
+        blogList : require('public/js/blogList.js'),
+        blogDetail : require('public/js/blogDetail.js'),
+        opusList : require('public/js/opusList.js'),
+        opusDetail : require('public/js/opusDetail.js'),
+        labsList : require('public/js/labsList.js'),
+        comments : require('comments/index.js')
     };
 	L.push = function (url) {
 		lofox.push(url);

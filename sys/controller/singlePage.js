@@ -1,5 +1,13 @@
 
 var mongo = require('../core/DB.js');
+var utils = require('../core/utils/index.js');
+
+/**
+ * 转换emoji表情
+ */
+function strToEmoji(str){
+    return str.replace(/\:(\w+)\:/g,'<span class="emoji-box"><span class="emoji s_$1"></span></span>');
+}
 
 function getUserInfo(id,callback){
 	var method = mongo.start();
@@ -63,6 +71,11 @@ function handleData(docs,callback){
 		}else{
 			item.url = '/' + item.cid.replace(/\-/g,'/');
 		}
+        //转换时间格式
+        item.time = utils.parse.time(item.time,"{h}:{i} {m}-{d}");
+        //替换表情
+        item.content = strToEmoji(item.content);
+        
 	});
 	if(uidsLength == 0){
 		endFn();
@@ -92,15 +105,12 @@ function getCommentList(callback){
 	},function(err,collection){
 		collection.count(function(err,count){
 			collection.find({}, {
-				limit: 15
+				limit: 8
 			}).sort({time:-1}).toArray(function(err, docs) {
 				method.close();
 				
 				handleData(docs,function(list){
-					callback&&callback(err,{
-						'count': count,
-						'list': list
-					});
+					callback&&callback(err,list,count);
 				});
 			});
 		});
@@ -112,13 +122,13 @@ exports.render = function (connect,app){
 	app.cache.use('singlePage',['html'],function(this_cache){
 		connect.write('html',200,this_cache);
 	},function(save_cache){
-		getCommentList(function(err,docs){
+		getCommentList(function(err,list){
 			//获取单页面视图
 			app.views('singlePage',{
 				title : '我的博客',
 				keywords : '剧中人,bh-lay,网站建设,网页设计,设计师',
 				description : '小剧客栈是剧中人精心营造的一个向广大设计爱好者、喜欢剧中人开放的博客，小剧希望用设计师鞭策自己，愿意和你共同分享，一起进步！',
-				commentList: JSON.stringify(docs)
+				commentList: list
 			},function(err,html){
 				save_cache(html);
 			});

@@ -4436,12 +4436,22 @@ body:before {
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
 .side_card .caption {
-  line-height: 24px;
   padding: .5em 1em;
-  font-weight: bold;
   box-shadow: 0 0 2px #aaa;
 }
-.side_card .content {
+.side_card .caption strong,
+.side_card .caption span,
+.side_card .caption small {
+  display: inline-block;
+  vertical-align: bottom;
+  height: 24px;
+  line-height: 24px;
+}
+.side_card .caption small {
+  padding: 0 .5em;
+  opacity: .6;
+}
+.side_card .text {
   padding: 1em 0;
   color: #ccc;
   font-size: 18px;
@@ -4454,6 +4464,67 @@ body:before {
   -moz-transition: all 0.2s linear;
   -webkit-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
+}
+.side-comments-item {
+  display: block;
+  padding: 10px;
+  border-top: 1px solid #eee;
+}
+.side-comments-item:after {
+  content: "";
+  display: block;
+  clear: both;
+  height: 0;
+  overflow: hidden;
+}
+.side-comments-item .cover {
+  float: left;
+}
+.side-comments-item .cover img {
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  background: #333;
+}
+.side-comments-item .main {
+  float: right;
+  width: calc(100% - 60px);
+}
+.side-comments-item .main h4 {
+  font-size: 14px;
+}
+.side-comments-item .main h4 small {
+  opacity: .7;
+  font-weight: normal;
+}
+.side-comments-item .main p {
+  padding: .5em 0;
+  font-size: 14px;
+  color: #333;
+  word-break: break-word;
+  line-height: 1.4em;
+  max-height: 5.6em;
+  overflow: hidden;
+}
+.side-comments-item .emoji-box {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  height: 1em;
+  width: 18px;
+}
+.side-comments-item .emoji {
+  position: absolute;
+  top: -5px;
+  left: -4px;
+  margin: 0;
+  transform: scale(0.6);
+  -webkit-transform: scale(0.6);
+}
+.side-comments-item:hover {
+  background: #fafafa;
+  color: inherit;
 }
 @media screen and (max-width: 965px) {
   .sidebar {

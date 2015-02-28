@@ -32,14 +32,27 @@
     });
     seajs.use("public/app.js");
 </script>
-<script type="text/javascript">
-	var app_data = {
-		latest_comments : $${{commentList}}
-	};
-</script>
 <include name="baiduAndGoogleTongji"/>
 <script type="text/template" id="module_latest_comments">
-<div class="side_card"><div class="content"><h3>开发中</h3><p>这儿将会放一些最新的评论！</p></div></div>
+<div class="side_card">
+<div class="caption"><strong>最新评论</strong><small>整点更新</small></div>
+<div class="content">
+{{@each commentList as it,index}}
+<a href="${{it.url}}" class="side-comments-item" lofox="true">
+    <div class="cover">
+        <img class="media-object" src="{{@if it.user.avatar}}${{it.user.avatar}}{{@else}}http://layasset.qiniudn.com/user/default.jpg{{@/if}}" />
+    </div>
+    <div class="main">
+        <h4>
+            ${{it.user.username}}
+            <small>${{it.time}}</small>
+        </h4>
+        <p>$${{it.content}}</p>
+    </div>
+</a>
+{{@/each}}
+</div>
+</div>
 </script>
 <script type="text/template" id="module_random_article">
 <div class="side_card"><div class="content"><h3>开发中</h3><p>这儿将会放一些随机文章！</p></div></div>

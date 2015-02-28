@@ -3,12 +3,22 @@
     overflow: hidden;
     .cardShadow();
     .caption{
-        line-height: 24px;
         padding: .5em 1em;
-        font-weight: bold;
         box-shadow: 0 0 2px #aaa;
+        strong,
+        span,
+        small{
+            display: inline-block;
+            vertical-align: bottom;
+            height: 24px;
+            line-height: 24px;
+        }
+        small{
+            padding: 0 .5em;
+            opacity: .6;
+        }
     }
-    .content{
+    .text{
         padding: 1em 0;
         color: #ccc;
         font-size: 18px;
@@ -20,6 +30,68 @@
             font-size: 30px;
             .transition(.2s);
         }
+    }
+}
+
+.side-comments-item{
+    display: block;
+    padding: 10px;
+    border-top: 1px solid #eee;
+    &:after{
+        content: "";
+        display: block;
+        clear: both;
+        height: 0;
+        overflow: hidden;
+    }
+    .cover{
+        float: left;
+        img{
+            display: block;
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+            background: #333;
+        }
+    }
+    .main{
+        float: right;
+        width: calc(~"100% - 60px");
+        h4{
+            font-size: 14px;
+            small{
+                opacity: .7;
+                font-weight: normal;
+            }
+        }
+        p{
+            padding: .5em 0;
+            font-size: 14px;
+            color: #333;
+            word-break: break-word;
+            line-height: 1.4em;
+            max-height: 5.6em;
+            overflow: hidden;
+        }
+    }
+    .emoji-box{
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        height: 1em;
+        width: 18px;
+    }
+    .emoji{
+        position: absolute;
+        top: -5px;
+        left: -4px;
+        margin: 0;
+        transform: scale(.6);
+        -webkit-transform: scale(.6)
+    }
+    &:hover{
+        background: #fafafa;
+        color: inherit;
     }
 }
 @media screen and (max-width: 965px) {
