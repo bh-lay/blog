@@ -4473,6 +4473,72 @@ body:before {
 .side-sns-share .content a:hover {
   color: #f70;
 }
+.side-github header {
+  position: relative;
+  height: 100px;
+  background: #555;
+}
+.side-github .logo {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  font-size: 120px;
+  color: #333;
+  height: 70px;
+  overflow: hidden;
+  text-align: center;
+  line-height: 100px;
+}
+.side-github .avatar {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  width: 70px;
+  height: 70px;
+  margin-left: -40px;
+  padding: 5px;
+  border-radius: 100%;
+  background: #fff;
+}
+.side-github .avatar img {
+  display: block;
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+}
+.side-github .main {
+  padding: 50px 0 15px;
+  text-align: center;
+}
+.side-github .main h3 {
+  font-size: 16px;
+  margin-bottom: .5em;
+}
+.side-github .count a {
+  display: block;
+  width: 33.333%;
+  float: left;
+  border-top: 1px solid #eee;
+  padding: 10px 0;
+}
+.side-github .count a:hover {
+  background: #fafafa;
+}
+.side-github .count strong,
+.side-github .count span {
+  display: block;
+  text-align: center;
+  line-height: 1.2em;
+}
+.side-github .count strong {
+  font-size: 20px;
+  color: #333;
+}
+.side-github .count span {
+  font-size: 12px;
+  color: #aaa;
+}
 .side-comments-item {
   display: block;
   padding: 10px;
