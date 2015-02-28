@@ -19,7 +19,6 @@ get_list: 								|		get_detail
 
 var mongo = require('../core/DB.js');
 var fs = require('fs');
-var querystring=require('querystring');
 
 function get_list(data,callback){
 	var data = data,
