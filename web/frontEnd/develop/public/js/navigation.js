@@ -36,10 +36,10 @@ define(function () {
 	nav.setCur = setCur;
     nav.back = {
         show : function(){
-            $('.nav-back').fadeIn(200);
+            $('.nav-back').show();
         },
         hide : function(){
-            $('.nav-back').fadeOut(200);
+            $('.nav-back').hide();
         }
     };
 	return nav;

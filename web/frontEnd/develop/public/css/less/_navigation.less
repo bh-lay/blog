@@ -97,24 +97,7 @@ body:before{
     display: none;
 }
 .nav-back{
-	position: absolute;
-    display: block;
-    top: 60px;
-    right: 0;
-	height: 40px;
-    padding: 0 20px;
-    line-height: 40px;
-    font-size: 16px;
-    color: #333;
-    background: #fff;
-    border-radius: 4px 0 0 4px;
-    white-space: nowrap;
-	box-shadow: 1px 1px 2px rgba(0,0,0,.8);
-	.transition(.2s);
-    i{
-        font-size: 22px;
-        margin-right: 5px;
-    }
+	opacity: 0;
 }
 .nav_appname{
 	display: none;
@@ -183,15 +166,23 @@ body:before{
 		}
     }
 	.nav-back{
+		position: absolute;
 		top: 5px;
 		left: 0;
-        right: auto;
+		height: 40px;
+		padding: 0 20px;
+		line-height: 40px;
+		font-size: 16px;
+		color: #333;
+		background: #fff;
+		white-space: nowrap;
 		border-radius: 4px;
-		box-shadow: none;
         z-index: 4;
-		&:hover{
-			top: 5px;
-			box-shadow: none;
+		opacity: 1;
+		.transition(.2s);
+		i{
+			font-size: 22px;
+			margin-right: 5px;
 		}
 	}
 	.nav_moreBtn {
