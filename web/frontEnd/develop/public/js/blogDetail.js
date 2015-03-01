@@ -23,7 +23,6 @@ define(function(require,exports){
                     '<div class="content sns-share" data-text="${intro}" data-url="http://bh-lay.com/blog/${id}" data-title="${title}" data-img="${cover}">',
                         '<a href="#" title="新浪微博" data-shareto="weibo"><i class="l-icon l-icon-weibo"></i></a>',
                         '<a href="#" title="QQ空间" data-shareto="qzone"><i class="l-icon l-icon-qzone"></i></a>',
-                        '<a href="#" title=""QQ好友 data-shareto="qq"><i class="l-icon l-icon-qq"></i></a>',
                     '</div>',
                 '</div>',
                 '[-github_links-]',

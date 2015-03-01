@@ -128,7 +128,6 @@ define(function (require, exports) {
             shareto = $(this).attr('data-shareto');
         var share_url={
             'weibo':'http://service.weibo.com/share/share.php?title='+text+'+&url='+url+'&source=bookmark&appkey=2861592023&searchPic=false&pic='+img,
-            'qq':'http://share.v.t.qq.com/index.php?c=share&a=index&title='+text+'+&url='+url+'&appkey=&site=bh-lay.com&pic='+img,
             'qzone':'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?summary='+text+'&url='+url+'&title='+ title+'&pics='+img+'&desc='+text
         };
         share_url[shareto] && window.open(share_url[shareto]);

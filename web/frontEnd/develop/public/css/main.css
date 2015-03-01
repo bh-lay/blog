@@ -4471,6 +4471,7 @@ body:before {
   text-align: center;
 }
 .side-sns-share .content a {
+  margin: 0 15px;
   padding: 0 15px;
   font-size: 50px;
   color: #ddd;
