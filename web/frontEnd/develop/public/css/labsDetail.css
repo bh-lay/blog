@@ -215,6 +215,12 @@ pre.hljs code {
   background-color: #eee;
   border-radius: 4px;
 }
+.article hr {
+  height: 1px;
+  margin: .6em 0;
+  border: none;
+  background: #ddd;
+}
 .article a {
   padding: 0px .5em;
   text-decoration: underline;
