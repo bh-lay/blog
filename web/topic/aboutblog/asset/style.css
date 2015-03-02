@@ -140,10 +140,10 @@ body {
   background: #333;
 }
 .header {
-  padding: 6em 1em;
+  padding: 5em 1em 8em;
   text-align: center;
   font-size: 16px;
-  background: #eee;
+  background: #f4f4f4;
 }
 .header h1 {
   margin-bottom: 1em;
@@ -153,11 +153,11 @@ body {
 }
 .header p {
   font-size: .75em;
-  color: #888;
+  color: #555;
 }
 .intro {
   max-width: 600px;
-  margin: -30px auto 30px;
+  margin: -80px auto -180px;
   padding: 30px;
   background: #fff;
 }
@@ -167,4 +167,9 @@ body {
 .structure embed {
   display: block;
   margin: auto;
+}
+@media screen and (max-width: 1200px) {
+  .intro {
+    margin-bottom: 0;
+  }
 }
