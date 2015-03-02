@@ -156,7 +156,7 @@ body {
   color: #555;
 }
 .intro {
-  max-width: 600px;
+  max-width: 700px;
   margin: -80px auto -180px;
   padding: 30px;
   background: #fff;
@@ -170,6 +170,6 @@ body {
 }
 @media screen and (max-width: 1200px) {
   .intro {
-    margin-bottom: 0;
+    margin: 0;
   }
 }
