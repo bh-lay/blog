@@ -11,33 +11,50 @@ body{
     padding: 5em 1em 8em;
     text-align: center;
     font-size: 16px;
+        color: #333;
     background: #f4f4f4;
     h1{
-        margin-bottom: 1em;
-        font-size: 2em;
+        margin-bottom: .5em;
+        font-size: 2.7em;
         font-weight: normal;
-        color: #333;
+		font-family: Helvetica, STHeiti STXihei, Microsoft JhengHei, Microsoft YaHei, Tohoma, Arial;
     }
     p{
         font-size: .75em;
-        color: #555;
     }
 }
-.intro{
+.intro-card{
     max-width: 700px;
-    margin: -80px auto -180px;
+    margin: -80px auto -160px;
     padding: 30px;
     background: #fff;
 }
 .structure{
+    width: 100%;
+    padding-bottom: 20px;
     overflow: auto;
-    embed{
+    svg{
         display: block;
+        width: 100%;
+        max-width: 1218px;
+        min-width: 840px;
         margin: auto;
     }
 }
+.intro-structrue{
+  background: #fff;
+  .article{
+    max-width: 800px;
+    margin: auto;
+    
+  }
+}
 @media screen and (max-width: 1200px) {
-    .intro{
-        margin: 0;
+    .intro-card{
+        margin-bottom: 20px;
     }
+}
+.tongji{
+  height: 0;
+  overflow: hidden;
 }
