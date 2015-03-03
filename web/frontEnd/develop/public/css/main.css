@@ -120,7 +120,8 @@ TD {
   .grid-row .grid-col-2-3,
   .grid-row .grid-col-fix-300,
   .grid-row .grid-col-flow-300,
-  .grid-row .grid-col-fix-220 .grid-col-flow-220 {
+  .grid-row .grid-col-fix-220,
+  .grid-row .grid-col-flow-220 {
     width: 100%;
     float: none !important;
   }
@@ -4042,20 +4043,6 @@ body:before {
   overflow: hidden;
   clear: both;
 }
-.articleListPage-tags {
-  min-height: 100px;
-  background: #fff;
-  border-radius: 2px;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
-}
-.articleListPage-tags .caption {
-  font-size: 14px;
-  font-weight: bold;
-  color: #333;
-  line-height: 20px;
-  padding: 9px 20px;
-  border-bottom: 1px solid #f4f4f4;
-}
 .articleListPage-tags .content {
   padding: 20px 0px 10px 10px;
 }
@@ -4135,8 +4122,6 @@ body:before {
   margin-bottom: 20px;
   overflow: hidden;
   background: #fff;
-  border-radius: 2px;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
 .artItCpt a {
   display: block;
