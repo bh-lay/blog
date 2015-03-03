@@ -181,6 +181,13 @@ body {
   max-width: 800px;
   margin: auto;
 }
+.intro-structrue .article li a {
+  opacity: .5;
+  font-size: .8em;
+}
+.intro-structrue .article li a:hover {
+  opacity: 1;
+}
 @media screen and (max-width: 1200px) {
   .intro-card {
     margin-bottom: 20px;
