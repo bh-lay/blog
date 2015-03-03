@@ -8,13 +8,13 @@
 	<meta name="keywords"  content="剧中人,小剧客栈,前端开发" />
 	<meta content="width=device-width, initial-scale=1, user-scalable=0" name="viewport">
     <base target="_blank" />
-  <link rel="stylesheet" href="asset/style.css?v=1" />
+  <link rel="stylesheet" href="asset/style.css?v=2" />
 </head>
 <body>
     <div class="header">
         <h1>关于小剧客栈</h1>
         <p>小剧客栈是剧中人在成长路上的一个缩影，也希望借此结交更多前辈好友。</p>
-        <div><a href="https://github.com/bh-lay/blog" class="btn">查看源码</a></div>
+        <div><a href="https://github.com/bh-lay/blog" class="btn">查看源码</a><a href="/" class="backToIndex" target="_self">回到首页</a></div>
     </div>
     <div class="intro-card article">
         <h3>为何自己做设计</h3>
@@ -31,7 +31,7 @@
 <h1>小剧客栈代码结构</h1>
 <p>这里列举小剧客栈主体代码所采用的组件，不包括细枝末节。上图红底部分表示该段代码由小剧开发。</p>
     <h2>一、前端页面</h2>
-    <p>小剧是这样划分前端页面的，一个是面向小伙伴的博客，分为<strong>屌丝版</strong>和<strong>尝鲜版</strong>；另一个是只有小剧自己在使用的<strong>后台管理</strong>页面；还有就是一些<strong>零散的专题页面</strong>包括实验室详情页。</p>
+    <p>小剧是这样划分前端页面的，一是面向小伙伴的博客，分为<strong>屌丝版</strong>和<strong>尝鲜版</strong>；另一个是只有小剧自己在使用的<strong>后台管理</strong>页面；还有就是一些<strong>零散的专题页面</strong>，其中包括实验室详情页。</p>
 		<h3>1.1、尝鲜版</h3>
         <p>基于单页+响应式的设计，区别于屌丝版，尝鲜版仅在高级浏览器下可以使用。</p>
 			<h4>javascript脚本部分</h4>
@@ -58,12 +58,13 @@ on desktop and mobile device<a href="http://www.areaaperta.com/nicescroll/">官�
 				<li><strong>……</strong></li>
 			</ul>
 		<h3>1.2、屌丝版</h3>
-        <p>见名知意，这是提供给屌丝使用的一个版本，仅作内容展示，不提供交互性较强的内容。不支持JS、html5、css3的浏览器“才有资格”使用此版本。</p>
+        <p>见名知意，这是提供给低级浏览器使用的一个版本，仅展示内容，不提供较强的交互。在不支持JS or html5 or css3的浏览器下使用此版本。</p>
 			<ul>
 			<li><strong>bootstrap：</strong>简洁、直观、强悍、移动设备优先的前端开发框架<a href="http://getbootstrap.com/">官网</a></li>
 				<li><strong>jQuery：</strong>The Write Less, Do More, JavaScript Library<a href="http://jquery.com/">官网</a></li>
 			</ul>
 		<h3>1.3、后台管理</h3>
+        <p>小剧客栈的后台管理页面，功能块相对较多，更新变动也比较频繁，这里就不一一列举了。</p>
 			<ul>
             <li><strong>juicer：</strong>一个高效、轻量的前端 (Javascript) 模板引擎<a href="http://juicer.name/">官网</a></li>
 			<li><strong>bootstrap：</strong>简洁、直观、强悍、移动设备优先的前端开发框架<a href="http://getbootstrap.com/">官网</a></li>
@@ -106,11 +107,6 @@ on desktop and mobile device<a href="http://www.areaaperta.com/nicescroll/">官�
     </div>
     </div>
     
-    <div class="intro-structrue">
-        <div class="article">
-    <p>拼命编写中……</p>
-        </div>
-    </div>
     <div class="tongji">
 <script type="text/javascript">
 	var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");

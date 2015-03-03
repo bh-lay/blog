@@ -8,11 +8,11 @@ body{
     background: #333;
 }
 .header{
-    padding: 5em 1em 8em;
+    padding: 100px 20px 140px;
     text-align: center;
     font-size: 16px;
     color: #333;
-    background: #f4f4f4;
+    background: #eee;
     h1{
         margin-bottom: .4em;
         line-height: 1em;
@@ -27,10 +27,19 @@ body{
     div{
         padding-top: 1.5em;
     }
+    .backToIndex{
+        font-size: 14px;
+        padding-left: 20px;
+        color: #555;
+        &:hover{
+            color: #333;
+            text-decoration: underline;
+        }
+    }
 }
 .intro-card{
     max-width: 700px;
-    margin: -80px auto -160px;
+    margin: -100px auto -160px;
     padding: 30px;
     background: #fff;
 }
@@ -96,7 +105,12 @@ body{
 }
 @media screen and (max-width: 1200px) {
     .intro-card{
-        margin-bottom: 20px;
+        margin-bottom: 0;
+    }
+    .structure{
+        svg{
+            height: 530px;
+        }
     }
 }
 .tongji{
