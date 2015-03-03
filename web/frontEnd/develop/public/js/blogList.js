@@ -8,13 +8,14 @@
 define(function(require,exports){
 	var pagination = require('util/pagination.js');
 	var baseTpl = ['<div class="articleListPage">',
-        '<div class="grid-row"><div class="grid-box-full">',
+        '<div class="grid-row"><div class="grid-col-fix-220">',
         '<div class="articleListPage-side">',
             '<div class="articleListPage-tags">',
                 '<div class="caption">标签</div>',
                 '<div class="content"></div>',
             '</div>',
         '</div>',
+        '</div><div class="grid-col-flow-220"',
         '<div class="articleListPage-main">',
 			'<div class="articleList"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载数据</p></div></div>',
 			'<div class="pagination_cnt"></div>',

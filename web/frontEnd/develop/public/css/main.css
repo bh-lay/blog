@@ -91,6 +91,12 @@ TD {
 .grid-row .grid-col-flow-300 {
   width: calc(100% - 300px);
 }
+.grid-row .grid-col-fix-220 {
+  width: 220px;
+}
+.grid-row .grid-col-flow-220 {
+  width: calc(100% - 220px);
+}
 @media screen and (max-width: 1300px) {
   .grid-row {
     width: 945px;
@@ -113,7 +119,8 @@ TD {
   .grid-row .grid-col-1-3,
   .grid-row .grid-col-2-3,
   .grid-row .grid-col-fix-300,
-  .grid-row .grid-col-flow-300 {
+  .grid-row .grid-col-flow-300,
+  .grid-row .grid-col-fix-220 .grid-col-flow-220 {
     width: 100%;
     float: none !important;
   }
@@ -4034,10 +4041,6 @@ body:before {
   height: 0;
   overflow: hidden;
   clear: both;
-}
-.articleListPage-side {
-  position: absolute;
-  width: 200px;
 }
 .articleListPage-tags {
   min-height: 100px;
