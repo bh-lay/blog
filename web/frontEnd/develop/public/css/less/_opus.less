@@ -80,7 +80,7 @@
 }
 
 .opus_detail{
-	padding: 60px 0 40px;
+	padding-bottom: 40px;
 	.article {
 		position: relative;
 		margin-bottom: 20px;
@@ -88,52 +88,49 @@
 		.cardShadow();
 	}
 }
-
-.opus_caption {
-	position: relative;
-	min-height: 120px;
-	overflow: hidden;
-	border: 1px solid #fff;
-	background: #fff;
-	background: rgba(255,255,255,0.5);
-	margin-bottom: 20px;
-	img {
-		height: 100px;
-		padding: 10px;
-		position: absolute;
-		top: 0px;
-		left: 0px
-	}
-	.info {
-		position: relative;
-		padding: 15px 15px 15px 130px
-	}
+.opus_detail_header{
+    padding: 5em 1em 4em;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 16px;
+		.cardShadow();
 	h1 {
-		padding-bottom: 20px;
-		border-bottom: 1px solid #aaa;
-		font-size: 20px;
-		letter-spacing: 0.5em;
+		margin-bottom: 1em;
+		font-size: 1.8em;
 		font-weight: normal;
-		color: #000
+		color: #333
 	}
-	ul {
-		font-size: 16px;
-		padding-top: 20px
-	}
-	li {
-		float: left;
-		width: 50%;
-		color: #666
-	}
-	strong {
-		padding-right: 10px;
-		font-weight: normal
+    .cover{
+        width: 9em;
+        height: 9em;
+        margin: 0 auto 2em;
+        border-radius: 100%;
+        overflow: hidden;
+        background-color: #aaa;
+        background-size: cover;
+        background-position: center center;
+    }
+    
+	.info {
+		text-align: center;
+        p{
+            display: inline-block;
+            padding: 0 1em;
+            font-size: .75em;
+        }
+    	strong {
+            padding-right: 10px;
+            font-weight: normal
+        }
 	}
 }
-.TagLine {
-	height: 50px;
-	margin-bottom: 20px;
-	background: url(../images/tagline.png) no-repeat;
-	text-indent: -100em;
-	overflow: hidden
+@media screen and (max-width: 900px){
+    .opus_detail_header{
+        font-size: 14px;
+    }
+}
+@media screen and (max-width: 600px){
+    .opus_detail_header{
+        font-size: 12px;
+    }
 }

@@ -472,7 +472,7 @@ body:before {
   width: 100%;
   height: 48px;
   background: #fff;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
   z-index: 2;
 }
 .nav_mask {
@@ -4287,7 +4287,7 @@ body:before {
   text-decoration: underline;
 }
 .opus_detail {
-  padding: 60px 0 40px;
+  padding-bottom: 40px;
 }
 .opus_detail .article {
   position: relative;
@@ -4297,53 +4297,52 @@ body:before {
   border-radius: 2px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
-.opus_caption {
-  position: relative;
-  min-height: 120px;
-  overflow: hidden;
-  border: 1px solid #fff;
-  background: #fff;
-  background: rgba(255, 255, 255, 0.5);
+.opus_detail_header {
+  padding: 5em 1em 4em;
   margin-bottom: 20px;
-}
-.opus_caption img {
-  height: 100px;
-  padding: 10px;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-}
-.opus_caption .info {
-  position: relative;
-  padding: 15px 15px 15px 130px;
-}
-.opus_caption h1 {
-  padding-bottom: 20px;
-  border-bottom: 1px solid #aaa;
-  font-size: 20px;
-  letter-spacing: 0.5em;
-  font-weight: normal;
-  color: #000000;
-}
-.opus_caption ul {
+  text-align: center;
   font-size: 16px;
-  padding-top: 20px;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
-.opus_caption li {
-  float: left;
-  width: 50%;
-  color: #666666;
+.opus_detail_header h1 {
+  margin-bottom: 1em;
+  font-size: 1.8em;
+  font-weight: normal;
+  color: #333333;
 }
-.opus_caption strong {
+.opus_detail_header .cover {
+  width: 9em;
+  height: 9em;
+  margin: 0 auto 2em;
+  border-radius: 100%;
+  overflow: hidden;
+  background-color: #aaa;
+  background-size: cover;
+  background-position: center center;
+}
+.opus_detail_header .info {
+  text-align: center;
+}
+.opus_detail_header .info p {
+  display: inline-block;
+  padding: 0 1em;
+  font-size: .75em;
+}
+.opus_detail_header .info strong {
   padding-right: 10px;
   font-weight: normal;
 }
-.TagLine {
-  height: 50px;
-  margin-bottom: 20px;
-  background: url(../images/tagline.png) no-repeat;
-  text-indent: -100em;
-  overflow: hidden;
+@media screen and (max-width: 900px) {
+  .opus_detail_header {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .opus_detail_header {
+    font-size: 12px;
+  }
 }
 /**实验室列表**/
 .labsList {
