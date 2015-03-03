@@ -6,7 +6,7 @@ define(function(require,exports){
     var base_tpl = ['<div class="opusListPage">',
         '<div class="grid-row">',
             '<div class="grid-col-flow-300">',
-                '<div class="opusList"></div>',
+                '<div class="opusList"><div style="padding: 100px"><span class="l-loading"></span></div></div>',
             '</div>',
             '<div class="grid-col-fix-300 sidebar">[-github_links-][-latest_comments-]</div>',
 		'</div>',
