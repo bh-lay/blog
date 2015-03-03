@@ -5,11 +5,11 @@
 define(function(require,exports){
 	
 	var temp = ['<div class="grid-row">{@each list as it}<div class="grid-box"><div class="lab_item">',
-		'<a class="cover" href="/labs/${it.name}" target="_blank" title="${it.title}">',
+		'<a class="cover" href="/labs/${it.name}" title="${it.title}">',
 			'<img src="${it.cover}" />',
 		'</a>',
 		'<h4 class="title">',
-			'<a href="/labs/${it.name}" target="_blank" title="${it.title}">${it.title}</a>',
+			'<a href="/labs/${it.name}" title="${it.title}">${it.title}</a>',
 		'</h4>',
 		'<div class="info">',
 			'<p>${it.intro}</p>',

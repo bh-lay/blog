@@ -11,7 +11,7 @@ define(function(require,exports){
         '{@/if}',
         '<div class="info">',
             '<p><strong>创作时间:</strong>${opus_time_create}</p>',
-            '{@if online_url}<p><strong>相关页面:</strong><a href="${online_url}" target="_blank">${online_url}</a></p>{@/if}',
+            '{@if online_url}<p><strong>相关页面:</strong><a href="${online_url}">${online_url}</a></p>{@/if}',
         '</div>',
     '</div>',           
     '<div class="grid-row">',
