@@ -9,11 +9,13 @@
 }
 .opus-item{
     position: relative;
+    min-height: 100px;
     padding: 10px 10px 10px 120px;
     overflow: hidden;
     margin-bottom: -1px;
     border-bottom: 1px solid #ddd;
     .cover {
+        display: block;
         position: absolute;
         top: 10px;
         left: 10px;
@@ -30,13 +32,10 @@
     .info {
         position: relative;
         h3 {
-            height: 30px;
-            line-height: 30px;
+            line-height: 24px;
             position: relative;
             margin-bottom: 8px;
             a {
-                display: block;
-                width: 260px;
                 overflow: hidden;
                 font-size: 16px;
                 font-weight: normal;
@@ -51,9 +50,6 @@
             line-height: 18px;
             padding: 6px 0;
             strong {
-                display: block;
-                height: 30px;
-                float: left;
                 font-size: 14px;
                 font-weight: normal;
                 color: #333
@@ -65,9 +61,6 @@
                 color: #888
             }
             a {
-                display: block;
-                width: 190px;
-                overflow: hidden;
                 text-overflow: ellipsis;
                 color: #888;
                 &:hover {
@@ -75,6 +68,16 @@
                     text-decoration: underline
                 }
             }
+        }
+    }
+}
+@media screen and (max-width: 500px){
+    .opus-item{
+        padding: 10px;
+        text-align: center;
+        .cover {
+            position: static;
+            margin: 0 auto 15px;
         }
     }
 }
@@ -89,13 +92,13 @@
 	}
 }
 .opus_detail_header{
-    padding: 5em 1em 4em;
+    padding: 3em 1em 2em;
     margin-bottom: 20px;
     text-align: center;
     font-size: 16px;
-		.cardShadow();
+    .cardShadow();
 	h1 {
-		margin-bottom: 1em;
+		margin-bottom: .7em;
 		font-size: 1.8em;
 		font-weight: normal;
 		color: #333
@@ -103,7 +106,7 @@
     .cover{
         width: 9em;
         height: 9em;
-        margin: 0 auto 2em;
+        margin: 0 auto 1em;
         border-radius: 100%;
         overflow: hidden;
         background-color: #aaa;
@@ -115,8 +118,12 @@
 		text-align: center;
         p{
             display: inline-block;
+            max-width: 15em;
             padding: 0 1em;
+            overflow: hidden;
             font-size: .75em;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
     	strong {
             padding-right: 10px;

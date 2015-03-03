@@ -4217,12 +4217,14 @@ body:before {
 }
 .opus-item {
   position: relative;
+  min-height: 100px;
   padding: 10px 10px 10px 120px;
   overflow: hidden;
   margin-bottom: -1px;
   border-bottom: 1px solid #ddd;
 }
 .opus-item .cover {
+  display: block;
   position: absolute;
   top: 10px;
   left: 10px;
@@ -4240,14 +4242,11 @@ body:before {
   position: relative;
 }
 .opus-item .info h3 {
-  height: 30px;
-  line-height: 30px;
+  line-height: 24px;
   position: relative;
   margin-bottom: 8px;
 }
 .opus-item .info h3 a {
-  display: block;
-  width: 260px;
   overflow: hidden;
   font-size: 16px;
   font-weight: normal;
@@ -4262,9 +4261,6 @@ body:before {
   padding: 6px 0;
 }
 .opus-item .info p strong {
-  display: block;
-  height: 30px;
-  float: left;
   font-size: 14px;
   font-weight: normal;
   color: #333333;
@@ -4276,15 +4272,22 @@ body:before {
   color: #888888;
 }
 .opus-item .info p a {
-  display: block;
-  width: 190px;
-  overflow: hidden;
   text-overflow: ellipsis;
   color: #888;
 }
 .opus-item .info p a:hover {
   color: #333;
   text-decoration: underline;
+}
+@media screen and (max-width: 500px) {
+  .opus-item {
+    padding: 10px;
+    text-align: center;
+  }
+  .opus-item .cover {
+    position: static;
+    margin: 0 auto 15px;
+  }
 }
 .opus_detail {
   padding-bottom: 40px;
@@ -4298,7 +4301,7 @@ body:before {
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
 .opus_detail_header {
-  padding: 5em 1em 4em;
+  padding: 3em 1em 2em;
   margin-bottom: 20px;
   text-align: center;
   font-size: 16px;
@@ -4307,7 +4310,7 @@ body:before {
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
 .opus_detail_header h1 {
-  margin-bottom: 1em;
+  margin-bottom: .7em;
   font-size: 1.8em;
   font-weight: normal;
   color: #333333;
@@ -4315,7 +4318,7 @@ body:before {
 .opus_detail_header .cover {
   width: 9em;
   height: 9em;
-  margin: 0 auto 2em;
+  margin: 0 auto 1em;
   border-radius: 100%;
   overflow: hidden;
   background-color: #aaa;
@@ -4327,8 +4330,12 @@ body:before {
 }
 .opus_detail_header .info p {
   display: inline-block;
+  max-width: 15em;
   padding: 0 1em;
+  overflow: hidden;
   font-size: .75em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .opus_detail_header .info strong {
   padding-right: 10px;

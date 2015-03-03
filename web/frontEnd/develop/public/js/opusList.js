@@ -22,13 +22,9 @@ define(function(require,exports){
 					'<span>${key}</span>',
 				'{@/each}',
 			'</p>',
-			'<p><strong>在线地址：</strong>',
-				'{@if it.online_url}',
-					'<a href="${it.online_url}">${it.online_url}</a>',
-				'{@else}',
-					'<span>无在线地址</span>',
-				'{@/if}',
-			'</p>',
+            '{@if it.online_url}',
+			     '<p><strong>在线地址：</strong><a href="${it.online_url}">${it.online_url}</a></p>',
+            '{@/if}',
 		'</div>',
 	'</div>{@/each}'].join('');
 	
