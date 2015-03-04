@@ -1,0 +1,19 @@
+<div class="side_card">
+<div class="caption"><strong>最新评论</strong></div>
+<div class="content">
+{{@each list as it,index}}
+<a href="${{it.url}}" class="side-comments-item" lofox="true">
+    <div class="cover">
+        <img class="media-object" src="{{@if it.user.avatar}}${{it.user.avatar}}{{@else}}http://layasset.qiniudn.com/user/default.jpg{{@/if}}" />
+    </div>
+    <div class="main">
+        <h4>
+            ${{it.user.username}}
+            <small>${{it.time}}</small>
+        </h4>
+        <p>$${{it.content}}</p>
+    </div>
+</a>
+{{@/each}}
+</div>
+</div>
