@@ -4,17 +4,15 @@
  */
 define(function(require,exports){
 	
-	var temp = ['<div class="grid-row">{@each list as it}<div class="grid-box"><div class="lab_item">',
-		'<a class="cover" href="/labs/${it.name}" title="${it.title}">',
-			'<img src="${it.cover}" />',
-		'</a>',
-		'<h4 class="title">',
-			'<a href="/labs/${it.name}" title="${it.title}">${it.title}</a>',
-		'</h4>',
-		'<div class="info">',
-			'<p>${it.intro}</p>',
-		'</div>',
-	'</div></div>{@/each}</div>'].join('');
+	var temp = ['<div class="grid-row">{@each list as it}<div class="grid-box">',
+        '<a href="/labs/${it.name}" title="${it.title}" class="lab_item">',
+            '<div class="cover" style="background-image:url(${it.cover})"><i class="l-icon l-icon-link"></i></div>',
+            '<div class="info">',
+                '<h4 class="title">${it.title}</h4>',
+                '<p>${it.intro}</p>',
+            '</div>',
+	   '</a>',
+    '</div>{@/each}</div>'].join('');
 	
 	var limit = 20,
 		 skip = 0,
