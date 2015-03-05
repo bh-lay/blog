@@ -5,45 +5,37 @@
 }
 .lab_item {
 	position: relative;
+    display: block;
 	max-width: 340px;
-	height: 340px;
 	margin: 0 auto 20px;
-	background: #fff;
-	overflow: hidden;
+    overflow: hidden;
 	.cardShadow();
-	.cover {
-		display: block;
-        height: 220px;
-		.transition(0.2s);
-		overflow: hidden;
-		img{
-			display: block;
-			margin: auto;
-			width: 100%;
-		}
-		&:hover{
-			opacity: 0.8
-		}
-		
-	}
-	.title {
-		padding: 15px 10px 0;
-		line-height: 20px;
-		font-weight: normal;
-		color: #333;
-		font-size: 20px;
-		text-align: center;
-		a {
-			.transition(0.2s);
-			&:hover {
-				text-decoration: underline;
-				color: #000
-			}
-		}
-	}
+    .cover{
+        width: 100%;
+        height: 300px;
+        top: 0;
+        left: 0;
+        background-size: cover;
+        background-position: center center;
+        i{
+            display: none;
+        }
+    }
 	.info {
-		padding: 10px 10px 20px;
+        bottom: -30px;
+        width: 100%;
+        height: 100px;
+        background: #fff;
+        .title {
+            padding: 15px 10px 0;
+            line-height: 20px;
+            font-weight: normal;
+            color: #333;
+            font-size: 20px;
+            text-align: center;
+        }
 		p {
+            padding: 10px 10px 20px;
 			color: #333;
 			font-size: 12px;
 			opacity: 0.7;
@@ -53,14 +45,55 @@
 		}
 	}
 }
-@media(max-width:640px){
+@media(min-width:965px){
 	.lab_item{
-		height: auto;
-		.cover{
-			height: auto;
-			img{
-            	width: 100%;
-			}
-		}
+        .cover{
+            line-height: 240px;
+            text-align: center;
+            &:before{
+                content: '';
+                position: absolute;
+                display: block;
+                width: 100%;
+                height: 100%;
+                background: #000;
+                opacity: 0;
+                .transition(0.15s,ease-out);
+                .transition-delay(.06s);
+            }
+            i{
+                display: inline-block;
+                position: relative;
+                opacity: 0;
+                text-align: center;
+                font-size: 80px;
+                color: #fff;
+                .transform(scale(1.6));
+                .transition(0.15s,ease-out);
+                .transition-delay(.06s);
+            }
+        }
+        .info{
+            position: absolute;
+            height: auto;
+            opacity: 0;
+            .transition(0.15s,ease-out);
+            .transition-delay(.06s);
+        }
+        &:hover{
+            .cover{
+                &:before{
+                    opacity: .4;
+                }
+                i{
+                    opacity: 1;
+                    .transform(scale(1));
+                }
+            }
+            .info{
+                opacity: 1;
+                bottom: 0;
+            }
+        }
 	}
 }
