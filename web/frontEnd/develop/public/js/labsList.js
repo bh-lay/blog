@@ -38,7 +38,7 @@ define(function(require,exports){
 					list[i].cover = L.qiniu(list[i].cover,{
 						'type' : 'cover',
 						'width' : 320,
-						'height': 240
+						'height': 400
 					});
 				}
 				callback&&callback(list);
