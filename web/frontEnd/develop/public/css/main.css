@@ -388,6 +388,9 @@ pre.hljs code {
 .l-icon-dribbble:after {
   content: '\006a';
 }
+.l-icon-link:after {
+  content: '\006b';
+}
 /**
  * 导航
  */
@@ -4357,31 +4360,40 @@ body:before {
 .lab_item {
   position: relative;
   max-width: 340px;
-  height: 340px;
+  height: 300px;
   margin: 0 auto 20px;
   overflow: hidden;
   background: #fff;
   border-radius: 2px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  background-size: cover;
+  background-position: center center;
 }
 .lab_item .cover {
-  display: block;
-  height: 220px;
-  transition: all 0.2s linear;
-  -moz-transition: all 0.2s linear;
-  -webkit-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
-  overflow: hidden;
-}
-.lab_item .cover img {
-  display: block;
-  margin: auto;
+  position: absolute;
   width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  text-align: center;
+  font-size: 80px;
+  color: #fff;
+  line-height: 200px;
+  background: rgba(0, 0, 0, 0.2);
+  display: none;
 }
-.lab_item .cover:hover {
-  opacity: 0.8;
+.lab_item .info {
+  position: absolute;
+  bottom: -50px;
+  width: 100%;
+  background: #fff;
+  opacity: 0;
+  transition: all 0.1s ease-in;
+  -moz-transition: all 0.1s ease-in;
+  -webkit-transition: all 0.1s ease-in;
+  -o-transition: all 0.1s ease-in;
 }
-.lab_item .title {
+.lab_item .info .title {
   padding: 15px 10px 0;
   line-height: 20px;
   font-weight: normal;
@@ -4389,26 +4401,27 @@ body:before {
   font-size: 20px;
   text-align: center;
 }
-.lab_item .title a {
-  transition: all 0.2s linear;
-  -moz-transition: all 0.2s linear;
-  -webkit-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
-}
-.lab_item .title a:hover {
-  text-decoration: underline;
-  color: #000000;
-}
-.lab_item .info {
-  padding: 10px 10px 20px;
-}
 .lab_item .info p {
+  padding: 10px 10px 20px;
   color: #333;
   font-size: 12px;
   opacity: 0.7;
   line-height: 16px;
   text-indent: 2em;
   text-align: justify;
+}
+.lab_item:hover .cover {
+  display: block;
+}
+.lab_item:hover .cover i {
+  animation: zoomout 0.2s;
+  -moz-animation: zoomout 0.2s;
+  -webkit-animation: zoomout 0.2s;
+  -o-animation: zoomout 0.2s;
+}
+.lab_item:hover .info {
+  bottom: 0;
+  opacity: 1;
 }
 @media (max-width: 640px) {
   .lab_item {
@@ -5078,9 +5091,9 @@ a:active {
     -moz-transform: translateX(0);
   }
 }
-@keyframes zoomin {
+@keyframes zoomout {
   0% {
-    transform: scale(0.1);
+    transform: scale(3);
     opacity: 0;
   }
   50% {
@@ -5090,9 +5103,9 @@ a:active {
     transform: scale(1);
   }
 }
-@-moz-keyframes zoomin {
+@-moz-keyframes zoomout {
   0% {
-    -moz-transform: scale(0.1);
+    -moz-transform: scale(3);
     opacity: 0;
   }
   50% {
@@ -5102,9 +5115,9 @@ a:active {
     -moz-transform: scale(1);
   }
 }
-@-webkit-keyframes zoomin {
+@-webkit-keyframes zoomout {
   0% {
-    -webkit-transform: scale(0.1);
+    -webkit-transform: scale(3);
     opacity: 0;
   }
   50% {
@@ -5145,22 +5158,6 @@ a:active {
     opacity: 0;
     -moz-transform: scale(0.3);
   }
-}
-.zoomin {
-  overflow: hidden;
-  animation: zoomin 0.5s;
-  -moz-animation: zoomin 0.5s;
-  -webkit-animation: zoomin 0.5s;
-  -o-animation: zoomin 0.5s;
-}
-.zoomout {
-  transform: scale(0.1);
-  -moz-transform: scale(0.1);
-  -webkit-transform: scale(0.1);
-  -o-transform: scale(0.1);
-  opacity: 0;
-  overflow: hidden;
-  transition: 0.7s;
 }
 .fadeInLeft {
   -webkit-animation: fadeInLeft 0.5s ease both;

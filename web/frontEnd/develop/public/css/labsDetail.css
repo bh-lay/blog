@@ -295,6 +295,9 @@ pre.hljs code {
 .l-icon-dribbble:after {
   content: '\006a';
 }
+.l-icon-link:after {
+  content: '\006b';
+}
 /**
  * 卡片类
  */

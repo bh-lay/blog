@@ -291,6 +291,9 @@ TD {
 .l-icon-dribbble:after {
   content: '\006a';
 }
+.l-icon-link:after {
+  content: '\006b';
+}
 body {
   background: #222;
 }
