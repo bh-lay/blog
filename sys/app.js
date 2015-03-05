@@ -106,19 +106,15 @@ app.get('/snsLogin/{from}', function(data,connect){
  * ajax
  *
  */
-var ajax_user = require('./ajax/user/index');
-var ajax_add_edit = require('./ajax/add&edit.js');
-var ajax_comments = require('./ajax/comments/index.js');
-var ajax_del = require('./ajax/del');
-var ajax_user_group = require('./ajax/user/user_group_add&edit');
-var ajax_power = require('./ajax/user/power');
-var ajax_demo = require('./ajax/demo/index');
-var ajax_tag =  require('./ajax/tag/index.js');
-var ajax_for_page = require('./ajax/forPage/index.js');
-//尝鲜版首页数据获取
-app.get('/ajax/forPage/index', function(data,connect){
-	ajax_for_page.index(connect,app);
-});
+var ajax_user = require('./ajax/user/index'),
+    ajax_add_edit = require('./ajax/add&edit.js'),
+    ajax_comments = require('./ajax/comments/index.js'),
+    ajax_del = require('./ajax/del'),
+    ajax_user_group = require('./ajax/user/user_group_add&edit'),
+    ajax_power = require('./ajax/user/power'),
+    ajax_demo = require('./ajax/demo/index'),
+    ajax_tag =  require('./ajax/tag/index.js');
+
 //通用增加&编辑
 app.get('/ajax/add_edit', function(data,connect){
 	ajax_add_edit.render(connect,app);
