@@ -20,4 +20,5 @@ sys/node_modules/
 web/frontEnd/build/
 web/frontEnd/dist/
 web/frontEnd/node_modules/
+web/asset/
 .project
