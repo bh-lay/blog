@@ -5,7 +5,7 @@
 
 var fs = require('fs');
 var utils = require('../../core/utils/index.js');
-var assetPath = "../../asset/";
+var assetPath = "../web/asset/";
 
 exports.createDir = function (req,callback){
 	utils.parse.request(req,function(err,fields,files){

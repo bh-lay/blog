@@ -13,7 +13,7 @@ module.exports = {
     //静态资源版本
     'frontEnd_version' : '20141217',
 	//图床
-	'img_domain' : 'http://layasset.qiniudn.com',
+	'img_domain' : '/asset',
 	'mongo' : {
 		'host':'localhost',
 		'port':27017,

@@ -5,7 +5,7 @@
 
 var fs = require('fs');
 var utils = require('../../core/utils/index.js');
-var assetPath = "../../asset/";
+var assetPath = "../web/asset/";
 
 exports.file = function (req,callback){
 	var json = {

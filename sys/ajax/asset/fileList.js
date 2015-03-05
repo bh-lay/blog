@@ -3,7 +3,8 @@
  */
 var fs = require('fs');
 
-var root = '../../asset/';
+var root = "../web/asset/";
+
 function handle_path(input){
 	var output = root;
 	if(input){
