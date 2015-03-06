@@ -131,6 +131,7 @@ define(function (require, exports) {
             'qzone':'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?summary='+text+'&url='+url+'&title='+ title+'&pics='+img+'&desc='+text
         };
         share_url[shareto] && window.open(share_url[shareto]);
+        return false;
     })
     //nicescrol
     .niceScroll({
