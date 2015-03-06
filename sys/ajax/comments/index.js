@@ -81,7 +81,7 @@ exports.add = function (connect,app){
 	});
 }
 
-//接口
+//列表
 exports.list = function (connect,app){
     var url = connect.request.url;
 	var data = connect.url.search;
@@ -90,7 +90,7 @@ exports.list = function (connect,app){
 	app.cache.use(url,['ajax','comment'],function(this_cache){
 		connect.write('json',this_cache);
 	},function(save_cache){
-        list(data,function(err,jsonData){
+        list(connect,data,function(err,jsonData){
             var json = {
                 'code' : 200
             }
@@ -102,7 +102,6 @@ exports.list = function (connect,app){
 			save_cache(JSON.stringify(json));
         });
 	});
-	
 };
 //删除
 exports.del = function (connect,app){

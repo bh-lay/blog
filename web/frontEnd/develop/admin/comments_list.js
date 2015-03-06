@@ -11,8 +11,9 @@ define(function(){
 			'url' : '/ajax/comments/list',
 			'type' : 'GET',
 			'data' : {
-				'skip' : start,
-				'limit' : limit
+                isadmin: true,
+				skip : start,
+				limit : limit
 			},
 			'success' : function(d){
 				var data = d.data;

@@ -4,21 +4,25 @@ var mongo = require('../../core/DB.js');
 
 function getUserInfo(id,callback){
 	var method = mongo.start();
-	method.open({'collection_name':'user'},function(err,collection){
+	method.open({
+        collection_name: 'user'
+    },function(err,collection){
 		if(err){
 			callback && callback(err);
 			return;
 		}
-		collection.find({'id' : id}).toArray(function(err, docs) {
+		collection.find({
+            id: id
+        }).toArray(function(err, docs) {
 			method.close();
 			if(err || docs.length == 0){
 				callback && callback(err);
 				return;
 			}
 			callback && callback(null,{
-				'avatar': docs[0].avatar,
-				'id': docs[0].id,
-				'username': docs[0].username
+				avatar: docs[0].avatar,
+				id: docs[0].id,
+				username: docs[0].username
 			});
 		});
 	});
@@ -79,14 +83,16 @@ function handleData(docs,callback){
 }
 
 //获取评论列表
-module.exports = function(data,callback){
+module.exports = function(connect,data,callback){
 	var data = data,
 		cid = data['cid'] || '',
 		limit_num = parseInt(data['limit']) || 10,
 		skip_num = parseInt(data['skip']) || 0;
 	
 	var method = mongo.start();
-	method.open({'collection_name':'comments'},function(err,collection){
+	method.open({
+        collection_name:'comments'
+    },function(err,collection){
 		if(err){
 			method.close();
 			callback&&callback(err);
@@ -98,7 +104,11 @@ module.exports = function(data,callback){
 			queryObj.cid = data['cid'];
 		}
 		
-		collection.find(queryObj,{limit:limit_num}).sort({time:-1}).skip(skip_num).toArray(function(err, docs) {
+		collection.find(queryObj,{
+            limit:limit_num
+        }).sort({
+            time:-1
+        }).skip(skip_num).toArray(function(err, docs) {
 			if(err){
 				callback&&callback(err);
 				return;
@@ -109,12 +119,31 @@ module.exports = function(data,callback){
 				if(err){
 					callback&&callback(err);
 				}else{
-					handleData(docs,function(list){
-						callback&&callback(err,{
-							'count': count,
-							'list': list
-						});
-					});
+                    //是否为后台管理列表
+                    if(data.isadmin){
+                        connect.session(function(session_this){
+                            if(session_this.get('user_group') == 'admin'){
+                                callback&&callback(null,{
+                                    count: count,
+                                    list: docs
+                                });
+                            }else{
+                                //权限验证
+                                callback&&callback(null,{
+                                    count: count,
+                                    list: []
+                                });
+                            }
+                        });
+                    }else{
+                        //普通列表
+                        handleData(docs,function(list){
+                            callback&&callback(err,{
+                                'count': count,
+                                'list': list
+                            });
+                        });
+                    }
 				}
 			});
 		});

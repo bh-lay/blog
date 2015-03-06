@@ -509,7 +509,7 @@ window.parse = window.parse || {};
 		};
 		
 		var time_str = format.replace(/{(y|m|d|h|i|s|a)}/g,function(){
-			return formatObj[arguments[1]]||arguments[0];
+			return formatObj[arguments[1]]||0;
 		});
 		//console.log(format,formatObj)
 		return time_str;
