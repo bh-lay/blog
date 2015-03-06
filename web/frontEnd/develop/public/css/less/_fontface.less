@@ -1,12 +1,16 @@
+@font_path: "../fonts/layicon-webfont";
+@font_version: "?v=1";
+
 @font-face {
 	font-family:"layIcon";
-	src:url("../fonts/layicon-webfont.eot");
-	src:url("../fonts/layicon-webfont.eot?#iefix") format("embedded-opentype"),
+	src:url("@{font_path}.eot@{font_version}");
+	src:url("@{font_path}.eot@{font_version}#iefix") format("embedded-opentype"),
 	//	url('../fonts/layicon-webfont.woff2') format('woff2'),
-		url('../fonts/layicon-webfont.woff') format('woff'),
-		url("../fonts/layicon-webfont.ttf") format("truetype"),
-		url("../fonts/layicon-webfont.svg#layicon-webfont") format("svg");
-	font-weight:normal;font-style:normal
+		url('@{font_path}.woff@{font_version}') format('woff'),
+		url("@{font_path}.ttf@{font_version}") format("truetype"),
+		url("@{font_path}.svg@{font_version}#layicon-webfont") format("svg");
+	font-weight:normal;
+    font-style:normal
 }
 
 .layIcon {
