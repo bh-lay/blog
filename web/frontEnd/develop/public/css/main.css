@@ -4395,6 +4395,11 @@ body:before {
   text-indent: 2em;
   text-align: justify;
 }
+@media (max-width: 650px) {
+  .lab_item .info {
+    height: auto;
+  }
+}
 @media (min-width: 1024px) {
   .lab_item .cover {
     height: 300px;
