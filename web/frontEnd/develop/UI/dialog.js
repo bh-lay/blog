@@ -2,7 +2,7 @@
  * @author bh-lay
  * 
  * @github https://github.com/bh-lay/UI
- * @modified 2014-11-27 16:55
+ * @modified 2015-3-9 13:13
  * 
  **/
 
@@ -48,7 +48,7 @@
 		prompt_tpl = '<div class="UI_prompt"><div class="UI_cnt"></div></div>',
 		cover_tpl = '<div class="UI_cover"><div class="UI_cnt"></div><a href="javascript:;" class="UI_close UI_coverClose">×</a></div>',
 		select_tpl = '<div class="UI_select"><div class="UI_select_body UI_cnt"><% if(title){ %><div class="UI_selectCpt"><h3><%=title %></h3><% if(intro){ %><p><%=intro %></p><% } %></div><% } %><div class="UI_selectCnt"><% for(var i=0,total=list.length;i<total;i++){ %><a class="UI_select_btn" href="javascript:;"><%=list[i] %></a><% } %></div></div><div class="UI_selectCancel"><a class="UI_select_btn" href="javascript:;">取消</a></div></div>',
-		popCSS = '.UI_lawyer{position:absolute;top:0;left:0;z-index:4999;width:100%;height:0;overflow:visible;font-family:"Microsoft Yahei"}.UI_lawyer a,.UI_lawyer a:hover,.UI_lawyer a:active{outline:none;text-decoration:none;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-tap-highlight-color:transparent}.UI_mask{position:absolute;top:0;left:0;width:100%;height:100%;background:#000;opacity:0.6;filter:alpha(opacity=60);display:none}.UI-blur{-webkit-filter:blur(3px)}.UI_pop{width:200px;position:absolute;top:400px;left:300px;background:#fff;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_pop_cpt{position:relative;height:36px;line-height:36px;overflow:hidden;border-bottom:1px solid #ebebeb;color:#777;font-size:16px;text-indent:15px;cursor:default}.UI_pop .UI_cnt{position:relative;min-height:100px;overflow:auto}.UI_pop_close{display:block;position:absolute;top:0;right:0;width:40px;height:36px;text-align:center;color:#ddd;font:bold 20px/36px "simsun";transition:0.1s}.UI_pop_close:hover{color:#888}.UI_pop_close:active{color:#222}.UI_confirm{width:300px;position:absolute;background:#fff;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_confirm_text{padding:30px 10px 20px;line-height:26px;text-align:center;font-size:20px;color:#333}.UI_ask{width:300px;position:absolute;background:#fff;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_ask_text{padding:25px 10px 15px;line-height:26px;text-align:center;font-size:18px;color:#333}.UI_ask input{display:block;margin:0 auto 15px;height:30px;padding:4px 4px;line-height:22px;box-sizing:border-box;width:90%}.UI_pop_confirm{overflow:hidden;text-align:center;border-top:1px solid #ddd;white-space:nowrap}.UI_pop_confirm a{display:inline-block;width:50%;font-size:14px;line-height:36px;color:#03f;transition:0.15s}.UI_pop_confirm a:hover{background:#eee}.UI_pop_confirm_ok{border-right:1px solid #ddd}.UI_plane{width:200px;position:absolute;top:400px;left:300px}.UI_prompt{position:absolute;width:240px;background:#fff;box-shadow:2px 2px 10px rgba(0,0,0,0.5)}.UI_prompt .UI_cnt{padding:30px 10px;font-size:18px;color:#333;text-align:center}.UI_cover{position:absolute;top:0;width:100%;height:100px;max-width:100%}.UI_cover .UI_cnt{position:relative;width:100%;height:100%;background:#fff;overflow:auto}.UI_coverClose{display:block;position:absolute;top:10px;right:20px;width:30px;height:30px;text-align:center;color:#aaa;font:18px/30px "simsun";background:#eee;border-radius:15px;border:1px solid #aaa}.UI_coverClose:hover{background:#333;color:#fff;transition:0.2s}.UI_select{position:absolute;width:200px;box-shadow:2px 2px 2px rgba(0,0,0,0.6)}.UI_select a{display:block;height:40px;line-height:40px;text-align:center;color:#03f;font-size:16px}.UI_select_body{overflow:hidden;background:#fff}.UI_selectCpt{padding:8px 0}.UI_selectCpt h3,.UI_selectCpt p{margin:0;font-size:15px;line-height:18px;text-align:center;color:#aaa;font-weight:normal}.UI_selectCpt p{font-size:12px}.UI_selectCnt a{height:34px;line-height:34px;font-size:14px;border-top:1px solid #ddd}.UI_selectCnt a:hover{background:#eee}.UI_selectCancel{display:none}@media(max-width:640px){.UI_select{position:fixed;bottom:0;width:100%;padding-bottom:10px}.UI_select_body, .UI_selectCancel{margin:0 10px;border-radius:8px}.UI_select_body{margin:0 10px 10px}.UI_selectCancel{display:block;background:#fff}}.UI_ie678 .UI_pop,.UI_ie678 .UI_confirm,.UI_ie678 .UI_ask,.UI_ie678 .UI_prompt,.UI_ie678 .UI_select{outline:3px solid #ccc}';
+		popCSS = 'body{position:relative}.UI_lawyer{position:absolute;top:0;left:0;z-index:4999;width:100%;height:0;overflow:visible;font-family:"Microsoft Yahei"}.UI_lawyer.isAnimation{height:auto;bottom:0;overflow:hidden}.UI_lawyer a,.UI_lawyer a:hover,.UI_lawyer a:active{outline:none;text-decoration:none;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-tap-highlight-color:transparent}.UI_mask{position:absolute;top:0;left:0;width:100%;height:100%;background:#000;opacity:0.6;filter:alpha(opacity=60);display:none}.UI-blur{-webkit-filter:blur(3px)}.UI_pop{width:200px;position:absolute;top:400px;left:300px;background:#fff;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_pop_cpt{position:relative;height:36px;line-height:36px;overflow:hidden;border-bottom:1px solid #ebebeb;color:#777;font-size:16px;text-indent:15px;cursor:default}.UI_pop .UI_cnt{position:relative;min-height:100px;overflow:auto}.UI_pop_close{display:block;position:absolute;top:0;right:0;width:40px;height:36px;text-align:center;color:#ddd;font:bold 20px/36px "simsun";transition:0.1s}.UI_pop_close:hover{color:#888}.UI_pop_close:active{color:#222}.UI_confirm{width:300px;position:absolute;background:#fff;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_confirm_text{padding:30px 10px 20px;line-height:26px;text-align:center;font-size:20px;color:#333}.UI_ask{width:300px;position:absolute;background:#fff;overflow:hidden;box-shadow:2px 3px 10px rgba(0,0,0,0.6)}.UI_ask_text{padding:25px 10px 15px;line-height:26px;text-align:center;font-size:18px;color:#333}.UI_ask input{display:block;margin:0 auto 15px;height:30px;padding:4px 4px;line-height:22px;box-sizing:border-box;width:90%}.UI_pop_confirm{overflow:hidden;text-align:center;border-top:1px solid #ddd;white-space:nowrap}.UI_pop_confirm a{display:inline-block;width:50%;font-size:14px;line-height:36px;color:#03f;transition:0.15s}.UI_pop_confirm a:hover{background:#eee}.UI_pop_confirm_ok{border-right:1px solid #ddd}.UI_plane{width:200px;position:absolute;top:400px;left:300px}.UI_prompt{position:absolute;width:240px;background:#fff;box-shadow:2px 2px 10px rgba(0,0,0,0.5)}.UI_prompt .UI_cnt{padding:30px 10px;font-size:18px;color:#333;text-align:center}.UI_cover{position:absolute;top:0;width:100%;height:100px;max-width:100%}.UI_cover .UI_cnt{position:relative;width:100%;height:100%;background:#fff;overflow:auto}.UI_coverClose{display:block;position:absolute;top:10px;right:20px;width:30px;height:30px;text-align:center;color:#aaa;font:18px/30px "simsun";background:#eee;border-radius:15px;border:1px solid #aaa}.UI_coverClose:hover{background:#333;color:#fff;transition:0.2s}.UI_select{position:absolute;width:200px;box-shadow:2px 2px 2px rgba(0,0,0,0.6)}.UI_select a{display:block;height:40px;line-height:40px;text-align:center;color:#03f;font-size:16px}.UI_select_body{overflow:hidden;background:#fff}.UI_selectCpt{padding:8px 0}.UI_selectCpt h3,.UI_selectCpt p{margin:0;font-size:15px;line-height:18px;text-align:center;color:#aaa;font-weight:normal}.UI_selectCpt p{font-size:12px}.UI_selectCnt a{height:34px;line-height:34px;font-size:14px;border-top:1px solid #ddd}.UI_selectCnt a:hover{background:#eee}.UI_selectCancel{display:none}@media(max-width:640px){.UI_select{position:fixed;bottom:0;width:100%;padding-bottom:10px}.UI_select_body, .UI_selectCancel{margin:0 10px;border-radius:8px}.UI_select_body{margin:0 10px 10px}.UI_selectCancel{display:block;background:#fff}.UI_lawyer a:hover{background:none}}.UI_ie678 .UI_pop,.UI_ie678 .UI_confirm,.UI_ie678 .UI_ask,.UI_ie678 .UI_prompt,.UI_ie678 .UI_select{outline:3px solid #ccc}';
 	
 	var isIE67 = isIE678 = false;
 	if(navigator.appName == "Microsoft Internet Explorer"){
@@ -74,13 +74,13 @@
 		private_scrollTop;
 
 	var private_CONFIG = {
-		'gap' : {
-			'top' : 0,
-			'left' : 0,
-			'bottom' : 0,
-			'right' : 0
+		gap : {
+			top : 0,
+			left : 0,
+			bottom : 0,
+			right : 0
 		},
-		'zIndex' : 499
+		zIndex : 499
 	};
 	var docDom;
 	if (document.compatMode == "BackCompat") {
@@ -93,6 +93,7 @@
 		//重新计算窗口尺寸
 		private_scrollTop = docDom.scrollTop == 0 ? private_body.scrollTop : docDom.scrollTop;
 		private_winH = window.innerHeight || document.documentElement.clientHeight;
+		private_winW = window.innerWidth || document.documentElement.clientWidth;
 		private_docH = docDom.scrollHeight;
 		private_docW = docDom.clientWidth;
 	}
@@ -201,13 +202,13 @@
 				refreshSize();
 				adapt_active_obj();
 				setCSS(private_maskDom,{
-					'marginTop' : private_scrollTop
+					marginTop : private_scrollTop
 				});
 			};
 		}else{
 			setCSS(private_maskDom,{
-				'position' : 'fixed',
-				'top' : 0
+				position : 'fixed',
+				top : 0
 			});
 			rebuild_fn = function(){
 				refreshSize();
@@ -243,8 +244,8 @@
 		}
 		
 		return {
-			'top' : Math.ceil(top),
-			'left' : Math.ceil(left)
+			top : Math.ceil(top),
+			left : Math.ceil(left)
 		}
 	}
 	//设置dom自适应于页面
@@ -258,8 +259,8 @@
 		
 		var method = isNum(time) ? animation : setCSS;
 		method(dom,{
-			'top' : isNum(param.top) ? param.top : Math.ceil(newPosition.top),
-			'left' : isNum(param.left) ? param.left : Math.ceil(newPosition.left)
+			top : isNum(param.top) ? param.top : Math.ceil(newPosition.top),
+			left : isNum(param.left) ? param.left : Math.ceil(newPosition.left)
 		},time);
 	}
 	//自适应于页面的原型方法
@@ -285,8 +286,8 @@
 			}
 		}
 		var this_html = utils.render(confirmBar_tpl,{
-			'confirm' : btns[0],
-			'cancel' : btns[1]
+			confirm : btns[0],
+			cancel : btns[1]
 		});
 		dom.appendChild(utils.createDom(this_html)[0]);
 		
@@ -332,13 +333,13 @@
 	function showMask(){
 		var lastHasMaskZindex = last_has_mask_zIndex();
 		setCSS(this.dom,{
-			'zIndex': lastHasMaskZindex + 2
+			zIndex: lastHasMaskZindex + 2
 		});
 		if(!this._mask){
 			return;
 		}
 		setCSS(private_maskDom,{
-			'zIndex': lastHasMaskZindex + 1
+			zIndex: lastHasMaskZindex + 1
 		});
 		
 		if(lastHasMaskZindex == 0){
@@ -357,7 +358,7 @@
 		}
 		var lastHasMaskZindex = last_has_mask_zIndex();
 		setCSS(private_maskDom,{
-			'zIndex' : lastHasMaskZindex - 1
+			zIndex : lastHasMaskZindex - 1
 		});
 		
 		if(lastHasMaskZindex == 0){
@@ -396,14 +397,12 @@
 	
 	/**
 	 * 开场动画
-	 *   创建一个dom用来完成动画
-	 *   动画结束，设置dom为结束样式
 	 **/
 	function openAnimation(fn){
 		var me = this;
 		var DOM = me.dom;
 		var from = me._from;
-		var time = 140;
+		var time = 100;
 		//向全局记录的对象内添加对象
 		active_objs.push(me);
 		//显示蒙层（内部判断是否显示）
@@ -414,7 +413,6 @@
 			fn && fn();
 			return
 		}
-		
 		var offset = utils.offset(DOM),
 			//动画第一帧css
 			cssStart = {},
@@ -424,32 +422,42 @@
 		if(from.tagName && from.parentNode){
 			var offset_from = utils.offset(from);
 			cssStart = {
-				'top' : offset_from.top,
-				'left' : offset_from.left,
-				'width' : outerWidth(from),
-				'height' : outerHeight(from),
-				'overflow' : 'hidden'
+				top : offset_from.top,
+				left : offset_from.left,
+				clip: 'rect(0,' + outerWidth(from) + 'px,' + outerHeight(from) + 'px,0)',
+				overflow : 'hidden'
 			};
 			cssAnim = {
-				'width' : getCSS(DOM,'width'),
-				'height' : getCSS(DOM,'height'),
-				'top' : getCSS(DOM,'top'),
-				'left' : getCSS(DOM,'left')
+				clip: 'rect(0,' + outerWidth(DOM) + 'px,' + outerHeight(DOM) + 'px,0)',
+				top : getCSS(DOM,'top'),
+				left : getCSS(DOM,'left')
 			};
 		//参数是字符串
 		}else if(typeof(from) == 'string'){
 			var countResult = countTranslate(from,40);
 			cssStart.transform = 'translate' + countResult[0] + '(' + countResult[1] + 'px)';
 			cssAnim.transform = 'translateX(0) translateY(0)';
+		}else{
+			//参数出错，不显示效果
+			fn && fn();
+			return
 		}
 		
-		//先隐藏
+		//先隐藏,再显示
 		cssStart.opacity = 0;
-		
-		setCSS(DOM,cssStart);
-		//动画开始
 		cssAnim.opacity = 1;
-		animation(DOM,cssAnim,time,'ease-out',fn);
+		
+		//动画开始
+		setCSS(DOM,cssStart);
+		utils.addClass(private_allCnt,'isAnimation');
+		animation(DOM,cssAnim,time,'ease-out',function(){
+			utils.removeClass(private_allCnt,'isAnimation');
+			//恢复动画样式
+			setCSS(DOM,{
+				clip: 'auto'
+			});
+			fn && fn();
+		});
 	}
 	
 	/**
@@ -479,8 +487,10 @@
 			fn && fn.call(me);
 			var DOM = me.dom;
 			
+			utils.addClass(private_allCnt,'isAnimation');
 			//删除dom
 			function removeDom(){
+				utils.removeClass(private_allCnt,'isAnimation');
 				utils.removeNode(DOM);
 			}
 			//ie系列或无from信息，不显示效果
@@ -495,28 +505,29 @@
 				//缩放回启动按钮
 				var offset =  utils.offset(from);
 				setCSS(DOM,{
-					'overflow' : 'hidden',
-					'width' : outerWidth(DOM),
-					'height' : outerHeight(DOM)
+					overflow : 'hidden',
+					clip: 'rect(0,' + outerWidth(DOM) + 'px,' + outerHeight(DOM) + 'px,0)'
 				});
 				animation(DOM,{
-					'top' : offset.top,
-					'left' : offset.left,
-					'width' : outerWidth(from),
-					'height' : outerHeight(from),
-					'opacity' : 0.5
+					top : offset.top,
+					left : offset.left,
+					clip: 'rect(0,' + outerWidth(from) + 'px,' + outerHeight(from) + 'px,0)',
+					opacity : 0.3
 				},time,function(){
 					animation(DOM,{
-						'opacity' : 0
-					},100,removeDom);
+						opacity : 0
+					},50,removeDom);
 				});
 			}else if(typeof(from) == 'string'){
 				var countResult = countTranslate(from,40);			
 				//动画开始
 				animation(DOM,{
-					'opacity' : 0,
-					'transform' : 'translate' + countResult[0] + '(' + countResult[1] + 'px)'
+					opacity : 0,
+					transform : 'translate' + countResult[0] + '(' + countResult[1] + 'px)'
 				},time,removeDom);
+			}else{
+				//参数出错时，直接删除dom
+				removeDom();
 			}
 		}
 	}
@@ -552,14 +563,14 @@
 			caption_dom.innerHTML = title;
 			//can drag is pop
 			utils.drag(caption_dom,me.dom,{
-				'move' : function(mx,my,l_start,t_start,w_start,h_start){
+				move : function(mx,my,l_start,t_start,w_start,h_start){
 					var left = mx + l_start;
 					var top = my + t_start;
 					
 					var newSize = fix_position(top,left,w_start,h_start);
 					setCSS(me.dom,{
-						'left' : newSize.left,
-						'top' : newSize.top
+						left : newSize.left,
+						top : newSize.top
 					});
 				}
 			});
@@ -576,7 +587,7 @@
 		
 		//设置宽度，为计算位置尺寸做准备
 		setCSS(me.dom,{
-			'width' : this_width
+			width : this_width
 		});
 		private_allCnt.appendChild(me.dom);
 		
@@ -590,7 +601,7 @@
 		openAnimation.call(me);
 	}
 	//使用close方法
-	POP.prototype.close = closeAnimation(300);
+	POP.prototype.close = closeAnimation(150);
 	POP.prototype.adapt = ADAPT;
 
 	/**
@@ -601,7 +612,7 @@
 		var me = this;
 		
 		var this_html = utils.render(confirm_tpl,{
-			'text' : param.text || 'need text in parameter!'
+			text : param.text || 'need text in parameter!'
 		});
 		me.dom = utils.createDom(this_html)[0];
 		me.closeFn = param.closeFn || null;
@@ -631,7 +642,7 @@
 		var param = param || {};
 		
 		var this_html = utils.render(ask_tpl,{
-			'text' : text || 'need text in parameter!'
+			text : text || 'need text in parameter!'
 		});
 
 		me.dom = utils.createDom(this_html)[0];
@@ -641,8 +652,8 @@
 		me.closeFn =  null;
 		
 		var confirm_html = utils.render(confirmBar_tpl,{
-			'confirm' : '确定',
-			'cancel' : '取消'
+			confirm : '确定',
+			cancel : '取消'
 		});
 		
 		me.dom.appendChild(utils.createDom(confirm_html)[0]);
@@ -722,10 +733,10 @@
 		me.dom.innerHTML = param.html || '';
 		
 		setCSS(me.dom,{
-			'width' : param.width || 240,
-			'height' : param.height || null,
-			'top' : isNum(param.top) ? param.top : 300,
-			'left' : isNum(param.left) ? param.left : 800
+			width : param.width || 240,
+			height : param.height || null,
+			top : isNum(param.top) ? param.top : 300,
+			left : isNum(param.left) ? param.left : 800
 		});
 		private_allCnt.appendChild(me.dom);
 		//处理是否易于关闭
@@ -759,16 +770,17 @@
 		//记录body的scrollY设置
 		me._bodyOverflowY = getCSS(private_body,'overflowY');
 		var cssObj = {
-			'width' : isNum(param.width) ? Math.min(private_docW,param.width) : private_docW,
-			'height' : isNum(param.height) ? Math.min(private_winH,param.height) : private_winH
+			width : isNum(param.width) ? Math.min(private_winW,param.width) : private_winW,
+			height : isNum(param.height) ? Math.min(private_winH,param.height) : private_winH
 		};
+		console.log(cssObj);
 		//水平定位
 		if(isNum(param.right)){
 			cssObj.right = param.right;
 		}else if(isNum(param.left)){
 			cssObj.left = param.left;
 		}else{
-			cssObj.left = (private_docW - cssObj.width)/2;
+			cssObj.left = (private_winW - cssObj.width)/2;
 		}
 		//垂直定位
 		if(isNum(param.bottom)){
@@ -785,7 +797,7 @@
 		easyCloseHandle.call(me,true);
 		openAnimation.call(me,function(){
 			setCSS(private_body,{
-				'overflowY' : 'hidden'
+				overflowY : 'hidden'
 			});
 		});
 		//insert html
@@ -794,10 +806,10 @@
 	//使用close方法
 	COVER.prototype.close = closeAnimation(400,function(){
 		setCSS(this.cntDom,{
-			'overflowY' : 'hidden'
+			overflowY : 'hidden'
 		});
 		setCSS(private_body,{
-			'overflowY' : this._bodyOverflowY
+			overflowY : this._bodyOverflowY
 		});
 	});
 	COVER.prototype.adapt = ADAPT;
@@ -816,9 +828,9 @@
 			fns.push(item[1]);
 		});
 		var this_html = utils.render(select_tpl,{
-			'list' : nameList,
-			'title' : param.title || null,
-			'intro' : param.intro || null
+			list : nameList,
+			title : param.title || null,
+			intro : param.intro || null
 		});
 		
 		me.dom = utils.createDom(this_html)[0];
@@ -841,17 +853,17 @@
 			private_allCnt.appendChild(me.dom);
 		}else{
 			var cssObj = {
-				'top' : param.top || 100,
-				'left' : param.left || 100,
-				'width' : param.width || 200
+				top : param.top || 100,
+				left : param.left || 100,
+				width : param.width || 200
 			};
 			private_allCnt.appendChild(me.dom);
 			
 			setCSS(me.dom,cssObj);
 			var newSize = fix_position(cssObj.top,cssObj.left,cssObj.width,outerHeight(me.dom));
 			setCSS(me.dom,{
-				'left' : newSize.left,
-				'top' : newSize.top
+				left : newSize.left,
+				top : newSize.top
 			});
 		}
 		easyCloseHandle.call(me,param.easyClose,true);
@@ -864,17 +876,17 @@
 	 *  抛出对外接口
 	 */
 	return {
-		'pop' : function(){
+		pop : function(){
 			return new POP(arguments[0]);
 		},
-		'config' : {
-			'gap' : function(name,value){
+		config : {
+			gap : function(name,value){
 				//name符合top/right/bottom/left,且value值为数字类型（兼容字符类型）
 				if(name && typeof(private_CONFIG.gap[name]) == 'number' && isNum(value)){
 					private_CONFIG.gap[name] = parseInt(value);
 				}
 			},
-			'zIndex' : function(num){
+			zIndex : function(num){
 				var num = parseInt(num);
 				if(num > 0){
 					private_CONFIG.zIndex = num;
@@ -884,22 +896,22 @@
 				}
 			}
 		},
-		'confirm' : function(){
+		confirm : function(){
 			return new CONFIRM(arguments[0]);
 		},
-		'ask' : function(text,callback,param){
+		ask : function(text,callback,param){
 			return new ASK(text,callback,param);
 		},
-		'prompt' : function(txt,time,param){
+		prompt : function(txt,time,param){
 			return new PROMPT(txt,time,param);
 		},
-		'plane' : function(){
+		plane : function(){
 			return new PLANE(arguments[0]);
 		},
-		'cover' : function(){
+		cover : function(){
 			return new COVER(arguments[0]);
 		},
-		'select' : function(){
+		select : function(){
 			return new SELECT(arguments[0],arguments[1]);
 		}
 	};
@@ -987,7 +999,6 @@
 				each(vendors,function(i,value){
 					if ( value + prop in styles ) {
 						returns = ('-' + value + '-' + prop).toLowerCase();
-						return false;
 					}
 				});
 			}
@@ -1277,12 +1288,12 @@
 		clone : clone,
 		unbind : removeHandler,
 		hasClass : hasClass,
-		'addClass' : function (dom, cls) {
+		addClass : function (dom, cls) {
 			if (!this.hasClass(dom, cls)) dom.className += " " + cls;
 		},
-		'removeClass' : function (dom, cls) {
+		removeClass : function (dom, cls) {
 			if (hasClass(dom, cls)) {
-				var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
+				var reg = new RegExp('(\\s+|^)' + cls + '(\\s+|$)');
 				dom.className = dom.className.replace(reg, ' ');
 			}
 		},
