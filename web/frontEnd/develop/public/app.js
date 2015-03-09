@@ -115,6 +115,14 @@ define(function (require, exports) {
         });
     }, 500);
     
+    
+	/**
+	 * 检测链接是为提供给js使用的地址
+     *   无地址、 javascript:: 、javascript:void(0)、#
+	 **/
+	function hrefForScript(href){
+		return (href.length == 0 || href.match(/^(javascript\s*\:|#)/)) ? true : false;
+	}
     /**
      * 分享功能
      *  data-text data-url data-title data-img data-shareto
@@ -132,6 +140,12 @@ define(function (require, exports) {
         };
         share_url[shareto] && window.open(share_url[shareto]);
         return false;
+    })
+    //处理火狐，js链接新窗口打开问题，感谢 @紫心蕊 
+    .on('click','a',function(e){
+        if(hrefForScript($(this).attr('href'))){
+            e.preventDefault();
+        }
     })
     //nicescrol
     .niceScroll({
