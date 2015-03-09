@@ -15,7 +15,8 @@ define(function(require,exports){
 				if(data.code == 1){
 					var detail = data['detail'];
 					var date = new Date(parseInt(detail.opus_time_create));
-					detail.opus_time_create = (date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+ date.getDate();//使用七牛图床
+					detail.opus_time_create = (date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+ date.getDate();
+                    //使用七牛图床
 					detail.cover = L.qiniu(detail.cover);
 					
 					fn&&fn(detail,detail['title']);
