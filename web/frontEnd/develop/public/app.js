@@ -235,6 +235,25 @@ function routerHandle(lofox) {
 		return newDom;
 	}
 	
+    //视图刷新前，销毁上一个对象
+	lofox.on('beforeRefresh',function(){
+        if(o_active_page && o_active_page.destroy){
+            o_active_page.destroy();
+        }
+        o_active_page = null;
+    });
+	/**
+	 * 监听视图刷新事件
+	 */
+	lofox.on('refresh', function (pathData,search) {
+        //显示隐藏返回按钮
+        if(pathData.length > 1){
+            L.nav.back.show();
+        }else{
+            L.nav.back.hide();
+        }
+    });
+	
 	/**
 	 * 首页
 	 */
@@ -253,7 +272,7 @@ function routerHandle(lofox) {
 		L.nav.setCur('blog');
 		var dom = getNewPage();
 		
-		o_active_page = L.views.blogList(dom, search);
+		o_active_page = new L.views.blogList(dom, search);
 	});
 	/**
 	 * 博客详细页
@@ -262,7 +281,7 @@ function routerHandle(lofox) {
 		this.title('我的博客_小剧客栈');
 		L.nav.setCur('blog');
 		var dom = getNewPage();
-		o_active_page = L.views.blogDetail(dom, param.id, function (title) {
+		o_active_page = new L.views.blogDetail(dom, param.id, function (title) {
             lofox.title(title);
         });
 	});
@@ -271,14 +290,14 @@ function routerHandle(lofox) {
 		this.title('作品_小剧客栈');
 		L.nav.setCur('opus');
 		var dom = getNewPage();
-		o_active_page = L.views.opusList(dom);
+		o_active_page = new L.views.opusList(dom);
 	});
 	//作品详情页
 	lofox.set('/opus/{id}', function (param) {
 		this.title('作品_小剧客栈');
 		L.nav.setCur('opus');
 		var dom = getNewPage();
-		o_active_page = L.views.opusDetail(dom, param.id);
+		o_active_page = new L.views.opusDetail(dom, param.id);
 	});
 	//实验室列表页
 	lofox.set('/labs', function () {
@@ -286,7 +305,7 @@ function routerHandle(lofox) {
 		
 		L.nav.setCur('labs');
 		var dom = getNewPage();
-		o_active_page = L.views.labsList(dom);
+		o_active_page = new L.views.labsList(dom);
 	});
 	
 	/**
@@ -297,27 +316,9 @@ function routerHandle(lofox) {
 		L.nav.setCur('bless');
 		var dom = getNewPage();
        
-        o_active_page = L.views.bless(dom);
+        o_active_page = new L.views.bless(dom);
 	});
 	
-	/**
-	 * 监听视图刷新事件
-	 */
-	lofox.on('refresh', function (pathData,search) {
-        //显示隐藏返回按钮
-        if(pathData.length > 1){
-            L.nav.back.show();
-        }else{
-            L.nav.back.hide();
-        }
-    });
-    //视图刷新前，销毁上一个对象
-	lofox.on('beforeRefresh',function(){
-        if(o_active_page && o_active_page.destory){
-            o_active_page.destory();
-        }
-        o_active_page = null;
-    });
 	$('body').on('click', 'a[lofox="true"]', function () {
 		var url = $(this).attr('href');
 		setTimeout(function () {

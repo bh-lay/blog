@@ -9,11 +9,11 @@ define(function(require,exports){
             '[-github_links-]',
         '</div>',
     '</div>'].join('');
-	
-	return function(dom){
+	function page(dom){
         var base_tpl_end = L.tplModule(base_tpl);
         
         dom.html(base_tpl_end);
         new L.views.comments.init(dom.find('.grid-col-flow-300')[0], 'define-1');
-	};
+	}
+	return page;
 });

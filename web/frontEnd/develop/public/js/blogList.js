@@ -87,10 +87,20 @@ define(function(require,exports){
 			}
 		});
 	}
-	function renderTags(dom,callback){
+	function renderTags(dom,tagName,callback){
 		getTag(function(data){
 			var html = juicer(tag_item_tpl,data);
 			dom.html(html);
+			
+			if(tagName){
+				dom.find('a').each(function(){
+					if($(this).attr('data-tag') == tagName){
+						$(this).addClass('active');
+					}
+				});
+			}else{
+				dom.find('a').eq(0).addClass('active');
+			}
 			callback && callback();
 		});
 	}
@@ -125,23 +135,24 @@ define(function(require,exports){
 		});
 	};
 	
-	return function(dom,param){
+	function page(dom,param){
+		var me = this;
         //插入基本模版
         dom.html(baseTpl);
-        var $list = dom.find('.articleList');
-        var $page_cnt = dom.find('.pagination_cnt');
+        this.$list = dom.find('.articleList');
+        this.$page_cnt = dom.find('.pagination_cnt');
         //获取当前页数
-		var pageIndex = param.page || 1;
+		this.pageIndex = param.page || 1;
         //获取标签名
         var pageTag = param.tag ? decodeURI(param.tag) : null;
         //创建列表对象
-        var list = new LIST($list,pageTag);
+        var list = new LIST(this.$list,pageTag);
         //渲染初始页
-		list.renderPage(pageIndex,function(){
+		list.renderPage(this.pageIndex,function(){
 			//分页组件
-			var page = new pagination($page_cnt,{
+			var page = new pagination(me.$page_cnt,{
 				'list_count' : list.count,
-				'page_cur' : pageIndex,
+				'page_cur' : me.pageIndex,
 				'page_list_num' : list.limit,
 				'max_page_btn' : 6
 			});
@@ -156,17 +167,7 @@ define(function(require,exports){
 			};
 		});
         //处理标签功能
-		
-		renderTags(dom.find('.side_card .content'),function(){
-			if(pageTag){
-				dom.find('.articleListPage-tags a').each(function(){
-					if($(this).attr('data-tag') == pageTag){
-						$(this).addClass('active');
-					}
-				});
-			}else{
-				dom.find('.articleListPage-tags a').eq(0).addClass('active');
-			}
+		renderTags(dom.find('.side_card .content'),pageTag,function(){
 			dom.on('click','.articleListPage-tags a',function(){
 				var $btn = $(this);
 				var tag = $btn.attr('data-tag');
@@ -178,5 +179,11 @@ define(function(require,exports){
 				L.refresh();
 			});
 		});
+	}
+	page.prototype = {
+		destroy: function(){
+			console.log('unbind');
+		}
 	};
+	return page;
 });

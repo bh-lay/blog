@@ -11,10 +11,6 @@ define(function(require,exports){
         var temp = $('#tpl_index_page').html();
         dom.html(temp);
 	}
-    view.prototype = {
-        destory: function(){
-        }
-    };
     
 	return view;
 });
