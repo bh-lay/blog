@@ -20,7 +20,7 @@ define(function(require,exports){
 		'</div>',
         '</div></div>',
     '</div>'].join('');
-	var tag_item_tpl = ['<a data-tag="null" href="javascript:void(0)">全部</a>{@each list as it}<a href="javascript:void(0)" data-tag="${it.name}">${it.name}<span>${it.count}</span></a>{@/each}'].join('');
+	var tag_item_tpl = '<a data-tag="null" href="javascript:void(0)">全部</a>{@each list as it}<a href="javascript:void(0)" data-tag="${it.name}">${it.name}<span>${it.count}</span></a>{@/each}';
 	var blogTemp =  ['{@each list as it}',
         '<div class="articleItem" articleId="${it.id}">',
 		'<div class="artItCnt">',
@@ -101,7 +101,11 @@ define(function(require,exports){
 			}else{
 				dom.find('a').eq(0).addClass('active');
 			}
-			callback && callback();
+			dom.on('click','a',function(){
+				var $btn = $(this);
+				var tag = $btn.attr('data-tag');
+				callback && callback(tag);
+			});
 		});
 	}
 	function LIST(dom,tag){
@@ -147,6 +151,16 @@ define(function(require,exports){
         var pageTag = param.tag ? decodeURI(param.tag) : null;
         //创建列表对象
         var list = new LIST(this.$list,pageTag);
+		
+		var scrollDelay;
+		this.scrollListener = function(){
+			clearTimeout(scrollDelay);
+			scrollDelay = setTimeout(function(){
+				if(document.body.scrollTop + window.innerHeight + 200 >= document.body.scrollHeight){
+				//	console.log('scrolling bottom');
+				}
+			},100);
+		}
         //渲染初始页
 		list.renderPage(this.pageIndex,function(){
 			//分页组件
@@ -167,22 +181,19 @@ define(function(require,exports){
 			};
 		});
         //处理标签功能
-		renderTags(dom.find('.side_card .content'),pageTag,function(){
-			dom.on('click','.articleListPage-tags a',function(){
-				var $btn = $(this);
-				var tag = $btn.attr('data-tag');
-				if(tag == 'null'){
-					L.push('/blog');
-				}else{
-					L.push('/blog?tag=' + tag);
-				}
-				L.refresh();
-			});
+		renderTags(dom.find('.side_card .content'),pageTag,function(tag){
+			if(tag == 'null'){
+				L.push('/blog');
+			}else{
+				L.push('/blog?tag=' + tag);
+			}
+			L.refresh();
 		});
+		$(document).scroll(this.scrollListener);
 	}
 	page.prototype = {
 		destroy: function(){
-			console.log('unbind');
+			$(document).unbind('scroll',this.scrollListener);
 		}
 	};
 	return page;
