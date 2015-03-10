@@ -43,7 +43,7 @@ TD {
   padding: 10px;
 }
 .grid-row {
-  width: 1260px;
+  width: 1500px;
   position: relative;
   margin: auto;
   zoom: 1;
@@ -69,7 +69,7 @@ TD {
   -webkit-box-sizing: border-box;
 }
 .grid-row .grid-box {
-  width: 315px;
+  width: 300px;
 }
 .grid-row .grid-box-2 {
   width: 50%;
@@ -97,14 +97,19 @@ TD {
 .grid-row .grid-col-flow-220 {
   width: calc(100% - 220px);
 }
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1550px) {
   .grid-row {
-    width: 945px;
+    width: 1200px;
   }
 }
-@media screen and (max-width: 965px) {
+@media screen and (max-width: 1250px) {
   .grid-row {
-    width: 630px;
+    width: 900px;
+  }
+}
+@media screen and (max-width: 950px) {
+  .grid-row {
+    width: 600px;
   }
   .grid-row .grid-box-2,
   .grid-row .grid-col-1-3,
