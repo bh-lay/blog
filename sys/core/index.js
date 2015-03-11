@@ -118,7 +118,6 @@ function APP(port){
 	
 	this.staticFileRoot = config.staticFileRoot;
 	this.MAPS = {};
-	this.REST = null;
 	
 	// server start
 	var server = http.createServer(function (req,res) {
@@ -127,6 +126,7 @@ function APP(port){
             res.end('hello I\'m bh-lay !');
             return
         }
+        //实例化一个connect对象
 		var new_connect = new connect(req,res),
             path = new_connect.url,
             pathNode = pathParser(path.pathname),
@@ -147,23 +147,17 @@ function APP(port){
 						'location' : url_redirect[path.pathname]
 					});
 				}else{
-					//第四顺序：执行定义的方法
-					if(me.REST){
-						me.REST.call(this,new_connect);
-					}else{
-						//最终：只能404了
-					//	new_connect.write('notFound','<h1>404</h1><p>找不到文件了，咋办啊！</p>');
-                        me.cache.use('404page',['html','system'],function(this_cache){
-                            new_connect.write('html',200,this_cache);
-                        },function(save_cache){
-                            //获取视图
-                            me.views('404',{
-                                content : '文件找不到啦！'
-                            },function(err,html){
-                                save_cache(html);
-                            });
+                    //最终：只能404了
+                    me.cache.use('404page',['html','system'],function(this_cache){
+                        new_connect.write('html',200,this_cache);
+                    },function(save_cache){
+                        //获取视图
+                        me.views('404',{
+                            content : '文件找不到啦！'
+                        },function(err,html){
+                            save_cache(html);
                         });
-					}
+                    });
 				}
 			});
 		}
@@ -191,14 +185,6 @@ APP.prototype.get = function(urls,callback){
 	});
 };
 
-/**
- * 404页面
- */
-APP.prototype.rest = function(callback){
-	if(typeof(callback) =='function'){
-		this.REST = callback;
-	}
-};
 APP.prototype.views = views;
 APP.prototype.cache = new cache({
     useCache: config.cache.use ? true : false,
