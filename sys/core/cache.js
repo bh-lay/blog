@@ -10,19 +10,88 @@
  * 	});
  */
 var fs = require('fs');
-var cache_max_num = 1000;
-//缓存存放目录
-var cache_root = './temporary/cache/';
+
 
 /**
- * 读取、生成缓存
- * 不做参数校验
- *  cache_path 缓存对应的文件目录
+ * 缓存类
+ *   useCache： 是否使用缓存
+ *   cache_max_num：最多使用缓存数
+ *   root：缓存存放目录
+ */
+function Cache(param){
+    param = param || {};
+    this.useCache = param.useCache;
+    this.cache_max_num = param.max_num;
+    //缓存存放目录
+    this.root = param.root;
+}
+
+//清除缓存
+Cache.prototype.clear = function(tags,callback){
+    if(typeof(tags)=='string' && tags.length > 0){
+        tags = tags.split(',');
+        //精准清除
+        this.try_del_each_cache(function(file_tags){
+            //遍历缓存文件的标签
+            for(var i=0,total=file_tags.length; i<total; i++){
+                var file_tag_item = file_tags[i];
+                //遍历待删除缓存标签
+                for(var s=0,all=tags.length; s<all; s++){
+                    var clear_tag_item = tags[s];
+                    //对比标签，相等就删除
+                    if(file_tag_item == clear_tag_item){
+                        return true;
+                    }
+                }
+            }
+            return false;
+        });
+        callback&&callback();
+    }else{
+        //暴力清除
+		this.try_del_each_cache();
+		callback&&callback();
+	}
+};
+
+/**
+ * 使用缓存
+ * 处理参数校验
+ *  cache_name 缓存名
+ *  tags 缓存标签
  *  callback 读取缓存后的回调函数
- *  create_cache 没有缓存时，生成缓存的回调函数
- **/
-function cache(cache_path,callback,create_cache){
-    //检测此条缓存是否存在
+ *  create_content 没有缓存时，调用生成内容的回调函数
+ */
+Cache.prototype.use = function (cache_name,tags,callback,create_content){
+    
+    var me = this;
+    if(typeof(cache_name) != 'string'){
+        console.error('缓存名必须为字符格式');
+        return
+    }
+    if(!tags || tags.length < 1){
+        console.error('缓存必须指定标签');
+        return
+    }
+    if((typeof(callback) != typeof(create_content)) || (typeof(create_content) != 'function')){
+        console.error('使用缓存必须指定使用、创建函数');
+        return
+    }
+    
+    //读取配置是否需要使用缓存
+    if(!this.useCache){
+        create_content(function(new_cache){
+            //通知调用方使用新的缓存
+            callback(new_cache);
+        });
+        return;
+    }
+	cache_name = cache_name.replace(/\/|\?/g,'_');
+    
+    var tagsStr = tags.join('_');
+    var cache_path = this.root + tagsStr + '--' + cache_name;
+    
+     //检测此条缓存是否存在
 	fs.exists(cache_path, function(exists) {
 		if(exists){
 			//存在，直接读取缓存
@@ -34,7 +103,7 @@ function cache(cache_path,callback,create_cache){
 			});
 		}else{
 			//不存在，调用创建缓存函数
-			create_cache(function(new_cache){
+			create_content(function(new_cache){
 				//通知调用方使用新的缓存
                 callback(new_cache);
 				//保存缓存至对应目录
@@ -43,106 +112,40 @@ function cache(cache_path,callback,create_cache){
 						console.log('create cache error',cache_name);
 					};
 				});
-			});
-			//缓存过多，清空
-			fs.readdir(cache_root,function(err,files){
-				if(err){
-					return
-				}
-				if(files.length > cache_max_num){
-					try_del_each_cache();
-				}
+                //检查缓存数量
+                fs.readdir(me.root,function(err,files){
+                    //缓存过多，清空
+                    if(!err && files.length > me.cache_max_num){
+                        me.try_del_each_cache();
+                    }
+                });
 			});
 		}
 	});
 };
 
+
 //尝试遍历删除缓存文件
-function try_del_each_cache(callback){
-    if(!callback){
-        callback = function(){
-            return true;
-        };
-    }
-	fs.readdir(cache_root,function(err,files){
+Cache.prototype.try_del_each_cache = function(callback){
+    var root = this.root;
+	fs.readdir(root,function(err,files){
 		if(err){
 			return
 		}
 		var total = files.length;
         
 		for(var i = 0;i < total;i++){
-			var filename = files[i];
-            var tagsStr = filename.split('--')[0] || '';
-            var fileTags = tagsStr.split('_');
+			var filename_split = files[i].split('--'),
+                tags = (filename_split[0] || '').split('_'),
+                name = filename_split[1] || '';
             if(files[i] != 'readMe.md'){
-                if( callback(fileTags)){
-                    fs.unlink(cache_root + files[i]);
+                //没有定义检查函数，或者检查函数返回值为true，删除缓存
+                if(!callback || callback(tags,name)){
+                    fs.unlink(root + files[i]);
                 }
 			}
 		}
 	});
-}
-
-
-/**
- * 清除缓存
- * cache.clear(tags,fn)
- * 
- */
-function CLEAR(tags,callback){
-    //精准清除
-    try_del_each_cache(function(file_tags){
-        //遍历缓存文件的标签
-        for(var i=0,total=file_tags.length; i<total; i++){
-            var file_tag_item = file_tags[i];
-            //遍历待删除缓存标签
-            for(var s=0,all=tags.length; s<all; s++){
-                var clear_tag_item = tags[s];
-                //对比标签，相等就删除
-                if(file_tag_item == clear_tag_item){
-                    return true;
-                }
-            }
-        }
-        callback&&callback();
-        return false;
-    });
-}
-
-//清除缓存
-exports.clear = function(tags,callback){
-    if(typeof(tags)=='string' && tags.length > 0){
-        tags = tags.split(',');
-        CLEAR(tags,callback);
-    }else{
-        //暴力清除
-		try_del_each_cache();
-		callback&&callback();
-	}
-    
 };
 
-/**
- * 使用缓存
- * 处理参数校验
- */
-exports.use = function (cache_name,tags,callback,create_cache){
-    if(typeof(cache_name) != 'string'){
-        console.error('缓存名必须为字符格式');
-        return
-    }
-    if(!tags || tags.length < 1){
-        console.error('缓存必须指定标签');
-        return
-    }
-    if((typeof(callback) != typeof(create_cache)) || (typeof(create_cache) != 'function')){
-        console.error('缓存必须指定回调函数');
-        return
-    }
-    
-	cache_name = cache_name.replace(/\/|\?/g,'_');
-    
-    var tagsStr = tags.join('_');
-    var cache_path = cache_root + tagsStr + '--' + cache_name + '.txt';
-    cache(cache_path,callback,create_cache);
-};
+module.exports = Cache;

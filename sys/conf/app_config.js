@@ -5,20 +5,26 @@
  */
 
 module.exports = {
-	'host' : '*',
-	'ip' : '0.0.0.0',
-	'port' : 80,
+	host : '*',
+	ip : '0.0.0.0',
+	port : 80,
 	//前端静态资源根目录
-	'frontEnd_root' : '/frontEnd/develop/',
+	frontEnd_root : '/frontEnd/develop/',
     //静态资源版本
-    'frontEnd_version' : '20141217',
+    frontEnd_version : '20141217',
 	//图床
-	'img_domain' : '/asset',
-	'mongo' : {
-		'host':'localhost',
-		'port':27017,
-		'user':'lay',
-		'pass':'19900927',
-		'db_name':'blog'
-	},
+	img_domain : '/asset',
+    //缓存配置
+    cache: {
+        use: true,
+        max_num: 1000,
+        root: './temporary/cache/'
+    },
+	mongo : {
+		host: 'localhost',
+		port: 27017,
+		user: 'lay',
+		pass: '19900927',
+		db_name: 'blog'
+	}
 }; 

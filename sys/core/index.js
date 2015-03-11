@@ -153,7 +153,7 @@ function APP(port){
 					}else{
 						//最终：只能404了
 					//	new_connect.write('notFound','<h1>404</h1><p>找不到文件了，咋办啊！</p>');
-                        me.cache.use('404page',['html,system'],function(this_cache){
+                        me.cache.use('404page',['html','system'],function(this_cache){
                             new_connect.write('html',200,this_cache);
                         },function(save_cache){
                             //获取视图
@@ -210,7 +210,11 @@ APP.prototype.rest = function(callback){
 	}
 };
 APP.prototype.views = views;
-APP.prototype.cache = cache;
+APP.prototype.cache = new cache({
+    useCache: config.cache.use ? true : false,
+    max_num: config.cache.max_num,
+    root: config.cache.root
+});
 APP.prototype.utils = utils;
 APP.prototype.config = config;
 
