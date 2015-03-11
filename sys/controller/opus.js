@@ -4,7 +4,7 @@
 var utils = require('../core/utils/index.js');
 var mongo = require('../core/DB.js');
 
-function list_page(callback){
+function list_page(app,callback){
 	var method = mongo.start();
 
 	method.open({'collection_name':'opus'},function(err,collection){
@@ -13,7 +13,7 @@ function list_page(callback){
 			method.close();
 			for(var i = 0,total = docs.length;i<total;i++){
 				docs[i]['work_range'] = docs[i]['work_range']?docs[i]['work_range'].split(/\,/):['暂未填写'];
-				docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? CONFIG.img_domain + docs[i].cover : docs[i].cover;
+				docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? app.config.img_domain + docs[i].cover : docs[i].cover;
 			}
 			callback && callback(null,docs);
 		});
@@ -23,7 +23,9 @@ function list_page(callback){
 
 function detail_page(id,callback){
 	var method = mongo.start();
-	method.open({'collection_name':'opus'},function(err,collection){
+	method.open({
+        collection_name: 'opus'
+    },function(err,collection){
 		collection.find({id:id}).toArray(function(err, docs) {
 			method.close();
 			if(docs.length==0){
@@ -40,7 +42,7 @@ exports.list = function(connect,app){
 	app.cache.use('opus_list',['html'],function(this_cache){
 		connect.write('html',200,this_cache);
 	},function(save_cache){
-		list_page(function(err,list){
+		list_page(app,function(err,list){
 			if(err){
 				app.write('notFound');
 				return

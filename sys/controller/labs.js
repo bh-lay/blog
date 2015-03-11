@@ -7,12 +7,12 @@ var mongo = require('../core/DB.js');
 var showdown = require('../lib/showdown/showdown.js');
 var converter = new showdown.converter();
 
-function list_page(callback){
+function list_page(capp,allback){
 	var method = mongo.start();
 	method.open({'collection_name' : 'labs'},function(err,collection){
 		collection.find({}, {limit:15}).sort({id:-1}).toArray(function(err, docs) {
 			for(var i in docs){
-				docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? CONFIG.img_domain + docs[i].cover : docs[i].cover;
+				docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? app.config.img_domain + docs[i].cover : docs[i].cover;
 			}
 			method.close();
 			callback && callback(null,docs);
@@ -46,7 +46,7 @@ exports.list = function (connect,app){
 	app.cache.use('labs_list',['html'],function(this_cache){
 		connect.write('html',200,this_cache);
 	},function(save_cache){
-		list_page(function(err,list){
+		list_page(app,function(err,list){
 			//获取视图
 			app.views('labsList',{
 				'title' : '实验室',

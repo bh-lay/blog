@@ -28,7 +28,7 @@ function getDetail(id,callback){
 	});
 }
 
-function getList(param,callback){
+function getList(app,param,callback){
 	var method = mongo.start();
 	var param = param || {};
 	var skip = param.skip || 0;
@@ -42,7 +42,7 @@ function getList(param,callback){
 				method.close();
 				for(var i in docs){
 					docs[i].time_show = utils.parse.time(docs[i].time_show ,'{y}年-{m}月-{d}日');
-					docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? CONFIG.img_domain + docs[i].cover : docs[i].cover;
+					docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? app.config.img_domain + docs[i].cover : docs[i].cover;
 				}
 				callback && callback(null,docs,{
 					'count' : count,
@@ -65,7 +65,7 @@ exports.list = function (connect,app){
 		connect.write('html',200,this_cache);
 	},function(save_cache){
 		//if none of cache,do this Fn
-		getList({
+		getList(app,{
 			'skip' : (page-1) * 10,
 			'limit': 10
 		},function(err,list,data){

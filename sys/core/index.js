@@ -111,9 +111,8 @@ function isNormalVisitor(req){
 }
 /**
  * application 类
- *   arguments[0] 端口号
  */
-function APP(port){
+function APP(){
 	var me = this;
 	
 	this.staticFileRoot = config.staticFileRoot;
@@ -163,8 +162,8 @@ function APP(port){
 		}
 	});
 	
-	server.listen(port, 0,0,0,0);
-	console.log('server start with port ' + port);
+	server.listen(config.port, 0,0,0,0);
+	console.log('server start with port ' + config.port);
 };
 
 /**

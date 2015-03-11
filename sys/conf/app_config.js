@@ -17,7 +17,7 @@ module.exports = {
 	img_domain : '/asset',
     //缓存配置
     cache: {
-        use: true,
+        use: false,
         max_num: 1000,
         root: './temporary/cache/'
     },

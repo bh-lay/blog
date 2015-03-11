@@ -5,9 +5,8 @@
 
 var mongodb = require('mongodb');
 var utils = require('./utils/index.js');
-//CONFIG is a global object
-var conf = CONFIG.mongo,
-	host = conf.host,
+var conf = require('./../conf/app_config').mongo;
+var host = conf.host,
 	port = conf.port,
 	user = conf.user,
 	pass = conf.pass,

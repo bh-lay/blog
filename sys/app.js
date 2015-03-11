@@ -1,13 +1,8 @@
-
-global.CONFIG = require('./conf/app_config');
-
 //引入app框架
 var app_factory = require('../sys/core/index.js');
+
 //创建app
-var app = new app_factory(CONFIG.port);
-
-
-
+var app = new app_factory();
 
 var singlePage = require('./controller/singlePage.js');
 /**
