@@ -116,7 +116,7 @@ function isNormalVisitor(req){
 function APP(port){
 	var me = this;
 	
-	this.staticFileRoot = './'
+	this.staticFileRoot = config.staticFileRoot;
 	this.MAPS = {};
 	this.REST = null;
 	
@@ -133,7 +133,7 @@ function APP(port){
             result = findUrlInMaps(pathNode,me.MAPS);
 		
 		if(result){
-			//第一顺序：执行set方法设置的回调
+			//第一顺序：执行get方法设置的回调
 			var data = result.data;
 			result.mapsItem.call(this,data,new_connect);
 		}else{
@@ -191,16 +191,6 @@ APP.prototype.get = function(urls,callback){
 	});
 };
 
-/**
- * 应用设置
- */
-APP.prototype.set = function(key,value){
-	if(key == 'staticFileRoot'){
-        if(value.length){
-            this.staticFileRoot = value.replace(/\/$/,'');
-        }
-	}
-};
 /**
  * 404页面
  */

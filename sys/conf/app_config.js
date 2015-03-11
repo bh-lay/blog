@@ -6,9 +6,10 @@
 
 module.exports = {
 	host : '*',
-	ip : '0.0.0.0',
 	port : 80,
-	//前端静态资源根目录
+    //静态资源根目录
+    staticFileRoot: '../web/',
+	//前端静态资源根目录（css、js、图片、字体）
 	frontEnd_root : '/frontEnd/develop/',
     //静态资源版本
     frontEnd_version : '20141217',
