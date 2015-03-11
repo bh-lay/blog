@@ -7,8 +7,8 @@
 <meta name="description" content="${{description}}" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 <include name="favicon_appicon" />
-<link rel="stylesheet" type="text/css" href="${{frontEnd_base}}public/css/labsDetail.css?v=${{frontEnd_version}}" />
-<link rel="stylesheet" type="text/css" href="${{frontEnd_base}}lib/Font-Awesome-3.2.1/css/font-awesome.min.css"/>
+<link rel="stylesheet" type="text/css" href="${{frontEnd.base}}public/css/labsDetail.css?v=${{frontEnd.version}}" />
+<link rel="stylesheet" type="text/css" href="${{frontEnd.base}}lib/Font-Awesome-3.2.1/css/font-awesome.min.css"/>
 </head>
 <body>
 <div class="l-mini-nav">
@@ -125,18 +125,18 @@
     </div>
 </div>
 </script>
-<script type="text/javascript" src="${{frontEnd_base}}lib/jquery/jquery.js"></script>
-<script type="text/javascript" src="${{frontEnd_base}}lib/sea.js"></script>
+<script type="text/javascript" src="${{frontEnd.base}}lib/jquery/jquery.js"></script>
+<script type="text/javascript" src="${{frontEnd.base}}lib/sea.js"></script>
 <script type="text/javascript">
 	var app_config = {
-		'frontEnd_base' : '${{frontEnd_base}}',
-		'imgDomain' : '${{img_domain}}'
+		'frontEnd_base' : '${{frontEnd.base}}',
+		'imgDomain' : '${{frontEnd.img_domain}}'
 	};
     seajs.config({
-        'base' : '${{frontEnd_base}}',
-        'map' : [[/^(.*\.(?:css|js))(.*)$/i, '$1?v=${{frontEnd_version}}']]
+        'base' : '${{frontEnd.base}}',
+        'map' : [[/^(.*\.(?:css|js))(.*)$/i, '$1?v=${{frontEnd.version}}']]
     });
-	seajs.use('${{frontEnd_base}}public/js/labsDetail.js');
+	seajs.use('${{frontEnd.base}}public/js/labsDetail.js');
 </script>
 <include name="baiduAndGoogleTongji"/>
 </body>

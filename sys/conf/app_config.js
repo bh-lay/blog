@@ -9,12 +9,15 @@ module.exports = {
 	port : 80,
     //静态资源根目录
     staticFileRoot: '../web/',
-	//前端静态资源根目录（css、js、图片、字体）
-	frontEnd_root : '/frontEnd/develop/',
-    //静态资源版本
-    frontEnd_version : '20141217',
-	//图床
-	img_domain : '/asset',
+	//前端资源（css、js、图片、字体）
+	frontEnd: {
+        //根目录
+        base : '/frontEnd/build/',
+        //版本
+        version : '20141217',
+        //图床地址
+        img_domain : '/asset'
+    },
     //缓存配置
     cache: {
         use: false,

@@ -30,7 +30,7 @@ exports.render = function(connect,app){
 		}else if(pathname == login_path){
 		//若为登录页面，直接登录
 			
-			//获取后台视图
+			//获取后台登录
 			app.views('admin/login',{},function(err,html){
 				if(err){
 					connect.write('html',500,'系统出错');

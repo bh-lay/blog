@@ -7,7 +7,7 @@ var mongo = require('../core/DB.js');
 var showdown = require('../lib/showdown/showdown.js');
 var converter = new showdown.converter();
 
-function list_page(capp,allback){
+function list_page(app,callback){
 	var method = mongo.start();
 	method.open({'collection_name' : 'labs'},function(err,collection){
 		collection.find({}, {limit:15}).sort({id:-1}).toArray(function(err, docs) {

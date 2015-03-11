@@ -1,4 +1,4 @@
-﻿<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
     <meta name="description" content="${{description}}" />
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
     <include name="favicon_appicon" />
-    <link rel="stylesheet" type="text/css" href="${{frontEnd_base}}public/css/links.css?v=${{frontEnd_version}}"/>
+    <link rel="stylesheet" type="text/css" href="${{frontEnd.base}}public/css/links.css?v=${{frontEnd.version}}"/>
 </head>
 <body>
 <div class="Jumbotron">
@@ -35,9 +35,9 @@
 </div>
 <script type="text/javascript">
     var app_config = {
-        'frontEnd_base' : '${{frontEnd_base}}',
-        'frontEnd_version' : '${{frontEnd_version}}',
-        'imgDomain' : '${{img_domain}}'
+        frontEnd_base : '${{frontEnd.base}}',
+        frontEnd_version : '${{frontEnd.version}}',
+        imgDomain : '${{frontEnd.img_domain}}'
     };
 </script>
 <include name="baiduAndGoogleTongji"/>

@@ -8,8 +8,8 @@
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 <include name="version_html5_script_bootstrap"/>
 <include name="favicon_appicon" />
-<link href="${{frontEnd_base}}lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-<link href="${{frontEnd_base}}public/css/bootstrap_plugin.css?v=${{frontEnd_version}}" rel="stylesheet" media="screen">
+<link href="${{frontEnd.base}}lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="${{frontEnd.base}}public/css/bootstrap_plugin.css?v=${{frontEnd.version}}" rel="stylesheet" media="screen">
 </head>
 <body>
 <include name="navigation_bootstrap" active="blog"/>
@@ -36,14 +36,14 @@
 </div>
 <script type="text/javascript">
     var app_config = {
-        'frontEnd_base' : '${{frontEnd_base}}',
-        'frontEnd_version' : '${{frontEnd_version}}',
-        'imgDomain' : '${{img_domain}}'
+        frontEnd_base : '${{frontEnd.base}}',
+        frontEnd_version : '${{frontEnd.version}}',
+        imgDomain : '${{frontEnd.img_domain}}'
     };
 </script>
-<script type="text/javascript" src="${{frontEnd_base}}lib/jquery/jquery.js"></script>
-<script type="text/javascript" src="${{frontEnd_base}}lib/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${{frontEnd_base}}public/js/bootstrap_plugin.js?v=${{frontEnd_version}}"></script>
+<script type="text/javascript" src="${{frontEnd.base}}lib/jquery/jquery.js"></script>
+<script type="text/javascript" src="${{frontEnd.base}}lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${{frontEnd.base}}public/js/bootstrap_plugin.js?v=${{frontEnd.version}}"></script>
 <include name="footer"/>
 <include name="baiduAndGoogleTongji"/>
 </body>

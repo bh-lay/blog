@@ -77,9 +77,7 @@ module.exports = function(URI,data,callback){
 	var realPath = baseRoot + URI;
 	var data = data || {};
 	//增加文件配置
-	data.frontEnd_base = this.config.frontEnd_root;
-	data.frontEnd_version = this.config.frontEnd_version;
-	data.img_domain = this.config.img_domain;
+	data.frontEnd = this.config.frontEnd;
 	
 	//读取模版
 	fs.readFile(realPath + '.html', "utf8",function(err,fileStr){
