@@ -89,7 +89,7 @@ define(function(require,exports){
 	function article_handule(dom,data,sendFn){
 		var new_html = valueInit(article_tpl,data);
 		dom.html(new_html);
-		mditor.bind(dom.find('textarea.mditor'));
+		new mditor(dom.find('textarea.mditor'));
 		dom.find('.pub_cover_btn').click(function(){
 			gallery.pop(function(files){
 				if(files && files.length>0){

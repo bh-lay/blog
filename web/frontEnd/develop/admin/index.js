@@ -34,10 +34,7 @@ define(function(require,exports){
 	
     var page_friends = require('admin/friends.js'),
         page_comment = require('admin/comments_list.js'),
-        article_list = require('admin/article_list.js')
-//        page_index = require(),
-//        page_index = require(),
-    ;
+        article_list = require('admin/article_list.js');
     
 	function createDom(dom){
 		var oldDom = dom.find('.mainCnt_body');
