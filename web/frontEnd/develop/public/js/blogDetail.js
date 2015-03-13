@@ -4,6 +4,7 @@
  */
 define(function(require,exports){
     require('lib/highlight/highlight');
+	var showdown = require('public/js/showdown.js');
 	
 	function getData(id,fn){
 		$.ajax({
@@ -17,8 +18,10 @@ define(function(require,exports){
                 var template = $('#tpl_blog_detail').html();
                 var tpl = L.tplModule(template);
 				if(data.code == 1){
+					var converter = new showdown.converter();
 					var detail = data['detail'];
 					var date = new Date(parseInt(detail.time_show));
+					detail.content = converter.makeHtml(detail.content);
 					detail.time_show = (date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+ date.getDate();
 					var this_html = juicer(tpl,detail);
 					fn&&fn(null,this_html,data['detail']['title']);

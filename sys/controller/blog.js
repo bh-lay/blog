@@ -7,7 +7,6 @@
 var utils = require('../core/utils/index.js');
 var mongo = require('../core/DB.js');
 var showdown = require('../lib/showdown/showdown.js');
-var converter = new showdown.converter();
 
 function getDetail(id,callback){
 	var method = mongo.start();
@@ -21,6 +20,8 @@ function getDetail(id,callback){
 				callback && callback('哇塞，貌似这篇博文不存在哦!');
 			}else{
 				docs[0].time_show = utils.parse.time(docs[0].time_show ,'{y}-{m}-{d}');
+				
+				var converter = new showdown.converter();
 				docs[0].content = converter.makeHtml(docs[0].content);
 				callback&&callback(null,docs[0]);
 			}
@@ -42,7 +43,7 @@ function getList(app,param,callback){
 				method.close();
 				for(var i in docs){
 					docs[i].time_show = utils.parse.time(docs[i].time_show ,'{y}年-{m}月-{d}日');
-					docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? app.config.img_domain + docs[i].cover : docs[i].cover;
+					docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? app.config.frontEnd.img_domain + docs[i].cover : docs[i].cover;
 				}
 				callback && callback(null,docs,{
 					'count' : count,

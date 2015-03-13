@@ -3,6 +3,7 @@
  */
 var utils = require('../core/utils/index.js');
 var mongo = require('../core/DB.js');
+var showdown = require('../lib/showdown/showdown.js');
 
 function list_page(app,callback){
 	var method = mongo.start();
@@ -13,7 +14,7 @@ function list_page(app,callback){
 			method.close();
 			for(var i = 0,total = docs.length;i<total;i++){
 				docs[i]['work_range'] = docs[i]['work_range']?docs[i]['work_range'].split(/\,/):['暂未填写'];
-				docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? app.config.img_domain + docs[i].cover : docs[i].cover;
+				docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? app.config.frontEnd.img_domain + docs[i].cover : docs[i].cover;
 			}
 			callback && callback(null,docs);
 		});
@@ -31,6 +32,8 @@ function detail_page(id,callback){
 			if(docs.length==0){
 				callback('哇塞，貌似这作品享不存在哦!');
 			}else{
+				var converter = new showdown.converter();
+				docs[0].content = converter.makeHtml(docs[0].content);
 				docs[0].opus_time_create = utils.parse.time(docs[0].opus_time_create ,'{y}-{m}-{d}');
 				callback && callback(null,docs[0]);
 			}
@@ -76,6 +79,7 @@ exports.detail = function(connect,app,id){
 				'description' : data.intro,
 				'content' : data.content,
 				'opus_pic' : data.opus_pic,
+				'cover' : (data.cover && data.cover[0] == '/') ? app.config.frontEnd.img_domain + data.cover : data.cover,
 				'opus_time_create' : data.opus_time_create
 			},function(err,html){
 				save_cache(html);

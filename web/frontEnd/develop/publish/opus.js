@@ -12,7 +12,6 @@
 
 define && define(function(require,exports){
 	require('mditor/mditor.js');
-	require('gallery/index.js');
 	
 	
 	//初始化模版
@@ -42,10 +41,7 @@ define && define(function(require,exports){
 				'<span class="input-group-addon">简介</span>',
 				'<textarea class="form-control" name="intro" cols="50" rows="5" placeholder="作品简介">{intro}</textarea>',
 			'</div>',
-			'<br/><div class="input-group">',
-				'<span class="input-group-addon">详细</span>',
-				'<textarea class="form-control mditor" name="content" cols="50" rows="10" placeholder="作品详细信息" >{content}</textarea>',
-			'</div>',
+			'<br/><textarea class="mditor" name="content" cols="50" rows="10" placeholder="作品详细信息" >{content}</textarea>',
 			'<br/><div class="input-group">',
 				'<span class="input-group-addon">缩略图</span>',
 				'<input type="text" class="form-control" name="cover" value="{cover}" placeholder="缩略图">',
@@ -97,6 +93,7 @@ define && define(function(require,exports){
 			var new_html = valueInit(opus_tpl,{});
 			
 			dom.html(new_html);
+			new mditor(dom.find('textarea.mditor')[0]);
 			admin.formToAjax(dom,{
 				'onSubmit' : function(data){
 					UI.prompt('正在提交分享修改！',0);
@@ -120,6 +117,7 @@ define && define(function(require,exports){
 			var new_html = valueInit(opus_tpl,data);
 			
 			dom.html(new_html);
+			new mditor(dom.find('textarea.mditor')[0]);
 			admin.formToAjax(dom,{
 				'onSubmit' : function(data){
 					UI.prompt('正在提交作品修改！');

@@ -31,8 +31,6 @@ get_detail
 var mongo = require('../core/DB.js');
 var fs = require('fs');
 var querystring=require('querystring');
-var showdown = require('../lib/showdown/showdown.js');
-var converter = new showdown.converter();
 
 function get_list(data,callback){
 	var data = data,
@@ -90,15 +88,6 @@ function get_detail(data,callback){
 				resJSON['code'] = 2;
 				resJSON['msg'] = 'could not find this blog !';				
 			}else{ 
-				resJSON['detail'] = docs[0];
-				
-				if(content_format == 'html'){
-				//	docs[0].content = markdown.parse(docs[0].content);
-					docs[0].content = converter.makeHtml(docs[0].content);
-				}
-			//	}else if(content_format == 'markdown'){
-					
-			//	}
 				resJSON['detail'] = docs[0];
 			}
 			callback&&callback(resJSON);

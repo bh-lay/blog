@@ -26,9 +26,7 @@ define(function(require,exports){
 			'<span class="input-group-addon">简介</span>',
 			'<textarea class="form-control" placeholder="一段话概括博文" name="intro" cols="50" rows="5">{intro}</textarea>',
 		'</div>',
-		'<br/><div class="input-group" style="width:100%">',
-			'<textarea class="mditor form-control" placeholder="博文正文" name="content">{content}</textarea>',
-		'</div>',
+		'<br/><textarea class="mditor" placeholder="博文正文" name="content">{content}</textarea>',
 		'<br/><div class="input-group">',
   			'<span class="input-group-addon">缩略图</span>',
   			'<input type="text" class="form-control" placeholder="缩略图" name="cover" value="{cover}" />',
@@ -89,7 +87,7 @@ define(function(require,exports){
 	function article_handule(dom,data,sendFn){
 		var new_html = valueInit(article_tpl,data);
 		dom.html(new_html);
-		new mditor(dom.find('textarea.mditor'));
+		new mditor(dom.find('textarea.mditor')[0]);
 		dom.find('.pub_cover_btn').click(function(){
 			gallery.pop(function(files){
 				if(files && files.length>0){

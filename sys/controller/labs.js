@@ -12,7 +12,7 @@ function list_page(app,callback){
 	method.open({'collection_name' : 'labs'},function(err,collection){
 		collection.find({}, {limit:15}).sort({id:-1}).toArray(function(err, docs) {
 			for(var i in docs){
-				docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? app.config.img_domain + docs[i].cover : docs[i].cover;
+				docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? app.config.frontEnd.img_domain + docs[i].cover : docs[i].cover;
 			}
 			method.close();
 			callback && callback(null,docs);

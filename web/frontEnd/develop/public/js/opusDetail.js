@@ -3,6 +3,7 @@
  *  
  */
 define(function(require,exports){
+	var showdown = require('public/js/showdown.js');
 	function getData(id,fn){
 		$.ajax({
 			'type' : 'GET' ,
@@ -13,7 +14,9 @@ define(function(require,exports){
 			},
 			'success' :function(data){
 				if(data.code == 1){
+					var converter = new showdown.converter();
 					var detail = data['detail'];
+					detail.content = converter.makeHtml(detail.content);
 					var date = new Date(parseInt(detail.opus_time_create));
 					detail.opus_time_create = (date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+ date.getDate();
                     //使用七牛图床
