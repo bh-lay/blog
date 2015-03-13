@@ -4,16 +4,6 @@
  */
 define(function(require,exports){
 	
-	var temp = ['<div class="grid-row">{@each list as it}<div class="grid-box">',
-        '<a href="/labs/${it.name}" title="${it.title}" class="lab_item">',
-            '<div class="cover" style="background-image:url(${it.cover})"><i class="l-icon l-icon-link"></i></div>',
-            '<div class="info">',
-                '<h4 class="title">${it.title}</h4>',
-                '<p>${it.intro}</p>',
-            '</div>',
-	   '</a>',
-    '</div>{@/each}</div>'].join('');
-	
 	var limit = 20,
 		 skip = 0,
 		 count = null,
@@ -46,9 +36,11 @@ define(function(require,exports){
 		});
 	};
 	return function(dom,param){
+		var base_tpl = $('#tpl_labs_list_base').html();
 		skip = 0;
-        dom.html('<div class="labsList"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载数据</p></div></div>');
+        dom.html(base_tpl);
 		getData(function(list){
+			var temp = $('#tpl_labs_list_item').html();
 			var this_html = juicer(temp,{
                 'list' : list
             });

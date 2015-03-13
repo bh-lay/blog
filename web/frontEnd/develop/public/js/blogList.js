@@ -7,41 +7,7 @@
 
 define(function(require,exports){
 	var pagination = require('util/pagination.js');
-	var baseTpl = ['<div class="articleListPage">',
-        '<div class="grid-row"><div class="grid-col-fix-220">',
-            '<div class="side_card articleListPage-tags">',
-                '<div class="caption"><strong>标签</strong></div>',
-                '<div class="content"></div>',
-            '</div>',
-        '</div><div class="grid-col-flow-220"',
-        '<div class="articleListPage-main">',
-			'<div class="articleList"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载数据</p></div></div>',
-			'<div class="pagination_cnt"></div>',
-		'</div>',
-        '</div></div>',
-    '</div>'].join('');
-	var tag_item_tpl = '<a data-tag="null" href="javascript:void(0)">全部</a>{@each list as it}<a href="javascript:void(0)" data-tag="${it.name}">${it.name}<span>${it.count}</span></a>{@/each}';
-	var blogTemp =  ['{@each list as it}',
-        '<div class="articleItem" articleId="${it.id}">',
-		'<div class="artItCnt">',
-            '{@if it.cover}',
-			'<div class="artItPic">',
-				'<a href="/blog/${it.id}" title="${it.title}" lofox="true" target="_self" >',
-					'<img src="${it.cover}" alt="${it.title}" />',
-				'</a>',
-			'</div>',
-			'{@/if}',
-			'<div class="artItCpt">',
-				'<a href="/blog/${it.id}" title="${it.title}" lofox="true" target="_self" >',
-					'${it.title}',
-				'</a>',
-			'</div>',
-			'<div class="artItInfo"><p>${it.intro}</p></div>',
-			'<div class="artItTime">${it.time_show}</div>',
-		'</div>',
-	'</div>',
-    '{@/each}'].join('');
-    var empty_tpl = ['<div class="blank-content"><p>啥都木有</p></div>'].join('');
+    var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>';
 	
 	function getData(skip,limit,tag,callback){
 		$.ajax({
@@ -57,8 +23,7 @@ define(function(require,exports){
 				var count = data['count'],
 					 list = data['list'];
 				for(var i in list){
-					var date = new Date(parseInt(list[i].time_show));
-					list[i].time_show = (date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+ date.getDate();
+					list[i].time_show = L.parseTime(list[i].time_show,'{y}-{mm}-{dd}');
 					//使用七牛图床
 					list[i].cover = L.qiniu(list[i].cover,{
 						'type' : 'zoom',
@@ -89,6 +54,7 @@ define(function(require,exports){
 	}
 	function renderTags(dom,tagName,callback){
 		getTag(function(data){
+			var tag_item_tpl = $('#tpl_blog_list_tag').html();
 			var html = juicer(tag_item_tpl,data);
 			dom.html(html);
 			
@@ -121,13 +87,13 @@ define(function(require,exports){
 		var me = this;
 		this.onLoadStart && this.onLoadStart();
 		this.skip = (index-1 || 0) * this.limit;
-		
+		var list_tpl = $('#tpl_blog_list_item').html();
 		getData(this.skip,this.limit,this.tag,function(err,list,count){
 			me.count = count;
 			me.skip += me.limit;
             var html;
             if(list.length){
-                html = juicer(blogTemp,{
+                html = juicer(list_tpl,{
                     'list' : list
                 });
             }else{
@@ -141,6 +107,7 @@ define(function(require,exports){
 	
 	function page(dom,param){
 		var me = this;
+		var baseTpl = $('#tpl_blog_list_base').html();
         //插入基本模版
         dom.html(baseTpl);
         this.$list = dom.find('.articleList');

@@ -8,21 +8,20 @@ define(function(require,exports){
 	
 	function getData(id,fn){
 		$.ajax({
-			'type' : 'GET' ,
-			'url' : '/ajax/blog',
-			'data' : {
-				'act' : 'get_detail',
-				'id' : id
+			type : 'GET' ,
+			url : '/ajax/blog',
+			data : {
+				act : 'get_detail',
+				id : id
 			},
-			'success' :function(data){
+			success :function(data){
                 var template = $('#tpl_blog_detail').html();
                 var tpl = L.tplModule(template);
 				if(data.code == 1){
 					var converter = new showdown.converter();
 					var detail = data['detail'];
-					var date = new Date(parseInt(detail.time_show));
 					detail.content = converter.makeHtml(detail.content);
-					detail.time_show = (date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+ date.getDate();
+					detail.time_show = L.parseTime(detail.time_show,'{y}-{mm}-{dd}');
 					var this_html = juicer(tpl,detail);
 					fn&&fn(null,this_html,data['detail']['title']);
 				}else{

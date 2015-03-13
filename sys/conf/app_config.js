@@ -12,7 +12,7 @@ module.exports = {
 	//前端资源（css、js、图片、字体）
 	frontEnd: {
         //根目录
-        base : '/frontEnd/develop/',
+        base : '/frontEnd/build/',
         //版本
         version : '20141217',
         //图床地址

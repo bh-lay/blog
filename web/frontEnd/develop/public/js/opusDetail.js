@@ -6,19 +6,18 @@ define(function(require,exports){
 	var showdown = require('public/js/showdown');
 	function getData(id,fn){
 		$.ajax({
-			'type' : 'GET' ,
-			'url' : '/ajax/opus',
-			'data' : {
-				'act' : 'get_detail',
-				'id' : id
+			type : 'GET' ,
+			url : '/ajax/opus',
+			data : {
+				act : 'get_detail',
+				id : id
 			},
-			'success' :function(data){
+			success :function(data){
 				if(data.code == 1){
 					var converter = new showdown.converter();
 					var detail = data['detail'];
 					detail.content = converter.makeHtml(detail.content);
-					var date = new Date(parseInt(detail.opus_time_create));
-					detail.opus_time_create = (date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+ date.getDate();
+					detail.opus_time_create = L.parseTime(detail.opus_time_create,'{y}-{mm}-{dd}');
                     //使用七牛图床
 					detail.cover = L.qiniu(detail.cover);
 					
