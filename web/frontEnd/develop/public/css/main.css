@@ -4661,7 +4661,7 @@ body:before {
   background: #fafafa;
   color: inherit;
 }
-@media screen and (max-width: 965px) {
+@media screen and (max-width: 950px) {
   .sidebar {
     padding-top: 20px;
   }
