@@ -46,9 +46,7 @@ define(function(require,exports){
                 hljs.highlightBlock(this);
             });
             
-			seajs.use('comments/index.js',function(comments){
-				new comments.init(commentDom,'blog-' + id);
-			});
+			new L.views.comments.init(commentDom,'blog-' + id);
 		});
 	};
 });

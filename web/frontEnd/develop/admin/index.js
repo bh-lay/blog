@@ -190,7 +190,7 @@ define(function(require,exports){
         var btn = $(this);
         var type = btn.attr('data-type');
         var id = btn.attr('data-id');
-        seajs.use('publish/publish.js',function(publish){
+        seajs.use('admin/publish/publish.js',function(publish){
             var cover = UI.cover({
                 from : btn[0],
 				easyClose: false,

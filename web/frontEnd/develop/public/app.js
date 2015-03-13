@@ -78,7 +78,7 @@ define(function (require, exports) {
         opusDetail : require('public/js/opusDetail.js'),
         labsList : require('public/js/labsList.js'),
         bless : require('public/js/bless.js'),
-        comments : require('comments/index.js')
+        comments : require('public/comments/index.js')
     };
 	L.push = function (url) {
 		lofox.push(url);

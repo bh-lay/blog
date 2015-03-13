@@ -1,10 +1,10 @@
 
 
 define(function(require,exports){
-	var mirror = require('comments/mirror'),
-	    selection = require('comments/selection'),
-	    pagination = require('util/pagination'),
-        face = require('comments/face');
+	var mirror = require('public/comments/mirror'),
+	    selection = require('public/comments/selection'),
+        face = require('public/comments/face'),
+	    pagination = require('util/pagination');
 	
     var default_avatar = 'http://layasset.qiniudn.com/user/default.jpg';
     var private_userInfo = null;

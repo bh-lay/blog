@@ -45,9 +45,8 @@ define(function(require,exports){
 			render_over&&render_over(title);
 			
 			var commentDom = dom.find('.comments_frame');
-			seajs.use('comments/index.js',function(comments){
-				new comments.init(commentDom,'opus-' + id);
-			});
+			
+			new L.views.comments.init(commentDom,'opus-' + id);
 		});
 	};
 });
