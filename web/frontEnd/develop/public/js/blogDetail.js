@@ -4,7 +4,7 @@
  */
 define(function(require,exports){
     require('lib/highlight/highlight');
-	var showdown = require('public/js/showdown.js');
+	var showdown = require('public/js/showdown');
 	
 	function getData(id,fn){
 		$.ajax({

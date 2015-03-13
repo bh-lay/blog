@@ -3,7 +3,7 @@
  *  
  */
 define(function(require,exports){
-	var showdown = require('public/js/showdown.js');
+	var showdown = require('public/js/showdown');
 	function getData(id,fn){
 		$.ajax({
 			'type' : 'GET' ,
