@@ -7,7 +7,6 @@
 
 define && define(function(require,exports){
 	var article = require('publish/article.js');
-	var share = require('publish/share.js');
 	var opus = require('publish/opus.js');
 	var labs = require('publish/labs.js');
 	var friends = require('publish/friends.js');
@@ -23,9 +22,7 @@ define && define(function(require,exports){
 	'</div>'].join('');
 	
 	function show_module (dom,name,id,sendFn){
-		if(name == 'share'){
-			share(dom,id,sendFn);
-		}else if(name == 'opus'){
+		if(name == 'opus'){
 			opus(dom,id,sendFn);
 		}else if(name == 'friends'){
 			friends(dom,id,sendFn);
@@ -54,7 +51,6 @@ define && define(function(require,exports){
 	
 	exports.init = INIT;
 	exports.article = article;
-	exports.share = share;
 	exports.opus = opus;
 	exports.labs = labs;
 	exports.friends = friends;

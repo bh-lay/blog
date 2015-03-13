@@ -8,7 +8,7 @@
  * 发布博文
  */
 define(function(require,exports){
-	require('mditor/mditor.js');
+	require('publish/mditor.js');
 	var gallery = require('gallery/index.js');
 	//初始化模版
 	function valueInit(tpl,data){

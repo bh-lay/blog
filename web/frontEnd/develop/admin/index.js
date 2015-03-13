@@ -91,12 +91,6 @@ define(function(require,exports){
         var dom = createDom(mainDom);
         article_list(dom);
     });
-    //分享页
-    lofox.set('/admin/share',function(){
-        this.title('分享列表');
-        var dom = createDom(mainDom);
-        admin.render.share(dom);
-    });
     //作品页
     lofox.set('/admin/opus',function(){
         this.title('作品列表');
@@ -166,7 +160,7 @@ define(function(require,exports){
         var type = data.type || null;
         var id = data.id || null;
 
-        if(type && type.match(/^(article|share|opus|friends|labs|power|user)$/)){
+        if(type && type.match(/^(article|opus|friends|labs|power|user)$/)){
             seajs.use('publish/publish.js',function(publish){
                 publish.init(dom,{
                     'active' : type,

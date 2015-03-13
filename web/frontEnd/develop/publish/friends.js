@@ -10,7 +10,6 @@
 
 
 define && define(function(require,exports){
-	require('mditor/mditor.js');
 	require('gallery/index.js');
 	
 	
