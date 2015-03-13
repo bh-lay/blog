@@ -11,7 +11,7 @@
  */
 
 define && define(function(require,exports){
-	require('publish/mditor.js');
+	require('admin/publish/mditor.js');
 	
 	
 	//初始化模版

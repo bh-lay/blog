@@ -10,8 +10,6 @@
 
 
 define && define(function(require,exports){
-	require('gallery/index.js');
-	
 	
 	//初始化模版
 	function valueInit(tpl,data){

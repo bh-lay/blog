@@ -8,8 +8,8 @@
  * 发布博文
  */
 define(function(require,exports){
-	require('publish/mditor.js');
-	var gallery = require('gallery/index.js');
+	require('admin/publish/mditor.js');
+	var gallery = require('admin/gallery/index.js');
 	//初始化模版
 	function valueInit(tpl,data){
 		var txt = tpl.replace(/\{(\w*)}/g,function(){

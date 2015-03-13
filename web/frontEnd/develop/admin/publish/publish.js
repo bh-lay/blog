@@ -6,12 +6,12 @@
 //alert(window.outerWidth);
 
 define && define(function(require,exports){
-	var article = require('publish/article.js');
-	var opus = require('publish/opus.js');
-	var labs = require('publish/labs.js');
-	var friends = require('publish/friends.js');
-	var power = require('publish/power.js');
-	var user = require('publish/user.js');
+	var article = require('admin/publish/article.js');
+	var opus = require('admin/publish/opus.js');
+	var labs = require('admin/publish/labs.js');
+	var friends = require('admin/publish/friends.js');
+	var power = require('admin/publish/power.js');
+	var user = require('admin/publish/user.js');
 	
 	var publish_tpl = ['<br/><div class="publish">',
 		'<div class="panel panel-default">',

@@ -161,7 +161,7 @@ define(function(require,exports){
         var id = data.id || null;
 
         if(type && type.match(/^(article|opus|friends|labs|power|user)$/)){
-            seajs.use('publish/publish.js',function(publish){
+            seajs.use('admin/publish/publish.js',function(publish){
                 publish.init(dom,{
                     'active' : type,
                     'id' : id,
