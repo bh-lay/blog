@@ -135,7 +135,7 @@ define(function(require,exports){
         var domCnt = createDom(mainDom);
         domCnt.html('<div class="col-md-12"></div>');
         var dom = domCnt.find('.col-md-12');
-        seajs.use('gallery/index.js',function(gallery){
+        seajs.use('admin/gallery/index.js',function(gallery){
             gallery.init(dom);
         });
     });

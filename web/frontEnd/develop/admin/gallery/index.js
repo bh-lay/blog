@@ -1,12 +1,12 @@
 define(function(require,exports){
 	
-	seajs.use('gallery/style.css');
+	seajs.use('admin/gallery/style.css');
 	var uploader = require('util/uploader.js');
 	var events = require('util/event.js');
 	var panel = require('util/panel.js');
 	var UI = require('UI/dialog.js');
-	var fileItem = require('gallery/fileItem.js');
-	var folderItem = require('gallery/folderItem.js');
+	var fileItem = require('admin/gallery/fileItem.js');
+	var folderItem = require('admin/gallery/folderItem.js');
 	
 	var loading_tpl = '<div class="gp_loading">正在加载</div>';
 	var empty_tpl = '<div class="gp_loading">傻逼，建个空目录做啥子！</div>';
