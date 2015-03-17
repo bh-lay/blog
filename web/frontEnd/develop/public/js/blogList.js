@@ -7,19 +7,19 @@
 
 define(function(require,exports){
 	var pagination = require('util/pagination.js');
-    var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>';
+  var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>';
 	
 	function getData(skip,limit,tag,callback){
 		$.ajax({
-			'type' : 'GET' ,
-			'url' : '/ajax/blog',
-			'data' : {
-				'act' : 'get_list',
-				'skip' : skip,
-                'tag' : tag || null,
-				'limit' : limit
+			type : 'GET' ,
+			url : '/ajax/blog',
+			data : {
+				act : 'get_list',
+				skip : skip,
+        tag : tag || null,
+				limit : limit
 			},
-			'success' :function(data){
+			success :function(data){
 				var count = data['count'],
 					 list = data['list'];
 				for(var i in list){
@@ -78,7 +78,7 @@ define(function(require,exports){
 		this.skip = 0;
 		this.limit = 10;
 		this.count = 0;
-        this.tag = tag || null
+    this.tag = tag || null
 		this.dom = dom;
 		this.onLoadStart = null;
 		this.onLoaded = null;
@@ -91,15 +91,15 @@ define(function(require,exports){
 		getData(this.skip,this.limit,this.tag,function(err,list,count){
 			me.count = count;
 			me.skip += me.limit;
-            var html;
-            if(list.length){
-                html = juicer(list_tpl,{
-                    'list' : list
-                });
-            }else{
-                html = empty_tpl;
-            }
-            me.dom.html(html);
+      var html;
+      if(list.length){
+          html = juicer(list_tpl,{
+              'list' : list
+          });
+      }else{
+          html = empty_tpl;
+      }
+      me.dom.html(html);
 			callback && callback();
 			me.onLoaded && me.onLoaded.call(me);
 		});
@@ -108,16 +108,16 @@ define(function(require,exports){
 	function page(dom,param){
 		var me = this;
 		var baseTpl = $('#tpl_blog_list_base').html();
-        //插入基本模版
-        dom.html(baseTpl);
-        this.$list = dom.find('.articleList');
-        this.$page_cnt = dom.find('.pagination_cnt');
-        //获取当前页数
+    //插入基本模版
+    dom.html(baseTpl);
+    this.$list = dom.find('.articleList');
+    this.$page_cnt = dom.find('.pagination_cnt');
+    //获取当前页数
 		this.pageIndex = param.page || 1;
-        //获取标签名
-        var pageTag = param.tag ? decodeURI(param.tag) : null;
-        //创建列表对象
-        var list = new LIST(this.$list,pageTag);
+    //获取标签名
+    var pageTag = param.tag ? decodeURI(param.tag) : null;
+    //创建列表对象
+    var list = new LIST(this.$list,pageTag);
 		
 		var scrollDelay;
 		this.scrollListener = function(){
@@ -132,22 +132,22 @@ define(function(require,exports){
 		list.renderPage(this.pageIndex,function(){
 			//分页组件
 			var page = new pagination(me.$page_cnt,{
-				'list_count' : list.count,
-				'page_cur' : me.pageIndex,
-				'page_list_num' : list.limit,
-				'max_page_btn' : 6
+				list_count : list.count,
+				page_cur : me.pageIndex,
+				page_list_num : list.limit,
+				max_page_btn : 6
 			});
 			page.jump = function(num){
 				var newUrl = '/blog?page=' + num;
-                if(pageTag){
-                    newUrl += '&tag=' + pageTag;
-                }
-                L.push(newUrl);
+        if(pageTag){
+            newUrl += '&tag=' + pageTag;
+        }
+        L.push(newUrl);
 				//list.renderPage(num);
 				L.refresh();
 			};
 		});
-        //处理标签功能
+    //处理标签功能
 		renderTags(dom.find('.side_card .content'),pageTag,function(tag){
 			if(tag == 'null'){
 				L.push('/blog');

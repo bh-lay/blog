@@ -57,7 +57,7 @@ window.L = window.L || {};
 }());
 
 define(function (require, exports) {
-    require('public/js/jquery');
+  require('public/js/jquery');
 	require('public/js/juicer.js');
 	require('util/lofox_1_0.js');
 	require('UI/dialog.js');
