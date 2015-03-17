@@ -159,8 +159,8 @@ define(function (require, exports) {
     
     
 	/**
-	 * 检测链接是为提供给js使用的地址
-     *   无地址、 javascript:: 、javascript:void(0)、#
+	 * 检测链接是否为提供给js使用的地址
+   *   无地址、 javascript:: 、javascript:void(0)、#
 	 **/
 	function hrefForScript(href){
 		return (href.length == 0 || href.match(/^(javascript\s*\:|#)/)) ? true : false;
@@ -176,6 +176,8 @@ define(function (require, exports) {
             title = encodeURIComponent($data.attr('data-title')),
             img = $data.attr('data-img'),
             shareto = $(this).attr('data-shareto');
+      
+        img = img ? L.qiniu(img) : '';
         var share_url={
             'weibo':'http://service.weibo.com/share/share.php?title='+text+'+&url='+url+'&source=bookmark&appkey=2861592023&searchPic=false&pic='+img,
             'qzone':'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?summary='+text+'&url='+url+'&title='+ title+'&pics='+img+'&desc='+text
