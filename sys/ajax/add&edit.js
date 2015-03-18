@@ -11,7 +11,9 @@ function add(parm,collection_name,callback){
 	
 	var method = mongo.start();
 
-	method.open({'collection_name':collection_name},function(err,collection){
+	method.open({
+    collection_name: collection_name
+  },function(err,collection){
 		if(err){
 			callback && callback(err);
 			return
@@ -34,8 +36,14 @@ function edit(parm,collection_name,callback){
 	
 	var method = mongo.start();
 	
-	method.open({'collection_name':collection_name},function(error,collection){
-		collection.update({'id':parm.id}, {$set:parm}, function(err,docs) {
+	method.open({
+    collection_name: collection_name
+  },function(error,collection){
+		collection.update({
+      id: parm.id
+    }, {
+      $set:parm
+    }, function(err,docs) {
 			if(err) {
 				callback && callback(err);
 			}else {
@@ -95,14 +103,14 @@ function filter_request(connect,callback){
 filter_request.blog = function(data){
 	var error = null;
 	var param = {
-		'id' : data['id']||null,
-		'title':decodeURI(data['title']),
-		'cover':data['cover']||'',
-		'time_show':data['time_show']||new Date().getTime(),
-		'tags':data['tags'] ? data['tags'].split(/\s*\,\s*/) : [],
-		'author':data['author']||'',
-		'content':data['content'],
-		'intro':data['intro']||data['content'].slice(0,200),
+		id : data['id']||null,
+		title :decodeURI(data['title']),
+		cover: data['cover']||'',
+		time_show: data['time_show'] || new Date().getTime().toString(),
+		tags: data['tags'] ? data['tags'].split(/\s*\,\s*/) : [],
+		author: data['author']||'',
+		content: data['content'],
+		intro: data['intro'] || data['content'].slice(0,200),
 	};
 	if(!(param['title']&&param['content'])){
 		error = 'please insert complete code !';

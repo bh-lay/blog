@@ -49,12 +49,18 @@ function get_list(data,callback){
 		findKeys.tags = data.tag;
 	}
 	var method = mongo.start();
-	method.open({'collection_name':'article'},function(err,collection){
+	method.open({
+    collection_name: 'article'
+  },function(err,collection){
       //count the all list
 		collection.count(findKeys,function(err,count){
 			resJSON['count'] = count;
 			
-			collection.find(findKeys,{limit:limit_num}).sort({time_show:-1}).skip(skip_num).toArray(function(err, docs) {
+			collection.find(findKeys,{
+        limit: limit_num
+      }).sort({
+        time_show: -1
+      }).skip(skip_num).toArray(function(err, docs) {
 				method.close();
 				if(err){
 					resJSON.code = 2;
@@ -81,8 +87,12 @@ function get_detail(data,callback){
 		'content_format' : content_format
 	};
 	var method = mongo.start();
-	method.open({'collection_name':'article'},function(err,collection){
-		collection.find({id:articleID}).toArray(function(err, docs) {
+	method.open({
+    collection_name: 'article'
+  },function(err,collection){
+		collection.find({
+      id:articleID
+    }).toArray(function(err, docs) {
 			method.close();
 			if(arguments[1].length==0){
 				resJSON['code'] = 2;
