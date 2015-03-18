@@ -135,29 +135,28 @@ define(function (require, exports) {
 		});
 		return time_str;
 	}
-    //配置弹出层
-    UI.config.zIndex(2000);
-    
-    //显示背景图
-    if (L.supports.css('backgroundSize') && !L.isMobileBrowser) {
-        new L.gallery({
-            'delay' : 50000,
-            'data' : [
-                {'src': app_config.frontEnd_base + 'public/images/gallery/bamboo.jpg', 'alt': '竹子'},
-                {'src': app_config.frontEnd_base + 'public/images/gallery/coast.jpg', 'alt': '江边'}
-            ]
-        });
-    }
-    //开始导航
-    L.nav();
-    //渐隐加载遮罩
-    setTimeout(function () {
-        $('.app_mask').fadeOut(500, function () {
-            $(this).remove();
-        });
-    }, 500);
-    
-    
+  //配置弹出层
+  UI.config.zIndex(2000);
+
+  //显示背景图
+  if (L.supports.css('backgroundSize') && !L.isMobileBrowser) {
+      new L.gallery({
+          'delay' : 50000,
+          'data' : [
+              {'src': app_config.frontEnd_base + 'public/images/gallery/bamboo.jpg', 'alt': '竹子'},
+              {'src': app_config.frontEnd_base + 'public/images/gallery/coast.jpg', 'alt': '江边'}
+          ]
+      });
+  }
+  //开始导航
+  L.nav();
+  //渐隐加载遮罩
+  setTimeout(function () {
+      $('.app_mask').fadeOut(500, function () {
+          $(this).remove();
+      });
+  }, 500);
+  
 	/**
 	 * 检测链接是否为提供给js使用的地址
    *   无地址、 javascript:: 、javascript:void(0)、#
@@ -165,42 +164,51 @@ define(function (require, exports) {
 	function hrefForScript(href){
 		return (href.length == 0 || href.match(/^(javascript\s*\:|#)/)) ? true : false;
 	}
-    /**
-     * 分享功能
-     *  data-text data-url data-title data-img data-shareto
-     */
-    $('body').on('click','.sns-share a',function(){
-        var $data = $(this).parents('.sns-share'),
-            url = $data.attr('data-url') || location.href,
-            text = encodeURIComponent($data.attr('data-text')) || document.title,
-            title = encodeURIComponent($data.attr('data-title')),
-            img = $data.attr('data-img'),
-            shareto = $(this).attr('data-shareto');
-      
-        img = img ? L.qiniu(img) : '';
-        var share_url={
-            'weibo':'http://service.weibo.com/share/share.php?title='+text+'+&url='+url+'&source=bookmark&appkey=2861592023&searchPic=false&pic='+img,
-            'qzone':'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?summary='+text+'&url='+url+'&title='+ title+'&pics='+img+'&desc='+text
-        };
-        share_url[shareto] && window.open(share_url[shareto]);
-        return false;
-    })
-    //处理火狐，js链接新窗口打开问题，感谢 @紫心蕊 
-    .on('click','a',function(e){
-        if(hrefForScript($(this).attr('href'))){
-            e.preventDefault();
-        }
-    })
-    //nicescrol
-    .niceScroll({
-        zindex : 2001,
-        cursorborder: '1px solid rgba(255,255,255,.2)',
-        mousescrollstep: 60,
-        railpadding: {
-            right : 1
-        },
-        bouncescroll: true
-    });
+  /**
+   * 分享功能
+   *  data-text data-url data-title data-img data-shareto
+   */
+  $('body').on('click','.sns-share a',function(){
+    var $data = $(this).parents('.sns-share'),
+        url = $data.attr('data-url') || location.href,
+        text = encodeURIComponent($data.attr('data-text')) || document.title,
+        title = encodeURIComponent($data.attr('data-title')),
+        img = $data.attr('data-img'),
+        shareto = $(this).attr('data-shareto');
+
+    img = img ? L.qiniu(img) : '';
+    var share_url={
+      weibo: 'http://service.weibo.com/share/share.php?title='+text+'+&url='+url+'&source=bookmark&appkey=2861592023&searchPic=false&pic='+img,
+      qzone: 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?summary='+text+'&url='+url+'&title='+ title+'&pics='+img+'&desc='+text
+    };
+    share_url[shareto] && window.open(share_url[shareto]);
+    return false;
+  })
+  //处理火狐，js链接新窗口打开问题，感谢 @紫心蕊 
+  .on('click','a',function(e){
+      if(hrefForScript($(this).attr('href'))){
+          e.preventDefault();
+      }
+  })
+  //nicescrol
+  .niceScroll({
+      zindex : 2001,
+      cursorborder: '1px solid rgba(255,255,255,.2)',
+      mousescrollstep: 60,
+      railpadding: {
+          right : 1
+      },
+      bouncescroll: true
+  });
+  //动态插入emoji表情样式
+  var str = '';
+  $('#data_emoji').html()
+  .replace(/^\s+|\s+$/g,'')
+  .split(/\s+/)
+  .forEach(function(item,index){
+    str += '.emoji.s_' + item + '{background-position: -' + (index * 25) + 'px 0;}';
+  });
+  $('head').append('<style type="text/css" data-module="emoji">' + str + '</style>');
 });
 
 /**
