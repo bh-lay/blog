@@ -325,8 +325,8 @@ pre.hljs code {
 }
 @font-face {
   font-family: "layIcon";
-  src: url("../fonts/layicon-webfont.eot?v=1");
-  src: url("../fonts/layicon-webfont.eot?v=1#iefix") format("embedded-opentype"), url('../fonts/layicon-webfont.woff?v=1') format('woff'), url("../fonts/layicon-webfont.ttf?v=1") format("truetype"), url("../fonts/layicon-webfont.svg?v=1#layicon-webfont") format("svg");
+  src: url("../fonts/layicon-webfont.eot?v=2");
+  src: url("../fonts/layicon-webfont.eot?v=2#iefix") format("embedded-opentype"), url('../fonts/layicon-webfont.woff?v=2') format('woff'), url("../fonts/layicon-webfont.ttf?v=2") format("truetype"), url("../fonts/layicon-webfont.svg?v=2#layicon-webfont") format("svg");
   font-weight: normal;
   font-style: normal;
 }
