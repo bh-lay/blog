@@ -3,12 +3,12 @@
 define(function(require,exports){
 	var mirror = require('public/comments/mirror'),
 	    selection = require('public/comments/selection'),
-        face = require('public/comments/face'),
+      face = require('public/comments/face'),
 	    pagination = require('util/pagination');
 	
-    var default_avatar = 'http://layasset.qiniudn.com/user/default.jpg';
-    var private_userInfo = null;
-	var baseTpl = ['<div class="l_comments">',
+  var default_avatar = 'http://layasset.qiniudn.com/user/default.jpg',
+      private_userInfo = null,
+      baseTpl = ['<div class="l_comments">',
 		'<div class="l_com_sendBox"></div>',
 		'<div class="l_com_list">',
 		'</div>',
@@ -36,9 +36,10 @@ define(function(require,exports){
 		'</div>',
 	'</div>'].join('');
 	var user_tpl = ['<div class="l_sendBox_user">',
-        '<p><input type="text" autocomplete="off" name="username" placeholder="昵称"/></p>',
-        '<p><input type="text" autocomplete="off" name="email" placeholder="xxx@qq.cn"/></p>',
-        '<p><input type="text" autocomplete="off" name="blog" placeholder="xxx.me"/></p>',
+        '<input type="text" autocomplete="off" name="username" placeholder="昵称"/>',
+        '<input type="text" autocomplete="off" name="email" placeholder="xxx@qq.cn"/>',
+        '<input type="text" autocomplete="off" name="blog" placeholder="xxx.me"/>',
+        '<p>邮箱仅用于<a href="http://en.gravatar.com/" title="全球认可的大头贴">gravatar</a>头像，和与您沟通！</p>',
     '</div>'].join('');
 	var list_tpl = ['<div>',
 		'<div class="l_com_list_cnt"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载模块</p></div></div>',
@@ -156,7 +157,7 @@ define(function(require,exports){
 			'blog' : userInput.blog || '',
 			'avatar' : userInput.avatar || default_avatar
 		}
-        var screen_name = user.username || '雁过留名';
+    var screen_name = user.username || '雁过留名';
 		$allDom.find('.l_send_username').html(screen_name).attr('title',screen_name);
 		$allDom.find('.l_send_avatar img').attr('src',user.avatar);
 	}
@@ -484,22 +485,22 @@ define(function(require,exports){
 					from: 'top',
 				}),
 				send = new sendBox(pop.cntDom,me.cid,{
-                    focus: true,
-                    onBeforeSend : function(text){
-                        return '@' + reply_for + ' ' + text;
-                    }
-                });
-            $(pop.dom).find('.UI_pop_cpt').css('border','none');
-            send.on('sendToServicesuccess',function(item){
-                pop.close();
-                me.addItem(item);
-            });
+          focus: true,
+          onBeforeSend : function(text){
+            return '@' + reply_for + ' ' + text;
+          }
+        });
+        $(pop.dom).find('.UI_pop_cpt').css('border','none');
+        send.on('sendToServicesuccess',function(item){
+          pop.close();
+          me.addItem(item);
+        });
 		});
 		
 	}
 	list.prototype.addItem = function(item){
 		item.time = '刚刚';
-        item.content = strToEmoji(item.content);
+    item.content = strToEmoji(item.content);
         
 		var html = juicer(item_tpl,{
 			'list' : [item]

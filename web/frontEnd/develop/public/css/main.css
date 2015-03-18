@@ -996,17 +996,28 @@ body:before {
   overflow: hidden;
 }
 .l_sendBox_user p {
-  margin-top: -1px;
-  border-top: 1px solid #ccc;
+  text-align: center;
+  padding: 5px 0;
+  line-height: 18px;
+  font-size: 12px;
+  color: #aaa;
+}
+.l_sendBox_user p a {
+  color: #888;
+}
+.l_sendBox_user p a:hover {
+  text-decoration: underline;
 }
 .l_sendBox_user input {
   display: block;
   width: 100%;
+  margin: 0;
   padding: 10px 15px;
   line-height: 15px;
   border: none;
-  font-size: 16px;
+  border-bottom: 1px solid #ddd;
   font-family: inherit;
+  font-size: 16px;
   color: #333;
   transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
