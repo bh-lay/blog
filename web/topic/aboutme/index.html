@@ -107,6 +107,14 @@ opacity:1}
 	padding: 0px 10px;
 	transition: all 0.2s;
 }
+.wrap:after{
+  content: '';
+  display: block;
+  clear: both;
+  height: 0;
+  line-height: 0;
+  overflow: hidden;
+}
 .active .wrap{
 	-webkit-animation:flipInX .6s .5s ease both;
 	-moz-animation:flipInX .6s .5s ease both;
@@ -152,7 +160,6 @@ p{
 	background-image: url(night.jpg);
 }
 #section2{
-	background-image: url(work.jpg);
 }
 #section2 p{
 	color: #000;
@@ -160,20 +167,21 @@ p{
 #section3 p{
 	color: #fff;
 }
+#section3 img{
+	max-width: 90%;
+}
 #section4 h1{
 	color: #fff;
 }
 .section4_left{
-	position: absolute;
+	float: left;
 	width: 240px;
 	top: 0;
 	left: 10px;
 }
 .section4_right{
-	position: relative;
-	padding-left: 260px;
-	padding-top: 100px;
-	height: 560px;
+	float: right;
+	padding-top: 130px;
 }
 .section4_right small a{
 	font-size: 14px;
