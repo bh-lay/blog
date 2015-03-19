@@ -4,8 +4,14 @@ var mongo = require('../core/DB');
 
 function getList(callback){
 	var method = mongo.start();
-    method.open({'collection_name':'blog_friend'},function(err,collection){
-		collection.find({
+    method.open({
+      collection_name: 'blog_friend'
+    },function(err,collection){
+      if(err){
+        callback && callback(err);
+        return;
+      }
+		  collection.find({
             isShow: '1'
         }, {
             limit:20
@@ -24,17 +30,22 @@ exports.render = function (connect,app){
 	app.cache.use('links_page',['html'],function(this_cache){
 		connect.write('html',200,this_cache);
 	},function(save_cache){
-        getList(function(err,list){
-            
-            //获取视图
-            app.views('links',{
-                title : '前端英雄榜_特大号的WEB屌丝们',
-                keywords : '剧中人,程序员,前端工程师,网页设计,设计师',
-                description : '一帮程序员,前端工程师,网页设计,设计师，一群纯屌丝！',
-                list: list
-            },function(err,html){
-                save_cache(html);
-            });
+      getList(function(err,list){
+        if(err){
+          app.views('system/mongoFail',{},function(err,html){
+            connect.write('html',500,html);
+          })
+          return;
+        }
+        //获取视图
+        app.views('links',{
+            title : '前端英雄榜_特大号的WEB屌丝们',
+            keywords : '剧中人,程序员,前端工程师,网页设计,设计师',
+            description : '一帮程序员,前端工程师,网页设计,设计师，一群纯屌丝！',
+            list: list
+        },function(err,html){
+            save_cache(html);
         });
+      });
 	});
 }

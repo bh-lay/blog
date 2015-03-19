@@ -9,7 +9,13 @@ var converter = new showdown.converter();
 
 function list_page(app,callback){
 	var method = mongo.start();
-	method.open({'collection_name' : 'labs'},function(err,collection){
+	method.open({
+    collection_name : 'labs'
+  },function(err,collection){
+    if(err){
+      callback && callback(err);
+      return
+    }
 		collection.find({}, {limit:15}).sort({id:-1}).toArray(function(err, docs) {
 			for(var i in docs){
 				docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? app.config.frontEnd.img_domain + docs[i].cover : docs[i].cover;
@@ -24,8 +30,13 @@ function get_detail(lab_name,callback){
 	//get template
 	var method = mongo.start();
 
-	method.open({'collection_name':'labs'},function(err,collection){
-
+	method.open({
+    collection_name: 'labs'
+  },function(err,collection){
+    if(err){
+      callback && callback(err);
+      return
+    }
 		collection.find({'name':lab_name}).toArray(function(err, docs) {
 			method.close();
 			if(arguments[1].length==0){
@@ -47,6 +58,12 @@ exports.list = function (connect,app){
 		connect.write('html',200,this_cache);
 	},function(save_cache){
 		list_page(app,function(err,list){
+      if(err){
+        app.views('system/mongoFail',{},function(err,html){
+          connect.write('html',500,html);
+        })
+        return;
+      }
 			//获取视图
 			app.views('labsList',{
 				'title' : '实验室',

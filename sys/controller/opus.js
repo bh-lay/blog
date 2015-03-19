@@ -8,8 +8,13 @@ var showdown = require('../lib/showdown/showdown.js');
 function list_page(app,callback){
 	var method = mongo.start();
 
-	method.open({'collection_name':'opus'},function(err,collection){
-
+	method.open({
+    collection_name: 'opus'
+  },function(err,collection){
+    if(err){
+      callback && callback(err);
+      return
+    }
 		collection.find({}, {limit:28}).sort({id:-1}).toArray(function(err, docs) {
 			method.close();
 			for(var i = 0,total = docs.length;i<total;i++){
@@ -25,8 +30,12 @@ function list_page(app,callback){
 function detail_page(id,callback){
 	var method = mongo.start();
 	method.open({
-        collection_name: 'opus'
-    },function(err,collection){
+      collection_name: 'opus'
+  },function(err,collection){
+    if(err){
+      callback && callback(err);
+      return
+    }
 		collection.find({id:id}).toArray(function(err, docs) {
 			method.close();
 			if(docs.length==0){
@@ -46,10 +55,12 @@ exports.list = function(connect,app){
 		connect.write('html',200,this_cache);
 	},function(save_cache){
 		list_page(app,function(err,list){
-			if(err){
-				app.write('notFound');
-				return
-			}
+      if(err){
+        app.views('system/mongoFail',{},function(err,html){
+          connect.write('html',500,html);
+        })
+        return;
+      }
 			//获取视图
 			app.views('opusList',{
 				'title' : '作品',
@@ -68,10 +79,12 @@ exports.detail = function(connect,app,id){
 		connect.write('html',200,this_cache);
 	},function(save_cache){
 		detail_page(id,function(err,data){
-			if(err){
-				connect.write('notFound');
-				return
-			}
+      if(err){
+        app.views('system/mongoFail',{},function(err,html){
+          connect.write('html',500,html);
+        })
+        return;
+      }
 			//获取视图
 			app.views('opusDetail',{
 				'title' : data.title,

@@ -10,7 +10,13 @@ var showdown = require('../lib/showdown/showdown.js');
 
 function getDetail(id,callback){
 	var method = mongo.start();
-	method.open({'collection_name':'article'},function(err,collection){
+	method.open({
+    collection_name: 'article'
+  },function(err,collection){
+    if(err){
+      callback && callback(err);
+      return;
+    }
 
 		collection.find({
 			'id' : id
@@ -35,7 +41,13 @@ function getList(app,param,callback){
 	var skip = param.skip || 0;
 	var limit = param.limit || 10;
 	
-	method.open({'collection_name':'article'},function(err,collection){
+	method.open({
+    collection_name: 'article'
+  },function(err,collection){
+    if(err){
+      callback && callback(err);
+      return;
+    }
 		collection.count(function(err,count){
 			collection.find({}, {
 				limit:limit
@@ -70,12 +82,18 @@ exports.list = function (connect,app){
 			'skip' : (page-1) * 10,
 			'limit': 10
 		},function(err,list,data){
+      if(err){
+        app.views('system/mongoFail',{},function(err,html){
+          connect.write('html',500,html);
+        })
+        return;
+      }
 			var page_html = app.utils.pagination({
-				'list_count' : data.count,
-				'page_list_num': data.limit,
-				'page_cur': page,
-				'max_page_btn': 10,
-				'base_url' : '/blog?page={num}'
+				list_count : data.count,
+				page_list_num: data.limit,
+				page_cur: page,
+				max_page_btn: 10,
+				base_url : '/blog?page={num}'
 			});
 			//获取视图
 			app.views('blogList',{
