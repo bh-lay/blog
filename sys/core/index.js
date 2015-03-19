@@ -146,17 +146,17 @@ function APP(){
 						'location' : url_redirect[path.pathname]
 					});
 				}else{
-                    //最终：只能404了
-                    me.cache.use('404page',['html','system'],function(this_cache){
-                        new_connect.write('html',200,this_cache);
-                    },function(save_cache){
-                        //获取视图
-                        me.views('404',{
-                            content : '文件找不到啦！'
-                        },function(err,html){
-                            save_cache(html);
-                        });
-                    });
+          //最终：只能404了
+          me.cache.use('404page',['html','system'],function(this_cache){
+              new_connect.write('html',200,this_cache);
+          },function(save_cache){
+              //获取视图
+              me.views('system/404',{
+                  content : '文件找不到啦！'
+              },function(err,html){
+                  save_cache(html);
+              });
+          });
 				}
 			});
 		}
