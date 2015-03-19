@@ -186,7 +186,7 @@ function login_handle(connect,session_this,username,password){
 //增加或编辑用户记录
 exports.add_edit = function (connect,app){
 	
-	parse.request(connect.request,function(error,fields, files){
+	utils.parse.request(connect.request,function(error,fields, files){
 		var data = fields;
 		var parm = {
 			'id' : data['id'] || '',
