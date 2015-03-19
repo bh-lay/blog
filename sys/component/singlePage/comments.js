@@ -103,6 +103,10 @@ function getCommentList(callback){
 	method.open({
 		collection_name: 'comments'
 	},function(err,collection){
+		if(err){
+			callback && callback(err);
+			return;
+		}
 		collection.count(function(err,count){
 			collection.find({}, {
 				limit: 5
@@ -119,9 +123,9 @@ function getCommentList(callback){
 
 exports.produce = function(temp,data,callback){
 	getCommentList(function(err,list){
-        var html = !err ? utils.juicer(temp,{
-            list: list
-        }) : '';
-        callback && callback(err,html);
-    });
+    var html = !err ? utils.juicer(temp,{
+      list: list
+    }) : '';
+    callback && callback(err,html);
+  });
 };

@@ -1471,7 +1471,8 @@ body:before {
   -o-column-gap: 20px;
   line-height: 0;
 }
-.articleList .l-loading-panel {
+.articleList .l-loading-panel,
+.articleList .blank-content {
   display: inline-block;
   width: 100%;
   margin-top: 0;
@@ -1574,6 +1575,9 @@ body:before {
   border-radius: 2px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   overflow: hidden;
+}
+.opusList .blank-content {
+  box-shadow: none;
 }
 .opus-item {
   position: relative;
@@ -2329,8 +2333,9 @@ a:active {
   -o-transition: all 0.2s linear;
 }
 .blank-content {
-  padding: 100px 20px;
-  margin-bottom: 20px;
+  max-width: 400px;
+  padding: 50px 0;
+  margin: 0 auto 20px;
   background: #fff;
   border-radius: 2px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);

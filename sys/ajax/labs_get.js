@@ -30,14 +30,19 @@ function get_list(data,callback){
 		skip_num = parseInt(data['skip'])||0;
 	
 	var resJSON = {
-		'code':1,
-		'limit':limit_num,
-		'skip':skip_num,
+		code: 1,
+		limit: limit_num,
+		skip: skip_num,
 	};
 	
 	var method = mongo.start();
 	method.open({'collection_name':'labs'},function(err,collection){
-      //count the all list
+    if(err){
+      resJSON.code = 500;
+      callback&&callback(resJSON);
+      return
+    }
+    //count the all list
 		collection.count(function(err,count){
 			resJSON['count'] = count;
 			

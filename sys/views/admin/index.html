@@ -37,33 +37,33 @@
 	.custom-subFooter{background:#333;color:#fff;}
 	.custom-mb10{margin-bottom:10px;}
 	.custom-mb20{margin-bottom:20px;}
-    .custom-editor{
-        margin: 10px 0;
-    }
-    #editor {
-        width: 100%;
-        min-height: 500px;
-    }
-    .pro_loading{
-        height: 200px;
-        line-height: 200px;
-        text-align: center;
-        background: #fff;
-    }
-    tr.disable{
-        text-decoration: line-through;
-        background: #eee;
-    }
-    .commentsList .comm_header {
-        line-height: 30px;
-        color: #888;
-    }
-    .commentsList .comm_header span{
-        padding: 0 1em 0 .5em;
-    }
-    .commentsList p{
-        padding-top: 1em;
-    }
+  .custom-editor{
+    margin: 10px 0;
+  }
+  #editor {
+    width: 100%;
+    min-height: 500px;
+  }
+  .pro_loading{
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+    background: #fff;
+  }
+  tr.disable{
+    text-decoration: line-through;
+    background: #eee;
+  }
+  .commentsList .comm_header {
+    line-height: 30px;
+    color: #888;
+  }
+  .commentsList .comm_header span{
+    padding: 0 1em 0 .5em;
+  }
+  .commentsList p{
+    padding-top: 1em;
+  }
 </style>
 </head>
 <body>
@@ -122,6 +122,7 @@
 				<ul>
 					<li>JSON code:200 正常</li>
 					<li>JSON code:201 没有权限</li>
+					<li>JSON code:501 连不上数据库</li>
 					<li>用户ID统一使用小写的uid，而非user_id、userid</li>
 					<li>基于bootstrap布局，自定义样式请加上“.custom-”前缀</li>
 				</ul>
@@ -143,14 +144,14 @@
 	var admin_dataBase = {
 		username : '${{username}}',
 		userid : '${{userid}}',
-        frontEnd_version : '${{frontEnd.version}}',
+    frontEnd_version : '${{frontEnd.version}}',
 		frontEnd_base : '${{frontEnd.base}}'
 	};
 	seajs.config({
 	  base : '${{frontEnd.base}}',
-      map : [[/^(.*\.(?:css|js))(.*)$/i, '$1?v=${{frontEnd.version}}']]
+    map : [[/^(.*\.(?:css|js))(.*)$/i, '$1?v=${{frontEnd.version}}']]
 	});
-    seajs.use('admin/index.js');
+  seajs.use('admin/index.js');
 </script>
 </body>
 </html>

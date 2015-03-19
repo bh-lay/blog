@@ -22,6 +22,10 @@ define(function(require,exports){
 			success :function(data){
 				var count = data['count'],
 					 list = data['list'];
+        if(data.code == 500){
+          callback && callback(500);
+          return
+        }
 				for(var i in list){
 					list[i].time_show = L.parseTime(list[i].time_show,'{y}-{mm}-{dd}');
 					//使用七牛图床
@@ -89,15 +93,19 @@ define(function(require,exports){
 		this.skip = (index-1 || 0) * this.limit;
 		var list_tpl = $('#tpl_blog_list_item').html();
 		getData(this.skip,this.limit,this.tag,function(err,list,count){
-			me.count = count;
-			me.skip += me.limit;
       var html;
-      if(list.length){
-          html = juicer(list_tpl,{
-              'list' : list
-          });
+      if(err){
+        html = empty_tpl;
       }else{
-          html = empty_tpl;
+        me.count = count;
+        me.skip += me.limit;
+        if(list.length){
+            html = juicer(list_tpl,{
+                'list' : list
+            });
+        }else{
+            html = empty_tpl;
+        }
       }
       me.dom.html(html);
 			callback && callback();

@@ -320,8 +320,16 @@ exports.list = function(connect,app){
  */
 function getUserDetail(userID,callback){
 	var method = mongo.start();
-	method.open({'collection_name':'user'},function(err,collection){
-		collection.find({id:userID}).toArray(function(err, docs) {
+	method.open({
+    collection_name: 'user'
+  },function(err,collection){
+    if(err){
+			callback&& callback(err);
+      return;
+    }
+		collection.find({
+      id: userID
+    }).toArray(function(err, docs) {
 			method.close();
 			if(err || docs.length == 0){
 				callback && callback(err || 'error');

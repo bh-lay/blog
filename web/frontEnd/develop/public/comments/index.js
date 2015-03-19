@@ -5,7 +5,7 @@ define(function(require,exports){
 	    selection = require('public/comments/selection'),
       face = require('public/comments/face'),
 	    pagination = require('util/pagination');
-	
+	var noData_tpl = '<div class="l_com_list_noData">来的真早，快抢沙发！</div>';
   var default_avatar = 'http://layasset.qiniudn.com/user/default.jpg',
       private_userInfo = null,
       baseTpl = ['<div class="l_comments">',
@@ -215,11 +215,11 @@ define(function(require,exports){
         var user = private_userInfo;
         
         var pop = UI.pop({
-            'title' : '雁过留名',
-            'width' : 300,
-            'html' : user_tpl,
-			'easyClose' : false,
-            'confirm' : confirmFn
+          title : '雁过留名',
+          width : 300,
+          html : user_tpl,
+          easyClose : false,
+          confirm : confirmFn
         });
         
         var $elem = $(pop.dom),
@@ -274,7 +274,7 @@ define(function(require,exports){
 		var $textarea = $allDom.find('textarea');
 		
 		var inputDelay,
-			focusDelay;
+        focusDelay;
 		$textarea.on('keyup keydown change propertychange input paste',function(){
 			clearTimeout(inputDelay);
 			inputDelay = setTimeout(function(){
@@ -304,7 +304,7 @@ define(function(require,exports){
 		}).on('click','.l_send_username,.l_send_avatar',function(e){
         	askForUserInfo.call(me)
 		}).on('click','.l_send_submit',function(){
-            $textarea.focus();
+      $textarea.focus();
 			if(me.text.length == 0){
 				UI.prompt('你丫倒写点东西啊！',null,{
 					'top' : $(this).offset().top + 40,
@@ -333,15 +333,15 @@ define(function(require,exports){
 			}
 			
 		}).on('click','.l_send_face',function(){
-            var offset = $(this).offset();
-            $textarea.focus();
+      var offset = $(this).offset();
+      $textarea.focus();
 			face({
-                top: offset.top,
-                left: offset.left,
-                onSelect: function(title){
-                    $textarea.insertTxt(':' + title + ':').trigger('change');
-                }
-            });
+        top: offset.top,
+        left: offset.left,
+        onSelect: function(title){
+            $textarea.insertTxt(':' + title + ':').trigger('change');
+        }
+      });
 		});
 	}
 	//绑定对象自定义事件
@@ -371,15 +371,15 @@ define(function(require,exports){
 			var length = $textarea.val().length;
 			var rest_length = me.limit - length;
 			var show_txt = rest_length;
-            if(length > 200){
-                $count.show();
-                if(rest_length < 0){
-				    show_txt = '<font color="#f50">' + Math.abs(rest_length) + '</font>';
-                }
-                $countRest.html(show_txt);
-            }else{
-                $count.hide();
-            }
+      if(length > 200){
+          $count.show();
+          if(rest_length < 0){
+      show_txt = '<font color="#f50">' + Math.abs(rest_length) + '</font>';
+          }
+          $countRest.html(show_txt);
+      }else{
+          $count.hide();
+      }
 		}).on('login',function(user){
 			//设置用户信息
 			setUserInfoToUI.call(me,user);
@@ -417,18 +417,16 @@ define(function(require,exports){
 			}
 			setUserInfoToUI.call(me,user);
 		});
-        if(param.focus){
-            $(this.dom).find('textarea').focus();
-        }
+    if(param.focus){
+        $(this.dom).find('textarea').focus();
+    }
 	}
 	sendBox.prototype = {
 		'on' : ON
 	};
 	
 	
-    
-    
-    
+  
     
 	/**
 	 * 列表类
@@ -448,21 +446,24 @@ define(function(require,exports){
 		$(dom).html(this.dom);
 
 		this.getData(0,function(err,data){
+      if(err){
+        $(me.dom).find('.l_com_list_cnt').html(noData_tpl);
+        return
+      }
 			var html = juicer(item_tpl,data);
 			$(me.dom).find('.l_com_list_cnt').html(html);
 			avatar_onerror($(me.dom));
 			if(me.total == 0){
-				$(me.dom).find('.l_com_list_cnt').prepend('<div class="l_com_list_noData">来的真早，快抢沙发！</div>');
+				$(me.dom).find('.l_com_list_cnt').prepend(noData_tpl);
 			}else{
 				//分页组件
 				var page = new pagination($(dom).find('.l_com_list_pagination'),{
-					'list_count' : me.total,
-					'page_cur' : 0,
-					'page_list_num' : me.limit,
-					'max_page_btn' : 6
+					list_count : me.total,
+					page_cur : 0,
+					page_list_num : me.limit,
+					max_page_btn : 6
 				});
 				page.jump = function(num){
-					
 					me.getData((num-1)*me.limit,function(err,data){
 						if(err){
 							console.log('error');
@@ -526,6 +527,9 @@ define(function(require,exports){
 				'limit' : me.limit
 			},
 			'success' : function(data){
+        if(data.code == 500){
+					callback && callback(500);
+        }
 				me._status = 'loaded';
 				if(data.code && data.code == 200){
 					var DATA = data.data;

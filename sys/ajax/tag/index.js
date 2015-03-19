@@ -7,8 +7,14 @@ var mongo = require('../../core/DB.js');
 
 function getTagsList(callback){
 	var method = mongo.start();
-	method.open({'collection_name':'article'},function(err,collection){
-		collection.find().toArray(function(err, docs) {
+	method.open({
+    collection_name: 'article'
+  },function(err,collection){
+    if(err){
+      callback && callback(err);
+      return;
+    }
+    collection.find().toArray(function(err, docs) {
 			method.close();
 			if(err){
 				callback && callback(err);

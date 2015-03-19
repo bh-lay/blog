@@ -3,6 +3,7 @@
  *  
  */
 define(function(require,exports){
+  var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>';
 	
 	var limit = 20,
 		 skip = 0,
@@ -18,7 +19,11 @@ define(function(require,exports){
 				'limit' : limit
 			},
 			'success' :function(data){
-				count = data['count'];
+				if(data.code == 500){
+          callback && callback(500);
+          return;
+        }
+        count = data['count'];
 				skip += limit;
 				
 				var list = data['list'];
@@ -31,20 +36,25 @@ define(function(require,exports){
 						'height': 400
 					});
 				}
-				callback&&callback(list);
+				callback&&callback(null,list);
 			}
 		});
 	};
 	return function(dom,param){
 		var base_tpl = $('#tpl_labs_list_base').html();
 		skip = 0;
-        dom.html(base_tpl);
-		getData(function(list){
-			var temp = $('#tpl_labs_list_item').html();
-			var this_html = juicer(temp,{
-                'list' : list
-            });
-            dom.find('.labsList').html(this_html);
+    dom.html(base_tpl);
+		getData(function(err,list){
+      var this_html;
+      if(err){
+        this_html = empty_tpl;
+      }else{
+        var temp = $('#tpl_labs_list_item').html();
+        this_html = juicer(temp,{
+            list : list
+        });
+      }
+      dom.find('.labsList').html(this_html);
 		});
 	};
 });

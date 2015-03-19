@@ -62,8 +62,8 @@ exports.add = function (connect,app){
 			}
 		
 		    
-            //清除所有评论缓存
-            app.cache.clear('comment');
+      //清除所有评论缓存
+      app.cache.clear('comment');
             
 			data.uid = session_this.get('uid');
 			add(data,function(err,data){
@@ -71,7 +71,7 @@ exports.add = function (connect,app){
 					'code' : 200
 				}
 				if(err){
-					json.code = 201
+					json.code = 500
 				}else{
 					json.data = data;
 				}
@@ -83,24 +83,24 @@ exports.add = function (connect,app){
 
 //列表
 exports.list = function (connect,app){
-    var url = connect.request.url;
+  var url = connect.request.url;
 	var data = connect.url.search;
     
     //使用缓存
 	app.cache.use(url,['ajax','comment'],function(this_cache){
 		connect.write('json',this_cache);
 	},function(save_cache){
-        list(connect,data,function(err,jsonData){
-            var json = {
-                'code' : 200
-            }
-            if(err){
-                json.code = 201;
-            }else{
-                json.data = jsonData;
-            }
-			save_cache(JSON.stringify(json));
-        });
+      list(connect,data,function(err,jsonData){
+        var json = {
+          code : 200
+        }
+        if(err){
+          json.code = 500;
+        }else{
+          json.data = jsonData;
+        }
+        save_cache(JSON.stringify(json));
+      });
 	});
 };
 //删除

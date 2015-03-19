@@ -3,6 +3,7 @@
  *  
  */
 define(function(require,exports){
+  var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>';
 	
 	var limit = 20,
 		 skip = 0,
@@ -18,6 +19,10 @@ define(function(require,exports){
 				'limit' : limit
 			},
 			'success' :function(data){
+        if(data.code == 500){
+          callback && callback(500);
+          return
+        }
 				count = data['count'];
 				skip += limit;
 				
@@ -27,7 +32,7 @@ define(function(require,exports){
                     //使用七牛图床
 					list[i].cover = L.qiniu(list[i].cover);
 				}
-				callback&&callback(list);
+				callback&&callback(null,list);
 			}
 		});
 	};
@@ -37,12 +42,17 @@ define(function(require,exports){
         var base_tpl_end = L.tplModule(base_tpl);
         dom.html(base_tpl_end);
 		skip = 0;
-		getData(function(list){
-			var item_tpl = $('#tpl_opus_list_item').html();
-			var this_html = juicer(item_tpl,{
-				'list' : list
-			});
-            dom.find('.opusList').html(this_html);
+		getData(function(err,list){
+      var this_html;
+      if(err){
+        this_html = empty_tpl;
+      }else{
+        var item_tpl = $('#tpl_opus_list_item').html();
+        this_html = juicer(item_tpl,{
+				  list : list
+        });
+      }
+      dom.find('.opusList').html(this_html);
 		});
 	};
 });

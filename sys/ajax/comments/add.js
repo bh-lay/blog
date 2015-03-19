@@ -40,7 +40,13 @@ module.exports = function(data,callback){
 	
 	
 	var method = mongo.start();
-	method.open({'collection_name':'comments'},function(err,collection){
+	method.open({
+    collection_name: 'comments'
+  },function(err,collection){
+    if(err){
+      callback && callback(err);
+      return
+    }
 		collection.insert(item,function(err,result){
 			if(err) {
 				callback && callback(err);

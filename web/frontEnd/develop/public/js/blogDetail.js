@@ -3,8 +3,9 @@
  *  
  */
 define(function(require,exports){
-    require('lib/highlight/highlight');
+  require('lib/highlight/highlight');
 	var showdown = require('public/js/showdown');
+  var empty_tpl = '<div class="blank-content"><p>博文不存在</p></div>';
 	
 	function getData(id,fn){
 		$.ajax({
@@ -15,9 +16,9 @@ define(function(require,exports){
 				id : id
 			},
 			success :function(data){
-                var template = $('#tpl_blog_detail').html();
-                var tpl = L.tplModule(template);
-				if(data.code == 1){
+        var template = $('#tpl_blog_detail').html();
+        var tpl = L.tplModule(template);
+				if(data.code == 200){
 					var converter = new showdown.converter();
 					var detail = data['detail'];
 					detail.content = converter.makeHtml(detail.content);
@@ -35,17 +36,18 @@ define(function(require,exports){
 		
 		getData(id,function(err,html,title){
 			if(err){
+        dom.html(empty_tpl);
 				return
 			}
 			callback && callback(title);
 			html&&dom.html(html);
 			var commentDom = dom.find('.comments_frame');
-            
-            //代码高亮
-            dom.find('pre').each(function(){
-                hljs.highlightBlock(this);
-            });
-            
+      
+      //代码高亮
+      dom.find('pre').each(function(){
+          hljs.highlightBlock(this);
+      });
+      
 			new L.views.comments.init(commentDom,'blog-' + id);
 		});
 	};

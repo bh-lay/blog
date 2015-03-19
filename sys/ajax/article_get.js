@@ -39,9 +39,9 @@ function get_list(data,callback){
 		findKeys = {};
 	
 	var resJSON = {
-		'code':1,
-		'limit':limit_num,
-		'skip':skip_num,
+		code: 1,
+		limit: limit_num,
+		skip: skip_num,
 	};
 	
 	//过滤标签
@@ -52,6 +52,11 @@ function get_list(data,callback){
 	method.open({
     collection_name: 'article'
   },function(err,collection){
+    if(err){
+      resJSON.code = 500;
+      callback&&callback(resJSON);
+      return
+    }
       //count the all list
 		collection.count(findKeys,function(err,count){
 			resJSON['count'] = count;
@@ -82,14 +87,19 @@ function get_detail(data,callback){
 		content_format = data['content_format'] || 'html';
 	
 	var resJSON={
-		'code':1,
-		'id' : articleID,
-		'content_format' : content_format
+		code: 200,
+		id : articleID,
+		content_format : content_format
 	};
 	var method = mongo.start();
 	method.open({
     collection_name: 'article'
   },function(err,collection){
+    if(err){
+      resJSON.code = 500;
+      callback&&callback(resJSON);
+      return
+    }
 		collection.find({
       id:articleID
     }).toArray(function(err, docs) {
@@ -120,14 +130,14 @@ function this_control(connect,callback){
 			});
 		}else{
 			callback&&callback({
-				'code' : 2,
-				'msg' : 'plese tell me which blog article you want to get !'
+				code : 2,
+				msg : 'plese tell me which blog article you want to get !'
 			});
 		}
 	}else{
 		callback&&callback({
-			'code' : 2,
-			'msg' : 'plese use [act] get_detail or get_list !'
+			code : 2,
+			msg : 'plese use [act] get_detail or get_list !'
 		});
 	}
 }
