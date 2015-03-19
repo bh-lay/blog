@@ -64,8 +64,8 @@ function get_detail(data,callback){
 		articleID = data['id'];
 	
 	var resJSON={
-		'code':1,
-		'id' : data['id'],
+		code: 200,
+		id : data['id'],
 	};
 	var method = mongo.start();
 	method.open({
