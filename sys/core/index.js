@@ -113,57 +113,58 @@ function isNormalVisitor(req){
  * application 类
  */
 function APP(){
-	var me = this;
+  var me = this;
+
+  this.staticFileRoot = config.staticFileRoot;
+  this.mime = config.mime;
+  this.MAPS = {};
 	
-	this.staticFileRoot = config.staticFileRoot;
-	this.MAPS = {};
-	
-	// server start
-	var server = http.createServer(function (req,res) {
-        if(isNormalVisitor(req)){
-            res.writeHead(500);
-            res.end('hello I\'m bh-lay !');
-            return
-        }
-        //实例化一个connect对象
-		var new_connect = new connect(req,res),
-            path = new_connect.url,
-            pathNode = pathParser(path.pathname),
-            result = findUrlInMaps(pathNode,me.MAPS);
-		
-		if(result){
-			//第一顺序：执行get方法设置的回调
-			var data = result.data;
-			result.mapsItem.call(this,data,new_connect);
-		}else{
-			//第二顺序：使用静态文件
-			staticFile.read(me.staticFileRoot ,path.pathname,req,function(status,headers,content){
-				new_connect.write('define',status,headers,content);
-			},function(){
-				//第三顺序：查找301重定向
-				if(url_redirect[path.pathname]){
-					new_connect.write('define',301,{
-						'location' : url_redirect[path.pathname]
-					});
-				}else{
+  // server start
+  var server = http.createServer(function (req,res) {
+    if(isNormalVisitor(req)){
+      res.writeHead(500);
+      res.end('hello I\'m bh-lay !');
+      return
+    }
+    //实例化一个connect对象
+    var new_connect = new connect(req,res),
+        path = new_connect.url,
+        pathNode = pathParser(path.pathname),
+        result = findUrlInMaps(pathNode,me.MAPS);
+
+    if(result){
+      //第一顺序：执行get方法设置的回调
+      var data = result.data;
+      result.mapsItem.call(this,data,new_connect);
+    }else{
+      //第二顺序：使用静态文件
+      staticFile.read(me.staticFileRoot,me.mime ,path.pathname,req,function(status,headers,content){
+          new_connect.write('define',status,headers,content);
+      },function(){
+        //第三顺序：查找301重定向
+        if(url_redirect[path.pathname]){
+          new_connect.write('define',301,{
+              'location' : url_redirect[path.pathname]
+          });
+        }else{
           //最终：只能404了
           me.cache.use('404page',['html','system'],function(this_cache){
-              new_connect.write('html',200,this_cache);
+            new_connect.write('html',200,this_cache);
           },function(save_cache){
-              //获取视图
-              me.views('system/404',{
-                  content : '文件找不到啦！'
-              },function(err,html){
-                  save_cache(html);
-              });
+            //获取视图
+            me.views('system/404',{
+                content : '文件找不到啦！'
+            },function(err,html){
+                save_cache(html);
+            });
           });
-				}
-			});
-		}
-	});
-	
-	server.listen(config.port, 0,0,0,0);
-	console.log('server start with port ' + config.port);
+        }
+      });
+    }
+  });
+
+  server.listen(config.port, 0,0,0,0);
+  console.log('server start with port ' + config.port);
 };
 
 /**

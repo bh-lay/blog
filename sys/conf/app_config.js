@@ -30,5 +30,19 @@ module.exports = {
 		user: 'lay',
 		pass: '19900927',
 		db_name: 'blog'
-	}
+	},
+    //定义文件类型 Mime-Type
+    mime : {
+      html : 'text/html',
+      js : 'application/x-javascript',
+      css : 'text/css',
+      ico : 'image/x-icon',
+      jpg : 'image/jpeg',
+      png : 'image/png',
+      gif : 'image/gif',
+      rar : 'application/zip',
+      zip : 'application/zip',
+      pdf : 'application/pdf',
+      txt : 'text/plain'
+    }
 }; 

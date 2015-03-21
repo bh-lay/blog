@@ -4,23 +4,9 @@
 
 var fs = require('fs');
 
-/*Mime-Type*/
-var mime = {
-	'html' : 'text/html',
-	'js' : 'application/x-javascript',
-	'css' : 'text/css',
-	'ico' : 'image/x-icon',
-	'jpg' : 'image/jpeg',
-	'png' : 'image/png',
-	'gif' : 'image/gif',
-	'rar' : 'application/zip',
-	'zip' : 'application/zip',
-	'pdf' : 'application/pdf',
-	'txt' : 'text/plain'
-};
 
 /*read static resources*/
-function readFile(staticFileRoot,path,req,responseFile,notFound) {
+function readFile(staticFileRoot,mime,path,req,responseFile,notFound) {
 	//匹配文件扩展名
 	var pathname_split = path.match(/.\.([^.]+)$/);
 	var ext = pathname_split ? pathname_split[1] : null;
@@ -34,16 +20,7 @@ function readFile(staticFileRoot,path,req,responseFile,notFound) {
         realPath = staticFileRoot + path;
     }
 	var content_type = mime[ext]||'unknown';
-//	if(!mime[ext]){
-		/**
-		 * 415 not supposted 
-		 */
-//		responseFile(415,{
-//			'Content-Type' : 'text/plain'
-//		},'this type file(*.'+ext+') is not supposted !');
-		
-//		return
-//	}
+  
 	fs.exists(realPath, function(exists) {
 		if(!exists){
 			notFound();
