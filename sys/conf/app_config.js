@@ -9,6 +9,8 @@ module.exports = {
 	port : 80,
     //静态资源根目录
     staticFileRoot: '../web/',
+    //静态资源缓存时间
+    staticMaxAge: 60 * 60 * 24 * 365,
 	//前端资源（css、js、图片、字体）
 	frontEnd: {
         //根目录

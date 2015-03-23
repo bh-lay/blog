@@ -8,7 +8,7 @@ var http = require('http');
 var connect = require('./connect.js');
 var views = require('./views.js');
 var cache = require('./cache.js');
-var staticFile = require('./staticFile.js');
+var Filer = require('./staticFile.js');
 var url_redirect = require('../conf/301url');
 var config = require('../conf/app_config');
 var utils = require('./utils/index.js');
@@ -114,11 +114,9 @@ function isNormalVisitor(req){
  */
 function APP(){
   var me = this;
-
-  this.staticFileRoot = config.staticFileRoot;
-  this.mime = config.mime;
+  
   this.MAPS = {};
-	
+  this.fileReader = new Filer(config.staticFileRoot,config.mime,config.staticMaxAge);
   // server start
   var server = http.createServer(function (req,res) {
     if(isNormalVisitor(req)){
@@ -138,7 +136,7 @@ function APP(){
       result.mapsItem.call(this,data,new_connect);
     }else{
       //第二顺序：使用静态文件
-      staticFile.read(me.staticFileRoot,me.mime ,path.pathname,req,function(status,headers,content){
+      me.fileReader.read(path.pathname,req,function(status,headers,content){
           new_connect.write('define',status,headers,content);
       },function(){
         //第三顺序：查找301重定向
