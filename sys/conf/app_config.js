@@ -6,37 +6,19 @@
 
 module.exports = {
 	host : '*',
+  //端口号
 	port : 80,
+  //静态资源
+  static: {
     //静态资源根目录
-    staticFileRoot: '../web/',
+    root: '../web/',
     //静态资源缓存时间
-    staticMaxAge: 60 * 60 * 24 * 365,
-	//前端资源（css、js、图片、字体）
-	frontEnd: {
-        //根目录
-        base : '/frontEnd/develop/',
-        //版本
-        version : '20141217',
-        //图床地址
-        img_domain : '/asset'
-    },
-    //缓存配置
-    cache: {
-        use: false,
-        max_num: 1000,
-        root: './temporary/cache/'
-    },
-	mongo : {
-		host: 'localhost',
-		port: 27017,
-		user: 'lay',
-		pass: '19900927',
-		db_name: 'blog'
-	},
+    maxAge: 60 * 60 * 24 * 365,
     //定义文件类型 Mime-Type
     mime : {
       html : 'text/html',
       js : 'application/x-javascript',
+      json : 'application/json',
       css : 'text/css',
       ico : 'image/x-icon',
       jpg : 'image/jpeg',
@@ -47,4 +29,28 @@ module.exports = {
       pdf : 'application/pdf',
       txt : 'text/plain'
     }
+  }, 
+	//前端版本控制（css、js、图片、字体）
+	frontEnd: {
+    //根目录
+    base : '/frontEnd/develop/',
+    //版本
+    version : '20141217',
+    //图床地址
+    img_domain : '/asset'
+  },
+  //缓存配置
+  cache: {
+    use: false,
+    max_num: 1000,
+    root: './temporary/cache/'
+  },
+  //数据库链接
+	mongo : {
+		host: 'localhost',
+		port: 27017,
+		user: 'lay',
+		pass: '19900927',
+		db_name: 'blog'
+	}
 }; 

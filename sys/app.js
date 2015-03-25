@@ -4,11 +4,11 @@ var app_factory = require('../sys/core/index.js');
 //创建app
 var app = new app_factory();
 
-var singlePage = require('./controller/singlePage.js');
 /**
  * 选择静态、动态视图版本
  *
  */
+var singlePage = require('./controller/singlePage.js');
 function views_select(connect,callback){
 	//cookie有相应字段
 	if(connect.cookie('ui_version') == 'js'){

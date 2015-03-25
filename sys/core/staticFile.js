@@ -5,10 +5,10 @@
 var fs = require('fs');
 
 
-function Filer(staticFileRoot,mime,maxAge){
-  this.staticFileRoot = staticFileRoot;
-  this.mime = mime;
-  this.maxAge = maxAge;
+function Filer(param){
+  this.staticFileRoot = param.root;
+  this.mime = param.mime;
+  this.maxAge = param.maxAge;
 }
 Filer.prototype.read = function(path,req,responseFile,notFound) {
   var me = this;

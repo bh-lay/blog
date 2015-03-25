@@ -8,7 +8,7 @@ var http = require('http');
 var connect = require('./connect.js');
 var views = require('./views.js');
 var cache = require('./cache.js');
-var Filer = require('./staticFile.js');
+var staticFile = require('./staticFile.js');
 var url_redirect = require('../conf/301url');
 var config = require('../conf/app_config.js');
 var utils = require('./utils/index.js');
@@ -116,7 +116,7 @@ function APP(){
   var me = this;
   
   this.MAPS = {};
-  this.fileReader = new Filer(config.staticFileRoot,config.mime,config.staticMaxAge);
+  this.fileReader = new staticFile(config.static);
   // server start
   var server = http.createServer(function (req,res) {
     if(isNormalVisitor(req)){
