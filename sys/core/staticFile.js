@@ -24,7 +24,7 @@ Filer.prototype.read = function(path,req,responseFile,notFound) {
   }else{
     realPath = this.staticFileRoot + path;
   }
-  var content_type = this[ext]||'unknown';
+  var content_type = this.mime[ext]||'unknown';
 
   fs.exists(realPath, function(exists) {
     if(!exists){

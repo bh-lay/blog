@@ -10,7 +10,7 @@ var views = require('./views.js');
 var cache = require('./cache.js');
 var Filer = require('./staticFile.js');
 var url_redirect = require('../conf/301url');
-var config = require('../conf/app_config');
+var config = require('../conf/app_config.js');
 var utils = require('./utils/index.js');
 /**
  * 格式化path 
