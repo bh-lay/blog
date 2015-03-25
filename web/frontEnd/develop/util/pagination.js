@@ -56,18 +56,21 @@ define(function(require,exports){
 			var num = parseInt($(this).html());
 			this_page.page_cur = num - 1;
 			this_page.jumpTo(num);
+      return false;
 		}).on('click','a[data-page="next"]',function(){
 			var num = ++this_page.page_cur;
 			this_page.jumpTo(num);
+      return false;
 		}).on('click','a[data-page="prev"]',function(){
 			var num = --this_page.page_cur;
 			this_page.jumpTo(num);
+      return false;
 		});
 		dom.html(this.dom);
 		render.call(this);
 	}
 	pageList.prototype = {
-		'jumpTo' : function(num){
+		jumpTo : function(num){
 			this.page_cur = num;
 			render.call(this);
 			this.jump && this.jump(num);
