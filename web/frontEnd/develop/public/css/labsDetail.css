@@ -185,23 +185,25 @@ pre.hljs code {
   font-size: 1em;
   color: #333333;
 }
+.article blockquote {
+  margin: 0 0 1em;
+  padding: 0 15px;
+  color: #777;
+  border-left: 4px solid #ddd;
+}
 .article ul {
   margin: 1em 0;
   padding-left: 1em;
-  list-style-type: disc;
-}
-.article ul li {
-  margin-left: 1em;
-  list-style-type: disc;
+  list-style: disc;
 }
 .article ol {
   margin: 1em 0;
   padding-left: 1em;
-  list-style-type: decimal;
+  list-style: decimal;
 }
-.article ol li {
+.article li {
   margin-left: 1em;
-  list-style-type: decimal;
+  list-style: inherit;
 }
 .article pre {
   overflow-x: auto;
