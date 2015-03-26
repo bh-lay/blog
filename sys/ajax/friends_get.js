@@ -27,9 +27,9 @@ function get_list(data,callback){
 		skip_num = parseInt(data['skip'])||0;
 	
 	var resJSON = {
-		'code':1,
-		'limit':limit_num,
-		'skip':skip_num,
+		code: 200,
+		limit: limit_num,
+		skip: skip_num,
 	};
 	
 	var method = mongo.start();
@@ -58,8 +58,8 @@ function get_detail(data,callback){
 		articleID = data['id'];
 	
 	var resJSON = {
-		'code':1,
-		'id' : data['id'],
+		code: 200,
+		id : data['id'],
 	};
 	var method = mongo.start();
 	method.open({'collection_name':'blog_friend'},function(err,collection){

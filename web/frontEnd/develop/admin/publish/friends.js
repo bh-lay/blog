@@ -62,7 +62,7 @@ define && define(function(require,exports){
 				'id' : id
 			},
 			'success' : function(data){
-				if(data.code != 1){
+				if(data.code != 200){
 					callback && callback('data error');
 				}else{
 					callback && callback(null,data.detail);

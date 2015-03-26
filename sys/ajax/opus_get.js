@@ -26,7 +26,7 @@ function get_list(data,callback){
 		skip_num = parseInt(data['skip'])||0;
 	
 	var resJSON = {
-		code : 1,
+		code : 200,
 		limit : limit_num,
 		skip : skip_num
 	};
