@@ -278,7 +278,15 @@ h1 {
 .index-views-intro p {
   margin-bottom: 1em;
   font-size: 1em;
-  opacity: .5;
+  color: #555;
+}
+.index-views-intro p a {
+  font-size: .8em;
+  color: #888;
+  text-decoration: underline;
+}
+.index-views-intro p a:hover {
+  color: #333;
 }
 .tongji {
   height: 0;
