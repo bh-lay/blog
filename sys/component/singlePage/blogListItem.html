@@ -1,5 +1,4 @@
-{@each list as it}
-	<div class="articleItem" articleId="${it.id}">
+{@each list as it}<div class="articleItem" articleId="${it.id}">
 	<div class="artItCnt">
 		{@if it.cover}
 		<div class="artItPic">
@@ -16,5 +15,4 @@
 		<div class="artItInfo"><p>${it.intro}</p></div>
 		<div class="artItTime">${it.time_show}</div>
 	</div>
-</div>
-{@/each}
+</div>{@/each}

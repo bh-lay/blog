@@ -1465,23 +1465,13 @@ body:before {
   padding-left: 220px;
 }
 .articleList {
-  -webkit-column-width: 300px;
-  -moz-column-width: 300px;
-  -o-colum-width: 300px;
-  -webkit-column-gap: 20px;
-  -moz-column-gap: 20px;
-  -o-column-gap: 20px;
-  line-height: 0;
+  position: relative;
 }
 .articleList .l-loading-panel,
 .articleList .blank-content {
-  display: inline-block;
-  width: 100%;
   margin-top: 0;
 }
 .articleItem {
-  display: inline-block;
-  width: 100%;
   margin-bottom: 20px;
   overflow: hidden;
   background: #fff;
@@ -2164,7 +2154,13 @@ a:active {
   position: relative;
 }
 .app_container .page {
+  height: 0;
+  overflow: hidden;
+}
+.app_container .page.page-active {
+  height: auto;
   min-height: 600px;
+  overflow: auto;
 }
 .app_mask {
   position: fixed;
@@ -2369,24 +2365,6 @@ a:active {
   color: #f70;
   z-index: 0;
 }
-.github-link {
-  position: fixed;
-  z-index: 4000;
-  display: block;
-  right: 0;
-  bottom: 0;
-  width: 60px;
-  height: 60px;
-  background: url(../images/github.png) top left;
-  transition: all 0.1s linear;
-  -moz-transition: all 0.1s linear;
-  -webkit-transition: all 0.1s linear;
-  -o-transition: all 0.1s linear;
-}
-.github-link:hover {
-  width: 70px;
-  height: 70px;
-}
 /**
  * 留言板
  *
@@ -2398,24 +2376,24 @@ a:active {
  * CSS3动画
  *
  */
-@-webkit-keyframes fadeOutLeft {
+@-webkit-keyframes fadeInLeft {
   0% {
-    opacity: 1;
-    -webkit-transform: translateX(0);
-  }
-  100% {
     opacity: 0;
     -webkit-transform: translateX(-20px);
   }
-}
-@-moz-keyframes fadeOutLeft {
-  0% {
-    opacity: 1;
-    -moz-transform: translateX(0);
-  }
   100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
+}
+@-moz-keyframes fadeInLeft {
+  0% {
     opacity: 0;
     -moz-transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    -moz-transform: translateX(0);
   }
 }
 @-webkit-keyframes fadeOutRight {
@@ -2438,71 +2416,11 @@ a:active {
     -moz-transform: translateX(20px);
   }
 }
-@-webkit-keyframes fadeInLeft {
-  0% {
-    opacity: 0;
-    -webkit-transform: translateX(-20px);
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform: translateX(0);
-  }
-}
-@-moz-keyframes fadeInLeft {
-  0% {
-    opacity: 0;
-    -moz-transform: translateX(-20px);
-  }
-  100% {
-    opacity: 1;
-    -moz-transform: translateX(0);
-  }
-}
-@-webkit-keyframes bounceOut {
-  0% {
-    -webkit-transform: scale(1);
-  }
-  25% {
-    -webkit-transform: scale(0.95);
-  }
-  50% {
-    opacity: 1;
-    -webkit-transform: scale(1.1);
-  }
-  100% {
-    opacity: 0;
-    -webkit-transform: scale(0.3);
-  }
-}
-@-moz-keyframes bounceOut {
-  0% {
-    -moz-transform: scale(1);
-  }
-  25% {
-    -moz-transform: scale(0.95);
-  }
-  50% {
-    opacity: 1;
-    -moz-transform: scale(1.1);
-  }
-  100% {
-    opacity: 0;
-    -moz-transform: scale(0.3);
-  }
-}
 .fadeInLeft {
   -webkit-animation: fadeInLeft 0.5s ease both;
   -moz-animation: fadeInLeft 0.5s ease both;
 }
-.fadeOutLeft {
-  -webkit-animation: fadeOutLeft 1s .2s ease both;
-  -moz-animation: fadeOutLeft 1s .2s ease both;
-}
 .fadeOutRight {
-  -webkit-animation: fadeOutRight 0.5s ease both;
-  -moz-animation: fadeOutRight 0.5s ease both;
-}
-.bounceOut {
-  -webkit-animation: bounceOut 1s .2s ease both;
-  -moz-animation: bounceOut 1s .2s ease both;
+  -webkit-animation: fadeOutRight .5s ease both;
+  -moz-animation: fadeOutRight .5s ease both;
 }
