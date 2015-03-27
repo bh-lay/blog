@@ -254,35 +254,37 @@ define(function (require, exports) {
 function routerHandle(lofox) {
     'use strict';
 	var dom = $('.contlayer'),
-        container = $('.app_container'),
-        $active_page = null,
-        o_active_page = null;
+      container = $('.app_container'),
+      $active_page = null,
+      o_active_page = null;
 	//移除老的page dom
 	function removePageDom(callback) {
 		if ($active_page) {
-            var $old = $active_page;
+      var $old = $active_page;
 			$active_page = null;
 			$old.addClass('fadeOutRight');
 			setTimeout(function () {
 				$old.remove();
-                $('html,body').scrollTop(0);
-                callback && callback();
+        $('html,body').scrollTop(0);
+        callback && callback();
 			}, 500);
 		} else {
-            callback && callback();
-        }
+      callback && callback();
+    }
 	}
 	//显示单页dom
 	function getNewPage() {
-		var newDom = $('<div class="page"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载模块</p></div></div>');
-        //移除老的dom
-        removePageDom(function () {
-            container.append(newDom);
-            newDom.addClass('fadeInLeft');
-            setTimeout(function () {
-                newDom.removeClass('fadeInLeft');
-            }, 500);
-        });
+		var newDom = $('<div class="page" style="visibility:\'hidden\'"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载模块</p></div></div>');
+    //移除老的dom
+    removePageDom(function () {
+        newDom.css({
+          visibility: 'visible'
+        }).addClass('fadeInLeft');
+        setTimeout(function () {
+            newDom.removeClass('fadeInLeft');
+        }, 500);
+    });
+    container.append(newDom);
 		$active_page = newDom;
 		return newDom;
 	}
