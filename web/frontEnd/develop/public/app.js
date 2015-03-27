@@ -274,14 +274,12 @@ function routerHandle(lofox) {
 	}
 	//显示单页dom
 	function getNewPage() {
-		var newDom = $('<div class="page" style="visibility:\'hidden\'"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载模块</p></div></div>');
+		var newDom = $('<div class="page"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载模块</p></div></div>');
     //移除老的dom
     removePageDom(function () {
-        newDom.css({
-          visibility: 'visible'
-        }).addClass('fadeInLeft');
+        newDom.addClass('fadeInLeft page-active');
         setTimeout(function () {
-            newDom.removeClass('fadeInLeft');
+          newDom.removeClass('fadeInLeft');
         }, 500);
     });
     container.append(newDom);
@@ -336,15 +334,15 @@ function routerHandle(lofox) {
 		L.nav.setCur('blog');
 		var dom = getNewPage();
 		o_active_page = new L.views.blogDetail(dom, param.id, function (title) {
-            lofox.title(title);
-        });
+      lofox.title(title);
+    });
 	});
 	//作品列表页
-	lofox.set('/opus', function () {
+	lofox.set('/opus', function (param, pathnde, search) {
 		this.title('作品_小剧客栈');
 		L.nav.setCur('opus');
 		var dom = getNewPage();
-		o_active_page = new L.views.opusList(dom);
+		o_active_page = new L.views.opusList(dom,search);
 	});
 	//作品详情页
 	lofox.set('/opus/{id}', function (param) {

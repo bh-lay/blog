@@ -149,7 +149,13 @@ a,a:active{
 .app_container {
 	position: relative;
 	.page{
-		min-height: 600px;
+    height: 0;
+    overflow: hidden;
+    &.page-active{
+      height: auto;
+		  min-height: 600px;
+      overflow: auto;
+    }
 	}
 }
 .app_mask{
