@@ -4,6 +4,10 @@
  */
 
 function loadImg(src,callback){
+  if(!src){
+    callback && callback();
+    return;
+  }
   var img = new Image();
   function End(){
     clearInterval(timer);
@@ -33,7 +37,7 @@ function Stick(param){
   this.list = [];
   this.last_row = [];
 
-  var scrollDelay;
+  var scrollDelay,resizeDelay;
   this.scrollListener = function(){
     clearTimeout(scrollDelay);
     scrollDelay = setTimeout(function(){
@@ -44,12 +48,13 @@ function Stick(param){
     },100);
   };
   this.resizeListener = function(){
-    setTimeout(function(){
+    clearTimeout(resizeDelay);
+    resizeDelay = setTimeout(function(){
       me.buildLayout();
       me.$container.find('.stickItem').each(function(){
         me.fixPosition($(this));
       });
-    },500);
+    },600);
   };
   $(document).scroll(this.scrollListener);
   $(window).resize(this.resizeListener);
@@ -87,7 +92,7 @@ Stick.prototype = {
         $item.removeClass('fadeInLeft');
       },1000);
       this.last_row[column_index] = parseInt($item.css('top')) + $item.height();
-      this.$container.height(Math.max.apply(null,this.last_row));
+      this.$container.height(Math.max.apply(null,this.last_row) + this.column_gap);
     }else{
        $item.css({
         position : 'static',
@@ -100,101 +105,107 @@ Stick.prototype = {
     this.fixPosition($item);
   },
   destroy: function(){
-		$(document).unbind('scroll',this.scrollListener);
-		$(window).unbind('resize',this.resizeListener);
-	}
+    $(document).unbind('scroll',this.scrollListener);
+    $(window).unbind('resize',this.resizeListener);
+  }
 };
 
 define(function(require,exports){
-  var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>';
 	
   var private_tag_data = null;
 	function getTag(callback){
-		if(private_tag_data){
-			callback && callback(private_tag_data);
-			return;
-		}
-		$.ajax({
-			'type' : 'GET' ,
-			'url' : '/ajax/tag/list',
-			'success' :function(data){
-				data = data || {};
-				data.list = data.list ? data.list.slice(0,12) : [];
-				private_tag_data = data;
-				callback && callback(private_tag_data);
-			}
-		});
+      if(private_tag_data){
+        callback && callback(private_tag_data);
+        return;
+      }
+      $.ajax({
+        type : 'GET' ,
+        url : '/ajax/tag/list',
+        success :function(data){
+          data = data || {};
+          data.list = data.list ? data.list.slice(0,12) : [];
+          private_tag_data = data;
+          callback && callback(private_tag_data);
+        }
+      });
 	}
 	function renderTags(dom,tagName,callback){
-		getTag(function(data){
-			var tag_item_tpl = $('#tpl_blog_list_tag').html();
-			var html = juicer(tag_item_tpl,data);
-			dom.html(html);
-			
-			if(tagName){
-				dom.find('a').each(function(){
-					if($(this).attr('data-tag') == tagName){
-						$(this).addClass('active');
-					}
-				});
-			}else{
-				dom.find('a').eq(0).addClass('active');
-			}
-			dom.on('click','a',function(){
-				var $btn = $(this);
-				var tag = $btn.attr('data-tag');
-				callback && callback(tag);
-			});
-		});
+      getTag(function(data){
+        var tag_item_tpl = $('#tpl_blog_list_tag').html();
+        var html = juicer(tag_item_tpl,data);
+        dom.html(html);
+
+        if(tagName){
+          dom.find('a').each(function(){
+            if($(this).attr('data-tag') == tagName){
+              $(this).addClass('active');
+            }
+          });
+        }else{
+          dom.find('a').eq(0).addClass('active');
+        }
+        dom.on('click','a',function(){
+          var $btn = $(this);
+          var tag = $btn.attr('data-tag');
+          callback && callback(tag);
+        });
+      });
 	}
 	
 	
-  function LIST(tag,onLoaded){
+  function LIST(tag,onLoadStart,onLoaded){
     this.skip = 0;
     this.limit = 10;
     this.count = 0;
     this.tag = tag || null
+    this.onLoadStart = onLoadStart;
     this.onLoaded = onLoaded;
     this.loadMore();
   }
   LIST.prototype.loadMore = function (){
     var me = this;
-		$.ajax({
-			type : 'GET' ,
-			url : '/ajax/blog',
-			data : {
-				act : 'get_list',
-				skip : this.skip,
+    if(this.count!=0 && this.skip >= this.count){
+      return
+    }
+    this.onLoadStart && this.onLoadStart();
+    $.ajax({
+      type : 'GET' ,
+      url : '/ajax/blog',
+      data : {
+        act : 'get_list',
+        skip : this.skip,
         tag : this.tag || null,
-				limit : this.limit
-			},
-			success :function(data){
-				var count = data['count'],
-					 list = data['list'];
+        limit : this.limit
+      },
+      success :function(data){
+        var count = data['count'],
+            list = data['list'];
         if(data.code == 500){
           callback && callback(500);
           return
         }
-				for(var i in list){
-					list[i].time_show = L.parseTime(list[i].time_show,'{y}-{mm}-{dd}');
-					//使用七牛图床
-					list[i].cover = L.qiniu(list[i].cover,{
-						type : 'zoom',
-						width : 420,
-					});
-				}
+        for(var i in list){
+            list[i].time_show = L.parseTime(list[i].time_show,'{y}-{mm}-{dd}');
+            //使用七牛图床
+            list[i].cover = L.qiniu(list[i].cover,{
+                type : 'zoom',
+                width : 420,
+            });
+        }
         me.count = count;
         me.skip += me.limit;
         me.onLoaded && me.onLoaded.call(me,list,count);
-			}
-		});
-	}
-	function page(dom,param){
-		var me = this;
-		var baseTpl = $('#tpl_blog_list_base').html();
+      }
+    });
+  }
+  function page(dom,param){
+    var me = this;
+    var baseTpl = $('#tpl_blog_list_base').html();
+    var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>';
     //插入基本模版
     dom.html(baseTpl);
     this.$list = dom.find('.articleList');
+    this.$loading = dom.find('.l-loading-panel');
     var list_tpl = $.trim($('#tpl_blog_list_item').html());
     //获取标签名
     var pageTag = param.tag ? decodeURI(param.tag) : null;
@@ -207,7 +218,13 @@ define(function(require,exports){
       }
     });
     //创建列表对象
-    var list = new LIST(pageTag, function(list){
+    var list = new LIST(pageTag,function(){
+      me.$loading.show();
+    },function(list){
+      me.$loading.hide();
+      if(!list || list.length == 0){
+        me.$list.html(empty_tpl);
+      }
       list.forEach(function(item){
         loadImg(item.cover,function(){
           var html = juicer(list_tpl,{
@@ -218,19 +235,19 @@ define(function(require,exports){
       });
     });
     //处理标签功能
-		renderTags(dom.find('.side_card .content'),pageTag,function(tag){
-			if(tag == 'null'){
-				L.push('/blog');
-			}else{
-				L.push('/blog?tag=' + tag);
-			}
-			L.refresh();
-		});
-	}
-	page.prototype = {
-		destroy: function(){
+    renderTags(dom.find('.side_card .content'),pageTag,function(tag){
+        if(tag == 'null'){
+            L.push('/blog');
+        }else{
+            L.push('/blog?tag=' + tag);
+        }
+        L.refresh();
+    });
+  }
+  page.prototype = {
+    destroy: function(){
       this.stick.destroy();
-		}
-	};
-	return page;
+    }
+  };
+  return page;
 });

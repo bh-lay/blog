@@ -1,7 +1,6 @@
 /** 博文列表页 **/
 .articleListPage{
-	margin: auto;
-	padding: 30px 0;
+  padding: 30px 0;
   &:after{
     content: '';
     display: block;
@@ -9,10 +8,18 @@
     overflow: hidden;
     clear: both;
   }
+  .blank-content{
+      margin-top: 0;
+  }
+  .l-loading-panel{
+    margin: 10px 0;
+    padding: 20px 0;
+    max-width: none;
+  }
 }
 .articleListPage-tags{
   .content{
-      padding: 20px 0px 10px 10px;
+    padding: 20px 0px 10px 10px;
   }
   a{
     position: relative;
@@ -65,22 +72,12 @@
     }
   }
 }
-.articleListPage-main{
-    min-height: 500px;
-	padding-left: 220px;
-}
 .articleList {
   position: relative;
-	.l-loading-panel,
-  .blank-content{
-		margin-top: 0;
-	}
 }
-
-
 .articleItem {
-	margin-bottom: 20px;
-	overflow: hidden;
+  margin-bottom: 20px;
+  overflow: hidden;
   background: #fff;
 }
 
@@ -129,8 +126,7 @@
     .articleListPage{
         width: auto;
     }
-    .articleListPage-side,
-    .articleListPage-main{
+    .articleListPage-side{
 		position: static;
         float: none;
         width: auto;

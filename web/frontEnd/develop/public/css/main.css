@@ -1395,7 +1395,6 @@ body:before {
 }
 /** 博文列表页 **/
 .articleListPage {
-  margin: auto;
   padding: 30px 0;
 }
 .articleListPage:after {
@@ -1404,6 +1403,14 @@ body:before {
   height: 0;
   overflow: hidden;
   clear: both;
+}
+.articleListPage .blank-content {
+  margin-top: 0;
+}
+.articleListPage .l-loading-panel {
+  margin: 10px 0;
+  padding: 20px 0;
+  max-width: none;
 }
 .articleListPage-tags .content {
   padding: 20px 0px 10px 10px;
@@ -1460,16 +1467,8 @@ body:before {
   background: #f70;
   color: #fff;
 }
-.articleListPage-main {
-  min-height: 500px;
-  padding-left: 220px;
-}
 .articleList {
   position: relative;
-}
-.articleList .l-loading-panel,
-.articleList .blank-content {
-  margin-top: 0;
 }
 .articleItem {
   margin-bottom: 20px;
@@ -1515,8 +1514,7 @@ body:before {
   .articleListPage {
     width: auto;
   }
-  .articleListPage-side,
-  .articleListPage-main {
+  .articleListPage-side {
     position: static;
     float: none;
     width: auto;
