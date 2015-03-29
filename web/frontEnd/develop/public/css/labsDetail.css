@@ -231,7 +231,7 @@ pre.hljs code {
   color: #f70;
   text-decoration: underline;
 }
-.article *:nth-child(1) {
+.article > *:nth-child(1) {
   margin-top: 1em !important;
 }
 @font-face {
