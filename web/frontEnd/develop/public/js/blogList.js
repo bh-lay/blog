@@ -55,12 +55,17 @@ define(function(require,exports){
     this.onLoadStart = onLoadStart;
     this.onLoaded = onLoaded;
     this.loadMore();
+    this.isLoading = false;
   }
   LIST.prototype.loadMore = function (){
     var me = this;
     if(this.count!=0 && this.skip >= this.count){
       return
     }
+    if(this.isLoading){
+      return
+    }
+    this.isLoading = true;
     this.onLoadStart && this.onLoadStart();
     $.ajax({
       type : 'GET' ,
@@ -89,6 +94,7 @@ define(function(require,exports){
         me.count = count;
         me.skip += me.limit;
         me.onLoaded && me.onLoaded.call(me,list,count);
+        me.isLoading = false;
       }
     });
   }

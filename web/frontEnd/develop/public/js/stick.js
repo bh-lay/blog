@@ -43,7 +43,6 @@
       clearTimeout(scrollDelay);
       scrollDelay = setTimeout(function(){
         if(document.body.scrollTop + window.innerHeight >= document.body.scrollHeight - 300){
-          console.log('scroll end');
           me.onNeedMore && me.onNeedMore();
         }
       },100);
