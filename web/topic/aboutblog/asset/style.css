@@ -147,6 +147,10 @@ body {
 h1 {
   font-family: Helvetica, STHeiti STXihei, Microsoft JhengHei, Microsoft YaHei, Tohoma, Arial;
 }
+.wrap {
+  max-width: 850px;
+  margin: auto;
+}
 .header {
   padding: 100px 20px 140px;
   text-align: center;
@@ -197,10 +201,6 @@ h1 {
 }
 .intro-structrue {
   background: #fff;
-}
-.intro-structrue .article {
-  max-width: 800px;
-  margin: auto;
 }
 .intro-structrue .article li a {
   opacity: .5;
@@ -270,23 +270,23 @@ h1 {
   color: #000;
 }
 .index-views-intro h1 {
-  margin-bottom: .6em;
+  margin-bottom: .4em;
   font-size: 2em;
   font-weight: normal;
   font-size: 32px;
 }
 .index-views-intro p {
-  margin-bottom: 1em;
-  font-size: 1em;
-  color: #555;
+  line-height: 1.6;
+  font-size: .8em;
+  color: #000;
 }
 .index-views-intro p a {
-  font-size: .8em;
-  color: #888;
+  padding-left: .8em;
+  color: #555;
   text-decoration: underline;
 }
 .index-views-intro p a:hover {
-  color: #333;
+  color: #000;
 }
 .tongji {
   height: 0;
