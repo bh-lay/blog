@@ -1407,10 +1407,17 @@ body:before {
 .articleListPage .blank-content {
   margin-top: 0;
 }
+.articleListPage .status {
+  height: 100px;
+}
 .articleListPage .l-loading-panel {
   margin: 10px 0;
   padding: 20px 0;
   max-width: none;
+}
+.articleListPage .l-loading-panel .l-loading {
+  width: 30px;
+  height: 30px;
 }
 .articleListPage-tags .content {
   padding: 20px 0px 10px 10px;
@@ -2127,7 +2134,8 @@ a:active {
   height: 8px;
   width: 8px;
   top: -4px;
-  left: 21px;
+  left: 50%;
+  margin-left: -4px;
   background: #555;
   border-radius: 100%;
 }

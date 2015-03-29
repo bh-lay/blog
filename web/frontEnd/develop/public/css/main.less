@@ -115,22 +115,23 @@ a,a:active{
   }
 }
 .l-loading {
-	position: relative;
-	display: block;
-    margin: auto;
-	height  : 50px;
-	width : 50px;
-	border : 1px solid #555;
-	border-radius : 50%;
-	animation : loading-rond 2s infinite;
-	-webkit-animation : loading-rond 2s infinite;
+  position: relative;
+  display: block;
+  margin: auto;
+  height  : 50px;
+  width : 50px;
+  border : 1px solid #555;
+  border-radius : 50%;
+  animation : loading-rond 2s infinite;
+  -webkit-animation : loading-rond 2s infinite;
   &:after{
     content: '';
     position : absolute;
     height : 8px;
     width : 8px;
     top : -4px;
-    left : 21px;
+    left : 50%;
+    margin-left: -4px;
     background : #555;
     border-radius : 100%;
   }
