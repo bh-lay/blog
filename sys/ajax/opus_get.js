@@ -21,18 +21,18 @@ var mongo = require('../core/DB.js');
 var fs = require('fs');
 
 function get_list(data,callback){
-	var data = data,
-		limit_num = parseInt(data['limit'])||10,
-		skip_num = parseInt(data['skip'])||0;
+  var data = data,
+      limit_num = parseInt(data['limit'])||10,
+      skip_num = parseInt(data['skip'])||0;
+
+  var resJSON = {
+      code : 200,
+      limit : limit_num,
+      skip : skip_num
+  };
 	
-	var resJSON = {
-		code : 200,
-		limit : limit_num,
-		skip : skip_num
-	};
-	
-	var method = mongo.start();
-	method.open({
+  var method = mongo.start();
+  method.open({
     collection_name: 'opus'
   },function(err,collection){
     if(err){
@@ -43,21 +43,25 @@ function get_list(data,callback){
     //count the all list
     collection.count(function(err,count){
       resJSON['count'] = count;
-    });
-
-    collection.find({},{limit:limit_num}).sort({id:-1}).skip(skip_num).toArray(function(err, docs) {
-      if(err){
-        resJSON.code = 2;
-      }else{
-        for(var i=0 in docs){
-          delete docs[i]['content'];
+      
+      collection.find({},{
+        limit : limit_num
+      }).sort({
+        id : -1
+      }).skip(skip_num).toArray(function(err, docs) {
+        if(err){
+          resJSON.code = 2;
+        }else{
+          for(var i=0 in docs){
+            delete docs[i]['content'];
+          }
+          resJSON['list'] = docs;
         }
-        resJSON['list'] = docs;
-      }
-      callback&&callback(resJSON);
-      method.close();
-		});
-	});
+        callback&&callback(resJSON);
+        method.close();
+      });
+    });
+  });
 }
 function get_detail(data,callback){
 	var data=data,
