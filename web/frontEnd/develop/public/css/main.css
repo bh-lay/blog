@@ -1408,16 +1408,16 @@ body:before {
   margin-top: 0;
 }
 .articleListPage .status {
-  height: 100px;
+  height: 52px;
 }
 .articleListPage .l-loading-panel {
-  margin: 10px 0;
-  padding: 20px 0;
+  margin: 0;
+  padding: 15px 0;
   max-width: none;
 }
 .articleListPage .l-loading-panel .l-loading {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
 }
 .articleListPage-tags .content {
   padding: 20px 0px 10px 10px;
