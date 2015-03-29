@@ -1,4 +1,4 @@
-﻿
+
 
 /***
  * list_count
@@ -10,7 +10,7 @@
 module.exports = function pageList(param){
 	var param = param || {};
 	var list_count = param.list_count || 0;
-	var page_cur = param.page_cur || 1;
+	var page_cur = parseInt(param.page_cur) || 1;
 	var page_list_num = param.page_list_num || 15;
 	var page_num = Math.ceil(list_count / page_list_num);
 	var max_page_btn = param.max_page_btn || 50;
