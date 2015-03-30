@@ -89,7 +89,7 @@ exports.list = function(connect,app){
       //获取视图
       app.views('opusList',{
           title : '作品_小剧客栈',
-          keywords : '作品,PS,剧中人,小剧客栈,bh_lay,前端工程师,设计师,nodeJS',
+          keywords : '作品,PS,剧中人,小剧客栈,前端工程师,设计师,nodeJS',
           description : '设计曾经是剧中人的一份职业，现在最大的兴趣爱好之一，这里有小剧最得意的作品，也有小剧倒腾的摄影图片，虽难等大雅之堂，却也能给自己一份小满足！',
           list : list,
           pagination : page_html
