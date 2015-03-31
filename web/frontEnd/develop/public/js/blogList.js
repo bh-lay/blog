@@ -110,7 +110,7 @@ define(function(require,exports){
     //获取标签名
     var pageTag = param.tag ? decodeURI(param.tag) : null;
     this.stick = new Stick({
-      $container: me.$list,
+      container: me.$list[0],
       column_width: 300,
       column_gap: 10,
       onNeedMore: function(){
@@ -126,10 +126,10 @@ define(function(require,exports){
         me.$list.html(empty_tpl);
       }
       list.forEach(function(item){
-          var html = juicer(list_tpl,{
-              list : [item]
-          });
-          me.stick.addItem($(html),item.cover);
+        var html = juicer(list_tpl,{
+            list : [item]
+        });
+        me.stick.addItem($(html)[0],item.cover);
       });
     });
     //处理标签功能
