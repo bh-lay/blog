@@ -127,13 +127,9 @@
         last_time = 0;
     this.scrollListener = function(){
       var now = new Date().getTime();
-      
       if(now - last_time > 1000 && (document.body.scrollTop + window.innerHeight >= document.body.scrollHeight - 300)){
-        console.log('loading！');
         me.onNeedMore && me.onNeedMore();
         last_time = now;
-      }else{
-        console.log('ignore scroll！');
       }
     };
     this.resizeListener = function(){
