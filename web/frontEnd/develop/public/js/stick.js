@@ -57,7 +57,6 @@
 	 */
   var bind = window.addEventListener ? function(elem, type, handler) {
     // 标准浏览器
-    //false:在冒泡阶段调用事件处理程序
     elem.addEventListener(type, handler, false);
   } : function(elem, type, handler) {
     // IE浏览器
@@ -83,9 +82,7 @@
    **/
 	function setCss(elem,cssObj){
     each(cssObj,function(prop,value){
-      if ( isNum(value)){
-        value += "px";
-      }
+      if (isNum(value)) value += "px";
       elem.style[prop] = value;
     });
 	}
@@ -117,22 +114,27 @@
         me = this;
     this.container = param.container;
     this.onNeedMore = param.onNeedMore || null;
-    this.column_gap = param.column_gap || 20;
-    this.column_width_base = param.column_width || 300;
+    this.column_gap = param.column_gap ? parseInt(param.column_gap) : 20;
+    this.column_width_base = param.column_width ? parseInt(param.column_width) : 300;
     this.column_width;
     this.column_num;
 
     this.list = [];
     this.last_row = [];
 
-    var scrollDelay,resizeDelay;
+    var scrollDelay,
+        resizeDelay,
+        last_time = 0;
     this.scrollListener = function(){
-      clearTimeout(scrollDelay);
-      scrollDelay = setTimeout(function(){
-        if(document.body.scrollTop + window.innerHeight >= document.body.scrollHeight - 300){
-          me.onNeedMore && me.onNeedMore();
-        }
-      },100);
+      var now = new Date().getTime();
+      
+      if(now - last_time > 1000 && (document.body.scrollTop + window.innerHeight >= document.body.scrollHeight - 300)){
+        console.log('loading！');
+        me.onNeedMore && me.onNeedMore();
+        last_time = now;
+      }else{
+        console.log('ignore scroll！');
+      }
     };
     this.resizeListener = function(){
       clearTimeout(resizeDelay);
