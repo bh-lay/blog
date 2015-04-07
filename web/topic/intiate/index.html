@@ -1,12 +1,13 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
-<meta charset="UTF-8">
-<title>创业团_剧中人朋友们的创业团队_小剧客栈</title>
-<meta name="keywords" content="剧中人,朋友,创业,团队" />
-<meta name="description" content="记录一群斗志高昂的年轻人，加油吧，少年！" />
-<link href="/favicon.ico" rel="shortcut icon"/>
-<link rel="stylesheet" type="text/css" href="/topic/intiate/style.css"/>
+  <meta charset="UTF-8">
+  <title>创业团_剧中人朋友们的创业团队_小剧客栈</title>
+  <meta name="keywords" content="剧中人,朋友,创业,团队" />
+  <meta name="description" content="记录一群斗志高昂的年轻人，加油吧，少年！" />
+  <meta content="width=device-width, initial-scale=1, user-scalable=0" name="viewport">
+  <link href="/favicon.ico" rel="shortcut icon"/>
+  <link rel="stylesheet" type="text/css" href="/topic/intiate/style.css"/>
 </head>
 <body>
 <div class="l-mini-nav">
@@ -43,8 +44,8 @@
 	
 </dl>
 <dl>
-	<dd><a target="_blank" href="http://rustar.taobao.com/">睿心服饰</a></dd>
 	<dd><img src="images/cyt_rxfs.jpg" alt="睿心服饰" /></dd>
+	<dd><a target="_blank" href="http://rustar.taobao.com/">睿心服饰</a></dd>
  	<dd><p>疯了，一个小女生竟然开了家只卖女生衣服的店，小剧大学同学的店铺，男生女生都进去瞅瞅吧！</p></dd>
 	
 </dl>
@@ -73,7 +74,6 @@
 	
 </dl>
 <dl>
-	<dd><img src="images/cyt_snz.jpg" alt="啊咿呀嘿" /></dd>
 	<dd><a target="_blank" href="http://canyouseeme.taobao.com">啊咿呀嘿</a></dd>
  	<dd><p>同事一丫头的小店，刚开张，很多东东都在建设中，但店主是个超有耐心美女哦！</p></dd>
 	
@@ -84,8 +84,7 @@
 <div class="footer">
   <div class="container">
     <div class="copyright fix">
-      <p>Copyright &#169; 2011-2012 bh-lay.com. Powered by：<strong>剧中人</strong></p>
-      <p>本博客架构为：帝国CMS+HTML5+CSS3+Jquery</p>
+      <p>Copyright &#169; 2012-2015 bh-lay.com. Powered by：<strong>剧中人</strong></p>
     </div>
   </div>
 </div>
@@ -96,7 +95,7 @@
   /** 模拟ajax加载，提供数据 **/
   var loadTime = 0;
   function loadMore(){
-    if(++loadTime >= 10){
+    if(++loadTime > 2){
       return
     }
     $('.source_data dl').each(function(){

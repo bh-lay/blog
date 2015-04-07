@@ -67,16 +67,13 @@ body {
 .container {
   width: 90%;
   margin: auto;
-  zoom: 1;
 }
-.container:after {
-  content: ".";
-  display: block;
-  height: 0;
-  clear: both;
-  overflow: hidden;
+@media (max-width: 600px){
+  .container {
+    width: auto;
+    margin: 0 10px;
+  }
 }
-
 .l-mini-nav{
 	height: 24px;
 	line-height: 24px;
@@ -92,29 +89,36 @@ body {
 	color: #333;
 }
 body{background: url(bj.png);}
-.tips{color:#666; margin-bottom: 20px;padding:10px 5px; text-indent:2em;border:1px solid #ddd;border-radius:4px;background-color:#fff;overflow:hidden;}
+.tips{color:#666; margin-bottom: 10px;padding:10px 5px; text-indent:2em;border:1px solid #ddd;border-radius:4px;background-color:#fff;overflow:hidden;}
 
 /*瀑布流页面*/
 .hangTitle{
   height:100px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   padding:20px 40px;
   background:url("intiate.jpg") no-repeat right top #000;
-  color:#fff;border-radius:0px 0px 8px 8px;_overflow:hidden;}
+  color:#fff;border-radius:0px 0px 8px 8px;_overflow:hidden;
+}
 .hangTitle h1{height:40px;font-size:30px;letter-spacing:0.5em;}
 .hangTitle span{height:20px;display:block;font-size:14px;color:#bbb;}
 .hangTitle p{font-size:16px;text-indent:0em;margin:15px 0px 0px;color:#ddd;}
-
+@media (max-width: 800px){
+  .hangTitle{
+    text-shadow: 1px 1px 3px rgba(0,0,0,.6);
+  }
+}
 #waterfall{
   position: relative;
-  margin:20px 0;
+  margin: 10px 0;
   min-height: 1000px;
 }
 #waterfall dl{
   background:#fff;
   border-radius:4px;
   margin-bottom: 10px;
-  overflow:hidden;box-shadow:2px 5px 10px #ccc;}
+  overflow:hidden;
+  box-shadow:1px 1px 3px rgba(0,0,0,.2)
+}
 #waterfall dl dt{line-height:50px;font-size:18px;color:#05a;text-align:center;}
 #waterfall dl dd{overflow:hidden;}
 #waterfall dl dd img{width:100%;display:block;margin:auto;}

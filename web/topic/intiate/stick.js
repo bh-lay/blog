@@ -1,3 +1,11 @@
+/**
+ * @author bh-lay
+ * 
+ * @github: https://github.com/bh-lay/stick
+ * 
+ * @modified 2015-04-07 21:51
+ *  
+ */
 (function(global,doc,factory){
   var Stick = factory(global,doc);
   //exports for commonJS
@@ -179,8 +187,8 @@
         setCss(item,{
           position : 'absolute',
           top: top,
-          left: column_index * (this.column_width + this.column_gap),
-          width: this.column_width
+          left: Math.round(column_index * (this.column_width + this.column_gap)),
+          width: Math.round(this.column_width)
         });
         addClass(item,'fadeInLeft');
         setTimeout(function(){
