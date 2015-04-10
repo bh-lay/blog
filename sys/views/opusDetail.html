@@ -2,57 +2,49 @@
 <html lang="en-US">
 <head>
 <meta charset="UTF-8">
-<title>${title}_小剧客栈</title>
-<meta name="keywords" content="${keywords}" />
-<meta name="description" content="${description}" />
+<title>${{title}}</title>
+<meta name="keywords" content="${{keywords}}" />
+<meta name="description" content="${{description}}" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-<link href="/favicon.ico" rel="shortcut icon"/>
-<link rel="apple-touch-icon" href="touch-icon-iphone.png" />
-<link rel="apple-touch-icon" sizes="72x72" href="touch-icon-ipad.png" />
-<link rel="apple-touch-icon" sizes="114x114" href="touch-icon-iphone-retina.png" />
-<link rel="apple-touch-icon" sizes="144x144" href="touch-icon-ipad-retina.png" />
-<link href="${frontEnd_base}public/css/common.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="${frontEnd_base}public/css/main.css"/>
+<include name="version_html5_script_bootstrap"/>
+<include name="favicon_appicon" />
+<link href="${{frontEnd.base}}lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="${{frontEnd.base}}loser/bootstrap_plugin.css?v=${{frontEnd.version}}" rel="stylesheet" media="screen">
 </head>
 <body>
-<div class="gallayer">
-		<div class="galBj"></div>
-		<div class="galMask"></div>
-</div>
-<div class="contlayer"></div>
-<div class="sourceCode">
-	<div class="golCnt">
-		<div class="TagLine">小剧作品，一次次小小的进步，成就平凡的自己！</div>
+<include name="navigation_bootstrap" active="opus"/>
+<div class="container page-body">
+	<div class="row">
 		<div id="focusTitle">
-			{@if cover}
-				<img src="${cover}" alt="${title}" class="topicImg" />
-			{@/if}
+            {{@if cover}}
+				<img src="${{cover}}" alt="${{title}}" class="topicImg" />
+            {{@/if}}
 			<div class="info">
-				<h1>${title}</h1>
+				<h1>${{title}}</h1>
 				<ul>
-					<li><strong>创作时间:</strong>${opus_time_create}</li>
+					<li><strong>创作时间:</strong>${{opus_time_create}}</li>
 					<li><strong>相关页面:</strong><a href="#" title="字段暂无" target="_blank">字段暂无</a></li>
 				</ul>
 			</div>
 		</div>
-		<div class="opus_detail">
-			<div class="photo"><img src="${opus_pic}" alt="${title}" /></div>
-			<div class="text">$${content}</div>
+		<div class="panel">
+			<div class="article">$${{content}}</div>
 		</div>
+		
+		<div class="comments_area"></div>
 	</div>
 </div>
-{{{navigation}}}
-<script type="text/javascript" src="${frontEnd_base}jquery.js"></script>
-<script type="text/javascript" src="${frontEnd_base}lib/sea.js"></script>
 <script type="text/javascript">
-	var app_config = {
-		'frontEnd_base' : '${frontEnd_base}'
-	};
-	seajs.config({
-	  'base' : '${frontEnd_base}'
-	});
+    var app_config = {
+        frontEnd_base : '${{frontEnd.base}}',
+        frontEnd_version : '${{frontEnd.version}}',
+        imgDomain : '${{frontEnd.img_domain}}'
+    };
 </script>
-<script type="text/javascript" src="${frontEnd_base}public/app.js"></script>
-{{{baiduAndGoogleTongji}}}
+<script type="text/javascript" src="${{frontEnd.base}}lib/jquery/jquery.js"></script>
+<script type="text/javascript" src="${{frontEnd.base}}lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${{frontEnd.base}}loser/bootstrap_plugin.js?v=${{frontEnd.version}}"></script>
+<include name="footer"/>
+<include name="baiduAndGoogleTongji"/>
 </body>
 </html>

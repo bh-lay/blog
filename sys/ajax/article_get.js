@@ -28,12 +28,9 @@ get_detail
 -----------------------------------------------------------------
  */
 
-var mongo = require('../conf/mongo_connect');
+var mongo = require('../core/DB.js');
 var fs = require('fs');
 var querystring=require('querystring');
-//var markdown = require('markdown');
-var showdown = require('../lib/showdown/showdown.js');
-var converter = new showdown.converter();
 
 function get_list(data,callback){
 	var data = data,
@@ -42,23 +39,33 @@ function get_list(data,callback){
 		findKeys = {};
 	
 	var resJSON = {
-		'code':1,
-		'limit':limit_num,
-		'skip':skip_num,
+		code: 1,
+		limit: limit_num,
+		skip: skip_num,
 	};
 	
 	//过滤标签
 	if(data.tag){
 		findKeys.tags = data.tag;
-		
 	}
 	var method = mongo.start();
-	method.open({'collection_name':'article'},function(err,collection){
+	method.open({
+    collection_name: 'article'
+  },function(err,collection){
+    if(err){
+      resJSON.code = 500;
+      callback&&callback(resJSON);
+      return
+    }
       //count the all list
-		collection.count(function(err,count){
+		collection.count(findKeys,function(err,count){
 			resJSON['count'] = count;
 			
-			collection.find(findKeys,{limit:limit_num}).sort({id:-1}).skip(skip_num).toArray(function(err, docs) {
+			collection.find(findKeys,{
+        limit: limit_num
+      }).sort({
+        time_show: -1
+      }).skip(skip_num).toArray(function(err, docs) {
 				method.close();
 				if(err){
 					resJSON.code = 2;
@@ -80,27 +87,27 @@ function get_detail(data,callback){
 		content_format = data['content_format'] || 'html';
 	
 	var resJSON={
-		'code':1,
-		'id' : articleID,
-		'content_format' : content_format
+		code: 200,
+		id : articleID,
+		content_format : content_format
 	};
 	var method = mongo.start();
-	method.open({'collection_name':'article'},function(err,collection){
-		collection.find({id:articleID}).toArray(function(err, docs) {
+	method.open({
+    collection_name: 'article'
+  },function(err,collection){
+    if(err){
+      resJSON.code = 500;
+      callback&&callback(resJSON);
+      return
+    }
+		collection.find({
+      id:articleID
+    }).toArray(function(err, docs) {
 			method.close();
 			if(arguments[1].length==0){
 				resJSON['code'] = 2;
 				resJSON['msg'] = 'could not find this blog !';				
 			}else{ 
-				resJSON['detail'] = docs[0];
-				
-				if(content_format == 'html'){
-				//	docs[0].content = markdown.parse(docs[0].content);
-					docs[0].content = converter.makeHtml(docs[0].content);
-				}
-			//	}else if(content_format == 'markdown'){
-					
-			//	}
 				resJSON['detail'] = docs[0];
 			}
 			callback&&callback(resJSON);
@@ -108,9 +115,8 @@ function get_detail(data,callback){
 	});
 }
 
-function this_control(url,callback){
-	var search = url.split('?')[1],
-		 data = querystring.parse(search);
+function this_control(connect,callback){
+	var data = connect.url.search;
 	
 	if(data['act']=='get_list'){
 		get_list(data,function(json_data){
@@ -124,26 +130,25 @@ function this_control(url,callback){
 			});
 		}else{
 			callback&&callback({
-				'code' : 2,
-				'msg' : 'plese tell me which blog article you want to get !'
+				code : 2,
+				msg : 'plese tell me which blog article you want to get !'
 			});
 		}
 	}else{
 		callback&&callback({
-			'code' : 2,
-			'msg' : 'plese use [act] get_detail or get_list !'
+			code : 2,
+			msg : 'plese use [act] get_detail or get_list !'
 		});
 	}
 }
 
-exports.render = function (req,res_this,res){
-	
-	var url = req.url;
+exports.render = function (connect,app){
+	var url = connect.request.url;
 
-	cache.ajax(url,function(this_cache){
-		res_this.json(this_cache);
+	app.cache.use(url,['ajax'],function(this_cache){
+		connect.write('json',this_cache);
 	},function(save_cache){
-		this_control(url,function(this_data){
+		this_control(connect,function(this_data){
 			save_cache(JSON.stringify(this_data));
 		});
 	});

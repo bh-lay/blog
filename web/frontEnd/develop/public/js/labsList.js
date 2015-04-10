@@ -3,28 +3,12 @@
  *  
  */
 define(function(require,exports){
+  var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>';
 	
-	var temp = ['<li><div class="lab_item">',
-		'<a class="lab_cover" href="/labs/<%=name %>" title="<%=title%>" target="_blank" style="background-image:url(<%=cover %>)"></a>',
-		'<h4 class="lab_title">',
-			'<a href="/labs/<%=name %>" title="<%=title %>" target="_blank"><%=title %></a>',
-		'</h4>',
-		'<div class="lab_info">',
-			'<p><%=intro %></p>',
-		'</div>',
-	'</div></li>'].join('');
-	
-	var render = L.tplEngine(temp);
 	var limit = 20,
 		 skip = 0,
 		 count = null,
 		 dom;
-
-	var insert = function(param){
-		var this_html = $(param['html']),
-			this_dom = param['dom'];
-		this_dom.append(this_html);
-	};
 	var getData = function(callback){
 		$.ajax({
 			'type' : 'GET' ,
@@ -35,40 +19,42 @@ define(function(require,exports){
 				'limit' : limit
 			},
 			'success' :function(data){
-				count = data['count'];
+				if(data.code == 500){
+          callback && callback(500);
+          return;
+        }
+        count = data['count'];
 				skip += limit;
 				
 				var list = data['list'];
 				for(var i = 0,total = list.length;i<total;i++){
 					list[i]['work_range'] = list[i]['work_range']?list[i]['work_range'].split(/\,/):['暂未填写'];
+					//使用七牛图床
+					list[i].cover = L.qiniu(list[i].cover,{
+						'type' : 'cover',
+						'width' : 320,
+						'height': 400
+					});
 				}
-				callback&&callback(list);
+				callback&&callback(null,list);
 			}
-		});
-	};
-	var start = function(){
-		
-		$('.shareList').on('mouseenter','a',function(){
-			$(this).find('strong').stop().animate({'bottom':0},200);
-		}).on('mouseleave','a',function(){
-			$(this).find('strong').stop().animate({'bottom':-100},200);
 		});
 	};
 	return function(dom,param){
+		var base_tpl = $('#tpl_labs_list_base').html();
 		skip = 0;
-		getData(function(list){
-			dom.html('<ul class="labsList"></ul>');
-			var this_html = '',
-				this_dom = dom.find('.labsList');
-			for(var i=0,total=list.length;i<total;i++){
-				this_html += render(list[i]);
-			}
-			insert({
-				'end' : (skip>=count)?true:false,
-				'html' : this_html,
-				'dom' : this_dom
-			});
-			start();
+    dom.html(base_tpl);
+		getData(function(err,list){
+      var this_html;
+      if(err){
+        this_html = empty_tpl;
+      }else{
+        var temp = $('#tpl_labs_list_item').html();
+        this_html = juicer(temp,{
+            list : list
+        });
+      }
+      dom.find('.labsList').html(this_html);
 		});
 	};
 });

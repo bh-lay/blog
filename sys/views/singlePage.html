@@ -1,30 +1,77 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
-<head>
-<meta charset="UTF-8">
-<title>${title}_小剧客栈</title>
-<meta name="keywords" content="${keywords}" />
-<meta name="description" content="${description}" />
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-<link href="/favicon.ico" rel="shortcut icon"/>
-<link rel="apple-touch-icon" href="touch-icon-iphone.png" />
-<link rel="apple-touch-icon" sizes="72x72" href="touch-icon-ipad.png" />
-<link rel="apple-touch-icon" sizes="114x114" href="touch-icon-iphone-retina.png" />
-<link rel="apple-touch-icon" sizes="144x144" href="touch-icon-ipad-retina.png" />
-<link rel="stylesheet" type="text/css" href="/frontEnd/public/css/common.css"/>
-<link rel="stylesheet" type="text/css" href="${frontEnd_base}public/css/main.css"/>
-</head>
-<body>
-	<div class="gallayer">
-		<div class="galBj"></div>
-		<div class="galMask"></div>
-	</div>
-	<div class="contlayer"></div>
-	<div class="sourceCode">${sourceCode}</div>
-{{{navigation}}}
-<script type="text/javascript" src="/frontEnd/jquery.js"></script>
-<script type="text/javascript" src="/frontEnd/lib/sea.js"></script>
-<script type="text/javascript" src="/frontEnd/public/app.js"></script>
-{{{baiduAndGoogleTongji}}}
+    <head>
+        <meta charset="UTF-8">
+        <title>${{title}}</title>
+        <meta name="keywords" content="${{keywords}}" />
+        <meta name="description" content="${{description}}" />
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+   		<base target="_blank" />
+        <include name="favicon_appicon" />
+        <link rel="stylesheet" type="text/css" href="${{frontEnd.base}}public/css/main.css?v=${{frontEnd.version}}"/>
+    </head>
+    <body>
+<include name="navigation"/>
+<div class="app_container"></div>
+<div class="app_mask">
+    <div class="app_mask_cnt">
+        <span class="l-loading"></span>
+        <p>小剧正在拼命加载资源</p>
+    </div>
+</div>
+<include name="footer" isSinglePage="true"/>
+<script type="text/template" id="module_latest_comments">
+<include name="singlePage/comments" />
+</script>
+<script type="text/template" id="module_github_links">
+<include name="singlePage/github" />
+</script>
+<script type="text/template" id="tpl_index_page">
+<include name="singlePage/index" />
+</script>
+<script type="text/template" id="tpl_opus_detail">
+<include name="singlePage/opusDetailPage" />
+</script>
+<script type="text/template" id="tpl_blog_detail">
+<include name="singlePage/blogDetailPage" />
+</script>
+<script type="text/template" id="tpl_blog_list_base">
+<include name="singlePage/blogListBase" />
+</script>
+<script type="text/template" id="tpl_blog_list_item">
+<include name="singlePage/blogListItem" />
+</script>
+<script type="text/template" id="tpl_blog_list_tag">
+<include name="singlePage/blogListTag" />
+</script>
+<script type="text/template" id="tpl_labs_list_item">
+<include name="singlePage/labsListItem" />
+</script>
+<script type="text/template" id="tpl_labs_list_base">
+<include name="singlePage/labsListBase" />
+</script>
+<script type="text/template" id="tpl_opus_list_base">
+<include name="singlePage/opusListBase" />
+</script>
+<script type="text/template" id="tpl_opus_list_item">
+<include name="singlePage/opusListItem" />
+</script>
+<script type="text/template" id="data_emoji">
+<include name="singlePage/emoji" />
+</script>
+<script type="text/javascript" src="${{frontEnd.base}}public/js/sea_jquery.js"></script>
+<script type="text/javascript">
+    var app_config = {
+        'frontEnd_base' : '${{frontEnd.base}}',
+        'frontEnd_version' : '${{frontEnd.version}}',
+        'imgDomain' : '${{frontEnd.img_domain}}'
+    };
+    seajs.config({
+        'base' : '${{frontEnd.base}}',
+        'map' : [[/^(.*\.(?:css|js))(.*)$/i, '$1?v=${{frontEnd.version}}']]
+    });
+    seajs.use("public/app.js");
+</script>
+<include name="baiduAndGoogleTongji"/>
 </body>
 </html>

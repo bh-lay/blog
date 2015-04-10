@@ -2,7 +2,7 @@
  * @author bh-lay
  * @github https://github.com/bh-lay/lofox
  * @version 1.0
- * @modified 2014-6-27 23:14
+ * @modified 2014-12-31 16:40
  *  location fox
  */
 
@@ -273,6 +273,8 @@
 			
 			var result = findUrlInMaps(pathData,this._maps);
 			
+            //触发视图刷新事件
+			EMIT.call(this,'beforeRefresh',[pathData,searchData]);
 			if(result){
 				var data = result.data;
 				//执行set方法设置的回调
@@ -282,6 +284,8 @@
 			}else{
 				this._rest && this._rest.call(this,pathData,searchData);
 			}
+            //触发视图刷新事件
+			EMIT.call(this,'refresh',[pathData,searchData]);
 		}
 	};
 	

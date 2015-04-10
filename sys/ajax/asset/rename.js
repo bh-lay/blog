@@ -4,13 +4,11 @@
  */
 
 var fs = require('fs');
-var assetPath = "../../asset/";
+var utils = require('../../core/utils/index.js');
+var assetPath = "../web/asset/";
 
-exports.rename = function (req,res_this){
-	var json = {
-		'code':200
-	}
-	parse.request(req,function(err,fields,files){
+exports.rename = function (req,callback){
+	utils.parse.request(req,function(err,fields,files){
 		
 		var pathname = fields.pathname || '';
 		var newName = fields.newName || '';
@@ -18,9 +16,7 @@ exports.rename = function (req,res_this){
 		//消除参数中首尾的｛/｝
 		pathname = pathname.replace(/^\/|\/$/g,'');
 		if(err || pathname.length < 1 || newName.length < 1){
-			json.code = 201;
-			json.msg = '参数不全';
-			res_this.json(json);
+			callback && callback('参数不全');
 		}else{
 			var filePath = assetPath + '/' + pathname;
 			var newPath = '';
@@ -47,17 +43,14 @@ exports.rename = function (req,res_this){
 			//检测是否同名
 			var exists = fs.existsSync(newPath);
 			if(exists){
-				json.code = 202;
-				json.msg = '文件重名';
-				res_this.json(json);
+				callback && callback('文件重名');
 			}else{
 				fs.rename(filePath,newPath,function(err){
 					if(err){
-						json.code = 201;
-						json.msg = '出错了';
-						json.err =[filePath,newPath]
+						callback && callback('出错了');
+					}else{
+						callback && callback(null);
 					}
-					res_this.json(json);
 				});
 				
 			}

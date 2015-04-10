@@ -11,10 +11,14 @@ pids
 logs
 results
 
-.project
+.project/
+.idea/
 npm-debug.log
-sys/cache
-sys/node_modules
-web/frontEnd/build
-web/frontEnd/dist
-web/frontEnd/node_modules
+sys/temporary/cache/
+sys/temporary/session/
+sys/temporary/upload/
+sys/node_modules/
+web/frontEnd/build/
+web/frontEnd/dist/
+web/frontEnd/node_modules/
+web/asset/

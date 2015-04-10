@@ -2,65 +2,49 @@
 <html lang="en-US">
 <head>
 <meta charset="UTF-8">
-<title>${title}_小剧客栈</title>
-<meta name="keywords" content="${keywords}" />
-<meta name="description" content="${description}" />
+<title>${{title}}</title>
+<meta name="keywords" content="${{keywords}}" />
+<meta name="description" content="${{description}}" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-<link href="/favicon.ico" rel="shortcut icon"/>
-<link rel="apple-touch-icon" href="touch-icon-iphone.png" />
-<link rel="apple-touch-icon" sizes="72x72" href="touch-icon-ipad.png" />
-<link rel="apple-touch-icon" sizes="114x114" href="touch-icon-iphone-retina.png" />
-<link rel="apple-touch-icon" sizes="144x144" href="touch-icon-ipad-retina.png" />
-<link rel="stylesheet" type="text/css" href="${frontEnd_base}public/css/common.css"/>
-<link rel="stylesheet" type="text/css" href="${frontEnd_base}public/css/main.css"/>
+<include name="version_html5_script_bootstrap"/>
+<include name="favicon_appicon" />
+<link href="${{frontEnd.base}}lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="${{frontEnd.base}}loser/bootstrap_plugin.css?v=${{frontEnd.version}}" rel="stylesheet" media="screen">
 </head>
 <body>
-	<div class="gallayer">
-		<div class="galBj"></div>
-		<div class="galMask"></div>
-	</div>
-	<div class="contlayer"></div>
-	<div class="sourceCode">
-{@each list as it,index}
-	<div class="articleItem" articleId="${it.id}">
-		<div class="artItCpt">
-			<h3><a href="/blog/${it.id}" title="${it.title}" lofox="true" target="_self" >${it.title}</a></h3>
-			<p>${it.time_show}</p>
-		</div>
-		<div class="artItCnt">
-			{@if it.cover}
-			<div class="artItPic">
-				<a href="/blog/${it.id}" title="${it.title}" lofox="true" target="_self" >
-					<img src="${it.cover}" alt="${it.title}" />
+<include name="navigation_bootstrap" active="blog"/>
+<div class="container page-body">
+	<div class="define-list">
+		<div class="col-sm-8">
+			{{@each list as it,index}}
+			<div class="media define-item">
+                {{@if it.cover}}
+				<a class="pull-left" href="/blog/${{it.id}}" title="${{it.title}}" target="_self" >
+					<img class="media-object" src="${{it.cover}}?imageView/1/w/120/h/120/q/85" alt="${{it.title}}" />
 				</a>
+                {{@/if}}
+				<div class="media-body">
+					<h4 class="media-heading"><a href="/blog/${{it.id}}" title="${{it.title}}" target="_self" >${{it.title}}</a></h4>
+					<p>${{it.intro}}</p>
+				</div>
 			</div>
-			{@/if}
-			<div class="artItInfo"><p>${it.intro}</p></div>
-			<div class="artItTag">${it.tags}</div>
-			<div class="artItFoot">
-				<a class="dataLike" title="我喜欢" href="javascript:void(0)"><i></i><b>8</b></a>
-				<a class="dataView" title="查看" href="/blog/${it.id}" lofox="true" target="_self"><i></i><b>367</b></a>
-			</div>
+            {{@/each}}
+			$${{pagination}}
 		</div>
-		<div class="artItLace">
-			<div class="artItLaCircle"></div>
-			<div class="artItLaCorner"><b></b><i></i></div>
-		</div>
+		<div class="col-sm-4"></div>
 	</div>
-{@/each}
-	</div>
-{{{navigation}}}
-<script type="text/javascript" src="${frontEnd_base}jquery.js"></script>
-<script type="text/javascript" src="${frontEnd_base}lib/sea.js"></script>
+</div>
 <script type="text/javascript">
-	var app_config = {
-		'frontEnd_base' : '${frontEnd_base}'
-	};
-	seajs.config({
-	  'base' : '${frontEnd_base}'
-	});
+    var app_config = {
+        frontEnd_base : '${{frontEnd.base}}',
+        frontEnd_version : '${{frontEnd.version}}',
+        imgDomain : '${{frontEnd.img_domain}}'
+    };
 </script>
-<script type="text/javascript" src="${frontEnd_base}public/app.js"></script>
-{{{baiduAndGoogleTongji}}}
+<script type="text/javascript" src="${{frontEnd.base}}lib/jquery/jquery.js"></script>
+<script type="text/javascript" src="${{frontEnd.base}}lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${{frontEnd.base}}loser/bootstrap_plugin.js?v=${{frontEnd.version}}"></script>
+<include name="footer"/>
+<include name="baiduAndGoogleTongji"/>
 </body>
 </html>

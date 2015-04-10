@@ -17,53 +17,72 @@ get_list: 								|		get_detail
 -----------------------------------------------------------------
  */
 
-var mongo = require('../conf/mongo_connect');
+var mongo = require('../core/DB.js');
 var fs = require('fs');
-var querystring=require('querystring');
 
 function get_list(data,callback){
-	var data = data,
-		limit_num = parseInt(data['limit'])||10,
-		skip_num = parseInt(data['skip'])||0;
+  var data = data,
+      limit_num = parseInt(data['limit'])||10,
+      skip_num = parseInt(data['skip'])||0;
+
+  var resJSON = {
+      code : 200,
+      limit : limit_num,
+      skip : skip_num
+  };
 	
-	var resJSON = {
-		'code':1,
-		'limit':limit_num,
-		'skip':skip_num,
-	};
-	
-	var method = mongo.start();
-	method.open({'collection_name':'opus'},function(err,collection){
-      //count the all list
-      collection.count(function(err,count){
-      	resJSON['count'] = count;
-      });
+  var method = mongo.start();
+  method.open({
+    collection_name: 'opus'
+  },function(err,collection){
+    if(err){
+      resJSON.code = 500;
+      callback&&callback(resJSON);
+      return
+    }
+    //count the all list
+    collection.count(function(err,count){
+      resJSON['count'] = count;
       
-      collection.find({},{limit:limit_num}).sort({id:-1}).skip(skip_num).toArray(function(err, docs) {
-			if(err){
-				resJSON.code = 2;
-			}else{
-				for(var i=0 in docs){
-					delete docs[i]['content'];
-				}
-				resJSON['list'] = docs;
-			}
-			callback&&callback(resJSON);
-			method.close();
-		});
-	});
+      collection.find({},{
+        limit : limit_num
+      }).sort({
+        id : -1
+      }).skip(skip_num).toArray(function(err, docs) {
+        if(err){
+          resJSON.code = 2;
+        }else{
+          for(var i=0 in docs){
+            delete docs[i]['content'];
+          }
+          resJSON['list'] = docs;
+        }
+        callback&&callback(resJSON);
+        method.close();
+      });
+    });
+  });
 }
 function get_detail(data,callback){
 	var data=data,
 		articleID = data['id'];
 	
 	var resJSON={
-		'code':1,
-		'id' : data['id'],
+		code: 200,
+		id : data['id'],
 	};
 	var method = mongo.start();
-	method.open({'collection_name':'opus'},function(err,collection){
-		collection.find({id:articleID}).toArray(function(err, docs) {
+	method.open({
+    collection_name: 'opus'
+  },function(err,collection){
+    if(err){
+      resJSON.code = 500;
+      callback&&callback(resJSON);
+      return
+    }
+    collection.find({
+      id: articleID
+    }).toArray(function(err, docs) {
 			if(arguments[1].length==0){
 				resJSON['code'] = 2;
 				resJSON['msg'] = 'could not find this opus !';				
@@ -77,10 +96,8 @@ function get_detail(data,callback){
 	});
 }
 
-function this_control(url,callback){
-	
-	var search = url.split('?')[1],
-		data = querystring.parse(search);
+function this_control(connect,callback){
+	var data = connect.url.search;
 	
 	if(data['act']=='get_list'){
 	
@@ -107,14 +124,13 @@ function this_control(url,callback){
 	}
 }
 
-exports.render = function (req,res_this,res){
-
-	var url = req.url;
+exports.render = function(connect,app){
+	var url = connect.request.url;
 	
-	cache.ajax(url,function(this_cache){
-		res_this.json(this_cache);
+	app.cache.use(url,['ajax'],function(this_cache){
+		connect.write('json',this_cache);
 	},function(save_cache){
-		this_control(url,function(this_data){
+		this_control(connect,function(this_data){
 			save_cache(JSON.stringify(this_data));
 		});
 	});

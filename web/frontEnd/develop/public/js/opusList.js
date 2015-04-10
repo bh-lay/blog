@@ -3,93 +3,90 @@
  *  
  */
 define(function(require,exports){
+	var pagination = require('util/pagination.js');
+  var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>';
 	
-	var item_tpl = ['<li>',
-		'<div class="opus_cover">',
-			'<a href="/opus/<%=id %>" title="<%=title %>" target="_self" lofox="true" >',
-				'<img src="<%=cover %>" alt="<%=title %>" />',
-			'</a>',
-		'</div>',
-		'<div class="opus_info">',
-			'<h3><a href="/opus/<%=id %>" target="_self" lofox="true" ><%=title %></a></h3>',
-			'<p><strong>开发范围：</strong>',
-				'<% for(var i=0;i<work_range.length;i++){ %>',
-					'<span><%=work_range[i] %></span>',
-				'<% } %>',
-			'</p>',
-			'<p><strong>在线地址：</strong>',
-				'<% if(online_url){ %>',
-					'<a href="<%=online_url %>"><%=online_url %></a>',
-				'<% }else{ %>',
-					'<span>无在线地址</span>',
-				'<% } %>',
-			'</p>',
-		'</div>',
-	'</li>'].join('');
-	var render = L.tplEngine(item_tpl);
+  function getData(skip,limit,callback){
+    $.ajax({
+      type : 'GET' ,
+      url : '/ajax/opus',
+      data : {
+        act : 'get_list',
+        skip : skip,
+        limit : limit
+      },
+      success :function(data){
+        var count = data['count'],
+            list = data['list'];
+        if(data.code == 500){
+          callback && callback(500);
+          return
+        }
+        for(var i = 0,total = list.length;i<total;i++){
+          list[i]['work_range'] = list[i]['work_range']?list[i]['work_range'].split(/\,/):['暂未填写'];
+          //使用七牛图床
+          list[i].cover = L.qiniu(list[i].cover);
+        }
+        callback && callback(null,list,count);
+      }
+    });
+  }
 	
-	var limit = 20,
-		 skip = 0,
-		 count = null,
-		 dom;
-
-	var insert = function(param){
-		var this_html = $(param['html']),
-			this_dom = param['dom'];
-		this_dom.append(this_html);
-	};
-	var getData = function(callback){
-		$.ajax({
-			'type' : 'GET' ,
-			'url' : '/ajax/opus',
-			'data' : {
-				'act' : 'get_list',
-				'skip' : skip ,
-				'limit' : limit
-			},
-			'success' :function(data){
-				count = data['count'];
-				skip += limit;
-				
-				var list = data['list'];
-				for(var i = 0,total = list.length;i<total;i++){
-					list[i]['work_range'] = list[i]['work_range']?list[i]['work_range'].split(/\,/):['暂未填写'];
-				}
-				callback&&callback(list);
-			}
-		});
-	};
-	var start = function(){
-		
-		$('.shareList').on('mouseenter','a',function(){
-			$(this).find('strong').stop().animate({'bottom':0},200);
-		}).on('mouseleave','a',function(){
-			$(this).find('strong').stop().animate({'bottom':-100},200);
-		});
-	};
-	
-	return function(dom,param){
-		var render_over = this.render_over || null;
-//			if(param['init']){
-			skip = 0;
-			getData(function(list){
-				dom.html('<div class="golCnt"><div class="opusList"><ul></ul></div></div>');
-				var this_html = '',
-					this_dom = dom.find('.opusList ul');
-				
-				for(var i=0,total=list.length;i<total;i++){
-					this_html += render(list[i]);
-				}
-				insert({
-					'end' : (skip>=count)?true:false,
-					'html' : this_html,
-					'dom' : this_dom
-				});
-				start();
-				render_over&&render_over();
-			});
-//		}else{
-//				start();
-//			}
-	};
+  function LIST(dom,tag){
+    this.skip = 0;
+    this.limit = 10;
+    this.count = 0;
+    this.dom = dom;
+  }
+  LIST.prototype.renderPage = function(index,callback){
+    var me = this;
+    this.skip = (index-1 || 0) * this.limit;
+    var list_tpl = $('#tpl_opus_list_item').html();
+    
+    getData(this.skip,this.limit,function(err,list,count){
+      if(!err && list.length){
+        me.count = count;
+        me.skip += me.limit;
+        var html = juicer(list_tpl,{
+            list : list
+        });
+        me.dom.html(html);
+      }else{
+        me.dom.html(empty_tpl);
+      }
+      callback && callback.call(me);
+    });
+  };
+  return function(dom,param){
+    var me = this,
+    param = param || {};
+    var base_tpl = $('#tpl_opus_list_base').html();
+    var base_tpl_end = L.tplModule(base_tpl);
+    
+    //插入基本模版
+    dom.html(base_tpl_end);
+    this.$list = dom.find('.opusList');
+    this.$page_cnt = dom.find('.pagination_cnt');
+    
+    //获取当前页数
+    this.pageIndex = param.page || 1;
+    
+     //创建列表对象
+    var list = new LIST(this.$list);
+    //渲染初始页
+    list.renderPage(this.pageIndex,function(){
+      //分页组件
+      var page = new pagination(me.$page_cnt,{
+        list_count : list.count,
+        page_cur : me.pageIndex,
+        page_list_num : list.limit,
+        max_page_btn : 6
+      });
+      page.jump = function(num){
+        var newUrl = '/opus?page=' + num;
+        L.push(newUrl);
+        L.refresh();
+      };
+    });
+  };
 });

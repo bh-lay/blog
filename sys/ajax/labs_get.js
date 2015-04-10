@@ -17,7 +17,7 @@ get_list: 								|		get_detail
 -----------------------------------------------------------------
  */
 
-var mongo = require('../conf/mongo_connect');
+var mongo = require('../core/DB.js');
 var fs = require('fs');
 var querystring=require('querystring');
 //var markdown = require('markdown');
@@ -30,14 +30,19 @@ function get_list(data,callback){
 		skip_num = parseInt(data['skip'])||0;
 	
 	var resJSON = {
-		'code':1,
-		'limit':limit_num,
-		'skip':skip_num,
+		code: 200,
+		limit: limit_num,
+		skip: skip_num,
 	};
 	
 	var method = mongo.start();
 	method.open({'collection_name':'labs'},function(err,collection){
-      //count the all list
+    if(err){
+      resJSON.code = 500;
+      callback&&callback(resJSON);
+      return
+    }
+    //count the all list
 		collection.count(function(err,count){
 			resJSON['count'] = count;
 			
@@ -58,14 +63,11 @@ function get_list(data,callback){
 }
 function get_detail(data,callback){
 	var data=data,
-		labID = data['id'],
-		//内容格式（html/markdown）
-		content_format = data['content_format'] || 'html';
+		labID = data['id'];
 	
 	var resJSON={
-		'code':1,
-		'id' : labID,
-		'content_format' : content_format
+		code: 200,
+		id : labID
 	};
 	var method = mongo.start();
 	method.open({'collection_name':'labs'},function(err,collection){
@@ -76,24 +78,14 @@ function get_detail(data,callback){
 				resJSON['msg'] = 'could not find this lab ' + labID + ' !';				
 			}else{ 
 				resJSON['detail'] = docs[0];
-				
-				if(content_format == 'html'){
-				//	docs[0].content = markdown.parse(docs[0].content);
-					docs[0].content = converter.makeHtml(docs[0].content);
-				}
-			//	}else if(content_format == 'markdown'){
-					
-			//	}
-				resJSON['detail'] = docs[0];
 			}
 			callback&&callback(resJSON);
 		});
 	});
 }
 
-function this_control(url,callback){
-	var search = url.split('?')[1],
-		 data = querystring.parse(search);
+function this_control(connect,callback){
+	var data = connect.url.search;
 	
 	if(data['act']=='get_list'){
 		get_list(data,function(json_data){
@@ -119,14 +111,13 @@ function this_control(url,callback){
 	}
 }
 
-exports.render = function (req,res_this,res){
-	
-	var url = req.url;
+exports.render = function (connect,app){
+	var url = connect.request.url;
 
-	cache.ajax(url,function(this_cache){
-		res_this.json(this_cache);
+	app.cache.use(url,['ajax'],function(this_cache){
+		connect.write('json',this_cache);
 	},function(save_cache){
-		this_control(url,function(this_data){
+		this_control(connect,function(this_data){
 			save_cache(JSON.stringify(this_data));
 		});
 	});

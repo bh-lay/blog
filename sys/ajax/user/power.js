@@ -17,7 +17,7 @@ get_list: 								|		get_detail
 -----------------------------------------------------------------
  */
 
-var mongo = require('../../conf/mongo_connect');
+var mongo = require('../../core/DB.js');
 var fs = require('fs');
 var querystring=require('querystring');
 
@@ -102,15 +102,14 @@ function this_control(data,callback){
 	}
 }
 
-exports.render = function (req,res_this,path){
-	
+exports.render = function (req,res_this,path){	
 	var url = req.url;
 	var pathnode = path.pathnode;
 	if(pathnode.length == 2){
 		var search = url.split('?')[1],
 			 data = querystring.parse(search);
 		 
-		cache.ajax(url,function(this_cache){
+		cache.use(url,['ajax'],function(this_cache){
 			res_this.json(this_cache);
 		},function(save_cache){
 			this_control(data,function(this_data){

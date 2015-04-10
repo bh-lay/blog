@@ -1,0 +1,139 @@
+/**********************************
+******************************
+Template Name: holyColorful
+Version:1.0
+Author:	bh_lay
+E-mail:	bh_lay@126.com
+Blog:	http://bh-lay.com
+Author URI:
+******************************
+**********************************/
+body,
+div,
+ul,
+ol,
+li,
+dl,
+dt,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0px;
+  padding: 0px;
+}
+img {
+  border: none;
+}
+ul,
+ol,
+li,
+form,
+dl {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: #333333;
+}
+a:hover {
+  color: #55cc00;
+}
+TD {
+  color: #777;
+  font-size: 12px;
+  padding: 10px;
+}
+.fix {
+  zoom: 1;
+}
+.fix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  overflow: hidden;
+}
+html,
+body {
+  color: #333;
+  font-size: 14px;
+  font-family: "Microsoft YaHei", tahoma, arial, simsun, "宋体";
+}
+.container {
+  width: 90%;
+  margin: auto;
+}
+@media (max-width: 600px){
+  .container {
+    width: auto;
+    margin: 0 10px;
+  }
+}
+.l-mini-nav{
+	height: 24px;
+	line-height: 24px;
+	background:#f5f5f5;
+	border-bottom: 1px solid #ccc;
+}
+.l-mini-nav a{
+	font-size: 12px;
+	color: #666;
+}
+.l-mini-nav a:hover{
+	text-decoration: underline;
+	color: #333;
+}
+body{background: url(bj.png);}
+.tips{color:#666; margin-bottom: 10px;padding:10px 5px; text-indent:2em;border:1px solid #ddd;border-radius:4px;background-color:#fff;overflow:hidden;}
+
+/*瀑布流页面*/
+.hangTitle{
+  height:100px;
+  margin-bottom: 10px;
+  padding:20px 40px;
+  background:url("intiate.jpg") no-repeat right top #000;
+  color:#fff;border-radius:0px 0px 8px 8px;_overflow:hidden;
+}
+.hangTitle h1{height:40px;font-size:30px;letter-spacing:0.5em;}
+.hangTitle span{height:20px;display:block;font-size:14px;color:#bbb;}
+.hangTitle p{font-size:16px;text-indent:0em;margin:15px 0px 0px;color:#ddd;}
+@media (max-width: 800px){
+  .hangTitle{
+    text-shadow: 1px 1px 3px rgba(0,0,0,.6);
+  }
+}
+#waterfall{
+  position: relative;
+  margin: 10px 0;
+  min-height: 1000px;
+}
+#waterfall dl{
+  background:#fff;
+  border-radius:4px;
+  margin-bottom: 10px;
+  overflow:hidden;
+  box-shadow:1px 1px 3px rgba(0,0,0,.2)
+}
+#waterfall dl dt{line-height:50px;font-size:18px;color:#05a;text-align:center;}
+#waterfall dl dd{overflow:hidden;}
+#waterfall dl dd img{width:100%;display:block;margin:auto;}
+#waterfall dl dd p{padding:10px 10px 20px;font-size:12px;color:#aaa;margin:0px;text-indent: 2em;line-height:1.6;}
+
+#waterfall dl a{display:block;padding:0px;text-align:center;line-height:40px;font-size:16px;color:#05a;text-align:center;}
+#waterfall dl a:hover{background:#f5f5f5;color:#05c}
+
+
+/**底部**/
+.footer{background:#000;border-top:2px solid #06f;border-bottom:1px solid #000;color:#aaa;padding:20px 0px;}
+.footer dl{display: inline;float: left;margin: 30px;text-align: center;width: 260px;}
+.footer dl dt{border-bottom:1px dashed #999;color:#000;font-size:15px;letter-spacing:0.4em;margin-bottom:10px;padding:5px;}
+.footer dl dd{float:left;font-size:12px;line-height:25px;width:130px;}
+.footer dl a{display:block;color:#aaa;}
+.footer dl a:hover{background:#444;color:#000;}
+.copyright{text-align:center;font-size:12px;padding:60px 0px;}
+.copyright img{display:none;}

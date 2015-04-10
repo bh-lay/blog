@@ -17,7 +17,7 @@ get_list: 								|		get_detail
 -----------------------------------------------------------------
  */
 
-var mongo = require('../conf/mongo_connect');
+var mongo = require('../core/DB.js');
 var fs = require('fs');
 var querystring=require('querystring');
 
@@ -27,9 +27,9 @@ function get_list(data,callback){
 		skip_num = parseInt(data['skip'])||0;
 	
 	var resJSON = {
-		'code':1,
-		'limit':limit_num,
-		'skip':skip_num,
+		code: 200,
+		limit: limit_num,
+		skip: skip_num,
 	};
 	
 	var method = mongo.start();
@@ -58,8 +58,8 @@ function get_detail(data,callback){
 		articleID = data['id'];
 	
 	var resJSON = {
-		'code':1,
-		'id' : data['id'],
+		code: 200,
+		id : data['id'],
 	};
 	var method = mongo.start();
 	method.open({'collection_name':'blog_friend'},function(err,collection){
@@ -76,9 +76,8 @@ function get_detail(data,callback){
 	});
 }
 
-function this_control(url,callback){
-	var search = url.split('?')[1],
-		 data = querystring.parse(search);
+function this_control(connect,callback){
+	var data = connect.url.search;
 	
 	if(data['act']=='get_list'){
 		get_list(data,function(json_data){
@@ -104,14 +103,13 @@ function this_control(url,callback){
 	}
 }
 
-exports.render = function (req,res_this,res){
-	
-	var url = req.url;
+exports.render = function (connect,app){
+	var url = connect.request.url;
 
-	cache.ajax(url,function(this_cache){
-		res_this.json(this_cache);
+	app.cache.use(url,['ajax'],function(this_cache){
+		connect.write('json',this_cache);
 	},function(save_cache){
-		this_control(url,function(this_data){
+		this_control(connect,function(this_data){
 			save_cache(JSON.stringify(this_data));
 		});
 	});

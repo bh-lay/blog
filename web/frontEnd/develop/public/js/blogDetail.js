@@ -3,40 +3,27 @@
  *  
  */
 define(function(require,exports){
-	require('lib/juicer.js');
-
-	var template = ['<div class="l_row"><div class="l_col_12"><div class="blog_article">',
-		'<div class="articletop">',
-			'<h1>${title}</h1>',
-			'<p><span>时间：${time_show} </span><span>作者：${author}</span></p>',
-		'</div>',
-		'<div class="article">$${content}</div>',
-		'<div class="copylink">',
-			'<div class="tag"><strong>本文关键字：</strong>${tags}</div>',
-			'<div class="pageUrl"><strong>转载请注明来源：</strong>http://bh-lay.com/blog/${id}</div>',
-		'</div>',
-		'<div class="youyan">',
-		'<div id="uyan_frame"></div>',
-		'<script type="text/javascript">',
-			'var uyan_config = {"du":"bh-lay.com"};',
-		'</script>',
-		'<script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1605927" async=""></script>',
-	'</div></div></div>'].join('');
+  require('lib/highlight/highlight');
+	var showdown = require('public/js/showdown');
+  var empty_tpl = '<div class="blank-content"><p>博文不存在</p></div>';
 	
 	function getData(id,fn){
 		$.ajax({
-			'type' : 'GET' ,
-			'url' : '/ajax/blog',
-			'data' : {
-				'act' : 'get_detail',
-				'id' : id
+			type : 'GET' ,
+			url : '/ajax/blog',
+			data : {
+				act : 'get_detail',
+				id : id
 			},
-			'success' :function(data){
-				if(data.code == 1){
+			success :function(data){
+        var template = $('#tpl_blog_detail').html();
+        var tpl = L.tplModule(template);
+				if(data.code == 200){
+					var converter = new showdown.converter();
 					var detail = data['detail'];
-					var date = new Date(parseInt(detail.time_show));
-					detail.time_show = (date.getYear()+1900)+'-'+(date.getMonth()+1)+'-'+ date.getDate();
-					var this_html = juicer(template,detail);
+					detail.content = converter.makeHtml(detail.content);
+					detail.time_show = L.parseTime(detail.time_show,'{y}-{mm}-{dd}');
+					var this_html = juicer(tpl,detail);
 					fn&&fn(null,this_html,data['detail']['title']);
 				}else{
 					fn&&fn('博客不存在！');
@@ -49,10 +36,19 @@ define(function(require,exports){
 		
 		getData(id,function(err,html,title){
 			if(err){
+        dom.html(empty_tpl);
 				return
 			}
 			callback && callback(title);
 			html&&dom.html(html);
+			var commentDom = dom.find('.comments_frame');
+      
+      //代码高亮
+      dom.find('pre').each(function(){
+          hljs.highlightBlock(this);
+      });
+      
+			new L.views.comments.init(commentDom,'blog-' + id);
 		});
 	};
 });

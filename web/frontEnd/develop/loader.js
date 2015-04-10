@@ -4,16 +4,16 @@
  * 
  * @demo
  * var require = new loader({ 
- * 	'lanternJS' : '/src/js/lantern.js',
- * 	'lanterncss' : '/src/css/lantern.css',
- * 	'lofox' : '/src/js/lofox.js'
+ *  'lanternJS' : '/src/js/lantern.js',
+ *  'lanterncss' : '/src/css/lantern.css',
+ *  'lofox' : '/src/js/lofox.js'
  * });
  * require.load('lanternJS',callBack);
  * require.load('lanternCSS,lofox',callBack);
  * require.load('/src/js/lantern.js,/src/js/lofox.js',callBack);
  */
 
-(function(exports){
+(function (exports) {
 	var loadHistory = {};
 	//定义私有变量
 	var private_doc = document;

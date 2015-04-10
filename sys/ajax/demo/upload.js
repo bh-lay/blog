@@ -4,13 +4,14 @@
  */
 
 var fs = require('fs');
+var utils = require('../../core/utils/index.js');
 
-exports.upload = function (req,res_this){
+exports.upload = function (req,callback){
 	var json = {
 		'code':200,
 		'files' : []
 	}
-	parse.request(req,function(err,fields, files){
+	utils.parse.request(req,function(err,fields, files){
 		var errorFiles = [];
 		if(err){
 			code = 201
@@ -25,6 +26,6 @@ exports.upload = function (req,res_this){
 			}
 			json.files = newFiles;
 		}
-		res_this.json(json);
+		callback && callback(json);
 	});
 }

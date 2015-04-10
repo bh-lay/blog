@@ -10,34 +10,29 @@
 	});
  */
 
-var mongo = require('../../conf/mongo_connect');
-var session = require('../../mod/session');
+var mongo = require('../../core/DB.js');
+var utils = require('../../core/utils/index.js');
 //增加一条用户记录
-function add(parm,res_this){
+function add(parm,callback){
 	var parm = parm;
 	
 	var method = mongo.start();
 		
 	method.open({'collection_name':'user'},function(err,collection){
-	
-		collection.find({}, {}).toArray(function(err, docs) {
-	
-			parm.id = parse.createID();
+		parm.id = utils.createID();
 
-			collection.insert(parm,function(err,result){
-				if(err) throw err;
-				res_this.json({
-					'code' : 1,
-					'id' : parm.id ,
-					'msg' : 'sucess !'
-				});
-				method.close();
-			});
+		collection.insert(parm,function(err,result){
+			if(err) {
+				callback && callback(err);
+			}else {
+				callback && callback(null);
+			}
+			method.close();
 		});
 	});
 }
 //修改用户记录
-function edit(parm,res_this){
+function edit(parm,callback){
 	var parm = parm;
 	
 	var method = mongo.start();
@@ -45,76 +40,15 @@ function edit(parm,res_this){
 	method.open({'collection_name':'user'},function(error,collection){
 		collection.update({'id':parm.id}, {$set:parm}, function(err,docs) {
 			if(err) {
-				res_this.json({
-					'code' : 1,
-					'msg' : 'modified failure !'
-				});       
+				callback && callback(err);
 			}else {
-				res_this.json({
-					'code' : 1,
-					'msg' : 'modified success !'
-				});
+				callback && callback(null);
 			}
 			method.close();
 		});
 	});
 }
-//增加或编辑用户记录
-function add_edit (){
-	var that = this;
-	parse.request(this.request,function(error,fields, files){
-		var data = fields;
-		var parm = {
-			'id' : data['id'] || '',
-			'username':data['username'] || '',
-			'password':data['password'] ? parse.md5(data['password']) : null,
-			'email':data['email'] || null,
-			'user_group':data['user_group'] || '',
-		};
-		if(!parm['username']){
-			that.res.json({
-				'code' : 2,
-				'msg' : 'please insert complete code !'
-			});
-			return
-		}
-		
-		session.start(that.request,that.res,function(){
-			var session_this = this;
-			if(parm['id']&&parm['id'].length>2){
-				//check edit user power
-				if(session_this.power(12)){
-					if(parm['password'] == null){
-						delete parm['password'];
-					}
-					edit(parm,that.res);
-				}else{
-					that.res.json({
-						'code':2,
-						'msg':'no power to edit user !'
-					});
-				}
-			}else{
-				//check add user power
-				if(session_this.power(11)){
-					add(parm,that.res);
-				}else{
-					that.res.json({
-						'code':2,
-						'msg':'no power to edit user !'
-					});
-				}
-			}
-		});
-	});
-}
 
-function handleSNS(id,req,res_this){
-	session.start(req,res_this,function(){
-		var SNS = this.get('SNSuserid');
-		console.log('-----------------',SNS)
-	});
-}
 /**
  * 注册新的用户
  * param {email & password}
@@ -122,12 +56,12 @@ function handleSNS(id,req,res_this){
  **/
 function signup(){
 	var that = this;
-	parse.request(this.request,function(error,data){
+	utils.parse.request(this.request,function(error,data){
 		var param = {};
 		param['email'] = data['email'] || null;
-		param['password'] = parse.md5(data['password'] || '');
+		param['password'] = utils.parse.md5(data['password'] || '');
 		param['user_group'] = 'user';
-		param['id'] = parse.createID();
+		param['id'] = utils.createID();
 		if(param['email']&&param['password']){
 			var method = mongo.start();
 			method.open({'collection_name':'user'},function(err,collection){
@@ -142,8 +76,6 @@ function signup(){
 							'id' : param.id ,
 							'msg' : 'sucess !'
 						});
-						//处理SNSuser关联
-						handleSNS(param.id,that.request,that.res);
 					});
 				});
 			});
@@ -201,51 +133,47 @@ function get_power(method,user_group,callback){
 	});
 }
 //处理login
-function login_handle(req,res_this,session_this,username,password){
+function login_handle(connect,session_this,username,password){
 		//matche user
 	var method = mongo.start();
 
 	method.open({'collection_name':'user'},function(err,collection){
 		//
 		if(err){
-			res_this.json({
+			connect.write('json',{
 				'code':4,
 				'msg':'咱数据库被拐跑了！'
 			});
 			return
 		}
-		collection.find({"$or": [{'username':username},{'email':username}]}).toArray(function(err, docs) {
-			
+		collection.find({
+			'email':username,
+			'password':password
+		}).toArray(function(err, docs) {
 			if(docs.length > 0){
-				if( docs[0]['password'] != password){
-					//密码错了
-					res_this.json({
-						'code':2,
-						'msg':'二货，帐号密码输错了吧！'
-					});
-					return
-				}				
-				var user_group = docs[0]['user_group'];
+				var user = docs[0];
+				var user_group = user['user_group'];
 				get_power(method,user_group,function(power_data){
 					method.close();
-					var userid = docs[0]['id'];
+					var userid = user['id'];
 					session_this.set({
 						'user_group' : user_group,
-						'username' : docs[0]['username'], 
-						'user_id' : userid,
+						'username' : user['username'], 
+						'uid' : userid,
 						'power_data' : power_data
 					});
+					if(user.password){
+						delete user.password;
+					}
 					
-					res_this.json({
+					connect.write('json',{
 						'code':200,
-						'msg':'login success!'
+						'user' : user
 					});
-					//处理SNSuser关联
-					handleSNS(userid,req,res_this);
 				});
 			}else{
-				//账号错了
-				res_this.json({
+				//账号or密码 错了
+				connect.write('json',{
 					'code':2,
 					'msg':'二货，帐号密码输错了吧！'
 				});
@@ -254,119 +182,213 @@ function login_handle(req,res_this,session_this,username,password){
 	});
 }
 
+
+//增加或编辑用户记录
+exports.add_edit = function (connect,app){
+	
+	utils.parse.request(connect.request,function(error,fields, files){
+		var data = fields;
+		var parm = {
+			'id' : data['id'] || '',
+			'username' : data['username'] || '',
+			'password' : data['password'] ? utils.parse.md5(data['password']) : null,
+			'email' : data['email'] || null,
+			'avatar' : data['avatar'] || null,
+			'user_group' : data['user_group'] || '',
+		};
+		if(!parm['username']){
+			connect.write('json',{
+				'code' : 2,
+				'msg' : 'please insert complete code !'
+			});
+			return
+		}
+		
+		connect.session(function(session_this){
+			if(parm['id']&&parm['id'].length>2){
+				//check edit user power
+				if(session_this.power(12)){
+					if(parm['password'] == null){
+						delete parm['password'];
+					}
+					edit(parm,function(err){
+						if(err){
+							connect.write('json',{
+								'code':3,
+								'msg':'modified faild!'
+							});
+							return;
+						}
+						connect.write('json',{
+							'code':1,
+							'msg':'modified success!'
+						});
+					});
+				}else{
+					connect.write('json',{
+						'code':2,
+						'msg':'no power to edit user !'
+					});
+				}
+			}else{
+				//check add user power
+				if(session_this.power(11)){
+					add(parm,function(err){
+						if(err){
+							connect.write('json',{
+								'code':3,
+								'msg':'add faild!'
+							});
+							return;
+						}
+						connect.write('json',{
+							'code':1,
+							'msg':'add success!'
+						});
+					});
+				}else{
+					connect.write('json',{
+						'code':2,
+						'msg':'no power to edit user !'
+					});
+				}
+			}
+		});
+	});
+}
+
 //登录
-function login (){
-	var req = this.request;
-	var res_this = this.res;
+exports.login = function (connect,app){
+	var req = connect.request;
 	if(req.method != 'POST'){
-		res_this.json({
+		connect.write('json',{
 			'code' : 201,
 			'msg' : 'please use POST to login !'
 		});
 		return
 	}
-	parse.request(req,function(error,data){
-		var username = data['username'];
+	utils.parse.request(req,function(error,data){
+		var email = data['email'];
 		var password = data['password'] || '';
-		password = parse.md5(password);
-		if(!username||password.length<2){
-			res_this.json({
+		password = utils.parse.md5(password);
+		if(!email||password.length<2){
+			connect.write('json',{
 				'code':2,
-				'msg':'please input username and password !'
+				'msg':'please input email and password !'
 			});
 		}else{
-			session.start(req,res_this,function(){
-				var session_this = this;
-				login_handle(req,res_this,session_this,username,password);
+			connect.session(function(session_this){
+				login_handle(connect,session_this,email,password);
 			});
 		}
 	});
 }
+
 //登出
-function exist(){
-	var req = this.request;
-	var res_this = this.res;
-	session.start(req,res_this,function(){
-		this.set({
+exports.exist = function(connect,app){
+	
+	connect.session(function(session_this){
+		session_this.set({
 			'user_group' : 'guest',
+			'uid' : '',
 			'power_data' : []
 		});
-		res_this.json({
+		connect.write('json',{
 			'code':200,
 			'msg':'exist success !'
 		});
 	});
 }
+
 //获取用户列表
-function list(){
-	var req = this.request;
-	var res_this = this.res;
-	parse.request(req,function(err,data){
+exports.list = function(connect,app){
+	utils.parse.request(connect.request,function(err,data){
 		if(err){
-			//res_this.json({a:12});
+			connect.write('json',{
+				'code' : 2,
+				'msg' : ''
+			});
 			return
 		}
 		get_list(data,function(json){
-			res_this.json(json);
+			connect.write('json',json);
+		});
+	});
+}
+/**
+ * 获取用户信息
+ */
+function getUserDetail(userID,callback){
+	var method = mongo.start();
+	method.open({
+    collection_name: 'user'
+  },function(err,collection){
+    if(err){
+			callback&& callback(err);
+      return;
+    }
+		collection.find({
+      id: userID
+    }).toArray(function(err, docs) {
+			method.close();
+			if(err || docs.length == 0){
+				callback && callback(err || 'error');
+				return;
+			}
+			var item = docs[0];
+			if(item && item['password']){
+				delete item['password']
+			}
+			callback&& callback(null,item)
 		});
 	});
 }
 //获取用户信息
-function detail(userID){
-	var req = this.request;
-	var res_this = this.res;
-	
-	var method = mongo.start();
-	var resJSON = {
-		'code' : 200,
-		'detail' : null
-	};
-	method.open({'collection_name':'user'},function(err,collection){
-		collection.find({id:userID}).toArray(function(err, docs) {
-			method.close();
-			if(arguments[1].length==0){
-				resJSON['code'] = 201;
-				resJSON['msg'] = 'could not find this user ' + userID + ' !';				
-			}else{ 
-				resJSON['detail'] = docs[0];
-				if(resJSON['detail']['password']){
-					delete resJSON['detail']['password']
-				}
-			}
-			res_this.json(resJSON);
-		});
-	});
-}
-
-exports.render = function (req,res_this,path){
-	this.request = req;
-	this.res = res_this;
-	this.path = path;
-	if(path.pathnode.length == 2){
-		add_edit.call(this);
-	}else if(path.pathnode.length == 3){
-		switch(path.pathnode[2]){
-			case 'signup':
-				signup.call(this);
-			break
-			case 'login':
-				login.call(this);
-			break
-			case 'exist':
-				exist.call(this);
-			break
-			case 'list':
-				list.call(this);
-			break
-			default :
-				var id = path.pathnode[2];
-				detail.call(this,id);
-				
+exports.detail = function (connect,app,userID){
+	utils.parse.request(connect.request,function(err,data){
+		if(err){
+			connect.write('json',{
+				'code' : 201,
+				'msg' : err
+			});
+			return
 		}
-	}else{
-		res_this.json({
-			'code' : 2,
-			'msg' : 'wrong path'
-		});
-	}
+		//获取指定用户信息
+		if(data.uid){
+			getUserDetail(data.uid,function(err,detail){
+				if(err){
+					connect.write('json',{
+						'code' : 201
+					});
+					return;
+				}
+				connect.write('json',{
+					'code' : 200,
+					'detail' : detail
+				});
+			});
+		}else{
+		//获取自己的用户信息
+			connect.session(function(session_this){
+				//session存入comment预留信息
+				session_this.set({
+					'comment_auth' : 'ready'
+				});
+				
+				var uid = session_this.get('uid');
+				getUserDetail(uid,function(err,detail){
+					if(err){
+						connect.write('json',{
+							'code' : 201
+						});
+						return;
+					}
+					connect.write('json',{
+						'code' : 200,
+						'detail' : detail
+					});
+				});
+			});
+		}
+	});
 }
