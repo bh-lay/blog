@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<title>剧中人后台</title>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<link href="${{frontEnd.base}}lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="/favicon.ico" rel="shortcut icon"/>
+<style type="text/css">
+ /* Box-sizing resets
+ *
+ * 为了避免 Bootstrap 设置的全局盒模型所带来的影响，可以重置单个页面元素或覆盖整个区域的盒模型。
+ */
+/* Option 2A: 通过 CSS 代码重置整个区域 */
+.reset-box-sizing,
+.reset-box-sizing *,
+.reset-box-sizing *:before,
+.reset-box-sizing *:after {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+	html{min-height:100%; }
+	body{padding-top:60px;
+		font-family: "Microsoft Yahei";
+		background : #444;
+	}
+	.navbar-default{box-shadow:0px 0px 5px rgba(0,0,0,0.7);background:#fff;border:none;}
+	.mainCnt{position:relative;min-height:500px;overflow: hidden;}
+	.mainCnt_body{position:relative;width:100%;}
+	.custom-listTable{background:#ddd;border-radius: 0px;}
+	.custom-listTable tr{background: #fff;}
+	.custom-listTable .btn{margin-right:10px;}
+	.custom-footer{background:#333;color:#fff;}
+	.custom-subFooter{background:#333;color:#fff;}
+	.custom-mb10{margin-bottom:10px;}
+	.custom-mb20{margin-bottom:20px;}
+  .custom-editor{
+    margin: 10px 0;
+  }
+  #editor {
+    width: 100%;
+    min-height: 500px;
+  }
+  .pro_loading{
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+    background: #fff;
+  }
+  tr.disable{
+    text-decoration: line-through;
+    background: #eee;
+  }
+  .commentsList .comm_header {
+    line-height: 30px;
+    color: #888;
+  }
+  .commentsList .comm_header span{
+    padding: 0 1em 0 .5em;
+  }
+  .commentsList p{
+    padding-top: 1em;
+  }
+</style>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a href="/admin" class="navbar-brand custom-lofox">小剧客栈</a>
+		</div>
+
+		<div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li><a class="custom-lofox" href="/admin/article">博文</a></li>
+				<li><a class="custom-lofox" href="/admin/opus">作品</a></li>
+				<li><a class="custom-lofox" href="/admin/labs">实验室</a></li>
+				<li><a class="custom-lofox" href="/admin/friends">友情链接</a></li>
+				<li><a class="custom-lofox" href="/admin/gallery">图库</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">用户 <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a class="custom-lofox" href="/admin/user/list">用户管理</a></li>
+						<li><a class="custom-lofox" href="/admin/user/group">用 户 组</a></li>
+						<li><a class="custom-lofox" href="/admin/user/power">权限列表</a></li>
+					</ul>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="#" title="{username}" class="dropdown-toggle" data-toggle="dropdown">
+						<span class="glyphicon glyphicon-user"></span>${{username}}<b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a class="custom-lofox" href="/admin/user/user.html?userid=${{userid}}">改密</a></li>
+						<li><a href="/ajax/user/exist" data-action-ajaxConfirm="二逼，是不是不玩儿啦！"><span class="glyphicon glyphicon-off"></span>退出</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</div>
+</nav> 
+<div class="container bs-docs-container">
+	<div class="row">
+		<div class="mainCnt"> </div>
+	</div>
+</div>
+<div class="custom-footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h3>后台相关介绍</h3>
+				<ul>
+					<li>JSON code:200 正常</li>
+					<li>JSON code:201 没有权限</li>
+					<li>JSON code:501 连不上数据库</li>
+					<li>用户ID统一使用小写的uid，而非user_id、userid</li>
+					<li>基于bootstrap布局，自定义样式请加上“.custom-”前缀</li>
+				</ul>
+				<br/>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/template" id="tpl_index_page">
+<include name="admin/index" />
+</script>
+<script type="text/template" id="tpl_comments_page">
+<include name="admin/comments_list" />
+</script>
+<script type="text/javascript" src="${{frontEnd.base}}lib/jquery/jquery.js"></script>
+<script type="text/javascript" src="${{frontEnd.base}}lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${{frontEnd.base}}lib/sea.js" ></script>
+<script type="text/javascript">
+	var admin_dataBase = {
+		username : '${{username}}',
+		userid : '${{userid}}',
+    frontEnd_version : '${{frontEnd.version}}',
+		frontEnd_base : '${{frontEnd.base}}'
+	};
+	seajs.config({
+	  base : '${{frontEnd.base}}',
+    map : [[/^(.*\.(?:css|js))(.*)$/i, '$1?v=${{frontEnd.version}}']]
+	});
+  seajs.use('admin/index.js');
+</script>
+</body>
+</html>

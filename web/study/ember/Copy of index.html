@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>学习ember</title>
+</head>
+<body>
+
+    <script type="text/x-handlebars">
+
+        <div id="frm">
+
+            <b>Load Tweets for: </b>
+{{view App.SearchTextField placeholder="Twitter username" valueBinding="App.tweetsController.username"}}
+
+<button {{action "loadTweets" target="App.tweetsController"}}>Go!</button>
+        </div>
+
+        <div id="content">
+
+            <div id="recent">
+
+                <h3>Recent Users</h3>
+<ol>
+
+    {{#each App.recentUsersController.reverse}}
+
+        <li>
+
+            <a href="#" title="view again" {{action "searchAgain" target="App.recentUsersController"}}>{{this}}</a> -
+
+            <a href="#" title="remove" {{action "removeUser" target="App.recentUsersController"}}>X</a>
+
+        </li>
+
+    {{/each}}
+
+</ol>
+            </div>
+
+            <div id="tweets">
+
+                <h3>Tweets</h3>
+<ul>
+
+    {{#each App.tweetsController}}
+
+        <li>
+
+            <img {{bindAttr src="avatar"}} />
+
+            <span>{{date}}</span>
+
+            <h3>{{screen_name}}</h3>
+
+            <p>{{text}}</p>
+
+        </li>
+
+    {{/each}}
+
+</ul>
+            </div>
+
+        </div>
+
+    </script>
+
+<!--
+<script type="text/javascript" src="/skin/js/lib/jquery.js"></script>
+<script type="text/javascript" src="/study/ember/handlebars-v1.3.0.js"></script>
+<script type="text/javascript" src="/study/ember/ember.min.js"></script>
+<script type="text/javascript" src="/study/ember/ember-data.min.js"></script>
+<script type="text/javascript" src="/study/ember/app.js"></script>
+-->
+<script type="text/javascript" src="/skin/js/lib/jquery.js"></script>
+<script type="text/javascript" src="/study/ember/ember.min.js"></script>
+<script type="text/javascript" src="/study/ember/app.js"></script>
+
+</body>
+</html>

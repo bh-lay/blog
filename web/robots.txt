@@ -1,0 +1,7 @@
+#
+# robots.txt for layServer
+#
+
+User-agent: *
+
+Disallow: /admin/

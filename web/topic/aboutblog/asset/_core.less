@@ -1,0 +1,29 @@
+/**
+ * 定义Minxin
+ **/
+.transition(@duration,@timing-function:linear, @props:all) {
+	transition: @props @duration @timing-function;
+	-moz-transition: @props @duration @timing-function;
+	-webkit-transition: @props @duration @timing-function;
+	-o-transition: @props @duration @timing-function;
+}
+
+
+.transform(@input) {
+	transform: @input;
+	-moz-transform: @input;
+	-webkit-transform: @input;
+	-o-transform: @input;
+}
+
+
+.rotate(@rt:7.5deg){
+	-moz-transform: rotate(@rt);
+	-o-transform: rotate(@rt);
+	-webkit-transform: rotate(@rt);
+}
+.borderbox(){
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>uploader DEMO</title>
+	<style type="text/css">
+	body{margin:0px;padding:0px;background:#ccc;}
+	.cnt{width:400px;margin:auto;padding-top:100px}
+	.upload{display: block;margin:0px auto 20px;width:100px;height : 30px;line-height:30px;background:#f4f4f4;text-align: center;font-size:14px;color:#333;text-decoration:none}
+	.upload:hover{background:#fff;}
+	.uploading{float:left;width:170px;height:140px;line-height:26px;padding-top:60px;margin:0px 10px 20px;text-align: center;background: #fff;color:#666;font-family:"microsoft yahei"}
+	.imgCard{float:left;width:170px;height:200px;overflow: hidden;margin:0px 10px 20px;background : #fff}
+	.imgCard img{width: 100%}
+	textarea{width:90%;display:block;margin:0px auto 40px;padding:5px 10px;font-size:12px;color:#666;border-color:#ddd;resize:none;}
+	</style>
+</head>
+<body>
+<div class="cnt">
+	<a href="javascript:void(0)" class="upload">上传</a>
+	<div class="imgCnt"></div>
+</div>
+<script type="text/temp" id="imgTpl">
+	<div class="imgCard">
+		<img src="{url}" />
+	</div>
+</script>
+<script type="text/javascript" src="/frontEnd/develop/jquery.js"></script>
+<script type="text/javascript" src="/frontEnd/develop/util/uploader.js"></script>
+<script type="text/javascript">
+	var uploader = new util.uploader({
+		'dom' : $('a.upload'),
+		'action' : '/ajax/demo/upload'
+	});
+	uploader.responseParser =  function(data){
+	  console.log(1,data);
+	  if(data && data.code == 200){
+	    var files = [];
+	    for(var i in data.files){
+	      files.push({
+	        'url' : data.files[i]['url'],
+	        'name' : data.files[i]['name']
+	      });
+	    }
+	    //触发上传完成事件
+	    return {
+	      'files' : files
+	    };
+	  }else{
+	    //触发上传失败事件
+	    return {
+	        'extra' : '服务器异常！'
+	    };
+	  }
+	}
+	uploader.on('startUpload',function(ID){
+		$('.imgCnt').append('<div class="uploading" id="up_' + ID + '">正在上传</div');
+	});
+	uploader.on('success',function(ID,files){
+		var html = '';
+		var tpl = $('#imgTpl');
+		for(var i=0,total=files.length;i<total;i++){
+			html += tpl.html().replace(/{url}/,function(){
+				return files[i]['url'];
+			});
+		}
+		$('#up_' + ID).before(html)
+		$('#up_' + ID).remove();
+	});
+	uploader.on('error',function(ID){
+		$('#up_' + ID).html('上传失败，打开F12看看原因吧！');
+	});
+</script>
+</body>
+</html>
