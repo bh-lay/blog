@@ -140,10 +140,16 @@ define(function (require, exports) {
   //显示背景图
   if (L.supports.css('backgroundSize') && !L.isMobileBrowser) {
       new L.gallery({
-          'delay' : 50000,
-          'data' : [
-              {'src': app_config.frontEnd_base + 'public/images/gallery/bamboo.jpg', 'alt': '竹子'},
-              {'src': app_config.frontEnd_base + 'public/images/gallery/coast.jpg', 'alt': '江边'}
+          delay : 50000,
+          data : [
+              {
+                src : app_config.frontEnd_base + 'public/images/gallery/bamboo.jpg',
+                alt : '竹子'
+              },
+              {
+                src : app_config.frontEnd_base + 'public/images/gallery/coast.jpg',
+                alt : '江边'
+              }
           ]
       });
   }
@@ -151,10 +157,11 @@ define(function (require, exports) {
   L.nav();
   //渐隐加载遮罩
   setTimeout(function () {
-      $('.app_mask').fadeOut(500, function () {
-          $(this).remove();
-      });
-  }, 500);
+      $('.app_mask').addClass('app_mask_out'); 
+      setTimeout(function () {
+        $('.app_mask').remove();
+      }, 1000);
+  },200);
   
 	/**
 	 * 检测链接是否为提供给js使用的地址
