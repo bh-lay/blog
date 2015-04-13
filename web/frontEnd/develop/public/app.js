@@ -85,12 +85,12 @@ define(function (require, exports) {
 	L.refresh = function () {
 		lofox.refresh();
 	};
-    //模块替换
-    L.tplModule = function(txt){
-        return (txt && txt.length) ? txt.replace(/\[\-(\w+)\-\]/g,function(a,key){
-            return $('#module_' + key).html() || '';
-        }) : '';
-    };
+  //模块替换
+  L.tplModule = function(txt){
+    return (txt && txt.length) ? txt.replace(/\[\-(\w+)\-\]/g,function(a,key){
+      return $('#module_' + key).html() || '';
+    }) : '';
+  };
 	/**
 	 * @param (timestamp/Date,'{y}-{m}-{d} {h}:{m}:{s}')
 	 * @param (timestamp/Date,'{y}-{mm}-{dd} {hh}:{mm}:{ss}')
@@ -156,12 +156,10 @@ define(function (require, exports) {
   //开始导航
   L.nav();
   //渐隐加载遮罩
+  $('.app_mask').addClass('app_mask_out'); 
   setTimeout(function () {
-      $('.app_mask').addClass('app_mask_out'); 
-      setTimeout(function () {
-        $('.app_mask').remove();
-      }, 1000);
-  },200);
+    $('.app_mask').remove();
+  }, 1000);
   
 	/**
 	 * 检测链接是否为提供给js使用的地址
@@ -263,31 +261,25 @@ function routerHandle(lofox) {
       container = $('.app_container'),
       $active_page = null,
       o_active_page = null;
-	//移除老的page dom
-	function removePageDom(callback) {
-		if ($active_page) {
+	//显示单页dom
+	function getNewPage() {
+		var newDom = $('<div class="page"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载模块</p></div></div>');
+    //移除老的page dom
+    if ($active_page) {
       var $old = $active_page;
 			$active_page = null;
 			$old.addClass('fadeOutRight');
 			setTimeout(function () {
 				$old.remove();
         $('html,body').scrollTop(0);
-        callback && callback();
-			}, 500);
-		} else {
-      callback && callback();
-    }
-	}
-	//显示单页dom
-	function getNewPage() {
-		var newDom = $('<div class="page"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载模块</p></div></div>');
-    //移除老的dom
-    removePageDom(function () {
         newDom.addClass('fadeInLeft page-active');
         setTimeout(function () {
           newDom.removeClass('fadeInLeft');
         }, 500);
-    });
+			}, 500);
+		} else {
+        newDom.addClass('page-active');
+    }
     container.append(newDom);
 		$active_page = newDom;
 		return newDom;
