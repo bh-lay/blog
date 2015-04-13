@@ -174,7 +174,7 @@ a,a:active{
     height: 50%;
     left: 0;
     background: #eee;
-    .transition(0.8s,ease-in-out);
+    .transition(0.4s,ease-out);
   }
   &:before{
     top: 0;
@@ -184,13 +184,16 @@ a,a:active{
   }
   &.app_mask_out{
     &:before{
+      .transition-delay(0.5s);
       top: -50%;
     }
     &:after{
+      .transition-delay(0.5s);
       top: 100%;
     }
     .app_mask_cnt{
-      top: -50%;
+      .transition(0.4s,ease-in);
+      opacity: 0;
     }
   }
 }
@@ -201,7 +204,6 @@ a,a:active{
   width: 260px;
   margin: -50px 0 0 -130px;
   z-index: 1;
-  .transition(0.1s,ease-in);
   p{
     padding-top: 20px;
     font-size: 18px;

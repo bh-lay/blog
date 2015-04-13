@@ -156,12 +156,10 @@ define(function (require, exports) {
   //开始导航
   L.nav();
   //渐隐加载遮罩
+  $('.app_mask').addClass('app_mask_out'); 
   setTimeout(function () {
-      $('.app_mask').addClass('app_mask_out'); 
-      setTimeout(function () {
-        $('.app_mask').remove();
-      }, 1000);
-  },200);
+    $('.app_mask').remove();
+  }, 1000);
   
 	/**
 	 * 检测链接是否为提供给js使用的地址
