@@ -2183,37 +2183,31 @@ a:active {
   width: 100%;
   height: 50%;
   left: 0;
-  background: #eee;
-  transition: all 0.4s ease-out;
-  -moz-transition: all 0.4s ease-out;
-  -webkit-transition: all 0.4s ease-out;
-  -o-transition: all 0.4s ease-out;
+  background: #f60;
 }
 .app_mask:before {
   top: 0;
 }
 .app_mask:after {
-  top: 50%;
+  bottom: 0;
 }
-.app_mask.app_mask_out:before {
-  transition-delay: 0.5s;
-  -moz-transition-delay: 0.5s;
-  -webkit-transition-delay: 0.5s;
-  -o-transition-delay: 0.5s;
-  top: -50%;
-}
+.app_mask.app_mask_out:before,
 .app_mask.app_mask_out:after {
-  transition-delay: 0.5s;
-  -moz-transition-delay: 0.5s;
-  -webkit-transition-delay: 0.5s;
-  -o-transition-delay: 0.5s;
-  top: 100%;
-}
-.app_mask.app_mask_out .app_mask_cnt {
+  height: 0;
   transition: all 0.4s ease-in;
   -moz-transition: all 0.4s ease-in;
   -webkit-transition: all 0.4s ease-in;
   -o-transition: all 0.4s ease-in;
+  transition-delay: 0.6s;
+  -moz-transition-delay: 0.6s;
+  -webkit-transition-delay: 0.6s;
+  -o-transition-delay: 0.6s;
+}
+.app_mask.app_mask_out .app_mask_cnt {
+  transition: all 0.55s ease-in;
+  -moz-transition: all 0.55s ease-in;
+  -webkit-transition: all 0.55s ease-in;
+  -o-transition: all 0.55s ease-in;
   opacity: 0;
 }
 .app_mask_cnt {
@@ -2227,8 +2221,14 @@ a:active {
 .app_mask_cnt p {
   padding-top: 20px;
   font-size: 18px;
-  color: #333;
+  color: #fff;
   text-align: center;
+}
+.app_mask_cnt .l-loading {
+  border: none;
+}
+.app_mask_cnt .l-loading:after {
+  background: #fff;
 }
 .tongji {
   width: 0px;

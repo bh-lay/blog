@@ -173,26 +173,23 @@ a,a:active{
     width: 100%;
     height: 50%;
     left: 0;
-    background: #eee;
-    .transition(0.4s,ease-out);
+    background: #f60;
   }
   &:before{
     top: 0;
   }
   &:after{
-    top: 50%;
+    bottom: 0;
   }
   &.app_mask_out{
-    &:before{
-      .transition-delay(0.5s);
-      top: -50%;
-    }
+    &:before,
     &:after{
-      .transition-delay(0.5s);
-      top: 100%;
+      height: 0;
+      .transition(0.4s,ease-in);
+      .transition-delay(0.6s);
     }
     .app_mask_cnt{
-      .transition(0.4s,ease-in);
+      .transition(0.55s,ease-in);
       opacity: 0;
     }
   }
@@ -207,8 +204,14 @@ a,a:active{
   p{
     padding-top: 20px;
     font-size: 18px;
-    color:#333;
+    color:#fff;
     text-align: center;
+  }
+  .l-loading{
+    border: none;
+    &:after{
+      background: #fff;
+    }
   }
 }
 
