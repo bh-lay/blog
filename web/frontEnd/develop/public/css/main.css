@@ -2183,52 +2183,50 @@ a:active {
   width: 100%;
   height: 50%;
   left: 0;
-  background: #f60;
+  background: #fff;
+  border-color: #ccc;
+  border-style: solid;
 }
 .app_mask:before {
   top: 0;
+  border-width: 0 0 1px 0;
 }
 .app_mask:after {
   bottom: 0;
+  border-width: 1px 0 0 0;
 }
 .app_mask.app_mask_out:before,
 .app_mask.app_mask_out:after {
   height: 0;
+  transition: all 0.3s ease-in;
+  -moz-transition: all 0.3s ease-in;
+  -webkit-transition: all 0.3s ease-in;
+  -o-transition: all 0.3s ease-in;
+  transition-delay: 0.5s;
+  -moz-transition-delay: 0.5s;
+  -webkit-transition-delay: 0.5s;
+  -o-transition-delay: 0.5s;
+}
+.app_mask.app_mask_out .app_mask_cnt {
   transition: all 0.4s ease-in;
   -moz-transition: all 0.4s ease-in;
   -webkit-transition: all 0.4s ease-in;
   -o-transition: all 0.4s ease-in;
-  transition-delay: 0.6s;
-  -moz-transition-delay: 0.6s;
-  -webkit-transition-delay: 0.6s;
-  -o-transition-delay: 0.6s;
-}
-.app_mask.app_mask_out .app_mask_cnt {
-  transition: all 0.55s ease-in;
-  -moz-transition: all 0.55s ease-in;
-  -webkit-transition: all 0.55s ease-in;
-  -o-transition: all 0.55s ease-in;
   opacity: 0;
 }
 .app_mask_cnt {
   position: absolute;
-  top: 50%;
+  bottom: 50%;
   left: 50%;
-  width: 260px;
-  margin: -50px 0 0 -130px;
+  width: 200px;
+  height: 70px;
+  margin-left: -100px;
   z-index: 1;
 }
 .app_mask_cnt p {
   padding-top: 20px;
   font-size: 18px;
-  color: #fff;
   text-align: center;
-}
-.app_mask_cnt .l-loading {
-  border: none;
-}
-.app_mask_cnt .l-loading:after {
-  background: #fff;
 }
 .tongji {
   width: 0px;
