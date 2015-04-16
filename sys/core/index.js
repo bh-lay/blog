@@ -191,6 +191,7 @@ APP.prototype.cache = new cache({
     root: config.cache.root
 });
 APP.prototype.session = new session_factory({
+  root : config.session.root
 });
 APP.prototype.utils = utils;
 APP.prototype.config = config;
