@@ -2,17 +2,15 @@ var nodemailer = require("nodemailer");
 
 // create reusable transport method (opens pool of SMTP connections)
 var smtpTransport = nodemailer.createTransport("SMTP",{
-	host: "smtp.126.com", // hostname
-	secureConnection: true, // use SSL
-	port: 465, // port for secure SMTP
-	service: "126.com",
+        host: "smtp.exmail.qq.com", // hostname
+      port: 465, // port for secure SMTP
 	auth: {
-		user: "bh_lay@126.com",
-		pass: "######"
+    	user: "mail@bh-lay.com",
+        pass: "xxxxxxxxxxx"
 	}
 });
 
-exports.send = function(mailOptions){
+function send(mailOptions){
 
 	// send mail with defined transport object
 	smtpTransport.sendMail(mailOptions, function(error, response){
@@ -29,9 +27,9 @@ exports.send = function(mailOptions){
 
 //demo
 // setup e-mail data with unicode symbols
-mail.send({
-    from: "<bh_lay@126.com>", // sender address
-    to: "bh_lay@qq.com", // list of receivers
+send({
+    from: "<mail@bh-lay.com>", // sender address
+    to: "bh_lay@126.com", // list of receivers
     subject: "Hello", // Subject line
     text: "Hello world", // plaintext body
     html: "<b>Hello world</b>" // html body
