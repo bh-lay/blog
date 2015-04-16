@@ -25,7 +25,8 @@ module.exports = function(data,callback){
 	var item = {
 		'content' : utils.encodeHtml(data.content),
 		'time' : new Date().getTime(),
-		'cid' : data.cid
+		'cid' : data.cid,
+      reply_for_id : data.reply_for_id
 	};
 	if(!item.cid){
 		callback && callback('missing argument : cid');
