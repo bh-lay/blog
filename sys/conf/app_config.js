@@ -39,6 +39,10 @@ module.exports = {
     //图床地址
     img_domain : '/asset'
   },
+  //SESSION配置
+  session : {
+    root : './temporary/session/'
+  },
   //缓存配置
   cache: {
     use: false,

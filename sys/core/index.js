@@ -12,6 +12,7 @@ var staticFile = require('./staticFile.js');
 var url_redirect = require('../conf/301url');
 var config = require('../conf/app_config.js');
 var utils = require('./utils/index.js');
+var session_factory = require('./session.js');
 /**
  * 格式化path 
  */
@@ -49,65 +50,65 @@ function searchParser(search){
  * @param {Object} url
  */
 function findUrlInMaps(inputPath,MAPS){
-	//定义从url中取到的数据｛变量｝
-	var matchValue = {};
-	//记录找到的maps项
-	var this_mapsItem = null;
-	
-	//遍历maps
-	for(var i in MAPS){
-		//获取maps当前项数组形式的url节点
-		var pathData = pathParser(i);
-		//路径与maps当前节点长度不一致，或最后配置不为通配符“*”跳过
-		if(pathData.length != inputPath.length && pathData[pathData.length -1] != '*'){
-			continue
-		}
-		
-		this_mapsItem = MAPS[i];
-		//遍历maps当前url节点
-		for(var s=0,total=pathData.length;s<total;s++){
-			//1.比对输入url与maps对应url是否一致
-			if(pathData[s] != inputPath[s]){
-				//2.检测当前节点是否为变量
-				var tryMatch = pathData[s].match(/{(.+)}/);
-				if(tryMatch){
-					var key = tryMatch[1];
-					matchValue[key] = inputPath[s];
-				}else if(pathData[s] != '*'){
-					//既不一致，又不是变量，也不是通配符，丢弃此条maps记录
-					this_mapsItem = null;
-					matchValue = {};
-					break
-				}
-				//else{} //符合条件
-			}
-			//else{} //符合条件
-		}
-		//若已经匹配出结果，不再继续匹配
-		if(this_mapsItem){
-			break
-		}
-	}
-	if(this_mapsItem){
-		return {
-			'mapsItem' : this_mapsItem,
-			'data' : matchValue
-		};
-	}else{
-		return false;
-	}
+  //定义从url中取到的数据｛变量｝
+  var matchValue = {};
+  //记录找到的maps项
+  var this_mapsItem = null;
+
+  //遍历maps
+  for(var i in MAPS){
+    //获取maps当前项数组形式的url节点
+    var pathData = pathParser(i);
+    //路径与maps当前节点长度不一致，或最后配置不为通配符“*”跳过
+    if(pathData.length != inputPath.length && pathData[pathData.length -1] != '*'){
+        continue
+    }
+
+    this_mapsItem = MAPS[i];
+    //遍历maps当前url节点
+    for(var s=0,total=pathData.length;s<total;s++){
+      //1.比对输入url与maps对应url是否一致
+      if(pathData[s] != inputPath[s]){
+        //2.检测当前节点是否为变量
+        var tryMatch = pathData[s].match(/{(.+)}/);
+        if(tryMatch){
+          var key = tryMatch[1];
+          matchValue[key] = inputPath[s];
+        }else if(pathData[s] != '*'){
+          //既不一致，又不是变量，也不是通配符，丢弃此条maps记录
+          this_mapsItem = null;
+          matchValue = {};
+          break
+        }
+        //else{} //符合条件
+      }
+      //else{} //符合条件
+    }
+    //若已经匹配出结果，不再继续匹配
+    if(this_mapsItem){
+      break
+    }
+  }
+  if(this_mapsItem){
+    return {
+      mapsItem : this_mapsItem,
+      data : matchValue
+    };
+  }else{
+    return false;
+  }
 }
 
 /**
  * 检测是否为正常用户
  */
 function isNormalVisitor(req){
-    var url = req.url;
-    //检测路径中是否包含 ../
-    if(url.match(/\.\.\//)){
-        return true;
-    }
-    return false;
+  var url = req.url;
+  //检测路径中是否包含 ../
+  if(url.match(/\.\.\//)){
+    return true;
+  }
+  return false;
 }
 /**
  * application 类
@@ -125,7 +126,7 @@ function APP(){
       return
     }
     //实例化一个connect对象
-    var new_connect = new connect(req,res),
+    var new_connect = new connect(req,res,me.session),
         path = new_connect.url,
         pathNode = pathParser(path.pathname),
         result = findUrlInMaps(pathNode,me.MAPS);
@@ -188,6 +189,8 @@ APP.prototype.cache = new cache({
     useCache: config.cache.use ? true : false,
     max_num: config.cache.max_num,
     root: config.cache.root
+});
+APP.prototype.session = new session_factory({
 });
 APP.prototype.utils = utils;
 APP.prototype.config = config;

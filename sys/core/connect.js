@@ -11,7 +11,6 @@
 var fs = require('fs');
 var zlib = require("zlib");
 var parse = require('./utils/parse.js');
-var SESSION = require('./session.js');
 
 
 //统一返回客户端信息方法
@@ -65,10 +64,10 @@ function sendJSON(data){
  * response html page
  */
 function sendHTML(status,content){
-	send.call(this,status,{
-		'Content-Type' : 'text/html',
-		'charset' : 'utf-8'
-	},content);
+  send.call(this,status,{
+    'Content-Type' : 'text/html',
+    'charset' : 'utf-8'
+  },content);
 
 }
 
@@ -76,11 +75,12 @@ function sendHTML(status,content){
  * 单次连接类
  *
  */
-function CONNECT(req,res){
-	this.url = parse.url(req.url);
-	this.request = req;
-	this.response = res;
-	this._session = null;
+function CONNECT(req,res,session_factory){
+  this.url = parse.url(req.url);
+  this.request = req;
+  this.response = res;
+  this._session = null;
+  this._session_factory = session_factory;
 	//是否已向客户端发送信息体
 	this._sended = false;
 }
@@ -181,7 +181,7 @@ CONNECT.prototype['session'] = function(callback){
 	}else{
 		//启用session
 		var cookie = this.cookie();
-		this._session = new SESSION(cookie,function(cookieObj){
+		this._session = new this._session_factory(cookie,function(cookieObj){
 			me.cookie(cookieObj);
 		},function(){
 			callback&&callback(me._session);
