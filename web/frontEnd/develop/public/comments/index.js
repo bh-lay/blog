@@ -47,7 +47,7 @@ define(function(require,exports){
 	'</div>'].join('');
 	
 	var item_tpl = ['{@each list as it}',
-		'<div class="l_com_item" data-uid="${it.uid}" data-cid="${it.cid}">',
+		'<div class="l_com_item" data-uid="${it.uid}" data-id="${it._id}" data-cid="${it.cid}">',
 			'<div class="l_com_item_main">',
 				'<div class="l_com_item_caption">{@if it.user.blog}<a href="${it.user.blog}">${it.user.username}</a>{@else}${it.user.username}{@/if} </div>',
 				'<div class="l_com_item_content">$${it.content}</div>',
@@ -152,10 +152,10 @@ define(function(require,exports){
         userInput = userInput || {};
 		var $allDom = $(this.dom);
 		var user = {
-			'username' : userInput.username || '',
-			'email' : userInput.email || '',
-			'blog' : userInput.blog || '',
-			'avatar' : userInput.avatar || default_avatar
+		    username : userInput.username || '',
+			email : userInput.email || '',
+			blog : userInput.blog || '',
+			avatar : userInput.avatar || default_avatar
 		}
     var screen_name = user.username || '雁过留名';
 		$allDom.find('.l_send_username').html(screen_name).attr('title',screen_name);
@@ -194,7 +194,8 @@ define(function(require,exports){
 				'cid' : data.id,
 				'content' : data.text,
 				//如果为登录用户，则不发送用户信息
-				'user' : user
+				'user' : user,
+              reply_for_id : data.reply_for_id
 			},
 			'success' : function(data){
 				if(data.code && data.code == 200){
@@ -304,7 +305,7 @@ define(function(require,exports){
 		}).on('click','.l_send_username,.l_send_avatar',function(e){
         	askForUserInfo.call(me)
 		}).on('click','.l_send_submit',function(){
-      $textarea.focus();
+            $textarea.focus();
 			if(me.text.length == 0){
 				UI.prompt('你丫倒写点东西啊！',null,{
 					'top' : $(this).offset().top + 40,
@@ -320,7 +321,8 @@ define(function(require,exports){
 				sendComment({
 					'id' : me.id,
 					'text' : text,
-					'user' : private_userInfo
+					'user' : private_userInfo,
+                  reply_for_id : me.reply_for_id || null
 				},function(err,item){
 					if(err){
 						EMIT.call(me,'sendToServiceError');
@@ -399,6 +401,7 @@ define(function(require,exports){
 		var me = this;
 		var param = param || {};
 		this.id = id;
+        this.reply_for_id = param.reply_for_id || null;
 		this.dom = $(sendBox_tpl)[0];
 		this.text = '';
 		this.userDefine = {};
@@ -486,16 +489,17 @@ define(function(require,exports){
 					from: 'top',
 				}),
 				send = new sendBox(pop.cntDom,me.cid,{
-          focus: true,
-          onBeforeSend : function(text){
-            return '@' + reply_for + ' ' + text;
-          }
-        });
-        $(pop.dom).find('.UI_pop_cpt').css('border','none');
-        send.on('sendToServicesuccess',function(item){
-          pop.close();
-          me.addItem(item);
-        });
+                  focus: true,
+                  reply_for_id : item.attr('data-id'),
+                  onBeforeSend : function(text){
+                    return '@' + reply_for + ' ' + text;
+                  }
+                });
+          $(pop.dom).find('.UI_pop_cpt').css('border','none');
+          send.on('sendToServicesuccess',function(item){
+            pop.close();
+            me.addItem(item);
+          });
 		});
 		
 	}
