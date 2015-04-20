@@ -1,0 +1,140 @@
+html,body{
+  margin: 0;
+  padding: 0;
+  font-family: "Microsoft Yahei"
+}
+h1,h2,h3{
+  margin: 0 0 .5em;
+  font-weight: normal;
+}
+a{
+  text-decoration: none;
+}
+.section{
+  font-size: 16px;
+  padding: 3em 0;
+}
+.section h1{
+  font-size: 1.8em;
+}
+.section h2{
+  font-size: 1.5em;
+}
+.section p{
+  margin: .5em 0;
+  line-height: 1.5;
+  font-size: 1em;
+}
+
+.wrap{
+	position: relative;
+	max-width: 1000px;
+	margin:auto;
+	padding: 0px 10px;
+	transition: all 0.2s;
+}
+.wrap:after{
+  content: '';
+  display: block;
+  clear: both;
+  height: 0;
+  line-height: 0;
+  overflow: hidden;
+}
+
+.half{
+  float: left;
+  width: 50%;
+}
+.pull-right{
+  float: right;
+}
+@media all and (max-width: 1000px){
+  .section{
+    font-size: 14px;
+  }
+  .wrap{
+    max-width: 500px;
+  }
+  .half{
+    float: none;
+    width: auto;
+    margin: auto;
+  }
+}
+.btn {
+  display: inline-block;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 2em;
+  line-height: 40px;
+  font-size: 14px;
+  text-align: center;
+  color: #333;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  white-space: nowrap;
+  outline: none;
+  text-decoration: none;
+  background: #fff;
+  transition: all 0.08s linear;
+}
+.btn:hover {
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+  background: #f70;
+}
+
+
+#header{
+  padding: 7em 0 6em;
+  text-align: center;
+  color: #fff;
+  background: #057;
+  background-image: -moz-linear-gradient(top, #057, #4ad);
+  background-image: -webkit-gradient(linear, left top, left bottom,color-stop(0, #057), color-stop(1, #4ad));
+}
+#header p{
+  margin-bottom: 1em;
+}
+#header img{
+  width: 300px;
+  margin-bottom: 2em;
+}
+
+#design{
+  color: #fff;
+  background: #689;
+}
+#design .pic{
+  float: left;
+  height: 140px;
+  background-size: cover;
+  background-position: center center;
+  outline: 2px solid #fff;
+  cursor: pointer;
+}
+#design .pic20{
+  width: 20%
+}
+#design .pic50{
+  width: 50%
+}
+#design .pic30{
+  width: 30%
+}
+
+#github{
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background: #fafafa;
+}
+.github-widget-user{
+  width: 220px;
+  min-height: 100px;
+  margin: auto;
+}
+.github-widget-user p{
+  margin: 0;
+}
