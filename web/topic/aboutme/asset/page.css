@@ -103,6 +103,9 @@ a{
   margin-bottom: 2em;
 }
 
+#work{
+}
+
 #design{
   color: #fff;
   background: #689;
@@ -137,4 +140,8 @@ a{
 }
 .github-widget-user p{
   margin: 0;
+}
+
+#link{
+  text-align: center;
 }

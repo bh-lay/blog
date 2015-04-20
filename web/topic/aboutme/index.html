@@ -17,13 +17,14 @@
     <p class="wow fadeInUp">90后天蝎男，前端工程师、全栈开发尝试者。</p>
     <p class="wow fadeInUp"><a href="/" class="btn" target="_self">回到首页</a></p>
 </div>
-<div class="section" id="section1">
+<div class="section" id="work">
   <div class="wrap">
-    <p>目前就职于上海矩方</p>
-    <p>担任凯捷技术咨询顾问</p>
-    <p>前上海易班前端工程师</p>
+    <div class="intro half wow fadeInLeft">
+      <h2>有关工作</h2>
+      <p>目前就职于上海矩方，任凯捷技术咨询顾问</p>
+      <p>前上海易班前端工程师</p>
+    </div>
   </div>
-  <a href="#page3" class="down"></a>
 </div>
 <div class="section" id="design">
   <div class="wrap">
@@ -64,20 +65,16 @@
       <p>以提交代码为荣，骗到follow、star为乐。</p>
       <br/>
       <p>年少无知，曾毫不顾忌地造了不少轮子。</p>
-      <p>左侧的<a href="https://github.com/bh-lay/github-widget-user" target="_blank">github个人名片</a>是其中之一</p>
+      <p>左侧的<a href="https://github.com/bh-lay/github-widget-user" target="_blank">github个人名片</a>也是其中之一</p>
     </div>
     <div class="half wow fadeInLeft">
       <div class="github-widget-user" data-user="bh-lay"></div>
     </div>
   </div>
 </div>
-<div class="section" id="section5">
+<div class="section" id="links">
   <div class="wrap">
-    <h1>关于我的博客</h1>
-    <p>博客于2012年3月建立</p>
-    <p>从毕业前夕，一直伴随我成长至今</p>
-    <p>是我造的所有轮子的发源地</p>
-    <p><br/><a href="/" target="_blank">看看小剧客栈</a></p>
+    <h2>常混迹于以下不健康场所</h2>
   </div>
 </div>
 <div class="section_loading"><p>玩命儿加载中……</p></div>
@@ -86,10 +83,10 @@
 <script src="asset/jquery-github-user-widget.js"></script>
 <script type="text/javascript">
   $('.section_loading').fadeOut(800);
-    wow = new WOW({
-      animateClass: 'animated',
-      offset:       100
-    }).init();
+  new WOW({
+    animateClass: 'animated',
+    offset:       100
+  }).init();
   $('.pic').click(function(){
     window.open($(this).attr('data-src'))
   });
