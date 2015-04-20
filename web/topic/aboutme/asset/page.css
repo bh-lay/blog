@@ -88,12 +88,25 @@ a{
 
 
 #header{
+  position: relative;
   padding: 7em 0 6em;
   text-align: center;
   color: #fff;
   background: #057;
   background-image: -moz-linear-gradient(top, #057, #4ad);
   background-image: -webkit-gradient(linear, left top, left bottom,color-stop(0, #057), color-stop(1, #4ad));
+}
+#header:after{
+  content: '';
+  position: absolute;
+  width: 340px;
+  height: 15px;
+  bottom: 50px;
+  margin-left: -170px;
+  left: 50%;
+  border-radius: 100%;
+  background: rgba(0,0,0,.15);
+  -webkit-filter: blur(3px);
 }
 #header p{
   margin-bottom: 1em;
@@ -115,7 +128,7 @@ a{
   height: 140px;
   background-size: cover;
   background-position: center center;
-  outline: 2px solid #fff;
+  outline: 1px solid #fff;
   cursor: pointer;
 }
 #design .pic20{
