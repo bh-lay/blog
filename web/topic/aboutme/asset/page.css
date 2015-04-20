@@ -1,39 +1,107 @@
-html,body{
+@font-face {
+  font-family: "layIcon";
+  src: url("layicon-webfont.eot?v=0");
+  src: url("layicon-webfont.eot?v=0#iefix") format("embedded-opentype"), url('layicon-webfont.woff?v=0') format('woff'), url("layicon-webfont.ttf?v=0") format("truetype"), url("layicon-webfont.svg?v=0#layicon-webfont") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+.layIcon {
+  font-family: "layIcon";
+  font-style: normal;
+}
+.l-icon {
+  font-family: "layIcon";
+  font-style: normal;
+}
+.l-icon-circle:after {
+  content: '\0044';
+}
+.l-icon-book:after {
+  content: '\0045';
+}
+.l-icon-code:after {
+  content: '\0046';
+}
+.l-icon-beaker:after {
+  content: '\0047';
+}
+.l-icon-share:after {
+  content: '\0048';
+}
+.l-icon-layLogo:after {
+  content: '\0049';
+}
+.l-icon-weibo:after {
+  content: '\004a';
+}
+.l-icon-qq:after {
+  content: '\004b';
+}
+.l-icon-qzone:after {
+  content: '\004c';
+}
+.l-icon-git:after {
+  content: '\0054';
+}
+.l-icon-face:after {
+  content: '\0055';
+}
+.l-icon-back:after {
+  content: '\005a';
+}
+.l-icon-setting:after {
+  content: '\0060';
+}
+.l-icon-person:after {
+  content: '\0064';
+}
+.l-icon-zhihu:after {
+  content: '\0069';
+}
+.l-icon-dribbble:after {
+  content: '\006a';
+}
+.l-icon-link:after {
+  content: '\006b';
+}
+html,
+body {
   margin: 0;
   padding: 0;
-  font-family: "Microsoft Yahei"
+  font-family: "Microsoft Yahei";
 }
-h1,h2,h3{
+h1,
+h2,
+h3 {
   margin: 0 0 .5em;
   font-weight: normal;
 }
-a{
+a {
   text-decoration: none;
 }
-.section{
+.section {
   font-size: 16px;
   padding: 3em 0;
 }
-.section h1{
+.section h1 {
   font-size: 1.8em;
 }
-.section h2{
+.section h2 {
   font-size: 1.5em;
 }
-.section p{
+.section p {
   margin: .5em 0;
   line-height: 1.5;
   font-size: 1em;
 }
-
-.wrap{
-	position: relative;
-	max-width: 1000px;
-	margin:auto;
-	padding: 0px 10px;
-	transition: all 0.2s;
+.wrap {
+  position: relative;
+  max-width: 1000px;
+  margin: auto;
+  padding: 0px 10px;
+  transition: all 0.2s;
 }
-.wrap:after{
+.wrap:after {
   content: '';
   display: block;
   clear: both;
@@ -41,22 +109,21 @@ a{
   line-height: 0;
   overflow: hidden;
 }
-
-.half{
+.half {
   float: left;
   width: 50%;
 }
-.pull-right{
+.pull-right {
   float: right;
 }
-@media all and (max-width: 1000px){
-  .section{
+@media all and (max-width: 1000px) {
+  .section {
     font-size: 14px;
   }
-  .wrap{
+  .wrap {
     max-width: 500px;
   }
-  .half{
+  .half {
     float: none;
     width: auto;
     margin: auto;
@@ -85,45 +152,39 @@ a{
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
   background: #f70;
 }
-
-
-#header{
+#header {
   position: relative;
   padding: 7em 0 6em;
   text-align: center;
   color: #fff;
   background: #057;
-  background-image: -moz-linear-gradient(top, #057, #4ad);
-  background-image: -webkit-gradient(linear, left top, left bottom,color-stop(0, #057), color-stop(1, #4ad));
+  background-image: -moz-linear-gradient(top, #005577, #44aadd);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #005577), color-stop(1, #44aadd));
 }
-#header:after{
+#header:after {
   content: '';
   position: absolute;
   width: 340px;
   height: 15px;
-  bottom: 50px;
+  bottom: 40px;
   margin-left: -170px;
   left: 50%;
   border-radius: 100%;
-  background: rgba(0,0,0,.15);
-  -webkit-filter: blur(3px);
+  background: rgba(0, 0, 0, 0.15);
+  -webkit-filter: blur(2px);
 }
-#header p{
+#header p {
   margin-bottom: 1em;
 }
-#header img{
+#header img {
   width: 300px;
   margin-bottom: 2em;
 }
-
-#work{
-}
-
-#design{
+#design {
   color: #fff;
   background: #689;
 }
-#design .pic{
+#design .pic {
   float: left;
   height: 140px;
   background-size: cover;
@@ -131,30 +192,34 @@ a{
   outline: 1px solid #fff;
   cursor: pointer;
 }
-#design .pic20{
-  width: 20%
+#design .pic20 {
+  width: 20%;
 }
-#design .pic50{
-  width: 50%
+#design .pic50 {
+  width: 50%;
 }
-#design .pic30{
-  width: 30%
+#design .pic30 {
+  width: 30%;
 }
-
-#github{
+#github {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   background: #fafafa;
 }
-.github-widget-user{
+.github-widget-user {
   width: 220px;
   min-height: 100px;
   margin: auto;
 }
-.github-widget-user p{
+.github-widget-user p {
   margin: 0;
 }
-
-#link{
+#link {
   text-align: center;
+}
+.icons a {
+  display: inline-block;
+  margin-right: 1em;
+  font-size: 36px;
+  color: #aaa;
 }
