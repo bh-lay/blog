@@ -1,5 +1,7 @@
 @import "_fontface.less";
 html,body{
+  position: relative;
+  height: 100%;
   margin: 0;
   padding: 0;
   font-family: "Microsoft Yahei"
@@ -90,31 +92,46 @@ a{
 
 #header{
   position: relative;
-  padding: 7em 0 6em;
+  padding: 0;
+  height: 100%;
+  min-height: 600px;
+  line-height: 100%;
   text-align: center;
   color: #fff;
   background: #057;
   background-image: -moz-linear-gradient(top, #057, #4ad);
   background-image: -webkit-gradient(linear, left top, left bottom,color-stop(0, #057), color-stop(1, #4ad));
-}
-#header:after{
-  content: '';
-  position: absolute;
-  width: 340px;
-  height: 15px;
-  bottom: 40px;
-  margin-left: -170px;
-  left: 50%;
-  border-radius: 100%;
-  background: rgba(0,0,0,.15);
-  -webkit-filter: blur(2px);
-}
-#header p{
-  margin-bottom: 1em;
-}
-#header img{
-  width: 300px;
-  margin-bottom: 2em;
+  .header_body{
+    display: inline-block;
+    vertical-align: middle;
+  }
+  &:before{
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 100%;
+    vertical-align: middle;
+  }
+  
+  &:after{
+    content: '';
+    position: absolute;
+    width: 340px;
+    height: 15px;
+    bottom: 40px;
+    margin-left: -170px;
+    left: 50%;
+    border-radius: 100%;
+    background: rgba(0,0,0,.15);
+    -webkit-filter: blur(2px);
+  }
+  p{
+    margin-bottom: 1em;
+  }
+  img{
+    width: 300px;
+    margin-bottom: 2em;
+  }
 }
 
 #work{
