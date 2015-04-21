@@ -90,6 +90,27 @@ a{
 }
 
 
+.section_loading{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+    text-align: center;
+  &:before{
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 100%;
+    vertical-align: middle;
+  }
+  p{
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 20px;
+  }
+}
 #header{
   position: relative;
   padding: 0;
@@ -112,14 +133,13 @@ a{
     height: 100%;
     vertical-align: middle;
   }
-  
   &:after{
     content: '';
     position: absolute;
-    width: 340px;
+    width: 320px;
     height: 15px;
     bottom: 40px;
-    margin-left: -170px;
+    margin-left: -160px;
     left: 50%;
     border-radius: 100%;
     background: rgba(0,0,0,.15);
@@ -135,6 +155,22 @@ a{
 }
 
 #work{
+  height: 50%;
+  min-height: 400px;
+  padding: 0;
+  background: #eee;
+  text-align: center;
+  .intro{
+    display: inline-block;
+    vertical-align: middle;
+  }
+  &:before{
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 100%;
+    vertical-align: middle;
+  }
 }
 
 #design{

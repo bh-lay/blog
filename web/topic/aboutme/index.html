@@ -8,7 +8,7 @@
 	<meta name="keywords"  content="剧中人,小剧客栈,前端开发" />
 	<meta content="width=device-width, initial-scale=1, user-scalable=0" name="viewport">
   <link rel="stylesheet" href="asset/animate.css">
-  <link rel="stylesheet" href="asset/page.css">
+  <link rel="stylesheet" href="asset/page.css?v=1">
 </head>
 <body>
 <div class="section " id="header">
@@ -20,14 +20,12 @@
   </div>
 </div>
 <div class="section" id="work">
-  <div class="wrap">
-    <div class="intro half wow fadeInLeft">
-      <h2>关于工作</h2>
-      <p>目前就职于上海矩方，任凯捷技术咨询顾问</p>
-      <p>服务于阿尔卡特朗讯</p>
-      <br/>
-      <p>前上海易班前端工程师</p>
-    </div>
+  <div class="intro wow fadeInLeft">
+    <h2>关于工作</h2>
+    <p>目前就职于上海矩方，任凯捷技术咨询顾问</p>
+    <p>服务于阿尔卡特朗讯</p>
+    <br/>
+    <p>前上海易班前端工程师</p>
   </div>
 </div>
 <div class="section" id="design">
@@ -105,7 +103,9 @@
 <script src="asset/jquery-github-user-widget.js"></script>
 <script src="asset/gallery.js"></script>
 <script type="text/javascript">
-  $('.section_loading').fadeOut(800);
+  $('.section_loading').fadeOut(800,function(){
+    $(this).remove();
+  });
   new WOW({
     animateClass: 'animated',
     offset:       100
