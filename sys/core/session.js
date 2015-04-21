@@ -67,51 +67,60 @@ var proto = {
   }
 };
 
+/**
+ * session工厂函数
+ *
+ **/
 function session_factory(param){
   param = param || {};
   var session_root = param.root;
+  //检测是否配置session存储目录
   if(!session_root){
     console.error('need seesion path');
     return
   }
+  /**
+   * session主类
+   *
+   **/
   function SESSION(cookieObj,writeCookie,callback){
-	//检测session id 或创建
-	this.sessionID = isNormalSessionID(cookieObj['session_verify']) ? cookieObj['session_verify'] : createSessionID();
-	this.path = session_root + this.sessionID + '.txt';
-	this.power_code = [];
-	
-	var that = this;
-	// find sessionID in session library
-	fs.exists(this.path, function(exists) {
-      if(exists){
-          //read session file
-          fs.readFile(that.path,'UTF-8',function(err,file){
-            if(err){
-              callback && callback(err);
-              return;
-            }
-            var JSON_file = JSON.parse(file);
-            for(var i in JSON_file){
-              that[i] = JSON_file[i];
-            }
-            callback&&callback();
-          });
-      }else{
-        //create session file
-        that.time_cerate = new Date();
+    //检测session id 或创建
+    this.sessionID = isNormalSessionID(cookieObj['session_verify']) ? cookieObj['session_verify'] : createSessionID();
+    this.path = session_root + this.sessionID + '.txt';
+    this.power_code = [];
 
-        that.data = {
-          user_group : 'guest'
-        };
-        writeCookie({
-          session_verify : that.sessionID,
-          path : '/',
-          'Max-Age' : 60*60*24*7,//session浏览器端保存七天
-          HttpOnly : true//前端脚本不可见
-        });
-        callback&&callback();
-      }
-	});
+    var that = this;
+    // find sessionID in session library
+    fs.exists(this.path, function(exists) {
+        if(exists){
+            //read session file
+            fs.readFile(that.path,'UTF-8',function(err,file){
+              if(err){
+                callback && callback(err);
+                return;
+              }
+              var JSON_file = JSON.parse(file);
+              for(var i in JSON_file){
+                that[i] = JSON_file[i];
+              }
+              callback&&callback();
+            });
+        }else{
+          //create session file
+          that.time_cerate = new Date();
+
+          that.data = {
+            user_group : 'guest'
+          };
+          writeCookie({
+            session_verify : that.sessionID,
+            path : '/',
+            'Max-Age' : 60*60*24*7,//session浏览器端保存七天
+            HttpOnly : true//前端脚本不可见
+          });
+          callback&&callback();
+        }
+    });
   }
   SESSION.prototype = proto;
   
