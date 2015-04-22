@@ -1,45 +1,53 @@
+/**
+ * @author bh-lay
+ * 
+ * @github: https://github.com/bh-lay/stick
+ * 
+ * @modified 2015-04-22 16:42
+ *  
+ */
 (function(global,doc,factory){
   var Stick = factory(global,doc);
   //exports for commonJS
   global.Stick = global.Stick || Stick;
   global.define && define(function(require,exports){
-      return Stick;
+    return Stick;
   });
 })(window,document,function(window,document){
   /**
-	 * 检测是否为数字
-	 * 兼容字符类数字 '23'
-	 */
-	function isNum(ipt){
-		return (ipt !== '') && (ipt == +ipt) ? true : false;
-	}
+   * 检测是否为数字
+   * 兼容字符类数字 '23'
+   */
+  function isNum(ipt){
+      return (ipt !== '') && (ipt == +ipt) ? true : false;
+  }
   /**
- 	 * 遍历数组或对象
-	 * 
-	 */
-	function each(arr,fn){
-		//检测输入的值
-		if(typeof(arr) != 'object' || typeof(fn) != 'function'){
-			return;
-		}
-		var Length = arr.length;
-		if( isNum(Length) ){
-			for(var i=0;i<Length;i++){
-				if(fn.call(this,i,arr[i]) === false) break;
-			}
-		}else{
-			for(var i in arr){
-				if (!arr.hasOwnProperty(i)) continue;
-				if(fn.call(this,i,arr[i]) === false) break;
-			}
-		}
-	}
+   * 遍历数组或对象
+   * 
+   */
+  function each(arr,fn){
+      //检测输入的值
+      if(typeof(arr) != 'object' || typeof(fn) != 'function'){
+          return;
+      }
+      var Length = arr.length;
+      if( isNum(Length) ){
+          for(var i=0;i<Length;i++){
+              if(fn.call(this,i,arr[i]) === false) break;
+          }
+      }else{
+          for(var i in arr){
+              if (!arr.hasOwnProperty(i)) continue;
+              if(fn.call(this,i,arr[i]) === false) break;
+          }
+      }
+  }
   /**
-	 * 判断dom是否拥有某个class
-	 */
-	function hasClass(elem,classSingle){
-		return (elem.className && elem.className.match(new RegExp('(\\s|^)' + classSingle + '(\\s|$)'))) ? true : false;
-	}
+   * 判断dom是否拥有某个class
+   */
+  function hasClass(elem,classSingle){
+      return (elem.className && elem.className.match(new RegExp('(\\s|^)' + classSingle + '(\\s|$)'))) ? true : false;
+  }
   function addClass(elem, cls) {
     if (!hasClass(elem, cls)) elem.className += " " + cls;
   }
@@ -49,12 +57,18 @@
       elem.className.replace(reg, ' ');
     }
   }
+  //创建dom
+  function createDom(html){
+      var a = document.createElement('div');
+      a.innerHTML = html;
+      return a.childNodes[0];
+  }
   /**
-	 * 事件绑定
-	 * elem:节点
-	 * type:事件类型
-	 * handler:回调
-	 */
+   * 事件绑定
+   * elem:节点
+   * type:事件类型
+   * handler:回调
+   */
   var bind = window.addEventListener ? function(elem, type, handler) {
     // 标准浏览器
     elem.addEventListener(type, handler, false);
@@ -63,12 +77,12 @@
     elem.attachEvent("on" + type, handler);
   };
   /**
-	 * 事件解除
-	 * elem:节点
-	 * type:事件类型
-	 * handler:回调
-	 */
-	var unbind = window.removeEventListener ? function(elem, type, handler) {
+   * 事件解除
+   * elem:节点
+   * type:事件类型
+   * handler:回调
+   */
+  var unbind = window.removeEventListener ? function(elem, type, handler) {
     // 标准浏览器
     elem.removeEventListener(type, handler, false);
   } : function(elem, type, handler) {
@@ -80,12 +94,12 @@
    * 精简后的方法，没处理数字型非像素的属性，如line-height、z-index
    *
    **/
-	function setCss(elem,cssObj){
+  function setCss(elem,cssObj){
     each(cssObj,function(prop,value){
       if (isNum(value)) value += "px";
       elem.style[prop] = value;
     });
-	}
+  }
   //图片预加载
   function loadImg(src,callback){
     if(!src){
@@ -105,7 +119,13 @@
     img.src=src;
   }
   
-  
+  /**
+   * 获取浏览器滚动尺寸
+   *  为了兼容firefox
+   */
+  function getScrollTop(){
+    return Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+  }
   /**
    * Stick
    */
@@ -127,7 +147,7 @@
         last_time = 0;
     this.scrollListener = function(){
       var now = new Date().getTime();
-      if(now - last_time > 1000 && (document.body.scrollTop + window.innerHeight >= document.body.scrollHeight - 300)){
+      if(now - last_time > 500 && (getScrollTop() + window.innerHeight >= document.body.scrollHeight - 300)){
         me.onNeedMore && me.onNeedMore();
         last_time = now;
       }
@@ -153,7 +173,7 @@
       var width = this.container.clientWidth;
       this.list = [];
       this.last_row = [];
-      this.column_num = parseInt((width+this.column_gap)/(this.column_width_base+this.column_gap));
+      this.column_num = Math.floor((width+this.column_gap)/(this.column_width_base+this.column_gap));
       this.column_width = (width + this.column_gap)/this.column_num - this.column_gap;
     },
     fixPosition: function(item){
@@ -170,12 +190,11 @@
           column_index = this.last_row.indexOf(top);
           top = top + this.column_gap;
         }
-        this.list.push(item);
         setCss(item,{
           position : 'absolute',
           top: top,
-          left: column_index * (this.column_width + this.column_gap),
-          width: this.column_width
+          left: Math.round(column_index * (this.column_width + this.column_gap)),
+          width: Math.round(this.column_width)
         });
         addClass(item,'fadeInLeft');
         setTimeout(function(){
@@ -191,13 +210,20 @@
           width: 'auto'
         });
       }
+      this.list.push(item);
     },
     addItem: function(item,cover){
       var me = this;
+      if(typeof(item) == 'string'){
+        item = createDom(item);
+      }
       loadImg(cover,function(){
         me.container.appendChild(item);
         me.fixPosition(item);
       });
+    },
+    addList: function(list){
+      //
     },
     destroy: function(){
       unbind(document,'scroll',this.scrollListener);
