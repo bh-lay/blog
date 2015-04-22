@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>关于剧中人</title>
-	<meta name="author" content="bh-lay" />
-	<meta name="description" content="剧中人，90后前端开发，全栈开发实践者。" />
-	<meta name="keywords"  content="剧中人,小剧客栈,前端开发" />
-	<meta content="width=device-width, initial-scale=1, user-scalable=0" name="viewport">
-  <link rel="stylesheet" href="asset/animate.css">
-  <link rel="stylesheet" href="asset/page.css?v=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>关于剧中人</title>
+  <meta name="author" content="bh-lay" />
+  <meta name="description" content="剧中人，90后前端开发，全栈开发实践者。" />
+  <meta name="keywords"  content="剧中人,小剧客栈,前端开发" />
+  <meta content="width=device-width, initial-scale=1, user-scalable=0" name="viewport">
+  <link rel="stylesheet" href="asset/page.css?v=2">
 </head>
 <body>
 <div class="section " id="header">
@@ -105,30 +104,33 @@
 <script src="asset/jquery-github-user-widget.js"></script>
 <script src="asset/gallery.js"></script>
 <script type="text/javascript">
-  $('.section_loading').fadeOut(800,function(){
-    $(this).remove();
-  });
-  $('.down').click(function(){
-    $('html,body').animate({
-      scrollTop: $('#header').outerHeight()
-    },300);
-  });
-  new WOW({
-    animateClass: 'animated',
-    offset: 150
-  }).init();
-  $('.pic').click(function(){
-    var index = $(this).index();
-    var arr = [];
-    $('.pic').each(function(){
-      arr.push({
-        cover : $(this).attr('data-src'),
-        thumb : $(this).css('backgroundImage').match(/url\((.+?)\)/)[1]
-      })
+  $(function(){
+    new WOW({
+      animateClass: 'animated',
+      offset: 150
+    }).init();
+    $('.section_loading').fadeOut(400,function(){
+      $(this).remove();
     });
-    var aaa = gallery(arr,index);
+    $('.down').click(function(){
+      $('html,body').animate({
+        scrollTop: $('#header').outerHeight()
+      },300);
+    });
+    $('.pic').click(function(){
+      var index = $(this).index();
+      var arr = [];
+      $('.pic').each(function(){
+        arr.push({
+          cover : $(this).attr('data-src'),
+          thumb : $(this).css('backgroundImage').match(/url\((.+?)\)/)[1]
+        })
+      });
+      var aaa = gallery(arr,index);
+    });
   });
-</script><div class="tongji">
+</script>
+<div class="tongji">
 <script type="text/javascript">
 	var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
 	document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F0f6bfc1dac208f86e5effd5f2d59027d' type='text/javascript'%3E%3C/script%3E"));
