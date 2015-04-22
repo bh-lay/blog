@@ -1,7 +1,7 @@
 @font-face {
   font-family: "layIcon";
-  src: url("layicon-webfont.eot?v=0");
-  src: url("layicon-webfont.eot?v=0#iefix") format("embedded-opentype"), url('layicon-webfont.woff?v=0') format('woff'), url("layicon-webfont.ttf?v=0") format("truetype"), url("layicon-webfont.svg?v=0#layicon-webfont") format("svg");
+  src: url("layicon-webfont.eot?v=1");
+  src: url("layicon-webfont.eot?v=1#iefix") format("embedded-opentype"), url('layicon-webfont.woff?v=1') format('woff'), url("layicon-webfont.ttf?v=1") format("truetype"), url("layicon-webfont.svg?v=1#layicon-webfont") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -63,6 +63,12 @@
 }
 .l-icon-link:after {
   content: '\006b';
+}
+.l-icon-fancyLogo:after {
+  content: '\006c';
+}
+.l-icon-down-double:after {
+  content: '\006d';
 }
 html,
 body {
@@ -131,6 +137,11 @@ a {
     margin: auto;
   }
 }
+@media all and (max-width: 600px) {
+  .section {
+    font-size: 12px;
+  }
+}
 .btn {
   display: inline-block;
   min-width: 40px;
@@ -160,8 +171,10 @@ a {
   left: 0;
   width: 100%;
   height: 100%;
-  background: #fff;
+  background: #057;
   text-align: center;
+  color: #fff;
+  z-index: 1000;
 }
 .section_loading:before {
   content: '';
@@ -180,7 +193,7 @@ a {
   padding: 0;
   height: 100%;
   min-height: 600px;
-  line-height: 100%;
+  overflow: hidden;
   text-align: center;
   color: #fff;
   background: #057;
@@ -209,13 +222,38 @@ a {
   border-radius: 100%;
   background: rgba(0, 0, 0, 0.15);
   -webkit-filter: blur(2px);
+  z-index: 0;
 }
 #header p {
   margin-bottom: 1em;
 }
-#header img {
-  width: 300px;
-  margin-bottom: 2em;
+#header .logo {
+  font-size: 17.5em;
+  margin-bottom: .05em;
+}
+#header .logo i {
+  display: block;
+}
+#header .down {
+  position: absolute;
+  width: 100px;
+  left: 50%;
+  bottom: 0;
+  margin-left: -50px;
+  padding-top: 100px;
+  text-align: center;
+  z-index: 1;
+}
+#header .down a {
+  display: block;
+  line-height: 50px;
+  opacity: .6;
+  color: #fff;
+  font-size: 3em;
+  transition: .2s;
+}
+#header .down a:hover {
+  opacity: 1;
 }
 #work {
   height: 50%;
@@ -238,6 +276,7 @@ a {
 #design {
   color: #fff;
   background: #689;
+  overflow: hidden;
 }
 #design .pic {
   float: left;

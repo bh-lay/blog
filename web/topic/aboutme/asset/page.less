@@ -65,6 +65,11 @@ a{
     margin: auto;
   }
 }
+@media all and (max-width: 600px){
+  .section{
+    font-size: 12px;
+  }
+}
 .btn {
   display: inline-block;
   min-width: 40px;
@@ -96,8 +101,10 @@ a{
   left: 0;
   width: 100%;
   height: 100%;
-  background: #fff;
-    text-align: center;
+  background: #057;
+  text-align: center;
+  color: #fff;
+  z-index: 1000;
   &:before{
     content: '';
     display: inline-block;
@@ -116,7 +123,7 @@ a{
   padding: 0;
   height: 100%;
   min-height: 600px;
-  line-height: 100%;
+  overflow: hidden;
   text-align: center;
   color: #fff;
   background: #057;
@@ -144,13 +151,38 @@ a{
     border-radius: 100%;
     background: rgba(0,0,0,.15);
     -webkit-filter: blur(2px);
+    z-index: 0;
   }
   p{
     margin-bottom: 1em;
   }
-  img{
-    width: 300px;
-    margin-bottom: 2em;
+  .logo{
+    font-size: 17.5em;
+    margin-bottom: .05em;
+    i{
+      display:block;
+    }
+  }
+  .down{
+    position: absolute;
+    width: 100px;
+    left: 50%;
+    bottom: 0;
+    margin-left: -50px;
+    padding-top: 100px;
+    text-align: center;
+    z-index: 1;
+    a{
+      display: block;
+      line-height: 50px;
+      opacity: .6;
+      color: #fff;
+      font-size: 3em;
+      transition: .2s;
+      &:hover{
+        opacity: 1;
+      }
+    }
   }
 }
 
@@ -176,6 +208,7 @@ a{
 #design{
   color: #fff;
   background: #689;
+  overflow: hidden;
 }
 #design .pic{
   float: left;
