@@ -95,7 +95,8 @@ a {
   font-size: 1.8em;
 }
 .section h2 {
-  font-size: 1.5em;
+  margin-bottom: 1em;
+  font-size: 1.7em;
 }
 .section p {
   margin: .5em 0;
@@ -120,9 +121,6 @@ a {
 .half {
   float: left;
   width: 50%;
-}
-.pull-right {
-  float: right;
 }
 @media all and (max-width: 1000px) {
   .section {
@@ -214,10 +212,10 @@ a {
 #header:after {
   content: '';
   position: absolute;
-  width: 320px;
+  width: 300px;
   height: 15px;
   bottom: 40px;
-  margin-left: -160px;
+  margin-left: -150px;
   left: 50%;
   border-radius: 100%;
   background: rgba(0, 0, 0, 0.15);
@@ -246,7 +244,7 @@ a {
 }
 #header .down a {
   display: block;
-  line-height: 50px;
+  line-height: 60px;
   opacity: .6;
   color: #fff;
   font-size: 3em;
@@ -256,8 +254,8 @@ a {
   opacity: 1;
 }
 #work {
-  height: 50%;
-  min-height: 400px;
+  height: 70%;
+  min-height: 280px;
   padding: 0;
   background: #eee;
   text-align: center;
@@ -283,7 +281,6 @@ a {
   height: 140px;
   background-size: cover;
   background-position: center center;
-  outline: 1px solid #fff;
   cursor: pointer;
 }
 #design .pic20 {
@@ -299,16 +296,43 @@ a {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   background: #fafafa;
+  text-align: center;
 }
-.github-widget-user {
+#github:before {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 100%;
+  vertical-align: middle;
+}
+#github .intro,
+#github .github-widget-user {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: left;
+}
+#github .intro {
+  width: 400px;
+}
+#github .github-widget-user {
   width: 220px;
-  min-height: 100px;
-  margin: auto;
+  margin-right: 190px;
 }
-.github-widget-user p {
+#github .github-widget-user p {
   margin: 0;
 }
-#link {
+@media all and (max-width: 900px) {
+  #github .intro {
+    width: auto;
+    padding: 0 10px;
+    margin-bottom: 1.5em;
+  }
+  #github .github-widget-user {
+    margin-right: 0;
+  }
+}
+#links {
+  padding: 6em 0 3em;
   text-align: center;
 }
 .icons {
@@ -322,7 +346,7 @@ a {
   color: #aaa;
 }
 .icons a:hover {
-  color: #fa0;
+  color: #48c;
 }
 .icons i {
   display: block;
@@ -333,9 +357,9 @@ a {
   font-size: 16px;
 }
 #footer {
-  background: #341;
+  padding: 2em 0;
+  background: #555;
   text-align: center;
-  font-size: 24px;
+  font-size: 1.3em;
   color: #fff;
-  opacity: .4;
 }

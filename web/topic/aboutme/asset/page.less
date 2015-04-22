@@ -20,7 +20,8 @@ a{
     font-size: 1.8em;
   }
   h2{
-    font-size: 1.5em;
+    margin-bottom: 1em;
+    font-size: 1.7em;
   }
   p{
     margin: .5em 0;
@@ -48,9 +49,6 @@ a{
 .half{
   float: left;
   width: 50%;
-}
-.pull-right{
-  float: right;
 }
 @media all and (max-width: 1000px){
   .section{
@@ -143,10 +141,10 @@ a{
   &:after{
     content: '';
     position: absolute;
-    width: 320px;
+    width: 300px;
     height: 15px;
     bottom: 40px;
-    margin-left: -160px;
+    margin-left: -150px;
     left: 50%;
     border-radius: 100%;
     background: rgba(0,0,0,.15);
@@ -174,7 +172,7 @@ a{
     z-index: 1;
     a{
       display: block;
-      line-height: 50px;
+      line-height: 60px;
       opacity: .6;
       color: #fff;
       font-size: 3em;
@@ -187,8 +185,8 @@ a{
 }
 
 #work{
-  height: 50%;
-  min-height: 400px;
+  height: 70%;
+  min-height: 280px;
   padding: 0;
   background: #eee;
   text-align: center;
@@ -209,40 +207,68 @@ a{
   color: #fff;
   background: #689;
   overflow: hidden;
-}
-#design .pic{
-  float: left;
-  height: 140px;
-  background-size: cover;
-  background-position: center center;
-  outline: 1px solid #fff;
-  cursor: pointer;
-}
-#design .pic20{
-  width: 20%
-}
-#design .pic50{
-  width: 50%
-}
-#design .pic30{
-  width: 30%
+  .pic{
+    float: left;
+    height: 140px;
+    background-size: cover;
+    background-position: center center;
+    cursor: pointer;
+  }
+  .pic20{
+    width: 20%
+  }
+  .pic50{
+    width: 50%
+  }
+  .pic30{
+    width: 30%
+  }
 }
 
 #github{
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   background: #fafafa;
+  text-align: center;
+  &:before{
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 100%;
+    vertical-align: middle;
+  }
+  .intro,
+  .github-widget-user,{
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+  }
+  .intro{
+    width: 400px;
+  }
+  .github-widget-user{
+    width: 220px;
+    margin-right: 190px;
+    p{
+      margin: 0;
+    }
+  }
 }
-.github-widget-user{
-  width: 220px;
-  min-height: 100px;
-  margin: auto;
-}
-.github-widget-user p{
-  margin: 0;
+@media all and (max-width: 900px){
+  #github{
+    .intro{
+      width: auto;
+      padding: 0 10px;
+      margin-bottom: 1.5em;
+    }
+    .github-widget-user{
+      margin-right: 0;
+    }
+  }
 }
 
-#link{
+#links{
+  padding: 6em 0 3em;
   text-align: center;
 }
 .icons{
@@ -254,7 +280,7 @@ a{
     font-size: 36px;
     color: #aaa;
     &:hover{
-      color: #fa0;
+      color: #48c;
     }
   }
   i{
@@ -267,9 +293,9 @@ a{
   }
 }
 #footer{
-  background: #341;
+  padding: 2em 0;
+  background: #555;
   text-align: center;
-  font-size: 24px;
+  font-size: 1.3em;
   color: #fff;
-  opacity: .4;
 }
