@@ -300,6 +300,12 @@ pre.hljs code {
 .l-icon-link:after {
   content: '\006b';
 }
+.l-icon-fancyLogo:after {
+  content: '\006c';
+}
+.l-icon-down-double:after {
+  content: '\006d';
+}
 /**
  * 卡片类
  */
