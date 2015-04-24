@@ -84,7 +84,7 @@ app.get('/admin/*', function(data,connect){
 	admin.render(connect,app);
 });
 
-//用户认证
+//用户登录认证
 var snsLogin = require('./controller/snsLogin.js');
 app.get('/snsLogin/{from}', function(data,connect){
 	if(data.from == 'github'){
@@ -94,6 +94,13 @@ app.get('/snsLogin/{from}', function(data,connect){
 			'code' : 500
 		});
 	}
+});
+
+
+//验证码
+var verifycode = require('./controller/verifycode.js');
+app.get('/verifycode', function(data,connect){
+  verifycode.render(connect,app);
 });
 
 /**

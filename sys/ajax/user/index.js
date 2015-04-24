@@ -14,11 +14,11 @@ var mongo = require('../../core/DB.js');
 var utils = require('../../core/utils/index.js');
 //增加一条用户记录
 function add(parm,callback){
-	var parm = parm;
-	
+  parm = parm || {};
 	var method = mongo.start();
-		
-	method.open({'collection_name':'user'},function(err,collection){
+	method.open({
+    collection_name: 'user'
+  },function(err,collection){
 		parm.id = utils.createID();
 
 		collection.insert(parm,function(err,result){
@@ -37,8 +37,14 @@ function edit(parm,callback){
 	
 	var method = mongo.start();
 		
-	method.open({'collection_name':'user'},function(error,collection){
-		collection.update({'id':parm.id}, {$set:parm}, function(err,docs) {
+	method.open({
+    collection_name: 'user'
+  },function(error,collection){
+		collection.update({
+      id : parm.id
+    }, {
+      $set: parm
+    }, function(err,docs) {
 			if(err) {
 				callback && callback(err);
 			}else {
@@ -64,7 +70,9 @@ function signup(){
 		param['id'] = utils.createID();
 		if(param['email']&&param['password']){
 			var method = mongo.start();
-			method.open({'collection_name':'user'},function(err,collection){
+			method.open({
+        collection_name : 'user'
+      },function(err,collection){
 				collection.find({}, {}).toArray(function(err, docs) {
 					collection.insert(param,function(err,result){
 						method.close();
@@ -72,9 +80,9 @@ function signup(){
 							console.log(err);
 						}
 						that.res.json({
-							'code' : 1,
-							'id' : param.id ,
-							'msg' : 'sucess !'
+							code : 1,
+							id : param.id ,
+							msg : 'sucess !'
 						});
 					});
 				});
@@ -103,12 +111,18 @@ function get_list(data,callback){
 		'skip':skip_num,
 	};
 	var method = mongo.start();
-	method.open({'collection_name':'user'},function(err,collection){
+	method.open({
+    collection_name: 'user'
+  },function(err,collection){
       //count the all list
 		collection.count(function(err,count){
 			resJSON['count'] = count;
 			
-			collection.find({},{limit:limit_num}).sort({id:-1}).skip(skip_num).toArray(function(err, docs) {
+			collection.find({},{
+        limit:limit_num
+      }).sort({
+        id: -1
+      }).skip(skip_num).toArray(function(err, docs) {
 				method.close();
 				if(err){
 					resJSON.code = 2;
@@ -137,7 +151,9 @@ function login_handle(connect,session_this,username,password){
 		//matche user
 	var method = mongo.start();
 
-	method.open({'collection_name':'user'},function(err,collection){
+	method.open({
+    collection_name: 'user'
+  },function(err,collection){
 		//
 		if(err){
 			connect.write('json',{
@@ -147,8 +163,8 @@ function login_handle(connect,session_this,username,password){
 			return
 		}
 		collection.find({
-			'email':username,
-			'password':password
+			email: username,
+			password: password
 		}).toArray(function(err, docs) {
 			if(docs.length > 0){
 				var user = docs[0];
@@ -157,25 +173,25 @@ function login_handle(connect,session_this,username,password){
 					method.close();
 					var userid = user['id'];
 					session_this.set({
-						'user_group' : user_group,
-						'username' : user['username'], 
-						'uid' : userid,
-						'power_data' : power_data
+						user_group : user_group,
+						username : user['username'], 
+						uid : userid,
+						power_data : power_data
 					});
 					if(user.password){
 						delete user.password;
 					}
 					
 					connect.write('json',{
-						'code':200,
-						'user' : user
+						code: 200,
+						user: user
 					});
 				});
 			}else{
 				//账号or密码 错了
 				connect.write('json',{
-					'code':2,
-					'msg':'二货，帐号密码输错了吧！'
+					code: 2,
+					msg: '二货，帐号密码输错了吧！'
 				});
 			}
 		});
