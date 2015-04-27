@@ -126,61 +126,7 @@
   function getScrollTop(){
     return Math.max(document.documentElement.scrollTop, document.body.scrollTop);
   }
-  /**
-   * Stick
-   */
-  function Stick(param){
-    var param = param || {},
-        me = this;
-    this.container = param.container;
-    this.onNeedMore = param.onNeedMore || null;
-    this.column_gap = param.column_gap ? parseInt(param.column_gap) : 20;
-    this.column_width_base = param.column_width ? parseInt(param.column_width) : 300;
-    this.column_width;
-    this.column_num;
-
-    this.list = [];
-    this.last_row = [];
-
-    var scrollDelay,
-        resizeDelay,
-        last_time = 0;
-    this.scrollListener = function(){
-      var now = new Date().getTime();
-      if(now - last_time > 500 && (getScrollTop() + window.innerHeight >= document.body.scrollHeight - 300)){
-        me.onNeedMore && me.onNeedMore();
-        last_time = now;
-      }
-    };
-    this.resizeListener = function(){
-      clearTimeout(resizeDelay);
-      resizeDelay = setTimeout(function(){
-        var oldList = me.list;
-        me.buildLayout();
-        if(me.column_num == 1){
-          setCss(this.container,{
-            height: 'auto'
-          });
-        }
-        oldList.forEach(function(item){
-          me.fixPosition(item);
-        });
-      },500);
-    };
-    bind(document,'scroll',this.scrollListener);
-    bind(window,'resize',this.resizeListener);
-    this.container.innerHTML = '';
-    this.buildLayout();
-  }
-  Stick.prototype = {
-    buildLayout : function(){
-      var width = this.container.clientWidth;
-      this.list = [];
-      this.last_row = [];
-      this.column_num = Math.floor((width+this.column_gap)/(this.column_width_base+this.column_gap));
-      this.column_width = (width + this.column_gap)/this.column_num - this.column_gap;
-    },
-    fixPosition: function(item){
+  function fixItemPosition(item){
       if(this.column_num > 1){
         var column_index,
             top = 0;
@@ -215,6 +161,66 @@
         });
       }
       this.list.push(item);
+    }
+  
+  /**
+   * Stick
+   */
+  function Stick(param){
+    var param = param || {},
+        me = this;
+    this.container = param.container;
+    this.onNeedMore = param.onNeedMore || null;
+    this.column_gap = param.column_gap ? parseInt(param.column_gap) : 20;
+    this.column_width_base = param.column_width ? parseInt(param.column_width) : 300;
+    this.column_width;
+    this.column_num;
+
+    this.list = [];
+    this.last_row = [];
+
+    var scrollDelay,
+        resizeDelay,
+        last_time = 0;
+    this.scrollListener = function(){
+      var now = new Date().getTime();
+      if(now - last_time > 500 && (getScrollTop() + window.innerHeight >= document.body.scrollHeight - 300)){
+        me.onNeedMore && me.onNeedMore();
+        last_time = now;
+      }
+    };
+    this.resizeListener = function(){
+      clearTimeout(resizeDelay);
+      resizeDelay = setTimeout(function(){
+        me.refresh();
+      },500);
+    };
+    bind(document,'scroll',this.scrollListener);
+    bind(window,'resize',this.resizeListener);
+    this.container.innerHTML = '';
+    this.buildLayout();
+  }
+  Stick.prototype = {
+    buildLayout : function(){
+      var width = this.container.clientWidth;
+      this.list = [];
+      this.last_row = [];
+      this.column_num = Math.floor((width+this.column_gap)/(this.column_width_base+this.column_gap));
+      this.column_width = (width + this.column_gap)/this.column_num - this.column_gap;
+    },
+    refresh: function(item){
+      var me = this;
+      var oldList = me.list;
+      me.buildLayout();
+      
+      if(me.column_num == 1){
+        setCss(this.container,{
+          height: 'auto'
+        });
+      }
+      each(oldList,function(i,item){
+        fixItemPosition.call(me,item);
+      });
     },
     addItem: function(item,cover){
       var me = this;
@@ -223,7 +229,7 @@
       }
       loadImg(cover,function(){
         me.container.appendChild(item);
-        me.fixPosition(item);
+        fixItemPosition.call(me,item);
       });
     },
     addList: function(list){
