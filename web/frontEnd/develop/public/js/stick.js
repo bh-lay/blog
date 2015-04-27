@@ -3,7 +3,7 @@
  * 
  * @github: https://github.com/bh-lay/stick
  * 
- * @modified 2015-04-22 16:42
+ * @modified 2015-04-27 15:09
  *  
  */
 (function(global,doc,factory){
@@ -157,7 +157,11 @@
       resizeDelay = setTimeout(function(){
         var oldList = me.list;
         me.buildLayout();
-        
+        if(me.column_num == 1){
+          setCss(this.container,{
+            height: 'auto'
+          });
+        }
         oldList.forEach(function(item){
           me.fixPosition(item);
         });
