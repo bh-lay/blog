@@ -188,16 +188,16 @@ define(function(require,exports){
 		}
 		
 		$.ajax({
-			'url' : '/ajax/comments/add',
-			'type' : 'POST',
-			'data' : {
-				'cid' : data.id,
-				'content' : data.text,
+			url : '/ajax/comments/add',
+			type : 'POST',
+			data : {
+				cid : data.id,
+				content : data.text,
 				//如果为登录用户，则不发送用户信息
-				'user' : user,
-              reply_for_id : data.reply_for_id
+				user : user,
+        reply_for_id : data.reply_for_id
 			},
-			'success' : function(data){
+			success : function(data){
 				if(data.code && data.code == 200){
 					callback && callback(null,data.data);
 				}else{
@@ -220,26 +220,14 @@ define(function(require,exports){
           width : 300,
           html : user_tpl,
           easyClose : false,
-          confirm : confirmFn
-        });
-        
-        var $elem = $(pop.dom),
-            $username = $elem.find('input[name="username"]'),
-            $email = $elem.find('input[name="email"]'),
-            $blog = $elem.find('input[name="blog"]');
-        
-        if(user){
-            $username.val(user.username || '');
-            $email.val(user.email || '');
-            $blog.val(user.blog || '');
-        }
-        function confirmFn(){
+          mask: true,
+          confirm : function (){
             var username = $username.val();
             var email = $email.val();
             var blog = $blog.val();
             if(username.length < 1){
                 UI.prompt('大哥，告诉我你叫什么呗！',null,{
-                  'from' : 'top'
+                  from : 'top'
                 });
                 return false;
             }
@@ -263,6 +251,18 @@ define(function(require,exports){
                 }
                 EMIT.call(me,'login',[private_userInfo]);
             },false);
+          }
+        });
+        
+        var $elem = $(pop.dom),
+            $username = $elem.find('input[name="username"]'),
+            $email = $elem.find('input[name="email"]'),
+            $blog = $elem.find('input[name="blog"]');
+        
+        if(user){
+            $username.val(user.username || '');
+            $email.val(user.email || '');
+            $blog.val(user.blog || '');
         }
     }
 	/**
@@ -303,7 +303,7 @@ define(function(require,exports){
 		$allDom.on('click','.l_send_placeholder',function(){
 			$textarea.focus();
 		}).on('click','.l_send_username,.l_send_avatar',function(e){
-        	askForUserInfo.call(me)
+      askForUserInfo.call(me)
 		}).on('click','.l_send_submit',function(){
             $textarea.focus();
 			if(me.text.length == 0){
