@@ -2592,6 +2592,8 @@ a {
 #header .header_body {
   display: inline-block;
   vertical-align: middle;
+  z-index: 100;
+  position: relative;
 }
 #header:before {
   content: '';
