@@ -379,6 +379,9 @@ pre.hljs code {
 .l-icon-setting:after {
   content: '\0060';
 }
+.l-icon-home:after {
+  content: '\0061';
+}
 .l-icon-person:after {
   content: '\0064';
 }
@@ -1020,7 +1023,7 @@ body:before {
   display: block;
   width: 100%;
   margin: 0;
-  padding: 10px 15px;
+  padding: 10px 20px;
   line-height: 15px;
   border: none;
   border-bottom: 1px solid #ddd;

@@ -288,6 +288,9 @@ pre.hljs code {
 .l-icon-setting:after {
   content: '\0060';
 }
+.l-icon-home:after {
+  content: '\0061';
+}
 .l-icon-person:after {
   content: '\0064';
 }
