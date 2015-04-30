@@ -27,9 +27,13 @@
     <div class="grid-box">
         <div class="guy-item">
           <div class="title">${{it.title}}</div>
-          <a target="_blank" href="${{it.url}}">博客</a>
-          <a target="_blank" href="${{it.url}}">Github</a>
-            <p>${{it.discription}}</p>
+          <div class="links">
+            <a href="${{it.url}}">博客</a>
+            {{@if it.github_username}}
+            <a target="_blank" href="https://github.com/${{it.github_username}}">Github</a>
+            {{@/if}}
+          </div>
+          <p>${{it.discription}}</p>
         </div>
     </div>
     {{@/each}}
