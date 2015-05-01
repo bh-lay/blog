@@ -166,12 +166,13 @@ filter_request.labs = function(data){
 filter_request.blog_friend = function(data){
 	var error = null;
 	var param = {
-		'id' : data['id']||'',
-		'title':decodeURI(data['title']),
-		'cover':data['cover']||'',
-		'url':data['url']||'',
-		'isShow' :data['isShow']||1,//1:show;0:hidden
-		'discription':data['discription']
+		id : data['id']||'',
+		title: decodeURI(data['title']),
+		cover: data['cover']||'',
+		url: data['url']||'',
+		isShow: data['isShow']||1,//1:show;0:hidden
+        github_username : data.github_username || null,
+		discription: data['discription']
 	};
 	if(param['id'].length<2){
 		param['time_create'] = new Date().getTime();
