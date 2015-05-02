@@ -28,9 +28,9 @@
         <div class="guy-item">
           <div class="title">${{it.title}}</div>
           <div class="links">
-            <a href="${{it.url}}">博客</a>
+            <p></p><a href="${{it.url}}">博客：${{it.screen_link}}</a></p>
             {{@if it.github_username}}
-            <a target="_blank" href="https://github.com/${{it.github_username}}">Github</a>
+            <p><a target="_blank" href="https://github.com/${{it.github_username}}">Github：${{it.github_username}}</a></p>
             {{@/if}}
           </div>
           <p>${{it.discription}}</p>

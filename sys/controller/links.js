@@ -37,6 +37,9 @@ exports.render = function (connect,app){
           })
           return;
         }
+        list.forEach(function(item){
+            item.screen_link = (item.url || '').replace(/http\:\/\/(www\.|)|\/$|/g,'');
+        });
         //获取视图
         app.views('links',{
             title : '前端英雄榜_特大号的WEB屌丝们',
