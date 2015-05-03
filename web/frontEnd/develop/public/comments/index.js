@@ -195,7 +195,7 @@ define(function(require,exports){
 				content : data.text,
 				//如果为登录用户，则不发送用户信息
 				user : user,
-        reply_for_id : data.reply_for_id
+                reply_for_id : data.reply_for_id
 			},
 			success : function(data){
 				if(data.code && data.code == 200){
@@ -270,12 +270,12 @@ define(function(require,exports){
 	 */
 	function bindDomEvent(){
 		
-		var me = this;
-		var $allDom = $(this.dom);
-		var $textarea = $allDom.find('textarea');
-		
-		var inputDelay,
-        focusDelay;
+		var me = this,
+            $allDom = $(this.dom),
+            $textarea = $allDom.find('textarea'),
+            inputDelay,
+            focusDelay,
+            isSubmitting = false;
 		$textarea.on('keyup keydown change propertychange input paste',function(){
 			clearTimeout(inputDelay);
 			inputDelay = setTimeout(function(){
@@ -303,10 +303,12 @@ define(function(require,exports){
 		$allDom.on('click','.l_send_placeholder',function(){
 			$textarea.focus();
 		}).on('click','.l_send_username,.l_send_avatar',function(e){
-      askForUserInfo.call(me)
+            askForUserInfo.call(me)
 		}).on('click','.l_send_submit',function(){
             $textarea.focus();
-			if(me.text.length == 0){
+			if(isSubmitting){
+                return
+            }else if(me.text.length == 0){
 				UI.prompt('你丫倒写点东西啊！',null,{
 					'top' : $(this).offset().top + 40,
 					'from' : $(this)[0]
@@ -318,12 +320,14 @@ define(function(require,exports){
 				});
 			}else if(private_userInfo){
                 var text = me.onBeforeSend ? (me.onBeforeSend(me.text) || me.text) : me.text;
+                isSubmitting = true;
 				sendComment({
 					'id' : me.id,
 					'text' : text,
 					'user' : private_userInfo,
                   reply_for_id : me.reply_for_id || null
 				},function(err,item){
+                    isSubmitting = false;
 					if(err){
 						EMIT.call(me,'sendToServiceError');
 					}else{
