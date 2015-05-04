@@ -33,6 +33,7 @@ body{
 }
 .myFriends{
 	padding: 20px 0;
+  margin-bottom: 100px;
   font-family: "Microsoft Yahei";
 	h3{
 		margin-bottom: 1em;
@@ -42,22 +43,62 @@ body{
 	}
 }
 .guy-item{
-  height: 70px;
-  padding: 20px 10px;
   margin-bottom: 20px;
   background: #fff;
-  transition:all ease .3s;
+  cursor: default;
   .title{
+    padding: 20px 10px 15px;
     line-height: 1em;
-    font-size: 18px;
-    margin-bottom: .5em;
+    font-size: 16px;
+  }
+  .desc{
+    margin: 0 10px 10px;
+    line-height: 1.5em;
+    font-size: 12px;
+    color: #888;
   }
   .links{
+    border-top: 1px solid #ddd;
+    padding: .6em 0;
     font-size: 14px;
+    p{
+      padding: 0 10px;
+    }
+    a{
+      font-size: 12px;
+      color: #aaa;
+      &:hover{
+        text-decoration: underline;
+      }
+    }
   }
-  &:hover{
-    transform: scale(1.3);
-    -webkit-transform: scale(1.1);
+}
+@media (min-width: 650px){
+  .guy-item{
+    height: 120px;
+    position: relative;
+    .desc{
+      max-height: 4.5em;
+      overflow: hidden;
+    }
+    .links{
+      position: absolute;
+      top: 70%;
+      left: 0;
+      width: 100%;
+      background: #f4f4f4;
+      opacity: 0;
+      transition:all ease-out .2s;
+      box-shadow: 0 2px 2px rgba(0,0,0,.5);
+      z-index: 0;
+    }
+    &:hover{
+      .links{
+        opacity: 1;
+        top: 100%;
+        z-index: 10;
+      }
+    }
   }
 }
 .tongji{

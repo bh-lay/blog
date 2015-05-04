@@ -27,13 +27,19 @@
     <div class="grid-box">
         <div class="guy-item">
           <div class="title">${{it.title}}</div>
+          <div class="desc">
+          {{@if it.discription}}
+            ${{it.discription}}
+          {{@else}}
+            真懒，啥都不写！
+          {{@/if}}
+          </div>
           <div class="links">
-            <p></p><a href="${{it.url}}">博客：${{it.screen_link}}</a></p>
+            <p>博客：<a href="${{it.url}}">${{it.screen_link}}</a></p>
             {{@if it.github_username}}
-            <p><a target="_blank" href="https://github.com/${{it.github_username}}">Github：${{it.github_username}}</a></p>
+            <p>Github：<a href="https://github.com/${{it.github_username}}">${{it.github_username}}</a></p>
             {{@/if}}
           </div>
-          <p>${{it.discription}}</p>
         </div>
     </div>
     {{@/each}}

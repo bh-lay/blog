@@ -4,25 +4,27 @@ var mongo = require('../core/DB');
 
 function getList(callback){
 	var method = mongo.start();
-    method.open({
-      collection_name: 'blog_friend'
-    },function(err,collection){
+  method.open({
+    collection_name: 'blog_friend'
+  },function(err,collection){
+    if(err){
+      callback && callback(err);
+      return;
+    }
+    collection.find({
+      isShow: '1'
+    }, {
+      limit:20
+    }).sort({
+      _id: -1
+    }).toArray(function(err, docs) {
       if(err){
         callback && callback(err);
-        return;
+        return
       }
-		  collection.find({
-            isShow: '1'
-        }, {
-            limit:20
-        }).toArray(function(err, docs) {
-			if(err){
-				callback && callback(err);
-				return
-			}
-			callback && callback(null,docs);
-			method.close();
-		});
+      callback && callback(null,docs);
+      method.close();
+    });
 	});
 };
 exports.render = function (connect,app){
