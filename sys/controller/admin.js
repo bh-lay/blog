@@ -11,6 +11,10 @@ exports.render = function(connect,app){
 	//获取session信息
 	connect.session(function(session_this){
 	
+    //session存入login预留信息
+    session_this.set({
+      login_auth : 'ready'
+    });
 		//若拥有登陆后台的权限，进入后台
 		if(session_this.power(powerCode)){
 			//获取后台视图

@@ -157,8 +157,8 @@ function login_handle(connect,session_this,username,password){
 		//
 		if(err){
 			connect.write('json',{
-				'code':4,
-				'msg':'咱数据库被拐跑了！'
+				code: 4,
+				msg: '咱数据库被拐跑了！'
 			});
 			return
 		}
@@ -273,31 +273,79 @@ exports.add_edit = function (connect,app){
 	});
 }
 
-//登录
+/**
+ * 登录
+ * 限制五分钟登录五次
+ **/
+var time_limit = 5 * 60 * 1000;
+var count_limit = 5;
 exports.login = function (connect,app){
+  
 	var req = connect.request;
+  //登录限定为 POST 方法
 	if(req.method != 'POST'){
 		connect.write('json',{
-			'code' : 201,
-			'msg' : 'please use POST to login !'
+			code : 201,
+			msg : 'please use POST to login !'
 		});
 		return
 	}
-	utils.parse.request(req,function(error,data){
-		var email = data['email'];
-		var password = data['password'] || '';
-		password = utils.parse.md5(password);
-		if(!email||password.length<2){
-			connect.write('json',{
-				'code':2,
-				'msg':'please input email and password !'
-			});
-		}else{
-			connect.session(function(session_this){
-				login_handle(connect,session_this,email,password);
-			});
-		}
-	});
+  //开启 session 功能
+  connect.session(function(session_this){
+    //检测认证信息
+    if(session_this.get('login_auth') != 'ready'){
+      //不是正常用户，阻止登录
+      connect.write('json',{
+        code : 201,
+        msg : '认证过期，请刷新重试！'
+      });
+      return
+    }
+    
+        //获取登录计数
+    var login_count = session_this.get('login_count') || 0,
+        //上次清除登录计数的时间
+        login_last_clear_time = session_this.get('login_last_clear_time') || new Date().getTime() - time_limit * 2,
+        //当前时间
+        now = new Date().getTime();
+    
+    //时间间隔在限制之外
+    if(now - login_last_clear_time > time_limit){
+      //登录计数置为一
+      session_this.set({
+        login_count : 1,
+        login_last_clear_time : now
+      });
+    }else{
+      //指定时间内 登录次数超过上限，停止处理登录请求
+      if(login_count >= count_limit){
+        connect.write('json',{
+          code : 403,
+          msg : '回家去吧，求你了！'
+        });
+        return
+      }else{
+        //允许登录，登录计数加一
+        session_this.set({
+          login_count : login_count + 1
+        });
+      }
+    }
+    //获取请求参数
+    utils.parse.request(req,function(error,data){
+      var email = data['email'];
+      var password = utils.parse.md5(data['password'] || '');
+      
+      if(!email || password.length < 2){
+        connect.write('json',{
+          code: 2,
+          msg: 'please input email and password !'
+        });
+      }else{
+        login_handle(connect,session_this,email,password);
+      }
+    });
+  });
 }
 
 //登出
@@ -305,13 +353,13 @@ exports.exist = function(connect,app){
 	
 	connect.session(function(session_this){
 		session_this.set({
-			'user_group' : 'guest',
-			'uid' : '',
-			'power_data' : []
+			user_group : 'guest',
+			uid : '',
+			power_data : []
 		});
 		connect.write('json',{
-			'code':200,
-			'msg':'exist success !'
+			code: 200,
+			msg : 'exist success !'
 		});
 	});
 }
@@ -388,7 +436,7 @@ exports.detail = function (connect,app,userID){
 			connect.session(function(session_this){
 				//session存入comment预留信息
 				session_this.set({
-					'comment_auth' : 'ready'
+					comment_auth : 'ready'
 				});
 				
 				var uid = session_this.get('uid');

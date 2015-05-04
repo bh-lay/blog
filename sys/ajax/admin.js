@@ -19,12 +19,16 @@ function get_list(data,callback){
 	
 	var method = mongo.start();
 	method.open({'collection_name':'opus'},function(err,collection){
-      //count the all list
-      collection.count(function(err,count){
-      	resJSON['count'] = count;
-      });
-      
-      collection.find({},{limit:limit_num}).sort({id:-1}).skip(skip_num).toArray(function(err, docs) {
+    //count the all list
+    collection.count(function(err,count){
+      resJSON['count'] = count;
+    });
+
+    collection.find({},{
+      limit: limit_num
+    }).sort({
+      id: -1
+    }).skip(skip_num).toArray(function(err, docs) {
 			if(err){
 				resJSON.code = 2;
 			}else{
