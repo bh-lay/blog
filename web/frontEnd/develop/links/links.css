@@ -272,9 +272,11 @@ body {
 }
 .Jumbotron h1 {
   margin-bottom: 1em;
-  font-size: 3em;
+  font-size: 3.2em;
+  font-weight: normal;
   letter-spacing: .1em;
   color: #fff;
+  font-family: Helvetica, STHeiti STXihei, Microsoft JhengHei, Microsoft YaHei, Tohoma, Arial;
 }
 .Jumbotron p {
   font-family: "Microsoft Yahei";
