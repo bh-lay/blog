@@ -48,19 +48,44 @@
 <script type="text/javascript" src="${{frontEnd.base}}lib/jquery/jquery.js?v=${{frontEnd.version}}"></script>
 <script type="text/javascript" src="${{frontEnd.base}}UI/dialog.js?v=${{frontEnd.version}}"></script>
 <script type="text/javascript">
-    var app_config = {
-        frontEnd_base : '${{frontEnd.base}}',
-        frontEnd_version : '${{frontEnd.version}}',
-        imgDomain : '${{frontEnd.img_domain}}'
-    };
+  var app_config = {
+      frontEnd_base : '${{frontEnd.base}}',
+      frontEnd_version : '${{frontEnd.version}}',
+      imgDomain : '${{frontEnd.img_domain}}'
+  };
   $('.add_one').click(function(){
     UI.pop({
-      width: 400,
+      width: 500,
       mask: true,
       title: '我也要上榜',
-      html: '<p class="developing">努力开发中！</p>'
+      html: $('#post_tpl').html()
     })
   });
+</script>
+<script type="text/template" id="post_tpl">
+<div class="post_link">
+  <div class="post_link_body">
+    <div class="input-group">
+      <span class="input-group-addon">尊姓大名</span>
+      <input type="text" name="title" placeholder="你更喜欢别人怎么称呼你？">
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon">博客地址</span>
+      <input type="text" name="url" placeholder="http://">
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon">Github用户名</span>
+      <input type="text" name="github_username" placeholder="如：bh-lay">
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon">个人描述</span>
+      <textarea name="discription" placeholder="一句话介绍自己，简洁无废话，低调且骚气！"></textarea>
+    </div>
+  </div>
+  <div class="submit">
+    <a href="javascript:void(0)">提交</a>
+  </div>
+</div>
 </script>
 <include name="baiduAndGoogleTongji"/>
 </body>

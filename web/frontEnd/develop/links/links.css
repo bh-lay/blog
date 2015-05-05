@@ -352,12 +352,67 @@ body {
     z-index: 10;
   }
 }
-.developing {
-  padding: 50px 0;
+.post_link {
   line-height: 20px;
-  text-align: center;
-  font-size: 20px;
   color: #333;
+}
+.post_link .post_link_body {
+  padding: 30px 30px 15px 0;
+}
+.post_link .submit {
+  padding: 10px 0 10px 120px;
+  border-top: 1px solid #ccc;
+}
+.post_link .submit a {
+  display: block;
+  width: 100px;
+  height: 1em;
+  padding: 10px 0;
+  background: #08f;
+  line-height: 1em;
+  text-align: center;
+  font-size: 14px;
+  color: #fff;
+}
+.input-group {
+  display: table;
+  width: 100%;
+  margin-bottom: 15px;
+}
+.input-group > * {
+  display: table-cell;
+  vertical-align: text-top;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+.input-group .input-group-addon {
+  width: 120px;
+  padding-right: 10px;
+  text-align: right;
+  font-size: 14px;
+}
+.input-group input,
+.input-group textarea {
+  width: 99%;
+  font-family: inherit;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  background: #fafafa;
+}
+.input-group input:focus,
+.input-group textarea:focus {
+  background: #fff;
+}
+.input-group input {
+  height: 2.2em;
+  padding: .6em 10px;
+  line-height: 2.2em;
+}
+.input-group textarea {
+  height: 6.2em;
+  padding: .5em 10px;
+  line-height: 1.3em;
 }
 .tongji {
   height: 0;
