@@ -145,9 +145,11 @@ app.get('/ajax/links/list', function(data,connect){
 app.get('/ajax/links/detail/{id}', function(data,connect){
 	ajax_links.detail(connect,app,data.id);
 });
-
 app.get('/ajax/links/add_edit', function(data,connect){
 	ajax_links.add_edit(connect,app,data.id);
+});
+app.get('/ajax/links/post', function(data,connect){
+	ajax_links.post(connect,app,data.id);
 });
 
 //清除缓存

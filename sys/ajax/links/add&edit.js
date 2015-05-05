@@ -116,7 +116,7 @@ module.exports = function (connect,app){
         });
       }else{
         //新增
-        add(data,collection_name,function(err){
+        add(data,function(err){
           if(err){
             connect.write('json',{
               code: 2,
