@@ -59,13 +59,9 @@ define && define(function(require,exports){
 			callback && callback('missing arguments');
 		}
 		$.ajax({
-			'url' : '/ajax/friends',
-			'type' : 'GET',
-			'data' : {
-				'act' : 'get_detail',
-				'id' : id
-			},
-			'success' : function(data){
+			url : '/ajax/links/detail/' + id,
+			type : 'GET',
+			success : function(data){
 				if(data.code != 200){
 					callback && callback('data error');
 				}else{

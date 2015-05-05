@@ -25,10 +25,9 @@ define(function(exports){
 	//获取友情链接列表
 	function getList(start,limit,callback){
 		$.ajax({
-			'url' : '/ajax/friends',
+			'url' : '/ajax/links/list',
 			'type' : 'GET',
 			'data' : {
-				'act' : 'get_list',
 				'skip' : start,
 				'limit' : limit
 			},

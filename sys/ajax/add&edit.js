@@ -171,18 +171,18 @@ filter_request.blog_friend = function(data){
 		cover: data['cover']||'',
 		url: data['url']||'',
 		isShow: data['isShow']||1,//1:show;0:hidden
-        github_username : data.github_username || null,
+    github_username : data.github_username || null,
 		discription: data['discription']
 	};
-	if(param['id'].length<2){
+	if(param['id'].length < 2){
 		param['time_create'] = new Date().getTime();
 	}
 	if(!(param['title']&&param['url'])){
 		error = 'please insert complete code !';
 	}
 	return {
-		'error' : error,
-		'data' : param
+		error : error,
+		data : param
 	};
 }
 
@@ -200,18 +200,18 @@ exports.render = function (connect,app){
 		var data = param['data'],
 			collection_name = param['collection_name'];
 		
-		if(data['id']&&data['id'].length>2){
+		if(data['id']&&data['id'].length > 2){
 			edit(data,collection_name,function(err){
 				if(err){
 					connect.write('json',{
-						'code':2,
-						'msg': 'edit fail !'
+						code:2,
+						msg: 'edit fail !'
 					});
 				}else{
 					connect.write('json',{
-						'code':1,
-						'id' : data.id,
-						'msg':'edit success !'
+						code: 1,
+						id : data.id,
+						msg: 'edit success !'
 					});
 					app.cache.clear();
 				}
@@ -220,14 +220,14 @@ exports.render = function (connect,app){
 			add(data,collection_name,function(err){
 				if(err){
 					connect.write('json',{
-						'code':2,
-						'msg': 'edit fail !'
+						code: 2,
+						msg: 'edit fail !'
 					});
 				}else{
 					connect.write('json',{
-						'code':1,
-						'id' : data.id,
-						'msg':'edit success !'
+						code: 1,
+						id : data.id,
+						msg: 'edit success !'
 					});
 					app.cache.clear();
 				}

@@ -110,6 +110,7 @@ app.get('/verifycode', function(data,connect){
 var ajax_user = require('./ajax/user/index'),
     ajax_add_edit = require('./ajax/add&edit.js'),
     ajax_comments = require('./ajax/comments/index.js'),
+    ajax_links = require('./ajax/links/index.js'),
     ajax_del = require('./ajax/del'),
     ajax_user_group = require('./ajax/user/user_group_add&edit'),
     ajax_power = require('./ajax/user/power'),
@@ -138,9 +139,11 @@ app.get('/ajax/opus', function(data,connect){
 });
 
 //友情链接
-var ajax_friends = require('./ajax/friends_get');
-app.get('/ajax/friends', function(data,connect){
-	ajax_friends.render(connect,app);
+app.get('/ajax/links/list', function(data,connect){
+	ajax_links.list(connect,app);
+});
+app.get('/ajax/links/detail/{id}', function(data,connect){
+	ajax_links.detail(connect,app,data.id);
 });
 
 //清除缓存
