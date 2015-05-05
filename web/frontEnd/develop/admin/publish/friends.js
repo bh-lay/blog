@@ -21,7 +21,7 @@ define && define(function(require,exports){
 	};
 
 	var friend_tpl = ['<div class="pub_friend">',
-		'<form action="/ajax/add_edit" method="post" target="_self">',
+		'<form action="/ajax/links/add_edit" method="post" target="_self">',
 			'<br/><div class="input-group">',
 				'<span class="input-group-addon">标题</span>',
 				'<input type="text" class="form-control" name="title" value="{title}" placeholder="标题">',
@@ -44,7 +44,6 @@ define && define(function(require,exports){
 			'</div>',
 			'<br/><div class="pub_row_input">',
 				'<input type="hidden" name="id" value="{id}" />',
-				'<input type="hidden" name="category" value="blog_friend" />',
 				'<button type="submit" class="btn btn-primary">提交</button>',
 			'</div>',
 		'</form>',

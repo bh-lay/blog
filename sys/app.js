@@ -146,6 +146,10 @@ app.get('/ajax/links/detail/{id}', function(data,connect){
 	ajax_links.detail(connect,app,data.id);
 });
 
+app.get('/ajax/links/add_edit', function(data,connect){
+	ajax_links.add_edit(connect,app,data.id);
+});
+
 //清除缓存
 var ajax_clear_cache = require('./ajax/clear_cache');
 app.get('/ajax/clear_cache', function(data,connect){

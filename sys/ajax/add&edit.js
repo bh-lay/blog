@@ -78,18 +78,13 @@ function filter_request(connect,callback){
 					data_filter['collection_name'] = 'opus';
 					need_power = 9;
 					break
-				case 'blog_friend' :
-					data_filter = filter_request.blog_friend(data);
-					data_filter['collection_name'] = 'blog_friend';
-					need_power = 18;
-					break
 				case 'labs' :
 					data_filter = filter_request.labs(data);
 					data_filter['collection_name'] = 'labs';
 					need_power = 3;
 					break
 				default :
-					error = 'please input category [blog,opus,blog_friend]';
+					error = 'please input category [blog,opus,labs]';
 			}
 			if(!session_this.power(need_power)){
 				error = 'no power';
@@ -160,29 +155,6 @@ filter_request.labs = function(data){
 	return {
 		'error' : error,
 		'data' : param
-	};
-}
-
-filter_request.blog_friend = function(data){
-	var error = null;
-	var param = {
-		id : data['id']||'',
-		title: decodeURI(data['title']),
-		cover: data['cover']||'',
-		url: data['url']||'',
-		isShow: data['isShow']||1,//1:show;0:hidden
-    github_username : data.github_username || null,
-		discription: data['discription']
-	};
-	if(param['id'].length < 2){
-		param['time_create'] = new Date().getTime();
-	}
-	if(!(param['title']&&param['url'])){
-		error = 'please insert complete code !';
-	}
-	return {
-		error : error,
-		data : param
 	};
 }
 
