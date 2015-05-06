@@ -357,25 +357,12 @@ body {
   color: #333;
 }
 .post_link .post_link_body {
-  padding: 30px 30px 15px 0;
-}
-.post_link .submit {
-  padding: 10px 0 10px 120px;
-  border-top: 1px solid #ccc;
-}
-.post_link .submit a {
-  background: #08f;
-  color: #fff;
-  height: 35px;
-  line-height: 35px;
-}
-.post_link .submit a:hover {
-  background: #06d;
+  padding: 30px 30px 10px 0;
 }
 .input-group {
   display: table;
   width: 100%;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 .input-group > * {
   display: table-cell;
@@ -397,6 +384,7 @@ body {
   font-size: 14px;
   border: 1px solid #ccc;
   background: #fafafa;
+  resize: none;
 }
 .input-group input:focus,
 .input-group textarea:focus {

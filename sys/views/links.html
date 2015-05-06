@@ -49,42 +49,43 @@
 <script type="text/javascript" src="${{frontEnd.base}}UI/dialog.js?v=${{frontEnd.version}}"></script>
 <script type="text/javascript">
   var app_config = {
-      frontEnd_base : '${{frontEnd.base}}',
-      frontEnd_version : '${{frontEnd.version}}',
-      imgDomain : '${{frontEnd.img_domain}}'
+    frontEnd_base : '${{frontEnd.base}}',
+    frontEnd_version : '${{frontEnd.version}}',
+    imgDomain : '${{frontEnd.img_domain}}'
   };
   $('.add_one').click(function(){
     var pop = UI.pop({
       width: 550,
       mask: true,
       title: '我也要上榜',
-      html: $('#post_tpl').html()
-    });
-    var $elem = $(pop.cntDom);
-    $elem.on('click','.submit a',function(){
-      var data = getData($elem),
-          err = null;
-      if(data.title.length < 1){
-        err = '咋不告诉我你叫啥捏！';
-      }else if(data.url.length < 5 ){
-        err = '博客地址我不校验，但你也不能糊弄我啊！'
-      }else if(data.discription.length < 10){
-        err = '介绍下自己，逼格噌噌噌往上飙啊有木有！';
-      }
-      if(err){
-        UI.prompt(err);
-      }else{
-        var prompt = UI.prompt('正在提交' , 0 , {
-          mask: true
-        });
-        sendData(data , function(){
-          prompt.tips('搞定，等待审核吧！');
-          setTimeout(function(){
-            pop.close();
-          },2000);
-        },function(){
-          prompt.tips('保存失败，咋回事，不会是出 BUG 了吧！');
-        });
+      html: $('#post_tpl').html(),
+      confirm : function(){
+        var $elem = $(pop.cntDom),
+            data = getData($elem),
+            err = null;
+        if(data.title.length < 1){
+          err = '咋不告诉我你叫啥捏！';
+        }else if(data.url.length < 5 ){
+          err = '博客地址我不校验，但你也不能糊弄我啊！'
+        }else if(data.discription.length < 10){
+          err = '介绍下自己，逼格噌噌噌往上飙啊有木有！';
+        }
+        if(err){
+          UI.prompt(err);
+        }else{
+          var prompt = UI.prompt('正在提交' , 0 , {
+            mask: true
+          });
+          sendData(data , function(){
+            prompt.tips('搞定，等待审核吧！');
+            setTimeout(function(){
+              pop.close();
+            },2000);
+          },function(){
+            prompt.tips('保存失败，咋回事，不会是出 BUG 了吧！');
+          });
+        }
+        return false;
       }
     });
   });
@@ -132,9 +133,6 @@
       <span class="input-group-addon">个人描述</span>
       <textarea name="discription" placeholder="一句话介绍自己，简洁无废话，低调且骚气！"></textarea>
     </div>
-  </div>
-  <div class="submit">
-    <a class="btn" href="javascript:void(0)">提交</a>
   </div>
 </div>
 </script>
