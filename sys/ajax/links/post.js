@@ -72,7 +72,7 @@ module.exports = function (connect,app){
         });
       }else{
         connect.write('json',{
-          code: 1,
+          code: 200,
           id : data.id,
           msg: 'added success !'
         });

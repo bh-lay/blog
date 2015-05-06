@@ -364,15 +364,13 @@ body {
   border-top: 1px solid #ccc;
 }
 .post_link .submit a {
-  display: block;
-  width: 100px;
-  height: 1em;
-  padding: 10px 0;
   background: #08f;
-  line-height: 1em;
-  text-align: center;
-  font-size: 14px;
   color: #fff;
+  height: 35px;
+  line-height: 35px;
+}
+.post_link .submit a:hover {
+  background: #06d;
 }
 .input-group {
   display: table;
