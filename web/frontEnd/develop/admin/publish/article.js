@@ -9,7 +9,8 @@
  */
 define(function(require,exports){
 	require('admin/publish/mditor.js');
-	var gallery = require('admin/gallery/index.js');
+	var formToAjax = require('admin/tools/form2ajax.js'),
+      gallery = require('admin/gallery/index.js');
 	//初始化模版
 	function valueInit(tpl,data){
 		var txt = tpl.replace(/\{(\w*)}/g,function(){
@@ -97,11 +98,11 @@ define(function(require,exports){
 			});
 		});
 		
-		admin.formToAjax(dom,{
-			'onSubmit' : function(data){
+		new formToAjax(dom,{
+			onSubmit : function(data){
 				UI.prompt('正在提交博文修改！');
 			},
-			'onResponse' : function(data){
+			onResponse : function(data){
 				UI.prompt('博文修改完毕');
 				sendFn && sendFn();
 			}

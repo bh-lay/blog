@@ -3,7 +3,8 @@
  * @param {Object} dom
  * @param {String|Number} [id] article ID
  **/
-define(function(){
+define(function(require){
+  var pageList = require('admin/tools/pageList.js');
 	var tpl = ['<tr>',
 		'<td><a title="查看博文" href="/blog/{id}" target="_blank">{title}</a></td>',
 		'<td>{time_show}</td>',
@@ -61,7 +62,7 @@ define(function(){
 			list_html += '<div class="page col-md-12"></div>';
 			dom.html(list_html);
 			//分页组件
-			var page = admin.pageList(dom.find('.page'),{
+			var page = new pageList(dom.find('.page'),{
 				'list_count' : data.count,
 				'page_cur' : 0,
 				'page_list_num' : page_list_num,

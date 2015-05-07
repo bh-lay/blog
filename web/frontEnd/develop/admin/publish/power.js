@@ -12,6 +12,7 @@
 
 define && define(function(require,exports){
 	
+	var formToAjax = require('admin/tools/form2ajax.js');
 	//初始化模版
 	function valueInit(tpl,data){
 			
@@ -62,7 +63,7 @@ define && define(function(require,exports){
 			var new_html = valueInit(power_tpl,{});
 			
 			dom.html(new_html);
-			admin.formToAjax(dom,{
+			new formToAjax(dom,{
 				'onSubmit' : function(data){
 					UI.prompt('正在提交权限的创建！');
 				},
@@ -81,7 +82,7 @@ define && define(function(require,exports){
 			var new_html = valueInit(power_tpl,data);
 			
 			dom.html(new_html);
-			admin.formToAjax(dom,{
+			new formToAjax(dom,{
 				'onSubmit' : function(data){
 					UI.prompt('正在提交权限的修改！');
 				},

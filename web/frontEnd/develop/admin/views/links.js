@@ -3,7 +3,8 @@
  * @param {Object} dom
  * @param {String|Number} [id] article ID
  **/
-define(function(exports){
+define(function(require){
+  var pageList = require('admin/tools/pageList.js');
 	var base_tpl = ['<div class="col-md-12 custom-mb10">',
 			'<a class="btn btn-default custom-publish" href="javascript:void(0)" data-type="friends">加友链</a>',
 		'</div>',
@@ -51,7 +52,7 @@ define(function(exports){
 			var list_html = juicer(item_tpl,data);
 			dom.find('.panel').html(list_html);
 			//分页组件
-			var page = admin.pageList(dom.find('.page'),{
+			var page = new pageList(dom.find('.page'),{
 				'list_count' : data.count,
 				'page_cur' : 0,
 				'page_list_num' : page_list_num

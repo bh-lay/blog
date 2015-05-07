@@ -10,7 +10,8 @@
 
 
 define && define(function(require,exports){
-	
+	var formToAjax = require('admin/tools/form2ajax.js');
+  
 	//初始化模版
 	function valueInit(tpl,data){
 			
@@ -76,7 +77,7 @@ define && define(function(require,exports){
 		if(!id){
 			var new_html = valueInit(friend_tpl,{});
 			dom.html(new_html);
-			admin.formToAjax(dom,{
+			new formToAjax(dom,{
 				'onSubmit' : function(data){
 					UI.prompt('正在发布！');
 				},
@@ -94,7 +95,7 @@ define && define(function(require,exports){
 			}
 			var new_html = valueInit(friend_tpl,data);
 			dom.html(new_html);
-			admin.formToAjax(dom,{
+			new formToAjax(dom,{
 				'onSubmit' : function(data){
 					UI.prompt('正在提交链接修改！');
 				},

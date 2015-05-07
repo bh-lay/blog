@@ -4,7 +4,8 @@
  * @param {Object} dom
  * @param {String|Number} [id] article ID
  **/
-define(function(){
+define(function(require){
+  var pageList = require('admin/tools/pageList.js');
 	//获取文章列表
 	function getList(start,limit,callback){
 		$.ajax({
@@ -40,7 +41,7 @@ define(function(){
 			
 			$list_cnt.html(list_html);
 			//分页组件
-			var page = admin.pageList($page_cnt,{
+			var page = new pageList($page_cnt,{
 				'list_count' : data.count,
 				'page_cur' : 0,
 				'page_list_num' : page_list_num,

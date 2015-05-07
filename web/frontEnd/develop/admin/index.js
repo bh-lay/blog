@@ -31,15 +31,14 @@ define(function(require,exports){
 	require('lib/juicer.js');
 	require('lib/jquery/jquery.easing.1.3.min.js');
 
-  window.admin = window.admin || {};
-  window.admin.render = {
-    opus : require('admin/page/opus.js'),
-    labs : require('admin/page/labs.js'),
-    blog : require('admin/page/blog.js'),
-    links : require('admin/page/links.js'),
-    power : require('admin/page/power.js'),
-    users : require('admin/page/users.js'),
-    comments : require('admin/page/comments.js')
+  var views = {
+    opus : require('admin/views/opus.js'),
+    labs : require('admin/views/labs.js'),
+    blog : require('admin/views/blog.js'),
+    links : require('admin/views/links.js'),
+    power : require('admin/views/power.js'),
+    users : require('admin/views/users.js'),
+    comments : require('admin/views/comments.js')
   };
 	function createDom(dom){
 		var oldDom = dom.find('.mainCnt_body');
@@ -81,36 +80,36 @@ define(function(require,exports){
 
   //首页
   lofox.set('/admin/',function(){
-      this.title('后台首页');
-      var dom = createDom(mainDom);
+    this.title('后台首页');
+    var dom = createDom(mainDom);
 
-      var tpl = $('#tpl_index_page').html();
-  var txt = tpl.replace('{username}',admin_dataBase.username);
-  dom.html(txt);
+    var tpl = $('#tpl_index_page').html();
+    var txt = tpl.replace('{username}',admin_dataBase.username);
+    dom.html(txt);
   });
   //博文页
   lofox.set('/admin/article',function(){
       this.title('博文列表');
       var dom = createDom(mainDom);
-      admin.render.blog(dom);
+      views.blog(dom);
   });
   //作品页
   lofox.set('/admin/opus',function(){
       this.title('作品列表');
       var dom = createDom(mainDom);
-      admin.render.opus(dom);
+      views.opus(dom);
   });
   //实验室
   lofox.set('/admin/labs',function(){
       this.title('实验室');
       var dom = createDom(mainDom);
-      admin.render.labs(dom);
+      views.labs(dom);
   });
   //用户列表页
   lofox.set('/admin/user/list',function(){
       this.title('用户列表');
       var dom = createDom(mainDom);
-      admin.render.users(dom);
+      views.users(dom);
   });
   //用户组页
   lofox.set('/admin/user/group',function(){
@@ -122,14 +121,14 @@ define(function(require,exports){
   lofox.set('/admin/user/power',function(){
       this.title('权限页');
       var dom = createDom(mainDom);
-      admin.render.power(dom);
+      views.power(dom);
   });
 
   //友情链接模块
   lofox.set('/admin/friends',function(){
       this.title('友情链接');
       var dom = createDom(mainDom);
-      admin.render.links(dom);
+      views.links(dom);
   });
   //图库
   lofox.set('/admin/gallery',function(){
@@ -148,7 +147,7 @@ define(function(require,exports){
       var domCnt = createDom(mainDom);
       domCnt.html('<div class="col-md-12"></div>');
       var dom = domCnt.find('.col-md-12');
-      admin.render.comments(dom);
+      views.comments(dom);
   });
   //发布相关
   lofox.set([
@@ -212,19 +211,12 @@ define(function(require,exports){
       return false;
   });
 
-  window.admin.load = function(){
-      require.load.apply(require,arguments);
-  };
-  window.admin.pageList = function(dom,param){
-      return new pageList(dom,param);
-  };
+  window.admin = window.admin || {};
+
   window.admin.push = function(url){
       //去除参数中的首个‘/’或‘/admin/’
       var new_url = '/admin/' + (url ? url.replace(/^(\/admin\/|\/)/,'') : '');
       lofox.push.call(lofox,new_url);
-  };
-  window.admin.formToAjax = function(dom,param){
-      return new formToAjax(dom,param);
   };
   window.admin.refresh = function(){
       lofox.refresh();
@@ -315,154 +307,8 @@ $(function(exports){
 	});
 });
 
-/***
- * 使用ajax提交表单
- * 
- **/
-function formToAjax(dom,param){
-	var this_form = this;
-	var param = param || {};
-	var formDom = null;
-	if(dom[0].tagName == 'FORM'){
-		formDom = dom;
-	}else{
-		formDom = dom.find('form');
-	}
-	
-	if(formDom.length == 0){
-		console.log('找不到<form>');
-		return
-	}
-	this.formDom = formDom;
-	this.action = this.formDom.attr('action');
-	this.method = this.formDom.attr('method') || 'GET';
-	this.method = this.method.toUpperCase();
-	this.onSubmit = param['onSubmit'] || null;
-	this.onResponse = param['onResponse'] || null;
-	
-	this.formDom.on("submit", function(event) {
-		this_form.submit();
-		return false
-	});
-}
-formToAjax.prototype = {
-	'getData' : function(){
-		var output = {};
-		this.formDom.find('input,textarea').each(function(){
-			var ipt = $(this);
-			var name = ipt.attr('name');
-			var type = ipt.attr('type');
-			if(!name){
-				return
-			}
-			if(type == 'radio' || type == 'checkbox'){
-				//FIXME 单选框或复选框
-			}else if(type == 'file'){
-				console.log('丢弃文件域！');
-			}else{
-				var value = ipt.val();
-				output[name] = value;
-			}
-		});
-		this.formDom.find('select').each(function(){
-			//FIXME 下拉框
-		});
-		return output;
-	},
-	'submit' : function(){
-		var this_form = this;
-		var data = this.getData();
-		if(this.onSubmit){
-			var check = this.onSubmit(data);
-			if(check == false){
-				//console.log('不提交');
-				return
-			}
-		}
-		//console.log('提交');
-		$.ajax({
-			'url' : this.action,
-			'type' : this.method,
-			'data' : data,
-			'success' : function(data){
-				this_form.onResponse && this_form.onResponse(data);
-			}
-		});
-	}
-};
 
 
-
-/***
- * 分页 页码
- **/
-
-function pageListRender(){
-	var txt = '';
-
-	if (this.page_cur > 1) {
-		txt += '<li><a data-page="prev" href="javascript:void(0)" >上一页</a></li>';
-	}else{
-		txt += '<li class="disabled"><span>上一页</span></li>';
-	}
-	var btn_num = 0;
-	var start_num = 0;
-	if(this.page_num > this.max_page_btn){
-		start_num =  this.page_cur - Math.floor(this.max_page_btn/2);
-	}
-	
-	
-	start_num = Math.max(start_num,1);
-	for(; start_num < this.page_num + 1; start_num++) {
-		if(start_num != this.page_cur){
-			txt += '<li><a data-page="jump" href="javascript:void(0)">' + start_num + '</a></li>';
-		}else{
-			txt += '<li class="active"><span>'+ start_num +'</span></li>';
-		}
-		btn_num++;
-		if(btn_num >= this.max_page_btn){
-			break;
-		}
-	}
-	if (this.page_num - this.page_cur >= 1) {
-		txt += '<li><a data-page="next" href="javascript:void(0)">下一页</a></li>';
-	}else{
-		txt += '<li class="disabled"><span>下一页</span></li>';
-	}
-	this.dom.html(txt);
-}
-function pageList(dom,param){
-	var param = param || {};
-	var this_page = this;
-	this.list_count = param.list_count || 0;
-	this.page_cur = param.page_cur || 1;
-	this.page_list_num = param.page_list_num || 15;
-	this.page_num = Math.ceil(this.list_count / this.page_list_num);
-	this.max_page_btn = param.max_page_btn || 50;
-	this.jump = null;
-	this.dom = $('<ul class="pagination"></ul>');
-	
-	this.dom.on('click','a[data-page="jump"]',function(){
-		var num = parseInt($(this).html());
-		this_page.page_cur = num - 1;
-		this_page.jumpTo(num);
-	}).on('click','a[data-page="next"]',function(){
-		var num = ++this_page.page_cur;
-		this_page.jumpTo(num);
-	}).on('click','a[data-page="prev"]',function(){
-		var num = --this_page.page_cur;
-		this_page.jumpTo(num);
-	});
-	dom.html(this.dom);
-	pageListRender.call(this);
-}
-pageList.prototype = {
-	'jumpTo' : function(num){
-		this.page_cur = num;
-		pageListRender.call(this);
-		this.jump && this.jump(num);
-	}
-};
 
 
 /**

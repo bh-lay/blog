@@ -6,6 +6,7 @@
 
 define(function(require,exports){
 
+	var formToAjax = require('admin/tools/form2ajax.js');
 	//初始化模版
 	function valueInit(tpl,data){
 			
@@ -67,7 +68,7 @@ define(function(require,exports){
 			var new_html = valueInit(share_tpl,{});
 			
 			dom.html(new_html);
-			admin.formToAjax(dom,{
+			new formToAjax(dom,{
 				'onSubmit' : function(data){
 					alert = UI.prompt('正在提交用户创建！',0);
 				},
@@ -90,7 +91,7 @@ define(function(require,exports){
 			var new_html = valueInit(share_tpl,data);
 			
 			dom.html(new_html);
-			admin.formToAjax(dom,{
+			new formToAjax(dom,{
 				'onSubmit' : function(data){
 					alert = UI.prompt('正在提交用户修改！');
 				},

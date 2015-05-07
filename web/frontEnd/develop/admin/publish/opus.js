@@ -12,6 +12,7 @@
 
 define && define(function(require,exports){
 	require('admin/publish/mditor.js');
+	var formToAjax = require('admin/tools/form2ajax.js');
 	
 	
 	//初始化模版
@@ -94,7 +95,7 @@ define && define(function(require,exports){
 			
 			dom.html(new_html);
 			new mditor(dom.find('textarea.mditor')[0]);
-			admin.formToAjax(dom,{
+			new formToAjax(dom,{
 				'onSubmit' : function(data){
 					UI.prompt('正在提交分享修改！',0);
 				},
@@ -118,7 +119,7 @@ define && define(function(require,exports){
 			
 			dom.html(new_html);
 			new mditor(dom.find('textarea.mditor')[0]);
-			admin.formToAjax(dom,{
+			new formToAjax(dom,{
 				'onSubmit' : function(data){
 					UI.prompt('正在提交作品修改！');
 				},

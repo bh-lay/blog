@@ -13,6 +13,7 @@
 define && define(function(require,exports){
 	require('admin/publish/mditor.js');
 	require('admin/gallery/index.js');
+	var formToAjax = require('admin/tools/form2ajax.js');
 	
 		//初始化模版
 	function valueInit(tpl,data){
@@ -94,7 +95,7 @@ define && define(function(require,exports){
 			var new_html = valueInit(labs_tpl,{});
 			
 			dom.html(new_html);
-			admin.formToAjax(dom,{
+			new formToAjax(dom,{
 				'onSubmit' : function(data){
 					alert = UI.prompt('正在发布实验室！',0);
 				},
@@ -119,7 +120,7 @@ define && define(function(require,exports){
 			
 			dom.html(new_html);
 			mditor.bind(dom.find('textarea.mditor'));
-			admin.formToAjax(dom,{
+			new formToAjax(dom,{
 				'onSubmit' : function(data){
 					alert = UI.prompt('正在提交实验室的修改！',0);
 				},

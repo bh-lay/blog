@@ -4,7 +4,8 @@
  * @param {Object} dom
  * @param {String|Number} [id] article ID
  **/
-define(function(exports){
+define(function(require){
+  var pageList = require('admin/tools/pageList.js');
 	var list_tpl = ['<tr>',
 		'<td class="arLiTitle"><a title="查看作品" href="/opus/{id}" target="_blank">{title}</a></td>',
 		'<td class="arLiTime">{time_show}</td>',
@@ -61,7 +62,7 @@ define(function(exports){
 			
 			list_html += '<div class="page col-md-12"></div>';
 			dom.html(list_html);
-			var page = admin.pageList(dom.find('.page'),{
+			var page = new pageList(dom.find('.page'),{
 				'list_count' : data.count,
 				'page_cur' : 0,
 				'page_list_num' : page_list_num

@@ -3,7 +3,8 @@
  * 实验室列表页
  * @param {Object} dom
  **/
-define(function(){
+define(function(require){
+  var pageList = require('admin/tools/pageList.js');
 	var tpl = ['<tr>',
 		'<td class="arLiTitle"><a title="查看博文" href="/labs/{name}" target="_blank">{title}</a></td>',
 		'<td class="arLiTime">{time_show}</td>',
@@ -61,7 +62,7 @@ define(function(){
 			list_html += '<div class="page col-md-12"></div>';
 			dom.html(list_html);
 			//分页组件
-			var page = admin.pageList(dom.find('.page'),{
+			var page = new pageList(dom.find('.page'),{
 				'list_count' : data.count,
 				'page_cur' : 0,
 				'page_list_num' : page_list_num
