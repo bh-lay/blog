@@ -81,7 +81,5 @@ define(function(){
 			};
 		});
 	}
-	return function(dom){
-		listPage(dom);
-	};
+	return listPage;
 });

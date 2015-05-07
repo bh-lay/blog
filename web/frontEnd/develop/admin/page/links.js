@@ -71,7 +71,5 @@ define(function(exports){
 			};
 		});
 	}
-	return function(dom,id){
-		listPage(dom);
-	};
+	return listPage;
 });

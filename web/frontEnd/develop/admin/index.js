@@ -26,16 +26,21 @@ window.admin = window.admin || {};
  ***/
 
 define(function(require,exports){
-    require('util/lofox_1_0.js');
+  require('util/lofox_1_0.js');
 	require('UI/dialog.js');
 	require('lib/juicer.js');
-	require('admin/render.js');
 	require('lib/jquery/jquery.easing.1.3.min.js');
-	
-    var page_friends = require('admin/friends.js'),
-        page_comment = require('admin/comments_list.js'),
-        article_list = require('admin/article_list.js');
-    
+
+  window.admin = window.admin || {};
+  window.admin.render = {
+    opus : require('admin/page/opus.js'),
+    labs : require('admin/page/labs.js'),
+    blog : require('admin/page/blog.js'),
+    links : require('admin/page/links.js'),
+    power : require('admin/page/power.js'),
+    users : require('admin/page/users.js'),
+    comments : require('admin/page/comments.js')
+  };
 	function createDom(dom){
 		var oldDom = dom.find('.mainCnt_body');
 		var newDom = $('<div class="mainCnt_body"><div><div class="pro_loading">正在加载</div></div></div>');
@@ -69,163 +74,161 @@ define(function(require,exports){
 		}
 		return newDom;
 	}
-    var lofox = util.lofox();
-    var mainDom = $('.mainCnt');
-    var titleDom = $('title');
+  var lofox = util.lofox();
+  var mainDom = $('.mainCnt');
+  var titleDom = $('title');
 
 
-    admin.render.base();
+  //首页
+  lofox.set('/admin/',function(){
+      this.title('后台首页');
+      var dom = createDom(mainDom);
 
-    //首页
-    lofox.set('/admin/',function(){
-        this.title('后台首页');
-        var dom = createDom(mainDom);
-		
-        var tpl = $('#tpl_index_page').html();
-		var txt = tpl.replace('{username}',admin_dataBase.username);
-		dom.html(txt);
-    });
-    //博文页
-    lofox.set('/admin/article',function(){
-        this.title('博文列表');
-        var dom = createDom(mainDom);
-        article_list(dom);
-    });
-    //作品页
-    lofox.set('/admin/opus',function(){
-        this.title('作品列表');
-        var dom = createDom(mainDom);
-        admin.render.opus(dom);
-    });
-    //实验室
-    lofox.set('/admin/labs',function(){
-        this.title('实验室');
-        var dom = createDom(mainDom);
-        admin.render.labs(dom);
-    });
-    //用户列表页
-    lofox.set('/admin/user/list',function(){
-        this.title('用户列表');
-        var dom = createDom(mainDom);
-        admin.render.userList(dom);
-    });
-    //用户组页
-    lofox.set('/admin/user/group',function(){
-        this.title('用户组列表');
-        var dom = createDom(mainDom);
-        dom.html('俺是用户组列表页');
-    });
-    //权限页
-    lofox.set('/admin/user/power',function(){
-        this.title('权限页');
-        var dom = createDom(mainDom);
-        admin.render.powerList(dom);
-    });
+      var tpl = $('#tpl_index_page').html();
+  var txt = tpl.replace('{username}',admin_dataBase.username);
+  dom.html(txt);
+  });
+  //博文页
+  lofox.set('/admin/article',function(){
+      this.title('博文列表');
+      var dom = createDom(mainDom);
+      admin.render.blog(dom);
+  });
+  //作品页
+  lofox.set('/admin/opus',function(){
+      this.title('作品列表');
+      var dom = createDom(mainDom);
+      admin.render.opus(dom);
+  });
+  //实验室
+  lofox.set('/admin/labs',function(){
+      this.title('实验室');
+      var dom = createDom(mainDom);
+      admin.render.labs(dom);
+  });
+  //用户列表页
+  lofox.set('/admin/user/list',function(){
+      this.title('用户列表');
+      var dom = createDom(mainDom);
+      admin.render.users(dom);
+  });
+  //用户组页
+  lofox.set('/admin/user/group',function(){
+      this.title('用户组列表');
+      var dom = createDom(mainDom);
+      dom.html('俺是用户组列表页');
+  });
+  //权限页
+  lofox.set('/admin/user/power',function(){
+      this.title('权限页');
+      var dom = createDom(mainDom);
+      admin.render.power(dom);
+  });
 
-    //友情链接模块
-    lofox.set('/admin/friends',function(){
-        this.title('友情链接');
-        var dom = createDom(mainDom);
-        page_friends(dom);
-    });
-    //图库
-    lofox.set('/admin/gallery',function(){
-        this.title('图库');
+  //友情链接模块
+  lofox.set('/admin/friends',function(){
+      this.title('友情链接');
+      var dom = createDom(mainDom);
+      admin.render.links(dom);
+  });
+  //图库
+  lofox.set('/admin/gallery',function(){
+      this.title('图库');
 
-        var domCnt = createDom(mainDom);
-        domCnt.html('<div class="col-md-12"></div>');
-        var dom = domCnt.find('.col-md-12');
-        seajs.use('admin/gallery/index.js',function(gallery){
-            gallery.init(dom);
-        });
-    });
-    //评论管理
-    lofox.set('/admin/comments',function(){
-        this.title('评论管理');
-        var domCnt = createDom(mainDom);
-        domCnt.html('<div class="col-md-12"></div>');
-        var dom = domCnt.find('.col-md-12');
-        page_comment(dom);
-    });
-    //发布相关
-    lofox.set([
-        '/admin/publish/',
-        '/admin/publish/{type}',
-        '/admin/publish/{type}/{id}'
-    ],function(data){
-        this.title('发布台');
-        var domCnt = createDom(mainDom);
-        domCnt.html('<div class="col-md-12"></div>');
-        var dom = domCnt.find('.col-md-12');
-        var type = data.type || null;
-        var id = data.id || null;
+      var domCnt = createDom(mainDom);
+      domCnt.html('<div class="col-md-12"></div>');
+      var dom = domCnt.find('.col-md-12');
+      seajs.use('admin/gallery/index.js',function(gallery){
+          gallery.init(dom);
+      });
+  });
+  //评论管理
+  lofox.set('/admin/comments',function(){
+      this.title('评论管理');
+      var domCnt = createDom(mainDom);
+      domCnt.html('<div class="col-md-12"></div>');
+      var dom = domCnt.find('.col-md-12');
+      admin.render.comments(dom);
+  });
+  //发布相关
+  lofox.set([
+      '/admin/publish/',
+      '/admin/publish/{type}',
+      '/admin/publish/{type}/{id}'
+  ],function(data){
+      this.title('发布台');
+      var domCnt = createDom(mainDom);
+      domCnt.html('<div class="col-md-12"></div>');
+      var dom = domCnt.find('.col-md-12');
+      var type = data.type || null;
+      var id = data.id || null;
 
-        if(type && type.match(/^(article|opus|friends|labs|power|user)$/)){
-            seajs.use('admin/publish/publish.js',function(publish){
-                publish.init(dom,{
-                    'active' : type,
-                    'id' : id,
-                    'sendFn' : function(){
-                        location.back();
-                    }
-                });
-            });
-        }else{
-            admin.push('/publish/article');
-            admin.refresh();
-        }
-    });
+      if(type && type.match(/^(article|opus|friends|labs|power|user)$/)){
+          seajs.use('admin/publish/publish.js',function(publish){
+              publish.init(dom,{
+                  'active' : type,
+                  'id' : id,
+                  'sendFn' : function(){
+                      location.back();
+                  }
+              });
+          });
+      }else{
+          admin.push('/publish/article');
+          admin.refresh();
+      }
+  });
 
-    lofox.rest(function(){
-        admin.push('');
-        admin.refresh();
-    })
+  lofox.rest(function(){
+      admin.push('');
+      admin.refresh();
+  })
 
-    $('body').on('click','a.custom-lofox',function(){
-        var url = $(this).attr('href');
-        lofox.push(url);
-        lofox.refresh();
-        return false
-    }).on('click','a.custom-publish',function(){
-        var btn = $(this);
-        var type = btn.attr('data-type');
-        var id = btn.attr('data-id');
-        seajs.use('admin/publish/publish.js',function(publish){
-            var cover = UI.cover({
-                from : btn[0],
-				easyClose: false,
-                html : '<div class="container my-publish-cnt"></div>'
-            });
-            publish.init($(cover.dom).find('.my-publish-cnt'),{
-                'active' : type,
-                'id' : id,
-                'sendFn' : function(){
-                    setTimeout(function(){
-                        cover.close();
-                    },1000);
-                }
-            });
-        });
-        return false;
-    });
+  $('body').on('click','a.custom-lofox',function(){
+      var url = $(this).attr('href');
+      lofox.push(url);
+      lofox.refresh();
+      return false
+  }).on('click','a.custom-publish',function(){
+      var btn = $(this);
+      var type = btn.attr('data-type');
+      var id = btn.attr('data-id');
+      seajs.use('admin/publish/publish.js',function(publish){
+          var cover = UI.cover({
+              from : btn[0],
+      easyClose: false,
+              html : '<div class="container my-publish-cnt"></div>'
+          });
+          publish.init($(cover.dom).find('.my-publish-cnt'),{
+              'active' : type,
+              'id' : id,
+              'sendFn' : function(){
+                  setTimeout(function(){
+                      cover.close();
+                  },1000);
+              }
+          });
+      });
+      return false;
+  });
 
-    window.admin.load = function(){
-        require.load.apply(require,arguments);
-    };
-    window.admin.pageList = function(dom,param){
-        return new pageList(dom,param);
-    };
-    window.admin.push = function(url){
-        //去除参数中的首个‘/’或‘/admin/’
-        var new_url = '/admin/' + (url ? url.replace(/^(\/admin\/|\/)/,'') : '');
-        lofox.push.call(lofox,new_url);
-    };
-    window.admin.formToAjax = function(dom,param){
-        return new formToAjax(dom,param);
-    };
-    window.admin.refresh = function(){
-        lofox.refresh();
-    };
+  window.admin.load = function(){
+      require.load.apply(require,arguments);
+  };
+  window.admin.pageList = function(dom,param){
+      return new pageList(dom,param);
+  };
+  window.admin.push = function(url){
+      //去除参数中的首个‘/’或‘/admin/’
+      var new_url = '/admin/' + (url ? url.replace(/^(\/admin\/|\/)/,'') : '');
+      lofox.push.call(lofox,new_url);
+  };
+  window.admin.formToAjax = function(dom,param){
+      return new formToAjax(dom,param);
+  };
+  window.admin.refresh = function(){
+      lofox.refresh();
+  };
 });
 
 /**
@@ -506,19 +509,3 @@ window.parse = window.parse || {};
 		return time_str;
 	}
 })(window.parse);
-
-/***
- * 基础页
- **/
-window.admin = window.admin || {};
-window.admin.render = window.admin.render || {};
-(function(exports){
-	exports.base = function(){
-		$('.userCnt').click(function(){
-			$('.username_hover').slideDown(200);
-		});
-		$('.username_hover').mouseleave(function(){
-			$(this).fadeOut(200);
-		})
-	};
-})(window.admin.render);

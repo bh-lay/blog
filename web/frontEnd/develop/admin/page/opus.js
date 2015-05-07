@@ -1,0 +1,84 @@
+
+/**
+ * 作品列表页
+ * @param {Object} dom
+ * @param {String|Number} [id] article ID
+ **/
+define(function(exports){
+	var list_tpl = ['<tr>',
+		'<td class="arLiTitle"><a title="查看作品" href="/opus/{id}" target="_blank">{title}</a></td>',
+		'<td class="arLiTime">{time_show}</td>',
+		'<td class="arLiEdit">',
+			'<a class="btn btn-default btn-xs custom-publish" title="修改"  href="javascript:void(0)" data-type="opus" data-id="{id}"><span class="glyphicon glyphicon-edit"></span></a>',
+			'<a class="btn btn-default btn-xs" title="删除" href="/ajax/del?from=opus&id={id}" data-item-selector="tr" data-action-del="三思啊，删了可就没啦！"><span class="glyphicon glyphicon-remove"></span></a>',
+		'</td>',
+	'</tr>'].join('');
+	
+	function render(tpl,data){
+		var txt = '';
+		for(var i=0 in data){
+			txt += tpl.replace(/{(\w*)}/g,function(){
+				var key = arguments[1];
+				return data[i][key] || '';
+			});
+		}
+		return txt;
+	}
+	function getList(start,limit,callback){
+		$.ajax({
+			'url' : '/ajax/opus',
+			'type' : 'GET',
+			'data' : {
+				'act' : 'get_list',
+				'skip' : start,
+				'limit' : limit
+			},
+			'success' : function(data){
+				for(var i in data.list){
+					data.list[i].time_show = parse.time(data.list[i].opus_time_create,'{y}-{m}-{d}');
+				}
+				callback(null,data);
+			}
+		});
+	}
+	function OPUS(dom){
+		var list_html = ['<div class="col-md-12 custom-mb10">',
+			'<a class="btn btn-default custom-publish" href="javascript:void(0)" data-type="opus">传作品</a>',
+		'</div>',
+		'<div class="col-md-12">',
+			'<div class="panel panel-default">',
+				'<table class="table table-hover custom-listTable">',
+					'<tr><th>标题</th><th>发布时间</th><th>操作</th></tr>'].join('');
+				//每页显示条数
+		var page_list_num = 10;
+		getList(0,page_list_num,function(err,data){
+			if(err){
+				console.log('error');
+				return
+			}
+			list_html += render(list_tpl,data.list);
+			list_html += '</table></div></div>';
+			
+			list_html += '<div class="page col-md-12"></div>';
+			dom.html(list_html);
+			var page = admin.pageList(dom.find('.page'),{
+				'list_count' : data.count,
+				'page_cur' : 0,
+				'page_list_num' : page_list_num
+			});
+			page.jump = function(num){
+				//console.log(num,12);
+				getList((num-1)*page_list_num,page_list_num,function(err,data){
+					if(err){
+						console.log('error');
+						return
+					}
+					var new_html = render(list_tpl,data.list);
+					dom.find('tr').eq(0).siblings().remove();
+					dom.find('.table').append(new_html);
+				});
+			};
+		});
+	}
+	return OPUS;
+});

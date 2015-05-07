@@ -11,7 +11,7 @@ define(function(){
 			'url' : '/ajax/comments/list',
 			'type' : 'GET',
 			'data' : {
-                isadmin: true,
+        isadmin: true,
 				skip : start,
 				limit : limit
 			},
@@ -60,7 +60,5 @@ define(function(){
 		});
 	}
 	
-	return function(dom,id){
-		listPage(dom);
-	};
+	return listPage;
 });
