@@ -27,14 +27,14 @@ define(function(require){
 	//获取文章列表
 	function getList(start,limit,callback){
 		$.ajax({
-			'url' : '/ajax/blog',
-			'type' : 'GET',
-			'data' : {
-				'act' : 'get_list',
-				'skip' : start,
-				'limit' : limit
+			url : '/ajax/blog',
+			type : 'GET',
+			data : {
+				act : 'get_list',
+				skip : start,
+				limit : limit
 			},
-			'success' : function(data){
+			success : function(data){
 				for(var i in data.list){
 					data.list[i].time_show = parseTime(data.list[i].time_show,'{y}-{m}-{d}');
 				}
@@ -64,10 +64,10 @@ define(function(require){
 			dom.html(list_html);
 			//分页组件
 			var page = new pageList(dom.find('.page'),{
-				'list_count' : data.count,
-				'page_cur' : 0,
-				'page_list_num' : page_list_num,
-				'max_page_btn' : 5
+				list_count : data.count,
+				page_cur : 0,
+				page_list_num : page_list_num,
+				max_page_btn : 5
 			});
 			page.jump = function(num){
 				//console.log(num,12);

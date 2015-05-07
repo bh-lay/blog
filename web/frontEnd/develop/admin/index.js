@@ -40,24 +40,23 @@ define(function(require,exports){
 		dom.append(newDom);
 		if(oldDom.length != 0){
 			dom.css('height',dom.height());
-			oldDom.css({
-				'position' : 'absolute',
-				'top': 0,
-				'left' : 0
-			});
-			newDom.css({
-				'position' : 'absolute',
-				'top' : 0,
-				'left': '200%'
-			});
 			
-			oldDom.animate({
-				'left': '-100%'
+			newDom.css({
+				position : 'absolute',
+				top : 0,
+				left: '200%'
+			});
+			oldDom.css({
+				position : 'absolute',
+				top: 0,
+				left : 0
+			}).animate({
+				left: '-100%'
 			},400).fadeOut(100,function(){
 				$(window).scrollTop(0);
 				oldDom.remove();
 				newDom.animate({
-					'left': 0
+					left: 0
 				},200,function(){
 					dom.css('height','auto');
 					newDom.css('position','relative');
@@ -207,12 +206,12 @@ define(function(require,exports){
   window.admin = window.admin || {};
 
   window.admin.push = function(url){
-      //去除参数中的首个‘/’或‘/admin/’
-      var new_url = '/admin/' + (url ? url.replace(/^(\/admin\/|\/)/,'') : '');
-      lofox.push.call(lofox,new_url);
+    //去除参数中的首个‘/’或‘/admin/’
+    var new_url = '/admin/' + (url ? url.replace(/^(\/admin\/|\/)/,'') : '');
+    lofox.push.call(lofox,new_url);
   };
   window.admin.refresh = function(){
-      lofox.refresh();
+    lofox.refresh();
   };
 });
 
