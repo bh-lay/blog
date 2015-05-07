@@ -5,7 +5,8 @@
  * @param {String|Number} [id] article ID
  **/
 define(function(require){
-  var pageList = require('admin/tools/pageList.js');
+  var pageList = require('admin/tools/pageList.js'),
+      parseTime = require('admin/tools/parseTime.js');
 	//获取文章列表
 	function getList(start,limit,callback){
 		$.ajax({
@@ -19,7 +20,7 @@ define(function(require){
 			'success' : function(d){
 				var data = d.data;
 				for(var i in data.list){
-					data.list[i].time = parse.time(data.list[i].time,'{y}年 {m}月 {d}日 {h}:{i}');
+					data.list[i].time = parseTime(data.list[i].time,'{y}年 {m}月 {d}日 {h}:{i}');
 				}
 				callback(null,data);	
 			}

@@ -4,7 +4,8 @@
  * @param {String|Number} [id] article ID
  **/
 define(function(require){
-  var pageList = require('admin/tools/pageList.js');
+  var pageList = require('admin/tools/pageList.js'),
+      parseTime = require('admin/tools/parseTime.js');
 	var base_tpl = ['<div class="col-md-12 custom-mb10">',
 			'<a class="btn btn-default custom-publish" href="javascript:void(0)" data-type="friends">加友链</a>',
 		'</div>',
@@ -34,7 +35,7 @@ define(function(require){
 			},
 			'success' : function(data){
 				for(var i in data.list){
-					data.list[i].time_create = parse.time(data.list[i].time_create,'{y}-{m}-{d}');
+					data.list[i].time_create = parseTime(data.list[i].time_create,'{y}-{m}-{d}');
 				}
 				callback(null,data);	
 			}

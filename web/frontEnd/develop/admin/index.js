@@ -16,14 +16,7 @@ window.admin = window.admin || {};
  * @method admin.refresh
  * 	@example admin.refresh();
  * 
- * @method admin.load 
- *		@param {String} url,the resources url you want to load
- * 	@param {Function} callback 
- * 	@example
- * 		admin.load('/p/public/js/util/slideBar.js',function(){
- * 			console.log('i'm the sidebar!')
- * 		});
- ***/
+ **/
 
 define(function(require,exports){
   require('util/lofox_1_0.js');
@@ -230,9 +223,9 @@ define(function(require,exports){
 $(function(exports){
 	function sendPOST(url,callback){
 		$.ajax({
-			'url' : url,
-			'type' : 'POST',
-			'success' : function(data){
+			url : url,
+			type : 'POST',
+			success : function(data){
 				if(data && data.code == 200){
 					callback && callback(null,'操作成功');
 				}else{
@@ -240,7 +233,7 @@ $(function(exports){
 					callback && callback(msg);
 				}
 			},
-			'error' : function(){
+			error : function(){
 				callback && callback('网络出错！');
 			}
 		});
@@ -250,8 +243,8 @@ $(function(exports){
 		var url = btn.attr('href');
 		var text = btn.attr('data-action-ajaxConfirm');
 		UI.confirm({
-			'text' : text,
-			'callback' : function(){
+			text : text,
+			callback : function(){
 				sendPOST(url,function(err,msg){
 					if(err){
 						UI.prompt(err);
@@ -269,8 +262,8 @@ $(function(exports){
 		var item_selector = btn.attr('data-item-selector');
 		var item = btn.parents(item_selector);
 		UI.confirm({
-			'text' : text,
-			'callback' : function(){
+			text : text,
+			callback : function(){
 				sendPOST(url,function(err,msg){
 					if(err){
 						UI.prompt(err);
@@ -290,68 +283,19 @@ $(function(exports){
 		var url = btn.attr('href');
 		var text = btn.attr('data-action-ajax');
 		$.ajax({
-			'url' : url,
-			'type' : 'POST',
-			'success' : function(data){
+			url : url,
+			type : 'POST',
+			success : function(data){
 				if(data && data.code ==200){
 					UI.prompt(text);
 				}else{
 					UI.prompt('操作失败！');
 				}
 			},
-			'error' : function(){
+		  error : function(){
 				UI.prompt('网络出错！');
 			}
 		});
 		return false;
 	});
 });
-
-
-
-
-
-/**
- * 格式化日期
- * @param (timestamp/Date,'{y}-{m}-{d} {h}:{m}:{s}')
- * 
- * y:year
- * m:months
- * d:date
- * h:hour
- * i:minutes
- * s:second
- * a:day
- */
-window.parse = window.parse || {};
-(function(exports){
-	
-	exports.time = function(time,format){
-		if(arguments.length==0){
-			return null;
-		}
-		var format = format ||'{y}-{m}-{d} {h}:{i}:{s}';
-		
-		if(typeof(time) == "object"){
-			var date = time;
-		}else{
-			var date = new Date(parseInt(time));
-		}
-		
-		var formatObj = {
-			y : date.getYear()+1900,
-			m : date.getMonth()+1,
-			d : date.getDate(),
-			h : date.getHours(),
-			i : date.getMinutes(),
-			s : date.getSeconds(),
-			a : date.getDay(),
-		};
-		
-		var time_str = format.replace(/{(y|m|d|h|i|s|a)}/g,function(){
-			return formatObj[arguments[1]]||0;
-		});
-		//console.log(format,formatObj)
-		return time_str;
-	}
-})(window.parse);

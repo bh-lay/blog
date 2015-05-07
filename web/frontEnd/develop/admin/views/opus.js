@@ -5,7 +5,8 @@
  * @param {String|Number} [id] article ID
  **/
 define(function(require){
-  var pageList = require('admin/tools/pageList.js');
+  var pageList = require('admin/tools/pageList.js'),
+      parseTime = require('admin/tools/parseTime.js');
 	var list_tpl = ['<tr>',
 		'<td class="arLiTitle"><a title="查看作品" href="/opus/{id}" target="_blank">{title}</a></td>',
 		'<td class="arLiTime">{time_show}</td>',
@@ -36,7 +37,7 @@ define(function(require){
 			},
 			'success' : function(data){
 				for(var i in data.list){
-					data.list[i].time_show = parse.time(data.list[i].opus_time_create,'{y}-{m}-{d}');
+					data.list[i].time_show = parseTime(data.list[i].opus_time_create,'{y}-{m}-{d}');
 				}
 				callback(null,data);
 			}

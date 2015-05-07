@@ -4,7 +4,8 @@
  * @param {String|Number} [id] article ID
  **/
 define(function(require){
-  var pageList = require('admin/tools/pageList.js');
+  var pageList = require('admin/tools/pageList.js'),
+      parseTime = require('admin/tools/parseTime.js');
 	var tpl = ['<tr>',
 		'<td><a title="查看博文" href="/blog/{id}" target="_blank">{title}</a></td>',
 		'<td>{time_show}</td>',
@@ -35,7 +36,7 @@ define(function(require){
 			},
 			'success' : function(data){
 				for(var i in data.list){
-					data.list[i].time_show = parse.time(data.list[i].time_show,'{y}-{m}-{d}');
+					data.list[i].time_show = parseTime(data.list[i].time_show,'{y}-{m}-{d}');
 				}
 				callback(null,data);	
 			}
