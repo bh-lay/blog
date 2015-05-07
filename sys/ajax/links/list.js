@@ -22,7 +22,11 @@ function get_list(data,callback){
 		collection.count(function(err,count){
 			resJSON['count'] = count;
 			
-			collection.find({},{limit:limit_num}).sort({id:-1}).skip(skip_num).toArray(function(err, docs) {
+			collection.find({},{
+              limit: limit_num
+            }).sort({
+              id: -1
+            }).skip(skip_num).toArray(function(err, docs) {
 				method.close();
 				if(err){
 					resJSON.code = 2;
@@ -42,12 +46,12 @@ module.exports = function (connect,app){
 	var url = connect.request.url;
 
 	app.cache.use(url,['ajax','links'],function(this_cache){
-		connect.write('json',this_cache);
+      connect.write('json',this_cache);
 	},function(save_cache){
-    var data = connect.url.search;
+      var data = connect.url.search;
 
-    get_list(data,function(json_data){
-      save_cache(json_data);
-    });
+      get_list(data,function(json_data){
+        save_cache(JSON.stringify(json_data));
+      });
 	});
 };
