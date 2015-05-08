@@ -1,0 +1,248 @@
+@charset "UTF-8";
+@import "../public/css/less/_core.less";
+
+@import "../public/css/less/_reset.less";
+@import "../public/css/less/_hljs.less";
+@import "../public/css/less/_article.less";
+@import "../public/css/less/_fontface.less";
+
+
+/**
+ * 卡片类
+ */
+.cardShadow{
+	background: #fff;
+	border-radius: 2px;
+	box-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+
+.btn{
+  display: inline-block;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 1em;
+  line-height: 40px;
+  font-size: 14px;
+  text-align: center;
+  color: #333;
+  background: #fff;
+  box-shadow: 1px 1px 2px rgba(0,0,0,.3);
+  border-radius: 2px;
+  white-space: nowrap;
+  outline: none;
+  text-decoration: none;
+  transition: all 0.1s linear;
+  &:hover {
+    color: #333;
+    text-decoration: none;
+    background: #ddd;
+  }
+  &.focusme{
+    color: #fff;
+    background: #f70;
+    &:hover {
+      background: #f50;
+    }
+  }
+}
+.fix {
+	display: inline-block;
+	zoom: 1
+}
+
+.fix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden
+}
+
+.l-mini-nav{
+	height: 24px;
+	line-height: 24px;
+	background:#f5f5f5;
+}
+.l-mini-nav a{
+	font-size: 12px;
+	color: #666;
+}
+.l-mini-nav a:hover{
+	text-decoration: underline;
+	color: #333;
+}
+html,body {
+	color: #333;
+	font-size: 14px;
+	font-family: Helvetica, STHeiti STXihei, Microsoft JhengHei, Microsoft YaHei, Tohoma, Arial;
+}
+.lab_container{
+    width: 960px;
+    max-width: 100%;
+    margin: auto;
+}
+.labs_detail_title {
+	padding: 80px 0px 100px;
+	background: #2ba3d4;
+	border-bottom: 1px solid #eee;
+  text-align: center;
+  h1 {
+      line-height: 30px;
+      font-size: 30px;
+      font-weight: normal;
+      color: #fff;
+      margin: 30px 0px 30px
+  }
+  p{
+    margin-bottom: 50px;
+    line-height: 30px;
+    font-size: 16px;
+    color: #fff;
+    i{
+      margin-right: 10px;
+      font-size: 24px;
+    }
+    a{
+      color: #fff;
+      cursor: pointer;
+      &:hover{
+        text-decoration: underline;
+      }
+    }
+  }
+  .btn{
+    margin-right: 10px;
+    i{
+      margin-right: 10px;
+    }
+  }
+}
+
+.labs_detail_doc {
+	padding: 0 0px 20px;
+	background: #fff
+}
+
+.labs_detail_github {
+	background: #2c3e50;
+	padding: 120px 0px 100px;
+	min-height: 450px;
+	position: relative
+}
+
+.labs_detail_github .labsDeGit_loading {
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -50px 0px 0px -50px;
+	text-align: center;
+	line-height: 100px;
+	color: #fff;
+	font-size: 30px
+}
+
+.labsDeGit_cpt {
+	color: #fff;
+	text-align: center;
+	margin-bottom: 60px;
+    i{
+        font-size: 120px
+    }
+    p{
+        height: 50px;
+        line-height: 50px;
+        font-size: 26px;
+    }
+}
+
+.labsDeGit_repos {
+    max-width: 400px;
+	margin: auto;
+	background: #fff;
+    .labsDeGitRepos_cpt {
+        height: 40px;
+        border-bottom: 1px solid #f4f4f4;
+        .labsDeGitRepos_cpt_logo {
+            height: 40px;
+            float: left;
+            padding: 0px 10px 0px 20px;
+            line-height: 40px;
+            color: #aaa
+        }
+        .labsDeGitRepos_cpt_root {
+            line-height: 40px;
+            a {
+                color: #777;
+                &:hover {
+                    color: #222;
+                    text-decoration: underline
+                }
+            }
+        }
+    }
+    .labsDeGitRepos_cnt {
+        overflow: hidden;
+        a {
+            display: block;
+            width: 33.3333%;
+            height: 100px;
+            float: left;
+            text-align: center;
+            .labsDeGitRepos_cnt_ico {
+                display: block;
+                height: 60px;
+                line-height: 60px;
+                font-size: 30px;
+                color: #666
+            }
+            strong {
+                display: block;
+                height: 40px;
+                line-height: 40px;
+                color: #333;
+                font-size: 16px;
+                font-weight: normal
+            }
+            &:hover {
+                background: #f4f4f4
+            }
+        }
+    }
+
+}
+
+
+.labs_footer {
+	padding: 50px 0px;
+	background: #eee;
+	text-align: center
+}
+
+.labs_footer h3 {
+	margin-bottom: 15px;
+	font-size: 14px;
+	font-weight: normal;
+	color: #666
+}
+
+.labs_footer p {
+	line-height: 24px;
+	font-size: 12px;
+	color: #888
+}
+
+.labs_footer a {
+	padding: 0px 5px;
+	text-decoration: underline;
+	color: #888
+}
+
+.labs_footer a:hover {
+	color: #333
+}
+.tongji {
+    height: 0;
+    overflow: hidden;
+}
