@@ -1,74 +1,73 @@
 <script type="text/javascript">
 var blog = {
-    // 进入尝鲜版
-    jumpToNewVersion : function (){
-        document.cookie='ui_version=js;path=/';
-        window.location.reload();
-    },
-    isAdvancedBrowser : false
+  // 进入尝鲜版
+  jumpToNewVersion : function (){
+    document.cookie='ui_version=js;path=/';
+    window.location.reload();
+  },
+  isAdvancedBrowser : false
 };
     
 (function(){
-    /**
-     * 判断是否支持css属性
-     * 兼容css3
-     */
-    var supports = (function() {
-        var styles = document.createElement('div').style,
-            vendors = 'Webkit Khtml Ms O Moz'.split(/\s/);
-
-        return function(prop) {
-            if ( prop in styles ){
-                return prop;
-            }else{
-                prop = prop.replace(/^[a-z]/, function(val) {
-                    return val.toUpperCase();
-                });
-                for(var i=0,total=vendors.length;i<total;i++){
-                    if ( vendors[i] + prop in styles ) {
-                        return ('-' + vendors[i] + '-' + prop).toLowerCase();
-                    }
-                }
-            }
-        };
-    })();
-    /**
-     * 是否支持 canvas
-     */
-    function supports_canvas() {
-      return !!document.createElement('canvas').getContext;
-    }
-
-    /**
-     * 检测是否为高级浏览器
-     *
-     */
-    if(supports('transition') && supports('transform') && supports_canvas()){
-        blog.isAdvancedBrowser = true;
-    }else{
-        blog.isAdvancedBrowser = false;
-    }
-    //判断是否为正常用户（区分搜索引擎）
-    function isNormalUser(){
-        var UA = navigator.userAgent.toLowerCase();
-        var UAs = 'googlebot,youdaobot,msnbot,bingbot,yahoo,spider'.split(',');
-        for(var i=0,total=UAs.length;i<total;i++){
-            if(UA.indexOf(UAs[i]) > -1){
-                return false;
-            }
+  /**
+   * 判断是否支持css属性
+   * 兼容css3
+   */
+  var supports = (function() {
+    var styles = document.createElement('div').style,
+        vendors = 'Webkit Khtml Ms O Moz'.split(/\s/);
+    return function(prop) {
+      if ( prop in styles ){
+        return prop;
+      }else{
+        prop = prop.replace(/^[a-z]/, function(val) {
+          return val.toUpperCase();
+        });
+        for(var i=0,total=vendors.length;i<total;i++){
+          if ( vendors[i] + prop in styles ) {
+            return ('-' + vendors[i] + '-' + prop).toLowerCase();
+          }
         }
-        return true;
+      }
+    };
+  })();
+  /**
+   * 是否支持 canvas
+   */
+  function supports_canvas() {
+    return !!document.createElement('canvas').getContext;
+  }
+
+  /**
+   * 检测是否为高级浏览器
+   *
+   */
+  if(supports('transition') && supports('transform') && supports_canvas()){
+    blog.isAdvancedBrowser = true;
+  }else{
+    blog.isAdvancedBrowser = false;
+  }
+  //判断是否为正常用户（区分搜索引擎）
+  function isNormalUser(){
+    var UA = navigator.userAgent.toLowerCase();
+    var UAs = 'googlebot,youdaobot,msnbot,bingbot,yahoo,spider'.split(',');
+    for(var i=0,total=UAs.length;i<total;i++){
+      if(UA.indexOf(UAs[i]) > -1){
+        return false;
+      }
     }
-    //浏览器用户且是高级浏览器
-    if(isNormalUser() &&  blog.isAdvancedBrowser){
-        var cookie_str = document.cookie || '';
-        var ui_match = cookie_str.match(/ui_version=(.+?)(;|$)/);
-        //cookie中的UI版本标识不为“html”（屌丝版）
-        if( !ui_match || ui_match[1] != 'html'){
-            //跳转至新版
-            blog.jumpToNewVersion();
-        }
+    return true;
+  }
+  //浏览器用户且是高级浏览器
+  if(isNormalUser() &&  blog.isAdvancedBrowser){
+    var cookie_str = document.cookie || '';
+    var ui_match = cookie_str.match(/ui_version=(.+?)(;|$)/);
+    //cookie中的UI版本标识不为“html”（屌丝版）
+    if( !ui_match || ui_match[1] != 'html'){
+      //跳转至新版
+   //   blog.jumpToNewVersion();
     }
+  }
 })();
 </script>
 <!--[if IE]>

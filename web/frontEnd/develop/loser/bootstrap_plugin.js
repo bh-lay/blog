@@ -41,16 +41,15 @@ function version_init(){
 	//检测浏览器
 	if( blog.isAdvancedBrowser){
 		var $tips = $(tips_tpl);
-		$('.navbar').parent().before($tips);
+		$('body').append($tips);
 		//检测是否已经显示过
 		if(!isShowedToday()){
 			$tips.find('.container').hide();
-			var $pop = $(changeVersionTpl).hide();
+			var $pop = $(changeVersionTpl);
 			$tips.prepend($pop);
-			$pop.slideDown(2000);
 			$pop.on('click','.nVP_close',function(){
-				$pop.slideUp(200);
-				$tips.find('.container').slideDown(200);
+              $pop.slideUp(200);
+			   $tips.find('.container').slideDown(200);
 			});
 			
 			var DATE = new Date();
@@ -103,5 +102,4 @@ if($comments.length){
 	$comments.on('click','.btn',function(){
 		blog.jumpToNewVersion();
 	});
-	
 }
