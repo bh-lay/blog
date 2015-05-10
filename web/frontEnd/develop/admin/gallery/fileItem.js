@@ -187,7 +187,7 @@ define(function(require,exports){
 		this.status(this._status);
 	}
 	fileItem.prototype = {
-		'status' : function(name,value){
+		status : function(name,value){
 			var need_change = true;
 			if(name == 'uploading'){
 				this.dom.addClass('gP_item_uploading');
@@ -203,7 +203,7 @@ define(function(require,exports){
 			}
 			
 		},
-		'del' : function(){
+		del : function(){
 			var pathname = this.pathname;
 			var DOM = this.dom;
 			UI.confirm({
@@ -236,8 +236,7 @@ define(function(require,exports){
 				}
 			});
 		},
-		'rename' : function(callback){
-		//	console.log(name,txt);
+		rename : function(callback){
 			var this_file = this;
 			var ask = UI.ask('快想一个新名字！', function(txt){
 				
@@ -272,7 +271,7 @@ define(function(require,exports){
 			//设置对话框纯文件名
 			ask.setValue(this.filename);
 		},
-		'select' : function(){
+		select : function(){
 			if(this._status == 'selected'){
 				this._status = 'normal';
 				this.dom.removeClass('gP_item_checked');

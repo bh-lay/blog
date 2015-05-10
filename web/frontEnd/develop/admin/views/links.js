@@ -47,7 +47,6 @@ define(function(require){
         dom.html(base_tpl);
 		getList(0,page_list_num,function(err,data){
 			if(err){
-				console.log('error');
 				return
 			}
 			var list_html = juicer(item_tpl,data);
@@ -60,10 +59,8 @@ define(function(require){
 			});
 			page.jump = function(num){
 				
-				//console.log(num,12);
 				getList((num-1)*page_list_num,page_list_num,function(err,data){
 					if(err){
-						console.log('error');
 						return
 					}
 					var new_html = juicer(item_tpl,data);

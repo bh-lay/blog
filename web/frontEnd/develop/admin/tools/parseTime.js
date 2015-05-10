@@ -36,7 +36,6 @@ define(function(){
 		var time_str = format.replace(/{(y|m|d|h|i|s|a)}/g,function(){
 			return formatObj[arguments[1]]||0;
 		});
-		//console.log(format,formatObj)
 		return time_str;
 	}
   return time;

@@ -35,7 +35,6 @@ define(function(require){
 		var $page_cnt = dom.find('.page_cnt');
 		getList(0,page_list_num,function(err,data){
 			if(err){
-				console.log('error');
 				return
 			}
 			var list_html = juicer(tpl,data);
@@ -49,10 +48,8 @@ define(function(require){
 				'max_page_btn' : 8
 			});
 			page.jump = function(num){
-				//console.log(num,12);
 				getList((num-1)*page_list_num,page_list_num,function(err,data){
 					if(err){
-						console.log('error');
 						return
 					}
 					var list_html = juicer(tpl,data);

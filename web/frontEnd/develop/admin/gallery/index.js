@@ -115,7 +115,6 @@ define(function(require,exports){
 			thisUpload.data.root = baseRoot;
 		});
 		thisUpload.responseParser = function(data){
-		//	console.log(data,'---------------');
 			if(data && data.code && data.code == 200){
 				files = data.files;
 			}else{
@@ -126,8 +125,6 @@ define(function(require,exports){
 			};
 		}
 		thisUpload.on('startUpload',function(ID,files){
-			console.log('startUpload',arguments);
-	
 			for(var i in files){
 				var fileNew = new fileItem(this_select.root,{
 					'name' : files[i]['name'],
@@ -138,7 +135,6 @@ define(function(require,exports){
 			}
 		});
 		thisUpload.on('success',function(ID,files){
-			console.log('success',arguments);
 			for(var i in files){
 				var name = files[i].name;
 				this_select.get(name,'file').status('normal');
@@ -177,13 +173,7 @@ define(function(require,exports){
 		
 		//文件右键菜单
 		var fileMenu = panel({
-			'targets' : '.gP_item[data-type="file"]',
-			'callback':function(name) {
-				console.log('you have chioce "' , name , '" from the [ ' , this , ']');
-			},
-			'callbefore' : function(){
-				
-			}
+			'targets' : '.gP_item[data-type="file"]'
 		});
 		//指定类型
 		fileMenu.type = 'menu';
@@ -212,13 +202,7 @@ define(function(require,exports){
 		
 		//文件夹右键菜单
 		var folderMenu = panel({
-			'targets' : '.gP_item[data-type="folder"]',
-			'callback':function(name) {
-				console.log('you have chioce "' , name , '" from the [ ' , this , ']');
-			},
-			'callbefore' : function(){
-				
-			}
+			'targets' : '.gP_item[data-type="folder"]'
 		});
 		//指定类型
 		folderMenu.type = 'menu';
@@ -268,10 +252,8 @@ define(function(require,exports){
 		'open' : function(filename){
 			var this_select = this;
 			var path = this.root + '/' + filename;
-	//		console.log(path,'22')
 			path = path.replace(/\/+/g,'/');
 			path = path.length>0 ? path : '/';
-	//		console.log(path,'333')
 			this.jump(path);
 		},
 		'layout' : function(input){
@@ -423,7 +405,6 @@ define(function(require,exports){
 		var explorer = new SELECT($(pop.cntDom).find('.col-md-12'));
 		
 		$(pop.dom).find('.galleryPop_footer a').on('click',function(){
-			console.log(explorer,explorer.selection(),123)
 			callback && callback(explorer.selection());
 			pop.close();
 		});

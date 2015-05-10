@@ -54,7 +54,6 @@ define(function(require){
 		var page_list_num = 8;
 		getList(0,page_list_num,function(err,data){
 			if(err){
-				console.log('error');
 				return
 			}
 			list_html += render(tpl,data.list);
@@ -70,10 +69,8 @@ define(function(require){
 				max_page_btn : 5
 			});
 			page.jump = function(num){
-				//console.log(num,12);
 				getList((num-1)*page_list_num,page_list_num,function(err,data){
 					if(err){
-						console.log('error');
 						return
 					}
 					var new_html = render(tpl,data.list);
