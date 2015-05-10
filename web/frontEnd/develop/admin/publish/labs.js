@@ -13,7 +13,8 @@
 define && define(function(require,exports){
 	require('admin/publish/mditor.js');
 	require('admin/gallery/index.js');
-	var formToAjax = require('admin/tools/form2ajax.js');
+	var formToAjax = require('admin/tools/form2ajax.js'),
+      gallery = require('admin/gallery/index.js');
 	
 		//初始化模版
 	function valueInit(tpl,data){
@@ -37,6 +38,7 @@ define && define(function(require,exports){
 			'<br/><div class="input-group">',
 				'<span class="input-group-addon">缩略图</span>',
 				'<input type="text" class="form-control" name="cover" value="{cover}" placeholder="缩略图">',
+                '<a href="javascript:void(0)" class="input-group-addon pub_cover_btn">选择</a>',
 			'</div>',
 			'<br/><div class="input-group">',
 				'<span class="input-group-addon">创作时间</span>',
@@ -90,6 +92,15 @@ define && define(function(require,exports){
 	}
 	//发布实验室内容
 	function LABS(dom,id,sendFn){
+        dom.on('click','.pub_cover_btn',function(){
+          var input = $(this).parent().find('input');
+          gallery.pop(function(files){
+            if(files && files.length>0){
+              var path = files[0]['path'];
+              input.val(path);
+            }
+          });
+		});
 		var alert;
 		if(!id){
 			var new_html = valueInit(labs_tpl,{});

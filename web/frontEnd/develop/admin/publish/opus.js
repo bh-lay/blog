@@ -3,7 +3,6 @@
  * 博客：http://bh-lay.com/
  * Copyright (c) 2012-2018 小剧客栈
 **/
-//alert(window.outerWidth);
 
 
 /**
@@ -12,7 +11,8 @@
 
 define && define(function(require,exports){
 	require('admin/publish/mditor.js');
-	var formToAjax = require('admin/tools/form2ajax.js');
+	var formToAjax = require('admin/tools/form2ajax.js'),
+      gallery = require('admin/gallery/index.js');
 	
 	
 	//初始化模版
@@ -46,10 +46,12 @@ define && define(function(require,exports){
 			'<br/><div class="input-group">',
 				'<span class="input-group-addon">缩略图</span>',
 				'<input type="text" class="form-control" name="cover" value="{cover}" placeholder="缩略图">',
+  			     '<a href="javascript:void(0)" class="input-group-addon pub_cover_btn">选择</a>',
 			'</div>',
 			'<br/><div class="input-group">',
 				'<span class="input-group-addon">大图</span>',
 				'<input type="text" class="form-control" name="opus_pic" value="{opus_pic}" placeholder="作品大图">',
+  			     '<a href="javascript:void(0)" class="input-group-addon pub_cover_btn">选择</a>',
 			'</div>',
 			'<br/><div class="input-group">',
 				'<span class="input-group-addon">标签</span>',
@@ -90,6 +92,15 @@ define && define(function(require,exports){
 		});
 	}
 	function OPUS(dom,id,sendFn){
+        dom.on('click','.pub_cover_btn',function(){
+          var input = $(this).parent().find('input');
+          gallery.pop(function(files){
+            if(files && files.length>0){
+              var path = files[0]['path'];
+              input.val(path);
+            }
+          });
+		});
 		if(!id){
 			var new_html = valueInit(opus_tpl,{});
 			
