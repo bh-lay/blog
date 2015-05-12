@@ -141,8 +141,20 @@
   left: 0;
   bottom: 0;
   width: 100%;
-  padding: 20px;
+  padding: 15px 20px;
   background: rgba(0, 0, 0, 0.6);
+  z-index: 10000;
+}
+.newVersionTips h1 {
+  margin: 0 0 15px;
+  font-family: "Microsoft Yahei";
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+}
+.newVersionTips h1 span {
+  padding-left: .5em;
+  color: #f50;
 }
 .newVersionPop {
   position: relative;

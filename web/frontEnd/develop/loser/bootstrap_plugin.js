@@ -2,15 +2,14 @@
  * 今天是否已经显示过弹框
  */
 function isShowedToday(){
-	var cookie_str = document.cookie || '';
-	var time_match = cookie_str.match(/last_show_version_time=(.+?)(;|$)/);
+	var time_match = localStorage.getItem('last_show_version_time');
 	if(!time_match){
 		return false;
 	}else{
 		var DATE = new Date();
 		var month = DATE.getMonth() + 1;
 		var date = DATE.getDate();
-		if(time_match[1] == month + '-' + date){
+		if(time_match == month + '-' + date){
 			return true;
 		}else{
 			return false;
@@ -20,12 +19,14 @@ function isShowedToday(){
 
 var tips_tpl = ['<div class="newVersionTips">',
 	'<div class="container">',
+    '<h1>正在使用<span>屌丝版</span></h1>',
 		'<button type="button" class="btn btn-success btn-sm toNewVersion"><i class="glyphicon glyphicon-send"></i> 进入尝鲜版</button>',
 	'</div>',
 '</div>'].join('');
 var changeVersionTpl = ['<div class="newVersionPop">',
     '<div class="nVP_bj"><img src="http://layasset.qiniudn.com/images/version_switch.jpg" /></div>',
     '<div class="nVP_txt">',
+        '<p class="nVP_1"></p>',
         '<p class="nVP_1">你竟然还在使用<span>屌丝版</span></p>',
         '<p class="nVP_2">小剧已为高级浏览器单独做了开发</p>',
         '<p class="nVP_3"><a href="javascript:void(0)" class="toNewVersion">使用尝鲜版</a></p>',
@@ -55,7 +56,7 @@ function version_init(){
 			var DATE = new Date();
 			var month = DATE.getMonth() + 1;
 			var date = DATE.getDate();
-			document.cookie = 'last_show_version_time=' + month + '-' + date + ';path=/;';
+      localStorage.setItem('last_show_version_time', month + '-' + date);
 		}
 	}
 }
