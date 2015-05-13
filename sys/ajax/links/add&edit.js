@@ -128,7 +128,7 @@ module.exports = function (connect,app){
               id : data.id,
               msg: 'edit success !'
             });
-            app.cache.clear();
+            app.cache.clear('links');
           }
         });
       }

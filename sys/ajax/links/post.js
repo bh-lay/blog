@@ -76,6 +76,7 @@ module.exports = function (connect,app){
           id : data.id,
           msg: 'added success !'
         });
+        app.cache.clear('links');
       }
     });
   });

@@ -28,27 +28,27 @@ function Cache(param){
 
 //清除缓存
 Cache.prototype.clear = function(tags,callback){
-    if(typeof(tags)=='string' && tags.length > 0){
-        tags = tags.split(',');
-        //精准清除
-        this.try_del_each_cache(function(file_tags){
-            //遍历缓存文件的标签
-            for(var i=0,total=file_tags.length; i<total; i++){
-                var file_tag_item = file_tags[i];
-                //遍历待删除缓存标签
-                for(var s=0,all=tags.length; s<all; s++){
-                    var clear_tag_item = tags[s];
-                    //对比标签，相等就删除
-                    if(file_tag_item == clear_tag_item){
-                        return true;
-                    }
-                }
-            }
-            return false;
-        });
-        callback&&callback();
-    }else{
-        //暴力清除
+  if(typeof(tags)=='string' && tags.length > 0){
+    tags = tags.split(',');
+    //精准清除
+    this.try_del_each_cache(function(file_tags){
+      //遍历缓存文件的标签
+      for(var i=0,total=file_tags.length; i<total; i++){
+        var file_tag_item = file_tags[i];
+        //遍历待删除缓存标签
+        for(var s=0,all=tags.length; s<all; s++){
+          var clear_tag_item = tags[s];
+          //对比标签，相等就删除
+          if(file_tag_item == clear_tag_item){
+            return true;
+          }
+        }
+      }
+      return false;
+    });
+    callback&&callback();
+  }else{
+    //暴力清除
 		this.try_del_each_cache();
 		callback&&callback();
 	}
