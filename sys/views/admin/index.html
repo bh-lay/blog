@@ -139,6 +139,7 @@
 <include name="admin/comments_list" />
 </script>
 <script type="text/javascript" src="${{frontEnd.base}}lib/jquery/jquery.js"></script>
+<script type="text/javascript" src="${{frontEnd.base}}admin/react.js"></script>
 <script type="text/javascript" src="${{frontEnd.base}}lib/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${{frontEnd.base}}lib/sea.js" ></script>
 <script type="text/javascript">
@@ -152,7 +153,7 @@
 	  base : '${{frontEnd.base}}',
     map : [[/^(.*\.(?:css|js))(.*)$/i, '$1?v=${{frontEnd.version}}']]
 	});
-  seajs.use('admin/index.js');
+  seajs.use('admin/app.js');
 </script>
 </body>
 </html>

@@ -23,3 +23,4 @@ web/frontEnd/dist/
 web/frontEnd/node_modules/
 web/asset/
 web/topic/nodeJS_base/
+web/frontEnd/develop/admin/react-build/.module-cache/
