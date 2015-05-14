@@ -1,0 +1,1 @@
+jsx --watch react-sources/ react-build/
