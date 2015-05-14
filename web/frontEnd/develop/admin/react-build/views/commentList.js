@@ -17,13 +17,13 @@ define(function(require){
       }
       var time = parseTime(this.props.time);
       return (
-        React.createElement("li", {className: "list-group-item clearfix", "data-uid": "{this.props.uid}", "data-cid": "{this.props.cid}"}, 
+        React.createElement("li", {className: "list-group-item clearfix", "data-uid": this.props.uid, "data-cid": this.props.cid}, 
           React.createElement("div", {className: "comm_header"}, 
             React.createElement("strong", null, "CID"), React.createElement("span", null, this.props.cid), 
             user, 
             React.createElement("div", {className: "dropdown pull-right"}, 
               React.createElement("small", null, React.createElement("i", {className: "glyphicon glyphicon-time"}), time), 
-              React.createElement("a", {className: "btn btn-xs", title: "删除", href: "/ajax/comments/del?id={this.props._id}}", "data-item-selector": ".media", "data-action-del": "三思啊，删了可就没啦！"}, 
+              React.createElement("a", {className: "btn btn-xs", title: "删除", href: "/ajax/comments/del?id=" + this.props._id, "data-item-selector": ".list-group-item", "data-action-del": "三思啊，删了可就没啦！"}, 
                 React.createElement("i", {className: "glyphicon glyphicon-remove"})
               )
             )
@@ -38,7 +38,7 @@ define(function(require){
     render: function() {
       var commentNodes = this.props.list.map(function(comment, index) {
         return (
-          React.createElement(Comment, {uid: comment.uid, cid: comment.cid, time: comment.time, key: index, user: comment.user}, 
+          React.createElement(Comment, {_id: comment._id, uid: comment.uid, cid: comment.cid, time: comment.time, key: index, user: comment.user}, 
             comment.content
           )
         );

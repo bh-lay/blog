@@ -25,13 +25,13 @@ define(function(require,exports){
 	require('lib/jquery/jquery.easing.1.3.min.js');
 
   var views = {
-    opus : require('admin/views/opus.js'),
-    labs : require('admin/views/labs.js'),
-    blog : require('admin/views/blog.js'),
-    links : require('admin/views/links.js'),
-    power : require('admin/views/power.js'),
-    users : require('admin/views/users.js'),
-    comments : require('admin/react-build/commentList.js')
+    opus : require('admin/react-build/views/opusList.js'),
+    labs : require('admin/react-build/views/labsList.js'),
+    blog : require('admin/react-build/views/blogList.js'),
+    links : require('admin/react-build/views/linksList.js'),
+    users : require('admin/react-build/views/userList.js'),
+    comments : require('admin/react-build/views/commentList.js'),
+    power : require('admin/react-build/views/powerList.js')
   };
 	function createDom(dom){
 		var oldDom = dom.find('.mainCnt_body');

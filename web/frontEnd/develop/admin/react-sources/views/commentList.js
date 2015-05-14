@@ -17,13 +17,13 @@ define(function(require){
       }
       var time = parseTime(this.props.time);
       return (
-        <li className="list-group-item clearfix" data-uid="{this.props.uid}" data-cid="{this.props.cid}">
+        <li className="list-group-item clearfix" data-uid={this.props.uid} data-cid={this.props.cid}>
           <div className="comm_header">
             <strong>CID</strong><span>{this.props.cid}</span>
             {user}
             <div className="dropdown pull-right">
               <small><i className="glyphicon glyphicon-time"></i>{time}</small>
-              <a className="btn btn-xs" title="删除" href="/ajax/comments/del?id={this.props._id}}" data-item-selector=".media" data-action-del="三思啊，删了可就没啦！">
+              <a className="btn btn-xs" title="删除" href={"/ajax/comments/del?id=" + this.props._id} data-item-selector=".list-group-item" data-action-del="三思啊，删了可就没啦！">
                 <i className="glyphicon glyphicon-remove"></i>
               </a>
             </div>
@@ -38,7 +38,7 @@ define(function(require){
     render: function() {
       var commentNodes = this.props.list.map(function(comment, index) {
         return (
-          <Comment uid={comment.uid} cid={comment.cid} time={comment.time} key={index} user={comment.user}>
+          <Comment _id={comment._id} uid={comment.uid} cid={comment.cid} time={comment.time} key={index} user={comment.user}>
             {comment.content}
           </Comment>
         );
