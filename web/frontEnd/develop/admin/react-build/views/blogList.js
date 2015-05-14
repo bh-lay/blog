@@ -59,7 +59,7 @@ define(function(require){
     loadCommentsFromServer: function() {
       var skip = (this.state.page-1) * this.state.limit;
       $.ajax({
-        url: this.props.url,
+        url: '/ajax/blog',
         dataType: 'json',
         data: {
           act : 'get_list',
@@ -67,10 +67,13 @@ define(function(require){
           limit : this.state.limit
         },
         success: function(json) {
-          this.setState({
-            list: json.list,
-            count: json.count
-          });
+          
+          if(json.list){
+            this.setState({
+              list: json.list,
+              count: json.count
+            });
+          }
         }.bind(this),
         error: function(xhr, status, err) {
           console.error(this.props.url, status, err.toString());
@@ -100,11 +103,7 @@ define(function(require){
   });
 
   return function (elem){
-    elem = elem[0];
-    React.render(
-      React.createElement(BlogPage, {url: "/ajax/blog"}),
-      elem
-    );
+    React.render(React.createElement(BlogPage, null), elem[0]);
   }
   
 });
