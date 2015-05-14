@@ -21,7 +21,6 @@ window.admin = window.admin || {};
 define(function(require,exports){
   require('util/lofox_1_0.js');
 	require('UI/dialog.js');
-	require('lib/juicer.js');
 	require('lib/jquery/jquery.easing.1.3.min.js');
 
   var views = {

@@ -62,10 +62,12 @@ define(function(require){
 				  'act' : 'get_list',
         },
         success: function(json) {
-          this.setState({
-            list: json.list,
-            count: json.count
-          });
+          if(json.list){
+            this.setState({
+              list: json.list,
+              count: json.count
+            });
+          }
         }.bind(this),
         error: function(xhr, status, err) {
           console.error(this.props.url, status, err.toString());

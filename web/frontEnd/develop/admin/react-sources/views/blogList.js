@@ -67,10 +67,13 @@ define(function(require){
           limit : this.state.limit
         },
         success: function(json) {
-          this.setState({
-            list: json.list,
-            count: json.count
-          });
+          
+          if(json.list){
+            this.setState({
+              list: json.list,
+              count: json.count
+            });
+          }
         }.bind(this),
         error: function(xhr, status, err) {
           console.error(this.props.url, status, err.toString());
@@ -99,7 +102,7 @@ define(function(require){
     }
   });
 
-  return BlogPage;function (elem){
+  return function (elem){
     React.render(<BlogPage />, elem[0]);
   }
   
