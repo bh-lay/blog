@@ -143,12 +143,12 @@
 	var admin_dataBase = {
 		username : '${{username}}',
 		userid : '${{userid}}',
-    frontEnd_version : '${{frontEnd.version}}',
+    frontEnd_version : '${{frontEnd.admin_version}}',
 		frontEnd_base : '${{frontEnd.base}}'
 	};
 	seajs.config({
 	  base : '${{frontEnd.base}}',
-    map : [[/^(.*\.(?:css|js))(.*)$/i, '$1?v=${{frontEnd.version}}']]
+    map : [[/^(.*\.(?:css|js))(.*)$/i, '$1?v=${{frontEnd.admin_version}}']]
 	});
   seajs.use('admin/app.js');
 </script>

@@ -7,7 +7,7 @@
 <meta name="description" content="${{description}}" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 <include name="favicon_appicon" />
-<link rel="stylesheet" type="text/css" href="${{frontEnd.base}}labs/labsDetail.css?v=${{frontEnd.version}}" />
+<link rel="stylesheet" type="text/css" href="${{frontEnd.base}}labs/labsDetail.css?v=${{frontEnd.loser_version}}" />
 <link rel="stylesheet" type="text/css" href="${{frontEnd.base}}lib/Font-Awesome-3.2.1/css/font-awesome.min.css"/>
 </head>
 <body>
@@ -90,10 +90,10 @@
 		'frontEnd_base' : '${{frontEnd.base}}',
 		'imgDomain' : '${{frontEnd.img_domain}}'
 	};
-    seajs.config({
-        'base' : '${{frontEnd.base}}',
-        'map' : [[/^(.*\.(?:css|js))(.*)$/i, '$1?v=${{frontEnd.version}}']]
-    });
+  seajs.config({
+      'base' : '${{frontEnd.base}}',
+      'map' : [[/^(.*\.(?:css|js))(.*)$/i, '$1?v=${{frontEnd.loser_version}}']]
+  });
 	seajs.use('${{frontEnd.base}}labs/detail.js');
 </script>
 <include name="baiduAndGoogleTongji"/>

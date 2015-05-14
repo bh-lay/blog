@@ -1,19 +1,19 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
-    <head>
-        <meta charset="UTF-8">
-        <title>${{title}}</title>
-        <meta name="keywords" content="${{keywords}}" />
-        <meta name="description" content="${{description}}" />
-        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-   		<base target="_blank" />
-        <include name="favicon_appicon" />
-        <link rel="stylesheet" type="text/css" href="${{frontEnd.base}}public/css/main.css?v=${{frontEnd.version}}"/>
-    </head>
-    <body>
-<include name="navigation"/>
-<div class="app_container"></div>
-<div class="app_mask">
+  <head>
+    <meta charset="UTF-8">
+    <title>${{title}}</title>
+    <meta name="keywords" content="${{keywords}}" />
+    <meta name="description" content="${{description}}" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <base target="_blank" />
+    <include name="favicon_appicon" />
+    <link rel="stylesheet" type="text/css" href="${{frontEnd.base}}public/css/main.css?v=${{frontEnd.singlepage_version}}"/>
+  </head>
+  <body>
+    <include name="navigation"/>
+    <div class="app_container"></div>
+    <div class="app_mask">
     <div class="app_mask_cnt">
       <span class="l-loading"></span>
     </div>
@@ -62,12 +62,12 @@
 <script type="text/javascript">
     var app_config = {
         'frontEnd_base' : '${{frontEnd.base}}',
-        'frontEnd_version' : '${{frontEnd.version}}',
+        'frontEnd_version' : '${{frontEnd.singlepage_version}}',
         'imgDomain' : '${{frontEnd.img_domain}}'
     };
     seajs.config({
         'base' : '${{frontEnd.base}}',
-        'map' : [[/^(.*\.(?:css|js))(.*)$/i, '$1?v=${{frontEnd.version}}']]
+        'map' : [[/^(.*\.(?:css|js))(.*)$/i, '$1?v=${{frontEnd.singlepage_version}}']]
     });
     seajs.use("public/app.js");
 </script>

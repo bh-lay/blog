@@ -9,7 +9,7 @@
 <include name="version_html5_script_bootstrap"/>
 <include name="favicon_appicon" />
 <link href="${{frontEnd.base}}lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-<link href="${{frontEnd.base}}loser/bootstrap_plugin.css?v=${{frontEnd.version}}" rel="stylesheet" media="screen">
+<link href="${{frontEnd.base}}loser/bootstrap_plugin.css?v=${{frontEnd.loser_version}}" rel="stylesheet" media="screen">
 </head>
 <body>
 <include name="navigation_bootstrap" active="blog"/>
@@ -31,13 +31,13 @@
 <script type="text/javascript">
     var app_config = {
         frontEnd_base : '${{frontEnd.base}}',
-        frontEnd_version : '${{frontEnd.version}}',
+        frontEnd_version : '${{frontEnd.loser_version}}',
         imgDomain : '${{frontEnd.img_domain}}'
     };
 </script>
 <script type="text/javascript" src="${{frontEnd.base}}lib/jquery/jquery.js"></script>
 <script type="text/javascript" src="${{frontEnd.base}}lib/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${{frontEnd.base}}loser/bootstrap_plugin.js?v=${{frontEnd.version}}"></script>
+<script type="text/javascript" src="${{frontEnd.base}}loser/bootstrap_plugin.js?v=${{frontEnd.loser_version}}"></script>
 <include name="footer"/>
 <include name="baiduAndGoogleTongji"/>
 </body>

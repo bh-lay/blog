@@ -8,7 +8,7 @@
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <include name="favicon_appicon" />
   <base target="_blank" />
-  <link rel="stylesheet" type="text/css" href="${{frontEnd.base}}links/links.css?v=${{frontEnd.version}}"/>
+  <link rel="stylesheet" type="text/css" href="${{frontEnd.base}}links/links.css?v=${{frontEnd.loser_version}}"/>
 </head>
 <body>
   <div class="Jumbotron">
@@ -46,11 +46,11 @@
     {{@/each}}
   </div>
 <script type="text/javascript" src="${{frontEnd.base}}lib/jquery/jquery.js"></script>
-<script type="text/javascript" src="${{frontEnd.base}}UI/dialog.js?v=${{frontEnd.version}}"></script>
+<script type="text/javascript" src="${{frontEnd.base}}UI/dialog.js?v=${{frontEnd.loser_version}}"></script>
 <script type="text/javascript">
   var app_config = {
     frontEnd_base : '${{frontEnd.base}}',
-    frontEnd_version : '${{frontEnd.version}}',
+    frontEnd_version : '${{frontEnd.loser_version}}',
     imgDomain : '${{frontEnd.img_domain}}'
   };
   $('.add_one').click(function(){
