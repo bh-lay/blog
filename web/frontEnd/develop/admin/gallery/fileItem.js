@@ -82,27 +82,27 @@ define(function(require,exports){
 		//URL地址
 		var url = domain + pathname;
 		return {
-			'fullname' : fullname,
-			'filename' : filename,
-			'extension' : extension,
-			'pathname' : pathname,
-			'url' : url
+			fullname: fullname,
+			filename: filename,
+			extension: extension,
+			pathname: pathname,
+			url: url
 		};
 	}
 	
 	//删除文件
 	function delFile(pathname,callback){
 		$.ajax({
-			'url' : '/ajax/asset/del',
-			'type' : 'POST',
-			'data' : {
-				'path' : pathname
+			url: '/ajax/asset/del',
+			type: 'POST',
+			data: {
+				path: pathname
 			},
-			'dataType' : 'json',
-			'success' : function(data){
+			dataType: 'json',
+			success: function(data){
 				callback && callback(null,data);
 			},
-			'error' : function(){
+			error: function(){
 				callback && callback('网络出错');
 			}
 		});
@@ -141,11 +141,11 @@ define(function(require,exports){
 		var touchEvents = toucher(itemDom.find('.gP_item_body')[0]);
 		touchEvents.on('swipeLeft',function(){
 			itemDom.find('.gP_item_body').animate({
-				'left' : -100
+				left: -100
 			},80);
 		}).on('swipeRight',function(){
 			itemDom.find('.gP_item_body').animate({
-				'left' : 0
+				left: 0
 			},80);
 		}).on('longTap',function(){
 			//切换选中状态
@@ -176,9 +176,9 @@ define(function(require,exports){
 		this.url =  file.url;
 		
 		var html = render(file_item_tpl,{
-			'fullname' : this.fullname,
-			'filename' : this.filename,
-			'extension' : this.extension
+			fullname: this.fullname,
+			filename: this.filename,
+			extension: this.extension
 		});
 		
 		this.dom = $(html);
@@ -207,8 +207,8 @@ define(function(require,exports){
 			var pathname = this.pathname;
 			var DOM = this.dom;
 			UI.confirm({
-				'text' : '删除就找不回来了，你再想想？',
-				'callback' : function(){
+				text: '删除就找不回来了，你再想想？',
+				callback: function(){
 					//发送删除请求
 					delFile(pathname,function(err){
 						if(err){
@@ -217,16 +217,16 @@ define(function(require,exports){
 						}
 						DOM.addClass('gP_item_deleted');
 						DOM.css({
-							'position' : 'relative',
-							'height' : DOM.find('.gP_item_body').height(),
-							'background' : '#333'
+							position: 'relative',
+							height: DOM.find('.gP_item_body').height(),
+							background: '#333'
 						});
 						DOM.find('.gP_item_body').css({
-							'position' : 'absolute',
-							'width' : '100%',
-							'height' : '100%'
+							position: 'absolute',
+							width: '100%',
+							height: '100%'
 						}).animate({
-							'left' : '100%'
+							left: '100%'
 						},300,function(){
 							DOM.slideUp(120,function(){
 								DOM.remove();
@@ -242,14 +242,14 @@ define(function(require,exports){
 				
 				var newName = txt;
 				$.ajax({
-					'url' : '/ajax/asset/rename',
-					'type' : 'POST',
-					'data' : {
-						'pathname' : this_file.pathname,
-						'newName' : newName
+					url: '/ajax/asset/rename',
+					type: 'POST',
+					data: {
+						pathname: this_file.pathname,
+						newName: newName
 					},
-					'dataType' : 'json',
-					'success' : function(data){
+					dataType: 'json',
+					success: function(data){
 						if(data && data.code == 200){
 							
 							this_file.filename = newName;
@@ -263,7 +263,7 @@ define(function(require,exports){
 							callback && callback('重命名失败');
 						}
 					},
-					'error' : function(){
+					error: function(){
 						callback && callback('网络出错');
 					}
 				});

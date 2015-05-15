@@ -66,28 +66,28 @@ define(function(require,exports){
 	 */
 	function getData(path,callback){
 		$.ajax({
-			'url' : '/ajax/asset',
-			'type' : 'GET',
-			'data' : {
-				'path' : path
+			url: '/ajax/asset',
+			type: 'GET',
+			data: {
+				path: path
 			},
-			'dataType' : 'json',
-			'success' : function(data){
+			dataType: 'json',
+			success: function(data){
 				if(data && data.code == 200){
 					var newData = {
-						'dir' : [],
-						'files' : []
+						dir: [],
+						files: []
 					};
 					for(var i in data.files){
 						var type = '';
 						if(data.files[i]['isdir']){
 							newData['dir'].push({
-								'name' : data.files[i]['name'],
-								'type' : 'folder'
+								name: data.files[i]['name'],
+								type: 'folder'
 							});
 						}else{
 							newData['files'].push({
-								'name' : data.files[i]['name']
+								name: data.files[i]['name']
 							});
 						}
 					}
@@ -104,11 +104,11 @@ define(function(require,exports){
 		var this_select = this;
 		
 		var thisUpload = new uploader({
-			'dom' : this.dom.find('a[data-action="upload"]'),
-			'action' : '/ajax/asset/upload',
-			'data' : {
-				'act' : 'addFile',
-				'root' : '/'
+			dom: this.dom.find('a[data-action="upload"]'),
+			action: '/ajax/asset/upload',
+			data: {
+				act: 'addFile',
+				root: '/'
 			}
 		});
 		this.on('fresh',function(baseRoot){
@@ -121,14 +121,14 @@ define(function(require,exports){
 				files = [];
 			}
 			return {
-				'files' : files
+				files: files
 			};
 		}
 		thisUpload.on('startUpload',function(ID,files){
 			for(var i in files){
 				var fileNew = new fileItem(this_select.root,{
-					'name' : files[i]['name'],
-					'status' : 'uploading'
+					name: files[i]['name'],
+					status: 'uploading'
 				});
 				this_select.files.push(fileNew);
 				this_select.cntDom.append(fileNew.dom);
@@ -161,9 +161,9 @@ define(function(require,exports){
 
 		//空白处绑定右键
 		var fileMenu = panel({
-			'targets' : '.gP_cnt'
+			targets: '.gP_cnt'
 		});
-		fileMenu.add('mkdir',{'txt':'新建目录'},function(){
+		fileMenu.add('mkdir',{txt:'新建目录'},function(){
 			//创建新的文件夹
 			UI.ask('新目录叫什么呢？', function(txt){
 				this_select.createDir(txt);
@@ -173,52 +173,58 @@ define(function(require,exports){
 		
 		//文件右键菜单
 		var fileMenu = panel({
-			'targets' : '.gP_item[data-type="file"]'
+			targets: '.gP_item[data-type="file"]'
 		});
 		//指定类型
 		fileMenu.type = 'menu';
 		//增删菜单条目
-		fileMenu.add('rename',{'txt':'重命名'},function(){
+		fileMenu.add('rename',{txt:'重命名'},function(){
 			//重命名
 			var fullname = $(this).attr('data-fullname');
 			var file = this_select.get(fullname,'file');
 			file && file.rename();
 		});
-		fileMenu.add('delete',{'txt':'删除'},function(){
+		fileMenu.add('delete',{txt:'删除'},function(){
 			//删除
 			var fullname = $(this).attr('data-fullname');
 			var file = this_select.get(fullname,'file');
 			file && file.del();
 		});
-		fileMenu.add('showurl',{'txt':'url地址'},function(){
+		fileMenu.add('showurl',{txt:'url地址'},function(){
 			//显示绝对地址
 			var fullname = $(this).attr('data-fullname');
 			var file = this_select.get(fullname,'file');
 			UI.confirm({
-				'text' : '<a target="_blank" href="' + file.url + '">' + file.url + '</a>'
+				text: '<a target="_blank" href="' + file.url + '">' + file.url + '</a>'
 			})
 		});
 		
 		
 		//文件夹右键菜单
 		var folderMenu = panel({
-			'targets' : '.gP_item[data-type="folder"]'
+			targets: '.gP_item[data-type="folder"]'
 		});
 		//指定类型
 		folderMenu.type = 'menu';
 		//增删菜单条目
-		folderMenu.add('open',{'txt':'打开'},function(){
+		folderMenu.add('open',{
+      txt: '打开'
+    },function(){
 			//重命名
 			var fullname = $(this).attr('data-fullname');
 			this_select.open(fullname);
 		});
-		folderMenu.add('rename',{'txt':'重命名'},function(){
+		folderMenu.add('rename',{
+      txt: '重命名'
+    },function(){
 			//重命名
 			var fullname = $(this).attr('data-fullname');
 			var folder = this_select.get(fullname,'folder');
 			folder && folder.rename();
 		});
-		folderMenu.add('delete',{'txt':'删除'},function(){
+		folderMenu.add('delete',{
+      txt: '删除'
+    },function(){
 			//删除
 			var fullname = $(this).attr('data-fullname');
 			var folder = this_select.get(fullname,'folder');
@@ -249,14 +255,14 @@ define(function(require,exports){
 		
 	}
 	SELECT.prototype = {
-		'open' : function(filename){
+		open: function(filename){
 			var this_select = this;
 			var path = this.root + '/' + filename;
 			path = path.replace(/\/+/g,'/');
 			path = path.length>0 ? path : '/';
 			this.jump(path);
 		},
-		'layout' : function(input){
+		layout: function(input){
 			var type = '';
 			if(input && input.match(/^grid|colum$/)){
 				type = input;
@@ -284,7 +290,7 @@ define(function(require,exports){
 				listDom.addClass('gp_select_grid');
 			}
 		},
-		'createDir' : function(foldername,callback){
+		createDir: function(foldername,callback){
 			var this_select = this;
 			if(!foldername || foldername.length < 0){
 				callback && callback('参数不全');
@@ -292,23 +298,23 @@ define(function(require,exports){
 			}
 
 			$.ajax({
-				'url' : '/ajax/asset/createDir',
-				'type' : 'POST',
-				'data' : {
-					'root' : this.root,
-					'name' : foldername,
+				url: '/ajax/asset/createDir',
+				type: 'POST',
+				data: {
+					root: this.root,
+					name: foldername,
 				},
-				'dataType' : 'json',
-				'success' : function(data){
+				dataType: 'json',
+				success: function(data){
 					this_select.refresh();
 					callback && callback(null,data);
 				},
-				'error' : function(){
+				error: function(){
 					callback && callback('网络出错');
 				}
 			});
 		},
-		'get' : function(fullname,type){
+		get: function(fullname,type){
 			var result = false;
 			if(fullname && fullname.length > 0){
 				var type = type || '';
@@ -324,7 +330,7 @@ define(function(require,exports){
 			return result;
 			
 		},
-		'back' : function(){
+		back: function(){
 			var root = this.root;
 			//去除最后一节目录
 			var path = root.split('/');
@@ -336,12 +342,12 @@ define(function(require,exports){
 			this.jump(newRoot);
 		},
 		//刷新当前列表
-		'refresh' : function(){
+		refresh: function(){
 			var path = this.root;
 			this.jump(path);
 		},
 		//跳转至指定目录
-		'jump' : function(basePath){
+		jump: function(basePath){
 			var this_select = this;
 			var cntDom = this.cntDom;
 			cntDom.html(loading_tpl);
@@ -357,14 +363,14 @@ define(function(require,exports){
 					this_select.files = [];
 					for(var i in data.dir){
 						var folderNew = new folderItem(basePath,{
-							'name' : data.dir[i]['name']
+							name: data.dir[i]['name']
 						});
 						cntDom.append(folderNew.dom);
 						this_select.folders.push(folderNew);
 					}
 					for(var i in data.files){
 						var fileNew = new fileItem(basePath,{
-							'name' : data.files[i]['name']
+							name: data.files[i]['name']
 						});
 						cntDom.append(fileNew.dom);
 						this_select.files.push(fileNew);
@@ -377,16 +383,16 @@ define(function(require,exports){
 				this_select.emit('fresh',this_select.root);
 			});
 		},
-		'selection' : function(){
+		selection: function(){
 			var selectedFiles = [];
 			var filesTotal = this.files.length;
 			for(var i=0;i<filesTotal;i++){
 				if(this.files[i]._status == 'selected'){
 					selectedFiles.push({
-						'extension': this.files[i]['extension'],
-						'fullname': this.files[i]['fullname'],
-						'url': this.files[i]['url'],
-						'path' : this.files[i]['pathname']
+						extension: this.files[i]['extension'],
+						fullname: this.files[i]['fullname'],
+						url: this.files[i]['url'],
+						path: this.files[i]['pathname']
 					});
 				}
 			}
@@ -399,8 +405,8 @@ define(function(require,exports){
 	};
 	exports.pop = function POP(callback){
 		var pop = UI.cover({
-			'title' : '选择文件',
-			'html' : pop_tpl
+			title: '选择文件',
+			html: pop_tpl
 		});
 		var explorer = new SELECT($(pop.cntDom).find('.col-md-12'));
 		

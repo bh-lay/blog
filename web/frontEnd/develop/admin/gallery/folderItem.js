@@ -44,13 +44,13 @@ define(function(require,exports){
 	//删除目录
 	function delDir(pathname,callback){
 		$.ajax({
-			'url' : '/ajax/asset/delDir',
-			'type' : 'POST',
-			'data' : {
-				'path' : pathname
+			url: '/ajax/asset/delDir',
+			type: 'POST',
+			data: {
+				path: pathname
 			},
-			'dataType' : 'json',
-			'success' : function(data){
+			dataType: 'json',
+			success: function(data){
 				if(data && data.code == 200){
 					callback && callback(null);
 				}else{
@@ -58,7 +58,7 @@ define(function(require,exports){
 					callback && callback(msg);
 				}
 			},
-			'error' : function(){
+			error: function(){
 				callback && callback('网络出错');
 			}
 		});
@@ -123,19 +123,19 @@ define(function(require,exports){
 		this.status = 'normal';
 		
 		var html = render(dir_tpl,[{
-			'name' : this.fullname
+			name: this.fullname
 		}]);
 		this.dom = $(html);
 		
 		bindItemEvent.call(this);
 	}
 	folderItem.prototype = {
-		'del' : function(){
+		del: function(){
 			var path = this.path;
 			var DOM = this.dom;
 			UI.confirm({
-				'text' : '删除就找不回来了，你再想想？',
-				'callback' : function(){
+				text: '删除就找不回来了，你再想想？',
+				callback: function(){
 					//发送删除请求
 					delDir(path,function(err){
 						if(err){
@@ -144,16 +144,16 @@ define(function(require,exports){
 						}
 						DOM.addClass('gP_item_deleted');
 						DOM.css({
-							'position' : 'relative',
-							'height' : DOM.find('.gP_item_body').height(),
-							'background' : '#333'
+							position: 'relative',
+							height: DOM.find('.gP_item_body').height(),
+							background: '#333'
 						});
 						DOM.find('.gP_item_body').css({
-							'position' : 'absolute',
-							'width' : '100%',
-							'height' : '100%'
+							position: 'absolute',
+							width: '100%',
+							height: '100%'
 						}).animate({
-							'left' : '100%'
+							left: '100%'
 						},300,function(){
 							DOM.slideUp(120,function(){
 								DOM.remove();
@@ -163,19 +163,19 @@ define(function(require,exports){
 				}
 			});
 		},
-		'rename' : function(callback){
+		rename: function(callback){
 			var this_folder = this;
 			var ask = UI.ask('快想一个新名字！', function(txt){
 				var newName = txt;
 				$.ajax({
-					'url' : '/ajax/asset/rename',
-					'type' : 'POST',
-					'data' : {
-						'pathname' : this_folder.path,
-						'newName' : newName
+					url: '/ajax/asset/rename',
+					type: 'POST',
+					data: {
+						pathname: this_folder.path,
+						newName: newName
 					},
-					'dataType' : 'json',
-					'success' : function(data){
+					dataType: 'json',
+					success: function(data){
 						if(data && data.code == 200){
 							callback && callback(null,data);
 							this_folder.dom.attr('data-fullname',newName);
@@ -186,7 +186,7 @@ define(function(require,exports){
 							
 						}
 					},
-					'error' : function(){
+					error: function(){
 						callback && callback('网络出错');
 					}
 				});
