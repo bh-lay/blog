@@ -1,7 +1,7 @@
-﻿/**
+/**
  *	@author bh-lay
  *	@github https://github.com/bh-lay/uploader
- *  @updata 2014-5-11 0:16
+ *  @updata 2015-5-16 10:13
  * Function depend on Jquery!
  * 
  */
@@ -9,7 +9,7 @@ window.util = window.util || {};
 
 (function(exports){
 	var staticID = 0;
-	var upCnt_tpl = ['<div class="uploaderCnt" style="width:0px;height:0px;position:fixed;left:0px;top:0px;overflow:hidden"></div>'].join('');
+	var upCnt_tpl = '<div class="uploaderCnt" style="width:0px;height:0px;position:fixed;left:0px;top:0px;overflow:hidden"></div>';
 	var up_tpl = ['<div class="uploaderItem uploader{ID}">',
 		'<iframe id="uploader{ID}" name="uploader{ID}" width="0" height="0" src="about:blank"></iframe>',
 		'<form method="post" action="{action}" enctype="multipart/form-data" name="uploader" target="uploader{ID}">',
@@ -82,14 +82,14 @@ window.util = window.util || {};
 				//可多选 
 				for(var i=0,total=input.files.length;i<total;i++){
 					returns.push({
-						'name' : input.files[i]['name'],
-						'size' : input.files[i]['size']
+						name: input.files[i]['name'],
+						size: input.files[i]['size']
 					})
 				}
 			}else{
 				//不支持多选
 				returns.push({
-					'name' : input.value.split(/\\/).pop()
+					name: input.value.split(/\\/).pop()
 				});
 			}
 		}
@@ -240,10 +240,7 @@ window.util = window.util || {};
 			this.dom.mouseenter(workStart)
 		}
 		
-		this.dom.mouseleave(function(){
-			//注销上传组建
-			this_up.activeSet && this_up.activeSet.destory();
-		}).on('click',function(){
+		this.dom.on('click',function(){
 			//代理click事件至上传组建
 			this_up.activeSet.dom.find('.uploader_btn').trigger('click');
 		});
@@ -275,7 +272,7 @@ window.util = window.util || {};
 		},200);
 	}
 	uploader.prototype = {
-		'on' : function (eventName,callback){
+		on: function (eventName,callback){
 			//事件堆无该事件，创建一个事件堆
 			if(!this._events[eventName]){
 				this._events[eventName] = [];
@@ -283,7 +280,7 @@ window.util = window.util || {};
 			this._events[eventName].push(callback);
 			return this;
 		},
-		'emit' : function (eventName,args){
+		emit: function (eventName,args){
 			//事件堆无该事件，结束运行
 			if(!this._events[eventName]){
 				return
@@ -293,13 +290,16 @@ window.util = window.util || {};
 				this._events[eventName][i].apply(this.event_global || this , args);
 			}
 		},
-		'createSingleUp' : function(){
+		createSingleUp: function(){
 			var this_up = this;
+          
+			//注销上一个上传组建
+			this.activeSet && this.activeSet.destory();
 			this.activeSet = new SingleUp({
-				'action' : this.action,
-				'data' : this.data,
-				'responseParser' : this.responseParser,
-				'beforeUpload' : function(ID,files){
+				action: this.action,
+				data: this.data,
+				responseParser: this.responseParser,
+				beforeUpload: function(ID,files){
 					this_up.emit('beforeUpload',[ID,files]);
 					if(this_up.can_upload){
 						return true;
@@ -307,13 +307,13 @@ window.util = window.util || {};
 						return false;
 					}
 				},
-				'onStartUpload' : function(ID,files){
+				onStartUpload: function(ID,files){
 					this_up.emit('startUpload',[ID,files]);
 				},
-				'onSuccess' : function(ID,files,extra){
+				onSuccess: function(ID,files,extra){
 					this_up.emit('success',[ID,files,extra]);
 				},
-				'onFail' : function(ID,extra){
+				onFail: function(ID,extra){
 					this_up.emit('error',[ID,extra]);
 				}
 			});
