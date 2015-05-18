@@ -78,7 +78,6 @@ define(function(require,exports){
         var me = this;
 		
 		var pop = UI.pop({
-			'mask' : true,
 			'width' : 400,
 			'html' : loginPanel_tpl,
 			'mask' : false,
