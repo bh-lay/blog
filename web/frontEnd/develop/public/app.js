@@ -73,8 +73,6 @@ define(function (require, exports) {
         index : require('public/js/index.js'),
         blogList : require('public/js/blogList.js'),
         blogDetail : require('public/js/blogDetail.js'),
-        opusList : require('public/js/opusList.js'),
-        opusDetail : require('public/js/opusDetail.js'),
         labsList : require('public/js/labsList.js'),
         bless : require('public/js/bless.js'),
         comments : require('public/comments/index.js')
@@ -334,20 +332,6 @@ function routerHandle(lofox) {
 		o_active_page = new L.views.blogDetail(dom, param.id, function (title) {
       lofox.title(title);
     });
-	});
-	//作品列表页
-	lofox.set('/opus', function (param, pathnde, search) {
-		this.title('作品_小剧客栈');
-		L.nav.setCur('opus');
-		var dom = getNewPage();
-		o_active_page = new L.views.opusList(dom,search);
-	});
-	//作品详情页
-	lofox.set('/opus/{id}', function (param) {
-		this.title('作品_小剧客栈');
-		L.nav.setCur('opus');
-		var dom = getNewPage();
-		o_active_page = new L.views.opusDetail(dom, param.id);
 	});
 	//实验室列表页
 	lofox.set('/labs', function () {

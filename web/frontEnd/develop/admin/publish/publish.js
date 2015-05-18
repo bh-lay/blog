@@ -7,7 +7,6 @@
 
 define && define(function(require,exports){
 	var article = require('admin/publish/article.js');
-	var opus = require('admin/publish/opus.js');
 	var labs = require('admin/publish/labs.js');
 	var friends = require('admin/publish/friends.js');
 	var power = require('admin/publish/power.js');
@@ -22,9 +21,7 @@ define && define(function(require,exports){
 	'</div>'].join('');
 	
 	function show_module (dom,name,id,sendFn){
-		if(name == 'opus'){
-			opus(dom,id,sendFn);
-		}else if(name == 'friends'){
+		if(name == 'friends'){
 			friends(dom,id,sendFn);
 		}else if(name == 'labs'){
 			labs(dom,id,sendFn);
@@ -51,7 +48,6 @@ define && define(function(require,exports){
 	
 	exports.init = INIT;
 	exports.article = article;
-	exports.opus = opus;
 	exports.labs = labs;
 	exports.friends = friends;
 	exports.power = power;

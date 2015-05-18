@@ -20,9 +20,30 @@ module.exports = {
 	'/Tutorials/other/':'/blog',
 	'/Tutorials/seo':'/blog',
 	'/Tutorials/seo/':'/blog',
-	'/works' : '/opus',
-	'/works/' : '/opus',
-	
+	'/works' : '/blog',
+	'/works/' : '/blog',
+	'/opus' : '/blog',
+	'/opus/' : '/blog',
+//opus - blog
+  '/opus/14bee5b9b38': '/blog/14d66332026',  //小剧客栈版本切换提示设计
+  '/opus/13f5ef793f8': '/blog/14d6631a0f6',  //收藏品类页面设计
+  '/opus/13f5ef716f8': '/blog/14d66309047',  //上海驰掣投资管理公司网站设计
+  '/opus/13f5ef63c38': '/blog/14d662ff523',  //梓树会务公司网站设计
+  '/opus/13f5ef53680': '/blog/14d662f132b',  //剧中人个人标识优化设计
+  '/opus/13f5ef4adc8': '/blog/14d662e26b5',  //水院高山photoshop图像设计
+  '/opus/13f5ef41d40': '/blog/14d662d3992',  //个人成长画册
+  '/opus/13f5ef39c58': '/blog/14d662c3fd2',  //创先争优主题海报
+  '/opus/13f5ef30400': '/blog/14d662aec6b',  //简洁易用的工具栏
+  '/opus/13f5ef26f90': '/blog/14d66299053',  //女生节专题banner
+  '/opus/13f5ef1b7f8': '/blog/14d662894df',  //剧中人个人标识
+  '/opus/13f5ef0ba10': '/blog/14d66270527',  //寝宫》动画——小剧作品
+  '/opus/13f5eefa0d0': '/blog/14d6625d9c7',  //2012倒计时页面
+  '/opus/13f5eeefcc0': '/blog/14d6624a21b',  //安徽运营中心第二次改版
+  '/opus/13f5eee7fc0': '/blog/14d66232474',  //动漫创意作品展-视频3D片头
+  '/opus/13f5eed2be8': '/blog/14d65f9c119',  //水院通后台登陆界面
+  '/opus/13f5eec9f48': '/blog/14d65f8991d',  //论坛召回会员banner
+  '/opus/13f5eebe7b0': '/blog/14d65f75d1d',  //学习雷锋专题页面
+  '/opus/13f5eeb2848': '/blog/14d65f018fc',  //网速-流量实时监测logo设计  
 //about - blog
 	'/about/2012-07-30/42.html' : '/blog/13f1f5bbbe8',
 	'/about/2012-04-27/26.html' : '/blog/13f1f46f398',

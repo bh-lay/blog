@@ -65,19 +65,6 @@ app.get('/labs/{name}', function(data,connect){
 	labs.detail(connect,app,data.name);
 });
 
-//作品
-var opus = require('./controller/opus.js');
-app.get('/opus', function(data,connect){
-	views_select(connect,function(){
-		opus.list(connect,app);
-	});
-});
-app.get('/opus/{id}', function(data,connect){
-	views_select(connect,function(){
-		opus.detail(connect,app,data.id);
-	});
-});
-
 //后台
 var admin = require('./controller/admin.js');
 app.get('/admin/*', function(data,connect){
@@ -131,11 +118,6 @@ app.get('/ajax/blog', function(data,connect){
 var ajax_labs = require('./ajax/labs_get');
 app.get('/ajax/labs', function(data,connect){
 	ajax_labs.render(connect,app);
-});
-//作品
-var ajax_opus = require('./ajax/opus_get');
-app.get('/ajax/opus', function(data,connect){
-	ajax_opus.render(connect,app);
 });
 
 //友情链接
