@@ -6,7 +6,7 @@ define(function(require,exports){
     var base_tpl = ['<div class="grid-row blessPage">',
         '<div class="grid-col-flow-300"></div>',
         '<div class="grid-col-fix-300 sidebar">',
-            '[-github_links-]',
+            '[-github_links-][-latest_comments-]',
         '</div>',
     '</div>'].join('');
 	function page(dom){
