@@ -1,7 +1,7 @@
 @font-face {
   font-family: "layIcon";
-  src: url("../fonts/layicon-webfont.eot?v=2");
-  src: url("../fonts/layicon-webfont.eot?v=2#iefix") format("embedded-opentype"), url('../fonts/layicon-webfont.woff?v=2') format('woff'), url("../fonts/layicon-webfont.ttf?v=2") format("truetype"), url("../fonts/layicon-webfont.svg?v=2#layicon-webfont") format("svg");
+  src: url("../fonts/layicon-webfont.eot?v=3");
+  src: url("../fonts/layicon-webfont.eot?v=3#iefix") format("embedded-opentype"), url('../fonts/layicon-webfont.woff?v=3') format('woff'), url("../fonts/layicon-webfont.ttf?v=3") format("truetype"), url("../fonts/layicon-webfont.svg?v=3#layicon-webfont") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -25,7 +25,7 @@
 .l-icon-beaker:after {
   content: '\0047';
 }
-.l-icon-share:after {
+.l-icon-envelope:after {
   content: '\0048';
 }
 .l-icon-layLogo:after {
@@ -72,6 +72,9 @@
 }
 .l-icon-down-double:after {
   content: '\006d';
+}
+.l-icon-comment:after {
+  content: '\006e';
 }
 .app-footer {
   position: relative;

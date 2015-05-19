@@ -73,18 +73,13 @@ function filter_request(connect,callback){
 					data_filter['collection_name'] = 'article';
 					need_power = 3;
 					break
-				case 'opus' :
-					data_filter = filter_request.opus(data);
-					data_filter['collection_name'] = 'opus';
-					need_power = 9;
-					break
 				case 'labs' :
 					data_filter = filter_request.labs(data);
 					data_filter['collection_name'] = 'labs';
 					need_power = 3;
 					break
 				default :
-					error = 'please input category [blog,opus,labs]';
+					error = 'please input category [blog,labs]';
 			}
 			if(!session_this.power(need_power)){
 				error = 'no power';
@@ -111,29 +106,6 @@ filter_request.blog = function(data){
 		error = 'please insert complete code !';
 	}
 	return {error:error,data:param};
-}
-
-filter_request.opus = function(data){
-	var error = null;
-	var param = {
-		'id' : data['id']||'',
-		'title':decodeURI(data['title']),
-		'cover':data['cover']||'',
-		'opus_pic':data['opus_pic']||'',
-		'opus_time_create':data['opus_time_create']||new Date().getTime(),
-		'tags':data['tags']||'',
-		'content':data['content'],
-		'work_range':data['work_range'],
-		'online_url':data['online_url'],
-		'intro':data['intro']||data['content'].slice(0,200),
-	};
-	if(!(param['title']&&param['content'])){
-		error = 'please insert complete code !';
-	}
-	return {
-		'error' : error,
-		'data' : param
-	};
 }
 
 filter_request.labs = function(data){

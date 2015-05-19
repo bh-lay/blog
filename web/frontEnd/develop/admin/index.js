@@ -25,7 +25,6 @@ define(function(require,exports){
 	require('lib/jquery/jquery.easing.1.3.min.js');
 
   var views = {
-    opus : require('admin/views/opus.js'),
     labs : require('admin/views/labs.js'),
     blog : require('admin/views/blog.js'),
     links : require('admin/views/links.js'),
@@ -84,12 +83,6 @@ define(function(require,exports){
       this.title('博文列表');
       var dom = createDom(mainDom);
       views.blog(dom);
-  });
-  //作品页
-  lofox.set('/admin/opus',function(){
-      this.title('作品列表');
-      var dom = createDom(mainDom);
-      views.opus(dom);
   });
   //实验室
   lofox.set('/admin/labs',function(){
@@ -154,7 +147,7 @@ define(function(require,exports){
       var type = data.type || null;
       var id = data.id || null;
 
-      if(type && type.match(/^(article|opus|friends|labs|power|user)$/)){
+      if(type && type.match(/^(article|friends|labs|power|user)$/)){
           seajs.use('admin/publish/publish.js',function(publish){
               publish.init(dom,{
                   'active' : type,

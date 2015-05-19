@@ -42,7 +42,7 @@ define && define(function(require,exports){
 			'</div>',
 			'<br/><div class="input-group">',
 				'<span class="input-group-addon">创作时间</span>',
-				'<input type="text" class="form-control" name="time_create" value="{opus_time_create}" placeholder="创作时间">',
+				'<input type="text" class="form-control" name="time_create" value="{time_create}" placeholder="创作时间">',
 			'</div>',
 			'<br/><div class="input-group">',
 				'<span class="input-group-addon">简介</span>',

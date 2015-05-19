@@ -18,9 +18,9 @@ define(function(require){
 
   var OpusList = React.createClass({
     render: function() {
-      var commentNodes = this.props.list.map(function(opus, index) {
+      var commentNodes = this.props.list.map(function(cmt, index) {
         return (
-          <Item id={opus.id} name={opus.name} discription={opus.discription} key={index}/>
+          <Item id={cmt.id} name={cmt.name} discription={cmt.discription} key={index}/>
         );
       });
       return (
@@ -81,7 +81,7 @@ define(function(require){
       return (
         <div>
           <div className="col-md-12 custom-mb10">
-             <a className="btn btn-primary btn-sm custom-lofox" href="/admin/publish/power" data-type="opus">加权限</a>
+             <a className="btn btn-primary btn-sm custom-lofox" href="/admin/publish/power">加权限</a>
           </div>
           <div className="col-md-12">
             <div className="panel panel-default">

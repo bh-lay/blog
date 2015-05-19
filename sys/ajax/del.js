@@ -8,7 +8,7 @@
 		'type':'GET',
 		'url':'/ajax/del',
 		'data':{
-			'from' : 'blog',		blog/opus/user/blog_friend
+			'from' : 'blog',		blog/user/blog_friend
 			'id' : '' ;
 		}, 
 	});
@@ -26,10 +26,6 @@ var del_conf = {
 	'labs' : {
 		'collection_name' : 'labs',
 		'power' : 4
-	},
-	'opus' : {
-		'collection_name' : 'opus',
-		'power' : 10
 	},
 	'user' : {
 		'collection_name' : 'user',
@@ -132,7 +128,7 @@ exports.render = function (connect,app){
 		}else{
 			connect.write('json',{
 				'code' : 2,
-				'msg' : 'please check [from] in [blog/opus/user/user_group] !'
+				'msg' : 'please check [from] in [blog/user/user_group] !'
 			});
 		}
 	}

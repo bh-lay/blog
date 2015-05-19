@@ -1,5 +1,5 @@
 /**
- * opus list
+ * 评论 list
  *  
  */
 define(function(require,exports){

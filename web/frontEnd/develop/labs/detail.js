@@ -1,5 +1,5 @@
 /**
- * opus detail
+ * labs detail
  *  
  */
 

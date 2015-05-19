@@ -18,9 +18,9 @@ define(function(require){
 
   var OpusList = React.createClass({
     render: function() {
-      var commentNodes = this.props.list.map(function(opus, index) {
+      var commentNodes = this.props.list.map(function(user, index) {
         return (
-          <Item _id={opus._id} id={opus.id} user_group={opus.user_group} email={opus.email} username={opus.username} key={index}/>
+          <Item _id={user._id} id={user.id} user_group={user.user_group} email={user.email} username={user.username} key={index}/>
         );
       });
       return (
@@ -76,7 +76,7 @@ define(function(require){
       return (
         <div>
           <div className="col-md-12 custom-mb10">
-             <a className="btn btn-primary btn-sm custom-lofox" href="/admin/publish/user" data-type="opus">增加用户</a>
+             <a className="btn btn-primary btn-sm custom-lofox" href="/admin/publish/user">增加用户</a>
           </div>
           <div className="col-md-12">
             <div className="panel panel-default">

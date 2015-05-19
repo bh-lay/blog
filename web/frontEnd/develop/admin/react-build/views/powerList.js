@@ -18,9 +18,9 @@ define(function(require){
 
   var OpusList = React.createClass({displayName: "OpusList",
     render: function() {
-      var commentNodes = this.props.list.map(function(opus, index) {
+      var commentNodes = this.props.list.map(function(cmt, index) {
         return (
-          React.createElement(Item, {id: opus.id, name: opus.name, discription: opus.discription, key: index})
+          React.createElement(Item, {id: cmt.id, name: cmt.name, discription: cmt.discription, key: index})
         );
       });
       return (
@@ -81,7 +81,7 @@ define(function(require){
       return (
         React.createElement("div", null, 
           React.createElement("div", {className: "col-md-12 custom-mb10"}, 
-             React.createElement("a", {className: "btn btn-primary btn-sm custom-lofox", href: "/admin/publish/power", "data-type": "opus"}, "加权限")
+             React.createElement("a", {className: "btn btn-primary btn-sm custom-lofox", href: "/admin/publish/power"}, "加权限")
           ), 
           React.createElement("div", {className: "col-md-12"}, 
             React.createElement("div", {className: "panel panel-default"}, 
