@@ -42,7 +42,7 @@ define(function(require,exports){
         '<p>邮箱仅用于<a href="http://en.gravatar.com/" title="全球认可的大头贴">gravatar</a>头像，和与您沟通！</p>',
     '</div>'].join('');
 	var list_tpl = ['<div>',
-		'<div class="l_com_list_cnt"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载模块</p></div></div>',
+		'<div class="l_com_list_cnt"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载评论内容</p></div></div>',
 		'<div class="l_com_list_pagination"></div>',
 	'</div>'].join('');
 	
@@ -195,7 +195,7 @@ define(function(require,exports){
 				content : data.text,
 				//如果为登录用户，则不发送用户信息
 				user : user,
-                reply_for_id : data.reply_for_id
+        reply_for_id : data.reply_for_id
 			},
 			success : function(data){
 				if(data.code && data.code == 200){
@@ -233,14 +233,14 @@ define(function(require,exports){
             }
             if(blog.length && !parseUrl(blog)){
                 UI.prompt('博客地址是对的么？',null,{
-                  'from' : 'top'
+                  from: 'top'
                 });
                 return false;
             }
             L.user.setLocalUser({
-                'username' : username,
-                'email' : email,
-                'blog' : blog
+                username: username,
+                email: email,
+                blog: blog
             });
             //更新用户信息
             L.user.info(function(err,user){
@@ -310,21 +310,21 @@ define(function(require,exports){
                 return
             }else if(me.text.length == 0){
 				UI.prompt('你丫倒写点东西啊！',null,{
-					'top' : $(this).offset().top + 40,
-					'from' : $(this)[0]
+					top: $(this).offset().top + 40,
+					from: $(this)[0]
 				});
 			}else if(me.text.length > 500){
 				UI.prompt('这是要刷屏的节奏么！',null,{
-					'top' : $(this).offset().top + 40,
-					'from' : $(this)[0]
+					top: $(this).offset().top + 40,
+					from: $(this)[0]
 				});
 			}else if(private_userInfo){
                 var text = me.onBeforeSend ? (me.onBeforeSend(me.text) || me.text) : me.text;
                 isSubmitting = true;
 				sendComment({
-					'id' : me.id,
-					'text' : text,
-					'user' : private_userInfo,
+					id: me.id,
+					text: text,
+					user: private_userInfo,
                   reply_for_id : me.reply_for_id || null
 				},function(err,item){
                     isSubmitting = false;
@@ -370,8 +370,8 @@ define(function(require,exports){
 				overflow = 'visible';
 			}
 			$textarea.css({
-				'height' : height,
-				'overflow' : overflow
+				height: height,
+				overflow: overflow
 			});
 			
 			var length = $textarea.val().length;
@@ -429,7 +429,7 @@ define(function(require,exports){
     }
 	}
 	sendBox.prototype = {
-		'on' : ON
+		on: ON
 	};
 	
 	
@@ -493,17 +493,17 @@ define(function(require,exports){
 					from: 'top',
 				}),
 				send = new sendBox(pop.cntDom,me.cid,{
-                  focus: true,
-                  reply_for_id : item.attr('data-id'),
-                  onBeforeSend : function(text){
-                    return '@' + reply_for + ' ' + text;
-                  }
-                });
-          $(pop.dom).find('.UI_pop_cpt').css('border','none');
-          send.on('sendToServicesuccess',function(item){
-            pop.close();
-            me.addItem(item);
-          });
+          focus: true,
+          reply_for_id : item.attr('data-id'),
+          onBeforeSend : function(text){
+            return '@' + reply_for + ' ' + text;
+          }
+        });
+        $(pop.dom).find('.UI_pop_cpt').css('border','none');
+        send.on('sendToServicesuccess',function(item){
+          pop.close();
+          me.addItem(item);
+        });
 		});
 		
 	}
@@ -512,13 +512,13 @@ define(function(require,exports){
     item.content = strToEmoji(item.content);
         
 		var html = juicer(item_tpl,{
-			'list' : [item]
+			list: [item]
 		});
 		var $item = $(html);
 		$(this.dom).find('.l_com_list_cnt').prepend($item);
 		$item.addClass('l_com_item_ani-insert');
 		$(this.dom).find('.l_com_list_noData').fadeOut(100);
-        avatar_onerror($item);
+    avatar_onerror($item);
 	};
 	list.prototype.getData = function(skip,callback){
 		
@@ -528,13 +528,13 @@ define(function(require,exports){
 		var me = this;
 		this._status = 'loading';
 		$.ajax({
-			'url' : '/ajax/comments/list',
-			'data' : {
-				'cid' : this.cid,
-				'skip' : skip || 0,
-				'limit' : me.limit
+			url: '/ajax/comments/list',
+			data: {
+				cid: this.cid,
+				skip: skip || 0,
+				limit: me.limit
 			},
-			'success' : function(data){
+			success: function(data){
         if(data.code == 500){
 					callback && callback(500);
         }
@@ -551,6 +551,7 @@ define(function(require,exports){
 							DATA.list[i].user.blog = parseUrl(DATA.list[i].user.blog);
 						}
 					}
+          return
 					callback && callback(null,DATA);
 				}
 			}

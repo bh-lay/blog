@@ -1104,6 +1104,11 @@ body:before {
   border-radius: 2px;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
+.l_com_list_cnt .l-loading-panel {
+  margin: 0 auto;
+  padding: 50px 0;
+  box-shadow: none;
+}
 .l_com_list_noData {
   padding: 30px 20px;
   line-height: 20px;
