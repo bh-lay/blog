@@ -113,10 +113,8 @@ define(function(require,exports){
 		//是否符合网址规范
 		if(typeof(input) == 'string' && input.match(/[\w-]+\.\w{2,4}/) ){
 		
-			//缺少协议
-			if( !input.match(/^http(?:s|)\:\/\//) ){
-				output = 'http://' + input;
-			}
+			//补全协议
+      output = input.match(/^http(?:s|)\:\/\//) ? input : ('http://' + input);
 		}
 		return output;
 	}
@@ -303,12 +301,12 @@ define(function(require,exports){
 		$allDom.on('click','.l_send_placeholder',function(){
 			$textarea.focus();
 		}).on('click','.l_send_username,.l_send_avatar',function(e){
-            askForUserInfo.call(me)
+      askForUserInfo.call(me)
 		}).on('click','.l_send_submit',function(){
-            $textarea.focus();
+      $textarea.focus();
 			if(isSubmitting){
-                return
-            }else if(me.text.length == 0){
+        return
+      }else if(me.text.length == 0){
 				UI.prompt('你丫倒写点东西啊！',null,{
 					top: $(this).offset().top + 40,
 					from: $(this)[0]
@@ -319,13 +317,13 @@ define(function(require,exports){
 					from: $(this)[0]
 				});
 			}else if(private_userInfo){
-                var text = me.onBeforeSend ? (me.onBeforeSend(me.text) || me.text) : me.text;
-                isSubmitting = true;
+        var text = me.onBeforeSend ? (me.onBeforeSend(me.text) || me.text) : me.text;
+        isSubmitting = true;
 				sendComment({
 					id: me.id,
 					text: text,
 					user: private_userInfo,
-                  reply_for_id : me.reply_for_id || null
+          reply_for_id : me.reply_for_id || null
 				},function(err,item){
                     isSubmitting = false;
 					if(err){
@@ -510,7 +508,9 @@ define(function(require,exports){
 	list.prototype.addItem = function(item){
 		item.time = '刚刚';
     item.content = strToEmoji(item.content);
-        
+    if(item.user && item.user.blog){
+      item.user.blog = parseUrl(item.user.blog);
+    }
 		var html = juicer(item_tpl,{
 			list: [item]
 		});
@@ -551,7 +551,6 @@ define(function(require,exports){
 							DATA.list[i].user.blog = parseUrl(DATA.list[i].user.blog);
 						}
 					}
-          return
 					callback && callback(null,DATA);
 				}
 			}
