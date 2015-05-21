@@ -2044,44 +2044,64 @@ a:active {
   width: 100%;
   height: 100%;
   z-index: 5000;
+  background: #fff;
 }
-.app_mask:after,
 .app_mask:before {
   content: '';
   position: absolute;
-  width: 100%;
-  height: 50%;
-  left: 0;
+  width: 104%;
+  height: 1px;
+  top: 50%;
+  left: -2%;
+  background: #aaa;
+  -webkit-transform: rotate(-15deg);
+  -moz-transform: rotate(-15deg);
+  -o-transform: rotate(-15deg);
+  transform: rotate(-15deg);
+}
+.app_mask .app_mask_cnt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 52px;
+  height: 52px;
+  margin: -26px 0 0 -26px;
+}
+.app_mask .app_mask_cnt span {
   background: #fff;
-  border-color: #ccc;
-  border-style: solid;
 }
-.app_mask:before {
-  top: 0;
-  border-width: 0 0 1px 0;
-}
-.app_mask:after {
-  bottom: 0;
-  border-width: 1px 0 0 0;
-}
-.app_mask.app_mask_out:before,
-.app_mask.app_mask_out:after {
-  height: 0;
-  transition: all 0.3s ease-in;
-  -moz-transition: all 0.3s ease-in;
-  -webkit-transition: all 0.3s ease-in;
-  -o-transition: all 0.3s ease-in;
-  transition-delay: 0.5s;
-  -moz-transition-delay: 0.5s;
-  -webkit-transition-delay: 0.5s;
-  -o-transition-delay: 0.5s;
+.app_mask.app_mask_out {
+  opacity: 0;
+  transition: all 0.1s ease-in;
+  -moz-transition: all 0.1s ease-in;
+  -webkit-transition: all 0.1s ease-in;
+  -o-transition: all 0.1s ease-in;
+  transition-delay: 0.4s;
+  -moz-transition-delay: 0.4s;
+  -webkit-transition-delay: 0.4s;
+  -o-transition-delay: 0.4s;
 }
 .app_mask.app_mask_out .app_mask_cnt {
-  transition: all 0.4s ease-in;
-  -moz-transition: all 0.4s ease-in;
-  -webkit-transition: all 0.4s ease-in;
-  -o-transition: all 0.4s ease-in;
-  opacity: 0;
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -o-transform: scale(0);
+  transform: scale(0);
+  transition: all 0.15s ease-in;
+  -moz-transition: all 0.15s ease-in;
+  -webkit-transition: all 0.15s ease-in;
+  -o-transition: all 0.15s ease-in;
+}
+.app_mask.app_mask_out:before {
+  width: 0;
+  left: 50%;
+  transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition-delay: 0.2s;
+  -moz-transition-delay: 0.2s;
+  -webkit-transition-delay: 0.2s;
+  -o-transition-delay: 0.2s;
 }
 .app_mask_cnt {
   position: absolute;
