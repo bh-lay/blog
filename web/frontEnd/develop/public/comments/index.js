@@ -15,10 +15,10 @@ define(function(require,exports){
 	'</div>'].join('');
 	
 	var sendBox_tpl = ['<div class="l_sendBox" spellcheck="false">',
-        '<div class="l_send_side">',
-            '<div class="l_send_avatar"><img src="" /></div>',
-            '<a href="javascript:void(0)" class="l_send_username">报上名来</a>',
-        '</div>',
+      '<div class="l_send_side">',
+        '<div class="l_send_avatar"><img src="" onerror="gravatar_error_fn(this)"/></div>',
+        '<a href="javascript:void(0)" class="l_send_username">报上名来</a>',
+      '</div>',
 		'<div class="l_sendBox_main">',
 			'<div class="l_send_textarea">',
 				'<textarea name="content"></textarea>',
@@ -57,7 +57,7 @@ define(function(require,exports){
 				'</div>',
 			'</div>',
 			'<div class="l_com_item_avatar">',
-				'<img src="{@if it.user.avatar}${it.user.avatar}{@else}' + default_avatar + '{@/if}"/>',
+				'<img src="{@if it.user.avatar}${it.user.avatar}{@else}' + default_avatar + '{@/if}" onerror="gravatar_error_fn(this)"/>',
 			'</div>',
 		'</div>',
 	'{@/each}'].join('');
@@ -147,10 +147,10 @@ define(function(require,exports){
 	 *
 	 */
 	function setUserInfoToUI(userInput){
-        userInput = userInput || {};
+    userInput = userInput || {};
 		var $allDom = $(this.dom);
 		var user = {
-		    username : userInput.username || '',
+      username : userInput.username || '',
 			email : userInput.email || '',
 			blog : userInput.blog || '',
 			avatar : userInput.avatar || default_avatar
@@ -160,16 +160,24 @@ define(function(require,exports){
 		$allDom.find('.l_send_avatar img').attr('src',user.avatar);
 	}
     
-    /**
-     * 转换emoji表情
-     */
-    function strToEmoji(str){
-        return str.replace(/\:(\w+)\:/g,'<span class="emoji s_$1"></span>');
+  /**
+   * 转换emoji表情
+   */
+  function strToEmoji(str){
+    return str.replace(/\:(\w+)\:/g,'<span class="emoji s_$1"></span>');
+  }
+  //占用全局方法
+  window.gravatar_error_fn = function(elem){
+    if(elem.src.indexOf('www.gravatar.com')){
+      //若gravatar官网请求失败，使用多说镜像
+      elem.src = elem.src.replace('www.gravatar.com','gravatar.duoshuo.com');
+    }else if(elem.src.indexOf('gravatar.duoshuo.com')){
+      //若多说镜像失败，使用默认头像
+      elem.src = default_avatar;
     }
-    //
-    function avatar_onerror(dom){
-        dom.find('img').attr("onerror",'(this.src !="' + default_avatar + '") && (this.src="' + default_avatar + '");');
-    }
+    //其余情况均不处理（已是默认头像）
+  }
+  
 	/**
 	 * 发送评论
 	 *
@@ -457,7 +465,6 @@ define(function(require,exports){
       }
 			var html = juicer(item_tpl,data);
 			$(me.dom).find('.l_com_list_cnt').html(html);
-			avatar_onerror($(me.dom));
 			if(me.total == 0){
 				$(me.dom).find('.l_com_list_cnt').prepend(noData_tpl);
 			}else{
@@ -476,7 +483,6 @@ define(function(require,exports){
 						}
 						var html = juicer(item_tpl,data);
 						$(me.dom).find('.l_com_list_cnt').html(html);
-                        avatar_onerror($(me.dom));
 					});
 				};
 			}
@@ -485,7 +491,7 @@ define(function(require,exports){
 			var item = $(this).parents('.l_com_item'),
 				reply_for = item.find('.l_com_item_caption').text(),
 				pop = UI.pop({
-                    title: '回复：' + reply_for,
+          title: '回复：' + reply_for,
 					mask: true,
 					easyClose: false,
 					from: 'top',
@@ -518,7 +524,6 @@ define(function(require,exports){
 		$(this.dom).find('.l_com_list_cnt').prepend($item);
 		$item.addClass('l_com_item_ani-insert');
 		$(this.dom).find('.l_com_list_noData').fadeOut(100);
-    avatar_onerror($item);
 	};
 	list.prototype.getData = function(skip,callback){
 		
