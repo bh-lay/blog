@@ -406,6 +406,7 @@ define(function(require,exports){
 	exports.pop = function POP(callback){
 		var pop = UI.cover({
 			title: '选择文件',
+      easyClose: false,
 			html: pop_tpl
 		});
 		var explorer = new SELECT($(pop.cntDom).find('.col-md-12'));
