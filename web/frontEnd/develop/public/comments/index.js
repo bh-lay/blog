@@ -164,7 +164,7 @@ define(function(require,exports){
    * 转换emoji表情
    */
   function strToEmoji(str){
-    return str.replace(/\:(\w+)\:/g,'<span class="emoji s_$1"></span>');
+    return str.replace(/\:(.+?)\:/g,'<span class="emoji s_$1"></span>');
   }
   //占用全局方法
   window.gravatar_error_fn = function(elem){
