@@ -1432,7 +1432,7 @@ body:before {
   padding: 15px 0;
   max-width: none;
 }
-.articleListPage .l-loading-panel .l-loading {
+.articleListPage .l-loading {
   width: 20px;
   height: 20px;
 }
