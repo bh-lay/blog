@@ -168,10 +168,10 @@ define(function(require,exports){
   }
   //占用全局方法
   window.gravatar_error_fn = function(elem){
-    if(elem.src.indexOf('www.gravatar.com')){
+    if(elem.src.indexOf('www.gravatar.com') > -1){
       //若gravatar官网请求失败，使用多说镜像
       elem.src = elem.src.replace('www.gravatar.com','gravatar.duoshuo.com');
-    }else if(elem.src.indexOf('gravatar.duoshuo.com')){
+    }else if(elem.src.indexOf('gravatar.duoshuo.com') > -1){
       //若多说镜像失败，使用默认头像
       elem.src = default_avatar;
     }
@@ -276,86 +276,85 @@ define(function(require,exports){
 	 */
 	function bindDomEvent(){
 		
-		var me = this,
-            $allDom = $(this.dom),
-            $textarea = $allDom.find('textarea'),
-            inputDelay,
-            focusDelay,
-            isSubmitting = false;
-		$textarea.on('keyup keydown change propertychange input paste',function(){
-			clearTimeout(inputDelay);
-			inputDelay = setTimeout(function(){
-				var newVal = $.trim($textarea.val());
-				//校验字符是否发生改变
-				if(newVal == me.text){
-					return
-				}
-				me.text = newVal;
-				//触发自定义事件“change”
-				EMIT.call(me,'change');
-			},80);
-		}).on('focus',function(){
-			clearTimeout(focusDelay);
-			$allDom.addClass('l_sendBox_active');
-		}).on('focusout',function(){
-			clearTimeout(focusDelay);
-			focusDelay = setTimeout(function(){
-				if(me.text.length == 0){
-					$allDom.removeClass('l_sendBox_active');
-				}
-			},200);
-		});
-		
-		$allDom.on('click','.l_send_placeholder',function(){
-			$textarea.focus();
-		}).on('click','.l_send_username,.l_send_avatar',function(e){
-      askForUserInfo.call(me)
-		}).on('click','.l_send_submit',function(){
-      $textarea.focus();
-			if(isSubmitting){
-        return
-      }else if(me.text.length == 0){
-				UI.prompt('你丫倒写点东西啊！',null,{
-					top: $(this).offset().top + 40,
-					from: $(this)[0]
-				});
-			}else if(me.text.length > 500){
-				UI.prompt('这是要刷屏的节奏么！',null,{
-					top: $(this).offset().top + 40,
-					from: $(this)[0]
-				});
-			}else if(private_userInfo){
-        var text = me.onBeforeSend ? (me.onBeforeSend(me.text) || me.text) : me.text;
-        isSubmitting = true;
-				sendComment({
-					id: me.id,
-					text: text,
-					user: private_userInfo,
-          reply_for_id : me.reply_for_id || null
-				},function(err,item){
-                    isSubmitting = false;
-					if(err){
-						EMIT.call(me,'sendToServiceError');
-					}else{
-						EMIT.call(me,'sendToServicesuccess',[item]);
-					}
-				});
-			}else{
-				askForUserInfo.call(me);
-			}
-			
-		}).on('click','.l_send_face',function(){
-      var offset = $(this).offset();
-      $textarea.focus();
-			face({
-        top: offset.top,
-        left: offset.left,
-        onSelect: function(title){
-            $textarea.insertTxt(':' + title + ':').trigger('change');
-        }
+      var me = this,
+          $allDom = $(this.dom),
+          $textarea = $allDom.find('textarea'),
+          inputDelay,
+          focusDelay,
+          isSubmitting = false;
+      $textarea.on('keyup keydown change propertychange input paste',function(){
+          clearTimeout(inputDelay);
+          inputDelay = setTimeout(function(){
+              var newVal = $.trim($textarea.val());
+              //校验字符是否发生改变
+              if(newVal == me.text){
+                  return
+              }
+              me.text = newVal;
+              //触发自定义事件“change”
+              EMIT.call(me,'change');
+          },80);
+      }).on('focus',function(){
+          clearTimeout(focusDelay);
+          $allDom.addClass('l_sendBox_active');
+      }).on('focusout',function(){
+          clearTimeout(focusDelay);
+          focusDelay = setTimeout(function(){
+            if(me.text.length == 0){
+              $allDom.removeClass('l_sendBox_active');
+            }
+          },200);
       });
-		});
-	}
+
+      $allDom.on('click','.l_send_placeholder',function(){
+        $textarea.focus();
+      }).on('click','.l_send_username,.l_send_avatar',function(e){
+        askForUserInfo.call(me)
+      }).on('click','.l_send_submit',function(){
+        $textarea.focus();
+        if(isSubmitting){
+          return
+        }else if(me.text.length == 0){
+          UI.prompt('你丫倒写点东西啊！',null,{
+              top: $(this).offset().top + 40,
+              from: $(this)[0]
+          });
+        }else if(me.text.length > 500){
+          UI.prompt('这是要刷屏的节奏么！',null,{
+              top: $(this).offset().top + 40,
+              from: $(this)[0]
+          });
+        }else if(private_userInfo){
+          var text = me.onBeforeSend ? (me.onBeforeSend(me.text) || me.text) : me.text;
+          isSubmitting = true;
+          sendComment({
+            id: me.id,
+            text: text,
+            user: private_userInfo,
+            reply_for_id : me.reply_for_id || null
+          },function(err,item){
+            isSubmitting = false;
+            if(err){
+                EMIT.call(me,'sendToServiceError');
+            }else{
+                EMIT.call(me,'sendToServicesuccess',[item]);
+            }
+          });
+        }else{
+          askForUserInfo.call(me);
+        }
+      }).on('click','.l_send_face',function(){
+        var offset = $(this).offset();
+        $textarea.focus();
+        face({
+          top: offset.top,
+          left: offset.left,
+          onSelect: function(title){
+            $textarea.insertTxt(':' + title + ':').trigger('change');
+          }
+        });
+      });
+    }
 	//绑定对象自定义事件
 	function bindCustomEvent(){
 		var me = this;
@@ -537,7 +536,7 @@ define(function(require,exports){
 			data: {
 				cid: this.cid,
 				skip: skip || 0,
-				limit: me.limit
+				limit: this.limit || 10
 			},
 			success: function(data){
         if(data.code == 500){
