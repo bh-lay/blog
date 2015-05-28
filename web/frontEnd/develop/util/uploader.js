@@ -1,13 +1,22 @@
 /**
  *	@author bh-lay
  *	@github https://github.com/bh-lay/uploader
- *  @updata 2015-5-16 10:13
+ *  @updata 2015-5-27 23:34
  * Function depend on Jquery!
  * 
  */
-window.util = window.util || {};
 
-(function(exports){
+(function(global,doc,factoryFn){
+  var factory = factoryFn(global,doc);
+  
+  global.util = global.util || {};
+  global.util.uploader = factory;
+  //提供CommonJS规范的接口
+  global.define && define(function(){
+      //对外接口
+      return factory;
+  });
+})(window,document,function(window,document){
 	var staticID = 0;
 	var upCnt_tpl = '<div class="uploaderCnt" style="width:0px;height:0px;position:fixed;left:0px;top:0px;overflow:hidden"></div>';
 	var up_tpl = ['<div class="uploaderItem uploader{ID}">',
@@ -319,11 +328,5 @@ window.util = window.util || {};
 			});
 		}
 	};
-	exports.uploader = uploader;
-})(window.util);
-
-//提供CommonJS规范的接口
-window.define && define(function(require,exports,module){
-	//对外接口
-	return window.util.uploader;
+	return uploader;
 });
