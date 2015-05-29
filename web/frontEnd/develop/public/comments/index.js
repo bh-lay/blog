@@ -445,122 +445,124 @@ define(function(require,exports){
 	 *
 	 */
 	function list(dom,cid){
-		var me = this;
-		//comment id
-		this.cid = cid;
-		this.list = [];
-		this.skip = 0;
-		this.limit = 15;
-		this.total = 0;
-		this._status = 'normal';
-		this.dom = $(list_tpl)[0];
-		
-		$(dom).html(this.dom);
+      var me = this;
+      //comment id
+      this.cid = cid;
+      this.list = [];
+      this.skip = 0;
+      this.limit = 15;
+      this.total = 0;
+      this._status = 'normal';
+      this.dom = $(list_tpl)[0];
 
-		this.getData(0,function(err,data){
-      if(err){
-        $(me.dom).find('.l_com_list_cnt').html(noData_tpl);
-        return
-      }
-			var html = juicer(item_tpl,data);
-			$(me.dom).find('.l_com_list_cnt').html(html);
-			if(me.total == 0){
-				$(me.dom).find('.l_com_list_cnt').prepend(noData_tpl);
-			}else{
-				//分页组件
-				var page = new pagination($(dom).find('.l_com_list_pagination'),{
-					list_count : me.total,
-					page_cur : 0,
-					page_list_num : me.limit,
-					max_page_btn : 6
-				});
-				page.jump = function(num){
-					me.getData((num-1)*me.limit,function(err,data){
-						if(err){
-							console.log('error');
-							return
-						}
-						var html = juicer(item_tpl,data);
-						$(me.dom).find('.l_com_list_cnt').html(html);
-					});
-				};
-			}
-		});
-		$(me.dom).on('click','.btn-reply',function(){
-			var item = $(this).parents('.l_com_item'),
-				reply_for = item.find('.l_com_item_caption').text(),
-				pop = UI.pop({
-          title: '回复：' + reply_for,
-					mask: true,
-					easyClose: false,
-					from: 'top',
-				}),
-				send = new sendBox(pop.cntDom,me.cid,{
-          focus: true,
-          reply_for_id : item.attr('data-id'),
-          onBeforeSend : function(text){
-            return '@' + reply_for + ' ' + text;
-          }
-        });
+      $(dom).html(this.dom);
+
+      this.getData(0,function(err,data){
+        if(err){
+          $(me.dom).find('.l_com_list_cnt').html(noData_tpl);
+          return
+        }
+        var html = juicer(item_tpl,data);
+        $(me.dom).find('.l_com_list_cnt').html(html);
+        if(me.total == 0){
+          $(me.dom).find('.l_com_list_cnt').prepend(noData_tpl);
+        }else{
+          //分页组件
+          var page = new pagination($(dom).find('.l_com_list_pagination'),{
+              list_count : me.total,
+              page_cur : 0,
+              page_list_num : me.limit,
+              max_page_btn : 6
+          });
+          page.jump = function(num){
+            $('html,body').animate({
+              scrollTop: $(me.dom).offset().top - 70
+            },100);
+            me.getData((num-1)*me.limit,function(err,data){
+              if(err){
+                console.log('error');
+                return
+              }
+              var html = juicer(item_tpl,data);
+              $(me.dom).find('.l_com_list_cnt').html(html);
+            });
+          };
+        }
+      });
+      $(me.dom).on('click','.btn-reply',function(){
+        var item = $(this).parents('.l_com_item'),
+            reply_for = item.find('.l_com_item_caption').text(),
+            pop = UI.pop({
+              title: '回复：' + reply_for,
+              mask: true,
+              easyClose: false,
+              from: 'top',
+            }),
+            send = new sendBox(pop.cntDom,me.cid,{
+              focus: true,
+              reply_for_id : item.attr('data-id'),
+              onBeforeSend : function(text){
+                return '@' + reply_for + ' ' + text;
+              }
+            });
         $(pop.dom).find('.UI_pop_cpt').css('border','none');
         send.on('sendToServicesuccess',function(item){
           pop.close();
           me.addItem(item);
         });
-		});
+      });
 		
 	}
 	list.prototype.addItem = function(item){
-		item.time = '刚刚';
-    item.content = strToEmoji(item.content);
-    if(item.user && item.user.blog){
-      item.user.blog = parseUrl(item.user.blog);
-    }
-		var html = juicer(item_tpl,{
-			list: [item]
-		});
-		var $item = $(html);
-		$(this.dom).find('.l_com_list_cnt').prepend($item);
-		$item.addClass('l_com_item_ani-insert');
-		$(this.dom).find('.l_com_list_noData').fadeOut(100);
+      item.time = '刚刚';
+      item.content = strToEmoji(item.content);
+      if(item.user && item.user.blog){
+        item.user.blog = parseUrl(item.user.blog);
+      }
+      var html = juicer(item_tpl,{
+        list: [item]
+      });
+      var $item = $(html);
+      $(this.dom).find('.l_com_list_cnt').prepend($item);
+      $item.addClass('l_com_item_ani-insert');
+      $(this.dom).find('.l_com_list_noData').fadeOut(100);
 	};
 	list.prototype.getData = function(skip,callback){
 		
-		if(this._status == 'loading'){
-			return;
-		}
-		var me = this;
-		this._status = 'loading';
-		$.ajax({
-			url: '/ajax/comments/list',
-			data: {
-				cid: this.cid,
-				skip: skip || 0,
-				limit: this.limit || 10
-			},
-			success: function(data){
-        if(data.code == 500){
-					callback && callback(500);
+      if(this._status == 'loading'){
+          return;
+      }
+      var me = this;
+      this._status = 'loading';
+      $.ajax({
+        url: '/ajax/comments/list',
+        data: {
+          cid: this.cid,
+          skip: skip || 0,
+          limit: this.limit || 10
+        },
+        success: function(data){
+          if(data.code == 500){
+            callback && callback(500);
+          }
+          me._status = 'loaded';
+          if(data.code && data.code == 200){
+            var DATA = data.data;
+            me.total = DATA.count;
+            me.list.concat(DATA.list);
+
+            for(var i=0,total=DATA.list.length;i<total;i++){
+              DATA.list[i].time = parseTime(DATA.list[i].time,"{h}:{ii} {y}-{m}-{d}");
+              DATA.list[i].content = strToEmoji(DATA.list[i].content);
+              if(DATA.list[i].user.blog){
+                DATA.list[i].user.blog = parseUrl(DATA.list[i].user.blog);
+              }
+            }
+            callback && callback(null,DATA);
+          }
         }
-				me._status = 'loaded';
-				if(data.code && data.code == 200){
-					var DATA = data.data;
-					me.total = DATA.count;
-					me.list.concat(DATA.list);
-					
-					for(var i=0,total=DATA.list.length;i<total;i++){
-						DATA.list[i].time = parseTime(DATA.list[i].time,"{h}:{ii} {y}-{m}-{d}");
-						DATA.list[i].content = strToEmoji(DATA.list[i].content);
-						if(DATA.list[i].user.blog){
-							DATA.list[i].user.blog = parseUrl(DATA.list[i].user.blog);
-						}
-					}
-					callback && callback(null,DATA);
-				}
-			}
-		});
+      });
 	};
-	
 	
 	exports.sendBox = sendBox;
 	exports.list = list;
