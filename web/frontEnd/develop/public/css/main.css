@@ -509,6 +509,13 @@ body:before {
   display: none;
 }
 @media screen and (max-width: 660px) {
+  .app_container,
+  .app-footer {
+    transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+  }
   .app_nav {
     height: 48px;
     background: #fff;
@@ -652,6 +659,11 @@ body:before {
     -moz-transform: translate(0, -8px) rotate(45deg);
     -webkit-transform: translate(0, -8px) rotate(45deg);
     -o-transform: translate(0, -8px) rotate(45deg);
+  }
+  .nav_slidedown .app_container,
+  .nav_slidedown .app-footer {
+    opacity: .6;
+    -webkit-transform: translateY(100px);
   }
 }
 /**分页组件**/
