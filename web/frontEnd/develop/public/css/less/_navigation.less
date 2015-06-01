@@ -87,15 +87,6 @@ body:before{
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
   z-index:2;
 }
-.nav_mask{
-  position:fixed;
-  top:0;
-  left:0;
-  width: 100%;
-  height: 100%;
-  z-index:1;
-  display: none;
-}
 .nav-back{
   opacity: 0;
 }
@@ -223,8 +214,12 @@ body:before{
       opacity: 1;
     }
     .nav_mask{
-      display: block;
-      background: rgba(255,255,255,.4);
+      position:fixed;
+      top:0;
+      left:0;
+      width: 100%;
+      height: 100%;
+      z-index:1;
     }
     .nav_appname{
       color: #aaa;
@@ -241,8 +236,8 @@ body:before{
     }
     .app_container,
     .app-footer{
-      opacity: .6;
-      -webkit-transform: translateY(100px);
+      opacity: .4;
+      .transform(translateY(100px));
     }
   }
 }

@@ -490,15 +490,6 @@ body:before {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
   z-index: 2;
 }
-.nav_mask {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  display: none;
-}
 .nav-back {
   opacity: 0;
 }
@@ -635,8 +626,12 @@ body:before {
     opacity: 1;
   }
   .nav_slidedown .nav_mask {
-    display: block;
-    background: rgba(255, 255, 255, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
   }
   .nav_slidedown .nav_appname {
     color: #aaa;
@@ -662,8 +657,11 @@ body:before {
   }
   .nav_slidedown .app_container,
   .nav_slidedown .app-footer {
-    opacity: .6;
+    opacity: .4;
+    transform: translateY(100px);
+    -moz-transform: translateY(100px);
     -webkit-transform: translateY(100px);
+    -o-transform: translateY(100px);
   }
 }
 /**分页组件**/
