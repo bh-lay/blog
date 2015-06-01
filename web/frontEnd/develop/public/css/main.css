@@ -802,7 +802,7 @@ body:before {
   margin: auto;
   border-radius: 8px;
   overflow: hidden;
-  background: #aaa;
+  background: #eee;
 }
 .l_send_avatar img {
   display: block;
@@ -1149,7 +1149,7 @@ body:before {
 }
 .l_com_item_main {
   position: relative;
-  margin-left: 60px;
+  margin-left: 70px;
   padding: 15px;
 }
 .l_com_item_caption {
@@ -1187,11 +1187,11 @@ body:before {
   position: absolute;
   top: 15px;
   left: 10px;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   overflow: hidden;
-  background: #333;
-  border-radius: 100%;
+  background: #eee;
+  border-radius: 12px;
 }
 .l_com_item_avatar img {
   width: 100%;
