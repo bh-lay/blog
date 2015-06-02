@@ -130,51 +130,101 @@
 }
 
 @media(max-width:780px){
-    .articleListPage{
-        width: auto;
-    }
-    .articleListPage-side{
-		position: static;
-        float: none;
-        width: auto;
-        max-width: 400px;
-        margin: auto;
-        padding-left: 0;
-    }
-	.articleListPage-tags{
-        position: static;
-        width: auto;
-        margin-bottom: 30px;
-    }
+  .articleListPage{
+    width: auto;
+  }
+  .articleListPage-side{
+    position: static;
+    float: none;
+    width: auto;
+    max-width: 400px;
+    margin: auto;
+    padding-left: 0;
+  }
+  .articleListPage-tags{
+    position: static;
+    width: auto;
+    margin-bottom: 30px;
+  }
 }
 
 
 
-
+/**
+ * 博文详情
+ *
+ **/
 
 .blogDetail{
-	padding: 30px 0 40px;
-}
-.blog_article {
-	margin-bottom: 20px;
-	overflow: hidden;
-	.cardShadow();
-    .caption {
-        text-align: center;
-        padding: 4em 1em 1.5em;
-        margin-bottom: 20px;
-        h1{
-            font-weight: normal;
-            line-height: 1.5;
-            margin-bottom: .5em;
-        }
-        p {
-            color: #666;
-        }
+  font-size: 14px;
+  header.info{
+    text-align: center;
+    padding: 9em 0 12em;
+    h1{
+      margin: 0 1em .5em;
+      font-size: 2.5em;
+      font-weight: normal;
+      line-height: 1.3;
     }
+  }
+  .sns-share{
+    padding: 1em 0;
+    a{
+      padding: 0 15px;
+      font-size: 2.5em;
+      color: #666;
+      .transition(.15s,ease-out);
+      &:hover{
+        color: #f70;
+      }
+    }
+  }
+  .article-section {
+    padding-bottom: 50px;
+    border: 1px solid #f4f4f4;
+    background: #f4f4f4;
+    .caption{
+      margin-top: -2em;
+      padding: .8em 1em;
+      background: #fff;
+      border-bottom: 1px dashed #ddd;
+      h1{
+        font-size: 1.4em;
+        font-weight: normal;
+        line-height: 1em;
+      }
+    }
+    .article{
+      padding-bottom: 3em;
+      background: #fff;
+    }
+  }
+  .comments-section{
+    position: relative;
+    padding: 50px 0;
+    background: #666;
+    &:before{
+      position: absolute;
+      content: '';
+      top: -22px;
+      left: 50%;
+      margin-left: -60px;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-color: transparent transparent #666;
+      border-width: 0 60px 22px;
+    }
+  }
+}
+
+@media(min-width:1000px){
+  .blogDetail{
+    font-size: 16px;
+  }
 }
 @media(min-width:1400px){
-    .article{
-        font-size: 16px;
-    }
+  .blogDetail{
+    font-size: 18px;
+  }
 }
