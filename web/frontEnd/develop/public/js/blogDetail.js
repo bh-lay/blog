@@ -48,7 +48,9 @@ define(function(require,exports){
           hljs.highlightBlock(this);
       });
       
-			new L.views.comments.init(commentDom,'blog-' + id);
+			new L.views.comments.init(commentDom,'blog-' + id,{
+        list_num: 8
+      });
 		});
 	};
 });

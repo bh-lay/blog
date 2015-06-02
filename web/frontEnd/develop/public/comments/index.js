@@ -410,11 +410,11 @@ define(function(require,exports){
 		var me = this;
 		var param = param || {};
 		this.id = id;
-        this.reply_for_id = param.reply_for_id || null;
+    this.reply_for_id = param.reply_for_id || null;
 		this.dom = $(sendBox_tpl)[0];
 		this.text = '';
 		this.userDefine = {};
-        this.onBeforeSend = param.onBeforeSend || null;
+    this.onBeforeSend = param.onBeforeSend || null;
 		$(dom).html($(this.dom));
 		
 		//绑定dom事件
@@ -444,74 +444,74 @@ define(function(require,exports){
 	 * 列表类
 	 *
 	 */
-	function list(dom,cid){
-      var me = this;
-      //comment id
-      this.cid = cid;
-      this.list = [];
-      this.skip = 0;
-      this.limit = 15;
-      this.total = 0;
-      this._status = 'normal';
-      this.dom = $(list_tpl)[0];
+	function list(dom,cid,param){
+    var me = this;
+    param = param || {};
+    //comment id
+    this.cid = cid;
+    this.list = [];
+    this.skip = 0;
+    this.limit = param.list_num || 15;
+    this.total = 0;
+    this._status = 'normal';
+    this.dom = $(list_tpl)[0];
 
-      $(dom).html(this.dom);
+    $(dom).html(this.dom);
 
-      this.getData(0,function(err,data){
-        if(err){
-          $(me.dom).find('.l_com_list_cnt').html(noData_tpl);
-          return
-        }
-        var html = juicer(item_tpl,data);
-        $(me.dom).find('.l_com_list_cnt').html(html);
-        if(me.total == 0){
-          $(me.dom).find('.l_com_list_cnt').prepend(noData_tpl);
-        }else{
-          //分页组件
-          var page = new pagination($(dom).find('.l_com_list_pagination'),{
-              list_count : me.total,
-              page_cur : 0,
-              page_list_num : me.limit,
-              max_page_btn : 6
-          });
-          page.jump = function(num){
-            $('html,body').animate({
-              scrollTop: $(me.dom).offset().top - 70
-            },100);
-            me.getData((num-1)*me.limit,function(err,data){
-              if(err){
-                console.log('error');
-                return
-              }
-              var html = juicer(item_tpl,data);
-              $(me.dom).find('.l_com_list_cnt').html(html);
-            });
-          };
-        }
-      });
-      $(me.dom).on('click','.btn-reply',function(){
-        var item = $(this).parents('.l_com_item'),
-            reply_for = item.find('.l_com_item_caption').text(),
-            pop = UI.pop({
-              title: '回复：' + reply_for,
-              mask: true,
-              easyClose: false,
-              from: 'top',
-            }),
-            send = new sendBox(pop.cntDom,me.cid,{
-              focus: true,
-              reply_for_id : item.attr('data-id'),
-              onBeforeSend : function(text){
-                return '@' + reply_for + ' ' + text;
-              }
-            });
-        $(pop.dom).find('.UI_pop_cpt').css('border','none');
-        send.on('sendToServicesuccess',function(item){
-          pop.close();
-          me.addItem(item);
+    this.getData(0,function(err,data){
+      if(err){
+        $(me.dom).find('.l_com_list_cnt').html(noData_tpl);
+        return
+      }
+      var html = juicer(item_tpl,data);
+      $(me.dom).find('.l_com_list_cnt').html(html);
+      if(me.total == 0){
+        $(me.dom).find('.l_com_list_cnt').prepend(noData_tpl);
+      }else{
+        //分页组件
+        var page = new pagination($(dom).find('.l_com_list_pagination'),{
+            list_count : me.total,
+            page_cur : 0,
+            page_list_num : me.limit,
+            max_page_btn : 6
         });
+        page.jump = function(num){
+          $('html,body').animate({
+            scrollTop: $(me.dom).offset().top - 70
+          },100);
+          me.getData((num-1)*me.limit,function(err,data){
+            if(err){
+              console.log('error');
+              return
+            }
+            var html = juicer(item_tpl,data);
+            $(me.dom).find('.l_com_list_cnt').html(html);
+          });
+        };
+      }
+    });
+    $(me.dom).on('click','.btn-reply',function(){
+      var item = $(this).parents('.l_com_item'),
+          reply_for = item.find('.l_com_item_caption').text(),
+          pop = UI.pop({
+            title: '回复：' + reply_for,
+            mask: true,
+            easyClose: false,
+            from: 'top',
+          }),
+          send = new sendBox(pop.cntDom,me.cid,{
+            focus: true,
+            reply_for_id : item.attr('data-id'),
+            onBeforeSend : function(text){
+              return '@' + reply_for + ' ' + text;
+            }
+          });
+      $(pop.dom).find('.UI_pop_cpt').css('border','none');
+      send.on('sendToServicesuccess',function(item){
+        pop.close();
+        me.addItem(item);
       });
-		
+    });
 	}
 	list.prototype.addItem = function(item){
       item.time = '刚刚';
@@ -528,52 +528,51 @@ define(function(require,exports){
       $(this.dom).find('.l_com_list_noData').fadeOut(100);
 	};
 	list.prototype.getData = function(skip,callback){
-		
-      if(this._status == 'loading'){
-          return;
-      }
-      var me = this;
-      this._status = 'loading';
-      $.ajax({
-        url: '/ajax/comments/list',
-        data: {
-          cid: this.cid,
-          skip: skip || 0,
-          limit: this.limit || 10
-        },
-        success: function(data){
-          if(data.code == 500){
-            callback && callback(500);
-          }
-          me._status = 'loaded';
-          if(data.code && data.code == 200){
-            var DATA = data.data;
-            me.total = DATA.count;
-            me.list.concat(DATA.list);
-
-            for(var i=0,total=DATA.list.length;i<total;i++){
-              DATA.list[i].time = parseTime(DATA.list[i].time,"{h}:{ii} {y}-{m}-{d}");
-              DATA.list[i].content = strToEmoji(DATA.list[i].content);
-              if(DATA.list[i].user.blog){
-                DATA.list[i].user.blog = parseUrl(DATA.list[i].user.blog);
-              }
-            }
-            callback && callback(null,DATA);
-          }
+    if(this._status == 'loading'){
+        return;
+    }
+    var me = this;
+    this._status = 'loading';
+    $.ajax({
+      url: '/ajax/comments/list',
+      data: {
+        cid: this.cid,
+        skip: skip || 0,
+        limit: this.limit || 10
+      },
+      success: function(data){
+        if(data.code == 500){
+          callback && callback(500);
         }
-      });
+        me._status = 'loaded';
+        if(data.code && data.code == 200){
+          var DATA = data.data;
+          me.total = DATA.count;
+          me.list.concat(DATA.list);
+
+          for(var i=0,total=DATA.list.length;i<total;i++){
+            DATA.list[i].time = parseTime(DATA.list[i].time,"{h}:{ii} {y}-{m}-{d}");
+            DATA.list[i].content = strToEmoji(DATA.list[i].content);
+            if(DATA.list[i].user.blog){
+              DATA.list[i].user.blog = parseUrl(DATA.list[i].user.blog);
+            }
+          }
+          callback && callback(null,DATA);
+        }
+      }
+    });
 	};
 	
 	exports.sendBox = sendBox;
 	exports.list = list;
-	exports.init = function(dom,id){
+	exports.init = function(dom,id,param){
 		var me = this;
 		this.dom = $(baseTpl)[0];
 		this.id = id;
 		$(dom).html($(this.dom));
 		
-		this.sendBox = new sendBox($(this.dom).find('.l_com_sendBox')[0],id);
-		this.list = new list($(this.dom).find('.l_com_list')[0],id);
+		this.sendBox = new sendBox($(this.dom).find('.l_com_sendBox')[0],id,param);
+		this.list = new list($(this.dom).find('.l_com_list')[0],id,param);
 		this.sendBox.on('sendToServicesuccess',function(item){
 			me.list.addItem(item);
 		});
