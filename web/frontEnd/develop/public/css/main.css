@@ -717,12 +717,13 @@ body:before {
 }
 .app-footer {
   position: relative;
-  padding: 20px 0;
+  padding: 30px 0;
   background: #333;
   color: #888;
 }
 .app-footer h3 {
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: normal;
 }
 .app-footer h3,
 .app-footer p {
@@ -740,8 +741,16 @@ body:before {
   padding: 10px 0;
   text-align: center;
 }
-.footer-aboutme p a {
-  padding-right: 10px;
+.footer-about-links {
+  margin-bottom: 10px;
+}
+.footer-aboutme a {
+  font-size: 22px;
+  padding-right: 15px;
+}
+.footer-aboutme a:hover {
+  color: #eee;
+  text-decoration: none;
 }
 /**
  * 评论模块
