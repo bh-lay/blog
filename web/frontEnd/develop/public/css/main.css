@@ -1568,11 +1568,11 @@ body:before {
 .blogDetail {
   font-size: 14px;
 }
-.blogDetail header.info {
+.blogDetail .info-section {
   text-align: center;
   padding: 9em 0 12em;
 }
-.blogDetail header.info h1 {
+.blogDetail .info-section h1 {
   margin: 0 1em .5em;
   font-size: 2.5em;
   font-weight: normal;
@@ -1595,7 +1595,7 @@ body:before {
 }
 .blogDetail .article-section {
   padding-bottom: 50px;
-  border: 1px solid #f4f4f4;
+  border-top: 1px solid #f4f4f4;
   background: #f4f4f4;
 }
 .blogDetail .article-section .caption {
