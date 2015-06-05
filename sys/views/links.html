@@ -7,7 +7,6 @@
   <meta name="description" content="${{description}}" />
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <include name="favicon_appicon" />
-  <base target="_blank" />
   <link rel="stylesheet" type="text/css" href="${{frontEnd.base}}links/links.css?v=${{frontEnd.loser_version}}"/>
 </head>
 <body>
@@ -36,9 +35,9 @@
           {{@/if}}
           </div>
           <div class="links">
-            <p>博客：<a href="${{it.url}}">${{it.screen_link}}</a></p>
+            <p>博客：<a href="${{it.url}}" target="_blank">${{it.screen_link}}</a></p>
             {{@if it.github_username}}
-            <p>Github：<a href="https://github.com/${{it.github_username}}">${{it.github_username}}</a></p>
+            <p>Github：<a href="https://github.com/${{it.github_username}}" target="_blank">${{it.github_username}}</a></p>
             {{@/if}}
           </div>
         </div>
