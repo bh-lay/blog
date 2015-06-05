@@ -6,7 +6,7 @@ var utils = require('../../core/utils/index.js');
  * 转换emoji表情
  */
 function strToEmoji(str){
-  return str.replace(/\:(.+?)\:/g,'<span class="emoji-box"><span class="emoji s_$1"></span></span>');
+  return str.replace(/\:((\w|\-)+)\:/g,'<span class="emoji-box"><span class="emoji s_$1"></span></span>');
 }
 
 function getUserInfo(id,callback){
