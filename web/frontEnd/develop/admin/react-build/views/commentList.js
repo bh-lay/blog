@@ -15,11 +15,12 @@ define(function(require){
       }else {
         user = React.createElement("span", null, React.createElement("strong", null, "UID"), React.createElement("span", null, this.props.uid));
       }
-      var time = parseTime(this.props.time);
+      var time = parseTime(this.props.time),
+          url = this.props.cid == 'define-1' ? '/bless' : '/' + this.props.cid.replace(/\-/g,'/');
       return (
         React.createElement("li", {className: "list-group-item clearfix", "data-uid": this.props.uid, "data-cid": this.props.cid}, 
           React.createElement("div", {className: "comm_header"}, 
-            React.createElement("strong", null, "CID"), React.createElement("span", null, this.props.cid), 
+            React.createElement("strong", null, "CID"), React.createElement("a", {href: url, target: "_blank"}, this.props.cid), 
             user, 
             React.createElement("div", {className: "dropdown pull-right"}, 
               React.createElement("small", null, React.createElement("i", {className: "glyphicon glyphicon-time"}), time), 
