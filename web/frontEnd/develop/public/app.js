@@ -211,6 +211,11 @@ define(function (require, exports) {
     str += '.emoji.s_' + item + '{background-position: -' + (index * 25) + 'px 0;}';
   });
   $('head').append('<style type="text/css" data-module="emoji">' + str + '</style>');
+  
+  //做个好玩的
+  document.addEventListener('visibilitychange', function() {
+    document.title = document.hidden ? '出BUG了，快看！':'小剧客栈，剧中人的个人博客！'
+  });
 });
 
 /**
