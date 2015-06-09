@@ -54,27 +54,27 @@ function get_detail(lab_name,callback){
 
 
 exports.list = function (connect,app){
-	app.cache.use('labs_list',['html'],function(this_cache){
-		connect.write('html',200,this_cache);
-	},function(save_cache){
-		list_page(app,function(err,list){
+  app.cache.use('labs_list',['html'],function(this_cache){
+    connect.write('html',200,this_cache);
+  },function(save_cache){
+    list_page(app,function(err,list){
       if(err){
         app.views('system/mongoFail',{},function(err,html){
           connect.write('html',500,html);
         })
         return;
       }
-			//获取视图
-			app.views('labsList',{
-				title : '实验室_小剧客栈',
+      //获取视图
+      app.views('labsList',{
+        title : '实验室_小剧客栈_剧中人的个人博客',
         keywords : '造轮子,组件,实验室,剧中人,小剧客栈,前端工程师,设计师,nodeJS',
         description : '剧中人造轮子的基地，汇集小剧开发的部分组件，孕育优秀代码的实验室！',
-				list : list
-			},function(err,html){
-				save_cache(html);
-			});
-		});
-	});
+        list : list
+      },function(err,html){
+        save_cache(html);
+      });
+    });
+  });
 };
 
 exports.detail = function (connect,app,lab_name){
@@ -89,7 +89,7 @@ exports.detail = function (connect,app,lab_name){
 			}
 			//获取视图
 			app.views('labsDetail',{
-				title : data.title + '_小剧客栈',
+				title : data.title + '_小剧客栈_剧中人的个人博客',
 				keywords : data.tags,
 				description : data.intro,
 				content : data.content,

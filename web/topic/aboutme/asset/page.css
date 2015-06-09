@@ -2478,6 +2478,11 @@ h3 {
 a {
   text-decoration: none;
 }
+hr {
+  height: 1px;
+  border: none;
+  background: #aaa;
+}
 .section {
   font-size: 16px;
   padding: 3em 0;
@@ -2654,6 +2659,8 @@ a {
   text-align: center;
 }
 #work .intro {
+  width: 300px;
+  max-width: 100%;
   display: inline-block;
   vertical-align: middle;
 }
