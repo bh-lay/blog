@@ -83,23 +83,26 @@
   color: #888;
 }
 .app-footer h3 {
-  font-size: 18px;
+  margin-bottom: .4em;
+  line-height: 1.5;
+  font-size: 20px;
   font-weight: normal;
 }
-.app-footer h3,
-.app-footer p {
-  line-height: 1.6;
-  margin-bottom: .5em;
+.app-footer p,
+.app-footer ul {
+  margin-bottom: 1em;
 }
 .app-footer a {
   color: #888;
+  transition: .1s;
 }
 .app-footer a:hover {
   text-decoration: underline;
+  color: #ddd;
 }
 .app-footer .grid-box-full {
   border-top: 1px solid #444;
-  padding: 10px 0;
+  padding: 20px 0;
   text-align: center;
 }
 .footer-about-links {
@@ -110,8 +113,50 @@
   padding-right: 15px;
 }
 .footer-aboutme a:hover {
-  color: #eee;
   text-decoration: none;
+}
+.form-search {
+  display: block;
+  margin: 0 auto 15px;
+  text-align: center;
+}
+.form-search input[type="text"],
+.form-search input[type="submit"] {
+  display: inline-block;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  height: 30px;
+  padding: 5px 10px;
+  line-height: 20px;
+  vertical-align: text-top;
+  border: none;
+  font-family: inherit;
+  transition: .2s;
+  color: #222;
+}
+.form-search input[type="text"] {
+  width: 200px;
+  margin-right: 10px;
+  background: #444;
+}
+.form-search input[type="text"]:focus {
+  outline: none;
+  background: #777;
+}
+.form-search input[type="submit"] {
+  background: #fff;
+  box-shadow: none;
+  border-radius: 2px;
+  cursor: pointer;
+  opacity: .3;
+}
+.form-search input[type="submit"]:focus {
+  outline: none;
+  color: #000;
+}
+.form-search input[type="submit"]:hover {
+  opacity: 1;
 }
 /* Box-sizing resets
  *

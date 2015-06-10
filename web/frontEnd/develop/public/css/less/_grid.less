@@ -60,7 +60,17 @@
 @media screen and (max-width: 1250px) {
   .grid-row {
     width: 900px;
-    .grid-col-2-4,{
+  }
+}
+@media screen and (max-width: 950px) {
+  .grid-row{
+    width: 600px;
+    .grid-box-2,
+    .grid-col-2-4,
+    .grid-col-fix-300,
+    .grid-col-flow-300,
+    .grid-col-fix-220,
+    .grid-col-flow-220{
       .full-width()
     }
     .grid-col-1-4{
@@ -68,23 +78,11 @@
     }
   }
 }
-@media screen and (max-width: 950px) {
-  .grid-row{
-    width: 600px;
-    .grid-box-2,
-    .grid-col-1-4,
-    .grid-col-fix-300,
-    .grid-col-flow-300,
-    .grid-col-fix-220,
-    .grid-col-flow-220{
-      .full-width()
-    }
-  }
-}
 @media screen and (max-width: 650px) {
   .grid-row{
     width: 100%;
-    .grid-box{
+    .grid-box,
+    .grid-col-1-4{
       .full-width()
     }
   }
