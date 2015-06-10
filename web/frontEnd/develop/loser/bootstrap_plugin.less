@@ -1,5 +1,6 @@
 @import "../public/css/less/_fontface.less";
 @import "../public/css/less/_footer.less";
+@import "../public/css/less/_grid.less";
 /* Box-sizing resets
  *
  * 为了避免 Bootstrap 设置的全局盒模型所带来的影响，可以重置单个页面元素或覆盖整个区域的盒模型。
@@ -14,7 +15,17 @@
      -moz-box-sizing: content-box;
           box-sizing: content-box;
 }
-
+.transition(@duration,@timing-function:linear, @props:all) {
+	transition: @props @duration @timing-function;
+	-moz-transition: @props @duration @timing-function;
+	-webkit-transition: @props @duration @timing-function;
+	-o-transition: @props @duration @timing-function;
+}
+.borderbox(){
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
 
 .navbar-cnt{
 	height: 50px;
@@ -35,7 +46,7 @@
 	}
 }
 .app-footer{
-    height: 300px;
+  padding-bottom: 100px;
     background: #333;
 }
 

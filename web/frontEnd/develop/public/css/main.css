@@ -730,9 +730,14 @@ body:before {
   font-size: 20px;
   font-weight: normal;
 }
-.app-footer p,
+.app-footer p {
+  margin-bottom: 1em;
+}
 .app-footer ul {
   margin-bottom: 1em;
+}
+.app-footer ul li {
+  margin-bottom: .6em;
 }
 .app-footer a {
   color: #888;

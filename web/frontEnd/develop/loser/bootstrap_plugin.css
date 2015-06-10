@@ -88,9 +88,14 @@
   font-size: 20px;
   font-weight: normal;
 }
-.app-footer p,
+.app-footer p {
+  margin-bottom: 1em;
+}
 .app-footer ul {
   margin-bottom: 1em;
+}
+.app-footer ul li {
+  margin-bottom: .6em;
 }
 .app-footer a {
   color: #888;
@@ -158,6 +163,100 @@
 .form-search input[type="submit"]:hover {
   opacity: 1;
 }
+.grid-row {
+  width: 1500px;
+  position: relative;
+  margin: auto;
+  zoom: 1;
+  transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+}
+.grid-row:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.grid-row [class*="grid-box"],
+.grid-row [class*="grid-col"] {
+  float: left;
+  padding-left: 10px;
+  padding-right: 10px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+.grid-row .grid-box {
+  width: 300px;
+}
+.grid-row .grid-box-2 {
+  width: 50%;
+}
+.grid-row .grid-box-full {
+  width: 100%;
+  float: none !important;
+  clear: both;
+}
+.grid-row .grid-col-1-4 {
+  width: 25%;
+}
+.grid-row .grid-col-2-4 {
+  width: 50%;
+}
+.grid-row .grid-col-fix-300 {
+  width: 300px;
+}
+.grid-row .grid-col-flow-300 {
+  width: calc(100% - 300px);
+}
+.grid-row .grid-col-fix-220 {
+  width: 220px;
+}
+.grid-row .grid-col-flow-220 {
+  width: calc(100% - 220px);
+}
+@media screen and (max-width: 1550px) {
+  .grid-row {
+    width: 1200px;
+  }
+}
+@media screen and (max-width: 1250px) {
+  .grid-row {
+    width: 900px;
+  }
+}
+@media screen and (max-width: 950px) {
+  .grid-row {
+    width: 600px;
+  }
+  .grid-row .grid-box-2,
+  .grid-row .grid-col-2-4,
+  .grid-row .grid-col-fix-300,
+  .grid-row .grid-col-flow-300,
+  .grid-row .grid-col-fix-220,
+  .grid-row .grid-col-flow-220 {
+    width: 100%;
+    float: none !important;
+    clear: both;
+  }
+  .grid-row .grid-col-1-4 {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 650px) {
+  .grid-row {
+    width: 100%;
+  }
+  .grid-row .grid-box,
+  .grid-row .grid-col-1-4 {
+    width: 100%;
+    float: none !important;
+    clear: both;
+  }
+}
 /* Box-sizing resets
  *
  * 为了避免 Bootstrap 设置的全局盒模型所带来的影响，可以重置单个页面元素或覆盖整个区域的盒模型。
@@ -190,7 +289,7 @@
   height: 30px;
 }
 .app-footer {
-  height: 300px;
+  padding-bottom: 100px;
   background: #333;
 }
 .newVersionTips {
