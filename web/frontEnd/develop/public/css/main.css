@@ -1657,8 +1657,8 @@ body:before {
 }
 .blogDetail .article-section {
   padding-bottom: 50px;
-  border-top: 1px solid #f4f4f4;
-  background: #f4f4f4;
+  border-top: 1px solid #eee;
+  background: #eee;
 }
 .blogDetail .article-section .caption {
   margin-top: -2em;
@@ -1674,6 +1674,15 @@ body:before {
 .blogDetail .article-section .article {
   padding-bottom: 3em;
   background: #fff;
+}
+.blogDetail .article-section footer {
+  padding: 10px 15px;
+  border-top: 1px solid #eee;
+  background: #fafafa;
+}
+.blogDetail .article-section footer p {
+  font-size: 14px;
+  color: #666;
 }
 .blogDetail .comments-section {
   position: relative;
