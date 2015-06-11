@@ -84,12 +84,13 @@ define(function(require,exports){
           return
         }
         for(var i in list){
-            list[i].time_show = L.parseTime(list[i].time_show,'{y}-{mm}-{dd}');
-            //使用七牛图床
-            list[i].cover = L.qiniu(list[i].cover,{
-                type : 'zoom',
-                width : 420,
-            });
+          list[i].time_show = L.parseTime(list[i].time_show,'{mm}-{dd} {y}');
+          //使用七牛图床
+          list[i].cover = L.qiniu(list[i].cover,{
+              type : 'zoom',
+              width : 420,
+          });
+          
         }
         me.count = count;
         me.skip += me.limit;

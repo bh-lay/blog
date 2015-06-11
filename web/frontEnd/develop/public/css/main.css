@@ -1570,6 +1570,41 @@ body:before {
   overflow: hidden;
   background: #fff;
 }
+.articleItem footer {
+  display: table;
+  width: 100%;
+  padding: 10px 0;
+  border-top: 1px solid #e8e8e8;
+  background: #fbfbfb;
+}
+.articleItem footer .tags {
+  display: table-cell;
+  width: 99%;
+  padding-left: 10px;
+  font-size: 13px;
+}
+.articleItem footer .tags strong {
+  margin-right: 5px;
+  color: #aaa;
+  font-weight: normal;
+}
+.articleItem footer .tags a {
+  margin-right: 5px;
+  color: #777;
+}
+.articleItem footer .tags a:hover {
+  text-decoration: underline;
+  color: #000;
+}
+.articleItem footer .time {
+  display: table-cell;
+  vertical-align: middle;
+  width: 1%;
+  padding: 0 10px;
+  white-space: nowrap;
+  color: #888;
+  font-size: 12px;
+}
 .artItCpt a {
   display: block;
   padding: 1em 1em .2em;
@@ -1577,7 +1612,7 @@ body:before {
   line-height: 1.5em;
   text-align: center;
   font-size: 18px;
-  color: #333;
+  color: #000;
   outline: none;
 }
 .artItCpt a:hover {
@@ -1595,15 +1630,10 @@ body:before {
 }
 .artItInfo {
   padding: 10px 20px;
-  line-height: 150%;
-  font-size: 12px;
+  line-height: 1.4;
+  font-size: 13px;
   color: #888;
   text-indent: 2em;
-}
-.artItTime {
-  color: #aaa;
-  font-size: 14px;
-  padding: 10px 20px 20px;
 }
 @media (max-width: 780px) {
   .articleListPage {

@@ -86,6 +86,41 @@
   margin-bottom: 20px;
   overflow: hidden;
   background: #fff;
+  footer{
+    display: table;
+    width: 100%;
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+    background: #fbfbfb;
+    .tags{
+      display: table-cell;
+      width: 99%;
+      padding-left: 10px;
+      font-size: 13px;
+      strong{
+        margin-right: 5px;
+        color: #aaa;
+        font-weight: normal;
+      }
+      a{
+        margin-right: 5px;
+        color: #777;
+        &:hover{
+          text-decoration: underline;
+          color: #000;
+        }
+      }
+    }
+    .time{
+      display: table-cell;
+      vertical-align: middle;
+      width: 1%;
+      padding: 0 10px;
+      white-space: nowrap;
+      color: #888;
+      font-size: 12px;
+    }
+  }
 }
 
 .artItCpt {
@@ -96,7 +131,7 @@
     line-height: 1.5em;
     text-align: center;
     font-size: 18px;
-    color: #333;
+    color: #000;
     outline: none;
     &:hover {
       color: #000;
@@ -117,16 +152,10 @@
 }
 .artItInfo {
   padding: 10px 20px;
-  line-height: 150%;
-  font-size: 12px;
+  line-height: 1.4;
+  font-size: 13px;
   color: #888;
   text-indent: 2em
-}
-
-.artItTime {
-  color: #aaa;
-  font-size: 14px;
-  padding: 10px 20px 20px
 }
 
 @media(max-width:780px){
