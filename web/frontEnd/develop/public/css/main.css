@@ -1279,7 +1279,7 @@ body:before {
 }
 /** 首页 **/
 .indeCnt section {
-  font-size: 16px;
+  font-size: 1rem;
 }
 .index-aboutme {
   padding: 15em 0;
@@ -1489,11 +1489,6 @@ body:before {
 }
 .index-about-links .btn {
   margin: 0 20px;
-}
-@media screen and (max-width: 680px) {
-  .indeCnt section {
-    font-size: 12px;
-  }
 }
 @media screen and (max-height: 680px) {
   .index-aboutme {
