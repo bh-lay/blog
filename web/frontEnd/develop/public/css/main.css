@@ -42,6 +42,9 @@ TD {
   font-size: 12px;
   padding: 10px;
 }
+html {
+  font-size: 18px;
+}
 .grid-row {
   width: 1500px;
   position: relative;
@@ -98,6 +101,9 @@ TD {
   width: calc(100% - 220px);
 }
 @media screen and (max-width: 1550px) {
+  html {
+    font-size: 16px;
+  }
   .grid-row {
     width: 1200px;
   }
@@ -108,6 +114,9 @@ TD {
   }
 }
 @media screen and (max-width: 950px) {
+  html {
+    font-size: 14px;
+  }
   .grid-row {
     width: 600px;
   }
@@ -1668,7 +1677,7 @@ body:before {
  *
  **/
 .blogDetail {
-  font-size: 14px;
+  font-size: 1rem;
 }
 .blogDetail .info-section {
   text-align: center;
@@ -1740,16 +1749,6 @@ body:before {
   border-style: solid;
   border-color: transparent transparent #666;
   border-width: 0 60px 22px;
-}
-@media (min-width: 1000px) {
-  .blogDetail {
-    font-size: 16px;
-  }
-}
-@media (min-width: 1400px) {
-  .blogDetail {
-    font-size: 18px;
-  }
 }
 /**实验室列表**/
 .labsList {
