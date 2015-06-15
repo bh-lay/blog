@@ -1277,6 +1277,72 @@ body:before {
   width: 100%;
   height: 100%;
 }
+.btn {
+  display: inline-block;
+  min-width: 40px;
+  padding: .5em 1em;
+  line-height: 1.5em;
+  font-size: 14px;
+  text-align: center;
+  color: #333;
+  background: #fff;
+  border: 1px solid #d3d3d3;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  white-space: nowrap;
+  outline: none;
+  text-decoration: none;
+  transition: all 0.08s linear;
+  -moz-transition: all 0.08s linear;
+  -webkit-transition: all 0.08s linear;
+  -o-transition: all 0.08s linear;
+}
+.btn:hover {
+  color: #333;
+  text-decoration: none;
+  border-color: #c3c3c3;
+  background: #f4f4f4;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+}
+.btn.focusme {
+  border: none;
+  color: #fff;
+  background: #fa7d3c;
+  background: -moz-linear-gradient(top, #fa7d3c 0%, #f55f10 100%);
+  background: -webkit-linear-gradient(top, #fa7d3c 0%, #f55f10 100%);
+  background: -o-linear-gradient(top, #fa7d3c 0%, #f55f10 100%);
+  background: -ms-linear-gradient(top, #fa7d3c 0%, #f55f10 100%);
+  background: linear-gradient(top bottom, #fa7d3c 0%, #f55f10 100%);
+}
+.btn.focusme:hover {
+  background: #f4722e;
+  background: -moz-linear-gradient(top, #f4722e 0%, #f05807 100%);
+  background: -webkit-linear-gradient(top, #f4722e 0%, #f05807 100%);
+  background: -o-linear-gradient(top, #f4722e 0%, #f05807 100%);
+  background: -ms-linear-gradient(top, #f4722e 0%, #f05807 100%);
+  background: linear-gradient(top bottom, #f4722e 0%, #f05807 100%);
+}
+.btn.blue {
+  color: #fff;
+  border: none;
+  padding: 1px 1em;
+  box-shadow: inset 1px 1px rgba(255, 255, 255, 0.1), 1px 1px rgba(0, 0, 0, 0.1);
+  background-color: #08c;
+  background-image: -moz-linear-gradient(top, rgba(255, 255, 255, 0.1), transparent);
+  background-image: -ms-linear-gradient(top, rgba(255, 255, 255, 0.1), transparent);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(255, 255, 255, 0.1)), to(transparent));
+  background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1), transparent);
+  background-image: -o-linear-gradient(top, rgba(255, 255, 255, 0.1), transparent);
+  background-image: linear-gradient(top, rgba(255, 255, 255, 0.1), transparent);
+  background-repeat: repeat-x;
+}
+.btn.blue:hover {
+  background-color: #09d;
+  text-decoration: none;
+}
+.btn.blue:active {
+  background-color: #07b;
+}
 /** 首页 **/
 .indeCnt section {
   font-size: 1rem;
@@ -1677,25 +1743,22 @@ body:before {
   padding: 9em 0 12em;
 }
 .blogDetail .info-section h1 {
-  margin: 0 1em .5em;
+  margin: 0 1em;
   font-size: 2.5em;
   font-weight: normal;
   line-height: 1.3;
+}
+.blogDetail .info-section P {
+  margin: 0 0 1em;
+  opacity: .8;
 }
 .blogDetail .sns-share {
   padding: 1em 0;
 }
 .blogDetail .sns-share a {
-  padding: 0 15px;
-  font-size: 2.5em;
-  color: #666;
-  transition: all 0.15s ease-out;
-  -moz-transition: all 0.15s ease-out;
-  -webkit-transition: all 0.15s ease-out;
-  -o-transition: all 0.15s ease-out;
-}
-.blogDetail .sns-share a:hover {
-  color: #f70;
+  margin: 0 .5em;
+  padding: .2em 1.2em;
+  font-size: 1.2rem;
 }
 .blogDetail .article-section {
   padding-bottom: 50px;
@@ -2040,52 +2103,6 @@ body:before {
   .sidebar {
     padding-top: 20px;
   }
-}
-.btn {
-  display: inline-block;
-  min-width: 40px;
-  height: 32px;
-  padding: 0 1em;
-  line-height: 33px;
-  font-size: 14px;
-  text-align: center;
-  color: #333;
-  background: #fff;
-  border: 1px solid #d3d3d3;
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
-  border-radius: 2px;
-  white-space: nowrap;
-  outline: none;
-  text-decoration: none;
-  transition: all 0.08s linear;
-  -moz-transition: all 0.08s linear;
-  -webkit-transition: all 0.08s linear;
-  -o-transition: all 0.08s linear;
-}
-.btn:hover {
-  color: #333;
-  text-decoration: none;
-  border-color: #c3c3c3;
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
-}
-.btn.focusme {
-  border: none;
-  padding: 1px 1em;
-  color: #fff;
-  background: #fa7d3c;
-  background: -moz-linear-gradient(top, #fa7d3c 0%, #f55f10 100%);
-  background: -webkit-linear-gradient(top, #fa7d3c 0%, #f55f10 100%);
-  background: -o-linear-gradient(top, #fa7d3c 0%, #f55f10 100%);
-  background: -ms-linear-gradient(top, #fa7d3c 0%, #f55f10 100%);
-  background: linear-gradient(top bottom, #fa7d3c 0%, #f55f10 100%);
-}
-.btn.focusme:hover {
-  background: #f4722e;
-  background: -moz-linear-gradient(top, #f4722e 0%, #f05807 100%);
-  background: -webkit-linear-gradient(top, #f4722e 0%, #f05807 100%);
-  background: -o-linear-gradient(top, #f4722e 0%, #f05807 100%);
-  background: -ms-linear-gradient(top, #f4722e 0%, #f05807 100%);
-  background: linear-gradient(top bottom, #f4722e 0%, #f05807 100%);
 }
 /**
  * 卡片类
