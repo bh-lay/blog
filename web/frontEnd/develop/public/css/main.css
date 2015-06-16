@@ -1797,14 +1797,14 @@ body:before {
 .blogDetail .comments-section:before {
   position: absolute;
   content: '';
-  top: -22px;
+  top: -1rem;
   left: 50%;
-  margin-left: -60px;
+  margin-left: -3rem;
   width: 0;
   height: 0;
   border-style: solid;
   border-color: transparent transparent #666;
-  border-width: 0 60px 22px;
+  border-width: 0 3rem 1rem;
 }
 /**实验室列表**/
 .labsList {
