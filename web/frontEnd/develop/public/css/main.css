@@ -958,7 +958,7 @@ body:before {
   height: 100%;
   line-height: 80px;
   text-indent: 1em;
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #888;
   cursor: text;
   background: #fff;
@@ -1241,7 +1241,7 @@ body:before {
   min-height: 20px;
   margin-bottom: 10px;
   line-height: 1.5;
-  font-size: 1rem;
+  font-size: .85rem;
   color: #333;
   word-wrap: break-word;
   word-break: break-all;
@@ -1348,7 +1348,7 @@ body:before {
   font-size: 1rem;
 }
 .index-aboutme {
-  padding: 25vh 0;
+  padding: 25vh 0 26vh;
   text-align: center;
 }
 .index-aboutme .avatar {
@@ -1400,10 +1400,10 @@ body:before {
   position: absolute;
   width: 0;
   height: 0;
-  top: -5vw;
+  top: -3rem;
   border-style: solid;
   left: 0;
-  border-width: 5vw 50vw 0;
+  border-width: 3rem 50vw 0;
   border-color: transparent rgba(255, 255, 255, 0.5) transparent;
 }
 .index-about-design h3 {
