@@ -2,6 +2,7 @@
 /** 首页 **/
 .indeCnt {
   section{
+    position: relative;
     font-size: 1rem;
   }
 }
@@ -48,41 +49,61 @@
 }
 
 .index-about-design{
-  margin-bottom: 5em;
-  padding-top: 5em;
+  padding: 5em 0;
   line-height: 1.8em;
-  overflow: hidden;
   background: rgba(255,255,255,.5);
   font-family: "Microsoft Yahei";
-  .intro-half {
-    float: right;
-    text-align: right;
-    h3{
-      margin-bottom: .6em;
-      font-size: 2em;
-      font-weight: normal;
-      letter-spacing: .2em;
-      color: #333;
-    }
-    p{
-      margin-bottom: 2.5em;
-      padding-right: .4em;
-      font-size: 1.3em;
-      color: #000;
-      opacity: .8;
-    }
-    .links{
-      font-size: .85em;
-      color: #333;
-      a{
-        padding: 0 .5em;
-        text-decoration: underline;
-      }
+  text-align: center;
+  &:before{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: -5vw;
+    border-style: solid;
+    left: 0;
+    border-width: 5vw 50vw 0;
+    border-color: transparent rgba(255,255,255,.5) transparent;
+  }
+  h3{
+    margin-bottom: .6em;
+    font-size: 2em;
+    font-weight: normal;
+    letter-spacing: .2em;
+    color: #333;
+  }
+  p{
+    margin-bottom: 2.5em;
+    padding-right: .4em;
+    font-size: 1.3em;
+    color: #000;
+    opacity: .8;
+  }
+  .links{
+    font-size: .85em;
+    color: #333;
+    a{
+      padding: 0 .5em;
+      text-decoration: underline;
     }
   }
-  .device-half {
+  .device-cnt {
     position: relative;
     height: 176px;
+    max-width: 600px;
+    margin: 1.5em auto 0;
+    &:before{
+      content: '';
+      position: absolute;
+      width: 120%;
+      height: 50px;
+      left: -10%;
+      bottom: -25px;
+      border-radius: 100%;
+      background: #fff;
+      opacity: .7;
+      z-index: 0;
+    }
   }
   .device{
     position: absolute;
@@ -166,14 +187,6 @@
   }
 }
 
-@media screen and (max-width: 965px) {
-	.index-about-design{
-		.intro-half{
-			text-align: center;
-            margin-bottom: 3em;
-		}
-	}
-}
 
 .index-about-backend{
   padding-top: 12em;
@@ -181,6 +194,7 @@
   line-height: 1.8em;
   text-align: center;
   color: #000;
+  background: rgba(255,255,255,.5);
   .nodeJS-logo{
     width: 90px;
     height: 120px;
