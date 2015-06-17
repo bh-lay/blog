@@ -85,7 +85,7 @@ exports.detail = function (connect,app,lab_name){
     get_detail(lab_name,function(err,data){
       if(err){
         if(err == 'notFound'){
-          connect.write('notFound','怎么坏掉了呢！');
+          connect.write('notFound','404！');
         }else{
           connect.write('error','怎么坏掉了呢！');
         }

@@ -9,8 +9,8 @@ var mongo = require('../core/DB.js');
 var showdown = require('../lib/showdown/showdown.js');
 
 function getDetail(id,callback){
-	var method = mongo.start();
-	method.open({
+  var method = mongo.start();
+  method.open({
     collection_name: 'article'
   },function(err,collection){
     if(err){
@@ -21,16 +21,16 @@ function getDetail(id,callback){
     collection.find({
         'id' : id
     }).toArray(function(err, docs) {
-        method.close();
-        if(arguments[1].length==0){
-            callback && callback('哇塞，貌似这篇博文不存在哦!');
-        }else{
-            docs[0].time_show = utils.parse.time(docs[0].time_show ,'{y}-{m}-{d}');
+      method.close();
+      if(arguments[1].length==0){
+        callback && callback('哇塞，貌似这篇博文不存在哦!');
+      }else{
+        docs[0].time_show = utils.parse.time(docs[0].time_show ,'{y}-{m}-{d}');
 
-            var converter = new showdown.converter();
-            docs[0].content = converter.makeHtml(docs[0].content);
-            callback&&callback(null,docs[0]);
-        }
+        var converter = new showdown.converter();
+        docs[0].content = converter.makeHtml(docs[0].content);
+        callback&&callback(null,docs[0]);
+      }
     });
   });
 }
@@ -49,22 +49,22 @@ function getList(app,param,callback){
       return;
     }
     collection.count(function(err,count){
-        collection.find({}, {
-            limit:limit
-        }).sort({
-          id:-1
-        }).skip(skip).toArray(function(err, docs) {
-            method.close();
-            for(var i in docs){
-                docs[i].time_show = utils.parse.time(docs[i].time_show ,'{y}年-{m}月-{d}日');
-                docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? app.config.frontEnd.img_domain + docs[i].cover : docs[i].cover;
-            }
-            callback && callback(null,docs,{
-              count : count,
-              skip : skip,
-              limit : limit
-            });
+      collection.find({}, {
+          limit:limit
+      }).sort({
+        id:-1
+      }).skip(skip).toArray(function(err, docs) {
+        method.close();
+        for(var i in docs){
+          docs[i].time_show = utils.parse.time(docs[i].time_show ,'{y}年-{m}月-{d}日');
+          docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? app.config.frontEnd.img_domain + docs[i].cover : docs[i].cover;
+        }
+        callback && callback(null,docs,{
+          count : count,
+          skip : skip,
+          limit : limit
         });
+      });
     });
   });
 };
@@ -111,28 +111,28 @@ exports.list = function (connect,app){
 };
 
 exports.detail = function (connect,app,id){
-	app.cache.use('blog_id_' + id,['html'],function(this_cache){
-		connect.write('html',200,this_cache);
-	},function(save_cache){
-		getDetail(id,function(err,data){
-			if(err){
-				connect.write('notFound','404');
-				return;
-			}
-			//获取视图
-			app.views('blogDetail',{
-				id : id,
-				title : data.title + '_小剧客栈_剧中人的个人博客',
-				keywords : data.tags,
-				description : data.intro,
-				time_show : data.time_show,
-				author : data.author,
-				cover : data.cover,
-				tags : data.tags,
-				content : data.content
-			},function(err,html){
-				save_cache(html);
-			});
-		})
-	});
+  app.cache.use('blog_id_' + id,['html'],function(this_cache){
+    connect.write('html',200,this_cache);
+  },function(save_cache){
+    getDetail(id,function(err,data){
+      if(err){
+        connect.write('notFound','404');
+        return;
+      }
+      //获取视图
+      app.views('blogDetail',{
+        id : id,
+        title : data.title + '_小剧客栈_剧中人的个人博客',
+        keywords : data.tags,
+        description : data.intro,
+        time_show : data.time_show,
+        author : data.author,
+        cover : data.cover,
+        tags : data.tags,
+        content : data.content
+      },function(err,html){
+        save_cache(html);
+      });
+    })
+  });
 }
