@@ -79,7 +79,7 @@ exports.list = function (connect,app){
   var page = data.page || 1,
       tag = data.tag ? data.tag : null;
   
-  var cache_name = 'blog_list_' + page;
+  var cache_name = 'blog_list_' + page + '_' + (tag ? tag : '');
   app.cache.use(cache_name,['html'],function(this_cache){
     //do something with this_cache
     connect.write('html',200,this_cache);
