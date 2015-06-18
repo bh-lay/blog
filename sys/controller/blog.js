@@ -37,10 +37,15 @@ function getDetail(id,callback){
 
 function getList(app,param,callback){
   var method = mongo.start();
-  var param = param || {};
-  var skip = param.skip || 0;
-  var limit = param.limit || 10;
+  var param = param || {},
+      skip = param.skip || 0,
+      limit = param.limit || 10,
+      findKeys = {};
 
+  //过滤标签
+  if(param.tag){
+      findKeys.tags = param.tag;
+  }
   method.open({
     collection_name: 'article'
   },function(err,collection){
@@ -48,8 +53,8 @@ function getList(app,param,callback){
       callback && callback(err);
       return;
     }
-    collection.count(function(err,count){
-      collection.find({}, {
+    collection.count(findKeys , function(err,count){
+      collection.find(findKeys , {
           limit:limit
       }).sort({
         id:-1
@@ -71,8 +76,9 @@ function getList(app,param,callback){
 exports.list = function (connect,app){
 	
   var data = connect.url.search;
-  var page = data.page || 1;
-
+  var page = data.page || 1,
+      tag = data.tag ? data.tag : null;
+  
   var cache_name = 'blog_list_' + page;
   app.cache.use(cache_name,['html'],function(this_cache){
     //do something with this_cache
@@ -81,7 +87,8 @@ exports.list = function (connect,app){
     //if none of cache,do this Fn
     getList(app,{
       skip : (page-1) * 10,
-      limit: 10
+      limit: 10,
+      tag: tag
     },function(err,list,data){
       if(err){
         app.views('system/mongoFail',{},function(err,html){
@@ -94,7 +101,7 @@ exports.list = function (connect,app){
           page_list_num: data.limit,
           page_cur: page,
           max_page_btn: 10,
-          base_url : '/blog?page={num}'
+          base_url : '/blog?page={num}' + (tag ? ('&tag=' + tag) : '')
       });
       //获取视图
       app.views('blogList',{

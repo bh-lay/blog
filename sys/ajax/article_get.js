@@ -33,23 +33,23 @@ var fs = require('fs');
 var querystring=require('querystring');
 
 function get_list(data,callback){
-	var data = data,
-		limit_num = parseInt(data['limit']) || 10,
-		skip_num = parseInt(data['skip']) || 0,
-		findKeys = {};
-	
-	var resJSON = {
-		code: 1,
-		limit: limit_num,
-		skip: skip_num,
-	};
-	
-	//过滤标签
-	if(data.tag){
-		findKeys.tags = data.tag;
-	}
-	var method = mongo.start();
-	method.open({
+  var data = data,
+      limit_num = parseInt(data['limit']) || 10,
+      skip_num = parseInt(data['skip']) || 0,
+      findKeys = {};
+
+  var resJSON = {
+      code: 1,
+      limit: limit_num,
+      skip: skip_num,
+  };
+
+  //过滤标签
+  if(data.tag){
+      findKeys.tags = data.tag;
+  }
+  var method = mongo.start();
+  method.open({
     collection_name: 'article'
   },function(err,collection){
     if(err){
@@ -57,11 +57,11 @@ function get_list(data,callback){
       callback&&callback(resJSON);
       return
     }
-      //count the all list
-		collection.count(findKeys,function(err,count){
-			resJSON['count'] = count;
-			
-			collection.find(findKeys,{
+    //count the all list
+    collection.count(findKeys,function(err,count){
+      resJSON['count'] = count;
+
+      collection.find(findKeys,{
         limit: limit_num
       }).sort({
         time_show: -1
