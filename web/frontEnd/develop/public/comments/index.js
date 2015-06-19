@@ -183,93 +183,94 @@ define(function(require,exports){
 	 *
 	 */
 	function sendComment(data,callback){
-		var user;
-		if(data.user.id){
-			user = null;
-		}else if(data.user && data.user.username.length > 0){
-			user = data.user;
-		}else{
-			callback && callback('未登录');
-			return
-		}
-		
-		$.ajax({
-			url : '/ajax/comments/add',
-			type : 'POST',
-			data : {
-				cid : data.id,
-				content : data.text,
-				//如果为登录用户，则不发送用户信息
-				user : user,
-        reply_for_id : data.reply_for_id
-			},
-			success : function(data){
-				if(data.code && data.code == 200){
-					callback && callback(null,data.data);
-				}else{
-					callback && callback('fail');
-				}
-			}
-		});
+      var user;
+      if(data.user.id){
+        user = null;
+      }else if(data.user && data.user.username.length > 0){
+        user = data.user;
+      }else{
+        callback && callback('未登录');
+        return
+      }
+
+      $.ajax({
+        url : '/ajax/comments/add',
+        type : 'POST',
+        data : {
+          cid : data.id,
+          content : data.text,
+          //如果为登录用户，则不发送用户信息
+          user : user,
+          reply_for_id : data.reply_for_id
+        },
+        success : function(data){
+          if(data.code && data.code == 200){
+            callback && callback(null,data.data);
+          }else{
+            callback && callback('fail');
+          }
+        }
+      });
 	}
     /**
      * 询问用户信息
      *
      */
-    function askForUserInfo(){
-        var me = this;
-        //用户信息
-        var user = private_userInfo;
-        
-        var pop = UI.pop({
-          title : '雁过留名',
-          width : 300,
-          html : user_tpl,
-          easyClose : false,
-          mask: true,
-          confirm : function (){
-            var username = $username.val();
-            var email = $email.val();
-            var blog = $blog.val();
-            if(username.length < 1){
-                UI.prompt('大哥，告诉我你叫什么呗！',null,{
-                  from : 'top'
-                });
-                return false;
-            }
-            if(blog.length && !parseUrl(blog)){
-                UI.prompt('博客地址是对的么？',null,{
-                  from: 'top'
-                });
-                return false;
-            }
-            L.user.setLocalUser({
-                username: username,
-                email: email,
-                blog: blog
+    function askForUserInfo(callback){
+      var me = this;
+      //用户信息
+      var user = private_userInfo;
+
+      var pop = UI.pop({
+        title : '雁过留名',
+        width : 300,
+        html : user_tpl,
+        easyClose : false,
+        mask: true,
+        confirm : function (){
+          var username = $username.val();
+          var email = $email.val();
+          var blog = $blog.val();
+          if(username.length < 1){
+            UI.prompt('大哥，告诉我你叫什么呗！',null,{
+              from : 'top'
             });
-            //更新用户信息
-            L.user.info(function(err,user){
-                if(err){
-                    private_userInfo = null;
-                }else if(user){
-                    private_userInfo = user;
-                }
-                EMIT.call(me,'login',[private_userInfo]);
-            },false);
+            return false;
           }
-        });
-        
-        var $elem = $(pop.dom),
-            $username = $elem.find('input[name="username"]'),
-            $email = $elem.find('input[name="email"]'),
-            $blog = $elem.find('input[name="blog"]');
-        
-        if(user){
-            $username.val(user.username || '');
-            $email.val(user.email || '');
-            $blog.val(user.blog || '');
+          if(blog.length && !parseUrl(blog)){
+            UI.prompt('博客地址是对的么？',null,{
+              from: 'top'
+            });
+            return false;
+          }
+          L.user.setLocalUser({
+            username: username,
+            email: email,
+            blog: blog
+          });
+          //更新用户信息
+          L.user.info(function(err,user){
+            if(err){
+              private_userInfo = null;
+            }else if(user){
+              private_userInfo = user;
+            }
+            EMIT.call(me,'login',[private_userInfo]);
+            callback && callback();
+          },false);
         }
+      });
+
+      var $elem = $(pop.dom),
+          $username = $elem.find('input[name="username"]'),
+          $email = $elem.find('input[name="email"]'),
+          $blog = $elem.find('input[name="blog"]');
+
+      if(user){
+        $username.val(user.username || '');
+        $email.val(user.email || '');
+        $blog.val(user.blog || '');
+      }
     }
 	/**
 	 * 绑定dom事件
@@ -280,30 +281,29 @@ define(function(require,exports){
           $allDom = $(this.dom),
           $textarea = $allDom.find('textarea'),
           inputDelay,
-          focusDelay,
-          isSubmitting = false;
+          focusDelay;
       $textarea.on('keyup keydown change propertychange input paste',function(){
-          clearTimeout(inputDelay);
-          inputDelay = setTimeout(function(){
-              var newVal = $.trim($textarea.val());
-              //校验字符是否发生改变
-              if(newVal == me.text){
-                  return
-              }
-              me.text = newVal;
-              //触发自定义事件“change”
-              EMIT.call(me,'change');
-          },80);
+        clearTimeout(inputDelay);
+        inputDelay = setTimeout(function(){
+          var newVal = $.trim($textarea.val());
+          //校验字符是否发生改变
+          if(newVal == me.text){
+            return
+          }
+          me.text = newVal;
+          //触发自定义事件“change”
+          EMIT.call(me,'change');
+        },80);
       }).on('focus',function(){
           clearTimeout(focusDelay);
           $allDom.addClass('l_sendBox_active');
       }).on('focusout',function(){
-          clearTimeout(focusDelay);
-          focusDelay = setTimeout(function(){
-            if(me.text.length == 0){
-              $allDom.removeClass('l_sendBox_active');
-            }
-          },200);
+        clearTimeout(focusDelay);
+        focusDelay = setTimeout(function(){
+          if(me.text.length == 0){
+            $allDom.removeClass('l_sendBox_active');
+          }
+        },200);
       });
 
       $allDom.on('click','.l_send_placeholder',function(){
@@ -311,38 +311,7 @@ define(function(require,exports){
       }).on('click','.l_send_username,.l_send_avatar',function(e){
         askForUserInfo.call(me)
       }).on('click','.l_send_submit',function(){
-        $textarea.focus();
-        if(isSubmitting){
-          return
-        }else if(me.text.length == 0){
-          UI.prompt('你丫倒写点东西啊！',null,{
-              top: $(this).offset().top + 40,
-              from: $(this)[0]
-          });
-        }else if(me.text.length > 500){
-          UI.prompt('这是要刷屏的节奏么！',null,{
-              top: $(this).offset().top + 40,
-              from: $(this)[0]
-          });
-        }else if(private_userInfo){
-          var text = me.onBeforeSend ? (me.onBeforeSend(me.text) || me.text) : me.text;
-          isSubmitting = true;
-          sendComment({
-            id: me.id,
-            text: text,
-            user: private_userInfo,
-            reply_for_id : me.reply_for_id || null
-          },function(err,item){
-            isSubmitting = false;
-            if(err){
-                EMIT.call(me,'sendToServiceError');
-            }else{
-                EMIT.call(me,'sendToServicesuccess',[item]);
-            }
-          });
-        }else{
-          askForUserInfo.call(me);
-        }
+        me.submit();
       }).on('click','.l_send_face',function(){
         var offset = $(this).offset();
         $textarea.focus();
@@ -357,84 +326,122 @@ define(function(require,exports){
     }
 	//绑定对象自定义事件
 	function bindCustomEvent(){
-		var me = this;
-		var $allDom = $(this.dom);
-		var $textarea = $allDom.find('textarea');
-        var $count = $allDom.find('.l_send_count');
-		var $countRest = $count.find('b');
-		var text_mirror = mirror($textarea);
-		
-		//监听字符变化事件
-		this.on('change',function (){
-			var height = text_mirror.refresh().realHeight + 20;
-			var overflow = 'hidden';
-			if(height < 80){
-				height = 80;
-			}else if(height > 200){
-				height = 200;
-				overflow = 'visible';
-			}
-			$textarea.css({
-				height: height,
-				overflow: overflow
-			});
-			
-			var length = $textarea.val().length;
-			var rest_length = me.limit - length;
-			var show_txt = rest_length;
-      if(length > 200){
+      var me = this;
+      var $allDom = $(this.dom);
+      var $textarea = $allDom.find('textarea');
+      var $count = $allDom.find('.l_send_count');
+      var $countRest = $count.find('b');
+      var text_mirror = mirror($textarea);
+
+      //监听字符变化事件
+      this.on('change',function (){
+        var height = text_mirror.refresh().realHeight + 20;
+        var overflow = 'hidden';
+        if(height < 80){
+            height = 80;
+        }else if(height > 200){
+            height = 200;
+            overflow = 'visible';
+        }
+        $textarea.css({
+          height: height,
+          overflow: overflow
+        });
+
+        var length = $textarea.val().length;
+        var rest_length = me.limit - length;
+        var show_txt = rest_length;
+        if(length > 200){
           $count.show();
           if(rest_length < 0){
-      show_txt = '<font color="#f50">' + Math.abs(rest_length) + '</font>';
+            show_txt = '<font color="#f50">' + Math.abs(rest_length) + '</font>';
           }
           $countRest.html(show_txt);
-      }else{
+        }else{
           $count.hide();
-      }
-		}).on('login',function(user){
-			//设置用户信息
-			setUserInfoToUI.call(me,user);
-			private_userInfo = user;
-		}).on('sendToServiceError',function(){
-			UI.prompt('网络出错，没发成功！');
-		}).on('sendToServicesuccess',function(){
-			$textarea.val('').trigger('change');
-			UI.prompt('发布成功！');
-		});
-		
+        }
+      }).on('login',function(user){
+          //设置用户信息
+          setUserInfoToUI.call(me,user);
+          private_userInfo = user;
+      }).on('sendToServiceError',function(){
+          UI.prompt('网络出错，没发成功！');
+      }).on('sendToServicesuccess',function(){
+          $textarea.val('').trigger('change');
+          UI.prompt('发布成功！');
+      });
 	}
 	/**
 	 * sendBox类
 	 */
 	function sendBox(dom,id,param){
-		var me = this;
-		var param = param || {};
-		this.id = id;
-    this.reply_for_id = param.reply_for_id || null;
-		this.dom = $(sendBox_tpl)[0];
-		this.text = '';
-		this.userDefine = {};
-    this.onBeforeSend = param.onBeforeSend || null;
-		$(dom).html($(this.dom));
+      var me = this;
+      var param = param || {};
+      this.id = id;
+      this.reply_for_id = param.reply_for_id || null;
+      this.isSubmitting = false;
+      this.dom = $(sendBox_tpl)[0];
+      this.text = '';
+      this.userDefine = {};
+      this.onBeforeSend = param.onBeforeSend || null;
+      $(dom).html($(this.dom));
 		
-		//绑定dom事件
-		bindDomEvent.call(this);
-		//绑定对象自定义事件
-		bindCustomEvent.call(this);
-		L.user.info(function(err,user){
-			if(err){
-				private_userInfo = null;
-			}else if(user){
-				private_userInfo = user;
-			}
-			setUserInfoToUI.call(me,user);
-		});
-    if(param.focus){
-        $(this.dom).find('textarea').focus();
-    }
+      //绑定dom事件
+      bindDomEvent.call(this);
+      //绑定对象自定义事件
+      bindCustomEvent.call(this);
+      L.user.info(function(err,user){
+        if(err){
+          private_userInfo = null;
+        }else if(user){
+          private_userInfo = user;
+        }
+        setUserInfoToUI.call(me,user);
+      });
+      if(param.focus){
+          $(this.dom).find('textarea').focus();
+      }
 	}
 	sendBox.prototype = {
-		on: ON
+      on: ON,
+      submit: function(){
+        var me = this,
+            $textarea = $(this.dom).find('textarea'),
+            $btn = $(this.dom).find('.l_send_submit');
+        
+        $textarea.focus();
+        if(this.isSubmitting){
+          return
+        }else if(this.text.length == 0){
+          UI.prompt('你丫倒写点东西啊！',null,{
+            from: $btn[0]
+          });
+        }else if(this.text.length > 500){
+          UI.prompt('这是要刷屏的节奏么！',null,{
+            from: $btn[0]
+          });
+        }else if(private_userInfo){
+          var text = this.onBeforeSend ? (this.onBeforeSend(me.text) || me.text) : me.text;
+          me.isSubmitting = true;
+          sendComment({
+            id: me.id,
+            text: text,
+            user: private_userInfo,
+            reply_for_id : me.reply_for_id || null
+          },function(err,item){
+            me.isSubmitting = false;
+            if(err){
+                EMIT.call(me,'sendToServiceError');
+            }else{
+                EMIT.call(me,'sendToServicesuccess',[item]);
+            }
+          });
+        }else{
+          askForUserInfo.call(me,function(){
+            me.submit();
+          });
+        }
+      }
 	};
 	
 	
