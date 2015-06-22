@@ -1,27 +1,30 @@
 /**
  * @author 剧中人
  * @github https://github.com/bh-lay/toucher
- * @modified 2014-6-3 15:48
+ * @modified 2015-6-23 00:25
  * 
  */
-window.util = window.util || {};
 
-window.util.toucher = window.util.toucher || function (dom){
-	return new window.util.toucher.init(dom);
-};
-
-(function(exports){
+ 
+(function(global,doc,factoryFn){
+	//初始化toucher主方法
+	var factory = factoryFn(global,doc);
+	
+	//提供window.util.toucher()接口
+	global.util = global.util || {};
+	global.util.toucher = global.util.toucher || factory;
+	
+	//提供CommonJS规范的接口
+	global.define && define(function(require,exports,module){
+		//对外接口
+		return factory;
+	});
+})(this,document,function(window,document){
 	/**
-	 * 检查class在不在多个class中 
+	 * 判断是否拥有某个class
 	 */
-	function hasClass(classAll,classSingle){
-		var classAll= classAll || '';
-		var classArray = classAll.split(/\s/g);
-		for(var i=0,total=classArray.length;i<total;i++){
-			if(classArray[i] == classSingle){
-				return true;
-			}
-		}
+	function hasClass(dom,classSingle){
+		return dom.className.match(new RegExp('(\\s|^)' + classSingle +'(\\s|$)'));
 	}
 
 	/**
@@ -30,10 +33,10 @@ window.util.toucher = window.util.toucher || function (dom){
 	 * 
 	 * @param string 事件名
 	 * @param [string] 事件委托至某个class（可选）
-	 * @param [function] 符合条件的事件被触发时需要执行的回调函数 
+	 * @param function 符合条件的事件被触发时需要执行的回调函数 
 	 * 
 	 */
-	function ON(eventName,a,b){
+	function ON(eventStr,a,b){
 		this._events = this._events || {};
 		var className,fn;
 		if(typeof(a) == 'string'){
@@ -43,16 +46,21 @@ window.util.toucher = window.util.toucher || function (dom){
 			className = null;
 			fn = a;
 		}
-		//事件名存在且callback合法，进行监听绑定
-		if(eventName.length > 0 && typeof(fn) == 'function'){
-			//事件堆无该事件，创建一个事件堆
-			if(!this._events[eventName]){
-				this._events[eventName] = [];
+		//检测callback是否合法,事件名参数是否存在·
+		if(typeof(fn) == 'function' && eventStr && eventStr.length){
+			var eventNames = eventStr.split(/\s+/);
+			for(var i=0,total=eventNames.length;i<total;i++){
+			
+				var eventName = eventNames[i];
+				//事件堆无该事件，创建一个事件堆
+				if(!this._events[eventName]){
+					this._events[eventName] = [];
+				}
+				this._events[eventName].push({
+					'className' : className,
+					'fn' : fn
+				});
 			}
-			this._events[eventName].push({
-				'className' : className,
-				'fn' : fn
-			});
 		}
 
 		//提供链式调用的支持
@@ -78,29 +86,7 @@ window.util.toucher = window.util.toucher || function (dom){
 		//从事件源：target开始向上冒泡
 		var target = e.target;
 		while (1) {
-			//当前需要校验的事件集
-			var eventsList = rest_events;
-			//置空尚未执行掉的事件集
-			rest_events = [];
-
-			//遍历事件所有绑定
-			for(var i=0,total=eventsList.length;i<total;i++){
-				var classStr = eventsList[i]['className'];
-				var callback = eventsList[i]['fn'];
-				//符合事件委托，执行
-				if(hasClass(target.className,classStr)){
-					//返回false停止事件冒泡及后续事件，其余继续执行
-					if(event_callback(eventName,callback,target,e) == false){
-						return
-					}
-				}else{
-					//不符合执行条件，压回到尚未执行掉的列表中
-					rest_events.push(eventsList[i]);
-				}
-			}
-			//向上冒泡
-			target = target.parentNode;
-			//若没有 需要执行的事件，结束冒泡
+			//若没有需要执行的事件，结束冒泡
 			if(rest_events.length ==0){
 				return;
 			}
@@ -117,6 +103,29 @@ window.util.toucher = window.util.toucher || function (dom){
 				}
 				return;
 			}
+			
+			//当前需要校验的事件集
+			var eventsList = rest_events;
+			//置空尚未执行掉的事件集
+			rest_events = [];
+
+			//遍历事件所有绑定
+			for(var i=0,total=eventsList.length;i<total;i++){
+				var classStr = eventsList[i]['className'];
+				var callback = eventsList[i]['fn'];
+				//符合事件委托，执行
+				if(hasClass(target,classStr)){
+					//返回false停止事件冒泡及后续事件，其余继续执行
+					if(event_callback(eventName,callback,target,e) == false){
+						return
+					}
+				}else{
+					//不符合执行条件，压回到尚未执行掉的列表中
+					rest_events.push(eventsList[i]);
+				}
+			}
+			//向上冒泡
+			target = target.parentNode;
 		}
 	}
 	
@@ -132,24 +141,31 @@ window.util.toucher = window.util.toucher || function (dom){
 		
 		var newE = {
 			'type' : name,
-			'pageX' : touch.clientX || 0,
-			'pageY' : touch.clientY || 0
+			'target' : e.target,
+			'pageX' : touch.pageX || 0,
+			'pageY' : touch.pageY || 0
 		};
 		//为swipe事件增加交互初始位置及移动距离
-		if(name == 'swipe' && e.startPosition){
+		if(name.match(/^swipe/) && e.startPosition){
 			newE.startX = e.startPosition['pageX'],
 			newE.startY = e.startPosition['pageY'],
 			newE.moveX = newE.pageX - newE.startX,
 			newE.moveY = newE.pageY - newE.startY
 		}
-		return fn.call(dom,newE);
+		var call_result = fn.call(dom,newE);
+		//若绑定方法返回false，阻止浏览器默认事件
+		if(call_result == false){
+			e.preventDefault();
+			e.stopPropagation();
+		}
+		
+		return call_result;
 	}
 	/**
 	 * 判断swipe方向
 	 */
 	function swipeDirection(x1, x2, y1, y2) {
-		return Math.abs(x1 - x2) >=
-			Math.abs(y1 - y2) ? (x1 - x2 > 0 ? 'Left' : 'Right') : (y1 - y2 > 0 ? 'Up' : 'Down')
+		return Math.abs(x1 - x2) >=	Math.abs(y1 - y2) ? (x1 - x2 > 0 ? 'Left' : 'Right') : (y1 - y2 > 0 ? 'Up' : 'Down')
 	}
 
 	/**
@@ -161,14 +177,19 @@ window.util.toucher = window.util.toucher || function (dom){
 
 		//轻击开始时间
 		var touchStartTime = 0;
+		
 		//记录上一次点击时间
 		var lastTouchTime = 0;
+		
 		//记录初始轻击的位置
 		var x1,y1,x2,y2;
+		
 		//轻击事件的延时器
 		var touchDelay;
+		
 		//测试长按事件的延时器
 		var longTap;
+		
 		//记录当前事件是否已为等待结束的状态
 		var isActive = false;
 		//记录有坐标信息的事件
@@ -180,11 +201,16 @@ window.util.toucher = window.util.toucher || function (dom){
 			clearTimeout(touchDelay);
 		}
 		
+      
+        //断定此次事件为轻击事件
+        function isSingleTap(){
+            actionOver();
+            EMIT.call(this_touch,'singleTap',eventMark);
+        }
 		//触屏开始
 		function touchStart(e){
 			//缓存事件
 			eventMark = e;
-		
 			x1 = e.touches[0].pageX;
 			y1 = e.touches[0].pageY;
 			x2 = 0;
@@ -208,12 +234,12 @@ window.util.toucher = window.util.toucher || function (dom){
 				return
 			}
 			var now = new Date();
-			if(now - lastTouchTime > 260){
-				touchDelay = setTimeout(function(){
-					//断定此次事件为轻击事件
-					actionOver();
-					EMIT.call(this_touch,'singleTap',eventMark);
-				},250);
+			 //若未监听doubleTap，直接响应
+            if(!this_touch._events.doubleTap || this_touch._events.doubleTap.length == 0){
+                isSingleTap();
+            }else if(now - lastTouchTime > 200){
+                //延迟响应
+                touchDelay = setTimeout(isSingleTap,190);
 			}else{
 				clearTimeout(touchDelay);
 				actionOver(e);
@@ -229,8 +255,8 @@ window.util.toucher = window.util.toucher || function (dom){
 			eventMark = e;
 			//在原生事件基础上记录初始位置（为swipe事件增加参数传递）
 			e.startPosition = {
-				'pageX' : x1,
-				'pageY' : y1
+				pageX : x1,
+				pageY : y1
 			};
 			//断定此次事件为移动事件
 			EMIT.call(this_touch,'swipe',e);
@@ -238,23 +264,17 @@ window.util.toucher = window.util.toucher || function (dom){
 			if(!isActive){
 				return
 			}
-    	   x2 = e.touches[0].pageX
-        	y2 = e.touches[0].pageY
+            x2 = e.touches[0].pageX
+            y2 = e.touches[0].pageY
 			if(Math.abs(x1-x2)>2 || Math.abs(y1-y2)>2){
 				//断定此次事件为移动手势
 				var direction = swipeDirection(x1, x2, y1, y2);
 				EMIT.call(this_touch,'swipe' + direction,e);
 			}else{
 				//断定此次事件为轻击事件
-				actionOver(e);
-				EMIT.call(this_touch,'singleTap',e);
+				isSingleTap();
 			}
 			actionOver(e);
-			//是否阻止浏览器默认事件
-			if(this_touch.preventDefault){
-				e.preventDefault();
-				e.stopPropagation();
-			}
 		}
 
 		/**
@@ -294,20 +314,14 @@ window.util.toucher = window.util.toucher || function (dom){
 		var param = param || {};
 
 		this.dom = DOM;
-		this.preventDefault = (typeof(param.preventDefaul)=='boolean' ? param.preventDefault : false);
 		//监听DOM原生事件
 		eventListener.call(this,this.dom);
 	}
 	//拓展事件绑定方法
 	touch.prototype['on'] = ON;
 	
-	
 	//对外提供接口
-	exports.init = touch;
-})(util.toucher);
-
-//提供CommonJS规范的接口
-window.define && define(function(require,exports,module){
-	//对外接口
-	return window.util.toucher;
+	return function (dom){
+		return new touch(dom);
+	};
 });
