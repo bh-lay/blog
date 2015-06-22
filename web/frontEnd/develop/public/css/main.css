@@ -1433,18 +1433,17 @@ body:before {
   height: 176px;
   max-width: 600px;
   margin: 1.5em auto 0;
+  border-bottom: 1px solid #fff;
+  overflow: hidden;
 }
 .index-about-design .device-cnt:before {
   content: '';
   position: absolute;
-  width: 120%;
-  height: 50px;
-  left: -10%;
-  bottom: -25px;
-  border-radius: 100%;
-  background: #fff;
-  opacity: .7;
-  z-index: 0;
+  height: 20px;
+  left: 10px;
+  right: 10px;
+  bottom: -20px;
+  box-shadow: 0 0px 10px #666;
 }
 .index-about-design .device {
   position: absolute;
@@ -1452,43 +1451,74 @@ body:before {
   border-radius: 8px 8px 0 0;
   background: #444;
 }
-.index-about-design .device:after {
-  content: "";
+.index-about-design .device div {
+  margin: 0 6px;
+  background: #d6d6d6;
+  overflow: hidden;
+  text-align: center;
+  line-height: 0;
+}
+.index-about-design .device div:before {
+  content: '';
+  display: block;
+  height: 10px;
+  margin-bottom: 6px;
+  background: #fff;
+  box-shadow: 0 0 2px #444;
+}
+.index-about-design .device i {
+  display: inline-block;
+  position: relative;
+  width: 58px;
+  height: 75px;
+  background: #fff;
+  margin: 0 3px 8px;
+}
+.index-about-design .device i:before {
+  content: '';
   position: absolute;
-  background: url(../images/index-skin.png);
+  width: 100%;
+  height: 62%;
+  left: 0;
+  top: 0;
+  background: #aaa;
 }
 .index-about-design .mobile {
   width: 60px;
   height: 105px;
   left: 10px;
 }
-.index-about-design .mobile:after {
-  top: 17px;
-  left: 5px;
-  width: 50px;
-  height: 88px;
-  background-position: -385px 0;
-}
 .index-about-design .mobile:before {
   content: '';
   display: block;
   position: absolute;
-  background: #303030;
+  background: #000;
   width: 3px;
   height: 3px;
   top: 4px;
   left: 28px;
   border-radius: 3px;
 }
-.index-about-design .mobile span {
+.index-about-design .mobile:after {
+  content: '';
   display: block;
   position: absolute;
-  background: #303030;
+  background: #000;
   width: 10px;
   height: 2px;
   top: 10px;
   left: 24px;
   border-radius: 2px;
+}
+.index-about-design .mobile div {
+  margin: 17px 4px 0;
+  height: 88px;
+}
+.index-about-design .mobile i {
+  display: block;
+  width: auto;
+  height: 55px;
+  margin-bottom: 4px;
 }
 .index-about-design .pc {
   width: 292px;
@@ -1496,35 +1526,36 @@ body:before {
   left: 50%;
   margin-left: -146px;
 }
-.index-about-design .pc:after {
-  top: 10px;
-  left: 6px;
-  width: 280px;
+.index-about-design .pc div {
+  margin-top: 10px;
   height: 166px;
-  background-position: 0 0;
+}
+.index-about-design .pc div:before {
+  margin-bottom: 10px;
 }
 .index-about-design .pad {
   width: 117px;
   height: 130px;
   right: 10px;
 }
-.index-about-design .pad:after {
-  top: 17px;
-  left: 5px;
-  width: 105px;
-  height: 113px;
-  background-position: -280px 0;
-}
 .index-about-design .pad:before {
   content: '';
   display: block;
   position: absolute;
-  background: #303030;
+  background: #000;
   width: 4px;
   height: 4px;
   top: 6px;
   left: 57px;
   border-radius: 100%;
+}
+.index-about-design .pad div {
+  margin-top: 17px;
+  height: 113px;
+}
+.index-about-design .pad i {
+  width: 44px;
+  height: 55px;
 }
 .index-about-backend {
   padding-top: 12em;
@@ -1537,8 +1568,8 @@ body:before {
 .index-about-backend .nodeJS-logo {
   width: 90px;
   height: 120px;
-  margin: 0 auto .5em;
-  background: url(../images/index-skin.png) -435px 0;
+  margin: 0 auto 1em;
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAAB5CAMAAACOTsaoAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAC1QTFRF0OSl////hLgW5/HSsrKys9Nw8vfmmcwzjLwmmcxmmLVZncdGwduJ3uzA////N4erwgAAAA90Uk5T//////////////////8A1NyYoQAAAyZJREFUeNrsmuGSqyAMhSMIhAL7/o97rW0VFUnAOHtnp/m1s+t+1SMhyaHw0xDet1wN/EujmiLegUY1B4qjg1oiiKKN2oQRQ0dUu0AhtFOFcALooE4iXEQbVQlzBY2qGtiNdooM14X2ihW+GW0UO0wbGlVDYAPaqcZwTLRXHeEZ6Kg6I1JoVN2BVXSo/WsAraF+xSm6uuAwDXMk5C5EYGoRhyUiUxVgLThjhyysYS1EYCy4oIdd6MBYiECLDB9gCuuHAJ37wBbZzk/mLVty4IocTz7rXPLqg7n1+fG4DCeFqrdVQ8PZW+NJDgyRTU0o04wmXxcteRntGHKS10CTyE2SF35peAm9kbx0KZwvOFZRWB/QUWi0rDVbkNxSaOCIXJYcCLTliVyS3BLo4qPRMbMZ6FQX10Tj95ul7kGHlNJnc8KYFYVkrqJh3SjMrtZkr+QiGoZDgAw6DoWIEmh8iwDTS/RmEd0JoOM++VMuySV0OvxlxmkBtD7sWH6+bRRC62OeCKBfS8/GvFwZY4KAIH7NlATeoUCiL+t61/jpFJ0UGg9N5aC91B4S7RHuZNDTe0t7ukUh9FMX52PSdreLiKCXhAGbVdsr6Gf5s7si/9pFLqOhULNxzfQr6Fiox17mrn2hoRISRL0r1tr6OMg2bIFS8EzwBBEgbcvMtcWXhkpxlK/oy4K/3IfsN6gUpLan2bd4p7i1Gjo2VVtNdBe8D66jnTw0wVCf4Bqa4EPrnkg0t3U/DBw265HqAwfyx6S59c2SuT6Z0mPSpm+0+mQCYs3TUDVX6nN4KBoP1CC9SY5EuDu6YZDeZl7ZfovkTHxuWrw3TW26jAfCalEYsMHdaUIv96jzsRqZxgPQZvWraYp8kT+2Fun+xn4zjjwYWC1Elzk3tGvLMT5d6jc+b7VrW0xmaDWZb7XGKUPfPw1932fo33oMUTwSZYLjbx75kJLTIv/S8VrbeZX5f44ybz2AvfXY+NbD7prkV4/ob/1iwa1fh5jisSU/BL8fMo75adI4iqLHx8cNfozS6Ak+azH/KI2e4I/3D/LoJb7oL/qL/qK/6D+E/ifAAI35BZMFavr+AAAAAElFTkSuQmCC');
 }
 .index-about-backend .language p {
   color: #80bd01;
