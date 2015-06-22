@@ -1436,14 +1436,14 @@ body:before {
   border-bottom: 1px solid #fff;
   overflow: hidden;
 }
-.index-about-design .device-cnt:before {
+.index-about-design .device-cnt:after {
   content: '';
   position: absolute;
-  height: 20px;
+  height: 10px;
   left: 10px;
   right: 10px;
-  bottom: -20px;
-  box-shadow: 0 0px 10px #666;
+  bottom: -10px;
+  box-shadow: 0 0px 10px #000;
 }
 .index-about-design .device {
   position: absolute;
