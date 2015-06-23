@@ -1449,16 +1449,14 @@ body:before {
   position: absolute;
   bottom: 0;
   border-radius: 8px 8px 0 0;
-  background: #444;
-}
-.index-about-design .device div {
-  margin: 0 6px;
   background: #d6d6d6;
-  overflow: hidden;
-  text-align: center;
+  border: 1px solid #444;
+  border-width: 10px 6px 0;
   line-height: 0;
+  /** 导航 **/
+  /** 列表项 **/
 }
-.index-about-design .device div:before {
+.index-about-design .device:before {
   content: '';
   display: block;
   height: 10px;
@@ -1484,35 +1482,31 @@ body:before {
   background: #aaa;
 }
 .index-about-design .mobile {
-  width: 60px;
-  height: 105px;
+  width: 52px;
+  height: 88px;
+  border-width: 17px 4px 0;
   left: 10px;
-}
-.index-about-design .mobile:before {
-  content: '';
-  display: block;
-  position: absolute;
-  background: #000;
-  width: 3px;
-  height: 3px;
-  top: 4px;
-  left: 28px;
-  border-radius: 3px;
 }
 .index-about-design .mobile:after {
   content: '';
   display: block;
   position: absolute;
   background: #000;
+  width: 3px;
+  height: 3px;
+  top: -13px;
+  left: 24px;
+  border-radius: 3px;
+}
+.index-about-design .mobile span {
+  display: block;
+  position: absolute;
+  background: #000;
   width: 10px;
   height: 2px;
-  top: 10px;
-  left: 24px;
+  top: -7px;
+  left: 20px;
   border-radius: 2px;
-}
-.index-about-design .mobile div {
-  margin: 17px 4px 0;
-  height: 88px;
 }
 .index-about-design .mobile i {
   display: block;
@@ -1521,37 +1515,30 @@ body:before {
   margin-bottom: 4px;
 }
 .index-about-design .pc {
-  width: 292px;
-  height: 176px;
+  width: 280px;
+  height: 166px;
   left: 50%;
   margin-left: -146px;
 }
-.index-about-design .pc div {
-  margin-top: 10px;
-  height: 166px;
-}
-.index-about-design .pc div:before {
+.index-about-design .pc:before {
   margin-bottom: 10px;
 }
 .index-about-design .pad {
-  width: 117px;
-  height: 130px;
+  width: 105px;
+  height: 113px;
   right: 10px;
+  border-top-width: 17px;
 }
-.index-about-design .pad:before {
+.index-about-design .pad:after {
   content: '';
   display: block;
   position: absolute;
   background: #000;
   width: 4px;
   height: 4px;
-  top: 6px;
-  left: 57px;
+  top: -11px;
+  left: 51px;
   border-radius: 100%;
-}
-.index-about-design .pad div {
-  margin-top: 17px;
-  height: 113px;
 }
 .index-about-design .pad i {
   width: 44px;
