@@ -19,7 +19,7 @@ window.admin = window.admin || {};
  **/
 
 define(function(require,exports){
-  require('util/lofox_1_0.js');
+  require('util/lofox.js');
 	require('UI/dialog.js');
 	require('lib/jquery/jquery.easing.1.3.min.js');
 

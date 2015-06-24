@@ -58,7 +58,7 @@ window.L = window.L || {};
 
 define(function (require, exports) {
 	require('public/js/juicer.js');
-	require('util/lofox_1_0.js');
+	require('util/lofox.js');
 	require('UI/dialog.js');
 	require('public/js/nicescroll.js')(jQuery);
     
@@ -186,11 +186,23 @@ define(function (require, exports) {
     share_url[shareto] && window.open(share_url[shareto]);
     return false;
   })
-  //处理火狐，js链接新窗口打开问题，感谢 @紫心蕊 
+  //全局控制 a 链接的打开方式
   .on('click','a',function(e){
-      if(hrefForScript($(this).attr('href'))){
+      var url = $(this).attr('href');
+      //为JS脚本准备的链接  处理火狐，js链接新窗口打开问题，感谢 @紫心蕊 
+      if(hrefForScript(url)){
           e.preventDefault();
+      }else if(lofox.isInRouter(url)){
+        //路由中配置的地址
+		setTimeout(function () {
+			lofox.push(url);
+			lofox.refresh();
+		});
+		return false;
       }
+    // html base 已设置链接为新窗口打开，此处无需处理
+    //  else{
+    //  }
   })
   //nicescrol
   .niceScroll({
@@ -356,15 +368,6 @@ function routerHandle(lofox) {
 		var dom = getNewPage();
        
         o_active_page = new L.views.bless(dom);
-	});
-	
-	$('body').on('click', 'a[lofox="true"]', function () {
-		var url = $(this).attr('href');
-		setTimeout(function () {
-			lofox.push(url);
-			lofox.refresh();
-		});
-		return false;
 	});
 }
 
