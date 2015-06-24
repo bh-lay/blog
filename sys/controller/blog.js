@@ -129,7 +129,7 @@ exports.detail = function (connect,app,id){
       //获取视图
       app.views('blogDetail',{
         id : id,
-        title : data.title + '_小剧客栈_剧中人的个人博客',
+        title : data.title,
         keywords : data.tags,
         description : data.intro,
         time_show : data.time_show,
