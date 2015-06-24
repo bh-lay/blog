@@ -2,20 +2,20 @@
   <div class="artItCnt">
     {@if it.cover}
     <div class="artItPic">
-      <a href="/blog/${it.id}" title="${it.title}" lofox="true" target="_self" >
+      <a href="/blog/${it.id}" title="${it.title}" >
         <img src="${it.cover}" alt="${it.title}" />
       </a>
     </div>
     {@/if}
     <div class="artItCpt">
-      <a href="/blog/${it.id}" title="${it.title}" lofox="true" target="_self" >
+      <a href="/blog/${it.id}" title="${it.title}" >
         ${it.title}
       </a>
     </div>
     <div class="artItInfo"><p>${it.intro}</p></div>
     <footer>
       <div class="tags">
-        <strong>tags</strong>{@each it.tags as t}<a href="/blog?tag=${t}" lofox="true">${t}</a>{@/each}
+        <strong>tags</strong>{@each it.tags as t}<a href="/blog?tag=${t}">${t}</a>{@/each}
       </div>
       <div class="time">${it.time_show}</div>
     </footer>
