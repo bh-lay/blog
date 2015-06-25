@@ -248,6 +248,7 @@ pre.hljs code {
 .article {
   padding: 20px;
   font-family: "Microsoft Yahei";
+  color: #333;
 }
 .article img {
   display: block;
@@ -285,7 +286,6 @@ pre.hljs code {
   line-height: 1.8;
   margin: 1em 0;
   font-size: 1em;
-  color: #333333;
 }
 .article blockquote {
   margin: 0 0 1em;
@@ -1358,7 +1358,15 @@ body:before {
   margin: 0 auto 1.5em;
   border-radius: 100%;
   border: 5px solid #fff;
-  background: url(../images/my-avatar.jpg);
+  background: url(../images/my-avatar.jpg) #ffffff;
+  transition: all 0.4s ease-out;
+  -moz-transition: all 0.4s ease-out;
+  -webkit-transition: all 0.4s ease-out;
+  -o-transition: all 0.4s ease-out;
+}
+.index-aboutme .avatar:hover {
+  transform: rotate(200deg);
+  -webkit-transform: rotate(200deg);
 }
 .index-aboutme h3 {
   margin-bottom: .5em;
@@ -1838,6 +1846,14 @@ body:before {
   border-style: solid;
   border-color: transparent transparent #666;
   border-width: 0 3rem 1rem;
+}
+@media screen and (max-width: 650px) {
+  .blogDetail .article-section {
+    background: #fafafa;
+  }
+  .blogDetail .article-section .grid-box-full {
+    padding: 0;
+  }
 }
 /**实验室列表**/
 .labsList {

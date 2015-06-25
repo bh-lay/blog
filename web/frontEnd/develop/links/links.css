@@ -151,6 +151,7 @@ html {
 .article {
   padding: 20px;
   font-family: "Microsoft Yahei";
+  color: #333;
 }
 .article img {
   display: block;
@@ -188,7 +189,6 @@ html {
   line-height: 1.8;
   margin: 1em 0;
   font-size: 1em;
-  color: #333333;
 }
 .article blockquote {
   margin: 0 0 1em;
