@@ -150,7 +150,7 @@ html {
  */
 pre.hljs code {
   display: block;
-  max-height: 200px;
+  max-height: 20em;
   padding: 0.5em;
   color: #ddd;
   border: none;
@@ -309,14 +309,14 @@ pre.hljs code {
 }
 .article pre {
   overflow-x: auto;
-  font-size: 13px;
   line-height: 1.8;
 }
 .article code {
   font-family: inherit;
-  padding: .2em .4em;
-  color: #f70;
-  background-color: #eee;
+  margin: 0 .3em;
+  padding: 0 .4em;
+  color: #e40;
+  background-color: #f6f6f6;
   border-radius: 4px;
 }
 .article hr {
@@ -327,10 +327,11 @@ pre.hljs code {
 }
 .article a {
   padding: 0px .5em;
-  text-decoration: underline;
+  text-decoration: none;
+  color: #3da9f7;
 }
 .article a:hover {
-  color: #f70;
+  color: #2c79b0;
   text-decoration: underline;
 }
 .article > *:nth-child(1) {
@@ -1776,10 +1777,9 @@ body:before {
   padding: 9em 0 12em;
 }
 .blogDetail .info-section h1 {
-  margin: 0 1em;
+  margin: 0 .5em .5em;
   font-size: 2.5em;
-  font-weight: normal;
-  line-height: 1.3;
+  line-height: 1.2;
 }
 .blogDetail .info-section P {
   margin: 0 0 1em;

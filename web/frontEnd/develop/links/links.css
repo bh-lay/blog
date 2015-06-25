@@ -212,14 +212,14 @@ html {
 }
 .article pre {
   overflow-x: auto;
-  font-size: 13px;
   line-height: 1.8;
 }
 .article code {
   font-family: inherit;
-  padding: .2em .4em;
-  color: #f70;
-  background-color: #eee;
+  margin: 0 .3em;
+  padding: 0 .4em;
+  color: #e40;
+  background-color: #f6f6f6;
   border-radius: 4px;
 }
 .article hr {
@@ -230,10 +230,11 @@ html {
 }
 .article a {
   padding: 0px .5em;
-  text-decoration: underline;
+  text-decoration: none;
+  color: #3da9f7;
 }
 .article a:hover {
-  color: #f70;
+  color: #2c79b0;
   text-decoration: underline;
 }
 .article > *:nth-child(1) {
