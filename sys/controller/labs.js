@@ -93,7 +93,7 @@ exports.detail = function (connect,app,lab_name){
       }
       //获取视图
       app.views('labsDetail',{
-        title : data.title + '_小剧客栈_剧中人的个人博客',
+        title : data.title,
         keywords : data.tags,
         description : data.intro,
         content : data.content,
