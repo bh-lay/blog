@@ -271,34 +271,33 @@ define(function (require, exports) {
 }(L));
 
 function routerHandle(lofox) {
-    'use strict';
-	var dom = $('.contlayer'),
+  'use strict';
+  var dom = $('.contlayer'),
       container = $('.app_container'),
       $active_page = null,
       o_active_page = null;
-	//显示单页dom
-	function getNewPage() {
-		var newDom = $('<div class="page"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载模块</p></div></div>');
+  //显示单页dom
+  function getNewPage() {
+    var newDom = $('<div class="page"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载模块</p></div></div>');
     //移除老的page dom
     if ($active_page) {
       var $old = $active_page;
-			$active_page = null;
-			$old.addClass('fadeOutRight');
-			setTimeout(function () {
-				$old.remove();
+          $active_page = null;
+          $old.addClass('fadeOutRight');
+      setTimeout(function () {
+        $old.remove();
         $('html,body').scrollTop(0);
         newDom.addClass('fadeInLeft page-active');
         setTimeout(function () {
           newDom.removeClass('fadeInLeft');
         }, 500);
-			}, 500);
-		} else {
-        newDom.addClass('page-active');
+      }, 500);
+    } else {
+      newDom.addClass('page-active');
     }
     container.append(newDom);
-		$active_page = newDom;
-		return newDom;
-	}
+    return $active_page = newDom;
+  }
 	
     //视图刷新前，销毁上一个对象
 	lofox.on('beforeRefresh',function(){

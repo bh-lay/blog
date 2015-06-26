@@ -4,38 +4,35 @@
  */
 define(function(require,exports){
   require('lib/highlight/highlight');
-	var showdown = require('public/js/showdown');
-  var empty_tpl = '<div class="blank-content"><p>博文不存在</p></div>';
+  var showdown = require('public/js/showdown'),
+      empty_tpl = '<div class="blank-content"><p>博文不存在</p></div>';
 	
-	function getData(id,fn){
-		$.ajax({
-			type : 'GET' ,
-			url : '/ajax/blog',
-			data : {
-				act : 'get_detail',
-				id : id
-			},
-			success :function(data){
+  function getData(id,fn){
+    $.ajax({
+      type : 'GET' ,
+      url : '/ajax/blog',
+      data : {
+        act : 'get_detail',
+        id : id
+      },
+      success :function(data){
         var template = $('#tpl_blog_detail').html();
         var tpl = L.tplModule(template);
-				if(data.code == 200){
-					var converter = new showdown.converter();
-					var detail = data['detail'];
-					detail.content = converter.makeHtml(detail.content);
-					detail.time_show = L.parseTime(detail.time_show,'{y}-{mm}-{dd}');
-					var this_html = juicer(tpl,detail);
-					fn&&fn(null,this_html,data['detail']['title']);
-				}else{
-					fn&&fn('博客不存在！');
-				}
-			}
-		});
-	};
+          if(data.code == 200){
+            var converter = new showdown.converter();
+            var detail = data['detail'];
+            detail.content = converter.makeHtml(detail.content);
+            detail.time_show = L.parseTime(detail.time_show,'{y}-{mm}-{dd}');
+            var this_html = juicer(tpl,detail);
+            fn&&fn(null,this_html,data['detail']['title']);
+          }else{
+            fn&&fn('博客不存在！');
+          }
+        }
+    });
+  };
 	
-	return function(dom,id,callback){
-		
-		getData(id,function(err,html,title){
-			if(err){
+  return function(dom,id,callback){
         dom.html(empty_tpl);
 				return
 			}
@@ -53,4 +50,6 @@ define(function(require,exports){
       });
 		});
 	};
+    });
+  };
 });

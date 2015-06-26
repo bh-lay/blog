@@ -451,7 +451,7 @@ define(function(require,exports){
 	 * 列表类
 	 *
 	 */
-	function list(dom,cid,param){
+  function list(dom,cid,param){
     var me = this;
     param = param || {};
     //comment id
@@ -461,8 +461,9 @@ define(function(require,exports){
     this.limit = param.list_num || 15;
     this.total = 0;
     this._status = 'normal';
+    
     this.dom = $(list_tpl)[0];
-
+    
     $(dom).html(this.dom);
 
     this.getData(0,function(err,data){
@@ -483,9 +484,7 @@ define(function(require,exports){
             max_page_btn : 6
         });
         page.jump = function(num){
-          $('html,body').animate({
-            scrollTop: $(me.dom).offset().top - 70
-          },100);
+          me.scrollToTop();
           me.getData((num-1)*me.limit,function(err,data){
             if(err){
               console.log('error');
@@ -520,21 +519,26 @@ define(function(require,exports){
       });
     });
 	}
-	list.prototype.addItem = function(item){
-      item.time = '刚刚';
-      item.content = strToEmoji(item.content);
-      if(item.user && item.user.blog){
-        item.user.blog = parseUrl(item.user.blog);
-      }
-      var html = juicer(item_tpl,{
-        list: [item]
-      });
-      var $item = $(html);
-      $(this.dom).find('.l_com_list_cnt').prepend($item);
-      $item.addClass('l_com_item_ani-insert');
-      $(this.dom).find('.l_com_list_noData').fadeOut(100);
-	};
-	list.prototype.getData = function(skip,callback){
+  list.prototype.scrollToTop = function(){
+    $('html,body').animate({
+      scrollTop: $(this.dom).offset().top - 70
+    },200);
+  };
+  list.prototype.addItem = function(item){
+    item.time = '刚刚';
+    item.content = strToEmoji(item.content);
+    if(item.user && item.user.blog){
+      item.user.blog = parseUrl(item.user.blog);
+    }
+    var html = juicer(item_tpl,{
+      list: [item]
+    });
+    var $item = $(html);
+    $(this.dom).find('.l_com_list_cnt').prepend($item);
+    $item.addClass('l_com_item_ani-insert');
+    $(this.dom).find('.l_com_list_noData').fadeOut(100);
+  };
+  list.prototype.getData = function(skip,callback){
     if(this._status == 'loading'){
         return;
     }
@@ -568,20 +572,20 @@ define(function(require,exports){
         }
       }
     });
-	};
+  };
 	
-	exports.sendBox = sendBox;
-	exports.list = list;
-	exports.init = function(dom,id,param){
-		var me = this;
-		this.dom = $(baseTpl)[0];
-		this.id = id;
-		$(dom).html($(this.dom));
-		
-		this.sendBox = new sendBox($(this.dom).find('.l_com_sendBox')[0],id,param);
-		this.list = new list($(this.dom).find('.l_com_list')[0],id,param);
-		this.sendBox.on('sendToServicesuccess',function(item){
-			me.list.addItem(item);
-		});
-	};
+  exports.sendBox = sendBox;
+  exports.list = list;
+  exports.init = function(dom,id,param){
+    var me = this;
+    this.dom = $(baseTpl)[0];
+    this.id = id;
+    $(dom).html($(this.dom));
+
+    this.sendBox = new sendBox($(this.dom).find('.l_com_sendBox')[0],id,param);
+    this.list = new list($(this.dom).find('.l_com_list')[0],id,param);
+    this.sendBox.on('sendToServicesuccess',function(item){
+      me.list.addItem(item);
+    });
+  };
 });
