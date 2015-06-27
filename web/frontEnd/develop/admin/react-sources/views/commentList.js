@@ -17,6 +17,7 @@ define(function(require){
       }
       var time = parseTime(this.props.time),
           url = this.props.cid == 'define-1' ? '/bless' : '/' + this.props.cid.replace(/\-/g,'/');
+       url += '#comments-' + this.props._id;
       return (
         <li className="list-group-item clearfix" data-uid={this.props.uid} data-cid={this.props.cid}>
           <div className="comm_header">
