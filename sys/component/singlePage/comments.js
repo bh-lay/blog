@@ -69,7 +69,7 @@ function handleData(docs,callback){
     if(item.cid == 'define-1'){
       item.url = '/bless';
     }else{
-      item.url = '/' + item.cid.replace(/\-/g,'/');
+      item.url = '/' + item.cid.replace(/\-/g,'/') + '#comments-' + item._id;
     }
     //转换时间格式
     item.time = utils.parse.time(item.time,"{h}:{i} {m}-{d}");

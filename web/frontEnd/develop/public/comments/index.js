@@ -471,8 +471,20 @@ define(function(require,exports){
         $(me.dom).find('.l_com_list_cnt').html(noData_tpl);
         return
       }
+      
+      var hash_match = (location.hash || '').match(/#comments-(.+)/);
+
       var html = juicer(item_tpl,data);
       $(me.dom).find('.l_com_list_cnt').html(html);
+      
+      if(hash_match){
+        var dom = $(me.dom).find('.l_com_item[data-id=' + hash_match[1] + ']');
+        setTimeout(function(){
+          me.scrollTo(dom,1200,function(){
+            dom.addClass('l_com_item_ani-active');
+          });
+        },500);
+      }
       if(me.total == 0){
         $(me.dom).find('.l_com_list_cnt').prepend(noData_tpl);
       }else{
@@ -484,7 +496,7 @@ define(function(require,exports){
             max_page_btn : 6
         });
         page.jump = function(num){
-          me.scrollToTop();
+          me.scrollTo($(me.dom));
           me.getData((num-1)*me.limit,function(err,data){
             if(err){
               console.log('error');
@@ -518,11 +530,11 @@ define(function(require,exports){
         me.addItem(item);
       });
     });
-	}
-  list.prototype.scrollToTop = function(){
+  }
+  list.prototype.scrollTo = function(dom,time,fn){
     $('html,body').animate({
-      scrollTop: $(this.dom).offset().top - 70
-    },200);
+      scrollTop: dom.offset().top - 70
+    },time || 100,fn);
   };
   list.prototype.addItem = function(item){
     item.time = '刚刚';

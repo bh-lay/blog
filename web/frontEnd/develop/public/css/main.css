@@ -1066,15 +1066,13 @@ body:before {
 }
 @-webkit-keyframes placeholderClose {
   0% {
-    opacity: 1;
+    background: #fff;
   }
-  99% {
-    opacity: 0;
-    width: 100%;
+  50% {
+    background: #fa7;
   }
   100% {
-    opacity: 0;
-    width: 0;
+    background: #fff;
   }
 }
 /*聚焦状态*/
@@ -1188,6 +1186,48 @@ body:before {
     opacity: 1;
   }
 }
+@keyframes commentsActive {
+  0% {
+    background: #fff;
+  }
+  40% {
+    background: #fa7;
+  }
+  80% {
+    background: #fa7;
+  }
+  100% {
+    background: #fff;
+  }
+}
+@-moz-keyframes commentsActive {
+  0% {
+    background: #fff;
+  }
+  40% {
+    background: #fa7;
+  }
+  80% {
+    background: #fa7;
+  }
+  100% {
+    background: #fff;
+  }
+}
+@-webkit-keyframes commentsActive {
+  0% {
+    background: #fff;
+  }
+  40% {
+    background: #fa7;
+  }
+  80% {
+    background: #fa7;
+  }
+  100% {
+    background: #fff;
+  }
+}
 /** list **/
 .l_com_list_cnt {
   overflow: hidden;
@@ -1227,6 +1267,12 @@ body:before {
   -moz-animation: insert 2s;
   -webkit-animation: insert 2s;
   -o-animation: insert 2s;
+}
+.l_com_item_ani-active {
+  animation: commentsActive 2s;
+  -moz-animation: commentsActive 2s;
+  -webkit-animation: commentsActive 2s;
+  -o-animation: commentsActive 2s;
 }
 .l_com_item_main {
   position: relative;

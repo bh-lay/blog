@@ -33,23 +33,23 @@ define(function(require,exports){
   };
 	
   return function(dom,id,callback){
+    getData(id,function(err,html,title){
+      if(err){
         dom.html(empty_tpl);
-				return
-			}
-			callback && callback(title);
-			html&&dom.html(html);
-			var commentDom = dom.find('.comments_frame');
-      
+        return
+      }
+      callback && callback(title);
+      html&&dom.html(html);
+      var commentDom = dom.find('.comments_frame');
+
       //代码高亮
       dom.find('pre').each(function(){
-          hljs.highlightBlock(this);
+        hljs.highlightBlock(this);
       });
       
-			new L.views.comments.init(commentDom,'blog-' + id,{
+      var comments = new L.views.comments.init(commentDom,'blog-' + id,{
         list_num: 8
       });
-		});
-	};
     });
   };
 });
