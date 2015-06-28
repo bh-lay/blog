@@ -305,11 +305,9 @@ function routerHandle(lofox) {
       o_active_page.destroy();
     }
     o_active_page = null;
-  });
-  /**
-   * 监听视图刷新事件
-   */
-  lofox.on('refresh', function (pathData,search) {
+  })
+  // 监听视图刷新事件
+  .on('refresh', function (pathData,search) {
     //显示隐藏返回按钮
     if(pathData.length > 1){
       L.nav.back.show();
@@ -327,11 +325,9 @@ function routerHandle(lofox) {
     var dom = getNewPage();
 
     o_active_page = new L.views.index(dom);
-  });
-  /**
-   * 博文列表
-   */
-  lofox.set('/blog', function (param, pathnde, search) {
+  })
+  // 博文列表
+  .set('/blog', function (param, pathnde, search) {
     this.title('我的博客_小剧客栈');
     L.nav.setCur('blog');
     var dom = getNewPage();
@@ -348,20 +344,17 @@ function routerHandle(lofox) {
     o_active_page = new L.views.blogDetail(dom, param.id, function (title) {
       lofox.title(title);
     });
-  });
+  })
   //实验室列表页
-  lofox.set('/labs', function () {
+  .set('/labs', function () {
     this.title('实验室_小剧客栈');
 
     L.nav.setCur('labs');
     var dom = getNewPage();
     o_active_page = new L.views.labsList(dom);
-  });
-
-  /**
-   * 留言板
-   */
-  lofox.set('/bless', function () {
+  })
+  // 留言板
+  .set('/bless', function () {
     this.title('留言板_小剧客栈');
     L.nav.setCur('bless');
     var dom = getNewPage();

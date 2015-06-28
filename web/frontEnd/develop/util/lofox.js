@@ -2,7 +2,7 @@
  * @author bh-lay
  * @github https://github.com/bh-lay/lofox
  * @version 1.0
- * @modified 2015-06-25 00:30
+ * @modified 2015-06-29 00:05
  *  location fox
  */
 
@@ -242,6 +242,7 @@
       if(typeof(callback) =='function'){
         this._rest = callback;
       }
+      return this;
     },
     on : function ON(eventName,callback){
       //事件堆无该事件，创建一个事件堆
@@ -249,6 +250,7 @@
         this.events[eventName] = [];
       }
       this.events[eventName].push(callback);
+      return this;
     },
     set : function(url,callback){
       var routerNames = [];
@@ -268,6 +270,7 @@
           renderFn : callback
         };
       };
+      return this;
     },
     //设置页面标题
     title : function(title){
