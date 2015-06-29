@@ -1541,6 +1541,7 @@ body:before {
   height: 88px;
   border-width: 17px 4px 0;
   left: 10px;
+  z-index: 1;
 }
 .index-about-design .mobile:after {
   content: '';
