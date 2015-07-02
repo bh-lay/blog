@@ -489,7 +489,7 @@ define(function(require,exports){
         $(me.dom).find('.l_com_list_cnt').prepend(noData_tpl);
       }else{
         //分页组件
-        var page = new pagination($(dom).find('.l_com_list_pagination'),{
+        var page = new pagination($(me.dom).find('.l_com_list_pagination'),{
             list_count : me.total,
             page_cur : 0,
             page_list_num : me.limit,
