@@ -502,9 +502,6 @@ body:before {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
   z-index: 2;
 }
-.nav-back {
-  opacity: 0;
-}
 .nav_appname {
   display: none;
 }
@@ -577,29 +574,6 @@ body:before {
     padding-left: 5px;
     font-size: 14px;
     text-align: left;
-  }
-  .nav-back {
-    position: absolute;
-    top: 5px;
-    left: 0;
-    height: 40px;
-    padding: 0 20px;
-    line-height: 40px;
-    font-size: 16px;
-    color: #333;
-    background: #fff;
-    white-space: nowrap;
-    border-radius: 4px;
-    z-index: 4;
-    opacity: 1;
-    transition: all 0.2s linear;
-    -moz-transition: all 0.2s linear;
-    -webkit-transition: all 0.2s linear;
-    -o-transition: all 0.2s linear;
-  }
-  .nav-back i {
-    font-size: 22px;
-    margin-right: 5px;
   }
   .nav_moreBtn {
     position: absolute;

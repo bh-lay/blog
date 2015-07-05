@@ -34,13 +34,5 @@ define(function () {
 	}
 	var nav = init;
 	nav.setCur = setCur;
-    nav.back = {
-        show : function(){
-            $('.nav-back').show();
-        },
-        hide : function(){
-            $('.nav-back').hide();
-        }
-    };
 	return nav;
 });
