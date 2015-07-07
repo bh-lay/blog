@@ -189,8 +189,9 @@ define(function (require, exports) {
   //全局控制 a 链接的打开方式
   .on('click','a',function(e){
     var url = $(this).attr('href');
-    //为JS脚本准备的链接  处理火狐，js链接新窗口打开问题，感谢 @紫心蕊 
+    //为JS脚本准备的链接
     if(hrefForScript(url)){
+			//阻止浏览器默认事件，处理因base设置，导致此类链接在火狐中新窗口打开问题，感谢 @紫心蕊 
       e.preventDefault();
     }else if(lofox.isInRouter(url)){
       //路由中配置的地址
@@ -309,11 +310,6 @@ function routerHandle(lofox) {
   // 监听视图刷新事件
   .on('refresh', function (pathData,search) {
     //显示隐藏返回按钮
-    if(pathData.length > 1){
-      L.nav.back.show();
-    }else{
-      L.nav.back.hide();
-    }
   });
 
   /**
