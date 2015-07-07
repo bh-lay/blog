@@ -120,9 +120,9 @@ define(function(require,exports){
     });
     //创建列表对象
     var list = new LIST(pageTag,function(){
-      me.$loading.fadeIn();
+      me.$loading.stop(true).fadeIn();
     },function(list){
-      me.$loading.fadeOut();
+      me.$loading.stop(true).fadeOut();
       if(!list || list.length == 0){
         me.$list.html(empty_tpl);
       }
