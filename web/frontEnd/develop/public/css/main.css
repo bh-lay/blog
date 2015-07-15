@@ -2592,3 +2592,29 @@ a:active {
   -webkit-animation: fadeOutRight .5s ease both;
   -moz-animation: fadeOutRight .5s ease both;
 }
+.app-toolbar {
+  position: fixed;
+  bottom: 0;
+  right: 20px;
+  width: 60px;
+  background: #fff;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+.app-toolbar .back-top {
+  position: relative;
+  display: block;
+  height: 30px;
+  background: #f70;
+}
+.app-toolbar .back-top:before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: -10px;
+  border-style: solid;
+  border-width: 0 30px 10px 30px;
+  border-color: transparent transparent #ff7700;
+}
