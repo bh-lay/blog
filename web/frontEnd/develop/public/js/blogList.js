@@ -55,10 +55,11 @@ define(function(require,exports){
     this.tag = tag || null
     this.onLoadStart = onLoadStart;
     this.onLoaded = onLoaded;
-    this.loadMore();
     this.isLoading = false;
+    this.loadMore();
   }
   LIST.prototype.loadMore = function (){
+		console.log(this);
     var me = this;
     if(this.count!=0 && this.skip >= this.count){
       return
