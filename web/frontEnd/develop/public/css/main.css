@@ -1618,7 +1618,7 @@ body:before {
 .articleListPage {
   min-height: 500px;
   margin: 30px 0;
-  padding: 0 20px 0 240px;
+  padding: 0 10px 0 240px;
 }
 .articleListPage:after {
   content: '';
@@ -1775,22 +1775,13 @@ body:before {
   color: #888;
   text-indent: 2em;
 }
-@media (max-width: 780px) {
+@media (max-width: 650px) {
   .articleListPage {
+    padding-left: 10px;
     width: auto;
-  }
-  .articleListPage-side {
-    position: static;
-    float: none;
-    width: auto;
-    max-width: 400px;
-    margin: auto;
-    padding-left: 0;
   }
   .articleListPage-tags {
-    position: static;
-    width: auto;
-    margin-bottom: 30px;
+    display: none;
   }
 }
 /**
@@ -1870,6 +1861,9 @@ body:before {
 @media screen and (max-width: 650px) {
   .blogDetail .article-section {
     background: #fafafa;
+  }
+  .blogDetail .article-section .grid-box-full {
+    padding: 0;
   }
 }
 /**实验室列表**/
