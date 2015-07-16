@@ -1,6 +1,8 @@
 /** 博文列表页 **/
 .articleListPage{
-  padding: 30px 0;
+	min-height: 500px;
+	margin: 30px 0;
+  padding: 0 20px 0 240px;
   &:after{
     content: '';
     display: block;
@@ -25,6 +27,9 @@
   }
 }
 .articleListPage-tags{
+	position: absolute;
+	width: 200px;
+	margin-left: -220px;
   .content{
     padding: 20px 0px 10px 10px;
   }
@@ -259,9 +264,6 @@
   .blogDetail{
     .article-section {
       background: #fafafa;
-      .grid-box-full{
-        padding: 0;
-      }
     }
   }
 }

@@ -94,12 +94,6 @@ html {
 .grid-row .grid-col-flow-300 {
   width: calc(100% - 300px);
 }
-.grid-row .grid-col-fix-220 {
-  width: 220px;
-}
-.grid-row .grid-col-flow-220 {
-  width: calc(100% - 220px);
-}
 @media screen and (max-width: 1550px) {
   html {
     font-size: 16px;
@@ -123,9 +117,7 @@ html {
   .grid-row .grid-box-2,
   .grid-row .grid-col-2-4,
   .grid-row .grid-col-fix-300,
-  .grid-row .grid-col-flow-300,
-  .grid-row .grid-col-fix-220,
-  .grid-row .grid-col-flow-220 {
+  .grid-row .grid-col-flow-300 {
     width: 100%;
     float: none !important;
     clear: both;
@@ -421,7 +413,7 @@ pre.hljs code {
 body:before {
   content: '';
   display: block;
-  height: 48px;
+  height: 50px;
 }
 .app_nav {
   position: fixed;
@@ -1624,7 +1616,9 @@ body:before {
 }
 /** 博文列表页 **/
 .articleListPage {
-  padding: 30px 0;
+  min-height: 500px;
+  margin: 30px 0;
+  padding: 0 20px 0 240px;
 }
 .articleListPage:after {
   content: '';
@@ -1647,6 +1641,11 @@ body:before {
 .articleListPage .l-loading {
   width: 20px;
   height: 20px;
+}
+.articleListPage-tags {
+  position: absolute;
+  width: 200px;
+  margin-left: -220px;
 }
 .articleListPage-tags .content {
   padding: 20px 0px 10px 10px;
@@ -1871,9 +1870,6 @@ body:before {
 @media screen and (max-width: 650px) {
   .blogDetail .article-section {
     background: #fafafa;
-  }
-  .blogDetail .article-section .grid-box-full {
-    padding: 0;
   }
 }
 /**实验室列表**/

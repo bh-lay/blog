@@ -94,12 +94,6 @@ html {
 .grid-row .grid-col-flow-300 {
   width: calc(100% - 300px);
 }
-.grid-row .grid-col-fix-220 {
-  width: 220px;
-}
-.grid-row .grid-col-flow-220 {
-  width: calc(100% - 220px);
-}
 @media screen and (max-width: 1550px) {
   html {
     font-size: 16px;
@@ -123,9 +117,7 @@ html {
   .grid-row .grid-box-2,
   .grid-row .grid-col-2-4,
   .grid-row .grid-col-fix-300,
-  .grid-row .grid-col-flow-300,
-  .grid-row .grid-col-fix-220,
-  .grid-row .grid-col-flow-220 {
+  .grid-row .grid-col-flow-300 {
     width: 100%;
     float: none !important;
     clear: both;
