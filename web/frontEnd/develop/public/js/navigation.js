@@ -27,7 +27,7 @@ define(function () {
 		function checkBackTop(){
 			var $win = $(window),
 					method = $win.scrollTop() > $win.height()*0.6 ? 'slideDown' : 'slideUp';
-			$back_top[method](100);
+			$back_top[method](80);
 		}
 		var delay,
 				$back_top = $('.back-top');
