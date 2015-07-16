@@ -5,7 +5,8 @@
 
 
 define(function(require,exports){
-  var Stick = require('public/js/stick');
+  var Stick = require('public/js/stick.js'),
+			tie = require('public/js/tie.js');
   var private_tag_data = null;
 	function getTag(callback){
       if(private_tag_data){
@@ -118,6 +119,12 @@ define(function(require,exports){
         list.loadMore();
       }
     });
+		var a = dom.find('.articleListPage-tags');
+		this.tie = util.tie({
+			dom : a,
+			scopeDom: a.parent(),
+			fixed_top: 80
+		});
     //创建列表对象
     var list = new LIST(pageTag,function(){
       me.$loading.stop(true).fadeIn();
@@ -142,10 +149,12 @@ define(function(require,exports){
         }
         L.refresh();
     });
+		
   }
   page.prototype = {
     destroy: function(){
       this.stick.destroy();
+			this.tie.destroy();
     }
   };
   return page;

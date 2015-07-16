@@ -1,7 +1,7 @@
 /**
  * @author bh-lay
  * @github https://github.com/bh-lay/tie.js
- * @modified 2015-7-16 21:23
+ * @modified 2015-7-16 21:49
  *  location fox
  * 处理既要相对于某个模块固定，又要在其可视时悬浮的页面元素
  * util.tie({
@@ -77,11 +77,11 @@
 		me.scopeDom = param.scopeDom;
 		//悬浮时，距顶部的距离
 		me.fix_top = param.fixed_top || 0;
+		me.minScrollTop = null;
+		me.maxScrollTop = null;
 		//原本的position属性
 		me._position_first = me.dom.css('position');
 		
-		me.minScrollTop = null;
-		me.maxScrollTop = null;
 		me.state = 'min';
 		me._scroll_listener = function(){
 			clearTimeout(scroll_delay);
@@ -97,28 +97,31 @@
 		}
 		me.$scrollDom.on('scroll',me._scroll_listener);
 	}
-	INIT.prototype.refresh = function (){
-		var domH = this.dom.height(),
-				cntH = this.scopeDom.outerHeight();
-		this.minScrollTop = this.scopeDom.offset().top - this.fix_top;
-		this.maxScrollTop = this.minScrollTop + cntH - domH;
-		
-		var scrollTop = private_$doc.scrollTop();
-		if(scrollTop <= this.minScrollTop){
-			this.state = 'min';
-		}else if(scrollTop >= this.maxScrollTop){
-			this.state = 'max';
-		}else{
-			this.state = 'mid';
+	INIT.prototype = {
+		refresh: function (){
+			var domH = this.dom.height(),
+					cntH = this.scopeDom.outerHeight();
+			this.minScrollTop = this.scopeDom.offset().top - this.fix_top;
+			this.maxScrollTop = this.minScrollTop + cntH - domH;
+
+			var scrollTop = private_$doc.scrollTop();
+			if(scrollTop <= this.minScrollTop){
+				this.state = 'min';
+			}else if(scrollTop >= this.maxScrollTop){
+				this.state = 'max';
+			}else{
+				this.state = 'mid';
+			}
+			fix_position.call(this,scrollTop);
+		},
+		destroy: function(){
+			this.$scrollDom.unbind('scroll',this._scroll_listener);
+			
+			this.dom.css({
+				position: 'absolute',
+				top: Math.max(private_$doc.scrollTop() - this.minScrollTop,0)
+			});
 		}
-		fix_position.call(this,scrollTop);
 	};
-	INIT.prototype.destroy = function(){
-		this.$scrollDom.unbind('scroll',this._scroll_listener);
-		this.dom.css({
-			position: 'absolute',
-			top: private_$doc.scrollTop() - this.minScrollTop
-		});
-	}
 	return INIT;
 });
