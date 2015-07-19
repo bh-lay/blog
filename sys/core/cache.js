@@ -2,12 +2,12 @@
  * @author bh-lay
  * 
  * @demo
- * 	cache.use('blog_list',['blog','ajax'],function(this_cache){
- * 		//do something with this_cache
- * 	},function(save_cache){
- * 		//if none of cache,do this Fn ,in the end Fn1 with be start
- * 		save_cache(this_cache);
- * 	});
+ *  cache.use('blog_list',['blog','ajax'],function(this_cache){
+ *    //do something with this_cache
+ *  },function(save_cache){
+ *    //if none of cache,do this Fn ,in the end Fn1 with be start
+ *    save_cache(this_cache);
+ *  });
  */
 var fs = require('fs');
 
@@ -49,9 +49,9 @@ Cache.prototype.clear = function(tags,callback){
     callback&&callback();
   }else{
     //暴力清除
-		this.try_del_each_cache();
-		callback&&callback();
-	}
+    this.try_del_each_cache();
+    callback&&callback();
+  }
 };
 
 /**
@@ -123,33 +123,33 @@ Cache.prototype.use = function (cache_name,tags,callback,create_content){
               me.try_del_each_cache();
             }
           });
-			});
-		}
-	});
+      });
+    }
+  });
 };
 
 
 //尝试遍历删除缓存文件
 Cache.prototype.try_del_each_cache = function(callback){
-    var root = this.root;
-	fs.readdir(root,function(err,files){
-		if(err){
-			return
-		}
-		var total = files.length;
-        
-		for(var i = 0;i < total;i++){
-			var filename_split = files[i].split('--'),
-                tags = (filename_split[0] || '').split('_'),
-                name = filename_split[1] || '';
-            if(files[i] != 'readMe.md'){
-                //没有定义检查函数，或者检查函数返回值为true，删除缓存
-                if(!callback || callback(tags,name)){
-                    fs.unlink(root + files[i]);
-                }
-			}
-		}
-	});
+  var root = this.root;
+  fs.readdir(root,function(err,files){
+    if(err){
+      return;
+    }
+    var total = files.length;
+    
+    for(var i = 0;i < total;i++){
+      var filename_split = files[i].split('--'),
+          tags = (filename_split[0] || '').split('_'),
+          name = filename_split[1] || '';
+      if(files[i] != 'readMe.md'){
+        //没有定义检查函数，或者检查函数返回值为true，删除缓存
+        if(!callback || callback(tags,name)){
+          fs.unlink(root + files[i]);
+        }
+      }
+    }
+  });
 };
 
 module.exports = Cache;

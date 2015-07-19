@@ -17,33 +17,33 @@ var session_factory = require('./session.js');
  * 格式化path 
  */
 function pathParser(input){
-	//去除首尾的‘/’
-	input = input.replace(/^\/*|\/*$/g,'');
-	//分割路径
-	var output = input.split(/\//);
-	
-	if(output.length == 1 && output[0] == ''){
-		output = [];
-	}
-	
-	return output;
+  //去除首尾的‘/’
+  input = input.replace(/^\/*|\/*$/g,'');
+  //分割路径
+  var output = input.split(/\//);
+  
+  if(output.length == 1 && output[0] == ''){
+    output = [];
+  }
+  
+  return output;
 }
 /**
  * 格式化search 
  */
 function searchParser(search){
-	var resultObj = {};
-	if(search && search.length > 1){
-		var items = search.split('&');
-		for(var index = 0 ; index < items.length ; index++ ){
-			if(! items[index]){
-				continue;
-			}
-			var kv = items[index].split('=');
-			resultObj[kv[0]] = typeof kv[1] === "undefined" ? "":kv[1];
-		}
-	}
-	return resultObj;
+  var resultObj = {};
+  if(search && search.length > 1){
+    var items = search.split('&');
+    for(var index = 0 ; index < items.length ; index++ ){
+      if(! items[index]){
+        continue;
+      }
+      var kv = items[index].split('=');
+      resultObj[kv[0]] = typeof kv[1] === "undefined" ? "":kv[1];
+    }
+  }
+  return resultObj;
 }
 /**
  * 在 MAPS 匹配url并返回对应值
@@ -61,7 +61,7 @@ function findUrlInMaps(inputPath,MAPS){
     var pathData = pathParser(i);
     //路径与maps当前节点长度不一致，或最后配置不为通配符“*”跳过
     if(pathData.length != inputPath.length && pathData[pathData.length -1] != '*'){
-        continue
+        continue;
     }
 
     this_mapsItem = MAPS[i];
@@ -86,7 +86,7 @@ function findUrlInMaps(inputPath,MAPS){
     }
     //若已经匹配出结果，不再继续匹配
     if(this_mapsItem){
-      break
+      break;
     }
   }
   if(this_mapsItem){
@@ -123,7 +123,7 @@ function APP(){
     if(isNormalVisitor(req)){
       res.writeHead(500);
       res.end('hello I\'m bh-lay !');
-      return
+      return;
     }
     //实例化一个connect对象
     var new_connect = new connect(req,res,me.session),
@@ -165,25 +165,25 @@ function APP(){
  * 设置前端请求路径
  */
 APP.prototype.get = function(urls,callback){
-	var me = this;
-	var routerNames = [].concat(urls);
-	
-	if(typeof(callback) != 'function'){
-		return;
-	}
-	routerNames.forEach(function(url,a,b){
-		if(typeof(url) != 'string'){
-			return;
-		}
-		me.MAPS[url] = callback;
-	});
+  var me = this;
+  var routerNames = [].concat(urls);
+  
+  if(typeof(callback) != 'function'){
+    return;
+  }
+  routerNames.forEach(function(url,a,b){
+    if(typeof(url) != 'string'){
+      return;
+    }
+    me.MAPS[url] = callback;
+  });
 };
 
 APP.prototype.views = views;
 APP.prototype.cache = new cache({
-    useCache: config.cache.use ? true : false,
-    max_num: config.cache.max_num,
-    root: config.cache.root
+  useCache: config.cache.use ? true : false,
+  max_num: config.cache.max_num,
+  root: config.cache.root
 });
 APP.prototype.session = new session_factory({
   root : config.session.root

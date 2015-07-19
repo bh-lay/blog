@@ -20,7 +20,7 @@ Filer.prototype.read = function(path,req,responseFile,notFound) {
   //add a default files for directory
   if(ext == null) {
     ext = 'html';
-    realPath = this.staticFileRoot + path + '/index.html'
+    realPath = this.staticFileRoot + path + '/index.html';
   }else{
     realPath = this.staticFileRoot + path;
   }
@@ -37,10 +37,10 @@ Filer.prototype.read = function(path,req,responseFile,notFound) {
          * 500 server error 
          */
         responseFile(500,{
-            'Content-Type' : 'text/plain'
+          'Content-Type' : 'text/plain'
         },'ext:' + ext + ',realPath:' + realPath);
 
-        return
+        return;
       }
       fs.stat(realPath, function(err, stat) {
         if(err) {
@@ -48,10 +48,10 @@ Filer.prototype.read = function(path,req,responseFile,notFound) {
            * 500 server error 
            */
           responseFile(500,{
-              'Content-Type' : 'text/plain'
+            'Content-Type' : 'text/plain'
           },'ext:' + ext + ',realPath:' + realPath);
 
-          return
+          return;
         }
         var lastModified = stat.mtime.toUTCString();
 
@@ -61,10 +61,10 @@ Filer.prototype.read = function(path,req,responseFile,notFound) {
           var expires = new Date();
           expires.setTime(expires.getTime() + me.maxAge * 1000);
           responseFile(200,{
-              "Content-Type" : content_type,
-              "Expires" : expires.toUTCString() ,
-              "Cache-Control" : "max-age=" + me.maxAge ,
-              "Last-Modified" : lastModified,
+            "Content-Type" : content_type,
+            "Expires" : expires.toUTCString() ,
+            "Cache-Control" : "max-age=" + me.maxAge ,
+            "Last-Modified" : lastModified,
           },file);
         }
       });
