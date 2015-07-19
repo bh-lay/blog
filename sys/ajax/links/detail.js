@@ -37,7 +37,7 @@ module.exports = function (connect,app,id){
 	},function(save_cache){
 
     get_detail(id,function(json_data){
-      save_cache(json_data);
+			save_cache(JSON.stringify(json_data));
     });
 	});
 };
