@@ -51,7 +51,7 @@ module.exports = function (connect,app){
       var data = connect.url.search;
 
       get_list(data,function(json_data){
-        save_cache(JSON.stringify(json_data));
+        save_cache(json_data);
       });
 	});
 };

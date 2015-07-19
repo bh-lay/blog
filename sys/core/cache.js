@@ -92,33 +92,37 @@ Cache.prototype.use = function (cache_name,tags,callback,create_content){
     var cache_path = this.root + tagsStr + '--' + cache_name;
     
      //检测此条缓存是否存在
-	fs.exists(cache_path, function(exists) {
-		if(exists){
-			//存在，直接读取缓存
-			fs.readFile(cache_path,'UTF-8',function(err,this_cache){
-				if(err){
-					consele.log('readFile error');
-				}
-				callback(this_cache);
-			});
-		}else{
-			//不存在，调用创建缓存函数
-			create_content(function(new_cache){
-				//通知调用方使用新的缓存
-                callback(new_cache);
-				//保存缓存至对应目录
-				fs.writeFile(cache_path,new_cache,function(err){
-					if(err){
-						console.log('create cache error',cache_name);
-					};
-				});
-                //检查缓存数量
-                fs.readdir(me.root,function(err,files){
-                    //缓存过多，清空
-                    if(!err && files.length > me.cache_max_num){
-                        me.try_del_each_cache();
-                    }
-                });
+    fs.exists(cache_path, function(exists) {
+      if(exists){
+        //存在，直接读取缓存
+        fs.readFile(cache_path,'UTF-8',function(err,this_cache){
+          if(err){
+            consele.log('readFile error');
+          }
+          callback(this_cache);
+        });
+      }else{
+        //不存在，调用创建缓存函数
+        create_content(function(new_cache){
+          if(typeof(new_cache) == 'object'){
+            //兼容JSON数据
+            new_cache = JSON.stringify(new_cache);
+          }
+          //通知调用方使用新的缓存
+          callback(new_cache);
+          //保存缓存至对应目录
+          fs.writeFile(cache_path,new_cache,function(err){
+            if(err){
+              console.log('create cache error',cache_name);
+            };
+          });
+          //检查缓存数量
+          fs.readdir(me.root,function(err,files){
+            //缓存过多，清空
+            if(!err && files.length > me.cache_max_num){
+              me.try_del_each_cache();
+            }
+          });
 			});
 		}
 	});
