@@ -54,6 +54,18 @@ window.L = window.L || {};
     css: supports
   };
   L.isMobileBrowser = (window.innerWidth < 720 && isSupportTouch) ? true : false;
+	
+  //占用全局方法
+  L.gravatar_error_fn = function(elem){
+    if(elem.src.indexOf('www.gravatar.com') > -1){
+      //若gravatar官网请求失败，使用多说镜像
+      elem.src = elem.src.replace('www.gravatar.com','gravatar.duoshuo.com');
+    }else if(elem.src.indexOf('gravatar.duoshuo.com') > -1){
+      //若多说镜像失败，使用默认头像
+      elem.src = 'http://layasset.qiniudn.com/user/default.jpg';
+    }
+    //其余情况均不处理（已是默认头像）
+  }
 }());
 
 define(function (require, exports) {
