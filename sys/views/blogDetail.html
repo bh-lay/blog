@@ -13,30 +13,36 @@
 </head>
 <body>
 <include name="navigation_bootstrap" active="blog"/>
-<div class="container page-body">
-	<div class="articletop">
-	<h1>${{title}}</h1>
-		<p>
-			<span>时间：${{time_show}} </span>
-			<span>作者：${{author}}</span>
-		</p>
-	</div>
-	<div class="panel">$${{content}}</div>
-	<div class="copylink">
-		<div class="tag"><strong>本文关键字：</strong>{{@each tags as t}}<a href="/blog?tag=${{t}}" lofox="true">${{t}}</a>{{@/each}}</div>
-		<div class="pageUrl"><strong>转载请注明来源：</strong>http://bh-lay.com/blog/${{id}}</div>
-	</div>
-	<div class="comments_area"></div>
+<div class="jumbotron">
+  <div class="container">
+    <h1>${{title}}</h1>
+    <p>
+      <span>时间：${{time_show}} </span>
+      <span>作者：${{author}}</span>
+    </p>
+  </div>
+</div>
+<div class="container">
+
+  <div class="">
+    <div class="article">$${{content}}</div>
+    <div class="copylink">
+      <div class="tag"><strong>本文关键字：</strong>{{@each tags as t}}<a href="/blog?tag=${{t}}" lofox="true">${{t}}</a>{{@/each}}</div>
+      <div class="pageUrl"><strong>转载请注明来源：</strong>http://bh-lay.com/blog/${{id}}</div>
+    </div>
+  </div>
+  <div class="comments_area"></div>
 </div>
 <script type="text/javascript">
-    var app_config = {
-        frontEnd_base : '${{frontEnd.base}}',
-        frontEnd_version : '${{frontEnd.loser_version}}',
-        imgDomain : '${{frontEnd.img_domain}}'
-    };
+var app_config = {
+  frontEnd_base : '${{frontEnd.base}}',
+  frontEnd_version : '${{frontEnd.loser_version}}',
+  imgDomain : '${{frontEnd.img_domain}}'
+};
 </script>
 <script type="text/javascript" src="${{frontEnd.base}}lib/jquery/jquery.js"></script>
 <script type="text/javascript" src="${{frontEnd.base}}lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${{frontEnd.base}}loser/highlight.js"></script>
 <script type="text/javascript" src="${{frontEnd.base}}loser/bootstrap_plugin.js?v=${{frontEnd.loser_version}}"></script>
 <include name="footer"/>
 <include name="baiduAndGoogleTongji"/>

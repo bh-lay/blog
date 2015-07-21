@@ -14,7 +14,7 @@ function isShowedToday(){
 		}else{
 			return false;
 		}
-	} 
+	}
 }
 
 var tips_tpl = ['<div class="newVersionTips">',
@@ -104,3 +104,10 @@ if($comments.length){
 		blog.jumpToNewVersion();
 	});
 }
+
+//代码高亮
+(function(){
+  $('pre').each(function(){
+    hljs.highlightBlock(this);
+  });
+})();

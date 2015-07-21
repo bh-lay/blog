@@ -268,6 +268,215 @@ html {
     clear: both;
   }
 }
+/**
+ * 文章模块
+ */
+.article {
+  padding: 20px;
+  font-family: "Microsoft Yahei";
+  color: #333;
+}
+.article img {
+  display: block;
+  max-width: 100%;
+  margin: auto;
+}
+.article h1,
+.article h2,
+.article h3,
+.article h4,
+.article h5,
+.article h6 {
+  font-weight: normal;
+  margin: 1.8em 0 0;
+}
+.article h1 {
+  font-size: 2em;
+}
+.article h2 {
+  font-size: 1.7em;
+}
+.article h3 {
+  font-size: 1.4em;
+}
+.article h4 {
+  font-size: 1.25em;
+}
+.article h5 {
+  font-size: 1.1em;
+}
+.article h6 {
+  font-size: 1em;
+}
+.article p {
+  line-height: 1.8;
+  margin: 1em 0;
+  font-size: 1em;
+}
+.article blockquote {
+  margin: 0 0 1em;
+  padding: 0 15px;
+  color: #777;
+  border-left: 4px solid #ddd;
+}
+.article ul {
+  margin: 1em 0;
+  padding-left: 1em;
+  list-style: disc;
+}
+.article ol {
+  margin: 1em 0;
+  padding-left: 1em;
+  list-style: decimal;
+}
+.article li {
+  margin-left: 1em;
+  list-style: inherit;
+}
+.article pre {
+  overflow-x: auto;
+  line-height: 1.8;
+}
+.article code {
+  font-family: inherit;
+  margin: 0 .3em;
+  padding: 0 .4em;
+  color: #e40;
+  background-color: #f6f6f6;
+  border-radius: 4px;
+}
+.article hr {
+  height: 1px;
+  margin: .6em 0;
+  border: none;
+  background: #ddd;
+}
+.article a {
+  padding: 0px .5em;
+  text-decoration: none;
+  color: #3da9f7;
+}
+.article a:hover {
+  color: #2c79b0;
+  text-decoration: underline;
+}
+.article > *:nth-child(1) {
+  margin-top: 1em !important;
+}
+/**
+ * 代码高亮
+ */
+pre.hljs code {
+  display: block;
+  max-height: 20em;
+  padding: 0.5em;
+  color: #ddd;
+  border: none;
+  margin: 0;
+  border-radius: 0;
+  font-family: Monaco, Consolas, "Lucida Console", monospace;
+  background: #333;
+  overflow: auto;
+}
+.profile .hljs-header *,
+.ini .hljs-title,
+.nginx .hljs-title {
+  color: #ffffff;
+}
+.hljs-comment {
+  color: #666;
+}
+.hljs-string,
+.hljs-symbol,
+.diff .hljs-change,
+.hljs-regexp,
+.xml .hljs-attribute,
+.smalltalk .hljs-char,
+.xml .hljs-value,
+.ini .hljs-value,
+.clojure .hljs-attribute,
+.coffeescript .hljs-attribute {
+  color: #a0c874;
+}
+.hljs-number {
+  color: #66dd00;
+}
+.hljs-built_in,
+.hljs-literal,
+.vhdl .hljs-typename,
+.go .hljs-constant,
+.go .hljs-typename,
+.ini .hljs-keyword,
+.lua .hljs-title,
+.perl .hljs-variable,
+.php .hljs-variable,
+.mel .hljs-variable,
+.django .hljs-variable,
+.css .funtion,
+.smalltalk .method,
+.hljs-hexcolor,
+.hljs-important,
+.hljs-flow,
+.hljs-inheritance,
+.parser3 .hljs-variable {
+  color: #59B524;
+}
+.hljs-keyword {
+  color: #888;
+  font-weight: bold;
+}
+.hljs-title,
+.ruby .hljs-constant,
+.vala .hljs-constant,
+.hljs-parent,
+.hljs-deletion,
+.hljs-template_tag,
+.css .hljs-keyword,
+.objectivec .hljs-class .hljs-id,
+.smalltalk .hljs-class,
+.lisp .hljs-keyword,
+.apache .hljs-tag,
+.nginx .hljs-variable,
+.hljs-envvar,
+.bash .hljs-variable,
+.go .hljs-built_in,
+.vbscript .hljs-built_in,
+.lua .hljs-built_in,
+.rsl .hljs-built_in,
+.tail,
+.avrasm .hljs-label,
+.tex .hljs-formula,
+.tex .hljs-formula * {
+  color: #a0c874;
+}
+.hljs-yardoctag,
+.hljs-phpdoc,
+.profile .hljs-header,
+.ini .hljs-title,
+.apache .hljs-tag,
+.parser3 .hljs-title {
+  font-weight: bold;
+}
+.hljs-params {
+  color: #666666;
+}
+body {
+  font-family: 'Microsoft Yahei';
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: inherit;
+}
 /* Box-sizing resets
  *
  * 为了避免 Bootstrap 设置的全局盒模型所带来的影响，可以重置单个页面元素或覆盖整个区域的盒模型。
@@ -302,6 +511,10 @@ html {
 .app-footer {
   padding-bottom: 100px;
   background: #333;
+}
+pre {
+  padding: 0;
+  border: none;
 }
 .newVersionTips {
   position: fixed;
@@ -436,13 +649,6 @@ html {
 }
 .define-list-2 {
   padding: 20px 0px;
-}
-.article {
-  line-height: 2;
-}
-.article img {
-  display: block;
-  max-width: 100%;
 }
 .tongji {
   position: absolute;

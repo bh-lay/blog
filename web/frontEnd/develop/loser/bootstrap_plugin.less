@@ -1,6 +1,16 @@
 @import "../public/css/less/_fontface.less";
 @import "../public/css/less/_footer.less";
 @import "../public/css/less/_grid.less";
+@import "../public/css/less/_article.less";
+@import "_hljs.less";
+
+
+body{
+  font-family: 'Microsoft Yahei';
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
+  font-family: inherit;
+}
 /* Box-sizing resets
  *
  * 为了避免 Bootstrap 设置的全局盒模型所带来的影响，可以重置单个页面元素或覆盖整个区域的盒模型。
@@ -50,6 +60,11 @@
     background: #333;
 }
 
+//代码高亮
+pre{
+  padding: 0;
+  border:none;
+}
 .newVersionTips{
   position: fixed;
   left: 0;
@@ -188,13 +203,6 @@
 	padding: 20px 0px;
 }
 
-.article{
-	line-height:2;
-	img{
-		display: block;
-		max-width: 100%;
-	}
-}
 .tongji{
 	position: absolute;
 	width: 0;
