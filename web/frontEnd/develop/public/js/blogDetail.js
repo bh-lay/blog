@@ -36,7 +36,7 @@ define(function(require,exports){
     getData(id,function(err,html,title){
       if(err){
         dom.html(empty_tpl);
-        return
+        return;
       }
       callback && callback(title);
       html&&dom.html(html);

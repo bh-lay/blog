@@ -6,66 +6,65 @@
 
 define(function(require,exports){
   var Stick = require('public/js/stick.js'),
-			tie = require('public/js/tie.js');
+      tie = require('public/js/tie.js');
   var private_tag_data = null;
-	function getTag(callback){
-      if(private_tag_data){
+  function getTag(callback){
+    if(private_tag_data){
+      callback && callback(private_tag_data);
+      return;
+    }
+    $.ajax({
+      type : 'GET' ,
+      url : '/ajax/tag/list',
+      success :function(data){
+        data = data || {};
+        data.list = data.list ? data.list.slice(0,12) : [];
+        private_tag_data = data;
         callback && callback(private_tag_data);
-        return;
       }
-      $.ajax({
-        type : 'GET' ,
-        url : '/ajax/tag/list',
-        success :function(data){
-          data = data || {};
-          data.list = data.list ? data.list.slice(0,12) : [];
-          private_tag_data = data;
-          callback && callback(private_tag_data);
-        }
-      });
-	}
-	function renderTags(dom,tagName,callback){
-      getTag(function(data){
-        var tag_item_tpl = $('#tpl_blog_list_tag').html();
-        var html = juicer(tag_item_tpl,data);
-        dom.html(html);
+    });
+  }
+  function renderTags(dom,tagName,callback){
+    getTag(function(data){
+      var tag_item_tpl = $('#tpl_blog_list_tag').html();
+      var html = juicer(tag_item_tpl,data);
+      dom.html(html);
 
-        if(tagName){
-          dom.find('a').each(function(){
-            if($(this).attr('data-tag') == tagName){
-              $(this).addClass('active');
-            }
-          });
-        }else{
-          dom.find('a').eq(0).addClass('active');
-        }
-        dom.on('click','a',function(){
-          var $btn = $(this);
-          var tag = $btn.attr('data-tag');
-          callback && callback(tag);
+      if(tagName){
+        dom.find('a').each(function(){
+          if($(this).attr('data-tag') == tagName){
+            $(this).addClass('active');
+          }
         });
+      }else{
+        dom.find('a').eq(0).addClass('active');
+      }
+      dom.on('click','a',function(){
+        var $btn = $(this);
+        var tag = $btn.attr('data-tag');
+        callback && callback(tag);
       });
-	}
-	
-	
+    });
+  }
+  
+  
   function LIST(tag,onLoadStart,onLoaded){
     this.skip = 0;
     this.limit = 10;
     this.count = 0;
-    this.tag = tag || null
+    this.tag = tag || null;
     this.onLoadStart = onLoadStart;
     this.onLoaded = onLoaded;
     this.isLoading = false;
     this.loadMore();
   }
   LIST.prototype.loadMore = function (){
-		console.log(this);
     var me = this;
     if(this.count!=0 && this.skip >= this.count){
-      return
+      return;
     }
     if(this.isLoading){
-      return
+      return;
     }
     this.isLoading = true;
     this.onLoadStart && this.onLoadStart();
@@ -83,7 +82,7 @@ define(function(require,exports){
             list = data['list'];
         if(data.code == 500){
           callback && callback(500);
-          return
+          return;
         }
         for(var i in list){
           list[i].time_show = L.parseTime(list[i].time_show,'{mm}-{dd} {y}');
@@ -100,7 +99,7 @@ define(function(require,exports){
         me.isLoading = false;
       }
     });
-  }
+  };
   function page(dom,param){
     var me = this;
     var baseTpl = $('#tpl_blog_list_base').html();
@@ -120,12 +119,12 @@ define(function(require,exports){
         list.loadMore();
       }
     });
-		var a = dom.find('.articleListPage-tags');
-		this.tie = util.tie({
-			dom : a,
-			scopeDom: a.parent(),
-			fixed_top: 80
-		});
+    var a = dom.find('.articleListPage-tags');
+    this.tie = util.tie({
+      dom : a,
+      scopeDom: a.parent(),
+      fixed_top: 80
+    });
     //创建列表对象
     var list = new LIST(pageTag,function(){
       me.$loading.stop(true).fadeIn();
@@ -143,19 +142,19 @@ define(function(require,exports){
     });
     //处理标签功能
     renderTags(dom.find('.side_card .content'),pageTag,function(tag){
-        if(tag == 'null'){
-            L.push('/blog');
-        }else{
-            L.push('/blog?tag=' + tag);
-        }
-        L.refresh();
+      if(tag == 'null'){
+        L.push('/blog');
+      }else{
+        L.push('/blog?tag=' + tag);
+      }
+      L.refresh();
     });
-		
+    
   }
   page.prototype = {
     destroy: function(){
       this.stick.destroy();
-			this.tie.destroy();
+      this.tie.destroy();
     }
   };
   return page;

@@ -65,7 +65,7 @@ window.L = window.L || {};
       elem.src = 'http://layasset.qiniudn.com/user/default.jpg';
     }
     //其余情况均不处理（已是默认头像）
-  }
+  };
 }());
 
 define(function (require, exports) {
@@ -143,7 +143,7 @@ define(function (require, exports) {
       return value || 0;
     });
     return time_str;
-  }
+  };
   //配置弹出层
   UI.config.zIndex(2000);
 
@@ -171,13 +171,13 @@ define(function (require, exports) {
     $('.app_mask').remove();
   }, 1000);
   
-	/**
-	 * 检测链接是否为提供给js使用的地址
+  /**
+   * 检测链接是否为提供给js使用的地址
    *   无地址、 javascript:: 、javascript:void(0)、#
-	 **/
-	function hrefForScript(href){
-		return (href.length == 0 || href.match(/^(javascript\s*\:|#)/)) ? true : false;
-	}
+   **/
+  function hrefForScript(href){
+    return (href.length == 0 || href.match(/^(javascript\s*\:|#)/)) ? true : false;
+  }
   /**
    * 分享功能
    *  data-text data-url data-title data-img data-shareto
@@ -203,7 +203,7 @@ define(function (require, exports) {
     var url = $(this).attr('href');
     //为JS脚本准备的链接
     if(hrefForScript(url)){
-			//阻止浏览器默认事件，处理因base设置，导致此类链接在火狐中新窗口打开问题，感谢 @紫心蕊 
+      //阻止浏览器默认事件，处理因base设置，导致此类链接在火狐中新窗口打开问题，感谢 @紫心蕊 
       e.preventDefault();
     }else if(lofox.isInRouter(url)){
       //路由中配置的地址
@@ -239,7 +239,7 @@ define(function (require, exports) {
   
   //做个好玩的
   document.addEventListener('visibilitychange', function() {
-    document.title = document.hidden ? '出BUG了，快看！':'小剧客栈，剧中人的个人博客！'
+    document.title = document.hidden ? '出BUG了，快看！':'小剧客栈，剧中人的个人博客！';
   });
 });
 
