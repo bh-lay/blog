@@ -1004,43 +1004,6 @@ body:before {
   background: #f70;
   text-decoration: none;
 }
-@keyframes placeholderClose {
-  0% {
-    opacity: 1;
-  }
-  99% {
-    opacity: 0;
-    width: 100%;
-  }
-  100% {
-    opacity: 0;
-    width: 0;
-  }
-}
-@-moz-keyframes placeholderClose {
-  0% {
-    opacity: 1;
-  }
-  99% {
-    opacity: 0;
-    width: 100%;
-  }
-  100% {
-    opacity: 0;
-    width: 0;
-  }
-}
-@-webkit-keyframes placeholderClose {
-  0% {
-    background: #fff;
-  }
-  50% {
-    background: #fa7;
-  }
-  100% {
-    background: #fff;
-  }
-}
 /*聚焦状态*/
 .l_sendBox_active .l_send_footer {
   height: 30px;
@@ -1056,10 +1019,7 @@ body:before {
   -o-transition: all 0.2s linear;
 }
 .l_sendBox_active .l_send_placeholder {
-  animation: placeholderClose 0.2s forwards;
-  -moz-animation: placeholderClose 0.2s forwards;
-  -webkit-animation: placeholderClose 0.2s forwards;
-  -o-animation: placeholderClose 0.2s forwards;
+  display: none;
 }
 .l_sendBox_user {
   overflow: hidden;
