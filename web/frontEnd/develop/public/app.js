@@ -72,7 +72,6 @@ define(function (require, exports) {
   require('public/js/juicer.js');
   require('util/lofox.js');
   require('UI/dialog.js');
-  require('public/js/nicescroll.js')(jQuery);
 
   //绑定路由
   var lofox = new util.lofox();
@@ -216,16 +215,6 @@ define(function (require, exports) {
   // html base 已设置链接为新窗口打开，此处无需处理
   //  else{
   //  }
-  })
-  //nicescrol
-  .niceScroll({
-    zindex : 2001,
-    cursorborder: '1px solid rgba(255,255,255,.2)',
-    mousescrollstep: 60,
-    railpadding: {
-      right : 1
-    },
-    bouncescroll: true
   });
   //动态插入emoji表情样式
   var str = '';

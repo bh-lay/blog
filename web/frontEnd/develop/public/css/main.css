@@ -2124,6 +2124,16 @@ body:before {
     padding-top: 20px;
   }
 }
+body::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+body::-webkit-scrollbar-track-piece {
+  background: #eee;
+}
+body::-webkit-scrollbar-thumb:vertical {
+  background: #666;
+}
 /**
  * 卡片类
  */
@@ -2210,6 +2220,7 @@ a:active {
 /**应用主容器**/
 .app_container {
   position: relative;
+  overflow: hidden;
 }
 .app_container .page {
   height: 0;
