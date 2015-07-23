@@ -2124,6 +2124,90 @@ body:before {
     padding-top: 20px;
   }
 }
+/**
+ * CSS3动画
+ *
+ */
+@-webkit-keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
+}
+@-moz-keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    -moz-transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    -moz-transform: translateX(0);
+  }
+}
+@-webkit-keyframes fadeOutRight {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateX(20px);
+  }
+}
+@-moz-keyframes fadeOutRight {
+  0% {
+    opacity: 1;
+    -moz-transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    -moz-transform: translateX(20px);
+  }
+}
+@-webkit-keyframes circle_zoom {
+  0% {
+    opacity: 0;
+    -webkit-mask-size: 30%;
+    -webkit-animation-timing-function: ease-in;
+  }
+  40% {
+    opacity: .6;
+    -webkit-mask-size: 60%;
+    -webkit-animation-timing-function: ease-in;
+  }
+  100% {
+    opacity: 1;
+    -webkit-mask-size: 300%;
+  }
+}
+@keyframes loading-rond {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes loading-rond {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+.fadeInLeft {
+  -webkit-animation: fadeInLeft 0.5s ease both;
+  -moz-animation: fadeInLeft 0.5s ease both;
+}
+.fadeOutRight {
+  -webkit-animation: fadeOutRight .5s ease both;
+  -moz-animation: fadeOutRight .5s ease both;
+}
 body::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -2200,22 +2284,6 @@ a:active {
   margin-left: -4px;
   background: #555;
   border-radius: 100%;
-}
-@keyframes loading-rond {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-@-webkit-keyframes loading-rond {
-  0% {
-    -webkit-transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-  }
 }
 /**应用主容器**/
 .app_container {
@@ -2358,22 +2426,6 @@ a:active {
   -webkit-mask-size: 300%;
   -webkit-animation: circle_zoom 1s;
 }
-@-webkit-keyframes circle_zoom {
-  0% {
-    opacity: 0;
-    -webkit-mask-size: 30%;
-    -webkit-animation-timing-function: ease-in;
-  }
-  40% {
-    opacity: .6;
-    -webkit-mask-size: 60%;
-    -webkit-animation-timing-function: ease-in;
-  }
-  100% {
-    opacity: 1;
-    -webkit-mask-size: 300%;
-  }
-}
 .blank-content {
   max-width: 400px;
   padding: 50px 0;
@@ -2415,58 +2467,6 @@ a:active {
  */
 .blessPage {
   padding: 20px 0;
-}
-/**
- * CSS3动画
- *
- */
-@-webkit-keyframes fadeInLeft {
-  0% {
-    opacity: 0;
-    -webkit-transform: translateX(-20px);
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform: translateX(0);
-  }
-}
-@-moz-keyframes fadeInLeft {
-  0% {
-    opacity: 0;
-    -moz-transform: translateX(-20px);
-  }
-  100% {
-    opacity: 1;
-    -moz-transform: translateX(0);
-  }
-}
-@-webkit-keyframes fadeOutRight {
-  0% {
-    opacity: 1;
-    -webkit-transform: translateX(0);
-  }
-  100% {
-    opacity: 0;
-    -webkit-transform: translateX(20px);
-  }
-}
-@-moz-keyframes fadeOutRight {
-  0% {
-    opacity: 1;
-    -moz-transform: translateX(0);
-  }
-  100% {
-    opacity: 0;
-    -moz-transform: translateX(20px);
-  }
-}
-.fadeInLeft {
-  -webkit-animation: fadeInLeft 0.5s ease both;
-  -moz-animation: fadeInLeft 0.5s ease both;
-}
-.fadeOutRight {
-  -webkit-animation: fadeOutRight .5s ease both;
-  -moz-animation: fadeOutRight .5s ease both;
 }
 .app-toolbar {
   position: fixed;
