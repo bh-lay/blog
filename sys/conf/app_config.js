@@ -34,12 +34,16 @@ module.exports = {
 	frontEnd: {
     //根目录
     base : '/frontEnd/develop/',
+    //尝鲜版版本号
+    fresh:{
+      base : '/frontEnd/develop/',
+      baseJS: 'sea_jquery.js',
+      version : '20141217'
+    },
     //屌丝版版本
     loser_version : '20141217',
     //后台管理版本
     admin_version : '20141217',
-    //尝鲜版版本号
-    singlepage_version : '20141217',
     //图床地址
     img_domain : '/asset'
   },
