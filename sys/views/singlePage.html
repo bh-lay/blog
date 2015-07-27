@@ -8,7 +8,7 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
     <base target="_blank" />
     <include name="favicon_appicon" />
-    <link rel="stylesheet" type="text/css" href="${{frontEnd.base}}public/css/main.css?v=${{frontEnd.singlepage_version}}"/>
+    <link rel="stylesheet" type="text/css" href="${{frontEnd.fresh.base}}public/css/main.css?v=${{frontEnd.fresh.version}}"/>
   </head>
   <body>
     <include name="navigation"/>
@@ -60,7 +60,7 @@
         'imgDomain' : '${{frontEnd.img_domain}}'
     };
     seajs.config({
-        'base' : '${{frontEnd.base}}',
+        'base' : '${{frontEnd.fresh.base}}',
         'map' : [[/^(.*\.(?:css|js))(.*)$/i, '$1?v=${{frontEnd.fresh.version}}']]
     });
     seajs.use("public/app.js");

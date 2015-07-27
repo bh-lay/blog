@@ -34,9 +34,10 @@ module.exports = {
 	frontEnd: {
     //根目录
     base : '/frontEnd/develop/',
-    //尝鲜版版本号
+    //尝鲜版版
     fresh:{
       base : '/frontEnd/develop/',
+      //jquery_seaport.js
       baseJS: 'sea_jquery.js',
       version : '20141217'
     },
