@@ -21,24 +21,24 @@
   </div>
   <div class="grid-row myFriends">
     <div class="grid-box-full">
-        <h3>我的小伙伴们</h3>
+      <h3>我的小伙伴们</h3>
     </div>
     {{@each list as it}}
     <div class="grid-box">
-        <div class="guy-item">
-          <div class="title">${{it.title}}</div>
-          <div class="desc">
+      <div class="guy-item">
+        <div class="title">${{it.title}}</div>
+        <div class="desc">
           {{@if it.discription}}
             ${{it.discription}}
-          {{@else}}
-            真懒，啥都不写！
+          {{@else}}真懒，啥都不写！ {{@/if}}
+        </div>
+        <div class="links">
+          {{@if it.url}}
+          <p>博客：<a href="${{it.url}}" target="_blank">${{it.screen_link}}</a></p>
           {{@/if}}
-          </div>
-          <div class="links">
-            <p>博客：<a href="${{it.url}}" target="_blank">${{it.screen_link}}</a></p>
-            {{@if it.github_username}}
-            <p>Github：<a href="https://github.com/${{it.github_username}}" target="_blank">${{it.github_username}}</a></p>
-            {{@/if}}
+          {{@if it.github_username}}
+          <p>Github：<a href="https://github.com/${{it.github_username}}" target="_blank">${{it.github_username}}</a></p>
+          {{@/if}}
           </div>
         </div>
     </div>
@@ -65,7 +65,7 @@
         if(data.title.length < 1){
           err = '咋不告诉我你叫啥捏！';
         }else if(data.url.length < 5 ){
-          err = '博客地址我不校验，但你也不能糊弄我啊！'
+          err = '博客地址我不校验，但你也不能糊弄我啊！';
         }else if(data.discription.length < 10){
           err = '介绍下自己，逼格噌噌噌往上飙啊有木有！';
         }
@@ -94,7 +94,7 @@
       url : $elem.find('input[name="url"]').val(),
       github_username : $elem.find('input[name="github_username"]').val(),
       discription : $elem.find('textarea[name="discription"]').val()
-    }
+    };
   }
   function sendData(data, successFn,errorFn){
     $.ajax({
