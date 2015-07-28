@@ -16,6 +16,9 @@ juicer.set({
 exports.juicer = juicer;
 exports.parse = require('./parse.js');
 exports.pagination = require('./pagination.js');
+exports.trim = function(str){
+  return (str || '').replace(/^\s*|\s*$/g,'');
+};
 //生成ID
 exports.createID = function(){
   var date = new Date();
