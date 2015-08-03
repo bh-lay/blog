@@ -21,15 +21,16 @@ window.admin = window.admin || {};
 define(function(require,exports){
   require('util/lofox.js');
 	require('UI/dialog.js');
+  require('public/js/juicer.js');
 	require('lib/jquery/jquery.easing.1.3.min.js');
 
   var views = {
-    labs : require('admin/react-build/views/labsList.js'),
-    blog : require('admin/react-build/views/blogList.js'),
-    links : require('admin/react-build/views/linksList.js'),
-    users : require('admin/react-build/views/userList.js'),
-    comments : require('admin/react-build/views/commentList.js'),
-    power : require('admin/react-build/views/powerList.js')
+    labs : require('admin/views/labs.js'),
+    blog : require('admin/views/blog.js'),
+    links : require('admin/views/links.js'),
+    users : require('admin/views/users.js'),
+    comments : require('admin/views/comments.js'),
+    power : require('admin/views/power.js')
   };
 	function createDom(dom){
 		var oldDom = dom.find('.mainCnt_body');
@@ -131,7 +132,7 @@ define(function(require,exports){
       var domCnt = createDom(mainDom);
       domCnt.html('<div class="col-md-12"></div>');
       var dom = domCnt.find('.col-md-12');
-      views.comments(dom);
+      new views.comments(dom);
   });
   //发布相关
   lofox.set([
