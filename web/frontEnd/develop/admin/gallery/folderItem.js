@@ -113,7 +113,7 @@ define(function(require,exports){
 		//过滤重复的路径中重复的//
 		this.path = this.path.replace(/\/+/g,'/');
 		
-		this.url = 'http://asset.bh-lay.com/' + this.path;
+		this.url = 'http://static.bh-lay.com/' + this.path;
 		/**
 		 * 状态
 		 * 正常 normal

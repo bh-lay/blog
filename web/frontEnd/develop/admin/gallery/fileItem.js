@@ -169,7 +169,7 @@ define(function(require,exports){
 		this._status = param.status || 'normal';
 		this.fullname = param.name;
 		
-		var file = parseFullname(this.fullname,basePath,'http://asset.bh-lay.com/');
+		var file = parseFullname(this.fullname,basePath,'http://static.bh-lay.com/');
 		this.filename = file.filename;
 		this.extension = file.extension;
 		this.pathname = file.pathname;

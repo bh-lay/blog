@@ -24,7 +24,7 @@ var tips_tpl = ['<div class="newVersionTips">',
 	'</div>',
 '</div>'].join('');
 var changeVersionTpl = ['<div class="newVersionPop">',
-    '<div class="nVP_bj"><img src="http://layasset.qiniudn.com/images/version_switch.jpg" /></div>',
+    '<div class="nVP_bj"><img src="http://static.bh-lay.com/images/version_switch.jpg" /></div>',
     '<div class="nVP_txt">',
         '<p class="nVP_1"></p>',
         '<p class="nVP_1">你竟然还在使用<span>屌丝版</span></p>',

@@ -6,7 +6,7 @@ define(function(require,exports){
       face = require('public/comments/face'),
       pagination = require('util/pagination'),
       
-      default_avatar = 'http://layasset.qiniudn.com/user/default.jpg',
+      default_avatar = 'http://static.bh-lay.com/user/default.jpg',
       private_userInfo = null,
       
       noData_tpl = '<div class="l_com_list_noData">来的真早，快抢沙发！</div>',

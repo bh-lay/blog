@@ -62,7 +62,7 @@ window.L = window.L || {};
       elem.src = elem.src.replace('www.gravatar.com','gravatar.duoshuo.com');
     }else if(elem.src.indexOf('gravatar.duoshuo.com') > -1){
       //若多说镜像失败，使用默认头像
-      elem.src = 'http://layasset.qiniudn.com/user/default.jpg';
+      elem.src = 'http://static.bh-lay.com/user/default.jpg';
     }
     //其余情况均不处理（已是默认头像）
   };
