@@ -32,7 +32,7 @@ exports.upload = function (req,callback){
 					fs.rename(files[i].path,newPath);
 					newFiles.push({
 	 	    			'name' : files[i]['name'],
-	 	    			'path' : 'http://asset.bh-lay.com/' + root + '/' + files[i]['name']
+	 	    			'path' : 'http://static.bh-lay.com/' + root + '/' + files[i]['name']
 	 	    		});
 				}
 			}
