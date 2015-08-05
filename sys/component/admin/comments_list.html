@@ -1,7 +1,7 @@
 <ul class="list-group commentsList">{@each list as it}
     <li class="list-group-item clearfix" data-uid="${it.uid}" data-cid="${it.cid}">
         <div class="comm_header">
-            <strong>CID</strong><span>${it.cid}</span>
+            <a href="${it.url}" target="_blank">${it.cid}</a>
             {@if it.user}
                 <i class="glyphicon glyphicon-user"></i><span style="padding: 0 1em 0 .5em;">${it.user.username}</span>
             {@else}
