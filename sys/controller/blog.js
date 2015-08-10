@@ -93,7 +93,7 @@ exports.list = function (connect,app){
       if(err){
         app.views('system/mongoFail',{},function(err,html){
           connect.write('html',500,html);
-        })
+        });
         return;
       }
       var page_html = app.utils.pagination({
@@ -133,13 +133,13 @@ exports.detail = function (connect,app,id){
         keywords : data.tags,
         description : data.intro,
         time_show : data.time_show,
-        author : data.author,
+        author : data.author || '剧中人',
         cover : data.cover,
         tags : data.tags,
         content : data.content
       },function(err,html){
         save_cache(html);
       });
-    })
+    });
   });
-}
+};
