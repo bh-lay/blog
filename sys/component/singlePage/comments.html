@@ -3,16 +3,15 @@
 <div class="content">
 {{@each list as it,index}}
 <a href="${{it.url}}" class="side-comments-item">
-    <div class="cover">
-        <img class="media-object" src="{{@if it.user.avatar}}${{it.user.avatar}}{{@else}}http://static.bh-lay.com/user/default.jpg{{@/if}}" onerror="L.gravatar_error_fn(this)" />
-    </div>
-    <div class="main">
-        <h4>
-            ${{it.user.username}}
-            <small>${{it.time}}</small>
-        </h4>
-        <p>$${{it.content}}</p>
-    </div>
+  <div class="cover">
+    <img class="media-object" src="{{@if it.user.avatar}}${{it.user.avatar}}{{@else}}http://static.bh-lay.com/user/default.jpg{{@/if}}" onerror="L.gravatar_error_fn(this)" />
+  </div>
+  <div class="main">
+    <h4>
+      ${{it.user.username}}<small>${{it.time}}</small>
+    </h4>
+    <p>$${{it.content}}</p>
+  </div>
 </a>
 {{@/each}}
 </div>

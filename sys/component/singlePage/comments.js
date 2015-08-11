@@ -67,7 +67,7 @@ function handleData(docs,callback){
     }
     //处理url
     if(item.cid == 'define-1'){
-      item.url = '/bless';
+      item.url = '/bless' + '#comments-' + item._id;
     }else{
       item.url = '/' + item.cid.replace(/\-/g,'/') + '#comments-' + item._id;
     }
