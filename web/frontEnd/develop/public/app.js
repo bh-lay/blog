@@ -30,24 +30,23 @@ window.L = window.L || {};
       }
     };
   })();
-  /**
-   * 是否支持 canvas
-   * 是否支持touch
-   */
-  var supports_canvas = !!document.createElement('canvas').getContext ? true : false;
-  var isSupportTouch = document.hasOwnProperty("ontouchend") ? true : false;
-
-  /**
-   * 是否为高级浏览器
-   * 是否为手机浏览器
-   *
-   */
-  var isAdvancedBrowser = (supports('transition') && supports('transform') && supports_canvas) ? true : false;
+  //是否支持 canvas
+  var supports_canvas = !!document.createElement('canvas').getContext ? true : false,
+      //是否支持touch
+      isSupportTouch = document.hasOwnProperty("ontouchend") ? true : false,
+      //是否为windows系统
+      isWindows = /windows|win32/.test(navigator.userAgent.toLowerCase()),
+      //是否为高级浏览器
+      isAdvancedBrowser = (supports('transition') && supports('transform') && supports_canvas) ? true : false;
 
   //屌丝就用屌丝版
   if (!isAdvancedBrowser) {
     document.cookie = 'ui_version=html;path=/;';
     window.location.reload();
+  }
+  //为windows系统定制body滚动条样式（仅webkit有效）
+  if(isWindows){
+    $('body').addClass('define-scrollbar');
   }
   L.supports = {
     touch : isSupportTouch,

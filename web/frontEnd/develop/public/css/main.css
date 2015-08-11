@@ -2201,14 +2201,14 @@ body:before {
   -webkit-animation: fadeOutRight .5s ease both;
   -moz-animation: fadeOutRight .5s ease both;
 }
-body::-webkit-scrollbar {
+.define-scrollbar::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
-body::-webkit-scrollbar-track-piece {
+.define-scrollbar::-webkit-scrollbar-track-piece {
   background: #eee;
 }
-body::-webkit-scrollbar-thumb:vertical {
+.define-scrollbar::-webkit-scrollbar-thumb:vertical {
   background: #666;
 }
 /**
