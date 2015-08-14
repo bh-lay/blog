@@ -36,8 +36,9 @@ module.exports = {
     base : '/frontEnd/develop/',
     //尝鲜版版
     fresh:{
+      // base : '/frontEnd/build/',
+      // baseJS: 'jquery_seaport.js',
       base : '/frontEnd/develop/',
-      //jquery_seaport.js
       baseJS: 'sea_jquery.js',
       version : '20141217'
     },
