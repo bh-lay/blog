@@ -1,7 +1,7 @@
 /**
  * @author bh-lay
  * @github https://github.com/bh-lay/tie.js
- * @modified 2015-7-16 21:49
+ * @modified 2015-9-9 00:10
  *  location fox
  * 处理既要相对于某个模块固定，又要在其可视时悬浮的页面元素
  * util.tie({
@@ -22,7 +22,7 @@
 	});
 })(window,function(window){
 	var isIE67 = false,
-			private_$doc = $(document);
+		private_$doc = $(document);
 	if(navigator.appName == "Microsoft Internet Explorer"){
 		var version = navigator.appVersion.split(";")[1].replace(/[ ]/g,"");
 		if(version == "MSIE6.0" || version == "MSIE7.0"){
@@ -45,30 +45,28 @@
 			position: 'absolute'
 		});
 	} : function(scrollTop){
+		var top,position;
 		if(this.state == 'min'){
-			this.dom.css({
-				top: 0,
-				position: this._position_first
-			});
+			top = 0;
+			position =  this._position_first;
 		}else if(this.state == 'max'){
-			this.dom.css({
-				top: this.maxScrollTop - this.minScrollTop,
-				position: 'absolute'
-			});
+			top = this.maxScrollTop - this.minScrollTop;
+			position = 'absolute';
 		}else{
-			this.dom.css({
-				top: this.fix_top,
-				position: 'fixed'
-			});
+			top = this.fix_top;
+			position = 'fixed';
 		}
+		this.dom.css({
+			top: top,
+			position: position
+		});
 	};
 
 	function INIT(param){
 		if( !(this instanceof INIT)){
 			return new INIT(param);
 		}
-		var me = this,
-				scroll_delay;
+		var me = this;
 		param = param || {};
 		//悬浮dom
 		me.dom = param.dom;
@@ -84,10 +82,7 @@
 		
 		me.state = 'min';
 		me._scroll_listener = function(){
-			clearTimeout(scroll_delay);
-			scroll_delay = setTimeout(function(){
-				me.refresh();
-			},0);
+			me.refresh();
 		}
 		
 		me.refresh();
@@ -100,17 +95,15 @@
 	INIT.prototype = {
 		refresh: function (){
 			var domH = this.dom.height(),
-					cntH = this.scopeDom.outerHeight();
+				cntH = this.scopeDom.outerHeight();
 			this.minScrollTop = this.scopeDom.offset().top - this.fix_top;
 			this.maxScrollTop = this.minScrollTop + cntH - domH;
 
 			var scrollTop = private_$doc.scrollTop();
 			if(scrollTop <= this.minScrollTop){
 				this.state = 'min';
-			}else if(scrollTop >= this.maxScrollTop){
-				this.state = 'max';
 			}else{
-				this.state = 'mid';
+				this.state = scrollTop >= this.maxScrollTop ? 'max' : 'mid';
 			}
 			fix_position.call(this,scrollTop);
 		},
