@@ -7,7 +7,7 @@
 module.exports = {
 	host : '*',
   //端口号
-	port : 80,
+	port : 8090,
   //静态资源
   static: {
     //静态资源根目录
@@ -63,8 +63,8 @@ module.exports = {
 	mongo : {
 		host: 'localhost',
 		port: 27017,
-		user: 'lay',
-		pass: '19900927',
+		user: 'bloguser',
+		pass: '123456',
 		db_name: 'blog'
 	}
 }; 
