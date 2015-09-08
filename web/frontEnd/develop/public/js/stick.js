@@ -175,6 +175,7 @@
     this.column_width_base = param.column_width ? parseInt(param.column_width) : 300;
     this.column_width;
     this.column_num;
+    this.load_spacing = param.load_spacing || 300;
 
     this.list = [];
     this.last_row = [];
@@ -184,7 +185,7 @@
         last_time = 0;
     this.scrollListener = function(){
       var now = new Date().getTime();
-      if(now - last_time > 500 && (getScrollTop() + window.innerHeight >= document.body.scrollHeight - 300)){
+      if(now - last_time > 500 && (getScrollTop() + window.innerHeight >= document.body.scrollHeight - me.load_spacing)){
         me.onNeedMore && me.onNeedMore();
         last_time = now;
       }
@@ -233,7 +234,7 @@
       });
     },
     addList: function(list){
-      //
+      //尚未实现
     },
     destroy: function(){
       unbind(document,'scroll',this.scrollListener);
