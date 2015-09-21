@@ -191,7 +191,7 @@ h1 {
   padding-bottom: 20px;
   overflow: auto;
 }
-.structure svg {
+.structure img {
   display: block;
   width: 100%;
   max-width: 1218px;
@@ -249,7 +249,7 @@ h1 {
   .intro-card {
     margin-bottom: 0;
   }
-  .structure svg {
+  .structure img {
     height: 530px;
   }
 }
@@ -259,7 +259,7 @@ h1 {
   overflow: auto;
   text-align: center;
   font-size: 16px;
-  background: url(wave.gif) #fafafa;
+  background: url(/asset/wave_cb89b62.gif) #fafafa;
 }
 .index-views-intro img {
   display: block;

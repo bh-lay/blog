@@ -98,6 +98,7 @@
       var state = e.state || {};
       //console.log('from popstate event !',state);
       var url = state.url || null;
+      console.log('arguments',e)
       //清除第一次不确定性的触发
       if(url){
         this_fox.refresh(url);
