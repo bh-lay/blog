@@ -92,7 +92,7 @@ exports.detail = function (connect,app,lab_name){
         return
       }
       //获取视图
-      app.views('multi-page/labsDetail',{
+      app.views('labsDetail',{
         title : data.title,
         keywords : data.tags,
         description : data.intro,
