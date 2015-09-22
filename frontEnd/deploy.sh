@@ -2,8 +2,18 @@
 echo 'Deploy System'
 echo '-----------------------'
 
+
+#检查项目是否存在
+if [ $1 == 'help' ]; then 
+    echo -e "Usage: bash $0 [project] [media]";
+    echo -e "       [project] 项目目录名";
+    echo -e "       [media] fis配置中的media（可选）";
+    exit 1;
+fi
+
 # 源码目录-发布目录
 deployFrom=$1;
+deployMedia=${2:-''};
 deployTo='';
 
 #检查项目是否存在
@@ -39,8 +49,9 @@ case $deployFrom in
     ;;
 esac
 
-echo '  from '$deployFrom
-echo '  to   '$deployTo
+echo '  from: '$deployFrom
+echo '  to  : '$deployTo
+echo '  fis3 release '$deployMedia' -d '$deployTo' --file fis-conf.js'
 
 cd $deployFrom
-fis3 release -d $deployTo --file fis-conf.js
+fis3 release $deployMedia -d $deployTo --file fis-conf.js
