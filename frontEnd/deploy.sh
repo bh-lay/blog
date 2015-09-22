@@ -30,6 +30,9 @@ case $deployFrom in
     'intiate')
         deployTo='../../web/topic/intiate'
     ;;
+    'multi-page')
+        deployTo='../../web/'
+    ;;
     *)  
 		echo -e "need config first,please edit deploy.sh !\n";
     	exit 1; 
