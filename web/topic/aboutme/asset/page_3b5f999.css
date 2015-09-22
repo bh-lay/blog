@@ -1,7 +1,8 @@
+@charset "UTF-8";
 @font-face {
   font-family: "layIcon";
   src: url("layicon-webfont.eot?v=2");
-  src: url("layicon-webfont.eot?v=2#iefix") format("embedded-opentype"), url('layicon-webfont.woff?v=2') format('woff'), url("layicon-webfont.ttf?v=2") format("truetype"), url("layicon-webfont.svg?v=2#layicon-webfont") format("svg");
+  src: url("layicon-webfont.eot?v=2") format("embedded-opentype"), url('layicon-webfont.woff?v=2') format('woff'), url("layicon-webfont.ttf?v=2") format("truetype"), url("layicon-webfont_1a2b6b0.svg?v=2") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -70,7 +71,6 @@
 .l-icon-down-double:after {
   content: '\006d';
 }
-@charset "UTF-8";
 /*!
 Animate.css - http://daneden.me/animate
 Licensed under the MIT license
@@ -2685,6 +2685,9 @@ hr {
   background-size: cover;
   background-position: center center;
   cursor: pointer;
+}
+#design .pic img {
+  width: 100%;
 }
 #design .pic20 {
   width: 20%;

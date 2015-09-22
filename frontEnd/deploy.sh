@@ -15,8 +15,11 @@ case $deployFrom in
     'aboutblog')
 		deployTo='../../web/topic/aboutblog'
     ;;
+    'aboutme')
+        deployTo='../../web/topic/aboutme'
+    ;;
     'intiate')
-		deployTo='../../web/topic/intiate'
+        deployTo='../../web/topic/intiate'
     ;;
     *)  
 		echo -e "need config first,please edit deploy.sh !\n";
