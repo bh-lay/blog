@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>关于剧中人</title>
+	<meta name="author" content="bh-lay" />
+	<meta name="description" content="剧中人，90后前端开发，全栈开发实践者。" />
+	<meta name="keywords"  content="剧中人,小剧客栈,前端开发" />
+	<meta content="width=device-width, initial-scale=0.5, user-scalable=0" name="viewport">
+	<link rel="stylesheet" type="text/css" href="jquery.fullPage.css" />
+	<link rel="stylesheet" href="style.css?__inline">
+	<!--[if IE]>
+		<script type="text/javascript">
+			 var console = { log: function() {} };
+		</script>
+	<![endif]-->
+</head>
+<body>
+<div id="fullpage">
+	<div class="section " id="section0">
+		<div class="wrap">
+			<img src="logo.png" alt="我是剧中人">
+			<p>90后天蝎男</p>
+			<p>前端工程师</p>
+			<p>全栈开发尝试者</p>
+		</div>
+		<a href="#page2" class="down"></a>
+	</div>
+	<div class="section" id="section1">
+		<div class="wrap">
+			<p>目前就职于上海矩方</p>
+			<p>担任法国凯捷技术咨询顾问</p>
+			<p><br/>前上海易班前端工程师</p>
+		</div>
+		<a href="#page3" class="down"></a>
+	</div>
+	<div class="section" id="section2">
+		<div class="wrap">
+			<p>喜欢设计</p>
+			<p>热衷于用户体验的实现与优化</p>
+			<p>更酷爱造轮子（这是病，得治）</p>
+		</div>
+		<a href="#page4" class="down"></a>
+	</div>
+	<div class="section" id="section3">
+		<div class="wrap">
+			<p>爱好nodeJS开发</p>
+			<img src="nodejs.gif"/>
+		</div>
+		<a href="#page5" class="down"></a>
+	</div>
+	<div class="section" id="section4">
+		<div class="wrap">
+			<div class="section4_right">
+				<img class="github_ico" src="github.png" />
+				<h1>常混迹于github</h1>
+				<p>←github名片（本人造的，你造吗）</p>
+				<p><small><a href="https://github.com/bh-lay/github-widget-user" target="_blank">jquery-github-user-widget.js</a></small></p>
+			</div>
+			<div class="section4_left"><div class="github-widget-user" data-user="bh-lay"></div></div>
+		</div>
+		<a href="#page6" class="down"></a>
+	</div>
+	<div class="section" id="section5">
+		<div class="wrap">
+			<h1>关于我的博客</h1>
+			<p>博客于2012年3月建立</p>
+			<p>从毕业前夕，一直伴随我成长至今</p>
+			<p>是我造的所有轮子的发源地</p>
+			<p><br/><a href="/" target="_blank">看看小剧客栈</a></p>
+		</div>
+	</div>
+</div>
+<div class="section_loading"><p>玩命儿加载中……</p></div>
+<script src="jquery.min.js"></script>
+<script src="jquery-ui.min.js"></script>
+<script type="text/javascript" src="jquery.fullPage.min.js"></script>
+<script type="text/javascript" src="jquery-github-user-widget.js"></script>
+<script type="text/javascript">
+		$(document).ready(function() {
+			$('#fullpage').fullpage({
+				sectionsColor: ['whitesmoke', '#4BBFC3', '#7BAABE', '#151911', '#ccddff', '#7BAABE'],
+				anchors: ['page1', 'page2', 'page3', 'page4', 'page5','page6'],
+				navigation:true,
+				scrollingSpeed: 600,
+				css3: true,
+				afterLoad : function(){
+					console.log(arguments);
+				}
+			});
+			$('.section_loading').fadeOut(800);
+		});
+</script><div class="tongji">
+<script type="text/javascript">
+	var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+	document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F0f6bfc1dac208f86e5effd5f2d59027d' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</div>
+</body>
+</html>

@@ -1,0 +1,205 @@
+/* Reset CSS
+ * --------------------------------------- */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,
+form,fieldset,input,textarea,p,blockquote,th,td {
+    padding: 0;
+    margin: 0;
+}
+a{
+	text-decoration:none;
+}
+table {
+    border-spacing: 0;
+}
+fieldset,img {
+    border: 0;
+}
+address,caption,cite,code,dfn,em,strong,th,var {
+    font-weight: normal;
+    font-style: normal;
+}
+strong{
+	font-weight: bold;
+}
+ol,ul {
+    list-style: none;
+    margin:0;
+    padding:0;
+}
+caption,th {
+    text-align: left;
+
+}
+h1,h2,h3,h4,h5,h6 {
+    font-weight: normal;
+    font-size: 100%;
+    margin:0;
+    padding:0;
+    color:#444;
+}
+q:before,q:after {content:'';}
+abbr,acronym { border: 0;}
+
+
+/* Custom CSS
+ * --------------------------------------- */
+body{
+	font-family: Microsoft Yahei,helvetica;
+	color: #fff;
+}
+
+@-webkit-keyframes bounce{
+0%,20%,50%,80%,100%{-webkit-transform:translateY(0)}
+40%{-webkit-transform:translateY(-30px)}
+60%{-webkit-transform:translateY(-15px)}
+}
+@-moz-keyframes bounce{
+0%,20%,50%,80%,100%{-moz-transform:translateY(0)}
+40%{-moz-transform:translateY(-30px)}
+60%{-moz-transform:translateY(-15px)}
+}
+
+@-webkit-keyframes flipInX{
+0%{-webkit-transform:perspective(400px) rotateX(90deg);
+opacity:0}
+40%{-webkit-transform:perspective(400px) rotateX(-10deg)}
+70%{-webkit-transform:perspective(400px) rotateX(10deg)}
+100%{-webkit-transform:perspective(400px) rotateX(0deg);
+opacity:1}
+}
+@-moz-keyframes flipInX{
+0%{-moz-transform:perspective(400px) rotateX(90deg);
+opacity:0}
+40%{-moz-transform:perspective(400px) rotateX(-10deg)}
+70%{-moz-transform:perspective(400px) rotateX(10deg)}
+100%{-moz-transform:perspective(400px) rotateX(0deg);
+opacity:1}
+}
+.down{
+	position: absolute;
+	display: block;
+	bottom: 10px;
+	left: 50%;
+	width: 50px;
+	height: 28px;
+	margin-left: -25px;
+	background: url(down.png);
+}
+.active .down{
+	-webkit-animation:bounce 1s 2s ease both;
+	-moz-animation:bounce 1s 2s ease both;
+}
+.wrap{
+	position: relative;
+	max-width: 700px;
+	margin:auto;
+	padding: 0px 10px;
+	transition: all 0.2s;
+}
+.wrap:after{
+  content: '';
+  display: block;
+  clear: both;
+  height: 0;
+  line-height: 0;
+  overflow: hidden;
+}
+.active .wrap{
+	-webkit-animation:flipInX .6s .5s ease both;
+	-moz-animation:flipInX .6s .5s ease both;
+}
+h1{
+	font-size: 2em;
+	margin-bottom: 1em;
+}
+p{
+	font-size: 1.5em;
+}
+.section_loading{
+	position: fixed;
+	top:0;
+	left:0;
+	width: 100%;
+	height: 100%;
+	z-index: 1000;
+	background: #eee;
+}
+.section_loading p{
+	position: absolute;
+	width: 300px;
+	height: 50px;
+	top: 50%;
+	left: 50%;
+	margin: -25px 0 0 -150px;
+	line-height: 50px;
+	text-align:center;
+	font-size: 26px;
+	letter-spacing: 2px;
+	color: #777;
+}
+.section{
+	text-align: center;
+	background-position: center center;
+	background-size: cover;
+}
+#section0{
+	background-image: url(aboutme.jpg);
+}
+#section1{
+	background-image: url(night.jpg);
+}
+#section2{
+}
+#section2 p{
+	color: #000;
+}
+#section3 p{
+	color: #fff;
+}
+#section3 img{
+	max-width: 90%;
+}
+#section4 h1{
+	color: #fff;
+}
+.section4_left{
+	float: left;
+	width: 240px;
+	top: 0;
+	left: 10px;
+}
+.section4_right{
+	float: right;
+	padding-top: 130px;
+}
+.section4_right small a{
+	font-size: 14px;
+	color: #03a;
+}
+.section4_right small a:hover{
+	text-decoration: underline;
+}
+.github-widget-user{
+	font-size: 14px;
+	text-align: left;
+}
+.github-widget-user p{
+	font-size: 1em;
+}
+
+#section5 .wrap{
+	text-align: right;
+}
+#section5 a{
+	display: inline-block;
+	width: 200px;
+	text-align: center;
+	line-height:40px;
+	font-size: 16px;
+	font-weight: normal;
+	color: #555;
+	background: #fff;
+}
+#section5 a:hover{
+	background: #eee;
+}

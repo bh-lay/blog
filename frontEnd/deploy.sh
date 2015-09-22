@@ -18,6 +18,9 @@ case $deployFrom in
     'aboutme')
         deployTo='../../web/topic/aboutme'
     ;;
+    'aboutme_old')
+        deployTo='../../web/topic/aboutme_old'
+    ;;
     'intiate')
         deployTo='../../web/topic/intiate'
     ;;
