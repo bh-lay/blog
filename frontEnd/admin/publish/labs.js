@@ -57,7 +57,7 @@ define && define(function(require,exports){
 				'<input type="text" class="form-control" name="demo_url" value="{demo_url}" placeholder="demo地址">',
 			'</div>',
 			'<br/><div class="input-group" style="width:100%">',
-				'<textarea class="form-control mditor" name="content" cols="50" rows="10" placeholder="插件详细介绍" >{content}</textarea>',
+				'<textarea class="mditor" name="content" cols="50" rows="10" placeholder="插件详细介绍" >{content}</textarea>',
 			'</div>',
 			'<br/><div>',
 				'<input type="hidden" name="id" value="{id}" />',
@@ -119,7 +119,7 @@ define && define(function(require,exports){
 					sendFn && sendFn();
 				}
 			});
-			mditor.bind(dom.find('textarea.mditor'));
+			mditor(dom.find('textarea.mditor')[0]);
 			return
 		}
 		getLabs(id,function(err,data){
@@ -130,7 +130,7 @@ define && define(function(require,exports){
 			var new_html = valueInit(labs_tpl,data);
 			
 			dom.html(new_html);
-			mditor.bind(dom.find('textarea.mditor'));
+			mditor(dom.find('textarea.mditor')[0]);
 			new formToAjax(dom,{
 				'onSubmit' : function(data){
 					alert = UI.prompt('正在提交实验室的修改！',0);
