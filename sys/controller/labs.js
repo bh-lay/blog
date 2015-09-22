@@ -65,7 +65,7 @@ exports.list = function (connect,app){
         return;
       }
       //获取视图
-      app.views('labsList',{
+      app.views('multi-page/labsList',{
         title : '实验室_小剧客栈_剧中人的个人博客',
         keywords : '造轮子,组件,实验室,剧中人,小剧客栈,前端工程师,设计师,nodeJS',
         description : '剧中人造轮子的基地，汇集小剧开发的部分组件，孕育优秀代码的实验室！',
@@ -92,7 +92,7 @@ exports.detail = function (connect,app,lab_name){
         return
       }
       //获取视图
-      app.views('labsDetail',{
+      app.views('multi-page/labsDetail',{
         title : data.title,
         keywords : data.tags,
         description : data.intro,
