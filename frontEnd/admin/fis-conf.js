@@ -6,10 +6,8 @@ fis.match('*.{js,css,jpg,png,less,gif,svg,eot,ttf,woff,woff2}', {
   useHash: true
 });
 
-  // fis-parser-less 插件进行解析
 //CSS压缩
 fis.match('*.css', {
-  // fis-optimizer-clean-css 插件进行压缩，已内置
   optimizer: fis.plugin('clean-css')
 });
 
@@ -29,11 +27,10 @@ fis.match('app.js', {
   isMod: true
 });
 
-//
+//发布位置
 fis.match('**', {
   release: 'asset/build/admin/$0'
 });
-
 fis.match('*.html', {
   release: '../sys/views/admin/$0'
 });
@@ -50,8 +47,7 @@ fis.match('::packager', {
 });
 
 
-// 注意： fis 中的 sea.js 方案，不支持部分打包。
-// 所以不要去配置 packTo 了，运行时会报错的。
+//线上打包
 fis
   .media('production')
     .match('/**.js', {
@@ -66,8 +62,8 @@ fis
       }
     })
   })
-  // //线上使用CDN
-  // .media('production').match('*', {
-  //   // domain: 'http://static.bh-lay.com'
-  // });
+  //线上使用CDN
+  .media('production').match('*', {
+    // domain: 'http://static.bh-lay.com'
+  });
 
