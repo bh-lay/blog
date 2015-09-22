@@ -43,6 +43,9 @@ case $deployFrom in
     'multi-page')
         deployTo='../../web/'
     ;;
+    'admin')
+        deployTo='../../web/'
+    ;;
     *)  
 		echo -e "need config first,please edit deploy.sh !\n";
     	exit 1; 

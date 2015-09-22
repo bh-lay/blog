@@ -5,11 +5,10 @@
 <title>剧中人后台</title>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" /><link href="/favicon.ico" rel="shortcut icon"/>
-
-    <link rel="stylesheet" type="text/css" href="/asset/build/admin/gallery/style_20e4f64.css" />
-    <link rel="stylesheet" type="text/css" href="/asset/build/admin/bootstrap/css/bootstrap_c8e9786.css" />
-    <style>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<link href="/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
+<link href="/favicon.ico" rel="shortcut icon"/>
+<style type="text/css">
  /* Box-sizing resets
  *
  * 为了避免 Bootstrap 设置的全局盒模型所带来的影响，可以重置单个页面元素或覆盖整个区域的盒模型。
@@ -136,18 +135,16 @@
 <script type="text/template" id="tpl_comments_page">
 <include name="admin/comments_list" />
 </script>
-
-<script type="text/javascript" src="/asset/build/admin/sea_b173327.js"></script>
-<script type="text/javascript" src="/asset/build/admin/pkg/index.html_map_f0c61c7.js"></script>
-<script type="text/javascript" src="/asset/build/admin/jquery_1b89cc6.js"></script>
-<script type="text/javascript" src="/asset/build/admin/bootstrap/js/bootstrap_36bc333.js"></script>
+<script type="text/javascript" src="/jquery.js"></script>
+<script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="/sea.js" ></script>
 <script type="text/javascript">
 	var admin_dataBase = {
 		username : '${{username}}',
 		userid : '${{userid}}',
 		frontEnd_base : '${{frontEnd.base}}'
 	};
-  	seajs.use('app');
+  	seajs.use('app.js');
 </script>
 </body>
 </html>
