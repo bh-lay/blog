@@ -31,11 +31,11 @@ fis.match('**', {
   release: 'asset/build/multi-page/$0'
 });
 
-fis.media('production').match('*', {
-  domain: 'http://static.bh-lay.com'
-});
-
-
 fis.match('*.html', {
   release: '../sys/views/multi-page/$0'
+});
+
+//线上使用CDN
+fis.media('production').match('*', {
+  domain: 'http://static.bh-lay.com'
 });
