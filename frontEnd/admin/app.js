@@ -6,7 +6,89 @@
 
 window.admin = window.admin || {};
 
-
+function globalEvents(){
+  /**
+   * ajax交互
+   *
+   **/
+  function sendPOST(url,callback){
+    $.ajax({
+      url : url,
+      type : 'POST',
+      success : function(data){
+        if(data && data.code == 200){
+          callback && callback(null,'操作成功');
+        }else{
+          var msg = data.msg || '操作失败';
+          callback && callback(msg);
+        }
+      },
+      error : function(){
+        callback && callback('网络出错！');
+      }
+    });
+  }
+  $('body').on('click','a[data-action-ajaxConfirm]',function(){
+    var btn = $(this);
+    var url = btn.attr('href');
+    var text = btn.attr('data-action-ajaxConfirm');
+    UI.confirm({
+      text : text,
+      callback : function(){
+        sendPOST(url,function(err,msg){
+          if(err){
+            UI.prompt(err);
+          }else{
+            UI.prompt('操作成功！');
+          }
+        });
+      }
+    });
+    return false;
+  }).on('click','a[data-action-del]',function(){
+    var btn = $(this);
+    var url = btn.attr('href');
+    var text = btn.attr('data-action-del');
+    var item_selector = btn.attr('data-item-selector');
+    var item = btn.parents(item_selector);
+    UI.confirm({
+      text : text,
+      callback : function(){
+        sendPOST(url,function(err,msg){
+          if(err){
+            UI.prompt(err);
+          }else{
+            item.fadeTo(400,0.1,function(){
+              item.slideUp(200,function(){
+                item.remove();
+              });
+            });
+          }
+        });
+      }
+    });
+    return false;
+  }).on('click','a[data-action-ajax]',function(){
+    var btn = $(this);
+    var url = btn.attr('href');
+    var text = btn.attr('data-action-ajax');
+    $.ajax({
+      url : url,
+      type : 'POST',
+      success : function(data){
+        if(data && data.code ==200){
+          UI.prompt(text);
+        }else{
+          UI.prompt('操作失败！');
+        }
+      },
+      error : function(){
+        UI.prompt('网络出错！');
+      }
+    });
+    return false;
+  });
+}
 /**
  * @method admin.push
  * 	@param {String} url,the location url needn't '/p/'
@@ -22,7 +104,6 @@ define(function(require,exports){
   require('lofox.js');
 	require('dialog.js');
   require('juicer.js');
-	require('jquery.easing.1.3.min.js');
 
   var views = {
     labs : require('views/labs.js'),
@@ -67,7 +148,7 @@ define(function(require,exports){
   var lofox = util.lofox();
   var mainDom = $('.mainCnt');
   var titleDom = $('title');
-
+  globalEvents();
 
   //首页
   lofox.set('/admin/',function(){
@@ -206,88 +287,4 @@ define(function(require,exports){
   window.admin.refresh = function(){
     lofox.refresh();
   };
-});
-
-/**
- * ajax交互
- *
- **/
-$(function(exports){
-	function sendPOST(url,callback){
-		$.ajax({
-			url : url,
-			type : 'POST',
-			success : function(data){
-				if(data && data.code == 200){
-					callback && callback(null,'操作成功');
-				}else{
-					var msg = data.msg || '操作失败';
-					callback && callback(msg);
-				}
-			},
-			error : function(){
-				callback && callback('网络出错！');
-			}
-		});
-	}
-	$('body').on('click','a[data-action-ajaxConfirm]',function(){
-		var btn = $(this);
-		var url = btn.attr('href');
-		var text = btn.attr('data-action-ajaxConfirm');
-		UI.confirm({
-			text : text,
-			callback : function(){
-				sendPOST(url,function(err,msg){
-					if(err){
-						UI.prompt(err);
-					}else{
-						UI.prompt('操作成功！');
-					}
-				});
-			}
-		});
-		return false;
-	}).on('click','a[data-action-del]',function(){
-		var btn = $(this);
-		var url = btn.attr('href');
-		var text = btn.attr('data-action-del');
-		var item_selector = btn.attr('data-item-selector');
-		var item = btn.parents(item_selector);
-		UI.confirm({
-			text : text,
-			callback : function(){
-				sendPOST(url,function(err,msg){
-					if(err){
-						UI.prompt(err);
-					}else{
-						item.fadeTo(400,0.1,function(){
-							item.slideUp(200,function(){
-								item.remove();
-							});
-						});
-					}
-				});
-			}
-		});
-		return false;
-	}).on('click','a[data-action-ajax]',function(){
-		var btn = $(this);
-		var url = btn.attr('href');
-		var text = btn.attr('data-action-ajax');
-		$.ajax({
-			url : url,
-			type : 'POST',
-			success : function(data){
-				if(data && data.code ==200){
-					UI.prompt(text);
-				}else{
-					UI.prompt('操作失败！');
-				}
-			},
-		  error : function(){
-				UI.prompt('网络出错！');
-			}
-		});
-		return false;
-	});
 });

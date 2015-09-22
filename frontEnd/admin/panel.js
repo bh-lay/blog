@@ -34,19 +34,20 @@
  * 	});
  * 	o.remove('copy');
  */
-window.util = window.util || {};
 
-window.util.panel = window.util.panel || function(param) {
-	var param = param || {};
-	var doms_path = param['targets'] || null,
-		 type = param['type'] || 'menu',
-		 args = param['list'] || {},
-		 callback = param['callback'] || null,
-		 callbefore = param['callbefore'] || null;
-	return new window.util.panel.init(doms_path,type,args,callback,callbefore);
-};
+(function(global,doc,factory){
 
-(function(exports) {
+	if(global.define){
+		//提供CommonJS规范的接口
+		define(function(){
+      		//对外接口
+      		return factory(global,doc);
+  		});
+  	}else{
+		global.util = global.util || {};
+		global.util.panel = global.util.panel || factory(global,doc);
+  	}
+})(window,document,function(window,document){
 	////////////////////////////////////////////
 	var console = window.console || {'log':function(){}};
 	
@@ -288,11 +289,13 @@ window.util.panel = window.util.panel || function(param) {
 			}
 		}
 	};
-	exports.init = construction;
-})(window.util.panel);
-
-//提供CommonJS规范的接口
-window.define && define(function(require,exports,module){
-	//对外接口
-	return window.util.panel;
+	return function(param) {
+		var param = param || {};
+		var doms_path = param['targets'] || null,
+			 type = param['type'] || 'menu',
+			 args = param['list'] || {},
+			 callback = param['callback'] || null,
+			 callbefore = param['callbefore'] || null;
+		return new construction(doms_path,type,args,callback,callbefore);
+	};
 });

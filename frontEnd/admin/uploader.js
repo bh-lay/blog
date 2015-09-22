@@ -6,16 +6,18 @@
  * 
  */
 
-(function(global,doc,factoryFn){
-  var factory = factoryFn(global,doc);
+(function(global,doc,factory){
   
-  global.util = global.util || {};
-  global.util.uploader = factory;
-  //提供CommonJS规范的接口
-  global.define && define(function(){
-      //对外接口
-      return factory;
-  });
+	if(global.define){
+		//提供CommonJS规范的接口
+		define(function(){
+      		//对外接口
+      		return factory(global,doc);
+  		});
+  	}else{
+  	  global.util = global.util || {};
+	  global.util.uploader = factory(global,doc);
+  	}
 })(window,document,function(window,document){
 	var staticID = 0;
 	var upCnt_tpl = '<div class="uploaderCnt" style="width:0px;height:0px;position:fixed;left:0px;top:0px;overflow:hidden"></div>';

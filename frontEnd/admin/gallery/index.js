@@ -1,6 +1,5 @@
 define(function(require,exports){
 	
-	seajs.use('gallery/style.css');
 	var uploader = require('uploader.js');
 	var events = require('event.js');
 	var panel = require('panel.js');

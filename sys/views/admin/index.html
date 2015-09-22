@@ -7,63 +7,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" /><link href="/favicon.ico" rel="shortcut icon"/>
 
-    <link rel="stylesheet" type="text/css" href="/asset/build/admin/gallery/style_20e4f64.css" />
     <link rel="stylesheet" type="text/css" href="/asset/build/admin/bootstrap/css/bootstrap_c8e9786.css" />
-    <style>
- /* Box-sizing resets
- *
- * 为了避免 Bootstrap 设置的全局盒模型所带来的影响，可以重置单个页面元素或覆盖整个区域的盒模型。
- */
-/* Option 2A: 通过 CSS 代码重置整个区域 */
-.reset-box-sizing,
-.reset-box-sizing *,
-.reset-box-sizing *:before,
-.reset-box-sizing *:after {
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-}
-	html{min-height:100%; }
-	body{padding-top:60px;
-		font-family: "Microsoft Yahei";
-		background : #444;
-	}
-	.navbar-default{box-shadow:0px 0px 5px rgba(0,0,0,0.7);background:#fff;border:none;}
-	.mainCnt{position:relative;min-height:500px;overflow: hidden;}
-	.mainCnt_body{position:relative;width:100%;}
-	.custom-footer{background:#333;color:#fff;}
-	.custom-subFooter{background:#333;color:#fff;}
-	.custom-mb10{margin-bottom:10px;}
-	.custom-mb20{margin-bottom:20px;}
-  .custom-editor{
-    margin: 10px 0;
-  }
-  #editor {
-    width: 100%;
-    min-height: 500px;
-  }
-  .pro_loading{
-    height: 200px;
-    line-height: 200px;
-    text-align: center;
-    background: #fff;
-  }
-  tr.disable{
-    text-decoration: line-through;
-    background: #eee;
-  }
-  .commentsList .comm_header {
-    line-height: 30px;
-    color: #888;
-  }
-  .commentsList .comm_header span,
-  .commentsList .comm_header a{
-    padding: 0 1em 0 .5em;
-  }
-  .commentsList p{
-    padding-top: 1em;
-  }
-</style>
+    <style>.reset-box-sizing,.reset-box-sizing *,.reset-box-sizing :before,.reset-box-sizing :after{-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box}html{min-height:100%}body{padding-top:60px;font-family:"Microsoft Yahei";background:#444}.navbar-default{box-shadow:0 0 5px rgba(0,0,0,.7);background:#fff;border:0}.mainCnt{position:relative;min-height:500px;overflow:hidden}.mainCnt_body{position:relative;width:100%}.custom-footer{background:#333;color:#fff}.custom-subFooter{background:#333;color:#fff}.custom-mb10{margin-bottom:10px}.custom-mb20{margin-bottom:20px}.custom-editor{margin:10px 0}#editor{width:100%;min-height:500px}.pro_loading{height:200px;line-height:200px;text-align:center;background:#fff}tr.disable{text-decoration:line-through;background:#eee}.commentsList .comm_header{line-height:30px;color:#888}.commentsList .comm_header span,.commentsList .comm_header a{padding:0 1em 0 .5em}.commentsList p{padding-top:1em}</style>
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -138,14 +83,13 @@
 </script>
 
 <script type="text/javascript" src="/asset/build/admin/sea_b173327.js"></script>
-<script type="text/javascript" src="/asset/build/admin/pkg/index.html_map_f0c61c7.js"></script>
+<script type="text/javascript" src="/asset/build/admin/pkg/index.html_map_26721d4.js"></script>
 <script type="text/javascript" src="/asset/build/admin/jquery_1b89cc6.js"></script>
 <script type="text/javascript" src="/asset/build/admin/bootstrap/js/bootstrap_36bc333.js"></script>
 <script type="text/javascript">
 	var admin_dataBase = {
 		username : '${{username}}',
-		userid : '${{userid}}',
-		frontEnd_base : '${{frontEnd.base}}'
+		userid : '${{userid}}'
 	};
   	seajs.use('app');
 </script>

@@ -8,7 +8,7 @@
  * 发布博文
  */
 define(function(require,exports){
-	require('publish/mditor.js');
+	require('mditor.js');
 	var formToAjax = require('tools/form2ajax.js'),
       gallery = require('gallery/index.js');
 	//初始化模版

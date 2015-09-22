@@ -11,7 +11,7 @@
 
 
 define && define(function(require,exports){
-	require('publish/mditor.js');
+	require('mditor.js');
 	require('gallery/index.js');
 	var formToAjax = require('tools/form2ajax.js'),
       gallery = require('gallery/index.js');
