@@ -7,9 +7,9 @@
     <meta name="description" content="${{description}}" />
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
     <base target="_blank" />
-    <include name="favicon_appicon" />  
-    <link rel="stylesheet" type="text/css" href="/asset/build/single-page/css/main_28ab563.css" />
-</head>
+    <include name="favicon_appicon" />
+    <link rel="stylesheet" type="text/css" href="/css/main.less"/>
+  </head>
   <body>
     <include name="navigation"/>
     <div class="app_container"></div>
@@ -52,14 +52,14 @@
 <script type="text/template" id="data_emoji">
 <include name="singlePage/emoji" />
 </script>
-<include name="baiduAndGoogleTongji"/>
-
-<script type="text/javascript" src="/asset/build/single-page/pkg/index.html_aio_d20224c.js"></script>
+<script type="text/javascript" src="/jquery-2.0.0.js" data-framework></script>
+<script type="text/javascript" src="/sea.js"></script>
 <script type="text/javascript">
     var app_config = {
         imgDomain : '${{frontEnd.img_domain}}'
     };
-    seajs.use("app");
+    seajs.use("app.js");
 </script>
+<include name="baiduAndGoogleTongji"/>
 </body>
 </html>

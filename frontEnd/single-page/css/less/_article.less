@@ -1,0 +1,91 @@
+
+/**
+ * 文章模块
+ */
+.article {
+  padding: 20px;
+  font-family: "Microsoft Yahei";
+  color: #333;
+  img {
+    display: block;
+    max-width: 100%;
+    margin: auto
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    margin: 1.8em 0 0;
+  }
+  h1 {
+    font-size: 2em
+  }
+  h2 {
+    font-size: 1.7em
+  }
+  h3 {
+    font-size: 1.4em
+  }
+  h4 {
+    font-size: 1.25em
+  }
+  h5 {
+    font-size: 1.1em
+  }
+  h6 {
+    font-size: 1em
+  }
+  p {
+    line-height: 1.8;
+    margin: 1em 0;
+    font-size: 1em;
+  }
+  blockquote {
+    margin: 0 0 1em;
+    padding: 0 15px;
+    color: #777;
+    border-left: 4px solid #ddd;
+  }
+  ul {
+    margin: 1em 0;
+    padding-left: 1em;
+    list-style: disc;
+  }
+  ol {
+    margin: 1em 0;
+    padding-left: 1em;
+    list-style: decimal;
+  }
+  li {
+    margin-left: 1em;
+    list-style: inherit;
+  }
+  pre {
+    overflow-x: auto;
+    line-height: 1.8;
+  }
+  code {
+    font-family: inherit;
+    margin: 0 .3em;
+    padding: 0 .4em;
+    color: #e40;
+    background-color: #f6f6f6;
+    border-radius: 4px;
+  }
+  hr{
+    height: 1px;
+    margin: .6em 0;
+    border: none;
+    background: #ddd;
+  }
+  a {
+    padding: 0px .5em;
+    text-decoration: none;
+    color: #3da9f7;
+    &:hover {
+      color: #2c79b0;
+      text-decoration: underline
+    }
+  }
+  >*:nth-child(1){
+    margin-top: 1em !important;
+  }
+}

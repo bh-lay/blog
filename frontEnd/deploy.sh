@@ -43,6 +43,9 @@ case $deployFrom in
     'multi-page')
         deployTo='../../web/'
     ;;
+    'single-page')
+        deployTo='../../web/'
+    ;;
     'admin')
         deployTo='../../web/'
     ;;
