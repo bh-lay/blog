@@ -26,7 +26,7 @@ define(function(require,exports){
   }
   function renderTags(dom,tagName,callback){
     getTag(function(data){
-      var tag_item_tpl = $('#tpl_blog_list_tag').html();
+      var tag_item_tpl = __inline('/tpl/blogListTag.html');
       var html = juicer(tag_item_tpl,data);
       dom.html(html);
 
@@ -102,13 +102,13 @@ define(function(require,exports){
   };
   function page(dom,param){
     var me = this;
-    var baseTpl = $('#tpl_blog_list_base').html();
+    var baseTpl = __inline('/tpl/blogListBase.html');
+    var list_tpl = __inline('/tpl/blogListItem.html');
     var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>';
     //插入基本模版
     dom.html(baseTpl);
     this.$list = dom.find('.articleList');
     this.$loading = dom.find('.l-loading-panel');
-    var list_tpl = $.trim($('#tpl_blog_list_item').html());
     //获取标签名
     var pageTag = param.tag ? decodeURI(param.tag) : null;
     this.stick = new Stick({

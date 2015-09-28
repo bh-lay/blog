@@ -5,7 +5,8 @@
 define(function(require,exports){
   require('js/highlight');
   var showdown = require('js/showdown'),
-      empty_tpl = '<div class="blank-content"><p>博文不存在</p></div>';
+      empty_tpl = '<div class="blank-content"><p>博文不存在</p></div>',
+      template = __inline('/tpl/blogDetailPage.html');
 	
   function getData(id,fn){
     $.ajax({
@@ -16,19 +17,17 @@ define(function(require,exports){
         id : id
       },
       success :function(data){
-        var template = $('#tpl_blog_detail').html();
-        var tpl = L.tplModule(template);
-          if(data.code == 200){
-            var converter = new showdown.converter();
-            var detail = data['detail'];
-            detail.content = converter.makeHtml(detail.content);
-            detail.time_show = L.parseTime(detail.time_show,'{y}-{mm}-{dd}');
-            var this_html = juicer(tpl,detail);
-            fn&&fn(null,this_html,data['detail']['title']);
-          }else{
-            fn&&fn('博客不存在！');
-          }
+        if(data.code == 200){
+          var converter = new showdown.converter();
+          var detail = data['detail'];
+          detail.content = converter.makeHtml(detail.content);
+          detail.time_show = L.parseTime(detail.time_show,'{y}-{mm}-{dd}');
+          var this_html = juicer(template,detail);
+          fn&&fn(null,this_html,data['detail']['title']);
+        }else{
+          fn&&fn('博客不存在！');
         }
+      }
     });
   };
 	
