@@ -36,6 +36,9 @@ fis.match('/js/sea.js', {
 fis.match('**', {
   release: 'asset/build/single-page/$0'
 });
+fis.match('**.psd', {
+  release: false
+});
 fis.match('*.html', {
   release: '../sys/views/single-page/$0'
 });
