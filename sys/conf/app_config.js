@@ -32,20 +32,6 @@ module.exports = {
   }, 
 	//前端版本控制（css、js、图片、字体）
 	frontEnd: {
-    //根目录
-    base : '/frontEnd/develop/',
-    //尝鲜版版
-    fresh:{
-      // base : '/frontEnd/build/',
-      // baseJS: 'jquery_seaport.js',
-      base : '/frontEnd/develop/',
-      baseJS: 'sea_jquery.js',
-      version : '20141217'
-    },
-    //屌丝版版本
-    loser_version : '20141217',
-    //后台管理版本
-    admin_version : '20141217',
     //图床地址
     img_domain : '/asset'
   },
