@@ -3,7 +3,9 @@
  *  
  */
 define(function(require,exports){
-  var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>';
+  var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>',
+      base_tpl = __inline('/tpl/labsListBase.html'),
+      item_temp = __inline('/tpl/labsListItem.html');
   
   var limit = 20,
       skip = 0,
@@ -41,7 +43,6 @@ define(function(require,exports){
     });
   };
   return function(dom,param){
-    var base_tpl = $('#tpl_labs_list_base').html();
     skip = 0;
     dom.html(base_tpl);
     getData(function(err,list){
@@ -49,8 +50,7 @@ define(function(require,exports){
       if(err){
         this_html = empty_tpl;
       }else{
-        var temp = $('#tpl_labs_list_item').html();
-        this_html = juicer(temp,{
+        this_html = juicer(item_temp,{
           list : list
         });
       }
