@@ -28,6 +28,9 @@ fis.match('comments/*.js', {
 fis.match('app.js', {
   isMod: true
 });
+fis.match('/js/sea.js', {
+  isMod: false
+});
 
 //发布位置
 fis.match('**', {
@@ -60,7 +63,7 @@ fis
     postpackager: fis.plugin('loader', {
       allInOne: {
         includeAsyncs: true,
-        ignore: []
+        ignore: ['/js/sea.js']
       }
     })
   })
