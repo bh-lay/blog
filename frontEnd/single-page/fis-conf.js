@@ -1,3 +1,4 @@
+/* global fis */
 
 
 
@@ -23,9 +24,6 @@ fis.match('js/*.js', {
   isMod: true
 });
 fis.match('comments/*.js', {
-  isMod: true
-});
-fis.match('app.js', {
   isMod: true
 });
 fis.match('/js/sea.js', {
@@ -72,6 +70,6 @@ fis
   })
   //线上使用CDN
   .media('production').match('*', {
-    // domain: 'http://static.bh-lay.com'
+    domain: 'http://static.bh-lay.com'
   });
 
