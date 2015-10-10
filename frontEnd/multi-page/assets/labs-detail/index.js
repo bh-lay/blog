@@ -2,10 +2,7 @@
  * labs detail
  *  
  */
-
-seajs.use([
-	'lib/highlight/highlight'
-],function(){
+(function(){
 	//下载部分
 	var btn = $('.labs_detail_download_link a');
 	btn.eq(0).addClass('active');
@@ -51,4 +48,4 @@ seajs.use([
     $('pre').each(function(){
         hljs.highlightBlock(this);
     });
-});
+})();
