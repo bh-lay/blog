@@ -6,62 +6,15 @@ define(function(require,exports){
       face = require('comments/face'),
       pagination = require('js/pagination'),
       
-      default_avatar = 'http://static.bh-lay.com/user/default.jpg',
       private_userInfo = null,
+      default_avatar = 'http://static.bh-lay.com/user/default.jpg',
       
       noData_tpl = '<div class="l_com_list_noData">来的真早，快抢沙发！</div>',
-      baseTpl = ['<div class="l_comments">',
-        '<div class="l_com_sendBox"></div>',
-        '<div class="l_com_list">',
-        '</div>',
-      '</div>'].join(''),
-      
-      sendBox_tpl = ['<div class="l_sendBox" spellcheck="false">',
-        '<div class="l_send_side">',
-          '<div class="l_send_avatar"><img src="" onerror="L.gravatar_error_fn(this)"/></div>',
-          '<a href="javascript:void(0)" class="l_send_username">报上名来</a>',
-        '</div>',
-        '<div class="l_sendBox_main">',
-          '<div class="l_send_textarea">',
-            '<textarea name="content"></textarea>',
-            '<div class="l_send_placeholder">评论屌一点，BUG少一点！</div>',
-          '</div>',
-          '<div class="l_send_footer">',
-            '<div class="l_send_footer_left">',
-              '<a href="javascript:void(0)" title="插入表情" class="l_send_face"><span class="l-icon l-icon-face"></span></a>',
-              '<div class="l_send_count"><b>500</b><i>/</i><span>500</span></div>',
-            '</div>',
-            '<div class="l_send_footer_right">',
-              '<a href="javascript:void(0)" class="l_send_submit">发布</a>',
-            '</div>',
-          '</div>',
-        '</div>',
-      '</div>'].join(''),
-      user_tpl = ['<div class="l_sendBox_user">',
-        '<input type="text" autocomplete="off" name="username" placeholder="昵称"/>',
-        '<input type="text" autocomplete="off" name="email" placeholder="xxx@qq.cn"/>',
-        '<input type="text" autocomplete="off" name="blog" placeholder="xxx.me"/>',
-        '<p>邮箱仅用于<a href="http://en.gravatar.com/" title="全球认可的大头贴">gravatar</a>头像，和与您沟通！</p>',
-      '</div>'].join(''),
-      list_tpl = ['<div>',
-        '<div class="l_com_list_cnt"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载评论内容</p></div></div>',
-        '<div class="l_com_list_pagination"></div>',
-      '</div>'].join(''),
-      item_tpl = ['{@each list as it}',
-        '<div class="l_com_item" data-uid="${it.uid}" data-id="${it._id}" data-cid="${it.cid}">',
-          '<div class="l_com_item_main">',
-            '<div class="l_com_item_caption">{@if it.user.blog}<a href="${it.user.blog}">${it.user.username}</a>{@else}${it.user.username}{@/if} </div>',
-            '<div class="l_com_item_content">$${it.content}</div>',
-            '<div class="l_com_item_footer">',
-              '<div class="time">${it.time}</div>',
-              '<a href="javascript:void(0)" class="btn-reply">回复</a>',
-            '</div>',
-          '</div>',
-          '<div class="l_com_item_avatar">',
-            '<img src="{@if it.user.avatar}${it.user.avatar}{@else}' + default_avatar + '{@/if}" onerror="L.gravatar_error_fn(this)"/>',
-          '</div>',
-        '</div>',
-      '{@/each}'].join('');
+      baseTpl = __inline('tpl/comments/base.html'),
+      sendBox_tpl = __inline('tpl/comments/sendBox.html'),
+      user_tpl = __inline('tpl/comments/user.html'),
+      list_tpl = __inline('tpl/comments/list.html'),
+      item_tpl = __inline('tpl/comments/item.html');
   
   /**
    * @param (timestamp/Date,'{y}-{m}-{d} {h}:{m}:{s}')
@@ -555,15 +508,17 @@ define(function(require,exports){
         if(data.code && data.code == 200){
           var DATA = data.data;
           me.total = DATA.count;
-          me.list.concat(DATA.list);
-
-          for(var i=0,total=DATA.list.length;i<total;i++){
-            DATA.list[i].time = parseTime(DATA.list[i].time,"{h}:{ii} {y}-{m}-{d}");
-            DATA.list[i].content = strToEmoji(DATA.list[i].content);
-            if(DATA.list[i].user.blog){
-              DATA.list[i].user.blog = parseUrl(DATA.list[i].user.blog);
+          me.list = DATA.list;
+          me.list.forEach(function(item){
+            console.log(arguments)
+            item.time = parseTime(item.time,"{h}:{ii} {y}-{m}-{d}");
+            item.content = strToEmoji(item.content);
+            //若无头像，使用默认头像
+            item.user.avatar =  item.user.avatar || default_avatar;
+            if(item.user.blog){
+              item.user.blog = parseUrl(item.user.blog);
             }
-          }
+          });
           callback && callback(null,DATA);
         }
       }
