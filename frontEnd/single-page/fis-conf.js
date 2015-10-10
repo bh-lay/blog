@@ -37,8 +37,8 @@ fis.match('**', {
 fis.match('**.psd', {
   release: false
 });
-fis.match('*.html', {
-  release: '../sys/views/single-page/$0'
+fis.match('index.html', {
+  release: '../sys/views/single-page/index.html'
 });
 
 
