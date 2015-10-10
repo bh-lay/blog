@@ -57,7 +57,7 @@ esac
 
 echo '  from: '$deployFrom
 echo '  to  : '$deployTo
-echo '  fis3 release '$deployMedia' -d '$deployTo' --file fis-conf.js'
+echo '  fis3 release '$deployMedia' -wd '$deployTo' --file fis-conf.js'
 
 cd $deployFrom
-fis3 release $deployMedia -d $deployTo --file fis-conf.js
+fis3 release $deployMedia -wd $deployTo --file fis-conf.js
