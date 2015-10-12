@@ -134,10 +134,12 @@ define(function(require,exports){
       if(!list || list.length == 0){
         me.$list.html(empty_tpl);
       }
-      list.forEach(function(item){
-        var html = juicer(list_tpl,{
-            list : [item]
-        });
+      list.forEach(function(item,index){
+        console.log(item.time_show,index);
+        if(index < 3){
+          item.is_new = true;
+        }
+        var html = juicer(list_tpl,item);
         me.stick.addItem($(html)[0],item.cover);
       });
     });
