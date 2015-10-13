@@ -120,11 +120,14 @@ define(function(require,exports){
         list.loadMore();
       }
     });
-    var a = dom.find('.articleListPage-tags');
+    var $tag = dom.find('.articleListPage-tags');
     this.tie = util.tie({
-      dom : a,
-      scopeDom: a.parent(),
-      fixed_top: 80
+      dom : $tag,
+      scopeDom: $tag.parents('.articleListPage'),
+      fixed_top: 50,
+      onPositionChange: function(){
+        $tag.parent().height($tag.outerHeight());
+      }
     });
     //创建列表对象
     var list = new LIST(pageTag,function(){
@@ -135,7 +138,6 @@ define(function(require,exports){
         me.$list.html(empty_tpl);
       }
       list.forEach(function(item,index){
-        console.log(item.time_show,index);
         if(index < 3){
           item.is_new = true;
         }
@@ -144,7 +146,7 @@ define(function(require,exports){
       });
     });
     //处理标签功能
-    renderTags(dom.find('.side_card .content'),pageTag,function(tag){
+    renderTags(dom.find('.articleListPage-tags .content'),pageTag,function(tag){
       if(tag == 'null'){
         L.push('/blog');
       }else{

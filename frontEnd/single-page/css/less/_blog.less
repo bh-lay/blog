@@ -4,7 +4,6 @@
 .articleListPage{
   min-height: 500px;
   margin: 30px 0;
-  padding: 0 10px 0 240px;
   .blank-content{
       margin-top: 0;
   }
@@ -21,12 +20,15 @@
     height: 20px;
   }
 }
+.articleListPage-tags-cnt{
+  margin-bottom: 20px;
+}
 .articleListPage-tags{
-  position: absolute;
-  width: 200px;
-  margin-left: -220px;
+  width: 100%;
+  background: #fff;
+  z-index: 5;
   .content{
-    padding: 20px 0px 10px 5px;
+    padding: 15px 0 5px 5px;
   }
   a{
     position: relative;
@@ -191,12 +193,9 @@
 }
 
 @media(max-width:650px){
-  .articleListPage{
-    padding-left: 10px;
+  .articleList{
+    margin: 0 10px;
     width: auto;
-  }
-  .articleListPage-tags{
-    display: none;
   }
 }
 
