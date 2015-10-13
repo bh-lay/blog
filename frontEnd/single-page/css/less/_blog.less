@@ -37,9 +37,9 @@
     height: 24px;
     margin: 0 10px 10px 0;
     line-height: 24px;
-    padding: 0 10px 0 20px;
+    padding: 0 8px 0 18px;
     border-radius: 0 4px 4px 0;
-    background: #ddd;
+    background: #eee;
     font-size: 12px;
     color: #333;
     overflow: hidden;
@@ -47,7 +47,7 @@
     white-space: nowrap;
     .borderbox();
     span{
-      opacity: .5;
+      opacity: .3;
       padding: 0 0 0 5px;
     }
     &:before{
@@ -192,7 +192,10 @@
   text-indent: 2em
 }
 
-@media(max-width:650px){
+@media(max-width:660px){
+  .articleListPage-tags{
+    position: static !important;
+  }
   .articleList{
     margin: 0 10px;
     width: auto;
