@@ -1,7 +1,7 @@
 /**
  * @author bh-lay
  * @github https://github.com/bh-lay/tie.js
- * @modified 2015-9-9 00:10
+ * @modified 2015-10-13 18:57
  *  location fox
  * 处理既要相对于某个模块固定，又要在其可视时悬浮的页面元素
  * util.tie({
@@ -78,6 +78,7 @@
 		me.fix_top = param.fixed_top || 0;
 		me.minScrollTop = null;
 		me.maxScrollTop = null;
+		//当定位方式发生变化时
 		me.onPositionChange = param.onPositionChange || null;
 		//原本的position属性
 		me._position_first = me.dom.css('position');
