@@ -1,8 +1,8 @@
 /**
  * @author bh-lay
  * @github https://github.com/bh-lay/tie.js
- * @modified 2015-10-14 19:16
- *  location fox
+ * @modified 2015-10-14 20:08
+ *
  * 处理既要相对于某个模块固定，又要在其可视时悬浮的页面元素
  * util.tie({
 		dom: ,			//需要浮动的元素
@@ -21,16 +21,9 @@
 		return global.util.tie;
 	});
 })(window,document,function(window,document){
-	var isIE67 = false,
-		private_body = document.body || document.getElementsByTagName("body")[0],
+	var private_body = document.body || document.getElementsByTagName("body")[0],
 		docDom = document.compatMode == "BackCompat" ? private_body : document.documentElement;
 
-	if(navigator.appName == "Microsoft Internet Explorer"){
-		var version = navigator.appVersion.split(";")[1].replace(/[ ]/g,"");
-		if(version == "MSIE6.0" || version == "MSIE7.0"){
-			isIE67 = true; 
-		}
-	}
 
 	function doc_scrollTop(){
 	    return docDom.scrollTop || private_body.scrollTop;
@@ -136,37 +129,6 @@
 		return box;
 	}
 	
-	var fix_position = isIE67 ? function(scrollTop){
-		var top;
-		if(this.state == 'min'){
-			top = 0; 
-		}else if(this.state == 'max'){
-			top = this.maxScrollTop - this.minScrollTop;
-		}else if(this.state == 'mid'){
-			top = scrollTop - this.minScrollTop;
-		}
-		this.dom.animate({
-			top: top
-		},100).css({
-			position: 'absolute'
-		});
-	} : function(scrollTop){
-		var top,position;
-		if(this.state == 'min'){
-			top = 0;
-			position =  this._position_first;
-		}else if(this.state == 'max'){
-			top = this.maxScrollTop - this.minScrollTop;
-			position = 'absolute';
-		}else{
-			top = this.fix_top;
-			position = 'fixed';
-		}
-		setCss(this.dom, {
-			top: top,
-			position: position
-		});
-	};
 	//获取样式
 	function getStyle(elem, prop) {
 		var value;
@@ -191,6 +153,26 @@
 			}
 		}
 		return value;
+	}
+
+	function fix_position(scrollTop){
+		var top,position;
+
+		if(this.state == 'min'){
+			top = 0;
+			position =  'relative';
+		}else if(this.state == 'max'){
+			var scopeClient = getClient(this.scopeDom);
+			top = scopeClient.top + scopeClient.height - getClient(this.ghostDom).top - getClient(this.dom).height;
+			position = 'relative';
+		}else{
+			top = this.fix_top;
+			position = 'fixed';
+		}
+		setCss(this.dom, {
+			top: top,
+			position: position
+		});
 	}
 	function INIT(param){
 		if( !(this instanceof INIT)){
@@ -219,8 +201,6 @@
 
 		//当定位方式发生变化时
 		me.onPositionChange = param.onPositionChange || null;
-		//原本的position属性
-		me._position_first = getStyle(me.dom,'position');
 		
 		me.state = 'min';
 		me._scroll_listener = function(){
@@ -236,12 +216,10 @@
 	}
 	INIT.prototype = {
 		refresh: function (){
-			var domH = getClient(this.dom).height,
-				cntH = getClient(this.scopeDom).height;
+			var scopeClient = getClient(this.scopeDom);
 
 			this.minScrollTop = getClient(this.ghostDom).top - this.fix_top;
-			this.maxScrollTop = this.minScrollTop + cntH - domH;
-
+			this.maxScrollTop = scopeClient.top + scopeClient.height - getClient(this.dom).height - this.fix_top;
 			var scrollTop = doc_scrollTop(),
 				state_before = this.state;
 			if(scrollTop <= this.minScrollTop){
@@ -260,6 +238,10 @@
 		},
 		destroy: function(){
 			bindHandler(this.scrollDom,'scroll',this._scroll_listener);
+			setCss(this.dom,{
+				position: 'relative',
+				top: getClient(this.dom).top - getClient(this.ghostDom).top
+			});
 		}
 	};
 	return INIT;

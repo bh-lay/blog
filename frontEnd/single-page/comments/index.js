@@ -510,7 +510,6 @@ define(function(require,exports){
           me.total = DATA.count;
           me.list = DATA.list;
           me.list.forEach(function(item){
-            console.log(arguments)
             item.time = parseTime(item.time,"{h}:{ii} {y}-{m}-{d}");
             item.content = strToEmoji(item.content);
             //若无头像，使用默认头像

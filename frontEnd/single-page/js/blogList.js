@@ -18,7 +18,7 @@ define(function(require,exports){
       url : '/ajax/tag/list',
       success :function(data){
         data = data || {};
-        data.list = data.list ? data.list.slice(0,14) : [];
+        data.list = data.list ? data.list.slice(0,10) : [];
         private_tag_data = data;
         callback && callback(private_tag_data);
       }
@@ -122,12 +122,9 @@ define(function(require,exports){
     });
     var $tag = dom.find('.articleListPage-tags');
     this.tie = util.tie({
-      dom : $tag,
-      scopeDom: $tag.parents('.articleListPage'),
-      fixed_top: 50,
-      onPositionChange: function(){
-        $tag.parent().height($tag.outerHeight());
-      }
+      dom : $tag[0],
+      scopeDom: $tag.parents('.articleListPage')[0],
+      fixed_top: 50
     });
     //创建列表对象
     var list = new LIST(pageTag,function(){
