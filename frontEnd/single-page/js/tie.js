@@ -1,7 +1,7 @@
 /**
  * @author bh-lay
  * @github https://github.com/bh-lay/tie.js
- * @modified 2015-10-13 18:57
+ * @modified 2015-10-14 19:16
  *  location fox
  * 处理既要相对于某个模块固定，又要在其可视时悬浮的页面元素
  * util.tie({
@@ -13,21 +13,127 @@
  */
 
 
-(function(global,factory_fn){
+(function(global,doc,factory_fn){
 	global.util = global.util || {};
-	global.util.tie = factory_fn(global);
+	global.util.tie = factory_fn(global,doc);
 	
 	global.define && define(function(){
 		return global.util.tie;
 	});
-})(window,function(window){
+})(window,document,function(window,document){
 	var isIE67 = false,
-		private_$doc = $(document);
+		private_body = document.body || document.getElementsByTagName("body")[0],
+		docDom = document.compatMode == "BackCompat" ? private_body : document.documentElement;
+
 	if(navigator.appName == "Microsoft Internet Explorer"){
 		var version = navigator.appVersion.split(";")[1].replace(/[ ]/g,"");
 		if(version == "MSIE6.0" || version == "MSIE7.0"){
 			isIE67 = true; 
 		}
+	}
+
+	function doc_scrollTop(){
+	    return docDom.scrollTop || private_body.scrollTop;
+	}
+	/**
+	 * 检测是否为数字
+	 * 兼容字符类数字 '23'
+	 **/
+	function isNum(ipt){
+		return (ipt !== '') && (ipt == +ipt) ? true : false;
+	}
+
+	/**
+	 * 遍历数组或对象
+	 * 
+	**/
+	function each(arr,fn){
+		//检测输入的值
+		if(typeof(arr) != 'object' || typeof(fn) != 'function'){
+			return;
+		}
+		var Length = arr.length;
+		if( isNum(Length) ){
+			for(var i=0;i<Length;i++){
+				if(fn.call(this,i,arr[i]) === false){
+					break
+				}
+			}
+		}else{
+			for(var i in arr){
+				if (!arr.hasOwnProperty(i)){
+					continue;
+				}
+				if(fn.call(this,i,arr[i]) === false){
+					break
+				}
+			}
+		}
+	}
+	/**
+	* dom设置样式
+	*/
+	function setStyle(elem,prop,value){
+		prop = prop.toString();
+		if (prop == "opacity") {
+			elem.style.filter = 'alpha(opacity=' + (value * 100)+ ')';
+			value = value;
+		} else if ( isNum(value) && prop != 'zIndex'){
+			value = value + "px";
+		}
+		elem.style[prop] = value;
+	}
+	//设置css
+	function setCss(doms,cssObj){
+		doms = [].concat(doms);
+		each(doms,function(i,dom){
+			each(cssObj,function(key,value){
+				setStyle(dom,key,value);
+			});
+		});
+	}
+  	/**
+	 * 事件绑定
+	 * elem:节点
+	 * type:事件类型
+	 * handler:回调
+	 **/
+	var bindHandler = window.addEventListener ? function(elem, type, handler) {
+			elem.addEventListener(type, handler, false);
+		} : function(elem, type, handler) {
+			elem.attachEvent("on" + type, handler);
+		};
+	/**
+	* 事件解除
+	* elem:节点
+	* type:事件类型
+	* handler:回调
+	*/
+	var removeHandler = window.removeEventListener ? function(elem, type, handler) {
+			elem.removeEventListener(type, handler, false);
+		} : function(elem, type, handler) {
+			elem.detachEvent("on" + type, handler);
+		};
+	function getClient(elem){
+		var box = {
+			top : 0,
+			left : 0,
+			width: 0,
+			height: 0,
+			screen_top : 0,
+			screen_left : 0
+		},
+		size = elem.getBoundingClientRect();
+
+		box.width = size.width || (size.right - size.left);
+		box.height = size.height || (size.bottom - size.top);
+		box.screen_top = size.top;
+		box.screen_left = size.left;
+
+		box.top = size.top + (document.documentElement.scrollTop == 0 ? document.body.scrollTop : document.documentElement.scrollTop);
+		box.left = size.left + document.body.scrollLeft;
+
+		return box;
 	}
 	
 	var fix_position = isIE67 ? function(scrollTop){
@@ -56,12 +162,36 @@
 			top = this.fix_top;
 			position = 'fixed';
 		}
-		this.dom.css({
+		setCss(this.dom, {
 			top: top,
 			position: position
 		});
 	};
+	//获取样式
+	function getStyle(elem, prop) {
+		var value;
+		if (elem.style[prop]){
+			value = elem.style[prop];
+		} else if(document.defaultView) {
+			var style = document.defaultView.getComputedStyle(elem, null);
+			value = prop in style ? style[prop] : style.getPropertyValue(prop);
+		} else if (elem.currentStyle) {
+			value = elem.currentStyle[prop];
+		}
 
+		if (/\px$/.test(value)){
+			value = parseInt(value);
+		}else if (isNum(value) ){
+			value = Number(value);
+		} else if (value == 'auto'){
+			if(prop == 'height'){
+				value = elem.clientHeight;
+			}else if(prop == 'width'){
+				value = elem.clientWidth;
+			}
+		}
+		return value;
+	}
 	function INIT(param){
 		if( !(this instanceof INIT)){
 			return new INIT(param);
@@ -69,19 +199,28 @@
 		var me = this,
 			scroll_delay;
 		param = param || {};
-		//悬浮dom
-		me.dom = param.dom;
-		me.$scrollDom = param.scrollDom || $(window);
-		//从属dom
-		me.scopeDom = param.scopeDom;
 		//悬浮时，距顶部的距离
 		me.fix_top = param.fixed_top || 0;
 		me.minScrollTop = null;
 		me.maxScrollTop = null;
+
+		//悬浮dom
+		me.dom = param.dom;
+		me.scrollDom = param.scrollDom || window;
+		//从属dom
+		me.scopeDom = param.scopeDom;
+		//占位dom
+		me.ghostDom = document.createElement('div');
+
+	    //将占位dom放置在悬浮dom前
+    	me.dom.parentNode.insertBefore(me.ghostDom,me.dom);
+	    //再将悬浮dom移入占位dom内
+	    me.ghostDom.appendChild(me.dom);
+
 		//当定位方式发生变化时
 		me.onPositionChange = param.onPositionChange || null;
 		//原本的position属性
-		me._position_first = me.dom.css('position');
+		me._position_first = getStyle(me.dom,'position');
 		
 		me.state = 'min';
 		me._scroll_listener = function(){
@@ -90,19 +229,20 @@
 		
 		me.refresh();
 		
-		if(me.scopeDom.css('position') == 'static'){
-			me.scopeDom.css('position','relative');
+		if(getStyle(me.scopeDom,'position') == 'static'){
+			me.scopeDom.style.position = 'relative';
 		}
-		me.$scrollDom.on('scroll',me._scroll_listener);
+		bindHandler(me.scrollDom,'scroll',me._scroll_listener);
 	}
 	INIT.prototype = {
 		refresh: function (){
-			var domH = this.dom.height(),
-				cntH = this.scopeDom.outerHeight();
-			this.minScrollTop = this.scopeDom.offset().top - this.fix_top;
+			var domH = getClient(this.dom).height,
+				cntH = getClient(this.scopeDom).height;
+
+			this.minScrollTop = getClient(this.ghostDom).top - this.fix_top;
 			this.maxScrollTop = this.minScrollTop + cntH - domH;
 
-			var scrollTop = private_$doc.scrollTop(),
+			var scrollTop = doc_scrollTop(),
 				state_before = this.state;
 			if(scrollTop <= this.minScrollTop){
 				this.state = 'min';
@@ -112,15 +252,14 @@
 			fix_position.call(this,scrollTop);
 			if(state_before != this.state){
 				this.onPositionChange && this.onPositionChange.call(this,this.state);
+				this.updateGhostDom();
 			}
 		},
+		updateGhostDom: function(){
+			this.ghostDom.style.height = getClient(this.dom).height + 'px';
+		},
 		destroy: function(){
-			this.$scrollDom.unbind('scroll',this._scroll_listener);
-			
-			this.dom.css({
-				position: 'absolute',
-				top: Math.max(private_$doc.scrollTop() - this.minScrollTop,0)
-			});
+			bindHandler(this.scrollDom,'scroll',this._scroll_listener);
 		}
 	};
 	return INIT;
