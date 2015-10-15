@@ -79,19 +79,23 @@ define(function(require,exports){
       },
       success :function(data){
         var count = data['count'],
-            list = data['list'];
+            list = data['list'],
+            now = new Date().getTime();
         if(data.code == 500){
           callback && callback(500);
           return;
         }
         for(var i in list){
+          //两月内的文章都算最新（多可悲）
+          if((now - list[i].time_show)/(1000*60*60*24) < 60){
+            list[i].is_new = true;
+          }
           list[i].time_show = L.parseTime(list[i].time_show,'{mm}-{dd} {y}');
           //使用七牛图床
           list[i].cover = L.qiniu(list[i].cover,{
               type : 'zoom',
               width : 420,
           });
-          
         }
         me.count = count;
         me.skip += me.limit;
@@ -135,9 +139,6 @@ define(function(require,exports){
         me.$list.html(empty_tpl);
       }
       list.forEach(function(item,index){
-        if(index < 3){
-          item.is_new = true;
-        }
         var html = juicer(list_tpl,item);
         me.stick.addItem($(html)[0],item.cover);
       });
