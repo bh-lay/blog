@@ -33,7 +33,7 @@ module.exports = {
 	//前端版本控制（css、js、图片、字体）
 	frontEnd: {
     //图床地址
-    img_domain : '/asset'
+    img_domain : 'http://127.0.0.1:8088'
   },
   //SESSION配置
   session : {

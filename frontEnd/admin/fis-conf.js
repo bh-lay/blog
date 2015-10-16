@@ -64,6 +64,6 @@ fis
   })
   //线上使用CDN
   .media('production').match('*', {
-    // domain: 'http://static.bh-lay.com'
+    domain: 'http://static.bh-lay.com'
   });
 

@@ -15,6 +15,12 @@ fi
 deployFrom=$1;
 deployMedia=${2:-''};
 deployTo='';
+watch='';
+
+#没有media配置时才用watch
+if [ ${#deployMedia} == 0 ]; then
+    watch='-w';
+fi
 
 #检查项目是否存在
 if [ ! -d $deployFrom ]; then 
@@ -44,7 +50,7 @@ case $deployFrom in
         deployTo='../../web/'
     ;;
     'single-page')
-        deployTo='../../web/'
+        deployTo='../../static/'
     ;;
     'admin')
         deployTo='../../web/'
@@ -55,9 +61,8 @@ case $deployFrom in
     ;;
 esac
 
-echo '  from: '$deployFrom
-echo '  to  : '$deployTo
-echo '  fis3 release '$deployMedia' -wd '$deployTo' --file fis-conf.js'
+echo '  from: '$deployFrom ' to  : '$deployTo
+echo '  fis3 release '$deployMedia' '$watch' -d '$deployTo' --file fis-conf.js'
 
 cd $deployFrom
-fis3 release $deployMedia -wd $deployTo --file fis-conf.js
+fis3 release $deployMedia $watch -d $deployTo --file fis-conf.js
