@@ -53,7 +53,7 @@ case $deployFrom in
         deployTo='../../static/'
     ;;
     'admin')
-        deployTo='../../web/'
+        deployTo='../../static/'
     ;;
     *)  
 		echo -e "need config first,please edit deploy.sh !\n";

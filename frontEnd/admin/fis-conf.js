@@ -29,7 +29,8 @@ fis.match('app.js', {
 
 //发布位置
 fis.match('**', {
-  release: 'asset/build/admin/$0'
+  release: 'asset/build/admin/$0',
+  domain: 'http://127.0.0.1:8088'
 });
 fis.match('*.html', {
   release: '../sys/views/admin/$0'
