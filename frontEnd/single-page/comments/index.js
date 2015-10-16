@@ -305,7 +305,7 @@ define(function(require,exports){
       private_userInfo = user;
     }).on('sendToServiceError',function(){
       UI.prompt('网络出错，没发成功！');
-    }).on('sendToServicesuccess',function(){
+    }).on('sendToServiceSuccess',function(){
       $textarea.val('').trigger('change');
       UI.prompt('发布成功！');
     });
@@ -372,7 +372,7 @@ define(function(require,exports){
           if(err){
               EMIT.call(me,'sendToServiceError');
           }else{
-              EMIT.call(me,'sendToServicesuccess',[item]);
+              EMIT.call(me,'sendToServiceSuccess',[item]);
           }
         });
       }else{
@@ -462,7 +462,7 @@ define(function(require,exports){
             }
           });
       $(pop.dom).find('.UI_pop_cpt').css('border','none');
-      send.on('sendToServicesuccess',function(item){
+      send.on('sendToServiceSuccess',function(item){
         pop.close();
         me.addItem(item);
       });
@@ -534,7 +534,7 @@ define(function(require,exports){
 
     this.sendBox = new sendBox($(this.dom).find('.l_com_sendBox')[0],id,param);
     this.list = new list($(this.dom).find('.l_com_list')[0],id,param);
-    this.sendBox.on('sendToServicesuccess',function(item){
+    this.sendBox.on('sendToServiceSuccess',function(item){
       me.list.addItem(item);
     });
   };
