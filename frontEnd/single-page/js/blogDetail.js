@@ -3,8 +3,8 @@
  *  
  */
 define(function(require,exports){
-  require('js/highlight');
-  var showdown = require('js/showdown'),
+  var hljs = require('js/highlight.js');
+  var showdown = require('js/showdown.js'),
       empty_tpl = '<div class="blank-content"><p>博文不存在</p></div>',
       template = __inline('/tpl/blogDetailPage.html');
 	

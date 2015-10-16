@@ -32,7 +32,8 @@ fis.match('/js/sea.js', {
 
 //发布位置
 fis.match('**', {
-  release: 'asset/build/single-page/$0'
+  release: 'build/single-page/$0',
+  domain: 'http://127.0.0.1:8088'
 });
 fis.match('**.psd', {
   release: false
