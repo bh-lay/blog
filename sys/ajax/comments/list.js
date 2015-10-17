@@ -119,31 +119,31 @@ module.exports = function(connect,data,callback){
 				if(err){
 					callback&&callback(err);
 				}else{
-          //是否为后台管理列表
-          if(data.isadmin){
-            connect.session(function(session_this){
-              if(session_this.get('user_group') == 'admin'){
-                callback&&callback(null,{
-                  count: count,
-                  list: docs
-                });
-              }else{
-                //权限验证
-                callback&&callback(null,{
-                  count: count,
-                  list: []
-                });
-              }
-            });
-          }else{
-              //普通列表
-              handleData(docs,function(list){
-                  callback&&callback(err,{
-                      'count': count,
-                      'list': list
-                  });
-              });
-          }
+		          //是否为后台管理列表
+		          if(data.isadmin){
+		            connect.session(function(session_this){
+		              if(session_this.get('user_group') == 'admin'){
+		                callback&&callback(null,{
+		                  count: count,
+		                  list: docs
+		                });
+		              }else{
+		                //权限验证
+		                callback&&callback(null,{
+		                  count: count,
+		                  list: []
+		                });
+		              }
+		            });
+		          }else{
+		              //普通列表
+		              handleData(docs,function(list){
+		                  callback&&callback(err,{
+		                      'count': count,
+		                      'list': list
+		                  });
+		              });
+		          }
 				}
 			});
 		});

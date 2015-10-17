@@ -32,8 +32,11 @@ fis.match('**', {
   release: 'build/admin/$0',
   domain: 'http://127.0.0.1:8088'
 });
-fis.match('*.html', {
-  release: '../sys/views/admin/$0'
+fis.match('index.html', {
+  release: '../sys/views/admin/index.html'
+});
+fis.match('login.html', {
+  release: '../sys/views/admin/login.html'
 });
 
 
