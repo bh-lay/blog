@@ -47,7 +47,7 @@ case $deployFrom in
         deployTo='../../web/topic/intiate'
     ;;
     'multi-page')
-        deployTo='../../web/'
+        deployTo='../../static/'
     ;;
     'single-page')
         deployTo='../../static/'

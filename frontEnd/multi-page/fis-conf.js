@@ -26,14 +26,19 @@ fis.match('*.css', {
   optimizer: fis.plugin('clean-css')
 });
 
- //
+//发布位置
 fis.match('**', {
-  release: 'asset/build/multi-page/$0'
+  release: 'build/multi-page/$0',
+  domain: 'http://127.0.0.1:8088'
 });
-
+fis.match('**.psd', {
+  release: false
+});
 fis.match('*.html', {
   release: '../sys/views/multi-page/$0'
 });
+
+
 
 //线上使用CDN
 fis.media('production').match('*', {
