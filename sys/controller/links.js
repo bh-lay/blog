@@ -44,7 +44,7 @@ exports.render = function (connect,app){
           item.screen_link = (item.url || '').replace(/http\:\/\/(www\.|)|\/$|/g,'');
         });
         //获取视图
-        app.views('links',{
+        app.views('multi-page/links',{
             title : '前端英雄榜_特大号的WEB屌丝们',
             keywords : '剧中人,程序员,前端工程师,网页设计,设计师',
             description : '一帮程序员,前端工程师,网页设计,设计师，一群纯屌丝！',

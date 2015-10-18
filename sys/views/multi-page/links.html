@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title>${{title}}</title>
+  <meta name="keywords" content="${{keywords}}" />
+  <meta name="description" content="${{description}}" />
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <include name="favicon_appicon" />
+  <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8088/build/multi-page/assets/links/links_e6a5c01.css"/>
+</head>
+<body>
+  <div class="Jumbotron">
+    <div class="grid-row">
+      <div class="grid-box-full">
+        <h1>前端英雄榜</h1>
+        <p><a href="javascript:;" class="btn add_one">我要上榜</a></p>
+      </div>
+    </div>
+    <div class="mask"><svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 100" preserveAspectRatio="none"><g><polygon xmlns="http://www.w3.org/2000/svg" points="0,100 600,100 600,0" style="fill:#222;stroke-width:0"/></g></svg></div>
+  </div>
+  <div class="grid-row myFriends">
+    <div class="grid-box-full">
+      <h3>我的小伙伴们</h3>
+    </div>
+    {{@each list as it}}
+    <div class="grid-box">
+      <div class="guy-item">
+        <div class="title">${{it.title}}</div>
+        <div class="desc">
+          {{@if it.discription}}
+            ${{it.discription}}
+          {{@else}}真懒，啥都不写！ {{@/if}}
+        </div>
+        <div class="links">
+          {{@if it.url}}
+          <p>博客：<a href="${{it.url}}" target="_blank">${{it.screen_link}}</a></p>
+          {{@/if}}
+          {{@if it.github_username}}
+          <p>Github：<a href="https://github.com/${{it.github_username}}" target="_blank">${{it.github_username}}</a></p>
+          {{@/if}}
+          </div>
+        </div>
+    </div>
+    {{@/each}}
+  </div>
+<script type="text/javascript" src="http://127.0.0.1:8088/build/multi-page/assets/jquery_ddb84c1.js"></script>
+<script type="text/javascript" src="http://127.0.0.1:8088/build/multi-page/assets/dialog_7c0caa4.js"></script>
+<script type="text/javascript">
+  var app_config = {
+    imgDomain : '${{frontEnd.img_domain}}'
+  };
+  $('.add_one').click(function(){
+    var pop = UI.pop({
+      width: 550,
+      mask: true,
+      title: '我也要上榜',
+      html: $('#post_tpl').html(),
+      confirm : function(){
+        var $elem = $(pop.cntDom),
+            data = getData($elem),
+            err = null;
+        if(data.title.length < 1){
+          err = '咋不告诉我你叫啥捏！';
+        }else if(data.url.length < 5 ){
+          err = '博客地址我不校验，但你也不能糊弄我啊！';
+        }else if(data.discription.length < 10){
+          err = '介绍下自己，逼格噌噌噌往上飙啊有木有！';
+        }
+        if(err){
+          UI.prompt(err);
+        }else{
+          var prompt = UI.prompt('正在提交' , 0 , {
+            mask: true
+          });
+          sendData(data , function(){
+            prompt.tips('搞定，等待审核吧！');
+            setTimeout(function(){
+              pop.close();
+            },2000);
+          },function(){
+            prompt.tips('保存失败，咋回事，不会是出 BUG 了吧！');
+          });
+        }
+        return false;
+      }
+    });
+  });
+  function getData($elem){
+    return {
+      title : $elem.find('input[name="title"]').val(),
+      url : $elem.find('input[name="url"]').val(),
+      github_username : $elem.find('input[name="github_username"]').val(),
+      discription : $elem.find('textarea[name="discription"]').val()
+    };
+  }
+  function sendData(data, successFn,errorFn){
+    $.ajax({
+      url : '/ajax/links/post',
+      data : data,
+      success : function(res){
+        if(res && res.code == 200){
+          successFn && successFn();
+        }else {
+          errorFn && errorFn();
+        }
+      },
+      error : function(){
+        errorFn && errorFn();
+      }
+    });
+  }
+</script>
+<script type="text/template" id="post_tpl">
+<div class="post_link">
+  <div class="post_link_body">
+    <div class="input-group">
+      <span class="input-group-addon">尊姓大名</span>
+      <input type="text" name="title" placeholder="你更喜欢别人怎么称呼你？">
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon">博客地址</span>
+      <input type="text" name="url" placeholder="http://">
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon">Github用户名</span>
+      <input type="text" name="github_username" placeholder="如：bh-lay">
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon">个人描述</span>
+      <textarea name="discription" placeholder="一句话介绍自己，简洁无废话，低调且骚气！"></textarea>
+    </div>
+  </div>
+</div>
+</script>
+<include name="baiduAndGoogleTongji"/>
+</body>
+</html>
