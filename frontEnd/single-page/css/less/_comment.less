@@ -1,6 +1,5 @@
 
 @import "../../../_public/less/_core.less";
-@import "../../../_public/less/_emoji.less";
 
 
 /**
@@ -12,12 +11,29 @@
   box-shadow: 0 0 2px rgba(0,0,0,0.2);
 }
 
+.face_list{
+    overflow: hidden;
+    a{
+        display: block;
+        float: left;
+        width: 14.2%;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        border-width: 1px 0 0 1px;
+        .borderbox();
+        span{
+            vertical-align: middle;
+        }
+        &:hover{
+            background: #eee;
+        }
+    }
+}
 /**
  * 评论模块
  *
  **/
-
-
 @sendBox_footer_height : 30px;
 .comments_frame {
 }
