@@ -18,12 +18,5 @@ sys/temporary/cache/
 sys/temporary/session/
 sys/temporary/upload/
 sys/node_modules/
-web/frontEnd/build/
-web/frontEnd/dist/
-web/frontEnd/node_modules/
-web/asset/
-web/topic/nodeJS_base/
-web/topic/iframer/
-web/frontEnd/develop/admin/react-build/.module-cache/
 
 
