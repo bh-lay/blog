@@ -247,15 +247,25 @@ hr{
   background: #689;
   overflow: hidden;
   .pics{
-    background: #fff;
+    height: 280px;
+    background: #000;
   }
   .pic{
+    position: relative;
     float: left;
     height: 140px;
     background-size: cover;
-    background-position: center center;
+    background-position: left center;
     cursor: pointer;
     overflow: hidden;
+    opacity: .7;
+    -webkit-transition: .4s ease-in-out;
+    -moz-transition: .4s ease-in-out;
+    transition: .4s ease-in-out;
+    &:hover{
+      background-position: right center;
+      opacity: 1;
+    }
   }
   .pic20{
     width: 20%

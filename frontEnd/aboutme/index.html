@@ -147,9 +147,14 @@
           __uri('images/zishu.jpg')
         ];    
     $('.pic').each(function(index){
+      var $this = $(this),
+          src = $this.find('img').attr('src');
+      
+      $this.css('backgroundImage','url(' + src + ')')
+            .find('img').hide();
       imgs.push({
         cover : cover[index],
-        thumb : $(this).find('img').attr('src')
+        thumb : src
       })
     });
     $('.pic').click(function(){

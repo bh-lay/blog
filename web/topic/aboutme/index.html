@@ -7,7 +7,7 @@
   <meta name="description" content="剧中人，90后前端开发，全栈开发实践者。" />
   <meta name="keywords"  content="剧中人,小剧客栈,前端开发" />
   <meta content="width=device-width, initial-scale=1, user-scalable=0" name="viewport">
-  <link rel="stylesheet" href="asset/page_c448327.css">
+  <link rel="stylesheet" href="asset/page_c614fd9.css">
 </head>
 <body>
 <div class="section " id="header">
@@ -121,7 +121,7 @@
 <script src="asset/jquery.min_3576a6e.js"></script>
 <script src="asset/wow.min_a26a117.js"></script>
 <script src="asset/jquery-github-user-widget_6f6fb6c.js"></script>
-<script src="asset/gallery_8fbe1f8.js"></script>
+<script src="asset/gallery_96200d8.js"></script>
 <script type="text/javascript">
   $(function(){
     new WOW({
@@ -147,9 +147,14 @@
           'images/zishu_73d8bd6.jpg'
         ];    
     $('.pic').each(function(index){
+      var $this = $(this),
+          src = $this.find('img').attr('src');
+      
+      $this.css('backgroundImage','url(' + src + ')')
+            .find('img').hide();
       imgs.push({
         cover : cover[index],
-        thumb : $(this).find('img').attr('src')
+        thumb : src
       })
     });
     $('.pic').click(function(){
