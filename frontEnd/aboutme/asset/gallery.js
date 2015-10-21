@@ -19,7 +19,7 @@ function gallery(json,index){
 				"-ms-user-select: none;",
 				"-khtml-user-select: none;",
 			"user-select: none}",
-			".lan_img {position:absolute;background:url(loading.gif) no-repeat center center #fff;left:30%;bottom:40%;width:40%;height:20%;}",
+			".lan_img {position:absolute;background: #fff;left:30%;bottom:40%;width:40%;height:20%;}",
 			".lan_img img {display:block;width:100%;height:100%;background:#fff;}",
 			".lan_List{position:absolute;z-index:0;left:0px;bottom:0px;width:100%;height:88px;padding-top:28px;overflow:hidden;cursor:default}",
 			".lan_List_cnt{display:block;height:88px;position:relative;left:0px;}",
@@ -37,8 +37,13 @@ function gallery(json,index){
 			".lan_List_cnt a span img{display:block;width:100%;height:100%}",
 			".lan_List_cnt a.cur{border-color:#000;cursor:default;z-index:10}",
 			".lan_List_cnt a.cur span{width:100px;height:100px;top:-16px;left:-8px;background-color:#666;}",
-			".lan_exist {background-color:#4c4c4c;color:#fff;cursor:pointer;font-size:20px;width:26px;height:26px;line-height:26px;position:absolute;right:-13px;top:-13px;border-radius:15px;z-index: 100;text-align:center;}",
-			".lan_exist:hover {background-color: #444; color: #f00;}",
+			".lan_exist {background:#000;opacity:.4;color:#fff;cursor:pointer;font-size:20px;width:30px;height:30px;line-height:30px;position:absolute;right:5px;top:5px;border-radius:15px;z-index: 100;text-align:center;}",
+			".lan_exist:hover {opacity:1;}",
+			".lan_next, .lan_prev{display:block;width:50px;height:100px;position:absolute;top:50%;margin-top:-50px;}",
+			".lan_next{right:30px;background-position:-200px -100px;}",
+			".lan_prev{left:30px;background-position:-200px 0px;}",
+			".lan_next.active{background-position:-250px -100px;}",
+			".lan_prev.active{background-position:-250px 0px;}",
 		"</style>",
 		"<div class='lan_img'>",
 			"<div class='lan_exist'>×</div>",
@@ -48,6 +53,8 @@ function gallery(json,index){
 			"<div class='lan_List_cnt'>",
 			"</div>",
 		"</div>",
+		"<div class='lan_prev' title='上一张'></div>",
+		"<div class='lan_next' title='下一张'></div>",
 	"</div>"].join('');
 	
 	
@@ -130,7 +137,6 @@ function gallery(json,index){
 	//////////////////////////////////////////////////
 	function bindEvent(){
 		var that = this;
-		console.log('gallery:','bind some events !');
 		var winResizeDelay;
 		$(window).resize(function(){
 			clearTimeout(winResizeDelay);
@@ -181,6 +187,18 @@ function gallery(json,index){
 			}else if(this_area == 'right' ){
 				that.next()
 			}
+		}).on('mousemove',function(e){
+			var this_area = check_mouse(e);
+			if(this_area == 'left'){
+				that.next_btn.removeClass('active');
+				that.prev_btn.addClass('active');
+			}else if(this_area == 'right' ){
+				that.prev_btn.removeClass('active');
+				that.next_btn.addClass('active');
+			}else{
+				that.prev_btn.removeClass('active');
+				that.next_btn.removeClass('active');
+			}
 		}).on('mousemove','.lan_exist,.lan_List,.lan_to_cnt',function(){
 			except = true ;
 		}).on('click','.lan_exist',function(){
@@ -202,14 +220,15 @@ function gallery(json,index){
 		this.json = json;
 		this.total = json.length;
 		this.dom = $(dom_html);
+		this.next_btn = this.dom.find('.lan_next');
+		this.prev_btn = this.dom.find('.lan_prev');
 		this.cur = {
 			'index' : index || 0,
 			'width' : null,
 			'height' : null
 		};
 		
-		console.log('gallery:','define global variable');
-		var private_bottomH = 160,
+		var private_bottomH = 120,
 			 private_list_cnt = this.dom.find('.lan_List_cnt');
 
 		
@@ -222,16 +241,10 @@ function gallery(json,index){
 			}
 			private_list_cnt.html(picList);
 			
-			console.log('gallery:','loading thumbnail!');
 			private_list_cnt.find('span').each(function(){
 				var this_dom = $(this);
 				var src = this_dom.attr('data-src');
-		//		console.log(src);
-	//			loadImg(src,{'loadFn':function(w,h){
-					//this_dom.html('<img src="' + src + '" />');
-		//			this_dom.html('<img src="' + src + '" />');
-					this_dom.css('backgroundImage','url(\"' + src + '\")');
-		//		}});
+				this_dom.css('backgroundImage','url(\"' + src + '\")');
 			});
 		}
 		///////////////////////////////////////////////////////
@@ -284,18 +297,10 @@ function gallery(json,index){
 			Left = (public_winW - w)/2;
 		
 			(Left<0)&&(Left=0);
-			mainPicCnt.animate({
-              width: w,
-              height: h,
-              bottom: Bottom,
-              left: Left
-            },100,function(){
+			mainPicCnt.animate({'width':w,'height':h,'bottom':Bottom,'left':Left},100,function(){
 				mainPic.stop().fadeTo(80,1);
 			});
-			mainPic.css({
-              width: w,
-              height: h
-            });
+			mainPic.css({'width':w,'height':h});
 			this_gal.resetList();
 		};
 		/////////////////////////////////////////////////////
@@ -337,6 +342,9 @@ function gallery(json,index){
 			if(this.total == 1){
 				this.exist();
 				return
+			}else if(this.total == 2){
+				this.next_btn.hide();
+				this.prev_btn.hide();
 			}
 			
 			this.dom.find('.lan_List_cnt a.cur').remove();
