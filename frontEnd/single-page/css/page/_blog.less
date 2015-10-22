@@ -136,6 +136,10 @@
   margin-bottom: 20px;
   overflow: hidden;
   background: #fff;
+  &.pure-text{
+    background: url(/images/blog_card.jpg) no-repeat top right #fff;
+    background-size: 163px 40px;
+  }
   .label{
     position: absolute;
     top: 0;
@@ -185,6 +189,7 @@
         font-weight: normal;
       }
       a{
+        display: inline-block;
         margin-right: 5px;
         color: #777;
         &:hover{
@@ -197,7 +202,7 @@
       display: table-cell;
       vertical-align: middle;
       width: 1%;
-      padding: 0 10px;
+      padding-right: 10px;
       white-space: nowrap;
       color: #888;
       font-size: 12px;
@@ -264,8 +269,9 @@
     padding: 9em 0 12em;
     h1{
       margin: 0 .5em .5em;
-      font-size: 2em;
       line-height: 1.2;
+      font-size: 2em;
+      font-weight: 500;
     }
     P{
       margin: 0 0 1em;

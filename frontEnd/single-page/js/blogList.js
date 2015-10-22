@@ -86,8 +86,8 @@ define(function(require,exports){
           return;
         }
         for(var i in list){
-          //两月内的文章都算最新（多可悲）
-          if((now - list[i].time_show)/(1000*60*60*24) < 60){
+          //三月内的文章都算最新（多可悲）
+          if((now - list[i].time_show)/(1000*60*60*24) < 90){
             list[i].is_new = true;
           }
           list[i].time_show = L.parseTime(list[i].time_show,'{mm}-{dd} {y}');
