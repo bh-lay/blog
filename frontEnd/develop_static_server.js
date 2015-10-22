@@ -13,78 +13,125 @@ var fs = require('fs'),
       png : 'image/png',
       gif : 'image/gif'
     };
-function staticFile(req,res){
+
+//拷贝参数
+function cloneArg(arg){
+  var obj = [];
+  for(var i=0,total=arg.length;i<total;i++){
+    obj[i] = arg[i];
+  }
+  return obj;
+}
+/**
+ * 单线异步队列管理
+ *
+**/
+function Step(callback,param){
+  this._steps = [];
+  this._currentStepIndex = -1;
+  this.then(callback,param);
+}
+Step.prototype.then = function(callback,param){
+  var me = this;
+  param = param || {};
+  if( typeof(callback) !== 'function' || typeof(param) !== 'object'){
+    throw Error('参数出错，第一个参数必须为function，第二个参数可选，且只能为对象格式');
+  }
+  this._steps.push([callback, param]);
+  return this;
+};
+Step.prototype.next = function(){
+  var index = ++this._currentStepIndex;
+  if(index >= this._steps.length){
+    console.error('走到头了，多走了一步。');
+    return;
+  }
+  var stepData = this._steps[index];
+  var args = cloneArg(arguments);
+  //第一位设置为step对象
+  args.unshift(this);
+  stepData[0].apply(stepData[1],args);
+};
+Step.prototype.start = function(){
+  if(this._currentStepIndex >= 0){
+    return;
+  }
+  this.next();
+};
+
+/**
+ * 服务主方法
+ *
+ **/
+function Server(req,res){
   var path = req.url.split(/\?/)[0],
       pathname_split = path.match(/.\.([^.]+)$/),
       ext = pathname_split ? pathname_split[1] : null,
-      realPath;
-  realPath = staticFileRoot + path;
+      realPath = staticFileRoot + path,
+      content_type;
   
   //增加根目录 index.html 的支持
   if(ext == null) {
     ext = 'html';
     realPath += '/index.html'
   }
-  
-  var content_type = mime[ext]||'unknown';
+  content_type = mime[ext]||'unknown';
 
-  fs.exists(realPath, function(exists) {
-    if(!exists){
-      res.writeHead(404);
-      res.end('404');
-      return ;
-    }
+  new Step(function(step){
+    //第一步、检查文件是否存在
+    fs.exists(realPath, function(exists) {
+      if(!exists){
+        res.writeHead(404);
+        res.end('404');
+      }else{
+        step.next();
+      }
+    });
+  })
+  .then(function(step){
+    //第二步、检查是否可用304缓存
+    fs.stat(realPath, function(err, stat) {
+      if(err) {
+        // 500 server error 
+        res.writeHead(500);
+        res.end('500');
+        return
+      }
+      var lastModified = stat.mtime.toUTCString(),
+          cacheModified = req.headers['if-modified-since'] || '';
+      if(lastModified == cacheModified){
+        // 使用缓存
+        res.writeHead(304);
+        res.end();
+      } else {
+        step.next(lastModified);       
+      }
+    });
+  })
+  .then(function(step,lastModified){
+    // 第三步、读取文件
     fs.readFile(realPath, function(err, file) {
       if(err) {
         // 500 server error 
-        res.writeHead(404);
-        res.end('404');
+        res.writeHead(500);
+        res.end('500');
         return
-      }      
-      //获取文件状态
-      fs.stat(realPath, function(err, stat) {
-        if(err) {
-          // 500 server error 
-          res.writeHead(404);
-          res.end('404');
-          return
-        }
-        
-        var lastModified = stat.mtime.toUTCString();
-
-        if(req.headers['if-modified-since'] && (lastModified == req.headers['if-modified-since'])) {
-          // 500 server error 
-          res.writeHead(304);
-          res.end();
-        } else {
-          var expires = new Date();
-          expires.setTime(expires.getTime() + maxAge * 1000);
-          
-          res.writeHead(200, {
-            'Content-Type': content_type,
-            'Expires' : expires.toUTCString() ,
-            'Cache-Control' : "max-age=" + maxAge,
-            'Last-Modified' : lastModified,
-            'Access-Control-Allow-Origin' : "*"
-          });
-          res.end(file);
-        }
+      }
+      var expires = new Date(new Date().getTime() + maxAge * 1000);
+      res.writeHead(200, {
+        'Content-Type': content_type,
+        'Expires' : expires.toUTCString(),
+        'Cache-Control' : "max-age=" + maxAge,
+        'Last-Modified' : lastModified,
+        'Access-Control-Allow-Origin' : "*"
       });
+      res.end(file);
     });
-  });
+  })
+  .start();
 }
 
 //创建服务
-http.createServer(function (req, res) {
-  var path = req.url.split(/\?/)[0];
-  
-  if( path == '/whoami' ){
-    pageA(req,res,path)
-  } else if(path.match(/user\/(.+:?)$/)){
-    pageB(req,res,path)
-  }else{
-    staticFile(req,res);
-  }
-}).listen(server_port, '127.0.0.1');
+http.createServer(Server).listen(server_port, '127.0.0.1');
 
 console.log('server started ,you can press [ctrl + c] to exit !');
