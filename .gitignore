@@ -14,9 +14,6 @@ results
 .project
 .idea/
 npm-debug.log
-sys/temporary/cache/
-sys/temporary/session/
-sys/temporary/upload/
 sys/node_modules/
 
 
