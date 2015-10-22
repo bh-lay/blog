@@ -77,7 +77,6 @@ define(function (require, exports) {
   routerHandle(lofox);
 
   L.user = require('js/user.js');
-  L.gallery = require('js/page_background.js');
   L.nav = require('js/navigation.js');
   L.views = {
     index : require('js/index.js'),
@@ -145,22 +144,6 @@ define(function (require, exports) {
   //配置弹出层
   UI.config.zIndex(2000);
 
-  //显示背景图
-  if (L.supports.css('backgroundSize') && !L.isMobileBrowser) {
-    new L.gallery({
-      delay : 50000,
-      data : [
-        {
-          src : __uri('images/gallery/bamboo.jpg'),
-          alt : '竹子'
-        },
-        {
-          src : __uri('images/gallery/coast.jpg'),
-          alt : '江边'
-        }
-      ]
-    });
-  }
   //开始导航
   L.nav();
   //渐隐加载遮罩

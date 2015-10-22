@@ -119,7 +119,7 @@ define(function(require,exports){
       container: me.$list[0],
       column_width: 280,
       column_gap: 10,
-      load_spacing: 400,
+      load_spacing: 1000,
       onNeedMore: function(){
         list.loadMore();
       }
