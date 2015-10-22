@@ -3,14 +3,14 @@
  */
 
 
-var mongodb = require('mongodb');
-var utils = require('./utils/index.js');
-var conf = require('./../conf/app_config').mongo;
-var host = conf.host,
-  port = conf.port,
-  user = conf.user,
-  pass = conf.pass,
-  db_name = conf.db_name;
+var mongodb = require('mongodb'),
+    utils = require('./utils/index.js'),
+    conf = require('./../conf/app_config').mongo,
+    host = conf.host,
+    port = conf.port,
+    user = conf.user,
+    pass = conf.pass,
+    db_name = conf.db_name;
 
 /** 
  * @param DB,collection_name,callback
@@ -85,9 +85,8 @@ exports.start = function(callback) {
  * 
  */
 exports.add_user = function (parm,callback){
-  var parm = parm;
-  
-  var method = new START();
+  var parm = parm,
+      method = new START();
     
   method.open({'collection_name':'user'},function(err,collection){
     parm.id = utils.createID();

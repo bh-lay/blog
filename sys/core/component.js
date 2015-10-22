@@ -6,9 +6,9 @@
  */
 
 
-var fs = require('fs');
-var baseFileRoot = './component/';
-var baseModuleRoot = '../component/';
+var fs = require('fs'),
+    baseFileRoot = './component/',
+    baseModuleRoot = '../component/';
 //define template Object
 exports.get = function(URI,data,callback){
   var realPath = baseFileRoot + URI;

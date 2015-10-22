@@ -9,10 +9,10 @@
  *  
  */
 
-var fs = require('fs');
-var component = require('./component');
-var utils = require('./utils/index.js');
-var baseRoot = './views/';
+var fs = require('fs'),
+    component = require('./component'),
+    utils = require('./utils/index.js'),
+    baseRoot = './views/';
 
 /**
  * 获取components 配置
@@ -21,8 +21,8 @@ var baseRoot = './views/';
  * @returns {name:'navigation_bootstrap',active:'index'}
  */
 function getComponentsConfig(input){
-  var strArray = input.match(/\<include(.+?)\/>/g) || [];
-  var confArray = [];
+  var strArray = input.match(/\<include(.+?)\/>/g) || [],
+      confArray = [];
   strArray.forEach(function(item,index){
     var data = {};
     //过滤多余的字符
@@ -42,8 +42,8 @@ function getComponentsConfig(input){
 }
 function replaceComponent(temp,callback){
   var need_temp = getComponentsConfig(temp),
-    temp_result = {},
-    over_count = 0;
+      temp_result = {},
+      over_count = 0;
   
   var total = need_temp.length;
   
@@ -74,8 +74,8 @@ function replaceComponent(temp,callback){
 }
 
 module.exports = function(URI,data,callback){
-  var realPath = baseRoot + URI;
-  var data = data || {};
+  var realPath = baseRoot + URI,
+      data = data || {};
   //增加文件配置
   data.frontEnd = this.config.frontEnd;
   

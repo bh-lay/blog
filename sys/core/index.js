@@ -4,15 +4,15 @@
  * @modified 2014-6-27 23:14
  */
 
-var http = require('http');
-var connect = require('./connect.js');
-var views = require('./views.js');
-var cache = require('./cache.js');
-var staticFile = require('./staticFile.js');
-var url_redirect = require('../conf/301url');
-var config = require('../conf/app_config.js');
-var utils = require('./utils/index.js');
-var session_factory = require('./session.js');
+var http = require('http'),
+    connect = require('./connect.js'),
+    views = require('./views.js'),
+    cache = require('./cache.js'),
+    staticFile = require('./staticFile.js'),
+    url_redirect = require('../conf/301url'),
+    config = require('../conf/app_config.js'),
+    utils = require('./utils/index.js'),
+    session_factory = require('./session.js');
 /**
  * 格式化path 
  */
@@ -29,31 +29,14 @@ function pathParser(input){
   return output;
 }
 /**
- * 格式化search 
- */
-function searchParser(search){
-  var resultObj = {};
-  if(search && search.length > 1){
-    var items = search.split('&');
-    for(var index = 0 ; index < items.length ; index++ ){
-      if(! items[index]){
-        continue;
-      }
-      var kv = items[index].split('=');
-      resultObj[kv[0]] = typeof kv[1] === "undefined" ? "":kv[1];
-    }
-  }
-  return resultObj;
-}
-/**
  * 在 MAPS 匹配url并返回对应值
  * @param {Object} url
  */
 function findUrlInMaps(inputPath,MAPS){
   //定义从url中取到的数据｛变量｝
-  var matchValue = {};
-  //记录找到的maps项
-  var this_mapsItem = null;
+  var matchValue = {},
+      //记录找到的maps项
+      this_mapsItem = null;
 
   //遍历maps
   for(var i in MAPS){
@@ -165,8 +148,8 @@ function APP(){
  * 设置前端请求路径
  */
 APP.prototype.get = function(urls,callback){
-  var me = this;
-  var routerNames = [].concat(urls);
+  var me = this,
+      routerNames = [].concat(urls);
   
   if(typeof(callback) != 'function'){
     return;

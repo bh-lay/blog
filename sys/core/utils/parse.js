@@ -1,9 +1,9 @@
 /**
  * @author bh-lay
  */
-var querystring = require('querystring');
-var formidable = require('formidable');
-var crypto = require('crypto');
+var querystring = require('querystring'),
+    formidable = require('formidable'),
+    crypto = require('crypto');
 
 //格式化cookie
 exports.cookie = function parseCookie(str){
@@ -178,10 +178,10 @@ exports.url = function(url){
   var search = querystring.parse(searchStr);
   
   var obj = {
-    'pathname' : a[0],
-    'search' : search,
-    'filename' : null,
-    'pathnode' : b.length?b.split(/\//):[],
+    pathname : a[0],
+    search : search,
+    filename : null,
+    pathnode : b.length?b.split(/\//):[],
   };
   
   obj['root'] = '/' + (obj['pathnode'][0]||'');

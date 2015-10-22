@@ -8,17 +8,16 @@
  *
  */
 
-var fs = require('fs');
-var zlib = require("zlib");
-var parse = require('./utils/parse.js');
+var fs = require('fs'),
+    zlib = require("zlib"),
+    parse = require('./utils/parse.js');
 
 
 //统一返回客户端信息方法
 function send (status,headers,content){
   
-  var _this = this;
-  
-  var headers = headers || {};
+  var _this = this,
+      headers = headers || {};
   headers['server'] = 'nodejs';
   headers['Connection'] = 'keep-alive';
   headers['Content-Encoding'] = 'gzip';

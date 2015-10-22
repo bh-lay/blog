@@ -21,8 +21,8 @@ exports.trim = function(str){
 };
 //生成ID
 exports.createID = function(){
-  var date = new Date();
-  var id = date.getTime().toString(16);
+  var date = new Date(),
+      id = date.getTime().toString(16);
   return id;
 };
 
