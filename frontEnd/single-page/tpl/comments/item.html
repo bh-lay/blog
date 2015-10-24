@@ -1,13 +1,13 @@
 {@each list as it}<div class="l_com_item" data-uid="${it.uid}" data-id="${it._id}" data-cid="${it.cid}">
-  <div class="l_com_item_main">
-    <div class="l_com_item_caption">{@if it.user.blog}<a href="${it.user.blog}">${it.user.username}</a>{@else}${it.user.username}{@/if} </div>
-    <div class="l_com_item_content">$${it.content}</div>
-    <div class="l_com_item_footer">
+  <div class="avatar">
+    <img src="${it.user.avatar}" onerror="L.gravatar_error_fn(this)"/>
+  </div>
+  <div class="content">
+    <div class="caption">{@if it.user.blog}<a href="${it.user.blog}">${it.user.username}</a>{@else}${it.user.username}{@/if} </div>
+    <div class="text">$${it.content}</div>
+    <div class="footer">
       <div class="time">${it.time}</div>
       <a href="javascript:void(0)" class="btn-reply">回复</a>
     </div>
-  </div>
-  <div class="l_com_item_avatar">
-    <img src="${it.user.avatar}" onerror="L.gravatar_error_fn(this)"/>
   </div>
 </div>{@/each}
