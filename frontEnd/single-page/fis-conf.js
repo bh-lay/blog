@@ -41,6 +41,9 @@ fis.match('**.psd', {
 fis.match('index.html', {
   release: '../sys/views/single-page/index.html'
 });
+fis.match('tpl/github.html', {
+  release: '../sys/component/single-page/github.html'
+});
 
 
 

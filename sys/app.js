@@ -216,10 +216,13 @@ app.get('/ajax/user/{act}', function(data,connect){
 /**
  * 计划任务
  **/
-var updateLabsDataFromGithub = require('../sys/functions/updateLabsDataFromGithub.js');
+var updateLabsDataFromGithub = require('../sys/functions/updateLabsDataFromGithub.js'),
+    myGithubData = require('../sys/functions/myGithubData.js');
 //每晚三点
-new CronJob('01 01 02 * * *', function() {
+new CronJob('01 01 03 * * *', function() {
   //更新实验室里的Github数据
   updateLabsDataFromGithub();
+  //更新个人Github信息
+  myGithubData.update();
 }, null, true, 'Asia/Hong_Kong');
 
