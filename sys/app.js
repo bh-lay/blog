@@ -1,5 +1,6 @@
 //引入app框架
-var app_factory = require('../sys/core/index.js');
+var app_factory = require('../sys/core/index.js'),
+    CronJob = require('cron').CronJob;
 
 //创建app
 var app = new app_factory();
@@ -210,3 +211,15 @@ app.get('/ajax/user/{act}', function(data,connect){
     });
   }
 });
+
+
+/**
+ * 计划任务
+ **/
+var updateLabsDataFromGithub = require('../sys/functions/updateLabsDataFromGithub.js');
+//每晚三点
+new CronJob('01 01 02 * * *', function() {
+  //更新实验室里的Github数据
+  updateLabsDataFromGithub();
+}, null, true, 'Asia/Hong_Kong');
+
