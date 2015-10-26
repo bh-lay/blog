@@ -142,12 +142,13 @@ Cache.prototype.try_del_each_cache = function(callback){
       var filename_split = files[i].split('--'),
           tags = (filename_split[0] || '').split('_'),
           name = filename_split[1] || '';
-      if(files[i] != 'readMe.md' || files[i] != '.gitignore'){
-        console.log(files[i]);
-        //没有定义检查函数，或者检查函数返回值为true，删除缓存
-        if(!callback || callback(tags,name)){
-         fs.unlink(root + files[i]);
-        }
+      //跳过被忽略的文件
+      if(files[i] == 'readMe.md' || files[i] == '.gitignore'){
+        continue;
+      }
+      //没有定义检查函数，或者检查函数返回值为true，删除缓存
+      if(!callback || callback(tags,name)){
+        fs.unlink(root + files[i]);
       }
     }
   });
