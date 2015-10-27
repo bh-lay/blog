@@ -21,6 +21,7 @@
 			<span class="input-group-addon">简介</span>
 			<textarea class="form-control" name="intro" cols="50" rows="5" placeholder="插件简介">${intro}</textarea>
 		</div>
+		{@if github}
 		<br/><div class="panel panel-default"><div class="panel-body">
 			<h4>此处为自动抓取github的信息</h4>
 			<dl class="dl-horizontal">
@@ -31,6 +32,7 @@
 			{@/each}
 		    </dl>
 		</div></div>
+		{@/if}
 		<br/><div>
 			<input type="hidden" name="id" value="${id}" />
 			<input type="hidden" name="category" value="labs" />
