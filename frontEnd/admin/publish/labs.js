@@ -11,20 +11,11 @@
 
 
 define && define(function(require,exports){
-	require('mditor.js');
 	require('gallery/index.js');
 	var formToAjax = require('tools/form2ajax.js'),
       gallery = require('gallery/index.js'),
       labs_tpl = __inline('tpl/labs.html');
 	
-		//初始化模版
-	function valueInit(tpl,data){
-			
-		var txt = tpl.replace(/\{(\w*)}/g,function(){
-			return data[arguments[1]]||'';
-		});
-		return txt;
-	};
 	/****
 	 * 获取实验室内容
 	 */
@@ -62,7 +53,7 @@ define && define(function(require,exports){
 		});
 		var alert;
 		if(!id){
-			var new_html = valueInit(labs_tpl,{});
+			var new_html = juicer(labs_tpl,{});
 			
 			dom.html(new_html);
 			new formToAjax(dom,{
@@ -78,7 +69,6 @@ define && define(function(require,exports){
 					sendFn && sendFn();
 				}
 			});
-			mditor(dom.find('textarea.mditor')[0]);
 			return
 		}
 		getLabs(id,function(err,data){
@@ -86,10 +76,11 @@ define && define(function(require,exports){
 				dom.html('数据异常！');
 				return
 			}
-			var new_html = valueInit(labs_tpl,data);
+			if(data.github){
+			}
+			var new_html = juicer(labs_tpl,data);
 			
 			dom.html(new_html);
-			mditor(dom.find('textarea.mditor')[0]);
 			new formToAjax(dom,{
 				'onSubmit' : function(data){
 					alert = UI.prompt('正在提交实验室的修改！',0);
