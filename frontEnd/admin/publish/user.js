@@ -6,7 +6,8 @@
 
 define(function(require,exports){
 
-	var formToAjax = require('tools/form2ajax.js');
+	var formToAjax = require('tools/form2ajax.js'),
+		user_tpl = __inline('tpl/user.html');
 	//初始化模版
 	function valueInit(tpl,data){
 			
@@ -16,29 +17,6 @@ define(function(require,exports){
 		return txt;
 	};
 	
-	var share_tpl = ['<div>',
-		'<form action="/ajax/user/add_edit" method="post" target="_self">',
-			'<div class="pub_row_input">',
-				'<input type="text" placeholder="用户名" name="username" value="{username}"/>',
-			'</div>',
-			'<div class="pub_row_input">',
-				'<input type="text" placeholder="邮箱" name="email" value="{email}"/>',
-			'</div>',
-			'<div class="pub_row_input">',
-				'<input type="text" placeholder="密码" name="password" />',
-			'</div>',
-			'<div class="pub_row_input">',
-				'<input type="text" placeholder="头像" name="avatar" value="{avatar}"/>',
-			'</div>',
-			'<div class="pub_row_input">',
-				'<input type="text" placeholder="用户组" name="user_group" value="{user_group}"/>',
-			'</div>',
-			'<div>',
-				'<input type="hidden" name="id" value="{id}" />',
-				'<button type="submit" class="btn btn-primary">提交</button>',
-			'</div>',
-		'</form>',
-	'</div>'].join('');
 	/****
 	 * 获取用户信息
 	 */
@@ -65,7 +43,7 @@ define(function(require,exports){
 	return function(dom,id,sendFn){
 		var alert;
 		if(!id){
-			var new_html = valueInit(share_tpl,{});
+			var new_html = valueInit(user_tpl,{});
 			
 			dom.html(new_html);
 			new formToAjax(dom,{
@@ -88,7 +66,7 @@ define(function(require,exports){
 				dom.html('数据异常！');
 				return
 			}
-			var new_html = valueInit(share_tpl,data);
+			var new_html = valueInit(user_tpl,data);
 			
 			dom.html(new_html);
 			new formToAjax(dom,{
