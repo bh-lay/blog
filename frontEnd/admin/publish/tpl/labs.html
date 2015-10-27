@@ -35,6 +35,9 @@
 			<input type="hidden" name="id" value="${id}" />
 			<input type="hidden" name="category" value="labs" />
 			<button type="submit" class="btn btn-primary">提交</button>
+			{@if id}
+			<a href="/ajax/labs/updateGitInfo?id=${id}&repo_name=${git_full_name}" class="btn btn-default" data-action-ajax="已发起更新">更新github数据</a>
+			{@/if}
 		</div>
 	</form>
 </div>

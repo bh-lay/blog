@@ -116,9 +116,13 @@ app.get('/ajax/blog', function(data,connect){
   ajax_blog.render(connect,app);
 });
 //实验室
-var ajax_labs = require('./ajax/labs_get');
+var ajax_labs = require('./ajax/labs_get'),
+    ajax_labs_update = require('./ajax/labs/updateGitInfo');
 app.get('/ajax/labs', function(data,connect){
   ajax_labs.render(connect,app);
+});
+app.get('/ajax/labs/updateGitInfo', function(data,connect){
+  ajax_labs_update.render(connect,app);
 });
 
 //友情链接
@@ -221,7 +225,7 @@ var updateLabsDataFromGithub = require('../sys/functions/updateLabsDataFromGithu
 //每晚三点
 new CronJob('01 01 03 * * *', function() {
   //更新实验室里的Github数据
-  updateLabsDataFromGithub();
+  updateLabsDataFromGithub.all();
   //更新个人Github信息
   myGithubData.update();
 }, null, true, 'Asia/Hong_Kong');

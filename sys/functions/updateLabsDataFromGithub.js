@@ -21,7 +21,7 @@ function get_list(callback){
 					var repo = item.git_full_name;
 					if(repo.length > 2){
 						list.push({
-							repo: repo.replace(/^\//,''),
+							repo: repo,
 							id: item.id
 						});
 					}
@@ -33,14 +33,15 @@ function get_list(callback){
 }
 //从Github API获取数据
 function get_info(repo_name,callback){
-	var need_keys = "name,full_name,html_url,description,created_at,updated_at,pushed_at,git_url,homepage,stargazers_count,watchers_count,forks_count".split(','),
-		options = {
-			url: api_url + repo_name,
-			headers: {
-				'User-Agent': 'bh-lay github api robot'
-			}
-		};
-	request(options, function (err, response, body){
+	var need_keys = "name,full_name,html_url,description,created_at,updated_at,pushed_at,git_url,homepage,stargazers_count,watchers_count,forks_count".split(',');
+
+	repo_name = repo_name.replace(/^\//,'');
+	request({
+		url: api_url + repo_name,
+		headers: {
+			'User-Agent': 'bh-lay github api robot'
+		}
+	}, function (err, response, body){
 		var responseBody,
 			repo_info = {};
 		if(err,response.statusCode != 200){
@@ -77,14 +78,13 @@ function update(id,data,callback){
 	});
 }
 
-module.exports = function(){
+exports.all = function(){
 	get_list(function(list){
 		list.forEach(function(item,index){
 			var repo_name = item.repo,
 				id = item.id;
 			//隔两秒执行一条
 			setTimeout(function(){
-				console.log(repo_name);
 				get_info(repo_name,function(err,data){
 					if(err){
 						return;
@@ -94,5 +94,14 @@ module.exports = function(){
 				});
 			},index * 2000);
 		});
+	});
+};
+exports.item = function(repo_name,id){
+	get_info(repo_name,function(err,data){
+		if(err){
+			return;
+		}
+		//更新数据
+		update(id,data);
 	});
 };
