@@ -8,21 +8,14 @@ define(function(require,exports){
 
 	var formToAjax = require('tools/form2ajax.js'),
 		user_tpl = __inline('tpl/user.html');
-	//初始化模版
-	function valueInit(tpl,data){
-			
-		var txt = tpl.replace(/\{(\w*)}/g,function(){
-			return data[arguments[1]]||'';
-		});
-		return txt;
-	};
 	
 	/****
 	 * 获取用户信息
 	 */
 	function getUser(id,callback){
 		if(!id){
-			callback && callback('missing arguments');
+			callback && callback(null,{});
+			return
 		}
 		$.ajax({
 			'url' : '/ajax/user/detail',
@@ -41,43 +34,24 @@ define(function(require,exports){
 	}
 	//用户模块
 	return function(dom,id,sendFn){
-		var alert;
-		if(!id){
-			var new_html = valueInit(user_tpl,{});
-			
-			dom.html(new_html);
-			new formToAjax(dom,{
-				'onSubmit' : function(data){
-					alert = UI.prompt('正在提交用户创建！',0);
-				},
-				'onResponse' : function(data){
-					if(data && data.code == 200){
-						alert.tips('用户创建完毕');
-					}else{
-						alert.tips(data.msg || '用户创建失败');
-					}
-					sendFn && sendFn();
-				}
-			});
-			return
-		}
 		getUser(id,function(err,data){
 			if(err){
 				dom.html('数据异常！');
 				return
 			}
-			var new_html = valueInit(user_tpl,data);
+			var prompt,
+				new_html = juicer(user_tpl,data);
 			
 			dom.html(new_html);
 			new formToAjax(dom,{
 				'onSubmit' : function(data){
-					alert = UI.prompt('正在提交用户修改！');
+					prompt = UI.prompt('正在提交！');
 				},
 				'onResponse' : function(data){
 					if(data && data.code == 200){
-						alert.tips('用户修改完毕');
+						prompt.tips('完事儿了！');
 					}else{
-						alert.tips(data.msg || '用户修改失败');
+						prompt.tips(data.msg || '坏了，失败了！');
 					}
 					sendFn && sendFn();
 				}

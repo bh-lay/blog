@@ -12,22 +12,14 @@
 define && define(function(require,exports){
 	var formToAjax = require('tools/form2ajax.js'),
 		friend_tpl = __inline("tpl/friends.html");
-  
-	//初始化模版
-	function valueInit(tpl,data){
-			
-		var txt = tpl.replace(/\{(\w*)}/g,function(){
-			return data[arguments[1]]||'';
-		});
-		return txt;
-	};
 	
 	/****
 	 * 获取友情链接内容
 	 */
 	function getFriend(id,callback){
 		if(!id){
-			callback && callback('missing arguments');
+			callback && callback(null,{});
+			return
 		}
 		$.ajax({
 			url : '/ajax/links/detail/' + id,
@@ -45,39 +37,25 @@ define && define(function(require,exports){
 	
 	//增加、修改友情链接
 	function FRIENDS(dom,id,sendFn){
-		if(!id){
-			var new_html = valueInit(friend_tpl,{});
-			dom.html(new_html);
-			new formToAjax(dom,{
-				'onSubmit' : function(data){
-					UI.prompt('正在发布！');
-				},
-				'onResponse' : function(data){
-					UI.prompt('链接发布完毕');
-					sendFn && sendFn();
-				}
-			});
-			return
-		}
 		getFriend(id,function(err,data){
 			if(err){
 				dom.html('数据异常！');
 				return
 			}
-			var new_html = valueInit(friend_tpl,data);
+			var new_html = juicer(friend_tpl,data),
+				prompt;
 			dom.html(new_html);
 			new formToAjax(dom,{
 				'onSubmit' : function(data){
-					UI.prompt('正在提交链接修改！');
+					prompt = UI.prompt('正在提交！',0);
 				},
 				'onResponse' : function(data){
-					UI.prompt('链接修改完毕');
+					prompt.tips('完事儿！');
 					sendFn && sendFn();
 				}
 			});
 		});
 	}
-	
 	
 	//对外接口
 	return FRIENDS;
