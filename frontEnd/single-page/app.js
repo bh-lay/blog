@@ -199,9 +199,8 @@ define(function (require, exports) {
   //  }
   });
   //动态插入emoji表情样式
-  var str = '<style type="text/css" data-module="emoji">'
-      emoji_str = $('#data_emoji').html();
-  emoji_str.replace(/^\s+|\s+$/g,'').split(/\s+/).forEach(function(item,index){
+  var str = '<style type="text/css" data-module="emoji">';
+  ($('#data_emoji').html() || '').replace(/^\s+|\s+$/g,'').split(/\s+/).forEach(function(item,index){
     str += '.emoji.s_' + item + '{background-position: -' + (index * 25) + 'px 0;}';
   });
   str += '</style>';
