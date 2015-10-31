@@ -1,1 +1,1 @@
-##这是静态资源的目录，独立域名 static.bh-lay.com  asset.bh-lay.com
+##这是静态资源的目录，独立域名 asset.bh-lay.com
