@@ -96,12 +96,13 @@ exports.all = function(){
 		});
 	});
 };
-exports.item = function(repo_name,id){
+exports.item = function(repo_name,id,callback){
 	get_info(repo_name,function(err,data){
 		if(err){
+			callback && callback('err');
 			return;
 		}
 		//更新数据
-		update(id,data);
+		update(id,data,callback);
 	});
 };

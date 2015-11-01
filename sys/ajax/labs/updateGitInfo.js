@@ -18,8 +18,8 @@ exports.render = function (connect,app){
 
 	//解析参数
 	utils.parse.request(connect.request,function(err,data){
-	    var repo_name = data.repo_name || '',
-	    	id = data.id || '';
+		var repo_name = data.repo_name || '',
+			id = data.id || '';
 	    if(repo_name.length + id.length < 6){
 			connect.write('json',{
 				code: 205,
@@ -36,12 +36,19 @@ exports.render = function (connect,app){
 				});
 				return
 			}
-			connect.write('json',{
-				code: 200,
-				msg: 'success'
-			});
 			//更新
-			updateLabsDataFromGithub.item(data.repo_name,data.id);
+			updateLabsDataFromGithub.item(data.repo_name,data.id,function(err){
+				var response_json = {
+					code: 200
+				};
+				if(err){
+					response_json.code = 206;
+				}else{
+					//清除实验室相关的缓存
+					app.cache.clear('labs');
+				}
+				connect.write('json',response_json);	
+			});
 		});
 	});
 }
