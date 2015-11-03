@@ -106,6 +106,7 @@ define(function(require,exports){
   require('juicer.js');
 
   var views = {
+    index : require('views/index.js'),
     labs : require('views/labs.js'),
     blog : require('views/blog.js'),
     links : require('views/links.js'),
@@ -154,10 +155,7 @@ define(function(require,exports){
   lofox.set('/admin/',function(){
     this.title('后台首页');
     var dom = createDom(mainDom);
-
-    var tpl = $('#tpl_index_page').html();
-    var txt = tpl.replace('{username}',admin_dataBase.username);
-    dom.html(txt);
+    views.index(dom);
   });
   //博文页
   lofox.set('/admin/article',function(){

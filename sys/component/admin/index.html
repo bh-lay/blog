@@ -1,10 +1,18 @@
 <div class="col-md-8">
 	<div class="jumbotron">
-		<h1>{username}你还有脸回来！</h1>
+		<h1>${username}你还有脸回来！</h1>
 		<p>你有多久没有更新博文了？</p>
 		<p>博客还想不想要了？</p>
 		<p>人生就此荒废你开心么？</p>
 		<p><a class="btn btn-primary btn-lg" href="/" target="_blank" role="button">去看看博客</a></p>
+	</div>
+	
+	<div class="panel custom-mb20">
+		<div class="panel-body">
+			<h3>评论管理</h3>
+			<p>好激动呦，有没有人给我写评论呢！</p>
+			<a class="btn btn-default custom-lofox" href="/admin/comments">评论管理</a>
+		</div>
 	</div>
 </div>
 <div class="col-md-4">
@@ -12,27 +20,11 @@
 		<div class="panel-body">
 			<h3>清除缓存<small>不选则清除全部</small></h3>
 			<div class="cache-type-list" data-toggle="buttons">
+			{@each cache_type as it}
 				<label class="btn btn-default btn-sm">
-					<input name="cache" type="checkbox" autocomplete="off" value="ajax">ajax
+					<input name="cache" type="checkbox" autocomplete="off" value="${it}">${it}
 				</label>
-				<label class="btn btn-default btn-sm">
-					<input name="cache" type="checkbox" autocomplete="off" value="comment">评论
-				</label>
-				<label class="btn btn-default btn-sm">
-					<input name="cache" type="checkbox" autocomplete="off" value="html">html
-				</label>
-				<label class="btn btn-default btn-sm">
-					<input name="cache" type="checkbox" autocomplete="off" value="labs">labs
-				</label>
-				<label class="btn btn-default btn-sm">
-					<input name="cache" type="checkbox" autocomplete="off" value="article">article
-				</label>
-				<label class="btn btn-default btn-sm">
-					<input name="cache" type="checkbox" autocomplete="off" value="links">links
-				</label>
-				<label class="btn btn-default btn-sm">
-					<input name="cache" type="checkbox" autocomplete="off" value="tags">tags
-				</label>
+			{@/each}
 			</div>
 			<button type="button" class="btn btn-primary">清除</button>
 		</div>
@@ -45,13 +37,6 @@
 				<a class="list-group-item custom-lofox" href="/admin/publish/labs">实验室</a>
 				<a class="list-group-item custom-lofox" href="/admin/publish/friends">加友链</a>
 			</div>
-		</div>
-	</div>
-	<div class="panel custom-mb20">
-		<div class="panel-body">
-			<h3>评论管理</h3>
-			<p>好激动呦，有没有人给我写评论呢！</p>
-			<a class="btn btn-default custom-lofox" href="/admin/comments">评论管理</a>
 		</div>
 	</div>
 	<div class="panel custom-mb20">
