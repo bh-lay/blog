@@ -230,8 +230,8 @@ new CronJob('01 01 03 * * *', function() {
   myGithubData.update();
 }, null, true, 'Asia/Hong_Kong');
 
-//每晚三点零五分
-new CronJob('01 05 03 * * *', function() {
+//每晚三点零十分
+new CronJob('01 10 03 * * *', function() {
   //清除缓存
   app.cache.clear();
 }, null, true, 'Asia/Hong_Kong');
