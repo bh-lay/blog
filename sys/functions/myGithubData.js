@@ -16,17 +16,15 @@ function get_info(){
 			'User-Agent': 'bh-lay github api robot'
 		}
 	}, function (err, response, body){
-		var responseBody,
-			userInfo = {};
+		var responseBody;
 		if(err,response.statusCode != 200){
 			callback && callback('error');
 			return;
 		}
 		responseBody = JSON.parse(body);
 		need_keys.forEach(function(item){
-			userInfo[item] = responseBody[item];
+			cache_data[item] = responseBody[item];
 		});
-		cache_data = userInfo;
 	});
 }
 
