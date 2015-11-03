@@ -6,14 +6,37 @@
 		<p>人生就此荒废你开心么？</p>
 		<p><a class="btn btn-primary btn-lg" href="/" target="_blank" role="button">去看看博客</a></p>
 	</div>
-	<div class="list-group">
-		<a class="list-group-item" href="/ajax/clear_cache"  data-action-ajax="清除缓存成功" >清除<strong>所有</strong>缓存</a>
-		<a class="list-group-item" href="/ajax/clear_cache?type=ajax" data-action-ajax="清除缓存成功" >清除ajax缓存</a>
-		<a class="list-group-item" href="/ajax/clear_cache?type=comment" data-action-ajax="清除缓存成功" >清除评论缓存</a>
-		<a class="list-group-item" href="/ajax/clear_cache?type=html" data-action-ajax="清除缓存成功" >清除页面缓存</a>
-	</div>
 </div>
 <div class="col-md-4">
+	<div class="panel">
+		<div class="panel-body">
+			<h3>清除缓存<small>不选则清除全部</small></h3>
+			<div class="cache-type-list" data-toggle="buttons">
+				<label class="btn btn-default btn-sm">
+					<input name="cache" type="checkbox" autocomplete="off" value="ajax">ajax
+				</label>
+				<label class="btn btn-default btn-sm">
+					<input name="cache" type="checkbox" autocomplete="off" value="comment">评论
+				</label>
+				<label class="btn btn-default btn-sm">
+					<input name="cache" type="checkbox" autocomplete="off" value="html">html
+				</label>
+				<label class="btn btn-default btn-sm">
+					<input name="cache" type="checkbox" autocomplete="off" value="labs">labs
+				</label>
+				<label class="btn btn-default btn-sm">
+					<input name="cache" type="checkbox" autocomplete="off" value="article">article
+				</label>
+				<label class="btn btn-default btn-sm">
+					<input name="cache" type="checkbox" autocomplete="off" value="links">links
+				</label>
+				<label class="btn btn-default btn-sm">
+					<input name="cache" type="checkbox" autocomplete="off" value="tags">tags
+				</label>
+			</div>
+			<button type="button" class="btn btn-primary">清除</button>
+		</div>
+	</div>
 	<div class="panel custom-mb20">
 		<div class="panel-body">
 			<h3>发布台<small>增加博客内容</small></h3>

@@ -53,3 +53,10 @@ tr.disable{
 .commentsList p{
   padding-top: 1em;
 }
+
+.cache-type-list{
+  margin-bottom: 10px;
+}
+.cache-type-list .btn{
+  margin-bottom: 5px;
+}
