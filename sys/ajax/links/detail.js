@@ -32,7 +32,7 @@ function get_detail(id,callback){
 
 module.exports = function (connect,app,id){
 	var url = connect.request.url;
-	app.cache.use(url,['ajax'],function(this_cache){
+	app.cache.use(url,['ajax','links'],function(this_cache){
 		connect.write('json',this_cache);
 	},function(save_cache){
 

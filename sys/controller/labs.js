@@ -54,7 +54,7 @@ function get_detail(lab_name,callback){
 
 
 exports.list = function (connect,app){
-  app.cache.use('labs_list',['html'],function(this_cache){
+  app.cache.use('labs_list',['html','labs'],function(this_cache){
     connect.write('html',200,this_cache);
   },function(save_cache){
     list_page(app,function(err,list){
@@ -78,7 +78,7 @@ exports.list = function (connect,app){
 };
 
 exports.detail = function (connect,app,lab_name){
-  app.cache.use('labs_id_' + lab_name,['html'],function(this_cache){
+  app.cache.use('labs_id_' + lab_name,['html','labs'],function(this_cache){
     connect.write('html',200,this_cache);
   },function(save_cache){
     //获取作品信息

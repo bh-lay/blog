@@ -80,7 +80,7 @@ exports.list = function (connect,app){
       tag = data.tag ? data.tag : null;
   
   var cache_name = 'blog_list_' + page + '_' + (tag ? tag : '');
-  app.cache.use(cache_name,['html'],function(this_cache){
+  app.cache.use(cache_name,['html','article'],function(this_cache){
     //do something with this_cache
     connect.write('html',200,this_cache);
   },function(save_cache){
@@ -118,7 +118,7 @@ exports.list = function (connect,app){
 };
 
 exports.detail = function (connect,app,id){
-  app.cache.use('blog_id_' + id,['html'],function(this_cache){
+  app.cache.use('blog_id_' + id,['html','article'],function(this_cache){
     connect.write('html',200,this_cache);
   },function(save_cache){
     getDetail(id,function(err,data){
