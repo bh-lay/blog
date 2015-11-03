@@ -38,7 +38,7 @@ case $deployFrom in
 		deployTo='../../web/topic/aboutblog'
     ;;
     'aboutme')
-        deployTo='../../web/topic/aboutme'
+        deployTo='../../static/'
     ;;
     'aboutme_old')
         deployTo='../../web/topic/aboutme_old'

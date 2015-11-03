@@ -14,6 +14,15 @@ fis.match('*.less', {
 });
 
 
+//发布位置
+fis.match('**', {
+  release: 'build/single-page/$0',
+  domain: 'http://127.0.0.1:8088'
+});
+fis.match('index.html', {
+  release: '../web/topic/aboutme/index.html'
+});
+
 fis.match('*.png', {
   // fis-optimizer-png-compressor 插件进行压缩，已内置
   optimizer: fis.plugin('png-compressor')
@@ -25,10 +34,14 @@ fis.match('*.css', {
 });
 
 
-//启用插件 
-fis.hook('relative'); 
-
-//让所有文件，都使用相对路径。 
-fis.match('**', {
-  relative: true
-})
+//线上打包
+fis
+  .media('production')
+    .match('/**.js', {
+    // 通过 uglify 压缩 js
+    optimizer: fis.plugin('uglify-js')
+  })
+  //线上使用CDN
+  .media('production').match('*', {
+    domain: 'http://static.bh-lay.com'
+  });
