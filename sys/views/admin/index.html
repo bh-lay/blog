@@ -76,7 +76,54 @@
 	</div>
 </div>
 <script type="text/template" id="tpl_index_page">
-<include name="admin/index" />
+	<div class="col-md-8">
+	<div class="jumbotron">
+		<h1>${username}你还有脸回来！</h1>
+		<p>你有多久没有更新博文了？</p>
+		<p>博客还想不想要了？</p>
+		<p>人生就此荒废你开心么？</p>
+		<p><a class="btn btn-primary btn-lg" href="/" target="_blank" role="button">去看看博客</a></p>
+	</div>
+	<div class="panel">
+		<div class="panel-body">
+			<h3>评论管理</h3>
+			<p>好激动呦，有没有人给我写评论呢！</p>
+			<a class="btn btn-default custom-lofox" href="/admin/comments">评论管理</a>
+		</div>
+	</div>
+</div>
+<div class="col-md-4">
+	<div class="panel">
+		<div class="panel-body">
+			<h3>清除缓存<small>不选则清除全部</small></h3>
+			<div class="cache-type-list" data-toggle="buttons">
+			{@each cache_type as it}
+				<label class="btn btn-default btn-sm">
+					<input name="cache" type="checkbox" autocomplete="off" value="${it}">${it}
+				</label>
+			{@/each}
+			</div>
+			<button type="button" class="btn btn-primary clear-cache-submit">清除</button>
+		</div>
+	</div>
+	<div class="panel">
+		<div class="panel-body">
+			<h3>发布台<small>增加博客内容</small></h3>
+			<div class="list-group">
+				<a class="list-group-item custom-lofox" href="/admin/publish/article">写博文</a>
+				<a class="list-group-item custom-lofox" href="/admin/publish/labs">实验室</a>
+				<a class="list-group-item custom-lofox" href="/admin/publish/friends">加友链</a>
+			</div>
+		</div>
+	</div>
+	<div class="panel">
+		<div class="panel-body">
+			<h3>图库<small>静态资源管理</small></h3>
+			<p>远程镜像至七牛云存储，新增操作直接上传即可。修改或删除操作需要进入七牛后台进行重复操作。</p>
+			<a class="btn btn-info custom-lofox" href="/admin/gallery">进入图库</a>
+		</div>
+	</div>
+</div>
 </script>
 <script type="text/template" id="tpl_comments_page">
 	<ul class="list-group commentsList">{@each list as it}
