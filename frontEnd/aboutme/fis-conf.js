@@ -16,7 +16,7 @@ fis.match('*.less', {
 
 //发布位置
 fis.match('**', {
-  release: 'build/single-page/$0',
+  release: 'build/aboutme/$0',
   domain: 'http://127.0.0.1:8088'
 });
 fis.match('index.html', {
@@ -28,11 +28,6 @@ fis.match('*.png', {
   optimizer: fis.plugin('png-compressor')
 });
 
-fis.match('*.css', {
-  // fis-optimizer-clean-css 插件进行压缩，已内置
-  optimizer: fis.plugin('clean-css')
-});
-
 
 //线上打包
 fis
@@ -41,7 +36,12 @@ fis
     // 通过 uglify 压缩 js
     optimizer: fis.plugin('uglify-js')
   })
+  //CSS压缩
+  .match('*.less', {
+    optimizer: fis.plugin('clean-css')
+  })
   //线上使用CDN
   .media('production').match('*', {
+    // domain: 'http://127.0.0.1:8088'
     domain: 'http://static.bh-lay.com'
   });

@@ -313,7 +313,7 @@
 					left = public_winW-list_cntW;
 				}
 				this.$list.animate({
-					left,left
+					left: left
 				},100);
 			}else{
 				this.$list.css('left', public_winW/2 - list_cntW/2);
