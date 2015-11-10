@@ -213,7 +213,6 @@ hr{
   min-height: 200px;
   padding: 150px 0 200px;
   background: #fff;
-  overflow: hidden;
   .zhuomianbaidu{
     img{
       display: block;
@@ -229,17 +228,12 @@ hr{
       font-size: 12px;
     }
   }
-  &:before{
-    content: '';
-    display: block;
+  .mask{
     position: absolute;
-    width: 0;
-    height: 0;
-    top: -80px;
+    width: 100%;
+    height: 3rem;
+    top: -3rem;
     left: 0;
-    border-width: 80px 100vw 0 0;
-    border-color: transparent #fff transparent transparent;
-    border-style: solid;
   }
 }
 
