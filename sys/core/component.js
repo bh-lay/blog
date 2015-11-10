@@ -11,11 +11,14 @@ var fs = require('fs'),
     baseModuleRoot = '../component/';
 //define template Object
 exports.get = function(URI,data,callback){
+  if(!callback){
+    return
+  }
   var realPath = baseFileRoot + URI;
   //读取
   fs.readFile(realPath + '.html', "utf8",function(err,txt){
     if(err){
-      callback && callback(err);
+      callback(err);
       return;
     }
     //得到模版内容
@@ -24,12 +27,12 @@ exports.get = function(URI,data,callback){
     fs.exists(realPath + '.js', function(exists) {
       if(!exists){
         //没有脚本文件，直接返回模版内容
-        callback && callback(null,temp);
+        callback(null,temp);
         return ;
       }
       //执行脚本文件
       require(baseModuleRoot + URI + '.js').produce(temp,data,function(err,html,data){
-        callback && callback(null,html,data);
+        callback(null,html,data);
       });
     });
   });
