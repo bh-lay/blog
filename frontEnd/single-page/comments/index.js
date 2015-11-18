@@ -447,7 +447,7 @@ define(function(require,exports){
     });
     $(me.dom).on('click','.btn-reply',function(){
       var item = $(this).parents('.l_com_item'),
-          reply_for = item.find('.l_com_item_caption').text(),
+          reply_for = item.attr('data-username'),
           pop = UI.pop({
             title: '回复：' + reply_for,
             mask: true,
