@@ -47,7 +47,7 @@ module.exports = {
   },
   //数据库链接
 	mongo : {
-		host: 'localhost',
+		host: '127.0.0.1',
 		port: 27017,
 		user: 'bloguser',
 		pass: '123456',
