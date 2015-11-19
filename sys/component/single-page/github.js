@@ -4,7 +4,8 @@ var utils = require('../../core/utils/index.js'),
 
 
 exports.produce = function(temp,data,callback){
-  var user_data = myGithubData.get(),
-      html = utils.juicer(temp,user_data);
-  callback && callback(null,html);
+  myGithubData.get(function(err,user_data){
+	var html = utils.juicer(temp,user_data);
+  	callback && callback(null,html);
+  });
 };
