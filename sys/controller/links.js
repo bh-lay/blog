@@ -50,7 +50,11 @@ exports.render = function (connect,app){
             description : '一帮程序员,前端工程师,网页设计,设计师，一群纯屌丝！',
             list: list
         },function(err,html){
+          if(err){
+            connect.write('html',200,'<h1>页面挂了！</h1>');
+          }else{
             save_cache(html);
+          }
         });
       });
   });

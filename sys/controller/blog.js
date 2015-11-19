@@ -111,7 +111,11 @@ exports.list = function (connect,app){
         list : list,
         pagination : page_html
       },function(err,html){
+        if(err){
+          connect.write('html',200,'<h1>页面挂了！</h1>');
+        }else{
           save_cache(html);
+        }
       });
     });
   });
@@ -123,7 +127,9 @@ exports.detail = function (connect,app,id){
   },function(save_cache){
     getDetail(id,function(err,data){
       if(err){
-        connect.write('notFound','404');
+        app.views('system/mongoFail',{},function(err,html){
+          connect.write('html',500,html);
+        });
         return;
       }
       //获取视图
@@ -138,7 +144,11 @@ exports.detail = function (connect,app,id){
         tags : data.tags,
         content : data.content
       },function(err,html){
-        save_cache(html);
+        if(err){
+          connect.write('html',200,'<h1>页面挂了！</h1>');
+        }else{
+          save_cache(html);
+        }
       });
     });
   });

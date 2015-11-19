@@ -71,7 +71,11 @@ exports.list = function (connect,app){
         description : '剧中人造轮子的基地，汇集小剧开发的部分组件，孕育优秀代码的实验室！',
         list : list
       },function(err,html){
-        save_cache(html);
+        if(err){
+          connect.write('html',200,'<h1>页面挂了！</h1>');
+        }else{
+          save_cache(html);
+        }
       });
     });
   });
@@ -101,10 +105,10 @@ exports.detail = function (connect,app,lab_name){
         demo_url : data.demo_url
       },function(err,html){
         if(err){
-          connect.write('error','怎么坏掉了呢！');
-          return
+          connect.write('html',200,'<h1>页面挂了！</h1>');
+        }else{
+          save_cache(html);
         }
-        save_cache(html);
       });
     });
   });
