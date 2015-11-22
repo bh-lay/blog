@@ -1,6 +1,5 @@
 /**
  * @author:bh-lay
- * Blog : http://bh-lay.com/
  * Copyright (c) 2012-2018
 **/
 
@@ -53,7 +52,7 @@ window.L = window.L || {};
     css: supports
   };
   L.isMobileBrowser = (window.innerWidth < 720 && isSupportTouch) ? true : false;
-	
+
   //占用全局方法
   L.gravatar_error_fn = function(elem){
     if(elem.src.indexOf('www.gravatar.com') > -1){
@@ -61,7 +60,7 @@ window.L = window.L || {};
       elem.src = elem.src.replace('www.gravatar.com','gravatar.duoshuo.com');
     }else if(elem.src.indexOf('gravatar.duoshuo.com') > -1){
       //若多说镜像失败，使用默认头像
-      elem.src = 'http://static.bh-lay.com/user/default.jpg';
+      elem.src = __uri('/images/default.jpg');
     }
     //其余情况均不处理（已是默认头像）
   };
@@ -101,7 +100,7 @@ define(function (require, exports) {
   /**
    * @param (timestamp/Date,'{y}-{m}-{d} {h}:{m}:{s}')
    * @param (timestamp/Date,'{y}-{mm}-{dd} {hh}:{mm}:{ss}')
-   * 
+   *
    * y:year
    * m:months
    * d:date
@@ -147,11 +146,11 @@ define(function (require, exports) {
   //开始导航
   L.nav();
   //渐隐加载遮罩
-  $('.app_mask').addClass('app_mask_out'); 
+  $('.app_mask').addClass('app_mask_out');
   setTimeout(function () {
     $('.app_mask').remove();
   }, 1000);
-  
+
   /**
    * 检测链接是否为提供给js使用的地址
    *   无地址、 javascript:: 、javascript:void(0)、#
@@ -184,7 +183,7 @@ define(function (require, exports) {
     var url = $(this).attr('href');
     //为JS脚本准备的链接
     if(hrefForScript(url)){
-      //阻止浏览器默认事件，处理因base设置，导致此类链接在火狐中新窗口打开问题，感谢 @紫心蕊 
+      //阻止浏览器默认事件，处理因base设置，导致此类链接在火狐中新窗口打开问题，感谢 @紫心蕊
       e.preventDefault();
     }else if(lofox.isInRouter(url)){
       //路由中配置的地址
@@ -205,7 +204,7 @@ define(function (require, exports) {
   });
   str += '</style>';
   $('head').append(str);
-  
+
   //做个好玩的
   document.addEventListener('visibilitychange', function() {
     document.title = document.hidden ? '出BUG了，快看！':'小剧客栈，剧中人的个人博客！';
@@ -280,7 +279,7 @@ function routerHandle(lofox) {
     container.append(newDom);
     return $active_page = newDom;
   }
-	
+
   //视图刷新前，销毁上一个对象
   lofox.on('beforeRefresh',function(){
     if(o_active_page && o_active_page.destroy){
