@@ -14,7 +14,7 @@ define(function(require,exports){
       userInfo = null,
       //存储程序需要用到的登录回调
       LoginCallbacks = [];
-  
+
   //相应登录的回调函数
   window.appLoginCallback = function(data){
     console.log(123,data);
@@ -23,7 +23,7 @@ define(function(require,exports){
     }
     LoginCallbacks = [];
   };
-  
+
   function getMyInfo(callback){
     $.ajax({
       url : '/ajax/user/detail',
@@ -37,7 +37,7 @@ define(function(require,exports){
       }
     });
   }
-  
+
   exports.setLocalUser = function(data){
     var data_str = JSON.stringify({
       username : data.username,
@@ -65,7 +65,7 @@ define(function(require,exports){
             userInfo = JSON.parse(user);
             //增加gravatar头像(md5邮箱)
             if(userInfo.email.length){
-              userInfo.avatar = 'http://www.gravatar.com/avatar/' + hex_md5(userInfo.email);
+              userInfo.avatar = 'https://www.gravatar.com/avatar/' + hex_md5(userInfo.email);
             }
             callback && callback(null,userInfo,'local');
           }else{

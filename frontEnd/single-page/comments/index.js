@@ -5,20 +5,20 @@ define(function(require,exports){
       selection = require('comments/selection'),
       face = require('comments/face'),
       pagination = require('js/pagination'),
-      
+
       private_userInfo = null,
-      default_avatar = 'http://static.bh-lay.com/user/default.jpg',
-      
+      default_avatar = __uri('/images/default.jpg');,
+
       noData_tpl = '<div class="l_com_list_noData">来的真早，快抢沙发！</div>',
       baseTpl = __inline('tpl/comments/base.html'),
       sendBox_tpl = __inline('tpl/comments/sendBox.html'),
       user_tpl = __inline('tpl/comments/user.html'),
       list_tpl = __inline('tpl/comments/list.html'),
       item_tpl = __inline('tpl/comments/item.html');
-  
+
   /**
    * @param (timestamp/Date,'{y}-{m}-{d} {h}:{m}:{s}')
-   * 
+   *
    * y:year
    * m:months
    * d:date
@@ -32,13 +32,13 @@ define(function(require,exports){
       return null;
     }
     var format = format ||'{y}-{m}-{d} {h}:{i}:{s}';
-    
+
     if(typeof(time) == "object"){
       var date = time;
     }else{
       var date = new Date(parseInt(time));
     }
-    
+
     var formatObj = {
       y : date.getYear()+1900,
       m : date.getMonth()+1,
@@ -48,7 +48,7 @@ define(function(require,exports){
       s : date.getSeconds(),
       a : date.getDay(),
     };
-    
+
     var time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g,function(result,key){
       var value = formatObj[key];
       if(result.length > 3 && value < 10){
@@ -71,7 +71,7 @@ define(function(require,exports){
     }
     return output;
   }
-  
+
   //处理自定义事件
   function ON(eventName,callback){
     this._events = this._events || {};
@@ -93,7 +93,7 @@ define(function(require,exports){
       this._events[eventName][i].apply(this.event_global || this,args);
     }
   }
-  
+
   /**
    * 设置用户信息
    *
@@ -111,14 +111,14 @@ define(function(require,exports){
     $allDom.find('.l_send_username').html(screen_name).attr('title',screen_name);
     $allDom.find('.l_send_avatar img').attr('src',user.avatar);
   }
-    
+
   /**
    * 转换emoji表情
    */
   function strToEmoji(str){
     return str.replace(/\:((\w|\-)+)\:/g,'<span class="emoji s_$1"></span>');
   }
-  
+
   /**
    * 发送评论
    *
@@ -324,7 +324,7 @@ define(function(require,exports){
     this.userDefine = {};
     this.onBeforeSend = param.onBeforeSend || null;
     $(dom).html($(this.dom));
-  
+
     //绑定dom事件
     bindDomEvent.call(this);
     //绑定对象自定义事件
@@ -347,7 +347,7 @@ define(function(require,exports){
       var me = this,
           $textarea = $(this.dom).find('textarea'),
           $btn = $(this.dom).find('.l_send_submit');
-      
+
       $textarea.focus();
       if(this.isSubmitting){
         return;
@@ -382,8 +382,8 @@ define(function(require,exports){
       }
     }
   };
-  
-  
+
+
   /**
    * 列表类
    *
@@ -398,9 +398,9 @@ define(function(require,exports){
     this.limit = param.list_num || 15;
     this.total = 0;
     this._status = 'normal';
-    
+
     this.dom = $(list_tpl)[0];
-    
+
     $(dom).html(this.dom);
 
     this.getData(0,function(err,data){
@@ -408,12 +408,12 @@ define(function(require,exports){
         $(me.dom).find('.l_com_list_cnt').html(noData_tpl);
         return;
       }
-      
+
       var hash_match = (location.hash || '').match(/#comments-(.+)/);
 
       var html = juicer(item_tpl,data);
       $(me.dom).find('.l_com_list_cnt').html(html);
-      
+
       if(hash_match){
         var dom = $(me.dom).find('.l_com_item[data-id=' + hash_match[1] + ']');
         setTimeout(function(){
@@ -523,7 +523,7 @@ define(function(require,exports){
       }
     });
   };
-  
+
   exports.sendBox = sendBox;
   exports.list = list;
   exports.init = function(dom,id,param){
