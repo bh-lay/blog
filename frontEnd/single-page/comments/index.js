@@ -15,49 +15,6 @@ define(function(require,exports){
       user_tpl = __inline('tpl/comments/user.html'),
       list_tpl = __inline('tpl/comments/list.html'),
       item_tpl = __inline('tpl/comments/item.html');
-
-  /**
-   * @param (timestamp/Date,'{y}-{m}-{d} {h}:{m}:{s}')
-   *
-   * y:year
-   * m:months
-   * d:date
-   * h:hour
-   * i:minutes
-   * s:second
-   * a:day
-   */
-  function parseTime(time,format){
-    if(arguments.length==0){
-      return null;
-    }
-    var format = format ||'{y}-{m}-{d} {h}:{i}:{s}';
-
-    if(typeof(time) == "object"){
-      var date = time;
-    }else{
-      var date = new Date(parseInt(time));
-    }
-
-    var formatObj = {
-      y : date.getYear()+1900,
-      m : date.getMonth()+1,
-      d : date.getDate(),
-      h : date.getHours(),
-      i : date.getMinutes(),
-      s : date.getSeconds(),
-      a : date.getDay(),
-    };
-
-    var time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g,function(result,key){
-      var value = formatObj[key];
-      if(result.length > 3 && value < 10){
-        value = '0' + value;
-      }
-      return value || 0;
-    });
-    return time_str;
-  }
   /**
    * 格式化网址
    *
@@ -510,7 +467,7 @@ define(function(require,exports){
           me.total = DATA.count;
           me.list = DATA.list;
           me.list.forEach(function(item){
-            item.time = parseTime(item.time,"{h}:{ii} {y}-{m}-{d}");
+            item.time = L.parseTime(item.time,"{h}:{ii} {y}-{m}-{d}");
             item.content = strToEmoji(item.content);
             //若无头像，使用默认头像
             item.user.avatar =  item.user.avatar || default_avatar;
