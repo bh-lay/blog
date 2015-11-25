@@ -42,7 +42,8 @@ define(function(require,exports){
     var data_str = JSON.stringify({
       username : data.username,
       email : data.email,
-      blog : data.blog
+      blog : data.blog,
+      avatar: data.avatar
     });
     localStorage.setItem("userInfo",data_str);
   };
@@ -65,7 +66,7 @@ define(function(require,exports){
             userInfo = JSON.parse(user);
             //增加gravatar头像(md5邮箱)
             if(userInfo.email.length){
-              userInfo.avatar = 'https://www.gravatar.com/avatar/' + hex_md5(userInfo.email);
+              userInfo.avatar = '//www.gravatar.com/avatar/' + hex_md5(userInfo.email);
             }
             callback && callback(null,userInfo,'local');
           }else{
