@@ -78,11 +78,11 @@ define(function (require, exports) {
   L.user = require('js/user.js');
   L.nav = require('js/navigation.js');
   L.views = {
-    index : require('js/index.js'),
-    blogList : require('js/blogList.js'),
-    blogDetail : require('js/blogDetail.js'),
-    labsList : require('js/labsList.js'),
-    bless : require('js/bless.js'),
+    index : require('js/page/index.js'),
+    blogList : require('js/page/blogList.js'),
+    blogDetail : require('js/page/blogDetail.js'),
+    labsList : require('js/page/labsList.js'),
+    bless : require('js/page/bless.js'),
     comments : require('comments/index.js')
   };
   L.push = function (url) {

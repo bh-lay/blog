@@ -1,13 +1,13 @@
 /**
  * blog detail
- *  
+ *
  */
 define(function(require,exports){
-  var hljs = require('js/highlight.js');
-  var showdown = require('js/showdown.js'),
+  var hljs = require('/js/highlight.js');
+  var showdown = require('/js/showdown.js'),
       empty_tpl = '<div class="blank-content"><p>博文不存在</p></div>',
       template = __inline('/tpl/blogDetailPage.html');
-	
+
   function getData(id,fn){
     $.ajax({
       type : 'GET' ,
@@ -30,7 +30,7 @@ define(function(require,exports){
       }
     });
   };
-	
+
   return function(dom,id,callback){
     getData(id,function(err,html,title){
       if(err){
@@ -45,7 +45,7 @@ define(function(require,exports){
       dom.find('pre').each(function(){
         hljs.highlightBlock(this);
       });
-      
+
       var comments = new L.views.comments.init(commentDom,'blog-' + id,{
         list_num: 8
       });

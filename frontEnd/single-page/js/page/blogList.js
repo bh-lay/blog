@@ -1,12 +1,12 @@
 /**
  * blogList page
- *  
+ *
  */
 
 
 define(function(require,exports){
-  var Stick = require('js/stick.js'),
-      tie = require('js/tie.js');
+  var Stick = require('/js/stick.js'),
+      tie = require('/js/tie.js');
   var private_tag_data = null;
   function getTag(callback){
     if(private_tag_data){
@@ -46,8 +46,8 @@ define(function(require,exports){
       });
     });
   }
-  
-  
+
+
   function LIST(tag,onLoadStart,onLoaded){
     this.skip = 0;
     this.limit = 10;
@@ -152,7 +152,7 @@ define(function(require,exports){
       }
       L.refresh();
     });
-    
+
   }
   page.prototype = {
     destroy: function(){

@@ -38,10 +38,10 @@ fis.match('**', {
 fis.match('**.psd', {
   release: false
 });
-fis.match('index.html', {
+fis.match('/index.html', {
   release: '../sys/views/single-page/index.html'
 });
-fis.match('tpl/github.html', {
+fis.match('/tpl/github.html', {
   release: '../sys/component/single-page/github.html'
 });
 
