@@ -20,14 +20,11 @@ fis.match('*.css', {
   optimizer: fis.plugin('clean-css')
 });
 
-fis.match('js/*.js', {
+fis.match('js/**.js', {
   isMod: true
 });
 fis.match('comments/*.js', {
   isMod: true
-});
-fis.match('/js/sea.js', {
-  isMod: false
 });
 
 //发布位置
@@ -48,7 +45,7 @@ fis.match('/tpl/github.html', {
 
 
 // 只需要编译 html 文件，以及其用到的资源。
-fis.hook('cmd', {
+fis.hook('amd', {
   baseUrl: './'
 });
 
@@ -74,5 +71,6 @@ fis
   })
   //线上使用CDN
   .media('production').match('*', {
-    domain: '//dn-lay.qbox.me'
+    // domain: '//dn-lay.qbox.me'
+    domain: '//127.0.0.1:8088'
   });

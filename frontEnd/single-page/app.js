@@ -64,33 +64,7 @@ window.L = window.L || {};
     }
     //其余情况均不处理（已是默认头像）
   };
-}());
 
-define(function (require, exports) {
-  require('js/juicer.js');
-  require('js/lofox.js');
-  require('js/dialog.js');
-
-  //绑定路由
-  var lofox = new util.lofox();
-  routerHandle(lofox);
-
-  L.user = require('js/user.js');
-  L.nav = require('js/navigation.js');
-  L.views = {
-    index : require('js/page/index.js'),
-    blogList : require('js/page/blogList.js'),
-    blogDetail : require('js/page/blogDetail.js'),
-    labsList : require('js/page/labsList.js'),
-    bless : require('js/page/bless.js'),
-    comments : require('comments/index.js')
-  };
-  L.push = function (url) {
-      lofox.push(url);
-  };
-  L.refresh = function () {
-      lofox.refresh();
-  };
   //模块替换
   L.tplModule = function(txt){
     return (txt && txt.length) ? txt.replace(/\[\-(\w+)\-\]/g,function(a,key){
@@ -140,6 +114,55 @@ define(function (require, exports) {
     });
     return time_str;
   };
+  //做个好玩的
+  document.addEventListener('visibilitychange', function() {
+    document.title = document.hidden ? '出BUG了，快看！':'小剧客栈，剧中人的个人博客！';
+  });
+
+  //动态插入emoji表情样式
+  var str = '<style type="text/css" data-module="emoji">';
+  ($('#data_emoji').html() || '').replace(/^\s+|\s+$/g,'').split(/\s+/).forEach(function(item,index){
+    str += '.emoji.s_' + item + '{background-position: -' + (index * 25) + 'px 0;}';
+  });
+  str += '</style>';
+  $('head').append(str);
+}());
+
+require([
+  'js/user',
+  'js/navigation',
+  'js/page/index',
+  'js/page/blogList',
+  'js/page/blogDetail',
+  'js/page/labsList',
+  'js/page/bless',
+  'comments/index',
+
+  'js/juicer',
+  'js/lofox',
+  'js/dialog'
+], function (user,nav,index,blogList,blogDetail,labsList,bless,comments){
+  //绑定路由
+  var lofox = new util.lofox();
+  routerHandle(lofox);
+
+  L.user = user;
+  L.nav = nav;
+  L.views = {
+    index : index,
+    blogList : blogList,
+    blogDetail : blogDetail,
+    labsList : labsList,
+    bless : bless,
+    comments : comments
+  };
+  L.push = function (url) {
+      lofox.push(url);
+  };
+  L.refresh = function () {
+      lofox.refresh();
+  };
+
   //配置弹出层
   UI.config.zIndex(2000);
 
@@ -197,19 +220,9 @@ define(function (require, exports) {
   //  else{
   //  }
   });
-  //动态插入emoji表情样式
-  var str = '<style type="text/css" data-module="emoji">';
-  ($('#data_emoji').html() || '').replace(/^\s+|\s+$/g,'').split(/\s+/).forEach(function(item,index){
-    str += '.emoji.s_' + item + '{background-position: -' + (index * 25) + 'px 0;}';
-  });
-  str += '</style>';
-  $('head').append(str);
 
-  //做个好玩的
-  document.addEventListener('visibilitychange', function() {
-    document.title = document.hidden ? '出BUG了，快看！':'小剧客栈，剧中人的个人博客！';
-  });
 });
+
 
 /**
  *使用七牛云存储
