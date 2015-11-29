@@ -65,9 +65,9 @@ fis
     postpackager: fis.plugin('loader', {
       allInOne: {
         includeAsyncs: true,
-        ignore: ['/js/sea.js']
+        ignore: ['jquery.js','require.js','test.js']
       }
-    })
+    });
   })
   //线上使用CDN
   .media('production').match('*', {
