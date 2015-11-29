@@ -1,18 +1,15 @@
 /**
  * 评论 list
- *  
+ *
  */
 define(function(require,exports){
-  var base_tpl = ['<div class="grid-row blessPage">',
-    '<div class="grid-col-flow-300"></div>',
-    '<div class="grid-col-fix-300 sidebar">',
-      '[-github_links-][-latest_comments-]',
-    '</div>',
-  '</div>'].join('');
+  var comment_id = 'define-1',
+      base_tpl = __inline('/tpl/bless.html');
 	function page(dom){
     var base_tpl_end = L.tplModule(base_tpl);
     dom.html(base_tpl_end);
-    new L.views.comments.init(dom.find('.grid-col-flow-300')[0], 'define-1');
+    new L.views.comments.sendBox(dom.find('.bless-sendBox')[0],comment_id);
+    new L.views.comments.list(dom.find('.grid-col-flow-300')[0], comment_id);
 	}
 	return page;
 });
