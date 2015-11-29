@@ -67,10 +67,10 @@ fis
         includeAsyncs: true,
         ignore: ['jquery.js','require.js','test.js']
       }
-    });
+    })
   })
   //线上使用CDN
   .media('production').match('*', {
-    // domain: '//dn-lay.qbox.me'
-    domain: '//127.0.0.1:8088'
+    domain: '//dn-lay.qbox.me'
+    // domain: '//127.0.0.1:8088'
   });
