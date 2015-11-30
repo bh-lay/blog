@@ -1,8 +1,7 @@
 
 
 define(function(require,exports){
-  var mirror = require('comments/mirror'),
-      selection = require('comments/selection'),
+  var selection = require('comments/selection'),
       face = require('comments/face'),
       pagination = require('js/pagination'),
 
@@ -226,24 +225,10 @@ define(function(require,exports){
         $allDom = $(this.dom),
         $textarea = $allDom.find('textarea'),
         $count = $allDom.find('.l_send_count'),
-        $countRest = $count.find('b'),
-        text_mirror = mirror($textarea);
+        $countRest = $count.find('b');
 
     //监听字符变化事件
     this.on('change',function (){
-      var height = text_mirror.refresh().realHeight + 20,
-          overflow = 'hidden';
-      if(height < 80){
-        height = 80;
-      }else if(height > 200){
-        height = 200;
-        overflow = 'visible';
-      }
-      $textarea.css({
-        height: height,
-        overflow: overflow
-      });
-
       var length = $textarea.val().length,
           rest_length = me.limit - length,
           show_txt = rest_length;
