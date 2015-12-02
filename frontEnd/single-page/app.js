@@ -45,7 +45,7 @@ window.L = window.L || {};
   }
   //为windows系统定制body滚动条样式（仅webkit有效）
   if(isWindows){
-    $('body').addClass('define-scrollbar');
+    Sizzle('body')[0].addClass('define-scrollbar');
   }
   L.supports = {
     touch : isSupportTouch,
@@ -121,11 +121,11 @@ window.L = window.L || {};
 
   //动态插入emoji表情样式
   var str = '<style type="text/css" data-module="emoji">';
-  ($('#data_emoji').html() || '').replace(/^\s+|\s+$/g,'').split(/\s+/).forEach(function(item,index){
+  (Sizzle('#data_emoji')[0].innerHTML || '').replace(/^\s+|\s+$/g,'').split(/\s+/).forEach(function(item,index){
     str += '.emoji.s_' + item + '{background-position: -' + (index * 25) + 'px 0;}';
   });
   str += '</style>';
-  $('head').append(str);
+  Sizzle('head')[0].insertAdjacentHTML('beforeEnd', str);
 }());
 
 require([

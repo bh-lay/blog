@@ -65,7 +65,7 @@ fis
     postpackager: fis.plugin('loader', {
       allInOne: {
         includeAsyncs: true,
-        ignore: ['jquery.js','require.js','test.js']
+        ignore: ['jquery.js','Sizzle.js','Base.js','require.js','test.js']
       }
     })
   })
