@@ -29,7 +29,7 @@ define(function(require,exports){
       destroy: function() {
         $gallery.css({
           position: 'absolute',
-          top: Sizzle('body')[0].scrollTop - Sizzle('.app_container')[0].offsetTop,
+          top: Sizzle('body')[0].scrollTop - utils.offset(Sizzle('.app_container')[0]).top,
           height: window.innerHeight
         });
       }

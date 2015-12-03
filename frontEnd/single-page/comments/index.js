@@ -173,10 +173,11 @@ define(function(require,exports){
    */
   function bindDomEvent(){
     var me = this,
-        $allDom = $(this.dom),
-        $textarea = $allDom.find('textarea'),
+        $allDom = me.dom,
+        $textarea = Sizzle('textarea',$allDom)[0],
         inputDelay,
         focusDelay;
+
     $textarea.on('keyup keydown change propertychange input paste',function(){
       clearTimeout(inputDelay);
       inputDelay = setTimeout(function(){
@@ -222,10 +223,10 @@ define(function(require,exports){
   //绑定对象自定义事件
   function bindCustomEvent(){
     var me = this,
-        $allDom = $(this.dom),
-        $textarea = $allDom.find('textarea'),
-        $count = $allDom.find('.l_send_count'),
-        $countRest = $count.find('b');
+        $allDom = this.dom,
+        $textarea = Sizzle('textarea',$allDom)[0],
+        $count = Sizzle('.l_send_count',$allDom)[0],
+        $countRest = Sizzle('b',$count)[0];
 
     //监听字符变化事件
     this.on('change',function (){
@@ -261,11 +262,12 @@ define(function(require,exports){
     this.id = id;
     this.reply_for_id = param.reply_for_id || null;
     this.isSubmitting = false;
-    this.dom = $(sendBox_tpl)[0];
+    this.dom = utils.createDom(sendBox_tpl);
     this.text = '';
     this.userDefine = {};
     this.onBeforeSend = param.onBeforeSend || null;
-    $(dom).html($(this.dom));
+    dom.innerHTML = '';
+    dom.appendChild(this.dom);
 
     //绑定dom事件
     bindDomEvent.call(this);
@@ -280,7 +282,7 @@ define(function(require,exports){
       setUserInfoToUI.call(me,user);
     });
     if(param.focus){
-      $(this.dom).find('textarea').focus();
+      Sizzle('textarea',this.dom)[0].focus();
     }
   }
   sendBox.prototype = {
@@ -341,9 +343,10 @@ define(function(require,exports){
     this.total = 0;
     this._status = 'normal';
 
-    this.dom = $(list_tpl)[0];
+    this.dom = utils.createDom(list_tpl);
 
-    $(dom).html(this.dom);
+    dom.innerHTML = '';
+    dom.appendChild(this.dom);
 
     this.getData(0,function(err,data){
       if(err){
@@ -354,7 +357,7 @@ define(function(require,exports){
       var hash_match = (location.hash || '').match(/#comments-(.+)/);
 
       var html = juicer(item_tpl,data);
-      $(me.dom).find('.l_com_list_cnt').html(html);
+      Sizzle('.l_com_list_cnt',me.dom)[0].innerHTML = html;
 
       if(hash_match){
         var dom = $(me.dom).find('.l_com_item[data-id=' + hash_match[1] + ']');
@@ -368,26 +371,26 @@ define(function(require,exports){
         $(me.dom).find('.l_com_list_cnt').prepend(noData_tpl);
       }else{
         //分页组件
-        var page = new pagination($(me.dom).find('.l_com_list_pagination'),{
+        var page = new pagination(Sizzle('.l_com_list_pagination',me.dom)[0],{
             list_count : me.total,
             page_cur : 0,
             page_list_num : me.limit,
             max_page_btn : 6
         });
         page.jump = function(num){
-          me.scrollTo($(me.dom));
+          me.scrollTo(me.dom);
           me.getData((num-1)*me.limit,function(err,data){
             if(err){
               console.log('error');
               return;
             }
             var html = juicer(item_tpl,data);
-            $(me.dom).find('.l_com_list_cnt').html(html);
+            Sizzle('.l_com_list_cnt',me.dom)[0].innerHTML = html;
           });
         };
       }
     });
-    $(me.dom).on('click','.btn-reply',function(){
+    me.dom.on('click','.btn-reply',function(){
       var item = $(this).parents('.l_com_item'),
           reply_for = item.attr('data-username'),
           pop = UI.pop({
@@ -411,9 +414,7 @@ define(function(require,exports){
     });
   }
   list.prototype.scrollTo = function(dom,time,fn){
-    $('html,body').animate({
-      scrollTop: dom.offset().top - 70
-    },time || 100,fn);
+    Sizzle('body')[0].scrollTop = utils.offset(dom).top - 70;
   };
   list.prototype.addItem = function(item){
     item.time = '刚刚';
@@ -435,19 +436,18 @@ define(function(require,exports){
     }
     var me = this;
     this._status = 'loading';
-    $.ajax({
+    utils.fetch({
       url: '/ajax/comments/list',
       data: {
         cid: this.cid,
         skip: skip || 0,
         limit: this.limit || 10
       },
-      success: function(data){
-        if(data.code == 500){
-          callback && callback(500);
-        }
+      callback: function(err,data){
         me._status = 'loaded';
-        if(data.code && data.code == 200){
+        if(err || data.code == 500){
+          callback && callback(500);
+        }else if(data.code && data.code == 200){
           var DATA = data.data;
           me.total = DATA.count;
           me.list = DATA.list;
@@ -470,12 +470,13 @@ define(function(require,exports){
   exports.list = list;
   exports.init = function(dom,id,param){
     var me = this;
-    this.dom = $(baseTpl)[0];
+    this.dom = utils.createDom(baseTpl);
     this.id = id;
-    $(dom).html($(this.dom));
+    dom.innerHTML = '';
+    dom.appendChild(this.dom);
 
-    this.sendBox = new sendBox($(this.dom).find('.l_com_sendBox')[0],id,param);
-    this.list = new list($(this.dom).find('.l_com_list')[0],id,param);
+    this.sendBox = new sendBox(Sizzle('.l_com_sendBox',this.dom)[0],id,param);
+    this.list = new list(Sizzle('.l_com_list',this.dom)[0],id,param);
     this.sendBox.on('sendToServiceSuccess',function(item){
       me.list.addItem(item);
     });

@@ -90,11 +90,31 @@ window.utils = {};
       }
     });
     each(cssObj,function(value,key){
-    console.log(key,value);
       setStyle(node,key,value);
     });
   });
 
+  //读取dom在页面中的位置
+  function offset(elem){
+   var box = {
+     top : 0,
+     left : 0,
+     screen_top : 0,
+     screen_left : 0
+   },
+   size;
+
+   if (typeof(elem.getBoundingClientRect) !== 'undefined' ) {
+     size = elem.getBoundingClientRect();
+   }
+   box.screen_top = size.top;
+   box.screen_left = size.left;
+
+   box.top = size.top + (document.documentElement.scrollTop == 0 ? document.body.scrollTop : document.documentElement.scrollTop);
+   box.left = size.left + document.body.scrollLeft;
+
+   return box;
+  }
   /**
    * 事件绑定
    * elem:节点
@@ -191,7 +211,8 @@ window.utils = {};
     });
   }
   addPrototype(Element,'on',function(a,b,c){
-    bind(this,a,b,c)
+    bind(this,a,b,c);
+    return this;
   });
   function createDom(html){
     var a = document.createElement('div');
@@ -200,6 +221,7 @@ window.utils = {};
   }
 
   utils.each = each;
+  utils.offset = offset;
   utils.createDom = createDom;
 })();
 
@@ -214,13 +236,19 @@ utils.fetch = function (param){
       headers = param.headers || {},
       data = param.data,
       dataStr = '',
+      method = (param.type && param.type.match(/^(get|post)$/i)) ? param.type.toUpperCase() : 'GET',
       request = new XMLHttpRequest();
   for(var i in data){
     dataStr += i + '=' +(data[i]||'') + '&';
   }
-  url = dataStr.length ? (url + '?' + dataStr) : url;
-  request.open('GET', url, true);
+
   headers.accept = "application/json, text/javascript";
+  if(method == 'POST'){
+    headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+  }else{
+    url = dataStr.length ? (url + '?' + dataStr) : url;
+  }
+  request.open(method, url, true);
   //设置 headers
   for(i in headers){
     request.setRequestHeader(i, headers[i]);

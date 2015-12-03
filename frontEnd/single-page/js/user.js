@@ -25,7 +25,7 @@ define(function(require,exports){
   };
 
   function getMyInfo(callback){
-    $.ajax({
+    utils.fetch({
       url : '/ajax/user/detail',
       type : 'POST',
       success : function(data){

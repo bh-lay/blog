@@ -140,11 +140,12 @@ define(function(require,exports){
       me.$loading.addClass('fadeOut');
       if(!list || list.length == 0){
         me.$list.innerHTML = empty_tpl;
+      }else{
+        list.forEach(function(item,index){
+          var html = juicer(list_tpl,item);
+          me.stick.addItem(html,item.cover);
+        });
       }
-      list.forEach(function(item,index){
-        var html = juicer(list_tpl,item);
-        me.stick.addItem(html,item.cover);
-      });
     });
     //处理标签功能
     renderTags(Sizzle('.articleListPage-tags .content',dom)[0],pageTag,function(tag){
