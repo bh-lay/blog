@@ -1,18 +1,18 @@
 /**
  * labs list
- *  
+ *
  */
 define(function(require,exports){
   var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>',
       base_tpl = __inline('/tpl/labsListBase.html'),
       item_temp = __inline('/tpl/labsListItem.html');
-  
+
   var limit = 20,
       skip = 0,
       count = null,
       dom;
   var getData = function(callback){
-    $.ajax({
+    utils.fetch({
       type : 'GET' ,
       url : '/ajax/labs',
       data : {
@@ -20,14 +20,14 @@ define(function(require,exports){
         skip : skip,
         limit : limit
       },
-      success :function(data){
-        if(data.code == 500){
+      callback :function(err,data){
+        if(err || data.code == 500){
           callback && callback(500);
           return;
         }
         count = data['count'];
         skip += limit;
-        
+
         var list = data['list'];
         for(var i = 0,total = list.length;i<total;i++){
           list[i]['work_range'] = list[i]['work_range']?list[i]['work_range'].split(/\,/):['暂未填写'];
@@ -44,7 +44,7 @@ define(function(require,exports){
   };
   return function(dom,param){
     skip = 0;
-    dom.html(base_tpl);
+    dom.innerHTML = base_tpl;
     getData(function(err,list){
       var this_html;
       if(err){
@@ -54,7 +54,7 @@ define(function(require,exports){
           list : list
         });
       }
-      dom.find('.labsList').html(this_html);
+      Sizzle('.labsList',dom)[0].innerHTML = this_html;
     });
   };
 });

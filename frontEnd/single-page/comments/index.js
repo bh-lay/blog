@@ -91,7 +91,7 @@ define(function(require,exports){
       return;
     }
 
-    $.ajax({
+    utils.fetch({
       url : '/ajax/comments/add',
       type : 'POST',
       data : {
@@ -101,8 +101,8 @@ define(function(require,exports){
         user : user,
         reply_for_id : data.reply_for_id
       },
-      success : function(data){
-        if(data.code && data.code == 200){
+      callback : function(err,data){
+        if(!err && data.code && data.code == 200){
           callback && callback(null,data.data);
         }else{
           callback && callback('fail');
@@ -125,11 +125,14 @@ define(function(require,exports){
           easyClose : false,
           mask: true,
           confirm : confirmFn
-        });
+        }),
+        nodeUsername = Sizzle('input[name="username"]',pop.dom)[0],
+        nodeEmail = Sizzle('input[name="email"]',pop.dom)[0],
+        nodeBlog = Sizzle('input[name="blog"]',pop.dom)[0];;
     function confirmFn(){
-      var username = $username.value,
-          email = $email.value,
-          blog = $blog.value;
+      var username = nodeUsername.value,
+          email = nodeEmail.value,
+          blog = nodeBlog.value;
       if(username.length < 1){
         UI.prompt('大哥，告诉我你叫什么呗！',null,{
           from : 'top'
@@ -158,14 +161,11 @@ define(function(require,exports){
         callback && callback();
       });
     }
-    var $username = Sizzle('input[name="username"]',pop.dom)[0],
-        $email = Sizzle('input[name="email"]',pop.dom)[0],
-        $blog = Sizzle('input[name="blog"]',pop.dom)[0];
 
     if(user){
-      $username.value = user.username || '';
-      $email.value = user.email || '';
-      $blog.value = user.blog || '';
+      nodeUsername.value = user.username || '';
+      nodeEmail.value = user.email || '';
+      nodeBlog.value = user.blog || '';
     }
   }
   /**
@@ -173,15 +173,15 @@ define(function(require,exports){
    */
   function bindDomEvent(){
     var me = this,
-        $allDom = me.dom,
-        $textarea = Sizzle('textarea',$allDom)[0],
+        nodeGlobal = me.dom,
+        nodeTextarea = Sizzle('textarea',nodeGlobal)[0],
         inputDelay,
         focusDelay;
 
-    $textarea.on('keyup keydown change propertychange input paste',function(){
+    nodeTextarea.on('keyup keydown change propertychange input paste',function(){
       clearTimeout(inputDelay);
       inputDelay = setTimeout(function(){
-        var newVal = $textarea.value.trim();
+        var newVal = nodeTextarea.value.trim();
         //校验字符是否发生改变
         if(newVal == me.text){
           return;
@@ -192,31 +192,31 @@ define(function(require,exports){
       },80);
     }).on('focus',function(){
         clearTimeout(focusDelay);
-        $allDom.addClass('l_sendBox_active');
+        nodeGlobal.addClass('l_sendBox_active');
     }).on('focusout',function(){
       clearTimeout(focusDelay);
       focusDelay = setTimeout(function(){
         if(me.text.length == 0){
-          $allDom.removeClass('l_sendBox_active');
+          nodeGlobal.removeClass('l_sendBox_active');
         }
       },200);
     });
 
-    $allDom.on('click','.l_send_placeholder',function(){
-      $textarea.focus();
+    nodeGlobal.on('click','.l_send_placeholder',function(){
+      nodeTextarea.focus();
     }).on('click','.set-userinfo',function(e){
       askForUserInfo.call(me);
     }).on('click','.l_send_submit',function(){
       me.submit();
     }).on('click','.l_send_face',function(){
       var offset = utils.offset(this);
-      $textarea.focus();
+      nodeTextarea.focus();
       face({
         top: offset.top,
         left: offset.left,
         onSelect: function(title){
-          selection.insertTxt($textarea,':' + title + ':');
-          utils.trigger($textarea,'change');
+          selection.insertTxt(nodeTextarea,':' + title + ':');
+          utils.trigger(nodeTextarea,'change');
         }
       });
     });
@@ -224,24 +224,24 @@ define(function(require,exports){
   //绑定对象自定义事件
   function bindCustomEvent(){
     var me = this,
-        $allDom = this.dom,
-        $textarea = Sizzle('textarea',$allDom)[0],
-        $count = Sizzle('.l_send_count',$allDom)[0],
-        $countRest = Sizzle('b',$count)[0];
+        nodeGlobal = this.dom,
+        nodeTextarea = Sizzle('textarea',nodeGlobal)[0],
+        nodeCount = Sizzle('.l_send_count',nodeGlobal)[0],
+        nodeCountRest = Sizzle('b',nodeCount)[0];
 
     //监听字符变化事件
     this.on('change',function (){
-      var length = $textarea.value.length,
+      var length = nodeTextarea.value.length,
           rest_length = me.limit - length,
           show_txt = rest_length;
-      if(length > me.limit){
-        $count.style.display = 'block';
+      if(length > 2 * me.limit/3){
+        nodeCount.style.display = 'block';
         if(rest_length < 0){
           show_txt = '<font color="#f50">' + Math.abs(rest_length) + '</font>';
         }
-        $countRest.innerHTML = show_txt;
+        nodeCountRest.innerHTML = show_txt;
       }else{
-        $count.style.display = 'none';
+        nodeCount.style.display = 'none';
       }
     }).on('login',function(user){
       //设置用户信息
@@ -250,7 +250,8 @@ define(function(require,exports){
     }).on('sendToServiceError',function(){
       UI.prompt('网络出错，没发成功！');
     }).on('sendToServiceSuccess',function(){
-      $textarea.val('').trigger('change');
+      nodeTextarea.value = '';
+      utils.trigger(nodeTextarea,'change');
       UI.prompt('发布成功！');
     });
   }
@@ -263,7 +264,7 @@ define(function(require,exports){
     this.id = id;
     this.reply_for_id = param.reply_for_id || null;
     this.isSubmitting = false;
-    this.limit = 200;
+    this.limit = 500;
     this.dom = utils.createDom(sendBox_tpl);
     this.text = '';
     this.userDefine = {};
@@ -291,20 +292,15 @@ define(function(require,exports){
     on: ON,
     submit: function(){
       var me = this,
-          $textarea = Sizzle('textarea',this.dom),
-          $btn = $(this.dom).find('.l_send_submit');
+          nodeTextarea = Sizzle('textarea',this.dom)[0];
 
-      $textarea.focus();
+      nodeTextarea.focus();
       if(this.isSubmitting){
         return;
       }else if(this.text.length == 0){
-        UI.prompt('你丫倒写点东西啊！',null,{
-          from: $btn[0]
-        });
+        UI.prompt('你丫倒写点东西啊！',null);
       }else if(this.text.length > 500){
-        UI.prompt('这是要刷屏的节奏么！',null,{
-          from: $btn[0]
-        });
+        UI.prompt('这是要刷屏的节奏么！',null);
       }else if(private_userInfo){
         var text = this.onBeforeSend ? (this.onBeforeSend(me.text) || me.text) : me.text;
         me.isSubmitting = true;
@@ -430,10 +426,11 @@ define(function(require,exports){
       list: [item]
     });
     var node_item = utils.createDom(html),
-        node_list_cnt = Sizzle('.l_com_list_cnt',this.dom);
+        node_list_cnt = Sizzle('.l_com_list_cnt',this.dom)[0];
     node_list_cnt.insertBefore(node_item, node_list_cnt.firstChild);
     node_item.addClass('l_com_item_ani-insert');
-    Sizzle('.l_com_list_noData',this.dom)[0].style.display = "none";
+    var nodeNoData = Sizzle('.l_com_list_noData',this.dom)[0];
+    nodeNoData && (nodeNoData.style.display = "none");
   };
   list.prototype.getData = function(skip,callback){
     if(this._status == 'loading'){

@@ -121,7 +121,7 @@ window.L = window.L || {};
 
   //动态插入emoji表情样式
   var str = '<style type="text/css" data-module="emoji">';
-  (Sizzle('#data_emoji')[0].innerHTML || '').replace(/^\s+|\s+$/g,'').split(/\s+/).forEach(function(item,index){
+  (Sizzle('#data_emoji')[0].innerHTML || '').trim().split(/\s+/).forEach(function(item,index){
     str += '.emoji.s_' + item + '{background-position: -' + (index * 25) + 'px 0;}';
   });
   str += '</style>';
@@ -186,12 +186,12 @@ require([
    *  data-text data-url data-title data-img data-shareto
    */
   Sizzle('body')[0].on('click','.sns-share a',function(){
-    var $data = $(this).parents('.sns-share'),
-        url = $data.attr('data-url') || location.href,
-        text = encodeURIComponent($data.attr('data-text')) || document.title,
-        title = encodeURIComponent($data.attr('data-title')),
-        img = $data.attr('data-img'),
-        shareto = $(this).attr('data-shareto');
+    var node_data = utils.parents(this,'.sns-share'),
+        url = node_data.getAttribute('data-url') || location.href,
+        text = encodeURIComponent(node_data.getAttribute('data-text')) || document.title,
+        title = encodeURIComponent(node_data.getAttribute('data-title')),
+        img = node_data.getAttribute('data-img'),
+        shareto = this.getAttribute('data-shareto');
 
     img = img ? L.qiniu(img) : '';
     var share_url={
@@ -267,37 +267,37 @@ require([
 function routerHandle(lofox) {
   'use strict';
   var container = Sizzle('.app_container')[0],
-      $active_page = null,
-      o_active_page = null;
+      nodeActivePage = null,
+      activePage = null;
   //显示单页dom
   function getNewPage() {
-    var newDom = utils.createDom('<div class="page"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载模块</p></div></div>');
+    var nodeNew = utils.createDom('<div class="page"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载模块</p></div></div>');
     //移除老的page dom
-    if ($active_page) {
-      var $old = $active_page;
-          $active_page = null;
-          $old.addClass('fadeOutRight');
+    if (nodeActivePage) {
+      var nodeOld = nodeActivePage;
+          nodeActivePage = null;
+          nodeOld.addClass('fadeOutRight');
       setTimeout(function () {
-        utils.remove($old);
+        utils.remove(nodeOld);
         Sizzle('body')[0].scrollTop = 0;
-        newDom.addClass('fadeInLeft page-active');
+        nodeNew.addClass('fadeInLeft page-active');
         setTimeout(function () {
-          newDom.removeClass('fadeInLeft');
+          nodeNew.removeClass('fadeInLeft');
         }, 500);
       }, 500);
     } else {
-      newDom.addClass('page-active');
+      nodeNew.addClass('page-active');
     }
-    container.appendChild(newDom);
-    return $active_page = newDom;
+    container.appendChild(nodeNew);
+    return nodeActivePage = nodeNew;
   }
 
   //视图刷新前，销毁上一个对象
   lofox.on('beforeRefresh',function(){
-    if(o_active_page && o_active_page.destroy){
-      o_active_page.destroy();
+    if(activePage && activePage.destroy){
+      activePage.destroy();
     }
-    o_active_page = null;
+    activePage = null;
   })
   // 监听视图刷新事件
   .on('refresh', function (pathData,search) {
@@ -312,7 +312,7 @@ function routerHandle(lofox) {
     L.nav.setCur('/');
     var dom = getNewPage();
 
-    o_active_page = new L.views.index(dom);
+    activePage = new L.views.index(dom);
   })
   // 博文列表
   .set('/blog', function (param, pathnde, search) {
@@ -320,7 +320,7 @@ function routerHandle(lofox) {
     L.nav.setCur('blog');
     var dom = getNewPage();
 
-    o_active_page = new L.views.blogList(dom, search);
+    activePage = new L.views.blogList(dom, search);
   });
   /**
    * 博客详细页
@@ -329,7 +329,7 @@ function routerHandle(lofox) {
     this.title('我的博客_小剧客栈');
     L.nav.setCur('blog');
     var dom = getNewPage();
-    o_active_page = new L.views.blogDetail(dom, param.id, function (title) {
+    activePage = new L.views.blogDetail(dom, param.id, function (title) {
       lofox.title(title);
     });
   })
@@ -339,7 +339,7 @@ function routerHandle(lofox) {
 
     L.nav.setCur('labs');
     var dom = getNewPage();
-    o_active_page = new L.views.labsList(dom);
+    activePage = new L.views.labsList(dom);
   })
   // 留言板
   .set('/bless', function () {
@@ -347,7 +347,7 @@ function routerHandle(lofox) {
     L.nav.setCur('bless');
     var dom = getNewPage();
 
-    o_active_page = new L.views.bless(dom);
+    activePage = new L.views.bless(dom);
   });
 }
 
