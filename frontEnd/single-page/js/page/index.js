@@ -14,8 +14,9 @@ define(function(require,exports){
       index=-1;
 
   function view(dom){
-    var $gallery = dom.html(temp).find('.gallayer');
-    $gallery.css('backgroundImage','url(' +  imgs[++index] + ')');
+    dom.innerHTML = temp;
+    var $gallery = Sizzle('.gallayer',dom)[0];
+    $gallery.style.backgroundImage = 'url(' +  imgs[++index] + ')';
 
     if(index + 1 >= imgs.length){
       index = -1;
@@ -28,8 +29,8 @@ define(function(require,exports){
       destroy: function() {
         $gallery.css({
           position: 'absolute',
-          top: $(window).scrollTop() - $('.app_container').offset().top,
-          height: $(window).height()
+          top: Sizzle('body')[0].scrollTop - utils.offset(Sizzle('.app_container')[0]).top,
+          height: window.innerHeight
         });
       }
     };

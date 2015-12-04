@@ -56,16 +56,17 @@ define(function(require,exports){
    */
   function setUserInfoToUI(userInput){
     userInput = userInput || {};
-    var $allDom = $(this.dom),
-        user = {
+    var user = {
           username : userInput.username || '',
           email : userInput.email || '',
           blog : userInput.blog || '',
           avatar : userInput.avatar || default_avatar
         },
-        screen_name = user.username || '雁过留名';
-    $allDom.find('.l_send_username').html(screen_name).attr('title',screen_name);
-    $allDom.find('.l_send_avatar img').attr('src',user.avatar);
+        screen_name = user.username || '雁过留名',
+        nodeUser = Sizzle('.l_send_username',this.dom)[0];
+    nodeUser.innerHTML = screen_name;
+    nodeUser.setAttribute('title',screen_name);
+    Sizzle('.l_send_avatar img',this.dom)[0].setAttribute('src',user.avatar);
   }
 
   /**
@@ -126,9 +127,9 @@ define(function(require,exports){
           confirm : confirmFn
         });
     function confirmFn(){
-      var username = $username.val(),
-          email = $email.val(),
-          blog = $blog.val();
+      var username = $username.value,
+          email = $email.value,
+          blog = $blog.value;
       if(username.length < 1){
         UI.prompt('大哥，告诉我你叫什么呗！',null,{
           from : 'top'
@@ -155,17 +156,16 @@ define(function(require,exports){
         }
         EMIT.call(me,'login',[private_userInfo]);
         callback && callback();
-      },false);
+      });
     }
-    var $elem = $(pop.dom),
-        $username = $elem.find('input[name="username"]'),
-        $email = $elem.find('input[name="email"]'),
-        $blog = $elem.find('input[name="blog"]');
+    var $username = Sizzle('input[name="username"]',pop.dom)[0],
+        $email = Sizzle('input[name="email"]',pop.dom)[0],
+        $blog = Sizzle('input[name="blog"]',pop.dom)[0];
 
     if(user){
-      $username.val(user.username || '');
-      $email.val(user.email || '');
-      $blog.val(user.blog || '');
+      $username.value = user.username || '';
+      $email.value = user.email || '';
+      $blog.value = user.blog || '';
     }
   }
   /**
@@ -173,14 +173,15 @@ define(function(require,exports){
    */
   function bindDomEvent(){
     var me = this,
-        $allDom = $(this.dom),
-        $textarea = $allDom.find('textarea'),
+        $allDom = me.dom,
+        $textarea = Sizzle('textarea',$allDom)[0],
         inputDelay,
         focusDelay;
+
     $textarea.on('keyup keydown change propertychange input paste',function(){
       clearTimeout(inputDelay);
       inputDelay = setTimeout(function(){
-        var newVal = $.trim($textarea.val());
+        var newVal = $textarea.value.trim();
         //校验字符是否发生改变
         if(newVal == me.text){
           return;
@@ -203,18 +204,19 @@ define(function(require,exports){
 
     $allDom.on('click','.l_send_placeholder',function(){
       $textarea.focus();
-    }).on('click','.l_send_username,.l_send_avatar',function(e){
+    }).on('click','.set-userinfo',function(e){
       askForUserInfo.call(me);
     }).on('click','.l_send_submit',function(){
       me.submit();
     }).on('click','.l_send_face',function(){
-      var offset = $(this).offset();
+      var offset = utils.offset(this);
       $textarea.focus();
       face({
         top: offset.top,
         left: offset.left,
         onSelect: function(title){
-          $textarea.insertTxt(':' + title + ':').trigger('change');
+          selection.insertTxt($textarea,':' + title + ':');
+          utils.trigger($textarea,'change');
         }
       });
     });
@@ -222,24 +224,24 @@ define(function(require,exports){
   //绑定对象自定义事件
   function bindCustomEvent(){
     var me = this,
-        $allDom = $(this.dom),
-        $textarea = $allDom.find('textarea'),
-        $count = $allDom.find('.l_send_count'),
-        $countRest = $count.find('b');
+        $allDom = this.dom,
+        $textarea = Sizzle('textarea',$allDom)[0],
+        $count = Sizzle('.l_send_count',$allDom)[0],
+        $countRest = Sizzle('b',$count)[0];
 
     //监听字符变化事件
     this.on('change',function (){
-      var length = $textarea.val().length,
+      var length = $textarea.value.length,
           rest_length = me.limit - length,
           show_txt = rest_length;
-      if(length > 200){
-        $count.show();
+      if(length > me.limit){
+        $count.style.display = 'block';
         if(rest_length < 0){
           show_txt = '<font color="#f50">' + Math.abs(rest_length) + '</font>';
         }
-        $countRest.html(show_txt);
+        $countRest.innerHTML = show_txt;
       }else{
-        $count.hide();
+        $count.style.display = 'none';
       }
     }).on('login',function(user){
       //设置用户信息
@@ -261,11 +263,13 @@ define(function(require,exports){
     this.id = id;
     this.reply_for_id = param.reply_for_id || null;
     this.isSubmitting = false;
-    this.dom = $(sendBox_tpl)[0];
+    this.limit = 200;
+    this.dom = utils.createDom(sendBox_tpl);
     this.text = '';
     this.userDefine = {};
     this.onBeforeSend = param.onBeforeSend || null;
-    $(dom).html($(this.dom));
+    dom.innerHTML = '';
+    dom.appendChild(this.dom);
 
     //绑定dom事件
     bindDomEvent.call(this);
@@ -280,14 +284,14 @@ define(function(require,exports){
       setUserInfoToUI.call(me,user);
     });
     if(param.focus){
-      $(this.dom).find('textarea').focus();
+      Sizzle('textarea',this.dom)[0].focus();
     }
   }
   sendBox.prototype = {
     on: ON,
     submit: function(){
       var me = this,
-          $textarea = $(this.dom).find('textarea'),
+          $textarea = Sizzle('textarea',this.dom),
           $btn = $(this.dom).find('.l_send_submit');
 
       $textarea.focus();
@@ -341,55 +345,55 @@ define(function(require,exports){
     this.total = 0;
     this._status = 'normal';
 
-    this.dom = $(list_tpl)[0];
+    this.dom = utils.createDom(list_tpl);
 
-    $(dom).html(this.dom);
+    dom.innerHTML = '';
+    dom.appendChild(this.dom);
 
     this.getData(0,function(err,data){
       if(err){
-        $(me.dom).find('.l_com_list_cnt').html(noData_tpl);
+        Sizzle('.l_com_list_cnt',me.dom)[0].innerHTML = noData_tpl;
         return;
       }
 
       var hash_match = (location.hash || '').match(/#comments-(.+)/);
 
       var html = juicer(item_tpl,data);
-      $(me.dom).find('.l_com_list_cnt').html(html);
+      Sizzle('.l_com_list_cnt',me.dom)[0].innerHTML = html;
 
       if(hash_match){
-        var dom = $(me.dom).find('.l_com_item[data-id=' + hash_match[1] + ']');
+        var dom = Sizzle('.l_com_item[data-id=' + hash_match[1] + ']',me.dom)[0];
         setTimeout(function(){
-          me.scrollTo(dom,1200,function(){
-            dom.addClass('l_com_item_ani-active');
-          });
+          me.scrollTo(dom);
+          dom.addClass('l_com_item_ani-active');
         },500);
       }
       if(me.total == 0){
-        $(me.dom).find('.l_com_list_cnt').prepend(noData_tpl);
+        Sizzle('.l_com_list_cnt',me.dom)[0].innerHTML = noData_tpl;
       }else{
         //分页组件
-        var page = new pagination($(me.dom).find('.l_com_list_pagination'),{
+        var page = new pagination(Sizzle('.l_com_list_pagination',me.dom)[0],{
             list_count : me.total,
             page_cur : 0,
             page_list_num : me.limit,
             max_page_btn : 6
         });
         page.jump = function(num){
-          me.scrollTo($(me.dom));
+          me.scrollTo(me.dom);
           me.getData((num-1)*me.limit,function(err,data){
             if(err){
               console.log('error');
               return;
             }
             var html = juicer(item_tpl,data);
-            $(me.dom).find('.l_com_list_cnt').html(html);
+            Sizzle('.l_com_list_cnt',me.dom)[0].innerHTML = html;
           });
         };
       }
     });
-    $(me.dom).on('click','.btn-reply',function(){
-      var item = $(this).parents('.l_com_item'),
-          reply_for = item.attr('data-username'),
+    me.dom.on('click','.btn-reply',function(){
+      var item = utils.parents(this,'.l_com_item'),
+          reply_for = item.getAttribute('data-username'),
           pop = UI.pop({
             title: '回复：' + reply_for,
             mask: true,
@@ -398,22 +402,23 @@ define(function(require,exports){
           }),
           send = new sendBox(pop.cntDom,me.cid,{
             focus: true,
-            reply_for_id : item.attr('data-id'),
+            reply_for_id : item.getAttribute('data-id'),
             onBeforeSend : function(text){
               return '@' + reply_for + ' ' + text;
             }
           });
-      $(pop.dom).find('.UI_pop_cpt').css('border','none');
+          console.log('reply_for',reply_for);
+      Sizzle('.UI_pop_cpt',pop.dom)[0].css({
+        border: 'none'
+      });
       send.on('sendToServiceSuccess',function(item){
         pop.close();
         me.addItem(item);
       });
     });
   }
-  list.prototype.scrollTo = function(dom,time,fn){
-    $('html,body').animate({
-      scrollTop: dom.offset().top - 70
-    },time || 100,fn);
+  list.prototype.scrollTo = function(dom){
+    Sizzle('body')[0].scrollTop = utils.offset(dom).top - 70;
   };
   list.prototype.addItem = function(item){
     item.time = '刚刚';
@@ -424,10 +429,11 @@ define(function(require,exports){
     var html = juicer(item_tpl,{
       list: [item]
     });
-    var $item = $(html);
-    $(this.dom).find('.l_com_list_cnt').prepend($item);
-    $item.addClass('l_com_item_ani-insert');
-    $(this.dom).find('.l_com_list_noData').fadeOut(100);
+    var node_item = utils.createDom(html),
+        node_list_cnt = Sizzle('.l_com_list_cnt',this.dom);
+    node_list_cnt.insertBefore(node_item, node_list_cnt.firstChild);
+    node_item.addClass('l_com_item_ani-insert');
+    Sizzle('.l_com_list_noData',this.dom)[0].style.display = "none";
   };
   list.prototype.getData = function(skip,callback){
     if(this._status == 'loading'){
@@ -435,19 +441,18 @@ define(function(require,exports){
     }
     var me = this;
     this._status = 'loading';
-    $.ajax({
+    utils.fetch({
       url: '/ajax/comments/list',
       data: {
         cid: this.cid,
         skip: skip || 0,
         limit: this.limit || 10
       },
-      success: function(data){
-        if(data.code == 500){
-          callback && callback(500);
-        }
+      callback: function(err,data){
         me._status = 'loaded';
-        if(data.code && data.code == 200){
+        if(err || data.code == 500){
+          callback && callback(500);
+        }else if(data.code && data.code == 200){
           var DATA = data.data;
           me.total = DATA.count;
           me.list = DATA.list;
@@ -470,12 +475,13 @@ define(function(require,exports){
   exports.list = list;
   exports.init = function(dom,id,param){
     var me = this;
-    this.dom = $(baseTpl)[0];
+    this.dom = utils.createDom(baseTpl);
     this.id = id;
-    $(dom).html($(this.dom));
+    dom.innerHTML = '';
+    dom.appendChild(this.dom);
 
-    this.sendBox = new sendBox($(this.dom).find('.l_com_sendBox')[0],id,param);
-    this.list = new list($(this.dom).find('.l_com_list')[0],id,param);
+    this.sendBox = new sendBox(Sizzle('.l_com_sendBox',this.dom)[0],id,param);
+    this.list = new list(Sizzle('.l_com_list',this.dom)[0],id,param);
     this.sendBox.on('sendToServiceSuccess',function(item){
       me.list.addItem(item);
     });

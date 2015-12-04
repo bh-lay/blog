@@ -9,17 +9,16 @@ define(function(require,exports){
       template = __inline('/tpl/blogDetailPage.html');
 
   function getData(id,fn){
-    $.ajax({
-      type : 'GET' ,
+    utils.fetch({
       url : '/ajax/blog',
       data : {
         act : 'get_detail',
         id : id
       },
-      success :function(data){
+      callback :function(err,data){
         if(data.code == 200){
-          var converter = new showdown.converter();
-          var detail = data['detail'];
+          var converter = new showdown.converter(),
+              detail = data['detail'];
           detail.content = converter.makeHtml(detail.content);
           detail.time_show = L.parseTime(detail.time_show,'{y}-{mm}-{dd}');
           var this_html = juicer(template,detail);
@@ -34,16 +33,18 @@ define(function(require,exports){
   return function(dom,id,callback){
     getData(id,function(err,html,title){
       if(err){
-        dom.html(empty_tpl);
+        dom.innerHTML = empty_tpl;
         return;
       }
       callback && callback(title);
-      html&&dom.html(html);
-      var commentDom = dom.find('.comments_frame');
+      if(html){
+        dom.innerHTML = html;
+      }
+      var commentDom = Sizzle('.comments_frame',dom)[0];
 
       //代码高亮
-      dom.find('pre').each(function(){
-        hljs.highlightBlock(this);
+      utils.each(Sizzle('pre',dom),function(node){
+        hljs.highlightBlock(node);
       });
 
       var comments = new L.views.comments.init(commentDom,'blog-' + id,{

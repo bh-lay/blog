@@ -19,8 +19,8 @@ define(function(require,exports){
 		if(this.page_num > this.max_page_btn){
 			start_num =  this.page_cur - Math.floor(this.max_page_btn/2);
 		}
-		
-		
+
+
 		start_num = Math.max(start_num,1);
 		for(; start_num < this.page_num + 1; start_num++) {
 			if(start_num != this.page_cur){
@@ -39,34 +39,39 @@ define(function(require,exports){
 			txt += '<li class="pagination_next disabled"><span>下一页</span></li>';
 		}
         txt += '</ul>';
-		this.dom.html(txt);
+		this.dom.innerHTML = txt;
 	}
 	function pageList(dom,param){
 		var param = param || {};
-		var this_page = this;
+		var me = this;
 		this.list_count = param.list_count || 0;
 		this.page_cur = param.page_cur || 1;
 		this.page_list_num = param.page_list_num || 15;
 		this.page_num = Math.ceil(this.list_count / this.page_list_num);
 		this.max_page_btn = param.max_page_btn || 50;
 		this.jump = null;
-		this.dom = $('<div>');
-		
-		this.dom.on('click','a[data-page="jump"]',function(){
-			var num = parseInt($(this).html());
-			this_page.page_cur = num - 1;
-			this_page.jumpTo(num);
-      return false;
-		}).on('click','a[data-page="next"]',function(){
-			var num = ++this_page.page_cur;
-			this_page.jumpTo(num);
-      return false;
-		}).on('click','a[data-page="prev"]',function(){
-			var num = --this_page.page_cur;
-			this_page.jumpTo(num);
-      return false;
+		this.dom = document.createElement('div');
+
+		this.dom.on('click','a',function(e){
+			var num,
+					page = this.getAttribute('data-page');
+			switch (page) {
+				case 'next':
+					me.jumpTo(++me.page_cur);
+					break;
+				case 'prev':
+					me.jumpTo(--me.page_cur);
+					break;
+				default:
+				// 'jump':
+					num = parseInt(this.innerHTML);
+					me.page_cur = num - 1;
+					me.jumpTo(num);
+			}
+			e.preventDefault();
 		});
-		dom.html(this.dom);
+		dom.innerHTML = '';
+		dom.appendChild(this.dom);
 		render.call(this);
 	}
 	pageList.prototype = {

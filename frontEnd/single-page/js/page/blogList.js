@@ -13,10 +13,9 @@ define(function(require,exports){
       callback && callback(private_tag_data);
       return;
     }
-    $.ajax({
-      type : 'GET' ,
+    utils.fetch({
       url : '/ajax/tag/list',
-      success :function(data){
+      callback :function(err,data){
         data = data || {};
         data.list = data.list ? data.list.slice(0,10) : [];
         private_tag_data = data;
@@ -28,20 +27,19 @@ define(function(require,exports){
     getTag(function(data){
       var tag_item_tpl = __inline('/tpl/blogListTag.html');
       var html = juicer(tag_item_tpl,data);
-      dom.html(html);
+      dom.innerHTML = html;
 
       if(tagName){
-        dom.find('a').each(function(){
-          if($(this).attr('data-tag') == tagName){
-            $(this).addClass('active');
+        utils.each(Sizzle('a',dom),function(node){
+          if(node.getAttribute('data-tag') == tagName){
+            node.addClass('active');
           }
         });
       }else{
-        dom.find('a').eq(0).addClass('active');
+        Sizzle('a',dom)[0].addClass('active');
       }
       dom.on('click','a',function(){
-        var $btn = $(this);
-        var tag = $btn.attr('data-tag');
+        var tag = this.getAttribute('data-tag');
         callback && callback(tag);
       });
     });
@@ -68,8 +66,7 @@ define(function(require,exports){
     }
     this.isLoading = true;
     this.onLoadStart && this.onLoadStart();
-    $.ajax({
-      type : 'GET' ,
+    utils.fetch({
       url : '/ajax/blog',
       data : {
         act : 'get_list',
@@ -77,7 +74,10 @@ define(function(require,exports){
         tag : this.tag || null,
         limit : this.limit
       },
-      success :function(data){
+      callback :function(err,data){
+        if(err){
+          //
+        }
         var count = data['count'],
             list = data['list'],
             now = new Date().getTime();
@@ -105,18 +105,19 @@ define(function(require,exports){
     });
   };
   function page(dom,param){
-    var me = this;
-    var baseTpl = __inline('/tpl/blogListBase.html');
-    var list_tpl = __inline('/tpl/blogListItem.html');
-    var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>';
+    var me = this,
+        //获取标签名
+        pageTag = param.tag ? decodeURI(param.tag) : null,
+        baseTpl = __inline('/tpl/blogListBase.html'),
+        list_tpl = __inline('/tpl/blogListItem.html'),
+        empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>';
     //插入基本模版
-    dom.html(baseTpl);
-    this.$list = dom.find('.articleList');
-    this.$loading = dom.find('.l-loading-panel');
-    //获取标签名
-    var pageTag = param.tag ? decodeURI(param.tag) : null;
+    dom.innerHTML = baseTpl;
+    this.$list = Sizzle('.articleList',dom)[0];
+    this.$loading = Sizzle('.l-loading-panel',dom)[0];
+
     this.stick = new Stick({
-      container: me.$list[0],
+      container: me.$list,
       column_width: 280,
       column_gap: 10,
       load_spacing: 1000,
@@ -124,27 +125,30 @@ define(function(require,exports){
         list.loadMore();
       }
     });
-    var $tag = dom.find('.articleListPage-tags');
+    var $tag = Sizzle('.articleListPage-tags',dom)[0];
     this.tie = util.tie({
-      dom : $tag[0],
-      scopeDom: $tag.parents('.articleListPage')[0],
+      dom : $tag,
+      scopeDom: $tag.parentNode,
       fixed_top: 50
     });
     //创建列表对象
     var list = new LIST(pageTag,function(){
-      me.$loading.stop(true).fadeIn();
+      me.$loading.removeClass('fadeIn','fadeOut');
+      me.$loading.addClass('fadeIn');
     },function(list){
-      me.$loading.stop(true).fadeOut();
+      me.$loading.removeClass('fadeIn','fadeOut');
+      me.$loading.addClass('fadeOut');
       if(!list || list.length == 0){
-        me.$list.html(empty_tpl);
+        me.$list.innerHTML = empty_tpl;
+      }else{
+        list.forEach(function(item,index){
+          var html = juicer(list_tpl,item);
+          me.stick.addItem(html,item.cover);
+        });
       }
-      list.forEach(function(item,index){
-        var html = juicer(list_tpl,item);
-        me.stick.addItem($(html)[0],item.cover);
-      });
     });
     //处理标签功能
-    renderTags(dom.find('.articleListPage-tags .content'),pageTag,function(tag){
+    renderTags(Sizzle('.articleListPage-tags .content',dom)[0],pageTag,function(tag){
       if(tag == 'null'){
         L.push('/blog');
       }else{

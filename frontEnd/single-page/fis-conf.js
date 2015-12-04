@@ -2,10 +2,6 @@
 
 
 
-//使用hash
-fis.match('*.{js,css,jpg,png,less,gif,svg,eot,ttf,woff,woff2}', {
-  useHash: true
-});
 
 //less编译
 fis.match('*.less', {
@@ -57,15 +53,19 @@ fis.match('::packager', {
 //线上打包
 fis
   .media('production')
-    .match('/**.js', {
+  .match('/**.js', {
     // 通过 uglify 压缩 js
     optimizer: fis.plugin('uglify-js')
+  })
+  //使用hash
+  .match('*.{js,css,jpg,png,less,gif,svg,eot,ttf,woff,woff2}', {
+    useHash: true
   })
   .match('::packager', {
     postpackager: fis.plugin('loader', {
       allInOne: {
         includeAsyncs: true,
-        ignore: ['jquery.js','require.js','test.js']
+        ignore: ['jquery.js','Sizzle.js','Base.js','require.js','test.js']
       }
     })
   })

@@ -45,7 +45,7 @@ window.L = window.L || {};
   }
   //为windows系统定制body滚动条样式（仅webkit有效）
   if(isWindows){
-    $('body').addClass('define-scrollbar');
+    Sizzle('body')[0].addClass('define-scrollbar');
   }
   L.supports = {
     touch : isSupportTouch,
@@ -68,7 +68,7 @@ window.L = window.L || {};
   //模块替换
   L.tplModule = function(txt){
     return (txt && txt.length) ? txt.replace(/\[\-(\w+)\-\]/g,function(a,key){
-      return $('#module_' + key).html() || '';
+      return Sizzle('#module_' + key)[0].innerHTML || '';
     }) : '';
   };
   /**
@@ -121,11 +121,11 @@ window.L = window.L || {};
 
   //动态插入emoji表情样式
   var str = '<style type="text/css" data-module="emoji">';
-  ($('#data_emoji').html() || '').replace(/^\s+|\s+$/g,'').split(/\s+/).forEach(function(item,index){
+  (Sizzle('#data_emoji')[0].innerHTML || '').replace(/^\s+|\s+$/g,'').split(/\s+/).forEach(function(item,index){
     str += '.emoji.s_' + item + '{background-position: -' + (index * 25) + 'px 0;}';
   });
   str += '</style>';
-  $('head').append(str);
+  Sizzle('head')[0].insertAdjacentHTML('beforeEnd', str);
 }());
 
 require([
@@ -169,9 +169,9 @@ require([
   //开始导航
   L.nav();
   //渐隐加载遮罩
-  $('.app_mask').addClass('app_mask_out');
+  Sizzle('.app_mask')[0].addClass('app_mask_out');
   setTimeout(function () {
-    $('.app_mask').remove();
+    utils.remove(Sizzle('.app_mask')[0]);
   }, 1000);
 
   /**
@@ -185,7 +185,7 @@ require([
    * 分享功能
    *  data-text data-url data-title data-img data-shareto
    */
-  $('body').on('click','.sns-share a',function(){
+  Sizzle('body')[0].on('click','.sns-share a',function(){
     var $data = $(this).parents('.sns-share'),
         url = $data.attr('data-url') || location.href,
         text = encodeURIComponent($data.attr('data-text')) || document.title,
@@ -200,10 +200,10 @@ require([
     };
     share_url[shareto] && window.open(share_url[shareto]);
     return false;
-  })
+  });
   //全局控制 a 链接的打开方式
-  .on('click','a',function(e){
-    var url = $(this).attr('href');
+ Sizzle('body')[0].on('click','a',function(e){
+    var url = this.getAttribute('href');
     //为JS脚本准备的链接
     if(hrefForScript(url)){
       //阻止浏览器默认事件，处理因base设置，导致此类链接在火狐中新窗口打开问题，感谢 @紫心蕊
@@ -214,7 +214,7 @@ require([
         lofox.push(url);
         lofox.refresh();
       });
-      return false;
+      e.preventDefault();
     }
   // html base 已设置链接为新窗口打开，此处无需处理
   //  else{
@@ -266,21 +266,20 @@ require([
 
 function routerHandle(lofox) {
   'use strict';
-  var dom = $('.contlayer'),
-      container = $('.app_container'),
+  var container = Sizzle('.app_container')[0],
       $active_page = null,
       o_active_page = null;
   //显示单页dom
   function getNewPage() {
-    var newDom = $('<div class="page"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载模块</p></div></div>');
+    var newDom = utils.createDom('<div class="page"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载模块</p></div></div>');
     //移除老的page dom
     if ($active_page) {
       var $old = $active_page;
           $active_page = null;
           $old.addClass('fadeOutRight');
       setTimeout(function () {
-        $old.remove();
-        $('html,body').scrollTop(0);
+        utils.remove($old);
+        Sizzle('body')[0].scrollTop = 0;
         newDom.addClass('fadeInLeft page-active');
         setTimeout(function () {
           newDom.removeClass('fadeInLeft');
@@ -289,7 +288,7 @@ function routerHandle(lofox) {
     } else {
       newDom.addClass('page-active');
     }
-    container.append(newDom);
+    container.appendChild(newDom);
     return $active_page = newDom;
   }
 
