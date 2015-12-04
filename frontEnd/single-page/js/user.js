@@ -17,7 +17,6 @@ define(function(require,exports){
 
   //相应登录的回调函数
   window.appLoginCallback = function(data){
-    console.log(123,data);
     for(var i=0,total=LoginCallbacks.length;i<total;i++){
       LoginCallbacks[i](data);
     }
@@ -28,8 +27,8 @@ define(function(require,exports){
     utils.fetch({
       url : '/ajax/user/detail',
       type : 'POST',
-      success : function(data){
-        if(data && data.code == 200){
+      callback : function(err,data){
+        if(!err && data && data.code == 200){
           callback && callback(null,data.detail);
         }else{
           callback && callback('error');
@@ -46,6 +45,7 @@ define(function(require,exports){
       avatar: data.avatar
     });
     localStorage.setItem("userInfo",data_str);
+    userInfo = data;
   };
   exports.info = function(callback,useCacheFlag){
     var useCache = typeof(useCacheFlag) == 'boolean' ? useCacheFlag : true;

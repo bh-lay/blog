@@ -68,7 +68,7 @@ window.L = window.L || {};
   //模块替换
   L.tplModule = function(txt){
     return (txt && txt.length) ? txt.replace(/\[\-(\w+)\-\]/g,function(a,key){
-      return $('#module_' + key).html() || '';
+      return Sizzle('#module_' + key)[0].innerHTML || '';
     }) : '';
   };
   /**
@@ -171,7 +171,7 @@ require([
   //渐隐加载遮罩
   Sizzle('.app_mask')[0].addClass('app_mask_out');
   setTimeout(function () {
-    Sizzle('.app_mask')[0].remove();
+    utils.remove(Sizzle('.app_mask')[0]);
   }, 1000);
 
   /**
@@ -278,7 +278,7 @@ function routerHandle(lofox) {
           $active_page = null;
           $old.addClass('fadeOutRight');
       setTimeout(function () {
-        $old.remove();
+        utils.remove($old);
         Sizzle('body')[0].scrollTop = 0;
         newDom.addClass('fadeInLeft page-active');
         setTimeout(function () {
