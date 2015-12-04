@@ -52,6 +52,14 @@ window.utils = {};
       dom.className = dom.className.replace(reg, ' ');
     }
   }
+
+  addPrototype(Element,'matches',(function(){
+    var node = document.createElement('div'),
+        matches = node.matchesSelector || node.msMatchesSelector || node.mozMatchesSelector || node.webkitMatchesSelector || node.oMatchesSelector;
+    node = null;
+    return matches;
+  })());
+
   addPrototype(Element,'addClass',function(){
     each([].slice.call(arguments),function(classname){
       addClass(this,classname);
@@ -156,64 +164,52 @@ window.utils = {};
       }
     }
   })();
-
-  function checkEventForClass(event,classStr,dom){
-    var target = event.srcElement || event.target;
+  /**
+   * 向上查找 dom
+  **/
+  function matchsElementbetweenDom(fromNode,selector,endNode){
+    var target = fromNode;
     while (1) {
-      if(target == dom || !target){
+      if(target == endNode || !target){
         return false;
       }
-      if(hasClass(target,classStr)){
+      if(target.matches(selector)){
         return target;
       }
-
-      target = target.parentNode;
-    }
-  }
-
-  function checkEventForTagName(event,tagname,dom){
-    var target = event.srcElement || event.target;
-    tagname = tagname.toLowerCase();
-    while (1) {
-      if(target == dom || !target){
-        return false;
-      }
-      if(tagname == target.tagName.toLowerCase()){
-        return target;
-      }
-
       target = target.parentNode;
     }
   }
   function bind(elem, type,a,b){
     var checkStr,checkEventFn,fn,
-        elems = [].concat(elem);
+        elems = [].concat(elem),
+        types = type.split(/\s+/);
     each(elems,function(node){
-      if(typeof(a) == 'string'){
-        if(a.slice(0,1) == '.'){
-          checkStr = a.replace(/^\./,'');
-          checkEventFn = checkEventForClass;
-        }else{
-          checkStr = a;
-          checkEventFn = checkEventForTagName;
-        }
-        fn = b;
+      if(typeof(a) == 'function'){
+        callback = a;
+      }else if(typeof(a) == 'string' && typeof(b) == 'function'){
         callback = function(e){
-          var bingoDom = checkEventFn(e,checkStr,node);
+          var target = event.srcElement || event.target,
+              bingoDom = matchsElementbetweenDom(target,a,node);
           if(bingoDom){
-            fn && fn.call(bingoDom,e);
+            b && b.call(bingoDom,e);
           }
         };
-      }else{
-        callback = a;
       }
-      bindHandler(node,type,callback);
+      each(types,function(event_name){
+        bindHandler(node,event_name,callback);
+      });
     });
   }
   addPrototype(Element,'on',function(a,b,c){
     bind(this,a,b,c);
     return this;
   });
+
+  function trigger(node,eventName){
+    var event = document.createEvent('HTMLEvents');
+    event.initEvent(eventName, true, false);
+    node.dispatchEvent(event);
+  }
   function createDom(html){
     var a = document.createElement('div');
     a.innerHTML = html;
@@ -223,6 +219,11 @@ window.utils = {};
   utils.each = each;
   utils.offset = offset;
   utils.createDom = createDom;
+  utils.remove = function(node){
+    node.parentNode.removeChild(node);
+  };
+  utils.parents = matchsElementbetweenDom;
+  utils.trigger = trigger;
 })();
 
 
