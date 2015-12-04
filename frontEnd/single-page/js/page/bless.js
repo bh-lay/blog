@@ -8,8 +8,12 @@ define(function(require,exports){
 	function page(dom){
     var base_tpl_end = L.tplModule(base_tpl);
     dom.innerHTML = base_tpl_end;
-    new L.views.comments.sendBox(Sizzle('.bless-sendBox',dom)[0],comment_id);
-    new L.views.comments.list(Sizzle('.grid-col-flow-300',dom)[0], comment_id);
+
+    var sendBox = new L.views.comments.sendBox(Sizzle('.bless-sendBox',dom)[0],comment_id),
+        list = new L.views.comments.list(Sizzle('.grid-col-flow-300',dom)[0], comment_id);
+    sendBox.on('sendToServiceSuccess',function(item){
+      list.addItem(item);
+    });
 	}
 	return page;
 });
