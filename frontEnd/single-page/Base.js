@@ -229,19 +229,32 @@ window.utils = {};
 
 
 
+function paramStringify(data, baseKey){
+  var dataArray = [],key,value;
 
+  for(var i in data){
+    key = baseKey ? baseKey + '[' + i + ']' : i,
+    value = data[i];
+    
+    if(value && value != 0 && value != ''){
+      if(typeof(value) == 'object'){
+        dataArray.push(paramStringify(data[i],key));
+      }else{
+        dataArray.push(key + '=' + data[i]);
+      }
+    }
+  }
+  return dataArray.join('&');
+}
 utils.fetch = function (param){
   param = param || {};
   var url = param.url,
       callback = param.callback || null,
       headers = param.headers || {},
       data = param.data,
-      dataStr = '',
+      dataStr = paramStringify(data),
       method = (param.type && param.type.match(/^(get|post)$/i)) ? param.type.toUpperCase() : 'GET',
       request = new XMLHttpRequest();
-  for(var i in data){
-    dataStr += i + '=' +(data[i]||'') + '&';
-  }
 
   headers.accept = "application/json, text/javascript";
   if(method == 'POST'){
