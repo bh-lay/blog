@@ -28,9 +28,8 @@ define(function () {
     });
 
     function checkBackTop(){
-      var method = nodeBody.scrollTop > window.innerHeight*0.6 ? 'slideDown' : 'slideUp';
-      nodeBackTop.removeClass('slideDown' , 'slideUp');
-      nodeBackTop.addClass(method);
+      var method = nodeBody.scrollTop > window.innerHeight*0.6 ? 'removeClass' : 'addClass';
+      nodeBackTop[method]('hide');
     }
     checkBackTop();
     window.onscroll = function(){
