@@ -140,7 +140,8 @@ require([
 
   'js/juicer',
   'js/lofox',
-  'js/dialog'
+  'js/dialog',
+  'js/Base'
 ], function (user,nav,index,blogList,blogDetail,labsList,bless,comments){
   //绑定路由
   var lofox = new util.lofox();
