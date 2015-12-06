@@ -255,6 +255,7 @@ utils.fetch = function (param){
     headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
   }else{
     url = dataStr.length ? (url + '?' + dataStr) : url;
+    dataStr = undefiend;
   }
   request.open(method, url, true);
   //设置 headers
