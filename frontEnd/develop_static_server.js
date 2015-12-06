@@ -1,6 +1,7 @@
 
 var fs = require('fs'),
     http = require('http'),
+    zlib = require("zlib"),
     staticFileRoot = '../static/',
     server_port = 8088,
     maxAge = 30 * 24 * 60 *60,
@@ -69,7 +70,7 @@ function Server(req,res){
       ext = pathname_split ? pathname_split[1] : null,
       realPath = staticFileRoot + path,
       content_type;
-  
+
   //增加根目录 index.html 的支持
   if(ext == null) {
     ext = 'html';
@@ -92,7 +93,7 @@ function Server(req,res){
     //第二步、检查是否可用304缓存
     fs.stat(realPath, function(err, stat) {
       if(err) {
-        // 500 server error 
+        // 500 server error
         res.writeHead(500);
         res.end('500');
         return
@@ -104,7 +105,7 @@ function Server(req,res){
         res.writeHead(304);
         res.end();
       } else {
-        step.next(lastModified);       
+        step.next(lastModified);
       }
     });
   })
@@ -112,7 +113,7 @@ function Server(req,res){
     // 第三步、读取文件
     fs.readFile(realPath, function(err, file) {
       if(err) {
-        // 500 server error 
+        // 500 server error
         res.writeHead(500);
         res.end('500');
         return
@@ -123,9 +124,12 @@ function Server(req,res){
         'Expires' : expires.toUTCString(),
         'Cache-Control' : "max-age=" + maxAge,
         'Last-Modified' : lastModified,
-        'Access-Control-Allow-Origin' : "*"
+        'Access-Control-Allow-Origin' : "*",
+        'Content-Encoding': 'gzip'
       });
-      res.end(file);
+      zlib.gzip(file, function(err, result) {
+        res.end(result);
+      });
     });
   })
   .start();
