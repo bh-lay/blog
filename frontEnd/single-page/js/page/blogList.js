@@ -133,11 +133,9 @@ define(function(require,exports){
     });
     //创建列表对象
     var list = new LIST(pageTag,function(){
-      utils.removeClass(me.nodeLoading,'fadeIn','fadeOut');
-      utils.addClass(me.nodeLoading,'fadeIn');
+      utils.removeClass(me.nodeLoading,'hide');
     },function(list){
-      utils.removeClass(me.nodeLoading,'fadeIn','fadeOut');
-      utils.addClass(me.nodeLoading,'fadeOut');
+      utils.addClass(me.nodeLoading,'hide');
       if(!list || list.length == 0){
         me.nodeList.innerHTML = empty_tpl;
       }else{
