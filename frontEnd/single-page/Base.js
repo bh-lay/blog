@@ -1,8 +1,16 @@
 /**
  * IE9+
  **/
-window.utils = {};
-(function(){
+(function(global,doc,factory){
+  var utils = factory(global,doc);
+  //提供window.UI的接口
+  global.utils = global.utils || utils;
+
+  //提供CommonJS规范的接口
+  global.define && define(function(){
+    return utils;
+  });
+})(this,document,function(window,document){
   /**
    * 检测是否为数字
    * 兼容字符类数字 '23'
@@ -18,7 +26,7 @@ window.utils = {};
     //检测输入的值
     if(typeof(arr) == 'object' && typeof(fn) == 'function'){
       var Length = arr.length;
-      if(Length && Length == +Length){
+      if(isNum(Length)){
         for(var i=0;i<Length;i++){
           fn.call(scope,arr[i],i,this);
         }
@@ -32,18 +40,13 @@ window.utils = {};
       }
     }
   }
-  function addPrototype(object,prop,fn){
-    if(typeof(object.prototype[prop]) == 'undefined'){
-      object.prototype[prop] = fn;
-    }
-  }
 
-  addPrototype(Element,'matches',(function(){
+  var matches = (function(){
     var node = document.createElement('div'),
-        matches = node.matchesSelector || node.msMatchesSelector || node.mozMatchesSelector || node.webkitMatchesSelector || node.oMatchesSelector;
+        matches = node.matches || node.matchesSelector || node.msMatchesSelector || node.mozMatchesSelector || node.webkitMatchesSelector || node.oMatchesSelector;
     node = null;
     return matches;
-  })());
+  })()
   /**
    * 判断dom是否拥有某个class
    */
@@ -75,9 +78,10 @@ window.utils = {};
     }
     elem.style[prop] = value;
   }
-  //设置css
-  addPrototype(Element,'css',function(cssObj){
-    var node = this;
+  function CSS(node,cssObj){
+    if(!node || !cssObj){
+      return;
+    }
     /**
      * 为css3属性增加扩展
      */
@@ -91,7 +95,7 @@ window.utils = {};
     each(cssObj,function(value,key){
       setStyle(node,key,value);
     });
-  });
+  }
 
   //读取dom在页面中的位置
   function offset(elem){
@@ -164,7 +168,7 @@ window.utils = {};
       if(target == endNode || !target){
         return false;
       }
-      if(target.matches(selector)){
+      if(matches.call(target,selector)){
         return target;
       }
       target = target.parentNode;
@@ -173,7 +177,13 @@ window.utils = {};
   function bind(elem, type,a,b){
     var checkStr,checkEventFn,fn,
         elems = [].concat(elem),
-        types = type.split(/\s+/);
+        types = type.split(/\s+/),
+        returns = {
+          bind: function(type,a,b){
+            bind(elem,type,a,b);
+            return returns;
+          }
+        };
     each(elems,function(node){
       if(typeof(a) == 'function'){
         callback = a;
@@ -190,11 +200,8 @@ window.utils = {};
         bindHandler(node,event_name,callback);
       });
     });
+    return returns;
   }
-  addPrototype(Element,'on',function(a,b,c){
-    bind(this,a,b,c);
-    return this;
-  });
 
   function trigger(node,eventName){
     var event = document.createEvent('HTMLEvents');
@@ -206,74 +213,75 @@ window.utils = {};
     a.innerHTML = html;
     return a.childNodes[0];
   }
+  // 字符化参数
+  function paramStringify(data, baseKey){
+    var dataArray = [],key,value;
 
-  utils.each = each;
-  utils.offset = offset;
-  utils.createDom = createDom;
-  utils.addClass = addClass;
-  utils.removeClass = removeClass;
-  utils.toggleClass = toggleClass;
-  utils.remove = function(node){
-    node.parentNode.removeChild(node);
-  };
-  utils.parents = matchsElementBetweenNode;
-  utils.trigger = trigger;
-})();
+    for(var i in data){
+      key = baseKey ? baseKey + '[' + i + ']' : i,
+      value = data[i];
 
-
-
-
-function paramStringify(data, baseKey){
-  var dataArray = [],key,value;
-
-  for(var i in data){
-    key = baseKey ? baseKey + '[' + i + ']' : i,
-    value = data[i];
-
-    if(value && value != 0 && value != ''){
-      if(typeof(value) == 'object'){
-        dataArray.push(paramStringify(data[i],key));
-      }else{
-        dataArray.push(key + '=' + data[i]);
+      if(value && value != 0 && value != ''){
+        if(typeof(value) == 'object'){
+          dataArray.push(paramStringify(data[i],key));
+        }else{
+          dataArray.push(key + '=' + data[i]);
+        }
       }
     }
+    return dataArray.join('&');
   }
-  return dataArray.join('&');
-}
-utils.fetch = function (param){
-  param = param || {};
-  var url = param.url,
-      callback = param.callback || null,
-      headers = param.headers || {},
-      data = param.data,
-      dataStr = paramStringify(data),
-      method = (param.type && param.type.match(/^(get|post)$/i)) ? param.type.toUpperCase() : 'GET',
-      request = new XMLHttpRequest();
+  function fetch(param){
+    param = param || {};
+    var url = param.url,
+        callback = param.callback || null,
+        headers = param.headers || {},
+        data = param.data,
+        dataStr = paramStringify(data),
+        method = (param.type && param.type.match(/^(get|post)$/i)) ? param.type.toUpperCase() : 'GET',
+        request = new XMLHttpRequest();
 
-  headers.accept = "application/json, text/javascript";
-  if(method == 'POST'){
-    headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
-  }else{
-    url = dataStr.length ? (url + '?' + dataStr) : url;
-    dataStr = undefiend;
-  }
-  request.open(method, url, true);
-  //设置 headers
-  for(i in headers){
-    request.setRequestHeader(i, headers[i]);
-  }
-  request.onload = function() {
-    if (request.status >= 200 && request.status < 400) {
-      var resp = request.responseText;
-      resp = JSON.parse(resp);
-      callback && callback(null,resp,request);
-    } else {
-      callback && callback(request.status,resp,request);
+    headers.accept = "application/json, text/javascript";
+    if(method == 'POST'){
+      headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+    }else{
+      url = dataStr.length ? (url + '?' + dataStr) : url;
+      dataStr = undefined;
     }
-  };
+    request.open(method, url, true);
+    //设置 headers
+    for(i in headers){
+      request.setRequestHeader(i, headers[i]);
+    }
+    request.onload = function() {
+      if (request.status >= 200 && request.status < 400) {
+        var resp = request.responseText;
+        resp = JSON.parse(resp);
+        callback && callback(null,resp,request);
+      } else {
+        callback && callback(request.status,resp,request);
+      }
+    };
 
-  request.onerror = function() {
-    callback && callback('connection fail',resp,request);
+    request.onerror = function() {
+      callback && callback('connection fail',resp,request);
+    };
+    request.send(dataStr);
+  }
+  return {
+    each: each,
+    offset: offset,
+    createDom: createDom,
+    addClass: addClass,
+    removeClass: removeClass,
+    toggleClass: toggleClass,
+    css: CSS,
+    remove: function (node){
+      node.parentNode.removeChild(node);
+    },
+    parents: matchsElementBetweenNode,
+    bind: bind,
+    trigger: trigger,
+    fetch: fetch
   };
-  request.send(dataStr);
-}
+});
