@@ -192,12 +192,12 @@ define(function(require,exports){
       },80);
     }).on('focus',function(){
         clearTimeout(focusDelay);
-        nodeGlobal.addClass('l_sendBox_active');
+        utils.addClass(nodeGlobal,'l_sendBox_active');
     }).on('focusout',function(){
       clearTimeout(focusDelay);
       focusDelay = setTimeout(function(){
         if(me.text.length == 0){
-          nodeGlobal.removeClass('l_sendBox_active');
+          utils.removeClass(nodeGlobal,'l_sendBox_active');
         }
       },200);
     });
@@ -361,7 +361,7 @@ define(function(require,exports){
         var dom = Sizzle('.l_com_item[data-id=' + hash_match[1] + ']',me.dom)[0];
         setTimeout(function(){
           me.scrollTo(dom);
-          dom.addClass('l_com_item_ani-active');
+          utils.addClass(dom,'l_com_item_ani-active');
         },500);
       }
       if(me.total == 0){
@@ -428,7 +428,7 @@ define(function(require,exports){
     var node_item = utils.createDom(html),
         node_list_cnt = Sizzle('.l_com_list_cnt',this.dom)[0];
     node_list_cnt.insertBefore(node_item, node_list_cnt.firstChild);
-    node_item.addClass('l_com_item_ani-insert');
+    utils.addClass(node_item,'l_com_item_ani-insert');
     var nodeNoData = Sizzle('.l_com_list_noData',this.dom)[0];
     nodeNoData && (nodeNoData.style.display = "none");
   };

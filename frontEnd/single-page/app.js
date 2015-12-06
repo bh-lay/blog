@@ -45,7 +45,7 @@ window.L = window.L || {};
   }
   //为windows系统定制body滚动条样式（仅webkit有效）
   if(isWindows){
-    Sizzle('body')[0].addClass('define-scrollbar');
+    utils.addClass(Sizzle('body')[0],'define-scrollbar');
   }
   L.supports = {
     touch : isSupportTouch,
@@ -169,7 +169,7 @@ require([
   //开始导航
   L.nav();
   //渐隐加载遮罩
-  Sizzle('.app_mask')[0].addClass('app_mask_out');
+  utils.addClass(Sizzle('.app_mask')[0],'app_mask_out');
   setTimeout(function () {
     utils.remove(Sizzle('.app_mask')[0]);
   }, 1000);
@@ -276,17 +276,17 @@ function routerHandle(lofox) {
     if (nodeActivePage) {
       var nodeOld = nodeActivePage;
           nodeActivePage = null;
-          nodeOld.addClass('fadeOutRight');
+          utils.addClass(nodeOld,'fadeOutRight');
       setTimeout(function () {
         utils.remove(nodeOld);
         Sizzle('body')[0].scrollTop = 0;
-        nodeNew.addClass('fadeInLeft page-active');
+        utils.addClass(nodeNew,'fadeInLeft page-active');
         setTimeout(function () {
-          nodeNew.removeClass('fadeInLeft');
+          utils.removeClass(nodeNew,'fadeInLeft');
         }, 500);
       }, 500);
     } else {
-      nodeNew.addClass('page-active');
+      utils.addClass(nodeNew,'page-active');
     }
     container.appendChild(nodeNew);
     return nodeActivePage = nodeNew;

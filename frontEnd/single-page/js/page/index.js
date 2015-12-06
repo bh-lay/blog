@@ -22,7 +22,7 @@ define(function(require,exports){
       index = -1;
     }
     setTimeout(function(){
-      nodeGallery.addClass('zoom-show');
+      utils.addClass(nodeGallery,'zoom-show');
     },600);
 
     return {

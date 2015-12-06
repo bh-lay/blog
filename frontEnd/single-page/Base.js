@@ -62,18 +62,6 @@ window.utils = {};
   function toggleClass(dom, cls) {
     (hasClass(dom, cls) ? removeClass : addClass)(dom,cls);
   }
-
-  addPrototype(Element,'addClass',function(){
-    each([].slice.call(arguments),function(classname){
-      addClass(this,classname);
-    },this);
-  });
-  addPrototype(Element,'removeClass',function(){
-    each([].slice.call(arguments),function(classname){
-      removeClass(this,classname);
-    },this);
-  });
-
   /**
    * dom设置样式
    */
@@ -170,7 +158,7 @@ window.utils = {};
   /**
    * 向上查找 dom
   **/
-  function matchsElementbetweenDom(fromNode,selector,endNode){
+  function matchsElementBetweenNode(fromNode,selector,endNode){
     var target = fromNode;
     while (1) {
       if(target == endNode || !target){
@@ -192,7 +180,7 @@ window.utils = {};
       }else if(typeof(a) == 'string' && typeof(b) == 'function'){
         callback = function(e){
           var target = event.srcElement || event.target,
-              bingoDom = matchsElementbetweenDom(target,a,node);
+              bingoDom = matchsElementBetweenNode(target,a,node);
           if(bingoDom){
             b && b.call(bingoDom,e);
           }
@@ -222,11 +210,13 @@ window.utils = {};
   utils.each = each;
   utils.offset = offset;
   utils.createDom = createDom;
+  utils.addClass = addClass;
+  utils.removeClass = removeClass;
   utils.toggleClass = toggleClass;
   utils.remove = function(node){
     node.parentNode.removeChild(node);
   };
-  utils.parents = matchsElementbetweenDom;
+  utils.parents = matchsElementBetweenNode;
   utils.trigger = trigger;
 })();
 

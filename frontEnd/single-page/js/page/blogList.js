@@ -32,11 +32,11 @@ define(function(require,exports){
       if(tagName){
         utils.each(Sizzle('a',dom),function(node){
           if(node.getAttribute('data-tag') == tagName){
-            node.addClass('active');
+            utils.addClass(node,'active');
           }
         });
       }else{
-        Sizzle('a',dom)[0].addClass('active');
+        utils.addClass(Sizzle('a',dom)[0],'active');
       }
       dom.on('click','a',function(){
         var tag = this.getAttribute('data-tag');
@@ -133,11 +133,11 @@ define(function(require,exports){
     });
     //创建列表对象
     var list = new LIST(pageTag,function(){
-      me.nodeLoading.removeClass('fadeIn','fadeOut');
-      me.nodeLoading.addClass('fadeIn');
+      utils.removeClass(me.nodeLoading,'fadeIn','fadeOut');
+      utils.addClass(me.nodeLoading,'fadeIn');
     },function(list){
-      me.nodeLoading.removeClass('fadeIn','fadeOut');
-      me.nodeLoading.addClass('fadeOut');
+      utils.removeClass(me.nodeLoading,'fadeIn','fadeOut');
+      utils.addClass(me.nodeLoading,'fadeOut');
       if(!list || list.length == 0){
         me.nodeList.innerHTML = empty_tpl;
       }else{

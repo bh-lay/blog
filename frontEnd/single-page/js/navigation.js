@@ -10,9 +10,9 @@ define(function () {
         nodeBody = Sizzle('body')[0],
         nodeNav = Sizzle('.app_nav',nodeBody)[0];
     nodeNav.on('click','.nav a,.side a',function () {
-      nodeBody.removeClass('nav_slidedown');
+      utils.removeClass(nodeBody,'nav_slidedown');
     }).on('click','.nav_mask', function () {
-      nodeBody.removeClass('nav_slidedown');
+      utils.removeClass(nodeBody,'nav_slidedown');
     }).on('click','.nav_moreBtn',function () {
       utils.toggleClass(nodeBody,'nav_slidedown');
     });
@@ -29,7 +29,7 @@ define(function () {
 
     function checkBackTop(){
       var method = nodeBody.scrollTop > window.innerHeight*0.6 ? 'removeClass' : 'addClass';
-      nodeBackTop[method]('hide');
+      utils[method](nodeBackTop,'hide');
     }
     checkBackTop();
     window.onscroll = function(){
@@ -46,9 +46,9 @@ define(function () {
       page = 'index';
     }
     utils.each(Sizzle('.app_nav li'),function(node){
-      node.removeClass('cur');
+      utils.removeClass(node,'cur');
     });
-    Sizzle('.app_nav li[page=' + page + ']')[0].addClass('cur');
+    utils.addClass(Sizzle('.app_nav li[page=' + page + ']')[0],'cur');
   }
   var nav = init;
   nav.setCur = setCur;
