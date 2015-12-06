@@ -128,7 +128,7 @@ define(function(require,exports){
     var nodeTag = Sizzle('.articleListPage-tags',dom)[0];
     this.tie = util.tie({
       dom : nodeTag,
-      scopeDom: nodeTag.parentNode,
+      scopeDom: utils.parents(nodeTag,'.articleListPage'),
       fixed_top: 50
     });
     //创建列表对象
