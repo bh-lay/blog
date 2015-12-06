@@ -38,7 +38,7 @@ define(function(require,exports){
       }else{
         utils.addClass(Sizzle('a',dom)[0],'active');
       }
-      dom.on('click','a',function(){
+      utils.bind(dom,'click','a',function(){
         var tag = this.getAttribute('data-tag');
         callback && callback(tag);
       });

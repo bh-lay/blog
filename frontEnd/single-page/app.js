@@ -185,7 +185,7 @@ require([
    * 分享功能
    *  data-text data-url data-title data-img data-shareto
    */
-  Sizzle('body')[0].on('click','.sns-share a',function(){
+  utils.bind(Sizzle('body')[0],'click','.sns-share a',function(){
     var node_data = utils.parents(this,'.sns-share'),
         url = node_data.getAttribute('data-url') || location.href,
         text = encodeURIComponent(node_data.getAttribute('data-text')) || document.title,
@@ -202,7 +202,7 @@ require([
     return false;
   });
   //全局控制 a 链接的打开方式
- Sizzle('body')[0].on('click','a',function(e){
+ utils.bind(Sizzle('body')[0],'click','a',function(e){
     var url = this.getAttribute('href');
     //为JS脚本准备的链接
     if(hrefForScript(url)){

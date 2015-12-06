@@ -52,7 +52,7 @@ define(function(require,exports){
 		this.jump = null;
 		this.dom = document.createElement('div');
 
-		this.dom.on('click','a',function(e){
+		utils.bind(this.dom,'click','a',function(e){
 			var num,
 					page = this.getAttribute('data-page');
 			switch (page) {

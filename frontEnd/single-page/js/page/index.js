@@ -27,7 +27,7 @@ define(function(require,exports){
 
     return {
       destroy: function() {
-        nodeGallery.css({
+        utils.css(nodeGallery,{
           position: 'absolute',
           top: Sizzle('body')[0].scrollTop - utils.offset(Sizzle('.app_container')[0]).top,
           height: window.innerHeight

@@ -178,7 +178,7 @@ define(function(require,exports){
         inputDelay,
         focusDelay;
 
-    nodeTextarea.on('keyup keydown change propertychange input paste',function(){
+    utils.bind(nodeTextarea,'keyup keydown change propertychange input paste',function(){
       clearTimeout(inputDelay);
       inputDelay = setTimeout(function(){
         var newVal = nodeTextarea.value.trim();
@@ -190,10 +190,10 @@ define(function(require,exports){
         //触发自定义事件“change”
         EMIT.call(me,'change');
       },80);
-    }).on('focus',function(){
+    }).bind('focus',function(){
         clearTimeout(focusDelay);
         utils.addClass(nodeGlobal,'l_sendBox_active');
-    }).on('focusout',function(){
+    }).bind('focusout',function(){
       clearTimeout(focusDelay);
       focusDelay = setTimeout(function(){
         if(me.text.length == 0){
@@ -202,13 +202,13 @@ define(function(require,exports){
       },200);
     });
 
-    nodeGlobal.on('click','.l_send_placeholder',function(){
+    utils.bind(nodeGlobal,'click','.l_send_placeholder',function(){
       nodeTextarea.focus();
-    }).on('click','.set-userinfo',function(e){
+    }).bind('click','.set-userinfo',function(e){
       askForUserInfo.call(me);
-    }).on('click','.l_send_submit',function(){
+    }).bind('click','.l_send_submit',function(){
       me.submit();
-    }).on('click','.l_send_face',function(){
+    }).bind('click','.l_send_face',function(){
       var offset = utils.offset(this);
       nodeTextarea.focus();
       face({
@@ -387,7 +387,7 @@ define(function(require,exports){
         };
       }
     });
-    me.dom.on('click','.btn-reply',function(){
+    utils.bind(me.dom,'click','.btn-reply',function(){
       var item = utils.parents(this,'.l_com_item'),
           reply_for = item.getAttribute('data-username'),
           pop = UI.pop({
@@ -404,7 +404,7 @@ define(function(require,exports){
             }
           });
           console.log('reply_for',reply_for);
-      Sizzle('.UI_pop_cpt',pop.dom)[0].css({
+      utils.css(Sizzle('.UI_pop_cpt',pop.dom)[0],{
         border: 'none'
       });
       send.on('sendToServiceSuccess',function(item){

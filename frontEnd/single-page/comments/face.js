@@ -18,7 +18,7 @@ define(function(){
         width: 300,
         html : html
       });
-      pop.cntDom.on('click','a',function(){
+      utils.bind(pop.cntDom,'click','a',function(){
         param.onSelect && param.onSelect(this.getAttribute('title'));
         pop.close();
       });

@@ -9,15 +9,15 @@ define(function () {
         nodeBackTop = Sizzle('.back-top')[0],
         nodeBody = Sizzle('body')[0],
         nodeNav = Sizzle('.app_nav',nodeBody)[0];
-    nodeNav.on('click','.nav a,.side a',function () {
+    utils.bind(nodeNav,'click','.nav a,.side a',function () {
       utils.removeClass(nodeBody,'nav_slidedown');
-    }).on('click','.nav_mask', function () {
+    }).bind('click','.nav_mask', function () {
       utils.removeClass(nodeBody,'nav_slidedown');
-    }).on('click','.nav_moreBtn',function () {
+    }).bind('click','.nav_moreBtn',function () {
       utils.toggleClass(nodeBody,'nav_slidedown');
     });
 
-    Sizzle('.backToOldVersion')[0].on('click', function () {
+    utils.bind(Sizzle('.backToOldVersion')[0],'click', function () {
       UI.confirm({
         text : '确定要去当屌丝？',
         callback : function(){
@@ -36,7 +36,7 @@ define(function () {
       clearTimeout(scrollDelay);
       scrollDelay = setTimeout(checkBackTop,100);
     };
-    nodeBackTop.on('click',function(){
+    utils.bind(nodeBackTop,'click',function(){
       nodeBody.scrollTop = 0;
     });
   };
