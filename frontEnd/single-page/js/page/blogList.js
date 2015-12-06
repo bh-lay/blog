@@ -113,11 +113,11 @@ define(function(require,exports){
         empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>';
     //插入基本模版
     dom.innerHTML = baseTpl;
-    this.$list = Sizzle('.articleList',dom)[0];
-    this.$loading = Sizzle('.l-loading-panel',dom)[0];
+    this.nodeList = Sizzle('.articleList',dom)[0];
+    this.nodeLoading = Sizzle('.l-loading-panel',dom)[0];
 
     this.stick = new Stick({
-      container: me.$list,
+      container: me.nodeList,
       column_width: 280,
       column_gap: 10,
       load_spacing: 1000,
@@ -125,21 +125,21 @@ define(function(require,exports){
         list.loadMore();
       }
     });
-    var $tag = Sizzle('.articleListPage-tags',dom)[0];
+    var nodeTag = Sizzle('.articleListPage-tags',dom)[0];
     this.tie = util.tie({
-      dom : $tag,
-      scopeDom: $tag.parentNode,
+      dom : nodeTag,
+      scopeDom: nodeTag.parentNode,
       fixed_top: 50
     });
     //创建列表对象
     var list = new LIST(pageTag,function(){
-      me.$loading.removeClass('fadeIn','fadeOut');
-      me.$loading.addClass('fadeIn');
+      me.nodeLoading.removeClass('fadeIn','fadeOut');
+      me.nodeLoading.addClass('fadeIn');
     },function(list){
-      me.$loading.removeClass('fadeIn','fadeOut');
-      me.$loading.addClass('fadeOut');
+      me.nodeLoading.removeClass('fadeIn','fadeOut');
+      me.nodeLoading.addClass('fadeOut');
       if(!list || list.length == 0){
-        me.$list.innerHTML = empty_tpl;
+        me.nodeList.innerHTML = empty_tpl;
       }else{
         list.forEach(function(item,index){
           var html = juicer(list_tpl,item);

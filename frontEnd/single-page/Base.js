@@ -37,6 +37,13 @@ window.utils = {};
       object.prototype[prop] = fn;
     }
   }
+
+  addPrototype(Element,'matches',(function(){
+    var node = document.createElement('div'),
+        matches = node.matchesSelector || node.msMatchesSelector || node.mozMatchesSelector || node.webkitMatchesSelector || node.oMatchesSelector;
+    node = null;
+    return matches;
+  })());
   /**
    * 判断dom是否拥有某个class
    */
@@ -52,13 +59,9 @@ window.utils = {};
       dom.className = dom.className.replace(reg, ' ');
     }
   }
-
-  addPrototype(Element,'matches',(function(){
-    var node = document.createElement('div'),
-        matches = node.matchesSelector || node.msMatchesSelector || node.mozMatchesSelector || node.webkitMatchesSelector || node.oMatchesSelector;
-    node = null;
-    return matches;
-  })());
+  function toggleClass(dom, cls) {
+    (hasClass(dom, cls) ? removeClass : addClass)(dom,cls);
+  }
 
   addPrototype(Element,'addClass',function(){
     each([].slice.call(arguments),function(classname){
@@ -219,6 +222,7 @@ window.utils = {};
   utils.each = each;
   utils.offset = offset;
   utils.createDom = createDom;
+  utils.toggleClass = toggleClass;
   utils.remove = function(node){
     node.parentNode.removeChild(node);
   };
@@ -235,7 +239,7 @@ function paramStringify(data, baseKey){
   for(var i in data){
     key = baseKey ? baseKey + '[' + i + ']' : i,
     value = data[i];
-    
+
     if(value && value != 0 && value != ''){
       if(typeof(value) == 'object'){
         dataArray.push(paramStringify(data[i],key));

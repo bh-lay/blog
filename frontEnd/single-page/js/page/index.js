@@ -15,19 +15,19 @@ define(function(require,exports){
 
   function view(dom){
     dom.innerHTML = temp;
-    var $gallery = Sizzle('.gallayer',dom)[0];
-    $gallery.style.backgroundImage = 'url(' +  imgs[++index] + ')';
+    var nodeGallery = Sizzle('.gallayer',dom)[0];
+    nodeGallery.style.backgroundImage = 'url(' +  imgs[++index] + ')';
 
     if(index + 1 >= imgs.length){
       index = -1;
     }
     setTimeout(function(){
-      $gallery.addClass('zoom-show');
+      nodeGallery.addClass('zoom-show');
     },600);
 
     return {
       destroy: function() {
-        $gallery.css({
+        nodeGallery.css({
           position: 'absolute',
           top: Sizzle('body')[0].scrollTop - utils.offset(Sizzle('.app_container')[0]).top,
           height: window.innerHeight
