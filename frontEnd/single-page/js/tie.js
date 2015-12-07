@@ -235,7 +235,7 @@
 		},
 		destroy: function(){
 			removeHandler(this.scrollDom,'scroll',this._scroll_resize_listener);
-			removebindHandler(window,'resize',me._scroll_resize_listener);
+			removeHandler(window,'resize',this._scroll_resize_listener);
 			setCss(this.dom,{
 				position: 'relative',
 				top: getClient(this.dom).top - getClient(this.ghostDom).top
