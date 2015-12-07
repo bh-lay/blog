@@ -1,7 +1,7 @@
 /**
  * @author bh-lay
  * @github https://github.com/bh-lay/tie.js
- * @modified 2015-10-23 18:31
+ * @modified 2015-12-07 18:21
  *
  * 处理既要相对于某个模块固定，又要在其可视时悬浮的页面元素
  * util.tie({
@@ -9,14 +9,14 @@
 		scopeDom: ,		//页面显示时的参照元素
 		fixed_top: 20	//悬浮时，距顶部的距离
 	});
- * 
+ *
  */
 
 
 (function(global,doc,factory_fn){
 	global.util = global.util || {};
 	global.util.tie = factory_fn(global,doc);
-	
+
 	global.define && define(function(){
 		return global.util.tie;
 	});
@@ -38,7 +38,7 @@
 
 	/**
 	 * 遍历数组或对象
-	 * 
+	 *
 	**/
 	function each(arr,fn){
 		//检测输入的值
@@ -128,7 +128,7 @@
 
 		return box;
 	}
-	
+
 	//获取样式
 	function getStyle(elem, prop) {
 		var value;
@@ -216,16 +216,17 @@
 
 		//当定位方式发生变化时
 		me.onPositionChange = param.onPositionChange || null;
-		
+
 		me.state = 'min';
-		me._scroll_listener = resetPosition.bind(this);
-		
+		me._scroll_resize_listener = resetPosition.bind(this);
+
 		me.refresh();
-		
+
 		if(getStyle(me.scopeDom,'position') == 'static'){
 			me.scopeDom.style.position = 'relative';
 		}
-		bindHandler(me.scrollDom,'scroll',me._scroll_listener);
+		bindHandler(me.scrollDom,'scroll',me._scroll_resize_listener);
+		bindHandler(window,'resize',me._scroll_resize_listener);
 	}
 	Tie.prototype = {
 		refresh: resetPosition,
@@ -233,7 +234,8 @@
 			this.ghostDom.style.height = getClient(this.dom).height + 'px';
 		},
 		destroy: function(){
-			removeHandler(this.scrollDom,'scroll',this._scroll_listener);
+			removeHandler(this.scrollDom,'scroll',this._scroll_resize_listener);
+			removebindHandler(window,'resize',me._scroll_resize_listener);
 			setCss(this.dom,{
 				position: 'relative',
 				top: getClient(this.dom).top - getClient(this.ghostDom).top
