@@ -31,77 +31,70 @@
 <h1>小剧客栈代码结构</h1>
 <p>这里列举小剧客栈主体代码所采用的组件，不包括细枝末节。上图红底部分表示该段代码由小剧开发。</p>
 <h2>一、前端页面</h2>
-<p>小剧是这样划分前端页面的，一是面向小伙伴的博客，分为<strong>屌丝版</strong>和<strong>尝鲜版</strong>；另一个是只有小剧自己在使用的<strong>后台管理</strong>页面；还有就是一些<strong>零散的专题页面</strong>，其中包括实验室详情页。</p>
+<p>小剧是这样划分前端页面的，一是面向小伙伴的博客，分为<strong>屌丝版</strong>和<strong>尝鲜版</strong>；另一个是只有小剧自己在使用的<strong>后台管理</strong>页面；还有就是一些零散的<strong>专题页面</strong>，其中包括实验室详情页。</p>
 <h3>1.1、尝鲜版</h3>
-<p>基于单页+响应式的设计，区别于屌丝版，尝鲜版仅在高级浏览器下可以使用。</p>
-<h4>javascript脚本部分</h4>
-<ul>
-    <li><strong>seaJS：</strong>一款优秀的模块加载器<a href="http://seajs.org/">官网</a></li>
-    <li><strong>jQuery：</strong>The Write Less, Do More, JavaScript Library<a href="http://jquery.com/">官网</a></li>
-    <li><strong>juicer：</strong>一个高效、轻量的前端 (Javascript) 模板引擎<a href="http://juicer.name/">官网</a></li>
-    <li><strong>lofox：</strong>一个用于单页面路由管理的工具<a href="https://github.com/bh-lay/lofox">官网</a></li>
-    <li><strong>dialog：</strong>响应式用户交互组件库<a href="https://github.com/bh-lay/UI">官网</a></li>
-    <li><strong>stick：</strong>瀑布流组件。<a href="https://github.com/bh-lay/stick">官网</a></li>
-    <li><strong>pagination：</strong>前端分页组件</li>
-    <li><strong>selection：</strong>操作文本域字符选择与获取选择状态、插入字符等操作的小类库<a href="https://github.com/bh-lay/Selection/">官网</a></li>
-    <li><strong>mirror：</strong>镜像textarea用于实现光标坐标选择、自动增高等功能的小组件</li>
-    <li><strong>md5.js：</strong>用于确保信息传输完整一致，是计算机广泛使用的哈希算法之一。<a href="http://pajhome.org.uk/crypt/md5">官网</a></li>
-</ul>
-<h4>css（less）样式部分</h4>
-<ul>
-    <li><strong>core：</strong>常用的Minxin定义</li>
-    <li><strong>grid：</strong>定制栅格化布局结构</li>
-    <li><strong>fontface：</strong>定制博客所需的logo、icon</li>
-    <li><strong>hljs：</strong>定制博客的代码高亮样式</li>
-    <li><strong>……</strong></li>
-</ul>
+<p>基于单页+响应式的设计，是小剧比较花心思和精力开发的部分。在高级浏览器下默认使用尝鲜版使用。</p>
 <h3>1.2、屌丝版</h3>
-<p>见名知意，这是提供给低级浏览器使用的一个版本，仅展示内容，不提供较强的交互。在不支持JS or html5 or css3的浏览器下使用此版本。</p>
-<ul>
-<li><strong>bootstrap：</strong>简洁、直观、强悍、移动设备优先的前端开发框架<a href="http://getbootstrap.com/">官网</a></li>
-    <li><strong>jQuery：</strong>The Write Less, Do More, JavaScript Library<a href="http://jquery.com/">官网</a></li>
-</ul>
+<p>见名知意，这是提供给低级浏览器使用的一个版本，仅展示内容，不提供较强的交互。在不支持JS or html5 or css3的浏览器下使用此版本。而且功能有阉割，不支持评论。</p>
 <h3>1.3、后台管理</h3>
-<p>小剧客栈的后台管理页面，功能块相对较多，更新变动也比较频繁，这里就不一一列举了。</p>
-<ul>
-  <li><strong>React：</strong>A declarative, efficient, and flexible JavaScript library for building user interfaces.<a href="https://github.com/facebook/react">官网</a></li>
-  <li><strong>bootstrap：</strong>简洁、直观、强悍、移动设备优先的前端开发框架<a href="http://getbootstrap.com/">官网</a></li>
-  <li><strong>showdown：</strong>基于Javascript的markdown渲染库<a href="http://daringfireball.net/projects/markdown">官网</a></li>
-  <li><strong>jQuery：</strong>The Write Less, Do More, JavaScript Library<a href="http://jquery.com/">官网</a></li>
-  <li><strong>Mditor：</strong>一款轻量级的markdown编辑器<a href="http://bh-lay.github.io/mditor/">官网</a></li>
-</ul>
+<p>小剧客栈的后台管理页面，功能块相对较多，更新变动也比较频繁，这里就介绍了。</p>
 <h3>1.4、零散页面</h3>
 <p>较为繁杂，不多赘述。</p>
+<h4>1.5、前端用到的javascript类库（框架）</h4>
+<ul>
+	<li><strong>jQuery：</strong>The Write Less, Do More, JavaScript Library<a href="http://jquery.com/">官网</a></li>
+	<li><strong>Sizzle</strong>jQuery核心选择器部分，DOM 选择器的一大增强利器<a href="http://sizzlejs.com/">官网</a></li>
+	<li><strong>bootstrap：</strong>简洁、直观、强悍、移动设备优先的前端开发框架<a href="http://getbootstrap.com/">官网</a></li>
+	<li><strong>seaJS：</strong>一款优秀的模块加载器<a href="http://seajs.org/">官网</a></li>
+	<li><strong>showdown：</strong>基于Javascript的markdown渲染库<a href="http://daringfireball.net/projects/markdown">官网</a></li>
+	<li><strong>Mditor：</strong>一款轻量级的markdown编辑器<a href="http://bh-lay.github.io/mditor/">官网</a></li>
+	<li><strong>juicer：</strong>一个高效、轻量的前端 (Javascript) 模板引擎<a href="http://juicer.name/">官网</a></li>
+	<li><strong>lofox：</strong>一个用于单页面路由管理的工具<a href="https://github.com/bh-lay/lofox">官网</a></li>
+	<li><strong>dialog：</strong>响应式用户交互组件库<a href="https://github.com/bh-lay/UI">官网</a></li>
+	<li><strong>stick：</strong>瀑布流组件。<a href="https://github.com/bh-lay/stick">官网</a></li>
+	<li><strong>pagination：</strong>前端分页组件</li>
+	<li><strong>selection：</strong>操作文本域字符选择与获取选择状态、插入字符等操作的小类库<a href="https://github.com/bh-lay/Selection/">官网</a></li>
+	<li><strong>mirror：</strong>镜像textarea用于实现光标坐标选择、自动增高等功能的小组件</li>
+	<li><strong>md5.js：</strong>用于确保信息传输完整一致，是计算机广泛使用的哈希算法之一。<a href="http://pajhome.org.uk/crypt/md5">官网</a></li>
+</ul>
+<h4>1.6、前端用到的 css（less）样式部分</h4>
+<ul>
+	<li><strong>core：</strong>常用的Minxin定义</li>
+	<li><strong>grid：</strong>定制栅格化布局结构</li>
+	<li><strong>fontface：</strong>定制博客所需的logo、icon</li>
+	<li><strong>hljs：</strong>定制博客的代码高亮样式</li>
+	<li><strong>……</strong></li>
+</ul>
 <h2>二、后端<small>语言nodeJS</small></h2>
 <ul>
   <li><strong>core：</strong>博客核心代码，暂未命名
-<ul>
-  <li><strong>index：</strong>APP类，初始化项目的主文件</li>
-  <li><strong>cache：</strong>缓存控制器，用于使用、创建、清理缓存</li>
-  <li><strong>views：</strong>视图类，模板引擎基于juicer</li>
-  <li><strong>component：</strong>视图片段类，用于实现视图内部公用模块，可定制参数</li>
-  <li><strong>connect：</strong>连接类，抽象出单次访问所需的常见操作，如返回特定类型内容，获取、添加cookie等</li>
-  <li><strong>session：</strong>session类，基于文件的数据存储，可用于服务端用户信息标记</li>
-  <li><strong>DB：</strong>基于mongoDb模块封装mongo的常用操作</li>
-  <li><strong>staticFile：</strong>静态资源读取器，用于响应静态资源的请求</li>
-  <li><strong>utils：</strong>常见工具类
-    <ul>
-      <li><strong>parse：</strong>各类变量的格式化方法，包括cookie、time、url等</li>
-      <li><strong>pagination：</strong>后端分页组件</li>
-    </ul>
-  </li>
+	<ul>
+	  <li><strong>index：</strong>APP类，初始化项目的主文件</li>
+	  <li><strong>cache：</strong>缓存控制器，用于使用、创建、清理缓存</li>
+	  <li><strong>views：</strong>视图类，模板引擎基于juicer</li>
+	  <li><strong>component：</strong>视图片段类，用于实现视图内部公用模块，可定制参数</li>
+	  <li><strong>connect：</strong>连接类，抽象出单次访问所需的常见操作，如返回特定类型内容，获取、添加cookie等</li>
+	  <li><strong>session：</strong>session类，基于文件的数据存储，可用于服务端用户信息标记</li>
+	  <li><strong>DB：</strong>基于mongoDb模块封装mongo的常用操作</li>
+	  <li><strong>staticFile：</strong>静态资源读取器，用于响应静态资源的请求</li>
+	  <li><strong>utils：</strong>常见工具类
+	    <ul>
+	      <li><strong>parse：</strong>各类变量的格式化方法，包括cookie、time、url等</li>
+	      <li><strong>pagination：</strong>后端分页组件</li>
+	    </ul>
+	  </li>
+	</ul>
+	<li><strong>juicer：</strong>juicer模板引擎的nodeJS版本<a href="http://juicer.name/">官网</a></li>
+	<li><strong>showdonw：</strong>基于Javascript的markdown渲染库<a href="http://daringfireball.net/projects/markdown">官网</a></li>
+	<li><strong>cron：</strong>计划任务</li>
 </ul>
-  <li><strong>juicer：</strong>juicer模板引擎的nodeJS版本<a href="http://juicer.name/">官网</a></li>
-  <li><strong>showdown：</strong>基于Javascript的markdown渲染库<a href="http://daringfireball.net/projects/markdown">官网</a></li>
-  <li><strong>mongoDB：</strong>mongoDB官方的node连接模块</li>
-</ul>
-<h2>三、代码构建<small>grunt</small></h2>
+<h2>三、代码构建<small>FIS3</small></h2>
 <ul>
-  <li><strong>transports：</strong>seaJS模块ID抽出工具</li>
-  <li><strong>concats：</strong>代码合并工具</li>
-  <li><strong>copy：</strong>文件复制方法</li>
-  <li><strong>uglify：</strong>JS压缩工具</li>
-  <li><strong>cssmin：</strong>css压缩工具</li>
+  <li><strong>fis3-hook-relative：</strong>相对路径输出插件</li>
+  <li><strong>fis3-hook-cmd：</strong>CMD模块打包插件</li>
+  <li><strong>fis3-hook-amd：</strong>AMD 模块打包插件</li>
+  <li><strong>fis-parser-less：</strong>Less 编译支持</li>
+  <li><strong>fis3-postpackager-loader：</strong>打包支持基础类库</li>
 </ul>
     </div>
   </div>

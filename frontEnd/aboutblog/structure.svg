@@ -1,7 +1,453 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1218" height="801" contenteditable="true" style="font-family:Microsoft Yahei" viewBox="121 -167 1218 801">
-<defs ><linearGradient x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgb(255, 255, 255)"></stop><stop offset="1" stop-color="rgb(204, 204, 204)"></stop></linearGradient><marker orient="auto" refX="6" refY="0" viewBox="-7 -7 14 14" markerWidth="7" markerHeight="7" markerUnits="userSpaceOnUse"><path fill="white" stroke="none" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path></marker></defs><g transform="translate(0.5, 0.5)"><g text-rendering="optimize-speed" transform="translate( 701 376 )"><g ><path fill="none" stroke="white" stroke-width="3" marker-end="url(#kity_marker_2)" d="M96 0A154,0,0,0,1,250 0" transform="translate( 0 0 )"></path><path fill="none" stroke="white" stroke-width="2" d="M346 0C351,0,351,-210,356 -210L422 -210" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M422 -210C427,-210,427,-338,432 -338L516 -338" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M516 -338C521,-338,521,-498,526 -498L587 -498" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M516 -338C521,-338,521,-466,526 -466L594 -466" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M516 -338C521,-338,521,-434,526 -434L587 -434" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M516 -338C521,-338,521,-402,526 -402L585 -402" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M516 -338C521,-338,521,-370,526 -370L592 -370" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M516 -338C521,-338,521,-338,526 -338L610 -338" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M516 -338C521,-338,521,-306,526 -306L618 -306" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M516 -338C521,-338,521,-274,526 -274L607 -274" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M516 -338C521,-338,521,-242,526 -242L592 -242" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M516 -338C521,-338,521,-210,526 -210L582 -210" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M516 -338C521,-338,521,-178,526 -178L594 -178" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M422 -210C427,-210,427,-82,432 -82L524 -82" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M524 -82C529,-82,529,-146,534 -146L589 -146" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M524 -82C529,-82,529,-114,534 -114L587 -114" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M524 -82C529,-82,529,-82,534 -82L611 -82" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M524 -82C529,-82,529,-50,534 -50L583 -50" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M524 -82C529,-82,529,-18,534 -18L584 -18" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M346 0C351,0,351,30,356 30L422 30" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M422 30C427,30,427,14,432 14L518 14" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M422 30C427,30,427,46,432 46L500 46" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M346 0C351,0,351,142,356 142L434 142" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M434 142C439,142,439,78,444 78L506 78" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M434 142C439,142,439,110,444 110L530 110" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M434 142C439,142,439,142,444 142L536 142" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M434 142C439,142,439,174,444 174L512 174" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M434 142C439,142,439,206,444 206L513 206" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M346 0C351,0,351,238,356 238L434 238" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="3" marker-end="url(#kity_marker_2)" d="M96 0A0,227,0,0,1,96 -227" transform="translate( 0 0 )"></path><path fill="none" stroke="white" stroke-width="2" d="M-74 -227C-79,-227,-79,-277,-84 -277L-173 -277" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M-74 -227C-79,-227,-79,-245,-84 -245L-158 -245" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M-74 -227C-79,-227,-79,-213,-84 -213L-142 -213" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M-74 -227C-79,-227,-79,-181,-84 -181L-146 -181" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M-74 -227C-79,-227,-79,-149,-84 -149L-153 -149" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="3" marker-end="url(#kity_marker_2)" d="M96 0A154,0,0,0,1,-58 0" transform="translate( 0 0 )"></path><path fill="none" stroke="white" stroke-width="2" d="M-209 0C-214,0,-214,-110,-219 -110L-394 -110" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M-394 -110C-399,-110,-399,-246,-404 -246L-524 -246" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M-394 -110C-399,-110,-399,-214,-404 -214L-467 -214" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M-394 -110C-399,-110,-399,-182,-404 -182L-465 -182" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M-394 -110C-399,-110,-399,-150,-404 -150L-500 -150" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M-394 -110C-399,-110,-399,-118,-404 -118L-480 -118" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M-394 -110C-399,-110,-399,-86,-404 -86L-451 -86" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M-394 -110C-399,-110,-399,-54,-404 -54L-476 -54" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M-394 -110C-399,-110,-399,-22,-404 -22L-484 -22" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M-394 -110C-399,-110,-399,26,-404 26L-458 26" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M-458 26C-463,26,-463,10,-468 10L-529 10" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M-458 26C-463,26,-463,42,-468 42L-560 42" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M-209 0C-214,0,-214,74,-219 74L-280 74" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M-209 0C-214,0,-214,106,-219 106L-311 106" transform="translate( 0.5 0.5 )"></path><path fill="none" stroke="white" stroke-width="2" d="M-209 0C-214,0,-214,138,-219 138L-379 138" transform="translate( 0.5 0.5 )"></path></g><g transform="matrix( 1 0 0 1 0 0 )"><path fill="rgba(0, 0, 0, .25)" stroke="none" d="M1,-17h198a22,22,0,0,1,22,22v0a22,22,0,0,1,-22,22h-198a22,22,0,0,1,-22,-22v0a22,22,0,0,1,22,-22z"></path><path fill="rgb(254, 219, 0)" stroke="rgb(254, 219, 0)" d="M-3,-22h198a22,22,0,0,1,22,22v0a22,22,0,0,1,-22,22h-198a22,22,0,0,1,-22,-22v0a22,22,0,0,1,22,-22z"></path><g transform="translate( 0 -3.5999999999999996 )" fill="black" style="cursor: default;"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="24" y="-12">小剧客栈代码结构</text></g><path fill="rgb(27,171,255)" stroke="none" opacity="0.5" transform="translate( -0.5 -1.5 )" style="cursor: text; display: none;" d="M0,-5h39v14h-39v-14z"></path></g><g ><path fill="none" stroke="none" d="M0,0h0v0h0z"></path></g><g ><path fill="none" stroke="none" d="M0,0h0v0h0z"></path><path fill="none" stroke="none"></path></g><g transform="matrix( 1 0 0 1 267 0 )"><path fill="rgba(0, 0, 0, .25)" stroke="none" d="M-1,-8h74a10,10,0,0,1,10,10v6a10,10,0,0,1,-10,10h-74a10,10,0,0,1,-10,-10v-6a10,10,0,0,1,10,-10z"></path><g transform="translate( -21 0 )" style="cursor: pointer;"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray" d="M-4.5,0L4.5,0"></path></g><path fill="#a4c5c0" stroke="#a4c5c0" d="M-5,-13h74a10,10,0,0,1,10,10v6a10,10,0,0,1,-10,10h-74a10,10,0,0,1,-10,-10v-6a10,10,0,0,1,10,-10z"></path><g transform="translate( 0 -2.4 )" fill="#333"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="16" y="-8">前端页面</text></g></g><g transform="matrix( 1 0 0 1 376 -224 )"><g transform="translate( -16 0 )" style="cursor: pointer;"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray" d="M-4.5,0L4.5,0"></path></g><path fill="transparent" stroke="none" d="M-5,-11h46a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-46a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">尝鲜版</text></g></g><g transform="matrix( 1 0 0 1 452 -352 )"><g transform="translate( -16 0 )" style="cursor: pointer;">
-<path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray" d="M-4.5,0L4.5,0"></path></g><path fill="transparent" stroke="none" d="M-5,-11h64a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-64a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">javascript</text></g></g><g transform="matrix( 1 0 0 1 546 -512 )"><g transform="translate( -16 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="transparent" stroke="none" d="M-5,-11h41a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-41a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">seaJS</text></g></g><g transform="matrix( 1 0 0 1 546 -480 )"><g transform="translate( -16 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="transparent" stroke="none" d="M-5,-11h48a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-48a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">jQuery</text></g></g><g transform="matrix( 1 0 0 1 546 -448 )"><g transform="translate( -16 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="transparent" stroke="none" d="M-5,-11h41a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-41a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">juicer</text></g></g><g transform="matrix( 1 0 0 1 546 -416 )"><g transform="translate( -16 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="#e75d66" stroke="none" d="M-5,-11h39a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-39a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">lofox</text></g></g><g transform="matrix( 1 0 0 1 546 -384 )"><g transform="translate( -16 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="#e75d66" stroke="none" d="M-5,-11h46a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-46a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">dialog</text></g></g><g transform="matrix( 1 0 0 1 546 -352 )"><g transform="translate( -16 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="transparent" stroke="none" d="M-5,-11h64a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-64a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">nicescroll</text></g></g><g transform="matrix( 1 0 0 1 546 -320 )"><g transform="translate( -16 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="#e75d66" stroke="none" d="M-5,-11h72a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-72a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">pagination</text></g></g><g transform="matrix( 1 0 0 1 546 -288 )"><g transform="translate( -16 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="#e75d66" stroke="none" d="M-5,-11h61a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-61a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">selection</text></g></g><g transform="matrix( 1 0 0 1 546 -256 )"><g transform="translate( -16 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="#e75d66" stroke="none" d="M-5,-11h46a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-46a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">mirror</text></g></g><g transform="matrix( 1 0 0 1 546 -224 )"><g transform="translate( -16 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="#e75d66" stroke="none" d="M-5,-11h36a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-36a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">stick</text></g></g><g transform="matrix( 1 0 0 1 546 -192 )"><g transform="translate( -16 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="transparent" stroke="none" d="M-5,-11h48a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-48a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">md5.js</text></g></g><g transform="matrix( 1 0 0 1 452 -96 )"><g transform="translate( -16 0 )" style="cursor: pointer;"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray" d="M-4.5,0L4.5,0"></path></g><path fill="transparent" stroke="none" d="M-5,-11h72a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-72a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">css（less）</text></g></g><g transform="matrix( 1 0 0 1 554 -160 )"><g transform="translate( -16 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="#e75d66" stroke="none" d="M-5,-11h35a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-35a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">core</text></g></g><g transform="matrix( 1 0 0 1 554 -128 )"><g transform="translate( -16 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="#e75d66" stroke="none" d="M-5,-11h33a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-33a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">grid</text></g></g><g transform="matrix( 1 0 0 1 554 -96 )"><g transform="translate( -16 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="#e75d66" stroke="none" d="M-5,-11h57a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-57a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">fontface</text></g></g><g transform="matrix( 1 0 0 1 554 -64 )"><g transform="translate( -16 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="transparent" stroke="none" d="M-5,-11h29a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-29a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">hljs</text></g></g><g transform="matrix( 1 0 0 1 554 -32 )"><g transform="translate( -16 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="transparent" stroke="none" d="M-5,-11h30a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-30a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">……</text></g></g><g transform="matrix( 1 0 0 1 376 16 )"><g transform="translate( -16 0 )" style="cursor: pointer;"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path>
-<path fill="none" stroke="gray" d="M-4.5,0L4.5,0"></path></g><path fill="transparent" stroke="none" d="M-5,-11h46a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-46a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">屌丝版</text></g></g><g transform="matrix( 1 0 0 1 452 0 )"><g transform="translate( -16 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="transparent" stroke="none" d="M-5,-11h66a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-66a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">bootstrap</text></g></g><g transform="matrix( 1 0 0 1 452 32 )"><g transform="translate( -16 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="transparent" stroke="none" d="M-5,-11h48a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-48a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">jQuery</text></g></g><g transform="matrix( 1 0 0 1 376 128 )"><g transform="translate( -16 0 )" style="cursor: pointer;"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray" d="M-4.5,0L4.5,0"></path></g><path fill="transparent" stroke="none" d="M-5,-11h58a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-58a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">后台管理</text></g></g><g transform="matrix( 1 0 0 1 464 64 )"><g transform="translate( -16 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="transparent" stroke="none" d="M-5,-11h42a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-42a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">React</text></g></g><g transform="matrix( 1 0 0 1 464 96 )"><g transform="translate( -16 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="transparent" stroke="none" d="M-5,-11h66a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-66a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">bootstrap</text></g></g><g transform="matrix( 1 0 0 1 464 128 )"><g transform="translate( -16 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="transparent" stroke="none" d="M-5,-11h72a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-72a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">showdown</text></g></g><g transform="matrix( 1 0 0 1 464 160 )"><g transform="translate( -16 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="transparent" stroke="none" d="M-5,-11h48a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-48a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">jQuery</text></g></g><g transform="matrix( 1 0 0 1 376 224 )"><g transform="translate( -16 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="transparent" stroke="none" d="M-5,-11h58a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-58a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">零散页面</text></g></g><g transform="matrix( 1 0 0 1 -59 -227 )"><path fill="rgba(0, 0, 0, .25)" stroke="none" d="M-1,-8h148a10,10,0,0,1,10,10v6a10,10,0,0,1,-10,10h-148a10,10,0,0,1,-10,-10v-6a10,10,0,0,1,10,-10z"></path><g transform="translate( 0 0 )" style="cursor: pointer;"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray" d="M-4.5,0L4.5,0"></path></g><path fill="#a4c5c0" stroke="#a4c5c0" d="M-5,-13h148a10,10,0,0,1,10,10v6a10,10,0,0,1,-10,10h-148a10,10,0,0,1,-10,-10v-6a10,10,0,0,1,10,-10z"></path><g transform="translate( 0 -2.4 )" fill="#333"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="16" y="-8">代码构建（grunt）</text></g></g><g transform="matrix( 1 0 0 1 -163 -291 )"><g transform="translate( 75 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="transparent" stroke="none" d="M-5,-11h69a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-69a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">transports</text></g></g><g transform="matrix( 1 0 0 1 -148 -259 )"><g transform="translate( 60 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="transparent" stroke="none" d="M-5,-11h54a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-54a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">concats</text></g></g><g transform="matrix( 1 0 0 1 -132 -227 )"><g transform="translate( 44 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="transparent" stroke="none" d="M-5,-11h38a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-38a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">copy</text></g></g><g transform="matrix( 1 0 0 1 -136 -195 )"><g transform="translate( 48 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="transparent" stroke="none" d="M-5,-11h42a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-42a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">uglify</text></g></g><g transform="matrix( 1 0 0 1 -143 -163 )"><g transform="translate( 55 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="transparent" stroke="none" d="M-5,-11h49a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-49a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">cssmin</text></g></g><g transform="matrix( 1 0 0 1 -194 0 )"><path fill="rgba(0, 0, 0, .25)" stroke="none" d="M-1,-8h129a10,10,0,0,1,10,10v6a10,10,0,0,1,-10,10h-129a10,10,0,0,1,-10,-10v-6a10,10,0,0,1,10,-10z"></path><g transform="translate( 140 0 )" style="cursor: pointer;"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray" d="M-4.5,0L4.5,0"></path></g><path fill="#a4c5c0" stroke="#a4c5c0" d="M-5,-13h129a10,10,0,0,1,10,10v6a10,10,0,0,1,-10,10h-129a10,10,0,0,1,-10,-10v-6a10,10,0,0,1,10,-10z"></path><g transform="translate( 0 -2.4 )" fill="#333"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="16" y="-8">后端（nodeJS）</text></g></g><g transform="matrix( 1 0 0 1 -384 -124 )"><g transform="translate( 161 0 )" style="cursor: pointer;"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray" d="M-4.5,0L4.5,0"></path></g><path fill="#e75d66" stroke="none" d="M-5,-11h155a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-155a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">core（核心代码，未命名）</text></g></g><g transform="matrix( 1 0 0 1 -514 -260 )"><g transform="translate( 106 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="#e75d66" stroke="none" d="M-5,-11h100a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-100a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
-<g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">index（APP类）</text></g></g><g transform="matrix( 1 0 0 1 -457 -228 )"><g transform="translate( 49 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="#e75d66" stroke="none" d="M-5,-11h43a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-43a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">cache</text></g></g><g transform="matrix( 1 0 0 1 -455 -196 )"><g transform="translate( 47 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="#e75d66" stroke="none" d="M-5,-11h41a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-41a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">views</text></g></g><g transform="matrix( 1 0 0 1 -490 -164 )"><g transform="translate( 82 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="#e75d66" stroke="none" d="M-5,-11h76a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-76a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">component</text></g></g><g transform="matrix( 1 0 0 1 -470 -132 )"><g transform="translate( 62 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="#e75d66" stroke="none" d="M-5,-11h56a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-56a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">connect</text></g></g><g transform="matrix( 1 0 0 1 -441 -100 )"><g transform="translate( 33 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="#e75d66" stroke="none" d="M-5,-11h27a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-27a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">DB</text></g></g><g transform="matrix( 1 0 0 1 -466 -68 )"><g transform="translate( 58 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="#e75d66" stroke="none" d="M-5,-11h52a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-52a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">session</text></g></g><g transform="matrix( 1 0 0 1 -474 -36 )"><g transform="translate( 66 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="#e75d66" stroke="none" d="M-5,-11h60a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-60a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">staticFile</text></g></g><g transform="matrix( 1 0 0 1 -448 12 )"><g transform="translate( 40 0 )" style="cursor: pointer;"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray" d="M-4.5,0L4.5,0"></path></g><path fill="#e75d66" stroke="none" d="M-5,-11h34a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-34a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">utils</text></g></g><g transform="matrix( 1 0 0 1 -519 -4 )"><g transform="translate( 47 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="#e75d66" stroke="none" d="M-5,-11h41a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-41a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">parse</text></g></g><g transform="matrix( 1 0 0 1 -550 28 )"><g transform="translate( 78 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="#e75d66" stroke="none" d="M-5,-11h72a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-72a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">pagination</text></g></g><g transform="matrix( 1 0 0 1 -270 60 )"><g transform="translate( 47 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="transparent" stroke="none" d="M-5,-11h41a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-41a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">juicer</text></g></g><g transform="matrix( 1 0 0 1 -301 92 )"><g transform="translate( 78 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="transparent" stroke="none" d="M-5,-11h72a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-72a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">showdown</text></g></g><g transform="matrix( 1 0 0 1 -369 124 )"><g transform="translate( 146 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="transparent" stroke="none" d="M-5,-11h140a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-140a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">mongoDB（连接模块）</text></g></g><g transform="matrix( 1 0 0 1 464 192 )"><g transform="translate( -16 0 )" style="cursor: pointer;" display="none"><path fill="white" stroke="gray" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path><path fill="none" stroke="gray"></path></g><path fill="#e75d66" stroke="none" d="M-5,-11h49a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-49a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path><g transform="translate( 0 -1.7999999999999998 )" fill="white" style="cursor: default;"><text text-rendering="inherit" dominant-baseline="text-before-edge" dy="0" font-size="12" y="-6">Mditor</text></g></g></g></g>
-<g transform="translate(740 405)"><text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="14">红底部分本人开发</text></g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1186" height="737" viewbox="77 -17 1186 737" style="font-family:Microsoft Yahei;font-size:12px;">
+   <defs>
+    <lineargradient x1="0" y1="0" x2="0" y2="1">
+     <stop offset="0" stop-color="rgb(255, 255, 255)"></stop>
+     <stop offset="1" stop-color="rgb(204, 204, 204)"></stop>
+    </lineargradient>
+    <marker orient="auto" refx="6" refy="0" viewbox="-7 -7 14 14" markerwidth="7" markerheight="7" markerunits="userSpaceOnUse">
+     <path fill="white" stroke="none" d="M6,0A6,6,0,1,1,-6,0A6,6,0,1,1,6,0"></path>
+    </marker>
+   </defs>
+   <g transform="translate(-77, 17)">
+    <g text-rendering="optimize-speed" transform="translate( 612 465 )">
+     <g>
+      <path fill="none" stroke="white" stroke-width="3" d="M96 0A163,5,0,0,0,259 5" transform="translate( 0 0 )"></path>
+      <path fill="none" stroke="white" stroke-width="3" d="M96 0A69,88,0,0,1,165 -88" transform="translate( 0 0 )"></path>
+      <path fill="none" stroke="white" stroke-width="3" d="M96 0A154,0,0,0,1,-58 0" transform="translate( 0 0 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M-211 0C-216,0,-216,-142,-221 -142L-350 -142" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M-350 -142C-355,-142,-355,-278,-360 -278L-481 -278" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M-350 -142C-355,-142,-355,-246,-360 -246L-429 -246" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M-350 -142C-355,-142,-355,-214,-360 -214L-421 -214" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M-350 -142C-355,-142,-355,-182,-360 -182L-459 -182" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M-350 -142C-355,-142,-355,-150,-360 -150L-440 -150" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M-350 -142C-355,-142,-355,-118,-360 -118L-406 -118" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M-350 -142C-355,-142,-355,-86,-360 -86L-429 -86" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M-350 -142C-355,-142,-355,-54,-360 -54L-440 -54" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M-350 -142C-355,-142,-355,-6,-360 -6L-411 -6" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M-411 -6C-416,-6,-416,-22,-421 -22L-483 -22" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M-411 -6C-416,-6,-416,10,-421 10L-515 10" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M-211 0C-216,0,-216,42,-221 42L-282 42" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M-211 0C-216,0,-216,74,-221 74L-314 74" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M-211 0C-216,0,-216,106,-221 106L-381 106" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M-211 0C-216,0,-216,138,-221 138L-294 138" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M-211 0C-216,0,-216,170,-221 170L-278 170" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M527 -309C532,-309,532,-437,537 -437L619 -437" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M527 -309C532,-309,532,-405,537 -405L596 -405" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M527 -309C532,-309,532,-373,537 -373L598 -373" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M527 -309C532,-309,532,-341,537 -341L595 -341" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M527 -309C532,-309,532,-309,537 -309L604 -309" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M527 -309C532,-309,532,-277,537 -277L631 -277" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M527 -309C532,-309,532,-245,537 -245L619 -245" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M527 -309C532,-309,532,-213,537 -213L592 -213" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M527 -309C532,-309,532,-181,537 -181L604 -181" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M431 -197C436,-197,436,-309,441 -309L527 -309" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M532 -85C537,-85,537,-149,542 -149L599 -149" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M532 -85C537,-85,537,-117,542 -117L594 -117" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M532 -85C537,-85,537,-85,542 -85L623 -85" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M532 -85C537,-85,537,-53,542 -53L589 -53" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M532 -85C537,-85,537,-21,542 -21L596 -21" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M431 -197C436,-197,436,-85,441 -85L532 -85" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M355 5C360,5,360,-197,365 -197L431 -197" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M431 27C436,27,436,11,441 11L528 11" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M431 27C436,27,436,43,441 43L509 43" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M355 5C360,5,360,27,365 27L431 27" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M443 139C448,139,448,171,453 171L514 171" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M443 139C448,139,448,107,453 107L540 107" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M443 139C448,139,448,139,453 139L546 139" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M443 139C448,139,448,75,453 75L521 75" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M355 5C360,5,360,139,365 139L443 139" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M355 5C360,5,360,235,365 235L443 235" transform="translate( 0.5 0.5 )"></path>
+      <path fill="none" stroke="white" stroke-width="2" d="M443 139C448,139,448,203,453 203L520 203" transform="translate( 0.5 0.5 )"></path>
+     </g>
+     <g transform="matrix( 1 0 0 1 0 0 )">
+      <path fill="rgba(0, 0, 0, .25)" stroke="none" d="M1,-17h198a22,22,0,0,1,22,22v0a22,22,0,0,1,-22,22h-198a22,22,0,0,1,-22,-22v0a22,22,0,0,1,22,-22z"></path>
+      <path fill="rgb(254, 219, 0)" stroke="rgb(254, 219, 0)" d="M-3,-22h198a22,22,0,0,1,22,22v0a22,22,0,0,1,-22,22h-198a22,22,0,0,1,-22,-22v0a22,22,0,0,1,22,-22z" stroke-width="3"></path>
+      <g transform="translate( 0 0 )" fill="black">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="24" dy="0" y="-12">
+        小剧客栈代码结构
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 276 5 )">
+      <path fill="rgba(0, 0, 0, .25)" stroke="none" d="M-1,-8h74a10,10,0,0,1,10,10v6a10,10,0,0,1,-10,10h-74a10,10,0,0,1,-10,-10v-6a10,10,0,0,1,10,-10z"></path>
+      <path fill="#a4c5c0" stroke="#a4c5c0" d="M-5,-13h74a10,10,0,0,1,10,10v6a10,10,0,0,1,-10,10h-74a10,10,0,0,1,-10,-10v-6a10,10,0,0,1,10,-10z"></path>
+      <g transform="translate( 0 0 )" fill="#333">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="16" dy="0" y="-8">
+        前端页面
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 182 -88 )">
+      <path fill="rgba(0, 0, 0, .25)" stroke="none" d="M-1,-8h134a10,10,0,0,1,10,10v6a10,10,0,0,1,-10,10h-134a10,10,0,0,1,-10,-10v-6a10,10,0,0,1,10,-10z"></path>
+      <path fill="#a4c5c0" stroke="#a4c5c0" d="M-5,-13h134a10,10,0,0,1,10,10v6a10,10,0,0,1,-10,10h-134a10,10,0,0,1,-10,-10v-6a10,10,0,0,1,10,-10z"></path>
+      <g transform="translate( 0 0 )" fill="#333">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="16" dy="0" y="-8">
+        代码构建（FIS3）
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 -196 0 )">
+      <path fill="rgba(0, 0, 0, .25)" stroke="none" d="M-1,-8h131a10,10,0,0,1,10,10v6a10,10,0,0,1,-10,10h-131a10,10,0,0,1,-10,-10v-6a10,10,0,0,1,10,-10z"></path>
+      <path fill="#a4c5c0" stroke="#a4c5c0" d="M-5,-13h131a10,10,0,0,1,10,10v6a10,10,0,0,1,-10,10h-131a10,10,0,0,1,-10,-10v-6a10,10,0,0,1,10,-10z"></path>
+      <g transform="translate( 0 0 )" fill="#333">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="16" dy="0" y="-8">
+        后端（nodeJS）
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 -340 -156 )">
+      <path fill="#e75d66" stroke="none" d="M-5,-11h109a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-109a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        core（核心代码）
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 -471 -292 )">
+      <path fill="#e75d66" stroke="none" d="M-5,-11h101a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-101a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        index（APP类）
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 -419 -260 )">
+      <path fill="#e75d66" stroke="none" d="M-5,-11h49a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-49a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        cache
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 -411 -228 )">
+      <path fill="#e75d66" stroke="none" d="M-5,-11h41a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-41a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        views
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 -449 -196 )">
+      <path fill="#e75d66" stroke="none" d="M-5,-11h79a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-79a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        component
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 -430 -164 )">
+      <path fill="#e75d66" stroke="none" d="M-5,-11h60a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-60a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        connect
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 -396 -132 )">
+      <path fill="#e75d66" stroke="none" d="M-5,-11h26a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-26a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        DB
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 -419 -100 )">
+      <path fill="#e75d66" stroke="none" d="M-5,-11h49a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-49a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        session
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 -430 -68 )">
+      <path fill="#e75d66" stroke="none" d="M-5,-11h60a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-60a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        staticFile
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 -401 -20 )">
+      <path fill="#e75d66" stroke="none" d="M-5,-11h31a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-31a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        utils
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 -473 -36 )">
+      <path fill="#e75d66" stroke="none" d="M-5,-11h42a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-42a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        parse
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 -505 -4 )">
+      <path fill="#e75d66" stroke="none" d="M-5,-11h74a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-74a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        pagination
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 -272 28 )">
+      <path fill="transparent" stroke="none" d="M-5,-11h41a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-41a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        juicer
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 -304 60 )">
+      <path fill="transparent" stroke="none" d="M-5,-11h73a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-73a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        showdown
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 -371 92 )">
+      <path fill="transparent" stroke="none" d="M-5,-11h140a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-140a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        mongoDB（连接模块）
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 -284 124 )">
+      <path fill="transparent" stroke="none" d="M-5,-11h53a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-53a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        request
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 -268 156 )">
+      <path fill="transparent" stroke="none" d="M-5,-11h37a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-37a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        cron
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 557 -451 )">
+      <path fill="transparent" stroke="none" d="M-5,-11h62a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-62a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        requireJS
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 557 -419 )">
+      <path fill="transparent" stroke="none" d="M-5,-11h39a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-39a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        Sizzle
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 557 -387 )">
+      <path fill="transparent" stroke="none" d="M-5,-11h41a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-41a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        juicer
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 557 -355 )">
+      <path fill="#e75d66" stroke="none" d="M-5,-11h38a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-38a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        lofox
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 557 -323 )">
+      <path fill="#e75d66" stroke="none" d="M-5,-11h47a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-47a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        dialog
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 557 -291 )">
+      <path fill="#e75d66" stroke="none" d="M-5,-11h74a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-74a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        pagination
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 557 -259 )">
+      <path fill="#e75d66" stroke="none" d="M-5,-11h62a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-62a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        selection
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 557 -227 )">
+      <path fill="#e75d66" stroke="none" d="M-5,-11h35a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-35a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        stick
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 557 -195 )">
+      <path fill="transparent" stroke="none" d="M-5,-11h47a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-47a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        md5.js
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 461 -323 )">
+      <path fill="transparent" stroke="none" d="M-5,-11h66a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-66a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        javascript
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 562 -163 )">
+      <path fill="#e75d66" stroke="none" d="M-5,-11h37a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-37a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        core
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 562 -131 )">
+      <path fill="#e75d66" stroke="none" d="M-5,-11h32a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-32a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        grid
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 562 -99 )">
+      <path fill="#e75d66" stroke="none" d="M-5,-11h61a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-61a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        fontface
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 562 -67 )">
+      <path fill="transparent" stroke="none" d="M-5,-11h27a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-27a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        hljs
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 562 -35 )">
+      <path fill="transparent" stroke="none" d="M-5,-11h34a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-34a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        ……
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 461 -99 )">
+      <path fill="transparent" stroke="none" d="M-5,-11h71a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-71a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        css（less）
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 385 -211 )">
+      <path fill="transparent" stroke="none" d="M-5,-11h46a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-46a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        尝鲜版
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 461 -3 )">
+      <path fill="transparent" stroke="none" d="M-5,-11h67a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-67a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        bootstrap
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 461 29 )">
+      <path fill="transparent" stroke="none" d="M-5,-11h48a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-48a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        jQuery
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 385 13 )">
+      <path fill="transparent" stroke="none" d="M-5,-11h46a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-46a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        屌丝版
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 473 157 )">
+      <path fill="transparent" stroke="none" d="M-5,-11h41a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-41a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        juicer
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 473 93 )">
+      <path fill="transparent" stroke="none" d="M-5,-11h67a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-67a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        bootstrap
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 473 125 )">
+      <path fill="transparent" stroke="none" d="M-5,-11h73a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-73a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        showdown
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 473 61 )">
+      <path fill="transparent" stroke="none" d="M-5,-11h48a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-48a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        jQuery
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 385 125 )">
+      <path fill="transparent" stroke="none" d="M-5,-11h58a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-58a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        后台管理
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 385 221 )">
+      <path fill="transparent" stroke="none" d="M-5,-11h58a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-58a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        零散页面
+       </text>
+      </g>
+     </g>
+     <g transform="matrix( 1 0 0 1 473 189 )">
+      <path fill="#e75d66" stroke="none" d="M-5,-11h47a5,5,0,0,1,5,5v12a5,5,0,0,1,-5,5h-47a5,5,0,0,1,-5,-5v-12a5,5,0,0,1,5,-5z"></path>
+      <g transform="translate( 0 0 )" fill="white">
+       <text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="12" dy="0" y="-6">
+        Mditor
+       </text>
+      </g>
+     </g>
+    </g>
+   </g>
+   <g transform="translate(580 515)"><text text-rendering="inherit" dominant-baseline="text-before-edge" font-size="14">红底部分本人开发</text></g>
+  </svg>
