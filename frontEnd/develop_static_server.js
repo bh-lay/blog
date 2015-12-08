@@ -27,18 +27,17 @@ function cloneArg(arg){
  * 单线异步队列管理
  *
 **/
-function Step(callback,param){
+function Step(callback){
   this._steps = [];
   this._currentStepIndex = -1;
-  this.then(callback,param);
+  this.then(callback);
 }
-Step.prototype.then = function(callback,param){
+Step.prototype.then = function(callback){
   var me = this;
-  param = param || {};
-  if( typeof(callback) !== 'function' || typeof(param) !== 'object'){
+  if( typeof(callback) !== 'function'){
     throw Error('参数出错，第一个参数必须为function，第二个参数可选，且只能为对象格式');
   }
-  this._steps.push([callback, param]);
+  this._steps.push([callback, {}]);
   return this;
 };
 Step.prototype.next = function(){
