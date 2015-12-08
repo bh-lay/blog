@@ -46,7 +46,7 @@
         matches = node.matches || node.matchesSelector || node.msMatchesSelector || node.mozMatchesSelector || node.webkitMatchesSelector || node.oMatchesSelector;
     node = null;
     return matches;
-  })()
+  })();
   /**
    * 判断dom是否拥有某个class
    */
@@ -188,11 +188,11 @@
       if(typeof(a) == 'function'){
         callback = a;
       }else if(typeof(a) == 'string' && typeof(b) == 'function'){
-        callback = function(e){
-          var target = event.srcElement || event.target,
+        callback = function(events){
+          var target = events.srcElement || events.target,
               bingoDom = matchsElementBetweenNode(target,a,node);
           if(bingoDom){
-            b && b.call(bingoDom,e);
+            b && b.call(bingoDom,events);
           }
         };
       }

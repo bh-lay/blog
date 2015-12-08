@@ -193,7 +193,7 @@ define(function(require,exports){
     }).bind('focus',function(){
         clearTimeout(focusDelay);
         utils.addClass(nodeGlobal,'l_sendBox_active');
-    }).bind('focusout',function(){
+    }).bind('focusout blur',function(){
       clearTimeout(focusDelay);
       focusDelay = setTimeout(function(){
         if(me.text.length == 0){
