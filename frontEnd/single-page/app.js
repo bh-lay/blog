@@ -5,7 +5,42 @@
 
 window.L = window.L || {};
 
-(function(){
+
+require([
+  'js/user',
+  'js/navigation',
+  'js/page/index',
+  'js/page/blogList',
+  'js/page/blogDetail',
+  'js/page/labsList',
+  'js/page/bless',
+  'comments/index',
+
+  'js/juicer',
+  'js/lofox',
+  'js/dialog',
+  'js/Base'
+], function (user,nav,index,blogList,blogDetail,labsList,bless,comments){
+  //绑定路由
+  var lofox = new util.lofox();
+  routerHandle(lofox);
+
+  L.user = user;
+  L.nav = nav;
+  L.views = {
+    index : index,
+    blogList : blogList,
+    blogDetail : blogDetail,
+    labsList : labsList,
+    bless : bless,
+    comments : comments
+  };
+  L.push = function (url) {
+      lofox.push(url);
+  };
+  L.refresh = function () {
+      lofox.refresh();
+  };
   /**
    * 判断是否支持css属性
    * 兼容css3
@@ -126,44 +161,7 @@ window.L = window.L || {};
   });
   str += '</style>';
   Sizzle('head')[0].insertAdjacentHTML('beforeEnd', str);
-}());
-
-require([
-  'js/user',
-  'js/navigation',
-  'js/page/index',
-  'js/page/blogList',
-  'js/page/blogDetail',
-  'js/page/labsList',
-  'js/page/bless',
-  'comments/index',
-
-  'js/juicer',
-  'js/lofox',
-  'js/dialog',
-  'js/Base'
-], function (user,nav,index,blogList,blogDetail,labsList,bless,comments){
-  //绑定路由
-  var lofox = new util.lofox();
-  routerHandle(lofox);
-
-  L.user = user;
-  L.nav = nav;
-  L.views = {
-    index : index,
-    blogList : blogList,
-    blogDetail : blogDetail,
-    labsList : labsList,
-    bless : bless,
-    comments : comments
-  };
-  L.push = function (url) {
-      lofox.push(url);
-  };
-  L.refresh = function () {
-      lofox.refresh();
-  };
-
+  
   //配置弹出层
   UI.config.zIndex(2000);
 

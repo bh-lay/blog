@@ -286,3 +286,52 @@
     fetch: fetch
   };
 });
+var operate_id = 0
+function findNode(selector,context,returns){
+  var id = context.getAttribute("id"),
+      newSelector = selector,
+      useID;
+  if(!id){
+    operate_id++;
+    //生成临时 ID
+    useID = 'Sizzle_' + operate_id;
+    context.setAttribute('id',useID);
+  }else{
+    useID = id;
+  }
+  returns = document.querySelectorAll('#' + useID + ' ' + selector);
+  !id && context.removeAttribute('id');
+  return returns;
+}
+function Sizzle(selector,context){
+  var returns = [],
+      selectorMatchs;
+  //查询语句不存在或不为字符串，返回空数组
+  if(!selector || typeof(selector) !== 'string'){
+    return returns;
+  }
+  //查找对象存在，使用 find 逻辑
+  if(context && context.nodeType){
+    //
+    selectorMatchs = selector.match(/^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/);
+    //选择器为简单模式
+    if(selectorMatchs){
+      //ID
+      if(selectorMatchs[1]){
+        returns = [context.getElementById(selectorMatchs[1])];
+      }else if(selectorMatchs[2]){
+        //classname
+        returns = context.getElementsByTagName(selectorMatchs[2]);
+      }else{
+        //tagname
+        returns = context.getElementsByClassName(selectorMatchs[3]);
+      }
+    }else{
+      returns = findNode(selector,context)
+    }
+  }else{
+    //直接 query
+    returns = document.querySelectorAll(selector);
+  }
+  return returns;
+}
