@@ -40,12 +40,13 @@
       }
     }
   }
-
+  //判断 dom 是否符合
   var matches = (function(){
-    var node = document.createElement('div'),
-        matches = node.matches || node.matchesSelector || node.msMatchesSelector || node.mozMatchesSelector || node.webkitMatchesSelector || node.oMatchesSelector;
-    node = null;
-    return matches;
+    var prop = Element.prototype,
+        matches = prop.matches || prop.matchesSelector || prop.msMatchesSelector || prop.mozMatchesSelector || prop.webkitMatchesSelector || prop.oMatchesSelector;
+    return function(target,selector){
+      return matches.call(target,selector);
+    };
   })();
   /**
    * 判断dom是否拥有某个class
@@ -168,7 +169,7 @@
       if(target == endNode || !target){
         return false;
       }
-      if(matches.call(target,selector)){
+      if(matches(target,selector)){
         return target;
       }
       target = target.parentNode;
