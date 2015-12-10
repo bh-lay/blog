@@ -257,9 +257,15 @@
       if(selector){
         listenerFn = function(events){
           var target = events.srcElement || events.target,
-              bingoDom = matchsSelectorBetweenNode(target,selector,node);
-          if(bingoDom){
-            b && b.call(bingoDom,events);
+              //selector支持多个配置，如 ".side a,.nav a"
+              selectors = selector.split(/\s*\,\s*/),
+              bingoDom;
+          for(var i=0,total=selectors.length;i<total;i++){
+            bingoDom = matchsSelectorBetweenNode(target,selectors[i],node);
+            if(bingoDom){
+              b && b.call(bingoDom,events);
+              break;
+            }
           }
         };
       }

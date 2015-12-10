@@ -4,8 +4,9 @@ define([
   'js/page/blogList',
   'js/page/blogDetail',
   'js/page/labsList',
-  'js/page/bless'
-],function(utils,indexPage,blogListPage,blogDetailPage,labsListPage,blessPage){
+  'js/page/bless',
+  'js/navigation'
+],function(utils,indexPage,blogListPage,blogDetailPage,labsListPage,blessPage,navigation){
   'use strict';
   return function(lofox){
     var container = utils.query('.app_container'),
@@ -51,7 +52,7 @@ define([
      */
     lofox.set('/', function () {
       this.title('小剧客栈_剧中人的个人空间 网页设计师博客 互动设计学习者');
-      L.nav.setCur('/');
+      navigation.setCur('/');
       var dom = getNewPage();
 
       activePage = new indexPage(dom);
@@ -59,7 +60,7 @@ define([
     // 博文列表
     .set('/blog', function (param, pathnde, search) {
       this.title('我的博客_小剧客栈');
-      L.nav.setCur('blog');
+      navigation.setCur('blog');
       var dom = getNewPage();
 
       activePage = new blogListPage(dom, search);
@@ -69,7 +70,7 @@ define([
      */
     lofox.set('/blog/{id}', function (param) {
       this.title('我的博客_小剧客栈');
-      L.nav.setCur('blog');
+      navigation.setCur('blog');
       var dom = getNewPage();
       activePage = new blogDetailPage(dom, param.id, function (title) {
         lofox.title(title);
@@ -79,14 +80,14 @@ define([
     .set('/labs', function () {
       this.title('实验室_小剧客栈');
 
-      L.nav.setCur('labs');
+      navigation.setCur('labs');
       var dom = getNewPage();
       activePage = new labsListPage(dom);
     })
     // 留言板
     .set('/bless', function () {
       this.title('留言板_小剧客栈');
-      L.nav.setCur('bless');
+      navigation.setCur('bless');
       var dom = getNewPage();
 
       activePage = new blessPage(dom);

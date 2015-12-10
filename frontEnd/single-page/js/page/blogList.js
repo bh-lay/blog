@@ -5,10 +5,11 @@
 
 
 define([
-  'js/Base'
-],function(utils){
-  var Stick = require('/js/stick.js'),
-      tie = require('/js/tie.js');
+  'js/Base',
+  '/js/stick',
+  '/js/tie',
+  'js/imageHosting'
+],function(utils,Stick,tie,imageHosting){
   var private_tag_data = null;
   function getTag(callback){
     if(private_tag_data){
@@ -90,7 +91,7 @@ define([
           }
           list[i].time_show = utils.parseTime(list[i].time_show,'{mm}-{dd} {y}');
           //使用七牛图床
-          list[i].cover = L.qiniu(list[i].cover,{
+          list[i].cover = imageHosting(list[i].cover,{
               type : 'zoom',
               width : 420,
           });

@@ -11,17 +11,17 @@ require([
   'js/navigation',
   'js/Base',
   'js/routerHandle',
+  'js/imageHosting',
 
   'js/juicer',
   'js/lofox',
   'js/dialog'
-], function (user,nav,utils,routerHandle){
+], function (user,navigation,utils,routerHandle,imageHosting){
   //绑定路由
   var lofox = new util.lofox();
   routerHandle(lofox);
 
   L.user = user;
-  L.nav = nav;
 
   L.push = function (url) {
       lofox.push(url);
@@ -107,7 +107,7 @@ require([
   UI.config.zIndex(2000);
 
   //开始导航
-  L.nav();
+  navigation.init();
   //渐隐加载遮罩
   utils.addClass(utils.query('.app_mask'),'app_mask_out');
   setTimeout(function () {
@@ -133,7 +133,7 @@ require([
         img = node_data.getAttribute('data-img'),
         shareto = this.getAttribute('data-shareto');
 
-    img = img ? L.qiniu(img) : '';
+    img = img ? imageHosting(img) : '';
     var share_url={
       weibo: 'http://service.weibo.com/share/share.php?title='+text+'+&url='+url+'&source=bookmark&appkey=2861592023&searchPic=false&pic='+img,
       qzone: 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?summary='+text+'&url='+url+'&title='+ title+'&pics='+img+'&desc='+text
@@ -160,49 +160,7 @@ require([
   //  else{
   //  }
   });
-
 });
-
-
-/**
- *使用七牛云存储
- * 若url为绝对地址，则使用源图，且不处理剪裁缩放
- * L.qiniu(url,config);
- */
-(function (exports) {
-  'use strict';
-  function cover(url, config) {
-    var w = config.width || config.height,
-        h = config.height || config.width;
-    return url + '?imageView/1/w/' + w + '/h/' + h + '/q/85';
-  }
-  function zoom(url, config) {
-    var confStr;
-    if (config.width) {
-      confStr = 'w/' + config.width;
-    } else {
-      confStr = 'h/' + config.height;
-    }
-
-    return url + '?imageView2/2/' + confStr + '/q/85';
-  }
-
-  exports.qiniu = function (url, config) {
-    var src = url;
-    if (typeof (url) === 'string' && url.length > 0 && url[0] === '/') {
-      src = app_config.imgDomain + url;
-      if (config) {
-        if (config.type === "zoom") {
-          src = zoom(src, config);
-        } else {
-          //config.type == "cover"
-          src = cover(src, config);
-        }
-      }
-    }
-    return src;
-  };
-}(L));
 
 
 try {

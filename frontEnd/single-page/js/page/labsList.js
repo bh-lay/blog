@@ -3,8 +3,9 @@
  *
  */
 define([
-  'js/Base'
-],function(utils){
+  'js/Base',
+  'js/imageHosting'
+],function(utils,imageHosting){
   var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>',
       base_tpl = __inline('/tpl/labsListBase.html'),
       item_temp = __inline('/tpl/labsListItem.html');
@@ -34,7 +35,7 @@ define([
         for(var i = 0,total = list.length;i<total;i++){
           list[i]['work_range'] = list[i]['work_range']?list[i]['work_range'].split(/\,/):['暂未填写'];
           //使用七牛图床
-          list[i].cover = L.qiniu(list[i].cover,{
+          list[i].cover = imageHosting(list[i].cover,{
             type : 'cover',
             width : 320,
             height: 400

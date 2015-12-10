@@ -360,7 +360,7 @@ define([
       utils.query('.l_com_list_cnt',me.dom).innerHTML = html;
 
       if(hash_match){
-        var dom = utils.query('.l_com_item[data-id=' + hash_match[1] + ']',me.dom);
+        var dom = utils.query('.l_com_item[data-id="' + hash_match[1] + '"]',me.dom);
         setTimeout(function(){
           me.scrollTo(dom);
           utils.addClass(dom,'l_com_item_ani-active');

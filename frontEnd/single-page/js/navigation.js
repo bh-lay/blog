@@ -3,8 +3,9 @@
  *
  */
 define([
+  'exports',
   'js/Base'
-],function (utils) {
+],function (exports,utils) {
   'use strict';
   function init() {
     var scrollDelay,
@@ -50,7 +51,7 @@ define([
     utils.removeClass(utils.query('.app_nav li.cur'),'cur');
     utils.addClass(utils.query('.app_nav li[page=' + page + ']'),'cur');
   }
-  var nav = init;
-  nav.setCur = setCur;
-  return nav;
+
+  exports.init = init;
+  exports.setCur = setCur;
 });
