@@ -119,47 +119,71 @@
 
    return box;
   }
-  /**
-   * 事件绑定
-   * elem:节点
-   * type:事件类型
-   * handler:回调
-   */
-  var bindHandler = (function() {
-    // 标准浏览器
-    if (window.addEventListener) {
-      return function(elem, type, handler) {
-        // 最后一个参数为true:在捕获阶段调用事件处理程序
-        //为false:在冒泡阶段调用事件处理程序
-        elem.addEventListener(type, handler, false);
-      }
-    } else if (window.attachEvent) {
-      // IE浏览器
-      return function(elem, type, handler) {
-        elem.attachEvent("on" + type, handler);
-      }
-    }
-  })();
 
-  /**
-   * 事件解除
-   * elem:节点
-   * type:事件类型
-   * handler:回调
-   */
-  var removeHandler = (function() {
-    // 标准浏览器
-    if (window.removeEventListener) {
-      return function(elem, type, handler) {
-        elem.removeEventListener(type, handler, false);
-      }
-    } else if (window.detachEvent) {
-      // IE浏览器
-      return function(elem, type, handler) {
-        elem.detachEvent("on" + type, handler);
-      }
+  var private_prefix = 'Query',
+      private_salt = parseInt(new Date().getTime()/1000).toString(36),
+      operate_id = 0;
+  //查找 DOM，仅限内部调用参数不做校验
+  function findNode(selector,context,queryMethod){
+    var id = context.getAttribute("id"),
+        newSelector = selector,
+        useID,
+        returns;
+    if(!id){
+      //生成临时 ID
+      useID = [private_prefix, private_salt, ++operate_id].join('_');
+      context.setAttribute('id',useID);
+    }else{
+      useID = id;
     }
-  })();
+    returns = document[queryMethod]('#' + useID + ' ' + selector);
+    !id && context.removeAttribute('id');
+    return returns;
+  }
+  /**
+   * 检索DOM
+   *  selector：选择器
+   *  context：查找对象，可选
+   *  isAllMatches：是否匹配所有元素，默认：是
+   **/
+  function Query(selector,context,isAllMatches){
+    var returns = [],
+        selectorMatchs,
+        //全部匹配还是进返回单个 node
+        isAllMatches = (typeof(isAllMatches) == 'boolean') ? isAllMatches : true,
+        queryMethod = 'querySelector' + (isAllMatches ? 'All' : '');
+    //查询语句不存在或不为字符串，返回空数组
+    if(!selector || typeof(selector) !== 'string'){
+      return returns;
+    }
+    //查找对象存在，使用 find 逻辑
+    if(context && context.nodeType){
+      //匹配选择器
+      selectorMatchs = selector.match(/^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/);
+      //选择器为简单模式
+      if(selectorMatchs){
+        //ID
+        if(selectorMatchs[1]){
+          returns = [context.getElementById(selectorMatchs[1])];
+        }else if(selectorMatchs[2]){
+          //classname
+          returns = context.getElementsByTagName(selectorMatchs[2]);
+        }else{
+          //tagname
+          returns = context.getElementsByClassName(selectorMatchs[3]);
+        }
+        //返回单个 node
+        !isAllMatches && (returns = returns[0] || null);
+      }else{
+        returns = findNode(selector,context,queryMethod)
+      }
+    }else{
+      //直接 query
+      returns = document[queryMethod](selector);
+    }
+    return returns;
+  }
+
   /**
    * 向上查找 dom
   **/
@@ -175,33 +199,59 @@
       target = target.parentNode;
     }
   }
+
+  /**
+   * 事件绑定
+   * elem: dom 节点，支持数组和单个 node节点
+   * type: 事件类型，支持空格分割多个事件如：'keydown keyup'
+   * selector: 可选，用于事件委托
+   * callback: 回调函数，最后一个参数
+   */
   function bind(elem, type,a,b){
-    var checkStr,checkEventFn,fn,
-        elems = [].concat(elem),
+    var elems = [].concat(elem),
         types = type.split(/\s+/),
+        selector,
+        listenerFn,
         returns = {
           bind: function(type,a,b){
             bind(elem,type,a,b);
             return returns;
           }
         };
+    if(typeof(a) == 'function'){
+      listenerFn = a;
+    }else if(typeof(a) == 'string' && typeof(b) == 'function'){
+      selector = a;
+    }else{
+      //没有定义回调函数，结束运行
+      return;
+    }
+    //遍历元素
     each(elems,function(node){
-      if(typeof(a) == 'function'){
-        callback = a;
-      }else if(typeof(a) == 'string' && typeof(b) == 'function'){
-        callback = function(events){
+      if(selector){
+        listenerFn = function(events){
           var target = events.srcElement || events.target,
-              bingoDom = matchsElementBetweenNode(target,a,node);
+              bingoDom = matchsElementBetweenNode(target,selector,node);
           if(bingoDom){
             b && b.call(bingoDom,events);
           }
         };
       }
       each(types,function(event_name){
-        bindHandler(node,event_name,callback);
+        //false:仅监听冒泡阶段
+        node.addEventListener(event_name, listenerFn, false);
       });
     });
     return returns;
+  }
+  /**
+   * 事件解除
+   * elem:节点
+   * type:事件类型
+   * handler:回调
+   */
+  function unbind(elem, type, handler) {
+    elem.removeEventListener(type, handler, false);
   }
 
   function trigger(node,eventName){
@@ -269,12 +319,57 @@
     };
     request.send(dataStr);
   }
+
+  /**
+   * @param (timestamp/Date,'{y}-{m}-{d} {h}:{m}:{s}')
+   * @param (timestamp/Date,'{y}-{mm}-{dd} {hh}:{mm}:{ss}')
+   *
+   * y:year
+   * m:months
+   * d:date
+   * h:hour
+   * i:minutes
+   * s:second
+   * a:day
+   */
+  function parseTime(time,format){
+    if(arguments.length==0){
+      return null;
+    }
+    var format = format ||'{y}-{m}-{d} {h}:{i}:{s}';
+
+    if(typeof(time) == "object"){
+      var date = time;
+    }else{
+      var date = new Date(parseInt(time));
+    }
+
+    var formatObj = {
+      y : date.getYear()+1900,
+      m : date.getMonth()+1,
+      d : date.getDate(),
+      h : date.getHours(),
+      i : date.getMinutes(),
+      s : date.getSeconds(),
+      a : date.getDay(),
+    };
+
+    var time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g,function(result,key){
+      var value = formatObj[key];
+      if(result.length > 3 && value < 10){
+        value = '0' + value;
+      }
+      return value || 0;
+    });
+    return time_str;
+  };
   return {
     queryAll: Query,
     query: function(selector,context){
       return Query(selector,context,false);
     },
     each: each,
+    parseTime: parseTime,
     offset: offset,
     createDom: createDom,
     addClass: addClass,
@@ -290,59 +385,3 @@
     fetch: fetch
   };
 });
-//此方法仅限内部调用，参数不做校验
-var operate_id = 0
-function findNode(selector,context,queryMethod){
-  var id = context.getAttribute("id"),
-      newSelector = selector,
-      useID,
-      returns;
-  if(!id){
-    operate_id++;
-    //生成临时 ID
-    useID = 'Query_' + operate_id;
-    context.setAttribute('id',useID);
-  }else{
-    useID = id;
-  }
-  returns = document[queryMethod]('#' + useID + ' ' + selector);
-  !id && context.removeAttribute('id');
-  return returns;
-}
-function Query(selector,context,isAllMatches){
-  var returns = [],
-      selectorMatchs,
-      //全部匹配还是进返回单个 node
-      isAllMatches = (typeof(isAllMatches) == 'boolean') ? isAllMatches : true,
-      queryMethod = 'querySelector' + (isAllMatches ? 'All' : '');
-  //查询语句不存在或不为字符串，返回空数组
-  if(!selector || typeof(selector) !== 'string'){
-    return returns;
-  }
-  //查找对象存在，使用 find 逻辑
-  if(context && context.nodeType){
-    //
-    selectorMatchs = selector.match(/^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/);
-    //选择器为简单模式
-    if(selectorMatchs){
-      //ID
-      if(selectorMatchs[1]){
-        returns = [context.getElementById(selectorMatchs[1])];
-      }else if(selectorMatchs[2]){
-        //classname
-        returns = context.getElementsByTagName(selectorMatchs[2]);
-      }else{
-        //tagname
-        returns = context.getElementsByClassName(selectorMatchs[3]);
-      }
-      //返回单个 node
-      !isAllMatches && (returns = returns[0] || null);
-    }else{
-      returns = findNode(selector,context,queryMethod)
-    }
-  }else{
-    //直接 query
-    returns = document[queryMethod](selector);
-  }
-  return returns;
-}
