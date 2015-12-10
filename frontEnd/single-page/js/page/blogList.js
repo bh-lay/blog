@@ -28,15 +28,12 @@ define([
   }
   function renderTags(dom,tagName,callback){
     getTag(function(data){
-      var tag_item_tpl = __inline('/tpl/blogListTag.html');
-      var html = juicer(tag_item_tpl,data);
-      dom.innerHTML = html;
+      var tag_item_tpl = __inline('/tpl/blogListTag.html'),
+          html = juicer(tag_item_tpl,data),
+          selector = tagName ? ('a[data-tag=' + tagName + ']') : 'a';
 
-      if(tagName){
-          utils.addClass(utils.query('a[data-tag=' + tagName + ']',dom),'active');
-      }else{
-        utils.addClass(utils.query('a',dom),'active');
-      }
+      dom.innerHTML = html;
+      utils.addClass(utils.query(selector,dom),'active');
       utils.bind(dom,'click','a',function(){
         var tag = this.getAttribute('data-tag');
         callback && callback(tag);
