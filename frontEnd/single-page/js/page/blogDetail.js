@@ -5,8 +5,9 @@
 define([
   'js/Base',
   '/js/highlight.js',
-  '/js/showdown.js'
-],function(utils,hljs,showdown){
+  '/js/showdown.js',
+  'comments/index'
+],function(utils,hljs,showdown,comments){
   var empty_tpl = '<div class="blank-content"><p>博文不存在</p></div>',
       template = __inline('/tpl/blogDetailPage.html');
 
@@ -49,7 +50,7 @@ define([
         hljs.highlightBlock(node);
       });
 
-      var comments = new L.views.comments.init(commentDom,'blog-' + id,{
+      new comments.init(commentDom,'blog-' + id,{
         list_num: 8
       });
     });
