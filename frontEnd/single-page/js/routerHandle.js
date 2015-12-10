@@ -72,9 +72,7 @@ define([
       this.title('我的博客_小剧客栈');
       navigation.setCur('blog');
       var dom = getNewPage();
-      activePage = new blogDetailPage(dom, param.id, function (title) {
-        lofox.title(title);
-      });
+      activePage = new blogDetailPage(dom, param.id, this.title.bind(this));
     })
     //实验室列表页
     .set('/labs', function () {

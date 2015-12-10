@@ -24,8 +24,8 @@ define([
               detail = data['detail'];
           detail.content = converter.makeHtml(detail.content);
           detail.time_show = utils.parseTime(detail.time_show,'{y}-{mm}-{dd}');
-          var this_html = juicer(template,detail);
-          fn&&fn(null,this_html,data['detail']['title']);
+
+          fn&&fn(null,detail);
         }else{
           fn&&fn('博客不存在！');
         }
@@ -33,24 +33,22 @@ define([
     });
   };
 
-  return function(dom,id,callback){
-    getData(id,function(err,html,title){
-      if(err){
+  return function(dom,id,setTitle){
+    getData(id,function(err,detail,title){
+      if(err && !detail){
         dom.innerHTML = empty_tpl;
         return;
       }
-      callback && callback(title);
-      if(html){
-        dom.innerHTML = html;
-      }
-      var commentDom = utils.query('.comments_frame',dom);
+
+      setTitle && setTitle(detail.title);
+      dom.innerHTML = juicer(template,detail);
 
       //代码高亮
       utils.each(utils.queryAll('pre',dom),function(node){
         hljs.highlightBlock(node);
       });
 
-      new comments.init(commentDom,'blog-' + id,{
+      new comments.init(utils.query('.comments_frame',dom),'blog-' + id,{
         list_num: 8
       });
     });
