@@ -5,9 +5,7 @@
   var utils = factory(global,doc);
   if(global.define){
     //提供CommonJS规范的接口
-    define(function(){
-      return utils;
-    });
+    define(utils);
   }else{
     //提供window.UI的接口
     global.utils = global.utils || utils;
