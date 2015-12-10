@@ -2,10 +2,12 @@
  * blog detail
  *
  */
-define(function(require,exports){
-  var hljs = require('/js/highlight.js');
-  var showdown = require('/js/showdown.js'),
-      empty_tpl = '<div class="blank-content"><p>博文不存在</p></div>',
+define([
+  'js/Base',
+  '/js/highlight.js',
+  '/js/showdown.js'
+],function(utils,hljs,showdown){
+  var empty_tpl = '<div class="blank-content"><p>博文不存在</p></div>',
       template = __inline('/tpl/blogDetailPage.html');
 
   function getData(id,fn){

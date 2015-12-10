@@ -3,13 +3,15 @@
  **/
 (function(global,doc,factory){
   var utils = factory(global,doc);
-  //提供window.UI的接口
-  global.utils = global.utils || utils;
-
-  //提供CommonJS规范的接口
-  global.define && define(function(){
-    return utils;
-  });
+  if(global.define){
+    //提供CommonJS规范的接口
+    define(function(){
+      return utils;
+    });
+  }else{
+    //提供window.UI的接口
+    global.utils = global.utils || utils;
+  }
 })(this,document,function(window,document){
   /**
    * 检测是否为数字
@@ -71,10 +73,7 @@
    */
   function setStyle(elem,prop,value){
     prop = prop.toString();
-    if (prop == "opacity") {
-      elem.style.filter = 'alpha(opacity=' + (value * 100)+ ')';
-      value = value;
-    } else if ( isNum(value) && prop != 'zIndex'){
+    if(isNum(value) && prop != 'zIndex'){
       value = value + "px";
     }
     elem.style[prop] = value;
@@ -183,18 +182,45 @@
     }
     return returns;
   }
-
   /**
-   * 向上查找 dom
+   * 匹配 selector 与 dom 间关系
   **/
-  function matchsElementBetweenNode(fromNode,selector,endNode){
-    var target = fromNode;
+  function matchsSelectorBetweenNode(fromNode,selector,endNode){
+    var target = fromNode,
+        selectors = selector.trim().split(/\s+/),
+        last_select = selectors.pop(),
+        parentsList = [],
+        bingoDom;
+
     while (1) {
+      //匹配结束
       if(target == endNode || !target){
         return false;
       }
-      if(matches(target,selector)){
-        return target;
+      //单条匹配成功
+      if(matches(target,last_select)){
+        // 命中的 dom
+        if(!bingoDom){
+          bingoDom = target;
+        }
+        //拆分当前匹配
+        parentsList = last_select.split(/\s*\>\s*/);
+        //包含父级匹配，如 .parent>.child>span
+        if(parentsList.length > 1){
+          //最后一条已无需对比
+          parentsList.pop();
+          //逆序遍历父级列表
+          for(var i = parentsList.length-1;i>=0;i--){
+            target = target.parentNode;
+            if(!matches(target,parentsList[i])){
+              return false;
+            }
+          }
+        }
+        if(!selectors.length){
+          return bingoDom;
+        }
+        last_select = selectors.pop();
       }
       target = target.parentNode;
     }
@@ -231,7 +257,7 @@
       if(selector){
         listenerFn = function(events){
           var target = events.srcElement || events.target,
-              bingoDom = matchsElementBetweenNode(target,selector,node);
+              bingoDom = matchsSelectorBetweenNode(target,selector,node);
           if(bingoDom){
             b && b.call(bingoDom,events);
           }
@@ -379,7 +405,12 @@
     remove: function (node){
       node.parentNode.removeChild(node);
     },
-    parents: matchsElementBetweenNode,
+    parents: function(node,selector){
+      if(!node || typeof(selector)!=='string' || selector.split(',').length > 1){
+        return null;
+      }
+      return matchsSelectorBetweenNode(node,selector);
+    },
     bind: bind,
     trigger: trigger,
     fetch: fetch

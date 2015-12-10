@@ -2,7 +2,9 @@
  * labs list
  *
  */
-define(function(require,exports){
+define([
+  'js/Base'
+],function(utils){
   var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>',
       base_tpl = __inline('/tpl/labsListBase.html'),
       item_temp = __inline('/tpl/labsListItem.html');

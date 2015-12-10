@@ -5,7 +5,9 @@
  */
 
 //index page
-define(function(require,exports){
+define([
+  'js/Base'
+],function(utils){
   var temp = __inline('/tpl/index.html'),
       imgs = [
         __uri("/images/gallery/bamboo.jpg"),

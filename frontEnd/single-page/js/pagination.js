@@ -3,7 +3,9 @@
 /***
  * 分页 页码
  **/
-define(function(require,exports){
+define([
+	'js/Base'
+],function(utils){
 	function render(){
 		var txt = '<ul class="pagination">';
         if(this.page_num < 2){

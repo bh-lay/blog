@@ -2,7 +2,9 @@
  * 评论 list
  *
  */
-define(function(require,exports){
+define([
+  'js/Base'
+],function(utils){
   var comment_id = 'define-1',
       base_tpl = __inline('/tpl/bless.html');
 	function page(dom){

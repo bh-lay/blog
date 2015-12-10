@@ -4,7 +4,9 @@
  */
 
 
-define(function(require,exports){
+define([
+  'js/Base'
+],function(utils){
   var Stick = require('/js/stick.js'),
       tie = require('/js/tie.js');
   var private_tag_data = null;

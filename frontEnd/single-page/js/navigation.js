@@ -2,7 +2,9 @@
  *
  *
  */
-define(function () {
+define([
+  'js/Base'
+],function (utils) {
   'use strict';
   function init() {
     var scrollDelay,

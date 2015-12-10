@@ -1,11 +1,13 @@
 
 
-define(function(require,exports){
-  var selection = require('comments/selection'),
-      face = require('comments/face'),
-      pagination = require('js/pagination'),
-
-      private_userInfo = null,
+define([
+  'exports',
+  'js/Base',
+  'comments/selection',
+  'comments/face',
+  'js/pagination'
+],function(exports,utils,selection,face,pagination){
+    var private_userInfo = null,
       default_avatar = __uri('/images/default.jpg'),
 
       noData_tpl = '<div class="l_com_list_noData">来的真早，快抢沙发！</div>',
@@ -403,7 +405,6 @@ define(function(require,exports){
               return '@' + reply_for + ' ' + text;
             }
           });
-          console.log('reply_for',reply_for);
       utils.css(utils.query('.UI_pop_cpt',pop.dom),{
         border: 'none'
       });

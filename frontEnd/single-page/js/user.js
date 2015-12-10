@@ -8,10 +8,13 @@
  *    type：用户类型（online、local）
  */
 
-define(function(require,exports){
-  var hex_md5 = require('js/md5'),
+define([
+  'exports',
+  'js/Base',
+  'js/md5'
+],function(exports,utils,hex_md5){
       //存储当前用户的信息
-      userInfo = null,
+  var userInfo = null,
       //存储程序需要用到的登录回调
       LoginCallbacks = [];
 

@@ -15,15 +15,15 @@ require([
   'js/page/labsList',
   'js/page/bless',
   'comments/index',
+  'js/Base',
 
   'js/juicer',
   'js/lofox',
-  'js/dialog',
-  'js/Base'
-], function (user,nav,index,blogList,blogDetail,labsList,bless,comments){
+  'js/dialog'
+], function (user,nav,index,blogList,blogDetail,labsList,bless,comments,utils){
   //绑定路由
   var lofox = new util.lofox();
-  routerHandle(lofox);
+  routerHandle(lofox,utils);
 
   L.user = user;
   L.nav = nav;
@@ -220,7 +220,7 @@ require([
   };
 }(L));
 
-function routerHandle(lofox) {
+function routerHandle(lofox,utils) {
   'use strict';
   var container = utils.query('.app_container'),
       nodeActivePage = null,
