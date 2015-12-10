@@ -20,7 +20,7 @@ define(function(require,exports){
           var converter = new showdown.converter(),
               detail = data['detail'];
           detail.content = converter.makeHtml(detail.content);
-          detail.time_show = L.parseTime(detail.time_show,'{y}-{mm}-{dd}');
+          detail.time_show = utils.parseTime(detail.time_show,'{y}-{mm}-{dd}');
           var this_html = juicer(template,detail);
           fn&&fn(null,this_html,data['detail']['title']);
         }else{

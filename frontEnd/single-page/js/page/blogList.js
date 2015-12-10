@@ -86,7 +86,7 @@ define(function(require,exports){
           if((now - list[i].time_show)/(1000*60*60*24) < 90){
             list[i].is_new = true;
           }
-          list[i].time_show = L.parseTime(list[i].time_show,'{mm}-{dd} {y}');
+          list[i].time_show = utils.parseTime(list[i].time_show,'{mm}-{dd} {y}');
           //使用七牛图床
           list[i].cover = L.qiniu(list[i].cover,{
               type : 'zoom',

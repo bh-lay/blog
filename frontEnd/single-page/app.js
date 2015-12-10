@@ -106,49 +106,6 @@ require([
       return utils.query('#module_' + key).innerHTML || '';
     }) : '';
   };
-  /**
-   * @param (timestamp/Date,'{y}-{m}-{d} {h}:{m}:{s}')
-   * @param (timestamp/Date,'{y}-{mm}-{dd} {hh}:{mm}:{ss}')
-   *
-   * y:year
-   * m:months
-   * d:date
-   * h:hour
-   * i:minutes
-   * s:second
-   * a:day
-   */
-  L.parseTime = function (time,format){
-    if(arguments.length==0){
-      return null;
-    }
-    var format = format ||'{y}-{m}-{d} {h}:{i}:{s}';
-
-    if(typeof(time) == "object"){
-      var date = time;
-    }else{
-      var date = new Date(parseInt(time));
-    }
-
-    var formatObj = {
-      y : date.getYear()+1900,
-      m : date.getMonth()+1,
-      d : date.getDate(),
-      h : date.getHours(),
-      i : date.getMinutes(),
-      s : date.getSeconds(),
-      a : date.getDay(),
-    };
-
-    var time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g,function(result,key){
-      var value = formatObj[key];
-      if(result.length > 3 && value < 10){
-        value = '0' + value;
-      }
-      return value || 0;
-    });
-    return time_str;
-  };
   //做个好玩的
   document.addEventListener('visibilitychange', function() {
     document.title = document.hidden ? '出BUG了，快看！':'小剧客栈，剧中人的个人博客！';
