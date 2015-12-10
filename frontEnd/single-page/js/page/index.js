@@ -15,7 +15,7 @@ define(function(require,exports){
 
   function view(dom){
     dom.innerHTML = temp;
-    var nodeGallery = Sizzle('.gallayer',dom)[0];
+    var nodeGallery = utils.query('.gallayer',dom);
     nodeGallery.style.backgroundImage = 'url(' +  imgs[++index] + ')';
 
     if(index + 1 >= imgs.length){
@@ -29,7 +29,7 @@ define(function(require,exports){
       destroy: function() {
         utils.css(nodeGallery,{
           position: 'absolute',
-          top: Sizzle('body')[0].scrollTop - utils.offset(Sizzle('.app_container')[0]).top,
+          top: utils.query('body').scrollTop - utils.offset(utils.query('.app_container')).top,
           height: window.innerHeight
         });
       }

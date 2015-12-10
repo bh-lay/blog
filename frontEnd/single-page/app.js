@@ -80,7 +80,7 @@ require([
   }
   //为windows系统定制body滚动条样式（仅webkit有效）
   if(isWindows){
-    utils.addClass(Sizzle('body')[0],'define-scrollbar');
+    utils.addClass(utils.query('body'),'define-scrollbar');
   }
   L.supports = {
     touch : isSupportTouch,
@@ -103,7 +103,7 @@ require([
   //模块替换
   L.tplModule = function(txt){
     return (txt && txt.length) ? txt.replace(/\[\-(\w+)\-\]/g,function(a,key){
-      return Sizzle('#module_' + key)[0].innerHTML || '';
+      return utils.query('#module_' + key).innerHTML || '';
     }) : '';
   };
   /**
@@ -156,21 +156,21 @@ require([
 
   //动态插入emoji表情样式
   var str = '<style type="text/css" data-module="emoji">';
-  (Sizzle('#data_emoji')[0].innerHTML || '').trim().split(/\s+/).forEach(function(item,index){
+  (utils.query('#data_emoji').innerHTML || '').trim().split(/\s+/).forEach(function(item,index){
     str += '.emoji.s_' + item + '{background-position: -' + (index * 25) + 'px 0;}';
   });
   str += '</style>';
-  Sizzle('head')[0].insertAdjacentHTML('beforeEnd', str);
-  
+  utils.query('head').insertAdjacentHTML('beforeEnd', str);
+
   //配置弹出层
   UI.config.zIndex(2000);
 
   //开始导航
   L.nav();
   //渐隐加载遮罩
-  utils.addClass(Sizzle('.app_mask')[0],'app_mask_out');
+  utils.addClass(utils.query('.app_mask'),'app_mask_out');
   setTimeout(function () {
-    utils.remove(Sizzle('.app_mask')[0]);
+    utils.remove(utils.query('.app_mask'));
   }, 1000);
 
   /**
@@ -184,7 +184,7 @@ require([
    * 分享功能
    *  data-text data-url data-title data-img data-shareto
    */
-  utils.bind(Sizzle('body')[0],'click','.sns-share a',function(){
+  utils.bind(utils.query('body'),'click','.sns-share a',function(){
     var node_data = utils.parents(this,'.sns-share'),
         url = node_data.getAttribute('data-url') || location.href,
         text = encodeURIComponent(node_data.getAttribute('data-text')) || document.title,
@@ -201,7 +201,7 @@ require([
     return false;
   });
   //全局控制 a 链接的打开方式
- utils.bind(Sizzle('body')[0],'click','a',function(e){
+  utils.bind(utils.query('body'),'click','a',function(e){
     var url = this.getAttribute('href');
     //为JS脚本准备的链接
     if(hrefForScript(url)){
@@ -265,7 +265,7 @@ require([
 
 function routerHandle(lofox) {
   'use strict';
-  var container = Sizzle('.app_container')[0],
+  var container = utils.query('.app_container'),
       nodeActivePage = null,
       activePage = null;
   //显示单页dom
@@ -278,7 +278,7 @@ function routerHandle(lofox) {
           utils.addClass(nodeOld,'fadeOutRight');
       setTimeout(function () {
         utils.remove(nodeOld);
-        Sizzle('body')[0].scrollTop = 0;
+        utils.query('body').scrollTop = 0;
         utils.addClass(nodeNew,'fadeInLeft page-active');
         setTimeout(function () {
           utils.removeClass(nodeNew,'fadeInLeft');

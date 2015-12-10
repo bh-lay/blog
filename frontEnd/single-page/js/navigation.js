@@ -6,9 +6,9 @@ define(function () {
   'use strict';
   function init() {
     var scrollDelay,
-        nodeBackTop = Sizzle('.back-top')[0],
-        nodeBody = Sizzle('body')[0],
-        nodeNav = Sizzle('.app_nav',nodeBody)[0];
+        nodeBackTop = utils.query('.back-top'),
+        nodeBody = utils.query('body'),
+        nodeNav = utils.query('.app_nav',nodeBody);
     utils.bind(nodeNav,'click','.nav a,.side a',function () {
       utils.removeClass(nodeBody,'nav_slidedown');
     }).bind('click','.nav_mask', function () {
@@ -17,7 +17,7 @@ define(function () {
       utils.toggleClass(nodeBody,'nav_slidedown');
     });
 
-    utils.bind(Sizzle('.backToOldVersion')[0],'click', function () {
+    utils.bind(utils.query('.backToOldVersion'),'click', function () {
       UI.confirm({
         text : '确定要去当屌丝？',
         callback : function(){
@@ -45,10 +45,8 @@ define(function () {
     if (page === '/') {
       page = 'index';
     }
-    utils.each(Sizzle('.app_nav li'),function(node){
-      utils.removeClass(node,'cur');
-    });
-    utils.addClass(Sizzle('.app_nav li[page=' + page + ']')[0],'cur');
+    utils.removeClass(utils.query('.app_nav li.cur'),'cur');
+    utils.addClass(utils.query('.app_nav li[page=' + page + ']'),'cur');
   }
   var nav = init;
   nav.setCur = setCur;

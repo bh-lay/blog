@@ -58,7 +58,7 @@
     if (!hasClass(dom, cls)) dom.className += " " + cls;
   }
   function removeClass(dom, cls) {
-    if (hasClass(dom, cls)) {
+    if (dom && hasClass(dom, cls)) {
       var reg = new RegExp('(\\s+|^)' + cls + '(\\s+|$)');
       dom.className = dom.className.replace(reg, ' ');
     }
@@ -270,6 +270,10 @@
     request.send(dataStr);
   }
   return {
+    queryAll: Query,
+    query: function(selector,context){
+      return Query(selector,context,false);
+    },
     each: each,
     offset: offset,
     createDom: createDom,
@@ -286,26 +290,31 @@
     fetch: fetch
   };
 });
+//此方法仅限内部调用，参数不做校验
 var operate_id = 0
-function findNode(selector,context,returns){
+function findNode(selector,context,queryMethod){
   var id = context.getAttribute("id"),
       newSelector = selector,
-      useID;
+      useID,
+      returns;
   if(!id){
     operate_id++;
     //生成临时 ID
-    useID = 'Sizzle_' + operate_id;
+    useID = 'Query_' + operate_id;
     context.setAttribute('id',useID);
   }else{
     useID = id;
   }
-  returns = document.querySelectorAll('#' + useID + ' ' + selector);
+  returns = document[queryMethod]('#' + useID + ' ' + selector);
   !id && context.removeAttribute('id');
   return returns;
 }
-function Sizzle(selector,context){
+function Query(selector,context,isAllMatches){
   var returns = [],
-      selectorMatchs;
+      selectorMatchs,
+      //全部匹配还是进返回单个 node
+      isAllMatches = (typeof(isAllMatches) == 'boolean') ? isAllMatches : true,
+      queryMethod = 'querySelector' + (isAllMatches ? 'All' : '');
   //查询语句不存在或不为字符串，返回空数组
   if(!selector || typeof(selector) !== 'string'){
     return returns;
@@ -326,12 +335,14 @@ function Sizzle(selector,context){
         //tagname
         returns = context.getElementsByClassName(selectorMatchs[3]);
       }
+      //返回单个 node
+      !isAllMatches && (returns = returns[0] || null);
     }else{
-      returns = findNode(selector,context)
+      returns = findNode(selector,context,queryMethod)
     }
   }else{
     //直接 query
-    returns = document.querySelectorAll(selector);
+    returns = document[queryMethod](selector);
   }
   return returns;
 }

@@ -30,13 +30,9 @@ define(function(require,exports){
       dom.innerHTML = html;
 
       if(tagName){
-        utils.each(Sizzle('a',dom),function(node){
-          if(node.getAttribute('data-tag') == tagName){
-            utils.addClass(node,'active');
-          }
-        });
+          utils.addClass(utils.query('a[data-tag=' + tagName + ']',dom),'active');
       }else{
-        utils.addClass(Sizzle('a',dom)[0],'active');
+        utils.addClass(utils.query('a',dom),'active');
       }
       utils.bind(dom,'click','a',function(){
         var tag = this.getAttribute('data-tag');
@@ -113,8 +109,8 @@ define(function(require,exports){
         empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>';
     //插入基本模版
     dom.innerHTML = baseTpl;
-    this.nodeList = Sizzle('.articleList',dom)[0];
-    this.nodeLoading = Sizzle('.l-loading-panel',dom)[0];
+    this.nodeList = utils.query('.articleList',dom);
+    this.nodeLoading = utils.query('.l-loading-panel',dom);
 
     this.stick = new Stick({
       container: me.nodeList,
@@ -125,7 +121,7 @@ define(function(require,exports){
         list.loadMore();
       }
     });
-    var nodeTag = Sizzle('.articleListPage-tags',dom)[0];
+    var nodeTag = utils.query('.articleListPage-tags',dom);
     this.tie = util.tie({
       dom : nodeTag,
       scopeDom: utils.parents(nodeTag,'.articleListPage'),
@@ -146,7 +142,7 @@ define(function(require,exports){
       }
     });
     //处理标签功能
-    renderTags(Sizzle('.articleListPage-tags .content',dom)[0],pageTag,function(tag){
+    renderTags(utils.query('.articleListPage-tags .content',dom),pageTag,function(tag){
       if(tag == 'null'){
         L.push('/blog');
       }else{

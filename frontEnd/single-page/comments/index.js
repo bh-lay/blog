@@ -63,10 +63,10 @@ define(function(require,exports){
           avatar : userInput.avatar || default_avatar
         },
         screen_name = user.username || '雁过留名',
-        nodeUser = Sizzle('.l_send_username',this.dom)[0];
+        nodeUser = utils.query('.l_send_username',this.dom);
     nodeUser.innerHTML = screen_name;
     nodeUser.setAttribute('title',screen_name);
-    Sizzle('.l_send_avatar img',this.dom)[0].setAttribute('src',user.avatar);
+    utils.query('.l_send_avatar img',this.dom).setAttribute('src',user.avatar);
   }
 
   /**
@@ -126,9 +126,9 @@ define(function(require,exports){
           mask: true,
           confirm : confirmFn
         }),
-        nodeUsername = Sizzle('input[name="username"]',pop.dom)[0],
-        nodeEmail = Sizzle('input[name="email"]',pop.dom)[0],
-        nodeBlog = Sizzle('input[name="blog"]',pop.dom)[0];;
+        nodeUsername = utils.query('input[name="username"]',pop.dom),
+        nodeEmail = utils.query('input[name="email"]',pop.dom),
+        nodeBlog = utils.query('input[name="blog"]',pop.dom);
     function confirmFn(){
       var username = nodeUsername.value,
           email = nodeEmail.value,
@@ -174,7 +174,7 @@ define(function(require,exports){
   function bindDomEvent(){
     var me = this,
         nodeGlobal = me.dom,
-        nodeTextarea = Sizzle('textarea',nodeGlobal)[0],
+        nodeTextarea = utils.query('textarea',nodeGlobal),
         inputDelay,
         focusDelay;
 
@@ -225,9 +225,9 @@ define(function(require,exports){
   function bindCustomEvent(){
     var me = this,
         nodeGlobal = this.dom,
-        nodeTextarea = Sizzle('textarea',nodeGlobal)[0],
-        nodeCount = Sizzle('.l_send_count',nodeGlobal)[0],
-        nodeCountRest = Sizzle('b',nodeCount)[0];
+        nodeTextarea = utils.query('textarea',nodeGlobal),
+        nodeCount = utils.query('.l_send_count',nodeGlobal),
+        nodeCountRest = utils.query('b',nodeCount);
 
     //监听字符变化事件
     this.on('change',function (){
@@ -285,14 +285,14 @@ define(function(require,exports){
       setUserInfoToUI.call(me,user);
     });
     if(param.focus){
-      Sizzle('textarea',this.dom)[0].focus();
+      utils.query('textarea',this.dom).focus();
     }
   }
   sendBox.prototype = {
     on: ON,
     submit: function(){
       var me = this,
-          nodeTextarea = Sizzle('textarea',this.dom)[0];
+          nodeTextarea = utils.query('textarea',this.dom);
 
       nodeTextarea.focus();
       if(this.isSubmitting){
@@ -348,27 +348,27 @@ define(function(require,exports){
 
     this.getData(0,function(err,data){
       if(err){
-        Sizzle('.l_com_list_cnt',me.dom)[0].innerHTML = noData_tpl;
+        utils.query('.l_com_list_cnt',me.dom).innerHTML = noData_tpl;
         return;
       }
 
       var hash_match = (location.hash || '').match(/#comments-(.+)/);
 
       var html = juicer(item_tpl,data);
-      Sizzle('.l_com_list_cnt',me.dom)[0].innerHTML = html;
+      utils.query('.l_com_list_cnt',me.dom).innerHTML = html;
 
       if(hash_match){
-        var dom = Sizzle('.l_com_item[data-id=' + hash_match[1] + ']',me.dom)[0];
+        var dom = utils.query('.l_com_item[data-id=' + hash_match[1] + ']',me.dom);
         setTimeout(function(){
           me.scrollTo(dom);
           utils.addClass(dom,'l_com_item_ani-active');
         },500);
       }
       if(me.total == 0){
-        Sizzle('.l_com_list_cnt',me.dom)[0].innerHTML = noData_tpl;
+        utils.query('.l_com_list_cnt',me.dom).innerHTML = noData_tpl;
       }else{
         //分页组件
-        var page = new pagination(Sizzle('.l_com_list_pagination',me.dom)[0],{
+        var page = new pagination(utils.query('.l_com_list_pagination',me.dom),{
             list_count : me.total,
             page_cur : 0,
             page_list_num : me.limit,
@@ -382,7 +382,7 @@ define(function(require,exports){
               return;
             }
             var html = juicer(item_tpl,data);
-            Sizzle('.l_com_list_cnt',me.dom)[0].innerHTML = html;
+            utils.query('.l_com_list_cnt',me.dom).innerHTML = html;
           });
         };
       }
@@ -404,7 +404,7 @@ define(function(require,exports){
             }
           });
           console.log('reply_for',reply_for);
-      utils.css(Sizzle('.UI_pop_cpt',pop.dom)[0],{
+      utils.css(utils.query('.UI_pop_cpt',pop.dom),{
         border: 'none'
       });
       send.on('sendToServiceSuccess',function(item){
@@ -414,7 +414,7 @@ define(function(require,exports){
     });
   }
   list.prototype.scrollTo = function(dom){
-    Sizzle('body')[0].scrollTop = utils.offset(dom).top - 70;
+    utils.query('body').scrollTop = utils.offset(dom).top - 70;
   };
   list.prototype.addItem = function(item){
     item.time = '刚刚';
@@ -426,10 +426,10 @@ define(function(require,exports){
       list: [item]
     });
     var node_item = utils.createDom(html),
-        node_list_cnt = Sizzle('.l_com_list_cnt',this.dom)[0];
+        node_list_cnt = utils.query('.l_com_list_cnt',this.dom);
     node_list_cnt.insertBefore(node_item, node_list_cnt.firstChild);
     utils.addClass(node_item,'l_com_item_ani-insert');
-    var nodeNoData = Sizzle('.l_com_list_noData',this.dom)[0];
+    var nodeNoData = utils.query('.l_com_list_noData',this.dom);
     nodeNoData && (nodeNoData.style.display = "none");
   };
   list.prototype.getData = function(skip,callback){
@@ -477,8 +477,8 @@ define(function(require,exports){
     dom.innerHTML = '';
     dom.appendChild(this.dom);
 
-    this.sendBox = new sendBox(Sizzle('.l_com_sendBox',this.dom)[0],id,param);
-    this.list = new list(Sizzle('.l_com_list',this.dom)[0],id,param);
+    this.sendBox = new sendBox(utils.query('.l_com_sendBox',this.dom),id,param);
+    this.list = new list(utils.query('.l_com_list',this.dom),id,param);
     this.sendBox.on('sendToServiceSuccess',function(item){
       me.list.addItem(item);
     });

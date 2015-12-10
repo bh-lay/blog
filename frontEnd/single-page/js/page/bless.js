@@ -9,8 +9,8 @@ define(function(require,exports){
     var base_tpl_end = L.tplModule(base_tpl);
     dom.innerHTML = base_tpl_end;
 
-    var sendBox = new L.views.comments.sendBox(Sizzle('.bless-sendBox',dom)[0],comment_id),
-        list = new L.views.comments.list(Sizzle('.grid-col-flow-300',dom)[0], comment_id);
+    var sendBox = new L.views.comments.sendBox(utils.query('.bless-sendBox',dom),comment_id),
+        list = new L.views.comments.list(utils.query('.grid-col-flow-300',dom), comment_id);
     sendBox.on('sendToServiceSuccess',function(item){
       list.addItem(item);
     });

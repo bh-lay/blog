@@ -40,10 +40,10 @@ define(function(require,exports){
       if(html){
         dom.innerHTML = html;
       }
-      var commentDom = Sizzle('.comments_frame',dom)[0];
+      var commentDom = utils.query('.comments_frame',dom);
 
       //代码高亮
-      utils.each(Sizzle('pre',dom),function(node){
+      utils.each(utils.queryAll('pre',dom),function(node){
         hljs.highlightBlock(node);
       });
 

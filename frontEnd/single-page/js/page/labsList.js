@@ -54,7 +54,7 @@ define(function(require,exports){
           list : list
         });
       }
-      Sizzle('.labsList',dom)[0].innerHTML = this_html;
+      utils.query('.labsList',dom).innerHTML = this_html;
     });
   };
 });
