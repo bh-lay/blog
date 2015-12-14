@@ -44,8 +44,8 @@ define([
       dom.innerHTML = juicer(template,detail);
 
       //代码高亮
-      utils.each(utils.queryAll('pre',dom),function(node){
-        hljs.highlightBlock(node);
+      utils.each(utils.queryAll('pre code',dom),function(node){
+        hljs(node);
       });
 
       new comments.init(utils.query('.comments_frame',dom),'blog-' + id,{

@@ -1,6 +1,6 @@
 
 .article {
-  padding: 20px;
+  padding: 40px 20px;
   font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 1rem;
   line-height: 1.6;
@@ -193,7 +193,7 @@
 
   div{
     counter-increment: section;
-    padding: 5px 10px 5px 40px;
+    padding: 5px 10px 5px 45px;
     min-height: 1em;
     line-height: 1em;
     &:before{
@@ -217,13 +217,14 @@
     .string{
       color: #183691
     }
-    .number{color:#d14}
+    .global,
+    .number{
+      color:#0086b3
+    }
     .keywords{
       color:#a71d5d;
     }
     .regex{color:#8000ff}
-    .global{color:#0086B3}
-    .brackets{color:#000080}
   }
   &.html{
     .comment{color:#999988;font-style:italic}
