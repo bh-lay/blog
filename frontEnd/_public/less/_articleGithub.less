@@ -70,12 +70,21 @@
   ul,ol {
     padding-left: 2em
   }
+  ul {
+    list-style: disc;
+  }
+  ol {
+    list-style: decimal;
+  }
   ul ul, ul ol, ol ol, ol ul {
     margin-top: 0;
     margin-bottom: 0
   }
-  li>p {
-    margin-top: 16px
+  li{
+    list-style: inherit;
+    &>p {
+      margin-top: 16px
+    }
   }
   dl {
     padding: 0
@@ -170,37 +179,25 @@
     }
   }
 }
-
-.hljs-params {
-  color: #333
-}
-.hljs-literal{
-  color: #0086b3;
-}
-
-
-
-
-
 //代码高亮
 .highlight{
   counter-reset: section 0;
   word-break: normal;
   white-space: pre;
-  margin-bottom: 16px;
+  margin-bottom: 2em;
+  padding: 1em 0;
   font-family: monospace;
-  background: #f6f6f6;
-
-  div{
+  background: #f8f8f8;
+  &>div{
     counter-increment: section;
-    padding: 5px 10px 5px 45px;
+    padding: 6px 10px 6px 3em;
     min-height: 1em;
     line-height: 1em;
     &:before{
       content: counter(section);
       display: block;
       position: absolute;
-      margin-left: -30px;
+      margin-left: -2em;
       color: #ddd;
     }
     &:hover{
@@ -224,7 +221,9 @@
     .keywords{
       color:#a71d5d;
     }
-    .regex{color:#8000ff}
+    .regex{
+      color:#009a1a
+    }
   }
   &.html{
     .comment{color:#999988;font-style:italic}
