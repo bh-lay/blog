@@ -45,7 +45,7 @@ define([
   function LIST(tag,onLoadStart,onLoaded){
     this.skip = 0;
     this.limit = 10;
-    this.count = 0;
+    this.count = -1;
     this.tag = tag || null;
     this.onLoadStart = onLoadStart;
     this.onLoaded = onLoaded;
@@ -54,10 +54,7 @@ define([
   }
   LIST.prototype.loadMore = function (){
     var me = this;
-    if(this.count!=0 && this.skip >= this.count){
-      return;
-    }
-    if(this.isLoading){
+    if(this.isLoading || this.count>=0 && this.skip >= this.count){
       return;
     }
     this.isLoading = true;
@@ -71,16 +68,13 @@ define([
         limit : this.limit
       },
       callback :function(err,data){
-        if(err){
-          //
+        if(err || !data || data.code == 200){
+          callback && callback('err');
+          return;
         }
         var count = data['count'],
             list = data['list'],
             now = new Date().getTime();
-        if(data.code == 500){
-          callback && callback(500);
-          return;
-        }
         for(var i in list){
           //三月内的文章都算最新（多可悲）
           if((now - list[i].time_show)/(1000*60*60*24) < 90){
