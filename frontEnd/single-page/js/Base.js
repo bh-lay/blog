@@ -52,10 +52,14 @@
    * 判断dom是否拥有某个class
    */
   function hasClass(dom,classSingle){
-    return dom.className && dom.className.match(new RegExp('(\\s|^)' + classSingle + '(\\s|$)')) || false;
+    if(dom && dom.className){
+      return !!dom.className.match(new RegExp('(\\s|^)' + classSingle + '(\\s|$)'));
+    }
   }
   function addClass(dom, cls) {
-    if (!hasClass(dom, cls)) dom.className += " " + cls;
+    if(dom && !hasClass(dom, cls)){
+      dom.className += " " + cls;
+    }
   }
   function removeClass(dom, cls) {
     if (dom && hasClass(dom, cls)) {
