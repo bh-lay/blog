@@ -42,5 +42,6 @@ fis.match('*.html', {
 
 //线上使用CDN
 fis.media('production').match('*', {
-  domain: 'http://static.bh-lay.com'
+  domain: '//dn-lay.qbox.me'
+  // domain: '//127.0.0.1:8088'
 });
