@@ -11,11 +11,6 @@ fis.match('*.less', {
   rExt: '.css'
 });
 
-//CSS压缩
-fis.match('*.css', {
-  optimizer: fis.plugin('clean-css')
-});
-
 fis.match('js/**.js', {
   isMod: true
 });
@@ -57,6 +52,10 @@ fis
     // 通过 uglify 压缩 js
     optimizer: fis.plugin('uglify-js')
   })
+  //CSS压缩
+  .match('*.less', {
+    optimizer: fis.plugin('clean-css')
+  });
   //使用hash
   .match('*.{js,css,jpg,png,less,gif,svg,eot,ttf,woff,woff2}', {
     useHash: true
