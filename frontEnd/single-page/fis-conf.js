@@ -55,7 +55,7 @@ fis
   //CSS压缩
   .match('*.less', {
     optimizer: fis.plugin('clean-css')
-  });
+  })
   //使用hash
   .match('*.{js,css,jpg,png,less,gif,svg,eot,ttf,woff,woff2}', {
     useHash: true

@@ -8,8 +8,7 @@ define([
   '/js/showdown.js',
   'comments/index'
 ],function(utils,hljs,showdown,comments){
-  var empty_tpl = '<div class="blank-content"><p>博文不存在</p></div>',
-      template = __inline('/tpl/blogDetailPage.html');
+  var template = __inline('/tpl/blogDetailPage.html');
 
   function getData(id,fn){
     utils.fetch({
@@ -19,7 +18,7 @@ define([
         id : id
       },
       callback :function(err,data){
-        if(data.code == 200){
+        if(!err && data && data.code == 200){
           var converter = new showdown.converter(),
               detail = data['detail'];
           detail.content = converter.makeHtml(detail.content);
@@ -36,7 +35,8 @@ define([
   return function(dom,id,setTitle){
     getData(id,function(err,detail,title){
       if(err && !detail){
-        dom.innerHTML = empty_tpl;
+        L.push('/');
+        L.refresh();
         return;
       }
 
