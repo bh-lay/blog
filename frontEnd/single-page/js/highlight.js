@@ -67,7 +67,6 @@ define(function(){
             parsed, arr;
         parsed = text.replace(/\r?\n$/, '').replace(new RegExp(rules, "g"), function() {
             var i = 0, j = 1, rule;
-            // console.log(arguments)
             while (rule = rules[i++]) {
                 if (arguments[j]) {
                     // if no custom replacement defined do the simple replacement
@@ -102,7 +101,6 @@ define(function(){
                 var start = '<span class="comment">',
                     end = "</span>",
                     text = start + str.replace(/\r?\n/g,end + '\r\n' + start) + end;
-                console.log(str,text);
                 return text;
             }
         },

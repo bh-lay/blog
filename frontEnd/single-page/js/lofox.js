@@ -94,11 +94,8 @@
     var this_fox = this;
 
     window.addEventListener('popstate',function(e){
-      //console.log(e);
       var state = e.state || {};
-      //console.log('from popstate event !',state);
       var url = state.url || null;
-      console.log('arguments',e)
       //清除第一次不确定性的触发
       if(url){
         this_fox.refresh(url);
@@ -135,7 +132,6 @@
     }else{
       setInterval(function(){
         var new_hash = LOCATION.hash || '#';
-    //	console.log('interval',new_hash);
         //hash发生变化
         if(new_hash != private_oldHash){
           private_oldHash = new_hash;
