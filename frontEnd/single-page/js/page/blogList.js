@@ -8,8 +8,9 @@ define([
   'js/Base',
   '/js/stick',
   '/js/tie',
-  'js/imageHosting'
-],function(utils,Stick,tie,imageHosting){
+  'js/imageHosting',
+  'js/juicer'
+],function(utils,Stick,tie,imageHosting,juicer){
   var private_tag_data = null;
   function getTag(callback){
     if(private_tag_data){

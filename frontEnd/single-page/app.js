@@ -5,7 +5,6 @@
 
 window.L = window.L || {};
 
-
 require([
   'js/user',
   'js/navigation',
@@ -13,7 +12,6 @@ require([
   'js/routerHandle',
   'js/imageHosting',
 
-  'js/juicer',
   'js/lofox',
   'js/dialog'
 ], function (user,navigation,utils,routerHandle,imageHosting){

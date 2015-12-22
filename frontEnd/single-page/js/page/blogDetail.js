@@ -5,8 +5,9 @@
 define([
   'js/Base',
   '/js/highlight.js',
-  'comments/index'
-],function(utils,hljs,comments){
+  'comments/index',
+  'js/juicer'
+],function(utils,hljs,comments,juicer){
   var template = __inline('/tpl/blogDetailPage.html');
 
   function getData(id,fn){

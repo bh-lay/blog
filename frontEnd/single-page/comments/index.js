@@ -5,8 +5,9 @@ define([
   'js/Base',
   'comments/selection',
   'comments/face',
-  'js/pagination'
-],function(exports,utils,selection,face,pagination){
+  'js/pagination',
+  'js/juicer'
+],function(exports,utils,selection,face,pagination,juicer){
     var private_userInfo = null,
       default_avatar = __uri('/images/default.jpg'),
 
