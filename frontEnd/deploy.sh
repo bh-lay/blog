@@ -4,7 +4,7 @@ echo '-----------------------'
 
 
 #检查项目是否存在
-if [ $1 == 'help' ]; then 
+if [ $1 == 'help' ]; then
     echo -e "Usage: bash $0 [project] [media]";
     echo -e "       [project] 项目目录名";
     echo -e "       [media] fis配置中的media（可选）";
@@ -23,28 +23,28 @@ if [ ${#deployMedia} == 0 ]; then
 fi
 
 #检查项目是否存在
-if [ ! -d $deployFrom ]; then 
-    echo -e "project not found !\n";  
+if [ ! -d $deployFrom ]; then
+    echo -e "project not found !\n";
     exit 1;
 fi
 
-if [ ${deployFrom:0:1} == '_' ]; then 
-    echo -e "["$deployFrom"] is not a project !\n";  
+if [ ${deployFrom:0:1} == '_' ]; then
+    echo -e "["$deployFrom"] is not a project !\n";
     exit 1;
 fi
 
 case $deployFrom in
     'aboutblog')
-		deployTo='../../web/topic/aboutblog'
+        deployTo='../../static/'
     ;;
     'aboutme')
         deployTo='../../static/'
     ;;
     'aboutme_old')
-        deployTo='../../web/topic/aboutme_old'
+        deployTo='../../static/'
     ;;
     'intiate')
-        deployTo='../../web/topic/intiate'
+        deployTo='../../static/'
     ;;
     'multi-page')
         deployTo='../../static/'
@@ -55,9 +55,9 @@ case $deployFrom in
     'admin')
         deployTo='../../static/'
     ;;
-    *)  
+    *)
 		echo -e "need config first,please edit deploy.sh !\n";
-    	exit 1; 
+    	exit 1;
     ;;
 esac
 
