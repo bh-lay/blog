@@ -56,6 +56,9 @@ fis
   .match('*.less', {
     optimizer: fis.plugin('clean-css')
   })
+  .match('*.css', {
+    optimizer: fis.plugin('clean-css')
+  })
   //使用hash
   .match('*.{js,css,jpg,png,less,gif,svg,eot,ttf,woff,woff2}', {
     useHash: true
