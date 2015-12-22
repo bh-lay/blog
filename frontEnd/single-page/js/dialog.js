@@ -3,7 +3,7 @@
  *
  * @github https://github.com/bh-lay/UI
  * @modified 2015-7-15 12:20
- *  
+ *
  **/
 
 (function(global,doc,UI_factory,utils_factory){
@@ -70,6 +70,7 @@
       private_maskDom = findByClassName(private_allCnt,'UI_mask')[0],
       private_body = document.body,
       private_docW,
+      private_winW,
       private_winH,
       private_docH,
       private_scrollTop;
@@ -1259,7 +1260,7 @@
     }
   }
   function bind(elem, type,a,b){
-    var className,fn;
+    var className,fn,callback;
     if(typeof(a) == 'string'){
       className = a.replace(/^\./,'');
       fn = b;

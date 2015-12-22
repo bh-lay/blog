@@ -335,7 +335,7 @@
     }
     request.open(method, url, true);
     //设置 headers
-    for(i in headers){
+    for(var i in headers){
       request.setRequestHeader(i, headers[i]);
     }
     request.onload = function() {
