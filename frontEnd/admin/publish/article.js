@@ -12,7 +12,7 @@ define(function(require,exports){
 	var formToAjax = require('tools/form2ajax.js'),
 		article_tpl = __inline("tpl/article.html"),
 		gallery = require('gallery/index.js');
-	
+
 	/****
 	 * 获取博文内容
 	 */
@@ -25,7 +25,7 @@ define(function(require,exports){
 			'url' : '/ajax/blog',
 			'type' : 'GET',
 			'data' : {
-				'content_format' : 'markdown',
+				'format' : 'markdown',
 				'act' : 'get_detail',
 				'id' : id
 			},
@@ -34,7 +34,7 @@ define(function(require,exports){
 					callback && callback('data error');
 				}else{
 					callback && callback(null,data.detail);
-				}	
+				}
 			}
 		});
 	}
@@ -58,7 +58,7 @@ define(function(require,exports){
 					}
 				});
 			});
-			
+
 			new formToAjax(dom,{
 				onSubmit : function(data){
 					prompt = UI.prompt('正在提交！');
@@ -70,6 +70,6 @@ define(function(require,exports){
 			});
 		});
 	}
-	
+
 	return ARTICLE;
 });

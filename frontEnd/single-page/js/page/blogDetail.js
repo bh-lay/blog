@@ -5,9 +5,8 @@
 define([
   'js/Base',
   '/js/highlight.js',
-  '/js/showdown.js',
   'comments/index'
-],function(utils,hljs,showdown,comments){
+],function(utils,hljs,comments){
   var template = __inline('/tpl/blogDetailPage.html');
 
   function getData(id,fn){
@@ -15,13 +14,12 @@ define([
       url : '/ajax/blog',
       data : {
         act : 'get_detail',
+        format : 'html',
         id : id
       },
       callback :function(err,data){
         if(!err && data && data.code == 200){
-          var converter = new showdown.converter(),
-              detail = data['detail'];
-          detail.content = converter.makeHtml(detail.content);
+          var detail = data['detail'];
           detail.time_show = utils.parseTime(detail.time_show,'{y}-{mm}-{dd}');
 
           fn&&fn(null,detail);
