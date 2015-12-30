@@ -93,6 +93,22 @@ require([
     document.title = document.hidden ? '出BUG了，快看！':'小剧客栈，剧中人的个人博客！';
   });
 
+  document.body.addEventListener('copy', function (event) {
+    var clipboardData = event.clipboardData || window.clipboardData;
+    
+    if (!clipboardData || !window.getSelection().toString()) {
+      return;
+    }
+    event.preventDefault();
+    var data = ['作者：剧中人',
+        '来自：小剧客栈', 
+        '链接：' + window.location.href,
+        '',
+        window.getSelection().toString()];
+    clipboardData.setData('text/html', data.join('<br>'));
+    clipboardData.setData('text/plain',data.join('\n'));
+  });
+
   //动态插入emoji表情样式
   var str = '<style type="text/css" data-module="emoji">';
   (utils.query('#data_emoji').innerHTML || '').trim().split(/\s+/).forEach(function(item,index){
