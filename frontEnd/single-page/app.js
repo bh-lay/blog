@@ -11,10 +11,11 @@ require([
   'js/Base',
   'js/routerHandle',
   'js/imageHosting',
+  'js/funny',
 
   'js/lofox',
   'js/dialog'
-], function (user,navigation,utils,routerHandle,imageHosting){
+], function (user,navigation,utils,routerHandle,imageHosting,funny){
   //绑定路由
   var lofox = new util.lofox();
   routerHandle(lofox);
@@ -88,26 +89,6 @@ require([
       return utils.query('#module_' + key).innerHTML || '';
     }) : '';
   };
-  //做个好玩的
-  document.addEventListener('visibilitychange', function() {
-    document.title = document.hidden ? '出BUG了，快看！':'小剧客栈，剧中人的个人博客！';
-  });
-
-  document.body.addEventListener('copy', function (event) {
-    var clipboardData = event.clipboardData || window.clipboardData;
-    
-    if (!clipboardData || !window.getSelection().toString()) {
-      return;
-    }
-    event.preventDefault();
-    var data = ['作者：剧中人',
-        '来自：小剧客栈', 
-        '链接：' + window.location.href,
-        '',
-        window.getSelection().toString()];
-    clipboardData.setData('text/html', data.join('<br>'));
-    clipboardData.setData('text/plain',data.join('\n'));
-  });
 
   //动态插入emoji表情样式
   var str = '<style type="text/css" data-module="emoji">';
@@ -122,6 +103,8 @@ require([
 
   //开始导航
   navigation.init();
+  //加入一些好玩的东西
+  funny();
   //渐隐加载遮罩
   utils.addClass(utils.query('.app_mask'),'app_mask_out');
   setTimeout(function () {
@@ -175,8 +158,3 @@ require([
   //  }
   });
 });
-
-
-try {
-  console.log("一个人到底多无聊\r\n 才会把 console 当成玩具\r\n一个人究竟多堕落\r\n 才会把大好青春荒废在博客上\r\n\r\n\r\n%cfollow me %c https://github.com/bh-lay","color:red","color:green");
-} catch (e) {}
