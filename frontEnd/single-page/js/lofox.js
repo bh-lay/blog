@@ -156,6 +156,7 @@
     this._maps = {};
     //未加入maps列表的url
     this._rest = null;
+    this.beforeTitleChange = null;
 
     window.addEventListener('popstate',function(e){
       var state = e.state || {};
@@ -209,10 +210,11 @@
     },
     //设置页面标题
     title : function(title){
-      var type = typeof(title);
-      if(type.match(/number|string/)){
-        document.title = title
+      var newTitle;
+      if(this.beforeTitleChange){
+        newTitle = this.beforeTitleChange(title);
       }
+      document.title = typeof(newTitle) === "string" ? newTitle : title;
     },
     //检测路径是否在路由中
     isInRouter: function(url){

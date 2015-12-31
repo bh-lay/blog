@@ -14,7 +14,7 @@ define([
       nodeContainer = utils.query('.app_container'),
       nodeActivePage = null,
       activePage = null;
-      
+
   /**
    * 检测链接是否为提供给js使用的地址
    *   无地址、 javascript:: 、javascript:void(0)、#
@@ -54,6 +54,9 @@ define([
   };
 
   return function(){
+    lofox.beforeTitleChange = function(title){
+      return title + '_剧中人的个人空间 网页设计师博客 互动设计学习者';
+    };
     //视图刷新前，销毁上一个对象
     lofox.on('beforeRefresh',function(){
       if(activePage && activePage.destroy){
@@ -64,42 +67,37 @@ define([
     // 监听视图刷新事件
     .on('refresh', function (pathData,search) {
       //显示隐藏返回按钮
-    });
-
-    /**
-     * 首页
-     */
-    lofox.set('/', function () {
-      this.title('小剧客栈_剧中人的个人空间 网页设计师博客 互动设计学习者');
+    })
+    //首页
+    .set('/', function () {
+      this.title('小剧客栈');
       navigation.setCur('/');
 
       activePage = new indexPage(new Page);
     })
     // 博文列表
     .set('/blog', function (param, pathnde, search) {
-      this.title('我的博客_小剧客栈');
+      this.title('我的博客');
       navigation.setCur('blog');
 
       activePage = new blogListPage(new Page, search);
-    });
-    /**
-     * 博客详细页
-     */
-    lofox.set('/blog/{id}', function (param) {
-      this.title('我的博客_小剧客栈');
+    })
+    // 博客详细页
+    .set('/blog/{id}', function (param) {
+      this.title('我的博客');
       navigation.setCur('blog');
       activePage = new blogDetailPage(new Page, param.id);
     })
     //实验室列表页
     .set('/labs', function () {
-      this.title('实验室_小剧客栈');
+      this.title('实验室');
 
       navigation.setCur('labs');
       activePage = new labsListPage(new Page);
     })
     // 留言板
     .set('/bless', function () {
-      this.title('留言板_小剧客栈');
+      this.title('留言板');
       navigation.setCur('bless');
 
       activePage = new blessPage(new Page);
