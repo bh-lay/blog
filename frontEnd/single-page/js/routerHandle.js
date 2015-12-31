@@ -14,7 +14,7 @@ define([
       nodeContainer = utils.query('.app_container'),
       nodeActivePage = null,
       activePage = null;
-      console.log('lofox',lofox)
+      
   /**
    * 检测链接是否为提供给js使用的地址
    *   无地址、 javascript:: 、javascript:void(0)、#

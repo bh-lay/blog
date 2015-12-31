@@ -16,10 +16,6 @@ require([
   'js/dialog'
 ], function (user,navigation,utils,routerHandle,imageHosting,funny){
 
-
-  L.user = user;
-
-
   /**
    * 判断是否支持css属性
    * 兼容css3
@@ -45,12 +41,12 @@ require([
   })();
   //是否支持 canvas
   var supports_canvas = !!document.createElement('canvas').getContext ? true : false,
-      //是否支持touch
-      isSupportTouch = document.hasOwnProperty("ontouchend") ? true : false,
       //是否为windows系统
       isWindows = /windows|win32/.test(navigator.userAgent.toLowerCase()),
+      //是否支持 history API
+      isHistorySupported = window.history && window.history.pushState,
       //是否为高级浏览器
-      isAdvancedBrowser = (supports('transition') && supports('transform') && supports_canvas) ? true : false;
+      isAdvancedBrowser = (supports('transform') && isHistorySupported && supports_canvas) ? true : false;
 
   //屌丝就用屌丝版
   if (!isAdvancedBrowser) {
@@ -61,8 +57,8 @@ require([
   if(isWindows){
     utils.addClass(utils.query('body'),'define-scrollbar');
   }
-  L.isMobileBrowser = (window.innerWidth < 720 && isSupportTouch) ? true : false;
 
+  L.user = user;
   //占用全局方法
   L.gravatar_error_fn = function(elem){
     if(elem.src.indexOf('www.gravatar.com') > -1){
