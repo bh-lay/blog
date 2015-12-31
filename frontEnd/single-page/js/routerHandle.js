@@ -5,10 +5,20 @@ define([
   'js/page/blogDetail',
   'js/page/labsList',
   'js/page/bless',
-  'js/navigation'
+  'js/navigation',
+  'js/lofox'
 ],function(utils,indexPage,blogListPage,blogDetailPage,labsListPage,blessPage,navigation){
   'use strict';
-  return function(lofox){
+  //绑定路由
+  var lofox = new util.lofox();
+
+  L.push = function (url) {
+      lofox.push(url);
+  };
+  L.refresh = function () {
+      lofox.refresh();
+  };
+  return function(){
     var container = utils.query('.app_container'),
         nodeActivePage = null,
         activePage = null;
@@ -89,6 +99,33 @@ define([
       var dom = getNewPage();
 
       activePage = new blessPage(dom);
+    });
+
+    /**
+     * 检测链接是否为提供给js使用的地址
+     *   无地址、 javascript:: 、javascript:void(0)、#
+     **/
+    function hrefForScript(href){
+      return (href.length == 0 || href.match(/^(javascript\s*\:|#)/)) ? true : false;
+    }
+    //全局控制 a 链接的打开方式
+    utils.bind(utils.query('body'),'click','a',function(e){
+      var url = this.getAttribute('href');
+      //为JS脚本准备的链接
+      if(hrefForScript(url)){
+        //阻止浏览器默认事件，处理因base设置，导致此类链接在火狐中新窗口打开问题，感谢 @紫心蕊
+        e.preventDefault();
+      }else if(lofox.isInRouter(url)){
+        //路由中配置的地址
+        setTimeout(function () {
+          lofox.push(url);
+          lofox.refresh();
+        });
+        e.preventDefault();
+      }
+    // html base 已设置链接为新窗口打开，此处无需处理
+    //  else{
+    //  }
     });
   };
 });

@@ -13,21 +13,13 @@ require([
   'js/imageHosting',
   'js/funny',
 
-  'js/lofox',
   'js/dialog'
 ], function (user,navigation,utils,routerHandle,imageHosting,funny){
-  //绑定路由
-  var lofox = new util.lofox();
-  routerHandle(lofox);
+
 
   L.user = user;
 
-  L.push = function (url) {
-      lofox.push(url);
-  };
-  L.refresh = function () {
-      lofox.refresh();
-  };
+
   /**
    * 判断是否支持css属性
    * 兼容css3
@@ -105,19 +97,15 @@ require([
   navigation.init();
   //加入一些好玩的东西
   funny();
+  //开始掌控路由
+  routerHandle();
   //渐隐加载遮罩
   utils.addClass(utils.query('.app_mask'),'app_mask_out');
   setTimeout(function () {
     utils.remove(utils.query('.app_mask'));
   }, 1000);
 
-  /**
-   * 检测链接是否为提供给js使用的地址
-   *   无地址、 javascript:: 、javascript:void(0)、#
-   **/
-  function hrefForScript(href){
-    return (href.length == 0 || href.match(/^(javascript\s*\:|#)/)) ? true : false;
-  }
+
   /**
    * 分享功能
    *  data-text data-url data-title data-img data-shareto
@@ -138,23 +126,5 @@ require([
     share_url[shareto] && window.open(share_url[shareto]);
     return false;
   });
-  //全局控制 a 链接的打开方式
-  utils.bind(utils.query('body'),'click','a',function(e){
-    var url = this.getAttribute('href');
-    //为JS脚本准备的链接
-    if(hrefForScript(url)){
-      //阻止浏览器默认事件，处理因base设置，导致此类链接在火狐中新窗口打开问题，感谢 @紫心蕊
-      e.preventDefault();
-    }else if(lofox.isInRouter(url)){
-      //路由中配置的地址
-      setTimeout(function () {
-        lofox.push(url);
-        lofox.refresh();
-      });
-      e.preventDefault();
-    }
-  // html base 已设置链接为新窗口打开，此处无需处理
-  //  else{
-  //  }
-  });
+
 });
