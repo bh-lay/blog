@@ -31,7 +31,7 @@ define([
     });
   };
 
-  return function(global,id,setTitle){
+  return function(global,id){
     var node = global.node;
     getData(id,function(err,detail,title){
       if(err && !detail){
@@ -40,7 +40,7 @@ define([
         return;
       }
 
-      setTitle && setTitle(detail.title);
+      global.title(detail.title);
       node.innerHTML = juicer(template,detail);
 
       //代码高亮

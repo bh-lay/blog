@@ -1,19 +1,20 @@
 define([
   'js/Base',
+  'js/lofox',
   'js/page/index',
   'js/page/blogList',
   'js/page/blogDetail',
   'js/page/labsList',
   'js/page/bless',
-  'js/navigation',
-  'js/lofox'
-],function(utils,indexPage,blogListPage,blogDetailPage,labsListPage,blessPage,navigation){
+  'js/navigation'
+],function(utils,Lofox,indexPage,blogListPage,blogDetailPage,labsListPage,blessPage,navigation){
   'use strict';
   //绑定路由
-  var lofox = new util.lofox(),
+  var lofox = new Lofox(),
       nodeContainer = utils.query('.app_container'),
       nodeActivePage = null,
       activePage = null;
+      console.log('lofox',lofox)
   /**
    * 检测链接是否为提供给js使用的地址
    *   无地址、 javascript:: 、javascript:void(0)、#
@@ -48,7 +49,8 @@ define([
   }
   Page.prototype = {
     push: lofox.push.bind(lofox),
-    refresh: lofox.refresh.bind(lofox)
+    refresh: lofox.refresh.bind(lofox),
+    title: lofox.title.bind(lofox)
   };
 
   return function(){
@@ -70,9 +72,8 @@ define([
     lofox.set('/', function () {
       this.title('小剧客栈_剧中人的个人空间 网页设计师博客 互动设计学习者');
       navigation.setCur('/');
-      var dom = getNewPage();
 
-      activePage = new indexPage(dom);
+      activePage = new indexPage(new Page);
     })
     // 博文列表
     .set('/blog', function (param, pathnde, search) {
@@ -87,23 +88,21 @@ define([
     lofox.set('/blog/{id}', function (param) {
       this.title('我的博客_小剧客栈');
       navigation.setCur('blog');
-      activePage = new blogDetailPage(new Page, param.id, this.title.bind(this));
+      activePage = new blogDetailPage(new Page, param.id);
     })
     //实验室列表页
     .set('/labs', function () {
       this.title('实验室_小剧客栈');
 
       navigation.setCur('labs');
-      var dom = getNewPage();
-      activePage = new labsListPage(dom);
+      activePage = new labsListPage(new Page);
     })
     // 留言板
     .set('/bless', function () {
       this.title('留言板_小剧客栈');
       navigation.setCur('bless');
-      var dom = getNewPage();
 
-      activePage = new blessPage(dom);
+      activePage = new blessPage(new Page);
     });
 
     //全局控制 a 链接的打开方式

@@ -46,9 +46,10 @@ define([
       }
     });
   };
-  return function(dom,param){
+  return function(global,param){
+    var node = global.node;
     skip = 0;
-    dom.innerHTML = base_tpl;
+    node.innerHTML = base_tpl;
     getData(function(err,list){
       var this_html;
       if(err){
@@ -58,7 +59,7 @@ define([
           list : list
         });
       }
-      utils.query('.labsList',dom).innerHTML = this_html;
+      utils.query('.labsList',node).innerHTML = this_html;
     });
   };
 });

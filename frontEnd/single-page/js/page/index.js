@@ -15,9 +15,12 @@ define([
       ],
       index=-1;
 
-  function view(dom){
-    dom.innerHTML = temp;
-    var nodeGallery = utils.query('.gallayer',dom);
+  function view(global){
+    var node = global.node,
+        nodeGallery;
+    node.innerHTML = temp;
+
+    nodeGallery = utils.query('.gallayer',node);
     nodeGallery.style.backgroundImage = 'url(' +  imgs[++index] + ')';
 
     if(index + 1 >= imgs.length){
