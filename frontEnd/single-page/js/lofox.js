@@ -2,7 +2,7 @@
  * @author bh-lay
  * @github https://github.com/bh-lay/lofox
  * @version 1.0
- * @modified 2015-12-31 18:25
+ * @modified 2015-12-31 17:12
  *  location fox
  */
 
@@ -64,15 +64,18 @@
    * 格式化search
    */
   function searchParser(search){
-    var resultObj = {};
+    var resultObj = {},
+        items,
+        index,
+        keyValue;
     if(search && search.length > 1){
-      var items = search.split('&');
-      for(var index = 0 ; index < items.length ; index++ ){
+      items = search.split('&');
+      for(index = 0 ; index < items.length ; index++ ){
         if(! items[index]){
           continue;
         }
-        var kv = items[index].split('=');
-        resultObj[kv[0]] = typeof kv[1] === "undefined" ? "":kv[1];
+        keyValue = items[index].split('=');
+        resultObj[keyValue[0]] = typeof keyValue[1] === "undefined" ? "": keyValue[1];
       }
     }
     return resultObj;
@@ -96,15 +99,17 @@
    * @param {Object} maps
    */
   function findPathInMaps(inputPath,maps){
-    //定义从url中取到的值
-    var matchValue = {};
-    //记录找到的maps项
-    var this_mapsItem = null;
+        //定义从url中取到的值
+    var matchValue = {},
+        //记录找到的maps项
+        this_mapsItem = null,
+        pathData,
+        tryMatch;
 
     //遍历maps
     for(var i in maps){
       //获取maps当前项数组形式的url节点
-      var pathData = pathParser(i);
+      pathData = pathParser(i);
       //比对输入url长度与maps当前节点长度是否一致
       if(pathData.length != inputPath.length){
         continue
@@ -116,10 +121,9 @@
         //1.比对输入url与maps对应url是否一致
         if(pathData[s] != inputPath[s]){
           //2.检测当前节点是否为变量
-          var tryMatch = pathData[s].match(/{(.+)}/);
+          tryMatch = pathData[s].match(/{(.+)}/);
           if(tryMatch){
-            var key = tryMatch[1];
-            matchValue[key] = inputPath[s];
+            matchValue[tryMatch[1]] = inputPath[s];
           }else{
             //既不一致，又不是变量，丢弃此条maps记录
             this_mapsItem = null;
@@ -136,7 +140,7 @@
     return this_mapsItem ? {
       mapsItem : this_mapsItem,
       data : matchValue
-    } : false;
+    } : null;
   }
   /**
    *  lofox构造器
@@ -180,7 +184,7 @@
       }
       return this;
     },
-    on : function ON(eventName,callback){
+    on : function(eventName,callback){
       //事件堆无该事件，创建一个事件堆
       if(!this.events[eventName]){
         this.events[eventName] = [];
@@ -189,9 +193,9 @@
       return this;
     },
     set : function(url,callback){
-      var routerNames = [];
-      var total;
-      var type = Object.prototype.toString.call(url);
+      var routerNames = [],
+          total,
+          type = Object.prototype.toString.call(url);
       if(type == '[object Array]'){
         routerNames = url;
         total = routerNames.length;
@@ -200,10 +204,8 @@
         total = 1;
       }
       for (var i=0;i<total;i++) {
-        var routerName = routerNames[i];
-        var callback = typeof(callback) =='function' ? callback :null;
-        this._maps[routerName] = {
-          renderFn : callback
+        this._maps[routerNames[i]] = {
+          renderFn : typeof(callback) =='function' ? callback :null
         };
       };
       return this;
@@ -241,12 +243,13 @@
           urlSplit = isNotEmptyString(urlString) ? urlString.split(/\?/) : ['',''],
           pathData = pathParser(urlSplit[0].split('#')[0]),
           searchData = searchParser(urlSplit[1]),
-          result = findPathInMaps(pathData,this._maps);
+          result = findPathInMaps(pathData,this._maps),
+          data;
 
       //触发视图刷新事件
       EMIT.call(this,'beforeRefresh',[pathData,searchData]);
       if(result){
-        var data = result.data;
+        data = result.data;
         //执行set方法设置的回调
         result.mapsItem['renderFn'].call(this,data,pathData,searchData);
         //设置标题
