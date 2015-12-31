@@ -31,23 +31,24 @@ define([
     });
   };
 
-  return function(dom,id,setTitle){
+  return function(global,id,setTitle){
+    var node = global.node;
     getData(id,function(err,detail,title){
       if(err && !detail){
-        L.push('/');
-        L.refresh();
+        global.push('/');
+        global.refresh();
         return;
       }
 
       setTitle && setTitle(detail.title);
-      dom.innerHTML = juicer(template,detail);
+      node.innerHTML = juicer(template,detail);
 
       //代码高亮
-      utils.each(utils.queryAll('pre code',dom),function(node){
-        hljs(node);
+      utils.each(utils.queryAll('pre code',node),function(codeNode){
+        hljs(codeNode);
       });
 
-      new comments.init(utils.query('.comments_frame',dom),'blog-' + id,{
+      new comments.init(utils.query('.comments_frame',node),'blog-' + id,{
         list_num: 8
       });
     });

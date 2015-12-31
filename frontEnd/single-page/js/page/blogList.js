@@ -95,17 +95,18 @@ define([
       }
     });
   };
-  function page(dom,param){
+  function page(global,param){
     var me = this,
+        node = global.node,
         //获取标签名
         pageTag = param.tag ? decodeURI(param.tag) : null,
         baseTpl = __inline('/tpl/blogListBase.html'),
         list_tpl = __inline('/tpl/blogListItem.html'),
         empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>';
     //插入基本模版
-    dom.innerHTML = baseTpl;
-    this.nodeList = utils.query('.articleList',dom);
-    this.nodeLoading = utils.query('.l-loading-panel',dom);
+    node.innerHTML = baseTpl;
+    this.nodeList = utils.query('.articleList',node);
+    this.nodeLoading = utils.query('.l-loading-panel',node);
 
     this.stick = new Stick({
       container: me.nodeList,
@@ -116,7 +117,7 @@ define([
         list.loadMore();
       }
     });
-    var nodeTag = utils.query('.articleListPage-tags',dom);
+    var nodeTag = utils.query('.articleListPage-tags',node);
     this.tie = util.tie({
       dom : nodeTag,
       scopeDom: utils.parents(nodeTag,'.articleListPage'),
@@ -137,13 +138,13 @@ define([
       }
     });
     //处理标签功能
-    renderTags(utils.query('.articleListPage-tags .content',dom),pageTag,function(tag){
+    renderTags(utils.query('.articleListPage-tags .content',node),pageTag,function(tag){
       if(tag == 'null'){
-        L.push('/blog');
+        global.push('/blog');
       }else{
-        L.push('/blog?tag=' + tag);
+        global.push('/blog?tag=' + tag);
       }
-      L.refresh();
+      global.refresh();
     });
 
   }
