@@ -13,8 +13,6 @@ function getList(callback){
     }
     collection.find({
       isShow: '1'
-    }, {
-      limit:20
     }).sort({
       _id: -1
     }).toArray(function(err, docs) {
