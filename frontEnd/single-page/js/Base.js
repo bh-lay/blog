@@ -138,8 +138,49 @@
       useID = id;
     }
     returns = document[queryMethod]('#' + useID + ' ' + selector);
-    !id && context.removeAttribute('id');
+
+    !id && nextTick(function(){
+      context.removeAttribute('id');
+    });
     return returns;
+  }
+
+  /**
+   * nextTick
+   * https://github.com/DDFE/next-tick/
+   */
+  //等待调用的函数栈
+  var nextTickCallbacks = [],
+      //当前是否正在运行中
+      nextTickIsRunning = false;
+
+  //调用所有在函数栈中的函数
+  //如果在执行某函数时又有新的函数被添加进来，
+  //该函数也会在本次调用的最后被执行
+  function callAllCallbacks() {
+    var cbs = nextTickCallbacks,
+        count = cbs.length;
+    nextTickCallbacks = [];
+    nextTickIsRunning = false;
+
+    for (var index = 0; index < count; index++) {
+      cbs[index]();
+    }
+  }
+  function nextTick(fn) {
+    //将函数存放到待调用栈中
+    nextTickCallbacks.push(fn);
+
+    //判断定时器是否启动
+    //如果没有启动，则启动计时器
+    //如果已经启动，则不需要做什么
+    //本次添加的函数会在 callAllCallbacks 时被调用
+    if (!nextTickIsRunning) {
+      nextTickIsRunning = true;
+      setTimeout(callAllCallbacks, 0);
+    }
+
+    return nextTickCallbacks.length;
   }
   /**
    * 检索DOM
