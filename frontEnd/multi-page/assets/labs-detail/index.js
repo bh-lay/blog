@@ -1,6 +1,6 @@
 /**
  * labs detail
- *  
+ *
  */
 (function(){
 	//下载部分
@@ -32,7 +32,7 @@
                 repo['repos_stargazers_count'] = repo.stargazers_count || 0;
                 repo['repos_watchers_count'] = repo.watchers || 0;
                 callback && callback(repo);
-			} 
+			}
 		});
 	}
 	var repos_name = $('.labs_detail_github').attr('data-repo');
@@ -43,9 +43,9 @@
         });
         $('.labs_detail_github .labsDeGit_cnt').html(this_html);
 	});
-	
-    //代码高亮
-    $('pre').each(function(){
-        hljs.highlightBlock(this);
-    });
+
+  //代码高亮
+  $('pre').each(function(){
+      hljs.highlightBlock(this);
+  });
 })();
