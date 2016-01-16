@@ -1,14 +1,19 @@
 <div class="col-sm-12">
-  {{@if activeTag}}
-    <a href="/blog">全部</a>
-  {{@else}}
-    <strong>全部</strong>
-  {{@/if}}
-  {{@each list as it,index}}
-    {{@if it.name == activeTag}}
-        <strong>${{it.name}}</strong>
+  <div class="panel panel-default">
+    <div class="panel-heading">标签</div>
+    <div class="panel-body">
+      {{@if activeTag}}
+        <a href="/blog">全部</a>
       {{@else}}
-        <a href="/blog?tag=${{it.name}}" class="">${{it.name}}</a>
-    {{@/if}}
-  {{@/each}}
+        <strong>全部</strong>
+      {{@/if}}
+      {{@each list as it,index}}
+        {{@if it.name == activeTag}}
+            <strong>${{it.name}}</strong>
+          {{@else}}
+            <a href="/blog?tag=${{it.name}}" class="">${{it.name}}</a>
+        {{@/if}}
+      {{@/each}}
+    </div>
+  </div>
 </div>
