@@ -74,11 +74,11 @@ function getList(app,param,callback){
   });
 };
 exports.list = function (connect,app){
-	
-  var data = connect.url.search;
-  var page = data.page || 1,
+
+  var data = connect.url.search,
+      page = data.page || 1,
       tag = data.tag ? data.tag : null;
-  
+
   var cache_name = 'blog_list_' + page + '_' + (tag ? tag : '');
   app.cache.use(cache_name,['html','article'],function(this_cache){
     //do something with this_cache
@@ -109,7 +109,8 @@ exports.list = function (connect,app){
         keywords : '博客,文章,心得,剧中人,小剧客栈,前端工程师,设计师,nodeJS',
         description : '剧中人的文笔很差，却也喜欢时常写点东西，不管是技术上的分享，生活上的感悟，还是天马行空的乱弹，小剧都会写在这里！',
         list : list,
-        pagination : page_html
+        pagination : page_html,
+        tag: tag || ''
       },function(err,html){
         if(err){
           connect.write('html',200,'<h1>页面挂了！</h1>');

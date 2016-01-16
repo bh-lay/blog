@@ -1,6 +1,10 @@
 <div class="col-sm-12">
   <a href="/blog">全部</a>
   {{@each list as it,index}}
-    <a href="/blog?tag=${{it.name}}">${{it.name}}</a>
+    {{@if it.active}}
+        <strong>${{it.name}}</strong>
+      {{@else}}
+        <a href="/blog?tag=${{it.name}}" class="">${{it.name}}</a>
+    {{@/if}}
   {{@/each}}
 </div>

@@ -2,11 +2,11 @@
  * @author bh-lay
  *
  * get template that we have defined !
- * 
+ *
  * exports.get(mod_name,{init:true});
  *    {init :true} replace public template
  *    {init :false} return original text
- *  
+ *
  */
 
 var fs = require('fs'),
@@ -29,7 +29,7 @@ function getComponentsConfig(input){
     item = item.replace(/^<include\s+|"|'|\s*\/>$/g,'');
     //分离参数
     var dataArray = item.split(/\s+/) || [];
-    
+
     dataArray.forEach(function(it){
       var itemSplit = it.split(/=/);
       var key = itemSplit[0];
@@ -44,9 +44,9 @@ function replaceComponent(temp,callback){
   var need_temp = getComponentsConfig(temp),
       temp_result = {},
       over_count = 0;
-  
+
   var total = need_temp.length;
-  
+
   //没有用到components
   if(total == 0){
     callback(null,temp);
@@ -78,7 +78,7 @@ module.exports = function(URI,data,callback){
       data = data || {};
   //增加文件配置
   data.frontEnd = this.config.frontEnd;
-  
+
   //读取模版
   fs.readFile(realPath + '.html', "utf8",function(err,fileStr){
     if(err){
@@ -87,7 +87,7 @@ module.exports = function(URI,data,callback){
     }
     //替换变量
     fileStr = utils.juicer(fileStr,data);
-    
+
     //解析模版的component
     replaceComponent(fileStr,function(err,txt){
       callback && callback(err,txt);
