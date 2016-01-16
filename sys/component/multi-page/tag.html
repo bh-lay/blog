@@ -1,0 +1,6 @@
+<div class="col-sm-12">
+  <a href="/blog">全部</a>
+  {{@each list as it,index}}
+    <a href="/blog?tag=${{it.name}}">${{it.name}}</a>
+  {{@/each}}
+</div>
