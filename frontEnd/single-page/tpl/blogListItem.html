@@ -1,20 +1,14 @@
 <div class="articleItem {@if !cover}pure-text{@/if}" articleId="${id}">
-  {@if is_new}
-    <div class="label"><span>new</span></div>
-  {@/if}
-  {@if cover}
-  <div class="artItPic">
-    <a href="/blog/${id}" title="${title}" >
-      <img src="${cover}" alt="${title}" />
-    </a>
-  </div>
-  {@/if}
-  <div class="artItCpt">
-    <a href="/blog/${id}" title="${title}" >
-      ${title}
-    </a>
-  </div>
-  <div class="artItInfo"><p>${intro}</p></div>
+  <a href="/blog/${id}" title="${title}" class="link">
+    {@if is_new}
+      <div class="label"><span>new</span></div>
+    {@/if}
+    {@if cover}
+    <div class="pic"><img src="${cover}" alt="${title}" /></div>
+    {@/if}
+    <div class="title">${title}</div>
+    <div class="info"><p>${intro}</p></div>
+  </a>
   <footer>
     <div class="tags">
       <strong>tags</strong>{@each tags as t}<a href="/blog?tag=${t}">${t}</a>{@/each}

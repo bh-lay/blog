@@ -144,12 +144,42 @@
   margin-bottom: 10px;
 }
 .articleItem {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   overflow: hidden;
   background: #fff;
   &.pure-text{
-    background: url(/images/blog_card.jpg) no-repeat top right #fff;
-    background-size: 170px 34px;
+    .link{
+      background: url(/images/blog_card.jpg) no-repeat top right #fff;
+      background-size: 170px 34px;
+    }
+  }
+  .link{
+    display: block;
+  }
+  .title {
+    display: block;
+    padding: 1em .5em .2em;
+    font-weight: normal;
+    line-height: 1.5em;
+    text-align: center;
+    font-size: 18px;
+    color: #000;
+    outline: none;
+  }
+  .pic{
+    img {
+      display: block;
+      background: #eee;
+      max-width: 100%;
+      margin: auto;
+    }
+  }
+  .info {
+    padding: 10px 20px;
+    line-height: 1.4;
+    font-size: 13px;
+    color: #888;
+    text-indent: 2em
   }
   .label{
     position: absolute;
@@ -220,41 +250,6 @@
       font-size: 12px;
     }
   }
-}
-
-.artItCpt {
-  a {
-    display: block;
-    padding: 1em .5em .2em;
-    font-weight: normal;
-    line-height: 1.5em;
-    text-align: center;
-    font-size: 18px;
-    color: #000;
-    outline: none;
-    &:hover {
-      color: #000;
-      text-decoration: underline;
-    }
-  }
-}
-.artItPic{
-  a{
-    display: block;
-  }
-  img {
-    display: block;
-    background: #eee;
-    max-width: 100%;
-    margin: auto;
-  }
-}
-.artItInfo {
-  padding: 10px 20px;
-  line-height: 1.4;
-  font-size: 13px;
-  color: #888;
-  text-indent: 2em
 }
 
 @media(max-width:660px){

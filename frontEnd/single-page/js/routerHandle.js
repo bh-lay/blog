@@ -28,8 +28,9 @@ define([
     //移除老的page dom
     if (nodeActivePage) {
       var nodeOld = nodeActivePage;
-          nodeActivePage = null;
-          utils.addClass(nodeOld,'fadeOutRight');
+      nodeActivePage = null;
+      utils.addClass(nodeOld,'fadeOutRight');
+
       setTimeout(function () {
         utils.remove(nodeOld);
         utils.query('body').scrollTop = 0;
