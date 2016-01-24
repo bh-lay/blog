@@ -3,6 +3,7 @@
  */
 
 module.exports = {
+	'/link': '/directories',
 // directory
 	'/about':'/blog',
 	'/about/':'/blog',
@@ -43,7 +44,7 @@ module.exports = {
   '/opus/13f5eed2be8': '/blog/14d65f9c119',  //水院通后台登陆界面
   '/opus/13f5eec9f48': '/blog/14d65f8991d',  //论坛召回会员banner
   '/opus/13f5eebe7b0': '/blog/14d65f75d1d',  //学习雷锋专题页面
-  '/opus/13f5eeb2848': '/blog/14d65f018fc',  //网速-流量实时监测logo设计  
+  '/opus/13f5eeb2848': '/blog/14d65f018fc',  //网速-流量实时监测logo设计
 //about - blog
 	'/about/2012-07-30/42.html' : '/blog/13f1f5bbbe8',
 	'/about/2012-04-27/26.html' : '/blog/13f1f46f398',
@@ -54,7 +55,7 @@ module.exports = {
 	'/lab/2012-10-17/48.html' : '/blog/13f1f6871d0',
 	'/lab/2012-10-08/47.html' : '/blog/13f1f67f0e8',
 	'/lab/2012-08-18/45.html' : '/blog/13f1f6558d8',
-	'/lab/2012-08-18/44.html' : '/blog/13f1f638be8',	
+	'/lab/2012-08-18/44.html' : '/blog/13f1f638be8',
 	'/lab/2012-07-16/40.html' : '/blog/13f1f55e7b8',
 	'/lab/2012-07-13/39.html' : '/blog/13f1f549f98',
 //writing - blog
