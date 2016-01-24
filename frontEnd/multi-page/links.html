@@ -25,13 +25,12 @@
     </div>
     {{@each list as it}}
     <div class="grid-box">
-      <div class="guy-item">
+      <div class="guy-item" data-id="${{it.id}}">
         <div class="title">${{it.title}}</div>
         <div class="desc">
           {{@if it.discription}}
             ${{it.discription}}
           {{@else}}真懒，啥都不写！ {{@/if}}
-          ${{it.id}}
         </div>
         <div class="links">
           {{@if it.url}}
