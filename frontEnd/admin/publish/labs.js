@@ -11,11 +11,10 @@
 
 
 define && define(function(require,exports){
-	require('gallery/index.js');
 	var formToAjax = require('tools/form2ajax.js'),
       gallery = require('gallery/index.js'),
       labs_tpl = __inline('tpl/labs.html');
-	
+
 	/****
 	 * 获取实验室内容
 	 */
@@ -36,7 +35,7 @@ define && define(function(require,exports){
 					callback && callback('data error');
 				}else{
 					callback && callback(null,data.detail);
-				}	
+				}
 			}
 		});
 	}
@@ -54,7 +53,7 @@ define && define(function(require,exports){
 		var alert;
 		if(!id){
 			var new_html = juicer(labs_tpl,{});
-			
+
 			dom.html(new_html);
 			new formToAjax(dom,{
 				'onSubmit' : function(data){
@@ -79,7 +78,7 @@ define && define(function(require,exports){
 			if(data.github){
 			}
 			var new_html = juicer(labs_tpl,data);
-			
+
 			dom.html(new_html);
 			new formToAjax(dom,{
 				'onSubmit' : function(data){
@@ -96,6 +95,6 @@ define && define(function(require,exports){
 			});
 		});
 	}
-	
+
 	return LABS;
 });
