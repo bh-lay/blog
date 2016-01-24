@@ -35,9 +35,9 @@ app.get('/bless', function(data,connect){
      });
   });
 });
-//友情链接
+//前端英雄榜
 var links = require('./controller/links.js');
-app.get('/links', function(data,connect){
+app.get('/directories', function(data,connect){
   links.render(connect,app);
 });
 
@@ -235,4 +235,3 @@ new CronJob('01 10 03 * * *', function() {
   //清除缓存
   app.cache.clear();
 }, null, true, 'Asia/Hong_Kong');
-
