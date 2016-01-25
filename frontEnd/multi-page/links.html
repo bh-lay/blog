@@ -11,14 +11,17 @@
 </head>
 <body>
   <div class="Jumbotron">
-    <div class="grid-row">
-      <div class="grid-box-full">
+    <div class="container">
+      <div class="nav">
+          <a href="/">回到首页</a>
+      </div>
+      <div class="info">
         <h1>前端英雄榜</h1>
         <p><a href="javascript:;" class="btn add_one">我要上榜</a></p>
       </div>
     </div>
   </div>
-  <div class="guy-list">
+  <div class="container">
     {{@each list as it}}
     <div class="guy-item" data-id="${{it.id}}">
       <div class="avatar">
