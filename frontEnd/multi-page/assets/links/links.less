@@ -1,11 +1,11 @@
 @charset "UTF-8";
 @import "../../../_public/less/_core.less";
 @import "../../../_public/less/_reset.less";
-@import "../../../_public/less/_grid.less";
+@import "/assets/_fontface.less";
 @import "../../../_public/less/_article.less";
 
 body{
-  background: #222;
+  background: #fff8e2;
 }
 .btn {
   display: inline-block;
@@ -32,19 +32,13 @@ body{
 }
 .Jumbotron{
   position: relative;
+  margin-bottom: 20px;
   padding: 8em 0 10em;
   background: #64cccb;
   background-image: -moz-linear-gradient(top, #336799, #64cccb);
   background-image: -webkit-gradient(linear, left top, left bottom,color-stop(0, #336799), color-stop(1, #64cccb));
   font-size: 12px;
   text-align: center;
-  .mask{
-    position: absolute;
-    width: 100%;
-    height: 3em;
-    left: 0;
-    bottom: 0;
-  }
   h1{
     margin-bottom: 1em;
     font-size: 3.2em;
@@ -57,46 +51,79 @@ body{
     font-family: "Microsoft Yahei";
   }
 }
-.myFriends{
-  padding: 20px 0;
-  margin-bottom: 100px;
-  font-family: "Microsoft Yahei";
-  h3{
-    margin-bottom: 1em;
-    font-size: 20px;
-    font-weight: normal;
-    color: #fff;
+.guy-list{
+  width: 1200px;
+  margin: auto;
+  &:after{
+    content: '';
+    display: block;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+    overflow: hidden;
+    clear: both;
   }
 }
 .guy-item{
-  margin-bottom: 20px;
+  float: left;
+  width: 380px;
+  margin: 0 10px 20px;
   background: #fff;
   cursor: default;
-  .title{
-    padding: 20px 10px 15px;
-    line-height: 1em;
+  @avatar_height: 40px;
+  .avatar{
+    float: left;
+    width: @avatar_height;
+    height: @avatar_height;
+    margin: 15px 0 0 25px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 2px rgba(0,0,0,.2);
+    img{
+      display: block;
+      width: 100%;
+      min-height: 100%;
+    }
+  }
+  .nickname{
+    padding: 15px 10px 15px 100px;
+    height: @avatar_height;
+    line-height: @avatar_height;
     font-size: 16px;
   }
   .desc{
-    margin: 0 10px 10px;
+    height: 4.5em;
+    line-height: 1.5em;
+    margin: 0 20px 10px;
+    overflow: hidden;
     line-height: 1.5em;
     font-size: 12px;
     color: #888;
   }
   .links{
-    border-top: 1px solid #ddd;
-    padding: .6em 0;
+    padding: 10px 20px;
+    font-size: 0;
+  }
+  .github,
+  .blog{
+    @icon-width: 26px;
+    display: inline-block;
+    vertical-align: text-top;
+    width: @icon-width;
+    height: @icon-width;
+    margin-right: 10px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: @icon-width;
+    color: #fff;
+  }
+  .github{
+    background: #00ae50;
+    font-size: 16px;
+  }
+  .blog{
+    background: green;
     font-size: 14px;
-    p{
-      padding: 0 10px;
-    }
-    a{
-      font-size: 12px;
-      color: #aaa;
-      &:hover{
-        text-decoration: underline;
-      }
-    }
   }
 }
 @media (min-width: 650px){
@@ -104,29 +131,10 @@ body{
     font-size: 16px;
   }
   .guy-item{
-    height: 120px;
-    position: relative;
-    .desc{
-      max-height: 4.5em;
-      overflow: hidden;
-    }
-    .links{
-      position: absolute;
-      top: 70%;
-      left: 0;
-      width: 100%;
-      background: #f4f4f4;
-      opacity: 0;
-      transition:all ease-out .2s;
-      box-shadow: 0 2px 2px rgba(0,0,0,.5);
-      z-index: 0;
-    }
+    box-shadow: #ced2db 0 1px 2px 0;
+    .transition(.4s);
     &:hover{
-      .links{
-        opacity: 1;
-        top: 100%;
-        z-index: 10;
-      }
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
     }
   }
 }

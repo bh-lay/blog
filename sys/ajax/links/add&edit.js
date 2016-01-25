@@ -5,7 +5,7 @@ var collection_name = 'blog_friend';
 
 function add(parm,callback){
 	var parm = parm;
-	
+
 	var method = mongo.start();
 
 	method.open({
@@ -23,16 +23,16 @@ function add(parm,callback){
 				return
 			}
 			callback && callback(null);
-			
+
 			method.close();
 		});
 	});
 }
 function edit(parm,callback){
 	var parm = parm;
-	
+
 	var method = mongo.start();
-	
+
 	method.open({
     collection_name: collection_name
   },function(error,collection){
@@ -55,7 +55,7 @@ function filter_param(data){
 	var param = {
 		id : data['id']||'',
 		title: decodeURI(data['title']),
-		cover: data['cover']||'',
+		avatar: data['avatar']||'',
 		url: data['url']||'',
 		isShow: data['isShow']||1,//1:show;0:hidden
     github_username : data.github_username || null,
@@ -74,7 +74,7 @@ function filter_param(data){
 var need_power = 18;
 
 module.exports = function (connect,app){
-  
+
   //校验权限
   connect.session(function(session_this){
     //没有编辑权限
@@ -85,12 +85,12 @@ module.exports = function (connect,app){
       });
       return
     }
-    
+
     //获取数据
     utils.parse.request(connect.request,function(err,data){
       //过滤数据
       var data = filter_param(data);
-      
+
       if(!data){
         //数据不全
         connect.write('json',{
