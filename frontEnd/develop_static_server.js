@@ -110,26 +110,26 @@ function Server(req,res){
   })
   .then(function(step,lastModified){
     // 第三步、读取文件
-    fs.readFile(realPath, function(err, file) {
-      if(err) {
-        // 500 server error
-        res.writeHead(500);
-        res.end('500');
-        return
-      }
-      var expires = new Date(new Date().getTime() + maxAge * 1000);
-      res.writeHead(200, {
-        'Content-Type': content_type,
-        'Expires' : expires.toUTCString(),
-        'Cache-Control' : "max-age=" + maxAge,
-        'Last-Modified' : lastModified,
-        'Access-Control-Allow-Origin' : "*",
-        'Content-Encoding': 'gzip'
-      });
-      zlib.gzip(file, function(err, result) {
-        res.end(result);
-      });
-    });
+    var expires = new Date(new Date().getTime() + maxAge * 1000),
+        headers = {
+          'Content-Type': content_type,
+          'Expires' : expires.toUTCString(),
+          'Cache-Control' : "max-age=" + maxAge,
+          'Last-Modified' : lastModified,
+          'Access-Control-Allow-Origin' : "*"
+        },
+        acceptEncoding = req.headers['accept-encoding'],
+        stream = fs.createReadStream(realPath),
+        gzipStream = zlib.createGzip();
+
+    if(acceptEncoding && acceptEncoding.indexOf('gzip') != -1) {
+      headers['Content-Encoding'] = 'gzip';
+      res.writeHead(200, headers);
+      stream.pipe(gzipStream).pipe(res);
+    }else{
+      res.writeHead(200, headers);
+      stream.pipe(res);
+    }
   })
   .start();
 }
