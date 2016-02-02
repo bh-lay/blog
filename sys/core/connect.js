@@ -34,15 +34,6 @@ function send (status,headers,content){
   }else{
     this.response.end();
   }
-  // logger ////////////////////////////////////
-  return
-  console.log({
-    'time':new Date(),
-    'status' : status,
-    'ip': this.ip(),
-    'url':this.request.url,
-    'user-agent':this.request.headers['user-agent']
-  });
 }
 /**
  * response json data

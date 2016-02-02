@@ -120,9 +120,7 @@ function APP(){
       result.mapsItem.call(this,data,new_connect);
     }else{
       //第二顺序：使用静态文件
-      me.fileReader.read(path.pathname,req,function(status,headers,content){
-          new_connect.write('define',status,headers,content);
-      },function(){
+      me.fileReader.read(path.pathname,req,res,function(){
         //第三顺序：查找301重定向
         if(url_redirect[path.pathname]){
           new_connect.write('define',301,{

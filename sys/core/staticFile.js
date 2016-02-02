@@ -2,7 +2,8 @@
  * @author bh-lay
  */
 
-var fs = require('fs');
+var fs = require('fs'),
+    zlib = require("zlib");
 
 
 function Filer(param){
@@ -10,9 +11,9 @@ function Filer(param){
   this.mime = param.mime;
   this.maxAge = param.maxAge;
 }
-Filer.prototype.read = function(path,req,responseFile,notFound) {
-  var me = this;
+Filer.prototype.read = function(path,req,res,notFound) {
   //匹配文件扩展名
+  var maxAge = this.maxAge;
   var pathname_split = path.match(/.\.([^.]+)$/);
   var ext = pathname_split ? pathname_split[1] : null;
 
@@ -31,44 +32,46 @@ Filer.prototype.read = function(path,req,responseFile,notFound) {
       notFound();
       return ;
     }
-    fs.readFile(realPath, function(err, file) {
+
+    fs.stat(realPath, function(err, stat) {
       if(err) {
         /**
          * 500 server error 
          */
-        responseFile(500,{
-          'Content-Type' : 'text/plain'
-        },'ext:' + ext + ',realPath:' + realPath);
-
+        res.writeHead(500);
+        res.end('500');
         return;
       }
-      fs.stat(realPath, function(err, stat) {
-        if(err) {
-          /**
-           * 500 server error 
-           */
-          responseFile(500,{
-            'Content-Type' : 'text/plain'
-          },'ext:' + ext + ',realPath:' + realPath);
+      var lastModified = stat.mtime.toUTCString();
 
-          return;
+      if(req.headers['if-modified-since'] && (lastModified == req.headers['if-modified-since'])) {
+          // 使用缓存
+        res.writeHead(304);
+        res.end();
+      } else {
+        var expires = new Date(new Date().getTime() + maxAge * 1000),
+            headers = {
+              'Content-Type': content_type,
+              'Expires' : expires.toUTCString(),
+              'Cache-Control' : "max-age=" + maxAge,
+              'Last-Modified' : lastModified,
+              'Access-Control-Allow-Origin' : "*"
+            },
+            acceptEncoding = req.headers['accept-encoding'],
+            stream = fs.createReadStream(realPath),
+            gzipStream = zlib.createGzip();
+        
+        if(acceptEncoding && acceptEncoding.indexOf('gzip') != -1) {
+          headers['Content-Encoding'] = 'gzip';
+          res.writeHead(200, headers);
+          stream.pipe(gzipStream).pipe(res);
+        }else{
+          res.writeHead(200, headers);
+          stream.pipe(res);
         }
-        var lastModified = stat.mtime.toUTCString();
-
-        if(req.headers['if-modified-since'] && (lastModified == req.headers['if-modified-since'])) {
-            responseFile(304);
-        } else {
-          var expires = new Date();
-          expires.setTime(expires.getTime() + me.maxAge * 1000);
-          responseFile(200,{
-            "Content-Type" : content_type,
-            "Expires" : expires.toUTCString() ,
-            "Cache-Control" : "max-age=" + me.maxAge ,
-            "Last-Modified" : lastModified,
-          },file);
-        }
-      });
+      }
     });
+    
   });
 };
 module.exports = Filer;
