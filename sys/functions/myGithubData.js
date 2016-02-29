@@ -5,11 +5,8 @@ var request = require('request'),
 	mongon_key = 'github_bh-lay',
 	need_keys = "public_repos,followers,following".split(',');
 	
-
-
 //从数据库读取
 function getFromDataBase(callback){
-	// console.log('getFromDataBase');
 	var method = mongo.start();
 	method.open({
 		collection_name: collection_name
@@ -22,7 +19,6 @@ function getFromDataBase(callback){
 			id : mongon_key
 		}).toArray(function(err, docs) {
 			method.close();
-			console.log('docs',docs);
 			if(arguments[1].length==0){
 				//若不存在，则从 Github 上获取
 				getFromGithub(function(err,data){
@@ -36,7 +32,6 @@ function getFromDataBase(callback){
 }
 //保存到数据库
 function saveDataToDataBase(data){
-	// console.log('saveDataToDataBase');
 	var method = mongo.start();
 
 	data.id = mongon_key;
@@ -73,7 +68,6 @@ function getFromGithub(callback){
 		}
 	}, function (err, response, body){
 		var responseBody;
-		console.log(err, response.statusCode, body);
 		if(err,response.statusCode != 200){
 			callback && callback('error');
 			return;
