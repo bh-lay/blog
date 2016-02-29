@@ -1,10 +1,11 @@
 
-var request = require('request'),
-	mongo = require('../core/DB.js'),
+var mongo = require('../core/DB.js'),
+	github = require('./github.js'),
 	collection_name = 'cache',
 	mongon_key = 'github_bh-lay',
 	need_keys = "public_repos,followers,following".split(',');
-	
+
+
 //从数据库读取
 function getFromDataBase(callback){
 	var method = mongo.start();
@@ -21,7 +22,7 @@ function getFromDataBase(callback){
 			method.close();
 			if(arguments[1].length==0){
 				//若不存在，则从 Github 上获取
-				getFromGithub(function(err,data){
+				updateFromGithub(function(err,data){
 					callback && callback(err,data);
 				});
 			}else{
@@ -59,23 +60,13 @@ function saveDataToDataBase(data){
   		});
 	});
 }
-//从Github API获取数据
-function getFromGithub(callback){
-	request({
-		url: 'https://api.github.com/users/bh-lay',
-		headers: {
-			'User-Agent': 'bh-lay github api robots'
-		}
-	}, function (err, response, body){
-		var responseBody;
-		if(err,response.statusCode != 200){
-			callback && callback('error');
-			return;
-		}
-		responseBody = JSON.parse(body);
+
+//从Github API更新数据
+function updateFromGithub(callback){
+	github.getUserInfo('bh-lay',function(err,info){
 		var data = {};
 		need_keys.forEach(function(item){
-			data[item] = responseBody[item];
+			data[item] = info[item];
 		});
 		callback && callback(null,data);
 		//保存到数据库
@@ -83,5 +74,5 @@ function getFromGithub(callback){
 	});
 }
 
-exports.update = getFromGithub;
+exports.update = updateFromGithub;
 exports.get = getFromDataBase;
