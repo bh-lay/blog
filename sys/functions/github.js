@@ -1,11 +1,13 @@
-var request = require('request');
+var request = require('request'),
+	userAgent = 'bh-lay github api robots';
 
 //从Github API获取数据
 function getUserInfo(username,callback){
+	console.log('get ' , username , ' info from github!');
 	request({
 		url: 'https://api.github.com/users/' + username,
 		headers: {
-			'User-Agent': 'bh-lay github api robots'
+			'User-Agent': userAgent
 		}
 	}, function (err, response, body){
 		var responseBody;
@@ -17,4 +19,5 @@ function getUserInfo(username,callback){
 		callback && callback(null,responseBody);
 	});
 }
+
 exports.getUserInfo = getUserInfo
