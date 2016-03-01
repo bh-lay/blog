@@ -1,7 +1,6 @@
 
 var mongo = require('../core/DB.js'),
-	request = require('request'),
-	api_url = 'https://api.github.com/repos/';
+	github = require('./github.js');
 
 //获取实验室列表
 function get_list(callback){
@@ -33,24 +32,11 @@ function get_list(callback){
 }
 //从Github API获取数据
 function get_info(repo_name,callback){
-	var need_keys = "name,full_name,html_url,description,created_at,updated_at,pushed_at,git_url,homepage,stargazers_count,watchers_count,forks_count".split(',');
-
-	repo_name = repo_name.replace(/^\//,'');
-	request({
-		url: api_url + repo_name,
-		headers: {
-			'User-Agent': 'bh-lay github api robot'
-		}
-	}, function (err, response, body){
-		var responseBody,
+	github.getReposInfo(repo_name,function(err,data){
+		var need_keys = "name,full_name,html_url,description,created_at,updated_at,pushed_at,git_url,homepage,stargazers_count,watchers_count,forks_count".split(','),
 			repo_info = {};
-		if(err,response.statusCode != 200){
-			callback && callback('error');
-			return;
-		}
-		responseBody = JSON.parse(body);
 		need_keys.forEach(function(item){
-			repo_info[item] = responseBody[item];
+			repo_info[item] = data[item];
 		});
 		callback && callback(null,repo_info);
 	});
