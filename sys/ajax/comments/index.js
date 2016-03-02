@@ -12,6 +12,7 @@
 
 var utils = require('../../core/utils/index.js'),
     add = require('./add.js'),
+    edit = require('./edit.js'),
     list = require('./list.js'),
     del = require('./del.js'),
     detail = require('./detail.js'),
@@ -104,30 +105,39 @@ exports.list = function (connect,app){
 };
 //列表
 exports.detail = function (connect,app){
-  var data = connect.url.search;
-      
-  utils.parse.request(connect.request,function(err,fields){
-    var _id = fields._id,
-        json = {
-          code : 200
-        };
+  var data = connect.url.search,
+      need_power = 17;
+  connect.session(function(session_this){
+      //校验权限
+      if(session_this.power(need_power)){
+        utils.parse.request(connect.request,function(err,fields){
+          var _id = fields._id,
+              json = {
+                code : 200
+              };
 
-    if(!_id || _id.length < 2){
-      json.code = 500;
-      connect.write('json',json);
-      return
-    }
-    detail(_id,function(err,commentItem){
-      var json = {
-        code : 200
-      };
-      if(err){
-        json.code = 500;
+          if(!_id || _id.length < 2){
+            json.code = 500;
+            connect.write('json',json);
+            return
+          }
+          detail(_id,function(err,commentItem){
+            var json = {
+              code : 200
+            };
+            if(err){
+              json.code = 500;
+            }else{
+              json.detail = commentItem;
+            }
+            connect.write('json',json);
+          });
+        });
       }else{
-        json.data = commentItem;
+        connect.write('json',{
+          'code' : 201
+        });
       }
-      connect.write('json',json);
-    });
   });
 };
 //删除
@@ -171,4 +181,33 @@ exports.del = function (connect,app){
       }
     });
   }
+};
+
+exports.edit = function(connect,app){
+  var need_power = 17;
+  utils.parse.request(connect.request,function(err,data){
+    var _id = data._id;
+    delete data._id;
+    connect.session(function(session_this){
+      //校验权限
+      if(session_this.power(need_power)){
+        edit(_id, data,function(err){
+          if(err){
+            connect.write('json',{
+              'code' : 300,
+              'msg' : '编辑失败'
+            });
+          }else{
+            connect.write('json',{
+              'code' : 200
+            });
+          }
+        });
+      }else{
+        connect.write('json',{
+          'code' : 201
+        });
+      }
+    });
+  });
 };

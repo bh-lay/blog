@@ -259,7 +259,7 @@ define(function(require,exports){
       seajs.use('publish/publish.js',function(publish){
           var cover = UI.cover({
               from : btn[0],
-      easyClose: false,
+              easyClose: false,
               html : '<div class="container my-publish-cnt"></div>'
           });
           publish.init($(cover.dom).find('.my-publish-cnt'),{

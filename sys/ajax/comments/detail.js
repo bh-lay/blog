@@ -9,7 +9,6 @@ module.exports = function(_id,callback){
 	method.open({
 		collection_name: 'comments'
 	},function(err,collection){
-		console.log(_id,123456)
 		if(err){
 			callback && callback(err);
 			return;

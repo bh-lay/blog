@@ -1,0 +1,29 @@
+<div>
+	<form action="/ajax/comments/edit" method="post" target="_self">
+		<div class="form-group clearfix">
+			<label class="col-sm-1 control-label">_id</label>
+			<div class="col-sm-11">
+				<p class="form-control-static">${_id}</p>
+			</div>
+		</div>
+		<div class="form-group clearfix">
+			<label class="col-sm-1 control-label">cid</label>
+			<div class="col-sm-11">
+				<p class="form-control-static">${cid}</p>
+			</div>
+		</div>
+		<div class="form-group clearfix">
+			<label class="col-sm-1 control-label">time</label>
+			<div class="col-sm-11">
+				<p class="form-control-static">${time}</p>
+			</div>
+		</div>
+		<div class="form-group clearfix">
+			<textarea class="form-control" name="content" >${content}</textarea>
+		</div>
+		<div>
+			<input type="hidden" name="_id" value="${_id}" />
+			<button type="submit" class="btn btn-primary">提交</button>
+		</div>
+	</form>
+</div>

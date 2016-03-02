@@ -11,6 +11,7 @@ define && define(function(require,exports){
 	var friends = require('publish/friends.js');
 	var power = require('publish/power.js');
 	var user = require('publish/user.js');
+	var comment = require('publish/comment.js');
 	
 	var publish_tpl = ['<br/><div class="publish">',
 		'<div class="panel panel-default">',
@@ -27,6 +28,8 @@ define && define(function(require,exports){
 			labs(dom,id,sendFn);
 		}else if(name == 'user'){
 			user(dom,id,sendFn);
+		}else if(name == 'comment'){
+			comment(dom,id,sendFn);
 		}else{
 			//默认为发布文章
 			article(dom,id,sendFn);
@@ -52,4 +55,5 @@ define && define(function(require,exports){
 	exports.friends = friends;
 	exports.power = power;
 	exports.user = user;
+	exports.comment = comment;
 });
