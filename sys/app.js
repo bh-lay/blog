@@ -185,7 +185,7 @@ app.get('/ajax/comments/{mark}', function(data,connect){
     ajax_comments[mark](connect,app);
   }else{
     connect.write('json',{
-      'code' : 500
+      'code' : 404
     });
   }
 });

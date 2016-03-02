@@ -14,6 +14,7 @@ var utils = require('../../core/utils/index.js'),
     add = require('./add.js'),
     list = require('./list.js'),
     del = require('./del.js'),
+    detail = require('./detail.js'),
     //二分钟限制十个回复
     time_limit = 2 * 60 * 1000,
     count_limit = 10;
@@ -98,6 +99,34 @@ exports.list = function (connect,app){
         json.data = jsonData;
       }
       save_cache(JSON.stringify(json));
+    });
+  });
+};
+//列表
+exports.detail = function (connect,app){
+  var data = connect.url.search;
+      
+  utils.parse.request(connect.request,function(err,fields){
+    var _id = fields._id,
+        json = {
+          code : 200
+        };
+
+    if(!_id || _id.length < 2){
+      json.code = 500;
+      connect.write('json',json);
+      return
+    }
+    detail(_id,function(err,commentItem){
+      var json = {
+        code : 200
+      };
+      if(err){
+        json.code = 500;
+      }else{
+        json.data = commentItem;
+      }
+      connect.write('json',json);
     });
   });
 };
