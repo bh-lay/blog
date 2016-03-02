@@ -201,6 +201,9 @@ exports.edit = function(connect,app){
             connect.write('json',{
               'code' : 200
             });
+            
+            //清除所有评论缓存
+            app.cache.clear('comment');
           }
         });
       }else{
