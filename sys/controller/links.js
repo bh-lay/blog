@@ -14,7 +14,7 @@ function getList(callback){
     collection.find({
       isShow: '1'
     }).sort({
-      _id: -1
+      score: -1
     }).toArray(function(err, docs) {
       if(err){
         callback && callback(err);
