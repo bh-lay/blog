@@ -215,12 +215,11 @@ app.get('/ajax/user/{act}', function(data,connect){
     });
   }
 });
-
-
 /**
  * 计划任务
  **/
 var updateLabsDataFromGithub = require('../sys/functions/updateLabsDataFromGithub.js'),
+    updateFriendsScore = require('../sys/functions/updateFriendsScore.js'),
     myGithubData = require('../sys/functions/myGithubData.js');
 //每晚三点
 new CronJob('01 01 03 * * *', function() {
@@ -228,6 +227,8 @@ new CronJob('01 01 03 * * *', function() {
   updateLabsDataFromGithub.all();
   //更新个人Github信息
   myGithubData.update();
+  // 更新前端英雄榜分数
+  updateFriendsScore.update();
 }, null, true, 'Asia/Hong_Kong');
 
 //每晚三点零十分
