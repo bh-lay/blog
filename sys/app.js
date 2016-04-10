@@ -103,7 +103,8 @@ var ajax_user = require('./ajax/user/index'),
     ajax_user_group = require('./ajax/user/user_group_add&edit'),
     ajax_power = require('./ajax/user/power'),
     ajax_demo = require('./ajax/demo/index'),
-    ajax_tag =  require('./ajax/tag/index.js');
+    ajax_tag =  require('./ajax/tag/index.js'),
+    ajax_functions =  require('./ajax/functions.js');
 
 //通用增加&编辑
 app.get('/ajax/add_edit', function(data,connect){
@@ -215,6 +216,13 @@ app.get('/ajax/user/{act}', function(data,connect){
     });
   }
 });
+
+app.get('/ajax/functions/{act}',function(data,connect){
+  var act = data.act;
+  console.log(ajax_functions);
+  ajax_functions(connect,app,act);
+});
+
 /**
  * 计划任务
  **/
