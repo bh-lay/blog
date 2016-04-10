@@ -7,7 +7,7 @@
 module.exports = {
 	host : '*',
   //端口号
-	port : 8090,
+	port : 8888,
   //静态资源
   static: {
     //静态资源根目录
