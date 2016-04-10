@@ -17,23 +17,25 @@ function get_list(data,callback){
 	};
 	
 	var method = mongo.start();
-	method.open({'collection_name':'blog_friend'},function(err,collection){
-      //count the all list
+	method.open({
+		'collection_name': 'blog_friend'
+	},function(err,collection){
+      	//count the all list
 		collection.count(function(err,count){
 			resJSON['count'] = count;
 			
 			collection.find({},{
-              limit: limit_num
+				time_create: 0,
+				adminScore: 0
+			},{
+              	limit: limit_num
             }).sort({
-              id: -1
+              	score: -1
             }).skip(skip_num).toArray(function(err, docs) {
 				method.close();
 				if(err){
 					resJSON.code = 2;
 				}else{
-					for(var i=0 in docs){
-						delete docs[i]['content'];
-					}
 					resJSON['list'] = docs;
 				}
 				callback&&callback(resJSON);

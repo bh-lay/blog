@@ -58,6 +58,7 @@ function filter_param(data){
 		avatar: data['avatar']||'',
 		url: data['url']||'',
 		isShow: data['isShow']||1,//1:show;0:hidden
+    adminScore: data['adminScore'] || 0,
     github_username : data.github_username || null,
 		discription: data['discription']
 	};
@@ -111,7 +112,7 @@ module.exports = function (connect,app){
               id : data.id,
               msg: 'edit success !'
             });
-            app.cache.clear();
+            app.cache.clear('links');
           }
         });
       }else{
