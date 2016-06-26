@@ -26,7 +26,11 @@ var fs = require('fs');
 function save_session(){
   var pathname = this.path;
   var data = JSON.stringify(this);
-  fs.writeFileSync(pathname,data);
+  var status = fs.writeFile(pathname,data,function( err ){
+    if( err ){
+      console.error('write seesion file error', err );
+    }
+  });
 }
 //生成session id
 function createSessionID(){
@@ -96,6 +100,7 @@ function session_factory(param){
         //read session file
         fs.readFile(that.path,'UTF-8',function(err,file){
           if(err){
+            console.error('read session file error',err);
             callback && callback(err);
             return;
           }
