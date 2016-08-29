@@ -223,6 +223,13 @@ app.get('/ajax/functions/{act}',function(data,connect){
   ajax_functions(connect,app,act);
 });
 
+// 获取微信JSSDK配置
+var ajax_wechat = require('./ajax/wechat.js');
+app.get('/ajax/getWechatJsapiSign', function( data, connect ){
+  ajax_wechat.getWechatJsapiSign( connect, app );
+});
+
+
 /**
  * 计划任务
  **/
