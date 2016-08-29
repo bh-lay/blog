@@ -39,17 +39,25 @@ function send (status,headers,content){
  * response json data
  *   data can be object or string
  */
-function sendJSON(data){
-  var json_str ='';
-  if(typeof(data) == 'string'){
-    json_str = data;
-  }else{
-    json_str = JSON.stringify(data);
-  }
+function sendJSON( data ){
+  var json_str = typeof(data) == 'string' ? data : JSON.stringify(data);
+  
   send.call(this,200,{
     'Content-Type' : 'application/json',
     'charset' : 'utf-8',
   },json_str);
+}
+/**
+ * response jsonp data
+ *   data can be object or string
+ */
+function sendJSONP( data ){
+  var json_str = typeof(data) == 'string' ? data : JSON.stringify(data),
+      callbackName = this.url.search.callback || 'jsonpCallback';
+  send.call(this,200,{
+    'Content-Type' : 'application/x-javascript',
+    'charset' : 'utf-8',
+  },callbackName + '(' + json_str + ');');
 }
 /**
  * response html page
@@ -95,6 +103,8 @@ CONNECT.prototype['write'] = function(type,a,b,c){
   switch(type){
     case 'json':
       sendJSON.call(this,a);
+    case 'jsonp':
+      sendJSONP.call(this,a);
     break;
     case 'html':
       sendHTML.call(this,a,b);
