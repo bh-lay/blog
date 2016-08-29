@@ -204,9 +204,13 @@ var sign = function (jsapi_ticket, url) {
   var string = raw(ret);
   var shaObj = new jsSHA('SHA-1', 'TEXT');  //new jsSHA(string, 'TEXT');
   shaObj.update(string);
-  ret.signature = shaObj.getHash("HEX");  //shaObj.getHash('SHA-1', 'HEX');
 
-  return ret;
+  return {
+    appId: config.weixin.AppId,
+    timestamp: ret.timestamp,
+    nonceStr: ret.nonceStr,
+    signature: shaObj.getHash("HEX")  //shaObj.getHash('SHA-1', 'HEX');
+  };
 };
 
 
@@ -238,7 +242,7 @@ exports.getWechatJsapiSign = function ( connect, app ) {
       returns.code = 500;
       returns.msg = err;
     }
-    
+
     connect.write( 'jsonp', returns);
   });
 };
