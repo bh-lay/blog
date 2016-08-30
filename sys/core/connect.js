@@ -103,6 +103,7 @@ CONNECT.prototype['write'] = function(type,a,b,c){
   switch(type){
     case 'json':
       sendJSON.call(this,a);
+    break;
     case 'jsonp':
       sendJSONP.call(this,a);
     break;
