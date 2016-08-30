@@ -29,12 +29,13 @@ function getUserInfo(username,callback){
 			'User-Agent': clientUserAgent
 		}
 	}, function (err, response, body){
+		response = response || {};
 		var responseBody;
 		if(err,response.statusCode != 200){
 			callback && callback('error');
 			return;
 		}
-		responseBody = JSON.parse(body);
+		responseBody = JSON.parse( body || {} );
 		callback && callback(null,responseBody);
 	});
 }
