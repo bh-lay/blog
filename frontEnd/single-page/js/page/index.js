@@ -47,9 +47,13 @@ define([
     }
     var countDownDays = Math.ceil( ( new Date(2016,9-1,28) - new Date() )/1000/60/60/24 ),
         MANY_ZEROS = "000000000000000000",
-        str_day = leftZeroPad(countDownDays,3),
-        html = createCountDownHtml( str_day );
-    utils.query('.countdown-body',node).innerHTML = html;
+        str_day = leftZeroPad(countDownDays,3);
+
+    if( countDownDays < 0 ){
+      utils.query('.countdown').style.display = 'none';
+    }else{
+      utils.query('.countdown-body',node).innerHTML = countDownDays == 0 ? '<span>婚</span><span>礼</span><span>中</span>' : createCountDownHtml( str_day ); 
+    }
     utils.css( utils.query('.index-wedding',node), {
       height: window.innerHeight - 50
     });
