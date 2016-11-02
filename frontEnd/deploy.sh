@@ -1,8 +1,9 @@
 # 使用帮助
 function help(){
-	echo "Usage: sh $0 [project] [media]";
-	echo "       [project] 项目目录名，all为编译全部";
-	echo "       [media] fis配置中的media（可选）\n";
+	echo "Usage   sh $0 [project] [media]";
+	echo "        [project] 项目目录名，all为编译全部";
+	echo "        [media] fis3 中配置的 media（可选）\n";
+	echo "notice  非编译全部项目[all]，并且未指定 media 时，默认开启 watch\n";
 }
 
 # 画横线
