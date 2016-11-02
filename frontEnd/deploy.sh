@@ -1,41 +1,79 @@
-
-echo 'Deploy System'
-echo '-----------------------'
-
-
 # 使用帮助
-if [ $1 == 'help' ]; then
-    echo -e "Usage: bash $0 [project] [media]";
-    echo -e "       [project] 项目目录名";
-    echo -e "       [media] fis配置中的media（可选）";
-    exit 1;
-fi
+function help(){
+	echo "Usage: sh $0 [project] [media]";
+	echo "       [project] 项目目录名，all为编译全部";
+	echo "       [media] fis配置中的media（可选）\n";
+}
 
-# 源码目录-发布目录
-deployFrom=$1;
+# 画横线
+function printLine(){
+	echo '--------------------------------------------------------\n';
+}
+
+# 编译方法 参数为目录名
+function deploy(){
+	# 不编译【 _ 】开头的目录
+	if [ ${1:0:1} == '_' ]; then
+		echo "skip ["$1"], ["$1"] is not a project !\n";
+	else
+		echo '  frontEnd/'$1 ' --> '$deployTo;
+		echo '  fis3 release '$deployMedia' '$watch' -d '$deployTo' --file fis-conf.js'
+		cd $root'/'$1
+		fis3 release $deployMedia $watch -d $deployTo --file fis-conf.js
+	fi
+}
+
+
+# 当前目录
+root=`pwd`;
+
+# 发布media，fis3的参数
 deployMedia=${2:-''};
-deployTo='../../static/'
-watch='';
 
+# 发布目录
+deployTo='../../static/';
+
+# 是否开启持续观测模式
+watch='';
 # 没有media配置时才用watch
 if [ ${#deployMedia} == 0 ]; then
-    watch='-w';
+	watch='-w';
 fi
 
-#检查项目是否存在
-if [ ! -d $deployFrom ]; then
-    echo -e "project not found !\n";
-    exit 1;
+
+
+echo '\n [BDS] bh-lay deploy system'
+printLine;
+
+
+if [ $1 == 'help' ]; then
+	# help 显示帮助
+    help
+
+elif [ $1 == 'all' ]; then
+	# all 编译所有项目
+    
+    echo "deploy all project start ";
+    # 取消 watch
+    watch='';
+    # 遍历编译所有项目
+	for x in `ls -l | grep '^d' | awk '{print $9}'`
+	do
+		printLine;
+		deploy $x;
+	done
+	
+elif [ ! -d $1 ]; then
+
+	# 项目可能不存在
+	echo "project ["$1"] is not found !\n";
+	help
+
+else
+
+	# 进入单项编译
+	deploy $1;
+
 fi
 
-# 不编译【 _ 】开头的目录
-if [ ${deployFrom:0:1} == '_' ]; then
-    echo -e "["$deployFrom"] is not a project !\n";
-    exit 1;
-fi
 
-echo '  from: '$deployFrom ' to  : '$deployTo
-echo '  fis3 release '$deployMedia' '$watch' -d '$deployTo' --file fis-conf.js'
-
-cd $deployFrom
-fis3 release $deployMedia $watch -d $deployTo --file fis-conf.js
