@@ -1,9 +1,9 @@
 # 使用帮助
 function help(){
 	echo "Usage   sh $0 [project] [media]";
-	echo "        [project] 项目目录名，all为编译全部";
-	echo "        [media] fis3 中配置的 media（可选）\n";
-	echo "notice  非编译全部项目[all]，并且未指定 media 时，默认开启 watch\n";
+	echo "        project 项目目录名，all为编译全部";
+	echo "        media   fis3 中配置的 media（可选）\n";
+	echo "notice  非编译全部项目[all]，且未指定 media 时，默认开启 watch\n";
 }
 
 # 画横线
@@ -43,11 +43,17 @@ fi
 
 
 
-echo '\n [BDS] bh-lay deploy system'
+echo '\n[BDS] bh-lay deploy system'
 printLine;
 
 
-if [ $1 == 'help' ]; then
+if [ $# == 0 ]; then
+	# 未传入参数 显示帮助
+	echo "没有执行任何编译操作，请按照下面提示进行操作";
+	printLine;
+    help
+
+elif [ $1 == 'help' ]; then
 	# help 显示帮助
     help
 
