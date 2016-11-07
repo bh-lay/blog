@@ -36,7 +36,7 @@ function start(){
 	cd ../../mongo/;
 	echo "  删除非正常退出的lock文件";
 	rm db/mongod.lock -rf;
-	./bin/mongod -dbpath=./db --fork --auth --bind_ip 127.0.0.1 --port 27017
+	./bin/mongod -dbpath=./db --fork --auth --bind_ip 127.0.0.1 --port 27017 --logpath=./log/MongoDB.log --logappend
 
 
 	printScape;
