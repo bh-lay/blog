@@ -15,9 +15,29 @@
   top: 0px;
   width: 100%;
   height: 100%;
-  background-position: center center;
+
+}
+
+.index-aboutme{
+  position: relative;
+  max-height: 94vh;
+  min-height: 300px;
+  overflow: hidden;
+  color: #fff;
+  text-shadow: 1px 0px 2px rgba(0,0,0,.3);
+  background: url("../../images/gallery/aboutme.jpg") center center;
   background-size: cover;
-  display: none;
+  visibility: hidden;
+  overflow: hidden;
+  &.zoom-show{
+    display: block;
+    visibility: visible;
+    -webkit-mask-image: url(/images/mask_bj.png?__inline);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center center;
+    -webkit-mask-size: 300%;
+    -webkit-animation: circle_zoom 1.2s ease-in;
+  }
   &:before {
     content: '';
     position: absolute;
@@ -25,53 +45,32 @@
     top: 0px;
     width: 100%;
     height: 100%;
-    background: url(/images/mask.png)
+    background: url(/images/mask.png?__inline);
+    z-index: 0;
   }
-  &.zoom-show{
-    display: block;
-    -webkit-mask-image: url(/images/mask_bj.png?__inline);
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: center center;
-    -webkit-mask-size: 300%;
-    -webkit-animation: circle_zoom 1.5s;
-  }
-}
-
-.index-aboutme{
-  padding: 25vh 0 26vh;
-  text-align: center;
-  overflow: hidden;
-  &:before{
+  &:after{
     content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    bottom: 0;
-    left: 0;
-    border-style: solid;
-    border-width: 3rem 50vw 0;
-    border-color: transparent rgba(255,255,255,.5) transparent;
+    display: block;
+    padding-top: 66%;
   }
-  .avatar{
-    width: 150px;
-    height: 150px;
-    margin: 0 auto 1.5em;
-    border-radius: 100%;
-    border: 5px solid #fff;
-    background: url(../../images/my-avatar.jpg) #fff;
-    .transition(.4s,ease-out);
-    &:hover{
-      transform: rotate(200deg);
-      -webkit-transform: rotate(200deg);
-    }
+  .aboutme-body{
+    position: absolute;
+    width: 100%;
+    height: 160px;
+    top: 50%;
+    left: 0;
+    margin-top: -80px;
+    text-align: center;
   }
   h3{
-    margin-bottom: .5em;
+    padding-left: 10px;
+    margin-bottom: .3em;
     line-height: 1em;
-    font-size: 1.6em;
+    font-size: 2.4em;
     font-weight: 500;
   }
   p{
+    padding-left: 10px;
     margin-bottom: 2em;
     font-size: 1.1em;
   }
@@ -81,27 +80,42 @@
       vertical-align: middle;
       width: 2.2em;
       height: 2.2em;
-      margin: 0 5px;
+      margin: 0 10px;
       line-height: 2.2em;
-      border: 1px solid rgba(0,0,0,0.8);
+      border: 1px solid rgba(255,255,255, .8);
       border-radius: 100%;
       font-size: 1.3em;
-      color: #000;
       opacity: .7;
-      .transition(.2s,ease);
+      .transition(.3s,ease-in-out);
+      svg{
+        width: 100%;
+        fill: #fff;
+      }
       &:hover{
         opacity: 1;
+        background: rgba(0,0,0,.2);
       }
     }
   }
 }
 
 .index-about-design{
+  position: relative;
   padding: 5em 0;
   line-height: 1.8em;
-  background: rgba(255,255,255,.5);
-  font-family: "Microsoft Yahei";
   text-align: center;
+  background: #fff;
+  &:before{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: -4rem;
+    left: 0;
+    border-style: solid;
+    border-width: 4rem 100vw 0 0;
+    border-color: transparent #fff transparent;
+  }
   h3{
     margin-bottom: .6em;
     font-size: 2em;
@@ -302,17 +316,28 @@
   0% {
     opacity: 0;
     -webkit-mask-size: 30%;
-    -webkit-animation-timing-function: ease-in
   }
 
   40% {
     opacity: .6;
     -webkit-mask-size: 60%;
-    -webkit-animation-timing-function: ease-in
   }
 
   100% {
     opacity: 1;
     -webkit-mask-size: 300%
+  }
+}
+
+@media screen and (min-width: 660px) {
+    .index-aboutme .aboutme-body{
+      top: 20%;
+      margin-top: 0;
+      text-align: left;
+    }
+}
+@media (min-width:800px) and (-webkit-min-device-pixel-ratio:2){
+  .index-aboutme{
+    background-image: url("../../images/gallery/aboutme_@2x.jpg");
   }
 }
