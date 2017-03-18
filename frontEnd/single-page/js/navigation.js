@@ -22,7 +22,7 @@ define([
 
     utils.bind(utils.query('.backToOldVersion'),'click', function () {
       UI.confirm({
-        text : '确定要去当屌丝？',
+        text : '想看看屌丝版 ？',
         callback : function(){
           document.cookie = 'ui_version=html;path=/;';
           window.location.reload();
