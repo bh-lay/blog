@@ -1,20 +1,16 @@
 
-
-
-//清除其他配置，只剩下如下配置
+// 静态资源均使用hash
 fis.match('*.{js,css,jpg,png,less,gif,svg}', {
   useHash: true,
 });
-
+// 解析 less
 fis.match('*.less', {
-  // fis-parser-less 插件进行解析
   parser: fis.plugin('less'),
-  // .less 文件后缀构建后被改成 .css 文件
   rExt: '.css'
 });
 
 
-//发布位置
+// 配置发布位置
 fis.match('**', {
   release: 'build/topic/$0',
   domain: 'http://127.0.0.1:8088'
@@ -23,25 +19,21 @@ fis.match('**/*.html', {
   release: '../web/topic/$0'
 });
 
-fis.match('*.png', {
-  // fis-optimizer-png-compressor 插件进行压缩，已内置
-  optimizer: fis.plugin('png-compressor')
-});
-
-
 //线上打包
-fis
-  .media('production')
+fis.media('production')
+    // 压缩 JS
     .match('/**.js', {
-    // 通过 uglify 压缩 js
-    optimizer: fis.plugin('uglify-js')
-  })
-  //CSS压缩
-  .match('*.less', {
-    optimizer: fis.plugin('clean-css')
-  })
-  //线上使用CDN
-  .media('production').match('*', {
-    // domain: 'http://127.0.0.1:8088'
-      domain: '//dn-lay.qbox.me'
-  });
+      optimizer: fis.plugin('uglify-js')
+    })
+    // 压缩CSS
+    .match('*.less', {
+      optimizer: fis.plugin('clean-css')
+    })
+    // 压缩 PNG
+    .match('*.png', {
+      optimizer: fis.plugin('png-compressor')
+    })
+    // 线上使用 CDN 域名
+    .match('*', {
+        domain: '//dn-lay.qbox.me'
+    });
