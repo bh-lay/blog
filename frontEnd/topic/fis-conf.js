@@ -16,11 +16,11 @@ fis.match('*.less', {
 
 //发布位置
 fis.match('**', {
-  release: 'build/aboutme/$0',
+  release: 'build/topic/$0',
   domain: 'http://127.0.0.1:8088'
 });
-fis.match('index.html', {
-  release: '../web/topic/aboutme/index.html'
+fis.match('**/*.html', {
+  release: '../web/topic/$0'
 });
 
 fis.match('*.png', {
