@@ -1,0 +1,177 @@
+
+.ghoulsName{
+}
+.ghoulsText{
+	position: relative;
+	display: inline-block;
+	width: 150px;
+	height: 150px;
+	margin-right: 50px;
+	line-height: 150px;
+	font-size: 150px;
+	overflow: hidden;
+	text-align: center;
+	color: #000;
+}
+.ghoulsTextTopHalf{
+	position: relative;
+	left: -100%;
+	height: 50%;
+	overflow: hidden;
+	-webkit-transition: .3s;
+	transition: .3s;
+}
+.ghoulsTextBottomHalf{
+	position: relative;
+	left: 100%;
+	height: 50%;
+	line-height: 0;
+	overflow: hidden;
+	-webkit-transition: .4s;
+	transition: .4s;
+	opacity: .5;
+}
+.trigramsLine{
+	position: absolute;
+	width: 100%;
+	height: 12%;
+	left: 0;
+	-webkit-transition: .3s;
+	transition: .3s;
+}
+.trigramsLine1{
+	top: 10%;
+}
+.trigramsLine2{
+	top: 44%;
+}
+.trigramsLine3{
+	top: 78%;
+}
+.trigramsIconRow{
+	background: #000;
+}
+.trigramsIconSplit:before,
+.trigramsIconSplit:after{
+	content: '';
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 44%;
+	background: #000;
+}
+.trigramsIconSplit:before{
+	left: 0;
+}
+.trigramsIconSplit:after{
+	right: 0;
+}
+.ghoulsText.active .trigramsLine1,
+.ghoulsText.active .trigramsLine3{
+	left: 100%;
+}
+.ghoulsText.active .trigramsLine2{
+	left: -100%;
+}
+.ghoulsText.active .ghoulsTextTopHalf,
+.ghoulsText.active .ghoulsTextBottomHalf{
+	left: 0;
+	opacity: 1;
+}
+
+.fadeOut{
+	opacity: 0;
+	-webkit-transition:.3s;
+	transition:.3s;
+}
+
+
+
+html,
+body{
+	position: relative;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: auto;
+	font-family: "Helvetica neue",Helvetica,Tahoma,"lantinghei sc","Microsoft Yahei",sans-serif;
+}
+body{
+	background: url("bj.jpg") no-repeat center top #42445d;
+	background-size: 100% auto;
+}
+.header{
+	min-height: 240px;
+	padding: 100px 0 50px;
+	text-align: center;
+}
+.inputSet{
+	position: relative;
+	width: 400px;
+	height: 60px;
+	margin: auto;
+	background: #fff;
+}
+#inputText{
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	border: none;
+	padding: 10px 120px 10px 20px;
+	line-height: 40px;
+	font-size: 40px;
+	background: transparent;
+	color: #555;
+}
+#button{
+	position: absolute;
+	display: block;
+	top: 10px;
+	right: 10px;
+	height: 40px;
+	padding: 0 15px;
+	line-height: 40px;
+	background: #f6f6f6;
+	text-decoration: none;
+	color: #333;
+}
+#button:hover{
+	background: #eee;
+}
+#button:active{
+	background: #ddd;
+}
+img{display:none;}
+
+@media (max-width: 800px) {
+	.header{
+		padding: 50px 0 20px;
+		min-height: 100px;
+	}
+	.ghoulsText{
+		width: 50px;
+		height: 50px;
+		margin-right: 10px;
+		line-height: 50px;
+		font-size: 50px;
+	}
+	.inputSet{
+		width: auto;
+		height: 40px;
+		margin: 0 15px 50px;
+	}
+	#inputText{
+		border: none;
+		padding: 10px 120px 10px 20px;
+		font-size: 20px;
+		line-height: 20px;
+	}
+	#button{
+		top: 5px;
+		right: 5px;
+		height: 30px;
+		padding: 0 15px;
+		line-height: 30px;
+	}
+}
