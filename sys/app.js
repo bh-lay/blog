@@ -62,6 +62,11 @@ app.get('/labs', function(data,connect){
     labs.list(connect,app);
   });
 });
+app.get('/720', function(data,connect){
+  views_select(connect,function(){
+    connect.write('html',200,'<h1>这块还没写呢！</h1>');
+  });
+});
 app.get('/labs/{name}', function(data,connect){
   labs.detail(connect,app,data.name);
 });
