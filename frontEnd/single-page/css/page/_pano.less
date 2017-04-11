@@ -9,53 +9,6 @@
   border-radius: 2px;
   box-shadow: 0 0 2px rgba(0,0,0,0.2);
 }
-.opus-header{
-	position: relative;
-	background: url(/images/opus.jpg) no-repeat center center #f4f1ec;
-	background-size: auto 100%;
-	min-height: 200px;
-	max-height: 400px;
-	&:before{
-		content: '';
-		display: block;
-		padding-top: 21%;
-	}
-	.sub-nav{
-		position: absolute;
-		width: 100%;
-		left: 0;
-		bottom: 0;
-		a,
-		strong{
-			display: inline-block;
-			height: 3em;
-			padding: 0 2em;
-			border-radius: 2px 2px 0 0;
-			line-height: 3em;
-			font-size: 1em;
-			background: #fff;
-		}
-		a{
-			opacity: .7;
-			.transition(0.15s,ease-out);
-			&:hover{
-				opacity: 1;
-				color: #000;
-			}
-		}
-	}
-}
-// 高清屏 + 大屏 使用大图
-@media (min-width:800px) and (-webkit-min-device-pixel-ratio:2){
-	.opus-header{
-		background-image: url(/images/opus_@2x.jpg);
-	}
-}
-.bless-sendBox{
-	max-width: 700px;
-	width: 100%;
-	margin:auto;
-}
 
 /**实验室列表**/
 .panoList {

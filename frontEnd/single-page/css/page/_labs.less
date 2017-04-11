@@ -11,8 +11,56 @@
 }
 
 /**实验室列表**/
+
+.opus-header{
+	position: relative;
+	background: url(/images/opus.jpg) no-repeat center center #f4f1ec;
+	background-size: auto 100%;
+	min-height: 200px;
+	max-height: 400px;
+	overflow: hidden;
+	&:before{
+		content: '';
+		display: block;
+		padding-top: 21%;
+	}
+	.sub-nav{
+		position: absolute;
+		width: 100%;
+		left: 0;
+		bottom: 0;
+		a,
+		strong{
+			display: inline-block;
+			vertical-align: bottom;
+			height: 3em;
+			padding: 5px 2em 0;
+			border-radius: 4px 4px 0 0;
+			line-height: 3em;
+			font-size: 1em;
+			background: #fff;
+			box-shadow: 1px 1px 2px rgba(0,0,0,.3);
+		}
+		a{
+			padding-top: 0;
+			opacity: .8;
+			.transition(0.15s,ease-out);
+			&:hover{
+				opacity: 1;
+				color: #000;
+			}
+		}
+	}
+}
+// 高清屏 + 大屏 使用大图
+@media (min-width:800px) and (-webkit-min-device-pixel-ratio:2){
+	.opus-header{
+		background-image: url(/images/opus_@2x.jpg);
+	}
+}
 .labsList {
 	padding: 40px 0;
+	background: #fff;
 }
 .lab_item {
 	position: relative;
