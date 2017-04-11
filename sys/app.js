@@ -229,10 +229,10 @@ app.get('/ajax/functions/{act}',function(data,connect){
 });
 
 // 获取微信JSSDK配置
-var ajax_wechat = require('./ajax/wechat.js');
-app.get('/ajax/getWechatJsapiSign', function( data, connect ){
-  ajax_wechat.getWechatJsapiSign( connect, app );
-});
+// var ajax_wechat = require('./ajax/wechat.js');
+// app.get('/ajax/getWechatJsapiSign', function( data, connect ){
+//   ajax_wechat.getWechatJsapiSign( connect, app );
+// });
 
 // 获取全景图数据
 var ajax_pano = require('./ajax/pano_get.js');
