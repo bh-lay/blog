@@ -224,7 +224,6 @@ app.get('/ajax/user/{act}', function(data,connect){
 
 app.get('/ajax/functions/{act}',function(data,connect){
   var act = data.act;
-  console.log(ajax_functions);
   ajax_functions(connect,app,act);
 });
 
