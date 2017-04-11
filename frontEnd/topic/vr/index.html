@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>关于剧中人</title>
+  <meta name="author" content="bh-lay" />
+  <meta name="description" content="剧中人，90后前端开发，全栈开发实践者。" />
+  <meta name="keywords"  content="剧中人,小剧客栈,前端开发" />
+  <meta content="width=device-width, initial-scale=1, user-scalable=0" name="viewport">
+  <link rel="stylesheet" href="asset/page.less">
+</head>
+<body>
+<div class="navigation">
+  <div class="wrap"></div>
+</div>
+<div class="section" id="header">
+  <div class="header_body">
+    <div class="header-detail wow fadeInRight">
+      <a href="javascript:void(0)" class="btn" >报价标准</a>
+      <a href="javascript:void(0)" class="btn btn-primary" data-wow-delay="0.5s" >联系约拍</a>
+    </div>
+  </div>
+  <div class="down wow bounceInUp" data-wow-delay=".5s">
+    <a href="javascript:void(0)">
+      <svg viewBox="0 0 1852 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" >
+        <path d="M1815.552 68.559238l-34.816-32.865524c-48.176762-45.348571-126.293333-45.348571-174.421333 0L926.281143 676.327619 246.296381 35.693714c-48.176762-45.348571-126.293333-45.348571-174.372571 0l-34.864762 32.865524a111.469714 111.469714 0 0 0 0 164.230095l766.927238 722.651429 0.195047 0.292571 34.913524 32.768c48.079238 45.348571 126.147048 45.348571 174.372572 0l34.864761-32.768 0.195048-0.341333L1815.405714 232.789333a111.274667 111.274667 0 0 0 0.146286-164.230095z" ></path>
+      </svg>
+    </a>
+  </div>
+</div>
+<div class="section" id="work">
+  <div class="mask"><svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 100" preserveAspectRatio="none"><g><polygon xmlns="http://www.w3.org/2000/svg" points="0,100 600,100 600,0" style="fill:#fff;stroke-width:0"/></g></svg></div>
+  <div class="wrap">
+    <div class="intro wow fadeInDown">
+      <h2>目前厮混在百度上海团队</h2>
+      <p>参与桌面百度的相关开发</p>
+      <a href="http://zhuomian.baidu.com" target="_blank">桌面百度是什么？</a>
+    </div>
+    <div class="zhuomianbaidu wow fadeInUp">
+    </div>
+    <div>
+    </div>
+  </div>
+</div>
+<div class="section" id="design">
+  <div class="wrap">
+    <div class="intro half wow fadeInLeft">
+      <h2>关于设计</h2>
+      <p>设计曾是我的职业，如今是我的一大爱好</p>
+      <p>喜欢恶搞，更爱PS一些奇奇怪怪的东西</p>
+      <p>不靠谱的摄影学徒，正儿八经的伪设计师</p>
+      <p></p>
+    </div>
+    <div class="pics half wow fadeInDownBig">
+    </div>
+  </div>
+</div>
+<div class="section" id="nodejs">
+  <div class="wrap">
+    <div class="half wow fadeInLeftBig">
+      <h2>关于开发</h2>
+      <p>习惯从前端代码中剥离出公用组件</p>
+      <p>对大而全的框架有轻微抵触心理</p>
+      <p>患有不是很严重的代码洁癖</p>
+    </div>
+    <div class="half wow fadeInRight">
+    </div>
+  </div>
+</div>
+<div class="section" id="github">
+  <div class="intro wow fadeInLeft">
+    <h2>Github脑残用户</h2>
+    <p>以提交代码为荣，骗follow、star为乐。</p>
+    <br/>
+    <p>年少无知，曾毫不顾忌地造了不少轮子。</p>
+    <p>这张<a href="https://github.com/bh-lay/github-widget-user" target="_blank">github个人名片</a>也是其中之一</p>
+  </div><div class="github-widget-user wow fadeInRight" data-user="bh-lay"></div>
+</div>
+<div class="section" id="links">
+  <div class="wrap">
+    <h2 class="wow fadeInLeft">常在这些不健康场所虚度光阴</h2>
+    <p class="wow fadeInLeft">不感冒游戏，对小说无爱。闲来无事爱刷知乎，撸起代码就会淘Github，偷点儿灵感上dribbble。</p>
+    
+    <div class="icons wow fadeInUp">
+      <a href="https://github.com/bh-lay" title="github">
+        <i class="l-icon l-icon-git"></i>
+        <strong>github</strong>
+      </a>
+      <a href="http://www.zhihu.com/people/imju-zhong-ren" title="知乎">
+        <i class="l-icon l-icon-zhihu"></i>
+        <strong>知乎</strong>
+      </a>
+      <a href="https://dribbble.com/bh_lay" title="dribbble">
+        <i class="l-icon l-icon-dribbble"></i>
+        <strong>dribbble</strong>
+      </a>
+    </div>
+  </div>
+</div>
+<div class="section" id="footer">没想好这块儿写什么！</div>
+<div class="section_loading"><p>玩命儿加载中……</p></div>
+<script src="asset/jquery.min.js"></script>
+<script src="asset/wow.min.js"></script>
+<script type="text/javascript">
+  $(function(){
+    new WOW({
+      animateClass: 'animated',
+      offset: 150
+    }).init();
+    $('.section_loading').fadeOut(400,function(){
+      $(this).remove();
+    });
+    $('.down').click(function(){
+      $('html,body').animate({
+        scrollTop: $('#header').outerHeight()
+      },300);
+    });
+  });
+</script>
+<div class="tongji">
+<!--<script type="text/javascript">-->
+	<!--var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");-->
+	<!--document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F0f6bfc1dac208f86e5effd5f2d59027d' type='text/javascript'%3E%3C/script%3E"));-->
+<!--</script>-->
+</div>
+</body>
+</html>
