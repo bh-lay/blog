@@ -234,6 +234,12 @@ app.get('/ajax/getWechatJsapiSign', function( data, connect ){
   ajax_wechat.getWechatJsapiSign( connect, app );
 });
 
+// 获取全景图数据
+var ajax_pano = require('./ajax/pano_get.js');
+app.get('/ajax/pano/list', function( data, connect ){
+  ajax_pano.render( connect, app );
+});
+
 
 /**
  * 计划任务
