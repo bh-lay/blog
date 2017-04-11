@@ -8,7 +8,7 @@ define([
   'js/juicer'
 ],function(utils,imageHosting,juicer){
   var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>',
-      base_tpl = __inline('/tpl/labsListBase.html'),
+      base_tpl = __inline('/tpl/panoListBase.html'),
       item_temp = __inline('/tpl/labsListItem.html');
 
   var limit = 20,
@@ -59,7 +59,7 @@ define([
           list : list
         });
       }
-      utils.query('.labsList',node).innerHTML = this_html;
+      utils.query('.panoList',node).innerHTML = this_html;
     });
   };
 });

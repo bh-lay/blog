@@ -102,7 +102,7 @@ define([
         this.title('小剧的全景作品');
 
         navigation.setCur('labs');
-        activePage = new opusListPage(new Page);
+        activePage = new panoListPage(new Page);
       })
     // panoListPage
     // 留言板
