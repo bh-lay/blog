@@ -11,7 +11,6 @@ define([
       base_tpl = __inline('/tpl/panoListBase.html'),
       item_temp = __inline('/tpl/panoListItem.html');
 
-  var dom;
   var getData = function(callback){
     utils.fetch({
       type : 'GET' ,
