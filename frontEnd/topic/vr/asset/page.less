@@ -32,11 +32,11 @@ hr{
   font-size: 16px;
   padding: 3em 0;
   h1{
-    font-size: 1.6em;
+    font-size: 1.8em;
   }
   h2{
     margin-bottom: 1em;
-    font-size: 1.4em;
+    font-size: 1.5em;
   }
   p{
     margin: .5em 0;
@@ -247,40 +247,69 @@ hr{
   }
 }
 
-#design{
-  color: #fff;
-  background: #689;
-  overflow: hidden;
-  .pics{
-    height: 280px;
-    background: #000;
-  }
-  .pic{
-    position: relative;
-    float: left;
-    height: 140px;
-    background-size: cover;
-    background-position: left center;
-    cursor: pointer;
-    overflow: hidden;
-    opacity: .7;
-    -webkit-transition: .4s ease-in-out;
-    -moz-transition: .4s ease-in-out;
-    transition: .4s ease-in-out;
-    &:hover{
-      background-position: right center;
-      opacity: 1;
-    }
-  }
-  .pic20{
-    width: 20%
-  }
-  .pic50{
-    width: 50%
-  }
-  .pic30{
-    width: 30%
-  }
+#section-3{
+	padding: 5em 0 6em;
+	background: url("../images/bj-3.jpg") no-repeat center center #a45a33;
+	background-size: cover;
+	overflow: hidden;
+	color: #fff;
+	h2,
+	p{
+		text-align: center;
+	}
+	ul{
+		margin: 4em 0 0;
+		padding: 0;
+		//background: rgba(255,255,255,.2);
+		&:after{
+			content: '';
+			display: block;
+			height:0;
+			overflow: hidden;
+			clear: both;
+		}
+	}
+	li{
+		position: relative;
+		list-style: none;
+		float: left;
+		width: 25%;
+		padding: 3em 0 2em;
+		&:after{
+			content: '';
+			display: block;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 8em;
+			height: 8em;
+			margin: -4em 0 0 -4em;
+			border: 1px dashed #fff;
+			border-radius: 100%;
+		}
+	}
+	svg{
+		display: block;
+		height: 2.5em;
+		margin: 0 auto .5em;
+		fill: #fff;
+	}
+	strong{
+		display: block;
+		line-height: 2em;
+		text-align: center;
+		font-weight: normal;
+		font-size: .8em;
+		color: rgba(255,255,255,.8);
+	}
+}
+
+@media all and (max-width: 1000px){
+	#section-3{
+		li{
+			width: 50%;
+		}
+	}
 }
 
 #github{
@@ -296,7 +325,7 @@ hr{
     vertical-align: middle;
   }
   .intro,
-  .github-widget-user,{
+  .github-widget-user{
     display: inline-block;
     vertical-align: middle;
     text-align: left;
