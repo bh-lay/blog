@@ -68,6 +68,12 @@ app.get('/720', function(data,connect){
     pano.list(connect, app);
   });
 });
+var photography = require('./controller/photography.js');
+app.get('/photography', function(data,connect){
+  views_select(connect,function(){
+    photography.list(connect, app);
+  });
+});
 app.get('/labs/{name}', function(data,connect){
   labs.detail(connect,app,data.name);
 });

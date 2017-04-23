@@ -1,7 +1,6 @@
 /**
  * @author bh-lay
  */
-var utils = require('../core/utils/index.js');
 
 var my720Data = require('../functions/my720Data.js');
 
