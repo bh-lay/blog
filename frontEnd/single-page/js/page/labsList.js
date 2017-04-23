@@ -5,11 +5,12 @@
 define([
   'js/Base',
   'js/imageHosting',
-  'js/juicer'
-],function(utils,imageHosting,juicer){
+  'js/juicer',
+  'js/publicTemplate'
+],function(utils, imageHosting, juicer, publicTemplate){
   var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>',
       base_tpl = __inline('/tpl/labsListBase.html'),
-      item_temp = __inline('/tpl/labsListItem.html');
+      item_temp = publicTemplate.postListItem;
 
   var limit = 20,
       skip = 0,
@@ -33,19 +34,25 @@ define([
         skip += limit;
 
         var list = data['list'];
-        for(var i = 0,total = list.length;i<total;i++){
-          list[i]['work_range'] = list[i]['work_range']?list[i]['work_range'].split(/\,/):['暂未填写'];
-          //使用七牛图床
-          list[i].cover = imageHosting(list[i].cover,{
-            type : 'cover',
-            width : 320,
-            height: 400
-          });
-        }
-        callback&&callback(null,list);
+        callback&&callback(null,filterData(list));
       }
     });
   };
+  function filterData(list){
+    list.forEach(function (item) {
+      //使用七牛图床
+      item.thumb = imageHosting(item.cover,{
+        type : 'cover',
+        width : 400,
+        height: 400
+      });
+      item.desc = item.intro;
+      item.url = '/labs/' + item.name;
+      item.star = item.github.stargazers_count;
+      item.fork = item.github.forks_count;
+    });
+    return list;
+  }
   return function(global,param){
     var node = global.node;
     skip = 0;
