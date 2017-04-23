@@ -9,12 +9,12 @@ define([
 ],function(utils,imageHosting,juicer){
   var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>',
       base_tpl = __inline('/tpl/photographyListBase.html'),
-      item_temp = __inline('/tpl/panoListItem.html');
+      item_temp = __inline('/tpl/photographyListItem.html');
 
   var getData = function(callback){
     utils.fetch({
       type : 'GET' ,
-      url : '/ajax/pano/list',
+      url : '/ajax/photography/list',
       data : {
         act : 'get_list'
       },
@@ -24,7 +24,7 @@ define([
           return;
         }
 
-        callback&&callback(null, data.products);
+        callback&&callback(null, data.post_list);
       }
     });
   };
