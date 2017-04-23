@@ -255,6 +255,11 @@ var ajax_pano = require('./ajax/pano_get.js');
 app.get('/ajax/pano/list', function( data, connect ){
   ajax_pano.render( connect, app );
 });
+// 获取图虫数据
+var ajax_photography = require('./ajax/photography_get.js');
+app.get('/ajax/photography/list', function( data, connect ){
+  ajax_photography.render(connect, app);
+});
 
 
 /**
