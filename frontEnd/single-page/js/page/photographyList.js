@@ -5,11 +5,12 @@
 define([
   'js/Base',
   'js/imageHosting',
-  'js/juicer'
-],function(utils,imageHosting,juicer){
+  'js/juicer',
+  'js/publicTemplate'
+],function(utils ,imageHosting, juicer, publicTemplate){
   var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>',
       base_tpl = __inline('/tpl/photographyListBase.html'),
-      item_temp = __inline('/tpl/photographyListItem.html');
+      item_temp = publicTemplate.postListItem;
 
   var getData = function(callback){
     utils.fetch({
@@ -24,10 +25,18 @@ define([
           return;
         }
 
-        callback&&callback(null, data.post_list);
+        callback&&callback(null, filterData(data.post_list));
       }
     });
   };
+  function filterData(list){
+    list.forEach(function (item) {
+      item.thumb = (item.images && item.images.length) ? item.images[0].source.g : '';
+      item.desc = item.excerpt;
+      item.like = item.favorites;
+    });
+    return list;
+  }
   return function(global, param){
     var node = global.node;
 

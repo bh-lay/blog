@@ -5,11 +5,12 @@
 define([
   'js/Base',
   'js/imageHosting',
-  'js/juicer'
-],function(utils,imageHosting,juicer){
+  'js/juicer',
+  'js/publicTemplate'
+],function(utils, imageHosting, juicer, publicTemplate){
   var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>',
       base_tpl = __inline('/tpl/panoListBase.html'),
-      item_temp = __inline('/tpl/panoListItem.html');
+      item_temp = publicTemplate.postListItem;
 
   var getData = function(callback){
     utils.fetch({
@@ -24,10 +25,17 @@ define([
           return;
         }
 
-        callback&&callback(null, data.products);
+        callback&&callback(null, filterData(data.products));
       }
     });
   };
+  function filterData(list){
+    list.forEach(function (item) {
+      item.title = item.name;
+      item.url = 'http://720yun.com/t/' + item.pid;
+    });
+    return list;
+  }
   return function(global, param){
     var node = global.node;
 
