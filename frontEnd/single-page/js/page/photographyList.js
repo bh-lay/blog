@@ -31,6 +31,7 @@ define([
   };
   function filterData(list){
     list.forEach(function (item) {
+      item.url += '?from=bh-lay';
       item.thumb = (item.images && item.images.length) ? item.images[0].source.g : '';
       item.desc = item.excerpt;
       item.like = item.favorites;

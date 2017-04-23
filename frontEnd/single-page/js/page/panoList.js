@@ -32,7 +32,7 @@ define([
   function filterData(list){
     list.forEach(function (item) {
       item.title = item.name;
-      item.url = 'http://720yun.com/t/' + item.pid;
+      item.url = 'http://720yun.com/t/' + item.pid + '?from=bh-lay';
     });
     return list;
   }
