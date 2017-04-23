@@ -257,6 +257,7 @@ app.get('/ajax/pano/list', function( data, connect ){
 var updateLabsDataFromGithub = require('../sys/functions/updateLabsDataFromGithub.js'),
     updateFriendsScore = require('../sys/functions/updateFriendsScore.js'),
     my720Data = require('../sys/functions/my720Data.js'),
+    myTuchongData = require('../sys/functions/myTuchongData.js'),
     myGithubData = require('../sys/functions/myGithubData.js');
 //每晚三点
 new CronJob('01 01 03 * * *', function() {
@@ -268,6 +269,8 @@ new CronJob('01 01 03 * * *', function() {
   updateFriendsScore.update();
   // 更新720云数据
   my720Data.update();
+  // 更新图虫数据
+  myTuchongData.update();
 }, null, true, 'Asia/Hong_Kong');
 
 //每晚三点零十分
