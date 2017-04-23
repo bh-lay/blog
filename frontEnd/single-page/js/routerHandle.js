@@ -6,9 +6,10 @@ define([
   'js/page/blogDetail',
   'js/page/labsList',
   'js/page/panoList',
+  'js/page/photographyList',
   'js/page/bless',
   'js/navigation'
-],function(utils,Lofox,indexPage,blogListPage,blogDetailPage,labsListPage, panoListPage, blessPage,navigation){
+],function(utils,Lofox,indexPage,blogListPage,blogDetailPage,labsListPage, panoListPage, photographyListPage, blessPage,navigation){
   'use strict';
   //绑定路由
   var lofox = new Lofox(),
@@ -103,6 +104,13 @@ define([
 
         navigation.setCur('labs');
         activePage = new panoListPage(new Page);
+      })
+    //摄影作品
+      .set('/photography', function () {
+        this.title('小剧的摄影作品');
+
+        navigation.setCur('labs');
+        activePage = new photographyListPage(new Page);
       })
     // panoListPage
     // 留言板
