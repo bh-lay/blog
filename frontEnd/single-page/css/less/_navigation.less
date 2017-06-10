@@ -18,7 +18,9 @@
       a {
         display: block;
         height: @nav_height;
-        padding: 0 2em 0 1em;
+        margin-right: 1em;
+        text-shadow: 1px 1px 4px rgba(255, 255, 255, .4);
+        padding: 0 1em;
         outline: none;
         overflow: hidden;
         line-height: @nav_height - 2;
@@ -87,9 +89,9 @@
   left: 0;
   width: 100%;
   height: @nav_height;
-  background: -webkit-linear-gradient(top,rgba(255,255,255,.6),transparent);
-  background: -moz-linear-gradient(top,rgba(255,255,255,.6),transparent);
-  background: linear-gradient(top,rgba(255,255,255,.6),transparent);
+  background: -webkit-linear-gradient(top,rgba(255,255,255,.5),transparent);
+  background: -moz-linear-gradient(top,rgba(255,255,255,.5),transparent);
+  background: linear-gradient(top,rgba(255,255,255,.5),transparent);
   .transition(.8s,ease,background-color);
   z-index:2;
 }

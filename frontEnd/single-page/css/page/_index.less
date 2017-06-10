@@ -20,11 +20,9 @@
 
 .index-aboutme{
   position: relative;
-  max-height: 94vh;
-  min-height: 300px;
+  max-height: 100vh;
+  min-height: 400px;
   overflow: hidden;
-  color: #fff;
-  text-shadow: 1px 0px 2px rgba(0,0,0,.3);
   background: url("../../images/gallery/aboutme.jpg") center center;
   background-size: cover;
   visibility: hidden;
@@ -68,6 +66,7 @@
     line-height: 1em;
     font-size: 2.4em;
     font-weight: 500;
+    color: #000;
   }
   p{
     padding-left: 10px;
@@ -82,18 +81,16 @@
       height: 2.2em;
       margin: 0 10px;
       line-height: 2.2em;
-      border: 1px solid rgba(255,255,255, .4);
+      border: 1px solid rgba(0,0,0, .4);
       border-radius: 100%;
       font-size: 1.3em;
-      opacity: .7;
       .transition(.3s,ease-in-out);
       svg{
         width: 100%;
-        fill: #fff;
+        fill: #000;
       }
       &:hover{
-        opacity: 1;
-        background: rgba(255,255,255, .5);
+        background: rgba(0,0,0, .2);
       }
     }
   }
@@ -331,7 +328,7 @@
 
 @media screen and (min-width: 660px) {
     .index-aboutme .aboutme-body{
-      top: 20%;
+      top: 25%;
       margin-top: 0;
       text-align: left;
     }
