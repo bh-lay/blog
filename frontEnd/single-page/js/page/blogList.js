@@ -121,7 +121,7 @@ define([
     this.tie = util.tie({
       dom : nodeTag,
       scopeDom: utils.parents(nodeTag,'.articleListPage'),
-      fixed_top: 50
+      fixed_top: 60
     });
     //创建列表对象
     var list = new LIST(pageTag,function(){
