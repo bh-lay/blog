@@ -35,7 +35,26 @@ define([
       utils[method](nodeBackTop,'hide');
     }
     checkBackTop();
+
+
+    var distance = 50,
+        // 是否已经置灰
+        isDarkened = false,
+        darkenClassName = "darken",
+        useMethod;
+    function fixNavClass(){
+      var isNeedDarken = nodeBody.scrollTop > distance,
+          isNeedChange = isNeedDarken !== isDarkened;
+      if (isNeedChange) {
+        isDarkened = isNeedDarken;
+        useMethod = (isNeedDarken ? 'add' : 'remove') + 'Class';
+
+        utils[useMethod](nodeNav, darkenClassName);
+      }
+    }
+
     window.onscroll = function(){
+      fixNavClass();
       clearTimeout(scrollDelay);
       scrollDelay = setTimeout(checkBackTop,100);
     };

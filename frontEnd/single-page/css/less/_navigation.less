@@ -4,12 +4,7 @@
 /**
  * 导航
  */
-@nav_height: 48px;
-body:before{
-  content: '';
-  display: block;
-  height: @nav_height + 2;
-}
+@nav_height: 60px;
 .app_nav {
   position: fixed;
   top: 0;
@@ -23,11 +18,11 @@ body:before{
       a {
         display: block;
         height: @nav_height;
-        padding: 0 15px;
+        padding: 0 2em 0 1em;
         outline: none;
         overflow: hidden;
-        line-height: @nav_height;
-        color: #333;
+        line-height: @nav_height - 2;
+        color: rgba(0, 0, 0, .6);
         text-align: center;
         font-size: 16px;
         .transition(.2s);
@@ -45,7 +40,7 @@ body:before{
           display: none;
         }
         &:hover {
-          color: #f70
+          color: #000;
         }
       }
       &:nth-child(1) a i{
@@ -53,7 +48,7 @@ body:before{
       }
       &.cur{
         a {
-          color: #f70
+          color: #000;
         }
       }
     }
@@ -68,25 +63,34 @@ body:before{
       line-height: @nav_height;
       padding:0 10px;
       a {
-        font-size: 12px
+        font-size: 12px;
+        color: #333
       }
       &.cur{
         a {
-          color: #f70
+          color: #000
         }
       }
+    }
+  }
+  &.darken,
+  &:hover{
+    .nav_body {
+      background-color: #fff;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
     }
   }
 }
 .nav_body {
   position: absolute;
-  border-top: 2px solid #f70;
   top: 0;
   left: 0;
   width: 100%;
   height: @nav_height;
-  background: #fff;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+  background: -webkit-linear-gradient(top,rgba(255,255,255,.6),transparent);
+  background: -moz-linear-gradient(top,rgba(255,255,255,.6),transparent);
+  background: linear-gradient(top,rgba(255,255,255,.6),transparent);
+  .transition(.8s,ease,background-color);
   z-index:2;
 }
 .nav_appname{
