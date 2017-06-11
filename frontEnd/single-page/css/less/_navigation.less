@@ -102,6 +102,11 @@
   display: none;
 }
 @media screen and (max-width: 660px) {
+  body:before{
+    content: '';
+    display: block;
+    height: @nav_height;
+  }
   .app_container,
   .app-footer{
     .transition(.2s,ease);
@@ -169,8 +174,8 @@
     display: block;
     width: 40px;
     height: 40px;
-    top: 5px;
-    right: 10px;
+    top: 10px;
+    right: 15px;
     background: #fff;
     z-index:3;
   }
