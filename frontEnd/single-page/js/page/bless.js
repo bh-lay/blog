@@ -13,7 +13,12 @@ define([
         {
             title: '束河古城',
             imgSrc: __uri('/images/comment_@2x.jpg'),
-            htmlSrc: 'http://bh-lay.tuchong.com',
+            htmlSrc: 'https://bh-lay.tuchong.com/14591502/',
+        },
+        {
+            title: '西沙湿地',
+            imgSrc: __uri('/images/comment_2_@2x.jpg'),
+            htmlSrc: 'https://bh-lay.tuchong.com/14465332/',
         }
     ];
     var potoGraphaIndex = -1;
