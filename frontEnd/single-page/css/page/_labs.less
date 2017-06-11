@@ -47,6 +47,29 @@
 			}
 		}
 	}
+	.photograghy-author{
+		position: absolute;
+		right: 10px;
+		bottom: 10px;
+		opacity: .5;
+		transition: .4s;
+		a{
+			font-size: 12px;
+			color: #fff;
+			text-shadow: 0 1px 2px #000;
+			&:hover{
+				text-decoration: underline;
+			}
+		}
+	}
+	&:hover .photograghy-author{
+		opacity: 1;
+	}
+}
+@media(max-width: 500px) {
+	.photograghy-author{
+		display: none;
+	}
 }
 .opus-sub-header{
 	min-height: 50px;
