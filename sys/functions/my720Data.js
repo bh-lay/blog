@@ -3,7 +3,7 @@ var mongo = require('../core/DB.js'),
 	collection_name = 'cache',
 	mongon_ID = '720yun_bh-lay',
 	request = require('request'),
-	clientUserAgent = 'bh-lay api robots';
+	clientUserAgent = 'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1';
 
 
 //从数据库读取
@@ -68,13 +68,27 @@ function saveDataToDataBase(data){
 //从720yun更新数据
 function updateFrom720(callback){
 	request({
-		url: 'https://ssl-api.720yun.com/api/member/19023widcyv/',
+		url: 'http://apiv4.720yun.com/author/19023widcyv/products?sort=0&page=1&selected=2',
+		method: 'GET',
 		headers: {
-			'User-Agent': clientUserAgent
+			'User-Agent': clientUserAgent,
+			'Referer': 'http://720yun.com/u/19023widcyv',
+			'Accept': 'application/json, text/plain, */*',
+			'Accept-Encoding': 'gzip, deflate',
+			'Accept-Language': 'zh-CN,zh;q=0.8,en;q=0.6,en-US;q=0.4',
+			'Access-Control-Request-Headers': 'app-authorization,app-key',
+			'Access-Control-Request-Method': 'GET',
+			'Cache-Control': 'no-cache',
+			'Connection': 'keep-alive',
+			'Host': 'apiv4.720yun.com',
+			'Origin': 'http://720yun.com',
+			'Pragma': 'no-cache',
+			'App-Authorization': '',
+			'App-Key': 'eByjUyLDG2KtkdhuTsw2pY46Q3ceBPdT'
 		}
 	}, function (err, response, body){
 		response = response || {};
-		if(err || response.statusCode != 200){
+		if(err || response.statusCode !== 200){
 			callback && callback('error');
 			return;
 		}

@@ -20,19 +20,22 @@ define([
         act : 'get_list'
       },
       callback :function(err, data){
-        if(err || data.code == 500){
+        if(!err && data && data.data && data.data.list) {
+			callback && callback(null, filterData(data.data.list));
+		} else {
           callback && callback(500);
-          return;
         }
-
-        callback&&callback(null, filterData(data.products));
       }
     });
   };
   function filterData(list){
     list.forEach(function (item) {
-      item.title = item.name;
-      item.url = 'http://720yun.com/t/' + item.pid + '?from=bh-lay';
+      item.title = item.property.name;
+      item.desc = item.property.remark;
+      item.url = 'http://720yun.com/t/' + item.property.pid + '?from=bh-lay';
+      item.thumb = 'http://thumb-qiniu.720static.com/@' + item.property.thumbUrl;
+      item.pv = item.pvCount;
+      item.like = item.likeCount;
     });
     return list;
   }
