@@ -5,9 +5,9 @@
 
 
 import utils from "../Base.js";
-import imageHosting from "./js/imageHosting.js";
-import juicer from "./js/juicer.js";
-import publicTemplate from "./js/publicTemplate.js";
+import imageHosting from "../imageHosting.js";
+import juicer from "../juicer.js";
+import publicTemplate from "../publicTemplate.js";
 
 var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>',
     base_tpl = __inline('/tpl/labsListBase.html'),
@@ -54,7 +54,7 @@ function filterData(list){
   });
   return list;
 }
-return function(global,param){
+export default function(global,param){
   var node = global.node;
   skip = 0;
   node.innerHTML = base_tpl;

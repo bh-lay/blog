@@ -5,24 +5,7 @@
  * @modified 2015-7-15 12:20
  *
  **/
-
-(function(global,doc,UI_factory,utils_factory){
-
-  //初始化工具类
-  var utils = utils_factory(global,doc);
-
-  //初始化UI模块
-  var UI = UI_factory(global,doc,utils);
-
-  //提供window.UI的接口
-  global.UI = global.UI || UI;
-  global.UI._utils = utils;
-
-  //提供CommonJS规范的接口
-  global.define && define(function(){
-    return UI;
-  });
-})(window,document,function(window,document,utils){
+function UI_factory(utils){
   /**
    * 缓存utils下常用工具
    *   为压缩变量名做准备
@@ -918,7 +901,8 @@
     cover : COVER,
     select : SELECT
   };
-},function (window,document) {
+}
+function utils_factory() {
   /**
    * 判断对象类型
    * string number array
@@ -1491,4 +1475,12 @@
       + "');}return p.join('');"))(data);
     }
   }
-});
+}
+
+//初始化工具类
+var utils = utils_factory();
+
+//初始化UI模块
+var UI = UI_factory(utils);
+
+export default UI;

@@ -5,10 +5,10 @@
 
 
 import utils from "../Base.js";
-import imageHosting from "./js/imageHosting.js";
-import juicer from "./js/juicer.js";
-import Stick from "./js/stick.js";
-import tie from "./js/tie.js";
+import imageHosting from "../imageHosting.js";
+import Stick from "../stick.js";
+import tie from "../tie.js";
+import juicer from "../juicer.js";
 
 var private_tag_data = null;
 function getTag(callback){
@@ -153,4 +153,4 @@ page.prototype = {
     this.tie.destroy();
   }
 };
-return page;
+export default page;

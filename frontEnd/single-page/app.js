@@ -19,7 +19,7 @@ import routerHandle from "./js/routerHandle.js";
 * 兼容css3
 */
 let supports = (function() {
-  let styles = document.createElement('div').style；
+  let styles = document.createElement('div').style;
   let vendors = 'Webkit Khtml Ms O Moz'.split(/\s/);
 
   return function(prop) {
