@@ -15,7 +15,6 @@ import funny from "./js/funny.js";
 import UI from "./js/dialog.js";
 import routerHandle from "./js/routerHandle.js";
 
-
 /**
 * 判断是否支持css属性
 * 兼容css3
@@ -57,7 +56,7 @@ if (!isAdvancedBrowser) {
 if (isWindows) {
   utils.addClass(utils.query('body'),'define-scrollbar');
 }
-
+window.L = {};
 L.user = user;
 //占用全局方法
 L.gravatar_error_fn = function(elem){

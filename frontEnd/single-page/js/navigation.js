@@ -3,6 +3,8 @@
  *
  */
 import utils from "./Base.js";
+import UI from "./dialog.js";
+
 function init() {
   var scrollDelay,
       nodeBackTop = utils.query('.back-top'),

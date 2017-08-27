@@ -8,7 +8,7 @@
  */
 //set
 var setPosition = (function() {
-	var textarea = doc.createElement("textarea");
+	var textarea = document.createElement("textarea");
 	if (textarea.setSelectionRange) {
 		return function(tarea,start, len) {
 			var len = len || 0;
@@ -31,7 +31,7 @@ var setPosition = (function() {
 })();
 //get
 var getPosition = (function(){
-	var textarea = doc.createElement("textarea");
+	var textarea = document.createElement("textarea");
 	if(typeof(textarea.selectionStart)=='number'){ //not IE
 		return function(tarea){
 
@@ -42,10 +42,10 @@ var getPosition = (function(){
 			var start = 0,
 				 end = 0;
 			tarea.focus();
-			var sTextRange = doc.selection.createRange();
+			var sTextRange = document.selection.createRange();
 
 			if (tarea.tagName == "TEXTAREA") {
-				var oTextRange = doc.body.createTextRange();
+				var oTextRange = document.body.createTextRange();
 				oTextRange.moveToElementText(tarea);
 				for (start = 0; oTextRange.compareEndPoints("StartToStart", sTextRange) < 0; start++) {
 					oTextRange.moveStart('character', 1);

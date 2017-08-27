@@ -12,7 +12,32 @@
   <base target="_blank" />
   <include name="favicon_appicon" />
 <body>
-  <include name="navigation"/>
+  <nav class="app_nav">
+    <div class="nav_mask"></div>
+    <div class="nav_body">
+      <div class="grid-row">
+          <ul class="nav">
+        <li page="index"><a class="nav_logo" data-title="首页" href="/"><i class="l-icon l-icon-layLogo"></i><span>小剧客栈</span></a></li>
+        <li page="blog"><a href="/blog/"><i class="l-icon l-icon-book"></i><span>博客</span></a></li>
+        <li page="labs"><a href="/labs/"><i class="l-icon l-icon-beaker"></i><span>实验室</span></a></li>
+            <li page="bless"><a title="给剧中人留言" href="/bless"><i class="l-icon l-icon-comment"></i><span>留言</span></a></li>
+
+      </ul>
+      <ul class="side">
+        <li><a title="前端英雄榜" href="/directories">前端英雄榜</a></li>
+      </ul>
+          </div>
+    </div>
+    <div class="nav_appname">
+      <i class="l-icon l-icon-layLogo"></i>小剧客栈
+    </div>
+    <a class="nav_moreBtn" href="javascript:void(0)" title="导航">
+      <span class="nav_Btn_ico nav_Btn_ico_1"></span>
+      <span class="nav_Btn_ico nav_Btn_ico_2"></span>
+      <span class="nav_Btn_ico nav_Btn_ico_3"></span>
+    </a>
+  </nav>
+
   <div class="app_container"></div>
   <div class="app_mask">
     <div class="app_mask_cnt">
@@ -22,7 +47,51 @@
   <div class="app-toolbar">
     <a href="javascript:void(0)" class="back-top"></a>
   </div>
-  <include name="footer" isSinglePage="true"/>
+
+
+  <div class="app-footer">
+    <div class="grid-row">
+      <div class="grid-col-2-4">
+        <h3>小剧客栈</h3>
+        <p>小剧客栈是剧中人在成长路上的一个缩影，也希望借此结交更多前辈好友。分享小剧在前端、nodeJS、设计和web的各个细节上的点点滴滴，愿与你共同分享，一起进步！</p>
+      </div>
+      <div class="grid-col-1-4">
+        <h3>相关链接</h3>
+         <ul>
+            <li><a href="/blog">博文</a></li>
+            <li><a href="/labs">实验室</a></li>
+            <li><a href="/directories">前端英雄榜</a></li>
+        </ul>
+      </div>
+      <div class="grid-col-1-4">
+        <div class="footer-about-links">
+           <h3>关于</h3>
+            <a href="/topic/aboutme/index.html">关于剧中人</a>
+            <a href="/topic/aboutblog/index.html">关于小剧客栈</a>
+        </div>
+        <p class="footer-aboutme">
+          <a href="/topic/aboutme/index.html" title="关于剧中人"><i class="l-icon l-icon-layLogo"></i></a>
+          <a href="https://github.com/bh-lay" title="github"><i class="l-icon l-icon-git"></i></a>
+          <a href="http://www.zhihu.com/people/imju-zhong-ren" title="知乎"><i class="l-icon l-icon-zhihu"></i></a>
+          <a href="https://dribbble.com/bh_lay" title="dribbble"><i class="l-icon l-icon-dribbble"></i></a>
+        </p>
+      </div>
+      <div class="grid-box-full">
+        <p>design & code by @剧中人,base on nodeJS + mongoDB</p>
+        <p>© 2012-2015。感谢七牛云存储提供静态资源空间。</p>
+        <form class="form-search" action="//www.baidu.com/baidu">
+          <input name=word type="text" maxlength="100" ><input type="submit" value="搜索">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input name=si type=hidden value="bh-lay.com">
+        </form>
+        <p><a class="backToOldVersion" href="javascript:void(0)">降级版本</a></p>
+      </div>
+    </div>
+  </div>
+
+
   <script type="text/template" id="module_latest_comments">
     <include name="single-page/comments" />
   </script>
