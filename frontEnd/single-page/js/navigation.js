@@ -67,4 +67,4 @@ function setCur(page) {
   utils.addClass(utils.query('.app_nav li[page=' + page + ']'),'cur');
 }
 
-export {init, setCur};
+export default {init, setCur};

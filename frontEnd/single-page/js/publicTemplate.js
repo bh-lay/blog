@@ -4,4 +4,4 @@
  */
 var postListItem = __inline('/tpl/postListItem.html');
 
-export {postListItem};
+export default {postListItem};

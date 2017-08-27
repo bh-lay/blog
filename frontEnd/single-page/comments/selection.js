@@ -122,4 +122,4 @@ function insertTxt(tarea,txt,start,end){
 };
 
 //exports
-export {insertTxt, Selection, setPosition, getPosition};
+export default {insertTxt, Selection, setPosition, getPosition};

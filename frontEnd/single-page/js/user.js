@@ -36,7 +36,7 @@ function getMyInfo(callback){
   });
 }
 
-export function setLocalUser (data) {
+function setLocalUser (data) {
   let data_str = JSON.stringify({
     username : data.username,
     email : data.email,
@@ -47,7 +47,7 @@ export function setLocalUser (data) {
   userInfo = data;
 }
 
-export function info (callback, useCacheFlag) {
+function info (callback, useCacheFlag) {
   let useCache = typeof(useCacheFlag) === 'boolean' ? useCacheFlag : true;
   //是否已有用户信息缓存
   if(useCache && userInfo){
@@ -76,3 +76,4 @@ export function info (callback, useCacheFlag) {
     });
   }
 }
+export default {setLocalUser, info};

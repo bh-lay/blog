@@ -481,4 +481,4 @@ function init(dom,id,param){
     me.list.addItem(item);
   });
 };
-export {sendBox, list, init};
+export default {sendBox, list, init};

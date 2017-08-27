@@ -4,6 +4,8 @@ const ROOT_PATH = path.resolve(__dirname);
 // const BUILD_PATH = path.resolve(ROOT_PATH, '../../static/build/single-page/');
 const BUILD_PATH = path.resolve(ROOT_PATH, '../../static/testWebpack');
 
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 const config = {
   entry: {
     app: path.resolve(ROOT_PATH, 'app.js')
@@ -38,7 +40,36 @@ const config = {
         test: /\.(png|jpg)$/,
         loader:"url-loader?limit=8192&name=img/[name][hash:8].[ext]"
       }
+    ],
+    rules: [
+      {
+        test: /\.less$/,
+        use: [
+          'style-loader',
+          { loader: 'css-loader', options: { importLoaders: 1 } },
+          'less-loader'
+        ]
+      }
     ]
-  }
+  },
+  plugins: [new HtmlWebpackPlugin({
+    filename: 'index.html',
+    template: './index.html',
+    inject: true,
+    files: {
+      css: [ "./css/main.less" ],
+      js: [ "app.js"],
+      chunks: {
+        head: {
+          entry: "app.js",
+          // "css": [ "main.css" ]
+        },
+        main: {
+          // "entry": "app.js",
+          // "css": []
+        },
+      }
+    }
+  })]
 };
 module.exports = config;

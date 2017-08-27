@@ -5,6 +5,8 @@
 
 // window.L = window.L || {};
 
+import css from './css/main.less';
+
 import user from './js/user.js'
 import navigation from './js/navigation.js'
 import utils from "./js/Base.js";
