@@ -2,6 +2,6 @@
  * public template list
  *
  */
-var postListItem = __inline('/tpl/postListItem.html');
+var postListItem = require("html-loader!../tpl/postListItem.html");
 
 export default {postListItem};

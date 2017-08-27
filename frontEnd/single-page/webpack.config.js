@@ -32,13 +32,9 @@ const config = {
 	  	  test: /\.(eot|woff|svg|ttf|woff2|gif)(\?|$)/,
 		    loader: 'file-loader?name=[hash].[ext]'
 	    },
-      // {
-      //   test: /\.(png|jpg)$/,
-      //   loader: 'url?limit=1200&name=[hash].[ext]'
-      // },
       {
         test: /\.(png|jpg)$/,
-        loader:"url-loader?limit=8192&name=img/[name][hash:8].[ext]"
+        loader: "url-loader?limit=8192&name=img/[name][hash:8].[ext]"
       }
     ],
     rules: [
@@ -55,21 +51,7 @@ const config = {
   plugins: [new HtmlWebpackPlugin({
     filename: 'index.html',
     template: './index.html',
-    inject: true,
-    files: {
-      css: [ "./css/main.less" ],
-      js: [ "app.js"],
-      chunks: {
-        head: {
-          entry: "app.js",
-          // "css": [ "main.css" ]
-        },
-        main: {
-          // "entry": "app.js",
-          // "css": []
-        },
-      }
-    }
+    inject: true
   })]
 };
 module.exports = config;

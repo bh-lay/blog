@@ -7,7 +7,7 @@
 //index page
 import utils from "../Base.js";
 
-var temp = __inline('/tpl/index.html');
+var temp = require("html-loader!../../tpl/index.html");
 
 function view(global){
   var node = global.node,

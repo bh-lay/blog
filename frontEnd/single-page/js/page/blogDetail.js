@@ -8,7 +8,7 @@ import juicer from "../juicer.js";
 import hljs from "../highlight.js";
 import comments from "../../comments/index.js";
 
-var template = __inline('/tpl/blogDetailPage.html');
+var template = require("html-loader!../../tpl/blogDetailPage.html");
 
 function getData(id,fn){
   utils.fetch({

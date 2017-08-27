@@ -8,7 +8,7 @@ import comments from "../../comments/index.js";
 import juicer from "../juicer.js";
 
 var comment_id = 'define-1',
-    base_tpl = __inline('/tpl/bless.html');
+    base_tpl = require("html-loader!../../tpl/bless.html");
 var potoGraphaList = [
     {
         title: '束河古城',

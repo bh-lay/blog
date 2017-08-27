@@ -8,7 +8,7 @@ import juicer from "../juicer.js";
 import publicTemplate from "../publicTemplate.js";
 
 var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>',
-    base_tpl = __inline('/tpl/photographyListBase.html'),
+    base_tpl = require("html-loader!../../tpl/photographyListBase.html"),
     item_temp = publicTemplate.postListItem;
 
 var getData = function(callback){
