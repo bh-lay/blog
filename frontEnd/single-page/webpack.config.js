@@ -30,9 +30,13 @@ const config = {
 	  	  test: /\.(eot|woff|svg|ttf|woff2|gif)(\?|$)/,
 		    loader: 'file-loader?name=[hash].[ext]'
 	    },
+      // {
+      //   test: /\.(png|jpg)$/,
+      //   loader: 'url?limit=1200&name=[hash].[ext]'
+      // },
       {
         test: /\.(png|jpg)$/,
-        loader: 'url?limit=1200&name=[hash].[ext]'
+        loader:"url-loader?limit=8192&name=img/[name][hash:8].[ext]"
       }
     ]
   }

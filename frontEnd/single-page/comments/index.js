@@ -7,7 +7,7 @@ import selection from "./selection.js";
 import face from "./face.js";
 
   var private_userInfo = null,
-    default_avatar = __uri('/images/default.jpg'),
+    default_avatar = require("file-loader!../images/default.jpg"),
 
     noData_tpl = '<div class="l_com_list_noData">来的真早，快抢沙发！</div>',
     baseTpl = __inline('tpl/comments/base.html'),
