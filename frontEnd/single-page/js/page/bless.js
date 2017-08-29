@@ -12,12 +12,12 @@ var comment_id = 'define-1',
 var potoGraphaList = [
     {
         title: '束河古城',
-        imgSrc: require("file-loader!../../images/comment_@2x.jpg"),
+        imgSrc: require("../../images/comment_@2x.jpg"),
         htmlSrc: 'https://bh-lay.tuchong.com/14591502/',
     },
     {
         title: '西沙湿地',
-        imgSrc: require("file-loader!../../images/comment_2_@2x.jpg"),
+        imgSrc: require("../../images/comment_2_@2x.jpg"),
         htmlSrc: 'https://bh-lay.tuchong.com/14465332/',
     }
 ];

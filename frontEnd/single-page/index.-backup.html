@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <title>${{title}}</title>
+    <meta name="keywords" content="${{keywords}}" />
+    <meta name="description" content="${{description}}" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <base target="_blank" />
+    <include name="favicon_appicon" />
+    <link rel="stylesheet" type="text/css" href="/css/main.less"/>
+    <link rel="stylesheet" type="text/css" href="/css/page/_index.less"/>
+    <link rel="stylesheet" type="text/css" href="/css/page/_blog.less"/>
+    <link rel="stylesheet" type="text/css" href="/css/page/_labs.less"/>
+    <link rel="stylesheet" type="text/css" href="/css/page/_pano.less"/>
+    <link rel="stylesheet" type="text/css" href="/css/page/_photography.less"/>
+    <link rel="stylesheet" type="text/css" href="/css/page/_bless.less"/>
+  </head>
+  <body>
+    <include name="navigation"/>
+    <div class="app_container"></div>
+    <div class="app_mask">
+      <div class="app_mask_cnt">
+        <span class="l-loading"></span>
+      </div>
+    </div>
+    <div class="app-toolbar">
+      <a href="javascript:void(0)" class="back-top"></a>
+    </div>
+<include name="footer" isSinglePage="true"/>
+<script type="text/template" id="module_latest_comments">
+<include name="single-page/comments" />
+</script>
+<script type="text/template" id="module_github_links">
+<include name="single-page/github" />
+</script>
+<script type="text/template" id="data_emoji">
+  <link rel="import" href="tpl/emoji.html?__inline">
+</script>
+<script type="text/javascript" src="app.js"></script>
+<script type="text/javascript">
+    var app_config = {
+        imgDomain : '${{frontEnd.img_domain}}'
+    };
+</script>
+<include name="baiduAndGoogleTongji"/>
+</body>
+</html>

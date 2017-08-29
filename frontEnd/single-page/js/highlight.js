@@ -44,7 +44,7 @@ highlight.add = function(lang,data, rules) {
 function highlightElements(node) {
     var parent = node.parentNode,
         html;
-    lang = (node.className || '').match(/(?:^|\s)(javascript|css|html)(?:$|\s)/);
+    var lang = (node.className || '').match(/(?:^|\s)(javascript|css|html)(?:$|\s)/);
     lang = lang ? lang[1] : 'javascript';
     html =  parse(node.innerHTML, lang);
     if(parent && (parent.tagName||'').toLowerCase() == 'pre'){

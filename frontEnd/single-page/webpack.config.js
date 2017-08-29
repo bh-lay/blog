@@ -3,6 +3,7 @@ const path = require('path');
 const ROOT_PATH = path.resolve(__dirname);
 const BUILD_PATH = path.resolve(ROOT_PATH, '../../static/build/single-page/');
 const HTML_PATH = path.resolve(ROOT_PATH, '../../sys/views/single-page/index.html');
+const GITHUB_HTML_PATH = path.resolve(ROOT_PATH, '../../sys/component/single-page/github.html');
 
 // const BUILD_PATH = path.resolve(ROOT_PATH, '../../static/testWebpack');
 
@@ -23,6 +24,14 @@ const config = {
         test: /\.css$/,
         loader: ['style', 'css', 'autoprefixer']
       },
+       {
+				  test: /\.less/,
+				  loaders: [
+            'style-loader',
+            { loader: 'css-loader', options: { importLoaders: 1 } },
+            'less-loader'
+          ],
+			  },
       {
 		    test: /\.js$/,
 		    loader: 'babel-loader?presets[]=es2015,presets[]=stage-0'
@@ -32,30 +41,36 @@ const config = {
 		    loader: 'file-loader?name=[name]_[hash].[ext]'
 	    },
       {
-        test: /\.(png|jpg)$/,
-        loader: "url-loader?limit=8192&name=[name][hash:8].[ext]"
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          name: 'img/[name].[hash:8].[ext]'
+        }
       }
     ],
-    rules: [
-      {
-        test: /\.less$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              // importLoaders: 1
-            }
-          },
-          'less-loader'
-        ]
-      }
-    ]
+    // rules: [
+    //   {
+    //     test: /\.less$/,
+    //     use: [
+    //       'style-loader',
+    //       { loader: 'css-loader', options: { importLoaders: 1 } },
+    //       'less-loader'
+    //     ]
+    //   },
+    // ]
   },
-  plugins: [new HtmlWebpackPlugin({
-    filename: HTML_PATH,
-    template: './index.html',
-    inject: true
-  })]
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: HTML_PATH,
+      template: './index.html',
+      inject: true
+    }),
+    new HtmlWebpackPlugin({
+      filename: GITHUB_HTML_PATH,
+      template: './tpl/github.html',
+      inject: false
+    }),
+  ]
 };
 module.exports = config;
