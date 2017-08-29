@@ -5,8 +5,6 @@ const BUILD_PATH = path.resolve(ROOT_PATH, '../../static/build/single-page/');
 const HTML_PATH = path.resolve(ROOT_PATH, '../../sys/views/single-page/index.html');
 const GITHUB_HTML_PATH = path.resolve(ROOT_PATH, '../../sys/component/single-page/github.html');
 
-// const BUILD_PATH = path.resolve(ROOT_PATH, '../../static/testWebpack');
-
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
@@ -24,22 +22,27 @@ const config = {
         test: /\.css$/,
         loader: ['style', 'css', 'autoprefixer']
       },
-       {
-				  test: /\.less/,
-				  loaders: [
-            'style-loader',
-            { loader: 'css-loader', options: { importLoaders: 1 } },
-            'less-loader'
-          ],
-			  },
       {
-		    test: /\.js$/,
-		    loader: 'babel-loader?presets[]=es2015,presets[]=stage-0'
-	    },
+        test: /\.less/,
+        loaders: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1
+            }
+          },
+          'less-loader'
+        ],
+      },
       {
-	  	  test: /\.(eot|woff|svg|ttf|woff2|gif)(\?|$)/,
-		    loader: 'file-loader?name=[name]_[hash].[ext]'
-	    },
+        test: /\.js$/,
+        loader: 'babel-loader?presets[]=es2015,presets[]=stage-0'
+      },
+      {
+        test: /\.(eot|woff|svg|ttf|woff2|gif)(\?|$)/,
+        loader: 'file-loader?name=[name]_[hash].[ext]'
+      },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
@@ -48,17 +51,7 @@ const config = {
           name: 'img/[name].[hash:8].[ext]'
         }
       }
-    ],
-    // rules: [
-    //   {
-    //     test: /\.less$/,
-    //     use: [
-    //       'style-loader',
-    //       { loader: 'css-loader', options: { importLoaders: 1 } },
-    //       'less-loader'
-    //     ]
-    //   },
-    // ]
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({
