@@ -6,6 +6,7 @@ const HTML_PATH = path.resolve(ROOT_PATH, '../../sys/views/single-page/index.htm
 const GITHUB_HTML_PATH = path.resolve(ROOT_PATH, '../../sys/component/single-page/github.html');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const config = {
   entry: {
@@ -19,17 +20,19 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.less/,
-        loaders: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1
-            }
-          },
-          'less-loader'
-        ],
+        test: /\.(css|less)$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1
+              }
+            },
+            'less-loader'
+          ]
+        })
       },
       {
         test: /\.js$/,
@@ -60,6 +63,7 @@ const config = {
       template: './tpl/github.html',
       inject: false
     }),
+    new ExtractTextPlugin("[name].css")
   ]
 };
 module.exports = config;

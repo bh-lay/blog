@@ -6,7 +6,6 @@
 // window.L = window.L || {};
 
 import './css/main.less';
-// import 'style-loader!css-loader!less-loader!./css/main.less';
 
 import user from './js/user.js'
 import navigation from './js/navigation.js'
