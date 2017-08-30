@@ -13,6 +13,7 @@
     "less": "^2.7.2",
     "less-loader": "^4.0.5",
     "style-loader": "^0.18.2",
+    "uglify-es": "git://github.com/mishoo/UglifyJS2#harmony",
     "url-loader": "^0.5.9",
     "webpack": "^3.5.5"
   }

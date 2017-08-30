@@ -3517,6 +3517,13 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
 
+"uglify-es@git://github.com/mishoo/UglifyJS2#harmony":
+  version "3.0.28"
+  resolved "git://github.com/mishoo/UglifyJS2#067d52b6bac67378cccbc8fdea2320676aafc47e"
+  dependencies:
+    commander "~2.11.0"
+    source-map "~0.5.1"
+
 uglify-js@3.0.x:
   version "3.0.28"
   resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.0.28.tgz#96b8495f0272944787b5843a1679aa326640d5f7"

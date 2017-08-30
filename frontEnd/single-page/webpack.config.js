@@ -7,6 +7,8 @@ const GITHUB_HTML_PATH = path.resolve(ROOT_PATH, '../../sys/component/single-pag
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+
 
 const config = {
   entry: {
@@ -27,7 +29,8 @@ const config = {
             {
               loader: 'css-loader',
               options: {
-                importLoaders: 1
+                importLoaders: 1,
+                minimize: true
               }
             },
             'less-loader'
@@ -40,7 +43,7 @@ const config = {
       },
       {
         test: /\.(eot|woff|svg|ttf|woff2)(\?|$)/,
-        loader: 'file-loader?name=font/[name].[hash].[ext]'
+        loader: 'file-loader?name=font/[name].[hash:8].[ext]'
       },
       {
         test: /\.(png|jpe?g|gif)(\?.*)?$/,
@@ -63,7 +66,8 @@ const config = {
       template: './tpl/github.html',
       inject: false
     }),
-    new ExtractTextPlugin("[name].css")
+    new ExtractTextPlugin("[name].[hash:8].css"),
+    new UglifyJSPlugin()
   ]
 };
 module.exports = config;
