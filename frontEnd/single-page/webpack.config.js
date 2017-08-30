@@ -40,11 +40,11 @@ const config = {
         loader: 'babel-loader?presets[]=es2015,presets[]=stage-0'
       },
       {
-        test: /\.(eot|woff|svg|ttf|woff2|gif)(\?|$)/,
-        loader: 'file-loader?name=[name]_[hash].[ext]'
+        test: /\.(eot|woff|svg|ttf|woff2)(\?|$)/,
+        loader: 'file-loader?name=font/[name].[hash].[ext]'
       },
       {
-        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        test: /\.(png|jpe?g|gif)(\?.*)?$/,
         loader: 'url-loader',
         options: {
           limit: 10000,
