@@ -5,6 +5,7 @@ import juicer from "../js/juicer.js";
 import pagination from "../js/pagination.js";
 import selection from "./selection.js";
 import face from "./face.js";
+import UI from "../js/dialog.js";
 
   var private_userInfo = null,
     default_avatar = require("../images/default.jpg"),
