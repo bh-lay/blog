@@ -17,11 +17,7 @@ const config = {
     publicPath: 'http://127.0.0.1:8088/build/single-page/'
   },
   module: {
-    loaders: [
-      {
-        test: /\.css$/,
-        loader: ['style', 'css', 'autoprefixer']
-      },
+    rules: [
       {
         test: /\.less/,
         loaders: [
