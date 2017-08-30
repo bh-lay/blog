@@ -3,7 +3,6 @@ function help(){
 	echo "Usage   sh $0 [project] [media]";
 	echo "        project 项目目录名，all为编译全部";
 	echo "        media   fis3 中配置的 media（可选）\n";
-	echo "notice  非编译全部项目[all]，且未指定 media 时，默认开启 watch\n";
 }
 
 # 画横线
@@ -17,10 +16,10 @@ function deploy(){
 	if [ ${1:0:1} == '_' ]; then
 		echo "skip ["$1"], ["$1"] is not a project !\n";
 	else
-		echo '  frontEnd/'$1 ' --> '$deployTo;
-		echo '  fis3 release '$deployMedia' '$watch' -d '$deployTo' --file fis-conf.js'
+		echo '  cd frontEnd/'$1;
+		echo '  npm run '$deployMedia
 		cd $root'/'$1
-		fis3 release $deployMedia $watch -d $deployTo --file fis-conf.js
+		npm run $deployMedia
 	fi
 }
 
@@ -30,16 +29,6 @@ root=`pwd`;
 
 # 发布media，fis3的参数
 deployMedia=${2:-''};
-
-# 发布目录
-deployTo='../../static/';
-
-# 是否开启持续观测模式
-watch='';
-# 没有media配置时才用watch
-if [ ${#deployMedia} == 0 ]; then
-	watch='-w';
-fi
 
 
 
@@ -61,8 +50,7 @@ elif [ $1 == 'all' ]; then
 	# all 编译所有项目
     
     echo "deploy all project start ";
-    # 取消 watch
-    watch='';
+
     # 遍历编译所有项目
 	for x in `ls -l | grep '^d' | awk '{print $9}'`
 	do

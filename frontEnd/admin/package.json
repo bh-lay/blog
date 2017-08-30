@@ -1,0 +1,24 @@
+{
+  "name": "multi-page",
+  "version": "1.0.0",
+  "description": "blog's administrator project",
+  "main": "app.js",
+  "scripts": {
+    "dev": "fis3 release -wd ../../static/",
+    "production": "fis3 release production -d ../../static/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bh-lay/blog.git"
+  },
+  "keywords": [
+    "bh-lay",
+    "blog"
+  ],
+  "author": "剧中人[bh-lay.com]",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bh-lay/blog/issues"
+  },
+  "homepage": "https://github.com/bh-lay/blog#readme"
+}

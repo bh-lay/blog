@@ -1,4 +1,3 @@
-define(function(require,exports){
 /*
  * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
  * Digest Algorithm, as defined in RFC 1321.
@@ -256,5 +255,4 @@ function binl2b64(binarray)
   return str;
 }
 
-return hex_md5; 
-});
+export default hex_md5;

@@ -5,26 +5,24 @@
  */
 
 //index page
-define([
-  'js/Base'
-],function(utils){
-  var temp = __inline('/tpl/index.html');
+import utils from "../Base.js";
 
-  function view(global){
-    var node = global.node,
-        nodeGallery;
-    node.innerHTML = temp;
+var temp = require("html-loader!../../tpl/index.html");
 
-    nodeGallery = utils.query('.gallayer',node);
+function view(global){
+  var node = global.node,
+      nodeGallery;
+  node.innerHTML = temp;
 
-    setTimeout(function(){
-      utils.addClass(nodeGallery,'zoom-show');
-    },600);
+  nodeGallery = utils.query('.gallayer',node);
 
-    return {
-      destroy: function() {
-      }
-    };
-  }
-  return view;
-});
+  setTimeout(function(){
+    utils.addClass(nodeGallery,'zoom-show');
+  },600);
+
+  return {
+    destroy: function() {
+    }
+  };
+}
+export default view;

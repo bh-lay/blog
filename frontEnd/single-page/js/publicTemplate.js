@@ -2,10 +2,6 @@
  * public template list
  *
  */
-define(function(){
-  var postListItem = __inline('/tpl/postListItem.html');
+var postListItem = require("html-loader!../tpl/postListItem.html");
 
-  return {
-    postListItem: postListItem
-  };
-});
+export default {postListItem};

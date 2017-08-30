@@ -14,6 +14,6 @@ results
 .project
 .idea/
 npm-debug.log
-sys/node_modules/
+node_modules
 web/topic/
 

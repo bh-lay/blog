@@ -5,7 +5,10 @@ var utils = require('../../core/utils/index.js'),
 
 exports.produce = function(temp,data,callback){
   myGithubData.get(function(err,user_data){
-	var html = utils.juicer(temp,user_data);
-  	callback && callback(null,html);
+	  var html = temp.replace(/\>\>(\w+)\<\</g, function (a, key) {
+	    return user_data[key] || 0;
+    });
+
+  	callback && callback(null, html);
   });
 };
