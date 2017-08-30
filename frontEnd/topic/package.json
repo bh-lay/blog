@@ -4,7 +4,7 @@
   "description": "blog's topics project",
   "main": "null",
   "scripts": {
-    "dev": "fis3 release -d ../../static/",
+    "dev": "fis3 release -wd ../../static/",
     "production": "fis3 release production -d ../../static/"
   },
   "repository": {
