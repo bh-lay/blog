@@ -9,6 +9,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
+const isProduction = process.env.NODE_ENV === 'production';
+const devPublicPath = 'http://127.0.0.1:8088/build/single-page/';
+const prodPublicPath = '//dn-lay.qbox.me/build/single-page/';
+const publicPath = isProduction ? prodPublicPath : devPublicPath;
 
 const config = {
   entry: {
@@ -17,7 +21,7 @@ const config = {
   output: {
     path: BUILD_PATH,
     filename: '[name].[hash:8].js',
-    publicPath: 'http://127.0.0.1:8088/build/single-page/'
+    publicPath: publicPath
   },
   module: {
     rules: [
@@ -30,7 +34,7 @@ const config = {
               loader: 'css-loader',
               options: {
                 importLoaders: 1,
-                minimize: true
+                minimize: isProduction
               }
             },
             'less-loader'
@@ -67,7 +71,9 @@ const config = {
       inject: false
     }),
     new ExtractTextPlugin("[name].[hash:8].css"),
-    new UglifyJSPlugin()
+    new UglifyJSPlugin({
+      compress: isProduction
+    })
   ]
 };
 module.exports = config;

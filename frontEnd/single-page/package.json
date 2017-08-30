@@ -13,8 +13,31 @@
     "less": "^2.7.2",
     "less-loader": "^4.0.5",
     "style-loader": "^0.18.2",
-    "uglify-es": "git://github.com/mishoo/UglifyJS2#harmony",
+    "uglify-es": "git://github.com/mishoo/UglifyJS2.git#harmony",
     "url-loader": "^0.5.9",
     "webpack": "^3.5.5"
-  }
+  },
+  "name": "single-page",
+  "version": "1.0.0",
+  "description": "blog's single page project",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "dev": "NODE_ENV=local_dev webpack",
+    "production": "NODE_ENV=production webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bh-lay/blog.git"
+  },
+  "keywords": [
+    "blog",
+    "bh-lay"
+  ],
+  "author": "bh-lay",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bh-lay/blog/issues"
+  },
+  "homepage": "https://github.com/bh-lay/blog#readme"
 }
