@@ -4,6 +4,7 @@
  */
 
 
+import './labs.less';
 import utils from "../../js/Base.js";
 import imageHosting from "../../js/imageHosting.js";
 import juicer from "../../js/juicer.js";

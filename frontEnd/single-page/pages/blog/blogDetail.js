@@ -3,6 +3,7 @@
  *
  */
 
+import "./blogDetail.less";
 import utils from "../../js/Base.js";
 import juicer from "../../js/juicer.js";
 import hljs from "../../js/highlight.js";

@@ -3,6 +3,7 @@
  *
  */
 
+import './bless.less';
 import utils from "../../js/Base.js";
 import comments from "../../comments/index.js";
 import juicer from "../../js/juicer.js";

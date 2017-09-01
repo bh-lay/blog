@@ -11,11 +11,11 @@ import UI from "../js/dialog.js";
     default_avatar = require("../images/default.jpg"),
 
     noData_tpl = '<div class="l_com_list_noData">来的真早，快抢沙发！</div>',
-    baseTpl = require("html-loader!../tpl/comments/base.html"),
-    sendBox_tpl = require("html-loader!../tpl/comments/sendBox.html"),
-    user_tpl = require("html-loader!../tpl/comments/user.html"),
-    list_tpl = require("html-loader!../tpl/comments/list.html"),
-    item_tpl = require("html-loader!../tpl/comments/item.html");
+    baseTpl = require("html-loader!./base.html"),
+    sendBox_tpl = require("html-loader!./sendBox.html"),
+    user_tpl = require("html-loader!./user.html"),
+    list_tpl = require("html-loader!./list.html"),
+    item_tpl = require("html-loader!./item.html");
 /**
  * 格式化网址
  *

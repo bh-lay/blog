@@ -3,6 +3,7 @@
  *
  */
 
+import './pano.less';
 import utils from "../../js/Base.js";
 import juicer from "../../js/juicer.js";
 

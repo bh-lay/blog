@@ -1,0 +1,79 @@
+/**
+ * 博文详情
+ *
+ **/
+@import "../../../_public/less/_articleGithub.less";
+
+.blogDetail{
+  font-size: 1rem;
+  background: #f5f5f5 url("../../images/mask.png");
+  header{
+    text-align: center;
+    padding: 6rem 0 4rem;
+    h1{
+      margin: 0 .5em .5em;
+      line-height: 1.2;
+      font-size: 2em;
+      font-weight: 500;
+    }
+    P{
+      margin: 0 0 1em;
+      opacity: .8;
+    }
+  }
+  .sns-share{
+    padding: 1em 0;
+    a{
+      margin: 0 .5em;
+      padding: .1em 1.2em;
+      font-size: 1.2rem;
+    }
+  }
+  .article-section {
+    padding-bottom: 50px;
+    border-top: 1px solid #eee;
+    background: #f6f6fa;
+    .article{
+      margin-top: -2em;
+      padding-bottom: 3em;
+      background: #fff;
+    }
+    footer{
+      padding: 10px 15px;
+      border-top: 1px solid #eee;
+      background: #fafafa;
+      p{
+        font-size: 14px;
+        color: #666;
+      }
+    }
+  }
+  .comments-section{
+    position: relative;
+    padding: 50px 0;
+    background: #ccc;
+    &:before{
+      position: absolute;
+      content: '';
+      top: -1rem;
+      left: 50%;
+      margin-left: -3rem;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-color: transparent transparent #ccc;
+      border-width: 0 3rem 1rem;
+    }
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .blogDetail{
+    .article-section {
+      background: #fafafa;
+      .grid-box-full{
+        padding: 0;
+      }
+    }
+  }
+}

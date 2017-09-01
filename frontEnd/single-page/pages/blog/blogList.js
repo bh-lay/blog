@@ -3,7 +3,7 @@
  *
  */
 
-
+import "./blogList.less";
 import utils from "../../js/Base.js";
 import imageHosting from "../../js/imageHosting.js";
 import Stick from "../../js/stick.js";
