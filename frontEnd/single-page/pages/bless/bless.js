@@ -3,12 +3,12 @@
  *
  */
 
-import utils from "../Base.js";
+import utils from "../../js/Base.js";
 import comments from "../../comments/index.js";
-import juicer from "../juicer.js";
+import juicer from "../../js/juicer.js";
 
 var comment_id = 'define-1',
-    base_tpl = require("html-loader!../../tpl/bless.html");
+    base_tpl = require("html-loader!./bless.html");
 var potoGraphaList = [
     {
         title: '束河古城',

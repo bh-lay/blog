@@ -4,11 +4,11 @@
  */
 
 
-import utils from "../Base.js";
-import imageHosting from "../imageHosting.js";
-import Stick from "../stick.js";
-import tie from "../tie.js";
-import juicer from "../juicer.js";
+import utils from "../../js/Base.js";
+import imageHosting from "../../js/imageHosting.js";
+import Stick from "../../js/stick.js";
+import tie from "../../js/tie.js";
+import juicer from "../../js/juicer.js";
 
 var private_tag_data = null;
 function getTag(callback){
@@ -28,7 +28,7 @@ function getTag(callback){
 }
 function renderTags(dom,tagName,callback){
   getTag(function(data){
-    var tag_item_tpl = require("html-loader!../../tpl/blogListTag.html"),
+    var tag_item_tpl = require("html-loader!./blogListTag.html"),
         html = juicer(tag_item_tpl,data),
         selector = tagName ? ('a[data-tag=' + tagName + ']') : 'a';
 
@@ -99,8 +99,8 @@ function page(global,param){
       node = global.node,
       //获取标签名
       pageTag = param.tag ? decodeURI(param.tag) : null,
-      baseTpl = require("html-loader!../../tpl/blogListBase.html"),
-      list_tpl = require("html-loader!../../tpl/blogListItem.html"),
+      baseTpl = require("html-loader!./blogListBase.html"),
+      list_tpl = require("html-loader!./blogListItem.html"),
       empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>';
   //插入基本模版
   node.innerHTML = baseTpl;

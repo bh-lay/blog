@@ -3,12 +3,12 @@
  *
  */
 
-import utils from "../Base.js";
-import juicer from "../juicer.js";
-import hljs from "../highlight.js";
+import utils from "../../js/Base.js";
+import juicer from "../../js/juicer.js";
+import hljs from "../../js/highlight.js";
 import comments from "../../comments/index.js";
 
-var template = require("html-loader!../../tpl/blogDetailPage.html");
+var template = require("html-loader!./blogDetailPage.html");
 
 function getData(id,fn){
   utils.fetch({

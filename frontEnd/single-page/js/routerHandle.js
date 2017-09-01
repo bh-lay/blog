@@ -2,13 +2,13 @@
 import utils from "./Base.js"
 import navigation from './navigation.js'
 import Lofox from './lofox.js'
-import indexPage from './page/index.js'
-import blogListPage from './page/blogList.js'
-import blogDetailPage from './page/blogDetail.js'
-import labsListPage from './page/labsList.js'
-import panoListPage from './page/panoList.js'
-import photographyListPage from './page/photographyList.js'
-import blessPage from './page/bless.js'
+import indexPage from '../pages/index/index.js'
+import blogListPage from '../pages/blog/blogList.js'
+import blogDetailPage from '../pages/blog/blogDetail.js'
+import labsListPage from '../pages/labs/labsList.js'
+import panoListPage from '../pages/pano/panoList.js'
+import photographyListPage from '../pages/photography/photographyList.js'
+import blessPage from '../pages/bless/bless.js'
 
 //绑定路由
 var lofox = new Lofox(),

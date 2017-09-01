@@ -4,14 +4,13 @@
  */
 
 
-import utils from "../Base.js";
-import imageHosting from "../imageHosting.js";
-import juicer from "../juicer.js";
-import publicTemplate from "../publicTemplate.js";
+import utils from "../../js/Base.js";
+import imageHosting from "../../js/imageHosting.js";
+import juicer from "../../js/juicer.js";
 
 var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>',
-    base_tpl = require("html-loader!../../tpl/labsListBase.html"),
-    item_temp = publicTemplate.postListItem;
+    base_tpl = require("html-loader!./labsListBase.html"),
+    item_temp = require("html-loader!../../tpl/postListItem.html");
 
 var limit = 20,
     skip = 0,

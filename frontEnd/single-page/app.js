@@ -30,8 +30,10 @@ let supports = (function() {
       prop = prop.replace(/^[a-z]/, function(val) {
         return val.toUpperCase();
       });
-      for(var i=0,total=vendors.length;i<total;i++){
-        if ( vendors[i] + prop in styles ) {
+      let i = 0;
+      let total = vendors.length;
+      for (; i < total; i++){
+        if ((vendors[i] + prop) in styles) {
           return ('-' + vendors[i] + '-' + prop).toLowerCase();
         }
       }

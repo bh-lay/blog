@@ -5,13 +5,13 @@
  */
 
 //index page
-import utils from "../Base.js";
+import utils from "../../js/Base.js";
 
-var temp = require("html-loader!../../tpl/index.html");
+const temp = require("html-loader!./index.html");
 
 function view(global){
-  var node = global.node,
-      nodeGallery;
+  const node = global.node;
+  let nodeGallery;
   node.innerHTML = temp;
 
   nodeGallery = utils.query('.gallayer',node);

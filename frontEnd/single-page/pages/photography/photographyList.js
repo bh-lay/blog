@@ -3,38 +3,36 @@
  *
  */
 
-import utils from "../Base.js";
-import juicer from "../juicer.js";
-import publicTemplate from "../publicTemplate.js";
+import utils from "../../js/Base.js";
+import juicer from "../../js/juicer.js";
 
 var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>',
-    base_tpl = require("html-loader!../../tpl/panoListBase.html"),
-    item_temp = publicTemplate.postListItem;
+    base_tpl = require("html-loader!./photographyListBase.html"),
+    item_temp = require("html-loader!../../tpl/postListItem.html");
 
 var getData = function(callback){
   utils.fetch({
     type : 'GET' ,
-    url : '/ajax/pano/list',
+    url : '/ajax/photography/list',
     data : {
       act : 'get_list'
     },
     callback :function(err, data){
-      if(!err && data && data.data && data.data.list) {
-    callback && callback(null, filterData(data.data.list));
-  } else {
+      if(err || data.code == 500){
         callback && callback(500);
+        return;
       }
+
+      callback&&callback(null, filterData(data.post_list));
     }
   });
 };
 function filterData(list){
   list.forEach(function (item) {
-    item.title = item.property.name;
-    item.desc = item.property.remark;
-    item.url = 'http://720yun.com/t/' + item.property.pid + '?from=bh-lay';
-    item.thumb = 'http://thumb-qiniu.720static.com/@' + item.property.thumbUrl;
-    item.pv = item.pvCount;
-    item.like = item.likeCount;
+    item.url += '?from=bh-lay';
+    item.thumb = (item.images && item.images.length) ? item.images[0].source.g : (item.title_image ? item.title_image.url : '');
+    item.desc = item.excerpt;
+    item.like = item.favorites;
   });
   return list;
 }

@@ -70,10 +70,10 @@ const config = {
       template: './tpl/github.html',
       inject: false
     }),
-    new ExtractTextPlugin("[name].[hash:8].css"),
-    new UglifyJSPlugin({
-      compress: isProduction
-    })
+    new ExtractTextPlugin("[name].[hash:8].css")
   ]
 };
+if (isProduction) {
+  config.plugins.push(new UglifyJSPlugin());
+}
 module.exports = config;
