@@ -5,7 +5,7 @@
 
 // window.L = window.L || {};
 
-import './css/main.less';
+import './less/app-base.less';
 
 import user from './js/user.js'
 import navigation from './js/navigation.js'
