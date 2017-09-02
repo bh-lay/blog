@@ -70,7 +70,7 @@ const config = {
       template: './tpl/github.html',
       inject: false
     }),
-    new ExtractTextPlugin("[name].[hash:8].css")
+    new ExtractTextPlugin("[name].[contenthash:8].css")
   ]
 };
 if (isProduction) {
