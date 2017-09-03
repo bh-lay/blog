@@ -2,12 +2,11 @@
 <html lang="en-US">
 <head>
 <meta charset="UTF-8">
-<title>${{title}}_小剧客栈_剧中人的个人博客</title>
-<meta name="keywords" content="${{keywords}}" />
-<meta name="description" content="${{description}}" />
+<title>$[[title]]_小剧客栈_剧中人的个人博客</title>
+<meta name="keywords" content="$[[keywords]]" />
+<meta name="description" content="$[[description]]" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
 <include name="favicon_appicon" />
-<link rel="stylesheet" type="text/css" href="/assets/labs-detail/index.less" />
 </head>
 <body>
 <div class="l-mini-nav">
@@ -17,21 +16,21 @@
 </div>
 	<div class="labs_detail_title">
 		<div class="lab_container">
-			<h1>${{title}}</h1>
-      <p><i class="icon-github-alt"></i><a src="http://github.com/${{git_full_name}}">${{git_full_name}}</a></p>
-      <a href="${{demo_url}}" target="_blank" class="btn focusme"><i class="icon-desktop"></i>查看demo</a>
-      <a title="下载压缩包" href="https://github.com/${{git_full_name}}/zipball/master" download class="btn">下载</a>
+			<h1>$[[title]]</h1>
+      <p><i class="icon-github-alt"></i><a src="http://github.com/$[[git_full_name]]">$[[git_full_name]]</a></p>
+      <a href="$[[demo_url]]" target="_blank" class="btn focusme"><i class="icon-desktop"></i>查看demo</a>
+      <a title="下载压缩包" href="https://github.com/$[[git_full_name]]/zipball/master" download class="btn">下载</a>
 		</div>
 	</div>
 	<div class="labs_detail_cnt">
 		<a name="doc"></a>
 		<div class="labs_detail_doc">
 			<div class="lab_container">
-				<div class="article">$${{content}}</div>
+				<div class="article">$$[[content]]</div>
 			</div>
 		</div>
 		<a name="github_link"></a>
-		<div class="labs_detail_github" data-repo="${{git_full_name}}">
+		<div class="labs_detail_github" data-repo="$[[git_full_name]]">
             <div class="labsDeGit_cpt">
                 <i class="icon-github"></i>
                 <p>I'm in Github</p>
@@ -82,9 +81,6 @@
     </div>
 </div>
 </script>
-<script type="text/javascript" src="/assets/jquery.js"></script>
-<script type="text/javascript" src="/assets/highlight.js"></script>
-<script type="text/javascript" src="/assets/labs-detail/index.js"></script>
 <include name="baiduAndGoogleTongji"/>
 </body>
 </html>

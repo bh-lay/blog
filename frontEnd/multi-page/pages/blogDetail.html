@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<title>$[[title]]_小剧客栈_剧中人的个人博客</title>
+<meta name="keywords" content="$[[keywords]]" />
+<meta name="description" content="$[[description]]" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<include name="version_html5_script_bootstrap"/>
+<include name="favicon_appicon" />
+</head>
+<body>
+<include name="navigation_bootstrap" active="blog"/>
+<div class="jumbotron">
+  <div class="container">
+    <h1>$[[title]]</h1>
+    <p>
+      <span>时间：$[[time_show]] </span>
+      <span>作者：$[[author]] </span>
+    </p>
+  </div>
+</div>
+<div class="container">
+  <div class="article">
+    $$[[content]]
+    <div class="copylink">
+      <div class="tag"><strong>本文关键字：</strong>[[@each tags as t]]<a href="/blog?tag=$[[t]]" lofox="true">$[[t]]</a>[[@/each]]</div>
+      <div class="pageUrl"><strong>转载请注明来源：</strong>http://bh-lay.com/blog/$[[id]]</div>
+    </div>
+  </div>
+  <div class="comments_area"></div>
+</div>
+<include name="footer"/>
+<include name="baiduAndGoogleTongji"/>
+</body>
+</html>

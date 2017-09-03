@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<title>$[[title]]</title>
+<meta name="keywords" content="$[[keywords]]" />
+<meta name="description" content="$[[description]]" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<include name="version_html5_script_bootstrap"/>
+<include name="favicon_appicon" />screen">
+</head>
+<body>
+<include name="navigation_bootstrap" active="labs"/>
+<div class="container page-body">
+	<div class="row define-list">
+		<ul class="nav nav-tabs">
+			<li role="presentation"><a href="/labs">前端实验室</a></li>
+			<li role="presentation" class="active"><a href="/720">720全景</a></li>
+			<li role="presentation"><a href="/photography">摄影</a></li>
+		</ul>
+		<br>
+		<div class="col-sm-8">
+		[[@each list as it,index]]
+			<div class="media define-item">
+				<a class="pull-left"
+				   rel="external nofollow"
+				   href="http://720yun.com/t/$[[it.pid]]" title="$[[it.name]]" target="_blank" >
+					<img class="media-object" src="$[[it.thumb]]" alt="$[[it.name]]" />
+				</a>
+				<div class="media-body">
+					<h4 class="media-heading">
+						<a href="http://720yun.com/t/$[[it.pid]]"
+						   rel="external nofollow"
+						   title="$[[it.name]]" target="_blank" >$[[it.name]]</a>
+					</h4>
+					<p>$[[it.desc]]</p>
+
+					<div class="data">
+						<span><strong>观看：</strong>$[[it.pv]]</span>
+						<span><strong>喜欢：</strong>$[[it.like]]</span>
+					</div>
+				</div>
+			</div>
+		[[@/each]]
+		<div class="col-sm-4">
+		</div>
+		</div>
+	</div>
+</div>
+<include name="footer"/>
+<include name="baiduAndGoogleTongji"/>
+</body>
+</html>

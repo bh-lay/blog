@@ -2,12 +2,11 @@
 <html lang="en-US">
 <head>
   <meta charset="UTF-8">
-  <title>${{title}}</title>
-  <meta name="keywords" content="${{keywords}}" />
-  <meta name="description" content="${{description}}" />
+  <title>$[[title]]</title>
+  <meta name="keywords" content="$[[keywords]]" />
+  <meta name="description" content="$[[description]]" />
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <include name="favicon_appicon" />
-  <link rel="stylesheet" type="text/css" href="assets/links/links.less"/>
 </head>
 <body>
   <div class="Jumbotron">
@@ -22,29 +21,26 @@
     </div>
   </div>
   <div class="container">
-    {{@each list as it}}
-    <div class="guy-item" data-id="${{it.id}}">
+    [[@each list as it]]
+    <div class="guy-item" data-id="$[[it.id]]">
       <div class="avatar">
-        <img src="${{it.avatar}}" alt="">
+        <img src="$[[it.avatar]]" alt="">
       </div>
-      <div class="nickname">${{it.title}}</div>
+      <div class="nickname">$[[it.title]]</div>
       <div class="desc">
-        {{@if it.discription}}${{it.discription}}{{@/if}}
+        [[@if it.discription]]$[[it.discription]][[@/if]]
       </div>
       <div class="links">
-        {{@if it.url}}
-        <a target="_blank" class="blog" href="${{it.url}}">博</a>
-        {{@/if}}
-        {{@if it.github_username}}
-        <a target="_blank" class="github" href="https://github.com/${{it.github_username}}" ><i class="l-icon l-icon-git"></i></a>
-        {{@/if}}
+        [[@if it.url]]
+        <a target="_blank" class="blog" href="$[[it.url]]">博</a>
+        [[@/if]]
+        [[@if it.github_username]]
+        <a target="_blank" class="github" href="https://github.com/$[[it.github_username]]" ><i class="l-icon l-icon-git"></i></a>
+        [[@/if]]
         </div>
     </div>
-    {{@/each}}
+    [[@/each]]
   </div>
-<script type="text/javascript" src="assets/jquery.js"></script>
-<script type="text/javascript" src="assets/dialog.js"></script>
-<script type="text/javascript" src="assets/links/index.js"></script>
 <script type="text/template" id="post_tpl">
 <div class="post_link">
   <div class="post_link_body">
