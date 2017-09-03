@@ -1,7 +1,7 @@
 const path = require('path');
 //定义了一些文件夹的路径
 const ROOT_PATH = path.resolve(__dirname);
-const BUILD_PATH = path.resolve(ROOT_PATH, '../../static/build/single-page/');
+const BUILD_PATH = path.resolve(ROOT_PATH, '../../static/build/multi-page/');
 const HTML_PATH = path.resolve(ROOT_PATH, '../../sys/views/multi-page/');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -15,7 +15,13 @@ const publicPath = isProduction ? prodPublicPath : devPublicPath;
 
 const config = {
   entry: {
-    app: path.resolve(ROOT_PATH, 'app.js')
+    "multi-base": [
+      './assets/jquery.js',
+      './assets/bootstrap/js/bootstrap.js',
+      './assets/highlight.js',
+      './assets/dialog.js'
+    ],
+    "multi-define": './assets/multi-define.js'
   },
   output: {
     path: BUILD_PATH,
@@ -62,16 +68,18 @@ const config = {
     new ExtractTextPlugin("[name].[contenthash:8].css")
   ]
 };
-const htmlFileNames = ['indexPage', 'blogList'];
-htmlFileNames.forEach(function (fileName) {
+const SameHtmlFileNames = ['indexPage', 'blogList', 'blogDetail', 'labsList', 'panoList', 'photographyList'];
+SameHtmlFileNames.forEach(function (fileName) {
   const htmlFileName = fileName + '.html';
   const htmlPlugin = new HtmlWebpackPlugin({
-    filename: HTML_PATH + htmlFileName,
+    filename: path.resolve(HTML_PATH, htmlFileName),
     template: './pages/' + htmlFileName,
-    inject: true
+    inject: true,
+    hash: true,
+    chunks: ['multi-base', 'multi-define']
   });
   config.plugins.push(htmlPlugin);
-})
+});
 if (isProduction) {
   config.plugins.push(new UglifyJSPlugin());
 }
