@@ -17,9 +17,12 @@
 	});
 	//处理github异步数据
 	function getRepoData(input,callback){
-    var split_array = input.split('/'),
-        user_login = split_array[0],
-        repos_name = split_array[1];
+    var split_array = input.match(/(?:^|\/)([^\/]+)\/([^\/]+)/);
+    if (!split_array) {
+    	return
+		}
+		var user_login = split_array[1],
+        repos_name = split_array[2];
 		$.ajax({
 			url: 'https://api.github.com/repos/' + user_login + '/' + repos_name,
 			dataType: 'jsonp',
