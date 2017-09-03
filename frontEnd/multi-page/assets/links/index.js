@@ -1,3 +1,5 @@
+import "./links.less";
+
 $('.add_one').click(function(){
   var pop = UI.pop({
     width: 550,

@@ -21,7 +21,17 @@ const config = {
       './assets/highlight.js',
       './assets/dialog.js'
     ],
-    "multi-define": './assets/multi-define.js'
+    "multi-define": './assets/multi-define.js',
+    "links": [
+      './assets/jquery.js',
+      './assets/dialog.js',
+      './assets/links/index.js'
+    ],
+    "labs-detail": [
+      './assets/jquery.js',
+      './assets/highlight.js',
+      './assets/labs-detail/index.js'
+    ]
   },
   output: {
     path: BUILD_PATH,
@@ -65,7 +75,23 @@ const config = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin("[name].[contenthash:8].css")
+    new ExtractTextPlugin("[name].[contenthash:8].css"),
+    // 前端英雄榜页面
+    new HtmlWebpackPlugin({
+      filename: path.resolve(HTML_PATH, 'links.html'),
+      template: './pages/links.html',
+      inject: true,
+      hash: true,
+      chunks: ['links']
+    }),
+    // 前端实验室详情页面
+    new HtmlWebpackPlugin({
+      filename: path.resolve(HTML_PATH, 'labsDetail.html'),
+      template: './pages/labsDetail.html',
+      inject: true,
+      hash: true,
+      chunks: ['labs-detail']
+    })
   ]
 };
 const SameHtmlFileNames = ['indexPage', 'blogList', 'blogDetail', 'labsList', 'panoList', 'photographyList'];
@@ -75,7 +101,7 @@ SameHtmlFileNames.forEach(function (fileName) {
     filename: path.resolve(HTML_PATH, htmlFileName),
     template: './pages/' + htmlFileName,
     inject: true,
-    hash: true,
+    hash: false,
     chunks: ['multi-base', 'multi-define']
   });
   config.plugins.push(htmlPlugin);

@@ -2,6 +2,8 @@
  * labs detail
  *
  */
+import "./index.less";
+
 (function(){
 	//下载部分
 	var btn = $('.labs_detail_download_link a');
