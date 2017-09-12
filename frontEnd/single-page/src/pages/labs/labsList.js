@@ -3,20 +3,18 @@
  *
  */
 
-
 import './labs.less';
 import utils from '../../js/Base.js';
 import imageHosting from '../../js/imageHosting.js';
 import juicer from '../../js/juicer.js';
 
-var empty_tpl = '<div class=\'blank-content\'><p>啥都木有</p></div>',
-  base_tpl = require('html-loader!./labsListBase.html'),
-  item_temp = require('html-loader!../../postListItem.html');
+let emptyTpl = '<div class=\'blank-content\'><p>啥都木有</p></div>';
+let baseTpl = require('html-loader!./labsListBase.html');
+let itemTemp = require('html-loader!../../postListItem.html');
 
-var limit = 20,
-  skip = 0,
-  count = null,
-  dom;
+let limit = 20;
+let skip = 0;
+let count = null;
 var getData = function (callback) {
   utils.fetch({
     type: 'GET',
@@ -27,14 +25,14 @@ var getData = function (callback) {
       limit: limit
     },
     callback: function (err, data) {
-      if (err || data.code == 500) {
+      if (err || data.code === 500) {
         callback && callback(500);
         return;
       }
       count = data['count'];
       skip += limit;
 
-      var list = data['list'];
+      let list = data['list'];
       callback && callback(null, filterData(list));
     }
   });
@@ -57,15 +55,15 @@ function filterData (list) {
 }
 
 export default function (global, param) {
-  var node = global.node;
+  let node = global.node;
   skip = 0;
-  node.innerHTML = base_tpl;
+  node.innerHTML = baseTpl;
   getData(function (err, list) {
-    var this_html;
+    let this_html;
     if (err) {
-      this_html = empty_tpl;
+      this_html = emptyTpl;
     } else {
-      this_html = juicer(item_temp, {
+      this_html = juicer(itemTemp, {
         list: list
       });
     }

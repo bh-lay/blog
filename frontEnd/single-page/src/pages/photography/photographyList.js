@@ -7,11 +7,11 @@ import './photography.less';
 import utils from '../../js/Base.js';
 import juicer from '../../js/juicer.js';
 
-var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>',
-  base_tpl = require('html-loader!./photographyListBase.html'),
-  item_temp = require('html-loader!../../postListItem.html');
+let empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>';
+let base_tpl = require('html-loader!./photographyListBase.html');
+let item_temp = require('html-loader!../../postListItem.html');
 
-var getData = function (callback) {
+let getData = function (callback) {
   utils.fetch({
     type: 'GET',
     url: '/ajax/photography/list',
@@ -40,12 +40,12 @@ function filterData (list) {
 }
 
 export default function (global, param) {
-  var node = global.node;
+  let node = global.node;
 
   node.innerHTML = base_tpl;
 
   getData(function (err, list) {
-    var this_html;
+    let this_html;
     if (err) {
       this_html = empty_tpl;
     } else {

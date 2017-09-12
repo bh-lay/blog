@@ -9,7 +9,7 @@ import juicer from '../../js/juicer.js';
 import hljs from '../../js/highlight.js';
 import comments from '../../comments/index.js';
 
-var template = require('html-loader!./blogDetailPage.html');
+const template = require('html-loader!./blogDetailPage.html');
 
 function getData (id, fn) {
   utils.fetch({
@@ -20,8 +20,8 @@ function getData (id, fn) {
       id: id
     },
     callback: function (err, data) {
-      if (!err && data && data.code == 200) {
-        var detail = data['detail'];
+      if (!err && data && data.code === 200) {
+        let detail = data['detail'];
         detail.time_show = utils.parseTime(detail.time_show, '{y}-{mm}-{dd}');
 
         fn && fn(null, detail);
@@ -33,7 +33,7 @@ function getData (id, fn) {
 };
 
 export default function (global, id) {
-  var node = global.node;
+  let node = global.node;
   getData(id, function (err, detail, title) {
     if (err && !detail) {
       global.push('/');
@@ -44,12 +44,12 @@ export default function (global, id) {
     global.title(detail.title);
     node.innerHTML = juicer(template, detail);
 
-    //代码高亮
+    // 代码高亮
     utils.each(utils.queryAll('pre code', node), function (codeNode) {
       hljs(codeNode);
     });
 
-    new comments.init(utils.query('.comments_frame', node), 'blog-' + id, {
+    new comments.Init(utils.query('.comments_frame', node), 'blog-' + id, {
       list_num: 8
     });
   });

@@ -24,7 +24,7 @@ var private_userInfo = null,
 function parseUrl (input) {
   var output = null;
   //是否符合网址规范
-  if (typeof(input) == 'string' && input.match(/[\w-]+\.\w{2,4}/)) {
+  if (typeof(input) === 'string' && input.match(/[\w-]+\.\w{2,4}/)) {
     //补全协议
     output = input.match(/^http(?:s|)\:\/\//) ? input : ('http://' + input);
   }
@@ -457,7 +457,7 @@ List.prototype.getData = function (skip, callback) {
     },
     callback: function (err, data) {
       me._status = 'loaded';
-      if (err || data.code == 500) {
+      if (err || data.code === 500) {
         callback && callback(500);
       } else if (data.code && data.code == 200) {
         var DATA = data.data;
@@ -479,7 +479,7 @@ List.prototype.getData = function (skip, callback) {
 };
 
 function init (dom, id, param) {
-  var me = this;
+  let me = this;
   this.dom = utils.createDom(baseTpl);
   this.id = id;
   dom.innerHTML = '';
@@ -490,5 +490,6 @@ function init (dom, id, param) {
   this.sendBox.on('sendToServiceSuccess', function (item) {
     me.list.addItem(item);
   });
-};
-export default {SendBox, List, init};
+}
+
+export {SendBox, List, Init};
