@@ -1,28 +1,28 @@
-
 /**
  * render
  *
  */
 
 import './index.less';
-import utils from "../../js/Base.js";
+import utils from '../../js/Base.js';
 
-const temp = require("html-loader!./index.html");
+const temp = require('html-loader!./index.html');
 
-function view(global){
+function view (global) {
   const node = global.node;
   let nodeGallery;
   node.innerHTML = temp;
 
-  nodeGallery = utils.query('.gallayer',node);
+  nodeGallery = utils.query('.gallayer', node);
 
-  setTimeout(function(){
-    utils.addClass(nodeGallery,'zoom-show');
-  },600);
+  setTimeout(function () {
+    utils.addClass(nodeGallery, 'zoom-show');
+  }, 600);
 
   return {
-    destroy: function() {
+    destroy: function () {
     }
   };
 }
+
 export default view;

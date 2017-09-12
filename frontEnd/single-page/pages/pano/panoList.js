@@ -4,30 +4,31 @@
  */
 
 import './pano.less';
-import utils from "../../js/Base.js";
-import juicer from "../../js/juicer.js";
+import utils from '../../js/Base.js';
+import juicer from '../../js/juicer.js';
 
-var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>',
-    base_tpl = require("html-loader!./panoListBase.html"),
-    item_temp = require("html-loader!../../tpl/postListItem.html");
+var empty_tpl = '<div class=\'blank-content\'><p>啥都木有</p></div>',
+  base_tpl = require('html-loader!./panoListBase.html'),
+  item_temp = require('html-loader!../../tpl/postListItem.html');
 
-var getData = function(callback){
+var getData = function (callback) {
   utils.fetch({
-    type : 'GET' ,
-    url : '/ajax/pano/list',
-    data : {
-      act : 'get_list'
+    type: 'GET',
+    url: '/ajax/pano/list',
+    data: {
+      act: 'get_list'
     },
-    callback :function(err, data){
-      if(!err && data && data.data && data.data.list) {
-    callback && callback(null, filterData(data.data.list));
-  } else {
+    callback: function (err, data) {
+      if (!err && data && data.data && data.data.list) {
+        callback && callback(null, filterData(data.data.list));
+      } else {
         callback && callback(500);
       }
     }
   });
 };
-function filterData(list){
+
+function filterData (list) {
   list.forEach(function (item) {
     item.title = item.property.name;
     item.desc = item.property.remark;
@@ -38,20 +39,21 @@ function filterData(list){
   });
   return list;
 }
-export default function(global, param){
+
+export default function (global, param) {
   var node = global.node;
 
   node.innerHTML = base_tpl;
 
-  getData(function(err,list){
+  getData(function (err, list) {
     var this_html;
-    if(err){
+    if (err) {
       this_html = empty_tpl;
-    }else{
-      this_html = juicer(item_temp,{
-        list : list
+    } else {
+      this_html = juicer(item_temp, {
+        list: list
       });
     }
-    utils.query('.panoList',node).innerHTML = this_html;
+    utils.query('.panoList', node).innerHTML = this_html;
   });
 };

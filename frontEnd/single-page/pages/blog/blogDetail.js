@@ -3,53 +3,53 @@
  *
  */
 
-import "./blogDetail.less";
-import utils from "../../js/Base.js";
-import juicer from "../../js/juicer.js";
-import hljs from "../../js/highlight.js";
-import comments from "../../comments/index.js";
+import './blogDetail.less';
+import utils from '../../js/Base.js';
+import juicer from '../../js/juicer.js';
+import hljs from '../../js/highlight.js';
+import comments from '../../comments/index.js';
 
-var template = require("html-loader!./blogDetailPage.html");
+var template = require('html-loader!./blogDetailPage.html');
 
-function getData(id,fn){
+function getData (id, fn) {
   utils.fetch({
-    url : '/ajax/blog',
-    data : {
-      act : 'get_detail',
-      format : 'html',
-      id : id
+    url: '/ajax/blog',
+    data: {
+      act: 'get_detail',
+      format: 'html',
+      id: id
     },
-    callback :function(err,data){
-      if(!err && data && data.code == 200){
+    callback: function (err, data) {
+      if (!err && data && data.code == 200) {
         var detail = data['detail'];
-        detail.time_show = utils.parseTime(detail.time_show,'{y}-{mm}-{dd}');
+        detail.time_show = utils.parseTime(detail.time_show, '{y}-{mm}-{dd}');
 
-        fn&&fn(null,detail);
-      }else{
-        fn&&fn('博客不存在！');
+        fn && fn(null, detail);
+      } else {
+        fn && fn('博客不存在！');
       }
     }
   });
 };
 
-export default function(global,id){
+export default function (global, id) {
   var node = global.node;
-  getData(id,function(err,detail,title){
-    if(err && !detail){
+  getData(id, function (err, detail, title) {
+    if (err && !detail) {
       global.push('/');
       global.refresh();
       return;
     }
 
     global.title(detail.title);
-    node.innerHTML = juicer(template,detail);
+    node.innerHTML = juicer(template, detail);
 
     //代码高亮
-    utils.each(utils.queryAll('pre code',node),function(codeNode){
+    utils.each(utils.queryAll('pre code', node), function (codeNode) {
       hljs(codeNode);
     });
 
-    new comments.init(utils.query('.comments_frame',node),'blog-' + id,{
+    new comments.init(utils.query('.comments_frame', node), 'blog-' + id, {
       list_num: 8
     });
   });
