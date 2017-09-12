@@ -9,7 +9,7 @@ import juicer from '../../js/juicer.js';
 
 var empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>',
   base_tpl = require('html-loader!./photographyListBase.html'),
-  item_temp = require('html-loader!../../tpl/postListItem.html');
+  item_temp = require('html-loader!../../src/postListItem.html');
 
 var getData = function (callback) {
   utils.fetch({
