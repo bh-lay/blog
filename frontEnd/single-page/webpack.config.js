@@ -16,7 +16,7 @@ const publicPath = isProduction ? prodPublicPath : devPublicPath;
 
 const config = {
   entry: {
-    app: path.resolve(ROOT_PATH, 'app.js')
+    app: path.resolve(ROOT_PATH, 'src/app.js')
   },
   output: {
     path: BUILD_PATH,
@@ -62,12 +62,12 @@ const config = {
   plugins: [
     new HtmlWebpackPlugin({
       filename: HTML_PATH,
-      template: './index.html',
+      template: './src/index.html',
       inject: true
     }),
     new HtmlWebpackPlugin({
       filename: GITHUB_HTML_PATH,
-      template: './tpl/github.html',
+      template: './src/github.html',
       inject: false
     }),
     new ExtractTextPlugin("[name].[contenthash:8].css")

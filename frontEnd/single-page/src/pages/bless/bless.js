@@ -4,9 +4,9 @@
  */
 
 import './bless.less';
-import utils from '../../src/js/Base.js';
+import utils from '../../js/Base.js';
 import {SendBox, List} from '../../comments/index.js';
-import juicer from '../../src/js/juicer.js';
+import juicer from '../../js/juicer.js';
 
 let commentId = 'define-1';
 let baseTpl = require('html-loader!./bless.html');
