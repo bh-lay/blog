@@ -4,9 +4,9 @@
  */
 
 import './blogDetail.less';
-import utils from '../../js/Base.js';
-import juicer from '../../js/juicer.js';
-import hljs from '../../js/highlight.js';
+import utils from '../../src/js/Base.js';
+import juicer from '../../src/js/juicer.js';
+import hljs from '../../src/js/highlight.js';
 import comments from '../../comments/index.js';
 
 var template = require('html-loader!./blogDetailPage.html');

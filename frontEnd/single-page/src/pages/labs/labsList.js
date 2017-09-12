@@ -5,9 +5,9 @@
 
 
 import './labs.less';
-import utils from '../../js/Base.js';
-import imageHosting from '../../js/imageHosting.js';
-import juicer from '../../js/juicer.js';
+import utils from '../../src/js/Base.js';
+import imageHosting from '../../src/js/imageHosting.js';
+import juicer from '../../src/js/juicer.js';
 
 var empty_tpl = '<div class=\'blank-content\'><p>啥都木有</p></div>',
   base_tpl = require('html-loader!./labsListBase.html'),

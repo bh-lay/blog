@@ -4,7 +4,7 @@
  */
 
 import './index.less';
-import utils from '../../js/Base.js';
+import utils from '../../src/js/Base.js';
 
 const temp = require('html-loader!./index.html');
 

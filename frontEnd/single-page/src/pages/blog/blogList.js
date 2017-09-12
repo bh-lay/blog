@@ -4,11 +4,11 @@
  */
 
 import './blogList.less';
-import utils from '../../js/Base.js';
-import imageHosting from '../../js/imageHosting.js';
-import Stick from '../../js/stick.js';
-import tie from '../../js/tie.js';
-import juicer from '../../js/juicer.js';
+import utils from '../../src/js/Base.js';
+import imageHosting from '../../src/js/imageHosting.js';
+import Stick from '../../src/js/stick.js';
+import tie from '../../src/js/tie.js';
+import juicer from '../../src/js/juicer.js';
 
 var private_tag_data = null;
 

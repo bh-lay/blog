@@ -1,11 +1,11 @@
 import './comment.less';
 
-import utils from "../js/Base.js";
-import juicer from "../js/juicer.js";
-import pagination from "../js/pagination.js";
+import utils from "../src/js/Base.js";
+import juicer from "../src/js/juicer.js";
+import pagination from "../src/js/pagination.js";
 import selection from "./selection.js";
 import face from "./face.js";
-import UI from "../js/dialog.js";
+import UI from "../src/js/dialog.js";
 
 var private_userInfo = null,
   default_avatar = require("../images/default.jpg"),
