@@ -46,6 +46,14 @@ const config = {
         loader: 'babel-loader?presets[]=es2015,presets[]=stage-0'
       },
       {
+        test: /(pages|comments)\/([^\.]+)\.html$/,
+        use: 'raw-loader'
+      },
+      {
+        test: /postListItem\.html$/,
+        use: 'raw-loader'
+      },
+      {
         test: /\.(eot|woff|svg|ttf|woff2)(\?|$)/,
         loader: 'file-loader?name=font/[name].[hash:8].[ext]'
       },
