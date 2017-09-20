@@ -75,7 +75,7 @@ L.gravatar_error_fn = function (elem) {
 
 // 模块替换
 L.tplModule = function (txt) {
-  return (txt && txt.length) ? txt.replace(/\[\-(\w+)\-\]/g, function (a, key) {
+  return (txt && txt.length) ? txt.replace(/\[-(\w+)-\]/g, function (a, key) {
     return utils.query('#module_' + key).innerHTML || '';
   }) : '';
 };

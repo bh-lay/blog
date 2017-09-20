@@ -9,7 +9,7 @@ import {SendBox, List} from '../../comments/index.js';
 import juicer from '../../js/juicer.js';
 
 let commentId = 'define-1';
-let baseTpl = require('html-loader!./bless.html');
+let baseTpl = require('./bless.html');
 let potoGraphaList = [
   {
     title: '束河古城',

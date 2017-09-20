@@ -6,7 +6,7 @@
 import './index.less';
 import utils from '../../js/Base.js';
 
-const temp = require('html-loader!./index.html');
+const temp = require('./index.html');
 
 function view (global) {
   const node = global.node;

@@ -11,11 +11,11 @@ var private_userInfo = null,
   default_avatar = require("../images/default.jpg"),
 
   noData_tpl = '<div class="l_com_list_noData">来的真早，快抢沙发！</div>',
-  baseTpl = require("html-loader!./base.html"),
-  sendBox_tpl = require("html-loader!./sendBox.html"),
-  user_tpl = require("html-loader!./user.html"),
-  list_tpl = require("html-loader!./list.html"),
-  item_tpl = require("html-loader!./item.html");
+  baseTpl = require("./base.html"),
+  sendBox_tpl = require("./sendBox.html"),
+  user_tpl = require("./user.html"),
+  list_tpl = require("./list.html"),
+  item_tpl = require("./item.html");
 
 /**
  * 格式化网址
@@ -478,7 +478,7 @@ List.prototype.getData = function (skip, callback) {
   });
 };
 
-function init (dom, id, param) {
+function Init (dom, id, param) {
   let me = this;
   this.dom = utils.createDom(baseTpl);
   this.id = id;

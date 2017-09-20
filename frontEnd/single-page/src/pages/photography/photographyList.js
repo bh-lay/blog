@@ -8,8 +8,8 @@ import utils from '../../js/Base.js';
 import juicer from '../../js/juicer.js';
 
 let empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>';
-let base_tpl = require('html-loader!./photographyListBase.html');
-let item_temp = require('html-loader!../../postListItem.html');
+let base_tpl = require('./photographyListBase.html');
+let item_temp = require('../../postListItem.html');
 
 let getData = function (callback) {
   utils.fetch({

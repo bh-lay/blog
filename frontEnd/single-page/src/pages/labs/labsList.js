@@ -9,8 +9,8 @@ import imageHosting from '../../js/imageHosting.js';
 import juicer from '../../js/juicer.js';
 
 let emptyTpl = '<div class=\'blank-content\'><p>啥都木有</p></div>';
-let baseTpl = require('html-loader!./labsListBase.html');
-let itemTemp = require('html-loader!../../postListItem.html');
+let baseTpl = require('./labsListBase.html');
+let itemTemp = require('../../postListItem.html');
 
 let limit = 20;
 let skip = 0;

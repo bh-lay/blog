@@ -26,14 +26,14 @@ function getTag (callback) {
       data = data || {};
       data.list = data.list ? data.list.slice(0, 10) : [];
       privateTagData = data;
-      callback && callback(private_privateTagDatatag_data);
+      callback && callback(privateTagData);
     }
   });
 }
 
 function renderTags (dom, tagName, callback) {
   getTag(function (data) {
-    let tagItemTpl = require('html-loader!./blogListTag.html');
+    let tagItemTpl = require('./blogListTag.html');
     let html = juicer(tagItemTpl, data);
     let selector = tagName ? ('a[data-tag=' + tagName + ']') : 'a';
 
@@ -59,7 +59,7 @@ function LIST (tag, onLoadStart, onLoaded) {
 
 LIST.prototype.loadMore = function () {
   let me = this;
-  if (this.isLoading || this.count >= 0 && this.skip >= this.count) {
+  if (this.isLoading || (this.count >= 0 && this.skip >= this.count)) {
     return;
   }
   this.isLoading = true;
@@ -94,7 +94,7 @@ LIST.prototype.loadMore = function () {
       }
       me.count = count;
       me.skip += me.limit;
-      me.onLoaded && me.onLoaded.call(me, list, count);
+      me.onLoaded && me.onLoaded(list, count);
       me.isLoading = false;
     }
   });
@@ -105,8 +105,8 @@ function page (global, param) {
   let node = global.node;
   // 获取标签名
   let pageTag = param.tag ? decodeURI(param.tag) : null;
-  let baseTpl = require('html-loader!./blogListBase.html');
-  let listTpl = require('html-loader!./blogListItem.html');
+  let baseTpl = require('./blogListBase.html');
+  let listTpl = require('./blogListItem.html');
   let emptyTpl = '<div class=\'blank-content\'><p>啥都木有</p></div>';
   // 插入基本模版
   node.innerHTML = baseTpl;
@@ -151,7 +151,6 @@ function page (global, param) {
     }
     global.refresh();
   });
-
 }
 
 page.prototype = {

@@ -7,9 +7,9 @@ import './blogDetail.less';
 import utils from '../../js/Base.js';
 import juicer from '../../js/juicer.js';
 import hljs from '../../js/highlight.js';
-import comments from '../../comments/index.js';
+import {Init as CommentInit} from '../../comments/index.js';
 
-const template = require('html-loader!./blogDetailPage.html');
+const template = require('./blogDetailPage.html');
 
 function getData (id, fn) {
   utils.fetch({
@@ -49,7 +49,7 @@ export default function (global, id) {
       hljs(codeNode);
     });
 
-    new comments.Init(utils.query('.comments_frame', node), 'blog-' + id, {
+    new CommentInit(utils.query('.comments_frame', node), 'blog-' + id, {
       list_num: 8
     });
   });
