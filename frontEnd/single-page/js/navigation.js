@@ -8,7 +8,7 @@ import UI from "./dialog.js";
 function init() {
   var scrollDelay,
       nodeBackTop = utils.query('.back-top'),
-      nodeBody = utils.query('body'),
+      nodeBody = document.documentElement || utils.query('body'),
       nodeNav = utils.query('.app_nav',nodeBody);
   utils.bind(nodeNav,'click','.nav a,.side a',function () {
     utils.removeClass(nodeBody,'nav_slidedown');
