@@ -16,7 +16,7 @@ const publicPath = isProduction ? prodPublicPath : devPublicPath;
 
 const config = {
   entry: {
-    app: path.resolve(ROOT_PATH, 'app.js')
+    app: path.resolve(ROOT_PATH, 'src/app.js')
   },
   output: {
     path: BUILD_PATH,
@@ -46,6 +46,14 @@ const config = {
         loader: 'babel-loader?presets[]=es2015,presets[]=stage-0'
       },
       {
+        test: /(pages|comments)\/([^\.]+)\.html$/,
+        use: 'raw-loader'
+      },
+      {
+        test: /postListItem\.html$/,
+        use: 'raw-loader'
+      },
+      {
         test: /\.(eot|woff|svg|ttf|woff2)(\?|$)/,
         loader: 'file-loader?name=font/[name].[hash:8].[ext]'
       },
@@ -62,12 +70,12 @@ const config = {
   plugins: [
     new HtmlWebpackPlugin({
       filename: HTML_PATH,
-      template: './index.html',
+      template: './src/index.html',
       inject: true
     }),
     new HtmlWebpackPlugin({
       filename: GITHUB_HTML_PATH,
-      template: './tpl/github.html',
+      template: './src/github.html',
       inject: false
     }),
     new ExtractTextPlugin("[name].[contenthash:8].css")

@@ -1,0 +1,286 @@
+@charset "UTF-8";
+@import "../../../_public/less/_core.less";
+@import "../../../_public/less/_reset.less";
+@import "../../../_public/less/_grid.less";
+
+@import "../../../_public/less/_btn.less";
+
+@import "../../../_public/less/_animation.less";
+
+@import "_navigation.less";
+@import "_pagination.less";
+@import "_footer.less";
+
+@import "_fontface.less";
+
+@import "_side.less";
+
+.define-scrollbar{
+  &::-webkit-scrollbar{
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-track-piece{
+    background: #eee;
+  }
+  &::-webkit-scrollbar-thumb:vertical{
+    background: #666;
+  }
+}
+
+/**
+ * 卡片类
+ */
+.cardShadow(){
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+
+
+
+body {
+  color: #333;
+  font-size: 14px;
+  font-family: "PingFang SC","Helvetica neue",Helvetica,Tahoma,"lantinghei sc","Microsoft Yahei", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background: #f4f4f4;
+}
+a,a:active{
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/** 提示信息 **/
+.l_alert_info{
+  border: 1px solid #bce8f1;
+  background: #d9edf7;
+  color: #31708f;
+  padding: 15px 20px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+.UI-plugin-iframe {
+  display: block;
+  border: none;
+  width: 100%;
+  height: 100%
+}
+
+/*定制的loading动画*/
+.l-loading-panel{
+  max-width: 360px;
+  margin: 200px auto 0;
+  padding: 40px 0;
+  .cardShadow();
+  p{
+    padding: 20px 0 0;
+    text-align: center;
+    color: #333;
+    font-size: 14px;
+    line-height:20px;
+  }
+}
+.l-loading {
+  position: relative;
+  display: block;
+  margin: auto;
+  height  : 50px;
+  width : 50px;
+  border : 1px solid #555;
+  border-radius : 50%;
+  animation : loading-rond 2s infinite;
+  -webkit-animation : loading-rond 2s infinite;
+  &:after{
+    content: '';
+    position : absolute;
+    height : 8px;
+    width : 8px;
+    top : -4px;
+    left : 50%;
+    margin-left: -4px;
+    background : #555;
+    border-radius : 100%;
+  }
+}
+
+/*表情*/
+.emoji {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  vertical-align: baseline;
+  margin: 0 .2em;
+  background: url('//dn-lay.qbox.me/build/single-page/images/emoji_6deb6fb.png') no-repeat top left;
+  zoom: 1;
+}
+
+/**应用主容器**/
+.app_container {
+  position: relative;
+  overflow: hidden;
+  .page{
+    height: 0;
+    overflow: hidden;
+    &.page-active{
+      height: auto;
+      min-height: 600px;
+      overflow: initial;
+    }
+  }
+}
+.app_mask{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5000;
+  background: #fff;
+  &:before{
+    content:'';
+    position: absolute;
+    width: 104%;
+    height: 1px;
+    top: 50%;
+    left: -2%;
+    background: #aaa;
+    -webkit-transform: rotate(-15deg);
+    -moz-transform: rotate(-15deg);
+    -o-transform: rotate(-15deg);
+    transform: rotate(-15deg);
+  }
+  .app_mask_cnt{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 52px;
+    height: 52px;
+    margin: -26px 0 0 -26px;
+    span{
+      background: #fff;
+    }
+  }
+
+  &.app_mask_out{
+    opacity: 0;
+    .transition(0.2s,ease-in);
+    .transition-delay(0.6s);
+    .app_mask_cnt{
+      -webkit-transform: scale(0);
+      -moz-transform: scale(0);
+      -o-transform: scale(0);
+      transform: scale(0);
+      .transition(0.15s,ease-in);
+    }
+    &:before{
+      width: 0;
+      left: 50%;
+      .transition(0.3s,ease);
+      .transition-delay(0.2s);
+    }
+  }
+}
+.app_mask_cnt{
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  width: 200px;
+  height: 70px;
+  margin-left:-100px;
+  z-index: 1;
+  p{
+    padding-top: 20px;
+    font-size: 18px;
+    text-align: center;
+  }
+}
+
+.tongji {
+  width: 0px;
+  height: 0px;
+  overflow: hidden
+}
+
+
+
+
+.blank-content{
+  max-width: 400px;
+  padding: 50px 0;
+  margin: 0 auto 20px;
+  .cardShadow();
+  p{
+    position: relative;
+    width: 120px;
+    height: 60px;
+    padding-top: 60px;
+    margin: auto;
+    border: 1px solid #aaa;
+    border-radius: 100%;
+    line-height: 40px;
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+    &:before{
+      content: '！';
+      position: absolute;
+      display: block;
+      top:0;
+      left: 0;
+      width: 100%;
+      padding-top: 20px;
+      line-height: 40px;
+      text-align: center;
+      font-size: 50px;
+      color: #f70;
+      z-index: 0;
+    }
+  }
+}
+
+/**
+ * 留言板
+ *
+ */
+.blessPage{
+  padding: 20px 0;
+}
+
+
+
+
+@toolbar-width: 60px;
+@toolbar-active-color: #f70;
+.app-toolbar{
+  position: fixed;
+  bottom: 0;
+  right: 20px;
+  width: @toolbar-width;
+  z-index: 100;
+  .back-top{
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 35px;
+    bottom: 0;
+    background: #f70;
+    box-shadow: 0 0 4px rgba(0,0,0,.5);
+    transition: .2s;
+    &:before{
+      content: '';
+      display: block;
+      position: absolute;
+      width: 0;
+      height: 0;
+      top: -10px;
+      border-style: solid;
+      border-width: 0 @toolbar-width/2 10px @toolbar-width/2;
+      border-color: transparent transparent @toolbar-active-color;
+    }
+    &.hide{
+      transition-delay: .5s;
+      bottom: -60px;
+    }
+  }
+}
