@@ -14,19 +14,20 @@
   .nav {
     float: left;
     li {
+      position: relative;
       float: left;
+      margin-right: 1em;
+      font-size: 16px;
+      color: rgba(0, 0, 0, .6);
       a {
         display: block;
         height: @nav_height;
-        margin-right: 1em;
-        text-shadow: 0 0 10px rgba(255, 255, 255, .3);
         padding: 0 1em;
         outline: none;
         overflow: hidden;
         line-height: @nav_height;
-        color: rgba(0, 0, 0, .6);
+        color: inherit;
         text-align: center;
-        font-size: 16px;
         .transition(.2s);
         i,
         span{
@@ -42,16 +43,14 @@
           display: none;
         }
         &:hover {
-          color: #000;
+          color: inherit;
         }
       }
       &:nth-child(1) a i{
         display: inline-block;
       }
       &.cur{
-        a {
-          color: #000;
-        }
+        color: #000;
       }
     }
   }
@@ -66,12 +65,7 @@
       padding:0 10px;
       a {
         font-size: 12px;
-        color: #333
-      }
-      &.cur{
-        a {
-          color: #000
-        }
+        color: #000
       }
     }
   }
@@ -89,9 +83,7 @@
   left: 0;
   width: 100%;
   height: @nav_height;
-  background: -webkit-linear-gradient(top,rgba(255,255,255,.2),transparent);
-  background: -moz-linear-gradient(top,rgba(255,255,255,.2),transparent);
-  background: linear-gradient(top,rgba(255,255,255,.2),transparent);
+  background: rgba(255, 255, 255, .4);
   .transition(.8s,ease,background-color);
   z-index:2;
 }
