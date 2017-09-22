@@ -7,31 +7,38 @@ import './index.less';
 import utils from '../../js/Base.js';
 
 const temp = require('./index.html');
-let potoGraphaList = [
-  {
-    title: '束河古城',
-    imgSrc: require('./images/aboutme_2.jpg'),
-    htmlSrc: 'https://bh-lay.tuchong.com/14591502/',
-  },
-  {
-    title: '西沙湿地',
-    imgSrc: require('./images/aboutme.jpg'),
-    htmlSrc: 'https://bh-lay.tuchong.com/14465332/',
-  }
-];
+let potoGraphaList = [require('./images/aboutme_2.jpg'), require('./images/aboutme.jpg')];
 let potoGraphaIndex = -1;
+
+//图片预加载
+function loadImg (src, callback) {
+  if (!src) {
+    callback && callback();
+    return;
+  }
+  var img = new Image();
+
+  function End () {
+    callback && callback();
+    callback = null;
+  }
+
+  img.onerror = img.onload = End;
+  img.src = src;
+}
+
 function view (global) {
   const node = global.node;
   let nodeGallery;
   node.innerHTML = temp;
-
-  nodeGallery = utils.query('.index-aboutme', node);
-  nodeGallery.style.backgroundImage = `url(${potoGraphaList[++potoGraphaIndex].imgSrc})`;
+  let imgSrc = potoGraphaList[++potoGraphaIndex];
 
   if (potoGraphaIndex + 1 >= potoGraphaList.length) {
     potoGraphaIndex = -1;
   }
-  setTimeout(function () {
+  loadImg(imgSrc, function () {
+    nodeGallery = utils.query('.index-aboutme', node);
+    nodeGallery.style.backgroundImage = `url(${imgSrc})`;
     utils.addClass(nodeGallery, 'zoom-show');
   }, 600);
 
