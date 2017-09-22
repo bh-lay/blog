@@ -23,7 +23,7 @@ function zoom(url, config) {
 function qiniu(url, config) {
   var src = url;
   if (typeof (url) === 'string' && url.length > 0 && url[0] === '/') {
-    src = '//dn-lay.qbox.me' + url;
+    src = CDN_PATH + url;
     if (config) {
       if (config.type === "zoom") {
         src = zoom(src, config);

@@ -5,6 +5,7 @@ const BUILD_PATH = path.resolve(ROOT_PATH, '../../static/build/single-page/');
 const HTML_PATH = path.resolve(ROOT_PATH, '../../sys/views/single-page/index.html');
 const GITHUB_HTML_PATH = path.resolve(ROOT_PATH, '../../sys/component/single-page/github.html');
 
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
@@ -13,6 +14,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 const devPublicPath = 'http://127.0.0.1:8088/build/single-page/';
 const prodPublicPath = '//dn-lay.qbox.me/build/single-page/';
 const publicPath = isProduction ? prodPublicPath : devPublicPath;
+const cdnPath = isProduction ? '//dn-lay.qbox.me' : '//127.0.0.1:8088';
 
 const config = {
   entry: {
@@ -78,7 +80,10 @@ const config = {
       template: './src/github.html',
       inject: false
     }),
-    new ExtractTextPlugin("[name].[contenthash:8].css")
+    new ExtractTextPlugin("[name].[contenthash:8].css"),
+    new webpack.DefinePlugin({
+      CDN_PATH: JSON.stringify(cdnPath)
+    })
   ]
 };
 if (isProduction) {
