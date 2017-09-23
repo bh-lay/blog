@@ -1,9 +1,13 @@
+
+@import "../../less/photography.less";
+
 .bless-header{
   position: relative;
   padding: 7rem 0 0;
   height: 350px;
   background: no-repeat center center #cef;
   background-size: cover;
+  .photography();
   h2{
     height: 1em;
     line-height: 1em;
@@ -12,25 +16,6 @@
     font-weight: normal;
     font-size: 3rem;
     color: #fff;
-  }
-
-  .photograghy-author{
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
-    opacity: .5;
-    transition: .4s;
-    a{
-      font-size: 12px;
-      color: #fff;
-      text-shadow: 0 1px 2px #000;
-      &:hover{
-        text-decoration: underline;
-      }
-    }
-  }
-  &:hover .photograghy-author{
-    opacity: 1;
   }
 }
 .bless-sendBox{
