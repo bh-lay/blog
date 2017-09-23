@@ -48,11 +48,7 @@ const config = {
         loader: 'babel-loader?presets[]=es2015,presets[]=stage-0'
       },
       {
-        test: /(pages|comments)\/([^\.]+)\.html$/,
-        use: 'raw-loader'
-      },
-      {
-        test: /postListItem\.html$/,
+        test: /(pages|comments|templates)\/([^\.]+)\.html$/,
         use: 'raw-loader'
       },
       {
