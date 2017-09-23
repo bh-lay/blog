@@ -5,9 +5,23 @@
 
 import './index.less';
 import utils from '../../js/Base.js';
+import juicer from '../../js/juicer.js';
 
 const temp = require('./index.html');
-let potoGraphaList = [require('./images/aboutme_2.jpg'), require('./images/aboutme.jpg')];
+let potoGraphaList = [
+  {
+    title: '随处撸码',
+    author: '剧中人',
+    imgSrc: require('./images/aboutme_2.jpg'),
+    htmlSrc: 'https://bh-lay.tuchong.com/14977204/'
+  },
+  {
+    title: '办公室背影',
+    author: 'Oo浪沫',
+    imgSrc: require('./images/aboutme.jpg'),
+    htmlSrc: 'https://bh-lay.tuchong.com/'
+  }
+];
 let potoGraphaIndex = -1;
 
 //图片预加载
@@ -30,15 +44,16 @@ function loadImg (src, callback) {
 function view (global) {
   const node = global.node;
   let nodeGallery;
-  node.innerHTML = temp;
-  let imgSrc = potoGraphaList[++potoGraphaIndex];
+  let photography = potoGraphaList[++potoGraphaIndex];
+  node.innerHTML = juicer(temp, {
+    photography
+  });
 
   if (potoGraphaIndex + 1 >= potoGraphaList.length) {
     potoGraphaIndex = -1;
   }
-  loadImg(imgSrc, function () {
+  loadImg(photography.imgSrc, function () {
     nodeGallery = utils.query('.index-aboutme', node);
-    nodeGallery.style.backgroundImage = `url(${imgSrc})`;
     utils.addClass(nodeGallery, 'zoom-show');
   }, 600);
 

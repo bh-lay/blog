@@ -1,5 +1,6 @@
 
 @import "../../../../_public/less/_core.less";
+@import "../../less/photography.less";
 
 /** 首页 **/
 .indeCnt {
@@ -23,10 +24,9 @@
   max-height: 100vh;
   min-height: 400px;
   overflow: hidden;
-  background-position: center center;
-  background-size: cover;
   visibility: hidden;
   overflow: hidden;
+  .photography(4.5rem);
   &.zoom-show{
     display: block;
     visibility: visible;
