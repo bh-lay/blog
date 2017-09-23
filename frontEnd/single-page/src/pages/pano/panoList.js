@@ -9,7 +9,7 @@ import juicer from '../../js/juicer.js';
 
 var empty_tpl = '<div class=\'blank-content\'><p>啥都木有</p></div>',
   base_tpl = require('./panoListBase.html'),
-  item_temp = require('../../postListItem.html');
+  item_temp = require('../../commons/templates/postListItem.html');
 
 var getData = function (callback) {
   utils.fetch({
