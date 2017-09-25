@@ -47,7 +47,7 @@ function init() {
       darkenClassName = "darken",
       useMethod;
   function fixNavClass(){
-    var isNeedDarken = checkBackTop() > distance,
+    var isNeedDarken = getScrollTop() > distance,
         isNeedChange = isNeedDarken !== isDarkened;
     if (isNeedChange) {
       isDarkened = isNeedDarken;
