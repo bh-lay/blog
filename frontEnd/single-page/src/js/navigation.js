@@ -27,9 +27,15 @@ function init() {
       }
     });
   });
-
+  /**
+   * 获取浏览器滚动尺寸
+   *
+   */
+  function getScrollTop () {
+    return Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+  }
   function checkBackTop(){
-    var method = nodeBody.scrollTop > window.innerHeight*0.6 ? 'removeClass' : 'addClass';
+    var method = getScrollTop() > window.innerHeight*0.6 ? 'removeClass' : 'addClass';
     utils[method](nodeBackTop,'hide');
   }
   checkBackTop();
@@ -41,7 +47,7 @@ function init() {
       darkenClassName = "darken",
       useMethod;
   function fixNavClass(){
-    var isNeedDarken = nodeBody.scrollTop > distance,
+    var isNeedDarken = checkBackTop() > distance,
         isNeedChange = isNeedDarken !== isDarkened;
     if (isNeedChange) {
       isDarkened = isNeedDarken;
