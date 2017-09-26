@@ -24,8 +24,15 @@ let potoGraphaList = [
 ];
 let potoGraphaIndex = -1;
 
+// 模块替换
+function tplModule (txt) {
+  return (txt && txt.length) ? txt.replace(/\[-(\w+)-\]/g, function (a, key) {
+    return utils.query('#module_' + key).innerHTML || '';
+  }) : '';
+};
+
 function page (global) {
-  let baseTplEnd = L.tplModule(baseTpl);
+  let baseTplEnd = tplModule(baseTpl);
   let node = global.node;
   node.innerHTML = juicer(baseTplEnd, {
     photography: potoGraphaList[++potoGraphaIndex]

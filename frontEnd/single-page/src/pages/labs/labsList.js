@@ -14,8 +14,8 @@ let itemTemp = require('../../commons/templates/postListItem.html');
 
 let limit = 20;
 let skip = 0;
-let count = null;
-var getData = function (callback) {
+
+function getData (callback) {
   utils.fetch({
     type: 'GET',
     url: '/ajax/labs',
@@ -29,7 +29,6 @@ var getData = function (callback) {
         callback && callback(500);
         return;
       }
-      count = data['count'];
       skip += limit;
 
       let list = data['list'];
@@ -40,7 +39,7 @@ var getData = function (callback) {
 
 function filterData (list) {
   list.forEach(function (item) {
-    //使用七牛图床
+    // 使用七牛图床
     item.thumb = imageHosting(item.cover, {
       type: 'cover',
       width: 400,
@@ -59,14 +58,14 @@ export default function (global, param) {
   skip = 0;
   node.innerHTML = baseTpl;
   getData(function (err, list) {
-    let this_html;
+    let thisHtml;
     if (err) {
-      this_html = emptyTpl;
+      thisHtml = emptyTpl;
     } else {
-      this_html = juicer(itemTemp, {
+      thisHtml = juicer(itemTemp, {
         list: list
       });
     }
-    utils.query('.labsList', node).innerHTML = this_html;
+    utils.query('.labsList', node).innerHTML = thisHtml;
   });
 };

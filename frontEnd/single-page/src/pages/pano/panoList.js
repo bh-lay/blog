@@ -7,11 +7,11 @@ import './pano.less';
 import utils from '../../js/Base.js';
 import juicer from '../../js/juicer.js';
 
-var empty_tpl = '<div class=\'blank-content\'><p>啥都木有</p></div>',
-  base_tpl = require('./panoListBase.html'),
-  item_temp = require('../../commons/templates/postListItem.html');
+let emptyTpl = '<div class=\'blank-content\'><p>啥都木有</p></div>';
+let baseTpl = require('./panoListBase.html');
+let itemTemp = require('../../commons/templates/postListItem.html');
 
-var getData = function (callback) {
+function getData (callback) {
   utils.fetch({
     type: 'GET',
     url: '/ajax/pano/list',
@@ -43,14 +43,14 @@ function filterData (list) {
 export default function (global, param) {
   var node = global.node;
 
-  node.innerHTML = base_tpl;
+  node.innerHTML = baseTpl;
 
   getData(function (err, list) {
     var this_html;
     if (err) {
-      this_html = empty_tpl;
+      this_html = emptyTpl;
     } else {
-      this_html = juicer(item_temp, {
+      this_html = juicer(itemTemp, {
         list: list
       });
     }

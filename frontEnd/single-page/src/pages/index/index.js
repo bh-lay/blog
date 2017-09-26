@@ -24,7 +24,7 @@ let potoGraphaList = [
 ];
 let potoGraphaIndex = -1;
 
-//图片预加载
+// 图片预加载
 function loadImg (src, callback) {
   if (!src) {
     callback && callback();

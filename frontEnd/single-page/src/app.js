@@ -73,13 +73,6 @@ L.gravatar_error_fn = function (elem) {
   // 其余情况均不处理（已是默认头像）
 };
 
-// 模块替换
-L.tplModule = function (txt) {
-  return (txt && txt.length) ? txt.replace(/\[-(\w+)-\]/g, function (a, key) {
-    return utils.query('#module_' + key).innerHTML || '';
-  }) : '';
-};
-
 // 动态插入emoji表情样式
 let str = '<style type=\'text/css\' data-module=\'emoji\'>';
 (utils.query('#data_emoji').innerHTML || '').trim().split(/\s+/).forEach(function (item, index) {

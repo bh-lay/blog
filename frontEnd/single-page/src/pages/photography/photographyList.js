@@ -7,8 +7,8 @@ import './photography.less';
 import utils from '../../js/Base.js';
 import juicer from '../../js/juicer.js';
 
-let empty_tpl = '<div class="blank-content"><p>啥都木有</p></div>';
-let base_tpl = require('./photographyListBase.html');
+let emptyTpl = '<div class="blank-content"><p>啥都木有</p></div>';
+let baseTpl = require('./photographyListBase.html');
 let item_temp = require('../../commons/templates/postListItem.html');
 
 let getData = function (callback) {
@@ -42,12 +42,12 @@ function filterData (list) {
 export default function (global, param) {
   let node = global.node;
 
-  node.innerHTML = base_tpl;
+  node.innerHTML = baseTpl;
 
   getData(function (err, list) {
     let this_html;
     if (err) {
-      this_html = empty_tpl;
+      this_html = emptyTpl;
     } else {
       this_html = juicer(item_temp, {
         list: list
