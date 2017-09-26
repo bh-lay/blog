@@ -41,19 +41,19 @@ function filterData (list) {
 }
 
 export default function (global, param) {
-  var node = global.node;
+  let node = global.node;
 
   node.innerHTML = baseTpl;
 
   getData(function (err, list) {
-    var this_html;
+    var thisHtml;
     if (err) {
-      this_html = emptyTpl;
+      thisHtml = emptyTpl;
     } else {
-      this_html = juicer(itemTemp, {
+      thisHtml = juicer(itemTemp, {
         list: list
       });
     }
-    utils.query('.panoList', node).innerHTML = this_html;
+    utils.query('.panoList', node).innerHTML = thisHtml;
   });
 };

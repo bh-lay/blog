@@ -9,7 +9,7 @@ import juicer from '../../js/juicer.js';
 
 let emptyTpl = '<div class="blank-content"><p>啥都木有</p></div>';
 let baseTpl = require('./photographyListBase.html');
-let item_temp = require('../../commons/templates/postListItem.html');
+let itemTemp = require('../../commons/templates/postListItem.html');
 
 let getData = function (callback) {
   utils.fetch({
@@ -19,7 +19,7 @@ let getData = function (callback) {
       act: 'get_list'
     },
     callback: function (err, data) {
-      if (err || data.code == 500) {
+      if (err || data.code === 500) {
         callback && callback(500);
         return;
       }
@@ -49,7 +49,7 @@ export default function (global, param) {
     if (err) {
       this_html = emptyTpl;
     } else {
-      this_html = juicer(item_temp, {
+      this_html = juicer(itemTemp, {
         list: list
       });
     }
