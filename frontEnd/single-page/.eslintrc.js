@@ -14,6 +14,7 @@ module.exports = {
   rules: {
     // allow paren-less arrow functions
     'arrow-parens': 0,
+    "no-new": 0,
     // allow async-await
     'generator-star-spacing': 0,
     // http://eslint.org/docs/rules/comma-dangle

@@ -18,7 +18,11 @@ module.exports =  {
         test: /\.js$/,
         enforce: 'pre',
         loader: 'eslint-loader'
-      }
+      },
+      {
+        test: /\.(html|eot|woff|svg|ttf|woff2|png|jpe?g|gif|css|less)$/,
+        use: 'file-loader?name=[name].[hash:8].[ext]'
+      },
     ]
   }
 };;
