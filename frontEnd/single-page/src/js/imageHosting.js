@@ -4,13 +4,14 @@
  * qiniu(url,config);
  */
 
-function cover(url, config) {
-  var w = config.width || config.height,
-      h = config.height || config.width;
+function cover (url, config) {
+  let w = config.width || config.height;
+  let h = config.height || config.width;
   return url + '?imageView/1/w/' + w + '/h/' + h + '/q/85';
 }
-function zoom(url, config) {
-  var confStr;
+
+function zoom (url, config) {
+  let confStr;
   if (config.width) {
     confStr = 'w/' + config.width;
   } else {
@@ -20,19 +21,21 @@ function zoom(url, config) {
   return url + '?imageView2/2/' + confStr + '/q/85';
 }
 
-function qiniu(url, config) {
-  var src = url;
+function qiniu (url, config) {
+  let src = url;
   if (typeof (url) === 'string' && url.length > 0 && url[0] === '/') {
+    /* global CDN_PATH */
     src = CDN_PATH + url;
     if (config) {
-      if (config.type === "zoom") {
+      if (config.type === 'zoom') {
         src = zoom(src, config);
       } else {
-        //config.type == "cover"
+        // config.type == "cover"
         src = cover(src, config);
       }
     }
   }
   return src;
 }
+
 export default qiniu;

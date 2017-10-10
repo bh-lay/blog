@@ -15,7 +15,7 @@ let itemTemp = require('../../commons/templates/postListItem.html');
 let limit = 20;
 let skip = 0;
 
-function getData (callback) {
+function getData (onSuccess, onError) {
   utils.fetch({
     type: 'GET',
     url: '/ajax/labs',
@@ -26,13 +26,13 @@ function getData (callback) {
     },
     callback: function (err, data) {
       if (err || data.code === 500) {
-        callback && callback(500);
+        onError && onError();
         return;
       }
       skip += limit;
 
       let list = data['list'];
-      callback && callback(null, filterData(list));
+      onSuccess && onSuccess(filterData(list));
     }
   });
 };
@@ -57,15 +57,12 @@ export default function (global, param) {
   let node = global.node;
   skip = 0;
   node.innerHTML = baseTpl;
-  getData(function (err, list) {
-    let thisHtml;
-    if (err) {
-      thisHtml = emptyTpl;
-    } else {
-      thisHtml = juicer(itemTemp, {
-        list: list
-      });
-    }
+  getData(function (list) {
+    let thisHtml = juicer(itemTemp, {
+      list: list
+    });
     utils.query('.labsList', node).innerHTML = thisHtml;
+  }, function () {
+    utils.query('.labsList', node).innerHTML = emptyTpl;
   });
 };

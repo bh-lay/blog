@@ -1,3 +1,9 @@
 /node_modules
 /src/comments
-/src/js
+/src/js/dialog.js
+/src/js/highlight.js
+/src/js/juicer.js
+/src/js/lofox.js
+/src/js/md5.js
+/src/js/stick.js
+/src/js/tie.js

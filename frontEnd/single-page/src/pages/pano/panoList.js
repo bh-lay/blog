@@ -11,7 +11,7 @@ let emptyTpl = '<div class=\'blank-content\'><p>啥都木有</p></div>';
 let baseTpl = require('./panoListBase.html');
 let itemTemp = require('../../commons/templates/postListItem.html');
 
-function getData (callback) {
+function getData (onSuccess, onError) {
   utils.fetch({
     type: 'GET',
     url: '/ajax/pano/list',
@@ -20,9 +20,9 @@ function getData (callback) {
     },
     callback: function (err, data) {
       if (!err && data && data.data && data.data.list) {
-        callback && callback(null, filterData(data.data.list));
+        onSuccess && onSuccess(filterData(data.data.list));
       } else {
-        callback && callback(500);
+        onError && onError();
       }
     }
   });
@@ -45,15 +45,12 @@ export default function (global, param) {
 
   node.innerHTML = baseTpl;
 
-  getData(function (err, list) {
-    var thisHtml;
-    if (err) {
-      thisHtml = emptyTpl;
-    } else {
-      thisHtml = juicer(itemTemp, {
-        list: list
-      });
-    }
+  getData(function (list) {
+    var thisHtml = juicer(itemTemp, {
+      list: list
+    });
     utils.query('.panoList', node).innerHTML = thisHtml;
+  }, function () {
+    utils.query('.panoList', node).innerHTML = emptyTpl;
   });
 };

@@ -379,10 +379,10 @@ function List (dom, cid, param) {
     } else {
       //分页组件
       var page = new pagination(utils.query('.l_com_list_pagination', me.dom), {
-        list_count: me.total,
-        page_cur: 0,
-        page_list_num: me.limit,
-        max_page_btn: 6
+        listCount: me.total,
+        pageCur: 0,
+        pageListNum: me.limit,
+        maxPageBtn: 6
       });
       page.jump = function (num) {
         me.scrollTo(me.dom);
