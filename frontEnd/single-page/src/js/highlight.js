@@ -25,13 +25,16 @@ highlight.add = function (lang, data, rules) {
   arr.toString = joinExp;
 
   for (let className in rules) {
+    if (!rules.hasOwnProperty(className)) {
+      return
+    }
     rule = rules[className];
-    exp = (typeof rule.exp !== "string") ? String(rule.exp).substr(1, String(rule.exp).length - 2) : rule.exp;
+    exp = (typeof rule.exp !== 'string') ? String(rule.exp).substr(1, String(rule.exp).length - 2) : rule.exp;
 
     arr.push({
       className: className,
-      exp: "(" + exp + ")",
-      length: (exp.match(/(^|[^\\])\([^?]/g) || "").length + 1, // number of subexps in rule
+      exp: '(' + exp + ')',
+      length: (exp.match(/(^|[^\\])\([^?]/g) || '').length + 1, // number of subexps in rule
       replacement: rule.replacement || null
     });
   }
@@ -61,7 +64,7 @@ function highlightElements (node) {
 function joinExp () {
   let exps = [];
   for (let i = 0; i < this.length; i++) exps.push(this[i].exp);
-  return exps.join("|");
+  return exps.join('|');
 }
 
 function parse (text, lang) {
@@ -70,7 +73,7 @@ function parse (text, lang) {
   let rules = config.rules;
   let parsed;
   let arr;
-  parsed = text.replace(/\r?\n$/, '').replace(new RegExp(rules, "g"), function () {
+  parsed = text.replace(/\r?\n$/, '').replace(new RegExp(rules, 'g'), function () {
     let i = 0;
     let j = 1;
     let rule;
@@ -83,9 +86,9 @@ function parse (text, lang) {
           return rule.replacement(arguments[0], rule);
         } else {
           // replace $0 with the className then do normal replaces
-          let str = rule.replacement.replace("$0", rule.className);
+          let str = rule.replacement.replace('$0', rule.className);
           for (let k = 1; k <= rule.length - 1; k++) {
-            str = str.replace("$" + k, arguments[j + k]);
+            str = str.replace('$' + k, arguments[j + k]);
           }
           return str;
         }
@@ -99,27 +102,27 @@ function parse (text, lang) {
   return parsed;
 }
 
-highlight.add("js javascript json", {
+highlight.add('js javascript json', {
   className: 'js'
 }, {
   blockComments: {
     exp: /\/\*[^*]*\*+([^\/][^*]*\*+)*\//,
     replacement: function (str) {
       let start = '<span class="comment">';
-      let end = "</span>";
+      let end = '</span>';
       return start + str.replace(/\r?\n/g, end + '\r\n' + start) + end;
     }
   },
   inlineComments: {
-    exp: /(\/\/[^\n]*(\n|$))/,//  /[^\\]\/\/[^\n]*(\n|$)/,
-    replacement: "<span class=\"comment\">$1</span>"
+    exp: /(\/\/[^\n]*(\n|$))/,
+    replacement: '<span class="comment">$1</span>'
   },
   string: {
     exp: /'[^'\\]*(\\.[^'\\]*)*'|"[^"\\]*(\\.[^"\\]*)*"/
   },
   number: {
     exp: /([^"'][+\-]?)(\d+)([^"'])/,
-    replacement: "$1<span class=\"$0\">$2</span>$3"
+    replacement: '$1<span class="$0">$2</span>$3'
   },
   regex: {
     exp: /\/[^\n]+[^\\]\//,
@@ -131,26 +134,22 @@ highlight.add("js javascript json", {
     exp: /\b(toString|valueOf|window|element|prototype|constructor|document|location|escape|unescape|parseInt|parseFloat|setTimeout|clearTimeout|setInterval|clearInterval|NaN|isNaN|Infinity|Date)\b/
   }
 });
-highlight.add("html xml", {
+highlight.add('html xml', {
   className: 'html'
 }, {
   tag: {
     exp: /(&lt;\/?)([a-zA-Z]+\s?)/,
-    replacement: "$1<span class=\"$0\">$2</span>"
+    replacement: '$1<span class="$0">$2</span>'
   },
   comment: {
     exp: /&lt;!\s*(--([^\-]|[\r\n]|-[^\-])*--\s*)&gt;/
-  },
-  tag: {
-    exp: /(&lt;\/?)([a-zA-Z]+\s?)/,
-    replacement: "$1<span class=\"$0\">$2</span>"
   },
   string: {
     exp: /'[^']*'|"[^"]*"/
   },
   attribute: {
     exp: /\b([a-zA-Z\-:]+)(=)/,
-    replacement: "<span class=\"$0\">$1</span>$2"
+    replacement: '<span class="$0">$1</span>$2'
   },
   data: {
     exp: /\s(data-[a-zA-z\-]+)/
@@ -159,7 +158,7 @@ highlight.add("html xml", {
     exp: /&lt;!DOCTYPE([^&]|&[^g]|&g[^t])*&gt;/
   }
 });
-highlight.add("css", {
+highlight.add('css', {
   className: 'css'
 }, {
   comment: {
@@ -169,21 +168,21 @@ highlight.add("css", {
     exp: /@\w[\w\s]*/
   },
   selectors: {
-    exp: "([\\w-:\\[.#][^{};>]*)(?={)"
+    exp: '([\\w-:\\[.#][^{};>]*)(?={)'
   },
   properties: {
-    exp: "([\\w-]+)(?=\\s*:)"
+    exp: '([\\w-]+)(?=\\s*:)'
   },
   units: {
     exp: /([0-9])(px|em|en|%|pt|rem)\b/,
-    replacement: "$1<span class=\"$0\">$2</span>"
+    replacement: '$1<span class="$0">$2</span>'
   },
   colors: {
     exp: /#[A-Za-z0-9]{3,6}/
   },
   urls: {
     exp: /url\(([^\)]*)\)/,
-    replacement: "url(<span class=\"$0\">$1</span>)"
+    replacement: 'url(<span class="$0">$1</span>)'
   },
   important: {
     exp: /!important/
