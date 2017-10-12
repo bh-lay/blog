@@ -6,52 +6,54 @@
  * @modified 2014-12-29 15:32
  *
  */
-//set
-var setPosition = (function () {
-  var textarea = document.createElement("textarea");
+// set
+let setPosition = (function () {
+  let textarea = document.createElement('textarea');
   if (textarea.setSelectionRange) {
     return function (tarea, start, len) {
-      var len = len || 0;
+      len = len || 0;
       setTimeout(function () {
         tarea.focus();
         tarea.setSelectionRange(start, start + len);
       });
     }
-  } else if (textarea.createTextRange) {//IE
+  } else if (textarea.createTextRange) {
+    // IE
     return function (tarea, start, len) {
-      var len = len || 0;
+      len = len || 0;
       tarea.focus();
-      var strLen = tarea.value.length;
-      var rng = tarea.createTextRange();
+      let strLen = tarea.value.length;
+      let rng = tarea.createTextRange();
       rng.moveStart('character', start);
       rng.moveEnd('character', start + len - strLen);
       rng.select();
     }
   }
 })();
-//get
-var getPosition = (function () {
-  var textarea = document.createElement("textarea");
-  if (typeof(textarea.selectionStart) == 'number') { //not IE
+// get
+let getPosition = (function () {
+  let textarea = document.createElement('textarea');
+  if (typeof textarea.selectionStart === 'number') {
+    // not IE
     return function (tarea) {
-
       return [tarea.selectionStart, tarea.selectionEnd, tarea.value.slice(tarea.selectionStart, tarea.selectionEnd)];
     }
-  } else { //IE
+  } else {
+    // IE
     return function (tarea) {
-      var start = 0,
-        end = 0;
+      let start = 0;
+      let end = 0;
       tarea.focus();
-      var sTextRange = document.selection.createRange();
+      let sTextRange = document.selection.createRange();
 
-      if (tarea.tagName == "TEXTAREA") {
-        var oTextRange = document.body.createTextRange();
+      if (tarea.tagName === 'TEXTAREA') {
+        let oTextRange = document.body.createTextRange();
         oTextRange.moveToElementText(tarea);
-        for (start = 0; oTextRange.compareEndPoints("StartToStart", sTextRange) < 0; start++) {
+        for (start = 0; oTextRange.compareEndPoints('StartToStart', sTextRange) < 0; start++) {
           oTextRange.moveStart('character', 1);
         }
-        for (var i = 0; i <= start; i++) {
-          if (tarea.value.charAt(i) == '\n') {
+        for (let i = 0; i <= start; i++) {
+          if (tarea.value.charAt(i) === '\n') {
             start++;
           }
         }
@@ -59,17 +61,16 @@ var getPosition = (function () {
         for (end = 0; oTextRange.compareEndPoints('StartToEnd', sTextRange) < 0; end++) {
           oTextRange.moveStart('character', 1);
         }
-        for (var i = 0; i <= end; i++) {
-          if (tarea.value.charAt(i) == '\n') {
+        for (let i = 0; i <= end; i++) {
+          if (tarea.value.charAt(i) === '\n') {
             end++;
           }
         }
       }
-      return [start, end, selectedTxt, tarea.value.slice(start, end)];
+      return [start, end, tarea.value.slice(start, end)];
     }
   }
 })();
-
 
 /**
  * @method Selection set or get texarea position
@@ -79,8 +80,8 @@ var getPosition = (function () {
  *
  **/
 function Selection () {
-  var tarea = arguments[0];
-  if (tarea.tagName != 'TEXTAREA') {
+  let tarea = arguments[0];
+  if (tarea.tagName !== 'TEXTAREA') {
     return
   }
   if (arguments['length'] > 1) {
@@ -92,35 +93,36 @@ function Selection () {
 
 /**
  * @method insertTxt
- * @param {Object} dom jquery dom
- * @param {String} text
+ * @param {Object} tarea element node
+ * @param {String} txt
  * @param {Number} [start]
  * @param {Number} [end]
  *
  **/
 function insertTxt (tarea, txt, start, end) {
-  if (tarea.tagName != 'TEXTAREA' || typeof(txt) == 'undefined') {
+  if (tarea.tagName !== 'TEXTAREA' || typeof txt === 'undefined') {
     return
   }
-  var txt = txt.toString();
-  var this_start, this_end;
-  if (typeof(start) == 'undefined') {
-    var pos = getPosition(tarea);
+  txt = txt.toString();
+  let thisStart;
+  let thisEnd;
+  if (typeof start === 'undefined') {
+    let pos = getPosition(tarea);
 
-    this_start = pos[0];
-    this_end = pos[1];
+    thisStart = pos[0];
+    thisEnd = pos[1];
   } else {
-    this_start = parseInt(start);
-    this_end = end || this_start;
+    thisStart = parseInt(start);
+    thisEnd = end || thisStart;
   }
 
-  var allTxt = tarea.value,
-    frontTxt = allTxt.slice(0, this_start),
-    endTxt = allTxt.slice(this_end);
+  let allTxt = tarea.value;
+  let frontTxt = allTxt.slice(0, thisStart)
+  let endTxt = allTxt.slice(thisEnd);
   tarea.value = frontTxt + txt + endTxt;
 
   setPosition(tarea, frontTxt.length + txt.length, 0);
-};
+}
 
-//exports
+// exports
 export default {insertTxt, Selection, setPosition, getPosition};

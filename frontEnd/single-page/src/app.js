@@ -7,7 +7,6 @@
 
 import './less/app-base.less';
 
-import user from './js/user.js'
 import navigation from './js/navigation.js'
 import utils from './js/Base.js';
 import imageHosting from './js/imageHosting.js';
@@ -60,7 +59,6 @@ if (isWindows) {
 }
 let L = {};
 window.L = L;
-L.user = user;
 // 占用全局方法
 L.gravatar_error_fn = function (elem) {
   if (elem.src.indexOf('www.gravatar.com') > -1) {

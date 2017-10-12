@@ -1,5 +1,4 @@
 /node_modules
-/src/comments
 /src/js/dialog.js
 /src/js/highlight.js
 /src/js/juicer.js
