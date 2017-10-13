@@ -76,9 +76,8 @@ function parse (text, lang) {
   parsed = text.replace(/\r?\n$/, '').replace(new RegExp(rules, 'g'), function () {
     let i = 0;
     let j = 1;
-    let ruleItem;
-    /*  eslint-disable no-cond-assign */
-    while (ruleItem = rules[i++]) {
+    let ruleItem = rules[i];
+    while (ruleItem) {
       if (arguments[j]) {
         // if no custom replacement defined do the simple replacement
         if (!ruleItem.replacement) {
@@ -96,6 +95,7 @@ function parse (text, lang) {
       } else {
         j += ruleItem.length;
       }
+      ruleItem = rules[++i]
     }
   });
   arr = parsed.split(/\r?\n/);
