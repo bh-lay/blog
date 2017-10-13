@@ -35,7 +35,7 @@ function getData (onSuccess, onError) {
       onSuccess && onSuccess(filterData(list));
     }
   });
-};
+}
 
 function filterData (list) {
   list.forEach(function (item) {
@@ -53,15 +53,35 @@ function filterData (list) {
   return list;
 }
 
-export default function (global, param) {
+export default function (global) {
   let node = global.node;
   skip = 0;
-  node.innerHTML = baseTpl;
+  node.innerHTML = juicer(baseTpl,{
+      subNav: [
+        {
+          value: '前端实验室',
+          href: '/labs'
+        },
+        {
+          value: '720全景',
+          href: '/720'
+        },
+        {
+          value: '摄影',
+          href: '/photography'
+        }
+      ],
+      activeSubNavIndex: 0,
+      thirdProfile: {
+        url: 'https://bh-lay.tuchong.com/?from=bh-lay',
+        title: '小剧在图虫',
+        intro: '摄影是小剧为数不多的爱好之一，这里仅仅是收藏一些还能看的过去的照片，作品托管在图虫。'
+      }
+  });
   getData(function (list) {
-    let thisHtml = juicer(itemTemp, {
+    utils.query('.labsList', node).innerHTML = juicer(itemTemp, {
       list: list
     });
-    utils.query('.labsList', node).innerHTML = thisHtml;
   }, function () {
     utils.query('.labsList', node).innerHTML = emptyTpl;
   });

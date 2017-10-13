@@ -1,24 +1,41 @@
 <div class="labs-list-pager">
-	<div class="opus-header">
-		<div class="sub-nav">
-			<div class="grid-row">
-				<div class="grid-box-full">
-					<div class="sub-nav-list">
-						<strong>前端实验室</strong>
-						<a href="/720">720全景</a>
-						<a href="/photography">摄影</a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="photograghy-author">
-			<a href="https://bh-lay.tuchong.com/14431809/#image24933177" target="_blank">宏村 By:@剧中人</a>
-		</div>
-	</div>
-	<div class="labsList">
-		<div class="l-loading-panel">
-			<span class="l-loading"></span>
-			<p>正在加载数据</p>
-		</div>
-	</div>
+    <div class="labs-header">
+        <div class="sub-nav">
+            <div class="grid-row">
+                <div class="grid-box-full">
+                    <div class="sub-nav-list">
+                        {@each subNav as it,index}
+                            {@if index == activeSubNavIndex}
+                                <strong>${it.value}</strong>
+                            {@else}
+                                <a href="${it.href}">${it.value}</a>
+                            {@/if}
+                        {@/each}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="photograghy-author">
+            <a href="https://bh-lay.tuchong.com/14431809/#image24933177" target="_blank">宏村 By:@剧中人</a>
+        </div>
+    </div>
+    <div class="labs-sub-header">
+        <div class="grid-row">
+            <div class="grid-col-fix-300">
+                <a href="${thirdProfile.url}" target="_blank" class="labs-profile-card">
+                    <span class="profile-icon"></span>
+                    ${thirdProfile.title}
+                </a>
+            </div>
+            <div class="grid-col-flow-300">
+                <p class="notice">${thirdProfile.intro}</p>
+            </div>
+        </div>
+    </div>
+    <div class="labsList">
+        <div class="l-loading-panel">
+            <span class="l-loading"></span>
+            <p>正在加载数据</p>
+        </div>
+    </div>
 </div>
