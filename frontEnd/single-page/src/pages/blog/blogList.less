@@ -150,12 +150,8 @@
   margin-bottom: 10px;
   overflow: hidden;
   background: #fff;
-  &.pure-text {
-    .link {
-      background: url("./images/blog-card.jpg") no-repeat top right #fff;
-      background-size: 170px 34px;
-    }
-  }
+  transition: box-shadow .3s ease-out;
+  transition-delay: .1s;
   .link {
     display: block;
   }
@@ -252,6 +248,15 @@
       color: #888;
       font-size: 12px;
     }
+  }
+  &.pure-text {
+    .link {
+      background: url("./images/blog-card.jpg") no-repeat top right #fff;
+      background-size: 170px 34px;
+    }
+  }
+  &:hover {
+    box-shadow: 5px 10px 10px -5px rgba(0, 0, 0, .2);
   }
 }
 
