@@ -76,23 +76,26 @@ function parse (text, lang) {
   parsed = text.replace(/\r?\n$/, '').replace(new RegExp(rules, 'g'), function () {
     let i = 0;
     let j = 1;
-    let rule;
-    while (rule = rules[i++]) {
+    let ruleItem;
+    /*  eslint-disable no-cond-assign */
+    while (ruleItem = rules[i++]) {
       if (arguments[j]) {
         // if no custom replacement defined do the simple replacement
-        if (!rule.replacement) {
-          return '<span class="' + rule.className + '">' + arguments[0] + '</span>';
-        } else if (typeof rule.replacement === 'function') {
-          return rule.replacement(arguments[0], rule);
+        if (!ruleItem.replacement) {
+          return '<span class="' + ruleItem.className + '">' + arguments[0] + '</span>';
+        } else if (typeof ruleItem.replacement === 'function') {
+          return ruleItem.replacement(arguments[0], ruleItem);
         } else {
           // replace $0 with the className then do normal replaces
-          let str = rule.replacement.replace('$0', rule.className);
-          for (let k = 1; k <= rule.length - 1; k++) {
+          let str = ruleItem.replacement.replace('$0', ruleItem.className);
+          for (let k = 1; k <= ruleItem.length - 1; k++) {
             str = str.replace('$' + k, arguments[j + k]);
           }
           return str;
         }
-      } else j += rule.length;
+      } else {
+        j += ruleItem.length;
+      }
     }
   });
   arr = parsed.split(/\r?\n/);
@@ -106,6 +109,7 @@ highlight.add('js javascript json', {
   className: 'js'
 }, {
   blockComments: {
+    /* eslint-disable no-useless-escape */
     exp: /\/\*[^*]*\*+([^\/][^*]*\*+)*\//,
     replacement: function (str) {
       let start = '<span class="comment">';
@@ -121,6 +125,7 @@ highlight.add('js javascript json', {
     exp: /'[^'\\]*(\\.[^'\\]*)*'|"[^"\\]*(\\.[^"\\]*)*"/
   },
   number: {
+    /* eslint-disable no-useless-escape */
     exp: /([^"'][+\-]?)(\d+)([^"'])/,
     replacement: '$1<span class="$0">$2</span>$3'
   },
@@ -142,6 +147,7 @@ highlight.add('html xml', {
     replacement: '$1<span class="$0">$2</span>'
   },
   comment: {
+    /* eslint-disable no-useless-escape */
     exp: /&lt;!\s*(--([^\-]|[\r\n]|-[^\-])*--\s*)&gt;/
   },
   string: {
@@ -181,6 +187,7 @@ highlight.add('css', {
     exp: /#[A-Za-z0-9]{3,6}/
   },
   urls: {
+    /* eslint-disable no-useless-escape */
     exp: /url\(([^\)]*)\)/,
     replacement: 'url(<span class="$0">$1</span>)'
   },

@@ -1,6 +1,5 @@
 /node_modules
 /src/js/dialog.js
-/src/js/highlight.js
 /src/js/juicer.js
 /src/js/lofox.js
 /src/js/md5.js
