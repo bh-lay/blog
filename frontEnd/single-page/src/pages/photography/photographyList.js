@@ -48,8 +48,8 @@ export default function (global, param) {
     let thisHtml = juicer(itemTemp, {
       list: list
     });
-    utils.query('.panoList', node).innerHTML = thisHtml;
+    utils.query('.photoList', node).innerHTML = thisHtml;
   }, function () {
-    utils.query('.panoList', node).innerHTML = emptyTpl;
+    utils.query('.photoList', node).innerHTML = emptyTpl;
   });
 };

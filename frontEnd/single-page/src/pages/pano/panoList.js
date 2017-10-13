@@ -40,13 +40,13 @@ function filterData (list) {
   return list;
 }
 
-export default function (global, param) {
+export default function (global) {
   let node = global.node;
 
   node.innerHTML = baseTpl;
 
   getData(function (list) {
-    var thisHtml = juicer(itemTemp, {
+    let thisHtml = juicer(itemTemp, {
       list: list
     });
     utils.query('.panoList', node).innerHTML = thisHtml;
