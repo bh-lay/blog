@@ -3,14 +3,10 @@
  *
  */
 
-import './labs.less';
+
+import LabsBase from './labs-base.js';
 import utils from '../../js/Base.js';
 import imageHosting from '../../js/imageHosting.js';
-import juicer from '../../js/juicer.js';
-
-let emptyTpl = '<div class=\'blank-content\'><p>啥都木有</p></div>';
-let baseTpl = require('./labsListBase.html');
-let itemTemp = require('../../commons/templates/postListItem.html');
 
 let limit = 20;
 let skip = 0;
@@ -55,22 +51,7 @@ function filterData (list) {
 
 export default function (global) {
   let node = global.node;
-  skip = 0;
-  node.innerHTML = juicer(baseTpl,{
-      subNav: [
-        {
-          value: '前端实验室',
-          href: '/labs'
-        },
-        {
-          value: '720全景',
-          href: '/720'
-        },
-        {
-          value: '摄影',
-          href: '/photography'
-        }
-      ],
+  let labsBase = new LabsBase(node, {
       activeSubNavIndex: 0,
       thirdProfile: {
         url: 'https://bh-lay.tuchong.com/?from=bh-lay',
@@ -78,11 +59,10 @@ export default function (global) {
         intro: '摄影是小剧为数不多的爱好之一，这里仅仅是收藏一些还能看的过去的照片，作品托管在图虫。'
       }
   });
+
   getData(function (list) {
-    utils.query('.labsList', node).innerHTML = juicer(itemTemp, {
-      list: list
-    });
+    labsBase.renderList(list);
   }, function () {
-    utils.query('.labsList', node).innerHTML = emptyTpl;
+    labsBase.renderEmpty();
   });
 };

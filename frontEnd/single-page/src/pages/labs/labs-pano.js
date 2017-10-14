@@ -3,13 +3,10 @@
  *
  */
 
-import './pano.less';
-import utils from '../../js/Base.js';
-import juicer from '../../js/juicer.js';
 
-let emptyTpl = '<div class=\'blank-content\'><p>啥都木有</p></div>';
-let baseTpl = require('./panoListBase.html');
-let itemTemp = require('../../commons/templates/postListItem.html');
+import LabsBase from './labs-base.js';
+
+import utils from '../../js/Base.js';
 
 function getData (onSuccess, onError) {
   utils.fetch({
@@ -42,15 +39,18 @@ function filterData (list) {
 
 export default function (global) {
   let node = global.node;
-
-  node.innerHTML = baseTpl;
+  let labsBase = new LabsBase(node, {
+      activeSubNavIndex: 1,
+      thirdProfile: {
+        url: 'https://720yun.com/u/19023widcyv?from=bh-lay',
+        title: '小剧在720云',
+        intro: '以下作品无特殊说明均由小剧拍摄并制作完成，作品托管在720云。'
+      }
+  });
 
   getData(function (list) {
-    let thisHtml = juicer(itemTemp, {
-      list: list
-    });
-    utils.query('.panoList', node).innerHTML = thisHtml;
+    labsBase.renderList(list);
   }, function () {
-    utils.query('.panoList', node).innerHTML = emptyTpl;
+    labsBase.renderEmpty();
   });
 };

@@ -3,13 +3,8 @@
  *
  */
 
-import './photography.less';
+import LabsBase from './labs-base.js';
 import utils from '../../js/Base.js';
-import juicer from '../../js/juicer.js';
-
-let emptyTpl = '<div class="blank-content"><p>啥都木有</p></div>';
-let baseTpl = require('./photographyListBase.html');
-let itemTemp = require('../../commons/templates/postListItem.html');
 
 let getData = function (onSuccess, onError) {
   utils.fetch({
@@ -39,17 +34,21 @@ function filterData (list) {
   return list;
 }
 
-export default function (global, param) {
+export default function (global) {
   let node = global.node;
-
-  node.innerHTML = baseTpl;
+  let labsBase = new LabsBase(node, {
+      activeSubNavIndex: 2,
+      thirdProfile: {
+        url: 'https://bh-lay.tuchong.com/?from=bh-lay',
+        title: '小剧在图虫',
+        intro: '摄影是小剧为数不多的爱好之一，这里仅仅是收藏一些还能看的过去的照片，作品托管在图虫。'
+      }
+  });
 
   getData(function (list) {
-    let thisHtml = juicer(itemTemp, {
-      list: list
-    });
-    utils.query('.photoList', node).innerHTML = thisHtml;
+    labsBase.renderList(list);
   }, function () {
-    utils.query('.photoList', node).innerHTML = emptyTpl;
+    labsBase.renderEmpty();
   });
 };
+

@@ -4,9 +4,9 @@ import Lofox from './lofox.js'
 import IndexPage from '../pages/index/index.js'
 import BlogListPage from '../pages/blog/blogList.js'
 import BlogDetailPage from '../pages/blog/blogDetail.js'
-import LabsListPage from '../pages/labs/labsList.js'
-import PanoListPage from '../pages/pano/panoList.js'
-import PhotographyListPage from '../pages/photography/photographyList.js'
+import LabsListPage from '../pages/labs/labs-fe.js'
+import PanoListPage from '../pages/labs/labs-pano.js'
+import PhotographyListPage from '../pages/labs/labs-photography.js'
 import BlessPage from '../pages/bless/bless.js'
 
 // 绑定路由
