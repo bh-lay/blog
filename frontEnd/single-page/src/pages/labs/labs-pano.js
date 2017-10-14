@@ -40,13 +40,13 @@ function filterData (list) {
 export default function (global) {
   let node = global.node;
   let labsBase = new LabsBase(node, {
-      activeSubNavIndex: 1,
-      pageClass: 'labs-list-pager-pano',
-      thirdProfile: {
-        url: 'https://720yun.com/u/19023widcyv?from=bh-lay',
-        title: '小剧在720云',
-        intro: '以下作品无特殊说明均由小剧拍摄并制作完成，作品托管在720云。'
-      }
+    activeSubNavIndex: 1,
+    pageClass: 'labs-list-pager-pano',
+    thirdProfile: {
+      url: 'https://720yun.com/u/19023widcyv?from=bh-lay',
+      title: '小剧在720云',
+      intro: '以下作品无特殊说明均由小剧拍摄并制作完成，作品托管在720云。'
+    }
   });
 
   getData(function (list) {

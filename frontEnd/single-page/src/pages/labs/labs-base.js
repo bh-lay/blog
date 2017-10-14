@@ -9,7 +9,7 @@ import juicer from '../../js/juicer.js';
 
 let emptyTpl = '<div class=\'blank-content\'><p>啥都木有</p></div>';
 let baseTpl = require('./labsListBase.html');
-let itemTemp = require('../../commons/templates/postListItem.html');
+let itemTemp = require('./postListItem.html');
 
 
 let initDefaultData = {
@@ -47,6 +47,7 @@ function paramMerge (options, defaults) {
   }
   return returns;
 }
+
 class LabsBase {
   constructor (node, param) {
     this.node = node;

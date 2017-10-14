@@ -37,13 +37,13 @@ function filterData (list) {
 export default function (global) {
   let node = global.node;
   let labsBase = new LabsBase(node, {
-      activeSubNavIndex: 2,
-      pageClass: 'labs-list-pager-photography',
-      thirdProfile: {
-        url: 'https://bh-lay.tuchong.com/?from=bh-lay',
-        title: '小剧在图虫',
-        intro: '摄影是小剧为数不多的爱好之一，这里仅仅是收藏一些还能看的过去的照片，作品托管在图虫。'
-      }
+    activeSubNavIndex: 2,
+    pageClass: 'labs-list-pager-photography',
+    thirdProfile: {
+      url: 'https://bh-lay.tuchong.com/?from=bh-lay',
+      title: '小剧在图虫',
+      intro: '摄影是小剧为数不多的爱好之一，这里仅仅是收藏一些还能看的过去的照片，作品托管在图虫。'
+    }
   });
 
   getData(function (list) {
