@@ -25,7 +25,6 @@ function getData (onSuccess, onError) {
         onError && onError();
         return;
       }
-      skip += limit;
 
       let list = data['list'];
       onSuccess && onSuccess(filterData(list));
@@ -53,6 +52,7 @@ export default function (global) {
   let node = global.node;
   let labsBase = new LabsBase(node, {
       activeSubNavIndex: 0,
+      pageClass: 'labs-list-pager-fe',
       thirdProfile: {
         url: 'https://bh-lay.tuchong.com/?from=bh-lay',
         title: '小剧在图虫',

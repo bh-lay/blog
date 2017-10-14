@@ -41,6 +41,7 @@ export default function (global) {
   let node = global.node;
   let labsBase = new LabsBase(node, {
       activeSubNavIndex: 1,
+      pageClass: 'labs-list-pager-pano',
       thirdProfile: {
         url: 'https://720yun.com/u/19023widcyv?from=bh-lay',
         title: '小剧在720云',

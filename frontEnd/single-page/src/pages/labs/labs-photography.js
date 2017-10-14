@@ -38,6 +38,7 @@ export default function (global) {
   let node = global.node;
   let labsBase = new LabsBase(node, {
       activeSubNavIndex: 2,
+      pageClass: 'labs-list-pager-photography',
       thirdProfile: {
         url: 'https://bh-lay.tuchong.com/?from=bh-lay',
         title: '小剧在图虫',

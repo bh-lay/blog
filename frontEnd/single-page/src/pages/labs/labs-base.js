@@ -27,6 +27,7 @@ let initDefaultData = {
       href: '/photography'
     }
   ],
+  pageClass: '',
   activeSubNavIndex: -1,
   thirdProfile: {
     url: '#',
