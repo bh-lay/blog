@@ -72,8 +72,8 @@
   &.darken,
   &:hover{
     .nav_body {
-      background-color: #fff;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+      opacity: 1;
+      box-shadow: 0 0 5px rgba(0, 0, 0, .4);
     }
   }
 }
@@ -83,8 +83,9 @@
   left: 0;
   width: 100%;
   height: @nav_height;
-  background: rgba(255, 255, 255, .4);
-  .transition(.8s,ease,background-color);
+  background-color: #fff;
+  opacity: .5;
+  .transition(.8s,ease,opacity);
   z-index:2;
 }
 .nav_appname{
