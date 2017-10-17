@@ -10,9 +10,21 @@ import juicer from '../../js/juicer.js';
 let emptyTpl = '<div class=\'blank-content\'><p>啥都木有</p></div>';
 let baseTpl = require('./labsListBase.html');
 let itemTemp = require('./postListItem.html');
-
+let potoGraphaList = [
+  {
+    imgSrc: require('./images/opus_@2x.jpg'),
+    htmlSrc: 'https://bh-lay.tuchong.com/14431809/#image24933177',
+    title: '宏村'
+  }, {
+    imgSrc: require('./images/yangshuo.jpg'),
+    htmlSrc: 'http://720yun.com/t/544jOrkvtn0?from=bh-lay',
+    title: '桂林阳朔'
+  }
+];
+let potoGraphaIndex = -1;
 
 let initDefaultData = {
+  photography: {},
   pageClass: '',
   thirdProfile: {
     url: '#',
@@ -37,6 +49,10 @@ class LabsBase {
   constructor (node, param) {
     this.node = node;
     this.options = paramMerge(param, initDefaultData);
+    this.options.photography = potoGraphaList[++potoGraphaIndex];
+    if (potoGraphaIndex + 1 >= potoGraphaList.length) {
+      potoGraphaIndex = -1;
+    }
     this.init();
   }
 
