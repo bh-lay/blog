@@ -54,9 +54,9 @@ export default function (global) {
       activeSubNavIndex: 0,
       pageClass: 'labs-list-pager-fe',
       thirdProfile: {
-        url: 'https://bh-lay.tuchong.com/?from=bh-lay',
-        title: '小剧在图虫',
-        intro: '摄影是小剧为数不多的爱好之一，这里仅仅是收藏一些还能看的过去的照片，作品托管在图虫。'
+        url: 'https://github.com/bh-lay',
+        title: '小剧在Github',
+        intro: '小剧也曾不知天高地厚的造过不少「轮子」，虽然不好用，但却是我成长路上一个个深深浅浅的脚印。'
       }
   });
 
