@@ -101,14 +101,14 @@ export default function () {
     .set('/720', function () {
       this.title('小剧的全景作品');
 
-      navigation.setCur('labs');
+      navigation.setCur('720');
       activePage = new PanoListPage(new Page());
     })
     // 摄影作品
     .set('/photography', function () {
       this.title('小剧的摄影作品');
 
-      navigation.setCur('labs');
+      navigation.setCur('photography');
       activePage = new PhotographyListPage(new Page());
     })
     // PanoListPage

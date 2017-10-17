@@ -75,7 +75,7 @@ function setCur (page) {
     page = 'index';
   }
   utils.removeClass(utils.query('.app_nav li.cur'), 'cur');
-  utils.addClass(utils.query('.app_nav li[page=' + page + ']'), 'cur');
+  utils.addClass(utils.query('.app_nav li[data-page="' + page + '"]'), 'cur');
 }
 
 export default {init, setCur};

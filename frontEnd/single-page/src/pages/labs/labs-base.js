@@ -13,22 +13,7 @@ let itemTemp = require('./postListItem.html');
 
 
 let initDefaultData = {
-  subNav: [
-    {
-      value: '前端实验室',
-      href: '/labs'
-    },
-    {
-      value: '720全景',
-      href: '/720'
-    },
-    {
-      value: '摄影',
-      href: '/photography'
-    }
-  ],
   pageClass: '',
-  activeSubNavIndex: -1,
   thirdProfile: {
     url: '#',
     title: '',
