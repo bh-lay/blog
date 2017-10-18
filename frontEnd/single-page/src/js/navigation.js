@@ -9,7 +9,7 @@ function init () {
   let scrollDelay;
   let nodeBackTop = utils.query('.back-top');
   let nodeBody = document.documentElement || utils.query('body');
-  let nodeNav = utils.query('.app_nav', nodeBody);
+  let nodeNav = utils.query('.app-nav', nodeBody);
   utils.bind(nodeNav, 'click', '.nav a,.side a', function () {
     utils.removeClass(nodeBody, 'nav_slidedown');
   }).bind('click', '.nav_mask', function () {
@@ -74,8 +74,8 @@ function setCur (page) {
   if (page === '/') {
     page = 'index';
   }
-  utils.removeClass(utils.query('.app_nav li.cur'), 'cur');
-  utils.addClass(utils.query('.app_nav li[data-page="' + page + '"]'), 'cur');
+  utils.removeClass(utils.query('.app-nav li.cur'), 'cur');
+  utils.addClass(utils.query('.app-nav li[data-page="' + page + '"]'), 'cur');
 }
 
 export default {init, setCur};
