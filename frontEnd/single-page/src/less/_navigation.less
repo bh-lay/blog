@@ -12,140 +12,124 @@
   height: @nav_height;
   z-index: 1000;
   .nav {
-    float: left;
-    li {
-      position: relative;
-      float: left;
+    float: right;
+    text-align: right;
+    a {
+      display: inline-block;
+      height: @nav_height;
       margin-right: 1em;
-      font-size: 16px;
+      padding: 0 1em;
+      outline: none;
+      overflow: hidden;
+      line-height: @nav_height;
       color: rgba(0, 0, 0, .6);
-      a {
-        display: block;
-        height: @nav_height;
-        padding: 0 1em;
-        outline: none;
-        overflow: hidden;
-        line-height: @nav_height;
-        color: inherit;
-        text-align: center;
-        .transition(.2s);
-        i,
-        span {
-          display: inline-block;
-          vertical-align: middle;
-          height: 30px;
-          line-height: 30px;
-        }
-        i {
-          margin-right: 6px;
-          text-align: center;
-          font-size: 24px;
-          display: none;
-        }
-        &:hover {
-          color: inherit;
-        }
-      }
-      &:nth-child(1) a i {
+      text-align: center;
+      font-size: 14px;
+      .transition(.2s);
+      i,
+      span {
         display: inline-block;
+        vertical-align: middle;
+        height: 30px;
+        line-height: 30px;
+      }
+      i {
+        margin-right: 6px;
+        text-align: center;
+        font-size: 24px;
+        display: none;
       }
       &.cur {
         color: #000;
       }
-    }
-  }
-  .side {
-    float: right;
-    height: @nav_height;
-    font-size: 0;
-    li {
-      display: inline-block;
-      height: @nav_height;
-      line-height: @nav_height;
-      padding: 0 10px;
-      a {
-        font-size: 12px;
-        color: #000
+      &:hover {
+        color: inherit;
       }
     }
   }
 
   .nav-app-name {
     position: absolute;
-    top: 20px;
-    left: 20px;
-    width: 120px;
-    height: 35px;
+    top: 16px;
+    left: 15px;
+    width: 95px;
+    height: 28px;
     background: url('../images/nav-logo.png');
     background-size: cover;
     border-radius: 4px;
     text-indent: -10em;
     overflow: hidden;
     font-size: 0;
-    z-index: 2;
   }
-  .nav_moreBtn {
+  .nav-more-btn {
     position: absolute;
     display: block;
     width: 46px;
     height: 46px;
     top: 15px;
-    right: 15px;
+    right: 20px;
     border-radius: 4px;
-    z-index: 3;
-  }
-  .nav_Btn_ico {
-    display: block;
-    position: absolute;
-    width: 22px;
-    height: 4px;
-    left: 13px;
-    border-radius: 4px;
-    background: #fff;
-    .transition(0.2s, ease);
-  }
-  .nav_Btn_ico_1 {
-    top: 12px
-  }
-  .nav_Btn_ico_2 {
-    top: 21px
-  }
-  .nav_Btn_ico_3 {
-    top: 30px
+    cursor: default;
+    i {
+      display: block;
+      position: absolute;
+      width: 28px;
+      height: 3px;
+      left: 9px;
+      border-radius: 4px;
+      background: #fff;
+      .transition(0.2s, ease);
+      &:nth-child(1) {
+        top: 12px
+      }
+      &:nth-child(2) {
+        top: 22px
+      }
+      &:nth-child(3) {
+        top: 32px
+      }
+    }
   }
 }
 
 @media screen and (min-width: 660px) {
   .app-nav {
-    .nav_body {
+    .nav-more-btn {
+      z-index: 1;
+    }
+    .nav-body {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: @nav_height;
       background: #fff;
-      transform: translate(0, -100%);
-      .transition(.3s, ease-in-out, transform);
-      transition-delay: .8s;
+      opacity: 0;
+      transform: translate(0, -10%);
+      .transition(.2s, ease-out);
+      transition-delay: .5s;
+      visibility: hidden;
+      z-index: 2;
     }
-    .nav-app-name,
-    .nav_moreBtn {
-      transition: .2s ease-in;
-      transition-delay: .8s
+    .sub-nav {
+      display: none;
     }
-
+    .nav-app-name {
+      box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+      .transition(.4s, ease-in-out);
+      transition-delay: .1s;
+      z-index: 3;
+    }
     &.darken,
     &:hover {
-      .nav_body {
+      .nav-body {
+        visibility: visible;
         transform: translate(0, 0);
+        opacity: 1;
         box-shadow: 0 0 5px rgba(0, 0, 0, .4);
         transition-delay: .1s;
       }
-      .nav-app-name,
-      .nav_moreBtn {
-        transform: translate(0, -20px);
-        opacity: 0;
-        transition-delay: .3s;
+      .nav-app-name {
       }
     }
   }
@@ -177,7 +161,7 @@
     }
   }
 
-  .nav_body {
+  .nav-body {
     width: 100%;
     height: auto;
     top: -300px;
@@ -208,11 +192,11 @@
   }
 
   .nav_slidedown {
-    .nav_body {
+    .nav-body {
       top: @nav_height;
       opacity: 1;
     }
-    .nav_mask {
+    .nav-mask {
       position: fixed;
       top: 0;
       left: 0;

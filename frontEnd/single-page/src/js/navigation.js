@@ -12,9 +12,9 @@ function init () {
   let nodeNav = utils.query('.app-nav', nodeBody);
   utils.bind(nodeNav, 'click', '.nav a,.side a', function () {
     utils.removeClass(nodeBody, 'nav_slidedown');
-  }).bind('click', '.nav_mask', function () {
+  }).bind('click', '.nav-mask', function () {
     utils.removeClass(nodeBody, 'nav_slidedown');
-  }).bind('click', '.nav_moreBtn', function () {
+  }).bind('click', '.nav-more-btn', function () {
     utils.toggleClass(nodeBody, 'nav_slidedown');
   });
 
@@ -74,8 +74,8 @@ function setCur (page) {
   if (page === '/') {
     page = 'index';
   }
-  utils.removeClass(utils.query('.app-nav li.cur'), 'cur');
-  utils.addClass(utils.query('.app-nav li[data-page="' + page + '"]'), 'cur');
+  utils.removeClass(utils.query('.app-nav .cur'), 'cur');
+  utils.addClass(utils.query('.app-nav a[data-page="' + page + '"]'), 'cur');
 }
 
 export default {init, setCur};

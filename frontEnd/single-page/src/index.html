@@ -13,40 +13,28 @@
     <include name="favicon_appicon"/>
 <body>
 <nav class="app-nav">
-    <div class="nav_mask"></div>
-    <div class="nav_body">
+    <div class="nav-mask"></div>
+    <div class="nav-body">
         <div class="grid-row">
-            <ul class="nav">
-                <li data-page="index">
-                    <a class="nav_logo" data-title="首页" href="/">首页</a>
+            <a class="nav_logo" data-page="index" data-title="首页" href="/">首页</a>
+            <div class="nav">
+                <a href="/blog" data-page="blog">博文</a>
+                <a href="/labs" data-page="labs">实验室</a>
+                <a href="/720" data-page="720">全景</a>
+                <a href="/photography" data-page="photography">摄影</a>
+                <a title="给剧中人留言" href="/bless" data-page="bless">留言</a>
+                <a href="javascript:viod(0)">其他</a>
+                <div class="sub-nav">
+                    <a title="前端英雄榜" href="/directories">前端英雄榜</a>
+                    <a href="/topic/aboutme/index.html">关于剧中人</a>
+                    <a href="/topic/aboutblog/index.html">关于小剧客栈</a>
+                </div>
                 </li>
-                <li data-page="blog">
-                    <a href="/blog">博文</a>
-                </li>
-                <li data-page="labs">
-                    <a href="/labs">实验室</a>
-                </li>
-                <li data-page="720">
-                    <a href="/720">全景</a>
-                </li>
-                <li data-page="photography">
-                    <a href="/photography">摄影</a>
-                </li>
-                <li data-page="bless">
-                    <a title="给剧中人留言" href="/bless">留言</a>
-                </li>
-            </ul>
-            <ul class="side">
-                <li><a title="前端英雄榜" href="/directories">前端英雄榜</a></li>
-            </ul>
+            </div>
         </div>
     </div>
     <div class="nav-app-name">小剧客栈</div>
-    <a class="nav_moreBtn" href="javascript:void(0)" title="导航">
-        <span class="nav_Btn_ico nav_Btn_ico_1"></span>
-        <span class="nav_Btn_ico nav_Btn_ico_2"></span>
-        <span class="nav_Btn_ico nav_Btn_ico_3"></span>
-    </a>
+    <a class="nav-more-btn" href="javascript:void(0)" title="导航"><i></i><i></i><i></i></a>
 </nav>
 
 <div class="app_container"></div>
