@@ -43,14 +43,17 @@ function init () {
 
   checkBackTop();
 
-  let distance = 50;
+  let distance = 140;
   // 是否已经置灰
   let isDarkened = false;
   let darkenClassName = 'darken';
   let useMethod;
+  let lastScrollTop = 0;
 
   function fixNavClass () {
-    let isNeedDarken = getScrollTop() > distance;
+    let scrollTop = getScrollTop();
+
+    let isNeedDarken = lastScrollTop > scrollTop && scrollTop > distance;
     let isNeedChange = isNeedDarken !== isDarkened;
     if (isNeedChange) {
       isDarkened = isNeedDarken;
@@ -58,6 +61,7 @@ function init () {
 
       utils[useMethod](nodeNav, darkenClassName);
     }
+    lastScrollTop = scrollTop;
   }
 
   window.onscroll = function () {
@@ -68,7 +72,7 @@ function init () {
   utils.bind(nodeBackTop, 'click', function () {
     nodeBody.scrollTop = 0;
   });
-};
+}
 
 function setCur (page) {
   if (page === '/') {

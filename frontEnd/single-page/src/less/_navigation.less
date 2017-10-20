@@ -3,7 +3,7 @@
 /**
  * 导航
  */
-@nav_height: 60px;
+@nav_height: 55px;
 .app-nav {
   position: fixed;
   top: 0;
@@ -16,77 +16,60 @@
     text-align: right;
     a {
       display: inline-block;
-      height: @nav_height;
+      height: @nav_height - 2;
       margin-right: 1em;
       padding: 0 1em;
+      border-bottom: 2px solid #fff;
       outline: none;
       overflow: hidden;
       line-height: @nav_height;
-      color: rgba(0, 0, 0, .6);
+      color: #333;
       text-align: center;
       font-size: 14px;
       .transition(.2s);
-      i,
-      span {
-        display: inline-block;
-        vertical-align: middle;
-        height: 30px;
-        line-height: 30px;
-      }
-      i {
-        margin-right: 6px;
-        text-align: center;
-        font-size: 24px;
-        display: none;
-      }
-      &.cur {
-        color: #000;
+      &.cur,
+      &.cur:hover {
+        border-bottom-color: currentColor;
+        color: #ff9800;
       }
       &:hover {
-        color: inherit;
+        color: #ff9800;
       }
     }
   }
-
   .nav-app-name {
-    position: absolute;
-    top: 16px;
-    left: 15px;
-    width: 95px;
-    height: 28px;
-    background: url('../images/nav-logo.png');
-    background-size: cover;
-    border-radius: 4px;
-    text-indent: -10em;
-    overflow: hidden;
-    font-size: 0;
+    float: left;
+    width: 100px;
+    height: @nav_height;
+    background: url('../images/nav-logo.png') no-repeat center;
+    background-size: 95px 28px;
   }
   .nav-more-btn {
     position: absolute;
     display: block;
-    width: 46px;
-    height: 46px;
+    width: 42px;
+    height: 42px;
     top: 15px;
     right: 20px;
     border-radius: 4px;
     cursor: default;
+    background: #fff;
     i {
       display: block;
       position: absolute;
-      width: 28px;
-      height: 3px;
+      width: 26px;
+      height: 4px;
       left: 9px;
       border-radius: 4px;
-      background: #fff;
-      .transition(0.2s, ease);
+      background: #444;
       &:nth-child(1) {
-        top: 12px
+        top: 10px
       }
       &:nth-child(2) {
-        top: 22px
+        top: 19px
       }
       &:nth-child(3) {
-        top: 32px
+        top: 28px
       }
     }
   }
@@ -96,6 +79,11 @@
   .app-nav {
     .nav-more-btn {
       z-index: 1;
+    }
+    .nav-more-btn {
+      transform: translate(0, 0);
+      .transition(.2s, ease-out);
+      transition-delay: .5s;
     }
     .nav-body {
       position: absolute;
@@ -114,22 +102,18 @@
     .sub-nav {
       display: none;
     }
-    .nav-app-name {
-      box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-      .transition(.4s, ease-in-out);
-      transition-delay: .1s;
-      z-index: 3;
-    }
     &.darken,
     &:hover {
+      .nav-more-btn {
+        transform: translate(0, -100%);
+        transition-delay: .2s;
+      }
       .nav-body {
         visibility: visible;
         transform: translate(0, 0);
         opacity: 1;
         box-shadow: 0 0 5px rgba(0, 0, 0, .4);
         transition-delay: .1s;
-      }
-      .nav-app-name {
       }
     }
   }
