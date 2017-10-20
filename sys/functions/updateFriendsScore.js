@@ -24,9 +24,9 @@ exports.update = function (callback){
       }
       docs.forEach(function(item){
         item = item || {};
-        var hasGithub = item.github_username && item.github_username.length > 2,
-            hasCover = item.cover && item.cover.length > 10,
-            hasBlog = item.url && item.url.length > 10,
+        var hasGithub = item.github_username && item.github_username.length > 2 ? 1 : 0,
+            hasCover = item.cover && item.cover.length > 10 ? 1 : 0,
+            hasBlog = item.url && item.url.length > 10 ? 1 : 0,
             adminScore = parseInt( item.adminScore || 0 );
         item.score = hasGithub * 4 + hasBlog * 3 + hasCover * 2 + adminScore;
         collection.save( item, function(){});
