@@ -228,6 +228,11 @@ LOFOX.prototype = {
       url: url
     },'test',url);
   },
+  replace: function(url){
+    window.history.replaceState({
+      url: url
+    },'test',url);
+  },
   refresh : function (url){
     var urlString = url ? url : LOCATION.pathname + LOCATION.search + LOCATION.hash,
         urlSplit = isNotEmptyString(urlString) ? urlString.split(/\?/) : ['',''],

@@ -54,6 +54,7 @@ function Page () {
 
 Page.prototype = {
   push: lofox.push.bind(lofox),
+  replace: lofox.replace.bind(lofox),
   refresh: lofox.refresh.bind(lofox),
   title: lofox.title.bind(lofox)
 };

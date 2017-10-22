@@ -145,9 +145,9 @@ function page (global, param) {
   // 处理标签功能
   renderTags(utils.query('.articleListPage-tags .content', node), pageTag, function (tag) {
     if (tag === 'null') {
-      global.push('/blog');
+      global.replace('/blog');
     } else {
-      global.push('/blog?tag=' + tag);
+      global.replace('/blog?tag=' + tag);
     }
     global.refresh();
   });
