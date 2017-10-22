@@ -126,7 +126,7 @@ function page (global, param) {
   this.tie = tie({
     dom: nodeTag,
     scopeDom: utils.parents(nodeTag, '.articleListPage'),
-    fixed_top: 0
+    fixed_top: 55
   });
   // 创建列表对象
   let list = new LIST(pageTag, function () {

@@ -37,11 +37,13 @@ function init () {
   }
 
   function checkBackTop () {
-    let method = getScrollTop() > window.innerHeight * 0.6 ? 'removeClass' : 'addClass';
+    let scrollTop = getScrollTop();
+    let method = scrollTop > window.innerHeight * 0.6 ? 'removeClass' : 'addClass';
     utils[method](nodeBackTop, 'hide');
   }
 
   checkBackTop();
+  fixNavClass();
 
   let distance = 140;
   // 是否已经置灰
@@ -52,8 +54,8 @@ function init () {
 
   function fixNavClass () {
     let scrollTop = getScrollTop();
-
-    let isNeedDarken = lastScrollTop > scrollTop && scrollTop > distance;
+    let isNeedDarken = scrollTop > distance;
+    // let isNeedDarken = lastScrollTop > scrollTop && scrollTop > distance;
     let isNeedChange = isNeedDarken !== isDarkened;
     if (isNeedChange) {
       isDarkened = isNeedDarken;
