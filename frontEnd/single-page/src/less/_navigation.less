@@ -49,8 +49,6 @@
     display: block;
     width: 42px;
     height: 42px;
-    top: 15px;
-    right: 20px;
     border-radius: 4px;
     cursor: default;
     background: #fff;
@@ -78,9 +76,9 @@
 @media screen and (min-width: 660px) {
   .app-nav {
     .nav-more-btn {
+      top: 15px;
+      right: 20px;
       z-index: 1;
-    }
-    .nav-more-btn {
       transform: translate(0, 0);
       .transition(.2s, ease-out);
       transition-delay: .5s;
@@ -127,7 +125,7 @@
     height: @nav_height;
   }
 
-  .app_container,
+  .app-container,
   .app-footer {
     .transition(.2s, ease);
   }
@@ -176,7 +174,9 @@
     }
   }
 
-  .nav_slidedown {
+  .nav-slidedown {
+      top: 15px;
+      right: 20px;
     .nav-body {
       top: @nav_height;
       opacity: 1;
@@ -189,7 +189,7 @@
       height: 100%;
       z-index: 1;
     }
-    .app_container,
+    .app-container,
     .app-footer {
       opacity: .4;
       .transform(translateY(100px));

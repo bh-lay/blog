@@ -11,11 +11,11 @@ function init () {
   let nodeBody = document.documentElement || utils.query('body');
   let nodeNav = utils.query('.app-nav', nodeBody);
   utils.bind(nodeNav, 'click', '.nav a,.side a', function () {
-    utils.removeClass(nodeBody, 'nav_slidedown');
+    utils.removeClass(nodeBody, 'nav-slidedown');
   }).bind('click', '.nav-mask', function () {
-    utils.removeClass(nodeBody, 'nav_slidedown');
+    utils.removeClass(nodeBody, 'nav-slidedown');
   }).bind('click', '.nav-more-btn', function () {
-    utils.toggleClass(nodeBody, 'nav_slidedown');
+    utils.toggleClass(nodeBody, 'nav-slidedown');
   });
 
   utils.bind(utils.query('.backToOldVersion'), 'click', function () {

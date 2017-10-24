@@ -11,7 +11,7 @@ import BlessPage from '../pages/bless/bless.js'
 
 // 绑定路由
 let lofox = new Lofox();
-let nodeContainer = utils.query('.app_container');
+let nodeContainer = utils.query('.app-container');
 let nodeActivePage = null;
 let activePage = null;
 
