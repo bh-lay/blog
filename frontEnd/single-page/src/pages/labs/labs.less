@@ -9,7 +9,7 @@
 
 .labs-header {
   position: relative;
-  background:  no-repeat center center #f4f1ec;
+  background: no-repeat center center #f4f1ec;
   background-size: auto 100%;
   min-height: 200px;
   max-height: 400px;
@@ -27,38 +27,56 @@
   background: #fff;
   box-shadow: 0 0 2px rgba(0, 0, 0, .2);
   .labs-profile-card {
-    display: block;
+    position: absolute;
+    top: -60px;
+    left: 10px;
     width: 140px;
-    height: 45px;
-    padding-top: 10px;
-    background-color: #fff;
-    opacity: .7;
-    transition: .2s;
-    line-height: 20px;
-    font-size: 14px;
-    text-align: center;
-    color: #000;
+    box-shadow: 5px 5px 5px -4px rgba(0, 0, 0, .2);
+    a {
+      display: block;
+      height: 120px;
+      padding-top: 1px;
+      background-color: #fafafa;
+      transition: .2s;
+      line-height: 20px;
+      font-size: 16px;
+      text-align: center;
+      color: #000;
+      &:hover {
+        color: #000;
+        background-color: #eee;
+      }
+    }
     .profile-icon {
       display: block;
       height: 18px;
-      margin: auto;
+      margin: 25px auto;
       background-repeat: no-repeat;
       background-position: center;
       background-size: contain;
     }
-    &:hover {
-      color: #000;
-      opacity: 1;
-      background-color: #eee;
-    }
   }
   .notice {
-    padding: 15px 0;
-    line-height: 25px;
+    padding: 16px 0 16px 160px;
+    line-height: 20px;
     font-size: 14px;
     color: #333;
   }
 }
+
+@media (max-width: 600px) {
+  .labs-sub-header {
+    padding: 15px;
+    .labs-profile-card {
+      position: static;
+      margin: auto;
+    }
+    .notice{
+      padding: 15px;
+    }
+  }
+}
+
 .labsList {
   min-height: 400px;
 }
