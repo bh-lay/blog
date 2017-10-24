@@ -11,7 +11,7 @@
   </a>
   <footer>
     <div class="tags">
-      <strong>tags</strong>{@each tags as t}<a href="/blog?tag=${t}">${t}</a>{@/each}
+      <strong>tags</strong>{@each tags as t}<a href="javascript:void(0)" data-tag="${t}">${t}</a>{@/each}
     </div>
     <div class="time">${time_show}</div>
   </footer>

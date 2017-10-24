@@ -40,7 +40,7 @@ function renderTags (dom, tagName, callback) {
     dom.innerHTML = html;
     utils.addClass(utils.query(selector, dom), 'active');
     utils.bind(dom, 'click', 'a', function () {
-      var tag = this.getAttribute('data-tag');
+      let tag = this.getAttribute('data-tag');
       callback && callback(tag);
     });
   });
@@ -141,6 +141,11 @@ function page (global, param) {
         me.stick.addItem(html, item.cover);
       });
     }
+  });
+  utils.bind(this.nodeList, 'click', '.tags a', function () {
+    let tag = this.getAttribute('data-tag');
+    global.replace('/blog?tag=' + tag);
+    global.refresh();
   });
   // 处理标签功能
   renderTags(utils.query('.articleListPage-tags .content', node), pageTag, function (tag) {
