@@ -35,7 +35,7 @@
   "devDependencies": {},
   "scripts": {
     "eslint": "webpack --config webpack.eslint.config.js",
-    "dev": "NODE_ENV=local_dev webpack",
+    "dev": "NODE_ENV=local_dev webpack --progress --watch",
     "production": "NODE_ENV=production webpack"
   },
   "repository": {
