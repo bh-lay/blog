@@ -1,7 +1,6 @@
 const path = require('path');
 //定义了一些文件夹的路径
 const ROOT_PATH = path.resolve(__dirname);
-const BUILD_PATH = path.resolve(ROOT_PATH, '../../static/build/single-page/');
 const HTML_PATH = path.resolve(ROOT_PATH, '../../sys/views/single-page/index.html');
 const GITHUB_HTML_PATH = path.resolve(ROOT_PATH, '../../sys/component/single-page/github.html');
 
@@ -11,10 +10,9 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
-const devPublicPath = 'http://127.0.0.1:8088/build/single-page/';
-const prodPublicPath = '//dn-lay.qbox.me/build/single-page/';
-const publicPath = isProduction ? prodPublicPath : devPublicPath;
+const BUILD_PATH = path.resolve(ROOT_PATH, '../../static/build/single-page/');
 const cdnPath = isProduction ? '//dn-lay.qbox.me' : '//127.0.0.1:8088';
+const publicPath = cdnPath + '/build/single-page/';
 
 const config = {
   entry: {
