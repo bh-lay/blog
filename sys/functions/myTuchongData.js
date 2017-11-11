@@ -22,7 +22,7 @@ function getFromDataBase(callback){
 			method.close();
 			if(arguments[1].length==0){
 				//若不存在，则从 720yun 上获取
-				updateFrom720(function(err,data){
+				updateFromTuchong(function(err,data){
 					callback && callback(err,data);
 				});
 			}else{
@@ -66,7 +66,7 @@ function saveDataToDataBase(data){
 }
 
 //从720yun更新数据
-function updateFrom720(callback){
+function updateFromTuchong(callback){
 	request({
 		url: 'https://bh-lay.tuchong.com/rest/2/sites/1785007/posts?count=40&page=1&before_timestamp=0',
 		headers: {
@@ -86,5 +86,5 @@ function updateFrom720(callback){
 	});
 }
 
-exports.update = updateFrom720;
+exports.update = updateFromTuchong;
 exports.get = getFromDataBase;
