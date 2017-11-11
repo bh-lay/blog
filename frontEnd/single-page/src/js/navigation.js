@@ -50,12 +50,11 @@ function init () {
   let isDarkened = false;
   let darkenClassName = 'darken';
   let useMethod;
-  let lastScrollTop = 0;
+  let scrollTop = 0;
+  let mouseY = 1000;
 
   function fixNavClass () {
-    let scrollTop = getScrollTop();
-    let isNeedDarken = scrollTop > distance;
-    // let isNeedDarken = lastScrollTop > scrollTop && scrollTop > distance;
+    let isNeedDarken = mouseY < 200 || scrollTop > distance;
     let isNeedChange = isNeedDarken !== isDarkened;
     if (isNeedChange) {
       isDarkened = isNeedDarken;
@@ -63,13 +62,17 @@ function init () {
 
       utils[useMethod](nodeNav, darkenClassName);
     }
-    lastScrollTop = scrollTop;
   }
 
   window.onscroll = function () {
+    scrollTop = getScrollTop();
     fixNavClass();
     clearTimeout(scrollDelay);
     scrollDelay = setTimeout(checkBackTop, 100);
+  };
+  window.onmousemove = function (e) {
+    mouseY = e.clientY;
+    fixNavClass();
   };
   utils.bind(nodeBackTop, 'click', function () {
     nodeBody.scrollTop = 0;
