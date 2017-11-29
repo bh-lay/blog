@@ -12,15 +12,15 @@ let commentId = 'define-1';
 let baseTpl = require('./bless.html');
 let potoGraphaList = [
   {
+    title: '西沙湿地',
+    imgSrc: require('../../images/comment_2_@2x.jpg'),
+    htmlSrc: 'https://bh-lay.tuchong.com/14465332/',
+  },
+  {
     title: '束河古城',
     imgSrc: require('../../images/comment_@2x.jpg'),
     htmlSrc: 'https://bh-lay.tuchong.com/14591502/',
   },
-  {
-    title: '西沙湿地',
-    imgSrc: require('../../images/comment_2_@2x.jpg'),
-    htmlSrc: 'https://bh-lay.tuchong.com/14465332/',
-  }
 ];
 let potoGraphaIndex = -1;
 
