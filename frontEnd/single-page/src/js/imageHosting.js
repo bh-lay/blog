@@ -11,10 +11,13 @@ function cover (url, config) {
 }
 
 function zoom (url, config) {
+  if (!url) {
+    return '';
+  }
   let confStr;
   if (config.width) {
     confStr = 'w/' + config.width;
-  } else {
+  } else if (config.height) {
     confStr = 'h/' + config.height;
   }
 

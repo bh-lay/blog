@@ -4,21 +4,47 @@
  **/
 @import "../../../../_public/less/_articleGithub.less";
 
-.blogDetail {
+.blog-detail {
+  padding: 80px 0;
   font-size: 1rem;
+  background: #dee3e7;
+  .blog-detail-container {
+    max-width: 1000px;
+    margin: auto;
+    background: #fff;
+  }
   header {
+    position: relative;
     text-align: center;
-    padding: 6rem 0 4rem;
-    background: #dee3e7;
-    h1 {
-      margin: 0 .5em .5em;
-      line-height: 1.2;
-      font-size: 2em;
-      font-weight: 500;
+    padding-top: 40%;
+    background-color: #eee;
+    background-size: cover;
+    background-position: center;
+    .header-cover {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: #000;
+      canvas{
+        opacity: .5
+      }
     }
-    P {
-      margin: 0 0 1em;
-      opacity: .8;
+    .header-body {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      h1 {
+        margin: 0 .5em .5em;
+        line-height: 1.2;
+        font-size: 2em;
+        font-weight: 500;
+      }
+      P {
+        margin: 0 0 1em;
+        opacity: .8;
+      }
     }
   }
   .sns-share {
@@ -30,18 +56,12 @@
     }
   }
   .article-section {
-    padding-bottom: 50px;
-    border-top: 1px solid #eee;
-    background: #f6f6fa;
+    padding: 5em 8em;
     .article {
-      margin-top: -2em;
-      padding-bottom: 3em;
       background: #fff;
     }
     footer {
       padding: 10px 15px;
-      border-top: 1px solid #eee;
-      background: #fafafa;
       p {
         font-size: 14px;
         color: #666;
@@ -67,13 +87,11 @@
   }
 }
 
-@media screen and (max-width: 650px) {
-  .blogDetail {
+@media screen and (max-width: 1000px) {
+  .blog-detail {
+    padding: 0;
     .article-section {
-      background: #fafafa;
-      .grid-box-full {
-        padding: 0;
-      }
+      padding: 1em 0;
     }
   }
 }

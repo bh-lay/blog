@@ -7,6 +7,8 @@ import './blogDetail.less';
 import utils from '../../js/Base.js';
 import juicer from '../../js/juicer.js';
 import hljs from '../../js/highlight.js';
+import imageHosting from '../../js/imageHosting.js';
+import blurRect from '../../js/blurRect.js';
 import {Init as CommentInit} from '../../comments/index.js';
 
 const template = require('./blogDetailPage.html');
@@ -30,7 +32,24 @@ function getData (id, fn) {
       }
     }
   });
-};
+}
+
+// 图片预加载
+function loadImg (src, callback) {
+  if (!src) {
+    callback && callback();
+    return;
+  }
+  let img = new Image();
+  img.crossOrigin = "Anonymous";
+  function End () {
+    callback && callback(img);
+    callback = null;
+  }
+
+  img.onerror = img.onload = End;
+  img.src = src;
+}
 
 export default function (global, id) {
   let node = global.node;
@@ -42,8 +61,43 @@ export default function (global, id) {
     }
 
     global.title(detail.title);
-    node.innerHTML = juicer(template, detail);
 
+    let hasCover = detail.cover && detail.cover.length;
+    node.innerHTML = juicer(template, {
+      article: detail,
+      hasCover: hasCover
+    });
+    if (hasCover) {
+      let coverUrl = imageHosting(detail.cover, {
+        type: 'zoom'
+      });
+      console.log('coverUrl', coverUrl);
+
+      loadImg(coverUrl, function (img) {
+        let header = utils.query('.header-cover', node);
+        console.log('header', header)
+        let width = header.clientWidth;
+        let height = header.clientHeight;
+        let canvas = document.createElement('canvas');
+        let context = canvas.getContext('2d');
+        // gaussBlur
+        console.log(width, width, 'header');
+        let newWidth = width;
+        let newHeight = width*img.height/img.width;
+        if(newHeight < height){
+          newHeight = height;
+          newWidth = height*img.width/img.height;
+        }
+        let top = (height - newHeight)/2;
+        let left = (width - newWidth)/2;
+        canvas.width = width;
+        canvas.height = height;
+        context.drawImage(img, left, top, newWidth, newHeight)
+
+        blurRect(context, 0, 0, width, height, 16, 1)
+        header.appendChild(canvas);
+      });
+    }
     // 代码高亮
     utils.each(utils.queryAll('pre code', node), function (codeNode) {
       hljs(codeNode);
