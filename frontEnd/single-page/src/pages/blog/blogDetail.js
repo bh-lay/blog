@@ -42,6 +42,7 @@ function loadImg (src, callback) {
   }
   let img = new Image();
   img.crossOrigin = "Anonymous";
+
   function End () {
     callback && callback(img);
     callback = null;
@@ -83,18 +84,18 @@ export default function (global, id) {
         // gaussBlur
         console.log(width, width, 'header');
         let newWidth = width;
-        let newHeight = width*img.height/img.width;
-        if(newHeight < height){
+        let newHeight = width * img.height / img.width;
+        if (newHeight < height) {
           newHeight = height;
-          newWidth = height*img.width/img.height;
+          newWidth = height * img.width / img.height;
         }
-        let top = (height - newHeight)/2;
-        let left = (width - newWidth)/2;
+        let top = (height - newHeight) / 2;
+        let left = (width - newWidth) / 2;
         canvas.width = width;
         canvas.height = height;
         context.drawImage(img, left, top, newWidth, newHeight)
 
-        blurRect(context, 0, 0, width, height, 16, 1)
+        blurRect(context, 0, 0, width, height, 8, 1);
         header.appendChild(canvas);
       });
     }
