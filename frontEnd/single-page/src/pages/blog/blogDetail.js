@@ -68,6 +68,7 @@ export default function (global, id) {
       article: detail,
       hasCover: hasCover
     });
+    let header = utils.query('.header-cover', node);
     if (hasCover) {
       let coverUrl = imageHosting(detail.cover, {
         type: 'zoom'
@@ -75,8 +76,6 @@ export default function (global, id) {
       console.log('coverUrl', coverUrl);
 
       loadImg(coverUrl, function (img) {
-        let header = utils.query('.header-cover', node);
-        console.log('header', header)
         let width = header.clientWidth;
         let height = header.clientHeight;
         let canvas = document.createElement('canvas');
@@ -98,6 +97,8 @@ export default function (global, id) {
         blurRect(context, 0, 0, width, height, 8, 1);
         header.appendChild(canvas);
       });
+    } else {
+      utils.addClass(header, 'no-cover');
     }
     // 代码高亮
     utils.each(utils.queryAll('pre code', node), function (codeNode) {
