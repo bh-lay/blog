@@ -56,11 +56,11 @@
     padding: 5em 8em;
     .caption {
       padding: 0 20px;
-      h1{
+      h1 {
         margin-bottom: .4em;
         font-size: 1.8rem;
       }
-      p{
+      p {
         font-size: 14px;
       }
     }
@@ -68,37 +68,62 @@
       background: #fff;
     }
     footer {
-      padding: 10px 15px;
+      padding: 10px 20px;
+      background: #f7f8f8;
       p {
         font-size: 14px;
-        color: #666;
+        color: #5c6870;
       }
     }
   }
   .sns-share {
-    padding: 2em;
+    padding: 6em 0 2em;
     text-align: center;
     a {
+      display: inline-block;
+      width: 80px;
+      height: 80px;
       margin: 0 1em;
-      padding: .1em 1.2em;
+      border-radius: 50%;
       font-size: 1.2rem;
+      color: #fff;
+      background: #fa7d3c;
+      background: -webkit-linear-gradient(top, #fa7d3c 0%, #f55f10 100%);
+      background: linear-gradient(top bottom, #fa7d3c 0%, #f55f10 100%);
+      i {
+        display: block;
+        padding-top: 10px;
+        line-height: 30px;
+        font-size: 30px;
+      }
+      span {
+        display: block;
+        line-height: 30px;
+        font-size: 14px;
+      }
+      &:hover {
+        background: #f4722e;
+        background: -webkit-linear-gradient(top, #f4722e 0%, #f05807 100%);
+        background: linear-gradient(top bottom, #f4722e 0%, #f05807 100%);
+      }
     }
   }
   .comments-section {
     position: relative;
-    padding: 2em 8em;
+    padding: 2em 8em 4em;
     background: #f5f8fa;
+    border: 1px solid #edf0f3;
     &:before {
       position: absolute;
       content: '';
       top: -1rem;
       left: 50%;
-      margin-left: -3rem;
+      margin-left: -2rem;
       width: 0;
       height: 0;
       border-style: solid;
       border-color: transparent transparent #f5f8fa;
-      border-width: 0 3rem 1rem;
+      border-width: 0 2rem 1rem;
     }
   }
 }
