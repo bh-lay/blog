@@ -70,10 +70,7 @@ export default function (global, id) {
     });
     let header = utils.query('.header-cover', node);
     if (hasCover) {
-      let coverUrl = imageHosting(detail.cover, {
-        type: 'zoom'
-      });
-      console.log('coverUrl', coverUrl);
+      let coverUrl = imageHosting(detail.cover);
 
       loadImg(coverUrl, function (img) {
         let width = header.clientWidth;
@@ -81,7 +78,6 @@ export default function (global, id) {
         let canvas = document.createElement('canvas');
         let context = canvas.getContext('2d');
         // gaussBlur
-        console.log(width, width, 'header');
         let newWidth = width;
         let newHeight = width * img.height / img.width;
         if (newHeight < height) {
