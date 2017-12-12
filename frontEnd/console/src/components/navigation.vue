@@ -1,9 +1,5 @@
 <template>
-  <el-menu router
-           class="el-menu-vertical-demo"
-           background-color="#545c64"
-           text-color="#fff"
-           active-text-color="#ffd04b">
+  <el-menu router class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
     <el-menu-item index="panel">
       <i class="el-icon-menu"></i>
       <span slot="title">快速操作</span>
@@ -29,18 +25,18 @@
 </template>
 
 <script>
-  export default {
-    name: 'HelloWorld',
-    data () {
-      return {}
-    },
-    methods: {}
-  }
+export default {
+  name: 'HelloWorld',
+  data () {
+    return {}
+  },
+  methods: {}
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .el-menu {
-    border-right: none;
-  }
+.el-menu {
+	border-right: none;
+}
 </style>

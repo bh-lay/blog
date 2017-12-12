@@ -11,40 +11,40 @@
 </template>
 
 <script>
-  import navigation from './components/navigation.vue'
+import navigation from './components/navigation.vue'
 
-  export default {
-    name: 'app',
-    components: {
-      navigation
-    }
-
+export default {
+  name: 'app',
+  components: {
+    navigation
   }
+}
 </script>
 
 <style>
-  html, body {
-    margin: 0;
-    padding: 0;
-  }
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
 
-  #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+#app {
+	font-family: 'Avenir', Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
 
-  .navigation {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 240px;
-    overflow: auto;
-    background: #545c64;
-  }
+.navigation {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 240px;
+	overflow: auto;
+	background: #545c64;
+}
 
-  .main {
-    padding-left: 240px;
-  }
+.main {
+	padding: 20px 20px 40px 260px;
+}
 </style>
