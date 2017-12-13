@@ -1,9 +1,6 @@
 <template>
   <div id="app">
-    <div class="navigation">
-      <div style="height: 80px"></div>
-      <navigation></navigation>
-    </div>
+    <navigation></navigation>
     <div class="main">
       <router-view/>
     </div>
