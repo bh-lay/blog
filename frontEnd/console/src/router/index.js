@@ -6,6 +6,10 @@ import Panel from '@/pages/panel/index'
 Vue.use(Router)
 let routes = [{
   path: '/',
+  redirect: '/panel'
+},
+{
+  path: '/xxxx',
   name: 'login',
   component: Login
 },
