@@ -41,7 +41,7 @@ function loadImg (src, callback) {
     return;
   }
   let img = new Image();
-  img.crossOrigin = "Anonymous";
+  img.crossOrigin = 'Anonymous';
 
   function End () {
     callback && callback(img);
@@ -70,7 +70,10 @@ export default function (global, id) {
     });
     let header = utils.query('.header-cover', node);
     if (hasCover) {
-      let coverUrl = imageHosting(detail.cover);
+      let coverUrl = imageHosting(detail.cover, {
+        type: 'zoom',
+        width: 420,
+      });
 
       loadImg(coverUrl, function (img) {
         let width = header.clientWidth;
