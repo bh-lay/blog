@@ -111,7 +111,7 @@
         </div>
         <div class="actions">
           <el-button type="text" size="small">重命名</el-button>
-          <el-button @click="handleDelete(file)" type="text" size="small">删除</el-button>
+          <el-button @click="handleDelete(file)" type="text" size="small" v-if="file.parsed.type !== 'folder'">删除</el-button>
         </div>
       </div>
     </div>
