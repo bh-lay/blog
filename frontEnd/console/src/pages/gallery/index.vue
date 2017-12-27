@@ -5,7 +5,6 @@
     background: #fff;
   }
   .list {
-    min-height: 100px;
     background: #fff
   }
   .item {
@@ -18,10 +17,9 @@
     &.folder {
       .filename{
         cursor: pointer;
-        background-image: -webkit-gradient(linear, 0 0, 100% 0, from(transparent),to(transparent));
         transition: .5s;
         &:hover {
-          background-image: -webkit-gradient(linear, 0 0, 100% 0, from(#c2ced6),to(#f2f5f8));
+          background-image: -webkit-gradient(linear, 0 0, 100% 0, from(#dee7ed),to(#f2f5f8));
         }
       }
     }
@@ -62,6 +60,11 @@
       }
     }
   }
+  .empty{
+    padding: 30px 60px;
+    font-size: 20px;
+    color: #abb4ba;
+  }
 </style>
 
 <template>
@@ -80,6 +83,9 @@
       </span>
     </div>
     <div class="list">
+      <div v-if="files.length == 0" class="empty">
+        这是一个空目录
+      </div>
       <div class="item" v-for="file in files" :class="{folder: file.parsed.type === 'folder'}">
         <div class="filename" @click="clickHandle(file)">
           <i v-if="file.parsed.type === 'folder'" class="el-icon-fa-folder-o"></i>
@@ -125,6 +131,21 @@ function parseFile (fullname, isdir) {
     extension,
     type
   }
+}
+function createPath (foldername, root) {
+  root = (root + '/').replace(/\/\//g, '/')
+  return fetch('/ajax/asset/createDir', {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+    },
+    body: querystring.stringify({
+      root,
+      name: foldername
+    })
+  })
+  .then(response => response.json())
 }
 export default {
   data () {
@@ -179,7 +200,7 @@ export default {
         this.files = files
       })
     },
-    handleCurrentChange () {
+    refresh () {
       this.getData()
     },
     clickHandle (file) {
@@ -191,7 +212,7 @@ export default {
     },
     jumpTo (newPath) {
       this.currentPath = newPath.replace(/\/+/g, '/')
-      this.getData();
+      this.getData()
     },
     delete (id) {
       let queryStr = querystring.stringify({
@@ -221,19 +242,18 @@ export default {
       this.$prompt('请输入目录名', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
-        inputPattern: /^(\w|\d|\-)+$/,
+        inputPattern: /^(\w|\d|-)+$/,
         inputErrorMessage: '目录只能用字母、数字'
       }).then(({ value }) => {
-        this.$message({
-          type: 'success',
-          message: '你的邮箱是: ' + value
-        });
+        createPath(value, this.currentPath).then(() => {
+          this.refresh()
+        })
       }).catch(() => {
         this.$message({
           type: 'info',
           message: '取消输入'
-        });       
-      });
+        })
+      })
     }
   }
 }
