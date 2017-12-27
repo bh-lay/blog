@@ -8,11 +8,26 @@
     background: #fff
   }
   .item {
+    position: relative;
     & + .item {
       border-top: 1px solid #dee7ed
     }
+    .actions {
+      position: absolute;
+      top: 50%;
+      right: 40px;
+      margin-top: -15px;
+      line-height: 30px;
+      opacity: 0;
+      visibility: hidden;
+      transition: .4s;
+    }
     &:hover {
       background: #f2f5f8;
+      .actions {
+        opacity: 1;
+        visibility: visible;
+      }
     }
     &.folder {
       .filename{
@@ -94,6 +109,10 @@
           <i v-if="file.parsed.type === 'other'" class="el-icon-fa-file-o"></i>
           <strong>{{file.parsed.filename}}</strong><span>{{file.parsed.extension}}</span>
         </div>
+        <div class="actions">
+          <el-button type="text" size="small">重命名</el-button>
+          <el-button @click="handleDelete(file)" type="text" size="small">删除</el-button>
+        </div>
       </div>
     </div>
   </div>
@@ -143,6 +162,24 @@ function createPath (foldername, root) {
     body: querystring.stringify({
       root,
       name: foldername
+    })
+  })
+  .then(response => response.json())
+}
+// 删除文件、目录
+function deletePath (pathname, isFolder) {
+  pathname = pathname.replace(/\/\//g, '/')
+  let folderAPI = '/ajax/asset/delDir'
+  let fileAPI = '/ajax/asset/del'
+  let useAPI = isFolder ? folderAPI : fileAPI
+  return fetch(useAPI, {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+    },
+    body: querystring.stringify({
+      path: pathname
     })
   })
   .then(response => response.json())
@@ -214,27 +251,18 @@ export default {
       this.currentPath = newPath.replace(/\/+/g, '/')
       this.getData()
     },
-    delete (id) {
-      let queryStr = querystring.stringify({
-        id: id
-      })
-      return fetch('/ajax/del?' + queryStr, {
-        method: 'POST',
-        credentials: 'same-origin'
-      })
-      .then(response => response.json())
-    },
     handleDelete (item) {
       this.$confirm('三思啊，删了可就没啦！', '提示', {
         confirmButtonText: '删除',
         type: 'warning'
       }).then(() => {
-        this.delete(item.id).then(() => {
+        let path = this.currentPath + '/' + item.name;
+        deletePath(path, item.isdir).then(() => {
           this.$message({
             type: 'success',
             message: '删除成功!'
           })
-          this.getData()
+          this.refresh()
         })
       }).catch(() => {})
     },
