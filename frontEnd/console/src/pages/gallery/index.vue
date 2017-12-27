@@ -45,21 +45,47 @@
       color: #a7b5be;
     }
   }
+  .current-path {
+    padding-left: 20px;
+    span {
+      i {
+        padding: 0 4px;
+        font-style: normal;
+        color: #c7cdd1;
+      }
+      a {
+        text-decoration: none;
+        color: #8f9ba3;
+        &:hover {
+          color: #3d505c;
+        }
+      }
+    }
+  }
 </style>
 
 <template>
   <div>
     <div class="header">
-      <el-button @click="handleCreate" type="button" size="small">xxx</el-button>
-      <span v-for="item in pathSplit">{{item.path}}---</span>
+      <el-button @click="handleCreate" type="button" size="small">
+          <i class="el-icon-fa-folder"></i> 创建目录
+      </el-button>
+      <el-button @click="handleCreate" type="button" size="small">
+          <i class="el-icon-fa-upload"></i> 上传
+      </el-button>
+      <span class="current-path">
+        <span v-for="item in pathSplits">
+          <i>/</i><a href="javascript:void(0)" @click="jumpTo(item.path)">{{item.part}}</a>
+        </span>
+      </span>
     </div>
     <div class="list">
       <div class="item" v-for="file in files" :class="{folder: file.parsed.type === 'folder'}">
         <div class="filename" @click="clickHandle(file)">
-          <i v-if="file.parsed.type === 'folder'" class="el-icon-fa-folder"></i>
+          <i v-if="file.parsed.type === 'folder'" class="el-icon-fa-folder-o"></i>
           <i v-if="file.parsed.type === 'picture'" class="el-icon-fa-file-image-o"></i>
           <i v-if="file.parsed.type === 'compressed'" class="el-icon-fa-file-archive-o"></i>
-          <i v-if="file.parsed.type === 'other'" class="el-icon-fa-file"></i>
+          <i v-if="file.parsed.type === 'other'" class="el-icon-fa-file-o"></i>
           <strong>{{file.parsed.filename}}</strong><span>{{file.parsed.extension}}</span>
         </div>
       </div>
@@ -116,12 +142,16 @@ export default {
     currentPath (after) {
       let pathSplit = after.replace(/^\//, '').split('/')
       let basePath = ''
-      this.pathSplit = pathSplit.map((item) => {
+      this.pathSplits = pathSplit.map((item) => {
         basePath += '/' + item
         return {
           part: item,
           path: basePath
         }
+      })
+      this.pathSplits.unshift({
+        part: 'root',
+        path: '/'
       })
     }
   },
@@ -157,6 +187,9 @@ export default {
         return
       }
       let newPath = this.currentPath + '/' + file.name
+      this.jumpTo(newPath)
+    },
+    jumpTo (newPath) {
       this.currentPath = newPath.replace(/\/+/g, '/')
       this.getData();
     },
@@ -185,6 +218,22 @@ export default {
       }).catch(() => {})
     },
     handleCreate () {
+      this.$prompt('请输入目录名', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        inputPattern: /^(\w|\d|\-)+$/,
+        inputErrorMessage: '目录只能用字母、数字'
+      }).then(({ value }) => {
+        this.$message({
+          type: 'success',
+          message: '你的邮箱是: ' + value
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消输入'
+        });       
+      });
     }
   }
 }
