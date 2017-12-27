@@ -25,7 +25,7 @@ exports.createDir = function (req,callback){
 			if(exists){
 				callback && callback('目录重名');
 			}else{
-				fs.mkdir(Path,777,function(err){
+				fs.mkdir(Path, function(err){
 					if(err){
 						callback && callback('出错了');
 					}else{
