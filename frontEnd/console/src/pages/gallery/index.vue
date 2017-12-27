@@ -106,7 +106,7 @@
           <strong>{{file.parsed.filename}}</strong><span>{{file.parsed.extension}}</span>
         </div>
         <div class="actions">
-          <el-button type="text" size="small">重命名</el-button>
+          <el-button @click="handleRename(file)" type="text" size="small">重命名</el-button>
           <el-button @click="handleDelete(file)" type="text" size="small" v-if="file.parsed.type !== 'folder'">删除</el-button>
         </div>
       </div>
@@ -202,6 +202,22 @@ function deletePath (pathname, isFolder) {
   })
   .then(response => response.json())
 }
+// 重命名
+function rename (pathname, newName) {
+  return fetch('/ajax/asset/rename', {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+    },
+    body: querystring.stringify({
+      pathname,
+      newName
+    })
+  })
+  .then(response => response.json())
+}
+
 export default {
   data () {
     return {
@@ -279,6 +295,25 @@ export default {
     jumpTo (newPath) {
       this.currentPath = cleanPath(newPath)
       this.getData()
+    },
+    handleRename (item) {
+      console.log('item', item)
+      this.$prompt('请输入邮箱', '提示', {
+        confirmButtonText: '重命名',
+        cancelButtonText: '取消',
+        inputValue: item.parsed.filename,
+        inputPattern: /^(\w|\d|-)+$/,
+        inputErrorMessage: '只能使用字母、数字'
+      }).then(({ value }) => {
+        let path = this.currentPath + '/' + item.name
+        rename(path, value).then(() => {
+          this.$message({
+            type: 'success',
+            message: '重命名成功!'
+          })
+          this.refresh()
+        })
+      }).catch(() => {})
     },
     handleDelete (item) {
       this.$confirm('三思啊，删了可就没啦！', '提示', {
