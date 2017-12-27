@@ -1,10 +1,16 @@
 <style scoped lang="less" rel="stylesheet/less">
   .header {
     padding: 10px;
-    margin-bottom: 20px;
     background: #fff;
   }
+  .upload-list{
+    padding: 10px;
+    background: #f9fafa;
+    border-top: 1px solid #e3e6e8;
+  }
+
   .list {
+    margin-top: 20px;
     background: #fff
   }
   .item {
@@ -84,14 +90,29 @@
       <el-button @click="handleCreate" type="button" size="small">
           <i class="el-icon-fa-folder"></i> 创建目录
       </el-button>
-      <el-button @click="handleCreate" type="button" size="small">
-          <i class="el-icon-fa-upload"></i> 上传
-      </el-button>
       <span class="current-path">
         <span v-for="item in pathSplits">
           <i>/</i><a href="javascript:void(0)" @click="jumpTo(item.path)">{{item.part}}</a>
         </span>
       </span>
+    </div>
+    <div class="upload-list">
+      <el-upload
+        class="upload-demo"
+        action="/ajax/asset/upload"
+        :data="{
+          act: 'addFile',
+          root: currentPath
+        }"
+        multiple
+        :limit="3"
+        :file-list="uploadFileList"
+        :on-change="refresh"
+        >
+        <el-button size="small" type="primary">
+          <i class="el-icon-fa-upload"></i> 上传
+        </el-button>
+      </el-upload>
     </div>
     <div class="list">
       <div v-if="files.length == 0" class="empty">
@@ -225,6 +246,8 @@ export default {
       pathSplits: [],
       files: [],
 
+      uploadFileList: [],
+
       domain: 'http://static.bh-lay.com',
       cdnDomain: 'http://dn-lay.qbox.me',
       selectedFile: {},
@@ -332,20 +355,14 @@ export default {
     },
     handleCreate () {
       this.$prompt('请输入目录名', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+        confirmButtonText: '创建',
         inputPattern: /^(\w|\d|-)+$/,
         inputErrorMessage: '目录只能用字母、数字'
       }).then(({ value }) => {
         createPath(value, this.currentPath).then(() => {
           this.refresh()
         })
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '取消输入'
-        })
-      })
+      }).catch(() => {})
     }
   }
 }
