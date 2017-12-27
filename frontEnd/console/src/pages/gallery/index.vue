@@ -9,6 +9,7 @@
   }
   .item {
     position: relative;
+    transition: .2s;
     & + .item {
       border-top: 1px solid #dee7ed
     }
@@ -29,24 +30,16 @@
         visibility: visible;
       }
     }
-    &.folder {
-      .filename{
-        cursor: pointer;
-        transition: .5s;
-        &:hover {
-          background-image: -webkit-gradient(linear, 0 0, 100% 0, from(#dee7ed),to(#f2f5f8));
-        }
-      }
-    }
   }
   .filename {
     display: inline-block;
-    min-width: 200px;
+    min-width: 140px;
     height: 30px;
     padding: 5px 30px;
     line-height: 30px;
     font-size: 14px;
-    cursor: default;
+    cursor: pointer;
+    transition: .5s;
     i {
       margin-right: .5em;
       color: #9da8af;
@@ -56,6 +49,9 @@
     }
     span{
       color: #a7b5be;
+    }
+    &:hover {
+      background-image: -webkit-gradient(linear, 0 0, 100% 0, from(#dee7ed),to(transparent));
     }
   }
   .current-path {
@@ -115,6 +111,24 @@
         </div>
       </div>
     </div>
+    <el-dialog
+      title="文件路径"
+      :visible.sync="pathDialogVisible">
+      <el-form ref="form" :model="selectedFile" label-width="80px" v-if="selectedFile.parsed">
+        <el-form-item label="相对路径">
+          <el-input v-model="selectedFile.parsed.path"></el-input>
+        </el-form-item>
+        <el-form-item label="回源地址">
+          <el-input v-model="domain + selectedFile.parsed.path"></el-input>
+        </el-form-item>
+        <el-form-item label="CDN地址">
+          <el-input v-model="cdnDomain + selectedFile.parsed.path"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="pathDialogVisible = false">关闭</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -122,15 +136,15 @@
 
 import querystring from 'querystring'
 
-function parseFile (fullname, isdir) {
-  fullname = fullname || ''
+function parseFile ({name, isFolder, basePath}) {
+  let fullname = name || ''
   // 文件基础名
   let filename
   // 文件扩展名
   let extension = ''
   let type = 'other'
-
-  if (!isdir) {
+  let path = basePath + '/' + fullname
+  if (!isFolder) {
     let match = fullname.match(/(.*)\.(\w+)$/)
     // 文件基础名
     filename = match ? match[1] : fullname
@@ -148,7 +162,8 @@ function parseFile (fullname, isdir) {
   return {
     filename,
     extension,
-    type
+    type,
+    path
   }
 }
 function createPath (foldername, root) {
@@ -189,7 +204,12 @@ export default {
     return {
       currentPath: '',
       pathSplits: [],
-      files: []
+      files: [],
+
+      domain: 'http://static.bh-lay.com',
+      cdnDomain: 'http://dn-lay.qbox.me',
+      selectedFile: {},
+      pathDialogVisible: false
     }
   },
   created () {
@@ -232,7 +252,11 @@ export default {
           }
         })
         files.forEach(item => {
-          item.parsed = parseFile(item.name, item.isdir)
+          item.parsed = parseFile({
+            basePath: this.currentPath,
+            name: item.name,
+            isFolder: item.isdir
+          })
         })
         this.files = files
       })
@@ -241,11 +265,13 @@ export default {
       this.getData()
     },
     clickHandle (file) {
-      if (!file.isdir) {
-        return
-      }
       let newPath = this.currentPath + '/' + file.name
-      this.jumpTo(newPath)
+      if (!file.isdir) {
+        this.selectedFile = file
+        this.pathDialogVisible = true
+      } else {
+        this.jumpTo(newPath)
+      }
     },
     jumpTo (newPath) {
       this.currentPath = newPath.replace(/\/+/g, '/')
