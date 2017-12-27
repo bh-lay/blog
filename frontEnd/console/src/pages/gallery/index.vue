@@ -115,7 +115,7 @@
       title="文件路径"
       :visible.sync="pathDialogVisible">
       <el-form ref="form" :model="selectedFile" label-width="80px" v-if="selectedFile.parsed">
-        <el-form-item label="相对路径">
+        <el-form-item label="物理路径">
           <el-input v-model="selectedFile.parsed.path"></el-input>
         </el-form-item>
         <el-form-item label="回源地址">
@@ -136,6 +136,9 @@
 
 import querystring from 'querystring'
 
+function cleanPath (path) {
+  return (path || '').replace(/\/+/g, '/')
+}
 function parseFile ({name, isFolder, basePath}) {
   let fullname = name || ''
   // 文件基础名
@@ -143,7 +146,7 @@ function parseFile ({name, isFolder, basePath}) {
   // 文件扩展名
   let extension = ''
   let type = 'other'
-  let path = basePath + '/' + fullname
+  let path = cleanPath(basePath + '/' + fullname)
   if (!isFolder) {
     let match = fullname.match(/(.*)\.(\w+)$/)
     // 文件基础名
@@ -167,7 +170,7 @@ function parseFile ({name, isFolder, basePath}) {
   }
 }
 function createPath (foldername, root) {
-  root = (root + '/').replace(/\/\//g, '/')
+  root = cleanPath(root + '/')
   return fetch('/ajax/asset/createDir', {
     method: 'POST',
     credentials: 'same-origin',
@@ -183,7 +186,7 @@ function createPath (foldername, root) {
 }
 // 删除文件、目录
 function deletePath (pathname, isFolder) {
-  pathname = pathname.replace(/\/\//g, '/')
+  pathname = cleanPath(pathname)
   let folderAPI = '/ajax/asset/delDir'
   let fileAPI = '/ajax/asset/del'
   let useAPI = isFolder ? folderAPI : fileAPI
@@ -274,7 +277,7 @@ export default {
       }
     },
     jumpTo (newPath) {
-      this.currentPath = newPath.replace(/\/+/g, '/')
+      this.currentPath = cleanPath(newPath)
       this.getData()
     },
     handleDelete (item) {
@@ -282,7 +285,7 @@ export default {
         confirmButtonText: '删除',
         type: 'warning'
       }).then(() => {
-        let path = this.currentPath + '/' + item.name;
+        let path = this.currentPath + '/' + item.name
         deletePath(path, item.isdir).then(() => {
           this.$message({
             type: 'success',
