@@ -90,15 +90,17 @@
       <el-button @click="handleCreate" type="button" size="small">
           <i class="el-icon-fa-folder"></i> 创建目录
       </el-button>
+      <el-button @click="uploadVisible = !uploadVisible" type="button" size="small">
+          <i class="el-icon-fa-upload"></i> 上传管理
+      </el-button>
       <span class="current-path">
         <span v-for="item in pathSplits">
           <i>/</i><a href="javascript:void(0)" @click="jumpTo(item.path)">{{item.part}}</a>
         </span>
       </span>
     </div>
-    <div class="upload-list">
+    <div class="upload-list" v-show="uploadVisible">
       <el-upload
-        class="upload-demo"
         action="/ajax/asset/upload"
         :data="{
           act: 'addFile',
@@ -106,8 +108,7 @@
         }"
         multiple
         :limit="3"
-        :file-list="uploadFileList"
-        :on-change="refresh"
+        :on-success="refresh"
         >
         <el-button size="small" type="primary">
           <i class="el-icon-fa-upload"></i> 上传
@@ -246,7 +247,7 @@ export default {
       pathSplits: [],
       files: [],
 
-      uploadFileList: [],
+      uploadVisible: false,
 
       domain: 'http://static.bh-lay.com',
       cdnDomain: 'http://dn-lay.qbox.me',
