@@ -1,7 +1,7 @@
 <template>
   <div class="navigation">
     <div style="height: 80px"></div>
-    <el-menu router class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+    <el-menu router class="el-menu-vertical-demo">
       <el-menu-item index="panel">
         <i class="el-icon-menu"></i>
         <span slot="title">快速操作</span>
@@ -18,7 +18,7 @@
           <el-menu-item index="content-friends">友情链接</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
-      <el-menu-item index="2">
+      <el-menu-item index="gallery">
         <i class="el-icon-picture"></i>
         <span slot="title">图库</span>
       </el-menu-item>

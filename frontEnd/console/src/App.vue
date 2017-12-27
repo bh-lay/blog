@@ -1,9 +1,11 @@
 <template>
   <div id="app">
-    <navigation></navigation>
     <div class="main">
-      <router-view/>
+      <div class="main-body">
+        <router-view/>
+      </div>
     </div>
+    <navigation></navigation>
   </div>
 </template>
 
@@ -21,11 +23,17 @@ export default {
 <style>
 html,
 body {
+	position: relative;
+  height: 100%;
 	margin: 0;
 	padding: 0;
+	overflow: hidden;
 }
 
 #app {
+	position: relative;
+  height: 100%;
+  overflow: hidden;
 	font-family: 'Avenir', Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -38,10 +46,17 @@ body {
 	bottom: 0;
 	width: 240px;
 	overflow: auto;
-	background: #545c64;
+	background: #fff;
 }
 
 .main {
+	position: relative;
+	height: 100%;
+	background: #545c64;
+  overflow: auto;
+}
+.main-body {
 	padding: 20px 20px 40px 260px;
+
 }
 </style>
