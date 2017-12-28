@@ -4,6 +4,7 @@ import Login from '@/pages/login/index'
 import Panel from '@/pages/panel/index'
 import Article from '@/pages/content/article'
 import Labs from '@/pages/content/labs'
+import Links from '@/pages/content/links'
 import Comments from '@/pages/content/comments'
 
 import Gallery from '@/pages/gallery/index'
@@ -42,6 +43,11 @@ let routes = [{
   path: '/content-comments',
   name: '评论管理',
   component: Comments
+},
+{
+  path: '/content-links',
+  name: '前端英雄榜',
+  component: Links
 }
 ]
 export default new Router({

@@ -25,7 +25,6 @@ function get_list(data,callback){
 			resJSON['count'] = count;
 			
 			collection.find({},{
-				time_create: 0,
 				adminScore: 0
 			},{
               	limit: limit_num

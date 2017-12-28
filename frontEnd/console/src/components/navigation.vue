@@ -15,7 +15,7 @@
           <el-menu-item index="content-article">博文</el-menu-item>
           <el-menu-item index="content-labs">实验室</el-menu-item>
           <el-menu-item index="content-comments">评论管理</el-menu-item>
-          <el-menu-item index="content-friends">友情链接</el-menu-item>
+          <el-menu-item index="content-links">前端英雄榜</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-menu-item index="gallery">
