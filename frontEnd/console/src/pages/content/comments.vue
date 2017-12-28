@@ -1,3 +1,9 @@
+<style>
+.user-info-item{
+  margin-right: 10px;
+}
+</style>
+ 
 <template>
   <div>
     <el-table
@@ -6,18 +12,20 @@
     <el-table-column type="expand">
       <template slot-scope="props">
         <el-row>
-          <el-col :span="12">
+          <el-col :span="8">
             评论在：<a :href="reverseUrl(props.row.cid)" target="_blank">{{props.row.cid}}</a>
           </el-col>
-          <el-col :span="12">
+          <el-col :span="16">
             <div v-if="props.row.user">
-              <i class="el-icon-fa-user"></i>
-              <span>{{ props.row.user.username }}</span>
-              <span v-if="props.row.user.blog">
+              <span class="user-info-item">
+                <i class="el-icon-fa-user"></i>
+                <span>{{ props.row.user.username }}</span>
+              </span>
+              <span v-if="props.row.user.blog" class="user-info-item">
                 <i class="el-icon-fa-home"></i>
                 <span>{{ props.row.user.blog }}</span>
               </span>
-              <span v-if="props.row.user.email">
+              <span v-if="props.row.user.email" class="user-info-item">
                 <i class="el-icon-fa-envelope"></i>
                 <span>{{ props.row.user.email }}</span>
               </span>
@@ -40,7 +48,7 @@
         label="发布日期"
         width="200">
         <template slot-scope="scope">
-          {{transformDate(scope.row.time_show)}}
+          {{transformDate(scope.row.time)}}
         </template>
       </el-table-column>
       <el-table-column
@@ -85,7 +93,7 @@ export default {
   },
   methods: {
     reverseUrl (id) {
-      return id === 'define-1' ? '/bless' : '/' + id.replace(/\-/g,'/')
+      return id === 'define-1' ? '/bless' : '/' + id.replace(/-/g, '/')
     },
     getData () {
       let queryStr = querystring.stringify({
