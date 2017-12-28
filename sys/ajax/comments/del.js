@@ -25,6 +25,10 @@ module.exports = function (ID,callback){
 			callback && callback(err);
 			return;
 		}
+		if (isNaN(parseInt(ID))) {
+			callback && callback('id 不合法');
+			return
+		}
 		collection.remove({
 			'_id' : ObjectID(ID)
 		},function(err,docs){
