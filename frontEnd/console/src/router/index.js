@@ -4,6 +4,8 @@ import Login from '@/pages/login/index'
 import Panel from '@/pages/panel/index'
 import Article from '@/pages/content/article'
 import Labs from '@/pages/content/labs'
+import Comments from '@/pages/content/comments'
+
 import Gallery from '@/pages/gallery/index'
 
 Vue.use(Router)
@@ -35,6 +37,11 @@ let routes = [{
   path: '/content-labs',
   name: '实验室',
   component: Labs
+},
+{
+  path: '/content-comments',
+  name: '评论管理',
+  component: Comments
 }
 ]
 export default new Router({
