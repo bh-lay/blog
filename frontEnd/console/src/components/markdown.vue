@@ -1,0 +1,67 @@
+<style lang="less" rel="stylesheet/less">
+  .mditor-outer {
+    line-height: initial;
+    textarea {
+      display: block;
+      min-height: 300px;
+      box-sizing: border-box;
+      width: 100%;
+      min-height: 300px;
+      resize: vertical;
+      padding: 10px;
+      font-size: 14px;
+      font-family: inherit;
+      border: none;
+      &:focus{
+        outline: none;
+      }
+    }
+    .article {
+      min-height: 300px;
+      max-height: 800px;
+      overflow: auto;
+      img {
+        max-width: 80%;
+      }
+    }
+  }
+</style>
+
+<template>
+  <el-tabs type="border-card" class="mditor-outer" @tab-click="handleClick">
+    <el-tab-pane label="编辑">
+      <textarea v-model="content"></textarea>
+    </el-tab-pane>
+    <el-tab-pane label="预览">
+      <div class="article" v-html="html"></div>
+    </el-tab-pane>
+  </el-tabs>
+</template>
+
+<script>
+import marked from 'marked'
+export default {
+  props: ['content'],
+  data () {
+    return {
+      html: ''
+    }
+  },
+  methods: {
+    handleClick (tab, event) {
+      console.log(tab)
+      this.getHtml()
+    },
+    getContent () {
+      let content = this.content
+      localStorage.setItem('mditor', content)
+      return content
+    },
+    getHtml () {
+      let text = this.getContent()
+      this.html = marked(text)
+      return this.html
+    }
+  }
+}
+</script>
