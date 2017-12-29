@@ -16,7 +16,9 @@
           <small>增加博客内容</small>
         </h3>
         <div class="list-group">
-          <el-button>写博文</el-button>
+          <router-link to="/editor-article/new">
+            <el-button>写博文</el-button>
+          </router-link>
           <el-button>实验室</el-button>
           <el-button>加友链</el-button>
         </div>
