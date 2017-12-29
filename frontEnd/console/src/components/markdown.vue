@@ -40,6 +40,7 @@
 
 <script>
 import marked from 'marked'
+import '../assets/github-article.less'
 export default {
   props: ['content'],
   data () {
