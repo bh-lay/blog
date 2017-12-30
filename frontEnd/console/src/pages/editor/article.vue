@@ -26,7 +26,7 @@
         <el-input type="textarea" v-model="form.intro"></el-input>
       </el-form-item>
       <el-form-item label="文章正文">
-        <markdown :content="form.content"></markdown>
+        <markdown ref="markdownEditor" :content="form.content"></markdown>
       </el-form-item>
       <el-form-item label="缩略图">
         <el-input v-model="form.cover"></el-input>
@@ -52,8 +52,13 @@
         </el-input>
         <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
       </el-form-item>
+      <el-form-item label="文章作者">
+        <el-input v-model="form.author"></el-input>
+      </el-form-item>
       <el-form-item label="发布时间">
-        <el-date-picker type="datetime" placeholder="选择日期" v-model="form.time_show" style="width: 100%;"></el-date-picker>
+        <el-date-picker
+          type="datetime"
+          placeholder="选择日期" v-model="form.time" style="width: 100%;"></el-date-picker>
       </el-form-item>
 
       <el-form-item>
@@ -71,6 +76,19 @@
 import markdown from '../../components/markdown'
 import querystring from 'querystring'
 
+function submit (data) {
+  data.category = 'blog'
+
+  return fetch('/ajax/add_edit', {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+    },
+    body: querystring.stringify(data)
+  })
+  .then(response => response.json())
+}
 function getBlogDtail (id) {
   let queryStr = querystring.stringify({
     format: 'markdown',
@@ -90,7 +108,7 @@ export default {
   data () {
     return {
       id: null,
-
+      dateFormat: 'yyyy-MM-dd hh:mm:ss',
       inputVisible: false,
       inputValue: '',
       form: {
@@ -99,7 +117,8 @@ export default {
         content: '',
         cover: '',
         tags: [],
-        time_show: ''
+        author: '剧中人',
+        time: new Date()
       }
     }
   },
@@ -108,12 +127,13 @@ export default {
     this.id = idInRouter === 'new' ? null : idInRouter
     if (this.id) {
       getBlogDtail(this.id).then(({code, detail}) => {
+        this.form.title = detail.title
+        this.form.intro = detail.intro
         this.form.content = detail.content
         this.form.cover = detail.cover
-        this.form.intro = detail.intro
         this.form.tags = detail.tags
-        this.form.time_show = detail.time_show
-        this.form.title = detail.title
+        this.form.author = detail.author
+        this.form.time = new Date(parseInt(detail.time_show, 10))
       })
     }
   },
@@ -138,7 +158,27 @@ export default {
       this.inputValue = ''
     },
     onSubmit () {
-      console.log('submit!')
+      let data = {
+        title: this.form.title,
+        intro: this.form.intro,
+        content: this.$refs.markdownEditor.getContent(),
+        cover: this.form.cover,
+        tags: this.form.tags.join(','),
+        author: this.form.author,
+        time_show: this.form.time.getTime(),
+        id: this.id
+      }
+      if (!data.title || !data.content) {
+        this.$alert('二货，咱写点儿干货行不行呐！')
+      }
+      submit(data).then(() => {
+        let msg = this.id ? '更新成功！' : '发布成功'
+        this.$alert(msg, {
+          callback: action => {
+            this.$router.push('/content-article')
+          }
+        })
+      })
     }
   }
 }

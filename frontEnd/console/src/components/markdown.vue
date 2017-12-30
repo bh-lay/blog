@@ -30,10 +30,10 @@
 <template>
   <el-tabs type="border-card" class="mditor-outer" @tab-click="handleClick">
     <el-tab-pane label="编辑">
-      <textarea v-model="content"></textarea>
+      <textarea v-model="markdownContent"></textarea>
     </el-tab-pane>
     <el-tab-pane label="预览">
-      <div class="article" v-html="html"></div>
+      <div class="article" v-html="htmlContent"></div>
     </el-tab-pane>
   </el-tabs>
 </template>
@@ -45,7 +45,13 @@ export default {
   props: ['content'],
   data () {
     return {
-      html: ''
+      markdownContent: '',
+      htmlContent: ''
+    }
+  },
+  watch: {
+    content: function (val) {
+      this.markdownContent = val
     }
   },
   methods: {
@@ -53,14 +59,14 @@ export default {
       this.getHtml()
     },
     getContent () {
-      let content = this.content
+      let content = this.markdownContent
       localStorage.setItem('mditor', content)
       return content
     },
     getHtml () {
       let text = this.getContent()
-      this.html = marked(text)
-      return this.html
+      this.htmlContent = marked(text)
+      return this.htmlContent
     }
   }
 }

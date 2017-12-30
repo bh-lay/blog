@@ -21,6 +21,7 @@
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
     "marked": "^0.3.9",
+    "moment": "^2.20.1",
     "querystring": "^0.2.0",
     "style-loader": "^0.19.1",
     "vue": "^2.5.2",
