@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/pages/login/index'
 import Panel from '@/pages/panel/index'
 import Article from '@/pages/content/article'
 import Labs from '@/pages/content/labs'
 import Links from '@/pages/content/links'
 import Comments from '@/pages/content/comments'
+
+import ArticleEditor from '@/pages/editor/article'
 
 import Gallery from '@/pages/gallery/index'
 
@@ -13,11 +14,6 @@ Vue.use(Router)
 let routes = [{
   path: '/',
   redirect: '/panel'
-},
-{
-  path: '/xxxx',
-  name: 'login',
-  component: Login
 },
 {
   path: '/panel',
@@ -48,7 +44,13 @@ let routes = [{
   path: '/content-links',
   name: '前端英雄榜',
   component: Links
+},
+{
+  path: '/editor-article/:id',
+  name: '博文发布',
+  component: ArticleEditor
 }
+
 ]
 export default new Router({
   routes
