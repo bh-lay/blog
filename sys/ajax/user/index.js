@@ -293,7 +293,7 @@ exports.login = function (connect,app){
   //开启 session 功能
   connect.session(function(session_this){
     //检测认证信息
-    if(session_this.get('login_auth') != 'ready'){
+    if(session_this.get('loginAuth') != 'ready'){
       //不是正常用户，阻止登录
       connect.write('json',{
         code : 201,
@@ -408,7 +408,7 @@ function getUserDetail(userID,callback){
 	});
 }
 //获取用户信息
-exports.detail = function (connect,app,userID){
+exports.detail = function (connect,app){
 	utils.parse.request(connect.request,function(err,data){
 		if(err){
 			connect.write('json',{
@@ -436,7 +436,8 @@ exports.detail = function (connect,app,userID){
 			connect.session(function(session_this){
 				//session存入comment预留信息
 				session_this.set({
-					comment_auth : 'ready'
+					comment_auth : 'ready',
+					loginAuth : 'ready'
 				});
 				
 				var uid = session_this.get('uid');
