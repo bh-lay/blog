@@ -50,11 +50,11 @@ module.exports = {
 
   build: {
     // Template for index.html
-    index: path.resolve(__dirname, '../dist/index.html'),
+    index: path.resolve(__dirname, '../../../web/topic/console.html'),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../../../static/build/single-page/'),
-    assetsSubDirectory: '/build/single-page/',
+    assetsRoot: path.resolve(__dirname, '../../../static/'),
+    assetsSubDirectory: 'build/console/',
     assetsPublicPath: '//dn-lay.qbox.me/',
 
     /**
