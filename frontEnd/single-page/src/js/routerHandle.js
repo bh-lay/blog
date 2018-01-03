@@ -123,7 +123,8 @@ export default function () {
 
   // 全局控制 a 链接的打开方式
   utils.bind(utils.query('body'), 'click', 'a', function (e) {
-    let url = this.getAttribute('href');
+    let url = this.getAttribute('href')
+    let isUseReplace = this.hasAttribute('data-lofox-replace')
     // 为JS脚本准备的链接
     if (isHrefForScript(url)) {
       // 阻止浏览器默认事件，处理因base设置，导致此类链接在火狐中新窗口打开问题，感谢 @紫心蕊
@@ -131,7 +132,11 @@ export default function () {
     } else if (lofox.isInRouter(url)) {
       // 路由中配置的地址
       setTimeout(function () {
-        lofox.push(url);
+        if (isUseReplace) {
+          lofox.replace(url);
+        } else {
+          lofox.push(url);
+        }
         lofox.refresh();
       });
       e.preventDefault();

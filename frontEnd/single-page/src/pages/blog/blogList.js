@@ -31,18 +31,14 @@ function getTag (callback) {
   });
 }
 
-function renderTags (dom, tagName, callback) {
+function renderTags (dom, tagName) {
   getTag(function (data) {
     let tagItemTpl = require('./blogListTag.html');
     let html = juicer(tagItemTpl, data);
-    let selector = tagName ? ('a[data-tag=' + tagName + ']') : 'a';
+    let selector = tagName ? `a[data-tag=${tagName}]` : 'a';
 
     dom.innerHTML = html;
     utils.addClass(utils.query(selector, dom), 'active');
-    utils.bind(dom, 'click', 'a', function () {
-      let tag = this.getAttribute('data-tag');
-      callback && callback(tag);
-    });
   });
 }
 
@@ -142,20 +138,8 @@ function page (global, param) {
       });
     }
   });
-  utils.bind(this.nodeList, 'click', '.tags a', function () {
-    let tag = this.getAttribute('data-tag');
-    global.replace('/blog?tag=' + tag);
-    global.refresh();
-  });
   // 处理标签功能
-  renderTags(utils.query('.articleListPage-tags .content', node), pageTag, function (tag) {
-    if (tag === 'null') {
-      global.replace('/blog');
-    } else {
-      global.replace('/blog?tag=' + tag);
-    }
-    global.refresh();
-  });
+  renderTags(utils.query('.articleListPage-tags .content', node), pageTag);
 }
 
 page.prototype = {
