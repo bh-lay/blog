@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html,
+body{
+    position: relative;
+    height: 100%;
+}
+body {
+    font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+}
+
+#app {
+    position: relative;
+    height: 100%;
+    max-width: 660px;
+    min-width: 320px;
+    margin: 0 auto;
+}
+
+.chat-window {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 40px;
+    width: 100%;
+    overflow: hidden;
+    background: #eee;
+}
+.chat-list {
+    padding: 20px 0;
+    transition: .5s;
+}
+
+.chat-item {
+    margin-bottom: 20px;
+    padding: 10px 10px;
+    font-size: 0;
+}
+
+.chat-item .avatar {
+    display: inline-block;
+    vertical-align: text-top;
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #eee;
+    box-shadow: 0 0 2px rgba(0, 0, 0, .1);
+}
+
+.chat-item .content {
+    display: inline-block;
+    vertical-align: text-top;
+    max-width: 70%;
+    margin: 0 20px;
+    white-space: pre-wrap;
+}
+
+.chat-item .content .nickname {;
+    color: #666;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 12px;
+    height: 12px;
+    line-height: 12px;
+}
+
+.chat-item .content .text {
+    position: relative;
+    max-width: 350px;
+    margin-left: -2px;
+    padding: 12px 8px 12px 12px;
+    min-height: 3em;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    background: #fafafa;
+    line-height: 1.5;
+    text-align: left;
+    font-size: 16px;
+    color: #333;
+}
+
+.chat-item-other .content .text:after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: -7px;
+    width: 12px;
+    height: 12px;
+    border-style: solid;
+    border-color: #eee;
+    border-width: 0 0 1px 1px;
+    background: #fafafa;
+    transform: rotate(45deg);
+}
+
+.chat-item-me {
+    text-align: right;
+}
+
+.chat-item-me .content .text {
+    margin-right: -2px;
+    border-color: #9fe658;
+    background-color: #9fe658;
+    box-sizing: border-box;
+    border-radius: 0.4em;
+    line-height: 1.2;
+    text-align: left;
+    color: rgb(51, 51, 51);
+    vertical-align: top;
+    display: inline-block;
+}
+
+.chat-item-me .content .text:after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    right: -6px;
+    width: 12px;
+    height: 12px;
+    background: #9fe658;
+    transform: rotate(45deg);
+}
