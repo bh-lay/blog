@@ -6,29 +6,28 @@
     <meta name="viewport"
           content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
     <title>Hidrupal：水滴们，我想采访你</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.less">
 </head>
 <body>
 <div id="app">
     <div class="chat-window" ref="chat-window">  
       <div class="chat-list" ref="chat-list" :style="{transform: 'translateY(' + -scrollTop + 'px)'}">
         <div v-for="chatItem in chatList" class="chat-item">
-            <div v-if="chatItem.from === 'me'" class="chat-item-me">
-                <div class="content">
-                    <div class="nickname">{{user.me.nickname}}</div>
-                    <div class="text">{{chatItem.text}}</div>
-                </div>
-                <span class="avatar" :style="{backgroundImage: 'url(' + user.me.avatar + ')'}"></span>
-            </div>
-            <div v-else class="chat-item-other">
+            <div :class="[chatItem.from === 'me' ? 'chat-item-me' : 'chat-item-other']">
                 <span class="avatar" :style="{backgroundImage: 'url(' + user[chatItem.from].avatar + ')'}"></span>
                 <div class="content">
                     <div class="nickname">{{user[chatItem.from].nickname}}</div>
-                    <div class="text">{{chatItem.text}}</div>
+                    <div class="content-body">
+                      <div v-if="chatItem.text" class="text">{{chatItem.text}}</div>
+                      <div v-else class="image" :style="{backgroundImage: 'url(' + chatItem.image + ')'}">
+                        <div :style="{paddingTop: chatItem.sizePercent * 100 + '%'}"></div>
+                      </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+  </div>
 </div>
 <script src="vue.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -47,10 +46,6 @@
       '不过听说你最近已经离开上海，回到了合肥发展，很可惜以后不能常在一起交流了。'
     },
     {
-      from: 'me',
-      text: '是的，时间过得挺快的，感觉昨天还在上海五角场瞎转悠，转眼回到合肥已经有三个月了。不在同一座城市生活，自然不能像以前隔三差五就聚在一起，不过现在互联网这么发达，上海也会是我以后常去的城市，交流的机会还是很多的。'
-    },
-    {
       from: 'HiDrupal',
       text: '我对合肥了解并不多，相信很多小伙伴们跟我一样很好奇，为什么会突然选择去合肥发展呢 ？'
     },
@@ -59,56 +54,56 @@
       text: '其实到现在我自己也很好奇，当时是如何做出离开上海的决定。\n' +
       '我在上海生活已经五年多了，早就习惯了上海的快节奏，也很享受上海的各种便捷，还有在上海非常容易汇集志同道合的小伙伴。离开上海前还有一份还不错的工作，也有更多可以去挑战的工作机会。总之离开上海对我自己来说是一个非常大的遗憾'
     },
-    {
-      from: 'HiDrupal',
-      text: '遗憾肯定会有，相信合肥肯定有吸引到你的地方吧？'
-    },
-    {
-      from: 'me',
-      text: '合肥是我家乡的省会城市，也是我学生时代生活的地方。合肥虽然没有上海那么浓厚的互联网底蕴，但是近些年的变化已经是日新月异，是一个值得参与的发展时期。\n' +
-      '非常幸运在今年六月份收到科大讯飞的邀请，有机会加入大数据研究院的这样一个优秀的团队，在经过简短的思考之后，便做了离开上海的决定。\n' +
-      '现在想想，其实也蛮冲动的。'
-    },
-    {
-      from: 'HiDrupal',
-      text: '虽看听起来很草率，但是相信你肯定是经过深思熟虑的。经过这三个月的工作，感觉如何？'
-    },
-    {
-      from: 'me',
-      text: '讯飞现在处在技术和业务稳步上升的阶段，在这样的大环境下个人有着很大的施展空间，同时也有着更宽的职责边界。所以只要有想法敢于承担，就有机会创造更大的价值。\n' +
-      '在讯飞最直观的感受就是尽管大胆做事，自由度很高。\n' +
-      '唯一不太舒服的一点就是，讯飞近一年的发展相当迅猛，迅猛到基础设施已经跟不上人员的发展了。每天各种排队，不得不说，讯飞排队已经成了一条风景线了。'
-    },
-    {
-      from: 'HiDrupal',
-      text: '是嘛，排队都能成风景，听起来挺有趣的！通过聊天可以感觉出来，你在生活中应该是一个比较善于发现乐趣的人。工作之余你有哪些爱好？'
-    },
-    {
-      from: 'me',
-      text: '其实我是一个挺容易自嗨的人，不太喜欢玩游戏，对体育也不感冒。\n' +
-      '最近一年多迷上了摄影，航拍还有全景拍摄，通过这些爱好学到了不少有意思的东西，也算学有所成，东拼西凑弄出了一些勉强能叫「作品」的东西。\n' +
-      '我自己还有一个小博客，其实文章并没有写多少，主要精力都花在了交互设计的实践，以及前后端编程上。可以算得上是我自己技术成长中的一片练兵场，对我意义很大。'
-    },
-    {
-      from: 'me',
-      text: '这些爱好虽然没有带来直观上的收益，但是潜移默化影响了自己看待新事物的态度，也认识了不同圈子里各种有趣的人，开阔了自己的眼界。'
-    },
-    {
-      from: 'xxo',
-      text: '确实挺有意思，猜想你的业余生活一定很丰富！\n' +
-      '最后我们来聊一聊drupal社区吧，很多小伙伴会觉得，drupal在国内的应用场景还是比较少，开发者数量也不算多，这一点你怎么看？'
-    },
-    {
-      from: 'me',
-      text: '其实这个话题我是最没有话语权的，因为我并不是一个drupal开发者。\n' +
-      '简单说说我的想法吧。客户、老板其实并不关心技术选型，但这一点只是和我们开发者密切相关。一般来说在做技术选型的时候，比较在意的是这几点，有：个人技术倾向、开发效率、运行性能、文档详细度，以及社区活跃度。'
-    },
-    {
-      from: 'me',
-      text: '在web开发的技术选型上，相信drupal在这几项上的得分都是比较高的。单纯从模块贡献的数量上就可以看出，drupal已经是WEB快速开发的首选了。\n' +
-      '至于国内的社区，可以看得出以东方龙马为首的一票人都在努力推动着，这一点并不是等着几个人去努力就能坐享其成的，国内交流的圈子还是要靠我们每个人去努力。\n' +
-      '相信我们搞HiDrupal也是这样的初衷。'
-    },
+    // {
+    //   from: 'HiDrupal',
+    //   text: '遗憾肯定会有，相信合肥肯定有吸引到你的地方吧？'
+    // },
+    // {
+    //   from: 'me',
+    //   text: '合肥是我家乡的省会城市，也是我学生时代生活的地方。合肥虽然没有上海那么浓厚的互联网底蕴，但是近些年的变化已经是日新月异，是一个值得参与的发展时期。\n' +
+    //   '非常幸运在今年六月份收到科大讯飞的邀请，有机会加入大数据研究院的这样一个优秀的团队，在经过简短的思考之后，便做了离开上海的决定。\n' +
+    //   '现在想想，其实也蛮冲动的。'
+    // },
+    // {
+    //   from: 'HiDrupal',
+    //   text: '虽看听起来很草率，但是相信你肯定是经过深思熟虑的。经过这三个月的工作，感觉如何？'
+    // },
+    // {
+    //   from: 'me',
+    //   text: '讯飞现在处在技术和业务稳步上升的阶段，在这样的大环境下个人有着很大的施展空间，同时也有着更宽的职责边界。所以只要有想法敢于承担，就有机会创造更大的价值。\n' +
+    //   '在讯飞最直观的感受就是尽管大胆做事，自由度很高。\n' +
+    //   '唯一不太舒服的一点就是，讯飞近一年的发展相当迅猛，迅猛到基础设施已经跟不上人员的发展了。每天各种排队，不得不说，讯飞排队已经成了一条风景线了。'
+    // },
+    // {
+    //   from: 'HiDrupal',
+    //   text: '是嘛，排队都能成风景，听起来挺有趣的！通过聊天可以感觉出来，你在生活中应该是一个比较善于发现乐趣的人。工作之余你有哪些爱好？'
+    // },
+    // {
+    //   from: 'me',
+    //   text: '其实我是一个挺容易自嗨的人，不太喜欢玩游戏，对体育也不感冒。\n' +
+    //   '最近一年多迷上了摄影，航拍还有全景拍摄，通过这些爱好学到了不少有意思的东西，也算学有所成，东拼西凑弄出了一些勉强能叫「作品」的东西。\n' +
+    //   '我自己还有一个小博客，其实文章并没有写多少，主要精力都花在了交互设计的实践，以及前后端编程上。可以算得上是我自己技术成长中的一片练兵场，对我意义很大。'
+    // },
+    // {
+    //   from: 'me',
+    //   text: '这些爱好虽然没有带来直观上的收益，但是潜移默化影响了自己看待新事物的态度，也认识了不同圈子里各种有趣的人，开阔了自己的眼界。'
+    // },
+    // {
+    //   from: 'xxo',
+    //   text: '确实挺有意思，猜想你的业余生活一定很丰富！\n' +
+    //   '最后我们来聊一聊drupal社区吧，很多小伙伴会觉得，drupal在国内的应用场景还是比较少，开发者数量也不算多，这一点你怎么看？'
+    // },
+    // {
+    //   from: 'me',
+    //   text: '其实这个话题我是最没有话语权的，因为我并不是一个drupal开发者。\n' +
+    //   '简单说说我的想法吧。客户、老板其实并不关心技术选型，但这一点只是和我们开发者密切相关。一般来说在做技术选型的时候，比较在意的是这几点，有：个人技术倾向、开发效率、运行性能、文档详细度，以及社区活跃度。'
+    // },
+    // {
+    //   from: 'me',
+    //   text: '在web开发的技术选型上，相信drupal在这几项上的得分都是比较高的。单纯从模块贡献的数量上就可以看出，drupal已经是WEB快速开发的首选了。\n' +
+    //   '至于国内的社区，可以看得出以东方龙马为首的一票人都在努力推动着，这一点并不是等着几个人去努力就能坐享其成的，国内交流的圈子还是要靠我们每个人去努力。\n' +
+    //   '相信我们搞HiDrupal也是这样的初衷。'
+    // },
     {
       from: 'HiDrupal',
       text: '的确，社区的事情需要每个人去努力，同时也需要有一部分人更多的奉献，这样才能吸引大家持续的参与其中。\n' +
@@ -117,7 +112,12 @@
     {
       from: 'me',
       text: '谢谢，同时祝HiDrupal越办越好。'
-    }
+    },
+    {
+      from: 'me',
+      image: __uri('chat-image/1.jpg'),
+      sizePercent: .67
+    },
   ];
   var user = {
       me: {
@@ -143,17 +143,19 @@
     created: function () {
       var me = this;
       var timer = setInterval(function () {
+        var nodeOuter = me.$refs['chat-window'];
+        var nodeInner = me.$refs['chat-list'];
         if(chatList.length){
           me.chatList.push(chatList.shift());
-          var nodeOuter = me.$refs['chat-window'];
-          var nodeInner = me.$refs['chat-list'];
-          me.$nextTick(() => {
+          me.$nextTick(function(){
             if (nodeOuter) {
               me.scrollTop = Math.max(nodeInner.clientHeight - nodeOuter.clientHeight, 0);
             }
           });
         } else {
-          clearInterval(timer)
+          clearInterval(timer);
+          nodeOuter.classList.add('normal-scroll')
+          nodeOuter.scrollTop = nodeInner.clientHeight - nodeOuter.clientHeight;
         }
       }, 1000)
     }
