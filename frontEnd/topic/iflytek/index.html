@@ -28,6 +28,9 @@
         </div>
     </div>
   </div>
+  <div class="input-area">
+    {{typedText}}
+  </div>
 </div>
 <script src="vue.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -136,43 +139,67 @@
     var sliceLength = 0;
     function step(){
       sliceLength++;
-      callback(text.slice(0, sliceLength))
+      stepCallback(text.slice(0, sliceLength))
       if (sliceLength >= text.length) {
-        onEnd();
+        setTimeout(onEnd, 700)
       } else{
-        setTimeout(step, 200)
+        setTimeout(step, 160)
       }
     }
-
+    setTimeout(step, 1000)
   }
   new Vue({
     el: '#app',
     data: {
       scrollTop: 0,
+      typedText: '',
       user: user,
       chatList: []
     },
     mounted: function () {
       var me = this;
-      var nodeOuter = me.$refs['chat-window'];
-      var nodeInner = me.$refs['chat-list'];
-      function chatRobot(){
+      function chatItem(){
         if(chatList.length){
-          me.chatList.push(chatList.shift());
-          me.$nextTick(function(){
-            if (nodeOuter) {
-              me.scrollTop = Math.max(nodeInner.clientHeight - nodeOuter.clientHeight, 0);
-            }
-            setTimeout(function(){
-              chatRobot()
-            }, 1500);
-          });
+          // typed
+          let newItem = chatList.shift();
+          function sendMsg(){
+            me.chatList.push(newItem);
+            me.scrollToEnd();
+            // 进入下一次聊天
+            chatItem()
+          }
+          if(newItem.from === 'me' && !!newItem.text) {
+            typed(newItem.text, function(text){
+              me.typedText = text;
+            }, function () {
+              me.typedText = '';
+              sendMsg();
+            })
+          } else {
+            setTimeout(sendMsg, 1500);
+          }
         } else {
-          nodeOuter.classList.add('normal-scroll')
-          nodeOuter.scrollTop = nodeInner.clientHeight - nodeOuter.clientHeight;
+          me.setNormalScroll()
         }
       }
-      chatRobot();
+      chatItem();
+    },
+    methods: {
+      scrollToEnd: function () {
+        var nodeOuter = this.$refs['chat-window'];
+        var nodeInner = this.$refs['chat-list'];
+        this.$nextTick(function(){
+          this.scrollTop = Math.max(nodeInner.clientHeight - nodeOuter.clientHeight, 0);
+        });
+      },
+      setNormalScroll: function () {
+        var nodeOuter = this.$refs['chat-window'];
+        var nodeInner = this.$refs['chat-list'];
+        setTimeout(function(){
+          nodeOuter.classList.add('normal-scroll')
+          nodeOuter.scrollTop = nodeInner.clientHeight - nodeOuter.clientHeight;
+        }, 500);
+      }
     }
   })
 </script>

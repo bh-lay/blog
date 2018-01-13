@@ -34,7 +34,7 @@ body {
     bottom: 40px;
     width: 100%;
     overflow: hidden;
-    background: #eee;
+    background: #f4f4f4;
     .chat-list {
         padding: 20px 0;
         transition: .5s;
@@ -137,7 +137,7 @@ body {
                 text-align: left;
                 color: @color_3;
             }
-            &:after {
+            &:before {
                 content: '';
                 position: absolute;
                 top: 20px;
@@ -149,4 +149,13 @@ body {
             }
         }
     }
+}
+
+.input-area{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    height: 40px;
+    border-top: 1px solid #eee;
 }
