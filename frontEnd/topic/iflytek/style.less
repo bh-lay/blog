@@ -92,7 +92,8 @@ body {
                 color: @color_2;
             }
             .image{
-                width: 200px;
+                position: relative;
+                width: 260px;
                 background: no-repeat center;
                 background-size: cover;
             }
@@ -103,17 +104,17 @@ body {
     .content {
         .text {
             &:after {
-            content: '';
-            position: absolute;
-            top: 20px;
-            left: -7px;
-            width: 12px;
-            height: 12px;
-            border-style: solid;
-            border-color: @border_color_1;
-            border-width: 0 0 1px 1px;
-            background: #fafafa;
-            transform: rotate(45deg);
+                content: '';
+                position: absolute;
+                top: 20px;
+                left: -7px;
+                width: 12px;
+                height: 12px;
+                border-style: solid;
+                border-color: @border_color_1;
+                border-width: 0 0 1px 1px;
+                background: #fafafa;
+                transform: rotate(45deg);
             }
         }
     }
