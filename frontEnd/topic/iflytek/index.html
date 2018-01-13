@@ -201,7 +201,10 @@
         }, 500);
       }
     }
-  })
+  });
+  document.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+  });
 </script>
 </body>
 </html>
