@@ -20,7 +20,7 @@
                 <div class="content">
                     <div class="nickname">{{user[chatItem.from].nickname}}</div>
                     <div class="content-body">
-                      <div v-if="chatItem.text" class="text">{{chatItem.text}}<a :href="chatItem.link" v-if="chatItem.link">@站外链接</a></div>
+                      <div v-if="chatItem.text" class="text">{{chatItem.text}}<a :href="chatItem.link" v-if="chatItem.link" target="_blank">@站外链接</a></div>
                       <div v-else class="image" :style="{backgroundImage: 'url(' + chatItem.image + ')'}">
                         <div :style="{paddingTop: chatItem.sizePercent * 100 + '%'}"></div>
                       </div>
@@ -44,20 +44,21 @@
           <div class="mask" :class="[isTyping ? 'hidden' : '']">讯飞语音输入法</div>
       </div>
   </div>
-  <div class="loading-mask">
-    <div class="text"><p>正在加入群聊</p><h3>讯飞大家庭</h3></div>
-  </div>
-  <div class="detail">
+  <div class="detail" v-if="isShowShare">
+    <a href="javascript:void(0)" class="close" @click="isShowShare = false">×</a>
     <div class="article">
       <h3>“光影随心”摄影比赛地址</h3>
       <div class="qr-code">
         <img src="images/qrcode.png" alt="二维码">
       </div>
       <a href="http://kcloudtest.iflytek.com/photowall/">http://kcloudtest.iflytek.com/photowall/</a>
-      <div class="random-pic">
+      <div v-if="randomPicUrl" class="random-pic" :style="{backgroundImage: 'url(' + randomPicUrl + ')'}">
         <div class="title">随机作品</div>
       </div>
     </div>
+  </div>
+  <div class="loading-mask">
+    <div class="text"><p>正在加入群聊</p><h3>讯飞大家庭</h3></div>
   </div>
 </div>
 <script type="text/javascript" src="vue.js"></script>

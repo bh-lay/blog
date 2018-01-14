@@ -6,15 +6,15 @@
     },
     {
       from: 'a',
-      text: '新人快自我介绍'
+      text: '新人做下自我介绍'
     },
     {
       from: 'me',
-      text: '大家好，我是剧中人，大数据研究院写代码的'
+      text: '大家好，我是剧中人，大数据研究院的同学'
     },
     {
       from: 'me',
-      text: '前几天一不小心在大家朋友圈刷屏的「中国声谷看雪景」也是我的作品'
+      text: '前几天一不小心在大家朋友圈刷屏的「中国声谷看雪景」就是我的作品'
     },
     {
       from: 'b',
@@ -113,6 +113,17 @@
         avatar: __uri('avatar/c.jpg')
       }
   };
+  var bigPic = [
+    __uri('images/1.jpg'),
+    __uri('images/2.jpg'),
+    __uri('images/3.jpg'),
+    __uri('images/4.jpg'),
+    __uri('images/5.jpg'),
+    __uri('images/6.jpg'),
+    __uri('images/7.jpg'),
+    __uri('images/8.jpg'),
+    __uri('images/9.jpg')
+  ];
   function typed(text, stepCallback, onEnd){
     var sliceLength = 0;
     function step(){
@@ -135,6 +146,10 @@
       isForbiddenOverflow: true,
       // 是否正在输入
       isTyping: false,
+      
+      isShowShare: false,
+      randomPicUrl: '',
+
       user: user,
       chatList: [
         {
@@ -193,6 +208,11 @@
           }
         }
         chatItem();
+      },
+      showSharePop: function () {
+        var randomIndex = Math.round(Math.random() * (bigPic.length - 1));
+        this.randomPicUrl = bigPic[randomIndex];
+        this.isShowShare = true;
       }
     }
   });
@@ -238,5 +258,5 @@ document.body.addEventListener('touchmove', function(evt) {
   }
 });
 function showdetail(){
-  console.log(1345)
+  app.showSharePop();
 }

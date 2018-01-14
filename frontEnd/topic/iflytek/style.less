@@ -56,7 +56,7 @@ body {
 #app {
     position: relative;
     height: 100%;
-    max-width: 600px;
+    max-width: 700px;
     min-width: 320px;
     margin: 0 auto;
 }
@@ -262,6 +262,19 @@ body {
         font-size: 14px;
         color: #fff;
     }
+    .close{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        text-decoration: none;
+        color: #fff;
+        font: normal 20px/36px "simsun";
+        transition: 0.1s;
+    }
     &:after{
         content: '';
         position: absolute;
@@ -301,7 +314,7 @@ body {
         }
         .random-pic{
             position: relative;
-            background: url('images/2.jpg') no-repeat center bottom #000;
+            background: no-repeat center bottom #eee;
             background-size: cover;
             &:after{
                 content: '';
@@ -321,5 +334,10 @@ body {
                 background: rgba(0, 0, 0, .3);
             }
         }
+    }
+}
+@media all and (orientation : landscape) { 
+    .random-pic{
+        display: none;
     }
 }
