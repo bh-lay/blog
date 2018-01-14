@@ -20,7 +20,7 @@
                 <div class="content">
                     <div class="nickname">{{user[chatItem.from].nickname}}</div>
                     <div class="content-body">
-                      <div v-if="chatItem.text" class="text">{{chatItem.text}}</div>
+                      <div v-if="chatItem.text" class="text">{{chatItem.text}}<a :href="chatItem.link" v-if="chatItem.link">@站外链接</a></div>
                       <div v-else class="image" :style="{backgroundImage: 'url(' + chatItem.image + ')'}">
                         <div :style="{paddingTop: chatItem.sizePercent * 100 + '%'}"></div>
                       </div>
@@ -61,19 +61,19 @@
     },
     {
       from: 'me',
-      text: '大家好，我是剧中人，在大数据研究院写代码的'
+      text: '大家好，我是剧中人，大数据研究院写代码的'
     },
     {
       from: 'me',
-      text: '前几天一不小心在大家朋友圈刷屏的「中国声谷看雪景」就是我的作品'
+      text: '前几天一不小心在大家朋友圈刷屏的「中国声谷看雪景」也是我的作品'
     },
     {
       from: 'b',
-      text: '原来是你啊，幸会幸会'
+      text: '原来是你拍的啊，幸会幸会'
     },
     {
       from: 'c',
-      text: '作品挺美的，赞👍'
+      text: '作品挺美的，赞 👍'
     },
     {
       from: 'a',
@@ -126,7 +126,7 @@
     },
     {
       from: 'me',
-      text: '投票就是点赞啦，每个人有十个点赞的机会，剩余的赞可以支持下其他小伙伴的作品呦。'
+      text: '投票就是点赞啦，每个人有十个点赞的机会，剩余的赞可以支持下其他小伙伴的作品呦'
     },
     {
       from: 'c',
@@ -134,8 +134,17 @@
     },
     {
       from: 'me',
-      text: '哦，忘了发了，可以点这个链接，就可以进入投票页面啦！'
+      text: '哦，忘发了，这个链接里有进入投票页面方式！'
     },
+    {
+      from: 'me',
+      text: '多谢大伙儿了',
+      link: 'http://xxx.xxx.xxx/'
+    },
+    {
+      from: 'a',
+      text: '6666666666'
+    }
   ];
   var user = {
       me: {

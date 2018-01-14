@@ -20,6 +20,7 @@ body {
 }
 body {
     font-family: @font_family_1;
+    background: #3d505c
 }
 .loading-mask{
     position: absolute;
@@ -55,7 +56,7 @@ body {
 #app {
     position: relative;
     height: 100%;
-    max-width: 660px;
+    max-width: 600px;
     min-width: 320px;
     margin: 0 auto;
 }
@@ -168,12 +169,19 @@ body {
                 text-align: left;
                 font-size: 16px;
                 color: @color_2;
+                a{
+                    margin-left: 10px;
+                    color: #428cd7;
+                    text-decoration: underline;
+                }
             }
             .image{
                 position: relative;
                 width: 230px;
                 background: no-repeat center;
                 background-size: cover;
+                border-radius: 4px;
+                overflow: hidden;
             }
         }
     }
