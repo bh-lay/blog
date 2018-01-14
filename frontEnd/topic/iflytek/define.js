@@ -66,7 +66,7 @@
     },
     {
       from: 'me',
-      text: '多谢啦，我的作品一共有两份，一份是「旅行随拍」里面是我17年旅行时拍摄的照片，另一份是「中国声谷看雪景」上次全景的同名作品'
+      text: '多谢啦，我的作品一共有两份，一份是「旅行随拍」里面是我17年旅行时拍摄的照片，另一份叫「中国声谷看雪景」是上次全景的同名作品'
     },
     {
       from: 'me',
@@ -224,7 +224,7 @@
       mask.parentNode.removeChild(mask);
       app.startChat();
     }, 200);
-  }, 1000);
+  }, 1200);
   // forbidden wechat scroll
   var overscroll = function(el) {
   el.addEventListener('touchstart', function() {

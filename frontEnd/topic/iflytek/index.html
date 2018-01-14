@@ -20,7 +20,7 @@
                 <div class="content">
                     <div class="nickname">{{user[chatItem.from].nickname}}</div>
                     <div class="content-body">
-                      <div v-if="chatItem.text" class="text">{{chatItem.text}}<a :href="chatItem.link" v-if="chatItem.link" target="_blank">@站外链接</a></div>
+                      <div v-if="chatItem.text" class="text">{{chatItem.text}}<a :href="chatItem.link" v-if="chatItem.link">@站外链接</a></div>
                       <div v-else class="image" :style="{backgroundImage: 'url(' + chatItem.image + ')'}">
                         <div :style="{paddingTop: chatItem.sizePercent * 100 + '%'}"></div>
                       </div>
@@ -51,7 +51,7 @@
       <div class="qr-code">
         <img src="images/qrcode.png" alt="二维码">
       </div>
-      <a href="http://kcloudtest.iflytek.com/photowall/">http://kcloudtest.iflytek.com/photowall/</a>
+      <a href="http://kcloudtest.iflytek.com/photowall/" target="_blank">http://kcloudtest.iflytek.com/photowall/</a>
       <div v-if="randomPicUrl" class="random-pic" :style="{backgroundImage: 'url(' + randomPicUrl + ')'}">
         <div class="title">随机作品</div>
       </div>
