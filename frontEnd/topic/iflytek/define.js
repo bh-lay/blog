@@ -260,3 +260,19 @@ document.body.addEventListener('touchmove', function(evt) {
 function showdetail(){
   app.showSharePop();
 }
+
+// 图片预加载
+(function () {
+  // 先预加载头像
+  for(var i in user){
+    new Image().src = user[i].avatar;
+  }
+  // 再预加载聊天中用到的图片
+  setTimeout(function(){
+    chatList.forEach(function(item){
+      if(item.image){
+        new Image().src = item.image;
+      }
+    });
+  }, 1500)
+})()
