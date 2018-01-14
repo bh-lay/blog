@@ -30,8 +30,19 @@
         </div>
     </div>
   </div>
-  <div class="input-bar">
-    <div class="typed-area">{{typedText}}</div>
+  <div class="footer">
+      <div class="input-bar">
+        <div class="typed-area">{{typedText}}</div>
+      </div>
+      <div class="sound-input">
+          <div class="sound-wave">
+              <span class="line1"></span>
+              <span class="line2"></span>
+              <span class="line3"></span>
+              <span class="line4"></span>
+          </div>
+          <div class="mask" :class="[isTyping ? 'hidden' : '']">讯飞语音输入法</div>
+      </div>
   </div>
 </div>
 <div class="loading-mask">
@@ -164,6 +175,8 @@
       scrollTop: 0,
       typedText: '',
       isForbiddenOverflow: true,
+      // 是否正在输入
+      isTyping: false,
       user: user,
       chatList: [
         {
@@ -207,8 +220,10 @@
             if(newItem.from === 'me' && !!newItem.text) {
               typed(newItem.text, function(text){
                 me.typedText = text;
+                me.isTyping = true;
               }, function () {
                 me.typedText = '';
+                me.isTyping = false;
                 sendMsg();
               })
             } else {
