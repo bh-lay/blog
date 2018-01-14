@@ -183,7 +183,7 @@
         function chatItem(){
           if(chatList.length){
             // typed
-            let newItem = chatList.shift();
+            var newItem = chatList.shift();
             function sendMsg(){
               me.chatList.push(newItem);
               me.scrollToEnd();
