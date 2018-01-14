@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport"
@@ -13,7 +12,10 @@
     <div class="chat-window" ref="chat-window">  
       <div class="chat-list" ref="chat-list" :style="{transform: 'translateY(' + -scrollTop + 'px)'}">
         <div v-for="chatItem in chatList" class="chat-item">
-            <div :class="[chatItem.from === 'me' ? 'chat-item-me' : 'chat-item-other']">
+          <div v-if="chatItem.from === 'system'" class="system-msg">
+            <div class="msg">{{chatItem.text}}</div>
+          </div>
+            <div v-else :class="[chatItem.from === 'me' ? 'chat-item-me' : 'chat-item-other']">
                 <span class="avatar" :style="{backgroundImage: 'url(' + user[chatItem.from].avatar + ')'}"></span>
                 <div class="content">
                     <div class="nickname">{{user[chatItem.from].nickname}}</div>
@@ -32,20 +34,27 @@
     <div class="typed-area">{{typedText}}</div>
   </div>
 </div>
+<div class="loading-mask">
+  <div class="text"><p>正在加入群聊</p><h3>讯飞大家庭</h3></div>
+</div>
 <script src="vue.js" type="text/javascript"></script>
 <script type="text/javascript">
   var chatList = [
+    {
+      from: 'system',
+      text: '[剧中人]已加入群聊'
+    },
     {
       from: 'a',
       text: '新人快自我介绍'
     },
     {
       from: 'me',
-      text: '大家好，我是剧中人，在大数据写页面的'
+      text: '大家好，我是剧中人，在大数据研究院写代码的'
     },
     {
       from: 'me',
-      text: '前几天一不小心刷了大家朋友圈的「中国声谷看雪景」是我的作品'
+      text: '前几天一不小心在大家朋友圈刷屏的「中国声谷看雪景」就是我的作品'
     },
     {
       from: 'b',
@@ -97,7 +106,7 @@
     },
     {
       from: 'me',
-      text: '多谢啦，我的作品一共有两份,一份是「中国声谷看雪景」同名作品，另一份是「旅行随拍」，封面图是'
+      text: '多谢啦，我的作品一共有两份,一份是「中国声谷看雪景」同名作品，另一份是「旅行随拍」'
     },
     {
       from: 'me',
@@ -156,36 +165,16 @@
       typedText: '',
       isForbiddenOverflow: true,
       user: user,
-      chatList: []
-    },
-    mounted: function () {
-      var me = this;
-      function chatItem(){
-        if(chatList.length){
-          // typed
-          let newItem = chatList.shift();
-          function sendMsg(){
-            me.chatList.push(newItem);
-            me.scrollToEnd();
-            // 进入下一次聊天
-            chatItem()
-          }
-          if(newItem.from === 'me' && !!newItem.text) {
-            typed(newItem.text, function(text){
-              me.typedText = text;
-            }, function () {
-              me.typedText = '';
-              sendMsg();
-            })
-          } else {
-            setTimeout(sendMsg, 1500);
-          }
-        } else {
-          me.isForbiddenOverflow = false;
-          me.setNormalScroll()
+      chatList: [
+        {
+          from: 'a',
+          text: '有新人加群了，我去处理一下'
+        },
+        {
+          from: 'c',
+          text: '快拉进来看看！'
         }
-      }
-      chatItem();
+      ]
     },
     methods: {
       scrollToEnd: function () {
@@ -202,10 +191,48 @@
           nodeOuter.classList.add('normal-scroll')
           nodeOuter.scrollTop = nodeInner.clientHeight - nodeOuter.clientHeight;
         }, 500);
+      },
+      startChat: function () {
+        var me = this;
+        function chatItem(){
+          if(chatList.length){
+            // typed
+            let newItem = chatList.shift();
+            function sendMsg(){
+              me.chatList.push(newItem);
+              me.scrollToEnd();
+              // 进入下一次聊天
+              chatItem()
+            }
+            if(newItem.from === 'me' && !!newItem.text) {
+              typed(newItem.text, function(text){
+                me.typedText = text;
+              }, function () {
+                me.typedText = '';
+                sendMsg();
+              })
+            } else {
+              setTimeout(sendMsg, 1500);
+            }
+          } else {
+            me.isForbiddenOverflow = false;
+            me.setNormalScroll()
+          }
+        }
+        chatItem();
       }
     }
   });
 
+  var mask = document.querySelector('.loading-mask');
+  setTimeout(function(){
+    mask.classList.add('close');
+    setTimeout(function(){
+      mask.parentNode.removeChild(mask);
+      app.startChat();
+    }, 500);
+  }, 1000);
+  // forbidden wechat scroll
   var overscroll = function(el) {
   el.addEventListener('touchstart', function() {
     var top = el.scrollTop

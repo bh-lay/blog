@@ -20,6 +20,37 @@ body {
 body {
     font-family: @font_family_1;
 }
+.loading-mask{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: #fafafa;
+    transition: .4s ease-out;
+    opacity: 1;
+    .text{
+        position: absolute;
+        width: 100%;
+        height: 60px;
+        top: 50%;
+        left: 0;
+        margin-top: -30px;
+        line-height: 30px;
+        text-align: center;
+        font-size: 16px;
+        color: #333;
+        p{
+            color: #859dad;
+        }
+        h3{
+            color: #526a7a;
+        }
+    }
+    &.close{
+        opacity: 0;
+    }
+}
 #app {
     position: relative;
     height: 100%;
@@ -34,7 +65,7 @@ body {
     bottom: 50px;
     width: 100%;
     overflow: hidden;
-    background: #f4f4f4;
+    background: #f2f2f3;
     .chat-list {
         padding: 20px 0;
         transition: .5s;
@@ -170,5 +201,17 @@ body {
                 transform: rotate(45deg);
             }
         }
+    }
+}
+.system-msg{
+    text-align: center;
+    .msg{
+        display: inline-block;
+        padding: 5px 20px;
+        background: #ddd;
+        border-radius: 4px;
+        line-height: 20px;
+        font-size: 14px;
+        color: #fff;
     }
 }
