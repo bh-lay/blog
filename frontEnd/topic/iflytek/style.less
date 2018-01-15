@@ -22,6 +22,21 @@ body {
     font-family: @font_family_1;
     background: #3d505c
 }
+.show-detail-action{
+    position: absolute;
+    width: 100px;
+    height: 36px;;
+    bottom: 200px;
+    right: 0;
+    padding: 0 10px 0 15px;
+    background: rgba(255,255,255,.6);
+    box-shadow: 0 0 2px rgba(0,0,0,.1);
+    border-radius: 18px 0 0 18px;
+    line-height: 36px;
+    text-decoration: none;
+    font-size: 12px;
+    color: #2e3438;
+}
 .loading-mask{
     position: absolute;
     width: 100%;
@@ -254,9 +269,9 @@ body {
     &:before{
         content: '拜托分享到小群，帮我拉个票呗！';
         position: absolute;
-        top: 110px;
+        top: 95px;
         left: 20px;
-        right: 105px;
+        right: 100px;
         line-height: 20px;
         text-align: right;
         font-size: 14px;
@@ -273,6 +288,7 @@ body {
         text-decoration: none;
         color: #fff;
         font-family: "simsun";
+        font-weight: bold;
         font-size: 24px;
     }
     &:after{
@@ -281,7 +297,7 @@ body {
         top: 20px;
         right: 20px;
         width: 80px;
-        height: 110px;
+        height: 90px;
         background: url('images/share-it.png') no-repeat right top;
         background-size: contain;
     }
@@ -298,7 +314,7 @@ body {
             font-weight: normal
         }
         .qr-code{
-            margin-bottom: 10px;
+            margin-bottom: 6px;
             img{
                 display: inline-block;
                 width: 80px;
@@ -308,7 +324,13 @@ body {
         }
         a{
             display: block;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+            font-size: 12px;
+            color: inherit
+        }
+        p{
+            display: block;
+            margin-bottom: 10px;
             font-size: 12px;
             color: inherit
         }

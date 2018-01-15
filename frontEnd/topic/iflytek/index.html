@@ -44,6 +44,7 @@
           <div class="mask" :class="[isTyping ? 'hidden' : '']">讯飞语音输入法</div>
       </div>
   </div>
+  <a class="show-detail-action" href="javascript:showdetail()">点击获取群聊攻略</a>
   <div class="detail" v-if="isShowShare">
     <a href="javascript:void(0)" class="close" @click="isShowShare = false">×</a>
     <div class="article">
@@ -52,6 +53,7 @@
         <img src="images/qrcode.png" alt="二维码">
       </div>
       <a href="http://kcloudtest.iflytek.com/photowall/" target="_blank">http://kcloudtest.iflytek.com/photowall/</a>
+      <p>我的作品：「旅行随拍-剧中人」、「中国声谷看雪景」</p>
       <div v-if="randomPicUrl" class="random-pic" :style="{backgroundImage: 'url(' + randomPicUrl + ')'}">
         <div class="title">随机作品</div>
       </div>
