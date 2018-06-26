@@ -34,15 +34,14 @@ var blog = {
   /**
    * 是否支持 canvas
    */
-  function supports_canvas() {
-    return !!document.createElement('canvas').getContext;
-  }
-
+  var supportsCanvas=  !!document.createElement('canvas').getContext;
+  var suuportPromise = !!window.Promise;
+  var suuportSessionStorage = !!window.sessionStorage
   /**
    * 检测是否为高级浏览器
    *
    */
-  if(supports('transition') && supports('transform') && supports_canvas()){
+  if(supports('transition') && supports('transform') && supportsCanvas && suuportPromise && suuportSessionStorage){
     blog.isAdvancedBrowser = true;
   }else{
     blog.isAdvancedBrowser = false;
