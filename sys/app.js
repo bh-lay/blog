@@ -1,6 +1,7 @@
 //引入app框架
 var app_factory = require('../sys/core/index.js'),
-    CronJob = require('cron').CronJob;
+    CronJob = require('cron').CronJob,
+    isbot = require('node-isbot');
 
 //创建app
 var app = new app_factory();
@@ -11,11 +12,13 @@ var app = new app_factory();
  */
 var singlePage = require('./controller/singlePage.js');
 function views_select(connect,callback){
-  //cookie有相应字段
-  if(connect.cookie('ui_version') == 'js'){
+  var isBotRequest = isbot(connect.req.headers['user-agent']);
+  var isMarkJSVersion = connect.cookie('ui_version') == 'js';
+  // 不是爬虫，并且 cookie 中已经标记使用单页版本
+  if (!isBotRequest && isMarkJSVersion) {
     singlePage.render(connect,app);
-  }else{
-    //无cookie标识，执行回调默认视图
+  } else {
+    // 无 cookie 标识，执行回调默认视图
     callback && callback();
   }
 }

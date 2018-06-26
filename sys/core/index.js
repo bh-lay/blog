@@ -138,7 +138,7 @@ function APP(){
     }
   });
 
-  server.listen(config.port, 0,0,0,0);
+  server.listen(config.port);
   console.log('server start with port ' + config.port);
 };
 
