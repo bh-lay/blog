@@ -57,7 +57,7 @@
         <template slot-scope="scope">
           <a href="javascript:void(0)"></a>
           <a href="javascript:void(0)"></a>
-          <el-button type="text" size="small">编辑</el-button>
+          <el-button type="text" size="small" @click="handleEdit(scope.row)">编辑</el-button>
           <el-button @click="handleDelete(scope.row)" type="text" size="small">删除</el-button>
         </template>
       </el-table-column>
@@ -71,6 +71,18 @@
       layout="prev, pager, next"
       :total="totalSize">
     </el-pagination>
+
+    <el-dialog
+      title="修改评论"
+      :visible.sync="editorVisible"
+      width="35%">
+      <commentsEditor
+        v-if="editorVisible"
+        :id="selectedID"
+        @update="getData()"
+        @close="editorVisible = false"
+      ></commentsEditor>
+    </el-dialog>
   </div>
 </template>Î
 
@@ -78,14 +90,21 @@
 
 import querystring from 'querystring'
 import dateFormat from 'dateformat'
+import commentsEditor from '../editor/comments.vue'
 
 export default {
+  components: {
+    commentsEditor
+  },
   data () {
     return {
       currentPage: 1,
       pageSize: 10,
       totalSize: 0,
-      tableData: []
+      tableData: [],
+
+      editorVisible: false,
+      selectedID: null
     }
   },
   created () {
@@ -138,6 +157,10 @@ export default {
           this.getData()
         })
       }).catch(() => {})
+    },
+    handleEdit (item) {
+      this.editorVisible = true
+      this.selectedID = item._id
     }
   }
 }
