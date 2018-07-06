@@ -66,7 +66,7 @@
           <span v-if="id">修改文章</span>
           <span v-if="!id">发布文章</span>
         </el-button>
-        <el-button>取消</el-button>
+        <el-button @click="onCancel">取消</el-button>
       </el-form-item>
     </el-form>
   </el-card>
@@ -178,6 +178,11 @@ export default {
             this.$router.push('/content-article')
           }
         })
+      })
+    },
+    onCancel () {
+      this.$router.push({
+        path: '/content-article'
       })
     }
   }
