@@ -86,7 +86,7 @@ function updateFrom720 (callback) {
       'Origin': 'http://720yun.com',
       'Pragma': 'no-cache',
       'Referer': 'http://720yun.com/u/19023widcyv',
-      'App-Authorization': '',
+      'App-Authorization': 'mv593k78gqm0g8kim1e7enlpdwylrez1',
       'App-Key': 'eByjUyLDG2KtkdhuTsw2pY46Q3ceBPdT'
     }
   }, function (err, response, body) {
