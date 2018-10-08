@@ -10,7 +10,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const isProduction = process.env.NODE_ENV === 'production';
 const BUILD_PATH = path.resolve(ROOT_PATH, '../../static/build/multi-page/');
 const devPublicPath = 'http://127.0.0.1:8088/build/multi-page/';
-const prodPublicPath = '//dn-lay.qbox.me/build/multi-page/';
+const prodPublicPath = 'http://static.bh-lay.com/build/multi-page/';
 const publicPath = isProduction ? prodPublicPath : devPublicPath;
 
 const config = {

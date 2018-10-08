@@ -11,7 +11,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 const BUILD_PATH = path.resolve(ROOT_PATH, '../../static/build/single-page/');
-const cdnPath = isProduction ? '//dn-lay.qbox.me' : '//127.0.0.1:8088';
+const cdnPath = isProduction ? 'http://static.bh-lay.com' : '//127.0.0.1:8088';
 const publicPath = cdnPath + '/build/single-page/';
 
 const config = {

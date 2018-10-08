@@ -35,5 +35,5 @@ fis.media('production')
     })
     // 线上使用 CDN 域名
     .match('*', {
-        domain: '//dn-lay.qbox.me'
+        domain: 'http://static.bh-lay.com'
     });

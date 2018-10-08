@@ -55,7 +55,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../../../static/'),
     assetsSubDirectory: 'build/console/',
-    assetsPublicPath: '//dn-lay.qbox.me/',
+    assetsPublicPath: 'http://static.bh-lay.com/',
 
     /**
      * Source Maps

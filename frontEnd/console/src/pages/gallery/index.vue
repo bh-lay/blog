@@ -250,7 +250,7 @@ export default {
       uploadVisible: false,
 
       domain: 'http://static.bh-lay.com',
-      cdnDomain: 'http://dn-lay.qbox.me',
+      cdnDomain: 'http://static.bh-lay.com',
       selectedFile: {},
       pathDialogVisible: false
     }

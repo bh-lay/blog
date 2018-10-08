@@ -40,7 +40,7 @@ exports.render = function (connect,app){
         list.forEach(function(item){
           item.url = utils.trim(item.url);
           item.screen_link = (item.url || '').replace(/http\:\/\/(www\.|)|\/$|/g,'');
-          item.avatar = item.avatar || '//dn-lay.qbox.me/user/default.jpg';
+          item.avatar = item.avatar || 'http://static.bh-lay.com/user/default.jpg';
         });
         //获取视图
         app.views('multi-page/links',{
