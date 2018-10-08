@@ -68,10 +68,14 @@ function saveDataToDataBase (data) {
 //从720yun更新数据
 function updateFrom720 (callback) {
   request({
-    url: 'http://apiv4.720yun.com/author/19023widcyv/products?sort=0&page=1&selected=2',
+    url: 'https://apiv4.720yun.com/author/19023widcyv/products?sort=0&page=1&selected=2',
     method: 'GET',
     headers: {
       'User-Agent': clientUserAgent,
+      ':authority': 'apiv4.720yun.com',
+      ':method': 'OPTIONS',
+      ':path': '/author/19023widcyv/products?sort=0&page=1&selected=2',
+      ':scheme': 'https',
       'Accept': 'application/json, text/plain, */*',
       'Accept-Language': 'zh-CN,zh;q=0.8,en;q=0.6,en-US;q=0.4',
       'Access-Control-Request-Headers': 'app-authorization,app-key',
