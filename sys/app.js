@@ -12,7 +12,7 @@ var app = new app_factory();
  */
 var singlePage = require('./controller/singlePage.js');
 function views_select(connect,callback){
-  var isBotRequest = isbot(connect.req.headers['user-agent']);
+  var isBotRequest = isbot(connect.request.headers['user-agent']);
   var isMarkJSVersion = connect.cookie('ui_version') == 'js';
   // 不是爬虫，并且 cookie 中已经标记使用单页版本
   if (!isBotRequest && isMarkJSVersion) {
