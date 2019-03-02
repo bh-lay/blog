@@ -23,7 +23,9 @@ const getConnect = () => {
 const getCollection = (collectionName) => {
 	var MongoClient = require('mongodb').MongoClient
 	return new Promise((resolve, reject) => {
-		MongoClient.connect(mongoConnectUrl, function (err, client) {
+		MongoClient.connect(mongoConnectUrl, {
+			useNewUrlParser: true
+		}, (err, client) => {
 			if (err) {
 				reject()
 			} else {
