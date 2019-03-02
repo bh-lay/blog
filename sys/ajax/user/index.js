@@ -95,7 +95,7 @@ function signup(){
  */
 function get_list(data,callback){
 	var limit_num = parseInt(data['limit']) || 10,
-			skip_num = parseInt(data['skip'])|| 0
+		skip_num = parseInt(data['skip'])|| 0
 	
 	var resJSON = {
 		'code':200,
@@ -325,7 +325,6 @@ exports.login = function (connect,app){
 		utils.parse.request(req,function(error,data){
 			var email = data['email']
 			var password = utils.parse.md5(data['password'] || '')
-      console.log('password', password)
 			if(!email || password.length < 2){
 				connect.write('json',{
 					code: 2,
@@ -433,7 +432,6 @@ exports.detail = function (connect,app){
 					})
 					return
 				}
-				console.log('uid', uid)
 				getUserDetail(uid,function(err,detail){
 					if(err){
 						connect.write('json',{

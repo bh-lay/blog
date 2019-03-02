@@ -8,40 +8,40 @@ var utils = require('../core/utils/index.js')
 
 function add(parm,collection_name,callback){	
 	DB.getCollection(collection_name)  
-	.then(({collection, closeDBConnect}) => {
-		parm.id = utils.createID()
+		.then(({collection, closeDBConnect}) => {
+			parm.id = utils.createID()
 
-		collection.insert(parm,function(err){
-			if(err){
-				callback && callback(err)
-				return
-			}
-			callback && callback(null)
+			collection.insert(parm,function(err){
+				if(err){
+					callback && callback(err)
+					return
+				}
+				callback && callback(null)
 			
-			closeDBConnect()
+				closeDBConnect()
+			})
+		}).catch(err => {
+			callback && callback(err)
 		})
-	}).catch(err => {
-		callback && callback(err);
-	});
 }
 function edit(parm,collection_name,callback){
 	DB.getCollection(collection_name)
-	.then(({collection, closeDBConnect}) => {
-		collection.updateOne({
-			id: parm.id
-		}, {
-			$set:parm
-		}, function(err) {
-			if(err) {
-				callback && callback(err)
-			}else {
-				callback && callback(null)
-			}
-			closeDBConnect()
+		.then(({collection, closeDBConnect}) => {
+			collection.updateOne({
+				id: parm.id
+			}, {
+				$set:parm
+			}, function(err) {
+				if(err) {
+					callback && callback(err)
+				}else {
+					callback && callback(null)
+				}
+				closeDBConnect()
+			})
+		}).catch(err => {
+			callback && callback(err)
 		})
-	}).catch(err => {
-		callback && callback(err);
-	})
 }
 
 ////////////////////////////////////////////////

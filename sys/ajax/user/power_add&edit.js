@@ -1,7 +1,6 @@
 /**
  * @author bh-lay
  * 
- * demo $.post('/ajax/user',{},function(d){console.log(d)})
  */
 
 var DB = require('../../core/DB.js')
