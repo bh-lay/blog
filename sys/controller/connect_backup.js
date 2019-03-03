@@ -1,9 +1,7 @@
 /**
  * @author bh-lay
  */
-var https = require('https');
-var querystring = require('querystring');
-var mongo = require('../mod/DB');
+var DB = require('../mod/DB');
 var sina = require('../lib/sinaSDK.js');
 
 function matchUser(param,callback){
@@ -12,65 +10,71 @@ function matchUser(param,callback){
 	if(!UID){
 		callback('where is UID ？',null);
 	}
+	DB.getCollection('SNSuser')
+		.then(({collection, closeDBConnect}) => {
+			collection.find({'from':from,'UID' : UID}).toArray(function(err, docs) {
 
-	var method = mongo.start();
-	method.open({'collection_name':'SNSuser'},function(err,collection){
-		collection.find({'from':from,'UID' : UID}).toArray(function(err, docs) {
+				if(docs.length == 0){
+					//创建一条用户
+					collection.insert(param,function(err,result){
+						closeDBConnect()
+						err = err || null
+						callback&&callback(err,result)
+					})
+				}else{
+					//更新用户信息
+					collection.update({'from':from,'UID' : UID}, {$set:param}, function(err,docs) {
+						closeDBConnect()
+						err = err || null
+						callback&&callback(err,docs)
+					})
+				}
+			})
+		}).catch(err => {
+			callback && callback(err)
+		})
 
-			if(docs.length == 0){
-		//创建一条用户
-				collection.insert(param,function(err,result){
-					method.close();
-					var err = err || null;
-					callback&&callback(err,result);
-				});
-			}else{
-		//更新用户信息
-				collection.update({'from':from,'UID' : UID}, {$set:param}, function(err,docs) {
-					method.close();
-					var err = err || null;
-					callback&&callback(err,docs);
-				});
-			}
-		});
-	});
 }
 //从用户组中获取权限分配
-function get_power(method,user_group,callback){
-	method.open({'collection_name':'user_group'},function(err,collection){
-		collection.find({'user_group':user_group}).toArray(function(err, docs) {
-			var power_data = docs[0]['power'];
-			callback&&callback(power_data);
-		});
-	});
+function get_power(user_group,callback){
+	DB.getCollection('user_group')
+		.then(({collection, closeDBConnect}) => {
+			collection.find({'user_group':user_group}).toArray(function(err, docs) {
+				var power_data = docs[0]['power']
+				callback&&callback(power_data)
+				closeDBConnect()
+			})
+		}).catch(err => {
+			callback && callback(err)
+		})
 }
 //从本地用户库中获取用户信息
 function getUserSession(id,callback){
-	var method = mongo.start();
-
-	method.open({'collection_name':'user'},function(err,collection){
-		//
-		collection.find({'id':id}).toArray(function(err, docs) {
-			if(docs.length == 0){
-				//用户不存在
-				callback&&callback('userid is not exist !');
-				return
-			}
-		
-			var user_group = docs[0]['user_group'];
-			var username = docs[0]['username'];
-			var userid = docs[0]['id'];
-			get_power(method,user_group,function(power_data){
-				method.close();
-				callback&&callback(null,{
-					'user_group' : user_group,
-					'username' : username, 
-					'user_id' : userid,
-					'power_data' : power_data
-				});				
-			});
-		});
-	});
+	DB.getCollection('user')
+		.then(({collection, closeDBConnect}) => {
+			collection.find({'id':id}).toArray(function(err, docs) {
+				if(docs.length == 0){
+					//用户不存在
+					callback&&callback('userid is not exist !');
+					return
+				}
+			
+				var user_group = docs[0]['user_group'];
+				var username = docs[0]['username'];
+				var userid = docs[0]['id'];
+				get_power(user_group,function(power_data){
+					closeDBConnect();
+					callback&&callback(null,{
+						'user_group' : user_group,
+						'username' : username, 
+						'user_id' : userid,
+						'power_data' : power_data
+					})
+				})
+			})
+		}).catch(err => {
+			callback && callback(err)
+		})
 }
 //登录或注册页面
 function loginOrRegister(res_this){

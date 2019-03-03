@@ -16,44 +16,41 @@ var utils = require('../../core/utils/index.js')
 //增加一条用户记录
 function add(parm,callback){
 	parm = parm || {}
-	var method = mongo.start()
-	method.open({
-		collection_name: 'user'
-	},function(err,collection){
-		parm.id = utils.createID()
+	DB.getCollection('user')
+		.then(({collection, closeDBConnect}) => {
+			parm.id = utils.createID()
 
-		collection.insert(parm,function(err,result){
-			if(err) {
-				callback && callback(err)
-			}else {
-				callback && callback(null)
-			}
-			method.close()
+			collection.insert(parm,function(err){
+				if(err) {
+					callback && callback(err)
+				}else {
+					callback && callback(null)
+				}
+				closeDBConnect()
+			})
+		}).catch(err => {
+			callback && callback(err)
 		})
-	})
 }
 //修改用户记录
 function edit(parm,callback){
-	var parm = parm
-	
-	var method = mongo.start()
-		
-	method.open({
-		collection_name: 'user'
-	},function(error,collection){
-		collection.update({
-			id : parm.id
-		}, {
-			$set: parm
-		}, function(err,docs) {
-			if(err) {
-				callback && callback(err)
-			}else {
-				callback && callback(null)
-			}
-			method.close()
+	DB.getCollection('user')
+		.then(({collection, closeDBConnect}) => {
+			collection.update({
+				id : parm.id
+			}, {
+				$set: parm
+			}, function(err) {
+				if(err) {
+					callback && callback(err)
+				}else {
+					callback && callback(null)
+				}
+				closeDBConnect()
+			})
+		}).catch(err => {
+			callback && callback(err)
 		})
-	})
 }
 
 /**
@@ -70,24 +67,19 @@ function signup(){
 		param['user_group'] = 'user'
 		param['id'] = utils.createID()
 		if(param['email']&&param['password']){
-			var method = mongo.start()
-			method.open({
-				collection_name : 'user'
-			},function(err,collection){
-				collection.find({}, {}).toArray(function(err, docs) {
-					collection.insert(param,function(err,result){
-						method.close()
-						if(err){
-							console.log(err)
-						}
-						that.res.json({
-							code : 1,
-							id : param.id ,
-							msg : 'sucess !'
+			DB.getCollection('user')
+				.then(({collection, closeDBConnect}) => {
+					collection.find({}, {}).toArray(function() {
+						collection.insert(param,function(err){
+							closeDBConnect()
+							that.res.json({
+								code : 1,
+								id : param.id ,
+								msg : 'sucess !'
+							})
 						})
 					})
 				})
-			})
 		}else{
 			that.res.json({
 				'code' : 2,
@@ -102,101 +94,98 @@ function signup(){
  * 
  */
 function get_list(data,callback){
-	var data = data,
-		limit_num = parseInt(data['limit'])||10,
-		skip_num = parseInt(data['skip'])||0
+	var limit_num = parseInt(data['limit']) || 10,
+			skip_num = parseInt(data['skip'])|| 0
 	
 	var resJSON = {
 		'code':200,
 		'limit':limit_num,
 		'skip':skip_num,
 	}
-	var method = mongo.start()
-	method.open({
-		collection_name: 'user'
-	},function(err,collection){
-		//count the all list
-		collection.countDocuments(function(err,count){
-			resJSON['count'] = count
-			
-			collection.find({},{
-				limit:limit_num
-			}).sort({
-				id: -1
-			}).skip(skip_num).toArray(function(err, docs) {
-				method.close()
-				if(err){
-					resJSON.code = 2
-				}else{
-					for(var i=0,total=docs.length;i<total;i++){
-						delete docs[i].password
+	DB.getCollection('user')
+		.then(({collection, closeDBConnect}) => {
+			collection.countDocuments(function(err,count){
+				resJSON['count'] = count
+				
+				collection.find({},{
+					limit:limit_num
+				}).sort({
+					id: -1
+				}).skip(skip_num).toArray(function(err, docs) {
+					closeDBConnect()
+					if(err){
+						resJSON.code = 2
+					}else{
+						for(var i=0,total=docs.length;i<total;i++){
+							delete docs[i].password
+						}
+						resJSON['list'] = docs
 					}
-					resJSON['list'] = docs
-				}
-				callback&&callback(resJSON)
+					callback&&callback(resJSON)
+				})
 			})
+		}).catch(err => {
+			callback && callback(err)
 		})
-	})
 }
 
-function get_power(method,user_group,callback){
-	method.open({'collection_name':'user_group'},function(err,collection){
-		collection.find({'user_group':user_group}).toArray(function(err, docs) {
-			var power_data = docs[0]['power']
-			callback&&callback(power_data)
+function get_power(user_group,callback){
+	DB.getCollection('user_group')
+		.then(({collection, closeDBConnect}) => {
+			collection.find({'user_group':user_group}).toArray(function(err, docs) {
+				closeDBConnect()
+				var power_data = docs[0]['power']
+				callback&&callback(power_data)
+			})
+		}).catch(err => {
+			callback && callback(err)
 		})
-	})
 }
 //处理login
 function login_handle(connect,session_this,username,password){
 	//matche user
-	var method = mongo.start()
+	DB.getCollection('user')
+		.then(({collection, closeDBConnect}) => {
 
-	method.open({
-		collection_name: 'user'
-	},function(err,collection){
-		//
-		if(err){
+			collection.find({
+				email: username,
+				password: password
+			}).toArray(function(err, docs) {
+				if(docs.length > 0){
+					var user = docs[0]
+					var user_group = user['user_group']
+					get_power(user_group,function(power_data){
+						closeDBConnect()
+						var userid = user['id']
+						session_this.set({
+							user_group : user_group,
+							username : user['username'], 
+							uid : userid,
+							power_data : power_data
+						})
+						if(user.password){
+							delete user.password
+						}
+						
+						connect.write('json',{
+							code: 200,
+							user: user
+						})
+					})
+				}else{
+					//账号or密码 错了
+					connect.write('json',{
+						code: 2,
+						msg: '二货，帐号密码输错了吧！'
+					})
+				}
+			})
+		}).catch(() => {
 			connect.write('json',{
 				code: 4,
 				msg: '咱数据库被拐跑了！'
 			})
-			return
-		}
-		collection.find({
-			email: username,
-			password: password
-		}).toArray(function(err, docs) {
-			if(docs.length > 0){
-				var user = docs[0]
-				var user_group = user['user_group']
-				get_power(method,user_group,function(power_data){
-					method.close()
-					var userid = user['id']
-					session_this.set({
-						user_group : user_group,
-						username : user['username'], 
-						uid : userid,
-						power_data : power_data
-					})
-					if(user.password){
-						delete user.password
-					}
-					
-					connect.write('json',{
-						code: 200,
-						user: user
-					})
-				})
-			}else{
-				//账号or密码 错了
-				connect.write('json',{
-					code: 2,
-					msg: '二货，帐号密码输错了吧！'
-				})
-			}
 		})
-	})
 }
 
 

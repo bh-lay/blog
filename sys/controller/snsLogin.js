@@ -59,73 +59,71 @@ exports.github = function (connect,app){
 				sendResult({
 					'code' : 202,
 					'msg' : '获取用户信息失败',
-				});
+				})
 				return
 			}
-			
-			var method = DB.start();
-			method.open({'collection_name':'user'},function(err,collection){
-				if(err){
+			DB.getCollection('user')
+				.then(({collection, closeDBConnect}) => {
+					collection.find({'github_id':data.id}).toArray(function(err, docs) {
+						if(docs.length == 0){
+							//新用户
+							var usrInfo = {
+								'username' : data.name,
+								'email' : data.email || null,
+								'user_group' : 'user',
+								'github_id' : data.id
+							}
+							DB.add_user(usrInfo,function(err,id){
+								if(err){
+									res_this.json({
+										'code':5,
+										'msg':'创建用户失败！'
+									})
+									return
+								}
+								usrInfo.id = id
+								login(connect,usrInfo,function(err){
+									if(err){
+										sendResult({
+											'code': 6,
+											'msg':'创建用户成功，登陆失败！'
+										})
+										return
+									}
+									sendResult({
+										'code': 200,
+										'msg':'创建用户成功，且登陆成功！！',
+										'user' : usrInfo
+									})
+									closeDBConnect()
+								})
+								
+							})
+						}else{
+							//用户已存在
+							login(connect,docs[0],function(err){
+								if(err){
+									sendResult({
+										'code': 7,
+										'msg':'登陆失败！'
+									})
+									return
+								}
+								sendResult({
+									'code' : 200,
+									'msg' : '登陆成功！',
+									'user' : docs[0]
+								})
+								closeDBConnect()
+							})
+						}
+					})
+				}).catch(err => {
 					sendResult({
 						'code':4,
 						'msg':'咱数据库被拐跑了！'
 					});
-					return
-				}
-				
-				collection.find({'github_id':data.id}).toArray(function(err, docs) {
-					if(docs.length == 0){
-						//新用户
-						var usrInfo = {
-							'username' : data.name,
-							'email' : data.email || null,
-							'user_group' : 'user',
-							'github_id' : data.id
-						};
-						DB.add_user(usrInfo,function(err,id){
-							if(err){
-								res_this.json({
-									'code':5,
-									'msg':'创建用户失败！'
-								});
-								return
-							}
-							usrInfo.id = id;
-							login(connect,usrInfo,function(err){
-								if(err){
-									sendResult({
-										'code': 6,
-										'msg':'创建用户成功，登陆失败！'
-									});
-									return
-								}
-								sendResult({
-									'code': 200,
-									'msg':'创建用户成功，且登陆成功！！',
-									'user' : usrInfo
-								});
-							});
-							
-						});
-					}else{
-						//用户已存在
-						login(connect,docs[0],function(err){
-							if(err){
-								sendResult({
-									'code': 7,
-									'msg':'登陆失败！'
-								});
-								return
-							}
-							sendResult({
-								'code' : 200,
-								'msg' : '登陆成功！',
-								'user' : docs[0]
-							});
-						});
-					}
-				});
-			});
+				})
 		});
 	});
 };

@@ -4,53 +4,42 @@
  * demo $.post('/ajax/user',{},function(d){console.log(d)})
  */
 
-var mongo = require('../../core/DB.js')
+var DB = require('../../core/DB.js')
 
 function add(parm,res_this){
-	var parm = parm
-	
-	var method = mongo.start()
-		
-	method.open({'collection_name':'user_group'},function(err,collection){
-		collection.find({}, {}).toArray(function(err, docs) {
+	DB.getCollection('user_group')
+		.then(({collection, closeDBConnect}) => {
 			parm.id = parse.createID()
 
-			collection.insert(parm,function(err,result){
-				if(err){
-					console.log(err)
-				}
+			collection.insert(parm,function(){
 				res_this.json({
 					'code' : 1 ,
 					'id' : parm.id ,
 					'msg' : 'sucess'
 				})
-				method.close()
+				closeDBConnect()
 			})
 		})
-	})
 }
 
 function edit(parm,res_this){
-	var parm = parm
-	
-	var method = mongo.start()
-		
-	method.open({'collection_name':'user_group'},function(error,collection){
-		collection.update({'id':parm.id}, {$set:parm}, function(err,docs) {
-			if(err) {
-				res_this.json({
-					'code' : 2 ,
-					'msg' : 'modified failure !'
-				})
-			}else {
-				res_this.json({
-					'code' : 1,
-					'msg' : 'modified success !'
-				})
-			}
-			method.close()
+	DB.getCollection('user_group')
+		.then(({collection, closeDBConnect}) => {
+			collection.update({'id':parm.id}, {$set:parm}, function(err,docs) {
+				if(err) {
+					res_this.json({
+						'code' : 2 ,
+						'msg' : 'modified failure !'
+					})
+				}else {
+					res_this.json({
+						'code' : 1,
+						'msg' : 'modified success !'
+					})
+				}
+				closeDBConnect()
+			})
 		})
-	})
 }
 
 exports.render = function (req,res_this){

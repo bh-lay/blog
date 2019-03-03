@@ -11,29 +11,22 @@ function logError(reportData){
 }
 
 //对外接口
-exports.render = function (connect, app){
-	var reportData = connect.url.search;
+exports.render = function (connect){
+	var reportData = connect.url.search
 
-	connect.write('define',200);
+	connect.write('define',200)
 
-	var method = DB.start();
-
-	method.open({
-		collection_name: 'report'
-	},function(err,collection){
-		if(err){
-			logError(reportData);
-			method.close();
-			return
-		}
-
-		collection.insert(reportData,function(err){
-			method.close();
-			if(err){
-				logError(reportData);
-				return
-			}
-
-		});
-	});
-};
+	DB.getCollection('report')
+		.then(({collection, closeDBConnect}) => {
+			collection.insert(reportData,function(err){
+				closeDBConnect()
+				if(err){
+					logError(reportData)
+					return
+				}
+	
+			});
+		}).catch(() => {
+			logError(reportData)
+		})
+}

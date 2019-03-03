@@ -1,34 +1,30 @@
 
-var mongo = require('../core/DB.js'),
+var DB = require('../core/DB.js'),
 	github = require('./github.js');
 
 //获取实验室列表
 function get_list(callback){
-	var method = mongo.start(),
-		list = [];
-	method.open({
-		'collection_name': 'labs'
-	},function(err,collection){
-		if(err){
-			callback && callback(list);
-			return
-    	}
-		collection.find({}).toArray(function(err, docs) {
-			method.close();
-			if(!err){
-				docs.forEach(function(item,index){
-					var repo = item.git_full_name;
-					if(repo.length > 2){
-						list.push({
-							repo: repo,
-							id: item.id
-						});
-					}
-				});
-			}
-			callback&&callback(list);
-		});
-	});
+	var list = []
+	DB.getCollection('labs')
+		.then(({collection, closeDBConnect}) => {
+			collection.find({}).toArray(function(err, docs) {
+				closeDBConnect()
+				if(!err){
+					docs.forEach(function(item){
+						var repo = item.git_full_name
+						if(repo.length > 2){
+							list.push({
+								repo: repo,
+								id: item.id
+							})
+						}
+					})
+				}
+				callback&&callback(list)
+			})
+		}).catch(err => {
+			callback && callback(err)
+		})
 }
 //从Github API获取数据
 function get_info(repo_name,callback){
@@ -48,25 +44,25 @@ function get_info(repo_name,callback){
 }
 //更新实验室单条数据
 function update(id,data,callback){
-	var method = mongo.start()
-	method.open({
-		collection_name: 'labs'
-	},function(err,collection){
-		collection.update({
-			id: id
-		}, {
-			$set: {
-				github: data
-			}
-		}, function(err) {
-			if(err) {
-				callback && callback(err);
-			}else {
-				callback && callback(null);
-			}
-			method.close();
-		});
-	});
+	DB.getCollection('labs')
+		.then(({collection, closeDBConnect}) => {
+			collection.update({
+				id: id
+			}, {
+				$set: {
+					github: data
+				}
+			}, function(err) {
+				if(err) {
+					callback && callback(err)
+				}else {
+					callback && callback(null)
+				}
+				closeDBConnect()
+			})
+		}).catch(err => {
+			callback && callback(err)
+		})
 }
 
 exports.all = function(){

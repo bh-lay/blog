@@ -29,36 +29,33 @@ function getFromDataBase(callback){
 }
 //保存到数据库
 function saveDataToDataBase(data){
-	var method = mongo.start();
-
-	data.id = mongon_ID;
-
-	method.open({
-    	collection_name: collectionName
-  	},function(error,collection){
-  		//查询用户信息
-  		collection.find({
-			id : mongon_ID
+	data.id = mongon_ID
+	DB.getCollection(collectionName)
+		.then(({collection, closeDBConnect}) => {
+			//查询用户信息
+			collection.find({
+				id : mongon_ID
+			})
+				//计算条数
+				.count(function(err,count){
+					if(count > 0){
+						// 条数存在，则直接更新
+						collection.update({
+							id: mongon_ID
+						}, {
+							$set: data
+						}, function() {
+							closeDBConnect()
+						})
+					}else{
+						// 不存在则插入为新数据
+						collection.insert(data,function(){
+							closeDBConnect()
+						})
+					}
+				})
 		})
-		//计算条数
-		.count(function(err,count){
-  			if(count > 0){
-				// 条数存在，则直接更新
-				collection.update({
-					id: mongon_ID
-				}, {
-					$set: data
-				}, function(err,docs) {
-					method.close();
-				});
-  			}else{
-  				// 不存在则插入为新数据
-				collection.insert(data,function(err,result){
-					method.close();
-				});
-  			}
-  		});
-	});
+
 }
 
 //从720yun更新数据
