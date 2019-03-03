@@ -3,9 +3,9 @@
  */
 
 
-var mongo = require('../../core/DB.js');
+var DB = require('../../core/DB.js');
 
-function get_list(data,callback){
+function get_list(data, callback){
 	var data = data,
 		limit_num = parseInt(data['limit'])||10,
 		skip_num = parseInt(data['skip'])||0;
@@ -15,23 +15,19 @@ function get_list(data,callback){
 		limit: limit_num,
 		skip: skip_num,
 	};
-	
-	var method = mongo.start();
-	method.open({
-		'collection_name': 'blog_friend'
-	},function(err,collection){
-      	//count the all list
-		collection.count(function(err,count){
+	DB.getCollection('blog_friend')  
+	.then(({collection, closeDBConnect}) => {
+		collection.countDocuments(function(err,count){
 			resJSON['count'] = count;
 			
 			collection.find({},{
 				adminScore: 0
 			},{
-              	limit: limit_num
-            }).sort({
-              	score: -1
-            }).skip(skip_num).toArray(function(err, docs) {
-				method.close();
+				limit: limit_num
+			}).sort({
+				score: -1
+			}).skip(skip_num).toArray(function(err, docs) {
+				closeDBConnect();
 				if(err){
 					resJSON.code = 2;
 				}else{
@@ -40,7 +36,10 @@ function get_list(data,callback){
 				callback&&callback(resJSON);
 			});
 		});
+	}).catch(err => {
+		callback && callback(err);
 	});
+
 }
 
 module.exports = function (connect,app){

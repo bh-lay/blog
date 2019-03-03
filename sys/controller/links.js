@@ -1,28 +1,24 @@
 //author bh-lay
 var utils = require('../core/utils/index.js');
-var mongo = require('../core/DB');
+var DB = require('../core/DB');
 
 function getList(callback){
-  var method = mongo.start();
-  method.open({
-    collection_name: 'blog_friend'
-  },function(err,collection){
-    if(err){
-      callback && callback(err);
-      return;
-    }
+  DB.getCollection('blog_friend')  
+  .then(({collection, closeDBConnect}) => {
     collection.find({
       isShow: '1'
     }).sort({
       score: -1
     }).toArray(function(err, docs) {
+      closeDBConnect();
       if(err){
         callback && callback(err);
         return;
       }
       callback && callback(null,docs);
-      method.close();
     });
+  }).catch(err => {
+    callback && callback(err);
   });
 };
 exports.render = function (connect,app){

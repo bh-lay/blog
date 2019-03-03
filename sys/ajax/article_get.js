@@ -31,41 +31,33 @@ get_detail
 var mongo = require('../core/DB.js'),
     showdown = require('../lib/showdown/showdown.js');
 
+var DB = mongo;
 function get_list(data,callback){
   var data = data,
       limit_num = parseInt(data['limit']) || 10,
       skip_num = parseInt(data['skip']) || 0,
       findKeys = {};
 
-  var resJSON = {
-      code: 1,
-      limit: limit_num,
-      skip: skip_num,
-  };
-
   //过滤标签
   if(data.tag){
       findKeys.tags = data.tag;
   }
-  var method = mongo.start();
-  method.open({
-    collection_name: 'article'
-  },function(err,collection){
-    if(err){
-      resJSON.code = 500;
-      callback&&callback(resJSON);
-      return
-    }
+  DB.getCollection('article')
+  .then(({collection, closeDBConnect}) => {
     //count the all list
-    collection.count(findKeys,function(err,count){
+    var resJSON = {
+      code: 1,
+      limit: limit_num,
+      skip: skip_num,
+    };
+    collection.countDocuments(findKeys,function(err,count){
       resJSON['count'] = count;
-
       collection.find(findKeys,{
         limit: limit_num
       }).sort({
         time_show: -1
       }).skip(skip_num).toArray(function(err, docs) {
-        method.close();
+        closeDBConnect();
         if(err){
           resJSON.code = 2;
         }else{
@@ -77,7 +69,13 @@ function get_list(data,callback){
         callback&&callback(resJSON);
       });
     });
-  });
+  }).catch(() => {
+      callback&&callback({
+        code: 500
+      });
+      return
+  })
+  
 }
 function get_detail(data,callback){
   var data=data,

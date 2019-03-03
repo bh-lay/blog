@@ -3,23 +3,13 @@
  *
  */
 
-var mongo = require('../core/DB.js');
+var DB = require('../core/DB.js');
 
 function getTagsList(callback){
-	var method = mongo.start();
-	method.open({
-    collection_name: 'article'
-  },function(err,collection){
-    if(err){
-      callback && callback(err);
-      return;
-    }
+	DB.getCollection('article')
+	.then(({collection, closeDBConnect}) => {
     collection.find().toArray(function(err, docs) {
-			method.close();
-			if(err){
-				callback && callback(err);
-				return;
-			}
+			closeDBConnect();
 
 			var tagsObj = {};
 			var tagsArray = [];
@@ -50,6 +40,8 @@ function getTagsList(callback){
 			});
 			callback && callback(null,tagsArray);
 		});
+	}).catch(err => {
+		callback && callback(err);
 	});
 }
 

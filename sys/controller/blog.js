@@ -53,7 +53,7 @@ function getList(app,param,callback){
       callback && callback(err);
       return;
     }
-    collection.count(findKeys , function(err,count){
+    collection.countDocuments(findKeys , function(err,count){
       collection.find(findKeys , {
           limit:limit
       }).sort({

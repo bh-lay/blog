@@ -1,5 +1,5 @@
 
-var mongo = require('../../core/DB.js');
+var DB = require('../../core/DB.js');
 var utils = require('../../core/utils/index.js');
 
 /**
@@ -10,14 +10,11 @@ function strToEmoji(str){
 }
 
 function getUserInfo(id,callback){
-  var method = mongo.start();
-  method.open({'collection_name':'user'},function(err,collection){
-    if(err){
-      callback && callback(err);
-      return;
-    }
+
+	DB.getCollection('user')
+	.then(({collection, closeDBConnect}) => {
     collection.find({'id' : id}).toArray(function(err, docs) {
-      method.close();
+      closeDBConnect();
       if(err || docs.length == 0){
         callback && callback(err);
         return;
@@ -28,7 +25,9 @@ function getUserInfo(id,callback){
         username: docs[0].username
       });
     });
-  });
+  }).catch(err => {
+		callback && callback(err);
+	});
 }
 
 /**
@@ -97,27 +96,22 @@ function handleData(docs,callback){
 
 //获取最近评论
 function getCommentList(callback){
-  var method = mongo.start();
-
-  method.open({
-    collection_name: 'comments'
-  },function(err,collection){
-    if(err){
-      callback && callback(err);
-      return;
-    }
-    collection.count(function(err,count){
+	DB.getCollection('comments')
+	.then(({collection, closeDBConnect}) => {
+    collection.countDocuments(function(err,count){
       collection.find({}, {
         limit: 8
       }).sort({time:-1}).toArray(function(err, docs) {
-        method.close();
+        closeDBConnect();
 
         handleData(docs,function(list){
           callback&&callback(err,list,count);
         });
       });
     });
-  });
+  }).catch(err => {
+		callback && callback(err);
+	});
 };
 
 exports.produce = function(temp,data,callback){

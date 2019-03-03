@@ -11,6 +11,7 @@
  */
 
 var mongo = require('../../core/DB.js');
+const DB = mongo
 var utils = require('../../core/utils/index.js');
 //增加一条用户记录
 function add(parm,callback){
@@ -115,7 +116,7 @@ function get_list(data,callback){
     collection_name: 'user'
   },function(err,collection){
       //count the all list
-		collection.count(function(err,count){
+		collection.countDocuments(function(err,count){
 			resJSON['count'] = count;
 			
 			collection.find({},{
@@ -382,19 +383,13 @@ exports.list = function(connect,app){
 /**
  * 获取用户信息
  */
-function getUserDetail(userID,callback){
-	var method = mongo.start();
-	method.open({
-    collection_name: 'user'
-  },function(err,collection){
-    if(err){
-			callback&& callback(err);
-      return;
-    }
+function getUserDetail(userID, callback){
+	DB.getCollection('user')  
+	.then(({collection, closeDBConnect}) => {
 		collection.find({
-      id: userID
-    }).toArray(function(err, docs) {
-			method.close();
+			id: userID
+		}).toArray(function(err, docs) {
+			closeDBConnect();
 			if(err || docs.length == 0){
 				callback && callback(err || 'error');
 				return;
@@ -405,11 +400,15 @@ function getUserDetail(userID,callback){
 			}
 			callback&& callback(null,item)
 		});
+	}).catch(err => {
+		callback && callback(err);
 	});
 }
 //获取用户信息
 exports.detail = function (connect,app){
+	console.log('获取用户信息')
 	utils.parse.request(connect.request,function(err,data){
+		console.log('获取用户信息', err,data)
 		if(err){
 			connect.write('json',{
 				'code' : 201,
@@ -441,6 +440,13 @@ exports.detail = function (connect,app){
 				});
 				
 				var uid = session_this.get('uid');
+				if (!uid) {
+					connect.write('json',{
+						'code' : 201
+					});
+					return
+				}
+				console.log('uid', uid)
 				getUserDetail(uid,function(err,detail){
 					if(err){
 						connect.write('json',{

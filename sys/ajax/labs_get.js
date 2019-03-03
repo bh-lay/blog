@@ -17,12 +17,8 @@ get_list: 								|		get_detail
 -----------------------------------------------------------------
  */
 
-var mongo = require('../core/DB.js');
+var DB = require('../core/DB.js');
 var fs = require('fs');
-var querystring=require('querystring');
-//var markdown = require('markdown');
-var showdown = require('../lib/showdown/showdown.js');
-var converter = new showdown.converter();
 
 function get_list(data,callback){
 	var data = data,
@@ -35,19 +31,13 @@ function get_list(data,callback){
 		skip: skip_num,
 	};
 	
-	var method = mongo.start();
-	method.open({'collection_name':'labs'},function(err,collection){
-    if(err){
-      resJSON.code = 500;
-      callback&&callback(resJSON);
-      return
-    }
-    //count the all list
-		collection.count(function(err,count){
+	DB.getCollection('labs')  
+	.then(({collection, closeDBConnect}) => {
+		collection.countDocuments(function(err,count){
 			resJSON['count'] = count;
 			
 			collection.find({},{limit:limit_num}).sort({id:-1}).skip(skip_num).toArray(function(err, docs) {
-				method.close();
+				closeDBConnect();
 				if(err){
 					resJSON.code = 2;
 				}else{
@@ -59,6 +49,9 @@ function get_list(data,callback){
 				callback&&callback(resJSON);
 			});
 		});
+	}).catch(err => {
+		resJSON.code = 500;
+		callback&&callback(resJSON);
 	});
 }
 function get_detail(data,callback){
