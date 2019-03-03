@@ -5,8 +5,12 @@
   "spm": {
     "alias": {}
   },
+  "scripts": {
+    "lint": "eslint --ext .js ajax --fix"
+  },
   "devDependencies": {
     "cron": "1.0.9",
+    "eslint": "^5.15.0",
     "formidable": "~1.0.14",
     "jssha": "^2.0.1",
     "juicer": "~0.6.5-stable",
@@ -14,5 +18,6 @@
     "node-isbot": "^0.0.8",
     "nodemailer": "~0.5.3",
     "request": "^2.81.0"
-  }
+  },
+  "dependencies": {}
 }
