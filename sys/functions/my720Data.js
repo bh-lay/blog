@@ -2,7 +2,7 @@ var DB = require('../core/DB.js'),
 	collectionName = 'cache',
 	mongon_ID = '720yun_bh-lay',
 	request = require('request'),
-	clientUserAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36';
+	clientUserAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36'
 
 
 //从数据库读取
@@ -12,24 +12,24 @@ function getFromDataBase(callback) {
 			collection.find({
 				id: mongon_ID
 			}).toArray(function (err, docs) {
-				closeDBConnect();
+				closeDBConnect()
 				if (arguments[1].length == 0) {
 					//若不存在，则从 720yun 上获取
 					updateFrom720(function (err, data) {
-						callback && callback(err, data);
-					});
+						callback && callback(err, data)
+					})
 				} else {
-					callback && callback(null, docs[0]);
+					callback && callback(null, docs[0])
 				}
-			});
+			})
 		}).catch(err => {
-			callback && callback(err);
-		});
+			callback && callback(err)
+		})
 }
 
 //保存到数据库
 function saveDataToDataBase(data) {
-	data.id = mongon_ID;
+	data.id = mongon_ID
 	DB.getCollection(collectionName)
 		.then(({ collection, closeDBConnect }) => {
 			// 计算条数
@@ -44,15 +44,15 @@ function saveDataToDataBase(data) {
 						}, {
 							$set: data
 						}, function () {
-							closeDBConnect();
-						});
+							closeDBConnect()
+						})
 					} else {
 						// 不存在则插入为新数据
 						collection.insert(data, function () {
-							closeDBConnect();
-						});
+							closeDBConnect()
+						})
 					}
-				});
+				})
 		})
 }
 
@@ -77,21 +77,21 @@ function updateFrom720(callback) {
 			'App-Key': 'eByjUyLDG2KtkdhuTsw2pY46Q3ceBPdT'
 		}
 	}, function (err, response, body) {
-		response = response || {};
+		response = response || {}
 		if (err || response.statusCode !== 200) {
-			callback && callback('error');
-			return;
+			callback && callback('error')
+			return
 		}
 		try {
-			var userData = JSON.parse(body || {});
-			callback && callback(null, userData);
+			var userData = JSON.parse(body || {})
+			callback && callback(null, userData)
 			//保存到数据库
-			saveDataToDataBase(userData);
+			saveDataToDataBase(userData)
 		} catch (e) {
-			callback && callback('parse error', null);
+			callback && callback('parse error', null)
 		}
-	});
+	})
 }
 
-exports.update = updateFrom720;
-exports.get = getFromDataBase;
+exports.update = updateFrom720
+exports.get = getFromDataBase

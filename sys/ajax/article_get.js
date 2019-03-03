@@ -28,13 +28,14 @@ get_detail
 -----------------------------------------------------------------
  */
 
-var DB = require('../core/DB.js'),
-	showdown = require('../lib/showdown/showdown.js')
+let DB = require('../core/DB.js')
+
+let showdown  = require('showdown')
 
 function get_list(data,callback){
-	var limit_num = parseInt(data['limit']) || 10,
-		skip_num = parseInt(data['skip']) || 0,
-		findKeys = {}
+	let limit_num = parseInt(data['limit']) || 10
+	let skip_num = parseInt(data['skip']) || 0
+	let findKeys = {}
 
 	//过滤标签
 	if(data.tag){
@@ -43,7 +44,7 @@ function get_list(data,callback){
 	DB.getCollection('article')
 		.then(({collection, closeDBConnect}) => {
 			//count the all list
-			var resJSON = {
+			let resJSON = {
 				code: 1,
 				limit: limit_num,
 				skip: skip_num,
@@ -59,7 +60,7 @@ function get_list(data,callback){
 					if(err){
 						resJSON.code = 2
 					}else{
-						for(var i=0 in docs){
+						for(let i in docs){
 							delete docs[i]['content']
 						}
 						resJSON['list'] = docs
@@ -76,8 +77,7 @@ function get_list(data,callback){
   
 }
 function get_detail(data,callback){
-	var data=data,
-		articleID = data['id'],
+	var articleID = data['id'],
 		//内容格式 html/markdown
 		format = data['format'] || 'markdown',
 		resJSON={

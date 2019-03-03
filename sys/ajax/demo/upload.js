@@ -12,17 +12,16 @@ exports.upload = function (req,callback){
 		'files' : []
 	}
 	utils.parse.request(req,function(err,fields, files){
-		var errorFiles = []
 		if(err){
-			code = 201
+			json.code = 201
 		}else if(files.length){
 			var newFiles = []
 			for(var i in files){
 				fs.unlink(files[i].path)
 				newFiles.push({
- 	    			'name' : 'upload.jpg',
- 	    			'url' : 'http://static.bh-lay.com/demo/upload.jpg'
- 	    		})
+					'name' : 'upload.jpg',
+					'url' : 'http://static.bh-lay.com/demo/upload.jpg'
+				})
 			}
 			json.files = newFiles
 		}

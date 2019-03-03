@@ -1,8 +1,8 @@
 /**
  * @author bh-lay
  */
-var https = require('https');
-var querystring = require('querystring');
+var https = require('https')
+var querystring = require('querystring')
 
 var CONF = {
 	'client_id' : '150e88277697b41e0702',
@@ -15,7 +15,7 @@ exports.get_token = function (code,callback){
 		'client_secret' : CONF['client_secret'],
 		'code' : code,
 		'redirect_uri' : CONF['redirect_uri']
-	});
+	})
 	//console.log('get token',postData);
 	var request = https.request({
 		'hostname' : 'github.com',
@@ -28,31 +28,30 @@ exports.get_token = function (code,callback){
 			'Content-Length' : postData.length
 		}
 	}, function(resp) {
-		var res_data = '';
+		var res_data = ''
 		resp.on('data', function(d) {
-			res_data += d;
+			res_data += d
 		}).on('end', function() {
-			var res_json = querystring.parse(res_data);
-			var err = null;
+			var res_json = querystring.parse(res_data)
+			var err = null
 			if(res_json.error){
-				err = 'error';
+				err = 'error'
 			}
-			console.log('token',res_json);
-			callback&&callback(err,res_json);
-		});
-	});
-	request.write(postData);
-	request.end();
+			callback&&callback(err,res_json)
+		})
+	})
+	request.write(postData)
+	request.end()
 	request.on('error', function(e) {
-		callback&&callback(e,null);
-	});
-};
+		callback&&callback(e,null)
+	})
+}
 
 exports.userInfo = function (param,callback){
 	
 	var getDataStr = querystring.stringify({
 		'access_token' : param['access_token']
-	});
+	})
 	
 	//console.log('get userinfo');
 	//console.log(getDataStr);
@@ -66,25 +65,21 @@ exports.userInfo = function (param,callback){
 			'User-Agent' : 'L-plain-text',
 		}
 	}, function(resp) {
-		var res_data = '';
+		var res_data = ''
 		resp.on('data', function(d) {
-			res_data += d;
+			res_data += d
 		}).on('end', function() {
-			var res_json = querystring.parse(res_data);
-			var err = null;
-			if(res_json.error){
-				err = 'error';
-			}
+			var res_json = querystring.parse(res_data)
+			var err = res_json.error ? 'error' : null
 			
-			//console.log('userinfo',res_data);
-			var res_json = JSON.parse(res_data);
-			callback&&callback(err,res_json);
-		});
-	});
+			res_json = JSON.parse(res_data)
+			callback&&callback(err,res_json)
+		})
+	})
 	
 	request.on('error', function(e) {
-		callback && callback(e,null);
-	});
+		callback && callback(e,null)
+	})
 	
-	request.end();
-};
+	request.end()
+}

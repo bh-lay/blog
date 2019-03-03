@@ -3,7 +3,7 @@ var DB = require('../../core/DB.js')
 
 
 function getUserInfo(id,callback){
-	DB.getCollection('user')  
+	DB.getCollection('user')
 		.then(({collection, closeDBConnect}) => {
 			collection.find({
 				id: id
@@ -80,12 +80,10 @@ function handleData(docs,callback){
 
 //获取评论列表
 module.exports = function(connect,data,callback){
-	var data = data,
-		cid = data['cid'] || '',
-		limit_num = parseInt(data['limit']) || 10,
-		skip_num = parseInt(data['skip']) || 0
+	let limit_num = parseInt(data['limit']) || 10
+	let skip_num = parseInt(data['skip']) || 0
 
-	DB.getCollection('comments')  
+	DB.getCollection('comments')
 		.then(({collection, closeDBConnect}) => {
 			var queryObj = {}
 			if(data['cid'] && data['cid'].length > 1){

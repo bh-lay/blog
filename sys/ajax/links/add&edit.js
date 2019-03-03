@@ -80,7 +80,7 @@ module.exports = function (connect,app){
 		//获取数据
 		utils.parse.request(connect.request,function(err,data){
 			//过滤数据
-			var data = filter_param(data)
+			data = filter_param(data)
 
 			if(!data){
 				//数据不全

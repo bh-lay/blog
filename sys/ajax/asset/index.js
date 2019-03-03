@@ -8,7 +8,7 @@ var del = require('./delete')
 var rename = require('./rename')
 var createDir = require('./createDir')
 
-function router(connect,app){
+function router(connect){
 	var pathnode = connect.url.pathnode
 	if(pathnode.length == 2){
 		utils.parse.request(connect.request,function(err,data){
@@ -82,8 +82,8 @@ function router(connect,app){
 			})
 		}else{
 			connect.write('json',{
-			     code : 2,
-			     msg : 'wrong path'
+				code : 2,
+				msg : 'wrong path'
 			})
 		}
 	}else{

@@ -8,12 +8,7 @@ var utils = require('../../core/utils/index.js')
 var assetPath = '../static/'
 
 exports.file = function (req,callback){
-	var json = {
-		'code' : 200,
-		'msg' : '删除成功'
-	}
-	utils.parse.request(req,function(err,fields, files){
-		var errorFiles = []
+	utils.parse.request(req,function(err,fields){
 		var path = fields.path || ''
 		//消除参数中首尾的｛/｝
 		path = path.replace(/^\/|\/$/g,'')
@@ -21,7 +16,7 @@ exports.file = function (req,callback){
 			callback && callback('参数不完整')
 		}else{
 			var Path = assetPath + path
-			fs.unlink(Path,function(err,data){
+			fs.unlink(Path,function(err){
 				if(err){
 					callback && callback(err)
 				}else{

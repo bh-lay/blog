@@ -1,11 +1,11 @@
 /**
  * @author bh-lay
  */
-var utils = require('../core/utils/index.js');
-var DB = require('../core/DB.js');
+var utils = require('../core/utils/index.js')
+var DB = require('../core/DB.js')
 
-var showdown = require('../lib/showdown/showdown.js');
-var converter = new showdown.converter();
+let showdown  = require('showdown')
+var converter = new showdown.converter()
 
 function list_page(app, callback) {
 	DB.getCollection('labs')
@@ -45,12 +45,12 @@ function get_detail(lab_name, callback) {
 
 exports.list = function (connect, app) {
 	app.cache.use('labs_list', ['html', 'labs'], function (this_cache) {
-		connect.write('html', 200, this_cache);
+		connect.write('html', 200, this_cache)
 	}, function (save_cache) {
 		list_page(app, function (err, list) {
 			if (err) {
 				app.views('system/mongoFail', {}, function (err, html) {
-					connect.write('html', 500, html);
+					connect.write('html', 500, html)
 				})
 				return
 			}
@@ -62,7 +62,7 @@ exports.list = function (connect, app) {
 				list: list
 			}, function (err, html) {
 				if (err) {
-					connect.write('html', 200, '<h1>页面挂了！</h1>');
+					connect.write('html', 200, '<h1>页面挂了！</h1>')
 				} else {
 					save_cache(html)
 				}
@@ -73,15 +73,15 @@ exports.list = function (connect, app) {
 
 exports.detail = function (connect, app, lab_name) {
 	app.cache.use('labs_id_' + lab_name, ['html', 'labs'], function (this_cache) {
-		connect.write('html', 200, this_cache);
+		connect.write('html', 200, this_cache)
 	}, function (save_cache) {
 		//获取作品信息
 		get_detail(lab_name, function (err, data) {
 			if (err) {
 				if (err == 'notFound') {
-					connect.write('notFound', '404！');
+					connect.write('notFound', '404！')
 				} else {
-					connect.write('error', '怎么坏掉了呢！');
+					connect.write('error', '怎么坏掉了呢！')
 				}
 				return
 			}
@@ -95,11 +95,11 @@ exports.detail = function (connect, app, lab_name) {
 				demo_url: data.demo_url
 			}, function (err, html) {
 				if (err) {
-					connect.write('html', 200, '<h1>页面挂了！</h1>');
+					connect.write('html', 200, '<h1>页面挂了！</h1>')
 				} else {
-					save_cache(html);
+					save_cache(html)
 				}
-			});
-		});
-	});
-};
+			})
+		})
+	})
+}

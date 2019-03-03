@@ -6,8 +6,7 @@
 var DB = require('../../core/DB.js')
 
 function get_list(data, callback){
-	var data = data,
-		limit_num = parseInt(data['limit'])||10,
+	var limit_num = parseInt(data['limit'])||10,
 		skip_num = parseInt(data['skip'])||0
 	
 	var resJSON = {
@@ -15,7 +14,7 @@ function get_list(data, callback){
 		limit: limit_num,
 		skip: skip_num,
 	}
-	DB.getCollection('blog_friend')  
+	DB.getCollection('blog_friend')
 		.then(({collection, closeDBConnect}) => {
 			collection.countDocuments(function(err,count){
 				resJSON['count'] = count

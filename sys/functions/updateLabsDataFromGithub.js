@@ -1,6 +1,6 @@
 
 var DB = require('../core/DB.js'),
-	github = require('./github.js');
+	github = require('./github.js')
 
 //获取实验室列表
 function get_list(callback){
@@ -28,12 +28,12 @@ function get_list(callback){
 }
 //从Github API获取数据
 function get_info(repo_name,callback){
-	var need_keys = "name,full_name,html_url,description,created_at,updated_at,pushed_at,git_url,homepage,stargazers_count,watchers_count,forks_count".split(','),
-		repo_info = {};
+	var need_keys = 'name,full_name,html_url,description,created_at,updated_at,pushed_at,git_url,homepage,stargazers_count,watchers_count,forks_count'.split(','),
+		repo_info = {}
 		
 	github.getReposInfo(repo_name,function(err,data){
 		if(err){
-			callback && callback(err);
+			callback && callback(err)
 			return
 		}
 		need_keys.forEach(function(item){
@@ -69,27 +69,27 @@ exports.all = function(){
 	get_list(function(list){
 		list.forEach(function(item,index){
 			var repo_name = item.repo,
-				id = item.id;
+				id = item.id
 			//隔两秒执行一条
 			setTimeout(function(){
 				get_info(repo_name,function(err,data){
 					if(err){
-						return;
+						return
 					}
 					//更新数据
-					update(id,data);
-				});
-			},index * 2000);
-		});
-	});
-};
+					update(id,data)
+				})
+			},index * 2000)
+		})
+	})
+}
 exports.item = function(repo_name,id,callback){
 	get_info(repo_name,function(err,data){
 		if(err){
-			callback && callback('err');
-			return;
+			callback && callback('err')
+			return
 		}
 		//更新数据
-		update(id,data,callback);
-	});
-};
+		update(id,data,callback)
+	})
+}

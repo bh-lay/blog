@@ -104,9 +104,8 @@ exports.list = function (connect,app){
 	})
 }
 //列表
-exports.detail = function (connect,app){
-	var data = connect.url.search,
-		need_power = 17
+exports.detail = function (connect){
+	var need_power = 17
 	connect.session(function(session_this){
 		//校验权限
 		if(session_this.power(need_power)){

@@ -3,7 +3,7 @@
  */
 var upload = require('./upload')
 
-exports.render = function (connect,app){
+exports.render = function (connect){
 	if(connect.url.pathnode.length == 2){
 		connect.write('json',{
 			'code' : 200,

@@ -54,42 +54,6 @@ function edit(parm,callback){
 }
 
 /**
- * 注册新的用户
- * param {email & password}
- *  
- **/
-function signup(){
-	var that = this
-	utils.parse.request(this.request,function(error,data){
-		var param = {}
-		param['email'] = data['email'] || null
-		param['password'] = utils.parse.md5(data['password'] || '')
-		param['user_group'] = 'user'
-		param['id'] = utils.createID()
-		if(param['email']&&param['password']){
-			DB.getCollection('user')
-				.then(({collection, closeDBConnect}) => {
-					collection.find({}, {}).toArray(function() {
-						collection.insert(param,function(err){
-							closeDBConnect()
-							that.res.json({
-								code : 1,
-								id : param.id ,
-								msg : 'sucess !'
-							})
-						})
-					})
-				})
-		}else{
-			that.res.json({
-				'code' : 2,
-				'msg' : 'signup fail'
-			})
-		}
-	})
-}
-
-/**
  * 获取用户列表
  * 
  */
@@ -190,9 +154,8 @@ function login_handle(connect,session_this,username,password){
 
 
 //增加或编辑用户记录
-exports.add_edit = function (connect,app){
-	
-	utils.parse.request(connect.request,function(error,fields, files){
+exports.add_edit = function (connect){
+	utils.parse.request(connect.request,function(error, fields){
 		var data = fields
 		var parm = {
 			'id' : data['id'] || '',
@@ -269,7 +232,7 @@ exports.add_edit = function (connect,app){
  **/
 var time_limit = 5 * 60 * 1000
 var count_limit = 5
-exports.login = function (connect,app){
+exports.login = function (connect){
   
 	var req = connect.request
 	//登录限定为 POST 方法
@@ -338,7 +301,7 @@ exports.login = function (connect,app){
 }
 
 //登出
-exports.exist = function(connect,app){
+exports.exist = function(connect){
 	
 	connect.session(function(session_this){
 		session_this.set({
@@ -354,7 +317,7 @@ exports.exist = function(connect,app){
 }
 
 //获取用户列表
-exports.list = function(connect,app){
+exports.list = function(connect){
 	utils.parse.request(connect.request,function(err,data){
 		if(err){
 			connect.write('json',{
@@ -372,7 +335,7 @@ exports.list = function(connect,app){
  * 获取用户信息
  */
 function getUserDetail(userID, callback){
-	DB.getCollection('user')  
+	DB.getCollection('user')
 		.then(({collection, closeDBConnect}) => {
 			collection.find({
 				id: userID
@@ -393,7 +356,7 @@ function getUserDetail(userID, callback){
 		})
 }
 //获取用户信息
-exports.detail = function (connect,app){
+exports.detail = function (connect){
 	utils.parse.request(connect.request,function(err,data){
 		if(err){
 			connect.write('json',{

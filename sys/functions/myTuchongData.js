@@ -3,29 +3,29 @@ var DB = require('../core/DB.js'),
 	collectionName = 'cache',
 	mongon_ID = 'tuchong_bh-lay',
 	request = require('request'),
-	clientUserAgent = 'bh-lay api robots';
+	clientUserAgent = 'bh-lay api robots'
 
 
 //从数据库读取
 function getFromDataBase(callback){
-	DB.getCollection(collectionName)  
-	.then(({collection, closeDBConnect}) => {
-		collection.find({
-			id : mongon_ID
-		}).toArray(function(err, docs) {
-			closeDBConnect();
-			if(arguments[1].length==0){
+	DB.getCollection(collectionName)
+		.then(({collection, closeDBConnect}) => {
+			collection.find({
+				id : mongon_ID
+			}).toArray(function(err, docs) {
+				closeDBConnect()
+				if(arguments[1].length==0){
 				//若不存在，则从 720yun 上获取
-				updateFromTuchong(function(err,data){
-					callback && callback(err,data);
-				});
-			}else{
-				callback&&callback(null,docs[0]);
-			}
-		});
-	}).catch(err => {
-		callback && callback(err);
-	});
+					updateFromTuchong(function(err,data){
+						callback && callback(err,data)
+					})
+				}else{
+					callback&&callback(null,docs[0])
+				}
+			})
+		}).catch(err => {
+			callback && callback(err)
+		})
 }
 //保存到数据库
 function saveDataToDataBase(data){
@@ -67,17 +67,17 @@ function updateFromTuchong(callback){
 			'Referer': 'https://bh-lay.tuchong.com/'
 		}
 	}, function (err, response, body){
-		response = response || {};
+		response = response || {}
 		if(err || response.statusCode != 200){
-			callback && callback('error');
-			return;
+			callback && callback('error')
+			return
 		}
-		var userData = JSON.parse( body || {} );
-		callback && callback(null,userData);
+		var userData = JSON.parse( body || {} )
+		callback && callback(null,userData)
 		//保存到数据库
-		saveDataToDataBase(userData);
-	});
+		saveDataToDataBase(userData)
+	})
 }
 
-exports.update = updateFromTuchong;
-exports.get = getFromDataBase;
+exports.update = updateFromTuchong
+exports.get = getFromDataBase

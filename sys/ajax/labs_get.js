@@ -18,12 +18,10 @@ get_list: 								|		get_detail
  */
 
 var DB = require('../core/DB.js')
-var fs = require('fs')
 
 function get_list(data,callback){
-	var data = data,
-		limit_num = parseInt(data['limit'])||10,
-		skip_num = parseInt(data['skip'])||0
+	let limit_num = parseInt(data['limit'])||10
+	let skip_num = parseInt(data['skip'])||0
 	
 	var resJSON = {
 		code: 200,
@@ -31,7 +29,7 @@ function get_list(data,callback){
 		skip: skip_num,
 	}
 	
-	DB.getCollection('labs')  
+	DB.getCollection('labs')
 		.then(({collection, closeDBConnect}) => {
 			collection.countDocuments(function(err,count){
 				resJSON['count'] = count
@@ -49,7 +47,7 @@ function get_list(data,callback){
 					callback&&callback(resJSON)
 				})
 			})
-		}).catch(err => {
+		}).catch(() => {
 			resJSON.code = 500
 			callback&&callback(resJSON)
 		})

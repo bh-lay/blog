@@ -3,11 +3,11 @@
  * 
  */
 
-var DB = require('../core/DB.js')
-var utils = require('../core/utils/index.js')
+let DB = require('../core/DB.js')
+let utils = require('../core/utils/index.js')
 
 function add(parm,collection_name,callback){	
-	DB.getCollection(collection_name)  
+	DB.getCollection(collection_name)
 		.then(({collection, closeDBConnect}) => {
 			parm.id = utils.createID()
 
@@ -48,15 +48,15 @@ function edit(parm,collection_name,callback){
 function filter_request(connect,callback){
 
 	connect.session(function(session_this){
-		var need_power,
-			error = null,
-			data_filter = {
-				data : {},
-				collection_name : null
-			}
+		let need_power
+		let error = null
+		let data_filter = {
+			data : {},
+			collection_name : null
+		}
 		
 		utils.parse.request(connect.request,function(err,data){
-			var category = data['category'] || ''
+			let category = data['category'] || ''
 			switch(category){
 			case 'blog' :
 				data_filter = filter_request.blog(data)
@@ -81,13 +81,13 @@ function filter_request(connect,callback){
 }
 
 filter_request.blog = function(data){
-	var error = null
-	var param = {
+	let error = null
+	let param = {
 		id : data['id']||null,
 		title :decodeURI(data['title']),
 		cover: data['cover']||'',
 		time_show: data['time_show'] || new Date().getTime().toString(),
-		tags: data['tags'] ? data['tags'].split(/\s*\,\s*/) : [],
+		tags: data['tags'] ? data['tags'].split(/\s*,\s*/) : [],
 		author: data['author']||'',
 		content: data['content'],
 		intro: data['intro'] || data['content'].slice(0,200),
@@ -99,8 +99,8 @@ filter_request.blog = function(data){
 }
 
 filter_request.labs = function(data){
-	var error = null
-	var param = {
+	let error = null
+	let param = {
 		'id' : data['id']||'',
 		'name' : data['name']||'',
 		'title':decodeURI(data['title']),
@@ -131,8 +131,8 @@ exports.render = function (connect,app){
 			})
 			return
 		}
-		var data = param['data'],
-			collection_name = param['collection_name']
+		let data = param['data']
+		let collection_name = param['collection_name']
 		
 		if(data['id']&&data['id'].length > 2){
 			edit(data,collection_name,function(err){

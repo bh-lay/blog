@@ -4,9 +4,9 @@
  */
 
 
-var utils = require('../core/utils/index.js');
-var DB = require('../core/DB.js');
-var showdown = require('../lib/showdown/showdown.js');
+var utils = require('../core/utils/index.js')
+var DB = require('../core/DB.js')
+let showdown  = require('showdown')
 
 function getDetail(id, callback) {
 	DB.getCollection('article')
@@ -16,13 +16,13 @@ function getDetail(id, callback) {
 			}).toArray(function (err, docs) {
 				closeDBConnect()
 				if (arguments[1].length == 0) {
-					callback && callback('哇塞，貌似这篇博文不存在哦!');
+					callback && callback('哇塞，貌似这篇博文不存在哦!')
 				} else {
-					docs[0].time_show = utils.parse.time(docs[0].time_show, '{y}-{m}-{d}');
+					docs[0].time_show = utils.parse.time(docs[0].time_show, '{y}-{m}-{d}')
 
-					var converter = new showdown.converter();
-					docs[0].content = converter.makeHtml(docs[0].content);
-					callback && callback(null, docs[0]);
+					var converter = new showdown.converter()
+					docs[0].content = converter.makeHtml(docs[0].content)
+					callback && callback(null, docs[0])
 				}
 			})
 		}).catch(err => {
@@ -50,7 +50,7 @@ function getList(app, param, callback) {
 				}).skip(skip).toArray(function (err, docs) {
 					closeDBConnect()
 					for (var i in docs) {
-						docs[i].time_show = utils.parse.time(docs[i].time_show, '{y}年-{m}月-{d}日');
+						docs[i].time_show = utils.parse.time(docs[i].time_show, '{y}年-{m}月-{d}日')
 						docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? app.config.frontEnd.img_domain + docs[i].cover : docs[i].cover
 					}
 					callback && callback(null, docs, {
@@ -63,17 +63,17 @@ function getList(app, param, callback) {
 		}).catch(err => {
 			callback && callback(err)
 		})
-};
+}
 exports.list = function (connect, app) {
 
 	var data = connect.url.search,
 		page = data.page || 1,
-		tag = data.tag ? data.tag : null;
+		tag = data.tag ? data.tag : null
 
-	var cache_name = 'blog_list_' + page + '_' + (tag ? tag : '');
+	var cache_name = 'blog_list_' + page + '_' + (tag ? tag : '')
 	app.cache.use(cache_name, ['html', 'article'], function (this_cache) {
 		//do something with this_cache
-		connect.write('html', 200, this_cache);
+		connect.write('html', 200, this_cache)
 	}, function (save_cache) {
 		//if none of cache,do this Fn
 		getList(app, {
@@ -83,7 +83,7 @@ exports.list = function (connect, app) {
 		}, function (err, list, data) {
 			if (err) {
 				app.views('system/mongoFail', {}, function (err, html) {
-					connect.write('html', 500, html);
+					connect.write('html', 500, html)
 				})
 				return
 			}
@@ -104,25 +104,25 @@ exports.list = function (connect, app) {
 				tag: tag || ''
 			}, function (err, html) {
 				if (err) {
-					connect.write('html', 200, '<h1>页面挂了！</h1>');
+					connect.write('html', 200, '<h1>页面挂了！</h1>')
 				} else {
-					save_cache(html);
+					save_cache(html)
 				}
-			});
-		});
-	});
-};
+			})
+		})
+	})
+}
 
 exports.detail = function (connect, app, id) {
 	app.cache.use('blog_id_' + id, ['html', 'article'], function (this_cache) {
-		connect.write('html', 200, this_cache);
+		connect.write('html', 200, this_cache)
 	}, function (save_cache) {
 		getDetail(id, function (err, data) {
 			if (err) {
 				app.views('system/mongoFail', {}, function (err, html) {
-					connect.write('html', 500, html);
-				});
-				return;
+					connect.write('html', 500, html)
+				})
+				return
 			}
 			//获取视图
 			app.views('multi-page/blogDetail', {
@@ -137,11 +137,11 @@ exports.detail = function (connect, app, id) {
 				content: data.content
 			}, function (err, html) {
 				if (err) {
-					connect.write('html', 200, '<h1>页面挂了！</h1>');
+					connect.write('html', 200, '<h1>页面挂了！</h1>')
 				} else {
-					save_cache(html);
+					save_cache(html)
 				}
-			});
-		});
-	});
-};
+			})
+		})
+	})
+}

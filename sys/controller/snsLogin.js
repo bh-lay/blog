@@ -1,26 +1,26 @@
 /**
  * @author bh-lay
  */
-var github = require('../lib/githubSDK.js');
-var DB = require('../core/DB.js');
+var github = require('../lib/githubSDK.js')
+var DB = require('../core/DB.js')
 
 function login(connect,user,callback){
 	connect.session(function(session_this){
-		var user_group = user['user_group'];
+		var user_group = user['user_group']
 		
 		DB.get_power(user_group,function(err,power_data){
 			callback && callback(err)
-			var userid = user['id'];
+			var userid = user['id']
 			session_this.set({
 				'user_group' : user_group,
 				'username' : user['username'], 
 				'uid' : userid,
 				'avatar' : '',
 				'power_data' : power_data
-			});
-			callback && callback(null);
-		});
-	});
+			})
+			callback && callback(null)
+		})
+	})
 }
 //对外接口
 exports.github = function (connect,app){
@@ -31,16 +31,16 @@ exports.github = function (connect,app){
 			'from' : 'github',
 			'data' : JSON.stringify(data)
 		},function(err,html){
-			connect.write('html',200,html);
-		});
+			connect.write('html',200,html)
+		})
 	}
 
-	var code = connect.url.search.code;
+	var code = connect.url.search.code
 	if(!code){
 		sendResult({
 			'code' : 203,
 			'msg' : 'missing code'
-		});
+		})
 		return
 	}
 	github.get_token(code,function(err,data){
@@ -48,7 +48,7 @@ exports.github = function (connect,app){
 			sendResult({
 				'code' : 201,
 				'msg' : '获取token失败',
-			});
+			})
 			return
 		}
 		
@@ -75,7 +75,7 @@ exports.github = function (connect,app){
 							}
 							DB.add_user(usrInfo,function(err,id){
 								if(err){
-									res_this.json({
+									sendResult({
 										'code':5,
 										'msg':'创建用户失败！'
 									})
@@ -118,12 +118,12 @@ exports.github = function (connect,app){
 							})
 						}
 					})
-				}).catch(err => {
+				}).catch(() => {
 					sendResult({
 						'code':4,
 						'msg':'咱数据库被拐跑了！'
-					});
+					})
 				})
-		});
-	});
-};
+		})
+	})
+}

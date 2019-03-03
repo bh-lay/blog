@@ -4,8 +4,7 @@ var request = require('request'),
 	jsSHA = require('jssha'),
 	config = require('../conf/wechat.js'),
 	private_wechat_token = null,
-	private_wechat_jsapi_ticket = null,
-	private_is_debug = true
+	private_wechat_jsapi_ticket = null
 
 
 /**
@@ -40,8 +39,6 @@ function getWechatToken( callback ) {
 		})
 
 	} else {
-		if( private_is_debug ) console.log('old access_token: ', old_token.token.access_token)
-    
 		//token还有20秒就过期，需要刷新
 		if((new Date()).getTime() - old_token.time > 7180000) {
 			getAndSetToken(function(new_token) {
@@ -59,7 +56,6 @@ function getWechatToken( callback ) {
 	function getAndSetToken(cb) {
 		request(wechat_token_url, function (error, response, body) {
 			if (!error && response.statusCode == 200) {
-				if( private_is_debug ) console.log('Get Wechat access token: ' + body)
 				var new_token = JSON.parse(body)
 				if(new_token.errcode) {
 					cb(null)
@@ -69,7 +65,6 @@ function getWechatToken( callback ) {
 						time: (new Date()).getTime()
 					}
           
-					if( private_is_debug ) console.log('new token: ' + new_token.access_token)
 					cb(new_token.access_token)
 				}
 			} else {
@@ -106,7 +101,6 @@ function getWechatJsapiTicket (search, callback) {
 
 			//检查缓存里wechat_token是否过期
 			var old_ticket = private_wechat_jsapi_ticket
-			if( private_is_debug ) console.log(old_ticket ? JSON.stringify(old_ticket) : 'null')
 			//空
 			if (!old_ticket) {
 				getAndSetTicket(function(new_ticket) {
@@ -117,7 +111,6 @@ function getWechatJsapiTicket (search, callback) {
 					}
 				})
 			} else {
-				if( private_is_debug ) console.log('old ticket: ', old_ticket.ticket.ticket)
 				if((new Date()).getTime() - old_ticket.time > 7180000) {  //token还有20秒就过期，需要刷新
 
 					getAndSetTicket(function(new_ticket) {
@@ -137,7 +130,6 @@ function getWechatJsapiTicket (search, callback) {
 		function getAndSetTicket(cb) {
 			request(jsapi_ticket_url, function (error, response, body) {
 				if (!error && response.statusCode == 200) {
-					if( private_is_debug ) console.log('Get Wechat JS API ticket: ' + body)
 					var new_ticket = JSON.parse(body)
 
 					if(new_ticket.errcode == 0) {
@@ -145,7 +137,6 @@ function getWechatJsapiTicket (search, callback) {
 							ticket: new_ticket,
 							time: (new Date()).getTime()
 						}
-						if( private_is_debug ) console.log('new ticket: ' + new_ticket.ticket)
 						cb(new_ticket.ticket)
 					} else {
 						cb(null)
@@ -216,7 +207,6 @@ var sign = function (jsapi_ticket, url) {
 
 exports.getWechatToken = function () {
 	// getWechatToken(function(err, token) {
-	//   if( private_is_debug ) console.log("API send token: ", token);
 	//   res.send({
 	//     access_token: token
 	//   });
@@ -225,12 +215,11 @@ exports.getWechatToken = function () {
 
 exports.getWechatJsapiTicket = function () {
 	// getWechatJsapiTicket(search, function(err, ticket) {
-	//   if( private_is_debug ) console.log("API send jsapi_ticket: ", ticket);
 	//   res.send({jsapi_ticket: ticket});
 	// });
 }
 
-exports.getWechatJsapiSign = function ( connect, app ) {
+exports.getWechatJsapiSign = function (connect) {
 	var search = connect.url.search,
 		url = decodeURI(search.url).replace(/%26/g, '&')
 	getWechatJsapiTicket(search, function(err, ticket) {

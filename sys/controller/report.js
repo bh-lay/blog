@@ -1,13 +1,14 @@
 /**
  * @author bh-lay
  */
-var DB = require('../core/DB.js');
+var DB = require('../core/DB.js')
 
 function logError(reportData){
-	console.log('-------------');
-	console.log('report save error!');
-	console.log(reportData);
-	console.log('-------------');
+	reportData.test = 1
+	// console.log('-------------')
+	// console.log('report save error!')
+	// console.log(reportData)
+	// console.log('-------------')
 }
 
 //对外接口
@@ -25,7 +26,7 @@ exports.render = function (connect){
 					return
 				}
 	
-			});
+			})
 		}).catch(() => {
 			logError(reportData)
 		})
