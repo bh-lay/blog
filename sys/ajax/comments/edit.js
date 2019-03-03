@@ -5,7 +5,7 @@ var DB = require('../../core/DB.js')
 module.exports = function(_id,data,callback){
 	DB.getCollection('comments')
 		.then(({collection, closeDBConnect}) => {
-			collection.update({
+			collection.updateOne({
 				_id: DB.ObjectID(_id)
 			}, {
 				$set: data

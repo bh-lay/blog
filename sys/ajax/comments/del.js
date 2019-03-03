@@ -6,7 +6,7 @@
 ***************************************************************/
 
 var DB = require('../../core/DB.js')
-var ObjectID = mongo.ObjectID
+var ObjectID = DB.ObjectID
 
 /**
  * delet method

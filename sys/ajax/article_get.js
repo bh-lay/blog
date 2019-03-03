@@ -31,10 +31,8 @@ get_detail
 var DB = require('../core/DB.js'),
 	showdown = require('../lib/showdown/showdown.js')
 
-var DB = mongo
 function get_list(data,callback){
-	var data = data,
-		limit_num = parseInt(data['limit']) || 10,
+	var limit_num = parseInt(data['limit']) || 10,
 		skip_num = parseInt(data['skip']) || 0,
 		findKeys = {}
 

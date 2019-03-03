@@ -23,7 +23,7 @@ function matchUser(param,callback){
 					})
 				}else{
 					//更新用户信息
-					collection.update({'from':from,'UID' : UID}, {$set:param}, function(err,docs) {
+					collection.updateOne({'from':from,'UID' : UID}, {$set:param}, function(err,docs) {
 						closeDBConnect()
 						err = err || null
 						callback&&callback(err,docs)

@@ -36,7 +36,7 @@ function add(parm,callback){
 function edit(parm,callback){
 	DB.getCollection('user')
 		.then(({collection, closeDBConnect}) => {
-			collection.update({
+			collection.updateOne({
 				id : parm.id
 			}, {
 				$set: parm
@@ -325,7 +325,7 @@ exports.login = function (connect,app){
 		utils.parse.request(req,function(error,data){
 			var email = data['email']
 			var password = utils.parse.md5(data['password'] || '')
-      
+      console.log('password', password)
 			if(!email || password.length < 2){
 				connect.write('json',{
 					code: 2,
@@ -395,9 +395,7 @@ function getUserDetail(userID, callback){
 }
 //获取用户信息
 exports.detail = function (connect,app){
-	console.log('获取用户信息')
 	utils.parse.request(connect.request,function(err,data){
-		console.log('获取用户信息', err,data)
 		if(err){
 			connect.write('json',{
 				'code' : 201,

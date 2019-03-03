@@ -37,16 +37,16 @@ function get_info(repo_name,callback){
 			return
 		}
 		need_keys.forEach(function(item){
-			repo_info[item] = data[item];
-		});
-		callback && callback(null,repo_info);
-	});
+			repo_info[item] = data[item]
+		})
+		callback && callback(null,repo_info)
+	})
 }
 //更新实验室单条数据
 function update(id,data,callback){
 	DB.getCollection('labs')
 		.then(({collection, closeDBConnect}) => {
-			collection.update({
+			collection.updateOne({
 				id: id
 			}, {
 				$set: {

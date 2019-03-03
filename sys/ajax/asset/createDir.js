@@ -8,7 +8,7 @@ var utils = require('../../core/utils/index.js')
 var assetPath = '../static/'
 
 exports.createDir = function (req,callback){
-	utils.parse.request(req,function(err,fields,files){
+	utils.parse.request(req, function(err, fields){
 		
 		var root = fields.root || ''
 		var dirName = fields.name || ''

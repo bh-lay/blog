@@ -25,9 +25,9 @@ function add(parm,collection_name,callback){
 	});
 }
 function edit(parm,collection_name,callback){
-	DB.getCollection('collection_name')
+	DB.getCollection(collection_name)
 	.then(({collection, closeDBConnect}) => {
-		collection.update({
+		collection.updateOne({
 			id: parm.id
 		}, {
 			$set:parm

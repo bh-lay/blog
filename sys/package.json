@@ -11,11 +11,11 @@
   "devDependencies": {
     "cron": "1.0.9",
     "eslint": "^5.15.0",
-    "formidable": "~1.0.14",
+    "formidable": "~1.2.1",
     "jssha": "^2.0.1",
     "juicer": "~0.6.5-stable",
-    "mongodb": "~3.1.13",
-    "node-isbot": "^0.0.8",
+    "mongodb": "^3.1.13",
+    "node-isbot": "0.0.8",
     "nodemailer": "~0.5.3",
     "request": "^2.81.0"
   },

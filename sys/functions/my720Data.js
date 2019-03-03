@@ -37,10 +37,10 @@ function saveDataToDataBase(data) {
 				id: mongon_ID
 			})
 				//计算条数
-				.count(function (err, count) {
+				.countDocuments(function (err, count) {
 					if (count > 0) {
 						// 条数存在，则直接更新
-						collection.update({
+						collection.updateOne({
 							id: mongon_ID
 						}, {
 							$set: data

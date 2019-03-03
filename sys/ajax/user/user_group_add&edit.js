@@ -25,7 +25,7 @@ function add(parm,res_this){
 function edit(parm,res_this){
 	DB.getCollection('user_group')
 		.then(({collection, closeDBConnect}) => {
-			collection.update({'id':parm.id}, {$set:parm}, function(err,docs) {
+			collection.updateOne({'id':parm.id}, {$set:parm}, function(err,docs) {
 				if(err) {
 					res_this.json({
 						'code' : 2 ,
