@@ -49,9 +49,10 @@ boom@2.x.x:
   dependencies:
     hoek "2.x.x"
 
-bson@~0.4.20:
-  version "0.4.23"
-  resolved "http://registry.npm.taobao.org/bson/download/bson-0.4.23.tgz#e65a2e3c7507ffade4109bc7575a76e50f8da915"
+bson@^1.1.0:
+  version "1.1.0"
+  resolved "http://registry.npm.taobao.org/bson/download/bson-1.1.0.tgz#bee57d1fb6a87713471af4e32bcae36de814b5b0"
+  integrity sha1-vuV9H7aodxNHGvTjK8rjbegUtbA=
 
 caseless@~0.12.0:
   version "0.12.0"
@@ -117,10 +118,6 @@ encoding@~0.1.7:
   resolved "https://registry.yarnpkg.com/encoding/-/encoding-0.1.12.tgz#538b66f3ee62cd1ab51ec323829d1f9480c74beb"
   dependencies:
     iconv-lite "~0.4.13"
-
-es6-promise@2.1.1:
-  version "2.1.1"
-  resolved "http://registry.npm.taobao.org/es6-promise/download/es6-promise-2.1.1.tgz#03e8f3c7297928e5478d6ab1d0643251507bdedd"
 
 extend@~3.0.0:
   version "3.0.1"
@@ -198,17 +195,13 @@ iconv-lite@~0.4.13:
   version "0.4.18"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.18.tgz#23d8656b16aae6742ac29732ea8f0336a4789cf2"
 
-inherits@~2.0.1, inherits@~2.0.3:
+inherits@~2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
 
 is-typedarray@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/is-typedarray/-/is-typedarray-1.0.0.tgz#e479c80858df0c1b11ddda6940f96011fcda4a9a"
-
-isarray@0.0.1:
-  version "0.0.1"
-  resolved "http://registry.npm.taobao.org/isarray/download/isarray-0.0.1.tgz#8a18acfca9a8f4177e09abfc6038939b05d1eedf"
 
 isarray@~1.0.0:
   version "1.0.0"
@@ -270,6 +263,11 @@ mailcomposer@~0.2.5:
     mime "~1.2.11"
     mimelib "~0.2.15"
 
+memory-pager@^1.0.2:
+  version "1.5.0"
+  resolved "http://registry.npm.taobao.org/memory-pager/download/memory-pager-1.5.0.tgz#d8751655d22d384682741c972f2c3d6dfa3e66b5"
+  integrity sha1-2HUWVdItOEaCdByXLyw9bfo+ZrU=
+
 mime-db@~1.29.0:
   version "1.29.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.29.0.tgz#48d26d235589651704ac5916ca06001914266878"
@@ -301,19 +299,24 @@ moment-timezone@~0.3.0:
   version "2.18.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
 
-mongodb-core@1.2.31:
-  version "1.2.31"
-  resolved "http://registry.npm.taobao.org/mongodb-core/download/mongodb-core-1.2.31.tgz#f1e6405f03d40846fdb838a702507affa3cb2c39"
+mongodb-core@3.1.11:
+  version "3.1.11"
+  resolved "http://registry.npm.taobao.org/mongodb-core/download/mongodb-core-3.1.11.tgz#b253038dbb4d7329f3d1c2ee5400bb0c9221fde5"
+  integrity sha1-slMDjbtNcynz0cLuVAC7DJIh/eU=
   dependencies:
-    bson "~0.4.20"
+    bson "^1.1.0"
+    require_optional "^1.0.1"
+    safe-buffer "^5.1.2"
+  optionalDependencies:
+    saslprep "^1.0.0"
 
-mongodb@~2.0.25:
-  version "2.0.55"
-  resolved "http://registry.npm.taobao.org/mongodb/download/mongodb-2.0.55.tgz#a09dd77259f6bba69f7dd592a011c11aa5761097"
+mongodb@~3.1.13:
+  version "3.1.13"
+  resolved "http://registry.npm.taobao.org/mongodb/download/mongodb-3.1.13.tgz#f8cdcbb36ad7a08b570bd1271c8525753f75f9f4"
+  integrity sha1-+M3Ls2rXoItXC9EnHIUldT91+fQ=
   dependencies:
-    es6-promise "2.1.1"
-    mongodb-core "1.2.31"
-    readable-stream "1.0.31"
+    mongodb-core "3.1.11"
+    safe-buffer "^5.1.2"
 
 node-isbot@^0.0.8:
   version "0.0.8"
@@ -381,15 +384,6 @@ readable-stream@*:
     string_decoder "~1.0.3"
     util-deprecate "~1.0.1"
 
-readable-stream@1.0.31:
-  version "1.0.31"
-  resolved "http://registry.npm.taobao.org/readable-stream/download/readable-stream-1.0.31.tgz#8f2502e0bc9e3b0da1b94520aabb4e2603ecafae"
-  dependencies:
-    core-util-is "~1.0.0"
-    inherits "~2.0.1"
-    isarray "0.0.1"
-    string_decoder "~0.10.x"
-
 request@^2.81.0:
   version "2.81.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.81.0.tgz#c6928946a0e06c5f8d6f8a9333469ffda46298a0"
@@ -417,9 +411,39 @@ request@^2.81.0:
     tunnel-agent "^0.6.0"
     uuid "^3.0.0"
 
+require_optional@^1.0.1:
+  version "1.0.1"
+  resolved "http://registry.npm.taobao.org/require_optional/download/require_optional-1.0.1.tgz#4cf35a4247f64ca3df8c2ef208cc494b1ca8fc2e"
+  integrity sha1-TPNaQkf2TKPfjC7yCMxJSxyo/C4=
+  dependencies:
+    resolve-from "^2.0.0"
+    semver "^5.1.0"
+
+resolve-from@^2.0.0:
+  version "2.0.0"
+  resolved "http://registry.npm.taobao.org/resolve-from/download/resolve-from-2.0.0.tgz#9480ab20e94ffa1d9e80a804c7ea147611966b57"
+  integrity sha1-lICrIOlP+h2egKgEx+oUdhGWa1c=
+
 safe-buffer@^5.0.1, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
+
+safe-buffer@^5.1.2:
+  version "5.1.2"
+  resolved "http://registry.npm.taobao.org/safe-buffer/download/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
+  integrity sha1-mR7GnSluAxN0fVm9/St0XDX4go0=
+
+saslprep@^1.0.0:
+  version "1.0.2"
+  resolved "http://registry.npm.taobao.org/saslprep/download/saslprep-1.0.2.tgz#da5ab936e6ea0bbae911ffec77534be370c9f52d"
+  integrity sha1-2lq5NubqC7rpEf/sd1NL43DJ9S0=
+  dependencies:
+    sparse-bitfield "^3.0.3"
+
+semver@^5.1.0:
+  version "5.6.0"
+  resolved "http://registry.npm.taobao.org/semver/download/semver-5.6.0.tgz#7e74256fbaa49c75aa7c7a205cc22799cac80004"
+  integrity sha1-fnQlb7qknHWqfHogXMInmcrIAAQ=
 
 "simplesmtp@~0.2 || ~0.3", simplesmtp@~0.3.30:
   version "0.3.35"
@@ -434,6 +458,13 @@ sntp@1.x.x:
   dependencies:
     hoek "2.x.x"
 
+sparse-bitfield@^3.0.3:
+  version "3.0.3"
+  resolved "http://registry.npm.taobao.org/sparse-bitfield/download/sparse-bitfield-3.0.3.tgz#ff4ae6e68656056ba4b3e792ab3334d38273ca11"
+  integrity sha1-/0rm5oZWBWuks+eSqzM004JzyhE=
+  dependencies:
+    memory-pager "^1.0.2"
+
 sshpk@^1.7.0:
   version "1.13.1"
   resolved "https://registry.yarnpkg.com/sshpk/-/sshpk-1.13.1.tgz#512df6da6287144316dc4c18fe1cf1d940739be3"
@@ -447,10 +478,6 @@ sshpk@^1.7.0:
     ecc-jsbn "~0.1.1"
     jsbn "~0.1.0"
     tweetnacl "~0.14.0"
-
-string_decoder@~0.10.x:
-  version "0.10.31"
-  resolved "http://registry.npm.taobao.org/string_decoder/download/string_decoder-0.10.31.tgz#62e203bc41766c6c28c9fc84301dab1c5310fa94"
 
 string_decoder@~1.0.3:
   version "1.0.3"
