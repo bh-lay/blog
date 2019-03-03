@@ -15,7 +15,7 @@ function start(){
 
 	echo "启动主服务";
 	printLine;
-	cd sys;
+	cd ../sys;
 	pm2 start app.js;
 
 
