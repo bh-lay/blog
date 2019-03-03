@@ -29,10 +29,10 @@ exports.upload = function (req,callback){
 						'name' : files[i]['name']
 					})
 				}else{
-					fs.rename(files[i].path,newPath)
+					fs.rename(files[i].path,newPath, () => {})
 					newFiles.push({
 						'name' : files[i]['name']
-	 				})
+					})
 				}
 			}
 			callback && callback(null,newFiles)
