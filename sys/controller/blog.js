@@ -20,7 +20,7 @@ function getDetail(id, callback) {
 				} else {
 					docs[0].time_show = utils.parse.time(docs[0].time_show, '{y}-{m}-{d}')
 
-					var converter = new showdown.converter()
+					var converter = new showdown.Converter()
 					docs[0].content = converter.makeHtml(docs[0].content)
 					callback && callback(null, docs[0])
 				}

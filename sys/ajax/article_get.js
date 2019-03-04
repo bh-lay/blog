@@ -97,7 +97,7 @@ function get_detail(data,callback){
 				}else{
 					resJSON['detail'] = docs[0]
 					if(format == 'html'){
-						var converter = new showdown.converter()
+						var converter = new showdown.Converter()
 						resJSON['detail'].content = converter.makeHtml(resJSON['detail'].content)
 					}
 				}

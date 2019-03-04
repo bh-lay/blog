@@ -5,7 +5,6 @@ var utils = require('../core/utils/index.js')
 var DB = require('../core/DB.js')
 
 let showdown  = require('showdown')
-var converter = new showdown.converter()
 
 function list_page(app, callback) {
 	DB.getCollection('labs')
@@ -28,6 +27,7 @@ function get_detail(lab_name, callback) {
 		.then(({collection, closeDBConnect}) => {
 			collection.find({ 'name': lab_name }).toArray(function (err, docs) {
 				closeDBConnect()
+				var converter = new showdown.Converter()
 				if (arguments[1].length == 0) {
 					callback && callback('notFound')
 				} else {
