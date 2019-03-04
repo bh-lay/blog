@@ -107,16 +107,6 @@ app.get('/verifycode', function(data,connect){
 })
 
 /**
- * 数据上报搜集
- */
-var reportCollect = require('./controller/report.js')
-app.get('/r/collect', function( data, connect ){
-	reportCollect.render(connect, app)
-})
-
-
-
-/**
  * ajax
  *
  */
