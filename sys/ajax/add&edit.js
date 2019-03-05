@@ -121,7 +121,7 @@ filter_request.labs = function(data){
 }
 
 //////////////////////////////////////////////////////
-exports.render = function (connect,app){
+exports.render = function (route, connect,app){
 
 	filter_request(connect,function(err,param){
 		if(err){

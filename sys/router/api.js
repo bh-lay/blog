@@ -20,8 +20,6 @@ let ajax_labs = require('../ajax/labs_get')
 let ajax_labs_update = require('../ajax/labs/updateGitInfo')
 //清除缓存
 let ajax_clear_cache = require('../ajax/clear_cache')
-//图库
-let ajax_asset = require('../ajax/asset/index')
 // 获取全景图数据
 let ajax_pano = require('../ajax/pano_get.js')
 // 获取图虫数据
@@ -31,31 +29,14 @@ let ajax_blog = require('../ajax/article_get')
 
 
 module.exports = [
-	// 用户登录认证
-	{
-		path: 'all /snsLogin/:from',
-		controller(route, connect, app) {
-			if(route.param.from == 'github'){
-				snsLogin.github(connect,app)
-			}else{
-				connect.write('json',{
-					'code' : 500
-				})
-			}
-		}
-	},
 	//通用增加&编辑
 	{
 		path: 'all /ajax/add_edit',
-		controller(route, connect, app) {
-			ajax_add_edit.render(connect,app)
-		}
+		controller: ajax_add_edit.render
 	},
 	{
 		path: 'all /ajax/blog',
-		controller(route, connect, app) {
-			ajax_blog.render(connect,app)
-		}
+		controller: ajax_blog.render
 	},
 	{
 		path: 'all /ajax/labs',
@@ -85,15 +66,7 @@ module.exports = [
 	// 清除缓存
 	{
 		path: 'all /ajax/clear_cache',
-		controller(route, connect, app) {
-			ajax_clear_cache.render(connect,app)
-		}
-	},
-	{
-		path: 'all /ajax/asset/*',
-		controller(route, connect, app) {
-			ajax_asset.render(connect,app)
-		}
+		controller: ajax_clear_cache.render
 	},
 	// 前端演示用的demo
 	{
@@ -171,5 +144,18 @@ module.exports = [
 		controller(route, connect, app) {
 			ajax_photography.render(connect, app)
 		}
-	}
+	},
+	// 用户登录认证
+	{
+		path: 'all /snsLogin/:from',
+		controller(route, connect, app) {
+			if(route.param.from == 'github'){
+				snsLogin.github(connect,app)
+			}else{
+				connect.write('json',{
+					'code' : 500
+				})
+			}
+		}
+	},
 ]

@@ -3,7 +3,7 @@
  */
 var utils = require('../core/utils/index.js')
  
-exports.render = function (connect,app){
+exports.render = function (route, connect,app){
 	if(connect.request.method != 'POST'){
 		connect.write('json',{
 			'code' : 201,
