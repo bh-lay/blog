@@ -78,12 +78,21 @@ class APP {
 		if(typeof(callback) !== 'function' || typeof(urlRule) !== 'string'){
 			return
 		}
+		// URL 转换为全小写
+		urlRule = urlRule.toLowerCase()
+		// 匹配 method，并清理 url method 部分
+		let method = 'all'
+		urlRule = urlRule.replace(/^(\w+)\s/, (result, key) => {
+			method = key.match(/^(get|post|options|put|delete)$/) ? key : 'all'
+			return ''
+		})
 		let keys = []
 		let rule = pathToRegexp(urlRule, keys)
+
 		this.routes.push({
 			keys: keys.map(key => key.name),
 			rule,
-			method: 'all',
+			method,
 			controller: callback
 		})
 	}

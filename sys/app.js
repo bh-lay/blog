@@ -170,22 +170,6 @@ app.setRoute('/ajax/demo/*', function(data,connect){
 	ajax_demo.render(connect,app)
 })
 
-//权限
-app.setRoute('/ajax/power', function(data,connect){
-	connect.write('json',{
-		'code' : 500
-	})
-//  ajax_power.render(connect,app);
-})
-
-//用户组
-app.setRoute('/ajax/user_group', function(data,connect){
-	connect.write('json',{
-		'code' : 500
-	})
-//  ajax_user_group.render(connect,app);
-})
-
 //公用删除接口
 app.setRoute('/ajax/del', function(data,connect){
 	ajax_del.render(connect,app)
@@ -234,12 +218,6 @@ app.setRoute('/ajax/functions/:act',function(data,connect){
 	var act = data.act
 	ajax_functions(connect,app,act)
 })
-
-// 获取微信JSSDK配置
-// var ajax_wechat = require('./ajax/wechat.js');
-// app.setRoute('/ajax/getWechatJsapiSign', function( data, connect ){
-//   ajax_wechat.getWechatJsapiSign( connect, app );
-// });
 
 // 获取全景图数据
 var ajax_pano = require('./ajax/pano_get.js')
