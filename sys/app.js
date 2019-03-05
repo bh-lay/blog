@@ -25,13 +25,13 @@ function views_select(connect,callback){
 
 //首页
 var index = require('./controller/index.js')
-app.get('/', function(data,connect){
+app.setRoute('/', function(data,connect){
 	views_select(connect,function(){
 		index.deal(connect,app)
 	})
 })
 //留言
-app.get('/bless', function(data,connect){
+app.setRoute('/bless', function(data,connect){
 	views_select(connect,function(){
 		connect.write('define',307,{
 			location:'/'
@@ -40,18 +40,18 @@ app.get('/bless', function(data,connect){
 })
 //前端英雄榜
 var links = require('./controller/links.js')
-app.get('/directories', function(data,connect){
+app.setRoute('/directories', function(data,connect){
 	links.render(connect,app)
 })
 
 //博客
 var blog = require('./controller/blog.js')
-app.get('/blog', function(data,connect){
+app.setRoute('/blog', function(data,connect){
 	views_select(connect,function(){
 		blog.list(connect,app)
 	})
 })
-app.get('/blog/{id}', function(data,connect){
+app.setRoute('/blog/:id', function(data,connect){
 	views_select(connect,function(){
 		blog.detail(connect,app,data.id)
 	})
@@ -60,36 +60,36 @@ app.get('/blog/{id}', function(data,connect){
 
 //实验室
 var labs = require('./controller/labs.js')
-app.get('/labs', function(data,connect){
+app.setRoute('/labs', function(data,connect){
 	views_select(connect,function(){
 		labs.list(connect,app)
 	})
 })
 var pano = require('./controller/pano.js')
-app.get('/720', function(data,connect){
+app.setRoute('/720', function(data,connect){
 	views_select(connect,function(){
 		pano.list(connect, app)
 	})
 })
 var photography = require('./controller/photography.js')
-app.get('/photography', function(data,connect){
+app.setRoute('/photography', function(data,connect){
 	views_select(connect,function(){
 		photography.list(connect, app)
 	})
 })
-app.get('/labs/{name}', function(data,connect){
+app.setRoute('/labs/:name', function(data,connect){
 	labs.detail(connect,app,data.name)
 })
 
 //后台
 var admin = require('./controller/admin.js')
-app.get('/admin/*', function(data,connect){
+app.setRoute('/admin/*', function(data,connect){
 	admin.render(connect,app)
 })
 
 //用户登录认证
 var snsLogin = require('./controller/snsLogin.js')
-app.get('/snsLogin/{from}', function(data,connect){
+app.setRoute('/snsLogin/:from', function(data,connect){
 	if(data.from == 'github'){
 		snsLogin.github(connect,app)
 	}else{
@@ -102,7 +102,7 @@ app.get('/snsLogin/{from}', function(data,connect){
 
 //验证码
 var verifycode = require('./controller/verifycode.js')
-app.get('/verifycode', function(data,connect){
+app.setRoute('/verifycode', function(data,connect){
 	verifycode.render(connect,app)
 })
 
@@ -120,58 +120,58 @@ var ajax_user = require('./ajax/user/index'),
 	ajax_functions =  require('./ajax/functions.js')
 
 //通用增加&编辑
-app.get('/ajax/add_edit', function(data,connect){
+app.setRoute('/ajax/add_edit', function(data,connect){
 	ajax_add_edit.render(connect,app)
 })
 
 //博客
 var ajax_blog = require('./ajax/article_get')
-app.get('/ajax/blog', function(data,connect){
+app.setRoute('/ajax/blog', function(data,connect){
 	ajax_blog.render(connect,app)
 })
 //实验室
 var ajax_labs = require('./ajax/labs_get'),
 	ajax_labs_update = require('./ajax/labs/updateGitInfo')
-app.get('/ajax/labs', function(data,connect){
+app.setRoute('/ajax/labs', function(data,connect){
 	ajax_labs.render(connect,app)
 })
-app.get('/ajax/labs/updateGitInfo', function(data,connect){
+app.setRoute('/ajax/labs/updateGitInfo', function(data,connect){
 	ajax_labs_update.render(connect,app)
 })
 
 //友情链接
-app.get('/ajax/links/list', function(data,connect){
+app.setRoute('/ajax/links/list', function(data,connect){
 	ajax_links.list(connect,app)
 })
-app.get('/ajax/links/detail/{id}', function(data,connect){
+app.setRoute('/ajax/links/detail/:id', function(data,connect){
 	ajax_links.detail(connect,app,data.id)
 })
-app.get('/ajax/links/add_edit', function(data,connect){
+app.setRoute('/ajax/links/add_edit', function(data,connect){
 	ajax_links.add_edit(connect,app,data.id)
 })
-app.get('/ajax/links/post', function(data,connect){
+app.setRoute('/ajax/links/post', function(data,connect){
 	ajax_links.post(connect,app,data.id)
 })
 
 //清除缓存
 var ajax_clear_cache = require('./ajax/clear_cache')
-app.get('/ajax/clear_cache', function(data,connect){
+app.setRoute('/ajax/clear_cache', function(data,connect){
 	ajax_clear_cache.render(connect,app)
 })
 
 //图库
 var ajax_asset = require('./ajax/asset/index')
-app.get('/ajax/asset/*', function(data,connect){
+app.setRoute('/ajax/asset/*', function(data,connect){
 	ajax_asset.render(connect,app)
 })
 
 //前端演示用的demo
-app.get('/ajax/demo/*', function(data,connect){
+app.setRoute('/ajax/demo/*', function(data,connect){
 	ajax_demo.render(connect,app)
 })
 
 //权限
-app.get('/ajax/power', function(data,connect){
+app.setRoute('/ajax/power', function(data,connect){
 	connect.write('json',{
 		'code' : 500
 	})
@@ -179,7 +179,7 @@ app.get('/ajax/power', function(data,connect){
 })
 
 //用户组
-app.get('/ajax/user_group', function(data,connect){
+app.setRoute('/ajax/user_group', function(data,connect){
 	connect.write('json',{
 		'code' : 500
 	})
@@ -187,12 +187,12 @@ app.get('/ajax/user_group', function(data,connect){
 })
 
 //公用删除接口
-app.get('/ajax/del', function(data,connect){
+app.setRoute('/ajax/del', function(data,connect){
 	ajax_del.render(connect,app)
 })
 
 //评论
-app.get('/ajax/comments/{mark}', function(data,connect){
+app.setRoute('/ajax/comments/:mark', function(data,connect){
 	var mark = data.mark
 	//尝试使用ajax模块提供接口
 	if(ajax_comments[mark]){
@@ -205,7 +205,7 @@ app.get('/ajax/comments/{mark}', function(data,connect){
 })
 
 //标签模块
-app.get('/ajax/tag/{act}', function(data,connect){
+app.setRoute('/ajax/tag/:act', function(data,connect){
 	var act = data.act
 	//尝试使用ajax模块提供接口
 	if(ajax_tag[act]){
@@ -218,7 +218,7 @@ app.get('/ajax/tag/{act}', function(data,connect){
 })
 
 //用户
-app.get('/ajax/user/{act}', function(data,connect){
+app.setRoute('/ajax/user/:act', function(data,connect){
 	var act = data.act
 	//尝试使用ajax模块提供接口
 	if(ajax_user[act]){
@@ -230,25 +230,25 @@ app.get('/ajax/user/{act}', function(data,connect){
 	}
 })
 
-app.get('/ajax/functions/{act}',function(data,connect){
+app.setRoute('/ajax/functions/:act',function(data,connect){
 	var act = data.act
 	ajax_functions(connect,app,act)
 })
 
 // 获取微信JSSDK配置
 // var ajax_wechat = require('./ajax/wechat.js');
-// app.get('/ajax/getWechatJsapiSign', function( data, connect ){
+// app.setRoute('/ajax/getWechatJsapiSign', function( data, connect ){
 //   ajax_wechat.getWechatJsapiSign( connect, app );
 // });
 
 // 获取全景图数据
 var ajax_pano = require('./ajax/pano_get.js')
-app.get('/ajax/pano/list', function( data, connect ){
+app.setRoute('/ajax/pano/list', function( data, connect ){
 	ajax_pano.render( connect, app )
 })
 // 获取图虫数据
 var ajax_photography = require('./ajax/photography_get.js')
-app.get('/ajax/photography/list', function( data, connect ){
+app.setRoute('/ajax/photography/list', function( data, connect ){
 	ajax_photography.render(connect, app)
 })
 
