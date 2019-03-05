@@ -16,17 +16,6 @@ var http = require('http'),
 
 
 /**
- * 检测是否为正常用户
- */
-function isNormalVisitor(req){
-	var url = req.url
-	//检测路径中是否包含 ../
-	if(url.match(/\.\.\//)){
-		return true
-	}
-	return false
-}
-/**
  * application 类
  */
 class APP {
@@ -35,15 +24,16 @@ class APP {
 		this.fileReader = new staticFile(config.static)
 		// server start
 		var server = http.createServer((req,res) => {
-			if(isNormalVisitor(req)){
+			// 屏蔽非法用户
+			if(this.isAbnormalVisitor(req)){
 				res.writeHead(500)
 				res.end('hello I\'m bh-lay !')
 				return
 			}
-			//实例化一个connect对象
+			// 实例化一个connect对象
 			let newConnect = new connect(req, res, this.session)
 			let path = newConnect.url
-			let matchedRoutes = this.testUrlInRoutes(path.pathname)
+			let matchedRoutes = this.matchRequestInRoutes(path.pathname, newConnect.request.method)
 			if(matchedRoutes.length){
 				// 第一顺序：执行get方法设置的回调
 				// 使用匹配的最后一个 controller
@@ -71,6 +61,17 @@ class APP {
 		server.listen(config.port)
 	}
 	/**
+	 * 检测是否为正常用户
+	 */
+	isAbnormalVisitor (req) {
+		var url = req.url
+		//检测路径中是否包含 ../
+		if(url.match(/\.\.\//)){
+			return true
+		}
+		return false
+	}
+	/**
 	 * 设置前端请求路径
 	 */
 	setRoute (urlRule, callback) {
@@ -86,13 +87,22 @@ class APP {
 			controller: callback
 		})
 	}
-	testUrlInRoutes (path) {
+	// 在 routes 配置中查找于请求匹配的路由
+	matchRequestInRoutes (path, method) {
 		let result = []
+		let currentMethod = method.toLowerCase()
+		// 遍历所有路由配置
 		this.routes.forEach(route => {
+			// 第一步，检查 method 是否匹配
+			if (route.method !== 'all' && route.method !== currentMethod) {
+				return
+			}
+			// 第二步，检查 URL 规则是否匹配
 			let testMatches = route.rule.exec(path)
 			if (!testMatches) {
 				return
 			}
+			// 从 URL 中国呢获取参数
 			let param = {}
 			testMatches.forEach((value, index) => {
 				if (index > 0) {
@@ -100,13 +110,12 @@ class APP {
 					param[key] = value
 				}
 			})
-			if (testMatches) {
-				result.push({
-					path,
-					param,
-					route
-				})
-			}
+			// 标记匹配结果
+			result.push({
+				path,
+				param,
+				route
+			})
 		})
 		return result
 	}
