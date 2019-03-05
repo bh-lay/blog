@@ -27,10 +27,11 @@ function getData (onSuccess, onError) {
 
 function filterData (list) {
   list.forEach(function (item) {
+    let thumb = 'https://ssl-thumb.720static.com/@' + item.property.thumbUrl
     item.title = item.property.name;
     item.desc = item.property.remark;
     item.url = 'http://720yun.com/t/' + item.property.pid + '?from=bh-lay';
-    item.thumb = 'http://thumb-qiniu.720static.com/@' + item.property.thumbUrl;
+    item.thumb = '/img-robber/' + btoa(thumb + '-https://720yun.com');
     item.pv = item.pvCount;
     item.like = item.likeCount;
   });
