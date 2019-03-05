@@ -5,7 +5,7 @@
 var utils = require('../../core/utils/index.js'),
 	updateLabsDataFromGithub = require('../../functions/updateLabsDataFromGithub.js')
 
-exports.render = function (connect,app){
+exports.render = function (route, connect, app){
 	//强制使用POST方法
 	if(connect.request.method != 'POST'){
 		connect.write('json',{

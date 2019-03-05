@@ -41,7 +41,7 @@ function filter_param(data){
 	return param
 }
 
-module.exports = function (connect,app){
+module.exports = function (route, connect, app){
 	//获取数据
 	utils.parse.request(connect.request,function(err,dataO){
 		//过滤数据

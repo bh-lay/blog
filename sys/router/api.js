@@ -1,35 +1,33 @@
 
 //用户登录认证
-var snsLogin = require('../controller/snsLogin.js')
-//验证码
-var verifycode = require('../controller/verifycode.js')
+let snsLogin = require('../controller/snsLogin.js')
 /**
  * ajax
  *
  */
-var ajax_user = require('../ajax/user/index'),
-	ajax_add_edit = require('../ajax/add&edit.js'),
-	ajax_comments = require('../ajax/comments/index.js'),
-	ajax_links = require('../ajax/links/index.js'),
-	ajax_del = require('../ajax/del'),
-	ajax_demo = require('../ajax/demo/index'),
-	ajax_tag =  require('../ajax/tag/index.js'),
-	ajax_functions =  require('../ajax/functions.js')
+var ajax_user = require('../ajax/user/index')
+let ajax_add_edit = require('../ajax/add&edit.js')
+let ajax_comments = require('../ajax/comments/index.js')
+let ajax_links = require('../ajax/links/index.js')
+let ajax_del = require('../ajax/del')
+let ajax_demo = require('../ajax/demo/index')
+let ajax_tag =  require('../ajax/tag/index.js')
+let ajax_functions =  require('../ajax/functions.js')
 
 
 //实验室
-var ajax_labs = require('../ajax/labs_get'),
-	ajax_labs_update = require('../ajax/labs/updateGitInfo')
+let ajax_labs = require('../ajax/labs_get')
+let ajax_labs_update = require('../ajax/labs/updateGitInfo')
 //清除缓存
-var ajax_clear_cache = require('../ajax/clear_cache')
+let ajax_clear_cache = require('../ajax/clear_cache')
 //图库
-var ajax_asset = require('../ajax/asset/index')
+let ajax_asset = require('../ajax/asset/index')
 // 获取全景图数据
-var ajax_pano = require('../ajax/pano_get.js')
+let ajax_pano = require('../ajax/pano_get.js')
 // 获取图虫数据
-var ajax_photography = require('../ajax/photography_get.js')
+let ajax_photography = require('../ajax/photography_get.js')
 //博客
-var ajax_blog = require('../ajax/article_get')
+let ajax_blog = require('../ajax/article_get')
 
 
 module.exports = [
@@ -44,12 +42,6 @@ module.exports = [
 					'code' : 500
 				})
 			}
-		}
-	},
-	{
-		path: 'all /verifycode',
-		controller(route, connect, app) {
-			verifycode.render(connect,app)
 		}
 	},
 	//通用增加&编辑
@@ -67,41 +59,30 @@ module.exports = [
 	},
 	{
 		path: 'all /ajax/labs',
-		controller(route, connect, app) {
-			ajax_labs.render(connect,app)
-		}
+		controller:ajax_labs.render
 	},
 	{
 		path: 'all /ajax/labs/updateGitInfo',
-		controller(route, connect, app) {
-			ajax_labs_update.render(connect,app)
-		}
+		controller: ajax_labs_update.render
 	},
 	//友情链接
 	{
 		path: 'all /ajax/links/list',
-		controller(route, connect, app) {
-			ajax_links.list(connect,app)
-		}
+		controller: ajax_links.list
 	},
 	{
 		path: 'all /ajax/links/detail/:id',
-		controller(route, connect, app) {
-			ajax_links.detail(connect,app, route.param.id)
-		}
+		controller: ajax_links.detail
 	},
 	{
 		path: 'all /ajax/links/add_edit',
-		controller(route, connect, app) {
-			ajax_links.add_edit(connect,app, route.param.id)
-		}
+		controller: ajax_links.add_edit
 	},
 	{
 		path: 'all /ajax/links/post',
-		controller(route, connect, app) {
-			ajax_links.post(connect,app, route.param.id)
-		}
+		controller: ajax_links.post
 	},
+	// 清除缓存
 	{
 		path: 'all /ajax/clear_cache',
 		controller(route, connect, app) {

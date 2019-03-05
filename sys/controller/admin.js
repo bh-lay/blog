@@ -6,7 +6,7 @@
 var powerCode = 1
 var login_path = '/admin/login'
 
-exports.render = function(connect,app){
+exports.render = function(route, connect,app){
 	var pathname = connect.url.pathname
 	//获取session信息
 	connect.session(function(session_this){

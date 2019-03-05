@@ -41,7 +41,7 @@ function get_list(data, callback){
 
 }
 
-module.exports = function (connect,app){
+module.exports = function (route, connect, app){
 	var url = connect.request.url
 
 	app.cache.use(url,['ajax','links'],function(this_cache){

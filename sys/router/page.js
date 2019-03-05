@@ -98,15 +98,11 @@ module.exports = [
 	},
 	{
 		path: 'get /labs/:name',
-		controller(route, connect, app) {
-			labs.detail(connect, app, route.param.name)
-		}
+		controller: labs.detail
 	},
 	//后台
 	{
 		path: 'get /admin/*',
-		controller(route, connect, app) {
-			admin.render(connect,app)
-		}
+		controller: admin.render
 	},
 ]

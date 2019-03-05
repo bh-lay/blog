@@ -64,7 +64,7 @@ function filter_param(data){
 
 var need_power = 18
 
-module.exports = function (connect,app){
+module.exports = function (route, connect, app){
 
 	//校验权限
 	connect.session(function(session_this){
