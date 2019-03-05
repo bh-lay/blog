@@ -39,7 +39,7 @@ module.exports = function(data,callback){
 	
 	DB.getCollection('comments')
 		.then(({collection, closeDBConnect}) => {
-			collection.insert(item,function(err){
+			collection.insertOne(item,function(err){
 				if(err) {
 					callback && callback(err)
 				} else {

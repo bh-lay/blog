@@ -8,7 +8,7 @@ function insert(parm,callback){
 	DB.getCollection(collection_name)
 		.then(({collection, closeDBConnect}) => {
 			parm.id = utils.createID()
-			collection.insert(parm,function(err){
+			collection.insertOne(parm,function(err){
 				if(err){
 					callback && callback(err)
 					return

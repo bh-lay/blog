@@ -47,7 +47,7 @@ function saveDataToDataBase(data){
 						})
 					}else{
 						// 不存在则插入为新数据
-						collection.insert(data,function(){
+						collection.insertOne(data,function(){
 							closeDBConnect()
 						})
 					}
