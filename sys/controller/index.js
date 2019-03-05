@@ -1,6 +1,6 @@
 //author bh-lay
 
-exports.deal = function (connect,app){
+exports.get = function (route, connect, app){
 	//缓存机制
 	app.cache.use('index_page',['html'],function(this_cache){
 		connect.write('html',200,this_cache)

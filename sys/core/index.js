@@ -38,7 +38,7 @@ class APP {
 				// 第一顺序：执行get方法设置的回调
 				// 使用匹配的最后一个 controller
 				let usedRoute = matchedRoutes[matchedRoutes.length - 1]
-				usedRoute.route.controller(usedRoute.param, newConnect)
+				usedRoute.route.controller(usedRoute, newConnect, this)
 			}else{
 				//第二顺序：使用静态文件
 				this.fileReader.read(path.pathname, req,res, () => {
