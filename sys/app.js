@@ -36,7 +36,7 @@ var pano = require('./controller/pano.js')
 var photography = require('./controller/photography.js')
 var admin = require('./controller/admin.js')
 
-const routes = [
+const PageRoutes = [
 	// 首页
 	{
 		path: 'get /',
@@ -106,9 +106,7 @@ const routes = [
 	{
 		path: 'get /labs/:name',
 		controller(route, connect, app) {
-			views_select(connect,function(){
-				labs.detail(connect, app, route.param.name)
-			})
+			labs.detail(connect, app, route.param.name)
 		}
 	},
 	//后台
@@ -119,31 +117,15 @@ const routes = [
 		}
 	},
 ]
-routes.forEach(({path, controller}) => {
-	app.setRoute(path, controller)
-})
+
 
 
 
 
 //用户登录认证
 var snsLogin = require('./controller/snsLogin.js')
-app.setRoute('/snsLogin/:from', function(route, connect, app) {
-	if(route.param.from == 'github'){
-		snsLogin.github(connect,app)
-	}else{
-		connect.write('json',{
-			'code' : 500
-		})
-	}
-})
-
-
 //验证码
 var verifycode = require('./controller/verifycode.js')
-app.setRoute('/verifycode', function(route, connect, app) {
-	verifycode.render(connect,app)
-})
 
 /**
  * ajax
@@ -158,118 +140,191 @@ var ajax_user = require('./ajax/user/index'),
 	ajax_tag =  require('./ajax/tag/index.js'),
 	ajax_functions =  require('./ajax/functions.js')
 
-//通用增加&编辑
-app.setRoute('/ajax/add_edit', function(route, connect, app) {
-	ajax_add_edit.render(connect,app)
-})
 
-//博客
-var ajax_blog = require('./ajax/article_get')
-app.setRoute('/ajax/blog', function(route, connect, app) {
-	ajax_blog.render(connect,app)
-})
 //实验室
 var ajax_labs = require('./ajax/labs_get'),
 	ajax_labs_update = require('./ajax/labs/updateGitInfo')
-app.setRoute('/ajax/labs', function(route, connect, app) {
-	ajax_labs.render(connect,app)
-})
-app.setRoute('/ajax/labs/updateGitInfo', function(route, connect, app) {
-	ajax_labs_update.render(connect,app)
-})
-
-//友情链接
-app.setRoute('/ajax/links/list', function(route, connect, app) {
-	ajax_links.list(connect,app)
-})
-app.setRoute('/ajax/links/detail/:id', function(route, connect, app) {
-	ajax_links.detail(connect,app, route.param.id)
-})
-app.setRoute('/ajax/links/add_edit', function(route, connect, app) {
-	ajax_links.add_edit(connect,app, route.param.id)
-})
-app.setRoute('/ajax/links/post', function(route, connect, app) {
-	ajax_links.post(connect,app, route.param.id)
-})
-
 //清除缓存
 var ajax_clear_cache = require('./ajax/clear_cache')
-app.setRoute('/ajax/clear_cache', function(route, connect, app) {
-	ajax_clear_cache.render(connect,app)
-})
-
 //图库
 var ajax_asset = require('./ajax/asset/index')
-app.setRoute('/ajax/asset/*', function(route, connect, app) {
-	ajax_asset.render(connect,app)
-})
-
-//前端演示用的demo
-app.setRoute('/ajax/demo/*', function(route, connect, app) {
-	ajax_demo.render(connect,app)
-})
-
-//公用删除接口
-app.setRoute('/ajax/del', function(route, connect, app) {
-	ajax_del.render(connect,app)
-})
-
-//评论
-app.setRoute('/ajax/comments/:mark', function(route, connect, app) {
-	var mark = route.param.mark
-	//尝试使用ajax模块提供接口
-	if(ajax_comments[mark]){
-		ajax_comments[mark](connect,app)
-	}else{
-		connect.write('json',{
-			'code' : 404
-		})
-	}
-})
-
-//标签模块
-app.setRoute('/ajax/tag/:act', function(route, connect, app) {
-	var act = route.param.act
-	//尝试使用ajax模块提供接口
-	if(ajax_tag[act]){
-		ajax_tag[act](connect,app)
-	}else{
-		connect.write('json',{
-			'code' : 500
-		})
-	}
-})
-
-//用户
-app.setRoute('/ajax/user/:act', function(route, connect, app) {
-	var act = route.param.act
-	//尝试使用ajax模块提供接口
-	if(ajax_user[act]){
-		ajax_user[act](connect,app)
-	}else{
-		connect.write('json',{
-			'code' : 500
-		})
-	}
-})
-
-app.setRoute('/ajax/functions/:act',function(route, connect, app) {
-	var act = route.param.act
-	ajax_functions(connect,app,act)
-})
 
 // 获取全景图数据
 var ajax_pano = require('./ajax/pano_get.js')
-app.setRoute('/ajax/pano/list', function( data, connect ){
-	ajax_pano.render( connect, app )
-})
+
 // 获取图虫数据
 var ajax_photography = require('./ajax/photography_get.js')
-app.setRoute('/ajax/photography/list', function( data, connect ){
-	ajax_photography.render(connect, app)
+
+
+//博客
+var ajax_blog = require('./ajax/article_get')
+
+let apiRoutes = [
+	// 用户登录认证
+	{
+		path: 'all /snsLogin/:from',
+		controller(route, connect, app) {
+			if(route.param.from == 'github'){
+				snsLogin.github(connect,app)
+			}else{
+				connect.write('json',{
+					'code' : 500
+				})
+			}
+		}
+	},
+	{
+		path: 'all /verifycode',
+		controller(route, connect, app) {
+			verifycode.render(connect,app)
+		}
+	},
+	//通用增加&编辑
+	{
+		path: 'all /ajax/add_edit',
+		controller(route, connect, app) {
+			ajax_add_edit.render(connect,app)
+		}
+	},
+	{
+		path: 'all /ajax/blog',
+		controller(route, connect, app) {
+			ajax_blog.render(connect,app)
+		}
+	},
+	{
+		path: 'all /ajax/labs',
+		controller(route, connect, app) {
+			ajax_labs.render(connect,app)
+		}
+	},
+	{
+		path: 'all /ajax/labs/updateGitInfo',
+		controller(route, connect, app) {
+			ajax_labs_update.render(connect,app)
+		}
+	},
+	//友情链接
+	{
+		path: 'all /ajax/links/list',
+		controller(route, connect, app) {
+			ajax_links.list(connect,app)
+		}
+	},
+	{
+		path: 'all /ajax/links/detail/:id',
+		controller(route, connect, app) {
+			ajax_links.detail(connect,app, route.param.id)
+		}
+	},
+	{
+		path: 'all /ajax/links/add_edit',
+		controller(route, connect, app) {
+			ajax_links.add_edit(connect,app, route.param.id)
+		}
+	},
+	{
+		path: 'all /ajax/links/post',
+		controller(route, connect, app) {
+			ajax_links.post(connect,app, route.param.id)
+		}
+	},
+	{
+		path: 'all /ajax/clear_cache',
+		controller(route, connect, app) {
+			ajax_clear_cache.render(connect,app)
+		}
+	},
+	{
+		path: 'all /ajax/asset/*',
+		controller(route, connect, app) {
+			ajax_asset.render(connect,app)
+		}
+	},
+	// 前端演示用的demo
+	{
+		path: 'all /ajax/demo/*',
+		controller(route, connect, app) {
+			ajax_demo.render(connect,app)
+		}
+	},
+	// 公用删除接口
+	{
+		path: 'all /ajax/del',
+		controller(route, connect, app) {
+			ajax_del.render(connect,app)
+		}
+	},
+	// 评论
+	{
+		path: 'all /ajax/comments/:mark',
+		controller(route, connect, app) {
+			var mark = route.param.mark
+			//尝试使用ajax模块提供接口
+			if(ajax_comments[mark]){
+				ajax_comments[mark](connect,app)
+			}else{
+				connect.write('json',{
+					'code' : 404
+				})
+			}
+		}
+	},
+	// 标签模块
+	{
+		path: 'all /ajax/tag/:act',
+		controller(route, connect, app) {
+			var act = route.param.act
+			//尝试使用ajax模块提供接口
+			if(ajax_tag[act]){
+				ajax_tag[act](connect,app)
+			}else{
+				connect.write('json',{
+					'code' : 500
+				})
+			}
+		}
+	},
+	{
+		path: 'all /ajax/user/:act',
+		controller(route, connect, app) {
+			var act = route.param.act
+			//尝试使用ajax模块提供接口
+			if(ajax_user[act]){
+				ajax_user[act](connect,app)
+			}else{
+				connect.write('json',{
+					'code' : 500
+				})
+			}
+		}
+	},
+	{
+		path: 'all /ajax/functions/:act',
+		controller(route, connect, app) {
+			var act = route.param.act
+			ajax_functions(connect,app,act)
+		}
+	},
+	{
+		path: 'all /ajax/pano/list',
+		controller(route, connect, app) {
+			ajax_pano.render( connect, app )
+		}
+	},
+	{
+		path: 'all /ajax/photography/list',
+		controller(route, connect, app) {
+			ajax_photography.render(connect, app)
+		}
+	}
+]
+
+
+const routes = [].concat(PageRoutes, apiRoutes)
+routes.forEach(({path, controller}) => {
+	app.setRoute(path, controller)
 })
-
-
 /**
  * 计划任务
  **/
