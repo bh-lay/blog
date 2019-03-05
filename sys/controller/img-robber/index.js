@@ -49,6 +49,8 @@ exports.render = (route, connect) => {
 						code: 2,
 						msg: 'load error !'
 					})
+					// 下载失败，删除可能已经下载到本地的文件
+					staticFile.deleteFile(localFilePath)
 				})
 		})
 

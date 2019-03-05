@@ -4,13 +4,19 @@ let request = require('request')
 // 下载文件
 const downloadFile = (fileUrl, refererUrl, path) => {
 	return new Promise((resolve, reject) => {
-		request
-			.get({
+		try {
+			let reqClient = request.get({
 				url: fileUrl,
 				headers: {
 					'Referer': refererUrl
 				}
+			}, err => {
+				if (err) {
+					reject()
+				}
 			})
+
+			reqClient
 			.pipe(fs.createWriteStream(path))
 			.on('error', () => {
 				reject()
@@ -18,9 +24,9 @@ const downloadFile = (fileUrl, refererUrl, path) => {
 			.on('finish', () => {
 				resolve()
 			})
-			.on('close', () => {
-				reject()
-			})
+		} catch (e) {
+			reject()
+		}
 	})
 }
 

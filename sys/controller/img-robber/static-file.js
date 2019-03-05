@@ -90,3 +90,6 @@ function fileReader(realPath, req, res) {
 
 exports.isFileExists = isFileExists
 exports.fileReader = fileReader
+exports.deleteFile = path => {
+	fs.unlink(path, () => {})
+}
