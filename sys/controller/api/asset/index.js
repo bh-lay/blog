@@ -1,7 +1,7 @@
 /**
  * @author bh-lay
  */
-var utils = require('../../core/utils/index.js')
+var utils = require('../../../core/utils/index.js')
 var read = require('./fileList')
 var upload = require('./upload')
 var del = require('./delete')

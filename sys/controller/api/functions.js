@@ -1,9 +1,9 @@
 /**
  * @author bh-lay
  */
-let updateFriendsScore = require('../functions/updateFriendsScore.js')
-let my720Data = require('../functions/my720Data.js')
-let myTuchongData = require('../functions/myTuchongData.js')
+let updateFriendsScore = require('../../functions/updateFriendsScore.js')
+let my720Data = require('../../functions/my720Data.js')
+let myTuchongData = require('../../functions/myTuchongData.js')
 
 function isAdmin (connect, successFn, failFn) {
 	connect.session(function (session_this) {

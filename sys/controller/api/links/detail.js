@@ -3,7 +3,7 @@
  */
 
 
-var DB = require('../../core/DB.js')
+var DB = require('../../../core/DB.js')
 
 function get_detail(id,callback){
 	

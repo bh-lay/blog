@@ -1,5 +1,5 @@
 
-var DB = require('../../core/DB.js')
+var DB = require('../../../core/DB.js')
 
 
 //获取评论详情

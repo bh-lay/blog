@@ -15,7 +15,7 @@
 
 ***************************************************************/
 
-var DB = require('../core/DB.js')
+var DB = require('../../core/DB.js')
 
 var del_conf = {
 	'blog' : {

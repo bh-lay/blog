@@ -4,7 +4,7 @@
  */
 
 var fs = require('fs')
-var utils = require('../../core/utils/index.js')
+var utils = require('../../../core/utils/index.js')
 var assetPath = '../static/'
 
 exports.upload = function (req,callback){

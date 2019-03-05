@@ -1,7 +1,7 @@
 /**
  * @author bh-lay
  */
-var utils = require('../core/utils/index.js')
+var utils = require('../../core/utils/index.js')
  
 exports.render = function (route, connect,app){
 	if(connect.request.method != 'POST'){

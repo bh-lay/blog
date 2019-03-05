@@ -2,7 +2,7 @@
 
 var request = require('request'),
 	jsSHA = require('jssha'),
-	config = require('../conf/wechat.js'),
+	config = require('../../conf/wechat.js'),
 	private_wechat_token = null,
 	private_wechat_jsapi_ticket = null
 

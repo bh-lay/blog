@@ -10,9 +10,9 @@
 	});
  */
 
-var mongo = require('../../core/DB.js')
+var mongo = require('../../../core/DB.js')
 const DB = mongo
-var utils = require('../../core/utils/index.js')
+var utils = require('../../../core/utils/index.js')
 //增加一条用户记录
 function add(parm,callback){
 	parm = parm || {}

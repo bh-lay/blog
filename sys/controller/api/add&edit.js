@@ -3,8 +3,8 @@
  * 
  */
 
-let DB = require('../core/DB.js')
-let utils = require('../core/utils/index.js')
+let DB = require('../../core/DB.js')
+let utils = require('../../core/utils/index.js')
 
 function add(parm,collection_name,callback){	
 	DB.getCollection(collection_name)

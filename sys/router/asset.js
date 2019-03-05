@@ -4,27 +4,27 @@ let asset = require('../controller/api/asset/index')
 module.exports = [
 	// 静态资源
 	{
-		path: 'all /ajax/asset',
+		path: 'get /ajax/asset',
 		controller: asset.list
 	},
 	{
-		path: 'all /ajax/asset/upload',
+		path: 'post /ajax/asset/upload',
 		controller: asset.upload
 	},
 	{
-		path: 'all /ajax/asset/del',
+		path: 'post /ajax/asset/del',
 		controller: asset.deleteFile
 	},
 	{
-		path: 'all /ajax/asset/rename',
+		path: 'post /ajax/asset/rename',
 		controller: asset.renamePath
 	},
 	{
-		path: 'all /ajax/asset/delDir',
+		path: 'post /ajax/asset/delDir',
 		controller: asset.deleteDir
 	},
 	{
-		path: 'all /ajax/asset/createDir',
+		path: 'post /ajax/asset/createDir',
 		controller: asset.createPath
 	}
 ]

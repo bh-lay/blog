@@ -3,7 +3,7 @@
  *
  */
 
-var getTags = require('../../functions/getTags.js')
+var getTags = require('../../../functions/getTags.js')
 
 //获取所有博文的标签
 exports.allBlogTagsList = function (connect,app){

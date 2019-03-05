@@ -1,5 +1,5 @@
 
-var DB = require('../../core/DB.js')
+var DB = require('../../../core/DB.js')
 
 
 function getUserInfo(id,callback){

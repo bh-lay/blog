@@ -1,7 +1,7 @@
 /*
  * @author bh-lay
  */
-var my720Data = require('../functions/my720Data.js')
+var my720Data = require('../../functions/my720Data.js')
 
 exports.render = function (connect,app){
 	var url = connect.request.url

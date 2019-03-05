@@ -28,7 +28,7 @@ get_detail
 -----------------------------------------------------------------
  */
 
-let DB = require('../core/DB.js')
+let DB = require('../../core/DB.js')
 
 let showdown  = require('showdown')
 

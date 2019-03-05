@@ -2,8 +2,8 @@
  * @author bh-lay
  */
 
-var utils = require('../../core/utils/index.js'),
-	updateLabsDataFromGithub = require('../../functions/updateLabsDataFromGithub.js')
+var utils = require('../../../core/utils/index.js'),
+	updateLabsDataFromGithub = require('../../../functions/updateLabsDataFromGithub.js')
 
 exports.render = function (route, connect, app){
 	//强制使用POST方法

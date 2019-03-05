@@ -10,7 +10,7 @@
   });
  */
 
-var utils = require('../../core/utils/index.js'),
+var utils = require('../../../core/utils/index.js'),
 	add = require('./add.js'),
 	edit = require('./edit.js'),
 	list = require('./list.js'),

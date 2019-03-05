@@ -1,7 +1,7 @@
 /*
  * @author bh-lay
  */
-var myTuchongData = require('../functions/myTuchongData.js')
+var myTuchongData = require('../../functions/myTuchongData.js')
 
 exports.render = function (connect,app){
 	var url = connect.request.url

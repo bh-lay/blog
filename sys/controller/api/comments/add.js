@@ -1,6 +1,6 @@
 
-var DB = require('../../core/DB.js')
-var utils = require('../../core/utils/index.js')
+var DB = require('../../../core/DB.js')
+var utils = require('../../../core/utils/index.js')
 
 function getUserInfo(id,callback){
 	DB.getCollection('user')

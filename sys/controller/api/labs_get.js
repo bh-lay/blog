@@ -17,7 +17,7 @@ get_list: 								|		get_detail
 -----------------------------------------------------------------
  */
 
-var DB = require('../core/DB.js')
+var DB = require('../../core/DB.js')
 
 function get_list(data,callback){
 	let limit_num = parseInt(data['limit'])||10
