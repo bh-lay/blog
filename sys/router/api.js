@@ -27,6 +27,7 @@ let photography = require('../controller/api/photography_get.js')
 //博客
 let blog = require('../controller/api/article_get')
 
+let imgRobber =  require('../controller/img-robber/index.js')
 
 module.exports = [
 	//通用增加&编辑
@@ -157,5 +158,10 @@ module.exports = [
 				})
 			}
 		}
+	},
+	// 用户登录认证
+	{
+		path: 'get /img-robber/:source',
+		controller: imgRobber.render
 	},
 ]

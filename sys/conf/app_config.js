@@ -39,6 +39,9 @@ module.exports = {
 	session : {
 		root : './temporary/session/'
 	},
+	imgRobber : {
+		root : './temporary/img-robber/'
+	},
 	//缓存配置
 	cache: {
 		use: false,
