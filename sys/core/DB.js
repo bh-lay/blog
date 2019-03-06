@@ -5,7 +5,7 @@
 
 let mongodb = require('mongodb')
 const mongoConig = require('./../conf/app_config').mongo
-const mongoConnectUrl = `mongodb://${mongoConig.host}:${mongoConig.port}`
+const mongoConnectUrl = `mongodb://${mongoConig.host}:${mongoConig.port}/${mongoConig.dbName}`
 
 
 const getConnect = () => {
@@ -24,7 +24,11 @@ const getCollection = (collectionName) => {
 	var MongoClient = require('mongodb').MongoClient
 	return new Promise((resolve, reject) => {
 		MongoClient.connect(mongoConnectUrl, {
-			useNewUrlParser: true
+			useNewUrlParser: true,
+			auth: {
+				user: mongoConig.user,
+				password: mongoConig.pass
+			}
 		}, (err, client) => {
 			if (err) {
 				reject()
