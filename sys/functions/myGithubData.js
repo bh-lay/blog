@@ -23,8 +23,8 @@ function getFromDataBase(callback){
 					callback&&callback(null,docs[0])
 				}
 			})
-		}).catch(err => {
-			callback && callback(err)
+		}).catch(() => {
+			callback && callback('error')
 		})
 }
 //保存到数据库
