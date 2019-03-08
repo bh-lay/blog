@@ -4,7 +4,6 @@ const CronJob = require('cron').CronJob
 const routes = require('./router/index.js')
 require('dotenv').config()
 
-console.log('process.env', process.env)
 //创建app
 let app = new app_factory()
 
