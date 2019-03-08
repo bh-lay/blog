@@ -27,7 +27,7 @@ function getData (onSuccess, onError) {
 
 function filterData (list) {
   list.forEach(function (item) {
-    let thumb = 'https://ssl-thumb.720static.com/@' + item.property.thumbUrl
+    let thumb = 'https://ssl-thumb.720static.com/@' + item.property.thumbUrl + '?imageMogr2/thumbnail/560'
     item.title = item.property.name;
     item.desc = item.property.remark;
     item.url = 'http://720yun.com/t/' + item.property.pid + '?from=bh-lay';
