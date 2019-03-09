@@ -2,8 +2,6 @@
  * labs list
  *
  */
-
-
 import LabsBase from './labs-base.js';
 
 import utils from '../../js/Base.js';
