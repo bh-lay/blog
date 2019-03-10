@@ -17,6 +17,7 @@ cd ../console && npm install
 echo '\n\n[3.4] 安装前端 topic 依赖\n cd ../topic \n npm install'
 cd ../topic && npm install
 
-cd ../sys && npm install
+echo '\n\n\n\n[4] 安装 node 进程管理工具 pm2 \n cd npm install -g pm2'
+cd npm install -g pm2
 
 echo '初始化完成'
