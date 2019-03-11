@@ -53,7 +53,7 @@ module.exports = {
 		host: process.env.mongoHost,
 		port: process.env.mongoPort,
 		user: process.env.mongoUser,
-		pass: process.env.Pwd,
+		pass: process.env.mongoPwd,
 		dbName: process.env.MongoDBName
 	}
 } 
