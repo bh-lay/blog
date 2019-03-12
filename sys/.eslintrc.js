@@ -27,9 +27,17 @@ module.exports = {
             {
                 allow: [
                     "warn",
-                    "error"
+                    "error",
+                    "log"
                 ]
             }
-        ]
+        ],
+        'no-eq-null': 0,
+        'no-multiple-empty-lines': 0,
+        'object-property-newline': 0,
+        'no-unused-vars': 0,
+        'no-unused-expressions': 0,
+        'no-useless-escape': 0,
+        'no-useless-return': 0
     }
 };
