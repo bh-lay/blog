@@ -17,13 +17,13 @@ const downloadFile = (fileUrl, refererUrl, path) => {
 			})
 
 			reqClient
-			.pipe(fs.createWriteStream(path))
-			.on('error', () => {
-				reject()
-			})
-			.on('finish', () => {
-				resolve()
-			})
+				.pipe(fs.createWriteStream(path))
+				.on('error', () => {
+					reject()
+				})
+				.on('finish', () => {
+					resolve()
+				})
 		} catch (e) {
 			reject()
 		}
