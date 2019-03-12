@@ -38,6 +38,8 @@ module.exports = {
         'no-unused-vars': 0,
         'no-unused-expressions': 0,
         'no-useless-escape': 0,
-        'no-useless-return': 0
+        'no-useless-return': 0,
+        'space-unary-ops': 0,
+        'no-unreachable': 0
     }
 };
