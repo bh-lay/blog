@@ -18,21 +18,21 @@
  * 
  */
 
-//FIXME 不要忘了删除过期的session
+// FIXME 不要忘了删除过期的session
 
 var fs = require('fs')
 
-//保存session
+// 保存session
 function save_session(){
 	var pathname = this.path
 	var data = JSON.stringify(this)
 	fs.writeFile(pathname,data,function(){})
 }
-//生成session id
+// 生成session id
 function createSessionID(){
 	return new Date().getTime() + Math.ceil(Math.random()*1000)
 }
-//检测是否为正常session id
+// 检测是否为正常session id
 function isNormalSessionID(ID){
 	if(ID == +ID && ID.length > 3){
 		return true
@@ -74,7 +74,7 @@ var proto = {
 function session_factory(param){
 	param = param || {}
 	var session_root = param.root
-	//检测是否配置session存储目录
+	// 检测是否配置session存储目录
 	if(!session_root){
 		console.error('need seesion path')
 		return
@@ -84,7 +84,7 @@ function session_factory(param){
    *
    **/
 	function SESSION(cookieObj,writeCookie,callback){
-		//检测session id 或创建
+		// 检测session id 或创建
 		this.sessionID = isNormalSessionID(cookieObj['session_verify']) ? cookieObj['session_verify'] : createSessionID()
 		this.path = session_root + this.sessionID + '.txt'
 		this.power_code = []
@@ -93,7 +93,7 @@ function session_factory(param){
 		// find sessionID in session library
 		fs.exists(this.path, function(exists) {
 			if(exists){
-				//read session file
+				// read session file
 				fs.readFile(that.path,'UTF-8',function(err,file){
 					if(err){
 						console.error('read session file error',err)
@@ -107,7 +107,7 @@ function session_factory(param){
 					callback&&callback()
 				})
 			}else{
-				//create session file
+				// create session file
 				that.time_cerate = new Date()
 
 				that.data = {
@@ -116,8 +116,8 @@ function session_factory(param){
 				writeCookie({
 					session_verify : that.sessionID,
 					path : '/',
-					'Max-Age' : 60*60*24*7,//session浏览器端保存七天
-					HttpOnly : true//前端脚本不可见
+					'Max-Age' : 60*60*24*7,// session浏览器端保存七天
+					HttpOnly : true// 前端脚本不可见
 				})
 				callback&&callback()
 			}

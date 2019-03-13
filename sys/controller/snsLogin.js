@@ -22,11 +22,11 @@ function login(connect,user,callback){
 		})
 	})
 }
-//对外接口
+// 对外接口
 exports.github = function (connect,app){
-	//定义返回页面方法
+	// 定义返回页面方法
 	function sendResult(data){
-		//获取视图
+		// 获取视图
 		app.views('snsLogin',{
 			'from' : 'github',
 			'data' : JSON.stringify(data)
@@ -66,7 +66,7 @@ exports.github = function (connect,app){
 				.then(({collection, closeDBConnect}) => {
 					collection.find({'github_id':data.id}).toArray(function(err, docs) {
 						if(docs.length == 0){
-							//新用户
+							// 新用户
 							var usrInfo = {
 								'username' : data.name,
 								'email' : data.email || null,
@@ -100,7 +100,7 @@ exports.github = function (connect,app){
 								
 							})
 						}else{
-							//用户已存在
+							// 用户已存在
 							login(connect,docs[0],function(err){
 								if(err){
 									sendResult({

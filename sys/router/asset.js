@@ -1,5 +1,5 @@
 
-//图库
+// 图库
 let asset = require('../controller/api/asset/index')
 module.exports = [
 	// 静态资源

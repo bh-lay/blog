@@ -13,7 +13,7 @@
 var mongo = require('../../../core/DB.js')
 const DB = mongo
 var utils = require('../../../core/utils/index.js')
-//增加一条用户记录
+// 增加一条用户记录
 function add(parm,callback){
 	parm = parm || {}
 	DB.getCollection('user')
@@ -32,7 +32,7 @@ function add(parm,callback){
 			callback && callback(err)
 		})
 }
-//修改用户记录
+// 修改用户记录
 function edit(parm,callback){
 	DB.getCollection('user')
 		.then(({collection, closeDBConnect}) => {
@@ -105,9 +105,9 @@ function get_power(user_group,callback){
 			callback && callback(err)
 		})
 }
-//处理login
+// 处理login
 function login_handle(connect,session_this,username,password){
-	//matche user
+	// matche user
 	DB.getCollection('user')
 		.then(({collection, closeDBConnect}) => {
 
@@ -137,7 +137,7 @@ function login_handle(connect,session_this,username,password){
 						})
 					})
 				}else{
-					//账号or密码 错了
+					// 账号or密码 错了
 					connect.write('json',{
 						code: 2,
 						msg: '二货，帐号密码输错了吧！'
@@ -153,7 +153,7 @@ function login_handle(connect,session_this,username,password){
 }
 
 
-//增加或编辑用户记录
+// 增加或编辑用户记录
 exports.add_edit = function (connect){
 	utils.parse.request(connect.request,function(error, fields){
 		var data = fields
@@ -175,7 +175,7 @@ exports.add_edit = function (connect){
 		
 		connect.session(function(session_this){
 			if(parm['id']&&parm['id'].length>2){
-				//check edit user power
+				// check edit user power
 				if(session_this.power(12)){
 					if(parm['password'] == null){
 						delete parm['password']
@@ -200,7 +200,7 @@ exports.add_edit = function (connect){
 					})
 				}
 			}else{
-				//check add user power
+				// check add user power
 				if(session_this.power(11)){
 					add(parm,function(err){
 						if(err){
@@ -235,7 +235,7 @@ var count_limit = 5
 exports.login = function (connect){
   
 	var req = connect.request
-	//登录限定为 POST 方法
+	// 登录限定为 POST 方法
 	if(req.method != 'POST'){
 		connect.write('json',{
 			code : 201,
@@ -243,11 +243,11 @@ exports.login = function (connect){
 		})
 		return
 	}
-	//开启 session 功能
+	// 开启 session 功能
 	connect.session(function(session_this){
-		//检测认证信息
+		// 检测认证信息
 		if(session_this.get('loginAuth') != 'ready'){
-			//不是正常用户，阻止登录
+			// 不是正常用户，阻止登录
 			connect.write('json',{
 				code : 201,
 				msg : '认证过期，请刷新重试！'
@@ -255,22 +255,22 @@ exports.login = function (connect){
 			return
 		}
     
-		//获取登录计数
+		// 获取登录计数
 		var login_count = session_this.get('login_count') || 0,
-			//上次清除登录计数的时间
+			// 上次清除登录计数的时间
 			login_last_clear_time = session_this.get('login_last_clear_time') || new Date().getTime() - time_limit * 2,
-			//当前时间
+			// 当前时间
 			now = new Date().getTime()
     
-		//时间间隔在限制之外
+		// 时间间隔在限制之外
 		if(now - login_last_clear_time > time_limit){
-			//登录计数置为一
+			// 登录计数置为一
 			session_this.set({
 				login_count : 1,
 				login_last_clear_time : now
 			})
 		}else{
-			//指定时间内 登录次数超过上限，停止处理登录请求
+			// 指定时间内 登录次数超过上限，停止处理登录请求
 			if(login_count >= count_limit){
 				connect.write('json',{
 					code : 403,
@@ -278,13 +278,13 @@ exports.login = function (connect){
 				})
 				return
 			}else{
-				//允许登录，登录计数加一
+				// 允许登录，登录计数加一
 				session_this.set({
 					login_count : login_count + 1
 				})
 			}
 		}
-		//获取请求参数
+		// 获取请求参数
 		utils.parse.request(req,function(error,data){
 			var email = data['email']
 			var password = utils.parse.md5(data['password'] || '')
@@ -300,7 +300,7 @@ exports.login = function (connect){
 	})
 }
 
-//登出
+// 登出
 exports.exist = function(connect){
 	
 	connect.session(function(session_this){
@@ -316,7 +316,7 @@ exports.exist = function(connect){
 	})
 }
 
-//获取用户列表
+// 获取用户列表
 exports.list = function(connect){
 	utils.parse.request(connect.request,function(err,data){
 		if(err){
@@ -355,7 +355,7 @@ function getUserDetail(userID, callback){
 			callback && callback(err)
 		})
 }
-//获取用户信息
+// 获取用户信息
 exports.detail = function (connect){
 	utils.parse.request(connect.request,function(err,data){
 		if(err){
@@ -365,7 +365,7 @@ exports.detail = function (connect){
 			})
 			return
 		}
-		//获取指定用户信息
+		// 获取指定用户信息
 		if(data.uid){
 			getUserDetail(data.uid,function(err,detail){
 				if(err){
@@ -380,9 +380,9 @@ exports.detail = function (connect){
 				})
 			})
 		}else{
-		//获取自己的用户信息
+		// 获取自己的用户信息
 			connect.session(function(session_this){
-				//session存入comment预留信息
+				// session存入comment预留信息
 				session_this.set({
 					comment_auth : 'ready',
 					loginAuth : 'ready'

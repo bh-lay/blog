@@ -28,7 +28,7 @@ function filter_param(data){
 		title: decodeURI(data['title']),
 		cover: data['cover']||'',
 		url: data['url']||'',
-		isShow: 0,//1:show;0:hidden
+		isShow: 0,// 1:show;0:hidden
 		github_username : data.github_username || null,
 		discription: data['discription']
 	}
@@ -42,20 +42,20 @@ function filter_param(data){
 }
 
 module.exports = function (route, connect, app){
-	//获取数据
+	// 获取数据
 	utils.parse.request(connect.request,function(err,dataO){
-		//过滤数据
+		// 过滤数据
 		var data = filter_param(dataO)
 
 		if(!data){
-			//数据不全
+			// 数据不全
 			connect.write('json',{
 				code: 204,
 				msg: '字段不全!'
 			})
 			return
 		}
-		//新增
+		// 新增
 		insert(data,function(err){
 			if(err){
 				connect.write('json',{

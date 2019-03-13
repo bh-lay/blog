@@ -34,7 +34,7 @@ function handleData(docs,callback){
 	 * 统一调用回调
 	 */
 	function endFn(){
-		//处理用户信息字段
+		// 处理用户信息字段
 		docs.forEach(function(item){
 			if(users[item.uid]){
 				item.user = users[item.uid]
@@ -51,7 +51,7 @@ function handleData(docs,callback){
 	var uidsLength = 0
 	var overLength = 0
 	
-	//获取所有需要的用户id
+	// 获取所有需要的用户id
 	docs.forEach(function(item){
 		var uid = item.uid
 		if(uid && !users[uid]){
@@ -62,9 +62,9 @@ function handleData(docs,callback){
 	if(uidsLength == 0){
 		endFn()
 	}else{
-		//遍历所有需要的用户id
+		// 遍历所有需要的用户id
 		for(var id in users){
-			//获取单个用户信息
+			// 获取单个用户信息
 			getUserInfo(id,function(err,userInfo){
 				overLength++
 				if(!err){
@@ -78,7 +78,7 @@ function handleData(docs,callback){
 	}
 }
 
-//获取评论列表
+// 获取评论列表
 module.exports = function(connect,data,callback){
 	let limit_num = parseInt(data['limit']) || 10
 	let skip_num = parseInt(data['skip']) || 0
@@ -98,13 +98,13 @@ module.exports = function(connect,data,callback){
 					callback&&callback(err)
 					return
 				}
-				//count the all list
+				// count the all list
 				collection.countDocuments(queryObj,function(err,count){
 					closeDBConnect()
 					if(err){
 						callback&&callback(err)
 					}else{
-						//是否为后台管理列表
+						// 是否为后台管理列表
 						if(data.isadmin){
 							connect.session(function(session_this){
 								if(session_this.get('user_group') == 'admin'){
@@ -113,7 +113,7 @@ module.exports = function(connect,data,callback){
 										list: docs
 									})
 								}else{
-									//权限验证
+									// 权限验证
 									callback&&callback(null,{
 										count: count,
 										list: []
@@ -121,7 +121,7 @@ module.exports = function(connect,data,callback){
 								}
 							})
 						}else{
-							//普通列表
+							// 普通列表
 							handleData(docs,function(list){
 								callback&&callback(err,{
 									'count': count,

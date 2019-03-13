@@ -36,7 +36,7 @@ function getList(app, param, callback) {
 	var limit = param.limit || 10
 	var findKeys = {}
 
-	//过滤标签
+	// 过滤标签
 	if (param.tag) {
 		findKeys.tags = param.tag
 	}
@@ -72,10 +72,10 @@ exports.list = function (connect, app) {
 
 	var cache_name = 'blog_list_' + page + '_' + (tag ? tag : '')
 	app.cache.use(cache_name, ['html', 'article'], function (this_cache) {
-		//do something with this_cache
+		// do something with this_cache
 		connect.write('html', 200, this_cache)
 	}, function (save_cache) {
-		//if none of cache,do this Fn
+		// if none of cache,do this Fn
 		getList(app, {
 			skip: (page - 1) * 10,
 			limit: 10,
@@ -94,7 +94,7 @@ exports.list = function (connect, app) {
 				max_page_btn: 10,
 				base_url: '/blog?page={num}' + (tag ? ('&tag=' + tag) : '')
 			})
-			//获取视图
+			// 获取视图
 			app.views('multi-page/blogList', {
 				title: (tag ? ('【' + tag + '】标签') : '我的博客') + '_小剧客栈_剧中人的个人博客',
 				keywords: '博客,文章,心得,剧中人,小剧客栈,前端工程师,设计师,nodeJS',
@@ -124,7 +124,7 @@ exports.detail = function (connect, app, id) {
 				})
 				return
 			}
-			//获取视图
+			// 获取视图
 			app.views('multi-page/blogDetail', {
 				id: id,
 				title: data.title,

@@ -1,5 +1,5 @@
 
-//用户登录认证
+// 用户登录认证
 let snsLogin = require('../controller/snsLogin.js')
 /**
  * ajax
@@ -15,22 +15,22 @@ let tag =  require('../controller/api/tag/index.js')
 let functions =  require('../controller/api/functions.js')
 
 
-//实验室
+// 实验室
 let labs = require('../controller/api/labs_get')
 let labs_update = require('../controller/api/labs/updateGitInfo')
-//清除缓存
+// 清除缓存
 let clear_cache = require('../controller/api/clear_cache')
 // 获取全景图数据
 let pano = require('../controller/api/pano_get.js')
 // 获取图虫数据
 let photography = require('../controller/api/photography_get.js')
-//博客
+// 博客
 let blog = require('../controller/api/article_get')
 
 let imgRobber =  require('../controller/img-robber/index.js')
 
 module.exports = [
-	//通用增加&编辑
+	// 通用增加&编辑
 	{
 		path: 'all /ajax/add_edit',
 		controller: add_edit.render
@@ -47,7 +47,7 @@ module.exports = [
 		path: 'all /ajax/labs/updateGitInfo',
 		controller: labs_update.render
 	},
-	//友情链接
+	// 友情链接
 	{
 		path: 'all /ajax/links/list',
 		controller: links.list
@@ -88,7 +88,7 @@ module.exports = [
 		path: 'all /ajax/comments/:mark',
 		controller(route, connect, app) {
 			var mark = route.param.mark
-			//尝试使用ajax模块提供接口
+			// 尝试使用ajax模块提供接口
 			if(comments[mark]){
 				comments[mark](connect,app)
 			}else{
@@ -103,7 +103,7 @@ module.exports = [
 		path: 'all /ajax/tag/:act',
 		controller(route, connect, app) {
 			var act = route.param.act
-			//尝试使用ajax模块提供接口
+			// 尝试使用ajax模块提供接口
 			if(tag[act]){
 				tag[act](connect,app)
 			}else{
@@ -117,7 +117,7 @@ module.exports = [
 		path: 'all /ajax/user/:act',
 		controller(route, connect, app) {
 			var act = route.param.act
-			//尝试使用ajax模块提供接口
+			// 尝试使用ajax模块提供接口
 			if(user[act]){
 				user[act](connect,app)
 			}else{

@@ -1,4 +1,4 @@
-//引入app框架
+// 引入app框架
 let	isbot = require('node-isbot')
 /**
  * 选择静态、动态视图版本
@@ -17,13 +17,13 @@ function views_select(connect, app, callback){
 	}
 }
 
-//首页
+// 首页
 var index = require('../controller/index.js')
-//前端英雄榜
+// 前端英雄榜
 var links = require('../controller/links.js')
-//博客
+// 博客
 var blog = require('../controller/blog.js')
-//实验室
+// 实验室
 var labs = require('../controller/labs.js')
 var pano = require('../controller/pano.js')
 var photography = require('../controller/photography.js')
@@ -100,7 +100,7 @@ module.exports = [
 		path: 'get /labs/:name',
 		controller: labs.detail
 	},
-	//后台
+	// 后台
 	{
 		path: 'get /admin/*',
 		controller: admin.render

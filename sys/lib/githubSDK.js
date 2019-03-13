@@ -16,7 +16,7 @@ exports.get_token = function (code,callback){
 		'code' : code,
 		'redirect_uri' : CONF['redirect_uri']
 	})
-	//console.log('get token',postData);
+	// console.log('get token',postData);
 	var request = https.request({
 		'hostname' : 'github.com',
 		'port' : 443,
@@ -53,8 +53,8 @@ exports.userInfo = function (param,callback){
 		'access_token' : param['access_token']
 	})
 	
-	//console.log('get userinfo');
-	//console.log(getDataStr);
+	// console.log('get userinfo');
+	// console.log(getDataStr);
 	var request = https.request({
 		'hostname' : 'api.github.com',
 		'port' : 443,

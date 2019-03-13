@@ -40,15 +40,15 @@ class APP {
 				let usedRoute = matchedRoutes[matchedRoutes.length - 1]
 				usedRoute.route.controller(usedRoute, newConnect, this)
 			}else{
-				//第二顺序：使用静态文件
+				// 第二顺序：使用静态文件
 				this.fileReader.read(path.pathname, req,res, () => {
-					//第三顺序：查找301重定向
+					// 第三顺序：查找301重定向
 					if(url_redirect[path.pathname]){
 						newConnect.write('define',301,{
 							'location' : url_redirect[path.pathname]
 						})
 					}else{
-						//最终：只能404了
+						// 最终：只能404了
 						this.views('system/404',{
 							content : '文件找不到啦！'
 						},function(err,html){
@@ -65,7 +65,7 @@ class APP {
 	 */
 	isAbnormalVisitor (req) {
 		var url = req.url
-		//检测路径中是否包含 ../
+		// 检测路径中是否包含 ../
 		if(url.match(/\.\.\//)){
 			return true
 		}

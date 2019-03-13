@@ -5,7 +5,7 @@
 
 var getTags = require('../../../functions/getTags.js')
 
-//获取所有博文的标签
+// 获取所有博文的标签
 exports.allBlogTagsList = function (connect,app){
 	app.cache.use('allBlogTagsList',['ajax','article','tags'],function(this_cache){
 		connect.write('json',this_cache)

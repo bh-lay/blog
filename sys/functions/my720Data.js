@@ -5,7 +5,7 @@ var DB = require('../core/DB.js'),
 	clientUserAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36'
 
 
-//从数据库读取
+// 从数据库读取
 function getFromDataBase(callback) {
 	DB.getCollection(collectionName)
 		.then(({ collection, closeDBConnect }) => {
@@ -14,7 +14,7 @@ function getFromDataBase(callback) {
 			}).toArray(function (err, docs) {
 				closeDBConnect()
 				if (arguments[1].length == 0) {
-					//若不存在，则从 720yun 上获取
+					// 若不存在，则从 720yun 上获取
 					updateFrom720(function (err, data) {
 						callback && callback(err, data)
 					})
@@ -27,7 +27,7 @@ function getFromDataBase(callback) {
 		})
 }
 
-//保存到数据库
+// 保存到数据库
 function saveDataToDataBase(data) {
 	data.id = mongon_ID
 	DB.getCollection(collectionName)
@@ -56,7 +56,7 @@ function saveDataToDataBase(data) {
 		})
 }
 
-//从720yun更新数据
+// 从720yun更新数据
 function updateFrom720(callback) {
 	request({
 		url: 'https://apiv4.720yun.com/author/19023widcyv/products?sort=0&page=1&selected=2',
@@ -85,7 +85,7 @@ function updateFrom720(callback) {
 		try {
 			var userData = JSON.parse(body || {})
 			callback && callback(null, userData)
-			//保存到数据库
+			// 保存到数据库
 			saveDataToDataBase(userData)
 		} catch (e) {
 			callback && callback('parse error', null)

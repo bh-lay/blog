@@ -2,7 +2,7 @@
 var DB = require('../core/DB.js'),
 	github = require('./github.js')
 
-//获取实验室列表
+// 获取实验室列表
 function get_list(callback){
 	var list = []
 	DB.getCollection('labs')
@@ -26,7 +26,7 @@ function get_list(callback){
 			callback && callback(err)
 		})
 }
-//从Github API获取数据
+// 从Github API获取数据
 function get_info(repo_name,callback){
 	var need_keys = 'name,full_name,html_url,description,created_at,updated_at,pushed_at,git_url,homepage,stargazers_count,watchers_count,forks_count'.split(','),
 		repo_info = {}
@@ -42,7 +42,7 @@ function get_info(repo_name,callback){
 		callback && callback(null,repo_info)
 	})
 }
-//更新实验室单条数据
+// 更新实验室单条数据
 function update(id,data,callback){
 	DB.getCollection('labs')
 		.then(({collection, closeDBConnect}) => {
@@ -70,13 +70,13 @@ exports.all = function(){
 		list.forEach(function(item,index){
 			var repo_name = item.repo,
 				id = item.id
-			//隔两秒执行一条
+			// 隔两秒执行一条
 			setTimeout(function(){
 				get_info(repo_name,function(err,data){
 					if(err){
 						return
 					}
-					//更新数据
+					// 更新数据
 					update(id,data)
 				})
 			},index * 2000)
@@ -89,7 +89,7 @@ exports.item = function(repo_name,id,callback){
 			callback && callback('err')
 			return
 		}
-		//更新数据
+		// 更新数据
 		update(id,data,callback)
 	})
 }

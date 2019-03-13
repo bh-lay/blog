@@ -10,7 +10,7 @@ var assetPath = '../static/'
 exports.file = function (req,callback){
 	utils.parse.request(req,function(err,fields){
 		var path = fields.path || ''
-		//消除参数中首尾的｛/｝
+		// 消除参数中首尾的｛/｝
 		path = path.replace(/^\/|\/$/g,'')
 		if(err || path.length == 1){
 			callback && callback('参数不完整')

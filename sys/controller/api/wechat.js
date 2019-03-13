@@ -26,29 +26,29 @@ function getWechatToken( callback ) {
 
 	var wechat_token_url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' + config.weixin.AppId + '&secret=' + config.weixin.AppSecret
 
-	//检查缓存里wechat_token是否过期
+	// 检查缓存里wechat_token是否过期
 	var old_token = private_wechat_token
 	if (!old_token ) {
-		//空
+		// 空
 		getAndSetToken(function( new_token ) {
 			if(new_token) {
 				callback(null, new_token)
-			} else {  //刷新失败
+			} else {  // 刷新失败
 				callback('Failed to get Wechat access_token', null)
 			}
 		})
 
 	} else {
-		//token还有20秒就过期，需要刷新
+		// token还有20秒就过期，需要刷新
 		if((new Date()).getTime() - old_token.time > 7180000) {
 			getAndSetToken(function(new_token) {
 				if(new_token) {
 					callback(null, new_token)
-				} else {  //刷新失败
+				} else {  // 刷新失败
 					callback(null, old_token.token.access_token)
 				}
 			})
-		} else {  //还不需要刷新
+		} else {  // 还不需要刷新
 			callback(null, old_token.token.access_token)
 		}
 	}
@@ -99,29 +99,29 @@ function getWechatJsapiTicket (search, callback) {
 		if(token) {
 			var jsapi_ticket_url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=' + token + '&type=jsapi'
 
-			//检查缓存里wechat_token是否过期
+			// 检查缓存里wechat_token是否过期
 			var old_ticket = private_wechat_jsapi_ticket
-			//空
+			// 空
 			if (!old_ticket) {
 				getAndSetTicket(function(new_ticket) {
 					if(new_ticket) {
 						callback(null, new_ticket)
-					} else {  //刷新失败
+					} else {  // 刷新失败
 						callback('Failed to get Wechat JS API ticket', null)
 					}
 				})
 			} else {
-				if((new Date()).getTime() - old_ticket.time > 7180000) {  //token还有20秒就过期，需要刷新
+				if((new Date()).getTime() - old_ticket.time > 7180000) {  // token还有20秒就过期，需要刷新
 
 					getAndSetTicket(function(new_ticket) {
 						if(new_ticket) {
 							callback(null, new_ticket)
-						} else {  //刷新失败
+						} else {  // 刷新失败
 							callback(null, old_ticket.ticket.ticket)
 						}
 					})
 
-				} else {  //还不需要刷新
+				} else {  // 还不需要刷新
 					callback(null, old_ticket.ticket.ticket)
 				}
 			}
@@ -193,14 +193,14 @@ var sign = function (jsapi_ticket, url) {
 		url: url
 	}
 	var string = raw(ret)
-	var shaObj = new jsSHA('SHA-1', 'TEXT')  //new jsSHA(string, 'TEXT');
+	var shaObj = new jsSHA('SHA-1', 'TEXT')  // new jsSHA(string, 'TEXT');
 	shaObj.update(string)
 
 	return {
 		appId: config.weixin.AppId,
 		timestamp: ret.timestamp,
 		nonceStr: ret.nonceStr,
-		signature: shaObj.getHash('HEX')  //shaObj.getHash('SHA-1', 'HEX');
+		signature: shaObj.getHash('HEX')  // shaObj.getHash('SHA-1', 'HEX');
 	}
 }
 

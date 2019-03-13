@@ -39,7 +39,7 @@ function handleData(docs, callback) {
 	 * 统一调用回调
 	 */
 	function endFn() {
-		//处理用户信息字段
+		// 处理用户信息字段
 		docs.forEach(function (item) {
 			if (users[item.uid]) {
 				item.user = users[item.uid]
@@ -57,29 +57,29 @@ function handleData(docs, callback) {
 	var overLength = 0
 
 	docs.forEach(function (item) {
-		//获取所有需要的用户id
+		// 获取所有需要的用户id
 		var uid = item.uid
 		if (uid && !users[uid]) {
 			users[uid] = {}
 			uidsLength++
 		}
-		//处理url
+		// 处理url
 		if (item.cid == 'define-1') {
 			item.url = '/bless' + '#comments-' + item._id
 		} else {
 			item.url = '/' + item.cid.replace(/-/g, '/') + '#comments-' + item._id
 		}
-		//转换时间格式
+		// 转换时间格式
 		item.time = utils.parse.time(item.time, '{h}:{i} {m}-{d}')
-		//替换表情
+		// 替换表情
 		item.content = strToEmoji(item.content)
 	})
 	if (uidsLength == 0) {
 		endFn()
 	} else {
-		//遍历所有需要的用户id
+		// 遍历所有需要的用户id
 		for (var id in users) {
-			//获取单个用户信息
+			// 获取单个用户信息
 			getUserInfo(id, function (err, userInfo) {
 				overLength++
 				if (!err) {
@@ -93,7 +93,7 @@ function handleData(docs, callback) {
 	}
 }
 
-//获取最近评论
+// 获取最近评论
 function getCommentList(callback) {
 	DB.getCollection('comments')
 		.then(({ collection, closeDBConnect }) => {

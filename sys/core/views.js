@@ -25,9 +25,9 @@ function getComponentsConfig(input){
 		confArray = []
 	strArray.forEach(function(item){
 		var data = {}
-		//过滤多余的字符
+		// 过滤多余的字符
 		item = item.replace(/^<include\s+|"|'|\s*\/>$/g,'')
-		//分离参数
+		// 分离参数
 		var dataArray = item.split(/\s+/) || []
 
 		dataArray.forEach(function(it){
@@ -47,7 +47,7 @@ function replaceComponent(temp,callback){
 
 	var total = need_temp.length
 
-	//没有用到components
+	// 没有用到components
 	if(total == 0){
 		callback(null,temp)
 	}else{
@@ -76,19 +76,19 @@ function replaceComponent(temp,callback){
 module.exports = function(URI,data,callback){
 	let realPath = baseRoot + URI
 	data = data || {}
-	//增加文件配置
+	// 增加文件配置
 	data.frontEnd = this.config.frontEnd
 
-	//读取模版
+	// 读取模版
 	fs.readFile(realPath + '.html', 'utf8',function(err,fileStr){
 		if(err){
 			callback && callback(err)
 			return
 		}
-		//替换变量
+		// 替换变量
 		fileStr = utils.juicer(fileStr,data)
 
-		//解析模版的component
+		// 解析模版的component
 		replaceComponent(fileStr,function(err,txt){
 			callback && callback(err,txt)
 		})

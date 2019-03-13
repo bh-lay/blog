@@ -1,7 +1,7 @@
 var request = require('request'),
 	clientUserAgent = 'bh-lay github api robots'
 
-//从Github API获取数据
+// 从Github API获取数据
 function getReposInfo(repo_name,callback){
 	repo_name = repo_name.replace(/^\//,'')
 	request({
@@ -21,7 +21,7 @@ function getReposInfo(repo_name,callback){
 	})
 }
 
-//从Github API获取数据
+// 从Github API获取数据
 function getUserInfo(username,callback){
 	request({
 		url: 'https://api.github.com/users/' + username,

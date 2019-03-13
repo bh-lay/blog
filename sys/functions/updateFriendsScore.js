@@ -1,5 +1,5 @@
 
-//author bh-lay
+// author bh-lay
 var DB = require('../core/DB')
 
 exports.update = function (callback) {

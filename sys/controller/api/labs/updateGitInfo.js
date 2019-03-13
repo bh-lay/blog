@@ -6,7 +6,7 @@ var utils = require('../../../core/utils/index.js'),
 	updateLabsDataFromGithub = require('../../../functions/updateLabsDataFromGithub.js')
 
 exports.render = function (route, connect, app){
-	//强制使用POST方法
+	// 强制使用POST方法
 	if(connect.request.method != 'POST'){
 		connect.write('json',{
 			'code' : 201,
@@ -15,7 +15,7 @@ exports.render = function (route, connect, app){
 		return
 	}
 
-	//解析参数
+	// 解析参数
 	utils.parse.request(connect.request,function(err,data){
 		var repo_name = data.repo_name || ''
 		var id = data.id || ''
@@ -35,7 +35,7 @@ exports.render = function (route, connect, app){
 				})
 				return
 			}
-			//更新
+			// 更新
 			updateLabsDataFromGithub.item(data.repo_name,data.id,function(err){
 				var response_json = {
 					code: 200
@@ -43,7 +43,7 @@ exports.render = function (route, connect, app){
 				if(err){
 					response_json.code = 206
 				}else{
-					//清除实验室相关的缓存
+					// 清除实验室相关的缓存
 					app.cache.clear('labs')
 				}
 				connect.write('json',response_json)	

@@ -19,7 +19,7 @@ exports.pagination = require('./pagination.js')
 exports.trim = function(str){
 	return (str || '').replace(/^\s*|\s*$/g,'')
 }
-//生成ID
+// 生成ID
 exports.createID = function(){
 	var date = new Date(),
 		id = date.getTime().toString(16)

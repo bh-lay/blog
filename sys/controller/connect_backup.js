@@ -6,7 +6,7 @@ function github_oauth(req, res_this, path){
 		path
 	})
 }
-//对外接口
+// 对外接口
 exports.deal = function (req,res_this,path){
 	if(path.pathnode.length == 2){
 		github_oauth(req,res_this,path)

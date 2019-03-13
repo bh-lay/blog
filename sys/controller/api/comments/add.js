@@ -18,7 +18,7 @@ function getUserInfo(id,callback){
 			callback && callback(err)
 		})
 }
-//增加一条评论
+// 增加一条评论
 module.exports = function(data,callback){
 	var item = {
 		content : utils.encodeHtml(data.content),
@@ -30,7 +30,7 @@ module.exports = function(data,callback){
 		callback && callback('missing argument : cid')
 		return
 	}
-	//登录用户只记id，本地用户记录对象
+	// 登录用户只记id，本地用户记录对象
 	if(data.uid){
 		item.uid = data.uid
 	}else{
@@ -44,7 +44,7 @@ module.exports = function(data,callback){
 					callback && callback(err)
 				} else {
 					if(data.uid){
-						//获取用户信息
+						// 获取用户信息
 						getUserInfo(data.uid,function(err,userInfo){
 							if(!err){
 								item.user = userInfo

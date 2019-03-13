@@ -15,14 +15,14 @@ exports.upload = function (req,callback){
 		}else if(files.length){
 			var newFiles = []
 			var root = (fields.root || '/')
-			//消除参数中首尾的｛/｝
+			// 消除参数中首尾的｛/｝
 			root = root.replace(/^\/|\/$/g,'')
 			
 			
 			for(var i in files){
 				var newPath = assetPath  + '/' + root + '/' + files[i].name
 				
-				//禁止上传同名文件
+				// 禁止上传同名文件
 				var exists = fs.existsSync(newPath)
 				if(exists){
 					errorFiles.push({

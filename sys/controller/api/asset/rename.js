@@ -13,7 +13,7 @@ exports.rename = function (req,callback){
 		var pathname = fields.pathname || ''
 		var newName = fields.newName || ''
 		
-		//消除参数中首尾的｛/｝
+		// 消除参数中首尾的｛/｝
 		pathname = pathname.replace(/^\/|\/$/g,'')
 		if(err || pathname.length < 1 || newName.length < 1){
 			callback && callback('参数不全')
@@ -40,7 +40,7 @@ exports.rename = function (req,callback){
 					newPath = assetPath + '/' + newName
 				}
 			}
-			//检测是否同名
+			// 检测是否同名
 			var exists = fs.existsSync(newPath)
 			if(exists){
 				callback && callback('文件重名')

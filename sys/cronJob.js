@@ -10,11 +10,11 @@ let myTuchongData = require('../sys/functions/myTuchongData.js')
 let myGithubData = require('../sys/functions/myGithubData.js')
 
 exports.start = app => {
-	//每晚三点
+	// 每晚三点
 	new CronJob('01 01 03 * * *', function() {
-		//更新实验室里的Github数据
+		// 更新实验室里的Github数据
 		updateLabsDataFromGithub.all()
-		//更新个人Github信息
+		// 更新个人Github信息
 		myGithubData.update()
 		// 更新前端英雄榜分数
 		updateFriendsScore.update()
@@ -24,9 +24,9 @@ exports.start = app => {
 		myTuchongData.update()
 	}, null, true, 'Asia/Hong_Kong')
 
-	//每晚三点零十分
+	// 每晚三点零十分
 	new CronJob('01 10 03 * * *', function() {
-		//清除全部缓存
+		// 清除全部缓存
 		app.cache.clear()
 	}, null, true, 'Asia/Hong_Kong')
 }

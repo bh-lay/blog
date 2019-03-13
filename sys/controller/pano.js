@@ -15,7 +15,7 @@ exports.list = function (connect,app){
 				})
 				return
 			}
-			//获取视图
+			// 获取视图
 			app.views('multi-page/panoList',{
 				title : '小剧的全景作品_小剧客栈_剧中人的个人博客',
 				keywords : '全景,pano,panorama,vr,剧中人,小剧客栈,前端工程师,设计师,nodeJS',

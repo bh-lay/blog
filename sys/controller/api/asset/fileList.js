@@ -8,7 +8,7 @@ var root = '../static/'
 function handle_path(input){
 	var output = root
 	if(input){
-		//过滤｛../｝
+		// 过滤｛../｝
 		output += input.replace(/\.\.\//g,'/')
 		output = output.replace(/^\//,'')
 	}

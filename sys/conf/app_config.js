@@ -8,15 +8,15 @@
 
 module.exports = {
 	host : process.env.host || '*',
-	//端口号
+	// 端口号
 	port : process.env.port,
-	//静态资源
+	// 静态资源
 	static: {
-		//静态资源根目录
+		// 静态资源根目录
 		root: '../web/',
-		//静态资源缓存时间
+		// 静态资源缓存时间
 		maxAge: 60 * 60 * 24 * 365,
-		//定义文件类型 Mime-Type
+		// 定义文件类型 Mime-Type
 		mime : {
 			html : 'text/html',
 			js : 'application/x-javascript',
@@ -32,25 +32,25 @@ module.exports = {
 			txt : 'text/plain'
 		}
 	}, 
-	//前端版本控制（css、js、图片、字体）
+	// 前端版本控制（css、js、图片、字体）
 	frontEnd: {
-		//图床地址
+		// 图床地址
 		img_domain : process.env.imgDomain
 	},
-	//SESSION配置
+	// SESSION配置
 	session : {
 		root : './temporary/session/'
 	},
 	imgRobber : {
 		root : './temporary/img-robber/'
 	},
-	//缓存配置
+	// 缓存配置
 	cache: {
 		use: false,
 		max_num: 1000,
 		root: './temporary/cache/'
 	},
-	//数据库链接
+	// 数据库链接
 	mongo : {
 		host: process.env.mongoHost,
 		port: process.env.mongoPort,

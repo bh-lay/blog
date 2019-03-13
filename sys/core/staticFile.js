@@ -12,13 +12,13 @@ function Filer(param){
 	this.maxAge = param.maxAge
 }
 Filer.prototype.read = function(path,req,res,notFound) {
-	//匹配文件扩展名
+	// 匹配文件扩展名
 	var maxAge = this.maxAge
 	var pathname_split = path.match(/.\.([^.]+)$/)
 	var ext = pathname_split ? pathname_split[1] : null
 
 	var realPath
-	//add a default files for directory
+	// add a default files for directory
 	if(ext == null) {
 		ext = 'html'
 		realPath = this.staticFileRoot + path + '/index.html'

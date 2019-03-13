@@ -44,7 +44,7 @@ function edit(parm,collection_name,callback){
 		})
 }
 
-////////////////////////////////////////////////
+// //////////////////////////////////////////////
 function filter_request(connect,callback){
 
 	connect.session(function(session_this){
@@ -120,7 +120,7 @@ filter_request.labs = function(data){
 	}
 }
 
-//////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////
 exports.render = function (route, connect,app){
 
 	filter_request(connect,function(err,param){

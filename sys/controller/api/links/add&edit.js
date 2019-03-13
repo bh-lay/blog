@@ -47,7 +47,7 @@ function filter_param(data){
 		title: decodeURI(data['title']),
 		avatar: data['avatar']||'',
 		url: data['url']||'',
-		isShow: data['isShow']||1,//1:show;0:hidden
+		isShow: data['isShow']||1,// 1:show;0:hidden
 		adminScore: data['adminScore'] || 0,
 		github_username : data.github_username || null,
 		discription: data['discription']
@@ -66,9 +66,9 @@ var need_power = 18
 
 module.exports = function (route, connect, app){
 
-	//校验权限
+	// 校验权限
 	connect.session(function(session_this){
-		//没有编辑权限
+		// 没有编辑权限
 		if(!session_this.power(need_power)){
 			connect.write('json',{
 				code: 201,
@@ -77,19 +77,19 @@ module.exports = function (route, connect, app){
 			return
 		}
 
-		//获取数据
+		// 获取数据
 		utils.parse.request(connect.request,function(err,data){
-			//过滤数据
+			// 过滤数据
 			data = filter_param(data)
 
 			if(!data){
-				//数据不全
+				// 数据不全
 				connect.write('json',{
 					code: 204,
 					msg: '字段不全!'
 				})
 			}else if(data['id'] && data['id'].length > 2){
-				//编辑
+				// 编辑
 				edit(data,function(err){
 					if(err){
 						connect.write('json',{
@@ -106,7 +106,7 @@ module.exports = function (route, connect, app){
 					}
 				})
 			}else{
-				//新增
+				// 新增
 				add(data,function(err){
 					if(err){
 						connect.write('json',{

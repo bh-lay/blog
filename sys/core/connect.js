@@ -12,7 +12,7 @@ let zlib = require('zlib')
 let parse = require('./utils/parse.js')
 
 
-//统一返回客户端信息方法
+// 统一返回客户端信息方法
 function send (status,headers,content){
   
 	var _this = this
@@ -80,7 +80,7 @@ function CONNECT(req,res,session_factory){
 	this.response = res
 	this._session = null
 	this._session_factory = session_factory
-	//是否已向客户端发送信息体
+	// 是否已向客户端发送信息体
 	this._sended = false
 }
 /**  //向客户端发送信息
@@ -97,7 +97,7 @@ function CONNECT(req,res,session_factory){
  */
 CONNECT.prototype['write'] = function(type,a,b,c){
 	if(this._sended){
-		//FIXME runing here maybe somthing wrong
+		// FIXME runing here maybe somthing wrong
 		return
 	}
 	this._sended = true
@@ -142,7 +142,7 @@ CONNECT.prototype['write'] = function(type,a,b,c){
 CONNECT.prototype['cookie'] = function(input){
 	var cookieInRequest = this.request.headers.cookie || ''
 	if(typeof(input) == 'object'){
-		//写入cookie
+		// 写入cookie
 		var cookieObj = arguments
 		for(var i in cookieObj){
 			var cookie_this = cookieObj[i]
@@ -153,10 +153,10 @@ CONNECT.prototype['cookie'] = function(input){
 			this.response.setHeader('Set-Cookie',cookie_str)  
 		}
 	}else if(typeof(input) == 'string'){
-		//获取特定cookie
+		// 获取特定cookie
 		return parse.cookie(cookieInRequest)[input]
 	}else{
-		//获取完整cookie
+		// 获取完整cookie
 		return parse.cookie(cookieInRequest)
 	}
 }
@@ -178,10 +178,10 @@ CONNECT.prototype['cookie'] = function(input){
 CONNECT.prototype['session'] = function(callback){
 	var me = this
 	if(this._session){
-		//session已被打开,直接使用
+		// session已被打开,直接使用
 		callback&&callback(this._session)
 	}else{
-		//启用session
+		// 启用session
 		var cookie = this.cookie()
 		this._session = new this._session_factory(cookie,function(cookieObj){
 			me.cookie(cookieObj)

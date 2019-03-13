@@ -13,7 +13,7 @@ function getTagsList(callback) {
 
 				var tagsObj = {}
 				var tagsArray = []
-				//获取所有标签
+				// 获取所有标签
 				for (var i = 0, total = docs.length; i < total; i++) {
 					var this_tags = docs[i].tags
 					if (Object.prototype.toString.call(this_tags) == '[object Array]') {
@@ -23,14 +23,14 @@ function getTagsList(callback) {
 						}
 					}
 				}
-				//转换为数组
+				// 转换为数组
 				for (var k in tagsObj) {
 					tagsArray.push({
 						name: k,
 						count: tagsObj[k]
 					})
 				}
-				//排序
+				// 排序
 				tagsArray.sort(function (x, y) {
 					if (x.count > y.count) {
 						return -1
@@ -69,6 +69,6 @@ function getAllBlogTagsList(callback) {
 		})
 }
 
-//获取所有博文的标签
+// 获取所有博文的标签
 exports.getAllBlogTagsList = getAllBlogTagsList
 exports.getTagsList = getTagsList

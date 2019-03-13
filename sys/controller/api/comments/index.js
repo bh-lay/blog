@@ -16,38 +16,38 @@ var utils = require('../../../core/utils/index.js'),
 	list = require('./list.js'),
 	del = require('./del.js'),
 	detail = require('./detail.js'),
-	//二分钟限制十个回复
+	// 二分钟限制十个回复
 	time_limit = 2 * 60 * 1000,
 	count_limit = 10
 
-//增加回复/评论
+// 增加回复/评论
 exports.add = function (connect,app){
 	utils.parse.request(connect.request,function(err,data){
 		connect.session(function(session_this){
-			//检测认证信息
+			// 检测认证信息
 			var comment_auth = session_this.get('comment_auth')
 			if(comment_auth != 'ready'){
-				//不是正常用户，阻止评论
+				// 不是正常用户，阻止评论
 				connect.write('json',{
 					'code' : 201
 				})
 				return
 			}
-			//获取评论计数
+			// 获取评论计数
 			var comment_count = session_this.get('comment_count') || 0
-			//上次清除评论计数的时间
+			// 上次清除评论计数的时间
 			var comment_last_clear_time = session_this.get('comment_last_clear_time') || new Date().getTime() - time_limit * 2
       
 			var now = new Date().getTime()
-			//时间间隔在限制之外
+			// 时间间隔在限制之外
 			if(now - comment_last_clear_time > time_limit){
-				//评论计数置为一
+				// 评论计数置为一
 				session_this.set({
 					'comment_count' : 1,
 					'comment_last_clear_time' : now
 				})
 			}else{
-				//指定时间内 评论数超过上限
+				// 指定时间内 评论数超过上限
 				if(comment_count >= count_limit){
 					connect.write('json',{
 						'code' : 403,
@@ -55,14 +55,14 @@ exports.add = function (connect,app){
 					})
 					return
 				}else{
-					//评论计数加一
+					// 评论计数加一
 					session_this.set({
 						'comment_count' : comment_count + 1
 					})
 				}
 			}
       
-			//清除所有评论缓存
+			// 清除所有评论缓存
 			app.cache.clear('comment')
             
 			data.uid = session_this.get('uid')
@@ -81,12 +81,12 @@ exports.add = function (connect,app){
 	})
 }
 
-//列表
+// 列表
 exports.list = function (connect,app){
 	var url = connect.request.url
 	var data = connect.url.search
     
-	//使用缓存
+	// 使用缓存
 	app.cache.use(url,['ajax','comment'],function(this_cache){
 		connect.write('json',this_cache)
 	},function(save_cache){
@@ -103,11 +103,11 @@ exports.list = function (connect,app){
 		})
 	})
 }
-//列表
+// 列表
 exports.detail = function (connect){
 	var need_power = 17
 	connect.session(function(session_this){
-		//校验权限
+		// 校验权限
 		if(session_this.power(need_power)){
 			utils.parse.request(connect.request,function(err,fields){
 				var _id = fields._id,
@@ -139,7 +139,7 @@ exports.detail = function (connect){
 		}
 	})
 }
-//删除
+// 删除
 exports.del = function (connect,app){
 	if(connect.request.method != 'POST'){
 		connect.write('json',{
@@ -158,7 +158,7 @@ exports.del = function (connect,app){
 		})
 	}else{
 		connect.session(function(session_this){
-			//校验权限
+			// 校验权限
 			if(session_this.power(need_power)){
 				del(ID,function(err){
 					if(err){
@@ -169,7 +169,7 @@ exports.del = function (connect,app){
 						connect.write('json',{
 							'code' : 200
 						})
-						//清除所有缓存
+						// 清除所有缓存
 						app.cache.clear('comment')
 					}
 				})
@@ -188,7 +188,7 @@ exports.edit = function(connect,app){
 		var _id = data._id
 		delete data._id
 		connect.session(function(session_this){
-			//校验权限
+			// 校验权限
 			if(session_this.power(need_power)){
 				edit(_id, data,function(err){
 					if(err){
@@ -201,7 +201,7 @@ exports.edit = function(connect,app){
 							'code' : 200
 						})
             
-						//清除所有评论缓存
+						// 清除所有评论缓存
 						app.cache.clear('comment')
 					}
 				})

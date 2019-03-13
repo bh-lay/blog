@@ -6,7 +6,7 @@ var DB = require('../core/DB.js'),
 	clientUserAgent = 'bh-lay api robots'
 
 
-//从数据库读取
+// 从数据库读取
 function getFromDataBase(callback){
 	DB.getCollection(collectionName)
 		.then(({collection, closeDBConnect}) => {
@@ -15,7 +15,7 @@ function getFromDataBase(callback){
 			}).toArray(function(err, docs) {
 				closeDBConnect()
 				if(arguments[1].length==0){
-				//若不存在，则从 720yun 上获取
+				// 若不存在，则从 720yun 上获取
 					updateFromTuchong(function(err,data){
 						callback && callback(err,data)
 					})
@@ -27,16 +27,16 @@ function getFromDataBase(callback){
 			callback && callback(err)
 		})
 }
-//保存到数据库
+// 保存到数据库
 function saveDataToDataBase(data){
 	data.id = mongon_ID
 	DB.getCollection(collectionName)
 		.then(({collection, closeDBConnect}) => {
-			//查询用户信息
+			// 查询用户信息
 			collection.find({
 				id : mongon_ID
 			})
-				//计算条数
+				// 计算条数
 				.countDocuments(function(err,count){
 					if(count > 0){
 						// 条数存在，则直接更新
@@ -58,7 +58,7 @@ function saveDataToDataBase(data){
 
 }
 
-//从720yun更新数据
+// 从720yun更新数据
 function updateFromTuchong(callback){
 	request({
 		url: 'https://bh-lay.tuchong.com/rest/2/sites/1785007/posts?count=40&page=1&before_timestamp=0',
@@ -74,7 +74,7 @@ function updateFromTuchong(callback){
 		}
 		var userData = JSON.parse( body || {} )
 		callback && callback(null,userData)
-		//保存到数据库
+		// 保存到数据库
 		saveDataToDataBase(userData)
 	})
 }

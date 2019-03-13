@@ -22,7 +22,7 @@ function list_page(app, callback) {
 }
 
 function get_detail(lab_name, callback) {
-	//get template
+	// get template
 	DB.getCollection('labs')
 		.then(({collection, closeDBConnect}) => {
 			collection.find({ 'name': lab_name }).toArray(function (err, docs) {
@@ -54,7 +54,7 @@ exports.list = function (connect, app) {
 				})
 				return
 			}
-			//获取视图
+			// 获取视图
 			app.views('multi-page/labsList', {
 				title: '实验室_小剧客栈_剧中人的个人博客',
 				keywords: '造轮子,组件,实验室,剧中人,小剧客栈,前端工程师,设计师,nodeJS',
@@ -76,7 +76,7 @@ exports.detail = function (route, connect, app) {
 	app.cache.use('labs_id_' + lab_name, ['html', 'labs'], function (this_cache) {
 		connect.write('html', 200, this_cache)
 	}, function (save_cache) {
-		//获取作品信息
+		// 获取作品信息
 		get_detail(lab_name, function (err, data) {
 			if (err) {
 				if (err == 'notFound') {
@@ -86,7 +86,7 @@ exports.detail = function (route, connect, app) {
 				}
 				return
 			}
-			//获取视图
+			// 获取视图
 			app.views('multi-page/labsDetail', {
 				title: data.title,
 				keywords: data.tags,

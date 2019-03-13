@@ -14,7 +14,7 @@ exports.list = function (connect,app){
 					connect.write('html',500,html)
 				})
 				return
-			}//获取视图
+			}// 获取视图
 			app.views('multi-page/photographyList',{
 				title : '小剧的摄影作品_小剧客栈_剧中人的个人博客',
 				keywords : '摄影,剧中人,小剧客栈,前端工程师,设计师,nodeJS',

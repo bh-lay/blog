@@ -11,7 +11,7 @@ exports.render = function (route, connect,app){
 		})
 		return
 	}
-	//FIXME add power check
+	// FIXME add power check
 	utils.parse.request(connect.request,function(err,data){
 		var typeStr = data.type || ''
 		app.cache.clear(typeStr,function(){

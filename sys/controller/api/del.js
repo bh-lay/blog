@@ -2,7 +2,7 @@
  * @author bh-lay
  * 
  */
-/**************************************************************
+/** ************************************************************
 @ demo
 	$.ajax({
 		'type':'GET',
@@ -103,7 +103,7 @@ exports.render = function (connect,app){
 			'msg' : 'please input [from] for del !'
 		})
 	}else{
-		//check ['from'] is exist
+		// check ['from'] is exist
 		if(del_conf[from]){
 			connect.session(function(session_this){
 				param['collection_name'] = del_conf[from]['collection_name']
@@ -118,7 +118,7 @@ exports.render = function (connect,app){
 						connect.write('json',{
 							'code' : 200
 						})
-						//清除所有缓存
+						// 清除所有缓存
 						app.cache.clear()
 					}
 				})

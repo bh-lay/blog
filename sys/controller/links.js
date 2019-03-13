@@ -1,4 +1,4 @@
-//author bh-lay
+// author bh-lay
 var utils = require('../core/utils/index.js')
 var DB = require('../core/DB')
 
@@ -22,7 +22,7 @@ function getList(callback){
 		})
 }
 exports.render = function (connect,app){
-	//缓存机制
+	// 缓存机制
 	app.cache.use('links_page',['html','links'],function(this_cache){
 		connect.write('html',200,this_cache)
 	},function(save_cache){
@@ -38,7 +38,7 @@ exports.render = function (connect,app){
 				item.screen_link = (item.url || '').replace(/http:\/\/(www\.|)|\/$|/g,'')
 				item.avatar = item.avatar || 'http://static.bh-lay.com/user/default.jpg'
 			})
-			//获取视图
+			// 获取视图
 			app.views('multi-page/links',{
 				title : '前端英雄榜_特大号的WEB屌丝们',
 				keywords : '剧中人,程序员,前端工程师,网页设计,设计师',

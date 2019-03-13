@@ -37,13 +37,13 @@ function get_list(data,callback){
 	let skip_num = parseInt(data['skip']) || 0
 	let findKeys = {}
 
-	//过滤标签
+	// 过滤标签
 	if(data.tag){
 		findKeys.tags = data.tag
 	}
 	DB.getCollection('article')
 		.then(({collection, closeDBConnect}) => {
-			//count the all list
+			// count the all list
 			let resJSON = {
 				code: 1,
 				limit: limit_num,
@@ -78,7 +78,7 @@ function get_list(data,callback){
 }
 function get_detail(data,callback){
 	var articleID = data['id'],
-		//内容格式 html/markdown
+		// 内容格式 html/markdown
 		format = data['format'] || 'markdown',
 		resJSON={
 			code: 200,

@@ -13,14 +13,14 @@ exports.createDir = function (req,callback){
 		var root = fields.root || ''
 		var dirName = fields.name || ''
 		
-		//消除参数中首尾的｛/｝
+		// 消除参数中首尾的｛/｝
 		root = root.replace(/^\/|\/$/g,'')
 		if(err || dirName.length < 1){
 			callback && callback('参数不全')
 		}else{
 			var Path = assetPath + root + '/' + dirName
 			
-			//检测是否同名
+			// 检测是否同名
 			var exists = fs.existsSync(Path)
 			if(exists){
 				callback && callback('目录重名')
