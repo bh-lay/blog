@@ -4,6 +4,8 @@
  * 
  */
 
+/* eslint-disable no-undef */
+
 module.exports = {
 	host : process.env.host || '*',
 	//端口号

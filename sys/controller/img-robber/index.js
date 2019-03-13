@@ -5,9 +5,11 @@ const imgRobberRoot = config.imgRobber.root
 
 
 const base64Encode = str => {
+	/* eslint-disable-next-line no-undef */
 	return Buffer.from(str).toString('base64')
 }
 const base64Decode = str => {
+	/* eslint-disable-next-line no-undef */
 	return Buffer.from(str, 'base64').toString()
 }
 exports.render = (route, connect) => {
