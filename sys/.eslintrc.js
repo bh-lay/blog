@@ -32,6 +32,7 @@ module.exports = {
                 ]
             }
         ],
+        'spaced-comment': 1,
         'no-eq-null': 0,
         'no-multiple-empty-lines': 0,
         'object-property-newline': 0,
