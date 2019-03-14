@@ -97,7 +97,7 @@ function sendComment (data, onSubmit) {
   }
 
   utils.fetch({
-    url: '/ajax/comments/add',
+    url: '/api/comments/0',
     type: 'POST',
     data: {
       cid: data.id,
@@ -449,7 +449,7 @@ List.prototype.getData = function (skip, onResponse) {
   let me = this;
   this._status = 'loading';
   utils.fetch({
-    url: '/ajax/comments/list',
+    url: '/api/comments/',
     data: {
       cid: this.cid,
       skip: skip || 0,

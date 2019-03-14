@@ -120,7 +120,7 @@ export default {
         skip: (this.currentPage - 1) * this.pageSize,
         limit: this.pageSize
       })
-      fetch('/ajax/comments/list?' + queryStr, {
+      fetch('/api/comments/?' + queryStr, {
         method: 'GET',
         credentials: 'same-origin'
       })
@@ -138,8 +138,8 @@ export default {
       return dateFormat(parseInt(dateStamp), 'yyyy-mm-dd HH:MM:ss')
     },
     delete (id) {
-      return fetch('/ajax/comments/del?id=' + id, {
-        method: 'POST',
+      return fetch('/api/comments/' + id, {
+        method: 'DELETE',
         credentials: 'same-origin'
       })
       .then(response => response.json())

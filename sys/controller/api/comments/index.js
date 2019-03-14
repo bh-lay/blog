@@ -10,18 +10,18 @@
   });
  */
 
-var utils = require('../../../core/utils/index.js'),
-	add = require('./add.js'),
-	edit = require('./edit.js'),
-	list = require('./list.js'),
-	del = require('./del.js'),
-	detail = require('./detail.js'),
-	// 二分钟限制十个回复
-	time_limit = 2 * 60 * 1000,
-	count_limit = 10
+let utils = require('../../../core/utils/index.js')
+let add = require('./add.js')
+let edit = require('./edit.js')
+let list = require('./list.js')
+let del = require('./del.js')
+let detail = require('./detail.js')
+// 二分钟限制十个回复
+let time_limit = 2 * 60 * 1000
+let count_limit = 10
 
 // 增加回复/评论
-exports.add = function (connect,app){
+exports.post = function (route, connect,app){
 	utils.parse.request(connect.request,function(err,data){
 		connect.session(function(session_this){
 			// 检测认证信息
@@ -81,11 +81,11 @@ exports.add = function (connect,app){
 	})
 }
 
-// 列表
-exports.list = function (connect,app){
+// 获取列表
+exports.list = function (route, connect,app){
 	var url = connect.request.url
 	var data = connect.url.search
-    
+
 	// 使用缓存
 	app.cache.use(url,['ajax','comment'],function(this_cache){
 		connect.write('json',this_cache)
@@ -103,34 +103,33 @@ exports.list = function (connect,app){
 		})
 	})
 }
-// 列表
-exports.detail = function (connect){
+
+// 获取评论详情
+exports.get = function (route, connect){
 	var need_power = 17
 	connect.session(function(session_this){
 		// 校验权限
 		if(session_this.power(need_power)){
-			utils.parse.request(connect.request,function(err,fields){
-				var _id = fields._id,
-					json = {
-						code : 200
-					}
+			let _id = route.params.id
+			let json = {
+				code : 200
+			}
 
-				if(!_id || _id.length < 2){
-					json.code = 500
-					connect.write('json',json)
-					return
+			if(!_id || _id.length < 2){
+				json.code = 500
+				connect.write('json',json)
+				return
+			}
+			detail(_id,function(err,commentItem){
+				var json = {
+					code : 200
 				}
-				detail(_id,function(err,commentItem){
-					var json = {
-						code : 200
-					}
-					if(err){
-						json.code = 500
-					}else{
-						json.detail = commentItem
-					}
-					connect.write('json',json)
-				})
+				if(err){
+					json.code = 500
+				}else{
+					json.detail = commentItem
+				}
+				connect.write('json',json)
 			})
 		}else{
 			connect.write('json',{
@@ -140,16 +139,8 @@ exports.detail = function (connect){
 	})
 }
 // 删除
-exports.del = function (connect,app){
-	if(connect.request.method != 'POST'){
-		connect.write('json',{
-			'code' : 201,
-			'msg' : 'please use POST to delete !'
-		})
-	}
-  
-	var data = connect.url.search
-	var ID = data['id'] || ''
+exports.delete = function (route, connect,app){
+	let ID = route.params.id
 	var need_power = 17
 	if(ID.length<2){
 		connect.write('json',{
@@ -182,11 +173,10 @@ exports.del = function (connect,app){
 	}
 }
 
-exports.edit = function(connect,app){
+exports.put = function(route, connect,app){
 	var need_power = 17
 	utils.parse.request(connect.request,function(err,data){
-		var _id = data._id
-		delete data._id
+		let _id = route.params.id
 		connect.session(function(session_this){
 			// 校验权限
 			if(session_this.power(need_power)){

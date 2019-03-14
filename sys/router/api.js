@@ -85,18 +85,12 @@ module.exports = [
 	},
 	// 评论
 	{
-		path: 'all /ajax/comments/:mark',
-		controller(route, connect, app) {
-			var mark = route.param.mark
-			// 尝试使用ajax模块提供接口
-			if(comments[mark]){
-				comments[mark](connect,app)
-			}else{
-				connect.write('json',{
-					'code' : 404
-				})
-			}
-		}
+		path: 'get /api/comments/',
+		controller: comments.list
+	},
+	{
+		path: 'rest /api/comments/:id',
+		controller: comments
 	},
 	// 标签模块
 	{

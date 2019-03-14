@@ -21,13 +21,9 @@ export default {
   },
   mounted () {
     this.isLoading = true
-    fetch('/ajax/comments/detail', {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-      },
-      body: `_id=${this.id}`
+    fetch(`/api/comments/${this.id}`, {
+      method: 'GET',
+      credentials: 'same-origin'
     })
     .then(response => response.json())
     .then(({code, detail}) => {
@@ -42,14 +38,13 @@ export default {
   methods: {
     submit () {
       this.isLoading = true
-      fetch('/ajax/comments/edit', {
-        method: 'POST',
+      fetch('/api/comments/' + this.id, {
+        method: 'PUT',
         credentials: 'same-origin',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
         },
         body: querystring.stringify({
-          _id: this.id,
           content: this.content
         })
       })
