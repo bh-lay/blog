@@ -14,7 +14,7 @@ const base64Decode = str => {
 }
 exports.render = (route, connect) => {
 	// 获取 URL 配置参数
-	let urlSourceStr = base64Decode(route.param.source || '')
+	let urlSourceStr = base64Decode(route.params.source || '')
 	// 分割 URL 参数
 	let urlSourceSplit = urlSourceStr.split(/-(?=http)/)
 	// 判断是否能

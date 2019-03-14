@@ -31,7 +31,7 @@ function get_detail(id,callback){
 }
 
 module.exports = function (route, connect, app){
-	let id = route.param.id
+	let id = route.params.id
 	var url = connect.request.url
 	app.cache.use(url,['ajax','links'],function(this_cache){
 		connect.write('json',this_cache)

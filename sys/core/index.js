@@ -34,6 +34,7 @@ class APP {
 			let newConnect = new connect(req, res, this.session)
 			let path = newConnect.url
 			let matchedRoutes = this.matchRequestInRoutes(path.pathname, newConnect.request.method)
+
 			if(matchedRoutes.length){
 				// 第一顺序：执行get方法设置的回调
 				// 使用匹配的最后一个 controller
@@ -76,7 +77,7 @@ class APP {
 	 * 设置前端请求路径
 	 */
 	setRoute (urlRule, callback) {
-		if(typeof(callback) !== 'function' || typeof(urlRule) !== 'string'){
+		if(typeof(urlRule) !== 'string'){
 			return
 		}
 		// URL 转换为全小写
@@ -89,7 +90,6 @@ class APP {
 		})
 		let keys = []
 		let rule = pathToRegexp(urlRulePrefix, keys)
-
 		this.routes.push({
 			originalRule: urlRule,
 			keys: keys.map(key => key.name),
@@ -115,11 +115,11 @@ class APP {
 				return
 			}
 			// 从 URL 中获取参数
-			let param = {}
+			let params = {}
 			testMatches.forEach((value, index) => {
 				if (index > 0) {
 					let key = route.keys[index - 1]
-					param[key] = value
+					params[key] = value
 				}
 			})
 			// rest API 会主动去找与当前 method 相匹配的方法
@@ -130,7 +130,7 @@ class APP {
 			// 标记匹配结果
 			result.push({
 				path,
-				param,
+				params,
 				route,
 				controller
 			})

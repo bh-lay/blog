@@ -68,7 +68,7 @@ module.exports = [
 		path: 'get /blog/:id',
 		controller(route, connect, app) {
 			views_select(connect, app, function(){
-				blog.detail(connect, app, route.param.id)
+				blog.detail(connect, app, route.params.id)
 			})
 		}
 	},

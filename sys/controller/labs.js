@@ -72,7 +72,7 @@ exports.list = function (connect, app) {
 }
 
 exports.detail = function (route, connect, app) {
-	let lab_name = route.param.name
+	let lab_name = route.params.name
 	app.cache.use('labs_id_' + lab_name, ['html', 'labs'], function (this_cache) {
 		connect.write('html', 200, this_cache)
 	}, function (save_cache) {

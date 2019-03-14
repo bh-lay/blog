@@ -102,7 +102,7 @@ module.exports = [
 	{
 		path: 'all /ajax/tag/:act',
 		controller(route, connect, app) {
-			var act = route.param.act
+			var act = route.params.act
 			// 尝试使用ajax模块提供接口
 			if(tag[act]){
 				tag[act](connect,app)
@@ -116,7 +116,7 @@ module.exports = [
 	{
 		path: 'all /ajax/user/:act',
 		controller(route, connect, app) {
-			var act = route.param.act
+			var act = route.params.act
 			// 尝试使用ajax模块提供接口
 			if(user[act]){
 				user[act](connect,app)
@@ -130,7 +130,7 @@ module.exports = [
 	{
 		path: 'all /ajax/functions/:act',
 		controller(route, connect, app) {
-			var act = route.param.act
+			var act = route.params.act
 			functions(connect,app,act)
 		}
 	},
@@ -150,7 +150,7 @@ module.exports = [
 	{
 		path: 'all /snsLogin/:from',
 		controller(route, connect, app) {
-			if(route.param.from == 'github'){
+			if(route.params.from == 'github'){
 				snsLogin.github(connect,app)
 			}else{
 				connect.write('json',{
