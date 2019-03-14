@@ -38,7 +38,7 @@ class APP {
 				// 第一顺序：执行get方法设置的回调
 				// 使用匹配的最后一个 controller
 				let usedRoute = matchedRoutes[matchedRoutes.length - 1]
-				usedRoute.route.controller(usedRoute, newConnect, this)
+				usedRoute.controller(usedRoute, newConnect, this)
 			}else{
 				// 第二顺序：使用静态文件
 				this.fileReader.read(path.pathname, req,res, () => {
@@ -59,6 +59,7 @@ class APP {
 			}
 		})
 		server.listen(config.port)
+		console.log('Server start at port: ' + config.port)
 	}
 	/**
 	 * 检测是否为正常用户
@@ -83,7 +84,7 @@ class APP {
 		// 匹配 method，并清理 url method 部分
 		let method = 'all'
 		urlRulePrefix = urlRulePrefix.replace(/^(\w+)\s/, (result, key) => {
-			method = key.match(/^(get|post|options|put|delete)$/) ? key : 'all'
+			method = key.match(/^(rest|get|post|options|put|delete)$/) ? key : 'all'
 			return ''
 		})
 		let keys = []
@@ -104,7 +105,8 @@ class APP {
 		// 遍历所有路由配置
 		this.routes.forEach(route => {
 			// 第一步，检查 method 是否匹配
-			if (route.method !== 'all' && route.method !== currentMethod) {
+			let methodMatch = route.method === 'rest' || route.method === 'all' || route.method === currentMethod
+			if (!methodMatch) {
 				return
 			}
 			// 第二步，检查 URL 规则是否匹配
@@ -112,7 +114,7 @@ class APP {
 			if (!testMatches) {
 				return
 			}
-			// 从 URL 中国呢获取参数
+			// 从 URL 中获取参数
 			let param = {}
 			testMatches.forEach((value, index) => {
 				if (index > 0) {
@@ -120,11 +122,17 @@ class APP {
 					param[key] = value
 				}
 			})
+			// rest API 会主动去找与当前 method 相匹配的方法
+			let controller = route.method === 'rest' ? route.controller[currentMethod] : route.controller
+			if (typeof controller !== 'function') {
+				return
+			}
 			// 标记匹配结果
 			result.push({
 				path,
 				param,
-				route
+				route,
+				controller
 			})
 		})
 		return result
