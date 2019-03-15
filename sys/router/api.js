@@ -71,10 +71,8 @@ module.exports = [
 	},
 	// 前端演示用的demo
 	{
-		path: 'all /ajax/demo/*',
-		controller(route, connect, app) {
-			demo.render(connect,app)
-		}
+		path: 'all /ajax/demo/upload',
+		controller: demo.upload
 	},
 	// 公用删除接口
 	{
