@@ -20,7 +20,6 @@ let functions =  require('../controller/api/functions.js')
 
 // 实验室
 let labs = require('../controller/api/labs_get')
-let labs_update = require('../controller/api/labs/updateGitInfo')
 // 清除缓存
 let clear_cache = require('../controller/api/clear_cache')
 // 获取全景图数据
@@ -57,10 +56,6 @@ module.exports = [
 	{
 		path: 'all /ajax/labs',
 		controller:labs.render
-	},
-	{
-		path: 'all /ajax/labs/updateGitInfo',
-		controller: labs_update.render
 	},
 	// 友情链接
 	{
