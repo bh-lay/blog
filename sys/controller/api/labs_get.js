@@ -1,21 +1,6 @@
 /*
  * @author bh-lay
  */
-/*
-@demo
------------------------------------------------------------------
-get_list: 								|		get_detail
-	$.ajax({                      |       	$.ajax({
-		'type':'GET',              |       		'type':'GET',
-		'url':'/ajax/blog',        |       		'url':'/ajax/blog',
-		'data':{                   |       		'data':{
-			'act' : 'get_list',     |       			'act' : 'get_detail',
-			'limit_num' : '12',		|					'id' :'123456789'
-			'skip_num' : '34'			|				}
-		}	       						|       	});
-	});                           |
------------------------------------------------------------------
- */
 
 var DB = require('../../core/DB.js')
 

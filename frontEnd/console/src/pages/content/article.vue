@@ -62,11 +62,10 @@ export default {
   methods: {
     getData () {
       let queryStr = querystring.stringify({
-        act: 'get_list',
         skip: (this.currentPage - 1) * this.pageSize,
         limit: this.pageSize
       })
-      fetch('/ajax/blog?' + queryStr, {
+      fetch('/api/blog?' + queryStr, {
         method: 'GET',
         credentials: 'same-origin'
       })

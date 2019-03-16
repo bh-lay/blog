@@ -91,11 +91,9 @@ function submit (data) {
 }
 function getBlogDtail (id) {
   let queryStr = querystring.stringify({
-    format: 'markdown',
-    act: 'get_detail',
-    id: id
+    format: 'markdown'
   })
-  return fetch('/ajax/blog?' + queryStr, {
+  return fetch(`/api/blog/${id}?` + queryStr, {
     method: 'GET',
     credentials: 'same-origin'
   })

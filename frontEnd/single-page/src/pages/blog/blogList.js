@@ -61,9 +61,8 @@ LIST.prototype.loadMore = function () {
   this.isLoading = true;
   this.onLoadStart && this.onLoadStart();
   utils.fetch({
-    url: '/ajax/blog',
+    url: '/api/blog',
     data: {
-      act: 'get_list',
       skip: this.skip,
       tag: this.tag || null,
       limit: this.limit

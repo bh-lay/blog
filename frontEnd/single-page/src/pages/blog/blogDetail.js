@@ -15,11 +15,9 @@ const template = require('./blogDetailPage.html');
 
 function getData (id, fn) {
   utils.fetch({
-    url: '/ajax/blog',
+    url: '/api/blog/' + id,
     data: {
-      act: 'get_detail',
-      format: 'html',
-      id: id
+      format: 'html'
     },
     callback: function (err, data) {
       if (!err && data && data.code === 200) {

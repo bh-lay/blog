@@ -1,4 +1,8 @@
 
+let comments = require('../controller/api/comments/index.js')
+let blog = require('../controller/api/blog/index.js')
+
+
 // 用户登录认证
 let snsLogin = require('../controller/snsLogin.js')
 /**
@@ -7,7 +11,6 @@ let snsLogin = require('../controller/snsLogin.js')
  */
 var user = require('../controller/api/user/index')
 let add_edit = require('../controller/api/add&edit.js')
-let comments = require('../controller/api/comments/index.js')
 let links = require('../controller/api/links/index.js')
 let del = require('../controller/api/del')
 let demo = require('../controller/api/demo/index')
@@ -24,20 +27,32 @@ let clear_cache = require('../controller/api/clear_cache')
 let pano = require('../controller/api/pano_get.js')
 // 获取图虫数据
 let photography = require('../controller/api/photography_get.js')
-// 博客
-let blog = require('../controller/api/article_get')
 
 let imgRobber =  require('../controller/img-robber/index.js')
 
 module.exports = [
+	// 评论
+	{
+		path: 'get /api/comments/',
+		controller: comments.list
+	},
+	{
+		path: 'rest /api/comments/:id',
+		controller: comments
+	},
+	// 博文
+	{
+		path: 'get /api/blog',
+		controller: blog.list
+	},
+	{
+		path: 'rest /api/blog/:id',
+		controller: blog
+	},
 	// 通用增加&编辑
 	{
 		path: 'all /ajax/add_edit',
 		controller: add_edit.render
-	},
-	{
-		path: 'all /ajax/blog',
-		controller: blog.render
 	},
 	{
 		path: 'all /ajax/labs',
@@ -80,15 +95,6 @@ module.exports = [
 		controller(route, connect, app) {
 			del.render(connect,app)
 		}
-	},
-	// 评论
-	{
-		path: 'get /api/comments/',
-		controller: comments.list
-	},
-	{
-		path: 'rest /api/comments/:id',
-		controller: comments
 	},
 	// 标签模块
 	{
