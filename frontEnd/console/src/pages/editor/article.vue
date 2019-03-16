@@ -76,19 +76,6 @@
 import markdown from '../../components/markdown'
 import querystring from 'querystring'
 
-function submit (data) {
-  data.category = 'blog'
-
-  return fetch('/ajax/add_edit', {
-    method: 'POST',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-    },
-    body: querystring.stringify(data)
-  })
-  .then(response => response.json())
-}
 function getBlogDtail (id) {
   let queryStr = querystring.stringify({
     format: 'markdown'
@@ -106,6 +93,8 @@ export default {
   data () {
     return {
       id: null,
+      // create edit
+      mode: 'create',
       dateFormat: 'yyyy-MM-dd hh:mm:ss',
       inputVisible: false,
       inputValue: '',
@@ -121,15 +110,15 @@ export default {
     }
   },
   created () {
-    let idInRouter = this.$route.params.id
-    this.id = idInRouter === 'new' ? null : idInRouter
-    if (this.id) {
-      getBlogDtail(this.id).then(({code, detail}) => {
+    this.id = this.$route.params.id
+    this.mode = this.id === 'new' ? 'create' : 'edit'
+    if (this.mode === 'edit') {
+      getBlogDtail(this.id).then(({code, detail = {}}) => {
         this.form.title = detail.title
         this.form.intro = detail.intro
         this.form.content = detail.content
         this.form.cover = detail.cover
-        this.form.tags = detail.tags
+        this.form.tags = detail.tags.length ? detail.tags.split() : []
         this.form.author = detail.author
         this.form.time = new Date(parseInt(detail.time_show, 10))
       })
@@ -169,8 +158,26 @@ export default {
       if (!data.title || !data.content) {
         this.$alert('二货，咱写点儿干货行不行呐！')
       }
-      submit(data).then(() => {
-        let msg = this.id ? '更新成功！' : '发布成功'
+      let url
+      let method
+      if (this.mode === 'edit') {
+        url = '/api/blog/' + this.id
+        method = 'PUT'
+      } else {
+        url = '/api/blog/0'
+        method = 'POST'
+      }
+      return fetch(url, {
+        method,
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        },
+        body: querystring.stringify(data)
+      })
+      .then(response => response.json())
+      .then(() => {
+        let msg = this.mode === 'edit' ? '更新成功！' : '发布成功'
         this.$alert(msg, {
           callback: action => {
             this.$router.push('/content-article')
