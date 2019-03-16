@@ -7,6 +7,7 @@ let detail = require('./detail.js')
 let list = require('./list.js')
 let addBlog = require('./add.js')
 let editBlog = require('./edit.js')
+let deleteBlog = require('./del.js')
 
 exports.list = function (route, connect,app){
 	var url = connect.request.url
@@ -57,7 +58,6 @@ exports.put = function (route, connect){
 						code: 2,
 						msg: err.message || 'edit failed !'
 					})
-					console.log(err)
 				})
 		})
 	})
@@ -85,8 +85,42 @@ exports.post = function (route, connect){
 						code: 2,
 						msg: err.message || 'create failed !'
 					})
-					console.log(err)
 				})
 		})
 	})
+}
+
+
+// 删除
+exports.delete = function (route, connect,app){
+	let ID = route.params.id
+	if(ID.length<2){
+		connect.write('json',{
+			'code' : 2,
+			'msg' : 'please input [id] for del !'
+		})
+	}else{
+		connect.session(function(session_this){
+			// 校验权限
+			if(session_this.power(power.BLOG_DELETE)){
+				deleteBlog(ID)
+					.then(() => {
+							connect.write('json',{
+								'code' : 200
+							})
+							// 清除所有缓存
+							app.cache.clear('comment')
+					})
+					.catch((err) => {
+						connect.write('json',{
+							'code' : 500
+						})
+					})
+			}else{
+				connect.write('json',{
+					'code' : 201
+				})
+			}
+		})
+	}
 }

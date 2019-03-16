@@ -82,12 +82,8 @@ export default {
       return dateFormat(parseInt(dateStamp), 'yyyy-mm-dd HH:MM:ss')
     },
     delete (id) {
-      let queryStr = querystring.stringify({
-        from: 'blog',
-        id: id
-      })
-      return fetch('/ajax/del?' + queryStr, {
-        method: 'POST',
+      return fetch('/api/blog/' + id, {
+        method: 'DELETE',
         credentials: 'same-origin'
       })
       .then(response => response.json())

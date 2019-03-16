@@ -3,6 +3,7 @@
 module.exports = {
 	BLOG_CREATE: 3,
 	BLOG_EDIT: 3,
+	BLOG_DELETE: 4,
 	COMMENTS_EDIT: 17,
 	COMMENTS_DELETE: 17,
 }
