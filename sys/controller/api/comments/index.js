@@ -11,6 +11,7 @@
  */
 
 let utils = require('../../../core/utils/index.js')
+let power = require('../../../conf/power.js')
 let add = require('./add.js')
 let edit = require('./edit.js')
 let list = require('./list.js')
@@ -106,42 +107,31 @@ exports.list = function (route, connect,app){
 
 // 获取评论详情
 exports.get = function (route, connect){
-	var need_power = 17
-	connect.session(function(session_this){
-		// 校验权限
-		if(session_this.power(need_power)){
-			let _id = route.params.id
-			let json = {
-				code : 200
-			}
+	let _id = route.params.id
+	let json = {
+		code : 200
+	}
 
-			if(!_id || _id.length < 2){
-				json.code = 500
-				connect.write('json',json)
-				return
-			}
-			detail(_id,function(err,commentItem){
-				var json = {
-					code : 200
-				}
-				if(err){
-					json.code = 500
-				}else{
-					json.detail = commentItem
-				}
-				connect.write('json',json)
-			})
-		}else{
-			connect.write('json',{
-				'code' : 201
-			})
+	if(!_id || _id.length < 2){
+		json.code = 500
+		connect.write('json',json)
+		return
+	}
+	detail(_id,function(err,commentItem){
+		var json = {
+			code : 200
 		}
+		if(err){
+			json.code = 500
+		}else{
+			json.detail = commentItem
+		}
+		connect.write('json',json)
 	})
 }
 // 删除
 exports.delete = function (route, connect,app){
 	let ID = route.params.id
-	var need_power = 17
 	if(ID.length<2){
 		connect.write('json',{
 			'code' : 2,
@@ -150,7 +140,7 @@ exports.delete = function (route, connect,app){
 	}else{
 		connect.session(function(session_this){
 			// 校验权限
-			if(session_this.power(need_power)){
+			if(session_this.power(power.COMMENTS_DELETE)){
 				del(ID,function(err){
 					if(err){
 						connect.write('json',{
@@ -174,12 +164,11 @@ exports.delete = function (route, connect,app){
 }
 
 exports.put = function(route, connect,app){
-	var need_power = 17
 	utils.parse.request(connect.request,function(err,data){
 		let _id = route.params.id
 		connect.session(function(session_this){
 			// 校验权限
-			if(session_this.power(need_power)){
+			if(session_this.power(power.COMMENTS_EDIT)){
 				edit(_id, data,function(err){
 					if(err){
 						connect.write('json',{
