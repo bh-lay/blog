@@ -19,7 +19,9 @@
           <router-link to="/editor-article/new">
             <el-button>写博文</el-button>
           </router-link>
-          <el-button>实验室</el-button>
+          <router-link to="/editor/labs/new">
+            <el-button>实验室</el-button>
+          </router-link>
           <el-button>加友链</el-button>
         </div>
       </el-card>

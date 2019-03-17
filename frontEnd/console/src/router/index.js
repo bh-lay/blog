@@ -7,6 +7,7 @@ import Links from '@/pages/content/links'
 import Comments from '@/pages/content/comments'
 
 import ArticleEditor from '@/pages/editor/article'
+import LabsEditor from '@/pages/editor/labs'
 
 import Gallery from '@/pages/gallery/index'
 
@@ -49,6 +50,11 @@ let routes = [{
   path: '/editor-article/:id',
   name: '博文发布',
   component: ArticleEditor
+},
+{
+  path: '/editor/labs/:id',
+  name: '实验室发布',
+  component: LabsEditor
 }
 
 ]
