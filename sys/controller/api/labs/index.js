@@ -46,7 +46,8 @@ exports.put = function (route, connect){
 			return
 		}
 		utils.parse.request(connect.request, (err, data) => {
-			editLabs(data)
+			let id = route.params.id
+			editLabs(id, data)
 				.then(() => {
 					connect.write('json',{
 						code: 1,

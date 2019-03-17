@@ -12,7 +12,6 @@ let snsLogin = require('../controller/snsLogin.js')
  *
  */
 var user = require('../controller/api/user/index')
-let add_edit = require('../controller/api/add&edit.js')
 let links = require('../controller/api/links/index.js')
 let del = require('../controller/api/del')
 let demo = require('../controller/api/demo/index')
@@ -55,12 +54,6 @@ module.exports = [
 	{
 		path: 'rest /api/labs/:id',
 		controller: labs
-	},
-
-	// 通用增加&编辑
-	{
-		path: 'all /ajax/add_edit',
-		controller: add_edit.render
 	},
 	// 友情链接
 	{

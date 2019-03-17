@@ -6,7 +6,7 @@ let DB = require('../../../core/DB.js')
 let parseData = require('./parse.js')
 let collectionName = 'labs'
 
-module.exports = params => {
+module.exports = (id, params) => {
 	let data = parseData(params)
 	return new Promise((resolve, reject) => {
 		if (!data) {
@@ -15,7 +15,7 @@ module.exports = params => {
 		DB.getCollection(collectionName)
 			.then(({collection, closeDBConnect}) => {
 				collection.updateOne({
-					id: params.id
+					id
 				}, {
 					$set: params
 				}, function(err) {
