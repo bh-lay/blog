@@ -94,14 +94,18 @@
           <i class="el-icon-fa-upload"></i> 上传管理
       </el-button>
       <span class="current-path">
-        <span v-for="item in pathSplits">
+        <span
+          v-for="(item, index) in pathSplits"
+          :key="index"
+        >
           <i>/</i><a href="javascript:void(0)" @click="jumpTo(item.path)">{{item.part}}</a>
         </span>
       </span>
     </div>
     <div class="upload-list" v-show="uploadVisible">
+      {{currentPath}}
       <el-upload
-        action="/ajax/asset/upload"
+        :action="`/api/asset/path/${currentPathBase64}`"
         :data="{
           act: 'addFile',
           root: currentPath
@@ -119,7 +123,12 @@
       <div v-if="files.length == 0" class="empty">
         这是一个空目录
       </div>
-      <div class="item" v-for="file in files" :class="{folder: file.parsed.type === 'folder'}">
+      <div
+        class="item"
+        v-for="(file, index) in files"
+        :key="index"
+        :class="{folder: file.parsed.type === 'folder'}"
+      >
         <div class="filename" @click="clickHandle(file)">
           <i v-if="file.parsed.type === 'folder'" class="el-icon-fa-folder-o"></i>
           <i v-if="file.parsed.type === 'picture'" class="el-icon-fa-file-image-o"></i>
@@ -191,17 +200,16 @@ function parseFile ({name, isFolder, basePath}) {
     path
   }
 }
-function createPath (foldername, root) {
-  root = cleanPath(root + '/')
-  return fetch('/ajax/asset/createDir', {
+function createPath (foldername, pathname) {
+  return fetch('/api/asset/createDir', {
     method: 'POST',
     credentials: 'same-origin',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
     },
     body: querystring.stringify({
-      root,
-      name: foldername
+      name: foldername,
+      pathname
     })
   })
   .then(response => response.json())
@@ -209,31 +217,22 @@ function createPath (foldername, root) {
 // 删除文件、目录
 function deletePath (pathname, isFolder) {
   pathname = cleanPath(pathname)
-  let folderAPI = '/ajax/asset/delDir'
-  let fileAPI = '/ajax/asset/del'
-  let useAPI = isFolder ? folderAPI : fileAPI
-  return fetch(useAPI, {
-    method: 'POST',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-    },
-    body: querystring.stringify({
-      path: pathname
-    })
+
+  return fetch('/api/asset/path/' + btoa(pathname), {
+    method: 'DELETE',
+    credentials: 'same-origin'
   })
   .then(response => response.json())
 }
 // 重命名
 function rename (pathname, newName) {
-  return fetch('/ajax/asset/rename', {
-    method: 'POST',
+  return fetch('/api/asset/path/' + btoa(pathname), {
+    method: 'PUT',
     credentials: 'same-origin',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
     },
     body: querystring.stringify({
-      pathname,
       newName
     })
   })
@@ -278,7 +277,7 @@ export default {
   },
   methods: {
     getData () {
-      fetch('/ajax/asset?path=' + this.currentPath, {
+      fetch('/api/asset/path/' + btoa(this.currentPath), {
         method: 'GET',
         credentials: 'same-origin'
       })
@@ -345,12 +344,19 @@ export default {
         type: 'warning'
       }).then(() => {
         let path = this.currentPath + '/' + item.name
-        deletePath(path, item.isdir).then(() => {
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          })
-          this.refresh()
+        deletePath(path, item.isdir).then(json => {
+          if (json.code === 200) {
+            this.$message({
+              type: 'success',
+              message: '删除成功!'
+            })
+            this.refresh()
+          } else {
+           this.$message({
+              type: 'error',
+              message: json.msg || '删除失败!'
+            }) 
+          }
         })
       }).catch(() => {})
     },
@@ -360,10 +366,22 @@ export default {
         inputPattern: /^(\w|\d|-)+$/,
         inputErrorMessage: '目录只能用字母、数字'
       }).then(({ value }) => {
-        createPath(value, this.currentPath).then(() => {
-          this.refresh()
+        createPath(value, this.currentPath).then(json => {
+          if (json.code === 200) {
+            this.refresh()
+          } else {
+            this.$message({
+              type: 'error',
+              message: json.msg || '创建目录失败!'
+            })
+          }
         })
       }).catch(() => {})
+    }
+  },
+  computed: {
+    currentPathBase64 () {
+      return btoa(this.currentPath)
     }
   }
 }
