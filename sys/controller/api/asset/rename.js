@@ -7,11 +7,10 @@ var fs = require('fs')
 var utils = require('../../../core/utils/index.js')
 var assetPath = '../static/'
 
-exports.rename = function (req,callback){
+module.exports = (pathname, req, callback) => {
 	utils.parse.request(req,function(err, fields){
 		
-		var pathname = fields.pathname || ''
-		var newName = fields.newName || ''
+		let newName = fields.newName || ''
 		
 		// 消除参数中首尾的｛/｝
 		pathname = pathname.replace(/^\/|\/$/g,'')
@@ -55,7 +54,5 @@ exports.rename = function (req,callback){
 				
 			}
 		}
-	//	res_this.html(200,JSON.stringify(json));
-	//	res_this.html(200,'<!DOCTYPE HTML><html lang="en-US"><head><meta charset="UTF-8" /></head><body>121212</body></html>');
 	})
 }

@@ -7,16 +7,20 @@ var fs = require('fs')
 var utils = require('../../../core/utils/index.js')
 var assetPath = '../static/'
 
-exports.file = function (req,callback){
-	utils.parse.request(req,function(err,fields){
-		var path = fields.path || ''
-		// 消除参数中首尾的｛/｝
-		path = path.replace(/^\/|\/$/g,'')
-		if(err || path.length == 1){
-			callback && callback('参数不完整')
-		}else{
-			var Path = assetPath + path
-			fs.unlink(Path,function(err){
+module.exports = (path, req, callback) => {
+	// 消除参数中首尾的｛/｝
+	path = path.replace(/^\/|\/$/g,'')
+
+	var pathname = assetPath + path
+	fs.lstat(pathname, (err, stat) => {
+		if (err) {
+			callback && callback('读取目录失败')
+			return
+		}
+		if (stat.isDirectory()) {
+			callback && callback('无法删除目录！')
+		} else {
+			fs.unlink(pathname,function(err){
 				if(err){
 					callback && callback(err)
 				}else{

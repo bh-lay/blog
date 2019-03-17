@@ -7,14 +7,14 @@ var fs = require('fs')
 var utils = require('../../../core/utils/index.js')
 var assetPath = '../static/'
 
-exports.upload = function (req,callback){
-	utils.parse.request(req,function(err,fields, files){
+module.exports = (path, req,callback) => {
+	utils.parse.request(req, function(err, fields, files){
 		var errorFiles = []
 		if(err){
 			callback && callback(err)
 		}else if(files.length){
 			var newFiles = []
-			var root = (fields.root || '/')
+			var root = (path || '/')
 			// 消除参数中首尾的｛/｝
 			root = root.replace(/^\/|\/$/g,'')
 			

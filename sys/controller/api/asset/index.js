@@ -2,103 +2,23 @@
  * @author bh-lay
  */
 var utils = require('../../../core/utils/index.js')
-var read = require('./fileList')
+var fileList = require('./fileList')
 var upload = require('./upload')
-var del = require('./delete')
+var delPath = require('./delete')
 var rename = require('./rename')
 var createDir = require('./createDir')
+var assetPath = '../static/'
+var fs = require('fs')
 
-const getList = connect => {
-	utils.parse.request(connect.request,function(err,data){
-		var pathStr = data.path
-		
-		read.list(pathStr,function(err,files){
-			var json = {
-				code : 200,
-				files : files
-			}
-			if(err){
-				json.code = 404
-				json.msg = 'Directory does not exist!'
-			}
-			connect.write('json',json)
-		})
-	})
-}
-const uploadFile = connect => {
-	upload.upload(connect.request,function(err,files){
-		if(err){
-			connect.write('json',{
-				code : 201
-			})
-			return
-		}
-		connect.write('json',{
-			code : 200,
-			files : files
-		})
-	})
-}
-const deleteFile = connect => {
-	del.file(connect.request,function(err){
-		if(err){
-			connect.write('json',{
-				code : 201
-			})
-			return
-		}
-		connect.write('json',{
-			code : 200
-		})
-	})
-}
-const renamePath = connect => {
-	rename.rename(connect.request, function(err){
-		if(err){
-			connect.write('json',{
-				code : 201
-			})
-			return
-		}
-		connect.write('json',{
-			code : 200
-		})
-	})
-}
-const createPath = connect => {
-	createDir.createDir(connect.request,function(err){
-		if(err){
-			connect.write('json',{
-				code : 201
-			})
-			return
-		}
-		connect.write('json',{
-			code : 200
-		})
-	})
+const base64Decode = str => {
+	/* eslint-disable-next-line no-undef */
+	return Buffer.from(str, 'base64').toString()
 }
 
-const doFn = (fnName, connect) => {
+const ifHashPermission = (connect, callback) => {
 	connect.session(function(session_this){
 		if(session_this.get('user_group') == 'admin'){
-			switch (fnName) {
-			case 'getList':
-				getList(connect)
-				break
-			case 'upload':
-				uploadFile(connect)
-				break
-			case 'deleteFile':
-				deleteFile(connect)
-				break
-			case 'renamePath':
-				renamePath(connect)
-				break
-			case 'createPath':
-				createPath(connect)
-				break
-			}
+			callback && callback(connect)
 		}else{
 			connect.write('json',{
 				code : 201,
@@ -108,24 +28,114 @@ const doFn = (fnName, connect) => {
 	})
 }
 
+// 获取某一目录下文件（文件夹）列表
+exports.get = (route, connect) => {
+	ifHashPermission(connect, () => {
+		let pathBase64 = route.params.path
+		let pathStr = base64Decode(pathBase64)
+		pathStr = pathStr.replace(/^\/|\/$/g,'')
 
-exports.list = (route, connect) => {
-	doFn('getList', connect)
-}
-exports.upload = (route, connect) => {
-	doFn('upload', connect)
-}
-exports.deleteFile = (route, connect) => {
-	doFn('deleteFile', connect)
-}
-exports.deleteDir = (route, connect) => {
-	connect.write('json',{
-		code : 203
+		var pathname = assetPath + pathStr
+		let stat = fs.lstat(pathname, (err, stat) => {
+			if (err) {
+				connect.write('json',{
+					code: 201,
+					msg: 'read failed'
+				})
+				return
+			}
+			if (stat.isDirectory()) {
+				// 读取目录
+				fileList(pathStr, function(err,files){
+					var json = {
+						code : 200,
+						files : files
+					}
+					if(err){
+						json.code = 404
+						json.msg = 'Directory does not exist!'
+					}
+					connect.write('json',json)
+				})
+			} else {
+				connect.write('json',{
+					code: 201,
+					msg: 'not support file reader'
+				})
+			}
+		})
 	})
 }
-exports.renamePath = (route, connect) => {
-	doFn('renamePath', connect)
+// 上传文件
+exports.post = (route, connect) => {
+	ifHashPermission(connect, () => {
+		let pathBase64 = route.params.path
+		let path = base64Decode(pathBase64)
+		upload(path, connect.request, function(err,files){
+			if(err){
+				connect.write('json',{
+					code : 201
+				})
+				return
+			}
+			connect.write('json',{
+				code : 200,
+				files : files
+			})
+		})
+	})
 }
+// 重命名
+exports.put = (route, connect) => {
+	ifHashPermission(connect, () => {
+		let pathBase64 = route.params.path
+		let path = base64Decode(pathBase64)
+		rename(path, connect.request, function(err){
+			if(err){
+				connect.write('json',{
+					code : 201
+				})
+				return
+			}
+			connect.write('json',{
+				code : 200
+			})
+		})
+	})
+}
+// 删除
+exports.delete = (route, connect) => {
+	ifHashPermission(connect, () => {
+		let pathBase64 = route.params.path
+		let path = base64Decode(pathBase64)
+		delPath(path, connect.request, function(err){
+			if(err){
+				connect.write('json',{
+					code : 201,
+					msg: err || '删除失败'
+				})
+				return
+			}
+			connect.write('json',{
+				code : 200
+			})
+		})
+	})
+}
+
 exports.createPath = (route, connect) => {
-	doFn('createPath', connect)
+	ifHashPermission(connect, () => {
+		createDir(connect.request, err => {
+			if(err){
+				connect.write('json',{
+					code : 201,
+					msg: err || '创建目录失败 ！'
+				})
+				return
+			}
+			connect.write('json',{
+				code : 200
+			})
+		})
+	})
 }

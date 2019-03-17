@@ -15,7 +15,7 @@ function handle_path(input){
 	return output
 }
 
-exports.list = function (pathStr,callback){
+module.exports = function (pathStr, callback){
 	var path = handle_path(pathStr)
 	
 	var res = []

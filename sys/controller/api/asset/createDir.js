@@ -7,10 +7,10 @@ var fs = require('fs')
 var utils = require('../../../core/utils/index.js')
 var assetPath = '../static/'
 
-exports.createDir = function (req,callback){
+module.exports = function (req, callback){
 	utils.parse.request(req, function(err, fields){
 		
-		var root = fields.root || ''
+		var root = fields.pathname || ''
 		var dirName = fields.name || ''
 		
 		// 消除参数中首尾的｛/｝
