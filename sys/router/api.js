@@ -1,6 +1,8 @@
 
 let comments = require('../controller/api/comments/index.js')
 let blog = require('../controller/api/blog/index.js')
+// 实验室
+let labs = require('../controller/api/labs/index.js')
 
 
 // 用户登录认证
@@ -17,9 +19,6 @@ let demo = require('../controller/api/demo/index')
 let tag =  require('../controller/api/tag/index.js')
 let functions =  require('../controller/api/functions.js')
 
-
-// 实验室
-let labs = require('../controller/api/labs_get')
 // 清除缓存
 let clear_cache = require('../controller/api/clear_cache')
 // 获取全景图数据
@@ -48,14 +47,20 @@ module.exports = [
 		path: 'rest /api/blog/:id',
 		controller: blog
 	},
+	// 实验室
+	{
+		path: 'get /api/labs',
+		controller: labs.list
+	},
+	{
+		path: 'rest /api/labs/:id',
+		controller: labs
+	},
+
 	// 通用增加&编辑
 	{
 		path: 'all /ajax/add_edit',
 		controller: add_edit.render
-	},
-	{
-		path: 'all /ajax/labs',
-		controller:labs.render
 	},
 	// 友情链接
 	{

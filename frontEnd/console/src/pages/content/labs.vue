@@ -106,6 +106,9 @@ export default {
       }).catch(() => {})
     },
     handleCreate () {
+      this.$router.push({
+        path: '/editor/labs/new'
+      })
     }
   }
 }
