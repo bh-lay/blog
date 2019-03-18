@@ -180,11 +180,8 @@ exports.url = function(url){
 	var obj = {
 		pathname : a[0],
 		search : search,
-		filename : null,
-		pathnode : b.length?b.split(/\//):[],
+		filename : null
 	}
-  
-	obj['root'] = '/' + (obj['pathnode'][0]||'')
   
 	if(obj['pathname'].match(/\/\w+\.\w+$/)){
 		// obj.pathnode.pop();

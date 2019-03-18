@@ -3,7 +3,6 @@
  *
  */
 
-
 import LabsBase from './labs-base.js';
 import utils from '../../js/Base.js';
 import imageHosting from '../../js/imageHosting.js';
@@ -14,9 +13,8 @@ let skip = 0;
 function getData (onSuccess, onError) {
   utils.fetch({
     type: 'GET',
-    url: '/ajax/labs',
+    url: '/api/labs',
     data: {
-      act: 'get_list',
       skip: skip,
       limit: limit
     },
@@ -49,15 +47,15 @@ function filterData (list) {
 }
 
 export default function (global) {
-  let node = global.node;
+  let node = global.node
   let labsBase = new LabsBase(node, {
-      activeSubNavIndex: 0,
-      pageClass: 'labs-list-pager-fe',
-      thirdProfile: {
-        url: 'https://github.com/bh-lay',
-        title: '小剧在Github',
-        intro: '小剧也曾不知天高地厚的造过不少「轮子」，虽然不好用，但却是我成长路上一个个深深浅浅的脚印。'
-      }
+    activeSubNavIndex: 0,
+    pageClass: 'labs-list-pager-fe',
+    thirdProfile: {
+      url: 'https://github.com/bh-lay',
+      title: '小剧在Github',
+      intro: '小剧也曾不知天高地厚的造过不少「轮子」，虽然不好用，但却是我成长路上一个个深深浅浅的脚印。'
+    }
   });
 
   getData(function (list) {
@@ -65,4 +63,4 @@ export default function (global) {
   }, function () {
     labsBase.renderEmpty();
   });
-};
+}
