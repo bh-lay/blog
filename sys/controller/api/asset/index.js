@@ -20,6 +20,13 @@ const ifHashPermission = (route, connect, callback) => {
 	// 去除首尾 【/】
 	realPath = realPath.replace(/^\/|\/$/g,'')
 	let pathname = assetPath + realPath
+	// 屏蔽非法请求
+	if (pathname.indexOf('../') > -1) {
+		connect.write('json',{
+			code : 201,
+			msg : 'no power'
+		})
+	}
 	connect.session(function(session_this){
 		if(session_this.get('user_group') == 'admin'){
 			callback && callback(pathname)
