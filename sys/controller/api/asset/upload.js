@@ -5,37 +5,32 @@
 
 var fs = require('fs')
 var utils = require('../../../core/utils/index.js')
-var assetPath = '../static/'
 
-module.exports = (path, req,callback) => {
-	utils.parse.request(req, function(err, fields, files){
+module.exports = (pathname, req, callback) => {
+	utils.parse.request(req, function (err, fields, files) {
 		var errorFiles = []
-		if(err){
+		if (err) {
 			callback && callback(err)
-		}else if(files.length){
+		} else if (files.length) {
 			var newFiles = []
-			var root = (path || '/')
-			// 消除参数中首尾的｛/｝
-			root = root.replace(/^\/|\/$/g,'')
-			
-			
-			for(var i in files){
-				var newPath = assetPath  + '/' + root + '/' + files[i].name
-				
+
+			for (var i in files) {
+				var newPath = pathname + '/' + files[i].name
+
 				// 禁止上传同名文件
 				var exists = fs.existsSync(newPath)
-				if(exists){
+				if (exists) {
 					errorFiles.push({
-						'name' : files[i]['name']
+						'name': files[i]['name']
 					})
-				}else{
-					fs.rename(files[i].path,newPath, () => {})
+				} else {
+					fs.rename(files[i].path, newPath, () => { })
 					newFiles.push({
-						'name' : files[i]['name']
+						'name': files[i]['name']
 					})
 				}
 			}
-			callback && callback(null,newFiles)
+			callback && callback(null, newFiles)
 		}
 	})
 }

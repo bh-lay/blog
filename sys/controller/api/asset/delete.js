@@ -4,14 +4,8 @@
  */
 
 var fs = require('fs')
-var utils = require('../../../core/utils/index.js')
-var assetPath = '../static/'
 
-module.exports = (path, req, callback) => {
-	// 消除参数中首尾的｛/｝
-	path = path.replace(/^\/|\/$/g,'')
-
-	var pathname = assetPath + path
+module.exports = (pathname, req, callback) => {
 	fs.lstat(pathname, (err, stat) => {
 		if (err) {
 			callback && callback('读取目录失败')

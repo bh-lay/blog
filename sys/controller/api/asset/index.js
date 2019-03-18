@@ -1,24 +1,28 @@
 /**
  * @author bh-lay
  */
-var utils = require('../../../core/utils/index.js')
-var fileList = require('./fileList')
-var upload = require('./upload')
-var delPath = require('./delete')
-var rename = require('./rename')
-var createDir = require('./createDir')
-var assetPath = '../static/'
-var fs = require('fs')
+let fileList = require('./fileList')
+let upload = require('./upload')
+let delPath = require('./delete')
+let rename = require('./rename')
+let createDir = require('./createDir')
+let fs = require('fs')
+let assetPath = '../static/'
 
 const base64Decode = str => {
 	/* eslint-disable-next-line no-undef */
 	return Buffer.from(str, 'base64').toString()
 }
 
-const ifHashPermission = (connect, callback) => {
+const ifHashPermission = (route, connect, callback) => {
+	let pathBase64 = route.params.path
+	let realPath = base64Decode(pathBase64)
+	// 去除首尾 【/】
+	realPath = realPath.replace(/^\/|\/$/g,'')
+	let pathname = assetPath + realPath
 	connect.session(function(session_this){
 		if(session_this.get('user_group') == 'admin'){
-			callback && callback(connect)
+			callback && callback(pathname)
 		}else{
 			connect.write('json',{
 				code : 201,
@@ -30,13 +34,8 @@ const ifHashPermission = (connect, callback) => {
 
 // 获取某一目录下文件（文件夹）列表
 exports.get = (route, connect) => {
-	ifHashPermission(connect, () => {
-		let pathBase64 = route.params.path
-		let pathStr = base64Decode(pathBase64)
-		pathStr = pathStr.replace(/^\/|\/$/g,'')
-
-		var pathname = assetPath + pathStr
-		let stat = fs.lstat(pathname, (err, stat) => {
+	ifHashPermission(route, connect, pathname => {
+		fs.lstat(pathname, (err, stat) => {
 			if (err) {
 				connect.write('json',{
 					code: 201,
@@ -46,7 +45,7 @@ exports.get = (route, connect) => {
 			}
 			if (stat.isDirectory()) {
 				// 读取目录
-				fileList(pathStr, function(err,files){
+				fileList(pathname, function(err,files){
 					var json = {
 						code : 200,
 						files : files
@@ -68,10 +67,9 @@ exports.get = (route, connect) => {
 }
 // 上传文件
 exports.post = (route, connect) => {
-	ifHashPermission(connect, () => {
-		let pathBase64 = route.params.path
-		let path = base64Decode(pathBase64)
-		upload(path, connect.request, function(err,files){
+	ifHashPermission(route, connect, pathname => {
+
+		upload(pathname, connect.request, (err,files) => {
 			if(err){
 				connect.write('json',{
 					code : 201
@@ -87,10 +85,8 @@ exports.post = (route, connect) => {
 }
 // 重命名
 exports.put = (route, connect) => {
-	ifHashPermission(connect, () => {
-		let pathBase64 = route.params.path
-		let path = base64Decode(pathBase64)
-		rename(path, connect.request, function(err){
+	ifHashPermission(route, connect, pathname => {
+		rename(pathname, connect.request, function(err){
 			if(err){
 				connect.write('json',{
 					code : 201
@@ -105,10 +101,8 @@ exports.put = (route, connect) => {
 }
 // 删除
 exports.delete = (route, connect) => {
-	ifHashPermission(connect, () => {
-		let pathBase64 = route.params.path
-		let path = base64Decode(pathBase64)
-		delPath(path, connect.request, function(err){
+	ifHashPermission(route, connect, pathname => {
+		delPath(pathname, connect.request, function(err){
 			if(err){
 				connect.write('json',{
 					code : 201,
@@ -124,7 +118,7 @@ exports.delete = (route, connect) => {
 }
 
 exports.createPath = (route, connect) => {
-	ifHashPermission(connect, () => {
+	ifHashPermission(route, connect, () => {
 		createDir(connect.request, err => {
 			if(err){
 				connect.write('json',{

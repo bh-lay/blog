@@ -5,53 +5,26 @@
 
 var fs = require('fs')
 var utils = require('../../../core/utils/index.js')
-var assetPath = '../static/'
 
 module.exports = (pathname, req, callback) => {
-	utils.parse.request(req,function(err, fields){
-		
-		let newName = fields.newName || ''
-		
-		// 消除参数中首尾的｛/｝
-		pathname = pathname.replace(/^\/|\/$/g,'')
-		if(err || pathname.length < 1 || newName.length < 1){
+	utils.parse.request(req, function (err, fields) {
+		let newFileName = fields.newName || ''
+		if (err || pathname.length < 1 || newFileName.length < 1) {
 			callback && callback('参数不全')
-		}else{
-			var filePath = assetPath + '/' + pathname
-			var newPath = ''
-			
-			/**
-			 * (.*)所在目录
-			 * (.+)文件名
-			 * ((?:\w|\s|\d)+)后缀名
-			 */
-			var pathnameMatch = pathname.match(/(.*)\/(.+)\.((?:\w|\s|\d)+)$/)
-			
-			if(pathnameMatch){
-				var extension = pathnameMatch[3]
-				var root = pathnameMatch[1]
-				newPath = assetPath + root + '/' + newName + '.' + extension
-			}else{
-				var pathnameMatch2 = pathname.match(/(.*)\/(.+)$/)
-				if(pathnameMatch2){
-					newPath = assetPath + pathnameMatch2[1] + '/' + newName
-				}else{
-					newPath = assetPath + '/' + newName
-				}
-			}
+		} else {
+			var newPath = pathname.replace(/[^\/]+$/, newFileName)
 			// 检测是否同名
 			var exists = fs.existsSync(newPath)
-			if(exists){
-				callback && callback('文件重名')
-			}else{
-				fs.rename(filePath,newPath,function(err){
-					if(err){
+			if (exists) {
+				callback && callback('文件重名成功!')
+			} else {
+				fs.rename(pathname, newPath, err => {
+					if (err) {
 						callback && callback('出错了')
-					}else{
+					} else {
 						callback && callback(null)
 					}
 				})
-				
 			}
 		}
 	})

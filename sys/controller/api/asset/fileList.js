@@ -3,30 +3,17 @@
  */
 var fs = require('fs')
 
-var root = '../static/'
-
-function handle_path(input){
-	var output = root
-	if(input){
-		// 过滤｛../｝
-		output += input.replace(/\.\.\//g,'/')
-		output = output.replace(/^\//,'')
-	}
-	return output
-}
-
-module.exports = function (pathStr, callback){
-	var path = handle_path(pathStr)
+module.exports = function (pathname, callback){
 	
 	var res = []
-	fs.readdir(path,function(err,files){
+	fs.readdir(pathname, function(err,files){
 		if(err){
 			callback && callback(err)
 			return
 		}
 		files.forEach(function(file){
-			var pathname = path + '/' + file,
-				stat = fs.lstatSync(pathname)
+			let filePath = pathname + '/' + file
+			let stat = fs.lstatSync(filePath)
 	
 			if (stat.isDirectory()){
 				res.push({
