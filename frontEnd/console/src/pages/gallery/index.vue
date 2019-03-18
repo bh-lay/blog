@@ -197,7 +197,8 @@ function parseFile ({name, isFolder, basePath}) {
     filename,
     extension,
     type,
-    path
+    path,
+    fullFileName: fullname
   }
 }
 function createPath (foldername, pathname) {
@@ -320,13 +321,12 @@ export default {
       this.getData()
     },
     handleRename (item) {
-      console.log('item', item)
-      this.$prompt('请输入邮箱', '提示', {
+      this.$prompt('请输入新的文件名', '提示', {
         confirmButtonText: '重命名',
         cancelButtonText: '取消',
-        inputValue: item.parsed.filename,
-        inputPattern: /^(\w|\d|-)+$/,
-        inputErrorMessage: '只能使用字母、数字'
+        inputValue: item.parsed.fullFileName,
+        inputPattern: /^(\w|\d|-|\.)+$/,
+        inputErrorMessage: '禁止使用特殊格式！'
       }).then(({ value }) => {
         let path = this.currentPath + '/' + item.name
         rename(path, value).then(() => {
@@ -352,10 +352,10 @@ export default {
             })
             this.refresh()
           } else {
-           this.$message({
+            this.$message({
               type: 'error',
               message: json.msg || '删除失败!'
-            }) 
+            })
           }
         })
       }).catch(() => {})
