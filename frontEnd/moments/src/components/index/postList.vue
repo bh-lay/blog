@@ -1,14 +1,14 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 .post-list
-  padding 20px 20px 50px
+  padding 0 40px 50px
 .item
   display flex
   margin-bottom 20px
   .user
-    width 40px
-    height 40px
+    width 60px
+    height 60px
     margin-right 20px
-    background #333
+    background #444
   .content
     flex-grow 1
     height 200px

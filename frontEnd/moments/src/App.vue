@@ -21,8 +21,6 @@ html, body, div
   z-index 2
 .app-main
   position relative
-  width 100%
-  height 100%
   background #fff
 /* 可以设置不同的进入和离开动画 */
 /* 设置持续时间和动画函数 */
@@ -43,6 +41,9 @@ html, body, div
 .page-container
   width 1200px
   margin auto
+.footer
+  height 400px
+  background #333
 </style>
 <template>
   <div id="app">
@@ -51,6 +52,9 @@ html, body, div
       <transition name="router-fade">
         <router-view class="router-page" />
       </transition>
+    </div>
+    <div class="footer">
+
     </div>
   </div>
 </template>

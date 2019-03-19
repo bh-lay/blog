@@ -11,25 +11,25 @@
   background #fff
 .index-main
   background #fff
-  border-top 1px solid #fff
+  border 1px solid #fff
+  border-width 1px 0
 .index-main-body
   display flex
   min-height 600px
   .index-sidebar
-    width 200px
+    width 150px
     margin-left -1000px
     padding-left 1000px
-    padding-top 20px
-    padding-right 40px
+    padding-top 30px
+    padding-right 30px
     border-right 1px solid #e0e6eb
     background #f6f7f9
-    .ads-1
-      height 160px
-      background #333
   .index-content
     flex-grow 1
+    padding-top 30px
   .index-sidebar-secondary
-    width 350px
+    width 200px
+    padding 30px 0 50px 30px
 </style>
 <template>
   <div class="index-page">
@@ -40,16 +40,19 @@
         <div class="some-tools-body"></div>
       </div>
     </div>
-    <div class="index-main"></div>
-    <div class="page-container">
-      <div class="index-main-body">
-        <div class="index-sidebar">
-          <div class="ads-1"></div>
+    <div class="index-main">
+      <div class="page-container">
+        <div class="index-main-body">
+          <div class="index-sidebar">
+            <sidebar />
+          </div>
+          <div class="index-content">
+            <postList />
+          </div>
+          <div class="index-sidebar-secondary">
+            <sidebarSecondary />
+          </div>
         </div>
-        <div class="index-content">
-          <postList />
-        </div>
-        <div class="index-sidebar-secondary"></div>
       </div>
     </div>
   </div>
@@ -57,9 +60,12 @@
 
 <script>
 import postList from './postList.vue'
+import sidebar from './sidebar.vue'
+import sidebarSecondary from './sidebarSecondary.vue'
+
 export default {
   name: 'index',
-  components: {postList},
+  components: {postList, sidebar, sidebarSecondary},
   data () {
     return {
     }
