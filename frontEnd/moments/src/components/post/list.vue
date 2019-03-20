@@ -28,16 +28,28 @@
         <div class="cover"></div>
       </div>
     </div>
+    {{pageInfo}}
+    <pagination
+      :total="pageInfo.total"
+      :size="pageInfo.size"
+      :current.sync="pageInfo.current"
+     />
   </div>
 </template>
 
 <script>
+import pagination from '../pagination/index.vue'
 export default {
   name: 'post-list',
-  components: {},
+  components: {pagination},
   data () {
     return {
-      postList: [1, 1, 1, 1, 1]
+      postList: [1, 1, 1, 1, 1],
+      pageInfo: {
+        total: 100,
+        current: 1,
+        size: 10
+      }
     }
   },
   created () {
