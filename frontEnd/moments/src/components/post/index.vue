@@ -1,14 +1,4 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-.banner
-  height 400px
-  background #2e3438
-.some-tools
-  padding 30px 0
-  background #f0f1f5
-.some-tools-body
-  height 240px
-  border 1px solid #e0e6eb
-  background #fff
 .index-main
   background #fff
   border 1px solid #fff
@@ -32,28 +22,15 @@
     padding 30px 0 50px 30px
 </style>
 <template>
-  <div class="index-page">
-    <div class="banner">
-      <div class="page-container">
-        23456
-      </div>
-    </div>
-    <div class="some-tools">
-      <div class="page-container">
-        <div class="some-tools-body"></div>
-      </div>
-    </div>
+  <div class="post-page">
     <div class="index-main">
       <div class="page-container">
         <div class="index-main-body">
           <div class="index-sidebar">
-            <sidebar />
           </div>
           <div class="index-content">
-            <postList />
           </div>
           <div class="index-sidebar-secondary">
-            <sidebarSecondary />
           </div>
         </div>
       </div>
@@ -62,13 +39,8 @@
 </template>
 
 <script>
-import postList from './postList.vue'
-import sidebar from './sidebar.vue'
-import sidebarSecondary from './sidebarSecondary.vue'
-
 export default {
-  name: 'index',
-  components: {postList, sidebar, sidebarSecondary},
+  name: 'postPage',
   data () {
     return {
     }

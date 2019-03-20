@@ -1,7 +1,8 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-nav-height = 80px
+nav-height = 90px
 .navigation
   height nav-height
+  background #aaa
 .naigation-body
   position fixed
   width 100%
@@ -11,7 +12,7 @@ nav-height = 80px
   background #fff
   box-shadow 0 0 2px #00000010, 0 0 10px #00000020
   z-index 10000
-  transition .2s ease-in-out
+  transition .4s ease-in-out
   .page-container
     display flex
     align-items center
@@ -42,8 +43,8 @@ nav-height = 80px
       <div class="page-container">
         <div class="page-title">剧中人的朋友圈</div>
         <div class="nav-list">
-          <a href="#">首页</a>
-          <a href="#">动态</a>
+          <a href="#/">首页</a>
+          <a href="#/post/1">动态</a>
         </div>
       </div>
     </div>
@@ -72,8 +73,7 @@ export default {
     },
     ajustNavigation () {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
-      console.log('scrollTop', scrollTop)
-      this.isScrolling = scrollTop > 40
+      this.isScrolling = scrollTop > 200
     }
   }
 }
