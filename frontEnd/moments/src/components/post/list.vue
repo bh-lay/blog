@@ -30,6 +30,7 @@
     </div>
     {{pageInfo}}
     <pagination
+      v-if="!disablePagination"
       :total="pageInfo.total"
       :size="pageInfo.size"
       :current.sync="pageInfo.current"
@@ -41,6 +42,7 @@
 import pagination from '../pagination/index.vue'
 export default {
   name: 'post-list',
+  props: ['disablePagination', 'firstPage'],
   components: {pagination},
   data () {
     return {
@@ -53,6 +55,7 @@ export default {
     }
   },
   created () {
+    this.pageInfo.current = parseInt(this.firstPage || 1, 10)
   }
 }
 </script>

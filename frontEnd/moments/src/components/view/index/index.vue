@@ -50,7 +50,10 @@
             <sidebar />
           </div>
           <div class="index-content">
-            <postList />
+            <postList
+              :disablePagination="true"
+            />
+            <a href="#/post/page/2">查看全部</a>
           </div>
           <div class="index-sidebar-secondary">
             <sidebarSecondary />

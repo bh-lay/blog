@@ -29,7 +29,9 @@
           <div class="index-sidebar">
           </div>
           <div class="index-content">
-            <postList />
+            <postList 
+              :firstPage="$route.params.page"
+            />
           </div>
           <div class="index-sidebar-secondary">
           </div>
