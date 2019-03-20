@@ -44,7 +44,7 @@ nav-height = 90px
         <div class="page-title">剧中人的朋友圈</div>
         <div class="nav-list">
           <a href="#/">首页</a>
-          <a href="#/post/1">动态</a>
+          <a href="#/post/page/1">动态</a>
         </div>
       </div>
     </div>

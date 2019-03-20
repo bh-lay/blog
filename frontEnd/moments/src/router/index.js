@@ -13,7 +13,7 @@ export default new Router({
       component: Index
     },
     {
-      path: '/post/:page',
+      path: '/post/page/:page',
       name: 'post',
       component: Post
     }
