@@ -7,9 +7,9 @@ let mongodb = require('mongodb')
 const mongoConig = require('./../conf/app_config').mongo
 const mongoConnectUrl = `mongodb://${mongoConig.host}:${mongoConig.port}/${mongoConig.dbName}`
 
-
-const getConnect = () => {
-	var MongoClient = require('mongodb').MongoClient
+// 获取数据库
+const getDB = () => {
+	let MongoClient = require('mongodb').MongoClient
 	return new Promise((resolve, reject) => {
 		MongoClient.connect(mongoConnectUrl, {
 			useNewUrlParser: true,
@@ -21,20 +21,25 @@ const getConnect = () => {
 			if (err) {
 				reject()
 			} else {
-				resolve(client)
+				let db = client.db(mongoConig.dbName)
+				resolve({
+					client,
+					db
+				})
 			}
 		})
 	})
 }
-
+// 获取数据集合
 const getCollection = (collectionName) => {
-	return getConnect()
-		.then(client => {
-			var db = client.db(mongoConig.dbName)
+	return getDB()
+		.then(({client, db}) => {
 			const collection = db.collection(collectionName)
 			
 			return {
 				collection,
+				db,
+				client,
 				closeDBConnect() {
 					client.close()
 				}
@@ -42,7 +47,7 @@ const getCollection = (collectionName) => {
 		})
 }
 module.exports = {
-	getConnect,
+	getDB,
 	getCollection,
 	ObjectID: mongodb.ObjectID
 }
