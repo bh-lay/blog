@@ -7,9 +7,9 @@ var DB = require('../core/DB.js')
 
 function getTagsList(callback) {
 	DB.getCollection('article')
-		.then(({ collection, closeDBConnect }) => {
+		.then(({ collection, client }) => {
 			collection.find().toArray(function (err, docs) {
-				closeDBConnect()
+				client.close()
 
 				var tagsObj = {}
 				var tagsArray = []
@@ -47,9 +47,9 @@ function getTagsList(callback) {
 
 function getAllBlogTagsList(callback) {
 	DB.getCollection('article')
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			collection.find().toArray(function (err, docs) {
-				closeDBConnect()
+				client.close()
 				if (err) {
 					callback && callback(err)
 					return

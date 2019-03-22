@@ -9,11 +9,11 @@ var DB = require('../core/DB.js'),
 // 从数据库读取
 function getFromDataBase(callback){
 	DB.getCollection(collection_name)
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			collection.find({
 				id : mongon_ID
 			}).toArray(function(err, docs) {
-				closeDBConnect()
+				client.close()
 				if(arguments[1].length==0){
 					// 若不存在，则从 Github 上获取
 					updateFromGithub(function(err,data){
@@ -30,7 +30,7 @@ function getFromDataBase(callback){
 // 保存到数据库
 function saveDataToDataBase(data){
 	DB.getCollection(collection_name)
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			collection.find({
 				id : mongon_ID
 			})
@@ -43,12 +43,12 @@ function saveDataToDataBase(data){
 						}, {
 							$set: data
 						}, function() {
-							closeDBConnect()
+							client.close()
 						})
 					}else{
 						// 不存在则插入为新数据
 						collection.insertOne(data,function(){
-							closeDBConnect()
+							client.close()
 						})
 					}
 				})

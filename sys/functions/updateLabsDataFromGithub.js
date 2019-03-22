@@ -6,9 +6,9 @@ var DB = require('../core/DB.js'),
 function get_list(callback){
 	var list = []
 	DB.getCollection('labs')
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			collection.find({}).toArray(function(err, docs) {
-				closeDBConnect()
+				client.close()
 				if(!err){
 					docs.forEach(function(item){
 						var repo = item.git_full_name
@@ -45,7 +45,7 @@ function get_info(repo_name,callback){
 // 更新实验室单条数据
 function update(id,data,callback){
 	DB.getCollection('labs')
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			collection.updateOne({
 				id: id
 			}, {
@@ -58,7 +58,7 @@ function update(id,data,callback){
 				}else {
 					callback && callback(null)
 				}
-				closeDBConnect()
+				client.close()
 			})
 		}).catch(err => {
 			callback && callback(err)

@@ -4,7 +4,7 @@ var DB = require('../core/DB')
 
 exports.update = function (callback) {
 	DB.getCollection('blog_friend')
-		.then(({ collection, closeDBConnect }) => {
+		.then(({ collection, client }) => {
 			collection.find({
 				isShow: '1'
 			}).toArray(function (err, docs) {
@@ -21,7 +21,7 @@ exports.update = function (callback) {
 					item.score = hasGithub * 4 + hasBlog * 3 + hasCover * 2 + adminScore
 					collection.save(item, function () { })
 				})
-				closeDBConnect()
+				client.close()
 
 				callback && callback()
 			})

@@ -9,11 +9,11 @@ var DB = require('../core/DB.js'),
 // 从数据库读取
 function getFromDataBase(callback){
 	DB.getCollection(collectionName)
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			collection.find({
 				id : mongon_ID
 			}).toArray(function(err, docs) {
-				closeDBConnect()
+				client.close()
 				if(arguments[1].length==0){
 				// 若不存在，则从 720yun 上获取
 					updateFromTuchong(function(err,data){
@@ -31,7 +31,7 @@ function getFromDataBase(callback){
 function saveDataToDataBase(data){
 	data.id = mongon_ID
 	DB.getCollection(collectionName)
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			// 查询用户信息
 			collection.find({
 				id : mongon_ID
@@ -45,12 +45,12 @@ function saveDataToDataBase(data){
 						}, {
 							$set: data
 						}, function() {
-							closeDBConnect()
+							client.close()
 						})
 					}else{
 						// 不存在则插入为新数据
 						collection.insertOne(data,function(){
-							closeDBConnect()
+							client.close()
 						})
 					}
 				})

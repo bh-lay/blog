@@ -11,9 +11,9 @@ function strToEmoji(str) {
 
 function getUserInfo(id, callback) {
 	DB.getCollection('user')
-		.then(({ collection, closeDBConnect }) => {
+		.then(({ collection, client }) => {
 			collection.find({ 'id': id }).toArray(function (err, docs) {
-				closeDBConnect()
+				client.close()
 				if (err || docs.length == 0) {
 					callback && callback(err)
 					return
@@ -96,12 +96,12 @@ function handleData(docs, callback) {
 // 获取最近评论
 function getCommentList(callback) {
 	DB.getCollection('comments')
-		.then(({ collection, closeDBConnect }) => {
+		.then(({ collection, client }) => {
 			collection.countDocuments(function (err, count) {
 				collection.find({}, {
 					limit: 8
 				}).sort({ time: -1 }).toArray(function (err, docs) {
-					closeDBConnect()
+					client.close()
 
 					handleData(docs, function (list) {
 						callback && callback(err, list, count)
