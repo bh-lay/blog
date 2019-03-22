@@ -1,6 +1,5 @@
 
 var DB = require('../../../core/DB.js')
-var utils = require('../../../core/utils/index.js')
 
 function getUserInfo(id,callback){
 	DB.getCollection('user')
@@ -21,7 +20,7 @@ function getUserInfo(id,callback){
 // 增加一条评论
 module.exports = function(data,callback){
 	var item = {
-		content : utils.encodeHtml(data.content),
+		content : data.content,
 		time : new Date().getTime(),
 		cid : data.cid,
 		reply_for_id : data.reply_for_id

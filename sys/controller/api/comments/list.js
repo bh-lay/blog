@@ -1,6 +1,6 @@
 
 var DB = require('../../../core/DB.js')
-
+let showdown  = require('showdown')
 
 function getUserInfo(id,callback){
 	DB.getCollection('user')
@@ -52,12 +52,14 @@ function handleData(docs,callback){
 	var overLength = 0
 	
 	// 获取所有需要的用户id
-	docs.forEach(function(item){
+	docs.forEach(item => {
 		var uid = item.uid
 		if(uid && !users[uid]){
 			users[uid] = {}
 			uidsLength++
 		}
+		var markdownConverter = new showdown.Converter()
+		item.content = markdownConverter.makeHtml(item.content)
 	})
 	if(uidsLength == 0){
 		endFn()
