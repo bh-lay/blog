@@ -17,7 +17,7 @@ module.exports = ID => {
 			return
 		}
 		DB.getCollection('article')
-			.then(({collection, closeDBConnect}) => {
+			.then(({collection, client}) => {
 				if (isNaN(parseInt(ID))) {
 					reject(new Error('id 不合法'))
 					return
@@ -30,7 +30,7 @@ module.exports = ID => {
 					}else {
 						resolve()
 					}
-					closeDBConnect()
+					client.close()
 				})
 			}).catch(err => {
 				reject(new Error(''))

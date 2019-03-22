@@ -3,9 +3,9 @@ var DB = require('../../../core/DB.js')
 
 function getUserInfo(id,callback){
 	DB.getCollection('user')
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			collection.find({'id' : id}).toArray(function(err, docs) {
-				closeDBConnect()
+				client.close()
 				if(err || docs.length == 0){
 					callback && callback(err)
 					return
@@ -37,7 +37,7 @@ module.exports = function(data,callback){
 	}
 	
 	DB.getCollection('comments')
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			collection.insertOne(item,function(err){
 				if(err) {
 					callback && callback(err)
@@ -55,7 +55,7 @@ module.exports = function(data,callback){
 					}
 				
 				}
-				closeDBConnect()
+				client.close()
 			})
 		}).catch(err => {
 			callback && callback(err)

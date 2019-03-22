@@ -4,11 +4,11 @@ let showdown  = require('showdown')
 
 function getUserInfo(id,callback){
 	DB.getCollection('user')
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			collection.find({
 				id: id
 			}).toArray(function(err, docs) {
-				closeDBConnect()
+				client.close()
 				if(err || docs.length == 0){
 					callback && callback(err)
 					return
@@ -86,7 +86,7 @@ module.exports = function(connect,data,callback){
 	let skip_num = parseInt(data['skip']) || 0
 
 	DB.getCollection('comments')
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			var queryObj = {}
 			if(data['cid'] && data['cid'].length > 1){
 				queryObj.cid = data['cid']
@@ -102,7 +102,7 @@ module.exports = function(connect,data,callback){
 				}
 				// count the all list
 				collection.countDocuments(queryObj,function(err,count){
-					closeDBConnect()
+					client.close()
 					if(err){
 						callback&&callback(err)
 					}else{

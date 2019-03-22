@@ -10,11 +10,11 @@ let showdown  = require('showdown')
 
 function getDetail(id, callback) {
 	DB.getCollection('article')
-		.then(({ collection, closeDBConnect }) => {
+		.then(({ collection, client }) => {
 			collection.find({
 				'id': id
 			}).toArray(function (err, docs) {
-				closeDBConnect()
+				client.close()
 				if (arguments[1].length == 0) {
 					callback && callback('哇塞，貌似这篇博文不存在哦!')
 				} else {
@@ -41,14 +41,14 @@ function getList(app, param, callback) {
 		findKeys.tags = param.tag
 	}
 	DB.getCollection('article')
-		.then(({ collection, closeDBConnect }) => {
+		.then(({ collection, client }) => {
 			collection.countDocuments(findKeys, function (err, count) {
 				collection.find(findKeys, {
 					limit: limit
 				}).sort({
 					id: -1
 				}).skip(skip).toArray(function (err, docs) {
-					closeDBConnect()
+					client.close()
 					for (var i in docs) {
 						docs[i].time_show = utils.parse.time(docs[i].time_show, '{y}年-{m}月-{d}日')
 						docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? app.config.frontEnd.img_domain + docs[i].cover : docs[i].cover

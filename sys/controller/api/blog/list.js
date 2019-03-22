@@ -15,7 +15,7 @@ module.exports = function get_list(data, callback) {
 		findKeys.tags = data.tag
 	}
 	DB.getCollection('article')
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			// count the all list
 			let resJSON = {
 				code: 1,
@@ -29,7 +29,7 @@ module.exports = function get_list(data, callback) {
 				}).sort({
 					time_show: -1
 				}).skip(skip_num).toArray(function(err, docs) {
-					closeDBConnect()
+					client.close()
 					if(err){
 						resJSON.code = 2
 					}else{

@@ -13,7 +13,7 @@ module.exports = (id, params) => {
 			reject(new Error('请输入完整数据！'))
 		}
 		DB.getCollection(collectionName)
-			.then(({collection, closeDBConnect}) => {
+			.then(({collection, client}) => {
 				collection.updateOne({
 					id
 				}, {
@@ -24,7 +24,7 @@ module.exports = (id, params) => {
 					}else {
 						resolve()
 					}
-					closeDBConnect()
+					client.close()
 				})
 			}).catch(err => {
 				reject(new Error('操作失败'))

@@ -63,7 +63,7 @@ exports.github = function (connect,app){
 				return
 			}
 			DB.getCollection('user')
-				.then(({collection, closeDBConnect}) => {
+				.then(({collection, client}) => {
 					collection.find({'github_id':data.id}).toArray(function(err, docs) {
 						if(docs.length == 0){
 							// 新用户
@@ -95,7 +95,7 @@ exports.github = function (connect,app){
 										'msg':'创建用户成功，且登陆成功！！',
 										'user' : usrInfo
 									})
-									closeDBConnect()
+									client.close()
 								})
 								
 							})
@@ -114,7 +114,7 @@ exports.github = function (connect,app){
 									'msg' : '登陆成功！',
 									'user' : docs[0]
 								})
-								closeDBConnect()
+								client.close()
 							})
 						}
 					})

@@ -14,11 +14,11 @@ module.exports = function (articleID, format, callback) {
 		format : format
 	}
 	DB.getCollection('article')
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			collection.find({
 				id:articleID
 			}).toArray(function(err, docs) {
-				closeDBConnect()
+				client.close()
 				if(arguments[1].length==0){
 					resJSON['code'] = 2
 					resJSON['msg'] = 'could not find this blog !'

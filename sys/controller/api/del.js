@@ -57,14 +57,14 @@ function DELET(param,session_this,callback){
 		
 	if(session_this.power(need_power)){
 		DB.getCollection(collection_name)
-			.then(({collection, closeDBConnect}) => {
+			.then(({collection, client}) => {
 				collection.remove({id:id},function(err){
 					if(err) {  
 						callback && callback('系统出错')
 					}else {
 						callback && callback(null)
 					}
-					closeDBConnect()
+					client.close()
 				})
 			}).catch(err => {
 				callback && callback(err)

@@ -5,7 +5,7 @@ var collection_name = 'blog_friend'
 
 function add(parm,callback){
 	DB.getCollection(collection_name)
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			parm.id = utils.createID()
 
 			collection.insertOne(parm, function(err){
@@ -15,7 +15,7 @@ function add(parm,callback){
 				}
 				callback && callback(null)
 
-				closeDBConnect()
+				client.close()
 			})
 		}).catch(err => {
 			callback && callback(err)
@@ -23,7 +23,7 @@ function add(parm,callback){
 }
 function edit(parm,callback){
 	DB.getCollection(collection_name)
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			collection.updateOne({
 				id: parm.id
 			}, {
@@ -34,7 +34,7 @@ function edit(parm,callback){
 				}else {
 					callback && callback(null)
 				}
-				closeDBConnect()
+				client.close()
 			})
 		}).catch(err => {
 			callback && callback(err)

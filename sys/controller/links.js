@@ -4,13 +4,13 @@ var DB = require('../core/DB')
 
 function getList(callback){
 	DB.getCollection('blog_friend')
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			collection.find({
 				isShow: '1'
 			}).sort({
 				score: -1
 			}).toArray(function(err, docs) {
-				closeDBConnect()
+				client.close()
 				if(err){
 					callback && callback(err)
 					return

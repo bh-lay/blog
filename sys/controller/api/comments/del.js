@@ -18,7 +18,7 @@ module.exports = function (ID,callback){
 		return
 	}
 	DB.getCollection('comments')
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			if (isNaN(parseInt(ID))) {
 				callback && callback('id 不合法')
 				return
@@ -31,7 +31,7 @@ module.exports = function (ID,callback){
 				}else {
 					callback && callback(null)
 				}
-				closeDBConnect()
+				client.close()
 			})
 		}).catch(err => {
 			callback && callback(err)

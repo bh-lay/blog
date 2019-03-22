@@ -8,12 +8,12 @@ let showdown  = require('showdown')
 
 function list_page(app, callback) {
 	DB.getCollection('labs')
-		.then(({ collection, closeDBConnect }) => {
+		.then(({ collection, client }) => {
 			collection.find({}, { limit: 15 }).sort({ id: -1 }).toArray(function (err, docs) {
 				for (var i in docs) {
 					docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? app.config.frontEnd.img_domain + docs[i].cover : docs[i].cover
 				}
-				closeDBConnect()
+				client.close()
 				callback && callback(null, docs)
 			})
 		}).catch(err => {
@@ -24,9 +24,9 @@ function list_page(app, callback) {
 function get_detail(lab_name, callback) {
 	// get template
 	DB.getCollection('labs')
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			collection.find({ 'name': lab_name }).toArray(function (err, docs) {
-				closeDBConnect()
+				client.close()
 				var converter = new showdown.Converter()
 				if (arguments[1].length == 0) {
 					callback && callback('notFound')

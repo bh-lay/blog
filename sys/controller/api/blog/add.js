@@ -15,13 +15,13 @@ module.exports = params => {
 			reject(new Error('请输入完整数据！'))
 		}
 		DB.getCollection(collectionName)
-			.then(({collection, closeDBConnect}) => {
+			.then(({collection, client}) => {
 				data.id = utils.createID()
 				collection.insertOne(data, function(err){
 					if(err){
 						reject(new Error('操作失败'))
 					} else {
-						closeDBConnect()
+						client.close()
 						resolve()
 					}
 				})

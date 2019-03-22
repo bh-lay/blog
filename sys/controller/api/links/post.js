@@ -6,7 +6,7 @@ var collection_name = 'blog_friend'
 
 function insert(parm,callback){
 	DB.getCollection(collection_name)
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			parm.id = utils.createID()
 			collection.insertOne(parm,function(err){
 				if(err){
@@ -15,7 +15,7 @@ function insert(parm,callback){
 				}
 				callback && callback(null)
 				
-				closeDBConnect()
+				client.close()
 			})
 		}).catch(err => {
 			callback && callback(err)

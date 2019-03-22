@@ -12,11 +12,11 @@ function get_detail(id,callback){
 		id : id,
 	}
 	DB.getCollection('blog_friend')
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			collection.find({
 				id: id
 			}).toArray(function(err, docs) {
-				closeDBConnect()
+				client.close()
 				if(arguments[1].length==0){
 					resJSON['code'] = 2
 					resJSON['msg'] = 'could not find this blog !'				

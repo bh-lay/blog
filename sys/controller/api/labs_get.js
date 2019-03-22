@@ -15,12 +15,12 @@ function get_list(data,callback){
 	}
 	
 	DB.getCollection('labs')
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			collection.countDocuments(function(err,count){
 				resJSON['count'] = count
 			
 				collection.find({},{limit:limit_num}).sort({id:-1}).skip(skip_num).toArray(function(err, docs) {
-					closeDBConnect()
+					client.close()
 					if(err){
 						resJSON.code = 2
 					}else{
@@ -45,9 +45,9 @@ function get_detail(data,callback){
 		id : labID
 	}
 	DB.getCollection('labs')
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			collection.find({id:labID}).toArray(function(err, docs) {
-				closeDBConnect()
+				client.close()
 				if(arguments[1].length==0){
 					resJSON['code'] = 2
 					resJSON['msg'] = 'could not find this lab ' + labID + ' !' 

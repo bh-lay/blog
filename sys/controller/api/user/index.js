@@ -17,7 +17,7 @@ var utils = require('../../../core/utils/index.js')
 function add(parm,callback){
 	parm = parm || {}
 	DB.getCollection('user')
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			parm.id = utils.createID()
 
 			collection.insertOne(parm,function(err){
@@ -26,7 +26,7 @@ function add(parm,callback){
 				}else {
 					callback && callback(null)
 				}
-				closeDBConnect()
+				client.close()
 			})
 		}).catch(err => {
 			callback && callback(err)
@@ -35,7 +35,7 @@ function add(parm,callback){
 // 修改用户记录
 function edit(parm,callback){
 	DB.getCollection('user')
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			collection.updateOne({
 				id : parm.id
 			}, {
@@ -46,7 +46,7 @@ function edit(parm,callback){
 				}else {
 					callback && callback(null)
 				}
-				closeDBConnect()
+				client.close()
 			})
 		}).catch(err => {
 			callback && callback(err)
@@ -67,7 +67,7 @@ function get_list(data,callback){
 		'skip':skip_num,
 	}
 	DB.getCollection('user')
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			collection.countDocuments(function(err,count){
 				resJSON['count'] = count
 				
@@ -76,7 +76,7 @@ function get_list(data,callback){
 				}).sort({
 					id: -1
 				}).skip(skip_num).toArray(function(err, docs) {
-					closeDBConnect()
+					client.close()
 					if(err){
 						resJSON.code = 2
 					}else{
@@ -95,9 +95,9 @@ function get_list(data,callback){
 
 function get_power(user_group,callback){
 	DB.getCollection('user_group')
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			collection.find({'user_group':user_group}).toArray(function(err, docs) {
-				closeDBConnect()
+				client.close()
 				var power_data = docs[0]['power']
 				callback&&callback(power_data)
 			})
@@ -109,7 +109,7 @@ function get_power(user_group,callback){
 function login_handle(connect,session_this,username,password){
 	// matche user
 	DB.getCollection('user')
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 
 			collection.find({
 				email: username,
@@ -119,7 +119,7 @@ function login_handle(connect,session_this,username,password){
 					var user = docs[0]
 					var user_group = user['user_group']
 					get_power(user_group,function(power_data){
-						closeDBConnect()
+						client.close()
 						var userid = user['id']
 						session_this.set({
 							user_group : user_group,
@@ -336,11 +336,11 @@ exports.list = function(connect){
  */
 function getUserDetail(userID, callback){
 	DB.getCollection('user')
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			collection.find({
 				id: userID
 			}).toArray(function(err, docs) {
-				closeDBConnect()
+				client.close()
 				if(err || docs.length == 0){
 					callback && callback(err || 'error')
 					return

@@ -15,7 +15,7 @@ function get_list(data, callback){
 		skip: skip_num,
 	}
 	DB.getCollection('blog_friend')
-		.then(({collection, closeDBConnect}) => {
+		.then(({collection, client}) => {
 			collection.countDocuments(function(err,count){
 				resJSON['count'] = count
 			
@@ -26,7 +26,7 @@ function get_list(data, callback){
 				}).sort({
 					score: -1
 				}).skip(skip_num).toArray(function(err, docs) {
-					closeDBConnect()
+					client.close()
 					if(err){
 						resJSON.code = 2
 					}else{
