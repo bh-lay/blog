@@ -46,8 +46,42 @@ const getCollection = (collectionName) => {
 			}
 		})
 }
+// 获取分页数据
+const getDocsForPagination = (collection, {
+	params = {},
+	limit = 10,
+	skip = 0,
+	sort = {}
+}) => {
+	return new Promise((resolve, reject) => {
+		collection.find(params, {
+			limit
+		})
+		.sort(sort)
+		.skip(skip)
+		.toArray((err, docs) => {
+			if(err){
+				reject(err)
+				return
+			}
+			// count the all list
+			collection.countDocuments(params, (err,count) => {
+				if(err){
+					reject(err)
+					return
+				}
+				resolve({
+					count,
+					docs
+				})
+			})
+		})
+	})
+}
+
 module.exports = {
 	getDB,
 	getCollection,
+	getDocsForPagination,
 	ObjectID: mongodb.ObjectID
 }
