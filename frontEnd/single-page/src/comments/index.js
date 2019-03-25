@@ -464,7 +464,7 @@ List.prototype.getData = function (skip, onResponse) {
         me.total = DATA.count;
         me.list = DATA.list;
         me.list.forEach(function (item) {
-          item.time = utils.parseTime(item.time, '{h}:{ii} {y}-{m}-{d}');
+          item.time = utils.parseTime(item.time, '{y}-{m}-{d} {h}:{ii} ');
           item.content = strToEmoji(item.content);
           // 若无头像，使用默认头像
           item.user.avatar = item.user.avatar || defaultAvatar;
