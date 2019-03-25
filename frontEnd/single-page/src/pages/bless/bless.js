@@ -41,7 +41,7 @@ function page (global) {
     potoGraphaIndex = -1;
   }
   let sendBox = new SendBox(utils.query('.bless-sendBox', node), commentId);
-  let list = new List(utils.query('.grid-col-flow-300', node), commentId);
+  let list = new List(utils.query('.main-body', node), commentId);
   sendBox.on('sendToServiceSuccess', function (item) {
     list.addItem(item);
   });
