@@ -23,16 +23,20 @@
   flex-wrap: wrap;
   .main-body {
     width: 400px;
-    flex-grow: 1;
+    flex: 1;
+    flex-basis: auto;
+    overflow: auto;
+    box-sizing: border-box;
     padding: 20px 20px 80px;
   }
   .bless-sidebar {
+    position: relative;
     width: 320px;
   }
   .sidebar-body {
+    height: 100%;
     margin-right: -300px;
-    margin-bottom: -2000px;
-    padding: 20px 320px 2020px 20px;
+    padding: 20px 320px 20px 20px;
     background: #ddd;
   }
 }
@@ -44,11 +48,9 @@
 @media screen and (max-width: 950px) {
   .blessPage .bless-sidebar {
     width: 100%;
-    border-top: 1px solid #e3e3e3;
     .sidebar-body{
-      margin: 0;
-      padding: 20px;
-      background: transparent;
+      margin-left: -800px;
+      padding-left: 820px;
     }
   }
 }
