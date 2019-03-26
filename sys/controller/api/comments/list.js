@@ -1,7 +1,15 @@
 
 var DB = require('../../../core/DB.js')
 let showdown  = require('showdown')
-
+const encodeHtml = s =>{
+	/* eslint-disable no-control-regex */
+	return (typeof s != 'string') ? s : s.replace(/<|>/g,function($0){
+		var c = $0.charCodeAt(0), r = ['&#']
+		c = (c == 0x20) ? 0xA0 : c
+		r.push(c); r.push(';')
+		return r.join('')
+	})
+}
 /**
  * 处理评论数据
  *  增加用户信息
@@ -18,8 +26,9 @@ const makeUpUserInfo = (db, docs) => {
 			userIDList.push(item.uid)
 		}
 		// 内容由 markdown 转为 html
-		var markdownConverter = new showdown.Converter()
-		item.content = markdownConverter.makeHtml(item.content)
+		let markdownConverter = new showdown.Converter()
+		let content = encodeHtml(item.content)
+		item.content = markdownConverter.makeHtml(content)
 	})
 	// 挨个构建获取用户信息对象
 	let userCollection = db.collection('user')
