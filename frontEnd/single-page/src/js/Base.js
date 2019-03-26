@@ -347,7 +347,7 @@ function paramStringify (data, baseKey) {
       if (typeof value === 'object') {
         dataArray.push(paramStringify(data[i], key));
       } else {
-        dataArray.push(key + '=' + data[i]);
+        dataArray.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[i]));
       }
     }
   }
