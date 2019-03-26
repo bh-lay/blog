@@ -1,5 +1,15 @@
 
 var DB = require('../../../core/DB.js')
+let showdown  = require('showdown')
+const encodeHtml = s =>{
+	/* eslint-disable no-control-regex */
+	return (typeof s != 'string') ? s : s.replace(/<|>/g,function($0){
+		var c = $0.charCodeAt(0), r = ['&#']
+		c = (c == 0x20) ? 0xA0 : c
+		r.push(c); r.push(';')
+		return r.join('')
+	})
+}
 
 function getUserInfo(id,callback){
 	DB.getCollection('user')
@@ -42,6 +52,11 @@ module.exports = function(data,callback){
 				if(err) {
 					callback && callback(err)
 				} else {
+
+					// 内容由 markdown 转为 html
+					let markdownConverter = new showdown.Converter()
+					let content = encodeHtml(item.content)
+					item.content = markdownConverter.makeHtml(content)
 					if(data.uid){
 						// 获取用户信息
 						getUserInfo(data.uid,function(err,userInfo){
