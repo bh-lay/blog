@@ -75,12 +75,15 @@ module.exports = function(connect,data,callback){
 
 	DB.getDB().then(({client, db}) => {
 		const collection = db.collection('comments')
-		
+		let params = {}
+		if(data.cid && data.cid.length > 1){
+			params.cid = data.cid
+		}
+		console.log('limit_num', limit_num)
+		console.log('skip_num', skip_num)
 		// 按照分页获取数据
 		return DB.getDocsForPagination(collection, {
-			params: {
-				cid: data['cid']
-			},
+			params,
 			limit: limit_num,
 			skip: skip_num,
 			sort: {
