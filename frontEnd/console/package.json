@@ -11,7 +11,8 @@
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "buildInProduction": "node --max_old_space_size=516 build/build.js"
   },
   "dependencies": {
     "dateformat": "^3.0.2",
