@@ -78,7 +78,7 @@ export default {
     },
     delete (id) {
       let queryStr = querystring.stringify({
-        from: 'blog_friend',
+        from: 'friends',
         id: id
       })
       return fetch('/ajax/del?' + queryStr, {

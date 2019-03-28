@@ -11,7 +11,7 @@ function get_detail(id,callback){
 		code: 200,
 		id : id,
 	}
-	DB.getCollection('blog_friend')
+	DB.getCollection('friends')
 		.then(({collection, client}) => {
 			collection.find({
 				id: id

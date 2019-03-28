@@ -2,7 +2,7 @@
 var DB = require('../../../core/DB.js')
 var utils = require('../../../core/utils/index.js')
 
-var collection_name = 'blog_friend'
+var collection_name = 'friends'
 
 function insert(parm,callback){
 	DB.getCollection(collection_name)

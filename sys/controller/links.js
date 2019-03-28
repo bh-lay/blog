@@ -3,7 +3,7 @@ var utils = require('../core/utils/index.js')
 var DB = require('../core/DB')
 
 function getList(callback){
-	DB.getCollection('blog_friend')
+	DB.getCollection('friends')
 		.then(({collection, client}) => {
 			collection.find({
 				isShow: '1'

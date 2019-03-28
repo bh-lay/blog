@@ -14,7 +14,7 @@ function get_list(data, callback){
 		limit: limit_num,
 		skip: skip_num,
 	}
-	DB.getCollection('blog_friend')
+	DB.getCollection('friends')
 		.then(({collection, client}) => {
 			collection.countDocuments(function(err,count){
 				resJSON['count'] = count
