@@ -1,6 +1,9 @@
 
 var DB = require('../../../core/DB.js')
 let showdown  = require('showdown')
+// 评论最大字数
+const maxCommentsTextLangth = 1000
+
 const encodeHtml = s =>{
 	/* eslint-disable no-control-regex */
 	return (typeof s != 'string') ? s : s.replace(/<|>/g,function($0){
@@ -30,7 +33,7 @@ function getUserInfo(id,callback){
 // 增加一条评论
 module.exports = function(data,callback){
 	var item = {
-		content : data.content,
+		content : data.content.slice(0, maxCommentsTextLangth),
 		time : new Date().getTime(),
 		cid : data.cid,
 		reply_for_id : data.reply_for_id
