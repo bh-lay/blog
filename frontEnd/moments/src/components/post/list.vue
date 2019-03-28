@@ -63,7 +63,7 @@ export default {
 		getData () {
 			let skip = (this.pageInfo.current - 1) * this.pageInfo.size
 			let limit = this.pageInfo.size
-			fetch(`/api/comments/?skip=${skip}&limit=${limit}`, {
+			fetch(`/api/moment/post/?skip=${skip}&limit=${limit}`, {
 				method: 'GET'
 			})
 				.then(response => response.json())

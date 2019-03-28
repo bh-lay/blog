@@ -80,7 +80,7 @@ function getBlogDtail (id) {
   let queryStr = querystring.stringify({
     format: 'markdown'
   })
-  return fetch(`/api/moment/${id}?` + queryStr, {
+  return fetch(`/api/moment/post/${id}?` + queryStr, {
     method: 'GET',
     credentials: 'same-origin'
   })
@@ -161,10 +161,10 @@ export default {
       let url
       let method
       if (this.mode === 'edit') {
-        url = '/api/moment/' + this.id
+        url = '/api/moment/post/' + this.id
         method = 'PUT'
       } else {
-        url = '/api/moment/0'
+        url = '/api/moment/post/0'
         method = 'POST'
       }
       return fetch(url, {

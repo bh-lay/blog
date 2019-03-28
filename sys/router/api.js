@@ -49,11 +49,11 @@ module.exports = [
 	},
 	// 剧中人的朋友圈
 	{
-		path: 'get /api/moment',
+		path: 'get /api/moment/post/',
 		controller: moment.list
 	},
 	{
-		path: 'rest /api/moment/:id',
+		path: 'rest /api/moment/post/:id',
 		controller: moment
 	},
 	// 实验室

@@ -65,7 +65,7 @@ export default {
         skip: (this.currentPage - 1) * this.pageSize,
         limit: this.pageSize
       })
-      fetch('/api/moment?' + queryStr, {
+      fetch('/api/moment/post/?' + queryStr, {
         method: 'GET',
         credentials: 'same-origin'
       })
@@ -82,7 +82,7 @@ export default {
       return dateFormat(parseInt(dateStamp), 'yyyy-mm-dd HH:MM:ss')
     },
     delete (id) {
-      return fetch('/api/moment/' + id, {
+      return fetch('/api/moment/post/' + id, {
         method: 'DELETE',
         credentials: 'same-origin'
       })
