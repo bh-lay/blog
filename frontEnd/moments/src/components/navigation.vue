@@ -1,12 +1,12 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-nav-height = 90px
+@import "~@/assets/stylus/variable.styl"
 .navigation
-	height nav-height
+	height $navigation-height
 	background #aaa
 .naigation-body
 	position fixed
 	width 100%
-	height nav-height
+	height $navigation-height
 	top 0
 	left 0
 	background #fff
