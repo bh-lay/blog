@@ -97,15 +97,13 @@ function handleData(docs, callback) {
 function getCommentList(callback) {
 	DB.getCollection('comments')
 		.then(({ collection, client }) => {
-			collection.countDocuments(function (err, count) {
-				collection.find({}, {
-					limit: 8
-				}).sort({ time: -1 }).toArray(function (err, docs) {
-					client.close()
+			collection.find({}, {
+				limit: 8
+			}).sort({ time: -1 }).toArray(function (err, docs) {
+				client.close()
 
-					handleData(docs, function (list) {
-						callback && callback(err, list, count)
-					})
+				handleData(docs, function (list) {
+					callback && callback(err, list)
 				})
 			})
 		}).catch(err => {
