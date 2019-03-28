@@ -1,7 +1,11 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
+@import "~@/assets/stylus/variable.styl"
+$banner-height = 500px
 .banner
-	height 400px
-	background #2e3438
+	height $banner-height
+	.banner-item
+		padding-top $navigation-height
+		height $banner-height
 .some-tools
 	padding 30px 0
 	background #f0f1f5
@@ -34,8 +38,17 @@
 <template>
 	<div class="index-page">
 		<div class="banner">
-			<div class="page-container">
-				23456
+			<div
+				class="banner-item"
+				v-for="(banner, index) in bannerList"
+				:key="index"
+				:style="{
+					backgroundColor: banner.background
+				}"
+			>
+				<div class="page-container">
+					23456
+				</div>
 			</div>
 		</div>
 		<div class="some-tools">
@@ -74,6 +87,12 @@ export default {
 	components: {postList, sidebar, sidebarSecondary},
 	data () {
 		return {
+			bannerList: [
+				{
+					background: '#333',
+					imgUrl: ''
+				}
+			]
 		}
 	},
 	created () {

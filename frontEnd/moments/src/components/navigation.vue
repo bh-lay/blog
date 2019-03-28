@@ -1,9 +1,6 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 @import "~@/assets/stylus/variable.styl"
 .navigation
-	height $navigation-height
-	background #aaa
-.naigation-body
 	position fixed
 	width 100%
 	height $navigation-height
@@ -23,7 +20,7 @@
 .page-title
 	margin-right 50px
 	font-size 24px
-	color #aaa
+	color #eee
 .nav-list
 	a
 		display inline-block
@@ -33,19 +30,15 @@
 <template>
 	<div
 		class="navigation"
+		:class="{
+			mini: isScrolling
+		}"
 	>
-		<div
-			class="naigation-body"
-			:class="{
-				mini: isScrolling
-			}"
-		>
-			<div class="page-container">
-				<div class="page-title">剧中人的朋友圈</div>
-				<div class="nav-list">
-					<a href="#/">首页</a>
-					<a href="#/post/page/1">动态</a>
-				</div>
+		<div class="page-container">
+			<div class="page-title">剧中人的朋友圈</div>
+			<div class="nav-list">
+				<a href="#/">首页</a>
+				<a href="#/post/page/1">动态</a>
 			</div>
 		</div>
 	</div>
