@@ -108,13 +108,13 @@ export default {
       inputVisible: false,
       inputValue: '',
       form: {
+        userid: '',
         title: '',
-        intro: '',
-        content: '',
         cover: '',
+        content: '',
+        originalUrl: '',
         tags: [],
-        author: '剧中人',
-        time: new Date()
+        createTime: new Date()
       },
 
       userSelectorVisible: false
@@ -131,7 +131,7 @@ export default {
         this.form.content = detail.content
         this.form.originalUrl = detail.originalUrl
         this.form.tags = detail.tags.length ? detail.tags.split(',') : []
-        this.form.createTime = detail.createTime
+        this.form.createTime = new Date(parseInt(detail.createTime, 10))
       })
     }
   },
@@ -156,8 +156,7 @@ export default {
       this.inputValue = ''
     },
     handleUserSelected (id) {
-      console.log('id', id)
-      this.userSelectorVisible = false;
+      this.userSelectorVisible = false
       this.form.userid = id
     },
     onSubmit () {
@@ -169,7 +168,7 @@ export default {
         content: this.$refs.markdownEditor.getContent(),
         originalUrl: this.form.originalUrl,
         tags: this.form.tags.join(','),
-        createTime: this.form.time.getTime()
+        createTime: this.form.createTime.getTime()
       }
       if (!data.title || !data.content) {
         this.$alert('二货，咱写点儿干货行不行呐！')
