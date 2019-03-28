@@ -39,15 +39,12 @@ const getCollection = (collectionName) => {
 			return {
 				collection,
 				db,
-				client,
-				closeDBConnect() {
-					client.close()
-				}
+				client
 			}
 		})
 }
-// 获取分页数据
-const getDocsForPagination = (collection, {
+// 使用数据集合获取分页数据
+const getPaginationByCollection = (collection, {
 	params = {},
 	limit = 10,
 	skip = 0,
@@ -55,10 +52,10 @@ const getDocsForPagination = (collection, {
 }) => {
 	return new Promise((resolve, reject) => {
 		collection.find(params, {
-			limit
+			limit,
+			skip,
+			sort
 		})
-		.sort(sort)
-		.skip(skip)
 		.toArray((err, docs) => {
 			if(err){
 				reject(err)
@@ -79,6 +76,26 @@ const getDocsForPagination = (collection, {
 	})
 }
 
+/**
+ * 获取分页数据
+ * 
+ * @param {Object, String} collectionNameOrCollection 数据集合或数据集合名
+ * @param {*} params 查询参数
+ */
+const getDocsForPagination = (collectionNameOrCollection, params) => {
+	if (typeof collectionNameOrCollection === 'string') {
+		return getCollection(collectionNameOrCollection)
+			.then(({collection, client}) => {
+				return getPaginationByCollection(collection, params)
+					.then(result => {
+						client.close()
+						return result
+					})
+			})
+	} else {
+		return getPaginationByCollection(collectionNameOrCollection, params)
+	}
+}
 module.exports = {
 	getDB,
 	getCollection,
