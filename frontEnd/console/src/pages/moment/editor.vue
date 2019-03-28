@@ -20,7 +20,8 @@
   <el-card class="box-card">
     <el-form ref="form" :model="form" label-width="100px">
       <el-form-item label="谁发布的？">
-        <el-input v-model="form.userid"></el-input>
+        {{form.userid}}
+        <el-button type="text" @click="userSelectorVisible = true">选择发布者</el-button>
       </el-form-item>
       <el-form-item label="文章标题">
         <el-input v-model="form.title"></el-input>
@@ -69,10 +70,17 @@
         <el-button @click="onCancel">取消</el-button>
       </el-form-item>
     </el-form>
+    <el-dialog title="谁发布的？" width="1200px" :visible.sync="userSelectorVisible">
+        <userSelector
+          :userid="form.userid"
+          @selected="handleUserSelected"
+        />
+    </el-dialog>
   </el-card>
 </template>Î
 
 <script>
+import userSelector from './user-selector.vue'
 import markdown from '../../components/markdown'
 import querystring from 'querystring'
 
@@ -88,7 +96,8 @@ function getBlogDtail (id) {
 }
 export default {
   components: {
-    markdown
+    markdown,
+    userSelector
   },
   data () {
     return {
@@ -106,7 +115,9 @@ export default {
         tags: [],
         author: '剧中人',
         time: new Date()
-      }
+      },
+
+      userSelectorVisible: false
     }
   },
   created () {
@@ -143,6 +154,11 @@ export default {
       }
       this.inputVisible = false
       this.inputValue = ''
+    },
+    handleUserSelected (id) {
+      console.log('id', id)
+      this.userSelectorVisible = false;
+      this.form.userid = id
     },
     onSubmit () {
       let data = {
