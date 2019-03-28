@@ -15,7 +15,6 @@ let snsLogin = require('../controller/snsLogin.js')
  *
  */
 var user = require('../controller/api/user/index')
-let del = require('../controller/api/del')
 let demo = require('../controller/api/demo/index')
 let tag =  require('../controller/api/tag/index.js')
 let functions =  require('../controller/api/functions.js')
@@ -83,13 +82,6 @@ module.exports = [
 	{
 		path: 'all /ajax/demo/upload',
 		controller: demo.upload
-	},
-	// 公用删除接口
-	{
-		path: 'all /ajax/del',
-		controller(route, connect, app) {
-			del.render(connect,app)
-		}
 	},
 	// 标签模块
 	{
