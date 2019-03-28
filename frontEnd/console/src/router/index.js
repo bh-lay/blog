@@ -2,11 +2,14 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Panel from '@/pages/panel/index'
 import Article from '@/pages/content/article'
+import Moment from '@/pages/content/moment'
 import Labs from '@/pages/content/labs'
 import Links from '@/pages/content/links'
 import Comments from '@/pages/content/comments'
 
 import ArticleEditor from '@/pages/editor/article'
+import MomentEditor from '@/pages/editor/moment'
+
 import LabsEditor from '@/pages/editor/labs'
 
 import Gallery from '@/pages/gallery/index'
@@ -25,6 +28,11 @@ let routes = [{
   path: '/content-article',
   name: '博文页面',
   component: Article
+},
+{
+  path: '/content/moment',
+  name: '剧中人的朋友圈列表页面',
+  component: Moment
 },
 {
   path: '/gallery',
@@ -55,6 +63,11 @@ let routes = [{
   path: '/editor/labs/:id',
   name: '实验室发布',
   component: LabsEditor
+},
+{
+  path: '/editor/moment/:id',
+  name: '剧中人的朋友圈发布',
+  component: MomentEditor
 }
 
 ]

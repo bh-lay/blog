@@ -16,6 +16,9 @@
           <small>增加博客内容</small>
         </h3>
         <div class="list-group">
+          <router-link to="/editor/moment/new">
+            <el-button>发剧中人的朋友圈</el-button>
+          </router-link>
           <router-link to="/editor-article/new">
             <el-button>写博文</el-button>
           </router-link>

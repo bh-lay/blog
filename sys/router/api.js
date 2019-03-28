@@ -49,7 +49,7 @@ module.exports = [
 	},
 	// 剧中人的朋友圈
 	{
-		path: 'get /api/moments',
+		path: 'get /api/moment',
 		controller: moment.list
 	},
 	{
