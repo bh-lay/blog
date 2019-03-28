@@ -1,8 +1,8 @@
 /*
  * @author bh-lay
  */
-let power = require('../../../conf/power.js')
-let utils = require('../../../core/utils/index.js')
+let power = require('../../../../conf/power.js')
+let utils = require('../../../../core/utils/index.js')
 let detail = require('./detail.js')
 let list = require('./list.js')
 let addBlog = require('./add.js')

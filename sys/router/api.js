@@ -1,7 +1,9 @@
 
 let comments = require('../controller/api/comments/index.js')
 let blog = require('../controller/api/blog/index.js')
-let moment = require('../controller/api/moment/index.js')
+let momentPost = require('../controller/api/moment/post/index.js')
+let momentFriend = require('../controller/api/moment/friend/index.js')
+
 // 实验室
 let labs = require('../controller/api/labs/index.js')
 
@@ -13,7 +15,6 @@ let snsLogin = require('../controller/snsLogin.js')
  *
  */
 var user = require('../controller/api/user/index')
-let links = require('../controller/api/links/index.js')
 let del = require('../controller/api/del')
 let demo = require('../controller/api/demo/index')
 let tag =  require('../controller/api/tag/index.js')
@@ -50,11 +51,19 @@ module.exports = [
 	// 剧中人的朋友圈
 	{
 		path: 'get /api/moment/post/',
-		controller: moment.list
+		controller: momentPost.list
 	},
 	{
 		path: 'rest /api/moment/post/:id',
-		controller: moment
+		controller: momentPost
+	},
+	{
+		path: 'get /api/moment/friend/',
+		controller: momentFriend.list
+	},
+	{
+		path: 'rest /api/moment/friend/:id',
+		controller: momentFriend
 	},
 	// 实验室
 	{
@@ -64,23 +73,6 @@ module.exports = [
 	{
 		path: 'rest /api/labs/:id',
 		controller: labs
-	},
-	// 友情链接
-	{
-		path: 'all /ajax/links/list',
-		controller: links.list
-	},
-	{
-		path: 'all /ajax/links/detail/:id',
-		controller: links.detail
-	},
-	{
-		path: 'all /ajax/links/add_edit',
-		controller: links.add_edit
-	},
-	{
-		path: 'all /ajax/links/post',
-		controller: links.post
 	},
 	// 清除缓存
 	{

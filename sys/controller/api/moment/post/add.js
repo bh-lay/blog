@@ -2,7 +2,9 @@
  * @author bh-lay
  * 
  */
-let DB = require('../../../core/DB.js')
+
+let DB = require('../../../../core/DB.js')
+let utils = require('../../../../core/utils/index.js')
 let parseData = require('./parse.js')
 let collectionName = 'moment'
 
@@ -14,17 +16,14 @@ module.exports = params => {
 		}
 		DB.getCollection(collectionName)
 			.then(({collection, client}) => {
-				collection.updateOne({
-					id: params.id
-				}, {
-					$set: params
-				}, function(err) {
-					if(err) {
+				data.id = utils.createID()
+				collection.insertOne(data, function(err){
+					if(err){
 						reject(new Error('操作失败'))
-					}else {
+					} else {
+						client.close()
 						resolve()
 					}
-					client.close()
 				})
 			}).catch(err => {
 				reject(new Error('操作失败'))

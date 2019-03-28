@@ -60,7 +60,7 @@ export default {
         skip: (this.currentPage - 1) * this.pageSize,
         limit: this.pageSize
       })
-      fetch('/ajax/links/list?' + queryStr, {
+      fetch('/api/moment/friend/?' + queryStr, {
         method: 'GET',
         credentials: 'same-origin'
       })

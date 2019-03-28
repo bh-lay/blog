@@ -3,7 +3,7 @@
  * @author bh-lay
  */
 
-let DB = require('../../../core/DB.js')
+let DB = require('../../../../core/DB.js')
 
 module.exports = function get_list(data, callback) {
 	let limit_num = parseInt(data['limit']) || 10
@@ -15,7 +15,7 @@ module.exports = function get_list(data, callback) {
 		params.tags = data.tag
 	}
 	// 按照分页获取数据
-	return DB.getDocsForPagination('moment', {
+	return DB.getDocsForPagination('friends', {
 		params,
 		limit: limit_num,
 		skip: skip_num,
