@@ -6,16 +6,16 @@ import Post from '@/components/view/post.vue'
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'index',
-      component: Index
-    },
-    {
-      path: '/post/page/:page',
-      name: 'post',
-      component: Post
-    }
-  ]
+	routes: [
+		{
+			path: '/',
+			name: 'index',
+			component: Index
+		},
+		{
+			path: '/post/page/:page',
+			name: 'post',
+			component: Post
+		}
+	]
 })
