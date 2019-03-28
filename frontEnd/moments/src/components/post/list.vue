@@ -11,7 +11,8 @@
 		background #444
 	.content
 		flex-grow 1
-		height 200px
+		width 200px;
+		min-height 200px
 		background #eee
 </style>
 <template>
@@ -26,9 +27,9 @@
 			<div class="content">
 				<div class="title"></div>
 				<div class="cover"></div>
+				{{item}}
 			</div>
 		</div>
-		{{pageInfo}}
 		<pagination
 			v-if="!disablePagination"
 			:total="pageInfo.total"
@@ -46,9 +47,9 @@ export default {
 	components: {pagination},
 	data () {
 		return {
-			postList: [1, 1, 1, 1, 1],
+			postList: [],
 			pageInfo: {
-				total: 100,
+				total: 0,
 				current: 1,
 				size: 10
 			}
@@ -56,6 +57,22 @@ export default {
 	},
 	created () {
 		this.pageInfo.current = parseInt(this.firstPage || 1, 10)
+		this.getData()
+	},
+	methods: {
+		getData () {
+			let skip = (this.pageInfo.current - 1) * this.pageInfo.size
+			let limit = this.pageInfo.size
+			fetch(`/api/comments/?skip=${skip}&limit=${limit}`, {
+				method: 'GET'
+			})
+				.then(response => response.json())
+				.then(({data = {}}) => {
+					let {count, list} = data
+					this.postList = list
+					this.pageInfo.total = count
+				})
+		}
 	}
 }
 </script>

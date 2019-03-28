@@ -1,11 +1,16 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 @import "~@/assets/stylus/variable.styl"
-$banner-height = 500px
+$banner-height = 400px
 .banner
-	height $banner-height
+	height $banner-height + $navigation-height
 	.banner-item
 		padding-top $navigation-height
 		height $banner-height
+	.banner-item-body
+		height $banner-height
+		background-size cover
+		background-position center center
+		background-repeat no-repeat
 .some-tools
 	padding 30px 0
 	background #f0f1f5
@@ -43,11 +48,16 @@ $banner-height = 500px
 				v-for="(banner, index) in bannerList"
 				:key="index"
 				:style="{
-					backgroundColor: banner.background
+					backgroundColor: banner.backgroundColor
 				}"
 			>
 				<div class="page-container">
-					23456
+					<div class="banner-item-body"
+						:style="{
+							backgroundImage: `url(${banner.imgUrl})`
+						}"
+					>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -89,8 +99,8 @@ export default {
 		return {
 			bannerList: [
 				{
-					background: '#333',
-					imgUrl: ''
+					backgroundColor: '#3d271c',
+					imgUrl: 'https://news.720yun.com/home/o_1d6p9kq541lk117h9dr61uoe1sgc.jpg'
 				}
 			]
 		}
