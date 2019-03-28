@@ -3,7 +3,7 @@
 var DB = require('../core/DB')
 
 exports.update = function (callback) {
-	DB.getCollection('blog_friend')
+	DB.getCollection('friends')
 		.then(({ collection, client }) => {
 			collection.find({
 				isShow: '1'

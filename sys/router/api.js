@@ -1,6 +1,7 @@
 
 let comments = require('../controller/api/comments/index.js')
 let blog = require('../controller/api/blog/index.js')
+let moment = require('../controller/api/moment/index.js')
 // 实验室
 let labs = require('../controller/api/labs/index.js')
 
@@ -45,6 +46,15 @@ module.exports = [
 	{
 		path: 'rest /api/blog/:id',
 		controller: blog
+	},
+	// 剧中人的朋友圈
+	{
+		path: 'get /api/moments',
+		controller: moment.list
+	},
+	{
+		path: 'rest /api/moment/:id',
+		controller: moment
 	},
 	// 实验室
 	{
