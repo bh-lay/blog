@@ -1,4 +1,5 @@
 <style lang="stylus" rel="stylesheet/stylus">
+@import './assets/stylus/article.styl'
 html, body, div
 	margin 0
 	padding 0
@@ -8,12 +9,6 @@ html, body, div
 	-moz-osx-font-smoothing grayscale
 
 	position relative
-	-webkit-touch-callout none
-	-webkit-user-select none
-	-khtml-user-select none
-	-moz-user-select none
-	-ms-user-select none
-	user-select none
 .app-side
 	position absolute
 	top 20px
