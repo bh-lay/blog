@@ -1,4 +1,5 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
+@import "~@/assets/stylus/variable.styl"
 .index-main
 	background #fff
 	border 1px solid #fff
@@ -10,13 +11,13 @@
 		width 150px
 		margin-left -1000px
 		padding-left 1000px
-		padding-top 30px
+		padding-top $navigation-height + 30px
 		padding-right 30px
 		border-right 1px solid #e0e6eb
 		background #f6f7f9
 	.index-content
 		flex-grow 1
-		padding-top 30px
+		padding-top $navigation-height + 30px
 	.index-sidebar-secondary
 		width 200px
 		padding 30px 0 50px 30px
