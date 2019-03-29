@@ -4,6 +4,16 @@
  */
 
 let DB = require('../../../../core/DB.js')
+let showdown  = require('showdown')
+const encodeHtml = s =>{
+	/* eslint-disable no-control-regex */
+	return (typeof s != 'string') ? s : s.replace(/<|>/g,function($0){
+		var c = $0.charCodeAt(0), r = ['&#']
+		c = (c == 0x20) ? 0xA0 : c
+		r.push(c); r.push(';')
+		return r.join('')
+	})
+}
 /**
  * 处理评论数据
  *  增加用户信息
@@ -27,11 +37,7 @@ const makeUpUserInfo = (db, docs) => {
 			userCollection.findOne({
 				id: userid
 			}, (err, doc) => {
-				resolve((err || !doc) ? {} : {
-					avatar: doc.avatar,
-					id: doc.id,
-					username: doc.username
-				})
+				resolve((err || !doc) ? {} : doc)
 			})
 		})
 	})
@@ -60,7 +66,8 @@ module.exports = function get_list(data, callback) {
 	let limit_num = parseInt(data['limit']) || 10
 	let skip_num = parseInt(data['skip']) || 0
 	let params = {}
-
+	// 内容由 markdown 转为 html
+	let markdownConverter = new showdown.Converter()
 	// 过滤标签
 	if(data.tag){
 		params.tags = data.tag
@@ -78,6 +85,10 @@ module.exports = function get_list(data, callback) {
 			}
 		})
 			.then(({count, docs}) => {
+				docs.forEach(item => {
+					let content = encodeHtml(item.content)
+					item.content = markdownConverter.makeHtml(content)
+				})
 				makeUpUserInfo(db, docs)
 					.then(() => {
 						client.close()
