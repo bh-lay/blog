@@ -8,7 +8,9 @@ let DB = require('../../../../core/DB.js')
 module.exports = function get_list(data, callback) {
 	let limit_num = parseInt(data['limit']) || 10
 	let skip_num = parseInt(data['skip']) || 0
-	let params = {}
+	let params = {
+		isShow: '1'
+	}
 
 	// 过滤标签
 	if(data.tag){
@@ -20,7 +22,7 @@ module.exports = function get_list(data, callback) {
 		limit: limit_num,
 		skip: skip_num,
 		sort: {
-			time_show: -1
+			adminScore: -1
 		}
 	})
 		.then(({count, docs}) => {
