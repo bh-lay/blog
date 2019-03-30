@@ -10,12 +10,21 @@ export default new Router({
 		{
 			path: '/',
 			name: 'index',
-			component: Index
+			component: Index,
+			meta: {
+				keepAlive: true
+			}
 		},
 		{
 			path: '/post/page/:page',
 			name: 'post',
-			component: Post
+			component: Post,
+			meta: {
+				keepAlive: true
+			}
 		}
-	]
+	],
+	scrollBehavior (to, from, savedPosition) {
+		return { x: 0, y: 0 }
+	}
 })
