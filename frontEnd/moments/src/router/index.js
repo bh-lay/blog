@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/components/view/index/index.vue'
-import Post from '@/components/view/post.vue'
+import Post from '@/components/view/post/index.vue'
 
 Vue.use(Router)
 

@@ -32,6 +32,7 @@
 					<div class="index-content">
 						<postList
 							:firstPage="$route.params.page"
+							@page-change="handlePageChange"
 						/>
 					</div>
 					<div class="index-sidebar-secondary">
@@ -52,6 +53,11 @@ export default {
 		}
 	},
 	created () {
+	},
+	methods: {
+		handlePageChange (pageIndex) {
+			this.$router.replace('/post/page/' + pageIndex)
+		}
 	}
 }
 </script>
