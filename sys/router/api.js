@@ -6,10 +6,6 @@ let momentFriend = require('../controller/api/moment/friend/index.js')
 
 // 实验室
 let labs = require('../controller/api/labs/index.js')
-
-
-// 用户登录认证
-let snsLogin = require('../controller/snsLogin.js')
 /**
  * ajax
  *
@@ -25,8 +21,6 @@ let clear_cache = require('../controller/api/clear_cache')
 let pano = require('../controller/api/pano_get.js')
 // 获取图虫数据
 let photography = require('../controller/api/photography_get.js')
-
-let imgRobber =  require('../controller/img-robber/index.js')
 
 module.exports = [
 	// 评论
@@ -130,23 +124,5 @@ module.exports = [
 		controller(route, connect, app) {
 			photography.render(connect, app)
 		}
-	},
-	// 用户登录认证
-	{
-		path: 'all /snsLogin/:from',
-		controller(route, connect, app) {
-			if(route.params.from == 'github'){
-				snsLogin.github(connect,app)
-			}else{
-				connect.write('json',{
-					'code' : 500
-				})
-			}
-		}
-	},
-	// 用户登录认证
-	{
-		path: 'get /img-robber/:source',
-		controller: imgRobber.render
-	},
+	}
 ]
