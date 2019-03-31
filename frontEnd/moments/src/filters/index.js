@@ -20,6 +20,8 @@ Vue.filter('timeFormat', (time, format = '{y}-{m}-{d} {h}:{i}:{s}') => {
 	})
 	return timeStr
 })
+
+// 时间差计算
 Vue.filter('dateDiff', dateTimeStamp => {
 	let minute = 1000 * 60
 	let hour = minute * 60
@@ -50,4 +52,8 @@ Vue.filter('dateDiff', dateTimeStamp => {
 		result = '刚刚'
 	}
 	return result
+})
+// 跳转链接生成
+Vue.filter('urlPrefix', url => {
+	return '/r/' + btoa(url)
 })

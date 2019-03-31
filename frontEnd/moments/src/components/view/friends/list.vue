@@ -92,12 +92,12 @@
 				<div class="title">{{item.title}}</div>
 				<div class="desc">{{item.discription}}</div>
 				<div class="links">
-					<a v-if="item.url" target="_blank" class="blog" :href="item.url">博客</a>
+					<a v-if="item.url" target="_blank" class="blog" :href="item.url | urlPrefix">博客</a>
 					<a
 						v-if="item.github_username"
 						target="_blank"
 						class="github"
-						:href="'https://github.com/' + item.github_username"
+						:href="item.githubLink | urlPrefix"
 					>Github</a>
 				</div>
 				<ul class="numbers">
@@ -148,6 +148,13 @@ export default {
 			})
 				.then(response => response.json())
 				.then(({count, list}) => {
+					list.forEach(item => {
+						if (item.github_username) {
+							item.githubLink = 'https://github.com/' + item.github_username
+						} else {
+							item.githubLink = ''
+						}
+					});
 					this.friendsList = list
 					this.pageInfo.total = count
 				})

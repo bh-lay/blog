@@ -44,7 +44,6 @@ const makeUpUserInfo = (db, docs) => {
 	// 统一等待获取
 	return Promise.all(getUserInfoArray)
 		.then(userList => {
-			console.log('userList', userList)
 			// 将获取到的用户列表转为 id 为 key 的对象
 			let users = {}
 			userList.forEach(item => {

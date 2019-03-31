@@ -143,7 +143,7 @@
 				>
 				<div class="content article" v-html="item.content" ></div>
 				<a
-					:href="item.originalUrl"
+					:href="item.originalUrl | urlPrefix"
 					target="_blank"
 					class="read-more"
 				>
