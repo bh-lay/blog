@@ -27,18 +27,30 @@ $banner-height = 400px
 	min-height 600px
 	.index-sidebar
 		width 150px
-		margin-left -1000px
-		padding-left 1000px
+		margin-left -3000px
+		padding-left 3000px
 		padding-top 30px
 		padding-right 30px
-		border-right 1px solid #e0e6eb
+		border-right 1px solid #e7ebef
 		background #f6f7f9
 	.index-content
 		flex-grow 1
-		padding-top 30px
+		padding 30px 0 60px
 	.index-sidebar-secondary
 		width 200px
 		padding 30px 0 50px 30px
+	.view-all-post
+		display block
+		margin 0 40px
+		background #0a85c2
+		line-height 44px
+		text-decoration none
+		text-align center
+		font-size 16px
+		color #fff
+		transition .2s
+		&:hover
+			background #175e82
 </style>
 <template>
 	<div class="index-page">
@@ -76,7 +88,7 @@ $banner-height = 400px
 						<postList
 							:disablePagination="true"
 						/>
-						<a href="#/post/page/2">查看全部</a>
+						<a href="#/post/page/2" class="view-all-post">查看全部动态</a>
 					</div>
 					<div class="index-sidebar-secondary">
 						<sidebarSecondary />

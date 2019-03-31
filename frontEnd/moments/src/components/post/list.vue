@@ -5,7 +5,7 @@
 	display flex
 	margin-bottom 20px
 	padding 20px
-	border-bottom: 1px solid #ddd
+	border-bottom: 1px solid #e7eaef
 	.user
 		width 60px
 		height 60px
@@ -142,7 +142,11 @@
 					:alt="item.title"
 				>
 				<div class="content article" v-html="item.content" ></div>
-				<a :href="item.originalUrl" class="read-more">
+				<a
+					:href="item.originalUrl"
+					target="_blank"
+					class="read-more"
+				>
 					<svg viewBox="0 0 1038 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
 						<path d="M860.598617 1022.400915l141.300989-37.845018c25.585364-6.880912 40.84936-32.999305 33.823076-59.359983L797.458977 36.104504c-6.929369-25.924564-33.677705-41.285474-58.923869-34.501476l-141.300989 37.845018c-25.633821 6.880912-40.84936 32.999305-33.823076 59.359983l238.215248 889.091409C808.604117 1013.824003 835.303995 1029.136456 860.598617 1022.400915z" />
 						<path d="M194.264631 1020.801829C220.770681 1020.801829 242.285647 999.480693 242.285647 972.199329L242.285647 51.756157c0-26.84525-21.854165-48.554044-48.021015-48.554044L48.021015 3.202114C21.514965 3.202114 0 24.474793 0 51.756157l0 920.443172c0 26.84525 21.854165 48.554044 48.021015 48.554044L194.264631 1020.753372z" />
@@ -198,6 +202,7 @@ export default {
 	watch: {
 		'pageInfo.current' () {
 			this.getData()
+			this.$emit('page-change', this.pageInfo.current)
 		}
 	}
 }
