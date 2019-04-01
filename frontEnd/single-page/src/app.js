@@ -71,14 +71,6 @@ L.gravatar_error_fn = function (elem) {
   // 其余情况均不处理（已是默认头像）
 };
 
-// 动态插入emoji表情样式
-let str = '<style type=\'text/css\' data-module=\'emoji\'>';
-(utils.query('#data_emoji').innerHTML || '').trim().split(/\s+/).forEach(function (item, index) {
-  str += '.emoji.s_' + item + '{background-position: -' + (index * 25) + 'px 0;}';
-});
-str += '</style>';
-utils.query('head').insertAdjacentHTML('beforeEnd', str);
-
 // 配置弹出层
 UI.config.zIndex(2000);
 

@@ -2,13 +2,6 @@
 var DB = require('../../core/DB.js')
 var utils = require('../../core/utils/index.js')
 
-/**
- * 转换emoji表情
- */
-function strToEmoji(str) {
-	return str.replace(/:((\w|-)+):/g, '<span class="emoji-box"><span class="emoji s_$1"></span></span>')
-}
-
 function getUserInfo(id, callback) {
 	DB.getCollection('user')
 		.then(({ collection, client }) => {
@@ -71,8 +64,6 @@ function handleData(docs, callback) {
 		}
 		// 转换时间格式
 		item.time = utils.parse.time(item.time, '{h}:{i} {m}-{d}')
-		// 替换表情
-		item.content = strToEmoji(item.content)
 	})
 	if (uidsLength == 0) {
 		endFn()

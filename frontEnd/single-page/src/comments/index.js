@@ -73,14 +73,6 @@ function setUserInfoToUI (userInput) {
   nodeUser.setAttribute('title', screenName);
   utils.query('.l_send_avatar img', this.dom).setAttribute('src', user.avatar);
 }
-
-/**
- * 转换emoji表情
- */
-function strToEmoji (str) {
-  return str.replace(/:((\w|-)+):/g, '<span class="emoji s_$1"></span>');
-}
-
 /**
  * 发送评论
  *
@@ -223,7 +215,7 @@ function bindDomEvent () {
       top: offset.top,
       left: offset.left,
       onSelect: function (title) {
-        selection.insertTxt(nodeTextarea, ':' + title + ':');
+        selection.insertTxt(nodeTextarea, title);
         utils.trigger(nodeTextarea, 'change');
       }
     });
@@ -428,7 +420,6 @@ List.prototype.scrollTo = function (dom) {
 };
 List.prototype.addItem = function (item) {
   item.time = '刚刚';
-  item.content = strToEmoji(item.content);
   if (item.user && item.user.blog) {
     item.user.blog = parseUrl(item.user.blog);
   }
@@ -465,7 +456,6 @@ List.prototype.getData = function (skip, onResponse) {
         me.list = DATA.list;
         me.list.forEach(function (item) {
           item.time = utils.parseTime(item.time, '{y}-{m}-{d} {h}:{ii} ');
-          item.content = strToEmoji(item.content);
           // 若无头像，使用默认头像
           item.user.avatar = item.user.avatar || defaultAvatar;
           if (item.user.blog) {
