@@ -21,9 +21,7 @@ exports.trim = function(str){
 }
 // 生成ID
 exports.createID = function(){
-	var date = new Date(),
-		id = date.getTime().toString(16)
-	return id
+	return parseInt(Math.ceil(Math.random()*1000) + '' + new Date().getTime()).toString(36)
 }
 
 exports.encodeHtml = function(s){
