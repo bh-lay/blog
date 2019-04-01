@@ -21,8 +21,8 @@ var fs = require('fs'),
  * @returns {name:'navigation_bootstrap',active:'index'}
  */
 function getComponentsConfig(input){
-	var strArray = input.match(/<include(.+?)\/>/g) || [],
-		confArray = []
+	let strArray = input.match(/<include(.+?)\/>/g) || []
+	let confArray = []
 	strArray.forEach(function(item){
 		var data = {}
 		// 过滤多余的字符
@@ -48,7 +48,7 @@ function replaceComponent(temp,callback){
 	var total = need_temp.length
 
 	// 没有用到components
-	if(total == 0){
+	if(total === 0){
 		callback(null,temp)
 	}else{
 		for(var i=0;i<total;i++){
