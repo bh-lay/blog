@@ -135,8 +135,7 @@ CONNECT.prototype['write'] = function(type,a,b,c){
  *    'path' : '/',
  *    'Max-Age' : 60*60*24*2
  *  },{
- *    'UID':'23w',
- *    'path':'/admin'
+ *    'UID':'23w'
  *  }); 
  */
 CONNECT.prototype['cookie'] = function(input){

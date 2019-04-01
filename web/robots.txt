@@ -3,5 +3,3 @@
 #
 
 User-agent: *
-
-Disallow: /admin/

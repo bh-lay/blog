@@ -154,7 +154,7 @@ export default {
 						} else {
 							item.githubLink = ''
 						}
-					});
+					})
 					this.friendsList = list
 					this.pageInfo.total = count
 				})

@@ -27,7 +27,6 @@ var blog = require('../controller/blog.js')
 var labs = require('../controller/labs.js')
 var pano = require('../controller/pano.js')
 var photography = require('../controller/photography.js')
-var admin = require('../controller/admin.js')
 
 module.exports = [
 	// 首页
@@ -99,10 +98,5 @@ module.exports = [
 	{
 		path: 'get /labs/:name',
 		controller: labs.detail
-	},
-	// 后台
-	{
-		path: 'get /admin/*',
-		controller: admin.render
-	},
+	}
 ]
