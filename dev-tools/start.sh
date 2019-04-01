@@ -33,10 +33,10 @@ function start(){
 
 	echo "启动 Mongo";
 	printLine;
-	cd ../../mongo/;
+	cd ../../mongodb-osx-x86_64-4.0.6/;
 	echo "  删除非正常退出的lock文件";
 	rm db/mongod.lock -rf;
-	./bin/mongod -dbpath=./db --fork --auth --bind_ip 127.0.0.1 --port 27017 --logpath=./log/MongoDB.log --logappend
+	./bin/mongod --fork -dbpath=./data/db --logpath=./log/MongoDB.log --bind_ip 127.0.0.1 --port 2797
 
 
 	printScape;
