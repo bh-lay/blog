@@ -19,9 +19,7 @@ exports.list = function (route, connect,app){
 exports.get = function (route, connect,app){
 	let data = connect.url.search
 	let id = route.params.id
-	// 内容格式 html/markdown
-	let format = data['format'] || 'markdown'
-	detail(id, format, function(json_data){
+	detail(id, function(json_data){
 		connect.write('json',json_data)
 	})
 }

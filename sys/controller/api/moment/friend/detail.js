@@ -6,12 +6,11 @@ let DB = require('../../../../core/DB.js')
 
 let showdown  = require('showdown')
 
-module.exports = function (friendsID, format, callback) {
+module.exports = function (friendsID, callback) {
 	
 	let resJSON={
 		code: 200,
-		id : friendsID,
-		format : format
+		id : friendsID
 	}
 	DB.getCollection('friends')
 		.then(({collection, client}) => {
@@ -24,10 +23,6 @@ module.exports = function (friendsID, format, callback) {
 					resJSON['msg'] = 'could not find this blog !'
 				}else{
 					resJSON['detail'] = docs[0]
-					if(format == 'html'){
-						var converter = new showdown.Converter()
-						resJSON['detail'].content = converter.makeHtml(resJSON['detail'].content)
-					}
 				}
 				callback&&callback(resJSON)
 			})
