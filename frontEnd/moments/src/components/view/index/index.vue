@@ -33,6 +33,13 @@ $banner-height = 400px
 		padding-right 30px
 		border-right 1px solid #e7ebef
 		background #f6f7f9
+		.title
+			margin-bottom 10px
+			padding 5px 10px
+			font-size 14px
+			font-weight bold
+			background #eeeff1
+
 	.index-content
 		flex-grow 1
 		padding 30px 0 60px
@@ -83,6 +90,9 @@ $banner-height = 400px
 				<div class="index-main-body">
 					<div class="index-sidebar">
 						<sidebar />
+						<br>
+						<div class="title">标签</div>
+						<tagList />
 					</div>
 					<div class="index-content">
 						<postList
@@ -106,11 +116,12 @@ $banner-height = 400px
 <script>
 import postList from '@/components/post/list.vue'
 import sidebar from './sidebar.vue'
+import tagList from './tag-list.vue'
 import sidebarSecondary from './sidebarSecondary.vue'
 
 export default {
 	name: 'index',
-	components: {postList, sidebar, sidebarSecondary},
+	components: {postList, sidebar, sidebarSecondary, tagList},
 	data () {
 		return {
 			bannerList: [
