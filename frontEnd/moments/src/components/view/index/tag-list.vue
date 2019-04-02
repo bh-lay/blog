@@ -3,6 +3,7 @@
 	display flex
 	flex-wrap wrap
 	margin 0 -4px
+	padding-top 10px
 	a
 		flex-grow 1
 		border 1px solid #e8eaee

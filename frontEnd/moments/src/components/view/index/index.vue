@@ -26,26 +26,20 @@ $banner-height = 400px
 	display flex
 	min-height 600px
 	.index-sidebar
-		width 150px
+		width 160px
 		margin-left -3000px
 		padding-left 3000px
 		padding-top 30px
-		padding-right 30px
+		padding-right 20px
 		border-right 1px solid #e7ebef
 		background #f6f7f9
-		.title
-			margin-bottom 10px
-			padding 5px 10px
-			font-size 14px
-			font-weight bold
-			background #eeeff1
 
 	.index-content
 		flex-grow 1
 		padding 30px 0 60px
 	.index-sidebar-secondary
-		width 200px
-		padding 30px 0 50px 30px
+		width 240px
+		padding 30px 0 50px 20px
 	.view-all-post
 		display block
 		margin 0 40px
@@ -58,6 +52,12 @@ $banner-height = 400px
 		transition .2s
 		&:hover
 			background #175e82
+.module-title
+	padding 5px 15px
+	font-size 14px
+	font-weight bold
+	color #454a54
+	background #eeeff1
 </style>
 <template>
 	<div class="index-page">
@@ -89,10 +89,11 @@ $banner-height = 400px
 			<div class="page-container">
 				<div class="index-main-body">
 					<div class="index-sidebar">
-						<sidebar />
+						<sidebarSecondary />
 						<br>
-						<div class="title">标签</div>
+						<div class="module-title">标签</div>
 						<tagList />
+						<br>
 					</div>
 					<div class="index-content">
 						<postList
@@ -105,6 +106,10 @@ $banner-height = 400px
 						>查看全部动态</router-link>
 					</div>
 					<div class="index-sidebar-secondary">
+						<div class="module-title">推荐阅读</div>
+						<recommandReading />
+						<br>
+						<div class="module-title">打赏</div>
 						<sidebarSecondary />
 					</div>
 				</div>
@@ -115,13 +120,13 @@ $banner-height = 400px
 
 <script>
 import postList from '@/components/post/list.vue'
-import sidebar from './sidebar.vue'
+import recommandReading from './recommandReading.vue'
 import tagList from './tag-list.vue'
 import sidebarSecondary from './sidebarSecondary.vue'
 
 export default {
 	name: 'index',
-	components: {postList, sidebar, sidebarSecondary, tagList},
+	components: {postList, recommandReading, sidebarSecondary, tagList},
 	data () {
 		return {
 			bannerList: [

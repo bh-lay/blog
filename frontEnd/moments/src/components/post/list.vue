@@ -1,6 +1,6 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 .post-list
-	padding 0 40px 50px
+	padding 0 20px 50px 30px
 .item
 	display flex
 	margin-bottom 20px

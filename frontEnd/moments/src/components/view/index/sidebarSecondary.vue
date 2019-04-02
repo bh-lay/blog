@@ -1,6 +1,6 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 	.ads-1
-		height 140px
+		height 120px
 		background #333
 </style>
 <template>
