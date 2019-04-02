@@ -21,7 +21,7 @@ function getList(callback){
 			callback && callback(err)
 		})
 }
-exports.render = function (connect,app){
+exports.render = function (route, connect,app){
 	// 缓存机制
 	app.cache.use('links_page',['html','links'],function(this_cache){
 		connect.write('html',200,this_cache)

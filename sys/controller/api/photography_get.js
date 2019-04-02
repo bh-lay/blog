@@ -3,7 +3,7 @@
  */
 var myTuchongData = require('../../functions/myTuchongData.js')
 
-exports.render = function (connect,app){
+exports.render = function (route, connect,app){
 	var url = connect.request.url
 
 	app.cache.use(url,['ajax','photography'],function(this_cache){

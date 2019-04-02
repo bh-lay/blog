@@ -121,8 +121,6 @@ module.exports = [
 	},
 	{
 		path: 'all /ajax/photography/list',
-		controller(route, connect, app) {
-			photography.render(connect, app)
-		}
+		controller: photography.render
 	}
 ]

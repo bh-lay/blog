@@ -43,7 +43,7 @@ function get_detail(lab_name, callback) {
 }
 
 
-exports.list = function (connect, app) {
+exports.list = function (route, connect, app) {
 	app.cache.use('labs_list', ['html', 'labs'], function (this_cache) {
 		connect.write('html', 200, this_cache)
 	}, function (save_cache) {

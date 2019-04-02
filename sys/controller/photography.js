@@ -4,7 +4,7 @@
 
 var myTuchongData = require('../functions/myTuchongData.js')
 
-exports.list = function (connect,app){
+exports.list = function (route, connect,app){
 	app.cache.use('photography_list',['html','photography'],function(this_cache){
 		connect.write('html',200,this_cache)
 	},function(save_cache){

@@ -64,7 +64,7 @@ function getList(app, param, callback) {
 			callback && callback(err)
 		})
 }
-exports.list = function (connect, app) {
+exports.list = function (route, connect, app) {
 
 	var data = connect.url.search,
 		page = data.page || 1,
@@ -113,7 +113,8 @@ exports.list = function (connect, app) {
 	})
 }
 
-exports.detail = function (connect, app, id) {
+exports.detail = function (route, connect, app) {
+	let id = route.params.id
 	app.cache.use('blog_id_' + id, ['html', 'article'], function (this_cache) {
 		connect.write('html', 200, this_cache)
 	}, function (save_cache) {

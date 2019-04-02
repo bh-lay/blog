@@ -1,21 +1,7 @@
 // 引入app框架
-let	isbot = require('node-isbot')
-/**
- * 选择静态、动态视图版本
- *
- */
+let isbot = require('node-isbot')
+
 var singlePage = require('../controller/singlePage.js')
-function views_select(connect, app, callback){
-	var isBotRequest = isbot(connect.request.headers['user-agent'])
-	var isMarkJSVersion = connect.cookie('ui_version') == 'js'
-	// 不是爬虫，并且 cookie 中已经标记使用单页版本
-	if (!isBotRequest && isMarkJSVersion) {
-		singlePage.render(connect,app)
-	} else {
-		// 无 cookie 标识，执行回调默认视图
-		callback && callback()
-	}
-}
 
 // 首页
 var index = require('../controller/index.js')
@@ -27,73 +13,62 @@ var blog = require('../controller/blog.js')
 var labs = require('../controller/labs.js')
 var pano = require('../controller/pano.js')
 var photography = require('../controller/photography.js')
+/**
+ * 选择静态、动态视图版本
+ *
+ */
+const adaptionViewForSinglePage = controller => {
+	return (route, connect, app) => {
+		var isBotRequest = isbot(connect.request.headers['user-agent'])
+		var isMarkJSVersion = connect.cookie('ui_version') === 'js'
+		// 不是爬虫，并且 cookie 中已经标记使用单页版本
+		if (!isBotRequest && isMarkJSVersion) {
+			singlePage.render(connect,app)
+		} else {
+			// 无 cookie 标识，执行回调默认视图
+			controller(route, connect, app)
+		}
 
+	}
+}
 module.exports = [
 	// 首页
 	{
 		path: 'get /',
-		controller(route, connect, app) {
-			views_select(connect, app, function(){
-				index.get(route, connect,app)
-			})
-		}
+		controller: adaptionViewForSinglePage(index.get)
+	},
+	{
+		path: 'get /directories',
+		controller: adaptionViewForSinglePage(links.render)
+	},
+	{
+		path: 'get /blog',
+		controller: adaptionViewForSinglePage(blog.list)
+	},
+	{
+		path: 'get /blog/:id',
+		controller: adaptionViewForSinglePage(blog.detail)
+	},
+	{
+		path: 'get /labs',
+		controller: adaptionViewForSinglePage(labs.list)
+	},
+	{
+		path: 'get /720',
+		controller: adaptionViewForSinglePage(pano.list)
+	},
+	{
+		path: 'get /photography',
+		controller: adaptionViewForSinglePage(photography.list)
 	},
 	// 留言
 	{
 		path: 'get /bless',
-		controller(route, connect, app) {
-			views_select(connect, app, function(){
-				connect.write('define',307,{
-					location:'/'
-				})
+		controller: adaptionViewForSinglePage((route, connect) => {
+			connect.write('define',307,{
+				location:'/'
 			})
-		}
-	},
-	{
-		path: 'get /directories',
-		controller(route, connect, app) {
-			links.render(connect,app)
-		}
-	},
-	{
-		path: 'get /blog',
-		controller(route, connect, app) {
-			views_select(connect, app, function(){
-				blog.list(connect,app)
-			})
-		}
-	},
-	{
-		path: 'get /blog/:id',
-		controller(route, connect, app) {
-			views_select(connect, app, function(){
-				blog.detail(connect, app, route.params.id)
-			})
-		}
-	},
-	{
-		path: 'get /labs',
-		controller(route, connect, app) {
-			views_select(connect, app, function(){
-				labs.list(connect,app)
-			})
-		}
-	},
-	{
-		path: 'get /720',
-		controller(route, connect, app) {
-			views_select(connect, app, function(){
-				pano.list(connect, app)
-			})
-		}
-	},
-	{
-		path: 'get /photography',
-		controller(route, connect, app) {
-			views_select(connect, app, function(){
-				photography.list(connect, app)
-			})
-		}
+		})
 	},
 	{
 		path: 'get /labs/:name',

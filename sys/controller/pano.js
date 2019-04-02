@@ -4,7 +4,7 @@
 
 var my720Data = require('../functions/my720Data.js')
 
-exports.list = function (connect,app){
+exports.list = function (route, connect,app){
 	app.cache.use('pano_list',['html','pano'],function(this_cache){
 		connect.write('html',200,this_cache)
 	},function(save_cache){
