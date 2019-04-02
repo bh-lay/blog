@@ -48,14 +48,14 @@ $nav-mini-height = 60px
 		<div class="page-container">
 			<div class="page-title">剧中人的朋友圈</div>
 			<div class="nav-list">
-				<a
+				<router-link
 					v-for="nav in navList"
 					:key="nav.type"
-					:href="nav.href"
+					:to="nav.href"
 					:class="{
 						active: nav.type === currentNavType
 					}"
-				>{{nav.label}}</a>
+				>{{nav.label}}</router-link>
 			</div>
 		</div>
 	</div>
@@ -72,17 +72,17 @@ export default {
 			navList: [
 				{
 					label: '首页',
-					href: '#/',
+					href: '/',
 					type: 'index'
 				},
 				{
 					label: '好友',
-					href: '#/friends/1',
+					href: '/friends/1',
 					type: 'friend'
 				},
 				{
 					label: '动态',
-					href: '#/post/page/1',
+					href: '/post/page/1',
 					type: 'post'
 				}
 			]

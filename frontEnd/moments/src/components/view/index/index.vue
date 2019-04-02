@@ -88,7 +88,11 @@ $banner-height = 400px
 						<postList
 							:disablePagination="true"
 						/>
-						<a href="#/post/page/2" class="view-all-post">查看全部动态</a>
+
+						<router-link
+							to="/post/page/2"
+							class="view-all-post"
+						>查看全部动态</router-link>
 					</div>
 					<div class="index-sidebar-secondary">
 						<sidebarSecondary />

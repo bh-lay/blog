@@ -8,6 +8,8 @@ import FriendDetail from '@/components/view/friends/detail.vue'
 Vue.use(Router)
 
 export default new Router({
+	// mode: 'history',
+	// base: '/moments/',
 	routes: [
 		{
 			path: '/',

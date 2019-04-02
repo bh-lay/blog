@@ -120,7 +120,9 @@
 			</div>
 			<div class="main">
 				<div class="caption">
-					<a :href="'#/friend/' + item.user.id">{{item.user.title}}</a>
+					<router-link
+						:to="'/friend/' + item.user.id"
+					>{{item.user.title}}</router-link>
 					<span>发布于</span>
 					<strong :title="item.createTime | timeFormat">{{item.createTime | dateDiff}}</strong>
 				</div>
@@ -130,10 +132,11 @@
 						<path d="M900.64 379.808l-263.072-256.032c-36.448-35.328-105.76-35.392-142.304 0.096l-327.04 319.904c-56.416 54.72-70.72 76.704-70.72 150.976l0 143.936c0 132.768 26.976 192 186.912 192l131.872 0c81.12 0 128.448-46.656 193.952-111.264l290.016-297.696c18.592-17.984 29.248-43.968 29.248-71.264C929.504 423.36 918.976 397.6 900.64 379.808zM323.008 786.752c-52.928 0-96-43.072-96-96s43.072-96 96-96 96 43.072 96 96S375.936 786.752 323.008 786.752z" />
 					</svg>
 					<strong>标签</strong>
-					<a
+					<router-link
 						v-for="tag in item.tags.split(',')"
 						:key="tag"
-						:href="'#' + tag">{{tag}}</a>
+						:to="'/'"
+					>{{tag}}</router-link>
 				</div>
 				<img
 					class="cover"

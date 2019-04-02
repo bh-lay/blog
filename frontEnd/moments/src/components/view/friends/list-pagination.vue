@@ -98,7 +98,9 @@
 				>
 				</div>
 				<div class="title">
-					<a :href="'#/friend/' + item.id">{{item.title}}</a>
+					<router-link
+						:to="'/friend/' + item.id"
+					>{{item.title}}</router-link>
 				</div>
 				<div class="desc">{{item.discription}}</div>
 				<div class="links">
