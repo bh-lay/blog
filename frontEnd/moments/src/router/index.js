@@ -18,7 +18,7 @@ export default new Router({
 		},
 		{
 			path: '/post/page/:page',
-			name: 'post',
+			name: 'postListPage',
 			component: Post,
 			meta: {
 				keepAlive: true
@@ -26,7 +26,7 @@ export default new Router({
 		},
 		{
 			path: '/friends/:page',
-			name: 'friends',
+			name: 'friendListPage',
 			component: Friends,
 			meta: {
 				keepAlive: true

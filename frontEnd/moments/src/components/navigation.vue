@@ -26,6 +26,9 @@
 		display inline-block
 		width 100px
 		line-height 50px
+		text-align center
+		&.active
+			background #eee
 </style>
 <template>
 	<div
@@ -37,9 +40,14 @@
 		<div class="page-container">
 			<div class="page-title">剧中人的朋友圈</div>
 			<div class="nav-list">
-				<a href="#/">首页</a>
-				<a href="#/friends/1">好友</a>
-				<a href="#/post/page/1">动态</a>
+				<a
+					v-for="nav in navList"
+					:key="nav.type"
+					:href="nav.href"
+					:class="{
+						active: nav.type === currentNavType
+					}"
+				>{{nav.label}}</a>
 			</div>
 		</div>
 	</div>
@@ -51,10 +59,29 @@ export default {
 	name: 'navigation',
 	data () {
 		return {
-			isScrolling: false
+			isScrolling: false,
+			currentNavType: 'index',
+			navList: [
+				{
+					label: '首页',
+					href: '#/',
+					type: 'index'
+				},
+				{
+					label: '好友',
+					href: '#/friends/1',
+					type: 'friend'
+				},
+				{
+					label: '动态',
+					href: '#/post/page/1',
+					type: 'post'
+				}
+			]
 		}
 	},
 	mounted () {
+		this.setActiveNav()
 		this.ajustNavigation()
 		window.addEventListener('scroll', this.scrollListener)
 	},
@@ -68,6 +95,24 @@ export default {
 		ajustNavigation () {
 			let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
 			this.isScrolling = scrollTop > 200
+		},
+		setActiveNav () {
+			console.log('route', this.$route)
+			let currentRouteName = this.$route.name
+			if (currentRouteName === 'index') {
+				this.currentNavType = 'index'
+			} else if (currentRouteName === 'postListPage') {
+				this.currentNavType = 'post'
+			} else if (currentRouteName === 'friendListPage') {
+				this.currentNavType = 'friend'
+			} else {
+				this.currentNavType = ''
+			}
+		}
+	},
+	watch: {
+		'$route' (route) {
+			this.setActiveNav()
 		}
 	}
 }
