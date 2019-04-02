@@ -120,7 +120,7 @@
 			</div>
 			<div class="main">
 				<div class="caption">
-					<a href="#">{{item.user.title}}</a>
+					<a :href="'#/friend/' + item.user.id">{{item.user.title}}</a>
 					<span>发布于</span>
 					<strong :title="item.createTime | timeFormat">{{item.createTime | dateDiff}}</strong>
 				</div>

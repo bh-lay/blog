@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/components/view/index/index.vue'
 import Post from '@/components/view/post/index.vue'
-import Friends from '@/components/view/friends/index.vue'
+import Friends from '@/components/view/friends/list.vue'
+import FriendDetail from '@/components/view/friends/detail.vue'
 
 Vue.use(Router)
 
@@ -28,6 +29,14 @@ export default new Router({
 			path: '/friends/:page',
 			name: 'friendListPage',
 			component: Friends,
+			meta: {
+				keepAlive: true
+			}
+		},
+		{
+			path: '/friend/:id',
+			name: 'friendDetailPage',
+			component: FriendDetail,
 			meta: {
 				keepAlive: true
 			}
