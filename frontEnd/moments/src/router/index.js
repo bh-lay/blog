@@ -25,7 +25,7 @@ export default new Router({
 			}
 		},
 		{
-			path: '/post/friends/:page',
+			path: '/friends/:page',
 			name: 'friends',
 			component: Friends,
 			meta: {

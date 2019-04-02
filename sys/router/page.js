@@ -73,5 +73,9 @@ module.exports = [
 	{
 		path: 'get /labs/:name',
 		controller: labs.detail
+	},
+	{
+		path: 'get /labs/:name',
+		controller: labs.detail
 	}
 ]

@@ -28,7 +28,7 @@ export default {
 	},
 	methods: {
 		handlePageChange (pageIndex) {
-			this.$router.replace('/post/friends/' + pageIndex)
+			this.$router.replace('/friends/' + pageIndex)
 		}
 	}
 }
