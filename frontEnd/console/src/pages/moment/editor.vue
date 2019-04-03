@@ -130,7 +130,7 @@ export default {
         this.form.cover = detail.cover
         this.form.content = detail.content
         this.form.originalUrl = detail.originalUrl
-        this.form.tags = detail.tags.length ? detail.tags.split(',') : []
+        this.form.tags = detail.tags
         this.form.createTime = new Date(parseInt(detail.createTime, 10))
       })
     }

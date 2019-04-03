@@ -15,9 +15,9 @@ module.exports = params => {
 		DB.getCollection(collectionName)
 			.then(({collection, client}) => {
 				collection.updateOne({
-					id: params.id
+					id: data.id
 				}, {
-					$set: params
+					$set: data
 				}, function(err) {
 					if(err) {
 						reject(new Error('操作失败'))
