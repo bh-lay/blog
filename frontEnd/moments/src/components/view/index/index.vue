@@ -61,6 +61,10 @@ $banner-height = 400px
 	.index-sidebar-secondary
 		width 240px
 		padding 30px 0 50px 20px
+		.zanshangma
+			img
+				display block
+				width 100%
 	.view-all-post
 		display block
 		margin 0 40px
@@ -124,8 +128,6 @@ $banner-height = 400px
 			<div class="page-container">
 				<div class="index-main-body">
 					<div class="index-sidebar">
-						<sidebarSecondary />
-						<br>
 						<div class="module-title">标签</div>
 						<tagList />
 						<br>
@@ -145,7 +147,9 @@ $banner-height = 400px
 						<recommandReading />
 						<br>
 						<div class="module-title">打赏</div>
-						<sidebarSecondary />
+						<div class="zanshangma">
+							<img src="./images/zanshangma.png" alt="微信赞赏码">
+						</div>
 					</div>
 				</div>
 			</div>
@@ -157,12 +161,11 @@ $banner-height = 400px
 import postList from '@/components/post/list.vue'
 import recommandReading from './recommandReading.vue'
 import tagList from './tag-list.vue'
-import sidebarSecondary from './sidebarSecondary.vue'
 import feedback from './feedback.vue'
 
 export default {
 	name: 'index',
-	components: {postList, feedback, recommandReading, sidebarSecondary, tagList},
+	components: {postList, feedback, recommandReading, tagList},
 	data () {
 		return {
 			bannerList: [
