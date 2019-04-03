@@ -135,7 +135,7 @@
 					<router-link
 						v-for="tag in item.tags.split(',')"
 						:key="tag"
-						:to="'/'"
+						:to="'/post/page/1/?tag=' + tag"
 					>{{tag}}</router-link>
 				</div>
 				<img
@@ -180,7 +180,8 @@ export default {
 			pageInfo: {
 				total: 0,
 				current: 1,
-				size: 10
+				size: 10,
+				tag: this.$route.query.tag
 			}
 		}
 	},
@@ -205,7 +206,7 @@ export default {
 	watch: {
 		'pageInfo.current' () {
 			this.getData()
-			this.$emit('page-change', this.pageInfo.current)
+			this.$emit('param-change', JSON.stringify(this.pageInfo))
 		}
 	}
 }

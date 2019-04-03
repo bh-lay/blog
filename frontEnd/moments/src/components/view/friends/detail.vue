@@ -92,7 +92,6 @@ $avatar-width = 120px
 					<div class="page-content">
 						<postList
 							:firstPage="$route.params.page"
-							@page-change="handlePageChange"
 						/>
 					</div>
 				</div>
