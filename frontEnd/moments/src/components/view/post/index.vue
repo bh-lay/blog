@@ -30,9 +30,12 @@
 					<div class="index-sidebar">
 					</div>
 					<div class="index-content">
+						<div class="tag-editor" v-if="tag">
+							标签：{{tag}} <router-link to="/post/page/1/">x</router-link>
+						</div>
 						<postList
-							:firstPage="$route.params.page"
-							@param-change="handleParamChange"
+							:pageIndex.sync="pageIndex"
+							:tag="tag"
 						/>
 					</div>
 					<div class="index-sidebar-secondary">
@@ -50,14 +53,31 @@ export default {
 	components: {postList},
 	data () {
 		return {
+			pageIndex: 1,
+			tag: ''
 		}
 	},
 	created () {
+		this.getParamsFromRoute()
 	},
 	methods: {
-		handleParamChange (paramStr) {
-			let {current, tag} = JSON.parse(paramStr)
-			this.$router.replace('/post/page/' + current + (tag ? `?tag=${tag}` : ''))
+		handleParamChange () {
+			this.$router.replace('/post/page/' + this.pageIndex + (this.tag ? `?tag=${this.tag}` : ''))
+		},
+		getParamsFromRoute () {
+			this.tag = this.$route.query.tag
+			this.pageIndex = parseInt(this.$route.params.page, 10)
+		}
+	},
+	watch: {
+		$route () {
+			this.getParamsFromRoute()
+		},
+		pageIndex () {
+			this.handleParamChange()
+		},
+		tag () {
+			this.handleParamChange()
 		}
 	}
 }

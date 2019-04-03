@@ -88,14 +88,8 @@
 </template>
 
 <script>
-import postList from '@/components/post/list.vue'
-import recommandReading from './recommandReading.vue'
-import tagList from './tag-list.vue'
-import sidebarSecondary from './sidebarSecondary.vue'
-
 export default {
-	name: 'index',
-	components: {postList, recommandReading, sidebarSecondary, tagList},
+	name: 'feedback',
 	data () {
 		return {
 			bannerList: [

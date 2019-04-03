@@ -133,7 +133,7 @@
 					</svg>
 					<strong>标签</strong>
 					<router-link
-						v-for="tag in item.tags.split(',')"
+						v-for="tag in item.tags"
 						:key="tag"
 						:to="'/post/page/1/?tag=' + tag"
 					>{{tag}}</router-link>
@@ -163,7 +163,8 @@
 			v-if="!disablePagination"
 			:total="pageInfo.total"
 			:size="pageInfo.size"
-			:current.sync="pageInfo.current"
+			:current="pageIndex"
+			@page-change="handlePageChange"
 		/>
 	</div>
 </template>
@@ -172,28 +173,32 @@
 import pagination from '../pagination/index.vue'
 export default {
 	name: 'post-list',
-	props: ['disablePagination', 'firstPage'],
+	props: ['disablePagination', 'pageIndex', 'tag'],
 	components: {pagination},
 	data () {
 		return {
 			postList: [],
 			pageInfo: {
 				total: 0,
-				current: 1,
-				size: 10,
-				tag: this.$route.query.tag
-			}
+				size: 10
+			},
+			timer: null
 		}
 	},
 	created () {
-		this.pageInfo.current = parseInt(this.firstPage || 1, 10)
 		this.getData()
 	},
 	methods: {
 		getData () {
-			let skip = (this.pageInfo.current - 1) * this.pageInfo.size
+			clearTimeout(this.timer)
+			this.timer = setTimeout(() => {
+				this.forceGetData()
+			}, 50)
+		},
+		forceGetData () {
+			let skip = (this.pageIndex - 1) * this.pageInfo.size
 			let limit = this.pageInfo.size
-			fetch(`/api/moment/post/?skip=${skip}&limit=${limit}`, {
+			fetch(`/api/moment/post/?skip=${skip}&limit=${limit}` + (this.tag ? `&tag=${this.tag}` : ''), {
 				method: 'GET'
 			})
 				.then(response => response.json())
@@ -201,12 +206,17 @@ export default {
 					this.postList = list
 					this.pageInfo.total = count
 				})
+		},
+		handlePageChange (index) {
+			this.$emit('update:pageIndex', index)
 		}
 	},
 	watch: {
-		'pageInfo.current' () {
+		pageIndex () {
 			this.getData()
-			this.$emit('param-change', JSON.stringify(this.pageInfo))
+		},
+		tag () {
+			this.getData()
 		}
 	}
 }

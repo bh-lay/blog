@@ -90,7 +90,7 @@ export default {
 	methods: {
 		clickCurrent (idx) {
 			if (this.current !== idx && idx > 0 && idx < this.page + 1) {
-				this.$emit('update:current', idx)
+				this.$emit('page-change', idx)
 			}
 		}
 	}
