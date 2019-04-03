@@ -14,14 +14,35 @@ $banner-height = 400px
 .some-tools
 	padding 30px 0
 	background #f0f1f5
-.some-tools-body
-	height 240px
-	border 1px solid #e0e6eb
-	background #fff
-.index-main
-	background #fff
 	border 1px solid #fff
 	border-width 1px 0
+	.some-tools-body
+		height 140px
+		display flex
+	.analysis-count
+		flex-grow 1
+		display flex
+		justify-content space-around
+		align-items center
+		width 200px
+		border 1px solid #e0e6eb
+		background #fff
+		.item
+			text-align center
+			.count
+				padding-left 8px
+				strong
+					margin-right 5px
+					font-size 28px
+					font-weight 300
+					color #2e3038
+				span
+					font-size 14px
+					color #8f93a3
+			.title
+				color #8f93a3
+.index-main
+	background #fff
 .index-main-body
 	display flex
 	min-height 600px
@@ -82,7 +103,21 @@ $banner-height = 400px
 		</div>
 		<div class="some-tools">
 			<div class="page-container">
-				<div class="some-tools-body"></div>
+				<div class="some-tools-body">
+					<feedback />
+					<div class="analysis-count">
+						<div
+							class="item"
+							v-for="(item, index) in analysis"
+							:key="index"
+						>
+							<div class="count">
+								<strong>{{item.count}}</strong><span>{{item.unit}}</span>
+							</div>
+							<div class="title">{{item.title}}</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="index-main">
@@ -123,16 +158,34 @@ import postList from '@/components/post/list.vue'
 import recommandReading from './recommandReading.vue'
 import tagList from './tag-list.vue'
 import sidebarSecondary from './sidebarSecondary.vue'
+import feedback from './feedback.vue'
 
 export default {
 	name: 'index',
-	components: {postList, recommandReading, sidebarSecondary, tagList},
+	components: {postList, feedback, recommandReading, sidebarSecondary, tagList},
 	data () {
 		return {
 			bannerList: [
 				{
 					backgroundColor: '#3d271c',
 					imgUrl: 'https://news.720yun.com/home/o_1d6p9kq541lk117h9dr61uoe1sgc.jpg'
+				}
+			],
+			analysis: [
+				{
+					count: 162,
+					unit: '位',
+					title: '好友入驻'
+				},
+				{
+					count: 537,
+					unit: '篇',
+					title: '文章引入'
+				},
+				{
+					count: 41,
+					unit: '个',
+					title: '常用标签'
 				}
 			]
 		}

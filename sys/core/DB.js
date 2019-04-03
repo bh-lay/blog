@@ -9,7 +9,7 @@ const mongoConnectUrl = `mongodb://${mongoConig.host}:${mongoConig.port}/${mongo
 
 // 获取数据库
 const getDB = () => {
-	let MongoClient = require('mongodb').MongoClient
+	let MongoClient = mongodb.MongoClient
 	return new Promise((resolve, reject) => {
 		MongoClient.connect(mongoConnectUrl, {
 			useNewUrlParser: true,
