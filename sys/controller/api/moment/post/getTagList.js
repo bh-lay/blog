@@ -3,10 +3,10 @@
  *
  */
 
-var DB = require('../../../core/DB.js')
+var DB = require('../../../../core/DB.js')
 
 function getTagsList(callback) {
-	DB.getCollection('article')
+	DB.getCollection('moment')
 		.then(({ collection, client }) => {
 			collection.find().toArray(function (err, docs) {
 				client.close()

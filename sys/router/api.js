@@ -54,6 +54,10 @@ module.exports = [
 		controller: momentPost
 	},
 	{
+		path: 'get /api/moment/posttags/',
+		controller: momentPost.tagList
+	},
+	{
 		path: 'get /api/moment/friend/',
 		controller: momentFriend.list
 	},
