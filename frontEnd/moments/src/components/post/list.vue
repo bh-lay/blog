@@ -106,6 +106,10 @@
 </style>
 <template>
 	<div class="post-list">
+		<template v-if="postList.length === 0">
+			<slot name="empty-tips" v-if="$slots['empty-tips']"></slot>
+			<div v-else>暂无推文</div>
+		</template>
 		<div
 			class="item"
 			v-for="(item, index) in postList"

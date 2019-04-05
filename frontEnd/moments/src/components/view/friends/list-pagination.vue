@@ -39,7 +39,7 @@
 				color #2e3338
 				transition .2s
 				&:hover
-					color #2270bf
+					text-decoration underline
 		.desc
 			padding 10px 26px
 			height 50px
@@ -52,8 +52,14 @@
 			text-align center
 			a
 				margin 0 .5em
-				font-size 14px
-				text-decoration underline
+				word-break break-all
+				line-height 20px
+				text-decoration none
+				font-size 15px
+				color #5c6370
+				&:hover
+					text-decoration underline
+					color #0095ff
 		.numbers
 			display flex
 			justify-content center
@@ -80,7 +86,7 @@
 			cursor default
 			box-shadow: 3px 3px 30px #c1c9d7
 			.title a
-				text-decoration underline
+				color #0095ff
 </style>
 <template>
 	<div class="friend-list">
