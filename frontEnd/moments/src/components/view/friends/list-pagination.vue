@@ -134,7 +134,8 @@
 		<pagination
 			:total="pageInfo.total"
 			:size="pageInfo.size"
-			:current.sync="pageInfo.current"
+			:current="pageIndex"
+			@page-change="handlePageChange"
 		/>
 	</div>
 </template>
@@ -144,6 +145,7 @@ import pagination from '@/components/pagination/index.vue'
 export default {
 	name: 'friendsList',
 	components: {pagination},
+	props: ['pageIndex'],
 	data () {
 		return {
 			friendsList: [],
@@ -176,12 +178,9 @@ export default {
 					this.friendsList = list
 					this.pageInfo.total = count
 				})
-		}
-	},
-	watch: {
-		'pageInfo.current' () {
-			this.getData()
-			this.$emit('page-change', this.pageInfo.current)
+		},
+		handlePageChange (index) {
+			this.$emit('update:pageIndex', index)
 		}
 	}
 }

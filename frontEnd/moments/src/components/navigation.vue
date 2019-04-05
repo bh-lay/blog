@@ -77,7 +77,7 @@ export default {
 				},
 				{
 					label: '好友',
-					href: '/friends/1',
+					href: '/friends/',
 					type: 'friend'
 				},
 				{
@@ -111,7 +111,7 @@ export default {
 				this.currentNavType = 'index'
 			} else if (currentRouteName === 'postListPage') {
 				this.currentNavType = 'post'
-			} else if (currentRouteName === 'friendListPage' || currentRouteName === 'friendDetailPage') {
+			} else if (currentRouteName === 'friendListPage' || currentRouteName === 'friendListIndexPage' || currentRouteName === 'friendDetailPage') {
 				this.currentNavType = 'friend'
 			} else {
 				this.currentNavType = ''

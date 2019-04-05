@@ -28,7 +28,15 @@ export default new Router({
 			}
 		},
 		{
-			path: '/friends/:page',
+			path: '/friends/',
+			name: 'friendListIndexPage',
+			component: Friends,
+			meta: {
+				keepAlive: true
+			}
+		},
+		{
+			path: '/friends/page/:page',
 			name: 'friendListPage',
 			component: Friends,
 			meta: {

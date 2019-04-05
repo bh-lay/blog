@@ -151,7 +151,7 @@ $avatar-width = 120px
 					</div>
 					<div class="page-content">
 						<postList
-							:firstPage="$route.params.page"
+							:pageIndex.sync="pageIndex"
 							:friendID="friendID"
 						>
 							<template slot="empty-tips">
@@ -179,6 +179,7 @@ export default {
 	components: {postList},
 	data () {
 		return {
+			pageIndex: 1,
 			detail: {
 				avatar: '',
 				title: '',

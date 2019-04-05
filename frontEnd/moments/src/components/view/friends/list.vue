@@ -8,8 +8,7 @@
 	<div class="friends-page">
 		<div class="page-container">
 			<friendList
-				:firstPage="$route.params.page"
-				@page-change="handlePageChange"
+				:pageIndex.sync="pageIndex"
 			/>
 		</div>
 	</div>
@@ -22,13 +21,30 @@ export default {
 	components: {friendList},
 	data () {
 		return {
+			pageIndex: 1
 		}
 	},
 	created () {
+		this.getParamsFromRoute()
 	},
 	methods: {
-		handlePageChange (pageIndex) {
-			this.$router.replace('/friends/' + pageIndex)
+		handleParamChange () {
+			if (this.pageIndex && this.pageIndex === 1) {
+				this.$router.replace('/friends/')
+			} else {
+				this.$router.replace('/friends/page/' + this.pageIndex)
+			}
+		},
+		getParamsFromRoute () {
+			this.pageIndex = parseInt(this.$route.params.page || 1, 10)
+		}
+	},
+	watch: {
+		$route () {
+			this.getParamsFromRoute()
+		},
+		pageIndex () {
+			this.handleParamChange()
 		}
 	}
 }
