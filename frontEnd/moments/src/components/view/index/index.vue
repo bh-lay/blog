@@ -128,7 +128,7 @@ $banner-height = 400px
 			<div class="page-container">
 				<div class="index-main-body">
 					<div class="index-sidebar">
-						<div class="module-title">标签</div>
+						<div class="module-title">热门标签</div>
 						<tagList />
 						<br>
 					</div>

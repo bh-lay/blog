@@ -36,10 +36,22 @@ export default {
 	components: {},
 	data () {
 		return {
-			tagList: ['javascript', '项目管理', 'VUE', '逆向设计', 'route', '响应式', '甘特图', '生活', '游记', '逆向设计逆向设计逆向设计逆向设计']
+			tagList: []
 		}
 	},
 	created () {
+		this.getTagList()
+	},
+	methods: {
+		getTagList () {
+			fetch('/api/moment/posttags/', {
+				method: 'GET'
+			})
+				.then(response => response.json())
+				.then(({list}) => {
+					this.tagList = list.map(item => item.name)
+				})
+		},
 	}
 }
 </script>
