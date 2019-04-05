@@ -3,7 +3,7 @@
  *
  */
 
-var DB = require('../core/DB.js')
+var DB = require('../../../core/DB.js')
 
 function getTagsList(callback) {
 	DB.getCollection('article')
@@ -44,31 +44,4 @@ function getTagsList(callback) {
 			callback && callback(err)
 		})
 }
-
-function getAllBlogTagsList(callback) {
-	DB.getCollection('article')
-		.then(({collection, client}) => {
-			collection.find().toArray(function (err, docs) {
-				client.close()
-				if (err) {
-					callback && callback(err)
-					return
-				}
-				var tags = []
-				for (var i = 0, total = docs.length; i < total; i++) {
-					tags.push({
-						id: docs[i].id,
-						title: docs[i].title,
-						tag: docs[i].tags
-					})
-				}
-				callback && callback(null, tags)
-			})
-		}).catch(err => {
-			callback && callback(err)
-		})
-}
-
-// 获取所有博文的标签
-exports.getAllBlogTagsList = getAllBlogTagsList
-exports.getTagsList = getTagsList
+module.exports = getTagsList

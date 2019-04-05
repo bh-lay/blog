@@ -18,7 +18,7 @@ function getTag (callback) {
     return;
   }
   utils.fetch({
-    url: '/ajax/tag/list',
+    url: '/api/blogtag/',
     callback: function (err, data) {
       if (err) {
         // do something

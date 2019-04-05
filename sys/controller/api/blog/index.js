@@ -8,6 +8,7 @@ let list = require('./list.js')
 let addBlog = require('./add.js')
 let editBlog = require('./edit.js')
 let deleteBlog = require('./del.js')
+let getTagList = require('./getTagList.js')
 
 exports.list = function (route, connect,app){
 	var url = connect.request.url
@@ -90,7 +91,6 @@ exports.post = function (route, connect){
 	})
 }
 
-
 // 删除
 exports.delete = function (route, connect,app){
 	let ID = route.params.id
@@ -123,4 +123,19 @@ exports.delete = function (route, connect,app){
 			}
 		})
 	}
+}
+
+exports.tagList = function (route, connect,app){
+	
+	app.cache.use('tagsListB',['ajax','article','tags'],function(this_cache){
+		connect.write('json',this_cache)
+	},function(save_cache){
+		getTagList(function(err,list){
+			save_cache(JSON.stringify({
+				code: err ? 500 : 200,
+				list : list
+			}))
+		})
+	})
+
 }

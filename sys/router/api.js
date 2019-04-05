@@ -12,7 +12,6 @@ let labs = require('../controller/api/labs/index.js')
  */
 var user = require('../controller/api/user/index')
 let demo = require('../controller/api/demo/index')
-let tag =  require('../controller/api/tag/index.js')
 let functions =  require('../controller/api/functions.js')
 
 // 清除缓存
@@ -40,6 +39,10 @@ module.exports = [
 	{
 		path: 'rest /api/blog/:id',
 		controller: blog
+	},
+	{
+		path: 'get /api/blogtag/',
+		controller: blog.tagList
 	},
 	// 剧中人的朋友圈
 	{
@@ -76,21 +79,6 @@ module.exports = [
 	{
 		path: 'all /ajax/demo/upload',
 		controller: demo.upload
-	},
-	// 标签模块
-	{
-		path: 'all /ajax/tag/:act',
-		controller(route, connect, app) {
-			var act = route.params.act
-			// 尝试使用ajax模块提供接口
-			if(tag[act]){
-				tag[act](connect,app)
-			}else{
-				connect.write('json',{
-					'code' : 500
-				})
-			}
-		}
 	},
 	{
 		path: 'all /ajax/user/:act',
