@@ -20,6 +20,14 @@ export default new Router({
 			}
 		},
 		{
+			path: '/post/',
+			name: 'postListIndexPage',
+			component: Post,
+			meta: {
+				keepAlive: true
+			}
+		},
+		{
 			path: '/post/page/:page',
 			name: 'postListPage',
 			component: Post,

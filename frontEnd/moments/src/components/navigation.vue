@@ -82,7 +82,7 @@ export default {
 				},
 				{
 					label: '动态',
-					href: '/post/page/1',
+					href: '/post/',
 					type: 'post'
 				}
 			]
@@ -109,7 +109,7 @@ export default {
 			let currentRouteName = this.$route.name
 			if (currentRouteName === 'index') {
 				this.currentNavType = 'index'
-			} else if (currentRouteName === 'postListPage') {
+			} else if (currentRouteName === 'postListPage' || currentRouteName === 'postListIndexPage') {
 				this.currentNavType = 'post'
 			} else if (currentRouteName === 'friendListPage' || currentRouteName === 'friendListIndexPage' || currentRouteName === 'friendDetailPage') {
 				this.currentNavType = 'friend'

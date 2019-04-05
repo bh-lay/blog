@@ -139,7 +139,7 @@
 					<router-link
 						v-for="tag in item.tags"
 						:key="tag"
-						:to="'/post/page/1/?tag=' + tag"
+						:to="'/post/?tag=' + tag"
 					>{{tag}}</router-link>
 				</div>
 				<img

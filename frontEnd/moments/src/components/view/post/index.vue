@@ -31,7 +31,7 @@
 					</div>
 					<div class="index-content">
 						<div class="tag-editor" v-if="tag">
-							标签：{{tag}} <router-link to="/post/page/1/">x</router-link>
+							标签：{{tag}} <router-link to="/post/">x</router-link>
 						</div>
 						<postList
 							:pageIndex.sync="pageIndex"
@@ -62,11 +62,15 @@ export default {
 	},
 	methods: {
 		handleParamChange () {
-			this.$router.replace('/post/page/' + this.pageIndex + (this.tag ? `?tag=${this.tag}` : ''))
+			if (this.pageIndex && this.pageIndex === 1) {
+				this.$router.replace('/post/')
+			} else {
+				this.$router.replace('/post/page/' + this.pageIndex)
+			}
 		},
 		getParamsFromRoute () {
 			this.tag = this.$route.query.tag
-			this.pageIndex = parseInt(this.$route.params.page, 10)
+			this.pageIndex = parseInt(this.$route.params.page, 10) || 1
 		}
 	},
 	watch: {
