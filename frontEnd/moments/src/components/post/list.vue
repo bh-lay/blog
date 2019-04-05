@@ -173,7 +173,7 @@
 import pagination from '../pagination/index.vue'
 export default {
 	name: 'post-list',
-	props: ['disablePagination', 'pageIndex', 'tag'],
+	props: ['disablePagination', 'pageIndex', 'tag', 'friendID'],
 	components: {pagination},
 	data () {
 		return {
@@ -198,7 +198,14 @@ export default {
 		forceGetData () {
 			let skip = (this.pageIndex - 1) * this.pageInfo.size
 			let limit = this.pageInfo.size
-			fetch(`/api/moment/post/?skip=${skip}&limit=${limit}` + (this.tag ? `&tag=${this.tag}` : ''), {
+			let apiUrl = `/api/moment/post/?skip=${skip}&limit=${limit}`
+			if (this.tag) {
+				apiUrl += `&tag=${this.tag}`
+			}
+			if (this.friendID) {
+				apiUrl += `&userid=${this.friendID}`
+			}
+			fetch(apiUrl, {
 				method: 'GET'
 			})
 				.then(response => response.json())

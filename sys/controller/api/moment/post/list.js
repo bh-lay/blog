@@ -71,6 +71,9 @@ module.exports = function get_list(data, callback) {
 	if(data.tag){
 		params.tags = data.tag
 	}
+	if(data.userid){
+		params.userid = data.userid
+	}
 	
 	// 按照分页获取数据
 	return DB.getDB().then(({client, db}) => {

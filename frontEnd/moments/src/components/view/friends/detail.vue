@@ -92,6 +92,7 @@ $avatar-width = 120px
 					<div class="page-content">
 						<postList
 							:firstPage="$route.params.page"
+							:friendID="friendID"
 						/>
 					</div>
 				</div>
