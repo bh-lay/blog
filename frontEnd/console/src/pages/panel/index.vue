@@ -44,8 +44,6 @@
       <el-card class="box-card">
         <h3>更新数据</h3>
         <p>默认每天更新一次，等不及的话可以手动更新。</p>
-
-        <el-button @click="executeFunction('updateFriendsScore')" >更新前端英雄榜分数</el-button>
         <el-button @click="executeFunction('update720yun')">更新720yun数据</el-button>
         <el-button @click="executeFunction('syncMoment')">更新朋友圈数据</el-button>
       </el-card>

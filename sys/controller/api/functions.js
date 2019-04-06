@@ -1,7 +1,6 @@
 /**
  * @author bh-lay
  */
-let updateFriendsScore = require('../../functions/updateFriendsScore.js')
 let my720Data = require('../../functions/my720Data.js')
 let myTuchongData = require('../../functions/myTuchongData.js')
 let moment = require('../../functions/moment/index.js')
@@ -23,9 +22,6 @@ module.exports = function (route, connect,app) {
 			msg: 'update success !'
 		}
 		switch (act) {
-		case 'updateFriendsScore':
-			updateFriendsScore.update()
-			break
 		case 'update720yun':
 			my720Data.update()
 			break

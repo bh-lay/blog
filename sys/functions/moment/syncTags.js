@@ -44,7 +44,6 @@ const addOrUpdateTag = (collection, {name, count}) => {
 	collection.countDocuments({
 		name
 	}, (err, resultCount) => {
-		console.log(name, 'resultCount', resultCount)
 		if (err) {
 			return
 		}
@@ -71,7 +70,6 @@ module.exports = () => {
 			}
 			let tagCollection = db.collection('moment_tag')
 			tagsArray.forEach(tag => {
-				console.log('tag', tag)
 				addOrUpdateTag(tagCollection, tag)
 			});
 			// 延后十秒关闭连接

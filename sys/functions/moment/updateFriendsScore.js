@@ -1,6 +1,6 @@
 
 // author bh-lay
-var DB = require('../core/DB')
+var DB = require('../../core/DB')
 
 exports.update = function (callback) {
 	DB.getCollection('friends')

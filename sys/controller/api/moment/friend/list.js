@@ -22,7 +22,7 @@ module.exports = function get_list(data, callback) {
 		limit: limit_num,
 		skip: skip_num,
 		sort: {
-			adminScore: -1
+			score: -1
 		}
 	})
 		.then(({count, docs}) => {
