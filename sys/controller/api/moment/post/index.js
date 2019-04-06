@@ -98,8 +98,6 @@ exports.delete = function (route, connect,app){
 						connect.write('json',{
 							'code' : 200
 						})
-						// 清除所有缓存
-						app.cache.clear('comment')
 					})
 					.catch((err) => {
 						connect.write('json',{
