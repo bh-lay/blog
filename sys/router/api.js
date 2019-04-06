@@ -2,6 +2,7 @@
 let comments = require('../controller/api/comments/index.js')
 let blog = require('../controller/api/blog/index.js')
 let momentPost = require('../controller/api/moment/post/index.js')
+let momentTag = require('../controller/api/moment/tags/index.js')
 let momentFriend = require('../controller/api/moment/friend/index.js')
 
 // 实验室
@@ -54,12 +55,16 @@ module.exports = [
 		controller: momentPost
 	},
 	{
-		path: 'get /api/moment/posttags/',
-		controller: momentPost.tagList
-	},
-	{
 		path: 'get /api/moment/friend/',
 		controller: momentFriend.list
+	},
+	{
+		path: 'get /api/moment/tag/',
+		controller: momentTag.list
+	},
+	{
+		path: 'rest /api/moment/tag/:id',
+		controller: momentPost
 	},
 	{
 		path: 'rest /api/moment/friend/:id',

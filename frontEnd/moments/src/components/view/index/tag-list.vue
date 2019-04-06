@@ -44,7 +44,7 @@ export default {
 	},
 	methods: {
 		getTagList () {
-			fetch('/api/moment/posttags/', {
+			fetch('/api/moment/tag/', {
 				method: 'GET'
 			})
 				.then(response => response.json())

@@ -8,7 +8,6 @@ let list = require('./list.js')
 let addBlog = require('./add.js')
 let editBlog = require('./edit.js')
 let deleteBlog = require('./del.js')
-let getTagList = require('./getTagList.js')
 
 exports.list = function (route, connect,app){
 	let data = connect.url.search
@@ -111,14 +110,4 @@ exports.delete = function (route, connect,app){
 			}
 		})
 	}
-}
-
-
-exports.tagList = function (route, connect,app){
-	getTagList((err,list) => {
-		connect.write('json', {
-			code: err ? 500 : 200,
-			list : list
-		})
-	})
 }
