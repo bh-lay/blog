@@ -3,7 +3,7 @@
  *
  */
 
-var DB = require('../core/DB.js')
+var DB = require('../../core/DB.js')
 
 const getTagsList = (DBClient) => {
 	let collection = DBClient.collection('moment')

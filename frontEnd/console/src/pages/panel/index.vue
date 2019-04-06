@@ -47,7 +47,7 @@
 
         <el-button @click="executeFunction('updateFriendsScore')" >更新前端英雄榜分数</el-button>
         <el-button @click="executeFunction('update720yun')">更新720yun数据</el-button>
-        <el-button @click="executeFunction('syncMomentTags')">更新朋友圈数据</el-button>
+        <el-button @click="executeFunction('syncMoment')">更新朋友圈数据</el-button>
       </el-card>
       <br>
       <el-card class="box-card">

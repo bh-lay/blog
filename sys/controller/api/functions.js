@@ -4,7 +4,7 @@
 let updateFriendsScore = require('../../functions/updateFriendsScore.js')
 let my720Data = require('../../functions/my720Data.js')
 let myTuchongData = require('../../functions/myTuchongData.js')
-let syncMomentTags = require('../../functions/syncMomentTags.js')
+let moment = require('../../functions/moment/index.js')
 
 function isAdmin (connect, successFn, failFn) {
 	connect.session(function (session_this) {
@@ -32,8 +32,8 @@ module.exports = function (route, connect,app) {
 		case 'updateTuchong':
 			myTuchongData.update()
 			break
-		case 'syncMomentTags':
-			syncMomentTags()
+		case 'syncMoment':
+			moment.sync()
 			break
 		default:
 			responseJson.code = 203
