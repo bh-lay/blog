@@ -51,7 +51,7 @@ export default {
 				.then(({list}) => {
 					this.tagList = list.map(item => item.name)
 				})
-		},
+		}
 	}
 }
 </script>

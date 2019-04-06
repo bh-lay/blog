@@ -200,7 +200,7 @@ export default {
 			}, 50)
 		},
 		forceGetData () {
-			let skip = (this.pageIndex - 1) * this.pageInfo.size
+			let skip = ((this.pageIndex || 1) - 1) * this.pageInfo.size
 			let limit = this.pageInfo.size
 			let apiUrl = `/api/moment/post/?skip=${skip}&limit=${limit}`
 			if (this.tag) {

@@ -104,11 +104,8 @@ module.exports = [
 		}
 	},
 	{
-		path: 'all /ajax/functions/:act',
-		controller(route, connect, app) {
-			var act = route.params.act
-			functions(connect,app,act)
-		}
+		path: 'post /api/functions/:act',
+		controller: functions
 	},
 	{
 		path: 'all /ajax/pano/list',

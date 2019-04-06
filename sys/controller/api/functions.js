@@ -4,6 +4,7 @@
 let updateFriendsScore = require('../../functions/updateFriendsScore.js')
 let my720Data = require('../../functions/my720Data.js')
 let myTuchongData = require('../../functions/myTuchongData.js')
+let syncMomentTags = require('../../functions/syncMomentTags.js')
 
 function isAdmin (connect, successFn, failFn) {
 	connect.session(function (session_this) {
@@ -14,15 +15,8 @@ function isAdmin (connect, successFn, failFn) {
 		}
 	})
 }
-
-module.exports = function (connect, app, act) {
-	if (connect.request.method !== 'POST') {
-		connect.write('json', {
-			'code': 201,
-			'msg': 'please use POST to clear cache !'
-		})
-		return
-	}
+module.exports = function (route, connect,app) {
+	var act = route.params.act
 	isAdmin(connect, function () {
 		var responseJson = {
 			code: 200,
@@ -37,6 +31,9 @@ module.exports = function (connect, app, act) {
 			break
 		case 'updateTuchong':
 			myTuchongData.update()
+			break
+		case 'syncMomentTags':
+			syncMomentTags()
 			break
 		default:
 			responseJson.code = 203

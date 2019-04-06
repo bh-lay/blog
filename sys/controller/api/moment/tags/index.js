@@ -8,7 +8,7 @@ let list = require('./list.js')
 let addBlog = require('./add.js')
 let editBlog = require('./edit.js')
 let deleteBlog = require('./del.js')
-let syncTagsFromPost = require('./sync-tags-from-post.js')
+
 exports.list = function (route, connect,app){
 	let data = connect.url.search
 	list(data, function(json_data){
@@ -39,8 +39,6 @@ exports.put = function (route, connect){
 						code: 1,
 						msg: 'edit success !'
 					})
-					// 更新标签数据
-					syncTagsFromPost()
 				})
 				.catch(err => {
 					connect.write('json',{
@@ -68,9 +66,6 @@ exports.post = function (route, connect){
 						code: 1,
 						msg: 'create success !'
 					})
-
-					// 更新标签数据
-					syncTagsFromPost()
 				})
 				.catch(err => {
 					connect.write('json',{
@@ -100,9 +95,6 @@ exports.delete = function (route, connect,app){
 						connect.write('json',{
 							'code' : 200
 						})
-
-						// 更新标签数据
-						syncTagsFromPost()
 					})
 					.catch((err) => {
 						connect.write('json',{
