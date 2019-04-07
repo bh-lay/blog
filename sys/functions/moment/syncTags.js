@@ -71,7 +71,7 @@ module.exports = () => {
 			let tagCollection = db.collection('moment_tag')
 			tagsArray.forEach(tag => {
 				addOrUpdateTag(tagCollection, tag)
-			});
+			})
 			// 延后十秒关闭连接
 			setTimeout(() => {
 				client.close()
