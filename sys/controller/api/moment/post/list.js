@@ -67,6 +67,7 @@ module.exports = function get_list(data, callback) {
 	let params = {}
 	// 内容由 markdown 转为 html
 	let markdownConverter = new showdown.Converter()
+	markdownConverter.setOption('noHeaderId', true)
 	// 过滤标签
 	if(data.tag){
 		params.tags = data.tag
