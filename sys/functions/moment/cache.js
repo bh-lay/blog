@@ -60,4 +60,4 @@ const setCache = (cacheName, content) => {
 }
 
 exports.get = getCache
-exports.set = setCache
+exports.save = setCache
