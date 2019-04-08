@@ -92,12 +92,6 @@ export default {
 	name: 'feedback',
 	data () {
 		return {
-			bannerList: [
-				{
-					backgroundColor: '#3d271c',
-					imgUrl: 'https://news.720yun.com/home/o_1d6p9kq541lk117h9dr61uoe1sgc.jpg'
-				}
-			]
 		}
 	},
 	created () {
