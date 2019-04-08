@@ -6,19 +6,21 @@ const collectionName = 'moment_cache'
 
 // 获取缓存
 const getCache = cacheName => {
-	return new Promise((resolve, reject) => {
-		DB.getCollection(collectionName)
-			.then(({collection, client}) => {
+	return DB.getCollection(collectionName)
+		.then(({collection, client}) => {
+			return new Promise((resolve, reject) => {
 				collection.findOne({
 					name: cacheName
 				}, (err, doc) => {
 					client.close()
-					resolve(doc)
+					if (err || !doc) {
+						reject(err)
+					} else {
+						resolve(doc)
+					}
 				})
-			}).catch(err => {
-				reject(err)
 			})
-	})
+		})
 }
 
 // 设置缓存

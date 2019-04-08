@@ -4,7 +4,7 @@ let blog = require('../controller/api/blog/index.js')
 let momentPost = require('../controller/api/moment/post/index.js')
 let momentTag = require('../controller/api/moment/tags/index.js')
 let momentFriend = require('../controller/api/moment/friend/index.js')
-let momentSummary = require('../controller/api/moment/summary.js')
+let momentCache = require('../controller/api/moment/cache.js')
 
 // 实验室
 let labs = require('../controller/api/labs/index.js')
@@ -72,8 +72,8 @@ module.exports = [
 		controller: momentFriend
 	},
 	{
-		path: 'get /api/moment/summary/',
-		controller: momentSummary.list
+		path: 'get /api/moment/cache/:name',
+		controller: momentCache.detail
 	},
 	// 实验室
 	{

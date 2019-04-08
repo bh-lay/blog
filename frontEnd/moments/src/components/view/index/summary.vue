@@ -52,12 +52,12 @@ export default {
 	},
 	methods: {
 		getList () {
-			fetch('/api/moment/summary/', {
+			fetch('/api/moment/cache/summary', {
 				method: 'GET'
 			})
 				.then(response => response.json())
-				.then(({list}) => {
-					this.summary = list
+				.then(({content}) => {
+					this.summary = content
 				})
 		}
 	}
