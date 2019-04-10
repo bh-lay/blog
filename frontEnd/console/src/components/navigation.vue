@@ -17,6 +17,7 @@
           <el-menu-item index="/content-comments">评论管理</el-menu-item>
           <el-menu-item index="/content/moment">朋友圈动态</el-menu-item>
           <el-menu-item index="/content-links">朋友圈好友</el-menu-item>
+          <el-menu-item index="/content/moment/cache">朋友圈缓存</el-menu-item>
         </el-menu-item-group>
       </el-submenu>
       <el-menu-item index="/gallery">

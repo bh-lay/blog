@@ -8,6 +8,8 @@ import Comments from '@/pages/content/comments'
 
 import ArticleEditor from '@/pages/editor/article'
 import Moment from '@/pages/moment/list'
+import MomentCache from '@/pages/moment/cache/list'
+import MomentCacheEditor from '@/pages/moment/cache/editor'
 import MomentEditor from '@/pages/moment/editor'
 
 import LabsEditor from '@/pages/editor/labs'
@@ -34,6 +36,17 @@ let routes = [{
   name: '剧中人的朋友圈列表页面',
   component: Moment
 },
+{
+  path: '/content/moment/cache',
+  name: '剧中人的朋友圈缓存页面',
+  component: MomentCache
+},
+{
+  path: '/editor/moment/cache/:name',
+  name: '剧中人的朋友圈缓存页面',
+  component: MomentCacheEditor
+},
+
 {
   path: '/gallery',
   name: '图库',
