@@ -38,46 +38,17 @@ export default {
 	components: {},
 	data () {
 		return {
-			postList: [
-				{
-					title: '记一次「随意」的照片赠送',
-					url: 'https://zhuwenlong.com/blog/article/5c36ba26b95a0e17952cffd6',
-					author: '朱文龙'
-				},
-				{
-					title: '720云产品发布会小记',
-					url: 'https://zhuwenlong.com/blog/article/5c36ba26b95a0e17952cffd6',
-					author: '剧中人'
-				},
-				{
-					title: 'JavaScript数字前补技巧JavaScript数字前补0小技巧',
-					url: 'https://zhuwenlong.com/blog/article/5c36ba26b95a0e17952cffd6',
-					author: '朱文龙'
-				},
-				{
-					title: '合肥GDG酱油之行',
-					url: 'https://zhuwenlong.com/blog/article/5c36ba26b95a0e17952cffd6',
-					author: '剧中人'
-				},
-				{
-					title: '网速/流量实时监测logo设计',
-					url: 'https://zhuwenlong.com/blog/article/5c36ba26b95a0e17952cffd6',
-					author: '朱文龙'
-				},
-				{
-					title: '拿什么拯救我拙劣的摄影水平',
-					url: 'https://zhuwenlong.com/blog/article/5c36ba26b95a0e17952cffd6',
-					author: '朱文龙'
-				},
-				{
-					title: 'JavaScript数字前补0小技巧',
-					url: 'https://zhuwenlong.com/blog/article/5c36ba26b95a0e17952cffd6',
-					author: '剧中人'
-				}
-			]
+			postList: []
 		}
 	},
 	created () {
+		fetch('/api/moment/cache/recommandReading', {
+			method: 'GET'
+		})
+			.then(response => response.json())
+			.then(({content}) => {
+				this.postList = content
+			})
 	}
 }
 </script>
