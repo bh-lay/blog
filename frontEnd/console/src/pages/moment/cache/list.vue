@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div><el-button @click="handleCreate" type="button">发好友动态</el-button></div>
+    <div><el-button @click="handleCreate" type="button">创建缓存</el-button></div>
     <br>
     <el-table
       :data="tableData"
@@ -104,7 +104,7 @@ export default {
     },
     handleCreate () {
       this.$router.push({
-        path: '/editor/moment/new'
+        path: '/editor/moment/cache/new'
       })
     }
   }

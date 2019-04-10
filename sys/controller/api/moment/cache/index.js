@@ -40,7 +40,6 @@ exports.put = function (route, connect){
 			return
 		}
 		utils.parse.request(connect.request, (err, data) => {
-			console.log('data', data)
 			let content = JSON.parse(data.content)
 			cache.save(cacheName, content)
 				.then(() => {
