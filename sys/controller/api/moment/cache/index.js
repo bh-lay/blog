@@ -30,6 +30,7 @@ exports.get = function (route, connect,app){
 		})
 }
 exports.put = function (route, connect){
+	let cacheName =  route.params.name
 	connect.session(function(session_this){
 		if(!session_this.power(power.BLOG_EDIT)){
 			connect.write('json', {
@@ -39,9 +40,9 @@ exports.put = function (route, connect){
 			return
 		}
 		utils.parse.request(connect.request, (err, data) => {
-			let cacheName = data.name
-			let content = data.content
-			cache.setCache(cacheName, content)
+			console.log('data', data)
+			let content = JSON.parse(data.content)
+			cache.save(cacheName, content)
 				.then(() => {
 					connect.write('json',{
 						code: 1,
@@ -52,35 +53,6 @@ exports.put = function (route, connect){
 					connect.write('json',{
 						code: 2,
 						msg: err.message || 'edit failed !'
-					})
-				})
-		})
-	})
-}
-
-exports.post = function (route, connect){
-	connect.session(function(session_this){
-		if(!session_this.power(power.BLOG_CREATE)){
-			connect.write('json', {
-				code: 206,
-				msg: '没有权限'
-			})
-			return
-		}
-		utils.parse.request(connect.request, (err, data) => {
-			let cacheName = data.name
-			let content = data.content
-			cache.setCache(cacheName, content)
-				.then(() => {
-					connect.write('json',{
-						code: 1,
-						msg: 'create success !'
-					})
-				})
-				.catch(err => {
-					connect.write('json',{
-						code: 2,
-						msg: err.message || 'create failed !'
 					})
 				})
 		})

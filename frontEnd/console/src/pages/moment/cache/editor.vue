@@ -28,8 +28,8 @@
 
       <el-form-item>
         <el-button type="primary" @click="onSubmit">
-          <span v-if="id">修改缓存</span>
-          <span v-if="!id">发布缓存</span>
+          <span v-if="cacheName">更新缓存</span>
+          <span v-if="!cacheName">创建缓存</span>
         </el-button>
         <el-button @click="onCancel">取消</el-button>
       </el-form-item>
@@ -71,29 +71,15 @@ export default {
   },
   methods: {
     onSubmit () {
-      let data = {
-        name: this.name,
-        content: this.form.content
-      }
-      if (!data.title || !data.content) {
-        this.$alert('二货，咱写点儿干货行不行呐！')
-      }
-      let url
-      let method
-      if (this.mode === 'edit') {
-        url = '/api/moment/cache/' + this.id
-        method = 'PUT'
-      } else {
-        url = '/api/moment/cache/0'
-        method = 'POST'
-      }
-      return fetch(url, {
-        method,
+      return fetch('/api/moment/cache/' + this.form.name, {
+        method: 'PUT',
         credentials: 'same-origin',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
         },
-        body: querystring.stringify(data)
+        body: querystring.stringify({
+          content: this.form.content
+        })
       })
       .then(response => response.json())
       .then(() => {
