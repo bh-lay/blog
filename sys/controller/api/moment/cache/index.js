@@ -20,7 +20,7 @@ exports.get = function (route, connect,app){
 		.then(data => {
 			connect.write('json', {
 				code: 200,
-				data
+				content: data.content
 			})
 		})
 		.catch(err => {

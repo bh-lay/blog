@@ -61,11 +61,11 @@ export default {
   },
   created () {
     this.cacheName = this.$route.params.name
+    this.form.name = this.cacheName
     this.mode = this.cacheName === 'new' ? 'create' : 'edit'
     if (this.mode === 'edit') {
-      getCacheDtail(this.cacheName).then(({code, data = {}}) => {
-        this.form.name = data.name
-        this.form.content = JSON.stringify(data.content)
+      getCacheDtail(this.cacheName).then(({code, content = {}}) => {
+        this.form.content = JSON.stringify(content)
       })
     }
   },
@@ -86,14 +86,14 @@ export default {
         let msg = this.mode === 'edit' ? '更新成功！' : '发布成功'
         this.$alert(msg, {
           callback: action => {
-            this.$router.push('/content/moment')
+            this.$router.push('/content/moment/cache')
           }
         })
       })
     },
     onCancel () {
       this.$router.push({
-        path: '/content/moment'
+        path: '/content/moment/cache'
       })
     }
   }
