@@ -34,12 +34,6 @@
         <el-button @click="onCancel">取消</el-button>
       </el-form-item>
     </el-form>
-    <el-dialog title="谁发布的？" width="1200px" :visible.sync="userSelectorVisible">
-        <userSelector
-          :userid="form.userid"
-          @selected="handleUserSelected"
-        />
-    </el-dialog>
   </el-card>
 </template>Î
 
@@ -99,26 +93,14 @@ export default {
   },
   methods: {
     onSubmit () {
-      let data = {
-        id: this.id,
-        userid: this.form.userid,
-        title: this.form.title,
-        cover: this.form.cover,
-        content: this.$refs.markdownEditor.getContent(),
-        originalUrl: this.form.originalUrl,
-        tags: this.form.tags.join(','),
-        createTime: this.form.createTime.getTime()
-      }
-      if (!data.title || !data.content) {
-        this.$alert('二货，咱写点儿干货行不行呐！')
-      }
+      let data = this.form
       let url
       let method
       if (this.mode === 'edit') {
-        url = '/api/moment/post/' + this.id
+        url = '/api/moment/friend/' + this.id
         method = 'PUT'
       } else {
-        url = '/api/moment/post/0'
+        url = '/api/moment/friend/0'
         method = 'POST'
       }
       return fetch(url, {
@@ -134,14 +116,14 @@ export default {
         let msg = this.mode === 'edit' ? '更新成功！' : '发布成功'
         this.$alert(msg, {
           callback: action => {
-            this.$router.push('/content/moment')
+            this.$router.push('/moment/friends')
           }
         })
       })
     },
     onCancel () {
       this.$router.push({
-        path: '/content/moment'
+        path: '/moment/friends'
       })
     }
   }
