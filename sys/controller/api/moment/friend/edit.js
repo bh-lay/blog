@@ -11,6 +11,7 @@ module.exports = params => {
 	return new Promise((resolve, reject) => {
 		if (!data) {
 			reject(new Error('请输入完整数据！'))
+			return
 		}
 		DB.getCollection(collectionName)
 			.then(({collection, client}) => {

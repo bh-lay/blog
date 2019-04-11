@@ -18,8 +18,9 @@ module.exports = data => {
 	if(params['id'].length < 2){
 		params['time_create'] = new Date().getTime()
 	}
-	if(!(params['title']&&params['url'])){
+	console.log('params', params)
+	if(!(params['title'] || !params['url'])){
 		return null
 	}
-	return !(params['title'] && params['content']) ? null : params
+	return params
 }
