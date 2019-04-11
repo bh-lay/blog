@@ -4,6 +4,7 @@ import Panel from '@/pages/panel/index'
 import Article from '@/pages/content/article'
 import Labs from '@/pages/content/labs'
 import Links from '@/pages/content/links'
+import FriendEditor from '@/pages/moment/friend-editor.vue'
 import Comments from '@/pages/content/comments'
 
 import ArticleEditor from '@/pages/editor/article'
@@ -63,7 +64,18 @@ let routes = [{
   component: Comments
 },
 {
-  path: '/content-links',
+  path: '/moment/friends',
+  name: '前端英雄榜',
+  component: Links
+},
+{
+  path: '/moment/friend/editor/:id',
+  name: '编辑好友',
+  component: FriendEditor
+},
+
+{
+  path: '/moment/friends',
   name: '前端英雄榜',
   component: Links
 },

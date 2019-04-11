@@ -20,7 +20,7 @@
         <template slot-scope="scope">
           <a href="javascript:void(0)"></a>
           <a href="javascript:void(0)"></a>
-          <el-button type="text" size="small">编辑</el-button>
+          <el-button type="text" size="small" @click="handleEdit(scope.row)">编辑</el-button>
           <el-button @click="handleDelete(scope.row)" type="text" size="small">删除</el-button>
         </template>
       </el-table-column>
@@ -96,6 +96,9 @@ export default {
           this.getData()
         })
       }).catch(() => {})
+    },
+    handleEdit (item) {
+      this.$router.push('/moment/friend/editor/' + item.id)
     },
     handleCreate () {
     }
