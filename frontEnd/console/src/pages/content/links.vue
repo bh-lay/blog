@@ -1,5 +1,7 @@
 <template>
   <div>
+    <div><el-button @click="handleCreate" type="button">增加好友</el-button></div>
+    <br>
     <el-table
       :data="tableData"
       style="width: 100%">
@@ -101,6 +103,7 @@ export default {
       this.$router.push('/moment/friend/editor/' + item.id)
     },
     handleCreate () {
+      this.$router.push('/moment/friend/editor/new')
     }
   }
 }
