@@ -10,6 +10,7 @@ const base64Decode = str => {
 module.exports = function (route, connect, app) {
 	// 获取 URL 配置参数
 	let target = base64Decode(route.params.target || '')
+	target = decodeURIComponent(target)
 	analysis.push({
 		request: connect.request,
 		response: connect.response,
