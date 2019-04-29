@@ -13,7 +13,7 @@ module.exports = function (momentID, format, callback) {
 		id : momentID,
 		format : format
 	}
-	DB.getCollection('moment')
+	DB.getCollection('moment_post')
 		.then(({collection, client}) => {
 			collection.find({
 				id: momentID

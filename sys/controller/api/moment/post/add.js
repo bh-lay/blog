@@ -6,7 +6,7 @@
 let DB = require('../../../../core/DB.js')
 let utils = require('../../../../core/utils/index.js')
 let parseData = require('./parse.js')
-let collectionName = 'moment'
+let collectionName = 'moment_post'
 
 module.exports = params => {
 	let data = parseData(params)

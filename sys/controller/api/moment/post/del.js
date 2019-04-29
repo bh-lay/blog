@@ -16,7 +16,7 @@ module.exports = ID => {
 			reject(new Error('missing ID'))
 			return
 		}
-		DB.getCollection('moment')
+		DB.getCollection('moment_post')
 			.then(({collection, client}) => {
 				if (isNaN(parseInt(ID))) {
 					reject(new Error('id 不合法'))

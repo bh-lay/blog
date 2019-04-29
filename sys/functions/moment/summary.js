@@ -23,7 +23,7 @@ const updateSummary = () => {
 	return DB.getDB().then(({client, db}) => {
 		let queryList = [
 			{
-				collectionName: 'moment',
+				collectionName: 'moment_post',
 				label: '文章引入',
 				unit: '篇'
 			},

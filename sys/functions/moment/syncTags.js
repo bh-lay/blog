@@ -6,7 +6,7 @@
 var DB = require('../../core/DB.js')
 
 const getTagsList = (DBClient) => {
-	let collection = DBClient.collection('moment')
+	let collection = DBClient.collection('moment_post')
 	return new Promise((resolve, reject) => {
 		collection.find().toArray(function (err, docs) {
 			if (err) {

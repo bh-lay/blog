@@ -78,7 +78,7 @@ module.exports = function get_list(data, callback) {
 	
 	// 按照分页获取数据
 	return DB.getDB().then(({client, db}) => {
-		const collection = db.collection('moment')
+		const collection = db.collection('moment_post')
 		DB.getDocsForPagination(collection, {
 			params,
 			limit: limit_num,
