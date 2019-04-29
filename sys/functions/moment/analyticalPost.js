@@ -1,11 +1,11 @@
 
 // author bh-lay
 var DB = require('../../core/DB')
+let analysis = require('../analysis/index.js')
 exports.update = function (callback) {
 	DB.getDB()
 		.then(({client, db}) => {
 			const postCollection = db.collection('moment_post')
-			const analysisCollection = db.collection('analysis')
 			let needUpdateCount = 0
 			let updatedCount = 0
 			const checkIsSuccess = () => {
@@ -15,40 +15,28 @@ exports.update = function (callback) {
 				}
 				return isEnd
 			}
-			postCollection.find({}).forEach((err, doc) => {
-				// 遍历结束，退出
-				if (!doc) {
-					return
-				}
-				if (err) {
-					return
-				}
-				needUpdateCount++
+			postCollection.find({}).forEach(doc => {
 				let target = doc.originalUrl
-				analysisCollection.countDocuments({
+				analysis.count({
 					type:'redirect',
 					params: {
 						target
 					}
-				}, (err, count) => {
-					if (err) {
-						updatedCount++
-						checkIsSuccess()
-						return
-					}
-					postCollection.updateOne({
-						_id: doc._id
-					}, {
-						$set: {
-							analysis: {
-								view: count
-							}
-						}
-					}, function () {
-						updatedCount++
-						checkIsSuccess()
-					})
 				})
+					.then(result => {
+						postCollection.updateOne({
+							_id: doc._id
+						}, {
+							$set: {
+								analysis: {
+									pv: result.pv
+								}
+							}
+						}, function () {
+							updatedCount++
+							checkIsSuccess()
+						})
+					})
 			})
 		})
 		.catch((error) => {

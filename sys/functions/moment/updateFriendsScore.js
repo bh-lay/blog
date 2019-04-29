@@ -19,7 +19,11 @@ exports.update = function (callback) {
 					var hasBlog = item.url && item.url.length > 10 ? 1 : 0
 					var adminScore = parseInt(item.adminScore || 0)
 					item.score = hasGithub * 4 + hasBlog * 3 + hasCover * 2 + adminScore
-					collection.save(item, function () { })
+					collection.updateOne({
+						_id: item._id
+					}, {
+						$set: item
+					}, function () { })
 				})
 				client.close()
 
