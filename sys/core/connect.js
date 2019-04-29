@@ -122,6 +122,9 @@ CONNECT.prototype['write'] = function(type,a,b,c){
 		break
 	}
 }
+CONNECT.prototype.setHeader = function (key, value) {
+	this.response.setHeader(key, value)
+}
 /**
  *  //获取完整cookie
  *  connect.cookie();

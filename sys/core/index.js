@@ -14,7 +14,14 @@ var http = require('http'),
 	utils = require('./utils/index.js'),
 	session_factory = require('./session.js')
 
-
+function crossCheck(connect){
+	let referer = connect.request.headers.referer || ''
+	let subDomainMatched = referer.match(/(http(s|)\:\/\/[^\.\/]+\.bh-lay\.com)/)
+	if (subDomainMatched) {
+		connect.setHeader('Access-Control-Allow-Origin', subDomainMatched[0])
+		connect.setHeader('Access-Control-Allow-Methods', 'GET')
+	}
+}
 /**
  * application 类
  */
@@ -34,16 +41,17 @@ class APP {
 			let newConnect = new connect(req, res, this.session)
 			let path = newConnect.url
 			let matchedRoutes = this.matchRequestInRoutes(path.pathname, newConnect.request.method)
-
+			// 第一顺序，执行跨域检测
+			crossCheck(newConnect)
 			if(matchedRoutes.length){
-				// 第一顺序：执行get方法设置的回调
+				// 第二顺序：执行get方法设置的回调
 				// 使用匹配的最后一个 controller
 				let usedRoute = matchedRoutes[matchedRoutes.length - 1]
 				usedRoute.controller(usedRoute, newConnect, this)
 			}else{
-				// 第二顺序：使用静态文件
+				// 第三顺序：使用静态文件
 				this.fileReader.read(path.pathname, req,res, () => {
-					// 第三顺序：查找301重定向
+					// 第四顺序：查找301重定向
 					if(url_redirect[path.pathname]){
 						newConnect.write('define',301,{
 							'location' : url_redirect[path.pathname]
