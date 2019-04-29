@@ -14,21 +14,23 @@ const base64Decode = str => {
 	return Buffer.from(str, 'base64').toString()
 }
 
-const ifHashPermission = (route, connect, callback) => {
+const ifHasPermission = (route, connect, callback) => {
 	let pathBase64 = route.params.path
 	let realPath = base64Decode(pathBase64)
 	// 去除首尾 【/】
 	realPath = realPath.replace(/^\/|\/$/g,'')
 	let pathname = assetPath + realPath
 	// 屏蔽非法请求
-	if (pathname.indexOf('../') > -1) {
+	if (realPath.indexOf('../') > -1) {
 		connect.write('json',{
 			code : 201,
 			msg : 'no power'
 		})
+		return
 	}
 	connect.session(function(session_this){
-		if(session_this.get('user_group') == 'admin'){
+		let userGroup = session_this.get('user_group')
+		if(userGroup === 'admin'){
 			callback && callback(pathname)
 		}else{
 			connect.write('json',{
@@ -41,7 +43,7 @@ const ifHashPermission = (route, connect, callback) => {
 
 // 获取某一目录下文件（文件夹）列表
 exports.get = (route, connect) => {
-	ifHashPermission(route, connect, pathname => {
+	ifHasPermission(route, connect, pathname => {
 		fs.lstat(pathname, (err, stat) => {
 			if (err) {
 				connect.write('json',{
@@ -74,7 +76,7 @@ exports.get = (route, connect) => {
 }
 // 上传文件
 exports.post = (route, connect) => {
-	ifHashPermission(route, connect, pathname => {
+	ifHasPermission(route, connect, pathname => {
 
 		upload(pathname, connect.request, (err,files) => {
 			if(err){
@@ -92,7 +94,7 @@ exports.post = (route, connect) => {
 }
 // 重命名
 exports.put = (route, connect) => {
-	ifHashPermission(route, connect, pathname => {
+	ifHasPermission(route, connect, pathname => {
 		rename(pathname, connect.request, function(err){
 			if(err){
 				connect.write('json',{
@@ -108,7 +110,7 @@ exports.put = (route, connect) => {
 }
 // 删除
 exports.delete = (route, connect) => {
-	ifHashPermission(route, connect, pathname => {
+	ifHasPermission(route, connect, pathname => {
 		delPath(pathname, connect.request, function(err){
 			if(err){
 				connect.write('json',{
@@ -125,7 +127,7 @@ exports.delete = (route, connect) => {
 }
 
 exports.createPath = (route, connect) => {
-	ifHashPermission(route, connect, () => {
+	ifHasPermission(route, connect, () => {
 		createDir(connect.request, err => {
 			if(err){
 				connect.write('json',{
