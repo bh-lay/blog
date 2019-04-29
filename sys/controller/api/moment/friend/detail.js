@@ -4,8 +4,6 @@
 
 let DB = require('../../../../core/DB.js')
 
-let showdown  = require('showdown')
-
 module.exports = function (friendsID, callback) {
 	
 	let resJSON={

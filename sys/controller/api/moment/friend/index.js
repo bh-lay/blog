@@ -1,6 +1,7 @@
 /*
  * @author bh-lay
  */
+let analysis = require('../../../../functions/analysis/index.js')
 let power = require('../../../../conf/power.js')
 let utils = require('../../../../core/utils/index.js')
 let detail = require('./detail.js')
@@ -15,12 +16,22 @@ exports.list = function (route, connect,app){
 		connect.write('json',json_data)
 	})
 }
-
-exports.get = function (route, connect,app){
-	let data = connect.url.search
+// 获取好友详情
+exports.get = function (route, connect){
 	let id = route.params.id
 	detail(id, function(json_data){
 		connect.write('json',json_data)
+	})
+
+	// 打点统计
+	analysis.push({
+		request: connect.request,
+		response: connect.response,
+		type: 'view',
+		params: {
+			catalog: 'moment-friend',
+			id
+		}
 	})
 }
 exports.put = function (route, connect){
