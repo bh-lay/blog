@@ -7,4 +7,3 @@
 - indexPage.html
 - labsDetail.html
 - labsList.html
-- links.html

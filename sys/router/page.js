@@ -5,8 +5,6 @@ var singlePage = require('../controller/singlePage.js')
 
 // 首页
 var index = require('../controller/index.js')
-// 前端英雄榜
-var links = require('../controller/links.js')
 // 博客
 var blog = require('../controller/blog.js')
 // 实验室
@@ -36,10 +34,6 @@ module.exports = [
 	{
 		path: 'get /',
 		controller: adaptionViewForSinglePage(index.get)
-	},
-	{
-		path: 'get /directories',
-		controller: adaptionViewForSinglePage(links.render)
 	},
 	{
 		path: 'get /blog',

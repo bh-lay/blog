@@ -3,7 +3,8 @@
  */
 
 module.exports = {
-	'/link': '/directories',
+	'/link': 'http://moments.bh-lay.com',
+	'/directories': 'http://moments.bh-lay.com',
 	// directory
 	'/about':'/blog',
 	'/about/':'/blog',
