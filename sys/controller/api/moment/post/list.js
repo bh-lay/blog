@@ -84,7 +84,7 @@ module.exports = function get_list(data, callback) {
 			limit: limit_num,
 			skip: skip_num,
 			sort: {
-				time_show: -1
+				createTime: -1
 			}
 		})
 			.then(({count, docs}) => {
