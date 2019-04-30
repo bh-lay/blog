@@ -13,7 +13,7 @@ module.exports = data => {
 		content: data['content'],
 		originalUrl: data['originalUrl'],
 		tags: data['tags'] ? data['tags'].split(/\s*,\s*/) : [],
-		createTime: data['time_show'] || new Date().getTime().toString()
+		createTime: data['createTime'] || new Date().getTime().toString()
 	}
 	return !(params['title'] && params['content']) ? null : params
 }
