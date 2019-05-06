@@ -49,19 +49,40 @@ function loadImg (src, callback) {
   img.onerror = img.onload = End;
   img.src = src;
 }
+function prefixID (htmlPart) {
+  let idMatches = htmlPart.match(/^<h\d\s[^>]*data-id=(?:"|')([^"']+)/)
+  let id = ''
+  console.log('idMatches', idMatches)
+  if (idMatches) {
+    id = idMatches[1]
+  } else {
+    id = parseInt(Math.random() * 1000, 10) + '_' + parseInt(Math.random() * 100 * 100)
+    htmlPart = htmlPart.replace(/(^<h\d)/, `$1 data-id="${id}" `)
+  }
+  return {
+    htmlPart,
+    id
+  }
+}
 function getToc (article) {
-  var result = []
-  article.replace(/<h(\d)\s[^>]+>([^<]+)/g, (a, indent, text) => {
-    result.push({
+  var toc = []
+  article = article.replace(/<h(\d)(?:\s[^>]+)*>([^<]+)/g, (htmlPart, indent, text) => {
+    let prefix = prefixID(htmlPart, indent, text)
+    toc.push({
       indent,
-      text
+      text,
+      id: prefix.id
     })
+    return prefix.htmlPart
   })
-  let minItendent = Math.min.apply(Math, result.map(item => item.indent))
-  result.forEach(item => {
+  let minItendent = Math.min.apply(Math, toc.map(item => item.indent))
+  toc.forEach(item => {
     item.indent = item.indent - minItendent
   })
-  return result
+  return {
+    article,
+    toc
+  }
 }
 export default function (global, id) {
   let node = global.node;
@@ -71,9 +92,11 @@ export default function (global, id) {
       global.refresh();
       return;
     }
-    let toc = getToc(detail.content)
+    let result = getToc(detail.content)
+    detail.content = result.article
+    detail.toc = result.toc
     global.title(detail.title);
-    console.log('toc', toc)
+
     let hasCover = detail.cover && detail.cover.length;
     node.innerHTML = juicer(template, {
       article: detail,
@@ -117,6 +140,14 @@ export default function (global, id) {
 
     new CommentInit(utils.query('.comments_frame', node), 'blog-' + id, {
       list_num: 8
+    });
+    utils.bind(utils.query('.toc-content', node), 'click', 'a', function (event) {
+      let href = this.getAttribute('href').replace(/^#/, '')
+      let node = utils.query('[data-id="' + href + '"]')
+      if (!node) {
+        return
+      }
+      window.scrollTo(0, node.offsetTop - 100)
     });
   });
 };

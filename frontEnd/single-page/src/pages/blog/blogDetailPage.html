@@ -12,6 +12,9 @@
                 <h1>${article.title}</h1>
                 <p>发布时间：<span>${article.time_show} </span></p>
             </div>
+            <div class="article toc-content">
+            {@each article.toc as it}<a href="#${it.id}">${it.text}</a>{@/each}
+            </div>
             <div class="article">$${article.content}</div>
             <footer>
                 <p><strong>tgs：</strong>${article.tags}</p>
