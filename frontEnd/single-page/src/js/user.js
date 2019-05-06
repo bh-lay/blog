@@ -66,7 +66,7 @@ function info (onResponse, useCacheFlag) {
           userInfo = JSON.parse(user);
           // 增加gravatar头像(md5邮箱)
           if (userInfo.email.length) {
-            userInfo.avatar = '//www.gravatar.com/avatar/' + hexMd5(userInfo.email);
+            userInfo.avatar = '//www.gravatar.com/avatar/' + hexMd5(userInfo.email) + '?s=100';
           }
           onResponse && onResponse(null, userInfo, 'local');
         } else {
