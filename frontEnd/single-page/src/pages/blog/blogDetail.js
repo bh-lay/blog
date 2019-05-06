@@ -49,7 +49,20 @@ function loadImg (src, callback) {
   img.onerror = img.onload = End;
   img.src = src;
 }
-
+function getToc (article) {
+  var result = []
+  article.replace(/<h(\d)\s[^>]+>([^<]+)/g, (a, indent, text) => {
+    result.push({
+      indent,
+      text
+    })
+  })
+  let minItendent = Math.min.apply(Math, result.map(item => item.indent))
+  result.forEach(item => {
+    item.indent = item.indent - minItendent
+  })
+  return result
+}
 export default function (global, id) {
   let node = global.node;
   getData(id, function (err, detail, title) {
@@ -58,9 +71,9 @@ export default function (global, id) {
       global.refresh();
       return;
     }
-
+    let toc = getToc(detail.content)
     global.title(detail.title);
-
+    console.log('toc', toc)
     let hasCover = detail.cover && detail.cover.length;
     node.innerHTML = juicer(template, {
       article: detail,
