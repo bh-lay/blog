@@ -8,25 +8,32 @@
             </div>
         </header>
         <div class="article-section">
-            <div class="caption">
-                <h1>${article.title}</h1>
-                <p>发布时间：<span>${article.time_show} </span></p>
+            <div class="article-section-body">
+                <div class="caption">
+                    <h1>${article.title}</h1>
+                    <p>发布时间：<span>${article.time_show} </span></p>
+                </div>
+                <div class="article">$${article.content}</div>
+                <footer>
+                    <p><strong>tgs：</strong>${article.tags}</p>
+                    <p><strong>转载请注明来源：</strong>http://bh-lay.com/blog/${article.id}</p>
+                </footer>
+                <div class="sns-share" data-text="${article.intro}" data-url="http://bh-lay.com/blog/${article.id}"
+                    data-title="${article.title}"
+                    data-img="${article.cover}">
+                    <a href="#" title="分享至新浪微博" data-shareto="weibo">
+                        <i class="l-icon l-icon-weibo"></i>
+                        <span>分享</span>
+                    </a>
+                </div>
             </div>
-            <div class="article toc-content">
-            {@each article.toc as it}<a href="#${it.id}">${it.text}</a>{@/each}
-            </div>
-            <div class="article">$${article.content}</div>
-            <footer>
-                <p><strong>tgs：</strong>${article.tags}</p>
-                <p><strong>转载请注明来源：</strong>http://bh-lay.com/blog/${article.id}</p>
-            </footer>
-            <div class="sns-share" data-text="${article.intro}" data-url="http://bh-lay.com/blog/${article.id}"
-                 data-title="${article.title}"
-                 data-img="${article.cover}">
-                <a href="#" title="分享至新浪微博" data-shareto="weibo">
-                    <i class="l-icon l-icon-weibo"></i>
-                    <span>分享</span>
-                </a>
+            <div class="article-section-side">
+                <div class="toc-content">
+                    <div class="title">TOC</div>
+                    {@each article.toc as it}
+                        <a href="#${it.id}" style="padding-left: ${it.indent}em">${it.text}</a>
+                    {@/each}
+                </div>
             </div>
         </div>
         <div class="comments-section">

@@ -4,6 +4,7 @@
  */
 
 import './blogDetail.less';
+import Tie from '../../js/tie.js'
 import utils from '../../js/Base.js';
 import juicer from '../../js/juicer.js';
 import hljs from '../../js/highlight.js';
@@ -84,70 +85,100 @@ function getToc (article) {
     toc
   }
 }
-export default function (global, id) {
-  let node = global.node;
-  getData(id, function (err, detail, title) {
-    if (err && !detail) {
-      global.push('/');
-      global.refresh();
-      return;
-    }
+
+class Page {
+  constructor (global, id) {
+    this.id = id
+    this.element = global.node;
+    this.tie = null
+    getData(id, (err, detail) => {
+      if (err && !detail) {
+        global.push('/');
+        global.refresh();
+      } else {
+        global.title(detail.title);
+        this.init(detail)
+      }
+    });
+  }
+  init (detail) {
     let result = getToc(detail.content)
     detail.content = result.article
     detail.toc = result.toc
-    global.title(detail.title);
 
-    let hasCover = detail.cover && detail.cover.length;
-    node.innerHTML = juicer(template, {
-      article: detail,
-      hasCover: hasCover
+    this.element.innerHTML = juicer(template, {
+      article: detail
     });
-    let header = utils.query('.header-cover', node);
-    if (hasCover) {
-      let coverUrl = imageHosting(detail.cover, {
-        type: 'zoom',
-        width: 420,
-      });
-
-      loadImg(coverUrl, function (img) {
-        let width = header.clientWidth;
-        let height = header.clientHeight;
-        let canvas = document.createElement('canvas');
-        let context = canvas.getContext('2d');
-        // gaussBlur
-        let newWidth = width;
-        let newHeight = width * img.height / img.width;
-        if (newHeight < height) {
-          newHeight = height;
-          newWidth = height * img.width / img.height;
-        }
-        let top = (height - newHeight) / 2;
-        let left = (width - newWidth) / 2;
-        canvas.width = width;
-        canvas.height = height;
-        context.drawImage(img, left, top, newWidth, newHeight)
-
-        blurRect(context, 0, 0, width, height, 8, 1);
-        header.appendChild(canvas);
-      });
-    } else {
+    this.addCover(detail.cover)
+    this.addCodeSupport()
+    this.addComment()
+    this.addToc()
+  }
+  addCover (originCoverUrl) {
+    let hasCover = originCoverUrl && originCoverUrl.length;
+    let header = utils.query('.header-cover', this.element);
+    if (!hasCover) {
       utils.addClass(header, 'no-cover');
+      return
     }
+    let coverUrl = imageHosting(originCoverUrl, {
+      type: 'zoom',
+      width: 420,
+    });
+
+    loadImg(coverUrl, function (img) {
+      let width = header.clientWidth;
+      let height = header.clientHeight;
+      let canvas = document.createElement('canvas');
+      let context = canvas.getContext('2d');
+      // gaussBlur
+      let newWidth = width;
+      let newHeight = width * img.height / img.width;
+      if (newHeight < height) {
+        newHeight = height;
+        newWidth = height * img.width / img.height;
+      }
+      let top = (height - newHeight) / 2;
+      let left = (width - newWidth) / 2;
+      canvas.width = width;
+      canvas.height = height;
+      context.drawImage(img, left, top, newWidth, newHeight)
+
+      blurRect(context, 0, 0, width, height, 8, 1);
+      header.appendChild(canvas);
+    });
+  }
+  addCodeSupport () {
     // 代码高亮
-    utils.each(utils.queryAll('pre code', node), function (codeNode) {
+    utils.each(utils.queryAll('pre code', this.element), function (codeNode) {
       hljs(codeNode);
     });
-
-    new CommentInit(utils.query('.comments_frame', node), 'blog-' + id, {
+  }
+  addComment () {
+    new CommentInit(utils.query('.comments_frame', this.element), 'blog-' + this.id, {
       list_num: 8
     });
-    utils.bind(utils.query('.toc-content', node), 'click', 'a', function (event) {
+  }
+  addToc () {
+    // 绑定 toc 点击事件
+    utils.bind(utils.query('.toc-content', this.element), 'click', 'a', function (event) {
       let href = this.getAttribute('href').replace(/^#/, '')
       let node = utils.query('[data-id="' + href + '"]')
       if (!node) {
         return
       }
-      window.scrollTo(0, node.offsetTop - 100)
+      let top = utils.offset(node).top - 80
+      window.scrollTo(0, top)
     });
-  });
+    let nodeTag = utils.query('.toc-content', this.element)
+    this.tie = new Tie({
+      dom: nodeTag,
+      scopeDom: utils.parents(nodeTag, '.article-section'),
+      fixed_top: 60
+    });
+  }
+  destroy () {
+    this.tie && this.tie.destroy();
+  }
 };
+export default Page

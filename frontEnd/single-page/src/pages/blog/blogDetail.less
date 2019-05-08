@@ -9,7 +9,7 @@
   font-size: 1rem;
   background: #dee3e7;
   .blog-detail-container {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: auto;
     background: #fff;
   }
@@ -57,7 +57,40 @@
     }
   }
   .article-section {
-    padding: 5em 8em;
+    display: flex;
+    .article-section-body {
+      flex-grow: 1;
+      width: 200px;
+      padding: 5em 4em 5em 8em;
+    }
+    .article-section-side {
+      width: 240px;
+      margin-left: 40px;
+      padding: 20px;
+      background: #f9fafb;
+      border-left: 1px solid #edeff3;
+      .toc-content {
+        width: 220px;
+        padding: 20px 10px 40px;
+        .title {
+          margin-bottom: 10px;
+          line-height: 2em;
+          font-size: 15px;
+          color: #c2ccd6
+        }
+        a {
+          display: block;
+          margin-bottom: 10px;
+          line-height: 1.2em;
+          font-size: 14px;
+          color: #8599ad;
+          transition: .2s;
+          &:hover {
+            color: #407fbf;
+          }
+        }
+      }
+    }
     .caption {
       padding: 0 20px;
       h1 {
