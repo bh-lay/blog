@@ -7,7 +7,7 @@
 .blog-detail {
   padding: 70px 0;
   font-size: 1rem;
-  background: #dee3e7;
+  background: #c2c9d6;
   .blog-detail-container {
     max-width: 1200px;
     margin: auto;
@@ -15,7 +15,7 @@
   }
   header {
     position: relative;
-    padding-top: 44%;
+    padding-top: 40%;
     background-color: #eee;
     background-size: cover;
     background-position: center;
@@ -61,11 +61,10 @@
     .article-section-body {
       flex-grow: 1;
       width: 200px;
-      padding: 5em 4em 5em 8em;
+      padding: 5em 4em 5em 6em;
     }
     .article-section-side {
-      width: 240px;
-      margin-left: 40px;
+      width: 300px;
       padding: 20px;
       background: #f9fafb;
       border-left: 1px solid #edeff3;
@@ -170,7 +169,12 @@
   .blog-detail {
     padding: 0;
     .article-section {
-      padding: 1em 0;
+      .article-section-body {
+        padding: 1em 0;
+      }
+      .article-section-side {
+        display: none;
+      }
     }
     .comments-section {
       padding: 2em 1em;
