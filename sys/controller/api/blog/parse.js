@@ -10,7 +10,7 @@ module.exports = data => {
 		title: decodeURI(data['title']),
 		cover: data['cover']||'',
 		time_show: data['time_show'] || new Date().getTime().toString(),
-		tags: data.tags.length ? data.tags : [],
+		tags: Array.isArray(data.tags) ? data.tags : [],
 		author: data['author']||'',
 		content: data['content'],
 		intro: data['intro'] || data['content'].slice(0,200),

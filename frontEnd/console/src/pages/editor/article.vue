@@ -118,7 +118,7 @@ export default {
         this.form.intro = detail.intro
         this.form.content = detail.content
         this.form.cover = detail.cover
-        this.form.tags = detail.tags || []
+        this.form.tags = Array.isArray(detail.tags) ? detail.tags : []
         this.form.author = detail.author
         this.form.time = new Date(parseInt(detail.time_show, 10))
       })
