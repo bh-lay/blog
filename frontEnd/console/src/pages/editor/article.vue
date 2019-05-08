@@ -118,7 +118,7 @@ export default {
         this.form.intro = detail.intro
         this.form.content = detail.content
         this.form.cover = detail.cover
-        this.form.tags = detail.tags.length ? detail.tags.split() : []
+        this.form.tags = detail.tags || []
         this.form.author = detail.author
         this.form.time = new Date(parseInt(detail.time_show, 10))
       })
@@ -150,7 +150,7 @@ export default {
         intro: this.form.intro,
         content: this.$refs.markdownEditor.getContent(),
         cover: this.form.cover,
-        tags: this.form.tags.join(','),
+        tags: this.form.tags,
         author: this.form.author,
         time_show: this.form.time.getTime(),
         id: this.id
