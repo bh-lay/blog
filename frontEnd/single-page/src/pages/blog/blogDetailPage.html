@@ -14,7 +14,11 @@
                 </div>
                 <div class="article">$${article.content}</div>
                 <footer>
-                    <p><strong>tgs：</strong>${article.tags}</p>
+                    <p><strong>tags：</strong>
+                    {@each article.tags as it}
+                        <a href="/blog?tag=${it}">${it}</a>
+                    {@/each}
+                    </p>
                     <p><strong>转载请注明来源：</strong>http://bh-lay.com/blog/${article.id}</p>
                 </footer>
                 <div class="sns-share" data-text="${article.intro}" data-url="http://bh-lay.com/blog/${article.id}"
