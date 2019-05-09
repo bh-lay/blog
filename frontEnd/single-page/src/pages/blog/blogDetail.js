@@ -116,7 +116,7 @@ class Page {
   }
   addCover (originCoverUrl) {
     let hasCover = originCoverUrl && originCoverUrl.length;
-    let header = utils.query('.header-cover', this.element);
+    let header = utils.query('header', this.element);
     if (!hasCover) {
       utils.addClass(header, 'no-cover');
       return
@@ -143,9 +143,12 @@ class Page {
       canvas.width = width;
       canvas.height = height;
       context.drawImage(img, left, top, newWidth, newHeight)
-
+      context.fillStyle = 'rgba(0,0,0,0.4)'
+      context.fillRect(0, 0, width, height)
       blurRect(context, 0, 0, width, height, 8, 1);
-      header.appendChild(canvas);
+      // header.appendChild(canvas);
+      let bluredImg = canvas.toDataURL('image/png')
+      header.style.backgroundImage = `url(${bluredImg})`
     });
   }
   addCodeSupport () {

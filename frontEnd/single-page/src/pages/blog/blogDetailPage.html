@@ -1,12 +1,11 @@
 <div class="blog-detail">
-    <div class="blog-detail-container">
-        <header>
-            <div class="header-cover"></div>
-            <div class="header-body">
-                <div class="title">${article.title}</div>
-                <div class="article-info"><span>${article.intro} </span></div>
-            </div>
-        </header>
+    <header>
+        <div class="grid-row header-body">
+            <div class="title">${article.title}</div>
+            <div class="article-info"><span>${article.intro} </span></div>
+        </div>
+    </header>
+    <div class="grid-row">
         <div class="article-section">
             <div class="article-section-body">
                 <div class="caption">
@@ -28,16 +27,18 @@
                 </div>
             </div>
             <div class="article-section-side">
-                <div class="toc-content">
-                    <div class="title">TOC</div>
-                    {@each article.toc as it}
-                        <a href="#${it.id}" style="padding-left: ${it.indent}em">${it.text}</a>
-                    {@/each}
+                <div class="article-section-body">
+                    <div class="toc-content">
+                        <div class="title">TOC</div>
+                        {@each article.toc as it}
+                            <a href="#${it.id}" style="padding-left: ${it.indent}em">${it.text}</a>
+                        {@/each}
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="comments-section">
-            <div class="comments_frame"></div>
-        </div>
+    </div>
+    <div class="comments-section">
+        <div class="comments_frame"></div>
     </div>
 </div>

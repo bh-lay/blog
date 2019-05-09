@@ -5,42 +5,21 @@
 @import "../../../../_public/less/_articleGithub.less";
 
 .blog-detail {
-  padding: 70px 0;
   font-size: 1rem;
-  background: #c2c9d6;
-  .blog-detail-container {
-    max-width: 1200px;
-    margin: auto;
-    background: #fff;
-  }
-  header {
+  background: #fff;
+  header { 
+    min-height: 160px;
+    max-height: 360px;
     position: relative;
-    padding-top: 40%;
     background-color: #eee;
     background-size: cover;
     background-position: center;
-    .header-cover {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      background: #000;
-      overflow: hidden;
-      canvas {
-        width: 100%;
-        height: 100%;
-        opacity: .8
-      }
-      &.no-cover {
-        background: #1f3747;
-        background-image: -webkit-linear-gradient(left, #1f3747 0%, #293d31 100%);
-      }
+    &.no-cover {
+      background: #1f3747;
+      background-image: -webkit-linear-gradient(left, #1f3747 0%, #293d31 100%);
     }
     .header-body {
-      position: absolute;
-      top: 5em;
-      left: 5em;
+      padding: 70px 20px 80px;
       .title {
         margin-bottom: .5em;
         line-height: 1.2;
@@ -49,7 +28,7 @@
         color: #fff;
       }
       .article-info {
-        width: 50%;
+        width: 62%;
         margin-bottom: 3em;
         color: #fff;
         opacity: .8;
@@ -61,13 +40,17 @@
     .article-section-body {
       flex-grow: 1;
       width: 200px;
-      padding: 5em 4em 5em 6em;
+      padding: 5em 6em 5em 1em;
     }
     .article-section-side {
-      width: 300px;
-      padding: 20px;
-      background: #f9fafb;
+      display: flex;
+      width: 340px;
       border-left: 1px solid #edeff3;
+      .article-section-body {
+        margin-right: -300px;
+        padding: 20px 320px 20px 20px;
+        background: #f9fafb;
+      }
       .toc-content {
         width: 220px;
         padding: 20px 10px 40px;
