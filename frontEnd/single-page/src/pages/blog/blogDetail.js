@@ -91,6 +91,7 @@ class Page {
     this.id = id
     this.element = global.node;
     this.tie = null
+    this.detail = null
     getData(id, (err, detail) => {
       if (err && !detail) {
         global.push('/');
@@ -98,6 +99,7 @@ class Page {
       } else {
         global.title(detail.title);
         this.init(detail)
+        this.detail = detail
       }
     });
   }
@@ -109,13 +111,28 @@ class Page {
     this.element.innerHTML = juicer(template, {
       article: detail
     });
-    setTimeout(() => {
-      this.createSharePop()
-    }, 2000)
     this.addCover(detail.cover)
     this.addCodeSupport()
     this.addComment()
     this.addToc()
+
+    utils.bind(this.element, 'click', '.share-to-wechat', () => {
+      this.createSharePop()
+    })
+    /**
+     * 分享功能
+     *  data-text data-url data-title data-img data-shareto
+     */
+    utils.bind(this.element, 'click', '.share-to-weibo', () => {
+      let url = 'http://bh-lay.com/blog/' + this.detail.id;
+      let text = this.detail.intro
+      let img = this.detail.cover
+
+      img = img ? imageHosting(img) : ''
+      let shareUrl = 'http://service.weibo.com/share/share.php?title=' + text + '+&url=' + url + '&source=bookmark&appkey=2861592023&searchPic=false&pic=' + img
+      window.open(shareUrl);
+      return false;
+    });
   }
   addCover (originCoverUrl) {
     let hasCover = originCoverUrl && originCoverUrl.length;
@@ -184,15 +201,25 @@ class Page {
     });
   }
   createSharePop () {
+    let wechatNode = utils.query('.wechat-area', this.element)
+    if (wechatNode.children.length) {
+      wechatNode.innerHTML = ''
+      return
+    }
     require.ensure(['asyncShareForMobile'], () => {
       // 引入 ace
       let {createShareCard} = require('asyncShareForMobile');
-      createShareCard({
-        title: '----234567890-= ',
-        intro: '----234567890-= ----234567890-= ----234567890-= ',
-        url: 'http://baidu.com',
-        coverUrl: 'http://static.bh-lay.com//blog/webpack-async-module/module-1.png'
+      let url = 'http://bh-lay.com/blog/' + this.detail.id;
+      let coverUrl = this.detail.cover
+
+      coverUrl = coverUrl ? imageHosting(coverUrl) : ''
+      let canvas = createShareCard({
+        title: this.detail.title,
+        intro: this.detail.intro,
+        url,
+        coverUrl
       })
+      wechatNode.appendChild(canvas)
     })
   }
   destroy () {

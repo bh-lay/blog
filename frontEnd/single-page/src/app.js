@@ -85,24 +85,3 @@ utils.addClass(utils.query('.app_mask'), 'app_mask_out');
 setTimeout(function () {
   utils.remove(utils.query('.app_mask'));
 }, 1000);
-
-/**
- * 分享功能
- *  data-text data-url data-title data-img data-shareto
- */
-utils.bind(utils.query('body'), 'click', '.sns-share a', function () {
-  let nodeData = utils.parents(this, '.sns-share');
-  let url = nodeData.getAttribute('data-url') || location.href;
-  let text = encodeURIComponent(nodeData.getAttribute('data-text')) || document.title;
-  let title = encodeURIComponent(nodeData.getAttribute('data-title'));
-  let img = nodeData.getAttribute('data-img');
-  let shareTo = this.getAttribute('data-shareto');
-
-  img = img ? imageHosting(img) : '';
-  let shareUrl = {
-    weibo: 'http://service.weibo.com/share/share.php?title=' + text + '+&url=' + url + '&source=bookmark&appkey=2861592023&searchPic=false&pic=' + img,
-    qzone: 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?summary=' + text + '&url=' + url + '&title=' + title + '&pics=' + img + '&desc=' + text
-  };
-  shareUrl[shareTo] && window.open(shareUrl[shareTo]);
-  return false;
-});
