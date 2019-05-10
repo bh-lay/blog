@@ -1,12 +1,12 @@
 const path = require('path');
-//定义了一些文件夹的路径
+// 定义了一些文件夹的路径
 const ROOT_PATH = path.resolve(__dirname);
 const HTML_PATH = path.resolve(ROOT_PATH, '../../sys/views/single-page/index.html');
 const GITHUB_HTML_PATH = path.resolve(ROOT_PATH, '../../sys/component/single-page/github.html');
 
-const webpack = require("webpack");
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -28,7 +28,7 @@ const config = {
       {
         test: /\.(css|less)$/,
         use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
+          fallback: 'style-loader',
           use: [
             {
               loader: 'css-loader',
@@ -74,7 +74,7 @@ const config = {
       template: './src/github.html',
       inject: false
     }),
-    new ExtractTextPlugin("[name].[contenthash:8].css"),
+    new ExtractTextPlugin('[name].[contenthash:8].css'),
     new webpack.DefinePlugin({
       CDN_PATH: JSON.stringify(cdnPath)
     })
