@@ -1000,7 +1000,7 @@ function utils_factory() {
    * 判断dom是否拥有某个class
    */
   function hasClass(dom,classSingle){
-    return dom.className && dom.className.match(new RegExp('(\\s|^)' + classSingle + '(\\s|$)')) || false;
+    return dom.className && dom.className.match && dom.className.match(new RegExp('(\\s|^)' + classSingle + '(\\s|$)')) || false;
   }
 
   //获取样式

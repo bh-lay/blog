@@ -7,6 +7,7 @@ const pixelRatio = window.devicePixelRatio || 1
 
 function loadImg (src, onload) {
   var img = new Image()
+  img.crossOrigin = 'Anonymous'
   img.onload = function () {
     onload(img)
   }
@@ -32,6 +33,7 @@ const buildQRCode = (url) => {
 export function createShareCard ({title, intro, url, coverUrl}) {
   let canvas = document.createElement('canvas')
   let context = canvas.getContext('2d')
+  let img = new Image()
 
   // 构建页脚图片
   let footerDataUrl = buildFooterImageDataUrl(title, intro)
@@ -60,6 +62,7 @@ export function createShareCard ({title, intro, url, coverUrl}) {
       // 将二维码绘制进 canvas
       context.drawImage(QRCodeImg, 590 * pixelRatio, (newImageHeight + 20) * pixelRatio, QRCodeWidth, QRCodeWidth)
     }
+    img.src = canvas.toDataURL('image/jpeg', 1)
   }
   // 加载封面图
   loadImg(coverUrl, img => {
@@ -80,5 +83,5 @@ export function createShareCard ({title, intro, url, coverUrl}) {
       render()
     })
   })
-  return canvas
+  return img
 }
