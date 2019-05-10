@@ -109,6 +109,9 @@ class Page {
     this.element.innerHTML = juicer(template, {
       article: detail
     });
+    setTimeout(() => {
+      this.createSharePop()
+    }, 2000)
     this.addCover(detail.cover)
     this.addCodeSupport()
     this.addComment()
@@ -179,6 +182,13 @@ class Page {
       scopeDom: utils.parents(nodeTag, '.article-section'),
       fixed_top: 60
     });
+  }
+  createSharePop () {
+    require.ensure(['asyncShareForMobile'], () => {
+      // 引入 ace
+      let {createShareCard} = require('asyncShareForMobile');
+      createShareCard('----234567890-= ')
+    })
   }
   destroy () {
     this.tie && this.tie.destroy();

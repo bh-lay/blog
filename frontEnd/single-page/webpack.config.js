@@ -78,7 +78,14 @@ const config = {
     new webpack.DefinePlugin({
       CDN_PATH: JSON.stringify(cdnPath)
     })
-  ]
+  ],
+  resolve: {
+    extensions: ['.js', '.json'],
+    alias: {
+      '~': path.resolve(__dirname, 'src'),
+      'asyncShareForMobile': path.resolve(__dirname, 'src/js/asyncShareForMobile.js')
+    }
+  }
 };
 if (isProduction) {
   config.plugins.push(new UglifyJSPlugin());
