@@ -187,7 +187,12 @@ class Page {
     require.ensure(['asyncShareForMobile'], () => {
       // 引入 ace
       let {createShareCard} = require('asyncShareForMobile');
-      createShareCard('----234567890-= ')
+      createShareCard({
+        title: '----234567890-= ',
+        intro: '----234567890-= ----234567890-= ----234567890-= ',
+        url: 'http://baidu.com',
+        coverUrl: 'http://static.bh-lay.com//blog/webpack-async-module/module-1.png'
+      })
     })
   }
   destroy () {
