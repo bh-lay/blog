@@ -53,7 +53,6 @@ function loadImg (src, callback) {
 function prefixID (htmlPart) {
   let idMatches = htmlPart.match(/^<h\d\s[^>]*data-id=(?:"|')([^"']+)/)
   let id = ''
-  console.log('idMatches', idMatches)
   if (idMatches) {
     id = idMatches[1]
   } else {
