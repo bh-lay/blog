@@ -26,6 +26,7 @@ module.exports = function (articleID, format, callback) {
 					resJSON['detail'] = docs[0]
 					if(format == 'html'){
 						var converter = new showdown.Converter()
+						// converter.setOption('noHeaderId', true)
 						resJSON['detail'].content = converter.makeHtml(resJSON['detail'].content)
 					}
 				}
