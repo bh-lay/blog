@@ -153,6 +153,7 @@ $tag_cnt_bj = #fff;
   transition-delay: .1s;
   .link {
     display: block;
+		text-decoration: none;
   }
   .title {
     display: block;
@@ -212,15 +213,12 @@ $tag_cnt_bj = #fff;
     }
   }
   footer {
-    display: table;
-    width: 100%;
-    padding: 10px 0;
+    display: flex;
+		justify-content: space-between;
+    padding: 10px;
     border-top: 1px solid #e8e8e8;
     background: #fbfbfb;
     .tags {
-      display: table-cell;
-      width: 99%;
-      padding-left: 10px;
       font-size: 13px;
       strong {
         margin-right: 5px;
@@ -231,6 +229,7 @@ $tag_cnt_bj = #fff;
         display: inline-block;
         margin-right: 5px;
         color: #777;
+				text-decoration: none;
         &:hover {
           text-decoration: underline;
           color: #000;
@@ -238,10 +237,6 @@ $tag_cnt_bj = #fff;
       }
     }
     .time {
-      display: table-cell;
-      vertical-align: middle;
-      width: 1%;
-      padding-right: 10px;
       white-space: nowrap;
       color: #888;
       font-size: 12px;
@@ -304,7 +299,7 @@ $tag_cnt_bj = #fff;
 							<strong>tags</strong>
 							<a :href="'/blog?tag=' + tag" v-for="tag in scope.data.tags" :key="tag">{{tag}}</a>
 						</div>
-						<div class="time">{{scope.data.time_show | dateDiff}}</div>
+						<div class="time" :title="scope.data.time_show | timeFormat">{{scope.data.time_show | dateDiff}}</div>
 					</footer>
 				</div>
 			</template>
@@ -356,14 +351,13 @@ export default {
 			fetch(`/api/blog?skip=${this.page.skip}&limit=${this.page.limit}&tag=${this.page.tag}`, {
 				method: 'GET'
 			})
-			.then(response => response.json())
-			.then(data => {
-				console.log('data', data)
-				this.page.count = data.count
-				this.page.skip += this.page.limit
-				this.list = this.list.concat(data.list)
-			})
-
+				.then(response => response.json())
+				.then(data => {
+					console.log('data', data)
+					this.page.count = data.count
+					this.page.skip += this.page.limit
+					this.list = this.list.concat(data.list)
+				})
 			// 		if (err || !data || data.code === 200) {
 			// 			// do something
 			// 			return;

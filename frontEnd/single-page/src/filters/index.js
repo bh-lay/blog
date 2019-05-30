@@ -89,8 +89,3 @@ Vue.filter('imgHosting', (url, type, width, height) => {
 	}
 	return src
 })
-/**
- *使用七牛云存储
- * 若url为绝对地址，则使用源图，且不处理剪裁缩放
- * qiniu(url,config);
- */
