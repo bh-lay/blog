@@ -15,7 +15,8 @@ html, body, div
 	left 20px
 	z-index 2
 .page-container
-	width 1200px
+	width 90%
+	max-width 1200px
 	margin auto
 .footer
 	height 400px
