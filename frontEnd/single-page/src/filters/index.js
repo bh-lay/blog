@@ -64,26 +64,6 @@ Vue.filter('urlPrefix', url => {
 
 // 跳转链接生成
 Vue.filter('imgHosting', (url, type, width, height) => {
-	function cover (url) {
-		let w = width || height
-		let h = height || width
-		return url + '?imageView/1/w/' + w + '/h/' + h + '/q/85'
-	}
-
-	function zoom (url) {
-		if (!url) {
-			return ''
-		}
-		let confStr
-		if (width) {
-			confStr = 'w/' + width
-		} else if (height) {
-			confStr = 'h/' + height
-		}
-
-		return url + '?imageView2/2/' + confStr + '/q/85'
-	}
-
 	if (typeof (url) !== 'string') {
 		return ''
 	}
@@ -94,10 +74,18 @@ Vue.filter('imgHosting', (url, type, width, height) => {
 	let src = CDN_PATH + url
 
 	if (type === 'zoom') {
-		src = zoom(src)
+		let confStr
+		if (width) {
+			confStr = 'w/' + width
+		} else if (height) {
+			confStr = 'h/' + height
+		}
+		src += '?imageView2/2/' + confStr + '/q/85'
 	} else {
-		// config.type == "cover"
-		src = cover(src)
+		// type === 'cover'
+		let w = width || height
+		let h = height || width
+		src += '?imageView/1/w/' + w + '/h/' + h + '/q/85'
 	}
 	return src
 })

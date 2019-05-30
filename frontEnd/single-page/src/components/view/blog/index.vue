@@ -295,7 +295,7 @@ $tag_cnt_bj = #fff;
 				<div :class="['article-item', !scope.data.cover ? 'pure-text' : '']">
 					<a :href="'/blog/'+ scope.data.id" :title="scope.data.title" class="link">
 						<div class="label" v-if="scope.data.is_new"><span>new</span></div>
-						<img v-if="scope.data.cover" :src="scope.data.cover | imgHosting" :alt="scope.data.title" />
+						<img v-if="scope.data.cover" :src="scope.data.cover | imgHosting('zoom', 400)" :alt="scope.data.title" />
 						<div class="title">{{scope.data.title}}</div>
 						<div class="info"><p>{{scope.data.intro}}</p></div>
 					</a>
