@@ -26,11 +26,12 @@ Vue.filter('dateDiff', dateTimeStamp => {
 	let minute = 1000 * 60
 	let hour = minute * 60
 	let day = hour * 24
-	let halfamonth = day * 15
 	let month = day * 30
+	let year = day * 365
 	let now = new Date().getTime()
 	let diffValue = now - dateTimeStamp
 
+	let yearC = diffValue / year
 	let monthC = diffValue / month
 	let weekC = diffValue / (7 * day)
 	let dayC = diffValue / day
@@ -38,7 +39,9 @@ Vue.filter('dateDiff', dateTimeStamp => {
 	let minC = diffValue / minute
 
 	let result
-	if (monthC >= 1) {
+	if (yearC >= 1) {
+		result = parseInt(yearC) + '年前'
+	} else if (monthC >= 1) {
 		result = parseInt(monthC) + '个月前'
 	} else if (weekC >= 1) {
 		result = parseInt(weekC) + '周前'
@@ -53,7 +56,53 @@ Vue.filter('dateDiff', dateTimeStamp => {
 	}
 	return result
 })
+
 // 跳转链接生成
 Vue.filter('urlPrefix', url => {
 	return 'http://bh-lay.com/r/' + btoa(encodeURIComponent(url))
 })
+
+// 跳转链接生成
+Vue.filter('imgHosting', (url, type, width, height) => {
+	function cover (url) {
+		let w = width || height
+		let h = height || width
+		return url + '?imageView/1/w/' + w + '/h/' + h + '/q/85'
+	}
+
+	function zoom (url) {
+		if (!url) {
+			return ''
+		}
+		let confStr
+		if (width) {
+			confStr = 'w/' + width
+		} else if (height) {
+			confStr = 'h/' + height
+		}
+
+		return url + '?imageView2/2/' + confStr + '/q/85'
+	}
+
+	if (typeof (url) !== 'string') {
+		return ''
+	}
+	if (url.length === 0 || url[0] !== '/') {
+		return url
+	}
+	/* global CDN_PATH */
+	let src = CDN_PATH + url
+
+	if (type === 'zoom') {
+		src = zoom(src)
+	} else {
+		// config.type == "cover"
+		src = cover(src)
+	}
+	return src
+})
+/**
+ *使用七牛云存储
+ * 若url为绝对地址，则使用源图，且不处理剪裁缩放
+ * qiniu(url,config);
+ */
