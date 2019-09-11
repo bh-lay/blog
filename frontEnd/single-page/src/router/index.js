@@ -2,8 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/components/view/index/index.vue'
 import Blog from '@/components/view/blog/index.vue'
-import Friends from '@/components/view/friends/list.vue'
-import FriendDetail from '@/components/view/friends/detail.vue'
+import Labs from '@/components/view/labs/index.vue'
 
 Vue.use(Router)
 
@@ -28,25 +27,9 @@ export default new Router({
 			}
 		},
 		{
-			path: '/friends/',
-			name: 'friendListIndexPage',
-			component: Friends,
-			meta: {
-				keepAlive: true
-			}
-		},
-		{
-			path: '/friends/page/:page',
-			name: 'friendListPage',
-			component: Friends,
-			meta: {
-				keepAlive: true
-			}
-		},
-		{
-			path: '/friend/:id',
-			name: 'friendDetailPage',
-			component: FriendDetail,
+			path: '/labs/',
+			name: 'labs',
+			component: Labs,
 			meta: {
 				keepAlive: true
 			}

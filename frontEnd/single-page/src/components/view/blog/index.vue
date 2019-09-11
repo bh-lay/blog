@@ -29,7 +29,7 @@ $tag_cnt_bj = #fff;
   .header {
     $header_bj: #fafafa;
     position: relative;
-    padding: 4rem 0 1rem;
+    padding: $navigation-height + 20px 0 1rem;
     background: $header_bj;
     &:before {
       content: '';
@@ -297,7 +297,7 @@ $tag_cnt_bj = #fff;
 					<footer>
 						<div class="tags">
 							<strong>tags</strong>
-							<a :href="'/blog?tag=' + tag" v-for="tag in scope.data.tags" :key="tag">{{tag}}</a>
+							<a :href="'/blog?tag=' + tag" v-for="(tag, index) in scope.data.tags" :key="index">{{tag}}</a>
 						</div>
 						<div class="time" :title="scope.data.time_show | timeFormat">{{scope.data.time_show | dateDiff}}</div>
 					</footer>
