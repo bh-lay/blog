@@ -161,6 +161,7 @@ function fixItemPosition(item){
 function Stick(param){
   var param = param || {},
       me = this;
+  this.scrollDom = param.scrollDom || null
   this.container = param.container;
   this.onNeedMore = param.onNeedMore || null;
   this.column_gap = param.column_gap ? parseInt(param.column_gap) : 20;
@@ -177,7 +178,7 @@ function Stick(param){
       last_time = 0;
   this.scrollListener = function(){
     var now = new Date().getTime();
-    if(now - last_time > 500 && (getScrollTop() + window.innerHeight >= document.body.scrollHeight - me.load_spacing)){
+    if(now - last_time > 500 && (getScrollTop() + (this.scrollDom || window).innerHeight >= (this.scrollDom || document.body).scrollHeight - me.load_spacing)){
       me.onNeedMore && me.onNeedMore();
       last_time = now;
     }
@@ -188,7 +189,7 @@ function Stick(param){
       me.refresh();
     },500);
   };
-  bind(document,'scroll',this.scrollListener);
+  bind(this.scrollDom || document,'scroll',this.scrollListener);
   bind(window,'resize',this.resizeListener);
   this.container.innerHTML = '';
   this.buildLayout();
@@ -229,7 +230,7 @@ Stick.prototype = {
     //尚未实现
   },
   destroy: function(){
-    unbind(document,'scroll',this.scrollListener);
+    unbind(this.scrollDom || document,'scroll',this.scrollListener);
     unbind(window,'resize',this.resizeListener);
   }
 };

@@ -6,6 +6,7 @@
 import './labs.less';
 import utils from '../../js/Base.js';
 import juicer from '../../js/juicer.js';
+import footer from '../../components/footer/index.js'
 
 let emptyTpl = '<div class=\'blank-content\'><p>啥都木有</p></div>';
 let baseTpl = require('./labsListBase.html');
@@ -58,6 +59,7 @@ class LabsBase {
 
   init () {
     this.node.innerHTML = juicer(baseTpl, this.options);
+    footer(utils.query('.section-footer', this.node))
   }
 
   renderList (list) {

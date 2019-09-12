@@ -9,6 +9,7 @@ import imageHosting from '../../js/imageHosting.js';
 import Stick from '../../js/stick.js';
 import tie from '../../js/tie.js';
 import juicer from '../../js/juicer.js';
+import footer from '../../components/footer/index.js'
 
 let privateTagData = null;
 
@@ -110,6 +111,7 @@ function page (global) {
 
   this.stick = new Stick({
     container: me.nodeList,
+    scrollDom: global.node,
     column_width: 280,
     column_gap: 10,
     load_spacing: 1000,
@@ -117,9 +119,11 @@ function page (global) {
       list.loadMore();
     }
   });
+  footer(utils.query('.section-footer', node))
   let nodeTag = utils.query('.articleListPage-tags', node);
   this.tie = tie({
     dom: nodeTag,
+    scrollDom: global.node,
     scopeDom: utils.parents(nodeTag, '.articleListPage'),
     fixed_top: 55
   });

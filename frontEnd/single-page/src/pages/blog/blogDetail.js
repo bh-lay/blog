@@ -4,6 +4,7 @@
  */
 
 import './blogDetail.less';
+import footer from '../../components/footer/index.js'
 import Tie from '../../js/tie.js'
 import utils from '../../js/Base.js';
 import juicer from '../../js/juicer.js';
@@ -114,7 +115,7 @@ class Page {
     this.addCodeSupport()
     this.addComment()
     this.addToc()
-
+    footer(utils.query('.section-footer', this.element))
     utils.bind(this.element, 'click', '.share-to-wechat', () => {
       this.createSharePop()
     })

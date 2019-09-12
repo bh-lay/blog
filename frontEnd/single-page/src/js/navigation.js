@@ -3,7 +3,6 @@
  *
  */
 import utils from './Base.js';
-import UI from './dialog.js';
 
 function init () {
   let scrollDelay;
