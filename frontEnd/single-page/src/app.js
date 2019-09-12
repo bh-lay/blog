@@ -7,7 +7,7 @@
 
 import './less/app-base.less';
 
-import navigation from './js/navigation.js'
+import navigation from './components/navigation/index.js'
 import utils from './js/Base.js';
 import funny from './js/funny.js';
 import UI from './js/dialog.js';

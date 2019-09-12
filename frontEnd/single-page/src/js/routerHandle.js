@@ -1,5 +1,5 @@
 import utils from './Base.js'
-import navigation from './navigation.js'
+import navigation from '../components/navigation/index.js'
 import Lofox from './lofox.js'
 import IndexPage from '../pages/index/index.js'
 import BlogListPage from '../pages/blog/blogList.js'
