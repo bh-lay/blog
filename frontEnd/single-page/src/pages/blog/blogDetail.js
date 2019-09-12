@@ -86,8 +86,8 @@ function getToc (article) {
 }
 
 class Page {
-  constructor (global, params) {
-    this.id = params.id
+  constructor (global) {
+    this.id = global.params.id
     this.element = global.node;
     this.tie = null
     this.detail = null

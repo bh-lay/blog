@@ -12,8 +12,6 @@ import BlessPage from '../pages/bless/bless.js'
 // 绑定路由
 let lofox = new Lofox();
 let nodeContainer = utils.query('.app-container');
-let nodeActivePage = null;
-let activePage = null;
 
 /**
  * 检测链接是否为提供给js使用的地址
@@ -23,35 +21,35 @@ function isHrefForScript (href) {
   return href.length === 0 || !!href.match(/^(javascript\s*:|#)/);
 }
 
-// 显示单页dom
-function getNewPage () {
-  let nodeNew = utils.createDom('<div class="page"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载模块</p></div></div>');
-  // 移除老的page dom
-  if (nodeActivePage) {
-    let nodeOld = nodeActivePage;
-    nodeActivePage = null;
-    utils.addClass(nodeOld, 'zoomOutDown');
-
-    setTimeout(function () {
-      utils.addClass(nodeNew, 'slideInUp page-active');
-      setTimeout(function () {
-        utils.remove(nodeOld);
-        utils.removeClass(nodeNew, 'slideInUp');
-      }, 1100);
-    }, 600);
-  } else {
-    utils.addClass(nodeNew, 'page-active');
-  }
-  nodeContainer.appendChild(nodeNew);
-  nodeActivePage = nodeNew;
-  return nodeActivePage;
+function Page (Controller, params, search) {
+  this.params = params
+  this.search = search
+  this.node = this.createNode()
+  this.view = new Controller(this)
 }
-
-function Page () {
-  this.node = getNewPage();
-}
-
+Page.activePage = null
 Page.prototype = {
+  createNode: function () {
+    let nodeNew = utils.createDom('<div class="page"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载模块</p></div></div>')
+    if (Page.activePage) {
+      let nodeOld = Page.activePage.node
+      Page.activePage = null
+      utils.addClass(nodeOld, 'zoomOutDown');
+  
+      setTimeout(function () {
+        utils.addClass(nodeNew, 'slideInUp page-active');
+        setTimeout(function () {
+          utils.remove(nodeOld);
+          utils.removeClass(nodeNew, 'slideInUp');
+        }, 1100);
+      }, 600);
+    } else {
+      utils.addClass(nodeNew, 'page-active');
+    }
+    nodeContainer.appendChild(nodeNew)
+    Page.activePage = this
+    return nodeNew
+  },
   push: lofox.push.bind(lofox),
   replace: lofox.replace.bind(lofox),
   refresh: lofox.refresh.bind(lofox),
@@ -64,52 +62,46 @@ export default function () {
   };
   // 视图刷新前，销毁上一个对象
   lofox
-    .on('beforeRefresh', function () {
-      if (activePage && activePage.destroy) {
-        activePage.destroy();
-      }
-      activePage = null;
-    })
     // 首页
-    .set('/', function () {
+    .set('/', function (param, search) {
       this.title('小剧客栈');
       navigation.setCur('/');
 
-      activePage = new IndexPage(new Page());
+      new Page(IndexPage, param, search)
     })
     // 博文列表
     .set('/blog', function (param, search) {
       this.title('我的博客');
       navigation.setCur('blog');
 
-      activePage = new BlogListPage(new Page(), param, search);
+      new Page(BlogListPage, param, search)
     })
     // 博客详细页
-    .set('/blog/{id}', function (param) {
+    .set('/blog/{id}', function (param, search) {
       this.title('我的博客');
       navigation.setCur('blog');
-      activePage = new BlogDetailPage(new Page(), param);
+      new Page(BlogDetailPage, param, search)
     })
     // 实验室列表页
-    .set('/labs', function () {
+    .set('/labs', function (param, search) {
       this.title('实验室');
 
       navigation.setCur('labs');
-      activePage = new LabsListPage(new Page());
+      new Page(LabsListPage, param, search)
     })
     // 全景列表页
-    .set('/720', function () {
+    .set('/720', function (param, search) {
       this.title('小剧的全景作品');
 
       navigation.setCur('720');
-      activePage = new PanoListPage(new Page());
+      new Page(PanoListPage, param, search)
     })
     // 摄影作品
     .set('/photography', function () {
       this.title('小剧的摄影作品');
 
       navigation.setCur('photography');
-      activePage = new PhotographyListPage(new Page());
+      new Page(PhotographyListPage)
     })
     // PanoListPage
     // 留言板
@@ -117,7 +109,7 @@ export default function () {
       this.title('留言板');
       navigation.setCur('bless');
 
-      activePage = new BlessPage(new Page());
+      new Page(BlessPage)
     });
 
   // 全局控制 a 链接的打开方式

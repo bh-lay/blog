@@ -95,11 +95,11 @@ LIST.prototype.loadMore = function () {
   });
 };
 
-function page (global, param, search) {
+function page (global) {
   let me = this;
   let node = global.node;
   // 获取标签名
-  let pageTag = search.tag ? decodeURI(search.tag) : null;
+  let pageTag = global.search.tag ? decodeURI(global.search.tag) : null;
   let baseTpl = require('./blogListBase.html');
   let listTpl = require('./blogListItem.html');
   let emptyTpl = '<div class=\'blank-content\'><p>啥都木有</p></div>';
