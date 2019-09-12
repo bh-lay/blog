@@ -246,7 +246,7 @@ LOFOX.prototype = {
     if(result){
       data = result.data;
       //执行set方法设置的回调
-      result.mapsItem['renderFn'].call(this,data,pathData,searchData);
+      result.mapsItem['renderFn'].call(this,data,searchData, pathData);
       //设置标题
       result.mapsItem['title'] && this.title(result.mapsItem['title']);
     }else{

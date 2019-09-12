@@ -86,12 +86,12 @@ function getToc (article) {
 }
 
 class Page {
-  constructor (global, id) {
-    this.id = id
+  constructor (global, params) {
+    this.id = params.id
     this.element = global.node;
     this.tie = null
     this.detail = null
-    getData(id, (err, detail) => {
+    getData(this.id, (err, detail) => {
       if (err && !detail) {
         global.push('/');
         global.refresh();

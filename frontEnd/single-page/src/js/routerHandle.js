@@ -78,17 +78,17 @@ export default function () {
       activePage = new IndexPage(new Page());
     })
     // 博文列表
-    .set('/blog', function (param, pathNode, search) {
+    .set('/blog', function (param, search) {
       this.title('我的博客');
       navigation.setCur('blog');
 
-      activePage = new BlogListPage(new Page(), search);
+      activePage = new BlogListPage(new Page(), param, search);
     })
     // 博客详细页
     .set('/blog/{id}', function (param) {
       this.title('我的博客');
       navigation.setCur('blog');
-      activePage = new BlogDetailPage(new Page(), param.id);
+      activePage = new BlogDetailPage(new Page(), param);
     })
     // 实验室列表页
     .set('/labs', function () {
