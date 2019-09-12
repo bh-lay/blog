@@ -9,7 +9,6 @@ import './less/app-base.less';
 
 import navigation from './js/navigation.js'
 import utils from './js/Base.js';
-import imageHosting from './js/imageHosting.js';
 import funny from './js/funny.js';
 import UI from './js/dialog.js';
 import routerHandle from './js/routerHandle.js';
@@ -52,10 +51,6 @@ let isAdvancedBrowser = !!(supports('transform') && isHistorySupported && isSupp
 if (!isAdvancedBrowser) {
   document.cookie = 'ui_version=html;path=/;';
   window.location.reload();
-}
-// 为windows系统定制body滚动条样式（仅webkit有效）
-if (isWindows) {
-  utils.addClass(utils.query('body'), 'define-scrollbar');
 }
 let L = {};
 window.L = L;

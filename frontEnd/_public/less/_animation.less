@@ -2,6 +2,7 @@
  * CSS3动画
  *
  */
+
 @-webkit-keyframes fadeInLeft{
   0%{
     opacity:0;
@@ -45,6 +46,51 @@
   }
 }
 
+
+@-webkit-keyframes zoomOutDown{
+  0%{
+    -webkit-transform: scale(1) translateY(0);
+    -webkit-transform-origin: center bottom;
+    // opacity: 1;
+  }
+  100%{
+    -webkit-transform: scale(0.9);
+    -webkit-transform-origin: center bottom;
+    // opacity: 0;
+  }
+}
+@-moz-keyframes zoomOutDown{
+  0%{
+    -moz-transform: scale(1) translateY(0);
+    -moz-transform-origin: center bottom;
+    // opacity: 1;
+  }
+  100%{
+    -moz-transform: scale(0.9);
+    -moz-transform-origin: center bottom;
+    // opacity: 0;
+  }
+}@-webkit-keyframes slideInUp{
+  0%{
+    -webkit-transform: translateY(300px);
+    opacity: 0;
+  }
+  100%{
+    -webkit-transform: translateY(0);
+    opacity: 1;
+  }
+}
+@-moz-keyframes slideInUp{
+  0%{
+    -moz-transform: translateY(300px);
+    opacity: 0;
+  }
+  100%{
+    -moz-transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 @keyframes loading-rond {
   0% {transform : rotate(0deg);}
   100% {transform : rotate(360deg);}
@@ -64,3 +110,19 @@
   -webkit-animation:fadeOutRight .5s ease both;
   -moz-animation:fadeOutRight .5s ease both;
 }
+
+.slideInUp{
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  -webkit-animation:slideInUp .5s ease-in-out both;
+  -moz-animation:slideInUp .5s ease-in-out both;
+}
+.zoomOutDown{
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  -webkit-animation:zoomOutDown .5s ease-out both;
+  -moz-animation:zoomOutDown .5s ease-out both;
+}
+

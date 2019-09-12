@@ -15,7 +15,7 @@
 
 @import "_side.less";
 
-.define-scrollbar{
+.define-scrollbar () {
   &::-webkit-scrollbar{
     width: 6px;
     height: 6px;
@@ -37,6 +37,12 @@
   box-shadow: 0 0 2px rgba(0,0,0,0.2);
 }
 
+html,
+body {
+  position: relative;
+  height: 100%;
+  overflow: hidden
+}
 
 
 body {
@@ -107,14 +113,23 @@ a,a:active{
 /**应用主容器**/
 .app-container {
   position: relative;
+  height: 100%;
   overflow: hidden;
+  background: #333;
   .page{
-    height: 0;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #fff;
     overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    .define-scrollbar();
     &.page-active{
-      height: auto;
-      min-height: 600px;
-      overflow: initial;
+      pointer-events: auto;
+      opacity: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
     }
   }
 }

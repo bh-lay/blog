@@ -30,16 +30,15 @@ function getNewPage () {
   if (nodeActivePage) {
     let nodeOld = nodeActivePage;
     nodeActivePage = null;
-    utils.addClass(nodeOld, 'fadeOutRight');
+    utils.addClass(nodeOld, 'zoomOutDown');
 
     setTimeout(function () {
-      utils.remove(nodeOld);
-      utils.query('body').scrollTop = 0;
-      utils.addClass(nodeNew, 'fadeInLeft page-active');
+      utils.addClass(nodeNew, 'slideInUp page-active');
       setTimeout(function () {
-        utils.removeClass(nodeNew, 'fadeInLeft');
-      }, 500);
-    }, 500);
+        utils.remove(nodeOld);
+        utils.removeClass(nodeNew, 'slideInUp');
+      }, 1100);
+    }, 600);
   } else {
     utils.addClass(nodeNew, 'page-active');
   }
