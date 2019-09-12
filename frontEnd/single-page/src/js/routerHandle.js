@@ -26,16 +26,23 @@ function Page (Controller, params, search) {
   this.search = search
   this.node = this.createNode()
   this.view = new Controller(this)
+
+  nodeContainer.appendChild(this.node)
+  Page.activePage = this
 }
 Page.activePage = null
 Page.prototype = {
   createNode: function () {
     let nodeNew = utils.createDom('<div class="page"><div class="l-loading-panel"><span class="l-loading"></span><p>正在加载模块</p></div></div>')
     if (Page.activePage) {
-      let nodeOld = Page.activePage.node
+      let oldPage = Page.activePage
       Page.activePage = null
+
+      // 调用销毁方法
+      oldPage.view.destroy()
+      let nodeOld = oldPage.node
       utils.addClass(nodeOld, 'zoomOutDown');
-  
+
       setTimeout(function () {
         utils.addClass(nodeNew, 'slideInUp page-active');
         setTimeout(function () {
@@ -46,8 +53,6 @@ Page.prototype = {
     } else {
       utils.addClass(nodeNew, 'page-active');
     }
-    nodeContainer.appendChild(nodeNew)
-    Page.activePage = this
     return nodeNew
   },
   push: lofox.push.bind(lofox),

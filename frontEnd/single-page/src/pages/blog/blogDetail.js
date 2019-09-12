@@ -196,6 +196,7 @@ class Page {
     let nodeTag = utils.query('.toc-content', this.element)
     this.tie = new Tie({
       dom: nodeTag,
+      scrollDom: this.element,
       scopeDom: utils.parents(nodeTag, '.article-section'),
       fixed_top: 60
     });
