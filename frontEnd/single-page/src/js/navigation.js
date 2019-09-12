@@ -18,16 +18,6 @@ function init () {
     utils.toggleClass(nodeBody, 'nav-slidedown');
   });
 
-  utils.bind(utils.query('.backToOldVersion'), 'click', function () {
-    UI.confirm({
-      text: '想看看屌丝版 ？',
-      callback: function () {
-        document.cookie = 'ui_version=html;path=/;';
-        window.location.reload();
-      }
-    });
-  });
-
   /**
    * 获取浏览器滚动尺寸
    *

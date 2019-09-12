@@ -4,6 +4,7 @@
  */
 
 import './index.less';
+import footer from '../../components/footer/index.js'
 import utils from '../../js/Base.js';
 import juicer from '../../js/juicer.js';
 
@@ -57,6 +58,7 @@ function view (global) {
     utils.addClass(nodeGallery, 'zoom-show');
   }, 600);
 
+  footer(utils.query('.section-footer', node))
   return {
     destroy: function () {
     }
