@@ -361,8 +361,8 @@ function List (dom, cid, param) {
 
     if (hashMatch) {
       var dom = utils.query('.l_com_item[data-id="' + hashMatch[1] + '"]', me.dom);
-      setTimeout(function () {
-        me.scrollTo(dom);
+      setTimeout(() => {
+        me.scrollTo(dom)
         utils.addClass(dom, 'l_com_item_ani-active');
       }, 500);
     }
@@ -376,7 +376,9 @@ function List (dom, cid, param) {
         pageListNum: me.limit,
         maxPageBtn: 6
       });
+      let lisCnt = utils.query('.l_com_list_cnt', me.dom)
       page.jump = function (num) {
+        lisCnt.innerHTML = '';
         me.scrollTo(me.dom);
         me.getData((num - 1) * me.limit, function (err, data) {
           if (err) {
@@ -384,7 +386,7 @@ function List (dom, cid, param) {
             return;
           }
           let html = juicer(itemTpl, data);
-          utils.query('.l_com_list_cnt', me.dom).innerHTML = html;
+          lisCnt.innerHTML = html;
         });
       };
     }
@@ -416,7 +418,10 @@ function List (dom, cid, param) {
 }
 
 List.prototype.scrollTo = function (dom) {
-  utils.query('body').scrollTop = utils.offset(dom).top - 70;
+  dom.scrollIntoView && dom.scrollIntoView({
+    behavior: 'smooth',
+    block: 'center'
+  })
 };
 List.prototype.addItem = function (item) {
   item.time = '刚刚';

@@ -25,9 +25,9 @@ function Page (Controller, params, search) {
   this.params = params
   this.search = search
   this.node = this.createNode()
-  this.view = new Controller(this)
-
   nodeContainer.appendChild(this.node)
+
+  this.view = new Controller(this)
   Page.activePage = this
 }
 Page.activePage = null

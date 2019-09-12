@@ -243,38 +243,3 @@ a,a:active{
     }
   }
 }
-
-@toolbar-width: 60px;
-@toolbar-active-color: #f70;
-.app-toolbar{
-  position: fixed;
-  bottom: 0;
-  right: 20px;
-  width: @toolbar-width;
-  z-index: 100;
-  .back-top{
-    position: absolute;
-    display: block;
-    width: 100%;
-    height: 35px;
-    bottom: 0;
-    background: #f70;
-    box-shadow: 0 0 4px rgba(0,0,0,.5);
-    transition: .2s;
-    &:before{
-      content: '';
-      display: block;
-      position: absolute;
-      width: 0;
-      height: 0;
-      top: -10px;
-      border-style: solid;
-      border-width: 0 @toolbar-width/2 10px @toolbar-width/2;
-      border-color: transparent transparent @toolbar-active-color;
-    }
-    &.hide{
-      transition-delay: .5s;
-      bottom: -60px;
-    }
-  }
-}
