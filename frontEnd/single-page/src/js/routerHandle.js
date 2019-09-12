@@ -39,7 +39,7 @@ Page.prototype = {
       Page.activePage = null
 
       // 调用销毁方法
-      oldPage.view.destroy()
+      oldPage.view.destroy && oldPage.view.destroy()
       let nodeOld = oldPage.node
       utils.addClass(nodeOld, 'zoomOutDown');
 
