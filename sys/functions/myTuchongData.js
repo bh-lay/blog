@@ -3,7 +3,7 @@ var DB = require('../core/DB.js'),
 	collectionName = 'cache',
 	mongon_ID = 'tuchong_bh-lay',
 	request = require('request'),
-	clientUserAgent = 'bh-lay api robots'
+	clientUserAgent = 'bh-lay api Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
 
 
 // 从数据库读取
