@@ -61,7 +61,7 @@ function saveDataToDataBase(data){
 // 从720yun更新数据
 function updateFromTuchong(callback){
 	request({
-		url: 'https://bh-lay.tuchong.com/rest/2/sites/1785007/posts?count=40&page=1&before_timestamp=0',
+		url: 'http://bh-lay.tuchong.com/rest/2/sites/1785007/posts?count=40&page=1&before_timestamp=0',
 		headers: {
 			'User-Agent': clientUserAgent,
 			'Referer': 'https://bh-lay.tuchong.com/'
