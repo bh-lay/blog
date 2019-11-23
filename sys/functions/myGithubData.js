@@ -52,6 +52,7 @@ function saveDataToDataBase(data){
 				}
 			})
 		})
+		.catch(e => console.log(e))
 }
 
 // 从Github API更新数据

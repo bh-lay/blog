@@ -53,7 +53,7 @@ function saveDataToDataBase(data){
 				}
 			})
 		})
-		.catch(() => {})
+		.catch(e => console.log(e))
 
 }
 
