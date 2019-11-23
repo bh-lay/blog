@@ -33,28 +33,27 @@ function saveDataToDataBase(data){
 	DB.getCollection(collectionName)
 		.then(({collection, client}) => {
 			// 查询用户信息
-			collection.find({
+			collection.countDocuments({
 				id : mongon_ID
+			}, function(err,count){
+				if(count > 0){
+					// 条数存在，则直接更新
+					collection.updateOne({
+						id: mongon_ID
+					}, {
+						$set: data
+					}, function() {
+						client.close()
+					})
+				}else{
+					// 不存在则插入为新数据
+					collection.insertOne(data,function(){
+						client.close()
+					})
+				}
 			})
-				// 计算条数
-				.countDocuments(function(err,count){
-					if(count > 0){
-						// 条数存在，则直接更新
-						collection.updateOne({
-							id: mongon_ID
-						}, {
-							$set: data
-						}, function() {
-							client.close()
-						})
-					}else{
-						// 不存在则插入为新数据
-						collection.insertOne(data,function(){
-							client.close()
-						})
-					}
-				})
 		})
+		.catch(() => {})
 
 }
 

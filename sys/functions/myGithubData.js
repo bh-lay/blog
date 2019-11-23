@@ -31,27 +31,26 @@ function getFromDataBase(callback){
 function saveDataToDataBase(data){
 	DB.getCollection(collection_name)
 		.then(({collection, client}) => {
-			collection.find({
+			// 计算条数
+			collection.countDocuments({
 				id : mongon_ID
+			}, function(err,count){
+				if(count > 0){
+					// 条数存在，则直接更新
+					collection.updateOne({
+						id: mongon_ID
+					}, {
+						$set: data
+					}, function() {
+						client.close()
+					})
+				}else{
+					// 不存在则插入为新数据
+					collection.insertOne(data,function(){
+						client.close()
+					})
+				}
 			})
-				// 计算条数
-				.countDocuments(function(err,count){
-					if(count > 0){
-						// 条数存在，则直接更新
-						collection.updateOne({
-							id: mongon_ID
-						}, {
-							$set: data
-						}, function() {
-							client.close()
-						})
-					}else{
-						// 不存在则插入为新数据
-						collection.insertOne(data,function(){
-							client.close()
-						})
-					}
-				})
 		})
 }
 
