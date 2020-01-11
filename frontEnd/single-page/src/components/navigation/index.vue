@@ -9,7 +9,7 @@
 	z-index 10000
 	background: #ffffffb3
 	transition .6s ease-in-out
-	.page-container
+	.nav-inner
 		display flex
 		align-items center
 		justify-content space-between
@@ -51,7 +51,7 @@
 			mini: isScrolling
 		}"
 	>
-		<div class="page-container">
+		<Container class="nav-inner">
 			<div class="page-title">H5</div>
 			<div class="nav-list">
 				<router-link
@@ -65,7 +65,7 @@
 					<span>{{nav.label}}</span>
 				</router-link>
 			</div>
-		</div>
+		</Container>
 	</div>
 </template>
 

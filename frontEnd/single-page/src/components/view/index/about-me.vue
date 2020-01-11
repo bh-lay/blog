@@ -95,7 +95,7 @@
 ]"
 >
 	<div class="aboutme-body">
-		<div class="page-container">
+		<Container>
 			<h2>
 				你好！
 				<br>我是
@@ -140,7 +140,7 @@
 					</svg>
 				</a>
 			</div>
-		</div>
+		</Container>
 	</div>
 	<div class="photograghy-author">
 		<a

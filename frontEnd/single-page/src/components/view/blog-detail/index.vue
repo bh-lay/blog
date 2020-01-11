@@ -140,12 +140,12 @@
 <template>
 <div class="blog-detail">
 	<header>
-			<div class="page-container header-body">
+			<Container class="header-body">
 					<div class="title">{{detail.title}}</div>
 					<div class="article-info"><span>{{detail.intro}}</span></div>
-			</div>
+			</Container>
 	</header>
-	<div class="page-container">
+	<Container>
 			<div class="article-section">
 					<div class="article-section-body">
 							<div class="caption">
@@ -184,7 +184,7 @@
 							</div>
 					</div>
 			</div>
-	</div>
+	</Container>
 	<div class="comments-section">
 			<div class="comments_frame"></div>
 	</div>

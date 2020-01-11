@@ -1,9 +1,7 @@
-import Vue from 'vue'
-
 /**
  * 毫秒格式化
  */
-Vue.filter('timeFormat', (time, format = '{y}-{m}-{d} {h}:{i}:{s}') => {
+function timeFormat (time, format = '{y}-{m}-{d} {h}:{i}:{s}') {
 	let date = new Date(parseInt(time, 10))
 	let formatObj = {
 		y: date.getYear() + 1900,
@@ -19,10 +17,10 @@ Vue.filter('timeFormat', (time, format = '{y}-{m}-{d} {h}:{i}:{s}') => {
 		return formatObj[b] || 0
 	})
 	return timeStr
-})
+}
 
 // 时间差计算
-Vue.filter('dateDiff', dateTimeStamp => {
+function dateDiff (dateTimeStamp) {
 	let minute = 1000 * 60
 	let hour = minute * 60
 	let day = hour * 24
@@ -55,15 +53,15 @@ Vue.filter('dateDiff', dateTimeStamp => {
 		result = '刚刚'
 	}
 	return result
-})
+}
 
 // 跳转链接生成
-Vue.filter('urlPrefix', url => {
+function urlPrefix (url) {
 	return 'http://bh-lay.com/r/' + btoa(encodeURIComponent(url))
-})
+}
 
 // 跳转链接生成
-Vue.filter('imgHosting', (url, type, width, height) => {
+function imgHosting (url, type, width, height) {
 	if (typeof (url) !== 'string') {
 		return ''
 	}
@@ -88,4 +86,6 @@ Vue.filter('imgHosting', (url, type, width, height) => {
 		src += '?imageView/1/w/' + w + '/h/' + h + '/q/85'
 	}
 	return src
-})
+}
+
+export default { timeFormat, dateDiff, urlPrefix, imgHosting }

@@ -3,9 +3,9 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import './filters/index.js'
-import './directives/index.js'
+import UILibrary from './ui-library/index.js'
 
+Vue.use(UILibrary)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

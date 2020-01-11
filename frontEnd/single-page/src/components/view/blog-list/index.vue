@@ -183,12 +183,12 @@ $tag_cnt_bj = #fff
 <div class="articleListPage">
 	<div class="articleListPage-tags-cnt">
 		<div class="articleListPage-tags">
-			<div class="page-container">
+			<Container>
 				<tagList />
-			</div>
+			</Container>
 		</div>
 	</div>
-	<div class="page-container">
+	<Container>
 		<Stick
 			:list="list"
 			imgKey="cover"
@@ -213,7 +213,7 @@ $tag_cnt_bj = #fff
 			</template>
 		</Stick>
 		<div class="status"><div class="l-loading-panel"><span class="l-loading"></span></div></div>
-	</div>
+	</Container>
 </div>
 </template>
 
