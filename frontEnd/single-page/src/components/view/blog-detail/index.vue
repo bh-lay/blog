@@ -150,7 +150,7 @@
 					<div class="article-section-body">
 							<div class="caption">
 									<h1>{{detail.title}}</h1>
-									<p>发布时间：<span>{{detail.time_show}}</span></p>
+									<p>发布时间：<span>{{detail.time_show | timeFormat}}</span></p>
 							</div>
 							<div class="article" v-html="detail.content"></div>
 							<footer>
