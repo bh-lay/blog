@@ -7,6 +7,7 @@ import BlogDetail from '@/components/view/blog-detail/index.vue'
 import LabsList from '@/components/view/labs-list/index.vue'
 import PanoList from '@/components/view/pano-list/index.vue'
 import PhotographyList from '@/components/view/photography-list/index.vue'
+import Bless from '@/components/view/bless/index.vue'
 
 Vue.use(Router)
 
@@ -43,6 +44,11 @@ export default new Router({
 			path: '/photography/',
 			name: 'photography',
 			component: PhotographyList
+		},
+		{
+			path: '/bless/',
+			name: 'blessPage',
+			component: Bless
 		}
 	],
 	scrollBehavior (to, from, savedPosition) {

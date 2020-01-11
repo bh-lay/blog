@@ -49,8 +49,7 @@
 		line-height 20px
 		font-size 14px
 		color #333
-		
-@media (max-width 600px)
+@media (max-width: 600px)
 	.labs-sub-header
 		padding 15px
 		.labs-profile-card

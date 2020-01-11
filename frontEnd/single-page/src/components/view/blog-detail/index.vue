@@ -140,53 +140,53 @@
 <template>
 <div class="blog-detail">
 	<header>
-			<Container class="header-body">
-					<div class="title">{{detail.title}}</div>
-					<div class="article-info"><span>{{detail.intro}}</span></div>
-			</Container>
+		<Container class="header-body">
+			<div class="title">{{detail.title}}</div>
+			<div class="article-info"><span>{{detail.intro}}</span></div>
+		</Container>
 	</header>
 	<Container>
-			<div class="article-section">
+		<div class="article-section">
+			<div class="article-section-body">
+				<div class="caption">
+					<h1>{{detail.title}}</h1>
+					<p>发布时间：<span>{{detail.time_show | timeFormat}}</span></p>
+				</div>
+				<div class="article" v-html="detail.content"></div>
+				<footer>
+					<p><strong>tags：</strong>
+						<a
+							v-for="(tag, index) in detail.tags"
+							:key="tag + index"
+							:href="'/blog?tag=' + tag"
+						>{{tag}}</a>
+					</p>
+					<p><strong>转载请注明来源：</strong>http://bh-lay.com/blog/{{detail.id}}</p>
+				</footer>
+				<div class="sns-share">
+					<button title="分享至新浪微博" class="share-to-weibo">
+						<i class="l-icon l-icon-weibo"></i>
+						<span>分享</span>
+					</button>
+					<button title="分享至微信" class="share-to-wechat">
+						<svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+							<path d="M405.333333 170.666667C228.693333 170.666667 85.333333 285.44 85.333333 426.666667 85.333333 507.306667 131.413333 578.56 203.946667 625.493333L170.666667 725.333333 277.333333 661.333333C315.306667 674.56 357.12 682.666667 401.493333 682.666667 390.4 655.786667 384 627.2 384 597.333333 384 456.106667 517.546667 341.333333 682.666667 341.333333 690.773333 341.333333 698.88 341.333333 706.56 342.613333 663.04 242.773333 545.28 170.666667 405.333333 170.666667M277.333333 277.333333C300.8 277.333333 320 296.533333 320 320 320 343.466667 300.8 362.666667 277.333333 362.666667 253.866667 362.666667 234.666667 343.466667 234.666667 320 234.666667 296.533333 253.866667 277.333333 277.333333 277.333333M490.666667 277.333333C514.133333 277.333333 533.333333 296.533333 533.333333 320 533.333333 343.466667 514.133333 362.666667 490.666667 362.666667 467.2 362.666667 448 343.466667 448 320 448 296.533333 467.2 277.333333 490.666667 277.333333M682.666667 384C541.44 384 426.666667 479.573333 426.666667 597.333333 426.666667 715.093333 541.44 810.666667 682.666667 810.666667 711.253333 810.666667 738.56 807.253333 764.16 800L853.333333 853.333333 826.88 773.546667C893.866667 734.72 938.666667 670.293333 938.666667 597.333333 938.666667 479.573333 823.893333 384 682.666667 384M597.333333 490.666667C620.8 490.666667 640 509.866667 640 533.333333 640 556.8 620.8 576 597.333333 576 573.866667 576 554.666667 556.8 554.666667 533.333333 554.666667 509.866667 573.866667 490.666667 597.333333 490.666667M768 490.666667C791.466667 490.666667 810.666667 509.866667 810.666667 533.333333 810.666667 556.8 791.466667 576 768 576 744.533333 576 725.333333 556.8 725.333333 533.333333 725.333333 509.866667 744.533333 490.666667 768 490.666667Z"/>
+						</svg>
+					</button>
+					<div class="wechat-area"></div>
+				</div>
+			</div>
+			<div class="article-section-side">
 					<div class="article-section-body">
-							<div class="caption">
-									<h1>{{detail.title}}</h1>
-									<p>发布时间：<span>{{detail.time_show | timeFormat}}</span></p>
-							</div>
-							<div class="article" v-html="detail.content"></div>
-							<footer>
-									<p><strong>tags：</strong>
-										<a 
-											v-for="(tag, index) in detail.tags"
-											:key="tag + index"
-											:href="'/blog?tag=' + tag"
-										>{{tag}}</a>
-									</p>
-									<p><strong>转载请注明来源：</strong>http://bh-lay.com/blog/{{detail.id}}</p>
-							</footer>
-							<div class="sns-share">
-									<button title="分享至新浪微博" class="share-to-weibo">
-											<i class="l-icon l-icon-weibo"></i>
-											<span>分享</span>
-									</button>
-									<button title="分享至微信" class="share-to-wechat">
-											<svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
-													<path d="M405.333333 170.666667C228.693333 170.666667 85.333333 285.44 85.333333 426.666667 85.333333 507.306667 131.413333 578.56 203.946667 625.493333L170.666667 725.333333 277.333333 661.333333C315.306667 674.56 357.12 682.666667 401.493333 682.666667 390.4 655.786667 384 627.2 384 597.333333 384 456.106667 517.546667 341.333333 682.666667 341.333333 690.773333 341.333333 698.88 341.333333 706.56 342.613333 663.04 242.773333 545.28 170.666667 405.333333 170.666667M277.333333 277.333333C300.8 277.333333 320 296.533333 320 320 320 343.466667 300.8 362.666667 277.333333 362.666667 253.866667 362.666667 234.666667 343.466667 234.666667 320 234.666667 296.533333 253.866667 277.333333 277.333333 277.333333M490.666667 277.333333C514.133333 277.333333 533.333333 296.533333 533.333333 320 533.333333 343.466667 514.133333 362.666667 490.666667 362.666667 467.2 362.666667 448 343.466667 448 320 448 296.533333 467.2 277.333333 490.666667 277.333333M682.666667 384C541.44 384 426.666667 479.573333 426.666667 597.333333 426.666667 715.093333 541.44 810.666667 682.666667 810.666667 711.253333 810.666667 738.56 807.253333 764.16 800L853.333333 853.333333 826.88 773.546667C893.866667 734.72 938.666667 670.293333 938.666667 597.333333 938.666667 479.573333 823.893333 384 682.666667 384M597.333333 490.666667C620.8 490.666667 640 509.866667 640 533.333333 640 556.8 620.8 576 597.333333 576 573.866667 576 554.666667 556.8 554.666667 533.333333 554.666667 509.866667 573.866667 490.666667 597.333333 490.666667M768 490.666667C791.466667 490.666667 810.666667 509.866667 810.666667 533.333333 810.666667 556.8 791.466667 576 768 576 744.533333 576 725.333333 556.8 725.333333 533.333333 725.333333 509.866667 744.533333 490.666667 768 490.666667Z"/>
-											</svg>
-									</button>
-									<div class="wechat-area"></div>
-							</div>
-					</div>
-					<div class="article-section-side">
-							<div class="article-section-body">
-									<div class="toc-content">
-											<div class="title">TOC</div>
-									</div>
+							<div class="toc-content">
+									<div class="title">TOC</div>
 							</div>
 					</div>
 			</div>
+		</div>
 	</Container>
 	<div class="comments-section">
-			<div class="comments_frame"></div>
+		<div class="comments_frame"></div>
 	</div>
 </div>
 </template>
@@ -195,19 +195,19 @@
 // 图片预加载
 function loadImg (src, callback) {
 	if (!src) {
-		callback && callback();
-		return;
+		callback && callback()
+		return
 	}
-	let img = new Image();
-	img.crossOrigin = 'Anonymous';
+	let img = new Image()
+	img.crossOrigin = 'Anonymous'
 
 	function End () {
-		callback && callback(img);
-		callback = null;
+		callback && callback(img)
+		callback = null
 	}
 
-	img.onerror = img.onload = End;
-	img.src = src;
+	img.onerror = img.onload = End
+	img.src = src
 }
 function prefixID (htmlPart) {
 	let idMatches = htmlPart.match(/^<h\d\s[^>]*data-id=(?:"|')([^"']+)/)
