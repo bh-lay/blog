@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/components/view/index/index.vue'
-import Blog from '@/components/view/blog/index.vue'
+import BlogList from '@/components/view/blog-list/index.vue'
+import BlogDetail from '@/components/view/blog-detail/index.vue'
+
 import Labs from '@/components/view/labs/index.vue'
 
 Vue.use(Router)
@@ -13,26 +15,22 @@ export default new Router({
 		{
 			path: '/',
 			name: 'index',
-			component: Index,
-			meta: {
-				keepAlive: true
-			}
+			component: Index
 		},
 		{
 			path: '/blog/',
 			name: 'blogListPage',
-			component: Blog,
-			meta: {
-				keepAlive: true
-			}
+			component: BlogList
+		},
+		{
+			path: '/blog/:id',
+			name: 'blogListPage',
+			component: BlogDetail
 		},
 		{
 			path: '/labs/',
 			name: 'labs',
-			component: Labs,
-			meta: {
-				keepAlive: true
-			}
+			component: Labs
 		}
 	],
 	scrollBehavior (to, from, savedPosition) {
