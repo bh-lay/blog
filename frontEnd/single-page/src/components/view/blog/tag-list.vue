@@ -25,7 +25,7 @@
 		<router-link
 			v-for="(tag, index) in tagList"
 			:key="index"
-			:to="'/post/?tag=' + tag"
+			:to="'/blog/?tag=' + tag"
 		>{{tag}}</router-link>
 	</div>
 </template>
