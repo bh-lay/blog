@@ -218,7 +218,6 @@ $tag_cnt_bj = #fff
 </template>
 
 <script>
-
 import Stick from 'vue-stick'
 import tagList from './tag-list.vue'
 export default {
