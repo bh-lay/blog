@@ -1,7 +1,7 @@
 {
-  "name": "train-vr",
+  "name": "single-page",
   "version": "1.0.0",
-  "description": "train vr traveler",
+  "description": "single-page",
   "author": "剧中人 <bh_lay@126.com>",
   "private": true,
   "scripts": {

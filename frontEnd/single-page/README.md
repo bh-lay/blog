@@ -1,6 +1,6 @@
-# train-vr
+# single-page
 
-> train vr traveler
+> single-page
 
 ## Build Setup
 
