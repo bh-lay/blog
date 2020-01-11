@@ -4,7 +4,9 @@ import Index from '@/components/view/index/index.vue'
 import BlogList from '@/components/view/blog-list/index.vue'
 import BlogDetail from '@/components/view/blog-detail/index.vue'
 
-import Labs from '@/components/view/labs/index.vue'
+import LabsList from '@/components/view/labs-list/index.vue'
+import PanoList from '@/components/view/pano-list/index.vue'
+import PhotographyList from '@/components/view/photography-list/index.vue'
 
 Vue.use(Router)
 
@@ -30,7 +32,17 @@ export default new Router({
 		{
 			path: '/labs/',
 			name: 'labs',
-			component: Labs
+			component: LabsList
+		},
+		{
+			path: '/720/',
+			name: 'pano',
+			component: PanoList
+		},
+		{
+			path: '/photography/',
+			name: 'photography',
+			component: PhotographyList
 		}
 	],
 	scrollBehavior (to, from, savedPosition) {
