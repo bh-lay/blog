@@ -110,7 +110,7 @@
 				box-shadow 2px 2px 4px rgba(0, 0, 0, .1), 2px 2px 15px rgba(0, 0, 0, .1)
 	.comments-section
 		position relative
-		padding 2em 8em 4em
+		padding 2em 0 4em
 		background #f5f8fa
 		border 1px solid #edf0f3
 		&:before
@@ -133,7 +133,7 @@
 			.article-section-side
 				display none
 		.comments-section
-			padding 2em 1em
+			padding 2em 0
 	.header-body
 		display none
 </style>
@@ -186,11 +186,14 @@
 		</div>
 	</Container>
 	<div class="comments-section">
-		<div class="comments_frame"></div>
+		<Container>
+			<Comments />
+		</Container>
 	</div>
 </div>
 </template>
 <script>
+import Comments from '@/components/comments/index.vue'
 
 // 图片预加载
 function loadImg (src, callback) {
@@ -247,6 +250,7 @@ function getToc (article) {
 export default {
 	name: 'blogDetail',
 	components: {
+		Comments
 	},
 	data () {
 		return {
