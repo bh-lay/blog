@@ -49,6 +49,7 @@
 		line-height 20px
 		font-size 14px
 		color #333
+
 @media (max-width: 600px)
 	.labs-sub-header
 		padding 15px
@@ -58,89 +59,22 @@
 		.notice
 			padding 15px
 
-.labsList
-	min-height 400px
-
 .post-list
+	min-height 400px
 	padding 40px 0
-
-.post-item
-	display block
-	position relative
-	margin-bottom 20px
-	box-shadow 1px 1px 2px rgba(0, 0, 0, .2)
-	background #000
-	overflow hidden
-	.data
-		position absolute
-		top -36px
-		left 0
-		width 100%
-		height 36px
-		background #222
-		span
-			display inline-block
-			height 36px
-			padding-left 20px
-			line-height 36px
-			font-size 12px
-			color #ccc
-			svg
-				display inline-block
-				vertical-align middle
-				width 18px
-				margin-right 5px
-				fill #ccc
-	.cover
-		background-color #555
-		background-size cover
-		background-position center
-		&:before
-			content ''
-			display block
-			padding-top 100%
-	.intro
-		height 130px
-		background #fff
-	.title
-		height 50px
-		padding-left 20px
-		line-height 50px
-		font-size 16px
-		color #000
-		white-space nowrap
-		overflow hidden
-		text-overflow ellipsis
-	.desc
-		height 64px
-		padding 0 20px
-		line-height 16px
-		font-size 12px
-		color #888
-		overflow hidden
-
-@media (min-width 1024px)
-	.post-item
-		padding-bottom 50px
-		.intro
-			position absolute
-			width 100%
-			left 0
-			top 100%
-			margin-top -50px
-		.data,
-		.cover,
-		.intro
-			transition .2s ease-in-out
-			transition-delay .1s
-		&:hover
-			.data
-				transform translate(0, 36px)
-			.cover
-				opacity .6
-				transform translate(0, -20px)
-			.intro
-				transform translate(0, -80px)
+	display flex
+	flex-wrap wrap
+	.post-item,
+	& > i
+		width 240px
+		flex-grow 1
+		margin 0 8px 16px
+	& > i
+		display block
+		height 0
+		padding 0
+		line-height 0
+		font-size 0
 </style>
 <template>
 <div class="labs-list-pager">
@@ -161,18 +95,21 @@
 			<p class="notice">{{intro}}</p>
 		</Container>
 	</div>
-	<div class="labsList">
-		<Container>
-			<div class="l-loading-panel">
-				<span class="l-loading"></span>
-				<p>正在加载数据</p>
-			</div>
-		</Container>
-	</div>
+	<Container>
+		<div class="post-list">
+			<Item
+				v-for="item in postList"
+				:key="item.id"
+				:post="item"
+			/>
+			<i /><i /><i /><i /><i /><i />
+		</div>
+	</Container>
 </div>
 </template>
 
 <script>
+import Item from './item.vue'
 
 let potoGraphaList = [
 	{
@@ -206,6 +143,7 @@ let photoGraphaIndex = -1
 
 export default {
 	name: 'sns-page-layout',
+	components: {Item},
 	props: {
 		intro: {
 			type: String,
@@ -218,6 +156,12 @@ export default {
 					url: ''
 				}
 			}
+		},
+		postList: {
+			type: Array,
+			default () {
+				return []
+			}
 		}
 	},
 	data () {
@@ -227,10 +171,10 @@ export default {
 		}
 	},
 	created () {
-		this.getList()
+		this.getBannerList()
 	},
 	methods: {
-		getList () {
+		getBannerList () {
 			this.photography = potoGraphaList[++photoGraphaIndex]
 			if (photoGraphaIndex + 1 >= potoGraphaList.length) {
 				photoGraphaIndex = -1

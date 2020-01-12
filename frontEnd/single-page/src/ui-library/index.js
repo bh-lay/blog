@@ -5,7 +5,6 @@ import filters from './filters/index.js'
 export default {
 	install (Vue) {
 		for (let componentKey in components) {
-			console.log('componentKey', componentKey)
 			Vue.component(componentKey, components[componentKey])
 		}
 		for (let directiveKey in directives) {

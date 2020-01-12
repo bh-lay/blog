@@ -11,17 +11,6 @@ $tag_cnt_bj = #fff
 		margin-top 0
 	.status
 		height 52px
-	.l-loading-panel
-		margin 0
-		padding 15px 0
-		max-width none
-		opacity 1
-		transition .4s
-		&.hide
-			opacity 0
-	.l-loading
-		width 20px
-		height 20px
 .articleListPage-tags-cnt
 	margin-bottom 20px
 
@@ -212,7 +201,7 @@ $tag_cnt_bj = #fff
 				</div>
 			</template>
 		</Stick>
-		<div class="status"><div class="l-loading-panel"><span class="l-loading"></span></div></div>
+		<div class="status"></div>
 	</Container>
 </div>
 </template>

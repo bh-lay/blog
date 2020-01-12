@@ -4,6 +4,7 @@
 <layout
   :intro="intro"
 	:thirdProfile="thirdProfile"
+	:postList="postList"
 >
 </layout>
 </template>
@@ -19,12 +20,29 @@ export default {
 			thirdProfile: {
 				title: 'Github',
 				url: 'https://github.com/bh-lay'
-			}
+			},
+			postList: []
 		}
 	},
 	created () {
+		this.getList()
 	},
 	methods: {
+		getList () {
+			fetch('/api/labs?limit=20', {
+				method: 'GET'
+			})
+				.then(response => response.json())
+				.then(data => {
+					data.list.forEach(function (item) {
+						item.desc = item.intro
+						item.url = '/labs/' + item.name
+						item.star = item.github.stargazers_count
+						item.fork = item.github.forks_count
+					})
+					this.postList = data.list
+				})
+		}
 	}
 }
 </script>
