@@ -29,18 +29,18 @@ export default {
 	},
 	methods: {
 		getList () {
-			fetch('/ajax/pano/list?act=get_list', {
+			fetch('/ajax/photography/list?act=get_list', {
 				method: 'GET'
 			})
 				.then(response => response.json())
 				.then(data => {
-					data.data.list.forEach(function (item) {
+					data.post_list.forEach(function (item) {
 						item.url += '?from=bh-lay'
 						item.thumb = (item.images && item.images.length) ? item.images[0].source.g : (item.title_image ? item.title_image.url : '')
 						item.desc = item.excerpt
-						item.like = item.favoritess
+						item.like = item.favorites
 					})
-					this.postList = data.data.list
+					this.postList = data.post_list
 				})
 		}
 	}

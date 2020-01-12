@@ -81,13 +81,13 @@
 				transform translate(0, -80px)
 </style>
 <template>
-<a class="post-item" :href="post.url">
+<a class="post-item" :href="post.url" target="_blank">
 	<div class="cover" :style="{
 		backgroundImage: `url(${post.thumb})`
 	}"></div>
 	<div class="intro">
 		<div class="title">{{post.title}}</div>
-		<div class="desc">{{post.intro}}</div>
+		<div class="desc">{{post.desc}}</div>
 	</div>
 	<div class="data">
 		<span v-if="post.pv">

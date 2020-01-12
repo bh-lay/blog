@@ -3,8 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import filters from './filters/index.js'
 import UILibrary from './ui-library/index.js'
 
+Vue.use(filters)
 Vue.use(UILibrary)
 Vue.config.productionTip = false
 

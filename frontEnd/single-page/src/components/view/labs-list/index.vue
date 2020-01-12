@@ -11,6 +11,8 @@
 
 <script>
 import layout from '@/components/sns-page-layout/index.vue'
+import filters from '@/filters/index.js'
+
 export default {
 	name: 'labs-page',
 	components: {layout},
@@ -35,6 +37,7 @@ export default {
 				.then(response => response.json())
 				.then(data => {
 					data.list.forEach(function (item) {
+						item.thumb = filters.imgHosting(item.cover)
 						item.desc = item.intro
 						item.url = '/labs/' + item.name
 						item.star = item.github.stargazers_count
