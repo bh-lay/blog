@@ -7,7 +7,7 @@
 	top 0
 	left 0
 	z-index 10000
-	background: #ffffffb3
+	background rgba(255, 255, 255, .4)
 	transition .6s ease-in-out
 	.nav-inner
 		display flex
@@ -17,28 +17,27 @@
 	.nav-list
 		a
 			display inline-block
-			width 100px
-			line-height $nav-mini-height
+			height 20px
+			margin-left 20px
+			padding 6px 10px
+			border-radius 6px
+			line-height 20px
 			text-align center
-			text-shadow 1px 1px 1px #ffffff33,2px 2px 5px #ffffff26
-			font-size 16px
+			font-size 14px
 			font-weight bold
-			color #22252a
+			color #2d3339
 			text-decoration none
-			transition .2s
+			transition .2s .1s
 			&:hover
-			&.active
-				color #0a66c2
-				text-shadow 1px 1px 1px #0f4c8a80
+				background #668299
+				color #fff
+			&.router-link-exact-active
+				background #0d8bf2
+				color #fff
 	&.mini
 		height $nav-mini-height
 		background #fff
 		box-shadow 0 0 2px #00000010, 0 0 10px #00000020
-		.nav-list a
-			text-shadow none
-			color #8f99a3
-			&.active
-				color #0a66c2
 .page-title
 	margin-right 50px
 	font-size 24px
@@ -58,9 +57,6 @@
 					v-for="nav in navList"
 					:key="nav.type"
 					:to="nav.href"
-					:class="{
-						active: nav.type === currentNavType
-					}"
 				>
 					<span>{{nav.label}}</span>
 				</router-link>
@@ -76,7 +72,6 @@ export default {
 	data () {
 		return {
 			isScrolling: false,
-			currentNavType: 'index',
 			navList: [
 				{
 					label: '首页',
@@ -112,7 +107,6 @@ export default {
 		}
 	},
 	mounted () {
-		this.setActiveNav()
 		this.ajustNavigation()
 		window.addEventListener('scroll', this.scrollListener)
 	},
@@ -126,24 +120,6 @@ export default {
 		ajustNavigation () {
 			let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
 			this.isScrolling = scrollTop > 50
-		},
-		setActiveNav () {
-			console.log('route', this.$route)
-			let currentRouteName = this.$route.name
-			if (currentRouteName === 'index') {
-				this.currentNavType = 'index'
-			} else if (currentRouteName === 'postListPage' || currentRouteName === 'postListIndexPage') {
-				this.currentNavType = 'post'
-			} else if (currentRouteName === 'friendListPage' || currentRouteName === 'friendListIndexPage' || currentRouteName === 'friendDetailPage') {
-				this.currentNavType = 'friend'
-			} else {
-				this.currentNavType = ''
-			}
-		}
-	},
-	watch: {
-		'$route' (route) {
-			this.setActiveNav()
 		}
 	}
 }
