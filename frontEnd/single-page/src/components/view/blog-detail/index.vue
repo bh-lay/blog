@@ -6,6 +6,7 @@
 .blog-detail
 	font-size 1rem
 	background #fff
+	overflow-x hidden
 	header
 		min-height 160px
 		max-height 360px
@@ -187,7 +188,9 @@
 	</Container>
 	<div class="comments-section">
 		<Container>
-			<Comments />
+			<Comments
+				:cid="'blog-' + blogID"
+			/>
 		</Container>
 	</div>
 </div>
@@ -276,9 +279,7 @@ export default {
 	},
 	methods: {
 		init (detail) {
-			fetch(`/api/blog/${this.blogID}?format=html`, {
-				method: 'GET'
-			})
+			fetch(`/api/blog/${this.blogID}?format=html`)
 				.then(response => response.json())
 				.then(data => {
 					for (let key in this.detail) {
