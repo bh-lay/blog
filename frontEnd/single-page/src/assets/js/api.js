@@ -1,4 +1,4 @@
-let domain = 'http://bh-lay.com/api'
+let domain = '/api'
 // 获取
 export function getApiData (url = '') {
 	return fetch(domain + url.replace(/^\b(\/)*/, '/'), {

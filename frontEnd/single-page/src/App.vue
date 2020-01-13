@@ -16,7 +16,7 @@ a
 	top 20px
 	left 20px
 	z-index 2
-.footer
+.page-footer
 	height 400px
 	background #333
 </style>
@@ -24,7 +24,7 @@ a
 	<div id="app">
 		<Navigation/>
 		<router-view class="router-page" />
-		<div class="footer">
+		<div class="page-footer">
 
 		</div>
 	</div>
@@ -33,6 +33,7 @@ a
 <script>
 import './assets/stylus/animation.css'
 import Navigation from './components/navigation/index.vue'
+
 export default {
 	name: 'App',
 	components: {Navigation}
