@@ -6,18 +6,6 @@
 	background #dee3e7
 
 /**实验室列表**/
-.labs-header
-	position relative
-	background no-repeat center center #f4f1ec
-	background-size auto 100%
-	min-height 200px
-	max-height 400px
-	overflow hidden
-	photography()
-	&:before
-		content ''
-		display block
-		padding-top 21%
 .labs-sub-header
 	min-height 50px
 	background #fff
@@ -78,13 +66,7 @@
 </style>
 <template>
 <div class="labs-list-pager">
-	<div class="labs-header" :style="{
-		backgroundImage: `url(${photography.imgSrc})`
-	}">
-		<div class="photograghy-author">
-			<a :href="photography.htmlSrc" target="_blank">{{photography.title}} By:@剧中人</a>
-		</div>
-	</div>
+	<headerBanner />
 	<div class="labs-sub-header">
 		<Container class="labs-sub-header-inner">
 			<div class="labs-profile-card">
@@ -109,6 +91,7 @@
 </template>
 
 <script>
+import headerBanner from '@/components/header-banner/index.vue'
 import Item from './item.vue'
 
 let potoGraphaList = [
@@ -143,7 +126,7 @@ let photoGraphaIndex = -1
 
 export default {
 	name: 'sns-page-layout',
-	components: {Item},
+	components: {headerBanner, Item},
 	props: {
 		intro: {
 			type: String,
