@@ -1,8 +1,6 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 @import "~@/assets/stylus/variable.styl"
 
-.comments-list
-	padding-top $navigation-height
 .l-com-item
 	display flex
 	margin-bottom 30px
@@ -66,6 +64,7 @@
 </style>
 <template>
 <div class="comments-list">
+	<div ref="scrollMark"></div>
 	<div
 		class="l-com-item"
 		v-for="item in list"
@@ -91,7 +90,6 @@
 		:total="page.total"
 		:size="page.pageItemCount"
 		:current.sync="page.pageIndex"
-		@page-change="handlePageChange"
 	/>
 </div>
 </template>
@@ -123,9 +121,9 @@ export default {
 	},
 	watch: {
 		'page.pageIndex' () {
-			this.$el.scrollIntoView({
+			this.$refs.scrollMark.scrollIntoView({
 				behavior: 'smooth',
-				block: 'start',
+				block: 'center',
 				inline: 'nearest'
 			})
 			this.getList()
@@ -144,9 +142,6 @@ export default {
 					this.page.total = data.data.count
 					this.list = data.data.list
 				})
-		},
-		handlePageChange () {
-
 		}
 	}
 }

@@ -13,7 +13,7 @@
 	padding 3em 0
 	text-align center
 	background #fff
-	.btn
+	a
 		margin 0 20px
 </style>
 <template>
