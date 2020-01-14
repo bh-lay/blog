@@ -46,7 +46,7 @@
 	</div>
 	<div class="frameworks">
 		<p>无耻地没有使用以下框架</p>
-		<p>express hexo bones rrestjs koa hapi<a href="https://github.com/bh-lay/blog/">博客源码</a></p>
+		<p>express hexo bones rrestjs koa hapi<a href="https://github.com/bh-lay/blog/" target="_blank">博客源码</a></p>
 	</div>
 </section>
 </template>

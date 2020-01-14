@@ -21,20 +21,20 @@
 		font-size 3rem
 		color #fff
 	photography()
-.blessPage 
+.blessPage
 	display flex
 	flex-wrap wrap
-	.main-body 
+	.main-body
 		width 400px
 		flex 1
 		flex-basis auto
 		overflow auto
 		box-sizing border-box
 		padding 20px 20px 80px
-	.bless-sidebar 
+	.bless-sidebar
 		position relative
 		width 320px
-	.sidebar-body 
+	.sidebar-body
 		height 100%
 		margin-right -300px
 		padding 20px 320px 20px 20px
@@ -43,8 +43,8 @@
 	max-width 700px
 	width 100%
 	margin:auto
-@media screen and (max-width: 950px) 
-	.blessPage .bless-sidebar 
+@media screen and (max-width: 950px)
+	.blessPage .bless-sidebar
 		width 100%
 		.sidebar-body
 			margin-left -800px

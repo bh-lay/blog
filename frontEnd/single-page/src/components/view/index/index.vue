@@ -5,7 +5,7 @@
 /* * 首页 * */
 .index-page
 	overflow hidden
-	section 
+	section
 		position relative
 		font-size 1rem
 
@@ -30,17 +30,12 @@
 </template>
 
 <script>
-import aboutMe from "./about-me.vue";
-import aboutDesign from "./about-design.vue";
-import aboutBackend from "./about-backend.vue";
-import aboutFriends from "./about-friends.vue";
+import aboutMe from './about-me.vue'
+import aboutDesign from './about-design.vue'
+import aboutBackend from './about-backend.vue'
+import aboutFriends from './about-friends.vue'
 export default {
-	name: "index",
-	components: { aboutMe, aboutDesign, aboutBackend, aboutFriends },
-	data() {
-		return {};
-	},
-	created() {},
-	methods: {}
-};
+	name: 'index-page',
+	components: { aboutMe, aboutDesign, aboutBackend, aboutFriends }
+}
 </script>

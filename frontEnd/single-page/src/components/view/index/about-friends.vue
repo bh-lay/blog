@@ -33,7 +33,7 @@
 </style>
 <template>
 <section class="index-about-friends">
-	<a href="/directories">
+	<a href="/directories" target="_blank">
 		<strong>前端英雄榜</strong>
 		<span>汇聚小剧身边的小伙伴</span>
 	</a>

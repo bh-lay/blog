@@ -58,16 +58,13 @@
 				width 0
 				height 1px
 				background #007fff
-				opacity 0
 				transition .4s
 			&:hover:after
 				width 25px
-				opacity 1
 			&.router-link-exact-active
 				color #007fff
 				&:after
 					width 50px
-					opacity 1
 	&.mini
 		padding-top 0
 		background #fff

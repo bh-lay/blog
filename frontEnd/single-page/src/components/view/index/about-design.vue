@@ -9,7 +9,6 @@
 	text-align center
 	background #222
 	background-image -webkit-gradient(linear, left top, left bottom, color-stop(0, #222), color-stop(1, #333))
-	overflow-x hidden
 	&:before
 		content ''
 		position absolute
@@ -146,8 +145,8 @@
 	<h3>尝试实现响应式设计</h3>
 	<p>配合单页架构营造顺滑体验</p>
 	<div class="links">
-		单页组件<a href="http://bh-lay.github.io/lofox/index.html">lofox.js</a>
-		<a href="http://bh-lay.github.io/iframer/app.html">iframer</a>
+		单页组件<a href="http://bh-lay.github.io/lofox/index.html" target="_blank">lofox.js</a>
+		<a href="http://bh-lay.github.io/iframer/app.html" target="_blank">iframer</a>
 	</div>
 	<div class="device-cnt">
 		<div class="device mobile"><span></span><i></i><i></i></div>
