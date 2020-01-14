@@ -4,7 +4,6 @@ $tag_cnt_bj = #fff
 /** 博文列表页 **/
 .articleListPage
 	min-height 600px
-	padding-top 300px
 	padding-bottom 20px
 	background #dee3e7
 	.blank-content
@@ -171,6 +170,7 @@ $tag_cnt_bj = #fff
 <template>
 <div class="articleListPage">
 	<div class="articleListPage-tags-cnt">
+		<headerBanner />
 		<div class="articleListPage-tags">
 			<Container>
 				<tagList />
@@ -181,20 +181,28 @@ $tag_cnt_bj = #fff
 		<Stick
 			:list="list"
 			imgKey="cover"
-			@onSrollEnd="loadMore"
+			@onScrollEnd="loadMore"
 		>
 			<template slot-scope="scope">
 				<div :class="['article-item', !scope.data.cover ? 'pure-text' : '']">
-					<a :href="'/blog/'+ scope.data.id" :title="scope.data.title" class="link">
+					<router-link
+						:to="'/blog/'+ scope.data.id"
+						:title="scope.data.title" class="link"
+					>
 						<div class="label" v-if="scope.data.is_new"><span>new</span></div>
 						<img v-if="scope.data.cover" :src="scope.data.cover | imgHosting('zoom', 400)" :alt="scope.data.title" />
 						<div class="title">{{scope.data.title}}</div>
 						<div class="info"><p>{{scope.data.intro}}</p></div>
-					</a>
+					</router-link>
 					<footer>
 						<div class="tags">
 							<strong>tags</strong>
-							<a :href="'/blog?tag=' + tag" v-for="(tag, index) in scope.data.tags" :key="index">{{tag}}</a>
+							<router-link
+								v-for="(tag, index) in scope.data.tags"
+								:key="index"
+								:to="'/blog?tag=' + tag"
+								:title="scope.data.title" class="link"
+							>{{tag}}</router-link>
 						</div>
 						<div class="time" :title="scope.data.time_show | timeFormat">{{scope.data.time_show | dateDiff}}</div>
 					</footer>
@@ -208,10 +216,13 @@ $tag_cnt_bj = #fff
 
 <script>
 import Stick from 'vue-stick'
+import headerBanner from '@/components/header-banner/index.vue'
 import tagList from './tag-list.vue'
+
 export default {
 	name: 'blogPage',
 	components: {
+		headerBanner,
 		tagList,
 		Stick: Stick.component
 	},
