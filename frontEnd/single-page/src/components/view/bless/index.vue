@@ -18,6 +18,7 @@
 		font-weight normal
 		font-size 3rem
 		color #fff
+	photography()
 .blessPage 
 	display flex
 	flex-wrap wrap

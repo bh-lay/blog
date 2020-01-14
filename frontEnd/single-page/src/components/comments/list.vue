@@ -1,5 +1,8 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 @import "~@/assets/stylus/variable.styl"
+
+.comments-list
+	padding-top $navigation-height
 .l-com-item
 	display flex
 	margin-bottom 30px
@@ -62,7 +65,7 @@
 			color #222
 </style>
 <template>
-<div class="comments-send-box">
+<div class="comments-list">
 	<div
 		class="l-com-item"
 		v-for="item in list"
@@ -74,10 +77,8 @@
 		<div class="content">
 			<div class="caption">
 				<div class="info">
-						<span class="who">
-							<a :href="item.user.blog" v-if="item.user.blog">{{item.user.username}</a>
-							<span v-else>{{item.user.username}}</span>
-						</span>
+						<a class="who" :href="item.user.blog" v-if="item.user.blog">{{item.user.username}}</a>
+						<span v-else>{{item.user.username}}</span>
 						<span>评论于</span>
 						<span class="time">{{item.time}}</span>
 				</div>
@@ -86,6 +87,12 @@
 			<div class="article" v-html="item.content"></div>
 		</div>
 	</div>
+	<Pagination
+		:total="page.total"
+		:size="page.pageItemCount"
+		:current.sync="page.pageIndex"
+		@page-change="handlePageChange"
+	/>
 </div>
 </template>
 <script>
@@ -93,8 +100,6 @@ let defaultAvatar = require('./default.jpg')
 
 export default {
 	name: 'comments-list',
-	components: {
-	},
 	props: {
 		cid: {
 			type: String,
@@ -103,6 +108,11 @@ export default {
 	},
 	data () {
 		return {
+			page: {
+				total: 0,
+				pageItemCount: 15,
+				pageIndex: 1
+			},
 			list: []
 		}
 	},
@@ -111,17 +121,33 @@ export default {
 	mounted () {
 		this.getList()
 	},
+	watch: {
+		'page.pageIndex' () {
+			this.getList()
+		}
+	},
 	methods: {
 		getList () {
-			fetch(`/api/comments/?cid=${this.cid}&skip=0&limit=10`)
+			this.$el.scrollIntoView({
+				behavior: 'smooth',
+				block: 'start',
+				inline: 'nearest'
+			})
+
+			let skip = (this.page.pageIndex - 1) * this.page.pageItemCount
+			fetch(`/api/comments/?cid=${this.cid}&skip=${skip}&limit=${this.page.pageItemCount}`)
 				.then(response => response.json())
 				.then(data => {
 					// data.data.list.forEach(function (item) {
 					// 	// 若无头像，使用默认头像
 					// 	item.user.avatar = item.user.avatar || defaultAvatar;
 					// });
+					this.page.total = data.data.count
 					this.list = data.data.list
 				})
+		},
+		handlePageChange () {
+
 		}
 	}
 }
