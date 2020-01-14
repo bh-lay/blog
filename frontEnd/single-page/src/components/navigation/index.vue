@@ -6,42 +6,74 @@
 	height $navigation-height
 	top 0
 	left 0
+	padding-top 20px
 	z-index 10000
-	background rgba(255, 255, 255, .4)
 	transition .6s ease-in-out
 	.nav-inner
 		display flex
 		align-items center
 		justify-content space-between
-		height 100%
+		height $navigation-height
+		margin 0 -10px 0 0
+		padding 0 10px 0 0
+		background #fff
+	.nav-logo
+		height $navigation-height
+		padding 0 18px
+		line-height $navigation-height
+		background #f4f5f6
+		border-left 1px solid transparent
+		border-right 1px solid #e9ebed
+		svg
+			display inline-block
+			vertical-align middle
+			width 30px
+			height 30px
+			margin-right 2px
+			fill #3d505c
+		span
+			display inline-block
+			vertical-align middle
+			line-height 30px
+			font-weight bold
+			font-size 16px
+			color #526a7a
 	.nav-list
 		a
+			position relative
 			display inline-block
-			height 20px
-			margin-left 20px
-			padding 6px 10px
-			border-radius 6px
-			line-height 20px
+			width 80px
+			line-height $navigation-height
 			text-align center
 			font-size 14px
 			font-weight bold
 			color #2d3339
 			text-decoration none
-			transition .2s .1s
-			&:hover
-				background #668299
-				color #fff
+			transition .2s
+			&:after
+				content ''
+				position absolute
+				bottom 20px
+				left 15px
+				width 0
+				height 1px
+				background #007fff
+				opacity 0
+				transition .4s
+			&:hover:after
+				width 25px
+				opacity 1
 			&.router-link-exact-active
-				background #0d8bf2
-				color #fff
+				color #007fff
+				&:after
+					width 50px
+					opacity 1
 	&.mini
-		height $nav-mini-height
+		padding-top 0
 		background #fff
-		box-shadow 0 0 2px #00000010, 0 0 10px #00000020
-.page-title
-	margin-right 50px
-	font-size 24px
-	color #eee
+		box-shadow 0 0 2px rgba(0,0,0,0.063), 0 0 10px rgba(0,0,0,0.125)
+		.nav-logo
+			border-left-color #e9ebed
 </style>
 <template>
 	<div
@@ -50,16 +82,24 @@
 			mini: isScrolling
 		}"
 	>
-		<Container class="nav-inner">
-			<div class="page-title">H5</div>
-			<div class="nav-list">
+		<Container>
+			<div class="nav-inner">
 				<router-link
-					v-for="nav in navList"
-					:key="nav.type"
-					:to="nav.href"
+					to="/"
+					class="nav-logo"
 				>
-					<span>{{nav.label}}</span>
+					<svg viewBox="150 50 1700 1700" xmlns="http://www.w3.org/2000/svg">
+						<path d="m1636.55 1484.58a211.6 211.6 0 0 1 -250.18 54.76 801.031 801.031 0 0 0 -775.466 1.51 211.855 211.855 0 0 1 -247.233-55.97 796.437 796.437 0 0 1 -163.671-484.88c0-441.828 358.172-800 800-800s800 358.172 800 800a796.409 796.409 0 0 1 -163.45 484.58zm-636.55-884.58c-220.914 0-400 179.086-400 400s179.086 400 400 400 400-179.09 400-400-179.09-400-400-400z"/>
+					</svg>
+					<span>小剧客栈</span>
 				</router-link>
+				<div class="nav-list">
+					<router-link
+						v-for="nav in navList"
+						:key="nav.type"
+						:to="nav.href"
+					>{{nav.label}}</router-link>
+				</div>
 			</div>
 		</Container>
 	</div>

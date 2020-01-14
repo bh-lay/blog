@@ -1,5 +1,4 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "~@/assets/stylus/variable.styl"
 .container
 	width 90%
 	max-width 1200px

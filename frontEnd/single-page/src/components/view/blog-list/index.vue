@@ -4,7 +4,7 @@ $tag_cnt_bj = #fff
 /** 博文列表页 **/
 .articleListPage
 	min-height 600px
-	padding-top $navigation-height
+	padding-top 300px
 	padding-bottom 20px
 	background #dee3e7
 	.blank-content

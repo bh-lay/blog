@@ -123,17 +123,16 @@ export default {
 	},
 	watch: {
 		'page.pageIndex' () {
-			this.getList()
-		}
-	},
-	methods: {
-		getList () {
 			this.$el.scrollIntoView({
 				behavior: 'smooth',
 				block: 'start',
 				inline: 'nearest'
 			})
-
+			this.getList()
+		}
+	},
+	methods: {
+		getList () {
 			let skip = (this.page.pageIndex - 1) * this.page.pageItemCount
 			fetch(`/api/comments/?cid=${this.cid}&skip=${skip}&limit=${this.page.pageItemCount}`)
 				.then(response => response.json())

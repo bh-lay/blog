@@ -5,7 +5,7 @@
 .index-aboutme
 	position relative
 	height 95vh
-	min-height 400px
+	min-height 600px
 	overflow hidden
 	visibility hidden
 	photography(4.5rem)

@@ -6,14 +6,16 @@
 	overflow hidden
 .bless-header
 	position relative
-	height 60vh
-	padding-top 15vh
+	height 75vh
+	min-height 500px
+	display flex
+	align-content center
 	background no-repeat center center #cef
 	background-size cover
 	h2
 		height 1em
 		line-height 1em
-		margin-bottom 1em
+		margin 0 0 0.5em
 		text-align center
 		font-weight normal
 		font-size 3rem
@@ -52,13 +54,11 @@
 <div class="bless-page">
 	<div class="bless-header" style="background-image: url('${photography.imgSrc}')">
 		<Container>
-			<div class="grid-box-full">
-				<h2>说点啥</h2>
-				<div class="bless-sendBox">
-					<CommentsSendBox
-						cid="define-1"
-					/>
-				</div>
+			<h2>说点啥</h2>
+			<div class="bless-sendBox">
+				<CommentsSendBox
+					cid="define-1"
+				/>
 			</div>
 		</Container>
 		<div class="photograghy-author">
