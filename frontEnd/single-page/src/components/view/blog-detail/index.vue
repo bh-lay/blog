@@ -105,6 +105,22 @@
 				width 400px
 				max-width 100%
 				box-shadow 2px 2px 4px rgba(0, 0, 0, .1), 2px 2px 15px rgba(0, 0, 0, .1)
+	.toc-content 
+		padding: 20px 10px 40px
+		.title
+			margin-bottom 10px
+			line-height 2em
+			font-size 15px
+			color #c2ccd6
+		a
+			display block
+			margin-bottom 10px
+			line-height 1.2em
+			font-size 14px
+			color #8599ad
+			transition .2s
+			&:hover
+				color #407fbf
 	.comments-section
 		position relative
 		padding 2em 0 4em
@@ -176,7 +192,16 @@
 			<div class="article-section-side">
 					<div class="article-section-body">
 							<div class="toc-content">
-									<div class="title">TOC</div>
+								<div class="title">TOC</div>
+								<a
+									v-for="item in articleToc"
+									:key="item.id"
+									:style="{
+										paddingLeft: `${item.indent}em`
+									}"
+									href="javascript:void(0)"
+									@click="scrollTo(item.id)"
+								>{{item.text}}</a>
 							</div>
 					</div>
 			</div>
@@ -194,41 +219,7 @@
 <script>
 import renderBanner from './render-banner.js'
 import Comments from '@/components/comments/index.vue'
-
-function prefixID (htmlPart) {
-	let idMatches = htmlPart.match(/^<h\d\s[^>]*data-id=(?:"|')([^"']+)/)
-	let id = ''
-	if (idMatches) {
-		id = idMatches[1]
-	} else {
-		id = parseInt(Math.random() * 1000, 10) + '_' + parseInt(Math.random() * 100 * 100)
-		htmlPart = htmlPart.replace(/(^<h\d)/, `$1 data-id="${id}" `)
-	}
-	return {
-		htmlPart,
-		id
-	}
-}
-function getToc (article) {
-	var toc = []
-	article = article.replace(/<h(\d)(?:\s[^>]+)*>([^<]+)/g, (htmlPart, indent, text) => {
-		let prefix = prefixID(htmlPart, indent, text)
-		toc.push({
-			indent,
-			text,
-			id: prefix.id
-		})
-		return prefix.htmlPart
-	})
-	let minItendent = Math.min.apply(Math, toc.map(item => item.indent))
-	toc.forEach(item => {
-		item.indent = item.indent - minItendent
-	})
-	return {
-		article,
-		toc
-	}
-}
+import buildToc from './build-toc.js'
 
 export default {
 	name: 'blogDetail',
@@ -246,7 +237,8 @@ export default {
 				intro: '',
 				tags: [],
 				time_show: ''
-			}
+			},
+			articleToc: []
 		}
 	},
 	computed: {
@@ -265,6 +257,13 @@ export default {
 					for (let key in this.detail) {
 						this.detail[key] = data.detail[key]
 					}
+
+					// 构建大纲数据
+					let tocData = buildToc(data.detail.content)
+					this.detail.content = tocData.article
+					this.articleToc = tocData.toc
+
+					// 渲染顶部图片
 					renderBanner(this.$refs.header, data.detail.cover)
 				})
 		},
@@ -298,24 +297,17 @@ export default {
 		},
 		addComment () {
 		},
-		addToc () {
+		scrollTo (id) {
 			// 绑定 toc 点击事件
-			// utils.bind(utils.query('.toc-content', this.element), 'click', 'a', function (event) {
-			// 	let href = this.getAttribute('href').replace(/^#/, '')
-			// 	let node = utils.query('[data-id="' + href + '"]')
-			// 	if (!node) {
-			// 		return
-			// 	}
-			// 	let top = utils.offset(node).top - 80
-			// 	window.scrollTo(0, top)
-			// });
-			// let nodeTag = utils.query('.toc-content', this.element)
-			// this.tie = new Tie({
-			// 	dom: nodeTag,
-			// 	scrollDom: this.element,
-			// 	scopeDom: utils.parents(nodeTag, '.article-section'),
-			// 	fixed_top: 60
-			// });
+			let node = document.querySelector('[data-id="' + id + '"]')
+			if (!node) {
+				return
+			}
+			node.scrollIntoView({
+				behavior: 'smooth',
+				block: 'center',
+				inline: 'nearest'
+			})
 		}
 	}
 }
