@@ -8,17 +8,13 @@
 	background #fff
 	overflow-x hidden
 	header
-		min-height 160px
-		max-height 360px
 		position relative
-		background-color #eee
+		min-height 300px
+		background no-repeat center #1f3747
+		background-image -webkit-linear-gradient(left, #1f3747 0%, #293d31 100%)
 		background-size cover
-		background-position center
-		&.no-cover
-			background #1f3747
-			background-image -webkit-linear-gradient(left, #1f3747 0%, #293d31 100%)
 		.header-body
-			padding 110px 20px 80px
+			padding $navigation-height * 2.2 20px $navigation-height
 			.title
 				margin-bottom .5em
 				line-height 1.2
@@ -140,7 +136,7 @@
 </style>
 <template>
 <div class="blog-detail">
-	<header>
+	<header ref="header">
 		<Container class="header-body">
 			<div class="title">{{detail.title}}</div>
 			<div class="article-info"><span>{{detail.intro}}</span></div>
@@ -196,25 +192,9 @@
 </div>
 </template>
 <script>
+import renderBanner from './render-banner.js'
 import Comments from '@/components/comments/index.vue'
 
-// 图片预加载
-function loadImg (src, callback) {
-	if (!src) {
-		callback && callback()
-		return
-	}
-	let img = new Image()
-	img.crossOrigin = 'Anonymous'
-
-	function End () {
-		callback && callback(img)
-		callback = null
-	}
-
-	img.onerror = img.onload = End
-	img.src = src
-}
 function prefixID (htmlPart) {
 	let idMatches = htmlPart.match(/^<h\d\s[^>]*data-id=(?:"|')([^"']+)/)
 	let id = ''
@@ -278,13 +258,14 @@ export default {
 		this.init()
 	},
 	methods: {
-		init (detail) {
+		init () {
 			fetch(`/api/blog/${this.blogID}?format=html`)
 				.then(response => response.json())
 				.then(data => {
 					for (let key in this.detail) {
 						this.detail[key] = data.detail[key]
 					}
+					renderBanner(this.$refs.header, data.detail.cover)
 				})
 		},
 		createSharePop () {
@@ -308,43 +289,6 @@ export default {
 			// 	})
 			// 	wechatNode.appendChild(canvas)
 			// })
-		},
-		addCover (originCoverUrl) {
-			// let hasCover = originCoverUrl && originCoverUrl.length;
-			// // let header = utils.query('header', this.element);
-			// if (!hasCover) {
-			// 	// utils.addClass(header, 'no-cover');
-			// 	return
-			// }
-			// let coverUrl = imageHosting(originCoverUrl, {
-			// 	type: 'zoom',
-			// 	width: 420,
-			// });
-
-			// loadImg(coverUrl, function (img) {
-			// 	let width = header.clientWidth;
-			// 	let height = header.clientHeight;
-			// 	let canvas = document.createElement('canvas');
-			// 	let context = canvas.getContext('2d');
-			// 	// gaussBlur
-			// 	let newWidth = width;
-			// 	let newHeight = width * img.height / img.width;
-			// 	if (newHeight < height) {
-			// 		newHeight = height;
-			// 		newWidth = height * img.width / img.height;
-			// 	}
-			// 	let top = (height - newHeight) / 2;
-			// 	let left = (width - newWidth) / 2;
-			// 	canvas.width = width;
-			// 	canvas.height = height;
-			// 	context.drawImage(img, left, top, newWidth, newHeight)
-			// 	context.fillStyle = 'rgba(0,0,0,0.4)'
-			// 	context.fillRect(0, 0, width, height)
-			// 	blurRect(context, 0, 0, width, height, 8, 1);
-			// 	// header.appendChild(canvas);
-			// 	let bluredImg = canvas.toDataURL('image/png')
-			// 	header.style.backgroundImage = `url(${bluredImg})`
-			// });
 		},
 		addCodeSupport () {
 			// 代码高亮

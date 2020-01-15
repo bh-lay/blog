@@ -201,7 +201,7 @@ $tag_cnt_bj = #fff
 								v-for="(tag, index) in scope.data.tags"
 								:key="index"
 								:to="'/blog?tag=' + tag"
-								:title="scope.data.title" class="link"
+								:title="scope.data.title"
 							>{{tag}}</router-link>
 						</div>
 						<div class="time" :title="scope.data.time_show | timeFormat">{{scope.data.time_show | dateDiff}}</div>
@@ -264,6 +264,7 @@ export default {
 					this.page.skip += this.page.limit
 					this.list = this.list.concat(data.list)
 				})
+				// FIXMEs
 			// 		if (err || !data || data.code === 200) {
 			// 			// do something
 			// 			return
