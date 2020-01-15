@@ -106,7 +106,9 @@
 				max-width 100%
 				box-shadow 2px 2px 4px rgba(0, 0, 0, .1), 2px 2px 15px rgba(0, 0, 0, .1)
 	.toc-content
-		padding: 20px 10px 40px
+		box-sizing border-box
+		width 100%
+		padding 20px 10px 40px
 		.title
 			margin-bottom 10px
 			line-height 2em
@@ -191,18 +193,20 @@
 			</div>
 			<div class="article-section-side">
 				<div class="article-section-body">
-					<div class="toc-content" ref="tieNode">
-						<div class="title">TOC</div>
-						<a
-							v-for="item in articleToc"
-							:key="item.id"
-							:style="{
-								paddingLeft: `${item.indent}em`
-							}"
-							href="javascript:void(0)"
-							@click="scrollTo(item.id)"
-						>{{item.text}}</a>
-					</div>
+					<Tie :tieTop="60">
+						<div class="toc-content" ref="tieNode">
+							<div class="title">TOC</div>
+							<a
+								v-for="item in articleToc"
+								:key="item.id"
+								:style="{
+									paddingLeft: `${item.indent}em`
+								}"
+								href="javascript:void(0)"
+								@click="scrollTo(item.id)"
+							>{{item.text}}</a>
+						</div>
+					</Tie>
 				</div>
 			</div>
 		</div>
@@ -217,12 +221,10 @@
 </div>
 </template>
 <script>
-import Tie from '@/assets/js/tie.js'
 import renderBanner from './render-banner.js'
 import Comments from '@/components/comments/index.vue'
 import buildToc from './build-toc.js'
 
-console.log('Tie', Tie)
 export default {
 	name: 'blogDetail',
 	components: {
@@ -240,9 +242,7 @@ export default {
 				tags: [],
 				time_show: ''
 			},
-			articleToc: [],
-			// eslint-disable-next-line
-			_tie: null
+			articleToc: []
 		}
 	},
 	computed: {
@@ -266,12 +266,7 @@ export default {
 					let tocData = buildToc(data.detail.content)
 					this.detail.content = tocData.article
 					this.articleToc = tocData.toc
-					let tieNode = this.$refs.tieNode
-					this._tie = new Tie({
-						dom: tieNode,
-						scopeDom: tieNode.parentNode,
-						fixed_top: 60
-					})
+
 					// 渲染顶部图片
 					renderBanner(this.$refs.header, data.detail.cover)
 				})
@@ -316,9 +311,6 @@ export default {
 				inline: 'nearest'
 			})
 		}
-	},
-	beforeDestroy () {
-		this._tie.destroy()
 	}
 }
 </script>

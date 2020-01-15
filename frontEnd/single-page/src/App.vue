@@ -3,6 +3,10 @@
 html, body, div
 	margin 0
 	padding 0
+body
+	font-size 14px
+	font-family PingFang SC,Helvetica neue,Helvetica,Tahoma,lantinghei sc,Microsoft Yahei,sans-serif
+	-webkit-font-smoothing antialiased
 a
 	text-decoration none
 #app
