@@ -10,6 +10,10 @@ export default {
 		tieTop: {
 			type: Number,
 			default: 50
+		},
+		zIndex: {
+			type: Number,
+			default: 50
 		}
 	},
 	data () {
@@ -27,7 +31,8 @@ export default {
 				this._tie = new Tie({
 					dom: this.$el,
 					scopeDom: this.$el.parentNode,
-					fixed_top: this.tieTop
+					fixed_top: this.tieTop,
+					zIndex: this.zIndex
 				})
 			})
 		}

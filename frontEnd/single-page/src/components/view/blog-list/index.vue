@@ -10,14 +10,15 @@ $tag_cnt_bj = #fff
 		margin-top 0
 	.status
 		height 52px
-.articleListPage-tags-cnt
+.articleListPage-tags-ghost
+	width 100%
 	margin-bottom 20px
 
 .articleListPage-tags
 	width 100%
 	background $tag_cnt_bj
 	border-bottom 1px solid #c4cdd4
-	z-index 5
+	z-index 500
 	.content
 		padding 12px 0 5px 5px
 	a
@@ -169,14 +170,17 @@ $tag_cnt_bj = #fff
 </style>
 <template>
 <div class="articleListPage">
-	<div class="articleListPage-tags-cnt">
-		<headerBanner />
+	<headerBanner />
+	<Tie
+		class="articleListPage-tags-ghost"
+		:tie-top="60"
+	>
 		<div class="articleListPage-tags">
 			<Container>
 				<tagList />
 			</Container>
 		</div>
-	</div>
+	</Tie>
 	<Container>
 		<Stick
 			:list="list"

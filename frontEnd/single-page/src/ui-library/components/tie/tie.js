@@ -173,7 +173,8 @@ function resetPosition () {
 
 	setCss(me.dom, {
 		top: top,
-		position: position
+		position: position,
+		zIndex: me.zIndex
 	})
 
 	if (stateBefore !== me.state) {
@@ -190,6 +191,7 @@ function Tie (param) {
 	param = param || {}
 	// 悬浮时，距顶部的距离
 	me.fix_top = param.fixed_top || 0
+	me.zIndex = param.zIndex || 0
 	me.minScrollTop = null
 	me.maxScrollTop = null
 
@@ -224,7 +226,6 @@ Tie.prototype = {
 	refresh: resetPosition,
 	updateGhostDom: function () {
 		var cLient = getClient(this.dom)
-		this.ghostDom.style.width = cLient.width + 'px'
 		this.ghostDom.style.height = cLient.height + 'px'
 	},
 	destroy: function () {

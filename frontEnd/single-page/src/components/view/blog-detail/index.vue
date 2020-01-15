@@ -106,8 +106,7 @@
 				max-width 100%
 				box-shadow 2px 2px 4px rgba(0, 0, 0, .1), 2px 2px 15px rgba(0, 0, 0, .1)
 	.toc-content
-		box-sizing border-box
-		width 100%
+		width 220px
 		padding 20px 10px 40px
 		.title
 			margin-bottom 10px
