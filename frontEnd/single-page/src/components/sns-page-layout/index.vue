@@ -94,36 +94,6 @@
 import headerBanner from '@/components/header-banner/index.vue'
 import Item from './item.vue'
 
-let potoGraphaList = [
-	{
-		imgSrc: require('./images/opus_@2x.jpg'),
-		htmlSrc: 'https://bh-lay.tuchong.com/14431809/#image24933177',
-		title: '宏村'
-	}, {
-		imgSrc: require('./images/yangshuo.jpg'),
-		htmlSrc: 'http://720yun.com/t/544jOrkvtn0?from=bh-lay',
-		title: '桂林阳朔'
-	}
-]
-
-// 图片预加载
-function loadImg (src, callback) {
-	if (!src) {
-		callback && callback()
-		return
-	}
-	var img = new Image()
-
-	function End () {
-		callback && callback()
-		callback = null
-	}
-
-	img.onerror = img.onload = End
-	img.src = src
-}
-let photoGraphaIndex = -1
-
 export default {
 	name: 'sns-page-layout',
 	components: {headerBanner, Item},
@@ -149,23 +119,11 @@ export default {
 	},
 	data () {
 		return {
-			photographyLoaded: false,
-			photography: {}
 		}
 	},
 	created () {
-		this.getBannerList()
 	},
 	methods: {
-		getBannerList () {
-			this.photography = potoGraphaList[++photoGraphaIndex]
-			if (photoGraphaIndex + 1 >= potoGraphaList.length) {
-				photoGraphaIndex = -1
-			}
-			loadImg(this.photography.imgSrc, () => {
-				this.photographyLoaded = true
-			}, 600)
-		}
 	}
 }
 </script>
