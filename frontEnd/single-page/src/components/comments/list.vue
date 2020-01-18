@@ -94,7 +94,7 @@
 </div>
 </template>
 <script>
-let defaultAvatar = require('./default.jpg')
+import {defaultAvatar} from './data.js'
 
 export default {
 	name: 'comments-list',
@@ -137,8 +137,8 @@ export default {
 				.then(data => {
 					data.data.list.forEach(function (item) {
 						// 若无头像，使用默认头像
-						item.user.avatar = item.user.avatar || defaultAvatar;
-					});
+						item.user.avatar = item.user.avatar || defaultAvatar
+					})
 					this.page.total = data.data.count
 					this.list = data.data.list
 				})

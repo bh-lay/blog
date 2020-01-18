@@ -6,11 +6,13 @@
 	background #fff
 	.side
 		margin-right 20px
-		.cover
+		.avatar
 			width 40px
 			height 40px
 			border-radius 8px
 			background #333
+		.name
+			font-size 12px
 	.main
 		flex-grow 1
 	.input-content
@@ -77,7 +79,13 @@
 <template>
 <div class="comments-send-box" :class="[(isStartInput || content.length) ? 'active' : 'default']">
 	<div class="side">
-		<div class="cover"></div>
+		<div class="avatar"
+			:style="{
+				backgroundImage: `url(${userData.avatar})`
+			}"
+		></div>
+		{{userData}}
+		<div class="name">{{userData.username}}</div>
 	</div>
 	<div class="main">
 		<div class="input-content">
@@ -97,6 +105,7 @@
 </div>
 </template>
 <script>
+import {getUserInfo} from './data.js'
 
 export default {
 	name: 'comments-send-box',
@@ -105,12 +114,15 @@ export default {
 	data () {
 		return {
 			content: '',
-			isStartInput: false
+			isStartInput: false,
+			userData: {}
 		}
 	},
-	computed: {
-	},
 	mounted () {
+		getUserInfo()
+			.then(user => {
+				this.userData = user
+			})
 	},
 	methods: {
 		startInput () {
