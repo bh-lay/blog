@@ -135,10 +135,10 @@ export default {
 			fetch(`/api/comments/?cid=${this.cid}&skip=${skip}&limit=${this.page.pageItemCount}`)
 				.then(response => response.json())
 				.then(data => {
-					// data.data.list.forEach(function (item) {
-					// 	// 若无头像，使用默认头像
-					// 	item.user.avatar = item.user.avatar || defaultAvatar;
-					// });
+					data.data.list.forEach(function (item) {
+						// 若无头像，使用默认头像
+						item.user.avatar = item.user.avatar || defaultAvatar;
+					});
 					this.page.total = data.data.count
 					this.list = data.data.list
 				})
