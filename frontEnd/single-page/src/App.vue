@@ -15,11 +15,24 @@ a
 	-moz-osx-font-smoothing grayscale
 
 	position relative
-.app-side
-	position absolute
-	top 20px
-	left 20px
-	z-index 2
+.view-outer
+	min-height 100vh
+	overflow hidden
+	background #333
+
+.view-animate-enter-active
+	will-change transform opacity
+	transition all 1.2s .5s
+.view-animate-leave-active
+	will-change transform opacity
+	transition all .5s
+.view-animate-enter
+	opacity 0
+	transform translate(-15%, 0)
+.view-animate-leave-active
+	opacity 0
+	transform translate(30%, 0)
+
 .page-footer
 	height 400px
 	background #333
@@ -27,7 +40,11 @@ a
 <template>
 	<div id="app">
 		<Navigation/>
-		<router-view class="router-page" />
+		<div class="view-outer">
+			<transition name="view-animate" >
+				<router-view class="view-page" />
+			</transition>
+		</div>
 		<div class="page-footer">
 
 		</div>

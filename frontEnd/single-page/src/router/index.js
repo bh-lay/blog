@@ -27,7 +27,7 @@ export default new Router({
 		},
 		{
 			path: '/blog/:id',
-			name: 'blogListPage',
+			name: 'blogDetailPage',
 			component: BlogDetail
 		},
 		{
