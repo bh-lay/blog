@@ -5,7 +5,6 @@ a
 	display: inline-block
 	vertical-align bottom
 	margin 0
-	padding 12px 20px
 	outline none
 	border-radius 4px
 	border 1px solid #dcdfe6
@@ -15,7 +14,18 @@ a
 	text-align center
 	transition .1s
 	font-weight 500
+	&:disabled
+		pointer-events none
+
+// size 尺寸
+.ui-button-small
+	padding 8px 15px
+	font-size 12px
+.ui-button-middle
+	padding 12px 20px
 	font-size 14px
+
+// type 样式
 .ui-button-default
 	border-color #dcdfe6
 	background #fff
@@ -23,12 +33,17 @@ a
 	&:hover
 		border-color #f90
 		color #f90
+	&:disabled
+		border-color #888
+		color #888
 .ui-button-primary
 	border-color transparent
 	background #f90
 	color #fff
 	&:hover
 		background #f70
+	&:disabled
+		background #aaa
 </style>
 
 <script>
@@ -46,6 +61,11 @@ export default {
 		target: {
 			type: String,
 			default: '_blank'
+		},
+		size: {
+			type: String,
+			// small、middle、large
+			default: 'middle'
 		}
 	},
 	render (createElement) {
@@ -53,7 +73,7 @@ export default {
 			return createElement(
 				'a',
 				{
-					class: `ui-button-${this.type}`,
+					class: [`ui-button-${this.type}`, `ui-button-${this.size}`],
 					attrs: {
 						href: this.href,
 						target: this.target
@@ -67,7 +87,7 @@ export default {
 		return createElement(
 			'button',
 			{
-				class: `ui-button-${this.type}`
+				class: [`ui-button-${this.type}`, `ui-button-${this.size}`]
 			},
 			[
 				this.$slots.default
