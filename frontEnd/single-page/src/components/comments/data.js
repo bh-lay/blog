@@ -1,6 +1,11 @@
 
 export var defaultAvatar = require('./default.jpg')
-
+const defaultUserData = {
+	username: '',
+	email: '',
+	blog: '',
+	avatar: ''
+}
 export function setUserInfo ({username, email, blog}) {
 	localStorage.setItem('userInfo', JSON.stringify({
 		username,
@@ -12,7 +17,7 @@ export function setUserInfo ({username, email, blog}) {
 function getUserInfoFromLocal () {
 	let dataStr = localStorage.getItem('userInfo')
 	if (!dataStr) {
-		return null
+		return Object.assign({}, defaultUserData)
 	}
 	try {
 		let data = JSON.parse(dataStr)
@@ -22,10 +27,10 @@ function getUserInfoFromLocal () {
 		}
 		return data
 	} catch (e) {
-		return null
+		return Object.assign({}, defaultUserData)
 	}
 }
-function getUserInfoFromServer (onResponse) {
+function getUserInfoFromServer () {
 	return fetch('/ajax/user/detail', {
 		method: 'POST'
 	})

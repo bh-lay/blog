@@ -5,14 +5,19 @@
 	padding 20px
 	background #fff
 	.side
+		width 50px
 		margin-right 20px
 		.avatar
 			width 40px
 			height 40px
+			margin 0 auto 5px
 			border-radius 8px
-			background #333
+			background no-repeat center #333
+			background-size cover
 		.name
+			text-align center
 			font-size 12px
+			word-break break-all
 	.main
 		flex-grow 1
 	.input-content
@@ -84,7 +89,6 @@
 				backgroundImage: `url(${userData.avatar})`
 			}"
 		></div>
-		{{userData}}
 		<div class="name">{{userData.username || '燕过留名'}}</div>
 	</div>
 	<div class="main">
@@ -101,7 +105,8 @@
 		<transition name="fade">
 			<setUserData
 				v-if="setUserDataVisible"
-				@confirm="setUserDataVisible = false"
+				:data="userData"
+				@confirm="onSetUserDataSuccess"
 			/>
 		</transition>
 		<div class="footer" >
@@ -129,12 +134,18 @@ export default {
 		}
 	},
 	mounted () {
-		getUserInfo()
-			.then(user => {
-				this.userData = user || {}
-			})
+		this.getUserData()
 	},
 	methods: {
+		getUserData () {
+			getUserInfo().then(user => {
+				this.userData = user || {}
+			})
+		},
+		onSetUserDataSuccess (userData) {
+			this.setUserDataVisible = false
+			this.userData = userData
+		},
 		startInput () {
 			this.isStartInput = true
 			this.$refs.textarea.focus()

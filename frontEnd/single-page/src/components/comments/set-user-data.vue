@@ -48,42 +48,57 @@
 	<div class="list">
 		<div class="item">
 			<div class="label">尊姓大名</div>
-			<input type="text" placeholder="昵称">
+			<input type="text" placeholder="昵称" maxlength="15" v-model="userData.username">
 		</div>
 		<div class="item">
 			<div class="label">Email</div>
-			<input type="text" placeholder="mail@bh-lay.com">
+			<input type="text" placeholder="mail@bh-lay.com" maxlength="50" v-model="userData.email">
 		</div>
 		<div class="item">
 			<div class="label">Blog</div>
-			<input type="text" placeholder="http://bh-lay.com">
+			<input type="text" placeholder="http://bh-lay.com" maxlength="50" v-model="userData.blog">
 		</div>
 	</div>
-	<Button type="primary" size="small" @click.native="confirm">确-定</Button>
+	<Button type="primary" size="small" @click.native="confirm">确定</Button>
 </div>
 </template>
 <script>
-import {getUserInfo} from './data.js'
+import {getUserInfo, setUserInfo} from './data.js'
 
 export default {
 	name: 'comments-set-user-data',
+	props: {
+		data: {
+			type: Object,
+			default () {
+				return {
+					username: '',
+					email: '',
+					blog: ''
+				}
+			}
+		}
+	},
 	data () {
 		return {
 			content: '',
 			isStartInput: false,
-			userData: {}
+			userData: {
+				username: '',
+				email: '',
+				blog: ''
+			}
 		}
 	},
 	mounted () {
-		// getUserInfo()
-		// 	.then(user => {
-		// 		console.log('user', user)
-		// 		this.userData = user || {}
-		// 	})
+		for (let key in this.userData) {
+			this.userData[key] = this.data[key]
+		}
 	},
 	methods: {
 		confirm () {
-			this.$emit('confirm')
+			setUserInfo(this.userData)
+			this.$emit('confirm', Object.assign({}, this.userData))
 		}
 	}
 }
