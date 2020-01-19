@@ -142,6 +142,10 @@ export default {
 					this.page.total = data.data.count
 					this.list = data.data.list
 				})
+		},
+		refresh () {
+			this.page.pageIndex = 1
+			this.getList()
 		}
 	}
 }

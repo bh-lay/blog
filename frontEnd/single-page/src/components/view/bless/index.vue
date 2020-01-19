@@ -59,6 +59,7 @@
 			<div class="bless-sendBox">
 				<CommentsSendBox
 					cid="define-1"
+					@sendSuccess="sendSuccess"
 				/>
 			</div>
 		</Container>
@@ -70,6 +71,7 @@
 		<div class="main-body">
 			<CommentsList
 				cid="define-1"
+				ref="commentsList"
 			/>
 		</div>
 		<div class="bless-sidebar">
@@ -94,6 +96,9 @@ export default {
 	created () {
 	},
 	methods: {
+		sendSuccess () {
+			this.$refs.commentsList.refresh()
+		}
 	}
 }
 </script>

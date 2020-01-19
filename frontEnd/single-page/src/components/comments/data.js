@@ -23,6 +23,7 @@ function getUserInfoFromLocal () {
 		let data = JSON.parse(dataStr)
 		// 增加gravatar头像(md5邮箱)
 		if (data.email.length) {
+			// FIXME
 			// data.avatar = '//www.gravatar.com/avatar/' + hexMd5(userInfo.email) + '?s=100';
 		}
 		return data

@@ -110,19 +110,52 @@
 			/>
 		</transition>
 		<div class="footer" >
-			<Button type="primary" :disabled="content.length === 0 || setUserDataVisible" >发布</Button>
+			<Button
+				type="primary"
+				:disabled="content.length === 0 || setUserDataVisible"
+				@click.native="submit"
+			>发布</Button>
 		</div>
 	</div>
 </div>
 </template>
 <script>
 import setUserData from './set-user-data.vue'
-import {getUserInfo} from './data.js'
+import {getUserInfo, defaultAvatar} from './data.js'
 
+// 字符化参数
+function paramStringify (data, baseKey) {
+	let dataArray = []
+	let key
+	let value
+
+	for (let i in data) {
+		key = baseKey ? baseKey + '[' + i + ']' : i
+		value = data[i]
+
+		if (value && value !== 0 && value !== '') {
+			if (typeof value === 'object') {
+				dataArray.push(paramStringify(data[i], key))
+			} else {
+				dataArray.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[i]))
+			}
+		}
+	}
+	return dataArray.join('&')
+}
 export default {
 	name: 'comments-send-box',
 	components: {
 		setUserData
+	},
+	props: {
+		cid: {
+			type: String,
+			required: true
+		},
+		replyForID: {
+			type: String
+		}
 	},
 	data () {
 		return {
@@ -137,21 +170,40 @@ export default {
 		this.getUserData()
 	},
 	methods: {
+		startInput () {
+			this.isStartInput = true
+			this.$refs.textarea.focus()
+		},
 		getUserData () {
 			getUserInfo().then(user => {
 				this.userData = user || {}
 			})
 		},
+		setUserData () {
+			this.setUserDataVisible = true
+		},
 		onSetUserDataSuccess (userData) {
 			this.setUserDataVisible = false
 			this.userData = userData
 		},
-		startInput () {
-			this.isStartInput = true
-			this.$refs.textarea.focus()
-		},
-		setUserData () {
-			this.setUserDataVisible = true
+		submit () {
+			fetch('/api/comments/0', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded'
+				},
+				body: paramStringify({
+					cid: this.cid,
+					content: this.content,
+					user: this.userData,
+					reply_for_id: this.replyForID
+				})
+			})
+				.then(response => response.json())
+				.then(data => {
+					this.content = ''
+					this.$emit('sendSuccess')
+				})
 		}
 	}
 }

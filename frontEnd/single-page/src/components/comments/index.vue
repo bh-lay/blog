@@ -5,9 +5,14 @@
 </style>
 <template>
 <div class="comments">
-	<SendBox class="send-box" />
+	<SendBox
+		class="send-box"
+		:cid="cid"
+		@sendSuccess="sendSuccess"
+	/>
 	<List
 		:cid="cid"
+		ref="commentsList"
 	/>
 </div>
 </template>
@@ -31,11 +36,10 @@ export default {
 		return {
 		}
 	},
-	computed: {
-	},
-	mounted () {
-	},
 	methods: {
+		sendSuccess () {
+			this.$refs.commentsList.refresh()
+		}
 	}
 }
 </script>
