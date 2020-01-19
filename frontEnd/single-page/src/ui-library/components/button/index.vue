@@ -5,6 +5,7 @@ a
 	display: inline-block
 	vertical-align bottom
 	margin 0
+	padding 0
 	outline none
 	border-radius 4px
 	border 1px solid #dcdfe6
@@ -26,6 +27,14 @@ a
 	font-size 14px
 
 // type 样式
+.ui-button-text
+	border none
+	font-size 14px
+	color #fff
+	&:hover
+		text-decoration underline
+	&:disabled
+		color #333
 .ui-button-default
 	border-color #dcdfe6
 	background #fff
@@ -69,7 +78,12 @@ export default {
 		}
 	},
 	render (createElement) {
-		let classNameList = [`ui-button-${this.type}`, `ui-button-${this.size}`]
+		let classNameList = [`ui-button-${this.type}`]
+		
+		// 文本类型不设置尺寸
+		if (this.type !== 'text'){
+			classNameList.push(`ui-button-${this.size}`)
+		}
 		if (this.href) {
 			return createElement(
 				'a',
