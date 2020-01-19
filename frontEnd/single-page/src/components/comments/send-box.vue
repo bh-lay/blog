@@ -78,14 +78,14 @@
 </style>
 <template>
 <div class="comments-send-box" :class="[(isStartInput || content.length) ? 'active' : 'default']">
-	<div class="side">
+	<div class="side" @click="setUserData">
 		<div class="avatar"
 			:style="{
 				backgroundImage: `url(${userData.avatar})`
 			}"
 		></div>
 		{{userData}}
-		<div class="name">{{userData.username}}</div>
+		<div class="name">{{userData.username || '燕过留名'}}</div>
 	</div>
 	<div class="main">
 		<div class="input-content">
@@ -98,36 +98,49 @@
 			></textarea>
 			<div class="placeholder" @click="startInput">评论屌一点，BUG少一点 ！<br><small>支持 Markdown 哦 ！</small></div>
 		</div>
+		<transition name="fade">
+			<setUserData
+				v-if="setUserDataVisible"
+				@confirm="setUserDataVisible = false"
+			/>
+		</transition>
 		<div class="footer" >
-			<Button type="primary">发布</Button>
+			<Button type="primary" :disabled="content.length === 0 || setUserDataVisible" >发布</Button>
 		</div>
 	</div>
 </div>
 </template>
 <script>
+import setUserData from './set-user-data.vue'
 import {getUserInfo} from './data.js'
 
 export default {
 	name: 'comments-send-box',
 	components: {
+		setUserData
 	},
 	data () {
 		return {
 			content: '',
 			isStartInput: false,
-			userData: {}
+			userData: {},
+
+			setUserDataVisible: false
 		}
 	},
 	mounted () {
 		getUserInfo()
 			.then(user => {
-				this.userData = user
+				this.userData = user || {}
 			})
 	},
 	methods: {
 		startInput () {
 			this.isStartInput = true
 			this.$refs.textarea.focus()
+		},
+		setUserData () {
+			this.setUserDataVisible = true
 		}
 	}
 }

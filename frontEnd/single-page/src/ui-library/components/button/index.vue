@@ -69,11 +69,12 @@ export default {
 		}
 	},
 	render (createElement) {
+		let classNameList = [`ui-button-${this.type}`, `ui-button-${this.size}`]
 		if (this.href) {
 			return createElement(
 				'a',
 				{
-					class: [`ui-button-${this.type}`, `ui-button-${this.size}`],
+					class: classNameList,
 					attrs: {
 						href: this.href,
 						target: this.target
@@ -87,7 +88,7 @@ export default {
 		return createElement(
 			'button',
 			{
-				class: [`ui-button-${this.type}`, `ui-button-${this.size}`]
+				class: classNameList
 			},
 			[
 				this.$slots.default
