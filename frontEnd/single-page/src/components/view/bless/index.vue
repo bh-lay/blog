@@ -3,7 +3,7 @@
 @import "~@/assets/stylus/mixin.styl"
 
 .bless-page
-	background #fff
+	background #454e54
 	overflow hidden
 .bless-header
 	position relative
@@ -39,7 +39,7 @@
 		height 100%
 		margin-right -300px
 		padding 20px 320px 20px 20px
-		background #ddd
+		background #fff
 .bless-sendBox
 	max-width 700px
 	width 100%

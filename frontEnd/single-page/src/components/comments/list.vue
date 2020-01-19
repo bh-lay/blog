@@ -145,7 +145,6 @@ export default {
 		},
 		refresh () {
 			this.page.pageIndex = 1
-			this.getList()
 		}
 	}
 }

@@ -109,10 +109,10 @@
 				@confirm="onSetUserDataSuccess"
 			/>
 		</transition>
-		<div class="footer" >
+		<div class="footer" v-if="!setUserDataVisible">
 			<Button
 				type="primary"
-				:disabled="content.length === 0 || setUserDataVisible"
+				:disabled="content.length === 0"
 				@click.native="submit"
 			>发布</Button>
 		</div>
@@ -161,7 +161,12 @@ export default {
 		return {
 			content: '',
 			isStartInput: false,
-			userData: {},
+			userData: {
+				username: '',
+				email: '',
+				blog: '',
+				avatar: ''
+			},
 
 			setUserDataVisible: false
 		}
@@ -187,6 +192,10 @@ export default {
 			this.userData = userData
 		},
 		submit () {
+			if (this.userData.username.length === 0) {
+				this.setUserDataVisible = true
+				return
+			}
 			fetch('/api/comments/0', {
 				method: 'POST',
 				headers: {

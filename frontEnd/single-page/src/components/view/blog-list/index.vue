@@ -12,7 +12,7 @@ $tag_cnt_bj = #fff
 		height 52px
 .articleListPage-tags-ghost
 	width 100%
-	margin-bottom 20px
+	padding-bottom 20px
 
 .articleListPage-tags
 	width 100%

@@ -6,10 +6,11 @@
 	padding 12px 0 8px
 	a
 		flex-grow 1
-		border 1px solid #e8eaee
+		max-width 200px
 		margin 0 5px 6px
 		padding 8px 5px
 		background #fff
+		border 1px solid #e8eaee
 		border-radius 4px
 		line-height 14px
 		text-align center
