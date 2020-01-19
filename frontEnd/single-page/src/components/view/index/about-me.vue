@@ -206,9 +206,10 @@ export default {
 			loadImg(
 				this.photography.imgSrc,
 				() => {
-					this.photographyLoaded = true
-				},
-				600
+					setTimeout(() => {
+						this.photographyLoaded = true
+					}, 1000)
+				}
 			)
 		}
 	}

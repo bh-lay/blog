@@ -18,20 +18,20 @@ a
 .view-outer
 	min-height 100vh
 	overflow hidden
-	background #333
+	background #eee
 
 .view-animate-enter-active
 	will-change transform opacity
-	transition all 1.2s .5s
+	transition all 1s .5s ease-in-out
 .view-animate-leave-active
 	will-change transform opacity
-	transition all .5s
+	transition all .5s ease-in-out
 .view-animate-enter
 	opacity 0
-	transform translate(-15%, 0)
+	transform translate(-10%, 0)
 .view-animate-leave-active
 	opacity 0
-	transform translate(30%, 0)
+	transform translate(20%, 0)
 
 .page-footer
 	height 400px

@@ -3,6 +3,7 @@
 @import "~@/assets/stylus/mixin.styl"
 
 .bless-page
+	background #fff
 	overflow hidden
 .bless-header
 	position relative
