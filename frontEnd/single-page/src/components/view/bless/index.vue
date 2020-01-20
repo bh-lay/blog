@@ -41,6 +41,12 @@
 		padding 20px 320px 20px 20px
 		border-left 1px solid #ebf1f5
 		background #f5f8fa
+		.side-card
+			margin-bottom 20px
+			overflow hidden
+			background #fff
+			border-radius 2px
+			box-shadow 0 0 2px rgba(0, 0, 0, 0.2)
 .bless-sendBox
 	max-width 700px
 	width 100%
@@ -68,7 +74,7 @@
 			<a href="${photography.htmlSrc}" target="_blank">${photography.title} By:@剧中人</a>
 		</div>
 	</div>
-	<Container class="grid-row bless-body">
+	<Container class="bless-body">
 		<div class="main-body">
 			<CommentsList
 				cid="define-1"
@@ -77,6 +83,11 @@
 		</div>
 		<div class="bless-sidebar">
 			<div class="sidebar-body">
+				<Github
+					class="side-card"
+					:summary="githubSummary"
+				/>
+				<Comments class="side-card" />
 			</div>
 		</div>
 	</Container>
@@ -86,19 +97,36 @@
 <script>
 import CommentsSendBox from '@/components/comments/send-box.vue'
 import CommentsList from '@/components/comments/list.vue'
+import Github from './github.vue'
+import Comments from './comments.vue'
 
 export default {
-	name: 'index',
-	components: {CommentsSendBox, CommentsList},
+	name: 'bless-page',
+	components: {CommentsSendBox, CommentsList, Comments, Github},
 	data () {
 		return {
+			commentList: [],
+			githubSummary: {
+				public_repos: 0,
+				followers: 0,
+				following: 0
+			}
 		}
 	},
 	created () {
+		this.getSummary()
 	},
 	methods: {
 		sendSuccess () {
 			this.$refs.commentsList.refresh()
+		},
+		getSummary () {
+			fetch('/api/single-page-side')
+				.then(response => response.json())
+				.then(data => {
+					this.githubSummary = data.githubSummary
+					this.commentList = data.commentList
+				})
 		}
 	}
 }

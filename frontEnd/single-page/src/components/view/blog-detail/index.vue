@@ -125,7 +125,7 @@
 	.comments-section
 		position relative
 		padding 2em 0 4em
-		background #454e54
+		background #5a6872
 		&:before
 			position absolute
 			content ''
@@ -135,7 +135,7 @@
 			width 0
 			height 0
 			border-style solid
-			border-color transparent transparent #454e54
+			border-color transparent transparent #5a6872
 			border-width 0 2rem 1rem
 @media screen and (max-width 1000px)
 	.blog-detail
