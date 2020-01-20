@@ -68,23 +68,16 @@
 	<div
 		class="l-com-item"
 		v-for="item in list"
-		:key="item.id"
+		:key="item._id"
 	>
 		<div class="avatar">
 			<img :src="item.user.avatar" />
 		</div>
-		<div class="content">
-			<div class="caption">
-				<div class="info">
-						<a class="who" :href="item.user.blog" v-if="item.user.blog">{{item.user.username}}</a>
-						<span v-else>{{item.user.username}}</span>
-						<span>评论于</span>
-						<span class="time">{{item.time}}</span>
-				</div>
-				<Button type="text" class="btn-reply">回复</Button>
-			</div>
-			<div class="article" v-html="item.content"></div>
-		</div>
+		<ItemContent
+			:cid="cid"
+			:item="item"
+			@replySuccess="refresh"
+		/>
 	</div>
 	<Pagination
 		:total="page.total"
@@ -94,10 +87,14 @@
 </div>
 </template>
 <script>
+import ItemContent from './item-content.vue'
 import {defaultAvatar} from './data.js'
 
 export default {
 	name: 'comments-list',
+	components: {
+		ItemContent
+	},
 	props: {
 		cid: {
 			type: String,
@@ -112,7 +109,9 @@ export default {
 				pageIndex: 1
 			},
 			list: [],
-			getListTimer: null
+			getListTimer: null,
+
+			replyMode: false
 		}
 	},
 	computed: {

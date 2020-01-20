@@ -22,7 +22,7 @@
 		flex-grow 1
 	.input-content
 		position relative
-		border 1px solid #ddd
+		border 1px solid #d7dfe4
 		&:before
 			content ""
 			position absolute
@@ -31,7 +31,7 @@
 			height 12px
 			top 15px
 			left -7px
-			border 1px solid #ddd
+			border 1px solid #d7dfe4
 			border-width 0 0 1px 1px
 			background #fff
 			transform rotate(45deg)
@@ -90,6 +90,8 @@
 			}"
 		></div>
 		<div class="name">{{userData.username || '燕过留名'}}</div>
+		{{replyForUsername}}<br/>
+		{{replyForID}}
 	</div>
 	<div class="main">
 		<div class="input-content">
@@ -155,6 +157,9 @@ export default {
 		},
 		replyForID: {
 			type: String
+		},
+		replyForUsername: {
+			type: String
 		}
 	},
 	data () {
@@ -196,17 +201,21 @@ export default {
 				this.setUserDataVisible = true
 				return
 			}
+			let data = {
+				cid: this.cid,
+				content: this.content,
+				user: this.userData
+			}
+			if (this.replyForID) {
+				data.reply_for_id = this.replyForID
+				data.content = `@${this.replyForUsername} ${data.content}`
+			}
 			fetch('/api/comments/0', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded'
 				},
-				body: paramStringify({
-					cid: this.cid,
-					content: this.content,
-					user: this.userData,
-					reply_for_id: this.replyForID
-				})
+				body: paramStringify(data)
 			})
 				.then(response => response.json())
 				.then(data => {
