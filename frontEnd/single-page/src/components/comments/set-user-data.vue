@@ -59,7 +59,7 @@
 			<input type="text" placeholder="http://bh-lay.com" maxlength="50" v-model="userData.blog">
 		</div>
 	</div>
-	<Button type="primary" size="small" @click.native="confirm">确定</Button>
+	<Button type="primary" size="small" @click="confirm">确定</Button>
 </div>
 </template>
 <script>

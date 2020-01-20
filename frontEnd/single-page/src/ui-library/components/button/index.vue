@@ -79,30 +79,32 @@ export default {
 		}
 	},
 	render (createElement) {
+		let nodeName
+		let attrs = {}
 		let classNameList = [`ui-button-${this.type}`]
 		// 文本类型不设置尺寸
 		if (this.type !== 'text') {
 			classNameList.push(`ui-button-${this.size}`)
 		}
 		if (this.href) {
-			return createElement(
-				'a',
-				{
-					class: classNameList,
-					attrs: {
-						href: this.href,
-						target: this.target
-					}
-				},
-				[
-					this.$slots.default
-				]
-			)
+			nodeName = 'a'
+			attrs = {
+				href: this.href,
+				target: this.target
+			}
+		} else {
+			nodeName = 'button'
 		}
 		return createElement(
 			'button',
 			{
-				class: classNameList
+				class: classNameList,
+				attrs,
+				on: {
+					click: () => {
+						this.$emit('click')
+					}
+				}
 			},
 			[
 				this.$slots.default

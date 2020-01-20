@@ -113,7 +113,7 @@
 			<Button
 				type="primary"
 				:disabled="content.length === 0"
-				@click.native="submit"
+				@click="submit"
 			>发布</Button>
 		</div>
 	</div>
