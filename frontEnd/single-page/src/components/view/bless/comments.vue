@@ -1,32 +1,70 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 @import "~@/assets/stylus/variable.styl"
 @import "~@/assets/stylus/mixin.styl"
-// .side_card .caption {
-//   padding: .5em 1em;
-//   box-shadow: 0 0 2px #aaa;
-// }
-// .side_card .caption strong,
-// .side_card .caption span,
-// .side_card .caption small {
-//   display: inline-block;
-//   vertical-align: bottom;
-//   height: 24px;
-//   line-height: 24px;
-// }
-// .side_card .caption small {
-//   padding: 0 .5em;
-//   opacity: .6;
-// }
-// .side_card .text {
-//   padding: 1em 0;
-//   color: #ccc;
-//   font-size: 18px;
-//   text-align: center;
-// }
+.comments
+	.caption
+		padding .5em 1em
+		box-shadow 0 0 2px #aaa
+		height 24px
+		line-height 24px
+		font-weight bold
+		font-size 15px
+		color #414f58
+.side-comments-item
+	display flex
+	padding 10px
+	border-top 1px solid #eee
+	.cover
+		width 50px
+		img
+			display block
+			width 40px
+			height 40px
+			border-radius 100%
+			background #eee
+	.main
+		flex-grow 1
+		h4
+			margin 0
+			padding 0
+			font-size 14px
+			font-weight 500
+			color #414f58
+			small
+				opacity .7
+				font-weight normal
+		p
+			margin 0
+			padding .5em 0 0
+			font-size 12px
+			color #888
+			word-break break-word
+			line-height 1.4em
+			max-height 4.2em
+			overflow hidden
+	&:hover
+		background #fafafa
+		color inherit
 </style>
 <template>
-<div class="bless-page">
-
+<div class="comments">
+	<div class="caption">最新评论</div>
+	<div class="content">
+		<router-link
+			v-for="item in list"
+			:key="item._id"
+			to="/bless#comments-5e25d38c02b4053d4c507961"
+			class="side-comments-item"
+		>
+			<div class="cover">
+				<img :src="item.user.avatar" >
+			</div>
+			<div class="main">
+				<h4>{{item.user.username}}<small>0:21 1-21</small></h4>
+				<p>{{item.content}}</p>
+			</div>
+		</router-link>
+	</div>
 </div>
 </template>
 
@@ -36,6 +74,7 @@ import CommentsList from '@/components/comments/list.vue'
 
 export default {
 	name: 'latest-comments',
+	props: ['list'],
 	data () {
 		return {
 		}

@@ -87,7 +87,10 @@
 					class="side-card"
 					:summary="githubSummary"
 				/>
-				<Comments class="side-card" />
+				<Comments
+					class="side-card"
+					:list="commentList"
+				/>
 			</div>
 		</div>
 	</Container>
