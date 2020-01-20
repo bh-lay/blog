@@ -85,7 +85,7 @@
 	<div class="main">
 		<h3>剧中人在Github</h3>
 		<p>
-			<Button :href="profileURL" type="primary">
+			<Button :href="profileURL" type="primary" size="small">
 				<i class="l-icon l-icon-person"></i>Follow me
 			</Button>
 		</p>

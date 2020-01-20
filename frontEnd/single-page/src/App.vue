@@ -1,5 +1,7 @@
 <style lang="stylus" rel="stylesheet/stylus">
 @import './assets/stylus/article.styl'
+@import './assets/stylus/hightlight.styl'
+
 html, body, div
 	margin 0
 	padding 0

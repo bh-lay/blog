@@ -96,7 +96,7 @@ export default {
 			nodeName = 'button'
 		}
 		return createElement(
-			'button',
+			nodeName,
 			{
 				class: classNameList,
 				attrs,

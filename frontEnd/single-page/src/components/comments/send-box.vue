@@ -90,8 +90,6 @@
 			}"
 		></div>
 		<div class="name">{{userData.username || '燕过留名'}}</div>
-		{{replyForUsername}}<br/>
-		{{replyForID}}
 	</div>
 	<div class="main">
 		<div class="input-content">

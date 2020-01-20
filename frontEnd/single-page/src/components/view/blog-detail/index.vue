@@ -165,7 +165,7 @@
 					<h1>{{detail.title}}</h1>
 					<p>发布时间：<span>{{detail.time_show | timeFormat}}</span></p>
 				</div>
-				<div class="article" v-html="detail.content"></div>
+				<div class="article" ref="article" v-html="detail.content"></div>
 				<footer>
 					<p><strong>tags：</strong>
 					<router-link
@@ -219,9 +219,10 @@
 </div>
 </template>
 <script>
-import renderBanner from './render-banner.js'
+import highlight from '@/assets/js/highlight.js'
 import Comments from '@/components/comments/index.vue'
 import buildToc from './build-toc.js'
+import renderBanner from './render-banner.js'
 
 export default {
 	name: 'blogDetail',
@@ -267,6 +268,7 @@ export default {
 
 					// 渲染顶部图片
 					renderBanner(this.$refs.header, data.detail.cover)
+					this.$nextTick(() => this.addCodeSupport())
 				})
 		},
 		createSharePop () {
@@ -293,9 +295,8 @@ export default {
 		},
 		addCodeSupport () {
 			// 代码高亮
-			// utils.each(utils.queryAll('pre code', this.element), function (codeNode) {
-			// 	hljs(codeNode);
-			// });
+			let codeList = this.$refs.article.querySelectorAll('pre code')
+			codeList.forEach(codeNode => highlight(codeNode))
 		},
 		scrollTo (id) {
 			// 绑定 toc 点击事件
