@@ -45,6 +45,8 @@
 	&:hover
 		background #fafafa
 		color inherit
+	&.router-link-exact-active
+		cursor default
 </style>
 <template>
 <div class="comments">
@@ -53,11 +55,11 @@
 		<router-link
 			v-for="item in list"
 			:key="item._id"
-			to="/bless#comments-5e25d38c02b4053d4c507961"
+			:to="item.url"
 			class="side-comments-item"
 		>
 			<div class="cover">
-				<img :src="item.user.avatar" >
+				<img :src="item.user.avatar || defaultAvatar" >
 			</div>
 			<div class="main">
 				<h4>{{item.user.username}}<small>0:21 1-21</small></h4>
@@ -71,12 +73,13 @@
 <script>
 import CommentsSendBox from '@/components/comments/send-box.vue'
 import CommentsList from '@/components/comments/list.vue'
-
+import {defaultAvatar} from '@/components/comments/data.js'
 export default {
 	name: 'latest-comments',
 	props: ['list'],
 	data () {
 		return {
+			defaultAvatar
 		}
 	},
 	created () {
