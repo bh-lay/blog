@@ -22,7 +22,6 @@
 		flex-grow 1
 		background #fff
 		border-radius 2px
-		box-shadow 0 0 2px rgba(0, 0, 0, 0.2)
 		&:before
 			content ''
 			position absolute
@@ -81,7 +80,7 @@
 						<span>评论于</span>
 						<span class="time">{{item.time}}</span>
 				</div>
-				<a href="javascript:void(0)" class="btn-reply">回复</a>
+				<Button type="text" class="btn-reply">回复</Button>
 			</div>
 			<div class="article" v-html="item.content"></div>
 		</div>
@@ -111,7 +110,8 @@ export default {
 				pageItemCount: 15,
 				pageIndex: 1
 			},
-			list: []
+			list: [],
+			getListTimer: null
 		}
 	},
 	computed: {
@@ -131,6 +131,12 @@ export default {
 	},
 	methods: {
 		getList () {
+			clearTimeout(this.getListTimer)
+			this.getListTimer = setTimeout(() => {
+				this.forceGetList()
+			})
+		},
+		forceGetList () {
 			let skip = (this.page.pageIndex - 1) * this.page.pageItemCount
 			fetch(`/api/comments/?cid=${this.cid}&skip=${skip}&limit=${this.page.pageItemCount}`)
 				.then(response => response.json())
@@ -145,6 +151,7 @@ export default {
 		},
 		refresh () {
 			this.page.pageIndex = 1
+			this.getList()
 		}
 	}
 }

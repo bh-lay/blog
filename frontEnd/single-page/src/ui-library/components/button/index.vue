@@ -29,6 +29,7 @@ a
 // type 样式
 .ui-button-text
 	border none
+	background transparent
 	font-size 14px
 	color #fff
 	&:hover
@@ -79,9 +80,8 @@ export default {
 	},
 	render (createElement) {
 		let classNameList = [`ui-button-${this.type}`]
-		
 		// 文本类型不设置尺寸
-		if (this.type !== 'text'){
+		if (this.type !== 'text') {
 			classNameList.push(`ui-button-${this.size}`)
 		}
 		if (this.href) {

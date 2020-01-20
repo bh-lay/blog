@@ -113,7 +113,7 @@
 			line-height 2em
 			font-size 15px
 			color #c2ccd6
-		a
+		button
 			display block
 			margin-bottom 10px
 			line-height 1.2em
@@ -168,11 +168,11 @@
 				<div class="article" v-html="detail.content"></div>
 				<footer>
 					<p><strong>tags：</strong>
-						<a
-							v-for="(tag, index) in detail.tags"
-							:key="tag + index"
-							:href="'/blog?tag=' + tag"
-						>{{tag}}</a>
+					<router-link
+						v-for="(tag, index) in detail.tags"
+						:key="tag + index"
+						:to="'/blog?tag=' + tag"
+					>{{tag}}</router-link>
 					</p>
 					<p><strong>转载请注明来源：</strong>http://bh-lay.com/blog/{{detail.id}}</p>
 				</footer>
@@ -194,15 +194,15 @@
 					<Tie :tieTop="60">
 						<div class="toc-content" ref="tieNode">
 							<div class="title">TOC</div>
-							<a
+							<Button
+								type="text"
 								v-for="item in articleToc"
 								:key="item.id"
 								:style="{
 									paddingLeft: `${item.indent}em`
 								}"
-								href="javascript:void(0)"
 								@click="scrollTo(item.id)"
-							>{{item.text}}</a>
+							>{{item.text}}</Button>
 						</div>
 					</Tie>
 				</div>
