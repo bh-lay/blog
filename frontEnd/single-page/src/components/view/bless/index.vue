@@ -3,7 +3,7 @@
 @import "~@/assets/stylus/mixin.styl"
 
 .bless-page
-	background #454e54
+	background #fff
 	overflow hidden
 .bless-header
 	position relative
@@ -22,7 +22,7 @@
 		font-size 3rem
 		color #fff
 	photography()
-.blessPage
+.bless-body
 	display flex
 	flex-wrap wrap
 	.main-body
@@ -39,7 +39,8 @@
 		height 100%
 		margin-right -300px
 		padding 20px 320px 20px 20px
-		background #fff
+		border-left 1px solid #ebf1f5
+		background #f5f8fa
 .bless-sendBox
 	max-width 700px
 	width 100%
@@ -67,7 +68,7 @@
 			<a href="${photography.htmlSrc}" target="_blank">${photography.title} By:@剧中人</a>
 		</div>
 	</div>
-	<Container class="grid-row blessPage">
+	<Container class="grid-row bless-body">
 		<div class="main-body">
 			<CommentsList
 				cid="define-1"

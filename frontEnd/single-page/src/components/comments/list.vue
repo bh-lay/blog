@@ -20,6 +20,7 @@
 		position relative
 		width 200px
 		flex-grow 1
+		border 1px solid #dfe7ec
 		background #fff
 		border-radius 2px
 		&:before
@@ -30,7 +31,7 @@
 			height 14px
 			top 14px
 			left -8px
-			border 1px solid #ddd
+			border 1px solid #dfe7ec
 			border-width 0 0 1px 1px
 			background #fff
 			transform rotate(45deg)

@@ -115,14 +115,13 @@ export default {
 	span
 		display inline-block
 		padding 6px 12px
-		line-height 1.42857143
-		color #fff
+		line-height 1.5
+		background #fff
+		color #526a7a
 		text-decoration none
 		cursor pointer
 		transition .15s ease-in-out
 		&:hover
-			z-index 2
-			color rgba(0, 0, 0, 0.6)
 			background-color #eee
 			border-color #ddd
 		&.active
