@@ -1,17 +1,18 @@
 
 export var defaultAvatar = require('./default.jpg')
+
 const defaultUserData = {
 	username: '',
 	email: '',
 	blog: '',
 	avatar: ''
 }
-export function setUserInfo ({username, email, blog}) {
+export function setUserInfo ({username, email, blog, avatar}) {
 	localStorage.setItem('userInfo', JSON.stringify({
 		username,
 		email,
 		blog,
-		avatar: email ? '' : defaultAvatar
+		avatar
 	}))
 }
 function getUserInfoFromLocal () {
@@ -20,13 +21,7 @@ function getUserInfoFromLocal () {
 		return Object.assign({}, defaultUserData)
 	}
 	try {
-		let data = JSON.parse(dataStr)
-		// 增加gravatar头像(md5邮箱)
-		if (data.email.length) {
-			// FIXME
-			// data.avatar = '//www.gravatar.com/avatar/' + hexMd5(userInfo.email) + '?s=100';
-		}
-		return data
+		return JSON.parse(dataStr)
 	} catch (e) {
 		return Object.assign({}, defaultUserData)
 	}

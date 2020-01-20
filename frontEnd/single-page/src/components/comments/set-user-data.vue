@@ -63,7 +63,12 @@
 </div>
 </template>
 <script>
-import {getUserInfo, setUserInfo} from './data.js'
+import md5 from 'md5'
+import {getUserInfo, setUserInfo, defaultAvatar} from './data.js'
+
+function gravatar (input) {
+	return `https://cn.gravatar.com/avatar/${md5(input)}?s=100`
+}
 
 export default {
 	name: 'comments-set-user-data',
@@ -74,7 +79,8 @@ export default {
 				return {
 					username: '',
 					email: '',
-					blog: ''
+					blog: '',
+					avatar: ''
 				}
 			}
 		}
@@ -86,7 +92,8 @@ export default {
 			userData: {
 				username: '',
 				email: '',
-				blog: ''
+				blog: '',
+				avatar: ''
 			}
 		}
 	},
@@ -97,6 +104,7 @@ export default {
 	},
 	methods: {
 		confirm () {
+			this.userData.avatar = this.userData.email ? gravatar(this.userData.email) : defaultAvatar
 			setUserInfo(this.userData)
 			this.$emit('confirm', Object.assign({}, this.userData))
 		}
