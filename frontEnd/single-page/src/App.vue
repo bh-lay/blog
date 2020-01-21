@@ -20,7 +20,7 @@ a
 .view-outer
 	min-height 100vh
 	overflow hidden
-	background #eee
+	background #21272c
 
 .view-animate-enter-active
 	will-change transform opacity
@@ -30,25 +30,22 @@ a
 	transition all .5s ease-in-out
 .view-animate-enter
 	opacity 0
-	transform translate(-10%, 0)
+	transform translate(0, 100px)
 .view-animate-leave-active
 	opacity 0
-	transform translate(20%, 0)
-
-.page-footer
-	height 400px
-	background #333
+	transform scale(0.9)
 </style>
 <template>
 	<div id="app">
 		<Navigation/>
 		<div class="view-outer">
-			<transition name="view-animate" >
+			<transition
+				name="view-animate"
+				@beforeLeave="beforeLeave"
+				@afterLeave="afterLeave"
+			>
 				<router-view class="view-page" />
 			</transition>
-		</div>
-		<div class="page-footer">
-
 		</div>
 	</div>
 </template>
@@ -56,9 +53,24 @@ a
 <script>
 import './assets/stylus/animation.css'
 import Navigation from './components/navigation/index.vue'
-
+function getScrollTop () {
+	return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+}
 export default {
 	name: 'App',
-	components: {Navigation}
+	components: {Navigation},
+	methods: {
+		beforeLeave (node) {
+			let scrollTop = getScrollTop()
+			window.scrollTo(0, 0)
+			node.style.position = 'relative'
+			node.style.height = '100vh'
+			node.style.overflow = 'hidden'
+			node.scrollTop = scrollTop
+		},
+		afterLeave () {
+			// window.scrollTo(0, 0)
+		}
+	}
 }
 </script>

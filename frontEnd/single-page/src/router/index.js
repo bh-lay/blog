@@ -50,8 +50,9 @@ export default new Router({
 			name: 'blessPage',
 			component: Bless
 		}
-	],
-	scrollBehavior (to, from, savedPosition) {
-		return { x: 0, y: 0 }
-	}
+	]
+	// ,
+	// scrollBehavior (to, from, savedPosition) {
+	// 	return { x: 0, y: 0 }
+	// }
 })
