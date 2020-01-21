@@ -10,6 +10,7 @@
 	z-index 10000
 	transition .6s ease-in-out
 	.nav-inner
+		position relative
 		display flex
 		align-items center
 		justify-content space-between
@@ -54,29 +55,85 @@
 				content ''
 				position absolute
 				bottom 20px
-				left 15px
+				left 18%
 				width 0
 				height 1px
 				background #007fff
 				transition .4s
 			&:hover:after
-				width 25px
+				width 30%
 			&.router-link-exact-active
 				color #007fff
 				&:after
-					width 50px
+					width 64%
 	&.mini
 		padding-top 0
 		background #fff
 		box-shadow 0 0 2px rgba(0,0,0,0.063), 0 0 10px rgba(0,0,0,0.125)
 		.nav-logo
 			border-left-color #e9ebed
+@media screen and (max-width 750px)
+	.navigation .nav-list a
+		width 60px
+@media screen and (max-width $max-mobile-width)
+	.navigation
+		.nav-list-body
+			position absolute
+			top 70px
+			right 0
+			width 200px
+			background #fff
+			box-shadow 2px 2px 10px rgba(0,0,0,0.1), 1px 1px 2px rgba(0,0,0,0.2)
+			transition .2s ease-in-out
+			visibility hidden
+			opacity 0
+		.nav-list
+			a
+				display block
+				width 100%
+		.nav-more-btn
+			position absolute
+			display block
+			width 44px
+			height 44px
+			top 10px
+			right 10px
+			border none
+			cursor default
+			background #fff
+			i
+				display block
+				position absolute
+				width 26px
+				height 4px
+				left 9px
+				border-radius 4px
+				background #444
+				transition .2s ease-in-out
+				&:nth-child(1)
+					top 10px
+				&:nth-child(2)
+					top 19px
+				&:nth-child(3)
+					top 28px
+	.nav-slidedown
+		.nav-more-btn
+			i:nth-child(1)
+				transform translateY(9px) rotate(-45deg)
+			i:nth-child(2)
+				opacity: 0
+			i:nth-child(3)
+				transform translateY(-9px) rotate(45deg)
+		.nav-list-body
+			visibility visible
+			opacity 1
 </style>
 <template>
 	<div
 		class="navigation"
 		:class="{
-			mini: isScrolling
+			mini: isScrolling,
+			'nav-slidedown': navSlidedown
 		}"
 	>
 		<Container>
@@ -91,11 +148,14 @@
 					<span>小剧客栈</span>
 				</router-link>
 				<div class="nav-list">
-					<router-link
-						v-for="nav in navList"
-						:key="nav.type"
-						:to="nav.href"
-					>{{nav.label}}</router-link>
+					<Button class="nav-more-btn" @click="navSlidedown = !navSlidedown"><i></i><i></i><i></i></Button>
+					<div class="nav-list-body">
+						<router-link
+							v-for="nav in navList"
+							:key="nav.type"
+							:to="nav.href"
+						>{{nav.label}}</router-link>
+					</div>
 				</div>
 			</div>
 		</Container>
@@ -140,7 +200,8 @@ export default {
 					href: '/bless',
 					type: 'bless'
 				}
-			]
+			],
+			navSlidedown: false
 		}
 	},
 	mounted () {
