@@ -26,7 +26,7 @@
 </template>
 
 <script>
-let potoGraphaList = [
+let photoGraphaList = [
 	{
 		imgSrc: require('./images/opus_@2x.jpg'),
 		htmlSrc: 'https://bh-lay.tuchong.com/14431809/#image24933177',
@@ -69,8 +69,8 @@ export default {
 	},
 	methods: {
 		getBannerList () {
-			this.photography = potoGraphaList[++photoGraphaIndex]
-			if (photoGraphaIndex + 1 >= potoGraphaList.length) {
+			this.photography = photoGraphaList[++photoGraphaIndex]
+			if (photoGraphaIndex + 1 >= photoGraphaList.length) {
 				photoGraphaIndex = -1
 			}
 			loadImg(this.photography.imgSrc, () => {

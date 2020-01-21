@@ -152,7 +152,7 @@
 </template>
 
 <script>
-let potoGraphaList = [
+let photoGraphaList = [
 	{
 		title: '随处撸码',
 		author: '剧中人',
@@ -183,7 +183,7 @@ function loadImg (src, callback) {
 	img.onerror = img.onload = End
 	img.src = src
 }
-let potoGraphaIndex = -1
+let photoGraphaIndex = -1
 
 export default {
 	name: 'index-about-me',
@@ -199,9 +199,9 @@ export default {
 	},
 	methods: {
 		getList () {
-			this.photography = potoGraphaList[++potoGraphaIndex]
-			if (potoGraphaIndex + 1 >= potoGraphaList.length) {
-				potoGraphaIndex = -1
+			this.photography = photoGraphaList[++photoGraphaIndex]
+			if (photoGraphaIndex + 1 >= photoGraphaList.length) {
+				photoGraphaIndex = -1
 			}
 			loadImg(
 				this.photography.imgSrc,
