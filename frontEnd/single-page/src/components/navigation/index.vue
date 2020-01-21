@@ -91,6 +91,16 @@
 			a
 				display block
 				width 100%
+		.nav-mask
+			position fixed
+			top 0
+			left 0
+			width 100%
+			height 100%
+			background rgba(0, 0, 0, .2)
+			transition .2s ease-in-out
+			visibility hidden
+			opacity 0
 		.nav-more-btn
 			position absolute
 			display block
@@ -125,6 +135,7 @@
 			i:nth-child(3)
 				transform translateY(-9px) rotate(45deg)
 		.nav-list-body
+		.nav-mask
 			visibility visible
 			opacity 1
 </style>
@@ -149,6 +160,7 @@
 				</router-link>
 				<div class="nav-list">
 					<Button class="nav-more-btn" @click="navSlidedown = !navSlidedown"><i></i><i></i><i></i></Button>
+					<div class="nav-mask" @click="navSlidedown = false"></div>
 					<div class="nav-list-body">
 						<router-link
 							v-for="nav in navList"
