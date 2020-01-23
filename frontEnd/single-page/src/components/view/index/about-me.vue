@@ -208,7 +208,7 @@ export default {
 				() => {
 					setTimeout(() => {
 						this.photographyLoaded = true
-					}, 1000)
+					}, 300)
 				}
 			)
 		}

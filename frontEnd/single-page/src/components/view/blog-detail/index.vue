@@ -137,7 +137,7 @@
 			border-style solid
 			border-color transparent transparent #5a6872
 			border-width 0 2rem 1rem
-@media screen and (max-width 1000px)
+@media screen and (max-width $max-pad-width)
 	.blog-detail
 		padding 0
 		.article-section

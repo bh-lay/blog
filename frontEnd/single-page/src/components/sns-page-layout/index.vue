@@ -40,6 +40,7 @@
 
 .post-list
 	min-height 400px
+	margin 0 -8px
 	padding 40px 0
 	display flex
 	flex-wrap wrap

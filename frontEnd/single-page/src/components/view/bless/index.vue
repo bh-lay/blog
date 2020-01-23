@@ -7,10 +7,7 @@
 	overflow hidden
 .bless-header
 	position relative
-	height 75vh
-	min-height 500px
-	display flex
-	align-content center
+	padding 25vh 0
 	background no-repeat center center #cef
 	background-size cover
 	h2
@@ -36,6 +33,7 @@
 		position relative
 		width 320px
 	.sidebar-body
+		box-sizing border-box
 		height 100%
 		margin-right -300px
 		padding 20px 320px 20px 20px
@@ -49,27 +47,32 @@
 			box-shadow 0 0 2px rgba(0, 0, 0, 0.2)
 .bless-sendBox
 	max-width 700px
-	width 100%
-	margin:auto
-@media screen and (max-width: 950px)
-	.blessPage .bless-sidebar
-		width 100%
+	padding 0 20px
+	margin auto
+@media screen and (max-width $max-pad-width)
+	.bless-body
+		display block
+		.main-body
+			width auto
+			padding 20px 0 40px
+		.bless-sidebar
+			width auto
 		.sidebar-body
-			margin-left -800px
-			padding-left 820px
+			margin 0
+			padding 0
+			border none
+			background transparent
 </style>
 <template>
 <div class="bless-page">
 	<div class="bless-header" style="background-image: url('${photography.imgSrc}')">
-		<Container>
+		<div class="bless-sendBox">
 			<h2>说点啥</h2>
-			<div class="bless-sendBox">
-				<CommentsSendBox
-					cid="define-1"
-					@sendSuccess="sendSuccess"
-				/>
-			</div>
-		</Container>
+			<CommentsSendBox
+				cid="define-1"
+				@sendSuccess="sendSuccess"
+			/>
+		</div>
 		<div class="photograghy-author">
 			<a href="${photography.htmlSrc}" target="_blank">${photography.title} By:@剧中人</a>
 		</div>

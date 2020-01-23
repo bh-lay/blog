@@ -3,6 +3,11 @@
 	width 90%
 	max-width 1200px
 	margin auto
+@media screen and (max-width 600px)
+	.container
+		width auto
+		margin-right 15px
+		margin-left 15px
 </style>
 <template>
 <div class="container"><slot /></div>
