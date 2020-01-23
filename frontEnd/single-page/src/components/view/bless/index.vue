@@ -94,6 +94,7 @@
 			</div>
 		</div>
 	</Container>
+	<Footer />
 </div>
 </template>
 

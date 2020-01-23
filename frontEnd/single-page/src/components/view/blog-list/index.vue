@@ -215,6 +215,7 @@ $tag_cnt_bj = #fff
 		</Stick>
 		<div class="status"></div>
 	</Container>
+	<Footer />
 </div>
 </template>
 

@@ -28,8 +28,8 @@
 		svg
 			display inline-block
 			vertical-align middle
-			width 30px
-			height 30px
+			width 25px
+			height 25px
 			margin-right 2px
 			fill #3d505c
 		span
@@ -37,8 +37,10 @@
 			vertical-align middle
 			line-height 30px
 			font-weight bold
-			font-size 16px
+			font-size 14px
 			color #526a7a
+	.nav-more-btn
+		display none
 	.nav-list
 		a
 			position relative
@@ -75,6 +77,7 @@
 @media screen and (max-width 750px)
 	.navigation .nav-list a
 		width 60px
+		font-size 13px
 @media screen and (max-width $max-mobile-width)
 	.navigation
 		.nav-list-body
@@ -230,6 +233,11 @@ export default {
 		ajustNavigation () {
 			let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
 			this.isScrolling = scrollTop > 50
+		}
+	},
+	watch: {
+		$route () {
+			this.navSlidedown = false
 		}
 	}
 }

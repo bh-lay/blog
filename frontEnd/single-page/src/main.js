@@ -4,10 +4,12 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import filters from './filters/index.js'
+import Footer from './components/footer/index.vue'
 import UILibrary from './ui-library/index.js'
 
 Vue.use(filters)
 Vue.use(UILibrary)
+Vue.component('Footer', Footer)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

@@ -38,15 +38,6 @@
 		font-size 14px
 		color #333
 
-@media (max-width: 600px)
-	.labs-sub-header
-		padding 15px
-		.labs-profile-card
-			position static
-			margin auto
-		.notice
-			padding 15px
-
 .post-list
 	min-height 400px
 	padding 40px 0
@@ -63,6 +54,14 @@
 		padding 0
 		line-height 0
 		font-size 0
+@media (max-width: $max-mobile-width)
+	.labs-sub-header
+		padding 15px
+		.labs-profile-card
+			position static
+			margin auto
+		.notice
+			padding 15px
 </style>
 <template>
 <div class="labs-list-pager">
@@ -87,6 +86,7 @@
 			<i /><i /><i /><i /><i /><i />
 		</div>
 	</Container>
+	<Footer />
 </div>
 </template>
 
