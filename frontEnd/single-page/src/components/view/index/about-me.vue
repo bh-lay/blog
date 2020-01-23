@@ -3,29 +3,10 @@
 @import '~@/assets/stylus/mixin.styl';
 
 .index-aboutme
-	position relative
-	height 95vh
-	min-height 600px
-	overflow hidden
-	visibility hidden
-	photography(4.5rem)
-	&.zoom-show
-		display block
-		visibility visible
-		-webkit-mask-image url("./images/mask-bj.png")
-		-webkit-mask-repeat no-repeat
-		-webkit-mask-position center center
-		-webkit-mask-size 300%
-		-webkit-animation circle_zoom 1.2s ease-in
-	&:before
-		content ''
-		position absolute
-		left 0
-		top 0
-		width 100%
-		height 100%
-		background url("./images/mask.png")
-		z-index 0
+	height 95vh !important
+	min-height 600px !important
+	:global(.photograghy-author)
+		bottom 80px !important
 	.aboutme-body
 		display flex
 		align-items center
@@ -66,33 +47,13 @@
 				fill currentColor
 			&:hover
 				background rgba(255, 255, 255, .5)
-
-@keyframes circle_zoom {
-	0% {
-		opacity: 0;
-		-webkit-mask-size: 30%;
-	}
-
-	40% {
-		opacity: 0.6;
-		-webkit-mask-size: 60%;
-	}
-
-	100% {
-		opacity: 1;
-		-webkit-mask-size: 300%;
-	}
-}
 </style>
 <template>
-<section
+<headerBanner
 	class="index-aboutme"
-	:style="{
-	backgroundImage: `url(${photography.imgSrc})`
-}"
-	:class="[
-	photographyLoaded ? 'zoom-show' : ''
-]"
+	:photoGraphaList="photoGraphaList"
+	:photoGraphaIndex="photoGraphaIndex"
+	@nextIndex="nextIndex"
 >
 	<div class="aboutme-body">
 		<Container>
@@ -142,75 +103,40 @@
 			</div>
 		</Container>
 	</div>
-	<div class="photograghy-author">
-		<a
-			:href="photography.htmlSrc"
-			target="_blank"
-		>{{photography.title}} By:@{{photography.author}}</a>
-	</div>
-</section>
+</headerBanner>
 </template>
 
 <script>
-let photoGraphaList = [
-	{
-		title: '随处撸码',
-		author: '剧中人',
-		imgSrc: require('./images/aboutme_2.jpg'),
-		htmlSrc: 'https://bh-lay.tuchong.com/14977204/'
-	},
-	{
-		title: '办公室背影',
-		author: 'Oo浪沫',
-		imgSrc: require('./images/aboutme.jpg'),
-		htmlSrc: 'https://bh-lay.tuchong.com/'
-	}
-]
+import headerBanner from '@/components/header-banner/index.vue'
 
-// 图片预加载
-function loadImg (src, callback) {
-	if (!src) {
-		callback && callback()
-		return
-	}
-	var img = new Image()
-
-	function End () {
-		callback && callback()
-		callback = null
-	}
-
-	img.onerror = img.onload = End
-	img.src = src
-}
-let photoGraphaIndex = -1
+let globalPhotoGraphaIndex = 0
 
 export default {
 	name: 'index-about-me',
-	components: {},
+	components: { headerBanner },
 	data () {
 		return {
 			photographyLoaded: false,
-			photography: {}
+			photoGraphaList: [
+				{
+					title: '随处撸码',
+					author: '剧中人',
+					imgSrc: require('./images/aboutme_2.jpg'),
+					htmlSrc: 'https://bh-lay.tuchong.com/14977204/'
+				},
+				{
+					title: '办公室背影',
+					author: 'Oo浪沫',
+					imgSrc: require('./images/aboutme.jpg'),
+					htmlSrc: 'https://bh-lay.tuchong.com/'
+				}
+			],
+			photoGraphaIndex: globalPhotoGraphaIndex
 		}
 	},
-	created () {
-		this.getList()
-	},
 	methods: {
-		getList () {
-			this.photography = photoGraphaList[++photoGraphaIndex]
-			if (photoGraphaIndex + 1 >= photoGraphaList.length) {
-				photoGraphaIndex = -1
-			}
-			loadImg(
-				this.photography.imgSrc,
-				() => {
-					setTimeout(() => {
-						this.photographyLoaded = true
-					}, 300)
-				}
-			)
+		nextIndex (index) {
+			globalPhotoGraphaIndex = index
 		}
 	}
 }

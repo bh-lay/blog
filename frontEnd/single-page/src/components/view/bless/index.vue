@@ -6,9 +6,8 @@
 	background #fff
 	overflow hidden
 .bless-header
-	position relative
-	height 70vh
-	min-height 420px
+	height 70vh !important
+	min-height 420px !important
 	.bless-header-content
 		position absolute
 		top 20%
@@ -74,12 +73,12 @@
 </style>
 <template>
 <div class="bless-page">
-	<div class="bless-header">
-		<headerBanner
-			:photoGraphaList="photoGraphaList"
-			:photoGraphaIndex="photoGraphaIndex"
-			@nextIndex="nextIndex"
-		/>
+	<headerBanner
+		class="bless-header"
+		:photoGraphaList="photoGraphaList"
+		:photoGraphaIndex="photoGraphaIndex"
+		@nextIndex="nextIndex"
+	>
 		<div class="bless-header-content">
 			<div class="bless-header-main">
 				<h2>说点啥</h2>
@@ -89,7 +88,7 @@
 				/>
 			</div>
 		</div>
-	</div>
+	</headerBanner>
 	<Container class="bless-body">
 		<div class="main-body">
 			<CommentsList
