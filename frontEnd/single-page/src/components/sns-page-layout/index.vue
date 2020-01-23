@@ -4,7 +4,8 @@
 
 .labs-list-pager
 	background #dee3e7
-
+.labs-header
+	height 300px
 /**实验室列表**/
 .labs-sub-header
 	min-height 50px
@@ -66,7 +67,13 @@
 </style>
 <template>
 <div class="labs-list-pager">
-	<headerBanner />
+	<div class="labs-header">
+		<headerBanner
+			:photoGraphaList="photoGraphaList"
+			:photoGraphaIndex="photoGraphaIndex"
+			@nextIndex="nextIndex"
+		/>
+	</div>
 	<div class="labs-sub-header">
 		<Container class="labs-sub-header-inner">
 			<div class="labs-profile-card">
@@ -95,6 +102,8 @@
 import headerBanner from '@/components/header-banner/index.vue'
 import Item from './item.vue'
 
+let globalPhotoGraphaIndex = 0
+
 export default {
 	name: 'sns-page-layout',
 	components: {headerBanner, Item},
@@ -120,11 +129,28 @@ export default {
 	},
 	data () {
 		return {
+			photoGraphaList: [
+				{
+					imgSrc: require('./images/opus_@2x.jpg'),
+					htmlSrc: 'https://bh-lay.tuchong.com/14431809/#image24933177',
+					title: '宏村',
+					author: '剧中人'
+				}, {
+					imgSrc: require('./images/yangshuo.jpg'),
+					htmlSrc: 'http://720yun.com/t/544jOrkvtn0?from=bh-lay',
+					title: '桂林阳朔',
+					author: '剧中人'
+				}
+			],
+			photoGraphaIndex: globalPhotoGraphaIndex
 		}
 	},
 	created () {
 	},
 	methods: {
+		nextIndex (index) {
+			globalPhotoGraphaIndex = index
+		}
 	}
 }
 </script>

@@ -6,8 +6,8 @@ $tag_cnt_bj = #fff
 	min-height 600px
 	padding-bottom 20px
 	background #dee3e7
-	.blank-content
-		margin-top 0
+	.article-list-header
+		height 300px
 	.status
 		height 52px
 .articleListPage-tags-ghost
@@ -170,7 +170,13 @@ $tag_cnt_bj = #fff
 </style>
 <template>
 <div class="articleListPage">
-	<headerBanner />
+	<div class="article-list-header">
+		<headerBanner
+			:photoGraphaList="photoGraphaList"
+			:photoGraphaIndex="photoGraphaIndex"
+			@nextIndex="nextIndex"
+		/>
+	</div>
 	<Tie
 		class="articleListPage-tags-ghost"
 		:tie-top="60"
@@ -224,6 +230,8 @@ import Stick from 'vue-stick'
 import headerBanner from '@/components/header-banner/index.vue'
 import tagList from './tag-list.vue'
 
+let globalPhotoGraphaIndex = 0
+
 export default {
 	name: 'blogPage',
 	components: {
@@ -239,7 +247,22 @@ export default {
 				limit: 20,
 				count: Infinity
 			},
-			list: []
+			list: [],
+
+			photoGraphaList: [
+				{
+					imgSrc: require('../../sns-page-layout/images/opus_@2x.jpg'),
+					htmlSrc: 'https://bh-lay.tuchong.com/14431809/#image24933177',
+					title: '宏村',
+					author: '剧中人'
+				}, {
+					imgSrc: require('../../sns-page-layout/images/yangshuo.jpg'),
+					htmlSrc: 'http://720yun.com/t/544jOrkvtn0?from=bh-lay',
+					title: '桂林阳朔',
+					author: '剧中人'
+				}
+			],
+			photoGraphaIndex: globalPhotoGraphaIndex
 		}
 	},
 	computed: {
@@ -294,6 +317,10 @@ export default {
 			// 		me.onLoaded && me.onLoaded(list, count)
 			// 		me.isLoading = false
 			// 	}
+		},
+
+		nextIndex (index) {
+			globalPhotoGraphaIndex = index
 		}
 	},
 	watch: {

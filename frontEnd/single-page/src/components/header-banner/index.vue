@@ -6,37 +6,22 @@
 	position relative
 	background no-repeat center center #f4f1ec
 	background-size auto 100%
+	height 100%
 	min-height 200px
-	max-height 400px
 	overflow hidden
 	photography()
-	&:before
-		content ''
-		display block
-		padding-top 21%
 </style>
 <template>
 <div class="header-banner" :style="{
 	backgroundImage: `url(${photography.imgSrc})`
 }">
 	<div class="photograghy-author">
-		<a :href="photography.htmlSrc" target="_blank">{{photography.title}} By:@剧中人</a>
+		<a :href="photography.htmlSrc" target="_blank">{{photography.title}} By:@{{photography.author}}</a>
 	</div>
 </div>
 </template>
 
 <script>
-let photoGraphaList = [
-	{
-		imgSrc: require('./images/opus_@2x.jpg'),
-		htmlSrc: 'https://bh-lay.tuchong.com/14431809/#image24933177',
-		title: '宏村'
-	}, {
-		imgSrc: require('./images/yangshuo.jpg'),
-		htmlSrc: 'http://720yun.com/t/544jOrkvtn0?from=bh-lay',
-		title: '桂林阳朔'
-	}
-]
 
 // 图片预加载
 function loadImg (src, callback) {
@@ -54,10 +39,18 @@ function loadImg (src, callback) {
 	img.onerror = img.onload = End
 	img.src = src
 }
-let photoGraphaIndex = -1
 
 export default {
 	name: 'header-banner',
+	props: {
+		photoGraphaList: {
+			type: Array
+		},
+		photoGraphaIndex: {
+			type: Number,
+			default: 0
+		}
+	},
 	data () {
 		return {
 			photographyLoaded: false,
@@ -69,10 +62,13 @@ export default {
 	},
 	methods: {
 		getBannerList () {
-			this.photography = photoGraphaList[++photoGraphaIndex]
-			if (photoGraphaIndex + 1 >= photoGraphaList.length) {
-				photoGraphaIndex = -1
+			this.photography = this.photoGraphaList[this.photoGraphaIndex]
+
+			let nextIndex = this.photoGraphaIndex + 1
+			if (nextIndex >= this.photoGraphaList.length) {
+				nextIndex = 0
 			}
+			this.$emit('nextIndex', nextIndex)
 			loadImg(this.photography.imgSrc, () => {
 				this.photographyLoaded = true
 			}, 600)

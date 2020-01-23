@@ -42,7 +42,7 @@
 		height 100%
 		top 0
 		left 0
-		padding 15px 20px
+		padding 15px
 		line-height 20px
 		font-size 1rem
 		color #a6a6a6
