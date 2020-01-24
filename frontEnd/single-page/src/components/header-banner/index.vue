@@ -12,7 +12,22 @@
 	background no-repeat center center #f4f1ec
 	background-size auto 100%
 	visibility hidden
-	photography()
+	background-size cover
+	.photograghy-author
+		position absolute
+		right 10px
+		bottom 10px
+		opacity .6
+		transition .4s
+		a
+			font-size 12px
+			color #fff
+			text-shadow 1px 1px 1px #000, 0 0 5px rgba(0, 0, 0, 0.5)
+			&:hover 
+				text-decoration underline
+	&:hover .photograghy-author
+		opacity 1
+
 	&:before
 		content ''
 		position absolute
