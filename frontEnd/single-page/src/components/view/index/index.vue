@@ -10,7 +10,7 @@
 		font-size 1rem
 
 .index-about-links
-	padding 3em 0
+	padding 5em 0
 	text-align center
 	background #fff
 	a

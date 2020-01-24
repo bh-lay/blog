@@ -3,7 +3,7 @@
 @import "~@/assets/stylus/mixin.styl"
 
 .index-about-friends
-	padding 4em 0
+	padding 6em 0
 	background #27a3ca
 	background-image -webkit-gradient(linear, left top, right bottom, color-stop(.5, #2a97e4), color-stop(1, #21b3ac))
 	a

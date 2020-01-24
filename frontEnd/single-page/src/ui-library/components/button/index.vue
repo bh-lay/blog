@@ -20,7 +20,7 @@ a
 
 // size 尺寸
 .ui-button-small
-	padding 8px 15px
+	padding 8px 10px
 	font-size 12px
 .ui-button-middle
 	padding 12px 20px

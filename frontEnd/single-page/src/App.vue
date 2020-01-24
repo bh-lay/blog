@@ -9,6 +9,7 @@ body
 	font-size 14px
 	font-family PingFang SC,Helvetica neue,Helvetica,Tahoma,lantinghei sc,Microsoft Yahei,sans-serif
 	-webkit-font-smoothing antialiased
+	background #21272c
 a
 	text-decoration none
 #app
