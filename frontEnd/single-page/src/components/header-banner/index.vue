@@ -123,7 +123,7 @@ export default {
 	methods: {
 		getBannerList () {
 			let startTime = new Date().getTime()
-			let delayTime = 1000
+			let delayTime = 1200
 			this.photography = this.photoGraphaList[this.photoGraphaIndex]
 
 			let nextIndex = this.photoGraphaIndex + 1

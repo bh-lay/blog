@@ -16,25 +16,33 @@ a
 	font-family 'Avenir', Helvetica, Arial, sans-serif
 	-webkit-font-smoothing antialiased
 	-moz-osx-font-smoothing grayscale
-
 	position relative
 .view-outer
 	min-height 100vh
 	overflow hidden
+.view-page
+	position relative
 	background #21272c
-
 .view-animate-enter-active
-	will-change transform opacity
-	transition all 1s .5s ease-in-out
+	animation view-in 1.2s ease-in-out
 .view-animate-leave-active
-	will-change transform opacity
-	transition all .5s ease-in-out
-.view-animate-enter
-	opacity 0
-	transform translate(0, 100px)
-.view-animate-leave-active
-	opacity 0
-	transform scale(0.9)
+	animation view-out 1.2s ease-in-out
+	transform-origin center bottom
+
+@keyframes view-in
+	0%,
+	50%
+		opacity 0
+		transform translate(0, 200px)
+	100%
+		opacity 1
+		transform translate(0, 0)
+@keyframes view-out
+	0%
+		transform scale(1)
+	50%,
+	100%
+		transform scale(0.88)
 </style>
 <template>
 	<div id="app">
@@ -64,7 +72,11 @@ export default {
 		beforeLeave (node) {
 			let scrollTop = getScrollTop()
 			window.scrollTo(0, 0)
-			node.style.position = 'relative'
+			node.style.position = 'absolute'
+			node.style.top = '0px'
+			node.style.left = '0px'
+			node.style.zIndex = 0
+			node.style.width = '100%'
 			node.style.height = '100vh'
 			node.style.overflow = 'hidden'
 			node.scrollTop = scrollTop
