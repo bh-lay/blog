@@ -23,7 +23,7 @@
 			font-size 12px
 			color #fff
 			text-shadow 1px 1px 1px #000, 0 0 5px rgba(0, 0, 0, 0.5)
-			&:hover 
+			&:hover
 				text-decoration underline
 	&:hover .photograghy-author
 		opacity 1

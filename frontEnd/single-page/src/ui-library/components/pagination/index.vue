@@ -1,4 +1,4 @@
-<template type="text/template" id="template_pagination">
+<template>
 	<section class="ui-pagination" v-show="total > size">
 		<span @click="clickCurrent(1)" :class="{
 			disabled: current == 1

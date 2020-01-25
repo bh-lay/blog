@@ -1,7 +1,7 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 .container
 	width 90%
-	max-width 1200px
+	max-width 1800px
 	margin auto
 @media screen and (max-width 600px)
 	.container

@@ -14,8 +14,8 @@
 			margin-bottom 20px
 			svg
 				display block
-				width 100px
-				margin-right 30px
+				width 80px
+				margin-right 20px
 				fill #505c62
 			h3
 				margin 0
@@ -60,7 +60,7 @@
 	.footer-sns-link
 		display flex
 		justify-content space-between
-		padding 30px 0 0
+		padding 40px 0 0
 		a
 			display block
 			width 60px
@@ -119,16 +119,16 @@
 			<div class="footer-part-side">
 				<h3>相关链接</h3>
 				<ul class="link-list">
-					<li><a href="https://github.com/bh-lay/blog" target="_blank">博客源码</a></li>
+					<li><a href="https://github.com/bh-lay/blog" target="_blank">博客源码<small>Github</small></a></li>
 					<li><a href="/directories" target="_blank">剧中人的朋友圈</a></li>
 					<li class="primary"><a href="https://v.voiceads.cn/" target="_blank">巧匠<small>在线视频制作平台</small></a></li>
 				</ul>
 			</div>
 			<div class="footer-part-side">
-				<div class="footer-about-links">
-						<h3>关于</h3>
-						<Button href="/topic/aboutme/index.html" size="small" type="primary" style="margin-right: 15px">关于剧中人</Button>
-						<Button href="/topic/aboutblog/index.html" size="small">关于小剧客栈</Button>
+				<h3>关于</h3>
+				<div>
+						<Button href="/topic/aboutme/index.html" type="primary" style="margin-right: 15px">关于剧中人</Button>
+						<Button href="/topic/aboutblog/index.html">关于小剧客栈</Button>
 				</div>
 				<div class="footer-sns-link">
 					<a href="https://github.com/bh-lay">
@@ -158,7 +158,7 @@
 	</div>
 
 	<div class="footer-sub">
-		<p>Design & Code by @剧中人，Base on NodeJS + MongoDB</p>
+		<p>Design & Code by @剧中人, Base on NodeJS</p>
 		<p>感谢七牛提供近乎免费的CDN服务</p>
 	</div>
 </div>
