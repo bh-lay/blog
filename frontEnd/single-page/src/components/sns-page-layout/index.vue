@@ -15,23 +15,29 @@
 		position relative
 	.labs-profile-card
 		position absolute
-		top -60px
+		top -90px
 		left 10px
 		width 140px
-		box-shadow 5px 5px 5px -4px rgba(0, 0, 0, .2)
-		a
+		height 150px
+		background #fff
+		box-shadow 2px 2px 10px rgba(0, 0, 0, .1), 5px 5px 5px -4px rgba(0, 0, 0, .2)
+		.icon
+			height 40px
+			padding-top 20px
+			:global(svg)
+				display block
+				width 40px
+				margin auto
+				color #2b353b
+		span
 			display block
-			height 120px
-			padding-top 1px
-			background-color #fafafa
-			transition .2s
-			line-height 20px
-			font-size 16px
+			line-height 30px
 			text-align center
-			color #000
-			&:hover
-				color #000
-				background-color #eee
+			font-size 14px
+			color #2b353b
+		.button
+			padding-top 10px
+			text-align center
 	.notice
 		margin 0
 		padding 16px 0 16px 160px
@@ -77,9 +83,13 @@
 	<div class="labs-sub-header">
 		<Container class="labs-sub-header-inner">
 			<div class="labs-profile-card">
-				<a :href="thirdProfile.url" target="_blank">
-					{{thirdProfile.title}}
-				</a>
+				<div class="icon">
+					<slot name="profile-icon" />
+				</div>
+				<span>{{thirdProfile.title}}</span>
+				<div class="button">
+					<Button :href="thirdProfile.url" target="_blank" type="primary" size="small">查看</Button>
+				</div>
 			</div>
 			<p class="notice">{{intro}}</p>
 		</Container>
