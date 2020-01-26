@@ -10,6 +10,7 @@ $tag_cnt_bj = #fff
 		height 300px
 	.status
 		height 52px
+		margin-bottom 20px
 .articleListPage-tags-ghost
 	width 100%
 	padding-bottom 20px
@@ -158,7 +159,6 @@ $tag_cnt_bj = #fff
 			background-size 170px 34px
 	&:hover
 		box-shadow 5px 10px 10px -5px rgba(0, 0, 0, .2)
-
 @media (max-width 660px)
 	.articleListPage-tags
 		position static !important
@@ -219,7 +219,8 @@ $tag_cnt_bj = #fff
 				</div>
 			</template>
 		</Stick>
-		<div class="status"></div>
+		<div class="status" v-loading="isLoading">
+		</div>
 	</Container>
 	<Footer />
 </div>
@@ -262,7 +263,8 @@ export default {
 					author: '剧中人'
 				}
 			],
-			photoGraphaIndex: globalPhotoGraphaIndex
+			photoGraphaIndex: globalPhotoGraphaIndex,
+			isLoading: false
 		}
 	},
 	computed: {
@@ -283,6 +285,7 @@ export default {
 			if (this.page.skip >= this.page.count) {
 				return
 			}
+			this.isLoading = true
 			fetch(`/api/blog?skip=${this.page.skip}&limit=${this.page.limit}&tag=${this.tag}`, {
 				method: 'GET'
 			})
@@ -291,6 +294,10 @@ export default {
 					this.page.count = data.count
 					this.page.skip += this.page.limit
 					this.list = this.list.concat(data.list)
+				})
+				.catch(() => {})
+				.then(() => {
+					this.isLoading = false
 				})
 				// FIXMEs
 			// 		if (err || !data || data.code === 200) {

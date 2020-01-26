@@ -27,7 +27,7 @@
 			cursor default
 </style>
 <template>
-	<div class="tag-list">
+	<div class="tag-list" v-loading="isLoading">
 		<router-link to="/blog/" >全部</router-link>
 		<router-link
 			v-for="(tag, index) in tagList"
@@ -45,7 +45,8 @@ export default {
 	components: {},
 	data () {
 		return {
-			tagList: []
+			tagList: [],
+			isLoading: false
 		}
 	},
 	created () {
@@ -53,9 +54,14 @@ export default {
 	},
 	methods: {
 		getTagList () {
+			this.isLoading = true
 			getApiData('/blogtag/')
 				.then(({list}) => {
 					this.tagList = list.map(item => item.name).slice(0, 10)
+				})
+				.catch(() => {})
+				.then(() => {
+					this.isLoading = false
 				})
 		}
 	}
