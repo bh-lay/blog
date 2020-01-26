@@ -1,6 +1,7 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 @import "~@/assets/stylus/variable.styl"
-
+.comments-list
+	min-height 400px
 .l-com-item
 	display flex
 	margin-bottom 30px
@@ -63,7 +64,7 @@
 			color #222
 </style>
 <template>
-<div class="comments-list">
+<div class="comments-list" v-loading="isLoading">
 	<div ref="scrollMark"></div>
 	<div
 		class="l-com-item"
@@ -111,7 +112,8 @@ export default {
 			list: [],
 			getListTimer: null,
 
-			replyMode: false
+			replyMode: false,
+			isLoading: false
 		}
 	},
 	computed: {
@@ -131,14 +133,18 @@ export default {
 	},
 	methods: {
 		getList () {
+			this.isLoading = true
 			clearTimeout(this.getListTimer)
 			this.getListTimer = setTimeout(() => {
 				this.forceGetList()
+					.then(() => {
+						this.isLoading = false
+					})
 			})
 		},
 		forceGetList () {
 			let skip = (this.page.pageIndex - 1) * this.page.pageItemCount
-			fetch(`/api/comments/?cid=${this.cid}&skip=${skip}&limit=${this.page.pageItemCount}`)
+			return fetch(`/api/comments/?cid=${this.cid}&skip=${skip}&limit=${this.page.pageItemCount}`)
 				.then(response => response.json())
 				.then(data => {
 					data.data.list.forEach(function (item) {
@@ -148,6 +154,7 @@ export default {
 					this.page.total = data.data.count
 					this.list = data.data.list
 				})
+				.catch(() => {})
 		},
 		refresh () {
 			this.page.pageIndex = 1
