@@ -251,12 +251,12 @@ export default {
 
 			photoGraphaList: [
 				{
-					imgSrc: require('../../sns-page-layout/images/opus_@2x.jpg'),
+					imgSrc: require('../../components/sns-page-layout/images/opus_@2x.jpg'),
 					htmlSrc: 'https://bh-lay.tuchong.com/14431809/#image24933177',
 					title: '宏村',
 					author: '剧中人'
 				}, {
-					imgSrc: require('../../sns-page-layout/images/yangshuo.jpg'),
+					imgSrc: require('../../components/sns-page-layout/images/yangshuo.jpg'),
 					htmlSrc: 'http://720yun.com/t/544jOrkvtn0?from=bh-lay',
 					title: '桂林阳朔',
 					author: '剧中人'

@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from '@/components/view/index/index.vue'
-import BlogList from '@/components/view/blog-list/index.vue'
-import BlogDetail from '@/components/view/blog-detail/index.vue'
+import Index from '@/view/index/index.vue'
+import BlogList from '@/view/blog-list/index.vue'
+import BlogDetail from '@/view/blog-detail/index.vue'
 
-import LabsList from '@/components/view/labs-list/index.vue'
-import PanoList from '@/components/view/pano-list/index.vue'
-import PhotographyList from '@/components/view/photography-list/index.vue'
-import Bless from '@/components/view/bless/index.vue'
+import LabsList from '@/view/labs-list/index.vue'
+import PanoList from '@/view/pano-list/index.vue'
+import PhotographyList from '@/view/photography-list/index.vue'
+import Bless from '@/view/bless/index.vue'
 
 Vue.use(Router)
 
