@@ -5,6 +5,7 @@
   :intro="intro"
 	:thirdProfile="thirdProfile"
 	:postList="postList"
+	:isLoading="isLoading"
 >
 	<template slot="profile-icon">
 		<svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -26,7 +27,9 @@ export default {
 				title: '图虫',
 				url: 'https://bh-lay.tuchong.com/?from=bh-lay'
 			},
-			postList: []
+			postList: [],
+
+			isLoading: false
 		}
 	},
 	created () {
@@ -34,6 +37,7 @@ export default {
 	},
 	methods: {
 		getList () {
+			this.isLoading = true
 			fetch('/ajax/photography/list?act=get_list', {
 				method: 'GET'
 			})
@@ -46,6 +50,10 @@ export default {
 						item.like = item.favorites
 					})
 					this.postList = data.post_list
+				})
+				.catch(() => {})
+				.then(() => {
+					this.isLoading = false
 				})
 		}
 	}

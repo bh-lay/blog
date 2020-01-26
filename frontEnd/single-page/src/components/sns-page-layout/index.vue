@@ -59,6 +59,7 @@
 	& > i
 		display block
 		height 0
+		margin-bottom 0
 		padding 0
 		line-height 0
 		font-size 0
@@ -95,7 +96,7 @@
 		</Container>
 	</div>
 	<Container>
-		<div class="post-list">
+		<div class="post-list" v-loading="isLoading">
 			<Item
 				v-for="item in postList"
 				:key="item.id"
@@ -135,6 +136,10 @@ export default {
 			default () {
 				return []
 			}
+		},
+		isLoading: {
+			type: Boolean,
+			default: true
 		}
 	},
 	data () {
@@ -154,8 +159,6 @@ export default {
 			],
 			photoGraphaIndex: globalPhotoGraphaIndex
 		}
-	},
-	created () {
 	},
 	methods: {
 		nextIndex (index) {

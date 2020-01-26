@@ -101,10 +101,12 @@
 				<Github
 					class="side-card"
 					:summary="githubSummary"
+					:isLoading="isLoading"
 				/>
 				<Comments
 					class="side-card"
 					:list="commentList"
+					:isLoading="isLoading"
 				/>
 			</div>
 		</div>
@@ -147,7 +149,8 @@ export default {
 					author: '剧中人'
 				}
 			],
-			photoGraphaIndex: globalPhotoGraphaIndex
+			photoGraphaIndex: globalPhotoGraphaIndex,
+			isLoading: false
 		}
 	},
 	created () {
@@ -158,11 +161,16 @@ export default {
 			this.$refs.commentsList.refresh()
 		},
 		getSummary () {
+			this.isLoading = true
 			fetch('/api/single-page-side')
 				.then(response => response.json())
 				.then(data => {
 					this.githubSummary = data.githubSummary
 					this.commentList = data.commentList
+				})
+				.catch(() => {})
+				.then(() => {
+					this.isLoading = false
 				})
 		},
 		nextIndex (index) {

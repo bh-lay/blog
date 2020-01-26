@@ -5,6 +5,7 @@
   :intro="intro"
 	:thirdProfile="thirdProfile"
 	:postList="postList"
+	:isLoading="isLoading"
 >
 	<template slot="profile-icon">
 		<svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -29,7 +30,9 @@ export default {
 				title: '720yun',
 				url: 'https://720yun.com/u/19023widcyv'
 			},
-			postList: []
+			postList: [],
+
+			isLoading: false
 		}
 	},
 	created () {
@@ -37,6 +40,7 @@ export default {
 	},
 	methods: {
 		getList () {
+			this.isLoading = true
 			fetch('/ajax/pano/list?act=get_list', {
 				method: 'GET'
 			})
@@ -52,6 +56,10 @@ export default {
 						item.like = item.likeCount
 					})
 					this.postList = data.data.list
+				})
+				.catch(() => {})
+				.then(() => {
+					this.isLoading = false
 				})
 		}
 	}

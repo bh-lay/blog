@@ -10,6 +10,8 @@
 		font-weight bold
 		font-size 15px
 		color #414f58
+	.content
+		min-height 200px
 .side-comments-item
 	display flex
 	padding 10px
@@ -51,7 +53,7 @@
 <template>
 <div class="comments">
 	<div class="caption">最新评论</div>
-	<div class="content">
+	<div class="content" v-loading="isLoading">
 		<router-link
 			v-for="item in list"
 			:key="item._id"
@@ -76,7 +78,7 @@ import CommentsList from '@/components/comments/list.vue'
 import {defaultAvatar} from '@/components/comments/data.js'
 export default {
 	name: 'latest-comments',
-	props: ['list'],
+	props: ['list', 'isLoading'],
 	data () {
 		return {
 			defaultAvatar

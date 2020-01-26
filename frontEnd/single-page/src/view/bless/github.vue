@@ -71,7 +71,7 @@
 			color #aaa
 </style>
 <template>
-<div class="side-github">
+<div class="side-github" v-loading="isLoading">
 	<header>
 		<div class="logo">
 			<svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -110,7 +110,7 @@
 <script>
 export default {
 	name: 'my-github-summary',
-	props: ['summary'],
+	props: ['summary', 'isLoading'],
 	data () {
 		return {
 			profileURL: 'https://github.com/bh-lay'
