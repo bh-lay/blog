@@ -22,23 +22,21 @@
 		height $navigation-height
 		padding 0 18px
 		line-height $navigation-height
-		background #f4f5f6
-		border-left 1px solid transparent
-		border-right 1px solid #e9ebed
+		background #0d9af2
 		svg
 			display inline-block
 			vertical-align middle
 			width 25px
 			height 25px
 			margin-right 2px
-			fill #3d505c
+			fill #fff
 		span
 			display inline-block
 			vertical-align middle
 			line-height 30px
 			font-weight bold
 			font-size 14px
-			color #526a7a
+			color #fff
 	.nav-more-btn
 		display none
 	.nav-list
@@ -56,7 +54,7 @@
 			&:after
 				content ''
 				position absolute
-				bottom 20px
+				bottom 15px
 				left 18%
 				width 0
 				height 1px
@@ -72,8 +70,6 @@
 		padding-top 0
 		background #fff
 		box-shadow 0 0 2px rgba(0,0,0,0.063), 0 0 10px rgba(0,0,0,0.125)
-		.nav-logo
-			border-left-color #e9ebed
 @media screen and (max-width 750px)
 	.navigation .nav-list a
 		width 60px

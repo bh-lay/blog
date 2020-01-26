@@ -179,7 +179,7 @@ $tag_cnt_bj = #fff
 	</div>
 	<Tie
 		class="articleListPage-tags-ghost"
-		:tie-top="60"
+		:tie-top="56"
 	>
 		<div class="articleListPage-tags">
 			<Container>
