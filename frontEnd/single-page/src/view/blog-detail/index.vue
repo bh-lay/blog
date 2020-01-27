@@ -4,7 +4,7 @@
 // @import "../../../../_public/less/_articleGithub.less"
 
 .blog-detail
-	font-size 1rem
+	font-size 14px
 	background #fff
 	overflow-x hidden
 	header
@@ -44,7 +44,7 @@
 			padding 0 20px
 			h1
 				margin-bottom .4em
-				font-size 1.8rem
+				font-size 28px
 			p
 				font-size 14px
 		.article
@@ -74,7 +74,6 @@
 			border-radius 50%
 			border none
 			cursor pointer
-			font-size 1.2rem
 			color #fff
 			transition .3s ease-in-out
 			opacity .8
@@ -106,7 +105,7 @@
 				max-width 100%
 				box-shadow 2px 2px 4px rgba(0, 0, 0, .1), 2px 2px 15px rgba(0, 0, 0, .1)
 	.toc-content
-		width 220px
+		width 300px
 		padding 20px 10px 40px
 		.title
 			margin-bottom 10px
@@ -117,6 +116,7 @@
 			display block
 			margin-bottom 10px
 			line-height 1.2em
+			text-align left
 			font-size 14px
 			color #8599ad
 			transition .2s
@@ -129,14 +129,14 @@
 		&:before
 			position absolute
 			content ''
-			top -1rem
+			top -15px
 			left 50%
-			margin-left -2rem
+			margin-left -30px
 			width 0
 			height 0
 			border-style solid
 			border-color transparent transparent #5a6872
-			border-width 0 2rem 1rem
+			border-width 0 30px 15px
 @media screen and (max-width $max-pad-width)
 	.blog-detail
 		padding 0

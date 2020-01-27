@@ -7,7 +7,7 @@
 	overflow hidden
 	section
 		position relative
-		font-size 1rem
+		font-size 14px
 
 .index-about-links
 	padding 5em 0

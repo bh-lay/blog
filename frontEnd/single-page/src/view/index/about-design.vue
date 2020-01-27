@@ -14,10 +14,10 @@
 		position absolute
 		width 0
 		height 0
-		top -4rem
+		top -50px
 		left 0
 		border-style solid
-		border-width 4rem 100vw 0 0
+		border-width 50px 100vw 0 0
 		border-color transparent #222 transparent
 	h3
 		margin-bottom 1em

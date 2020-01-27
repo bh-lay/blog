@@ -6,7 +6,7 @@
 	height 95vh !important
 	min-height 600px !important
 	:global(.photograghy-author)
-		bottom 80px !important
+		bottom 60px !important
 	.aboutme-body
 		display flex
 		align-items center

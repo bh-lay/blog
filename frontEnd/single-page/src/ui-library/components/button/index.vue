@@ -10,7 +10,6 @@ a
 	border-radius 4px
 	border 1px solid #dcdfe6
 	line-height 1
-	white-space nowrap
 	cursor pointer
 	text-align center
 	transition .1s

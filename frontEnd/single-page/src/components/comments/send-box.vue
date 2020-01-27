@@ -44,7 +44,7 @@
 		left 0
 		padding 15px
 		line-height 20px
-		font-size 1rem
+		font-size 14px
 		color #a6a6a6
 		cursor text
 		background #fff
@@ -62,7 +62,7 @@
 		resize none
 		font-family inherit
 		line-height 24px
-		font-size 1rem
+		font-size 14px
 		color #333
 		&:focus
 			outline none

@@ -31,13 +31,15 @@
 				font-weight 500
 			.time
 				color #aaa
+				small
+					padding-left 5px
 		.btn-reply
 			color #aaa
 			&:hover
 				color #333
 	.article
 		min-height 20px
-		padding 1.5rem
+		padding 20px
 		font-size 14px
 		pre
 			background #f8f8f8
@@ -65,8 +67,7 @@
 		<div class="info">
 				<a class="who" :href="item.user.blog" v-if="item.user.blog">{{item.user.username}}</a>
 				<span v-else class="who">{{item.user.username}}</span>
-				<span>评论于</span>
-				<span class="time">{{item.time | timeFormat}}</span>
+				<span class="time">评论于<small>{{item.time | timeFormat}}</small></span>
 		</div>
 		<Button type="text" class="btn-reply" @click="replyMode = !replyMode">回复</Button>
 	</div>
