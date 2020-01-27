@@ -79,11 +79,29 @@
 			visibility hidden
 		.footer
 			height 50px
-
+@media screen and (max-width $max-mobile-width)
+	.comments-send-box
+		display block
+		padding 13px
+		.side
+			display flex
+			width 100%
+			margin-bottom 10px
+			align-items center
+			.avatar
+				width 30px
+				height 30px
+				margin 0 10px 0 0
+		.input-content:before
+			top -5px
+			left 13px
+			width 8px
+			height 8px
+			border-width 1px 0 0 1px
 </style>
 <template>
 <div class="comments-send-box" :class="[(isStartInput || content.length) ? 'active' : 'default']">
-	<div class="side" @click="setUserData">
+	<div class="side" @click="setUserDataVisible = !setUserDataVisible">
 		<div class="avatar"
 			:style="{
 				backgroundImage: `url(${userData.avatar})`
@@ -92,6 +110,12 @@
 		<div class="name">{{userData.username || '燕过留名'}}</div>
 	</div>
 	<div class="main">
+		<setUserData
+			v-if="setUserDataVisible"
+			:data="userData"
+			@confirm="onSetUserDataSuccess"
+		/>
+		<template v-else>
 		<div class="input-content">
 			<textarea
 				cols="30"
@@ -102,20 +126,14 @@
 			></textarea>
 			<div class="placeholder" @click="startInput">评论屌一点，BUG少一点 ！<br><small>支持 Markdown 哦 ！</small></div>
 		</div>
-		<transition name="fade">
-			<setUserData
-				v-if="setUserDataVisible"
-				:data="userData"
-				@confirm="onSetUserDataSuccess"
-			/>
-		</transition>
-		<div class="footer" v-if="!setUserDataVisible">
+		<div class="footer">
 			<Button
 				type="primary"
 				:disabled="content.length === 0"
 				@click="submit"
 			>发布</Button>
 		</div>
+		</template>
 	</div>
 </div>
 </template>
@@ -186,9 +204,6 @@ export default {
 			getUserInfo().then(user => {
 				this.userData = user || {}
 			})
-		},
-		setUserData () {
-			this.setUserDataVisible = true
 		},
 		onSetUserDataSuccess (userData) {
 			this.setUserDataVisible = false

@@ -21,10 +21,8 @@
 			transform rotate(45deg)
 	.caption
 		display flex
-		height 20px
 		padding 15px 20px
-		border-bottom 1px solid #eee
-		font-size .85rem
+		font-size 14px
 		line-height 20px
 		.info
 			flex-grow 1
@@ -40,7 +38,7 @@
 	.article
 		min-height 20px
 		padding 1.5rem
-		font-size .85rem
+		font-size 14px
 		pre
 			background #f8f8f8
 			padding 20px 30px
@@ -48,15 +46,27 @@
 	.send-box
 		border-top 1px solid #dfe7ec
 		background #f1f3f4
+@media screen and (max-width $max-mobile-width)
+	.content:before
+		width 10px
+		height 10px
+		top 10px
+		left -6px
+	.caption
+		padding 8px 12px
+		.info .who
+			display block
+	.article
+		padding 15px
 </style>
 <template>
 <div class="content">
 	<div class="caption">
 		<div class="info">
 				<a class="who" :href="item.user.blog" v-if="item.user.blog">{{item.user.username}}</a>
-				<span v-else>{{item.user.username}}</span>
+				<span v-else class="who">{{item.user.username}}</span>
 				<span>评论于</span>
-				<span class="time">{{item.time}}</span>
+				<span class="time">{{item.time | timeFormat}}</span>
 		</div>
 		<Button type="text" class="btn-reply" @click="replyMode = !replyMode">回复</Button>
 	</div>

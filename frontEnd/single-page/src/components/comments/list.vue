@@ -17,51 +17,14 @@
 		img
 			width  100%
 			height 100%
-	.content
-		position relative
-		width 200px
-		flex-grow 1
-		border 1px solid #dfe7ec
-		background #fff
-		border-radius 2px
-		&:before
-			content ''
-			position absolute
-			display block
-			width 14px
-			height 14px
-			top 14px
-			left -8px
-			border 1px solid #dfe7ec
-			border-width 0 0 1px 1px
-			background #fff
-			transform rotate(45deg)
-	.caption
-		display flex
-		height 20px
-		padding 15px 20px
-		border-bottom 1px solid #eee
-		font-size .85rem
-		line-height 20px
-		.info
-			flex-grow 1
-			width 100px
-			.who
-				font-weight 500
-			.time
-				color #aaa
-		.btn-reply
-			color #aaa
-			&:hover
-				color #333
-	.article
-		min-height 20px
-		padding 1.5rem
-		font-size .85rem
-		pre
-			background #f8f8f8
-			padding 20px 30px
-			color #222
+
+@media screen and (max-width $max-mobile-width)
+	.l-com-item
+		margin-bottom 15px
+		.avatar
+			width 35px
+			height 35px
+			margin-right 12px
 </style>
 <template>
 <div class="comments-list" v-loading="isLoading">

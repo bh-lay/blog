@@ -38,6 +38,14 @@
 			&:focus
 				outline none
 				background #d7d9db
+@media screen and (max-width $max-mobile-width)
+	.comments-set-user-data
+		.title
+			display none
+		.list
+			flex-wrap wrap
+			.item:first-child
+				width 100%
 </style>
 <template>
 <div class="comments-set-user-data">

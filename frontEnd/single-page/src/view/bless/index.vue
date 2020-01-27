@@ -7,7 +7,7 @@
 	overflow hidden
 .bless-header
 	height 70vh !important
-	min-height 420px !important
+	min-height 450px !important
 	.bless-header-content
 		position absolute
 		top 20%
@@ -28,7 +28,7 @@
 		margin 0 0 0.5em
 		text-align center
 		font-weight normal
-		font-size 3rem
+		font-size 30px
 		color #fff
 .bless-body
 	display flex
