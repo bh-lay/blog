@@ -106,7 +106,8 @@ $tag_cnt_bj = #fff
 		width 30px
 		height 30px
 		background #f70
-		box-shadow -1px 1px 2px #000
+		border 1px solid #c7cdd1
+		border-width 0 0 1px 1px
 		&:before
 			position absolute
 			content ''
@@ -232,7 +233,16 @@ import headerBanner from '@/components/header-banner/index.vue'
 import tagList from './tag-list.vue'
 
 let globalPhotoGraphaIndex = 0
+const prefixBlogList = list => {
+	list = list || []
+	
+	let now = new Date().getTime()
+	list.forEach(item => {
+		item.is_new = (now - item.time_show) / (1000 * 60 * 60 * 24) < 900
+	})
 
+	return list
+}
 export default {
 	name: 'blogPage',
 	components: {
@@ -293,37 +303,13 @@ export default {
 				.then(data => {
 					this.page.count = data.count
 					this.page.skip += this.page.limit
-					this.list = this.list.concat(data.list)
+					let blogList = prefixBlogList(data.list)
+					this.list = this.list.concat(blogList)
 				})
 				.catch(() => {})
 				.then(() => {
 					this.isLoading = false
 				})
-				// FIXMEs
-			// 		if (err || !data || data.code === 200) {
-			// 			// do something
-			// 			return
-			// 		}
-			// 		let count = data['count']
-			// 		let list = data['list']
-			// 		let now = new Date().getTime()
-			// 		for (var i in list) {
-			// 			// 三月内的文章都算最新（多可悲）
-			// 			if ((now - list[i].time_show) / (1000 * 60 * 60 * 24) < 90) {
-			// 				list[i].is_new = true
-			// 			}
-			// 			list[i].time_show = utils.parseTime(list[i].time_show, '{mm}-{dd} {y}')
-			// 			// 使用七牛图床
-			// 			list[i].cover = imageHosting(list[i].cover, {
-			// 				type: 'zoom',
-			// 				width: 420,
-			// 			})
-			// 		}
-			// 		me.count = count
-			// 		me.skip += me.limit
-			// 		me.onLoaded && me.onLoaded(list, count)
-			// 		me.isLoading = false
-			// 	}
 		},
 
 		nextIndex (index) {
