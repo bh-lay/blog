@@ -2,19 +2,24 @@
 @import "~@/assets/stylus/variable.styl"
 
 .sns-share
-	padding 6em 0 2em
-	text-align center
+	padding 20px 0
+	border-top 1px solid #d3dade
 	.share-card
-		min-height 200px
-		padding 20px
+		min-height 120px
 		:global(img)
+			display block
 			width 400px
 			max-width 100%
+			margin auto
 			box-shadow 2px 2px 4px rgba(0, 0, 0, .1), 2px 2px 15px rgba(0, 0, 0, .1)
+	p
+		text-align center
+		color #67757e
 </style>
 <template>
 <div class="sns-share">
 	<div class="share-card" v-loading="isCoverLoaded" ref="cardArea"></div>
+	<p>长按或扫描分享给你的好友～</p>
 </div>
 </template>
 <script>
@@ -61,6 +66,7 @@ export default {
 				})
 					.then(img => {
 						this.isCoverLoaded = false
+						this.$refs.cardArea.innerHTML = ''
 						this.$refs.cardArea.appendChild(img)
 					})
 			})

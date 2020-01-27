@@ -50,7 +50,7 @@
 		.article
 			background #fff
 		footer
-			margin 0 20px
+			margin 0 20px 40px
 			padding 10px 20px
 			background #f7f8f8
 			p
@@ -133,14 +133,15 @@
 					>{{tag}}</router-link>
 					</p>
 					<p><strong>转载请注明来源：</strong>http://bh-lay.com/blog/{{detail.id}}</p>
+
+					<blogShare
+						v-if="!isLoading"
+						:blogID="detail.id"
+						:title="detail.title"
+						:intro="detail.intro"
+						:cover="detail.cover"
+					/>
 				</footer>
-				<blogShare
-					v-if="!isLoading"
-					:blogID="detail.id"
-					:title="detail.title"
-					:intro="detail.intro"
-					:cover="detail.cover"
-				/>
 			</div>
 			<div class="article-section-side">
 				<div class="article-section-body">
