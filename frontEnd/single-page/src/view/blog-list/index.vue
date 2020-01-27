@@ -235,10 +235,11 @@ import tagList from './tag-list.vue'
 let globalPhotoGraphaIndex = 0
 const prefixBlogList = list => {
 	list = list || []
-	
+
 	let now = new Date().getTime()
 	list.forEach(item => {
-		item.is_new = (now - item.time_show) / (1000 * 60 * 60 * 24) < 900
+		// 三个月内的博文都算新闻章
+		item.is_new = (now - item.time_show) / (1000 * 60 * 60 * 24) < 90
 	})
 
 	return list

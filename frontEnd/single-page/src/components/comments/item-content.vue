@@ -29,6 +29,7 @@
 			width 100px
 			.who
 				font-weight 500
+				color #364249
 			.time
 				color #aaa
 				small
