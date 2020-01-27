@@ -62,48 +62,6 @@
 				color #5c6870
 				&:hover
 					text-decoration underline
-	.sns-share
-		padding 6em 0 2em
-		text-align center
-		button
-			display inline-block
-			vertical-align top
-			width 80px
-			height 80px
-			margin 0 1em
-			border-radius 50%
-			border none
-			cursor pointer
-			color #fff
-			transition .3s ease-in-out
-			opacity .8
-			i
-				display block
-				padding-top 10px
-				line-height 30px
-				font-size 30px
-			span
-				display block
-				line-height 30px
-				font-size 14px
-			&:focus
-				outline none
-			&:hover
-				opacity 1
-			&.share-to-weibo
-				background #fa7d3c
-				background -webkit-linear-gradient(top, #fa7d3c 0%, #f55f10 100%)
-				background linear-gradient(top bottom, #fa7d3c 0%, #f55f10 100%)
-			&.share-to-wechat
-				background #66BC54
-				svg
-					fill #fff
-		.wechat-area
-			padding 20px
-			img
-				width 400px
-				max-width 100%
-				box-shadow 2px 2px 4px rgba(0, 0, 0, .1), 2px 2px 15px rgba(0, 0, 0, .1)
 	.toc-content
 		width 300px
 		padding 20px 10px 40px
@@ -151,7 +109,7 @@
 		display none
 </style>
 <template>
-<div class="blog-detail">
+<div class="blog-detail" v-loading="isLoading">
 	<header ref="header">
 		<Container class="header-body">
 			<div class="title">{{detail.title}}</div>
@@ -176,18 +134,13 @@
 					</p>
 					<p><strong>转载请注明来源：</strong>http://bh-lay.com/blog/{{detail.id}}</p>
 				</footer>
-				<div class="sns-share">
-					<button title="分享至新浪微博" class="share-to-weibo">
-						<i class="l-icon l-icon-weibo"></i>
-						<span>分享</span>
-					</button>
-					<button title="分享至微信" class="share-to-wechat">
-						<svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
-							<path d="M405.333333 170.666667C228.693333 170.666667 85.333333 285.44 85.333333 426.666667 85.333333 507.306667 131.413333 578.56 203.946667 625.493333L170.666667 725.333333 277.333333 661.333333C315.306667 674.56 357.12 682.666667 401.493333 682.666667 390.4 655.786667 384 627.2 384 597.333333 384 456.106667 517.546667 341.333333 682.666667 341.333333 690.773333 341.333333 698.88 341.333333 706.56 342.613333 663.04 242.773333 545.28 170.666667 405.333333 170.666667M277.333333 277.333333C300.8 277.333333 320 296.533333 320 320 320 343.466667 300.8 362.666667 277.333333 362.666667 253.866667 362.666667 234.666667 343.466667 234.666667 320 234.666667 296.533333 253.866667 277.333333 277.333333 277.333333M490.666667 277.333333C514.133333 277.333333 533.333333 296.533333 533.333333 320 533.333333 343.466667 514.133333 362.666667 490.666667 362.666667 467.2 362.666667 448 343.466667 448 320 448 296.533333 467.2 277.333333 490.666667 277.333333M682.666667 384C541.44 384 426.666667 479.573333 426.666667 597.333333 426.666667 715.093333 541.44 810.666667 682.666667 810.666667 711.253333 810.666667 738.56 807.253333 764.16 800L853.333333 853.333333 826.88 773.546667C893.866667 734.72 938.666667 670.293333 938.666667 597.333333 938.666667 479.573333 823.893333 384 682.666667 384M597.333333 490.666667C620.8 490.666667 640 509.866667 640 533.333333 640 556.8 620.8 576 597.333333 576 573.866667 576 554.666667 556.8 554.666667 533.333333 554.666667 509.866667 573.866667 490.666667 597.333333 490.666667M768 490.666667C791.466667 490.666667 810.666667 509.866667 810.666667 533.333333 810.666667 556.8 791.466667 576 768 576 744.533333 576 725.333333 556.8 725.333333 533.333333 725.333333 509.866667 744.533333 490.666667 768 490.666667Z"/>
-						</svg>
-					</button>
-					<div class="wechat-area"></div>
-				</div>
+				<blogShare
+					v-if="!isLoading"
+					:blogID="detail.id"
+					:title="detail.title"
+					:intro="detail.intro"
+					:cover="detail.cover"
+				/>
 			</div>
 			<div class="article-section-side">
 				<div class="article-section-body">
@@ -222,13 +175,15 @@
 <script>
 import highlight from '@/assets/js/highlight.js'
 import Comments from '@/components/comments/index.vue'
+import blogShare from './share.vue'
 import buildToc from './build-toc.js'
 import renderBanner from './render-banner.js'
 
 export default {
 	name: 'blogDetail',
 	components: {
-		Comments
+		Comments,
+		blogShare
 	},
 	data () {
 		return {
@@ -242,7 +197,9 @@ export default {
 				tags: [],
 				time_show: ''
 			},
-			articleToc: []
+			articleToc: [],
+
+			isLoading: true
 		}
 	},
 	computed: {
@@ -255,6 +212,7 @@ export default {
 	},
 	methods: {
 		init () {
+			this.isLoading = true
 			fetch(`/api/blog/${this.blogID}?format=html`)
 				.then(response => response.json())
 				.then(data => {
@@ -271,28 +229,10 @@ export default {
 					renderBanner(this.$refs.header, data.detail.cover)
 					this.$nextTick(() => this.addCodeSupport())
 				})
-		},
-		createSharePop () {
-			// let wechatNode = utils.query('.wechat-area', this.element)
-			// if (wechatNode.children.length) {
-			// 	wechatNode.innerHTML = ''
-			// 	return
-			// }
-			// require.ensure(['asyncShareForMobile'], () => {
-			// 	// 引入 ace
-			// 	let {createShareCard} = require('asyncShareForMobile');
-			// 	let url = 'http://bh-lay.com/blog/' + this.detail.id;
-			// 	let coverUrl = this.detail.cover
-
-			// 	coverUrl = coverUrl ? imageHosting(coverUrl) : ''
-			// 	let canvas = createShareCard({
-			// 		title: this.detail.title,
-			// 		intro: this.detail.intro,
-			// 		url,
-			// 		coverUrl
-			// 	})
-			// 	wechatNode.appendChild(canvas)
-			// })
+				.catch(() => {})
+				.then(() => {
+					this.isLoading = false
+				})
 		},
 		addCodeSupport () {
 			// 代码高亮
