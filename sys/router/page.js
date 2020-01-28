@@ -1,7 +1,8 @@
 // 引入app框架
 let isbot = require('node-isbot')
 
-var singlePage = require('../controller/singlePage.js')
+var singlePageJS = require('../controller/single-page-js.js')
+var singlePageVue = require('../controller/single-page-vue.js')
 
 // 首页
 var index = require('../controller/index.js')
@@ -18,12 +19,16 @@ var photography = require('../controller/photography.js')
 const adaptionViewForSinglePage = controller => {
 	return (route, connect, app) => {
 		var isBotRequest = isbot(connect.request.headers['user-agent'])
-		var isMarkJSVersion = connect.cookie('ui_version') === 'js'
-		// 不是爬虫，并且 cookie 中已经标记使用单页版本
-		if (!isBotRequest && isMarkJSVersion) {
-			singlePage.render(connect,app)
-		} else {
+		var uiVersion = connect.cookie('ui_version')
+		if (isBotRequest) {
 			// 无 cookie 标识，执行回调默认视图
+			return controller(route, connect, app)
+		}else if (uiVersion === 'vue') {
+			singlePageVue.render(connect,app)
+		} else if (uiVersion === 'js') {
+			singlePageJS.render(connect,app)
+		} else {
+			// 执行回调默认视图
 			controller(route, connect, app)
 		}
 

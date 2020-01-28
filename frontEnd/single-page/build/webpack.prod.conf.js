@@ -11,7 +11,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const ROOT_PATH = path.resolve(__dirname);
-const BUILD_PATH = path.resolve(ROOT_PATH, '../../bh-lay.com/static/build/moments/');
+const BUILD_PATH = path.resolve(ROOT_PATH, '../../../static/build/single-page-vue/');
 
 const env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
@@ -30,7 +30,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     path: BUILD_PATH,
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js'),
-    publicPath: 'http://static.bh-lay.com/build/moments/'
+    publicPath: 'http://static.bh-lay.com/build/single-page-vue/'
   },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
