@@ -23,10 +23,7 @@ function renderBanner (headerNode, originCoverUrl) {
 	if (!originCoverUrl || originCoverUrl.length === 0) {
 		return
 	}
-	let coverUrl = filters.imgHosting(originCoverUrl, {
-		type: 'zoom',
-		width: 420
-	})
+	let coverUrl = filters.imgHosting(originCoverUrl, 'zoom', 420)
 
 	loadImg(coverUrl)
 		.then(img => {

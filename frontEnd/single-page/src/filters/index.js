@@ -61,7 +61,7 @@ function urlPrefix (url) {
 }
 
 // 跳转链接生成
-function imgHosting (url, type, width, height) {
+function imgHosting (url, type = 'zoom', width = 300, height) {
 	if (typeof (url) !== 'string') {
 		return ''
 	}

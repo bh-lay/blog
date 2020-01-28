@@ -54,10 +54,7 @@ export default {
 			require.ensure(['./blog-share.js'], () => {
 				// 异步引入分享模块
 				let {createShareCard} = require('./blog-share.js')
-				let coverUrl = filters.imgHosting(this.cover, {
-					type: 'zoom',
-					width: 420
-				})
+				let coverUrl = filters.imgHosting(this.cover, 'zoom', 420)
 				createShareCard({
 					title: this.title,
 					intro: this.intro,
