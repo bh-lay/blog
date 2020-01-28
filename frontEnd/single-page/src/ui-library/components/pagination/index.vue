@@ -1,25 +1,30 @@
 <template>
 	<section class="ui-pagination" v-show="total > size">
 		<span @click="clickCurrent(1)" :class="{
-			disabled: current == 1
-		}">首页</span>
+			disabled: current == 1,
+			'page-first': true
+		}">&lt;&lt;</span>
 		<span @click="clickCurrent(current - 1)" :class="{
-			disabled: current == 1
-		}">上一页</span>
+			disabled: current == 1,
+			'page-prev': true
+		}">&lt;</span>
 		<span
 			v-for="p in setList"
 			:key="p.val"
 			:class="{
-				active: current == p.val
+				active: current == p.val,
+				'page-num': true
 			}"
 			@click="clickCurrent(p.val)"
 		>{{ p.text }}</span>
 		<span @click="clickCurrent(current + 1)" :class="{
-			disabled: current == page
-		}">下一页</span>
+			disabled: current == page,
+			'page-next': true
+		}">&gt;</span>
 		<span @click="clickCurrent(page)" :class="{
-			disabled: current == page
-		}">尾页</span>
+			disabled: current == page,
+			'page-end': true
+		}">&gt;&gt;</span>
 	</section>
 </template>
 <script>
@@ -110,11 +115,15 @@ export default {
 }
 </script>
 <style lang="stylus" rel="stylesheet/stylus" scoped>
+@import "~@/assets/stylus/variable.styl"
+
 .ui-pagination
 	text-align center
+	font-weight bold
+	font-size 14px
 	span
 		display inline-block
-		padding 6px 12px
+		padding 6px 15px
 		line-height 1.5
 		background #fff
 		color #526a7a
@@ -122,8 +131,7 @@ export default {
 		cursor pointer
 		transition .15s ease-in-out
 		&:hover
-			background-color #eee
-			border-color #ddd
+			background-color #f1f3f4
 		&.active
 			background #428bca
 			color #fff
@@ -136,4 +144,8 @@ export default {
 			cursor not-allowed
 			&:hover
 				cursor default
+@media screen and (max-width $max-mobile-width)
+	.ui-pagination
+		.page-num:not(.active)
+			display none
 </style>
