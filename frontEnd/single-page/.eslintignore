@@ -1,7 +1,5 @@
-/node_modules
-/src/js/dialog.js
-/src/js/juicer.js
-/src/js/lofox.js
-/src/js/md5.js
-/src/js/stick.js
-/src/js/tie.js
+/build/
+/config/
+/dist/
+/*.js
+/test/unit/coverage/

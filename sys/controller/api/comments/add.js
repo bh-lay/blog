@@ -33,7 +33,7 @@ function getUserInfo(id,callback){
 // 增加一条评论
 module.exports = function(data,callback){
 	var item = {
-		content : data.content.slice(0, maxCommentsTextLangth),
+		content : (data.content || '').slice(0, maxCommentsTextLangth),
 		time : new Date().getTime(),
 		cid : data.cid,
 		reply_for_id : data.reply_for_id

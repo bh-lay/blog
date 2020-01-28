@@ -1,0 +1,84 @@
+/**
+ * 代码高亮
+ */
+pre code
+	display block
+	max-height 20em
+	padding 0.5em
+	color #ddd
+	border none
+	margin 0
+	border-radius 0
+	font-family Monaco, Consolas, "Lucida Console", monospace
+	background #333
+	overflow auto
+
+.highlight
+	counter-reset section 0
+	word-break normal
+	white-space pre
+	margin-bottom 2em
+	padding 1em 0
+	font-family monospace
+	background #f8f8f8
+	overflow auto
+	&>div
+		position relative
+		counter-increment section
+		padding 6px 10px 6px 3em
+		min-height 1em
+		line-height 1em
+		&:before
+			content counter(section)
+			display block
+			position absolute
+			margin-left -2em
+			color #ddd
+		&:hover
+			background #eee
+			&:before
+				color #aaa
+	
+	&.javascript 
+		.comment
+			color #969896
+		.string
+			color #183691
+		.global,
+		.number
+			color #0086b3
+		.keywords
+			color #a71d5d
+		.regex
+			color #009a1a
+
+	&.html
+		.comment
+			color #999988
+			font-style italic
+		.doctype
+			color #008080
+		.tag
+			color #881280
+		.attribute
+			color #008080 
+		.data 
+			color #d14
+		.string
+			color #888
+	
+	&.css
+		.comment
+			color #008000
+		.properties
+			color #008080
+		.selectors
+			color #800000
+		.units
+			color #f00
+		.urls
+			color #f0f
+		.colors
+			color #808000
+		.important
+			color #00f
