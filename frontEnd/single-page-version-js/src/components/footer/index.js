@@ -4,15 +4,14 @@ let template = require('./index.html')
 
 function Init (dom) {
   let newDom = utils.createDom(template)
-  utils.bind(utils.query('.backToOldVersion', newDom), 'click', function () {
-    UI.confirm({
-      text: '想看看屌丝版 ？',
-      callback: function () {
-        document.cookie = 'ui_version=html;path=/;'
-        window.location.reload()
-      }
+  let nodes = utils.queryAll('.switch-version', newDom)
+  utils.each(nodes, function(node){
+    let version = node.getAttribute('data-version')
+    utils.bind(node, 'click', function (e) {
+      document.cookie = 'ui_version=' + version + ';path=/;'
+      window.location.reload()
     })
-  })
+  });
   dom.appendChild(newDom)
 }
 
