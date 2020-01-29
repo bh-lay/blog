@@ -78,12 +78,31 @@
 			&:hover
 				background #fff
 .footer-sub
-	padding 30px 0 50px
+	padding 40px 0 50px
 	border-top 1px solid #0d1012
 	background #121517
 	text-align center
 	color #5c6870
-
+.footer-version
+	padding 10px 20px 18px
+	border-top 1px solid #070808
+	background #090a0b
+	text-align center
+	button
+		margin-right 20px
+		color #2e3438
+		&:hover
+			color #8f9ba3
+		&[disabled]
+			color #576975
+	span
+		display inline-block
+		vertical-align text-bottom
+		height 1em
+		margin-left 20px
+		line-height 1em
+		font-size 12px
+		color #2e3438
 @media screen and (max-width $max-pad-width)
 	.footer-container
 		// display block
@@ -156,10 +175,16 @@
 			</div>
 		</Container>
 	</div>
-
 	<div class="footer-sub">
 		<p>Design & Code by @剧中人, Base on NodeJS</p>
 		<p>感谢七牛提供近乎免费的CDN服务</p>
+	</div>
+	<div class="footer-version">
+		<span>当前：</span>
+		<Button type="text" disabled>Vue 版本</Button>
+		<span>切换：</span>
+		<Button type="text" @click="switchVersion ('html')">SSR 版本</Button>
+		<Button type="text" @click="switchVersion ('js')">原生 JS 版本</Button>
 	</div>
 </div>
 </template>
@@ -167,6 +192,12 @@
 <script>
 
 export default {
-	name: 'app-footer'
+	name: 'app-footer',
+	methods: {
+		switchVersion (version) {
+			document.cookie = `ui_version=${version};path=/;`
+			window.location.reload()
+		}
+	}
 }
 </script>
