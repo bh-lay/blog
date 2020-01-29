@@ -1,0 +1,18 @@
+{@each list as it}<div class="l_com_item" data-uid="${it.uid}" data-id="${it._id}" data-cid="${it.cid}" data-username="${it.user.username}">
+  <div class="avatar">
+    <img src="${it.user.avatar}" onerror="L.gravatar_error_fn(this)"/>
+  </div>
+  <div class="content">
+    <div class="caption">
+      <div class="info">
+          <span class="who">
+              {@if it.user.blog}<a href="${it.user.blog}">${it.user.username}</a>{@else}${it.user.username}{@/if}
+          </span>
+          <span>评论于</span>
+          <span class="time">${it.time}</span>
+      </div>
+      <a href="javascript:void(0)" class="btn-reply">回复</a>
+    </div>
+    <div class="article">$${it.content}</div>
+  </div>
+</div>{@/each}

@@ -1,0 +1,18 @@
+<div class="articleItem {@if !cover}pure-text{@/if}" articleId="${id}">
+  <a href="/blog/${id}" title="${title}" class="link">
+    {@if is_new}
+      <div class="label"><span>new</span></div>
+    {@/if}
+    {@if cover}
+    <div class="pic"><img src="${cover}" alt="${title}" /></div>
+    {@/if}
+    <div class="title">${title}</div>
+    <div class="info"><p>${intro}</p></div>
+  </a>
+  <footer>
+    <div class="tags">
+      <strong>tags</strong>{@each tags as t}<a href="/blog?tag=${t}" data-lofox-replace >${t}</a>{@/each}
+    </div>
+    <div class="time">${time_show}</div>
+  </footer>
+</div>

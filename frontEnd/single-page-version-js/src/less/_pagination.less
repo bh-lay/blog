@@ -1,0 +1,52 @@
+
+@import "../../../_public/less/_core.less";
+
+
+/**分页组件**/
+.pagination{
+    padding-top: 20px;
+    li{
+        display: inline-block;
+        vertical-align: text-top;
+    }
+    span,
+    a{
+        display: block;
+        height: 40px;
+        line-height: 40px;
+        padding: 0px 15px;
+        background: #fff;
+        font-size: 14px;
+        color: #428bca;
+        .transition(0.1s);
+        &:hover{
+            background: #eee;
+            color: #333;
+        }
+    }
+    .active span{
+        background: #428bca;
+        color: #fff;
+        font-size: 22px;
+        cursor: default;
+    }
+    .disabled span{
+        color: #bbb;
+        cursor: default;
+    }
+}
+@media (max-width: 660px) {
+	.pagination{
+		text-align: center;
+		li{
+			display: none;
+		}
+		.pagination_prev,
+		.pagination_next{
+			display: inline-block;
+			border-radius: 20px;
+			margin: 0px 10px;
+			overflow: hidden;
+		}
+	}
+}

@@ -1,0 +1,30 @@
+.photography(@bottom:10px) {
+  position: relative;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  .photograghy-author {
+    position: absolute;
+    right: 10px;
+    bottom: @bottom;
+    opacity: .6;
+    transition: .4s;
+    a {
+      font-size: 12px;
+      color: #fff;
+      text-shadow: 1px 1px 1px #000, 0 0 5px rgba(0, 0, 0, 0.5);
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  &:hover .photograghy-author {
+    opacity: 1;
+  }
+
+  @media (max-width: 500px) {
+    .photograghy-author {
+      display: none;
+    }
+  }
+}
