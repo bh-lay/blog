@@ -39,6 +39,7 @@
 	.nav-more-btn
 		display none
 	.nav-list
+		padding-right 15px
 		a
 			position relative
 			display inline-block

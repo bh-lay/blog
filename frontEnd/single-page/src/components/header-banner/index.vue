@@ -99,7 +99,7 @@ function loadImg (src, callback) {
 	img.onerror = img.onload = End
 	img.src = src
 }
-
+let callTimes = 0
 export default {
 	name: 'header-banner',
 	props: {
@@ -114,30 +114,27 @@ export default {
 	data () {
 		return {
 			photographyLoaded: false,
-			photography: {}
+			photography: {},
+			delayTime: callTimes === 0 ? 0 : 1200
 		}
 	},
 	created () {
-		this.getBannerList()
-	},
-	methods: {
-		getBannerList () {
-			let startTime = new Date().getTime()
-			let delayTime = 1200
-			this.photography = this.photoGraphaList[this.photoGraphaIndex]
+		callTimes++
 
-			let nextIndex = this.photoGraphaIndex + 1
-			if (nextIndex >= this.photoGraphaList.length) {
-				nextIndex = 0
-			}
-			this.$emit('nextIndex', nextIndex)
-			loadImg(this.photography.imgSrc, () => {
-				let spendTime = new Date().getTime() - startTime
-				setTimeout(() => {
-					this.photographyLoaded = true
-				}, Math.max(delayTime - spendTime, 0))
-			})
+		let startTime = new Date().getTime()
+		this.photography = this.photoGraphaList[this.photoGraphaIndex]
+
+		let nextIndex = this.photoGraphaIndex + 1
+		if (nextIndex >= this.photoGraphaList.length) {
+			nextIndex = 0
 		}
+		this.$emit('nextIndex', nextIndex)
+		loadImg(this.photography.imgSrc, () => {
+			let spendTime = new Date().getTime() - startTime
+			setTimeout(() => {
+				this.photographyLoaded = true
+			}, Math.max(this.delayTime - spendTime, 0))
+		})
 	}
 }
 </script>
