@@ -137,19 +137,24 @@ $tag_cnt_bj = #fff
 		border-top 1px solid #e8e8e8
 		background #fbfbfb
 		.tags
-			font-size 13px
 			strong
-				margin-right 5px
-				color #aaa
+				font-size 12px
+				color #73828c
 				font-weight normal
 			a
 				display inline-block
-				margin-right 5px
-				color #777
+				padding 0 5px
+				font-size 13px
+				color #73828c
 				text-decoration none
 				&:hover
 					text-decoration underline
 					color #000
+				&.router-link-exact-active
+					border-radius 4px
+					background #29353d
+					color #a7b5be
+					cursor default
 		.time
 			white-space nowrap
 			color #888
@@ -291,6 +296,11 @@ export default {
 			this.page.skip = 0
 			this.list = []
 			this.loadMore()
+			this.$el.scrollIntoView({
+				behavior: 'smooth',
+				block: 'start',
+				inline: 'nearest'
+			})
 		},
 		loadMore () {
 			if (this.page.skip >= this.page.count) {
