@@ -118,7 +118,6 @@ export default {
 		}
 	},
 	created () {
-
 		let startTime = new Date().getTime()
 		this.photography = this.photoGraphaList[this.photoGraphaIndex]
 
