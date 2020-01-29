@@ -16,15 +16,18 @@
 	<link rel="apple-touch-icon" sizes="114x114" href="/touch-icon-iphone-retina.png" />
 	<link rel="apple-touch-icon" sizes="144x144" href="/touch-icon-ipad-retina.png" />
 	<style>
+		html {
+			overflow-y: scroll
+		}
 		.app-mask {
-			position: absolute;
+			position: fixed;
 			top: 0;
 			left: 0;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			width: 100%;
-			height: 101%;
+			height: 100%;
 			z-index: 1000000;
 			background: #f0f3f4
 		}
@@ -45,7 +48,7 @@
 			color: #e2e6e9
 		}
 		.app-mask.hide {
-			transition: .45s .4s ease-in-out;
+			transition: .45s .5s ease-in-out;
 			opacity: 0;
 			visibility: hidden
 		}
