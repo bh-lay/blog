@@ -5,7 +5,7 @@
 	padding 20px 0
 	border-top 1px solid #d3dade
 	.share-card
-		min-height 120px
+		min-height 100px
 		:global(img)
 			display block
 			width 400px

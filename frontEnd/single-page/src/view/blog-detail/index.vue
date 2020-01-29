@@ -72,7 +72,8 @@
 					font-size 12px
 					color #8f9ba3
 		.article
-			background #fff
+			font-size 16px
+			color #22272a
 		footer
 			margin 0 20px 40px
 			padding 10px 20px
@@ -131,6 +132,27 @@
 			padding 2em 0
 	.header-body
 		display none
+		position relative
+		padding 2em 0 4em
+		background #5a6872
+		&:before
+			position absolute
+			content ''
+			top -15px
+			left 50%
+			margin-left -30px
+			width 0
+			height 0
+			border-style solid
+			border-color transparent transparent #5a6872
+			border-width 0 30px 15px
+@media screen and (max-width $max-mobile-width)
+	.blog-detail
+		.article-section
+			.caption
+				padding 0
+			.article
+				padding 40px 0
 </style>
 <template>
 <div class="blog-detail" v-loading="isLoading">

@@ -14,8 +14,7 @@ function loadImg (src) {
 			resolve(img)
 		}
 		img.onerror = function () {
-			console.log('src', src)
-			reject(new Error('image error'))
+			resolve()
 		}
 
 		img.src = src
@@ -27,7 +26,7 @@ const buildFooterImageDataUrl = (title, intro) => {
 
 	return 'data:image/svg+xml;base64,' + window.btoa(unescape(encodeURIComponent(svgText)))
 }
-const buildQRCode = (url) => {
+const buildQRCodeImg = (url) => {
 	return QRCode.toDataURL(url, {
 		errorCorrectionLevel: 'M',
 		margin: 0,
@@ -36,7 +35,7 @@ const buildQRCode = (url) => {
 			dark: '#aaaaaaff',
 			light: '#00000000'
 		}
-	})
+	}).then(QRCodeUrl => loadImg(QRCodeUrl))
 }
 
 const render = (coverImg, footerImg, QRCodeImg) => {
@@ -77,12 +76,9 @@ export function createShareCard ({ title, intro, url, coverUrl }) {
 		// 加载页脚图片
 		loadImg(footerDataUrl),
 		// 创建二维码图片 URL
-		buildQRCode(url)
+		buildQRCodeImg(url)
 	])
-		.then(([coverImg, footerImg, QRCodeUrl]) => {
-			// 生成二维码 image 图片
-			return loadImg(QRCodeUrl).then(QRCodeImg => {
-				return render(coverImg, footerImg, QRCodeImg)
-			})
+		.then(([coverImg, footerImg, QRCodeImg]) => {
+			return render(coverImg, footerImg, QRCodeImg)
 		})
 }
