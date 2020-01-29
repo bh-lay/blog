@@ -15,8 +15,7 @@
 		align-items center
 		justify-content space-between
 		height $navigation-height
-		margin 0 -10px 0 0
-		padding 0 10px 0 0
+		margin 0 -10px
 		background #fff
 	.nav-logo
 		height $navigation-height
@@ -105,7 +104,7 @@
 			display block
 			width 44px
 			height 44px
-			top 10px
+			top 7px
 			right 10px
 			border none
 			cursor default
