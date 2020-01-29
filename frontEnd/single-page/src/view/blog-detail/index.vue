@@ -45,8 +45,32 @@
 			h1
 				margin-bottom .4em
 				font-size 28px
-			p
+			.publish-time
+				display flex
+				width 230px
+				border-radius 4px
+				overflow hidden
+				background #edf0f2
 				font-size 14px
+				.label
+					display flex
+					width 85px
+					background #2691d9
+					justify-content center
+					align-items center
+					font-weight bold
+					font-size 14px
+					color #fff
+				.main
+					flex-grow 1
+					padding 5px 0 5px 15px
+				.date-relative
+					font-weight bold
+					font-size 16px
+					color #454e54
+				.date-real
+					font-size 12px
+					color #8f9ba3
 		.article
 			background #fff
 		footer
@@ -121,7 +145,13 @@
 			<div class="article-section-body">
 				<div class="caption">
 					<h1>{{detail.title}}</h1>
-					<p>发布时间：<span>{{detail.time_show | timeFormat}}</span></p>
+					<div class="publish-time">
+						<div class="label">发布时间</div>
+						<div class="main">
+							<div class="date-relative">{{detail.time_show | dateDiff}}</div>
+							<div class="date-real">{{detail.time_show | timeFormat}}</div>
+						</div>
+					</div>
 				</div>
 				<div class="article" ref="article" v-html="detail.content"></div>
 				<footer>
