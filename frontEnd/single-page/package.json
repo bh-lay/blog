@@ -12,7 +12,7 @@
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
     "build": "node build/build.js",
-    "deploy": "npm run deploySatic && npm run deployHTML",
+    "deploy": "npm run build && npm run deploySatic && npm run deployHTML",
     "deploySatic": "scp -r ../../static/build/single-page-vue/* root@119.27.164.123:/root/webserver/bh-lay.com/static/build/single-page-vue/",
     "deployHTML": "scp -r ../../sys/views/single-page/vue.html root@119.27.164.123:/root/webserver/bh-lay.com/sys/views/single-page/"
   },
