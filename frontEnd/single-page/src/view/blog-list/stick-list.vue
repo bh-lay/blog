@@ -191,6 +191,11 @@ export default {
 			})
 		},
 		loadMore () {
+			// 防止重复加载
+			if (this.isLoading) {
+				return
+			}
+			// 超出总量不加载
 			if (this.page.skip >= this.page.count) {
 				return
 			}
