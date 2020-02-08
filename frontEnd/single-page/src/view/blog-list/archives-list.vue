@@ -1,37 +1,66 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 @import "~@/assets/stylus/variable.styl"
+.archive-list
+	max-width 640px
+	margin 0 auto 50px
+.archive-item
+	margin-bottom 30px
+	.caption
+		display flex
+		justify-content space-between
+		margin-bottom 10px
+		a
+			font-size 16px
+		span
+			font-size 14px
+			color #8f9aa3
+	p
+		margin 0
+		color #636f79
 </style>
 <template>
-<div class="articleListPage">
-	234
+<div class="archive-list">
+	<div ref="scrollMark"></div>
+	<div
+		class="archive-item"
+		v-for="item in list"
+		:key="item.id"
+	>
+		<div class="caption">
+			<router-link
+				:to="'/blog/'+ item.id"
+				:title="item.title"
+				class="link"
+			>{{item.title}}</router-link>
+			<span>{{item.time_show | timeFormat}}</span>
+		</div>
+		<p>{{item.intro}}</p>
+	</div>
+	<Pagination
+		:total="page.total"
+		:size="page.pageItemCount"
+		:current.sync="page.pageIndex"
+	/>
 </div>
 </template>
 
 <script>
 
-const prefixBlogList = list => {
-	list = list || []
-
-	let now = new Date().getTime()
-	list.forEach(item => {
-		// 三个月内的博文都算新闻章
-		item.is_new = (now - item.time_show) / (1000 * 60 * 60 * 24) < 90
-	})
-
-	return list
-}
 export default {
 	name: 'blogPageArchives',
 	components: {},
 	data () {
 		return {
 			page: {
-				skip: 0,
+				total: 0,
 				tag: '',
-				limit: 20,
-				count: Infinity
+				pageItemCount: 15,
+				pageIndex: 1
 			},
 			list: [],
+			getListTimer: null,
+
+			replyMode: false,
 			isLoading: false
 		}
 	},
@@ -41,43 +70,56 @@ export default {
 		}
 	},
 	mounted () {
-		this.loadMore()
+		this.getList()
 	},
 	methods: {
-		refresh () {
-			this.page.skip = 0
-			this.list = []
-			this.loadMore()
-			this.$el.scrollIntoView({
+		getList () {
+			this.$refs.scrollMark.scrollIntoView({
 				behavior: 'smooth',
-				block: 'start',
+				block: 'center',
 				inline: 'nearest'
 			})
-		},
-		loadMore () {
-			if (this.page.skip >= this.page.count) {
-				return
-			}
 			this.isLoading = true
-			fetch(`/api/blog?skip=${this.page.skip}&limit=${this.page.limit}&tag=${this.tag}`, {
-				method: 'GET'
+			clearTimeout(this.getListTimer)
+			this.getListTimer = setTimeout(() => {
+				this.forceGetList()
+					.then(() => {
+						this.isLoading = false
+					})
 			})
+		},
+		forceGetList () {
+			let skip = (this.page.pageIndex - 1) * this.page.pageItemCount
+			return fetch(`/api/blog?skip=${skip}&limit=${this.page.pageItemCount}&tag=${this.tag}`)
 				.then(response => response.json())
 				.then(data => {
-					this.page.count = data.count
-					this.page.skip += this.page.limit
-					let blogList = prefixBlogList(data.list)
-					this.list = this.list.concat(blogList)
+					this.page.total = data.count
+					this.list = data.list
 				})
 				.catch(() => {})
-				.then(() => {
-					this.isLoading = false
-				})
+		},
+		replacePath () {
+			let query = {
+				type: 'list',
+				page: this.page.pageIndex
+			}
+			if (this.tag) {
+				query.tag = this.tag
+			}
+			this.$router.replace({
+				path: '/blog/',
+				query
+			})
 		}
 	},
 	watch: {
-		$route () {
-			this.refresh()
+		'$route.query.tag' () {
+			this.page.pageIndex = 1
+			this.getList()
+		},
+		'page.pageIndex' () {
+			this.replacePath()
+			this.getList()
 		}
 	}
 }
