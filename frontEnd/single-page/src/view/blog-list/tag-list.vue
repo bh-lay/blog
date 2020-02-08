@@ -4,23 +4,16 @@
 	flex-wrap wrap
 	margin 0 -5px
 	padding 12px 0 8px
-	a
+	button
 		flex-grow 1
 		max-width 100px
 		margin 0 5px 6px
-		padding 8px
-		background #fff
-		border 1px solid #e8eaee
-		border-radius 4px
-		line-height 14px
-		text-align center
-		text-decoration none
-		font-size 12px
+		border-color #e8eaee
 		color #576575
-		transition .2s
 		&:hover
 			border-color #8599ad
-		&.router-link-exact-active
+			color #576575
+		&.ui-button-primary
 			border-color #576575
 			background #576575
 			color #fff
@@ -28,12 +21,18 @@
 </style>
 <template>
 	<div class="tag-list" v-loading="isLoading">
-		<router-link to="/blog/" >全部</router-link>
-		<router-link
+		<Button
+			@click="switchTag('')"
+			size="small"
+			:type="!$route.query.tag ? 'primary' : 'default'"
+		>全部</Button>
+		<Button
 			v-for="(tag, index) in tagList"
 			:key="index"
-			:to="'/blog/?tag=' + tag"
-		>{{tag}}</router-link>
+			:type="$route.query.tag === tag ? 'primary' : 'default'"
+			size="small"
+			@click="switchTag(tag)"
+		>{{tag}}</Button>
 	</div>
 </template>
 
@@ -63,6 +62,20 @@ export default {
 				.then(() => {
 					this.isLoading = false
 				})
+		},
+		switchTag (tag) {
+			let query = {}
+			if (this.$route.query.type === 'list') {
+				query.type = 'list'
+				query.page = 1
+			}
+			if (tag) {
+				query.tag = tag
+			}
+			this.$router.replace({
+				path: '/blog/',
+				query
+			})
 		}
 	}
 }
