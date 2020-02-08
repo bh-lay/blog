@@ -2,8 +2,6 @@
 .tag-list
 	display flex
 	flex-wrap wrap
-	margin 0 -5px
-	padding 12px 0 8px
 	button
 		flex-grow 1
 		max-width 100px

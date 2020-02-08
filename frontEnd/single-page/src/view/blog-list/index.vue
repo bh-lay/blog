@@ -16,11 +16,50 @@ $tag_cnt_bj = #fff
 	background $tag_cnt_bj
 	border-bottom 1px solid #c4cdd4
 	z-index 500
+.sticky-body
+	display flex
+	align-items start
+	padding 12px 0 6px
+	.tag-list
+		flex-grow 1
+		margin-right 15px
 .list-type-switch
-	margin-bottom 20px
-	padding 15px
-	text-align center
-	background #fff
+	position relative
+	width 30px
+	background #f1f3f4
+	i
+		position absolute
+		width 8px
+		height 8px
+		background #bec6ca
+		transition .2s
+		&:nth-child(1)
+			top 5px
+			left 5px
+		&:nth-child(2)
+			top 5px
+			left 15px
+		&:nth-child(3)
+			top 15px
+			left 5px
+		&:nth-child(4)
+			top 15px
+			left 15px
+	&.active
+		i
+			width 18px
+			height 3px
+			left 5px
+			&:nth-child(1)
+				top 6px
+			&:nth-child(4)
+				top 12px
+			&:nth-child(3)
+				top 18px
+			&:nth-child(2)
+				left 15px
+				width 0
+				height 0
 </style>
 <template>
 <div class="article-list-page">
@@ -36,12 +75,15 @@ $tag_cnt_bj = #fff
 		:tie-top="56"
 	>
 		<div class="sticky-bar">
-			<Container>
+			<Container class="sticky-body">
 				<tagList />
-				<div class="list-type-switch">
-					<Button @click="setPreListType(true)">归档视图</Button>
-					<Button @click="setPreListType(false)">瀑布流视图</Button>
-				</div>
+				<Button
+					size="small"
+					@click="toggleArchivesList"
+					:class="['list-type-switch', usePreListMode ? 'active' : '']"
+				>
+					<i></i><i></i><i></i><i></i>
+				</Button>
 			</Container>
 		</div>
 	</Tie>
@@ -60,7 +102,7 @@ import archivesList from './archives-list.vue'
 import tagList from './tag-list.vue'
 
 let globalPhotoGraphaIndex = 0
-let globalUsePreListMode = false
+
 export default {
 	name: 'blogPage',
 	components: {
@@ -84,25 +126,36 @@ export default {
 					author: '剧中人'
 				}
 			],
-			photoGraphaIndex: globalPhotoGraphaIndex,
-			usePreListMode: globalUsePreListMode
+			photoGraphaIndex: globalPhotoGraphaIndex
 		}
 	},
 	computed: {
 		tag () {
 			return this.$route.query.tag || ''
+		},
+		usePreListMode () {
+			return this.$route.query.type === 'list'
 		}
 	},
 	methods: {
 		nextIndex (index) {
 			globalPhotoGraphaIndex = index
 		},
-		setPreListType (isSet) {
-			this.usePreListMode = isSet
+		toggleArchivesList () {
+			let isSet = !this.usePreListMode
+			let query = {}
+			if (isSet) {
+				query.type = 'list'
+				query.page = 1
+			}
+			if (this.tag) {
+				query.tag = this.tag
+			}
+			this.$router.replace({
+				path: '/blog/',
+				query
+			})
 		}
-	},
-	beforeDestroy() {
-		globalUsePreListMode = this.usePreListMode
 	}
 }
 </script>

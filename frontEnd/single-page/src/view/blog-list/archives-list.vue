@@ -2,7 +2,14 @@
 @import "~@/assets/stylus/variable.styl"
 .archive-list
 	max-width 640px
-	margin 0 auto 50px
+	margin 20px auto 60px
+.archive-title
+	line-height 1.5em
+	margin-bottom 20px
+	border-bottom 1px solid #bdc6ca
+	text-indent 10px
+	font-size 16px
+	color #414f58
 .archive-item
 	margin-bottom 30px
 	.caption
@@ -20,7 +27,9 @@
 </style>
 <template>
 <div class="archive-list">
-	<div ref="scrollMark"></div>
+	<div ref="scrollMark" class="archive-title">
+		Archives
+	</div>
 	<div
 		class="archive-item"
 		v-for="item in list"

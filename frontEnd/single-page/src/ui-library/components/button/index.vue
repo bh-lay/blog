@@ -19,6 +19,7 @@ a
 
 // size 尺寸
 .ui-button-small
+	min-height 30px
 	padding 8px 10px
 	font-size 12px
 .ui-button-middle
@@ -39,17 +40,17 @@ a
 	background #fff
 	color #606266
 	&:hover
-		border-color #f90
-		color #f90
+		border-color #7a9fb8
+		color #09f
 	&:disabled
 		border-color #888
 		color #888
 .ui-button-primary
 	border-color transparent
-	background #f90
+	background #09f
 	color #fff
 	&:hover
-		background #f70
+		background #09f
 	&:disabled
 		background #aaa
 </style>
