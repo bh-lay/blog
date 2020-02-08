@@ -103,40 +103,39 @@
 </style>
 <template>
 <div>
-		<Stick
-			:list="list"
-			imgKey="cover"
-			@onScrollEnd="loadMore"
-		>
-			<template slot-scope="scope">
-				<div :class="['article-item', !scope.data.cover ? 'pure-text' : '']">
-					<router-link
-						:to="'/blog/'+ scope.data.id"
-						:title="scope.data.title" class="link"
-					>
-						<div class="label" v-if="scope.data.is_new"><span>new</span></div>
-						<img v-if="scope.data.cover" :src="scope.data.cover | imgHosting('zoom', 400)" :alt="scope.data.title" />
-						<div class="title">{{scope.data.title}}</div>
-						<div class="info"><p>{{scope.data.intro}}</p></div>
-					</router-link>
-					<footer>
-						<div class="tags">
-							<strong>tags</strong>
-							<router-link
-								v-for="(tag, index) in scope.data.tags"
-								:key="index"
-								:to="'/blog?tag=' + tag"
-								:title="scope.data.title"
-							>{{tag}}</router-link>
-						</div>
-						<div class="time" :title="scope.data.time_show | timeFormat">{{scope.data.time_show | dateDiff}}</div>
-					</footer>
-				</div>
-			</template>
-		</Stick>
-		<div class="status" v-loading="isLoading">
-		</div>
-
+	<div ref="scrollMark"></div>
+	<Stick
+		:list="list"
+		imgKey="cover"
+		@onScrollEnd="loadMore"
+	>
+		<template slot-scope="scope">
+			<div :class="['article-item', !scope.data.cover ? 'pure-text' : '']">
+				<router-link
+					:to="'/blog/'+ scope.data.id"
+					:title="scope.data.title" class="link"
+				>
+					<div class="label" v-if="scope.data.is_new"><span>new</span></div>
+					<img v-if="scope.data.cover" :src="scope.data.cover | imgHosting('zoom', 400)" :alt="scope.data.title" />
+					<div class="title">{{scope.data.title}}</div>
+					<div class="info"><p>{{scope.data.intro}}</p></div>
+				</router-link>
+				<footer>
+					<div class="tags">
+						<strong>tags</strong>
+						<router-link
+							v-for="(tag, index) in scope.data.tags"
+							:key="index"
+							:to="'/blog?tag=' + tag"
+							:title="scope.data.title"
+						>{{tag}}</router-link>
+					</div>
+					<div class="time" :title="scope.data.time_show | timeFormat">{{scope.data.time_show | dateDiff}}</div>
+				</footer>
+			</div>
+		</template>
+	</Stick>
+	<div class="status" v-loading="isLoading"></div>
 </div>
 </template>
 
@@ -155,7 +154,7 @@ const prefixBlogList = list => {
 	return list
 }
 export default {
-	name: 'blogPage',
+	name: 'blogPageStick',
 	components: {
 		Stick: Stick.component
 	},
@@ -184,9 +183,9 @@ export default {
 			this.page.skip = 0
 			this.list = []
 			this.loadMore()
-			this.$el.scrollIntoView({
+			this.$refs.scrollMark.scrollIntoView({
 				behavior: 'smooth',
-				block: 'start',
+				block: 'center',
 				inline: 'nearest'
 			})
 		},

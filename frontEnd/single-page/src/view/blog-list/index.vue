@@ -2,80 +2,28 @@
 @import "~@/assets/stylus/variable.styl"
 $tag_cnt_bj = #fff
 /** 博文列表页 **/
-.articleListPage
+.article-list-page
 	min-height 600px
 	padding-bottom 20px
 	background #dee3e7
 	.article-list-header
 		height 300px
-.articleListPage-tags-ghost
+.sticky-bar-outer
 	width 100%
 	padding-bottom 20px
-
-.articleListPage-tags
+.sticky-bar
 	width 100%
 	background $tag_cnt_bj
 	border-bottom 1px solid #c4cdd4
 	z-index 500
-	.content
-		padding 12px 0 5px 5px
-	a
-		position relative
-		display inline-block
-		max-width 100%
-		height 24px
-		margin 0 10px 5px 0
-		line-height 24px
-		padding 0 8px 0 18px
-		border-radius 0 4px 4px 0
-		background #eee
-		font-size 12px
-		color #333
-		overflow hidden
-		text-overflow ellipsis
-		white-space nowrap
-		span
-			opacity .3
-			padding 0 0 0 5px
-		&:before
-			position absolute
-			content ''
-			top 0
-			left 0
-			width 0
-			height 0
-			border-width 12px 12px 12px 0
-			border-color $tag_cnt_bj transparent $tag_cnt_bj transparent
-			border-style solid
-		&:after
-			position absolute
-			content ''
-			width 4px
-			height 4px
-			top 10px
-			left 8px
-			border-radius 100%
-			background $tag_cnt_bj
-		&:hover
-			background #333
-			color #fff
-		&.active
-			background #f70
-			color #fff
-
-.articleList
-	position relative
-	margin-bottom 10px
-
-@media (max-width 660px)
-	.articleListPage-tags
-		position static !important
-	.articleList
-		margin 0 10px
-		width auto
+.list-type-switch
+	margin-bottom 20px
+	padding 15px
+	text-align center
+	background #fff
 </style>
 <template>
-<div class="articleListPage">
+<div class="article-list-page">
 	<div class="article-list-header">
 		<headerBanner
 			:photoGraphaList="photoGraphaList"
@@ -84,48 +32,42 @@ $tag_cnt_bj = #fff
 		/>
 	</div>
 	<Tie
-		class="articleListPage-tags-ghost"
+		class="sticky-bar-outer"
 		:tie-top="56"
 	>
-		<div class="articleListPage-tags">
+		<div class="sticky-bar">
 			<Container>
 				<tagList />
+				<div class="list-type-switch">
+					<Button @click="setPreListType(true)">归档视图</Button>
+					<Button @click="setPreListType(false)">瀑布流视图</Button>
+				</div>
 			</Container>
 		</div>
 	</Tie>
 	<Container>
-		<stickList />
+		<archivesList v-if="usePreListMode"/>
+		<stickList v-else/>
 	</Container>
 	<Footer />
 </div>
 </template>
 
 <script>
-import Stick from 'vue-stick'
 import headerBanner from '@/components/header-banner/index.vue'
 import stickList from './stick-list.vue'
-
+import archivesList from './archives-list.vue'
 import tagList from './tag-list.vue'
 
 let globalPhotoGraphaIndex = 0
-const prefixBlogList = list => {
-	list = list || []
-
-	let now = new Date().getTime()
-	list.forEach(item => {
-		// 三个月内的博文都算新闻章
-		item.is_new = (now - item.time_show) / (1000 * 60 * 60 * 24) < 90
-	})
-
-	return list
-}
+let globalUsePreListMode = false
 export default {
 	name: 'blogPage',
 	components: {
 		headerBanner,
 		tagList,
 		stickList,
-		Stick: Stick.component
+		archivesList
 	},
 	data () {
 		return {
@@ -142,7 +84,8 @@ export default {
 					author: '剧中人'
 				}
 			],
-			photoGraphaIndex: globalPhotoGraphaIndex
+			photoGraphaIndex: globalPhotoGraphaIndex,
+			usePreListMode: globalUsePreListMode
 		}
 	},
 	computed: {
@@ -153,7 +96,13 @@ export default {
 	methods: {
 		nextIndex (index) {
 			globalPhotoGraphaIndex = index
+		},
+		setPreListType (isSet) {
+			this.usePreListMode = isSet
 		}
+	},
+	beforeDestroy() {
+		globalUsePreListMode = this.usePreListMode
 	}
 }
 </script>

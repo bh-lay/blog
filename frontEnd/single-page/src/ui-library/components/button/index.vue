@@ -30,7 +30,6 @@ a
 	border none
 	background transparent
 	font-size 14px
-	color #fff
 	&:hover
 		text-decoration underline
 	&:disabled
