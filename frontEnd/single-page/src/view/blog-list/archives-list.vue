@@ -2,7 +2,8 @@
 @import "~@/assets/stylus/variable.styl"
 .archive-list
 	max-width 640px
-	margin 20px auto 60px
+	margin 0 auto 20px
+	padding 20px 20px 40px
 .archive-title
 	line-height 1.5em
 	margin-bottom 20px
@@ -26,7 +27,7 @@
 		color #636f79
 </style>
 <template>
-<div class="archive-list">
+<div class="archive-list" v-loading="isLoading">
 	<div ref="scrollMark" class="archive-title">
 		Archives
 	</div>

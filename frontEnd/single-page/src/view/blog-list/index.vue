@@ -22,6 +22,7 @@ $tag_cnt_bj = #fff
 	padding 12px 0 6px
 	.tag-list
 		flex-grow 1
+		width 200px
 		margin-right 15px
 .list-type-switch
 	position relative
