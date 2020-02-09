@@ -76,10 +76,13 @@
 		font-size 13px
 @media screen and (max-width $max-mobile-width)
 	.navigation
+		padding-top 0
+		.nav-inner
+			margin 0 -15px
 		.nav-list-body
 			position absolute
-			top 70px
-			right 0
+			top 60px
+			right 10px
 			width 200px
 			background #fff
 			box-shadow 2px 2px 10px rgba(0,0,0,0.1), 1px 1px 2px rgba(0,0,0,0.2)
