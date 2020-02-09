@@ -2,10 +2,12 @@
 .tag-list
 	display flex
 	flex-wrap wrap
+	height 30px
+	overflow hidden
 	button
 		flex-grow 1
 		max-width 100px
-		margin 0 5px 6px
+		margin 0 10px 5px 0
 		border-color #e8eaee
 		color #576575
 		&:hover
