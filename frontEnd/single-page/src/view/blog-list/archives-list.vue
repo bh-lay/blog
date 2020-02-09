@@ -65,7 +65,7 @@ export default {
 				total: 0,
 				tag: '',
 				pageItemCount: 15,
-				pageIndex: 1
+				pageIndex: parseInt(this.$route.query.page) || 1
 			},
 			list: [],
 			getListTimer: null,
