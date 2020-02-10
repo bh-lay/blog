@@ -40,7 +40,7 @@ export default {
         method: 'PUT',
         credentials: 'same-origin',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           content: this.content

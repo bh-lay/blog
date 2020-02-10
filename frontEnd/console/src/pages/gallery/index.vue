@@ -203,7 +203,7 @@ function createPath (foldername, pathname) {
     method: 'POST',
     credentials: 'same-origin',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify({
       name: foldername,
@@ -228,7 +228,7 @@ function rename (pathname, newName) {
     method: 'PUT',
     credentials: 'same-origin',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify({
       newName

@@ -40,7 +40,7 @@ export default {
         fetch('/ajax/user/login', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            'Content-Type': 'application/json'
           },
           credentials: 'same-origin',
           body: JSON.stringify({

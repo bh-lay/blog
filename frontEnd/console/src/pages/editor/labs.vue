@@ -130,7 +130,7 @@ export default {
         method,
         credentials: 'same-origin',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
       })
