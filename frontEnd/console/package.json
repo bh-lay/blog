@@ -12,7 +12,11 @@
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
     "build": "node build/build.js",
-    "buildInProduction": "node --max_old_space_size=516 build/build.js"
+    "buildInProduction": "node --max_old_space_size=516 build/build.js",
+    "deploy": "npm run build && npm run deploySatic && npm run deployHTML",
+    "deploySatic": "scp -r ../../static/build/console/* root@119.27.164.123:/root/webserver/bh-lay.com/static/build/console/",
+    "deployHTML": "scp -r ../../web/topic/console.html root@119.27.164.123:/root/webserver/bh-lay.com/web/topic/"
+    
   },
   "dependencies": {
     "dateformat": "^3.0.2",
