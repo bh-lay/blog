@@ -115,7 +115,7 @@ export default {
     getData () {
       let skip = (this.currentPage - 1) * this.pageSize
 
-      fetch(`/api/comments/?isadmin=true&skip=${skip}&limit=${this.pageSize}` + queryStr, {
+      fetch(`/api/comments/?isadmin=true&skip=${skip}&limit=${this.pageSize}`, {
         method: 'GET',
         credentials: 'same-origin'
       })

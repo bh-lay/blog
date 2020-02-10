@@ -84,7 +84,7 @@ import userSelector from './user-selector.vue'
 import markdown from '../../components/markdown'
 
 function getBlogDtail (id) {
-  return fetch(`/api/moment/post/${id}?format=markdown` + queryStr, {
+  return fetch(`/api/moment/post/${id}?format=markdown`, {
     method: 'GET',
     credentials: 'same-origin'
   })

@@ -76,7 +76,7 @@
 import markdown from '../../components/markdown'
 
 function getBlogDtail (id) {
-  return fetch(`/api/blog/${id}?format=markdown` + queryStr, {
+  return fetch(`/api/blog/${id}?format=markdown`, {
     method: 'GET',
     credentials: 'same-origin'
   })
