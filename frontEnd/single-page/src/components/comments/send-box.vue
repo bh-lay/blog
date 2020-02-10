@@ -141,26 +141,6 @@
 import setUserData from './set-user-data.vue'
 import {getUserInfo, defaultAvatar} from './data.js'
 
-// 字符化参数
-function paramStringify (data, baseKey) {
-	let dataArray = []
-	let key
-	let value
-
-	for (let i in data) {
-		key = baseKey ? baseKey + '[' + i + ']' : i
-		value = data[i]
-
-		if (value && value !== 0 && value !== '') {
-			if (typeof value === 'object') {
-				dataArray.push(paramStringify(data[i], key))
-			} else {
-				dataArray.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[i]))
-			}
-		}
-	}
-	return dataArray.join('&')
-}
 export default {
 	name: 'comments-send-box',
 	components: {
@@ -226,9 +206,9 @@ export default {
 			fetch('/api/comments/0', {
 				method: 'POST',
 				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded'
+					'Content-Type': 'application/json'
 				},
-				body: paramStringify(data)
+				body: JSON.stringify(data)
 			})
 				.then(response => response.json())
 				.then(data => {
