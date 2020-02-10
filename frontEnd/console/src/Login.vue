@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import querystring from 'querystring'
 
 export default {
   name: 'login',
@@ -44,7 +43,7 @@ export default {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
           },
           credentials: 'same-origin',
-          body: querystring.stringify({
+          body: JSON.stringify({
             email,
             password
           })

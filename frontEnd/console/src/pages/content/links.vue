@@ -40,8 +40,6 @@
 </template>Î
 
 <script>
-
-import querystring from 'querystring'
 import dateFormat from 'dateformat'
 
 export default {
@@ -58,11 +56,8 @@ export default {
   },
   methods: {
     getData () {
-      let queryStr = querystring.stringify({
-        skip: (this.currentPage - 1) * this.pageSize,
-        limit: this.pageSize
-      })
-      fetch('/api/moment/friend/?' + queryStr, {
+      let skip = (this.currentPage - 1) * this.pageSize
+      fetch(`/api/moment/friend/?skip=${skip}&limit=${this.pageSize}` + queryStr, {
         method: 'GET',
         credentials: 'same-origin'
       })

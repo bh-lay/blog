@@ -74,13 +74,9 @@
 
 <script>
 import markdown from '../../components/markdown'
-import querystring from 'querystring'
 
 function getBlogDtail (id) {
-  let queryStr = querystring.stringify({
-    format: 'markdown'
-  })
-  return fetch(`/api/blog/${id}?` + queryStr, {
+  return fetch(`/api/blog/${id}?format=markdown` + queryStr, {
     method: 'GET',
     credentials: 'same-origin'
   })
@@ -173,7 +169,7 @@ export default {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
         },
-        body: querystring.stringify(data)
+        body: JSON.stringify(data)
       })
       .then(response => response.json())
       .then(() => {

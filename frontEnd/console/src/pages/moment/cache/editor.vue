@@ -38,8 +38,6 @@
 </template>Î
 
 <script>
-import querystring from 'querystring'
-
 function getCacheDtail (name) {
   return fetch(`/api/moment/cache/${name}`, {
     method: 'GET',
@@ -77,7 +75,7 @@ export default {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
         },
-        body: querystring.stringify({
+        body: JSON.stringify({
           content: this.form.content
         })
       })

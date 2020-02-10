@@ -87,8 +87,6 @@
 </template>Î
 
 <script>
-
-import querystring from 'querystring'
 import dateFormat from 'dateformat'
 import commentsEditor from '../editor/comments.vue'
 
@@ -115,12 +113,9 @@ export default {
       return id === 'define-1' ? '/bless' : '/' + id.replace(/-/g, '/')
     },
     getData () {
-      let queryStr = querystring.stringify({
-        isadmin: true,
-        skip: (this.currentPage - 1) * this.pageSize,
-        limit: this.pageSize
-      })
-      fetch('/api/comments/?' + queryStr, {
+      let skip = (this.currentPage - 1) * this.pageSize
+
+      fetch(`/api/comments/?isadmin=true&skip=${skip}&limit=${this.pageSize}` + queryStr, {
         method: 'GET',
         credentials: 'same-origin'
       })

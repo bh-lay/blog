@@ -39,7 +39,6 @@
 
 <script>
 import markdown from '../../components/markdown'
-import querystring from 'querystring'
 
 function getBlogDtail (id) {
   return fetch(`/api/labs/${id}`, {
@@ -133,7 +132,7 @@ export default {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
         },
-        body: querystring.stringify(data)
+        body: JSON.stringify(data)
       })
       .then(response => response.json())
       .then(() => {

@@ -9,8 +9,6 @@
 </template>Î
 
 <script>
-import querystring from 'querystring'
-
 export default {
   props: ['id'],
   data () {
@@ -44,7 +42,7 @@ export default {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
         },
-        body: querystring.stringify({
+        body: JSON.stringify({
           content: this.content
         })
       })

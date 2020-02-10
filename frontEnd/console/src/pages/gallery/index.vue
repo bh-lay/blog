@@ -164,9 +164,6 @@
 </template>
 
 <script>
-
-import querystring from 'querystring'
-
 function cleanPath (path) {
   return (path || '').replace(/\/+/g, '/')
 }
@@ -208,7 +205,7 @@ function createPath (foldername, pathname) {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
     },
-    body: querystring.stringify({
+    body: JSON.stringify({
       name: foldername,
       pathname
     })
@@ -233,7 +230,7 @@ function rename (pathname, newName) {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
     },
-    body: querystring.stringify({
+    body: JSON.stringify({
       newName
     })
   })

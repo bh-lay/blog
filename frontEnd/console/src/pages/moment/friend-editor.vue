@@ -38,8 +38,6 @@
 </template>Î
 
 <script>
-import querystring from 'querystring'
-
 function getFriendDtail (id) {
   return fetch(`/api/moment/friend/${id}`, {
     method: 'GET',
@@ -109,7 +107,7 @@ export default {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
         },
-        body: querystring.stringify(data)
+        body: JSON.stringify(data)
       })
       .then(response => response.json())
       .then(() => {
