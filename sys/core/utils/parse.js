@@ -124,8 +124,28 @@ exports.request = function(req,callBack){
 		var content_type = req['headers']['content-type'] || ''
 		// FIXME 猥琐的处理方式
 		content_type = content_type.split(';')[0]
-		if(content_type == 'application/x-www-form-urlencoded'){
-			var postData = ''
+		var postData = ''
+		if(content_type == 'application/json') {
+			// 数据块接收中
+			req.addListener('data', function (postDataChunk) {
+				postData += postDataChunk
+			})
+			// 数据接收完毕，执行回调函数
+			req.addListener('end', function () {
+				try {
+					var fields_post = JSON.parse(postData)
+					// 将URL上的参数非强制性的增加到post数据上
+					for(var i in fields){
+						if(!fields_post[i]){
+							fields_post[i] = fields[i]
+						}
+					}
+					callBack(null,fields_post)
+				} catch (e) {
+					callBack(e)
+				}
+			})
+		} else if(content_type == 'application/x-www-form-urlencoded'){
 			// 数据块接收中
 			req.addListener('data', function (postDataChunk) {
 				postData += postDataChunk
