@@ -11,7 +11,7 @@ function getReposInfo(repo_name,callback){
 		}
 	}, function (err, response, body){
 		var responseBody
-		if(err,response.statusCode != 200){
+		if(err || response.statusCode != 200){
 			callback && callback('error')
 			return
 		}
