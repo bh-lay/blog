@@ -2,6 +2,15 @@
 @import "~@/assets/stylus/variable.styl"
 .comments-list
 	min-height 400px
+.list-empty
+	padding 20px
+	background #fff
+	p
+		font-size 14px
+		color #8599ad
+	h3
+		font-size 18px
+		color #5c6870
 .l-com-item
 	display flex
 	margin-bottom 30px
@@ -29,6 +38,10 @@
 <template>
 <div class="comments-list" v-loading="isLoading">
 	<div ref="scrollMark"></div>
+	<div class="list-empty">
+		<p>竟然还没有人说过话，好机会来了！</p>
+		<h3>写个牛逼哄哄的评论，好么？</h3>
+	</div>
 	<div
 		class="l-com-item"
 		v-for="item in list"
