@@ -26,7 +26,8 @@
 				<div class="media-body">
 					<h4 class="media-heading"><a href="/blog/$[[it.id]]" title="$[[it.title]]" target="_self" >$[[it.title]]</a></h4>
 					<p>$[[it.intro]]</p>
-		          <div class="tag"><strong>本文关键字：</strong>[[@each it.tags as t]]<a href="/blog?tag=$[[t]]" lofox="true">$[[t]]</a>[[@/each]]</div>
+				  <div class="tag"><strong>本文关键字：</strong>[[@each it.tags as t]]<a href="/blog?tag=$[[t]]" lofox="true">$[[t]]</a>[[@/each]]</div>
+				  <time>$[[it.time_show]]</time>
 				</div>
 			</div>
             [[@/each]]

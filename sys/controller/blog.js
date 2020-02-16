@@ -46,7 +46,7 @@ function getList(app, param, callback) {
 				collection.find(findKeys, {
 					limit: limit
 				}).sort({
-					id: -1
+					time_show: -1
 				}).skip(skip).toArray(function (err, docs) {
 					client.close()
 					for (var i in docs) {

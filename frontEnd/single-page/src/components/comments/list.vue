@@ -38,7 +38,7 @@
 <template>
 <div class="comments-list" v-loading="isLoading">
 	<div ref="scrollMark"></div>
-	<div class="list-empty">
+	<div class="list-empty" v-if="list.length == 0 && !isLoading">
 		<p>竟然还没有人说过话，好机会来了！</p>
 		<h3>写个牛逼哄哄的评论，好么？</h3>
 	</div>
