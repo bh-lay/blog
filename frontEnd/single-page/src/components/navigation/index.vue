@@ -62,7 +62,8 @@
 				transition .4s
 			&:hover:after
 				width 30%
-			&.router-link-exact-active
+			&.sub-page.router-link-active,
+			&.index-page.router-link-exact-active
 				color #007fff
 				&:after
 					width 64%
@@ -165,9 +166,14 @@
 					<div class="nav-mask" @click="navSlidedown = false"></div>
 					<div class="nav-list-body">
 						<router-link
+							to="/"
+							class="index-page"
+						>首页</router-link>
+						<router-link
 							v-for="nav in navList"
 							:key="nav.type"
 							:to="nav.href"
+							class="sub-page"
 						>{{nav.label}}</router-link>
 					</div>
 				</div>
@@ -184,11 +190,6 @@ export default {
 		return {
 			isScrolling: false,
 			navList: [
-				{
-					label: '首页',
-					href: '/',
-					type: 'index'
-				},
 				{
 					label: '博文',
 					href: '/blog',
