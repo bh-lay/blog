@@ -57,7 +57,7 @@
 			border-radius 2px
 			box-shadow 0 0 2px rgba(0, 0, 0, 0.2)
 
-@media screen and (max-width $max-pad-width)
+@media screen and (max-width $pad-portrait-width)
 	.bless-body
 		display block
 		.main-body

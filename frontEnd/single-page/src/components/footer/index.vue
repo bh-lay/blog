@@ -103,9 +103,8 @@
 		line-height 1em
 		font-size 12px
 		color #2e3438
-@media screen and (max-width $max-pad-width)
+@media screen and (max-width $pad-portrait-width)
 	.footer-container
-		// display block
 		flex-wrap wrap
 		.footer-part-main
 			width 100%

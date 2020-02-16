@@ -88,7 +88,7 @@
 				&:hover
 					text-decoration underline
 	.toc-content
-		width 300px
+		width 280px
 		padding 20px 10px 40px
 		.title
 			margin-bottom 10px
@@ -120,7 +120,10 @@
 			border-style solid
 			border-color transparent transparent #5a6872
 			border-width 0 30px 15px
-@media screen and (max-width $max-pad-width)
+@media screen and (max-width $pad-portrait-width)
+	.blog-detail .article-section .article-section-body
+		padding 5em 2em 5em 0
+@media screen and (max-width $pad-landscape-width)
 	.blog-detail
 		padding 0
 		.article-section
