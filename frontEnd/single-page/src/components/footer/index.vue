@@ -78,11 +78,20 @@
 			&:hover
 				background #fff
 .footer-sub
-	padding 40px 0 50px
+	padding 40px 0 20px
 	border-top 1px solid #0d1012
 	background #121517
 	text-align center
 	color #5c6870
+	.beian
+		padding 10px 0 20px
+		a
+			font-size 14px
+			color #292f32
+			transition .15s
+			&:hover
+				text-decoration underline
+				color #9da9af
 .footer-version
 	padding 10px 20px 18px
 	border-top 1px solid #070808
@@ -177,6 +186,7 @@
 	<div class="footer-sub">
 		<p>Design & Code by @剧中人, Base on NodeJS</p>
 		<p>感谢七牛提供近乎免费的CDN服务</p>
+		<div class="beian"><a href="http://beian.miit.gov.cn" rel="nofollow">皖ICP备14001331号-1</a></div>
 	</div>
 	<div class="footer-version">
 		<span>当前：</span>
