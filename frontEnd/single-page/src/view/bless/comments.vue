@@ -26,6 +26,7 @@
 			background #eee
 	.main
 		flex-grow 1
+		width 200px
 		h4
 			margin 0
 			padding 0
