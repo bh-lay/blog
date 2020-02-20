@@ -116,14 +116,14 @@ export default {
 		return {
 			photoGraphaList: [
 				{
-					imgSrc: require('../../components/sns-page-layout/images/opus_@2x.jpg'),
-					htmlSrc: 'https://bh-lay.tuchong.com/14431809/#image24933177',
-					title: '宏村',
+					imgSrc: require('./images/architecture-b3.jpg'),
+					htmlSrc: 'https://bh-lay.tuchong.com/27040825/?from=bh-lay',
+					title: '讯飞数据中心',
 					author: '剧中人'
 				}, {
-					imgSrc: require('../../components/sns-page-layout/images/yangshuo.jpg'),
-					htmlSrc: 'http://720yun.com/t/544jOrkvtn0?from=bh-lay',
-					title: '桂林阳朔',
+					imgSrc: require('./images/architecture-b3-2.jpg'),
+					htmlSrc: 'https://bh-lay.tuchong.com/27040825/?from=bh-lay',
+					title: '讯飞数据中心',
 					author: '剧中人'
 				}
 			],
