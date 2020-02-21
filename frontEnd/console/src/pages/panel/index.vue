@@ -1,6 +1,6 @@
 <template>
   <el-row :gutter="20">
-    <el-col :span="16">
+    <el-col :sm="24" :md="14">
       <el-card class="box-card">
         <h1>剧中人你还有脸回来！</h1>
         <p>你有多久没有更新博文了？</p>
@@ -39,8 +39,9 @@
         <br>
         <el-button type="primary" @click="clearCache">清除</el-button>
       </el-card>
+      <br>
     </el-col>
-    <el-col :span="8">
+    <el-col :sm="24" :md="10">
       <el-card class="box-card">
         <h3>更新数据</h3>
         <p>默认每天更新一次，等不及的话可以手动更新。</p>
