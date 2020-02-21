@@ -103,7 +103,6 @@
       </span>
     </div>
     <div class="upload-list" v-show="uploadVisible">
-      {{currentPath}}
       <el-upload
         :action="`/api/asset/path/${currentPathBase64}`"
         :data="{
@@ -111,7 +110,6 @@
           root: currentPath
         }"
         multiple
-        :limit="3"
         :on-success="refresh"
         >
         <el-button size="small" type="primary">

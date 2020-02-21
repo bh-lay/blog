@@ -74,6 +74,7 @@ export default {
       max-height: 80vh;
       box-shadow: 2px 2px 12px rgba(0, 0, 0, .15), 1px 1px 3px rgba(0, 0, 0, .1);
       overflow: auto;
+      scroll-behavior: smooth;
       opacity: 0;
       visibility: hidden;
       transition: .15s;
