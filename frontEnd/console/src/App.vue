@@ -1,11 +1,11 @@
 <template>
   <div id="app">
+    <navigation></navigation>
     <div class="main">
       <div class="main-body">
         <router-view/>
       </div>
     </div>
-    <navigation></navigation>
   </div>
 </template>
 
@@ -32,6 +32,7 @@ body {
 
 #app {
 	position: relative;
+	display: flex;
   height: 100%;
   overflow: hidden;
 	font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -40,10 +41,6 @@ body {
 }
 
 .navigation {
-	position: fixed;
-	top: 0;
-	left: 0;
-	bottom: 0;
 	width: 240px;
 	overflow: auto;
 	background: #fff;
@@ -51,12 +48,13 @@ body {
 
 .main {
 	position: relative;
+	flex-grow: 1;
+	width: 300px;
 	height: 100%;
 	background: #545c64;
   overflow: auto;
 }
 .main-body {
-	padding: 20px 20px 40px 260px;
-
+	padding: 20px 20px 40px;
 }
 </style>

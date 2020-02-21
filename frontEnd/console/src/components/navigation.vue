@@ -1,7 +1,7 @@
 <template>
   <div class="navigation">
-    <div style="height: 80px"></div>
-    <el-menu router class="el-menu-vertical-demo">
+    <el-button class="trigger-button" icon="el-icon-menu" @click="mobileVisible = !mobileVisible"></el-button>
+    <el-menu router :class="['navigation-list', mobileVisible ? 'mobile-visible' : '']">
       <el-menu-item index="/panel">
         <i class="el-icon-menu"></i>
         <span slot="title">快速操作</span>
@@ -31,17 +31,65 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'navigation',
   data () {
-    return {}
+    return {
+      mobileVisible: false
+    }
   },
-  methods: {}
+  methods: {},
+  watch: {
+    '$route' () {
+      this.mobileVisible = false
+    }
+  }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="less" rel="stylesheet/less">
+.navigation {
+  padding-top: 50px;
+  .trigger-button {
+    display: none
+  }
+}
 .el-menu {
 	border-right: none;
+}
+
+@media screen and (max-width: 800px){
+	.navigation {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: transparent;
+    overflow: visible;
+    z-index: 2000;
+    .navigation-list {
+      position: absolute;
+      top: 50px;
+      right: 10px;
+      width: 240px;
+      max-height: 80vh;
+      box-shadow: 2px 2px 12px rgba(0, 0, 0, .15), 1px 1px 3px rgba(0, 0, 0, .1);
+      overflow: auto;
+      opacity: 0;
+      visibility: hidden;
+      transition: .15s;
+      transform: translateY(-15px);
+      &.mobile-visible {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+    }
+    .trigger-button {
+      position: absolute;
+      display: block;
+      top: 10px;
+      right: 10px
+    }
+	}
 }
 </style>
