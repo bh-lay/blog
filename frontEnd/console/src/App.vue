@@ -57,4 +57,7 @@ body {
 .main-body {
 	padding: 20px 20px 40px;
 }
+.el-form-item__label {
+	line-height: 20px
+}
 </style>

@@ -18,7 +18,7 @@
 
 <template>
   <el-card class="box-card">
-    <el-form ref="form" :model="form" label-width="80px">
+    <el-form ref="form" :model="form" label-position="top" >
       <el-form-item label="文章标题">
         <el-input v-model="form.title"></el-input>
       </el-form-item>

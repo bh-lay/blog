@@ -3,7 +3,7 @@
 
 <template>
   <el-card class="box-card">
-    <el-form ref="form" :model="form" label-width="100px">
+    <el-form ref="form" :model="form" label-position="top">
       <el-form-item label="姓名">
         <el-input v-model="form.title"></el-input>
       </el-form-item>

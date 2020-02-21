@@ -18,7 +18,7 @@
 
 <template>
   <el-card class="box-card">
-    <el-form ref="form" :model="form" label-width="100px">
+    <el-form ref="form" :model="form" label-position="top">
       <el-form-item label="谁发布的？">
         {{form.userid}}
         <el-button type="text" @click="userSelectorVisible = true">选择发布者</el-button>
