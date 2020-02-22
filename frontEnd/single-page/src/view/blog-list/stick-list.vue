@@ -5,7 +5,6 @@
 	height 52px
 	margin-bottom 20px
 .article-item
-	margin-bottom 10px
 	overflow hidden
 	background #fff
 	transition box-shadow .3s ease-out
