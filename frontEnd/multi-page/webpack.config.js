@@ -22,11 +22,6 @@ const config = {
       './assets/dialog.js'
     ],
     "multi-define": './assets/multi-define.js',
-    "links": [
-      './assets/jquery.js',
-      './assets/dialog.js',
-      './assets/links/index.js'
-    ],
     "labs-detail": [
       './assets/jquery.js',
       './assets/highlight.js',
@@ -76,14 +71,6 @@ const config = {
   },
   plugins: [
     new ExtractTextPlugin("[name].[contenthash:8].css"),
-    // 前端英雄榜页面
-    new HtmlWebpackPlugin({
-      filename: path.resolve(HTML_PATH, 'links.html'),
-      template: './pages/links.html',
-      inject: true,
-      hash: true,
-      chunks: ['links']
-    }),
     // 前端实验室详情页面
     new HtmlWebpackPlugin({
       filename: path.resolve(HTML_PATH, 'labsDetail.html'),
