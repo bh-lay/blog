@@ -88,7 +88,7 @@ export default {
 			page: {
 				total: 0,
 				pageItemCount: 15,
-				pageIndex: this.pageIndex
+				pageIndex: this.pageIndex || 1
 			},
 			list: [],
 			getListTimer: null,

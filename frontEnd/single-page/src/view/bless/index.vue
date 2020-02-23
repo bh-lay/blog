@@ -136,7 +136,7 @@ export default {
 				followers: 0,
 				following: 0
 			},
-			pageIndex: parseInt(this.$route.query.page, 10),
+			pageIndex: parseInt(this.$route.query.page, 10) || 1,
 
 			photoGraphaList: [
 				{
