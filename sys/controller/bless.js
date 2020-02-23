@@ -73,7 +73,7 @@ exports.list = function (route, connect, app) {
 		// if none of cache,do this Fn
 		getList(app, {
 			skip: (page - 1) * 10,
-			limit: 10,
+			limit: 15,
 			tag: tag
 		}, function (err, list, data) {
 			if (err) {
