@@ -12,6 +12,7 @@ var blog = require('../controller/blog.js')
 var labs = require('../controller/labs.js')
 var pano = require('../controller/pano.js')
 var photography = require('../controller/photography.js')
+var bless = require('../controller/bless.js')
 /**
  * 选择静态、动态视图版本
  *
@@ -63,11 +64,7 @@ module.exports = [
 	// 留言
 	{
 		path: 'get /bless',
-		controller: adaptionViewForSinglePage((route, connect) => {
-			connect.write('define',307,{
-				location:'/'
-			})
-		})
+		controller: adaptionViewForSinglePage(bless.list)
 	},
 	{
 		path: 'get /labs/:name',

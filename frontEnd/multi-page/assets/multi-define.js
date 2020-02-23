@@ -70,24 +70,6 @@ version_init();
 $('body').on('click', '.toNewVersion', function () {
   blog.jumpToNewVersion();
 });
-$('.nav_comment_link').click(function () {
-  if (blog.isAdvancedBrowser) {
-    UI.confirm({
-      'text': '仅在“尝鲜版”下可用',
-      'from': $(this)[0],
-      'mask': false,
-      'btns': ['进入尝鲜版', '保持现状'],
-      'callback': function () {
-        blog.jumpToNewVersion();
-      }
-    });
-  } else {
-    UI.confirm({
-      'text': '浏览器太老旧，请升级！'
-    });
-  }
-  return false;
-});
 
 //评论模块
 var $comments = $('.comments_area');

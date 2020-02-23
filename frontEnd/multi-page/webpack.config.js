@@ -81,7 +81,7 @@ const config = {
     })
   ]
 };
-const SameHtmlFileNames = ['indexPage', 'blogList', 'blogDetail', 'labsList', 'panoList', 'photographyList'];
+const SameHtmlFileNames = ['indexPage', 'blogList', 'blogDetail', 'labsList', 'panoList', 'photographyList', 'bless'];
 SameHtmlFileNames.forEach(function (fileName) {
   const htmlFileName = fileName + '.html';
   const htmlPlugin = new HtmlWebpackPlugin({
