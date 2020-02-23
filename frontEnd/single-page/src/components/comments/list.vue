@@ -76,6 +76,11 @@ export default {
 		cid: {
 			type: String,
 			required: true
+		},
+		pageIndex: {
+			type: Number,
+			required: false,
+			default: 1
 		}
 	},
 	data () {
@@ -83,7 +88,7 @@ export default {
 			page: {
 				total: 0,
 				pageItemCount: 15,
-				pageIndex: 1
+				pageIndex: this.pageIndex
 			},
 			list: [],
 			getListTimer: null,
@@ -104,6 +109,7 @@ export default {
 				block: 'center',
 				inline: 'nearest'
 			})
+			this.$emit('update:pageIndex', this.page.pageIndex)
 			this.getList()
 		}
 	},

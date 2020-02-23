@@ -94,6 +94,7 @@
 			<CommentsList
 				cid="define-1"
 				ref="commentsList"
+				:pageIndex.sync="pageIndex"
 			/>
 		</div>
 		<div class="bless-sidebar">
@@ -135,6 +136,7 @@ export default {
 				followers: 0,
 				following: 0
 			},
+			pageIndex: parseInt(this.$route.query.page, 10),
 
 			photoGraphaList: [
 				{
@@ -175,6 +177,16 @@ export default {
 		},
 		nextIndex (index) {
 			globalPhotoGraphaIndex = index
+		}
+	},
+	watch: {
+		pageIndex () {
+			this.$router.replace({
+				path: '/bless',
+				query: {
+					page: this.pageIndex
+				}
+			})
 		}
 	}
 }
