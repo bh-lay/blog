@@ -5,7 +5,10 @@
   "main": "null",
   "scripts": {
     "dev": "NODE_ENV=local_dev webpack",
-    "production": "NODE_ENV=production webpack"
+    "build": "NODE_ENV=production webpack",
+    "deploy": "npm run build && npm run deploySatic && npm run deployHTML",
+    "deploySatic": "scp -r ../../static/build/multi-page/* root@119.27.164.123:/root/webserver/bh-lay.com/static/build/multi-page/",
+    "deployHTML": "scp -r ../../sys/views/multi-page/* root@119.27.164.123:/root/webserver/bh-lay.com/sys/views/multi-page/"
   },
   "repository": {
     "type": "git",

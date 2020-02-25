@@ -8,28 +8,6 @@ var utils = require('../core/utils/index.js')
 var DB = require('../core/DB.js')
 let showdown  = require('showdown')
 
-function getDetail(id, callback) {
-	DB.getCollection('article')
-		.then(({ collection, client }) => {
-			collection.find({
-				'id': id
-			}).toArray(function (err, docs) {
-				client.close()
-				if (arguments[1].length == 0) {
-					callback && callback('哇塞，貌似这篇博文不存在哦!')
-				} else {
-					docs[0].time_show = utils.parse.time(docs[0].time_show, '{y}-{m}-{d}')
-
-					var converter = new showdown.Converter()
-					docs[0].content = converter.makeHtml(docs[0].content)
-					callback && callback(null, docs[0])
-				}
-			})
-		}).catch(err => {
-			callback && callback(err)
-		})
-}
-
 function getList(app, param, callback) {
 	param = param || {}
 	var skip = param.skip || 0
@@ -42,7 +20,7 @@ function getList(app, param, callback) {
 				collection.find(findKeys, {
 					limit: limit
 				}).sort({
-					time_show: -1
+					time: -1
 				}).skip(skip).toArray(function (err, docs) {
 					client.close()
 					for (var i in docs) {
