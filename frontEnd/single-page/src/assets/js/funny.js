@@ -1,20 +1,19 @@
 const baseTitle = '小剧客栈-剧中人的个人博客！'
 let globalTitle = baseTitle
 
-export function titleTick (url = '') {
-	// 会变的 title
+// 会变的 title
+function titleTick () {
 	document.addEventListener('visibilitychange', function () {
 		document.title = document.hidden ? '出BUG了，快看！' : globalTitle
 	})
 }
-export function setTitle (title) {
-	// 会变的 title
+// 设置页面 title
+function setTitle (title) {
 	globalTitle = `${title} | ${baseTitle}`
 	document.title = globalTitle
 }
 
-
-export function copyPrefix () {
+function copyPrefix () {
 	// 复制超过18个字，改变被复制文字
 	document.body.addEventListener('copy', function (event) {
 		let clipboardData = event.clipboardData || window.clipboardData
@@ -36,7 +35,8 @@ export function copyPrefix () {
 	})
 }
 
-export function consolePrint () {
+// 控制台输出
+function consolePrint () {
 	// 控制台
 	try {
 		console.log('一个人到底多无聊\r\n 才会把 console 当成玩具\r\n一个人究竟多堕落\r\n 才会把大好青春荒废在博客上\r\n\r\n\r\n%cfollow me %c https://github.com/bh-lay', 'color:red', 'color:green')
@@ -44,10 +44,10 @@ export function consolePrint () {
 }
 
 export default {
-	install (Vue) {
+	setTitle,
+	init (Vue) {
 		titleTick()
 		copyPrefix()
 		consolePrint()
-		Vue.setTitle = Vue.prototype.setTitle = setTitle
 	}
 }
