@@ -6,12 +6,19 @@ import router from './router'
 import filters from './filters/index.js'
 import Footer from './components/footer/index.vue'
 import UILibrary from './ui-library/index.js'
+import fuuny from './assets/js/funny.js'
 
 Vue.use(filters)
 Vue.use(UILibrary)
+Vue.use(fuuny)
 Vue.component('Footer', Footer)
 Vue.config.productionTip = false
 
+router.beforeEach((to, from, next) => {
+	let title = to.meta.title
+	Vue.setTitle(title)
+	next()
+})
 /* eslint-disable no-new */
 new Vue({
 	el: '#app',

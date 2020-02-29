@@ -17,37 +17,58 @@ export default new Router({
 		{
 			path: '/',
 			name: 'index',
-			component: Index
+			component: Index,
+			meta: {
+				title: '首页'
+			}
 		},
 		{
 			path: '/blog/',
 			name: 'blogListPage',
-			component: BlogList
+			component: BlogList,
+			meta: {
+				title: '博文'
+			}
 		},
 		{
 			path: '/blog/:id',
 			name: 'blogDetailPage',
-			component: BlogDetail
+			component: BlogDetail,
+			meta: {
+				title: '加载中...'
+			}
 		},
 		{
 			path: '/labs/',
 			name: 'labs',
-			component: LabsList
+			component: LabsList,
+			meta: {
+				title: '实验室'
+			}
 		},
 		{
 			path: '/720/',
 			name: 'pano',
-			component: PanoList
+			component: PanoList,
+			meta: {
+				title: '全景摄影'
+			}
 		},
 		{
 			path: '/photography/',
 			name: 'photography',
-			component: PhotographyList
+			component: PhotographyList,
+			meta: {
+				title: '摄影'
+			}
 		},
 		{
 			path: '/bless/',
 			name: 'blessPage',
-			component: Bless
+			component: Bless,
+			meta: {
+				title: '留言板'
+			}
 		}
 	]
 })

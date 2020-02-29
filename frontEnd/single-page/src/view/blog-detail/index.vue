@@ -288,6 +288,7 @@ export default {
 				.catch(() => {})
 				.then(() => {
 					this.isLoading = false
+					this.setTitle(this.detail.title)
 				})
 		},
 		addCodeSupport () {
