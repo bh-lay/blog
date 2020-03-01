@@ -1,4 +1,4 @@
-const baseTitle = '小剧客栈-剧中人的个人博客！'
+const baseTitle = '小剧客栈-剧中人的个人博客 网页设计师博客 前端工程师 互动设计学习者！'
 let globalTitle = baseTitle
 
 // 会变的 title
@@ -9,7 +9,7 @@ function titleTick () {
 }
 // 设置页面 title
 function setTitle (title) {
-	globalTitle = `${title} | ${baseTitle}`
+	globalTitle = title ? `${title} | ${baseTitle}` : baseTitle
 	document.title = globalTitle
 }
 
