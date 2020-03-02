@@ -19,7 +19,7 @@ export default new Router({
 			name: 'index',
 			component: Index,
 			meta: {
-				title: ''
+				title: '首页'
 			}
 		},
 		{

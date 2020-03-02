@@ -1,5 +1,11 @@
+import setWechatData from './wechat-tool.js'
 const baseTitle = '小剧客栈-剧中人的个人博客 网页设计师博客 前端工程师 互动设计学习者！'
+const defaultDesc = document.querySelector('meta[name="description"]').content
 let globalTitle = baseTitle
+let globalDesc = defaultDesc
+let globalImg = ''
+
+const isWechat = true || navigator.userAgent.toLowerCase().indexOf('microMessenger') > 0
 
 // 会变的 title
 function titleTick () {
@@ -8,9 +14,13 @@ function titleTick () {
 	})
 }
 // 设置页面 title
-function setTitle (title) {
-	globalTitle = title ? `${title} | ${baseTitle}` : baseTitle
+function setTitle (title, desc, img) {
+	globalTitle = title !== '首页' ? `${title} | ${baseTitle}` : baseTitle
+	globalDesc = desc || defaultDesc
+	globalImg = img || null
 	document.title = globalTitle
+
+	isWechat && setWechatData(globalTitle, globalDesc, globalImg)
 }
 
 function copyPrefix () {
@@ -45,7 +55,7 @@ function consolePrint () {
 
 export default {
 	setTitle,
-	init (Vue) {
+	init () {
 		titleTick()
 		copyPrefix()
 		consolePrint()
