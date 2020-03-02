@@ -219,7 +219,7 @@ exports.getWechatJsapiTicket = function () {
 	// });
 }
 
-exports.getWechatJsapiSign = function (connect) {
+exports.getWechatJsapiSign = function (route, connect, app) {
 	var search = connect.url.search,
 		url = decodeURI(search.url).replace(/%26/g, '&')
 	getWechatJsapiTicket(search, function(err, ticket) {
@@ -232,6 +232,6 @@ exports.getWechatJsapiSign = function (connect) {
 			returns.msg = err
 		}
 
-		connect.write( 'jsonp', returns)
+		connect.write( 'json', returns)
 	})
 }

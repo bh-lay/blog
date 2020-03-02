@@ -19,6 +19,7 @@ let pano = require('../../controller/api/pano_get.js')
 // 获取图虫数据
 let photography = require('../../controller/api/photography_get.js')
 let getSinglePageSideData = require('../../controller/api/single-page-side/index.js')
+let wechat = require('../../controller/api/wechat.js')
 
 
 module.exports = [
@@ -96,5 +97,10 @@ module.exports = [
 	{
 		path: 'all /ajax/photography/list',
 		controller: photography.render
-	}
+	},
+	// 获取微信公众号配置
+	{
+		path: 'get /api/wechat-sign-signature',
+		controller: wechat.getWechatJsapiSign
+	},
 ]
