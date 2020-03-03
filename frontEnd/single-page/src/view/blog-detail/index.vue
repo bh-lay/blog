@@ -231,6 +231,7 @@
 <script>
 import highlight from '@/assets/js/highlight.js'
 import Comments from '@/components/comments/index.vue'
+import filters from '@/filters/index.js'
 import blogShare from './share.vue'
 import buildToc from './build-toc.js'
 import renderBanner from './render-banner.js'
@@ -288,7 +289,9 @@ export default {
 				.catch(() => {})
 				.then(() => {
 					this.isLoading = false
-					this.setTitle(this.detail.title)
+
+					let coverUrl = filters.imgHosting(this.detail.cover, 'cover', 420)
+					this.setTitle(this.detail.title, this.detail.intro, coverUrl)
 				})
 		},
 		addCodeSupport () {

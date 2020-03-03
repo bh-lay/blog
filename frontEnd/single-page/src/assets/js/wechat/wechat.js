@@ -1,6 +1,7 @@
 var wx = require('weixin-js-sdk')
 
 let wechatConfigCache = null
+let defaultAvatar = 'http://static.bh-lay.com/user/avatar-small.jpg'
 
 function loadWechatConfig () {
 	if (wechatConfigCache) {
@@ -11,8 +12,8 @@ function loadWechatConfig () {
 		.then(data => {
 			wechatConfigCache = data.config
 			wx.config({
-				debug: true,
-				appId: 'wxc4cf8e62667f92ea',
+				debug: false,
+				appId: wechatConfigCache.appId,
 				timestamp: wechatConfigCache.timestamp,
 				nonceStr: wechatConfigCache.nonceStr,
 				signature: wechatConfigCache.signature,
@@ -22,7 +23,8 @@ function loadWechatConfig () {
 		})
 }
 
-export function updatePageInfo (title, desc, imgUrl) {
+export function updatePageInfo (title, desc, img) {
+	console.log('img', img)
 	loadWechatConfig()
 		.then(() => {
 			wx.ready(function () {
@@ -30,7 +32,7 @@ export function updatePageInfo (title, desc, imgUrl) {
 					title,
 					desc,
 					link: location.href,
-					imgUrl
+					imgUrl: img || defaultAvatar
 				}
 				wx.onMenuShareAppMessage(data)
 				wx.onMenuShareTimeline(data)
