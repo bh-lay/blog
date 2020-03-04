@@ -7,7 +7,7 @@ function loadWechatConfig () {
 	if (wechatConfigCache) {
 		return Promise.resolve(wechatConfigCache)
 	}
-	return fetch('/api/wechat-sign-signature')
+	return fetch('/api/wechat-sign-signature?url=' + location.href)
 		.then(response => response.json())
 		.then(data => {
 			wechatConfigCache = data.config
@@ -17,7 +17,7 @@ function loadWechatConfig () {
 				timestamp: wechatConfigCache.timestamp,
 				nonceStr: wechatConfigCache.nonceStr,
 				signature: wechatConfigCache.signature,
-				jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline']
+				jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData']
 			})
 			return wechatConfigCache
 		})
@@ -33,8 +33,8 @@ export function updatePageInfo (title, desc, img) {
 					link: location.href,
 					imgUrl: img || defaultAvatar
 				}
-				wx.onMenuShareAppMessage(data)
-				wx.onMenuShareTimeline(data)
+				wx.updateAppMessageShareData(data)
+				wx.updateTimelineShareData(data)
 			})
 		})
 }
