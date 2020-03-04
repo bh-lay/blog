@@ -24,7 +24,6 @@ function loadWechatConfig () {
 }
 
 export function updatePageInfo (title, desc, img) {
-	console.log('img', img)
 	loadWechatConfig()
 		.then(() => {
 			wx.ready(function () {

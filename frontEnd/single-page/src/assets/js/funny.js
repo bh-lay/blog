@@ -5,7 +5,7 @@ let globalTitle = baseTitle
 let globalDesc = defaultDesc
 let globalImg = ''
 
-const isWechat = navigator.userAgent.toLowerCase().indexOf('microMessenger') > 0
+const isWechat = navigator.userAgent.toLowerCase().indexOf('micromessenger') > 0
 
 // 会变的 title
 function titleTick () {
