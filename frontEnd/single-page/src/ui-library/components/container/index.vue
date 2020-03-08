@@ -6,8 +6,8 @@
 @media screen and (max-width 600px)
 	.container
 		width auto
-		margin-right 15px
-		margin-left 15px
+		margin-right 5px
+		margin-left 5px
 </style>
 <template>
 <div class="container"><slot /></div>

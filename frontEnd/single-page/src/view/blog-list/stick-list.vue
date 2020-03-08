@@ -1,6 +1,7 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 @import "~@/assets/stylus/variable.styl"
-
+.stick-list
+	padding-top 20px
 .status
 	height 52px
 	margin-bottom 20px
@@ -19,7 +20,7 @@
 		line-height 1.5em
 		text-align center
 		font-size 18px
-		color #000
+		color #22252a
 		outline none
 	img
 		display block
@@ -27,10 +28,10 @@
 		max-width 100%
 		margin auto
 	.info
-		padding 10px 20px
+		padding 20px
 		line-height 1.4
 		font-size 13px
-		color #888
+		color #8a98a8
 		text-indent 2em
 	.label
 		position absolute
@@ -92,20 +93,36 @@
 			white-space nowrap
 			color #888
 			font-size 12px
-	&.pure-text
-		.link
+	&.pure-text .link
 			background url("./blog-card.jpg") no-repeat top right #fff
 			background-size 170px 34px
 	&:hover
 		box-shadow 5px 10px 10px -5px rgba(0, 0, 0, .2)
 
+@media (max-width: $max-mobile-width)
+	.stick-list
+		padding-top 10px
+	.article-item
+		.title
+			padding: 1em 0 0.2em;
+			font-size 14px
+		.info
+			padding 5px 10px 15px
+			font-size 12px
+		footer
+			display none
+		&.pure-text .link
+			padding-top 5px
+			background-size 85px 17px
 </style>
 <template>
-<div>
+<div class="stick-list">
 	<div ref="scrollMark"></div>
 	<Stick
 		:list="list"
 		imgKey="cover"
+		:columnWidth="isMobile ? 170 : 280"
+		:columnSpacing="isMobile ? 5 : 10"
 		@onScrollEnd="loadMore"
 	>
 		<template slot-scope="scope">
@@ -117,7 +134,7 @@
 					<div class="label" v-if="scope.data.is_new"><span>new</span></div>
 					<img v-if="scope.data.cover" :src="scope.data.cover | imgHosting('zoom', 400)" :alt="scope.data.title" />
 					<div class="title">{{scope.data.title}}</div>
-					<div class="info"><p>{{scope.data.intro}}</p></div>
+					<div class="info">{{scope.data.intro}}</div>
 				</router-link>
 				<footer>
 					<div class="tags">
@@ -166,7 +183,9 @@ export default {
 				count: Infinity
 			},
 			list: [],
-			isLoading: false
+			isLoading: false,
+
+			isMobile: window.innerWidth < 600
 		}
 	},
 	computed: {

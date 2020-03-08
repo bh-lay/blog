@@ -10,7 +10,6 @@ $tag_cnt_bj = #fff
 		height 300px
 .sticky-bar-outer
 	width 100%
-	padding-bottom 20px
 .sticky-bar
 	width 100%
 	background $tag_cnt_bj
@@ -61,6 +60,9 @@ $tag_cnt_bj = #fff
 				left 15px
 				width 0
 				height 0
+@media (max-width: $max-mobile-width)
+	.sticky-body
+		padding 7px 0
 </style>
 <template>
 <div class="article-list-page">

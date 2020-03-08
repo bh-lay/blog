@@ -71,6 +71,16 @@
 			margin auto
 		.notice
 			padding 15px
+	.post-list
+		margin 0 -5px
+		padding-top 10px
+		.post-item,
+		& > i
+			width 170px
+			margin-left 5px
+			margin-right 5px
+		.post-item
+			margin-bottom 10px
 </style>
 <template>
 <div class="labs-list-pager">
