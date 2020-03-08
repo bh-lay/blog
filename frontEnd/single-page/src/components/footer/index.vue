@@ -125,10 +125,19 @@
 @media screen and (max-width $max-mobile-width)
 	.footer-container
 		display block
-		padding-top 40px
+		padding-top 30px
 		.footer-part-main,
 		.footer-part-side
 			width auto
+			padding 0 10px
+		.footer-part-main
+			.label
+				svg
+					width 60px
+				h3
+					font-size 20px
+			p
+				font-size 14px
 </style>
 <template>
 <div class="app-footer">

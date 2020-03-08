@@ -79,7 +79,7 @@
 	.navigation
 		padding-top 0
 		.nav-inner
-			margin 0 -15px
+			margin-left -5px
 		.nav-list-body
 			position absolute
 			top 60px

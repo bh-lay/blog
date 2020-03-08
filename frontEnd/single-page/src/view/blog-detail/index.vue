@@ -149,13 +149,6 @@
 			border-style solid
 			border-color transparent transparent #5a6872
 			border-width 0 30px 15px
-@media screen and (max-width $max-mobile-width)
-	.blog-detail
-		.article-section
-			.caption
-				padding 0
-			.article
-				padding 40px 0
 </style>
 <template>
 <div class="blog-detail" v-loading="isLoading">
