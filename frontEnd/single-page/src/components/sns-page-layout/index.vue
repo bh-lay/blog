@@ -77,10 +77,10 @@
 		.post-item,
 		& > i
 			width 170px
-			margin-left 5px
-			margin-right 5px
+			margin-left 3px
+			margin-right 3px
 		.post-item
-			margin-bottom 10px
+			margin-bottom 6px
 </style>
 <template>
 <div class="labs-list-pager">

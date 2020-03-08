@@ -129,7 +129,7 @@
 		.footer-part-main,
 		.footer-part-side
 			width auto
-			padding 0 10px
+			padding 0 5px
 		.footer-part-main
 			.label
 				svg

@@ -41,9 +41,9 @@
 		height 130px
 		background #fff
 	.title
-		height 50px
-		padding-left 20px
-		line-height 50px
+		height 30px
+		padding 10px 0 10px 20px
+		line-height 30px
 		font-size 16px
 		color #000
 		white-space nowrap

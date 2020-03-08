@@ -71,6 +71,7 @@
 		border-top 1px solid #e8e8e8
 		background #fbfbfb
 		.tags
+			flex-grow 1
 			strong
 				font-size 12px
 				color #73828c
@@ -90,6 +91,7 @@
 					color #a7b5be
 					cursor default
 		.time
+			width 100px
 			white-space nowrap
 			color #888
 			font-size 12px
@@ -109,7 +111,7 @@
 		.info
 			padding 5px 10px 15px
 			font-size 12px
-		footer
+		footer .tags
 			display none
 		&.pure-text .link
 			padding-top 5px
@@ -122,7 +124,7 @@
 		:list="list"
 		imgKey="cover"
 		:columnWidth="isMobile ? 170 : 280"
-		:columnSpacing="isMobile ? 5 : 10"
+		:columnSpacing="isMobile ? 6 : 10"
 		@onScrollEnd="loadMore"
 	>
 		<template slot-scope="scope">
