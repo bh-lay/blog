@@ -4,9 +4,10 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
-const isProduction = process.env.NODE_ENV === 'production'
-const cdnPath = isProduction ? 'http://static.bh-lay.com' : '//127.0.0.1:8088'
 
+require('dotenv').config({
+	path: path.resolve(__dirname, '../../../.env')
+})
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -30,9 +31,7 @@ module.exports = {
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
-    publicPath: process.env.NODE_ENV === 'production'
-      ? config.build.assetsPublicPath
-      : config.dev.assetsPublicPath
+		publicPath: process.env.cdnDomain + '/build/single-page-vue/'
   },
   resolve: {
     extensions: ['.js', '.vue', '.json', '.styl'],
@@ -93,7 +92,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      CDN_PATH: JSON.stringify(cdnPath)
+      CDN_PATH: JSON.stringify(process.env.cdnDomain)
     })
   ],
   node: {

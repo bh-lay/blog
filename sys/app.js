@@ -1,5 +1,7 @@
 // 第一步，引入环境变量配置
-require('dotenv').config()
+require('dotenv').config({
+	path: '../.env'
+})
 
 // 引入app框架
 const appFactory = require('../sys/core/index.js')

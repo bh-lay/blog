@@ -27,26 +27,13 @@ function start(){
 	cd ../frontEnd/;
 	pm2 start develop_static_server.js;
 
-
 	printScape;
-
-
-	echo "启动 Mongo";
-	printLine;
-	cd ../../mongodb/;
-	echo "  删除非正常退出的lock文件";
-	rm db/mongod.lock -rf;
-	./bin/mongod --fork -dbpath=./data --logpath=./log/MongoDB.log --bind_ip 127.0.0.1 --port 2797
-
 
 	printScape;
 	printLine;
 	echo "好了，都启动好了";
 	echo "  node 服务请使用 pm2 关闭"
-	echo "  mongo 服务请使用以下方式关闭
-	    ./mongod
-	    > use admin
-	    > db.shutdownServer()\n";
+	echo "  mongo 服务请自行维护"
 }
 
 start;

@@ -4,6 +4,10 @@
 
 const path = require('path')
 
+require('dotenv').config({
+	path: path.resolve(__dirname, '../../../.env')
+})
+
 module.exports = {
   dev: {
 
@@ -58,7 +62,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../../../static/'),
     assetsSubDirectory: 'build/console/',
-    assetsPublicPath: 'http://static.bh-lay.com/',
+    assetsPublicPath: process.env.cndDomain,
 
     /**
      * Source Maps

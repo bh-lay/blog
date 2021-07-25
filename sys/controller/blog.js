@@ -51,7 +51,7 @@ function getList(app, param, callback) {
 					client.close()
 					for (var i in docs) {
 						docs[i].time_show = utils.parse.time(docs[i].time_show, '{y}年-{m}月-{d}日')
-						docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? app.config.frontEnd.img_domain + docs[i].cover : docs[i].cover
+						docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? app.config.frontEnd.cdnDomain + docs[i].cover : docs[i].cover
 					}
 					callback && callback(null, docs, {
 						count: count,
@@ -81,7 +81,7 @@ exports.list = function (route, connect, app) {
 			limit: 10,
 			tag: tag
 		}, function (err, list, data) {
-			if (err) {
+			if (err || !data) {
 				app.views('system/mongoFail', {}, function (err, html) {
 					connect.write('html', 500, html)
 				})

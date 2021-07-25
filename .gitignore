@@ -6,7 +6,8 @@ lib-cov
 *.out
 *.pid
 *.gz
-
+# 根目录下的 .env 文件
+/.env
 pids
 logs
 results

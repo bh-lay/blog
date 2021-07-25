@@ -4,6 +4,10 @@ const ROOT_PATH = path.resolve(__dirname);
 const HTML_PATH = path.resolve(ROOT_PATH, '../../sys/views/single-page/index.html');
 const GITHUB_HTML_PATH = path.resolve(ROOT_PATH, '../../sys/component/single-page/github.html');
 
+require('dotenv').config({
+	path: path.resolve(__dirname, '../../.env')
+})
+
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -11,7 +15,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 const BUILD_PATH = path.resolve(ROOT_PATH, '../../static/build/single-page/');
-const cdnPath = isProduction ? 'http://static.bh-lay.com' : '//127.0.0.1:8088';
+const cdnPath = process.env.cdnDomain;
 const publicPath = cdnPath + '/build/single-page/';
 
 const config = {

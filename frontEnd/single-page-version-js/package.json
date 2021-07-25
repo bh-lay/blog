@@ -34,11 +34,13 @@
   "version": "1.0.0",
   "description": "blog's single page project",
   "main": "app.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "dotenv": "^10.0.0"
+  },
   "scripts": {
     "eslint": "webpack --config webpack.eslint.config.js",
     "dev": "NODE_ENV=local_dev webpack --progress --watch",
-    "production": "NODE_ENV=production webpack"
+    "build": "NODE_ENV=production webpack"
   },
   "repository": {
     "type": "git",

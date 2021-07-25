@@ -7,11 +7,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
+require('dotenv').config({
+	path: path.resolve(ROOT_PATH, '../../.env')
+})
+
 const isProduction = process.env.NODE_ENV === 'production';
 const BUILD_PATH = path.resolve(ROOT_PATH, '../../static/build/multi-page/');
-const devPublicPath = 'http://127.0.0.1:8088/build/multi-page/';
-const prodPublicPath = 'http://static.bh-lay.com/build/multi-page/';
-const publicPath = isProduction ? prodPublicPath : devPublicPath;
 
 const config = {
   entry: {
@@ -31,7 +32,7 @@ const config = {
   output: {
     path: BUILD_PATH,
     filename: '[name].[hash:8].js',
-    publicPath: publicPath
+    publicPath: process.env.cdnDomain + '/build/multi-page/'
   },
   module: {
     rules: [

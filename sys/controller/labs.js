@@ -11,7 +11,7 @@ function list_page(app, callback) {
 		.then(({ collection, client }) => {
 			collection.find({}, { limit: 15 }).sort({ id: -1 }).toArray(function (err, docs) {
 				for (var i in docs) {
-					docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? app.config.frontEnd.img_domain + docs[i].cover : docs[i].cover
+					docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? app.config.frontEnd.cdnDomain + docs[i].cover : docs[i].cover
 				}
 				client.close()
 				callback && callback(null, docs)

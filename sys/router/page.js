@@ -22,7 +22,7 @@ const adaptionViewForSinglePage = controller => {
 		var isBotRequest = isbot(connect.request.headers['user-agent'])
 		var uiVersion = connect.cookie('ui_version')
 		if (isBotRequest) {
-			// 无 cookie 标识，执行回调默认视图
+			// 若命中搜索引擎标识，执行回调默认视图
 			return controller(route, connect, app)
 		}else if (uiVersion === 'vue') {
 			singlePageVue.render(connect,app)
