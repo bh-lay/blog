@@ -11,7 +11,7 @@ echo '\n\n\n\n[3] 安装前端依赖'
 echo '\n\n[3.1] 安装前端 single-page 依赖'
 cd ../frontEnd/single-page && npm install && npm run build
 echo '\n\n[3.1] 安装前端 single-page-version-js 依赖'
-cd ../frontEnd/single-page-version-js && npm install && npm run build
+cd ../single-page-version-js && npm install && npm run build
 echo '\n\n[3.2] 安装前端 multi-page 依赖'
 cd ../multi-page && npm install && npm run build
 echo '\n\n[3.3] 安装前端 console 依赖'
