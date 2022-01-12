@@ -29,7 +29,7 @@ exports.render = (route, connect) => {
 	// 获取图片原始地址和 referr 
 	let [imageOriginUrl, imageReeferrUrl] = urlSourceSplit
 	// 生成新的文件名
-	let fileName = base64Encode(imageOriginUrl)
+	let fileName = base64Encode(imageOriginUrl).replace(/\//g, '-')
 	// 生成新的文件地址
 	let localFilePath = imgRobberRoot + fileName
 	// 查看文件是否存在
@@ -45,7 +45,7 @@ exports.render = (route, connect) => {
 					// 下载成功，读取文件
 					staticFile.fileReader(localFilePath, connect.request, connect.response)
 				})
-				.catch(() => {
+				.catch((e) => {
 					// 下载失败
 					connect.write('json',{
 						code: 2,

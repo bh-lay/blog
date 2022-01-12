@@ -23,7 +23,7 @@ module.exports = [
 	},
 	// 通用图片盗链方法
 	{
-		path: 'get /img-robber/:source',
+		path: 'get /img-robber/:source*',
 		controller: imgRobber.render
 	},
 ]
