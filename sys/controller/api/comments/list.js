@@ -8,7 +8,7 @@ const encodeHtml = s =>{
 		c = (c == 0x20) ? 0xA0 : c
 		r.push(c); r.push(';')
 		return r.join('')
-	})
+	}).replace(/"/g, '&quot;')
 }
 /**
  * 处理评论数据
