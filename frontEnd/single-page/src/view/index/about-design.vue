@@ -7,8 +7,7 @@
 	padding-top 9em
 	line-height 1.8em
 	text-align center
-	background #222
-	background-image -webkit-gradient(linear, left top, left bottom, color-stop(0, #222), color-stop(1, #333))
+	background #1f2738
 	&:before
 		content ''
 		position absolute
@@ -18,46 +17,46 @@
 		left 0
 		border-style solid
 		border-width 50px 100vw 0 0
-		border-color transparent #222 transparent
+		border-color transparent #1f2738 transparent
 	h3
 		margin-bottom 1em
 		font-size 2em
 		font-weight normal
 		letter-spacing .2em
-		color #fff
+		color #c1c8d7
 	p
 		margin-bottom 7em
 		padding-right .4em
 		font-size 1.3em
-		color #ddd
+		color #a5aec0
 	.links
 		font-size 1em
-		color #fff
+		color #a5aec0
 		a
 			padding 0 .5em
 			text-decoration underline
-			color #fff
+			color #a5aec0
 	.device-cnt
 		position relative
-		height 176px
+		height 190px
 		max-width 600px
 		margin 2em auto 0
 		overflow hidden
-		&after
+		&:after
 			content ''
 			position absolute
 			height 10px
 			left 10px
 			right 10px
 			bottom -10px
-			box-shadow 0 0 10px #000
+			box-shadow 0 0 10px rgba(0, 0, 0, .5)
 	.device
 		position absolute
 		bottom 0
 		border-radius 8px 8px 0 0
-		background #aaa
+		background #afb8ca
 		border-style solid
-		border-color #ddd
+		border-color #e0e4eb
 		border-width 10px 6px 0
 		line-height 0
 		box-shadow 0px 0px 4px rgba(0, 0, 0,0.2), 1px 1px 2px rgba(0, 0, 0,.4)
@@ -68,7 +67,7 @@
 			height 10px
 			margin-bottom 6px
 			background #fff
-			box-shadow 0 2px 2px -2px #000
+			box-shadow 0 2px 2px -2px #364463
 		/** 列表项 **/
 		i
 			display inline-block
@@ -117,7 +116,7 @@
 			margin-bottom 4px
 	.pc
 		width 280px
-		height 166px
+		height 176px
 		left 50%
 		margin-left -146px
 		&:before
@@ -143,7 +142,7 @@
 </style>
 <template>
 <section class="index-about-design">
-	<h3>尝试实现响应式设计</h3>
+	<h3>多视图 + 响应式设计</h3>
 	<p>配合单页架构营造顺滑体验</p>
 	<div class="links">
 		单页组件<a href="http://bh-lay.github.io/lofox/index.html" target="_blank">lofox.js</a>

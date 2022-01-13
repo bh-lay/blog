@@ -26,15 +26,15 @@
       &:nth-child(1)
         margin-bottom .5em
         font-size 1.5em
-        color #555
+        color #2f3746
       &:nth-child(2)
         max-width 400px
         margin auto
-        background #555
-        color #fff
+        background #2f3746
+        color #979eaa
     a
       padding-left .5em
-      color #80bd01
+      color #accc66
       &:hover
         text-decoration underline
 </style>
@@ -45,8 +45,8 @@
 		<p>NODEJS强力驱动</p>
 	</div>
 	<div class="frameworks">
-		<p>无耻地没有使用以下框架</p>
-		<p>express hexo bones rrestjs koa hapi<a href="https://github.com/bh-lay/blog/" target="_blank">博客源码</a></p>
+		<p>基于少量类库实现服务端框架</p>
+		<p>path-to-regexp、formidable、request、juicer ...<a href="https://github.com/bh-lay/blog/" target="_blank">博客源码</a></p>
 	</div>
 </section>
 </template>
