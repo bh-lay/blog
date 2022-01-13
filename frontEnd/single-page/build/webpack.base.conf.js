@@ -31,7 +31,6 @@ module.exports = {
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
-		publicPath: process.env.cdnDomain + '/build/single-page-vue/'
   },
   resolve: {
     extensions: ['.js', '.vue', '.json', '.styl'],
