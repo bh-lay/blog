@@ -16,7 +16,7 @@
     "juicer": "~0.6.5-stable",
     "mongodb": "^3.1.13",
     "node-isbot": "0.0.8",
-    "nodemailer": "~6.4.16",
+    "nodemailer": "~6.6.1",
     "request": "^2.81.0"
   },
   "dependencies": {
