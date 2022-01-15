@@ -100,7 +100,8 @@ exports.delete = function (route, connect,app){
 					})
 					.catch((err) => {
 						connect.write('json',{
-							'code' : 500
+							code : 500,
+							message: err ? err.message : ''
 						})
 					})
 			}else{
