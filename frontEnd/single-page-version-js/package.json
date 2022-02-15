@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "ajv": "^6.10.0",
+    "ajv": "^6.12.3",
     "autoprefixer-loader": "^3.2.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^7.2.3",
