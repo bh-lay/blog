@@ -2,8 +2,7 @@
 @import "~@/assets/stylus/variable.styl"
 
 .sns-share
-	padding 20px 0
-	border-top 1px solid #d3dade
+	padding 40px 0
 	.share-card
 		min-height 100px
 		:global(img)

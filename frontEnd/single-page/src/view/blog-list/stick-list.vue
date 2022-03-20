@@ -67,15 +67,15 @@
 	footer
 		display flex
 		align-items center
-		padding 5px 15px
+		padding 7px 15px
 		border-top 1px solid #edeff3
 		background #f9fafb
-		line-height 30px
+		line-height 24px
 		.tags
 			flex-grow 1
 		.time
 			white-space nowrap
-			color #888
+			color #7e94a9
 			font-size 12px
 	&.pure-text .link
 			background url("./blog-card.jpg") no-repeat top right #fff

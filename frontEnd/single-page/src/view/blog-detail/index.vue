@@ -73,9 +73,7 @@
 			font-size 16px
 			color #22272a
 		footer
-			margin 0 20px 40px
-			padding 10px 20px
-			background #f9fafb
+			margin 0 20px
 			p
 				font-size 14px
 				color #5c6870
@@ -93,7 +91,7 @@
 			line-height 1.2em
 			text-align left
 			font-size 14px
-			color #8599ad
+			color #667f99
 			transition .2s
 			&:hover
 				color #407fbf
@@ -173,15 +171,15 @@
 						/>
 					</p>
 					<p><strong>转载请注明来源：</strong>http://bh-lay.com/blog/{{detail.id}}</p>
-
-					<blogShare
-						v-if="!isLoading"
-						:blogID="detail.id"
-						:title="detail.title"
-						:intro="detail.intro"
-						:cover="detail.cover"
-					/>
 				</footer>
+
+				<blogShare
+					v-if="!isLoading"
+					:blogID="detail.id"
+					:title="detail.title"
+					:intro="detail.intro"
+					:cover="detail.cover"
+				/>
 			</div>
 			<div class="article-section-side">
 				<div class="article-section-body">
