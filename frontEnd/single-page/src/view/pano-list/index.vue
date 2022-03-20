@@ -47,7 +47,7 @@ export default {
 				.then(response => response.json())
 				.then(data => {
 					data.data.list.forEach(function (item) {
-						let thumb = `https://ssl-thumb.720static.com/@${item.property.thumbUrl}?imageMogr2/thumbnail/560`
+						let thumb = `https://ssl-thumb2.720static.com/${item.property.thumbUrl}?imageMogr2/thumbnail/560`
 						item.title = item.property.name
 						item.desc = item.property.remark
 						item.url = `http://720yun.com/t/${item.property.pid}?from=bh-lay`
