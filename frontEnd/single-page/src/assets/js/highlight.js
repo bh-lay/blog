@@ -51,14 +51,31 @@ highlight.add = function (lang, data, rules) {
 
 function highlightElements (node) {
 	let parent = node.parentNode
-	let html
 	let lang = (node.className || '').match(/(?:^|\s)(javascript|css|html)(?:$|\s)/)
 	lang = lang ? lang[1] : 'javascript'
-	html = parse(node.innerHTML, lang)
+	let { html, lines } = parse(node.innerHTML, lang)
 	if (parent && (parent.tagName || '').toLowerCase() === 'pre') {
 		node = parent
 	}
-	node.outerHTML = html
+	if (lines.length > 10) {
+		const tempDiv = document.createElement('div')
+		tempDiv.innerHTML = html
+		const highlightEl = tempDiv.childNodes[0]
+		highlightEl.style = 'height: 300px'
+
+		const showMoreEl = document.createElement('div')
+		showMoreEl.classList.add('highlight-show-more')
+		showMoreEl.innerHTML = '查看全部'
+		showMoreEl.addEventListener('click', function () {
+			showMoreEl.parentNode.removeChild(showMoreEl)
+			highlightEl.style = 'height: auto'
+		})
+
+		highlightEl.appendChild(showMoreEl)
+		node.parentNode.replaceChild(highlightEl, node)
+	} else {
+		node.outerHTML = html
+	}
 }
 
 function joinExp () {
@@ -71,9 +88,7 @@ function parse (text, lang) {
 	lang = lang || 'js'
 	let config = ruleSet[lang]
 	let rules = config.rules
-	let parsed
-	let arr
-	parsed = text.replace(/\r?\n$/, '').replace(new RegExp(rules, 'g'), function () {
+	let parsed = text.replace(/\r?\n$/, '').replace(new RegExp(rules, 'g'), function () {
 		let i = 0
 		let j = 1
 		let ruleItem = rules[i]
@@ -98,14 +113,20 @@ function parse (text, lang) {
 			ruleItem = rules[++i]
 		}
 	})
-	arr = parsed.split(/\r?\n/)
-
-	parsed = '<div>' + arr.join('</div><div>') + '</div>'
-	parsed = '<div class="highlight ' + lang + '">' + parsed + '</div>'
-	return parsed
+	const lines = parsed.split(/\r?\n/)
+	const highlightHtml = `<div class="highlight-wrapper">
+		<div class="highlight-lang">${lang}</div>
+		<div class="highlight ${lang}">
+			<div class="code-line">${lines.join('</div><div class="code-line">')}</div>
+		</div>
+	</div>`
+	return {
+		lines,
+		html: highlightHtml
+	}
 }
 
-highlight.add('js javascript json',
+highlight.add('js javascript typescript json',
 	{
 		className: 'js'
 	},
