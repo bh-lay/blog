@@ -75,8 +75,12 @@
 		footer
 			margin 0 20px
 			p
+				word-break break-all
+				line-height: 24px
 				font-size 14px
 				color #5c6870
+		.sns-share
+			margin 0 20px
 	.toc-content
 		width 280px
 		padding 20px 10px 40px
