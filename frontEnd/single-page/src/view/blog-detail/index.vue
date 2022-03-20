@@ -1,8 +1,6 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 @import "~@/assets/stylus/variable.styl"
 
-// @import "../../../../_public/less/_articleGithub.less"
-
 .blog-detail
 	font-size 14px
 	background #fff
@@ -77,16 +75,10 @@
 		footer
 			margin 0 20px 40px
 			padding 10px 20px
-			background #f7f8f8
+			background #f9fafb
 			p
 				font-size 14px
 				color #5c6870
-			a
-				margin-right 10px
-				font-size 14px
-				color #5c6870
-				&:hover
-					text-decoration underline
 	.toc-content
 		width 280px
 		padding 20px 10px 40px
@@ -174,11 +166,11 @@
 				<div class="article" ref="article" v-html="detail.content"></div>
 				<footer>
 					<p><strong>tags：</strong>
-					<router-link
-						v-for="(tag, index) in detail.tags"
-						:key="tag + index"
-						:to="'/blog?tag=' + tag"
-					>{{tag}}</router-link>
+						<blog-tag
+							v-for="(tag, index) in detail.tags"
+							:key="index"
+							:tag="tag"
+						/>
 					</p>
 					<p><strong>转载请注明来源：</strong>http://bh-lay.com/blog/{{detail.id}}</p>
 
@@ -224,6 +216,7 @@
 <script>
 import highlight from '@/assets/js/highlight.js'
 import Comments from '@/components/comments/index.vue'
+import BlogTag from '@/components/common/blog-tag.vue'
 import filters from '@/filters/index.js'
 import blogShare from './share.vue'
 import buildToc from './build-toc.js'
@@ -233,7 +226,8 @@ export default {
 	name: 'blogDetail',
 	components: {
 		Comments,
-		blogShare
+		blogShare,
+		BlogTag
 	},
 	data () {
 		return {

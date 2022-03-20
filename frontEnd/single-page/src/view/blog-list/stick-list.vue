@@ -66,32 +66,14 @@
 			color #fff
 	footer
 		display flex
-		justify-content space-between
-		padding 10px
-		border-top 1px solid #e8e8e8
-		background #fbfbfb
+		align-items center
+		padding 5px 15px
+		border-top 1px solid #edeff3
+		background #f9fafb
+		line-height 30px
 		.tags
 			flex-grow 1
-			strong
-				font-size 12px
-				color #73828c
-				font-weight normal
-			a
-				display inline-block
-				padding 0 5px
-				font-size 13px
-				color #73828c
-				text-decoration none
-				&:hover
-					text-decoration underline
-					color #000
-				&.router-link-exact-active
-					border-radius 4px
-					background #29353d
-					color #a7b5be
-					cursor default
 		.time
-			width 100px
 			white-space nowrap
 			color #888
 			font-size 12px
@@ -140,13 +122,11 @@
 				</router-link>
 				<footer>
 					<div class="tags">
-						<strong>tags</strong>
-						<router-link
+						<blog-tag
 							v-for="(tag, index) in scope.data.tags"
 							:key="index"
-							:to="'/blog?tag=' + tag"
-							:title="scope.data.title"
-						>{{tag}}</router-link>
+							:tag="tag"
+						/>
 					</div>
 					<div class="time" :title="scope.data.time_show | timeFormat">{{scope.data.time_show | dateDiff}}</div>
 				</footer>
@@ -159,6 +139,7 @@
 
 <script>
 import Stick from 'vue-stick'
+import BlogTag from '@/components/common/blog-tag.vue'
 
 const prefixBlogList = list => {
 	list = list || []
@@ -174,7 +155,8 @@ const prefixBlogList = list => {
 export default {
 	name: 'blogPageStick',
 	components: {
-		Stick: Stick.component
+		Stick: Stick.component,
+		BlogTag
 	},
 	data () {
 		return {
