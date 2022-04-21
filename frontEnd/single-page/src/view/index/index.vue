@@ -23,7 +23,7 @@
 	<aboutBackend/>
 	<aboutFriends/>
 	<section class="index-about-links">
-		<Button href="/topic/aboutme/index.html" type="primary" >关于剧中人</Button>
+		<Button href="http://t.bh-lay.com/aboutme/" type="primary" >关于剧中人</Button>
 		<Button href="/topic/aboutblog/index.html" target="_blank" >关于小剧客栈</Button>
 	</section>
 	<Footer />
