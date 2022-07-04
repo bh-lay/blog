@@ -110,7 +110,6 @@ export default {
 		},
 		replacePath () {
 			let query = {
-				type: 'list',
 				page: this.page.pageIndex
 			}
 			if (this.tag) {
