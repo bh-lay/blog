@@ -83,7 +83,7 @@ $tag_cnt_bj = #fff
 				<Button
 					size="small"
 					@click="toggleArchivesList"
-					:class="['list-type-switch', usePreListMode ? 'active' : '']"
+					:class="['list-type-switch', useListMode ? 'active' : '']"
 				>
 					<i></i><i></i><i></i><i></i>
 				</Button>
@@ -91,7 +91,7 @@ $tag_cnt_bj = #fff
 		</div>
 	</Tie>
 	<Container>
-		<archivesList v-if="usePreListMode"/>
+		<archivesList v-if="useListMode"/>
 		<stickList v-else/>
 	</Container>
 	<Footer />
@@ -129,15 +129,13 @@ export default {
 					author: '剧中人'
 				}
 			],
-			photoGraphaIndex: globalPhotoGraphaIndex
+			photoGraphaIndex: globalPhotoGraphaIndex,
+			useListMode: localStorage.getItem('blog-layout') === 'list'
 		}
 	},
 	computed: {
 		tag () {
 			return this.$route.query.tag || ''
-		},
-		usePreListMode () {
-			return this.$route.query.type === 'list'
 		}
 	},
 	methods: {
@@ -145,19 +143,8 @@ export default {
 			globalPhotoGraphaIndex = index
 		},
 		toggleArchivesList () {
-			let isSet = !this.usePreListMode
-			let query = {}
-			if (isSet) {
-				query.type = 'list'
-				query.page = 1
-			}
-			if (this.tag) {
-				query.tag = this.tag
-			}
-			this.$router.replace({
-				path: '/blog/',
-				query
-			})
+			this.useListMode = !this.useListMode
+			localStorage.setItem('blog-layout', this.useListMode ? 'list' : 'card')
 		}
 	}
 }
