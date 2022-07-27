@@ -68,6 +68,9 @@
 	</div>
 
 	<script type="text/javascript">
+		if (location.protocol.indexOf('s') > 0) {
+			location.protocol = 'http'
+		}
 		var _hmt = _hmt || [];
 		(function () {
 			var hm = document.createElement("script");
