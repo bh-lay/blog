@@ -9,7 +9,7 @@
     "lint": "eslint --ext .js ./ --fix"
   },
   "devDependencies": {
-    "cron": "1.0.9",
+    "cron": "1.8.2",
     "eslint": "^5.15.0",
     "request": "^2.81.0"
   },
