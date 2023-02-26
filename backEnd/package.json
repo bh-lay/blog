@@ -31,7 +31,7 @@
     "node-isbot": "0.0.8",
     "nodemailer": "~6.6.1",
     "path-to-regexp": "^3.0.0",
-    "request": "^2.81.0",
+    "request": "^2.88.2",
     "showdown": "^1.9.1"
   }
 }
