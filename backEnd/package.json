@@ -7,7 +7,9 @@
   },
   "scripts": {
     "dev": "nodemon -r tsconfig-paths/register ./src/app.ts",
-    "serve": "ts-node -r tsconfig-paths/register ./src/app.ts ",
+    "serve-local": "ts-node -r tsconfig-paths/register ./src/app.ts ",
+    "serve": "node ./dist/app.js ",
+    "build": "rm -rf dist && tsc && tsc-alias",
     "lint": "eslint --ext .ts ./src --fix"
   },
   "devDependencies": {
@@ -21,6 +23,7 @@
     "eslint": "^5.15.0",
     "nodemon": "^2.0.20",
     "ts-node": "^10.9.1",
+    "tsc-alias": "^1.8.2",
     "tsconfig-paths": "^4.1.2",
     "typescript": "^4.9.5"
   },
