@@ -7,9 +7,9 @@ import { base64Encode, base64Decode } from '@/lib/utils'
 
 export async function get (route: routeItemMatched, connect: Connect, app: App){
 	// 获取 URL 配置参数
-	let urlSourceStr = base64Decode(route.params.source as string || '')
+	const urlSourceStr = base64Decode(route.params.source as string || '')
 	// 分割 URL 参数
-	let urlSourceSplit = urlSourceStr.split(/-(?=http)/)
+	const urlSourceSplit = urlSourceStr.split(/-(?=http)/)
 	// 判断是否能
 	if (urlSourceSplit.length === 0) {
 		connect.writeJson({
@@ -20,11 +20,11 @@ export async function get (route: routeItemMatched, connect: Connect, app: App){
 	}
 	
 	// 获取图片原始地址和 referr 
-	let [imageOriginUrl, imageReeferrUrl] = urlSourceSplit
+	const [imageOriginUrl, imageReeferrUrl] = urlSourceSplit
 	// 生成新的文件名
-	let fileName = base64Encode(imageOriginUrl).replace(/\//g, '-')
+	const fileName = base64Encode(imageOriginUrl).replace(/\//g, '-')
 	// 生成新的文件地址
-	let localFilePath = getAppConfig().imgRobber.root + fileName
+	const localFilePath = getAppConfig().imgRobber.root + fileName
 	// 查看文件是否存在
 	const fileExist = await isFileExists(localFilePath)
 	

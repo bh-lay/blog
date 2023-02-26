@@ -3,8 +3,8 @@
  * demo 
  */
 import { promises as fs } from 'fs'
-import { App, Connect, routeItemMatched } from "@/core/types"
-import { base64PathToAbsolute, hasPermission } from "./utils"
+import { App, Connect, routeItemMatched } from '@/core/types'
+import { base64PathToAbsolute, hasPermission } from './utils'
 
 
 

@@ -5,12 +5,12 @@ import { routeItemMatched, Connect, App } from '@/core/types'
 import { formatTime } from '@/core/utils/parse'
 import DB from '@/core/DB'
 
-let showdown  = require('showdown')
+const showdown  = require('showdown')
 
 async function list_page(app: App) {
 	const { collection, client } = await DB.getCollection('labs')
 	const docs = await collection.find({}, { limit: 15 }).sort({ id: -1 }).toArray()
-	for (var i in docs) {
+	for (const i in docs) {
 		docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? app.config.frontEnd.cdnDomain + docs[i].cover : docs[i].cover
 	}
 	client.close()
@@ -23,17 +23,17 @@ export function list(route: routeItemMatched, connect: Connect, app: App) {
 		return list_page(app)
 			.then(function (list) {
 			// 获取视图
-			return connect.views('multi-page/labsList', {
-				title: '实验室_小剧客栈_剧中人的个人博客',
-				keywords: '造轮子,组件,实验室,剧中人,小剧客栈,前端工程师,设计师,nodeJS',
-				description: '剧中人造轮子的基地，汇集小剧开发的部分组件，孕育优秀代码的实验室！',
-				list: list
+				return connect.views('multi-page/labsList', {
+					title: '实验室_小剧客栈_剧中人的个人博客',
+					keywords: '造轮子,组件,实验室,剧中人,小剧客栈,前端工程师,设计师,nodeJS',
+					description: '剧中人造轮子的基地，汇集小剧开发的部分组件，孕育优秀代码的实验室！',
+					list: list
+				})
 			})
+	})
+		.then((html) => {
+			connect.writeHTML(200, html)
 		})
-	})
-	.then((html) => {
-		connect.writeHTML(200, html)
-	})
 }
 
 async function get_detail(lab_name: string) {
@@ -42,7 +42,7 @@ async function get_detail(lab_name: string) {
 	const docs = await collection.find({ 'name': lab_name }).toArray()
 
 	client.close()
-	var converter = new showdown.Converter()
+	const converter = new showdown.Converter()
 	if (!docs || docs.length === 0) {
 		throw new Error('notFound')
 	}
@@ -53,7 +53,7 @@ async function get_detail(lab_name: string) {
 }
 
 export async function detail(route: routeItemMatched, connect: Connect, app: App) {
-	let lab_name = route.params.name as string
+	const lab_name = route.params.name as string
 	const html = await app.cache.getWithCreate('labs_id_' + lab_name, ['html', 'labs'], async function() {
 		// 获取作品信息
 		const data = await get_detail(lab_name)

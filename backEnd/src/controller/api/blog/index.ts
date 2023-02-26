@@ -10,9 +10,9 @@ import publish from './publish'
 import remove from './remove'
 
 export async function getList (route: routeItemMatched, connect: Connect, app: App) {
-	var url = connect.request.url || ''
+	const url = connect.request.url || ''
 	const json = await app.cache.getWithCreate(url, ['api','article'], async function() {
-		let data = connect.url.search || {}
+		const data = connect.url.search || {}
 		return await list({
 			limit: typeof data.limit === 'number' ? data.limit : 10,
 			skip: parseInt(data.skip as string, 10),
@@ -23,12 +23,12 @@ export async function getList (route: routeItemMatched, connect: Connect, app: A
 }
 
 async function getArticleDetail(route: routeItemMatched, connect: Connect, app: App) {
-	var url = connect.request.url || ''
+	const url = connect.request.url || ''
 	const json = await app.cache.getWithCreate(url,['api','article'], async function(){
-		let data = connect.url.search
-		let id = route.params.id
+		const data = connect.url.search
+		const id = route.params.id
 		// 内容格式 html/markdown
-		let format = data.format as string || 'markdown'
+		const format = data.format as string || 'markdown'
 		return await detail(id as string, format)
 	})
 	connect.writeJson(JSON.parse(json))

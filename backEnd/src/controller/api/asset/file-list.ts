@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs'
-import { App, Connect, routeItemMatched } from "@/core/types"
-import { base64PathToAbsolute, hasPermission } from "./utils"
+import { App, Connect, routeItemMatched } from '@/core/types'
+import { base64PathToAbsolute, hasPermission } from './utils'
 
 
 // 获取某一目录下文件（文件夹）列表
@@ -32,8 +32,8 @@ export default async function(route: routeItemMatched, connect: Connect, app: Ap
 
 	const subFileList = await fs.readdir(pathname)
 	const files = await Promise.all(subFileList.map(async function(filename){
-		let filePath = pathname + '/' + filename
-		let stat = await fs.lstat(filePath)
+		const filePath = pathname + '/' + filename
+		const stat = await fs.lstat(filePath)
 		return {
 			name : filename,
 			isdir : stat.isDirectory()
@@ -43,9 +43,9 @@ export default async function(route: routeItemMatched, connect: Connect, app: Ap
 		code: 200, 
 		files
 	})
-					// if(err){
-					// 	json.code = 404
-					// 	json.msg = 
-					// }
+	// if(err){
+	// 	json.code = 404
+	// 	json.msg = 
+	// }
 
 }

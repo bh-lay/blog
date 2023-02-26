@@ -7,7 +7,7 @@ import { createPagination } from '@/core/utils/pagination'
 import { formatTime } from '@/core/utils/parse'
 import DB from '@/core/DB'
 
-let showdown  = require('showdown')
+const showdown  = require('showdown')
 
 type getListParams = {
 	skip: number,
@@ -16,9 +16,9 @@ type getListParams = {
 }
 async function getList (app: App, param: getListParams) {
 	param = param || {}
-	var skip = param.skip || 0
-	var limit = param.limit || 10
-	var findKeys: {tags?: string} = {}
+	const skip = param.skip || 0
+	const limit = param.limit || 10
+	const findKeys: {tags?: string} = {}
 	// 过滤标签
 	if (param.tag) {
 		findKeys.tags = param.tag
@@ -33,7 +33,7 @@ async function getList (app: App, param: getListParams) {
 	}).skip(skip).toArray()
 	client.close()
 
-	for (var i in docs) {
+	for (const i in docs) {
 		docs[i].time_show = formatTime(docs[i].time_show, '{y}年-{m}月-{d}日')
 		docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? app.config.frontEnd.cdnDomain + docs[i].cover : docs[i].cover
 	}
@@ -48,7 +48,7 @@ export async function list(route: routeItemMatched, connect: Connect, app: App) 
 	const page: number = parseInt(data.page as string, 10) || 1
 	const tag = typeof data.tag === 'string' ? data.tag : null
 
-	var cache_name = 'blog_list_' + page + '_' + (tag ? tag : '')
+	const cache_name = 'blog_list_' + page + '_' + (tag ? tag : '')
 	const html = await app.cache.getWithCreate(cache_name, ['html', 'article'], async function () {
 		// if none of cache,do this Fn
 		const params: getListParams = {
@@ -58,7 +58,7 @@ export async function list(route: routeItemMatched, connect: Connect, app: App) 
 		}
 		const {docs, count, limit} = await getList(app, params)
 
-		var page_html = createPagination({
+		const page_html = createPagination({
 			list_count: count,
 			page_list_num: limit,
 			page_cur: page,
@@ -91,12 +91,12 @@ async function getDetail(id: string) {
 	const doc = docs[0]
 	doc.time_show = formatTime(doc.time_show, '{y}-{mm}-{d}')
 
-	var converter = new showdown.Converter()
+	const converter = new showdown.Converter()
 	doc.content = converter.makeHtml(doc.content)
 	return doc
 }
 export async function detail (route: routeItemMatched, connect: Connect, app: App) {
-	let id = route.params.id as string
+	const id = route.params.id as string
 	const html = await app.cache.getWithCreate('blog_id_' + id, ['html', 'article'], async function() {
 		const data = await getDetail(id)
 		// 获取视图

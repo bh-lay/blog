@@ -9,14 +9,14 @@ export function getAccessToken(code: string): Promise<string>{
 	console.log('getAccessToken----------')
 	const githubConfig = getAppConfig().github
 	return new Promise((resolve, reject) => {
-		var postData = querystring.stringify({
+		const postData = querystring.stringify({
 			client_id : githubConfig.clientId,
 			client_secret : githubConfig.clientSecret,
 			code : code,
 			redirect_uri :githubConfig.redirectUri
 		})
 		// console.log('get token',postData);
-		var request = https.request({
+		const request = https.request({
 			hostname: 'github.com',
 			port: 443,
 			path: '/login/oauth/access_token',
@@ -27,11 +27,11 @@ export function getAccessToken(code: string): Promise<string>{
 				'Content-Length' : postData.length
 			}
 		}, function(resp) {
-			var res_data = ''
+			let res_data = ''
 			resp.on('data', function(d) {
 				res_data += d
 			}).on('end', function() {
-				var res_json = querystring.parse(res_data)
+				const res_json = querystring.parse(res_data)
 				if(res_json.error){
 					reject(res_json.error)
 				} else {
@@ -105,11 +105,11 @@ export function getUserInfoByToken (accessToken: string): Promise<userInfo>{
   			'X-GitHub-Api-Version': '2022-11-28'
 			}
 		}, function(resp) {
-			var res_data = ''
+			let res_data = ''
 			resp.on('data', function(d) {
 				res_data += d
 			}).on('end', function() {
-				var res_json = JSON.parse(res_data)
+				const res_json = JSON.parse(res_data)
 				if (res_json.error) {
 					reject(res_json.error)
 				} else {

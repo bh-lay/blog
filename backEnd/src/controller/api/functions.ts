@@ -8,7 +8,7 @@ import { updateFromTuchong } from '@/functions/my-tuchong-data'
 
 
 export default async function(route: routeItemMatched, connect: Connect, app: App){
-	var act = route.params.act
+	const act = route.params.act
 	const sessionInstance = await connect.session()
 	if (sessionInstance.get('user_group') !== 'admin') {
 		return connect.writeJson( {
@@ -16,7 +16,7 @@ export default async function(route: routeItemMatched, connect: Connect, app: Ap
 			'msg': 'no power !'
 		})
 	}
-	var responseJson = {
+	const responseJson = {
 		code: 200,
 		msg: 'update success !'
 	}

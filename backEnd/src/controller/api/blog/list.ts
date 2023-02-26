@@ -9,9 +9,9 @@ type listOption = {
 	tag?: string
 }
 export default async function (data: listOption) {
-	let limit_num = data.limit || 10
-	let skip_num = data.skip || 0
-	let params: Record<string, string> = {}
+	const limit_num = data.limit || 10
+	const skip_num = data.skip || 0
+	const params: Record<string, string> = {}
 
 	// 过滤标签
 	if(data.tag){
@@ -27,7 +27,7 @@ export default async function (data: listOption) {
 		}
 	})
 	// 删除正文
-	for(let i in docs){
+	for(const i in docs){
 		docs[i]['content'] = undefined
 	}
 	return {

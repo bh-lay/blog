@@ -22,13 +22,13 @@ export function isFileExists(filePath: string) {
 // 响应文件
 function responseFile(path: string, lastModifiedInFile: string, req: IncomingMessage, res: typeResponse) {
 	// 尝试获取文件后缀名
-	let pathnameMatches = path.match(/.\.([^.]+)$/)
-	let ext = pathnameMatches ? pathnameMatches[1] : 'jpg'
-	let contentType = ext === 'jpg' || ext === 'png' || ext ==='gif' ?  mime[ext] : 'unknown'
+	const pathnameMatches = path.match(/.\.([^.]+)$/)
+	const ext = pathnameMatches ? pathnameMatches[1] : 'jpg'
+	const contentType = ext === 'jpg' || ext === 'png' || ext ==='gif' ?  mime[ext] : 'unknown'
 
-	let expires = new Date(new Date().getTime() + maxAge * 1000)
+	const expires = new Date(new Date().getTime() + maxAge * 1000)
 
-	let acceptEncoding = req.headers['accept-encoding']
+	const acceptEncoding = req.headers['accept-encoding']
 
 	return new Promise((resolve, reject) => {
 		const stream = fs.createReadStream(path)
@@ -46,7 +46,7 @@ function responseFile(path: string, lastModifiedInFile: string, req: IncomingMes
 			'Access-Control-Allow-Origin': '*'
 		}
 		if (acceptEncoding && acceptEncoding.indexOf('gzip') !== -1) {
-			let gzipStream = zlib.createGzip()
+			const gzipStream = zlib.createGzip()
 			responseHeaders['Content-Encoding'] = 'gzip'
 
 			res.writeHead(200, responseHeaders)
@@ -67,8 +67,8 @@ export function readFileToResponse(realPath: string, req: IncomingMessage, res: 
 	return promises.stat(realPath)
 		.then(stat => {
 			// 检查缓存是否可用
-			let lastModifiedInFile = stat.mtime.toUTCString()
-			let lastModifiedInHttp = req.headers['if-modified-since'] || ''
+			const lastModifiedInFile = stat.mtime.toUTCString()
+			const lastModifiedInHttp = req.headers['if-modified-since'] || ''
 		
 			if (lastModifiedInFile === lastModifiedInHttp) {
 				// 可以使用缓存，停止处理

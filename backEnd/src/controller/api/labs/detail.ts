@@ -6,7 +6,7 @@ import DB from '@/core/DB'
 import { routeItemMatched, Connect, App } from '@/core/types'
 
 async function getDetail (articleID: string, format: string) {
-	let resJSON: Record<string, any> = {
+	const resJSON: Record<string, any> = {
 		code: 200,
 		id : articleID,
 		format : format,
@@ -30,12 +30,12 @@ async function getDetail (articleID: string, format: string) {
 
 }
 export default async function (route: routeItemMatched, connect: Connect, app: App) {
-	var url = connect.request.url || ''
+	const url = connect.request.url || ''
 	const cacheContent = await app.cache.getWithCreate(url, ['api','labs'], async function(){
-		let data = connect.url.search
-		let id = route.params.id as string
+		const data = connect.url.search
+		const id = route.params.id as string
 		// 内容格式 html/markdown
-		let format = data.format as string || 'markdown'
+		const format = data.format as string || 'markdown'
 		return await getDetail(id, format)
 	})
 	connect.writeJson(JSON.parse(cacheContent))

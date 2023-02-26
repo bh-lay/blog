@@ -9,7 +9,7 @@ async function getDB(): Promise<{
 	client: mongodb.MongoClient,
 	db: mongodb.Db
 }> {
-	let MongoClient = mongodb.MongoClient
+	const MongoClient = mongodb.MongoClient
 	const mongoConig = getAppConfig().mongo
 	const mongoConnectUrl = `mongodb://${mongoConig.host}:${mongoConig.port}`
 
@@ -20,7 +20,7 @@ async function getDB(): Promise<{
 		}
 	})
 
-	let db = client.db(mongoConig.dbName)
+	const db = client.db(mongoConig.dbName)
 	return {
 		client,
 		db
@@ -60,7 +60,7 @@ async function getPaginationByCollection(collection: mongodb.Collection, options
 		skip,
 		sort
 	})
-	.toArray()
+		.toArray()
 	const count = await collection.countDocuments(params)
 
 	return {

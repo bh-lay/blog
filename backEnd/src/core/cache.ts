@@ -32,11 +32,11 @@ export default class Cache {
 		// 精准清除
 		this.try_del_each_cache(function(file_tags){
 			// 遍历缓存文件的标签
-			for(var i=0,total=file_tags.length; i<total; i++){
-				var file_tag_item = file_tags[i]
+			for(let i=0,total=file_tags.length; i<total; i++){
+				const file_tag_item = file_tags[i]
 				// 遍历待删除缓存标签
-				for(var s=0,all=tagList.length; s<all; s++){
-					var clear_tag_item = tagList[s]
+				for(let s=0,all=tagList.length; s<all; s++){
+					const clear_tag_item = tagList[s]
 					// 对比标签，相等就删除
 					if(file_tag_item == clear_tag_item){
 						return true
@@ -125,12 +125,12 @@ export default class Cache {
 	}
 	// 尝试遍历删除缓存文件
 	private async try_del_each_cache(callback?: (tags: string[], name: string) => boolean){
-		var root = this.root
+		const root = this.root
 		const files = await fs.readdir(root)
-		var total = files.length
+		const total = files.length
 			
-		for(var i = 0;i < total;i++){
-			var filename_split = files[i].split('--'),
+		for(let i = 0;i < total;i++){
+			const filename_split = files[i].split('--'),
 				tags = (filename_split[0] || '').split('_'),
 				name = filename_split[1] || ''
 			// 跳过被忽略的文件

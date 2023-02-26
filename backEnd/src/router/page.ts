@@ -18,8 +18,8 @@ import { list as blessListController } from '@/controller/bless'
  */
 function adaptionViewForSinglePage (controller: singleController): singleController {
 	function wrappedController(route: routeItemMatched, connect: Connect, app: App) {
-		var isBotRequest = isbot(connect.request.headers['user-agent'] || '')
-		var uiVersion = connect.cookie('ui_version')
+		const isBotRequest = isbot(connect.request.headers['user-agent'] || '')
+		const uiVersion = connect.cookie('ui_version')
 
 		if (isBotRequest) {
 			// 若命中搜索引擎标识，执行回调默认视图

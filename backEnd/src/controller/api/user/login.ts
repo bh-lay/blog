@@ -11,10 +11,10 @@ import { parseRequestBody, str2md5 } from '@/core/utils/parse'
  * 登录
  * 限制五分钟登录五次
  **/
-var time_limit = 5 * 60 * 1000
-var count_limit = 5
+const time_limit = 5 * 60 * 1000
+const count_limit = 5
 export default async function (route: routeItemMatched, connect: Connect){
-	var req = connect.request
+	const req = connect.request
 	// 登录限定为 POST 方法
 	if(req.method !== 'POST'){
 		connect.writeJson({
@@ -64,8 +64,8 @@ export default async function (route: routeItemMatched, connect: Connect){
 	}
 	// 获取请求参数
 	const { params } = await parseRequestBody(req)
-	var email = params.email as string || ''
-	var password = str2md5(params.password as string || '')
+	const email = params.email as string || ''
+	const password = str2md5(params.password as string || '')
 	if(!email || password.length < 2){
 		return connect.writeJson({
 			code: 2,
@@ -103,12 +103,12 @@ async function handleLogin(connect: Connect, sessionInstance: Session, username:
 			msg: '二货，帐号密码输错了吧！'
 		})
 	}
-	var user = docs[0]
-	var userGroup = user.user_group as string
+	const user = docs[0]
+	const userGroup = user.user_group as string
 	const powerCode = await getUserGroupPower(userGroup)
 
 	client.close()
-	var userid = user.id as string
+	const userid = user.id as string
 	sessionInstance.set({
 		user_group : userGroup,
 		username : user.username, 

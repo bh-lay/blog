@@ -3,7 +3,7 @@ import { routeItemMatched, Connect, App } from '@/core/types'
 import { parseRequestBody } from '@/core/utils/parse'
 import { encodeHtml } from '@/lib/utils'
 
-let showdown  = require('showdown')
+const showdown  = require('showdown')
 // 评论最大字数
 const maxCommentsTextLangth = 1000
 
@@ -20,7 +20,7 @@ async function getUserInfo(id: string){
 }
 // 增加一条评论
 async function add(data: any){
-	var item = {
+	const item = {
 		content : (data.content || '').slice(0, maxCommentsTextLangth),
 		time : new Date().getTime(),
 		cid : data.cid,
@@ -42,8 +42,8 @@ async function add(data: any){
 	await collection.insertOne(item)
 
 	// 内容由 markdown 转为 html
-	let markdownConverter = new showdown.Converter()
-	let content = encodeHtml(item.content)
+	const markdownConverter = new showdown.Converter()
+	const content = encodeHtml(item.content)
 	item.content = markdownConverter.makeHtml(content)
 	if(data.uid){
 		// 获取用户信息
@@ -56,8 +56,8 @@ async function add(data: any){
 }
 
 // 二分钟限制十个回复
-let time_limit = 2 * 60 * 1000
-let count_limit = 10
+const time_limit = 2 * 60 * 1000
+const count_limit = 10
 
 // 增加回复/评论
 export default async function (route: routeItemMatched, connect: Connect, app: App){
@@ -70,7 +70,7 @@ export default async function (route: routeItemMatched, connect: Connect, app: A
 	}
 	const sessionInstance = await connect.session()
 	// 检测认证信息
-	var comment_auth = sessionInstance.get('comment_auth') as string
+	const comment_auth = sessionInstance.get('comment_auth') as string
 	if(comment_auth !== 'ready'){
 		// 不是正常用户，阻止评论
 		return connect.writeJson({
@@ -78,11 +78,11 @@ export default async function (route: routeItemMatched, connect: Connect, app: A
 		})
 	}
 	// 获取评论计数
-	var comment_count = sessionInstance.get('comment_count') as number || 0
+	const comment_count = sessionInstance.get('comment_count') as number || 0
 	// 上次清除评论计数的时间
-	var comment_last_clear_time = sessionInstance.get('comment_last_clear_time') as number || new Date().getTime() - time_limit * 2
+	const comment_last_clear_time = sessionInstance.get('comment_last_clear_time') as number || new Date().getTime() - time_limit * 2
 	
-	var now = new Date().getTime()
+	const now = new Date().getTime()
 	// 时间间隔在限制之外
 	if(now - comment_last_clear_time > time_limit){
 		// 评论计数置为一

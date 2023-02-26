@@ -3,7 +3,7 @@ import { routeItemMatched, Connect, App } from '@/core/types'
 
 // 获取评论详情
 export default async function(route: routeItemMatched, connect: Connect){
-	let id = (route.params.id || '').toString()
+	const id = (route.params.id || '').toString()
 
 	if(!id || id.length < 2){
 		return connect.writeJson({

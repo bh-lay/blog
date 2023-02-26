@@ -5,7 +5,7 @@
  */
 
 export default function (data: Record<string, unknown>) {
-	var params = {
+	const params = {
 		id: data.id as string ||'',
 		title: decodeURI(data.title as string || ''),
 		avatar: data.avatar ||'',

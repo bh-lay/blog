@@ -10,7 +10,7 @@ export default async function (route: routeItemMatched, connect: Connect, app: A
 		const data = await get720Data()
 		const list = (data.data.list || []).map((item) => {
 			const property = item.property
-			let thumb = `https://ssl-thumb2.720static.com/${property.thumbUrl}?imageMogr2/thumbnail/560`
+			const thumb = `https://ssl-thumb2.720static.com/${property.thumbUrl}?imageMogr2/thumbnail/560`
 			return {
 				title: property.name,
 				desc: property.remark,

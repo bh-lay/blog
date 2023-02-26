@@ -9,12 +9,12 @@ import DB from '@/core/DB'
 const collectionName = 'friends'
 
 export default async function (route: routeItemMatched, connect: Connect) {
-	let data = connect.url.search
-	let limit_num = parseInt(data.limit as string) || 10
-	let skip_num = parseInt(data.skip as string) || 0
-	let params: Record<string, unknown> = {
+	const data = connect.url.search
+	const limit_num = parseInt(data.limit as string) || 10
+	const skip_num = parseInt(data.skip as string) || 0
+	const params: Record<string, unknown> = {
 		isShow: {
-			$in: [1, "1"]
+			$in: [1, '1']
 		}
 	}
 
@@ -32,7 +32,7 @@ export default async function (route: routeItemMatched, connect: Connect) {
 		}
 	})
 	// 删除正文
-	for(let i in docs){
+	for(const i in docs){
 		delete docs[i]['content']
 	}
 	connect.writeJson({

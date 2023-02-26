@@ -7,8 +7,8 @@ import DB from '@/core/DB'
 
 export default async function (route: routeItemMatched, connect: Connect) {
 	const params = connect.url.search
-	let limit_num = parseInt(params.limit as string) || 10
-	let skip_num = parseInt(params.skip as string) || 0
+	const limit_num = parseInt(params.limit as string) || 10
+	const skip_num = parseInt(params.skip as string) || 0
 
 	// 按照分页获取数据
 	const {count, docs} = await DB.getDocsForPagination('moment_tag', {

@@ -12,7 +12,7 @@ export function getRepoInfo(repoName: string){
 				'User-Agent': clientUserAgent
 			}
 		}, function (err, response, body){
-			var responseBody
+			let responseBody
 			if(err || response.statusCode !== 200){
 				return reject(new Error('error'))
 			}
@@ -23,7 +23,7 @@ export function getRepoInfo(repoName: string){
 				reject(e)
 			}
 		})
-	});
+	})
 }
 
 // 从Github API获取数据
@@ -41,7 +41,7 @@ export function getUserInfo(username: string): Promise<githubUserInfo>{
 			}
 		}, function (err, response, body){
 			response = response || {}
-			var responseBody
+			let responseBody
 			if(err || response.statusCode !== 200){
 				return reject(new Error('error'))
 			}

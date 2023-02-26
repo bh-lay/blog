@@ -5,7 +5,7 @@
  */
 
 export default function (data: Record<string, unknown>) {
-	let params = {
+	const params = {
 		id : data.id || null,
 		userid : data.userid || null,
 		title: decodeURI(data.title as string || ''),

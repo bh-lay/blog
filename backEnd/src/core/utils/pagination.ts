@@ -14,16 +14,15 @@ export type paginationParams = {
 }
 export function createPagination(param: paginationParams): string {
 	param = param || {}
-	var list_count = param.list_count || 0,
-		page_cur = param.page_cur || 1,
-		page_list_num = param.page_list_num || 15,
-		page_num = Math.ceil(list_count / page_list_num),
-		max_page_btn = param.max_page_btn || 50,
-		base_url_split = (param.base_url || '').split(/{num}/),
-
-		base_url_front = base_url_split[0],
-		base_url_end = base_url_split[1] || '',
-		txt = '<ul class="pagination">'
+	const list_count = param.list_count || 0
+	const page_cur = param.page_cur || 1
+	const page_list_num = param.page_list_num || 15
+	const page_num = Math.ceil(list_count / page_list_num)
+	const max_page_btn = param.max_page_btn || 50
+	const base_url_split = (param.base_url || '').split(/{num}/)
+	const base_url_front = base_url_split[0]
+	const base_url_end = base_url_split[1] || ''
+	let txt = '<ul class="pagination">'
 
 	if (page_cur > 1) {
 		txt += '<li class="pagination_prev"><a href="' + base_url_front + (page_cur - 1) + base_url_end + '" >上一页</a></li>'
@@ -31,7 +30,7 @@ export function createPagination(param: paginationParams): string {
 		txt += '<li class="pagination_prev disabled"><span>上一页</span></li>'
 	}
 
-	var btn_num = 0,
+	let btn_num = 0,
 		start_num = 0
 	if(page_num > max_page_btn){
 		start_num =  page_cur - Math.floor(max_page_btn/2)

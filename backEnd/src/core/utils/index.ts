@@ -26,8 +26,8 @@ export const parse = {
 
 // 写入cookie
 export function writeCookie(cookieObj: Record<string, unknown>, response: typeResponse) {
-	var cookie_str = ''
-	for(var k in cookieObj){
+	let cookie_str = ''
+	for(const k in cookieObj){
 		cookie_str += k + '=' + cookieObj[k] +';'
 	}
 	response.setHeader('Set-Cookie',cookie_str)

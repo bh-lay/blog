@@ -10,7 +10,7 @@ import DB from '@/core/DB'
 const collectionName = 'moment_post'
 
 export default async function (route: routeItemMatched, connect: Connect) {
-	let ID = route.params.id as string || ''
+	const ID = route.params.id as string || ''
 	if(!ID || ID.length < 2){
 		return connect.writeJson({
 			code : 2,

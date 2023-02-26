@@ -4,12 +4,12 @@
 
 import DB from '@/core/DB'
 
-let showdown  = require('showdown')
+const showdown  = require('showdown')
 type detail = {
 	content?: string
 }
 export default async function (articleID: string, format: string) {
-	let resJSON={
+	const resJSON={
 		code: 200,
 		id : articleID,
 		format : format,
@@ -28,7 +28,7 @@ export default async function (articleID: string, format: string) {
 	} else {
 		resJSON.detail = docs[0]
 		if(format === 'html'){
-			var converter = new showdown.Converter()
+			const converter = new showdown.Converter()
 			// converter.setOption('noHeaderId', true)
 			resJSON.detail.content = converter.makeHtml(resJSON.detail.content)
 		}

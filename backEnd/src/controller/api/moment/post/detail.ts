@@ -6,16 +6,16 @@ import DB from '@/core/DB'
 
 const collectionName = 'moment_post'
 
-let showdown  = require('showdown')
+const showdown  = require('showdown')
 
 
 export default async function (route: routeItemMatched, connect: Connect) {
-	let data = connect.url.search
-	let postId = route.params.id
+	const data = connect.url.search
+	const postId = route.params.id
 	// 内容格式 html/markdown
-	let format = data.format || 'markdown'
+	const format = data.format || 'markdown'
 
-	let resJSON={
+	const resJSON={
 		code: 200,
 		id: postId,
 		detail: null,
@@ -36,7 +36,7 @@ export default async function (route: routeItemMatched, connect: Connect) {
 	}
 	const detail = docs[0]
 	if(format == 'html'){
-		var converter = new showdown.Converter()
+		const converter = new showdown.Converter()
 		converter.setOption('noHeaderId', true)
 		detail.content = converter.makeHtml(detail.content)
 	}

@@ -9,7 +9,7 @@ import DB from '@/core/DB'
 import { encodeHtml } from '@/lib/utils'
 
 const collectionName = 'moment_post'
-let showdown  = require('showdown')
+const showdown  = require('showdown')
 
 type momentPost = {
 	userid?: string,
@@ -21,9 +21,9 @@ type momentPost = {
  *
  **/
 async function makeUpUserInfo(db: mongodb.Db, momentList: momentPost[]) {
-	let userIDList: string[] = []
+	const userIDList: string[] = []
 	// 挨个构建获取用户信息对象
-	let userCollection = db.collection('friends')
+	const userCollection = db.collection('friends')
 	// 遍历评论列表，获取所有需要的用户id
 	momentList.forEach((item) => {
 		if(item.userid && userIDList.indexOf(item.userid) === -1){
@@ -37,7 +37,7 @@ async function makeUpUserInfo(db: mongodb.Db, momentList: momentPost[]) {
 	}).toArray()
 
 	// 将获取到的用户列表转为 id 为 key 的对象
-	let users: Record<string, unknown> = {}
+	const users: Record<string, unknown> = {}
 	userList.forEach(item => {
 		users[item.id] = item
 	})
@@ -53,13 +53,13 @@ async function makeUpUserInfo(db: mongodb.Db, momentList: momentPost[]) {
 }
 
 export default async function (route: routeItemMatched, connect: Connect) {
-	let data = connect.url.search
+	const data = connect.url.search
 
-	let limit_num = parseInt(data.limit as string) || 10
-	let skip_num = parseInt(data.skip as string) || 0
-	let params: Record<string, unknown> = {}
+	const limit_num = parseInt(data.limit as string) || 10
+	const skip_num = parseInt(data.skip as string) || 0
+	const params: Record<string, unknown> = {}
 	// 内容由 markdown 转为 html
-	let markdownConverter = new showdown.Converter()
+	const markdownConverter = new showdown.Converter()
 	markdownConverter.setOption('noHeaderId', true)
 	// 过滤标签
 	if(data.tag){
@@ -82,7 +82,7 @@ export default async function (route: routeItemMatched, connect: Connect) {
 		}
 	})
 	docs.forEach(item => {
-		let content = encodeHtml(item.content)
+		const content = encodeHtml(item.content)
 		item.content = markdownConverter.makeHtml(content)
 	})
 	const newDocs = await makeUpUserInfo(db, docs as momentPost[])

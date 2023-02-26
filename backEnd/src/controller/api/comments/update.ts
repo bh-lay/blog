@@ -7,7 +7,7 @@ import { parseRequestBody } from '@/core/utils/parse'
 // 修改评论
 export default async function(route: routeItemMatched, connect: Connect, app: App){
 	const { params } = await parseRequestBody(connect.request)
-	let _id = route.params.id
+	const _id = route.params.id
 	const sessionInstance = await connect.session()
 	// 校验权限
 	if(!sessionInstance.power(power.COMMENTS_EDIT)){

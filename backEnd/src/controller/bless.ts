@@ -14,9 +14,9 @@ type getListParams = {
 }
 async function getList(app: App, param: getListParams) {
 	param = param || {}
-	var skip = param.skip || 0
-	var limit = param.limit || 10
-	var findKeys = {}
+	const skip = param.skip || 0
+	const limit = param.limit || 10
+	const findKeys = {}
 
 	const { collection, client } = await DB.getCollection('comments')
 	const count = await collection.countDocuments(findKeys)
@@ -27,7 +27,7 @@ async function getList(app: App, param: getListParams) {
 	}).skip(skip).toArray()
 	client.close()
 	
-	for (var i in docs) {
+	for (const i in docs) {
 		docs[i].time_show = formatTime(docs[i].time, '{y}年-{m}月-{d}日')
 	}
 	return {
@@ -37,11 +37,11 @@ async function getList(app: App, param: getListParams) {
 	}
 }
 export async function list(route: routeItemMatched, connect: Connect, app: App) {
-	var data = connect.url.search,
+	const data = connect.url.search,
 		page = data.page || 1
 	const tag = typeof data.tag === 'string' ? data.tag : null
 
-	var cache_name = 'bless_list_' + page + '_' + (tag ? tag : '')
+	const cache_name = 'bless_list_' + page + '_' + (tag ? tag : '')
 	const html = await app.cache.getWithCreate(cache_name, ['html', 'article'], async function () {
 		// if none of cache,do this Fn
 		const {docs, count, limit} = await getList(app, {

@@ -11,25 +11,25 @@ type tagItemInfo = {
 }
 
 async function getTagsList (DBClient: mongodb.Db) {
-	let collection = DBClient.collection('moment_post')
+	const collection = DBClient.collection('moment_post')
 	const docs = await collection.find().toArray()
 
 
-	var tagsObj: Record<string, number> = {}
-	var tagsArray: tagItemInfo[] = []
+	const tagsObj: Record<string, number> = {}
+	const tagsArray: tagItemInfo[] = []
 	// 获取所有标签
 	docs.forEach((docItem) => {
-		var this_tags = docItem.tags
+		const this_tags = docItem.tags
 		if (Object.prototype.toString.call(this_tags) == '[object Array]') {
-			for (var s = 0, count = this_tags.length; s < count; s++) {
-				var tagStr = this_tags[s]
+			for (let s = 0, count = this_tags.length; s < count; s++) {
+				const tagStr = this_tags[s]
 				tagsObj[tagStr] = tagsObj[tagStr] ? tagsObj[tagStr] + 1 : 1
 			}
 		}
 	})
 
 	// 转换为数组
-	for (var k in tagsObj) {
+	for (const k in tagsObj) {
 		tagsArray.push({
 			name: k,
 			count: tagsObj[k]
@@ -46,7 +46,7 @@ async function addOrUpdateTag (collection: mongodb.Collection<mongodb.Document>,
 		name
 	})
 
-	let isExist = resultCount > 0
+	const isExist = resultCount > 0
 	if (isExist) {
 		await collection.updateOne({ name }, {
 			$set: { count }
@@ -66,7 +66,7 @@ export default async function () {
 	if (tagsArray.length === 0) {
 		return
 	}
-	let tagCollection = db.collection('moment_tag')
+	const tagCollection = db.collection('moment_tag')
 	const updatePromiseQueue: Promise<void>[] = []
 	tagsArray.forEach(tag => {
 		updatePromiseQueue.push(addOrUpdateTag(tagCollection, tag))

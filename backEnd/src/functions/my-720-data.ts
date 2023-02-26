@@ -1,6 +1,6 @@
 import DB from '@/core/DB'
 import request from 'request'
-var collectionName = 'cache',
+const collectionName = 'cache',
 	mongon_ID = '720yun_bh-lay',
 	clientUserAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36'
 
@@ -79,7 +79,7 @@ export function updateFrom720(): Promise<panoData> {
 				return reject(new Error('error'))
 			}
 			try {
-				var userData = JSON.parse(body || {})
+				const userData = JSON.parse(body || {})
 				resolve(userData)
 				// 保存到数据库
 				saveDataToDataBase(userData)

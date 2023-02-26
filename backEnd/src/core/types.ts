@@ -1,5 +1,5 @@
 import http from 'http'
-import AppClass from "./index"
+import AppClass from './index'
 import ConnectClass from './connect'
 import SessionClass from './session'
 

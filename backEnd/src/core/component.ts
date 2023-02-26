@@ -15,12 +15,12 @@ export default async function(
 	resolveFn: componentFn,
 	context: componentContext
 ): Promise<string>{
-	var realPath = baseFileRoot + URI
+	const realPath = baseFileRoot + URI
 	// 模版内容
 	let componentTemplate = ''
 	try {
 		componentTemplate = await fs.readFile(realPath + '.html', 'utf8')
-  } catch (e) {
+	} catch (e) {
 		componentTemplate = ''
 	}
 	// 查找脚本文件

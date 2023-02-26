@@ -18,20 +18,20 @@ import resolveComponent from './component'
  * @returns {name:'navigation-bootstrap',active:'index'}
  */
 function getComponentsConfig(input: string){
-	let strArray = input.match(/<include(.+?)\/>/g) || []
+	const strArray = input.match(/<include(.+?)\/>/g) || []
 	type objecRecord = Record<string, unknown>
-	let confArray: objecRecord[] = []
+	const confArray: objecRecord[] = []
 	strArray.forEach(function(item){
-		var data: objecRecord = {}
+		const data: objecRecord = {}
 		// 过滤多余的字符
 		item = item.replace(/^<include\s+|"|'|\s*\/>$/g,'')
 		// 分离参数
-		var dataArray = item.split(/\s+/) || []
+		const dataArray = item.split(/\s+/) || []
 
 		dataArray.forEach(function(it){
-			var itemSplit = it.split(/=/)
-			var key = itemSplit[0]
-			var value = itemSplit[1]
+			const itemSplit = it.split(/=/)
+			const key = itemSplit[0]
+			const value = itemSplit[1]
 			data[key] = value
 		})
 		confArray.push(data)
@@ -43,8 +43,8 @@ export function replaceComponent(
 	componentRegistedRecord: componentRegisted,
 	context: componentContext
 ): Promise<string>{
-	let needResolveComponents = getComponentsConfig(temp)
-	let temp_result: Record<string, string> = {}
+	const needResolveComponents = getComponentsConfig(temp)
+	const temp_result: Record<string, string> = {}
 
 	// 没有用到components
 	if(needResolveComponents.length === 0){
@@ -52,7 +52,7 @@ export function replaceComponent(
 	}
 	const promiseList: Promise<unknown>[] = []
 	needResolveComponents.forEach((needResolveComponent) => {
-		var componentName = needResolveComponent.name as string
+		const componentName = needResolveComponent.name as string
 		promiseList.push(resolveComponent(
 			componentName,
 			needResolveComponent,
@@ -65,7 +65,7 @@ export function replaceComponent(
 		)
 	})
 	return Promise.all(promiseList).then(() => {
-		var html = temp.replace(/<include\s+name\s*=\s*(?:"|')(.+?)(?:"|')([^/])*\/>/g, function(includeStr,name){
+		const html = temp.replace(/<include\s+name\s*=\s*(?:"|')(.+?)(?:"|')([^/])*\/>/g, function(includeStr,name){
 			return temp_result[name] || includeStr
 		})
 		return html

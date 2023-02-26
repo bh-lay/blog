@@ -6,7 +6,7 @@
 
 export default function(data: Record<string, unknown>) {
 	const content = data.content as string || ''
-	let params = {
+	const params = {
 		id: data.id || null,
 		name: data.name || '',
 		title: decodeURI(data.title as string || ''),

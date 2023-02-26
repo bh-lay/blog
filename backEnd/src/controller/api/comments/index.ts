@@ -14,8 +14,8 @@ import remove from './remove'
 
 // 获取列表
 export async function list(route: routeItemMatched, connect: Connect, app: App){
-	var url = connect.request.url || ''
-	var params = connect.url.search
+	const url = connect.request.url || ''
+	const params = connect.url.search
 
 	// 使用缓存
 	const cacheJson = await app.cache.getWithCreate(url, ['api','comment'], async function(){

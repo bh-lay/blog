@@ -2,18 +2,18 @@ import DB from '@/core/DB'
 import { typeResponse } from '@/core/types'
 import { IncomingMessage } from 'node:http'
 
-let cookieName = 'traceid'
+const cookieName = 'traceid'
 function creatID () {
 	return parseInt(Math.ceil(Math.random()*1000) + '' + new Date().getTime()).toString(36)
 }
 const getTraceIdID = (request: IncomingMessage, response: typeResponse) => {
-	let cookieInRequest = request.headers.cookie || ''
-	let reg = new RegExp(cookieName + '=([^\;]+)')
-	let result = cookieInRequest.match(reg)
+	const cookieInRequest = request.headers.cookie || ''
+	const reg = new RegExp(cookieName + '=([^\;]+)')
+	const result = cookieInRequest.match(reg)
 	if (result) {
 		return result[1]
 	} else {
-		let id = creatID()
+		const id = creatID()
 		response.setHeader('Set-Cookie', `${cookieName}=${id}; path=/; HttpOnly`)
 		return id
 	}
@@ -35,13 +35,13 @@ export default async function addRecord (request: IncomingMessage, response: typ
 	type,
 	params
 }: options) {
-	let requestHeaders = request.headers || {}
-	let referer = requestHeaders.referer || ''
-	let time = new Date().getTime().toString()
-	let ip = getClientIp(request)
-	let ua = requestHeaders['user-agent']
-	let traceid = getTraceIdID(request, response)
-	let item = {
+	const requestHeaders = request.headers || {}
+	const referer = requestHeaders.referer || ''
+	const time = new Date().getTime().toString()
+	const ip = getClientIp(request)
+	const ua = requestHeaders['user-agent']
+	const traceid = getTraceIdID(request, response)
+	const item = {
 		referer,
 		time,
 		ip,

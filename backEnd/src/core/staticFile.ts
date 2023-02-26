@@ -24,11 +24,11 @@ export default class FilerReader {
 	}
 	read (path: string, req: http.IncomingMessage, res: typeResponse, notFound: () => void) {
 		// 匹配文件扩展名
-		var maxAge = this.maxAge
-		var pathname_split = path.match(/.\.([^.]+)$/)
-		var ext = pathname_split ? pathname_split[1] : null
+		const maxAge = this.maxAge
+		const pathname_split = path.match(/.\.([^.]+)$/)
+		let ext = pathname_split ? pathname_split[1] : null
 	
-		var realPath: string
+		let realPath: string
 		// add a default files for directory
 		if(ext == null) {
 			ext = 'html'
@@ -36,7 +36,7 @@ export default class FilerReader {
 		}else{
 			realPath = this.staticFileRoot + path
 		}
-		var content_type = this.mime[ext]||'unknown'
+		const content_type = this.mime[ext]||'unknown'
 	
 		fs.exists(realPath, function(exists) {
 			if(!exists){
@@ -53,14 +53,14 @@ export default class FilerReader {
 					res.end('500')
 					return
 				}
-				var lastModified = stat.mtime.toUTCString()
+				const lastModified = stat.mtime.toUTCString()
 	
 				if(req.headers['if-modified-since'] && (lastModified == req.headers['if-modified-since'])) {
 					// 使用缓存
 					res.writeHead(304)
 					res.end()
 				} else {
-					var expires = new Date(new Date().getTime() + maxAge * 1000),
+					const expires = new Date(new Date().getTime() + maxAge * 1000),
 						headers: OutgoingHttpHeaders = {
 							'Content-Type': content_type,
 							'Expires' : expires.toUTCString(),

@@ -20,7 +20,7 @@ async function getUserDetail(userID: string){
 	if(docs.length === 0){
 		return null
 	}
-	var item = docs[0]
+	const item = docs[0]
 	if(item && item['password']){
 		delete item['password']
 	}
@@ -30,7 +30,7 @@ async function getUserDetail(userID: string){
 export default async function (route: routeItemMatched, connect: Connect, app: App){
 	const { params = {} } = await parseRequestBody(connect.request)
 
-		// 获取指定用户信息
+	// 获取指定用户信息
 	if(params.uid){
 		const userDetail = await getUserDetail(params.uid as string)
 

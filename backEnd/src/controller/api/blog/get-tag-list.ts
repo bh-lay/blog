@@ -17,16 +17,16 @@ export default async function getTagsList() {
 	}
 	// 获取所有标签
 	docs.forEach((article) => {
-		var this_tags = article.tags
+		const this_tags = article.tags
 		if (Object.prototype.toString.call(this_tags) == '[object Array]') {
-			for (var s = 0, count = this_tags.length; s < count; s++) {
-				var tagStr = this_tags[s]
+			for (let s = 0, count = this_tags.length; s < count; s++) {
+				const tagStr = this_tags[s]
 				tagsObj[tagStr] = tagsObj[tagStr] ? tagsObj[tagStr] + 1 : 1
 			}
 		}
 	})
 	// 转换为数组
-	for (var k in tagsObj) {
+	for (const k in tagsObj) {
 		tagsArray.push({
 			name: k,
 			count: tagsObj[k]

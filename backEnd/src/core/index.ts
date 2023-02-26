@@ -13,8 +13,8 @@ import { httpMethod, routeHttpMethod, searchParams, controller, routeItemParsed,
 import Cache from './cache'
 
 function crossCheck(connect: Connect){
-	let referer = connect.request.headers.referer || ''
-	let subDomainMatched = referer.match(/(http(s|)\:\/\/[^\.\/]+\.bh-lay\.com)/)
+	const referer = connect.request.headers.referer || ''
+	const subDomainMatched = referer.match(/(http(s|)\:\/\/[^\.\/]+\.bh-lay\.com)/)
 	if (subDomainMatched) {
 		connect.setHeader('Access-Control-Allow-Origin', subDomainMatched[0])
 		connect.setHeader('Access-Control-Allow-Methods', 'GET')
@@ -42,7 +42,7 @@ export default class App {
 		this.components = {}
 		this.fileReader = new FilerReader(config.static)
 		// server start
-		var server = http.createServer((req,res) => {
+		const server = http.createServer((req,res) => {
 			// 屏蔽非法用户
 			if(this.isAbnormalVisitor(req)){
 				res.writeHead(500)
@@ -56,16 +56,16 @@ export default class App {
 			})
 			const path = newConnect.url
 			const pathname = path.pathname
-			let matchedRoutes = this.matchRequestInRoutes(pathname, newConnect.request.method || '')
+			const matchedRoutes = this.matchRequestInRoutes(pathname, newConnect.request.method || '')
 			// 第一顺序，执行跨域检测
 			crossCheck(newConnect)
 			if(matchedRoutes.length){
 				// 第二顺序：执行get方法设置的回调
 				// 使用匹配的最后一个 controller
-				let usedRoute = matchedRoutes[matchedRoutes.length - 1]
+				const usedRoute = matchedRoutes[matchedRoutes.length - 1]
 				newConnect.route = usedRoute
 				usedRoute.controller(usedRoute, newConnect, this).catch(async (error) => {
-					console.error(`\ncontroller failed\n|-------------->\n$`, usedRoute, '\n', error, '<--------------|')
+					console.error('\ncontroller failed\n|-------------->\n$', usedRoute, '\n', error, '<--------------|')
 					const html = await newConnect.views('system/mongoFail',{error})
 					newConnect.writeHTML(500, html)
 				})
@@ -83,9 +83,9 @@ export default class App {
 						newConnect.views('system/404',{
 							content : '文件找不到啦！'
 						})
-						.then(function(html){
-							newConnect.writeHTML(404, html)
-						})
+							.then(function(html){
+								newConnect.writeHTML(404, html)
+							})
 					}
 				})
 			}
@@ -97,7 +97,7 @@ export default class App {
 	 * 检测是否为正常用户
 	 */
 	isAbnormalVisitor (req: http.IncomingMessage) {
-		var url = req.url || ''
+		const url = req.url || ''
 		// 检测路径中是否包含 ../
 		if(url.match(/\.\.\//)){
 			return true
@@ -119,8 +119,8 @@ export default class App {
 			method = key.match(/^(rest|get|post|put|delete)$/) ? key : 'all'
 			return ''
 		})
-		let keys: pathToRegexp.Key[] = []
-		let rule = pathToRegexp(urlRulePrefix, keys)
+		const keys: pathToRegexp.Key[] = []
+		const rule = pathToRegexp(urlRulePrefix, keys)
 		this.routes.push({
 			originalRule: urlRule,
 			keys: keys.map(key => key.name),
@@ -131,25 +131,25 @@ export default class App {
 	}
 	// 在 routes 配置中查找于请求匹配的路由
 	matchRequestInRoutes (path: string, method: string) {
-		let result: routeItemMatched[] = []
-		let currentMethod = method.toLowerCase() as httpMethod
+		const result: routeItemMatched[] = []
+		const currentMethod = method.toLowerCase() as httpMethod
 		// 遍历所有路由配置
 		this.routes.forEach((routeConfigItem: routeItemParsed) => {
 			// 第一步，检查 method 是否匹配
-			let methodMatch = routeConfigItem.method === 'rest' || routeConfigItem.method === 'all' || routeConfigItem.method === currentMethod
+			const methodMatch = routeConfigItem.method === 'rest' || routeConfigItem.method === 'all' || routeConfigItem.method === currentMethod
 			if (!methodMatch) {
 				return
 			}
 			// 第二步，检查 URL 规则是否匹配
-			let testMatches = routeConfigItem.rule.exec(path)
+			const testMatches = routeConfigItem.rule.exec(path)
 			if (!testMatches) {
 				return
 			}
 			// 从 URL 中获取参数
-			let params: searchParams = {}
+			const params: searchParams = {}
 			testMatches.forEach((value, index) => {
 				if (index > 0) {
-					let key = routeConfigItem.keys[index - 1]
+					const key = routeConfigItem.keys[index - 1]
 					params[key] = value
 				}
 			})

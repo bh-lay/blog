@@ -5,13 +5,13 @@
 /** ************************************************************
 ***************************************************************/
 import DB from '@/core/DB'
-import power from "@/conf/power"
-import { App, Connect, routeItemMatched } from "@/core/types"
+import power from '@/conf/power'
+import { App, Connect, routeItemMatched } from '@/core/types'
 
 
 // 删除
 export default async function (route: routeItemMatched, connect: Connect, app: App) {
-	let ID = route.params.id as string || ''
+	const ID = route.params.id as string || ''
 	if(ID.length < 2){
 		return connect.writeJson({
 			code : 2,

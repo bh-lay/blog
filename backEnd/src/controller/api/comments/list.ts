@@ -2,7 +2,7 @@ import DB from '@/core/DB'
 import * as mongodb from 'mongodb'
 import { routeItemMatched, Connect, App } from '@/core/types'
 import { encodeHtml } from '@/lib/utils'
-let showdown  = require('showdown')
+const showdown  = require('showdown')
 
 /**
  * 处理评论数据
@@ -11,7 +11,7 @@ let showdown  = require('showdown')
  **/
 const makeUpUserInfo = async (db: mongodb.Db, docs: mongodb.Document[], format: string) => {
 	
-	let userIDList: string[] = []
+	const userIDList: string[] = []
 	
 	// 遍历评论列表
 	docs.forEach(item => {
@@ -21,20 +21,20 @@ const makeUpUserInfo = async (db: mongodb.Db, docs: mongodb.Document[], format: 
 		}
 		// 内容由 markdown 转为 html
 		if (format === 'html') {
-			let markdownConverter = new showdown.Converter()
-			let content = encodeHtml(item.content)
+			const markdownConverter = new showdown.Converter()
+			const content = encodeHtml(item.content)
 			item.content = markdownConverter.makeHtml(content)
 		}
 	})
 	// 构建获取用户信息对象
-	let userCollection = db.collection('user')
+	const userCollection = db.collection('user')
 	const userList = await userCollection.find({
 		id: {
 			$in: userIDList
 		}
 	}).toArray()
 	// 将获取到的用户列表转为 id 为 key 的对象
-	let users: Record<string, unknown> = {}
+	const users: Record<string, unknown> = {}
 	userList.forEach(item => {
 		users[item.id] = item
 	})
@@ -58,13 +58,13 @@ export default async function(connect: Connect, data: {
 	cid?: string,
 	format?: string
 }){
-	let limit_num = data.limit || 10
-	let skip_num = data.skip || 0
-	let getListForAdmin = data.isadmin
+	const limit_num = data.limit || 10
+	const skip_num = data.skip || 0
+	const getListForAdmin = data.isadmin
 	const format = data.format === 'plain' ? data.format : 'html'
 	const {client, db} = await DB.getDB()
 	const collection = db.collection('comments')
-	let params: {cid?: string} = {}
+	const params: {cid?: string} = {}
 	if(data.cid && data.cid.length > 1){
 		params.cid = data.cid
 	}

@@ -15,9 +15,9 @@ export function encodeHtml (html: string) {
 	/* eslint-disable no-control-regex */
 	return html.replace(/<|>/g,function($0){
 		let c = $0.charCodeAt(0)
-		let r: (string | number)[] = ['&#']
+		const r: (string | number)[] = ['&#']
 		c = (c === 0x20) ? 0xA0 : c
-		r.push(c);
+		r.push(c)
 		r.push(';')
 		return r.join('')
 	})

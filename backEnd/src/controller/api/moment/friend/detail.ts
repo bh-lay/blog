@@ -16,7 +16,7 @@ const collectionName = 'friends'
 
 // 获取好友详情
 export default async function (route: routeItemMatched, connect: Connect) {
-	let friendID = route.params.id
+	const friendID = route.params.id
 
 	const {collection, client} = await DB.getCollection(collectionName)
 

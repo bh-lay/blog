@@ -17,13 +17,13 @@ export async function getCache(cacheName: string) {
 // 设置缓存
 export async function setCache (cacheName: string, content: string) {
 	const {client, db} = await DB.getDB()
-	let collection = db.collection(collectionName)
+	const collection = db.collection(collectionName)
 	// 获取缓存名下的文档总数
 	const resultCount = await collection.countDocuments({
 		name: cacheName
 	})
 
-	let isExist = resultCount > 0
+	const isExist = resultCount > 0
 	if (isExist) {
 		// 存在，则更新缓存
 		await collection.updateOne({

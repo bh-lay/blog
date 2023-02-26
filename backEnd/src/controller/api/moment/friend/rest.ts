@@ -1,10 +1,10 @@
 /*
  * @author bh-lay
  */
-import detail from "./detail"
-import update from "./update"
-import publish from "./publish"
-import remove from "./remove"
+import detail from './detail'
+import update from './update'
+import publish from './publish'
+import remove from './remove'
 
 export default {
 	post: publish,

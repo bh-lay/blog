@@ -8,7 +8,7 @@ import { routeItemMatched, Connect, App } from '@/core/types'
 
 // 获取评论详情
 export default async function(route: routeItemMatched, connect: Connect, app: App){
-	let ID = (route.params.id || '').toString()
+	const ID = (route.params.id || '').toString()
 	if(!ID || ID.length < 2){
 		return connect.writeJson({
 			code: 2,

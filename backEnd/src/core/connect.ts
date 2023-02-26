@@ -54,7 +54,7 @@ export default class CONNECT {
 		headers['Connection'] = 'keep-alive'
 		headers['Content-Encoding'] = 'gzip'
 		this.response.statusCode = status
-		for(var i in headers){
+		for(const i in headers){
 			this.setHeader(i, headers[i] as string)
 		}
 		if(content){
@@ -79,7 +79,7 @@ export default class CONNECT {
 	 *   data can be object or string
 	 */
 	writeJSONP(data: unknown) {
-		var json_str = typeof(data) == 'string' ? data : JSON.stringify(data),
+		const json_str = typeof(data) == 'string' ? data : JSON.stringify(data),
 			callbackName = this.url.search.callback || 'jsonpCallback'
 		this.sendResponse(200,{
 			'Content-Type' : 'application/x-javascript',
@@ -117,7 +117,7 @@ export default class CONNECT {
 	 *  }); 
 	 */
 	cookie(input?: Record<string, unknown> | string){
-		var cookieInRequest = this.request.headers.cookie || ''
+		const cookieInRequest = this.request.headers.cookie || ''
 		if(typeof(input) === 'object'){
 			// 写入cookie
 			writeCookie(input, this.response)
@@ -146,14 +146,14 @@ export default class CONNECT {
 	 *  });
 	 */
 	async session(): Promise<Session>{
-		var me = this
+		const me = this
 		if(this._session){
 			// session已被打开,直接使用
 			return Promise.resolve(this._session)
 		}
 		// 启用session
 		return new Promise((resolve, reject) => {
-			var cookie = this.cookie() as Record<string, string | number>
+			const cookie = this.cookie() as Record<string, string | number>
 			const session = new Session(this.sessionRoot, cookie)
 			session.init(function(cookieObj){
 				me.cookie(cookieObj)
@@ -165,7 +165,7 @@ export default class CONNECT {
 		})
 	}
 	async views (URI: string, data: Record<string, unknown>){
-		let realPath = baseViewRoot + URI
+		const realPath = baseViewRoot + URI
 		data = data || {}
 		// 读取模版
 		let viewTemplate = ''

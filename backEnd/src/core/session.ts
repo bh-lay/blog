@@ -63,7 +63,7 @@ export default class Session {
 		if(exists){
 			// read session file
 			const cacheContent = await fs.readFile(this.path,'utf-8')
-			var JSON_file = JSON.parse(cacheContent)
+			const JSON_file = JSON.parse(cacheContent)
 			this.fillFromCache(JSON_file)
 		} else{
 			// create session file
@@ -85,20 +85,20 @@ export default class Session {
 		this.createdTime = sessionCached.createdTime as number
 	}
 	set (param: Record<string, unknown>){
-		for(var i in param){
+		for(const i in param){
 			if(i === 'powerCode'){
 				this.powerCode = param[i] as string
 			}else{
 				this.data[i] = param[i]
 			}
 		}
-		var pathname = this.path
-		var data = JSON.stringify(this)
+		const pathname = this.path
+		const data = JSON.stringify(this)
 		fs.writeFile(pathname,data)
 	}
 	get(name: string){
-		var this_session = this.data
-		var getData = this_session[name] || null
+		const this_session = this.data
+		const getData = this_session[name] || null
 		return getData
 	}
 	power(code: number){

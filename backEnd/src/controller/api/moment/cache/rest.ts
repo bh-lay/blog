@@ -7,7 +7,7 @@ import { getCache, setCache, removeCache } from '@/functions/moment/cache'
 import { parseRequestBody } from '@/core/utils/parse'
 
 async function get(route: routeItemMatched, connect: Connect) {
-	let cacheName =  route.params.name as string || ''
+	const cacheName =  route.params.name as string || ''
 	const data = await getCache(cacheName)
 	if (data) {
 		connect.writeJson( {
@@ -21,7 +21,7 @@ async function get(route: routeItemMatched, connect: Connect) {
 	}
 }
 async function put(route: routeItemMatched, connect: Connect) {
-	let cacheName =  route.params.name as string || ''
+	const cacheName =  route.params.name as string || ''
 	const sessionInstance = await connect.session()
 	if(!sessionInstance.power(power.BLOG_EDIT)){
 		return connect.writeJson( {
@@ -30,7 +30,7 @@ async function put(route: routeItemMatched, connect: Connect) {
 		})
 	}
 	const { params } = await parseRequestBody(connect.request)
-	let content = JSON.parse(params.content as string)
+	const content = JSON.parse(params.content as string)
 	await setCache(cacheName, content)
 	connect.writeJson({
 		code: 1,
@@ -40,7 +40,7 @@ async function put(route: routeItemMatched, connect: Connect) {
 
 // 删除
 export async function deleteMethod(route: routeItemMatched, connect: Connect) {
-	let cacheName = route.params.name as string || ''
+	const cacheName = route.params.name as string || ''
 	if(cacheName.length < 2){
 		return connect.writeJson({
 			code : 2,

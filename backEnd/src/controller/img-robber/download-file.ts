@@ -5,7 +5,7 @@ import request from 'request'
 export default function downloadFile (fileUrl: string, refererUrl: string, writePath: string) {
 	return new Promise((resolve, reject) => {
 		try {
-			let reqClient = request.get({
+			const reqClient = request.get({
 				url: fileUrl,
 				headers: {
 					'Referer': refererUrl

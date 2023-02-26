@@ -7,7 +7,7 @@ import { routeItemMatched, Connect, App } from '@/core/types'
 import power from '@/conf/power'
 import parseData from './parse'
 import { parseRequestBody } from '@/core/utils/parse'
-let collectionName = 'labs'
+const collectionName = 'labs'
 
 export default async function (route: routeItemMatched, connect: Connect, app: App) {
 	const sessionInstance = await connect.session()
@@ -19,8 +19,8 @@ export default async function (route: routeItemMatched, connect: Connect, app: A
 		return
 	}
 	const { params } = await parseRequestBody(connect.request)
-	let id = route.params.id
-	let data = parseData(params)
+	const id = route.params.id
+	const data = parseData(params)
 	if (!data) {
 		return connect.writeJson({
 			code: 2,

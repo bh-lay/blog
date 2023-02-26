@@ -3,9 +3,9 @@
  * demo 
  */
 import { promises as fs } from 'fs'
-import { App, Connect, routeItemMatched } from "@/core/types"
-import { hasPermission, relativePathToAbsolute } from "./utils"
-import { parseRequestBody } from "@/core/utils/parse"
+import { App, Connect, routeItemMatched } from '@/core/types'
+import { hasPermission, relativePathToAbsolute } from './utils'
+import { parseRequestBody } from '@/core/utils/parse'
 import { isFileExists } from '@/controller/img-robber/static-file'
 
 
@@ -22,15 +22,15 @@ export default async function(route: routeItemMatched, connect: Connect, app: Ap
 	}
 
 	const root = params.pathname as string || ''
-	var dirName = params.name as string || ''
+	const dirName = params.name as string || ''
 	// 转换成可操作路径
 	const pathname = relativePathToAbsolute(root)
 
 
-	let newPath = pathname + '/' + dirName
+	const newPath = pathname + '/' + dirName
 	
 	// 检测是否同名
-	var exists = await isFileExists(newPath)
+	const exists = await isFileExists(newPath)
 	if (exists) {
 		return connect.writeJson({
 			code : 201,

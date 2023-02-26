@@ -3,8 +3,8 @@
  * demo 
  */
 import { promises as fs } from 'fs'
-import { App, Connect, routeItemMatched } from "@/core/types"
-import { base64PathToAbsolute, hasPermission } from "./utils"
+import { App, Connect, routeItemMatched } from '@/core/types'
+import { base64PathToAbsolute, hasPermission } from './utils'
 import { parseRequestBody } from '@/core/utils/parse'
 import { isFileExists } from '@/controller/img-robber/static-file'
 import formidable from 'formidable'
@@ -50,7 +50,7 @@ export default async function(route: routeItemMatched, connect: Connect, app: Ap
 	} else {
 		fileList = [files.file]
 	}
-	var exists = await isFileExists(uploadToPathname)
+	const exists = await isFileExists(uploadToPathname)
 	if (!exists) {
 		return connect.writeJson({
 			code : 202

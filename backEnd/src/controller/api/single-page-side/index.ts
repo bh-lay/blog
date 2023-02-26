@@ -12,14 +12,14 @@ export default async function (route: routeItemMatched, connect: Connect) {
 		format: 'plain'
 	})
 	list.forEach((commentItem) => {
-			// 处理url
-			if (commentItem.cid == 'define-1') {
-				commentItem.url = '/bless'
-			} else {
-				commentItem.url = '/' + commentItem.cid.replace(/-/g, '/')
-			}
-			// 转换时间格式
-			commentItem.time = formatTime(commentItem.time, '{h}:{i} {m}-{d}')
+		// 处理url
+		if (commentItem.cid == 'define-1') {
+			commentItem.url = '/bless'
+		} else {
+			commentItem.url = '/' + commentItem.cid.replace(/-/g, '/')
+		}
+		// 转换时间格式
+		commentItem.time = formatTime(commentItem.time, '{h}:{i} {m}-{d}')
 	
 	})
 	connect.writeJson({

@@ -7,7 +7,7 @@ export default async function () {
 
 	const postList = await postCollection.find({}).toArray()
 	const promiseList = postList.map(async function(doc) {
-		let target = doc.originalUrl
+		const target = doc.originalUrl
 		const result = await analysisCount('redirect', {
 			target
 		})
