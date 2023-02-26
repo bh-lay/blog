@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title>$[[title]]</title>
+  <meta name="keywords" content="$[[keywords]]" />
+  <meta name="description" content="$[[description]]" />
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <include name="favicon_appicon" />
+<link href="http://static.bh-lay.com/build/multi-page/links.6deb0ab4.css?9b2f83b989aca0546bfb" rel="stylesheet"></head>
+<body>
+  <div class="Jumbotron">
+    <div class="container">
+      <div class="nav">
+          <a href="/">回到首页</a>
+      </div>
+      <div class="info">
+        <h1>前端英雄榜</h1>
+        <p><a href="javascript:;" class="btn add_one">我要上榜</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    [[@each list as it]]
+    <div class="guy-item" data-id="$[[it.id]]">
+      <div class="avatar">
+        <img src="$[[it.avatar]]" alt="">
+      </div>
+      <div class="nickname">$[[it.title]]</div>
+      <div class="desc">
+        [[@if it.discription]]$[[it.discription]][[@/if]]
+      </div>
+      <div class="links">
+        [[@if it.url]]
+        <a target="_blank" class="blog" href="$[[it.url]]">博</a>
+        [[@/if]]
+        [[@if it.github_username]]
+        <a target="_blank" class="github" href="https://github.com/$[[it.github_username]]" >git</a>
+        [[@/if]]
+        </div>
+    </div>
+    [[@/each]]
+  </div>
+<script type="text/template" id="post_tpl">
+<div class="post_link">
+  <div class="post_link_body">
+    <div class="input-group">
+      <span class="input-group-addon">尊姓大名</span>
+      <input type="text" name="title" placeholder="你更喜欢别人怎么称呼你？">
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon">博客地址</span>
+      <input type="text" name="url" placeholder="http://">
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon">Github用户名</span>
+      <input type="text" name="github_username" placeholder="如：bh-lay">
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon">个人描述</span>
+      <textarea name="discription" placeholder="一句话介绍自己，简洁无废话，低调且骚气！"></textarea>
+    </div>
+  </div>
+</div>
+</script>
+<include name="baiduAndGoogleTongji"/>
+<script type="text/javascript" src="http://static.bh-lay.com/build/multi-page/links.9b2f83b9.js?9b2f83b989aca0546bfb"></script></body>
+</html>

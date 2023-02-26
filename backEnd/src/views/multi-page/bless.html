@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<title>$[[title]]</title>
+<meta name="keywords" content="$[[keywords]]" />
+<meta name="description" content="$[[description]]" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+<meta name="robots" content="nofollow">
+<include name="version_html5_script_bootstrap"/>
+<include name="favicon_appicon" />
+<style>
+.bless-item{
+    padding: 10px;
+    border-bottom: 1px solid #eee
+}
+
+</style>
+<link href="http://static.bh-lay.com//build/multi-page/multi-define.86c22e38.css" rel="stylesheet"></head>
+<body>
+<include name="navigation-bootstrap" active="bless"/>
+<div class="container page-body">
+    <br/>
+    <div class="comments_area"></div>
+	<div class="row define-list">
+		<div class="col-sm-8">
+		[[@each list as it,index]]
+			<div class="bless-item">
+                [[@if it.user]]$[[it.user.username]][[@/if]]
+				<div class="media-body">
+					<p>$[[it.content]]</p>
+				</div>
+			</div>
+		[[@/each]]
+		<div class="col-sm-4">
+		</div>
+		</div>
+    </div>
+    $$[[pagination]]
+</div>
+<include name="footer"/>
+<include name="baiduAndGoogleTongji"/>
+<script type="text/javascript" src="http://static.bh-lay.com//build/multi-page/multi-base.0c57ea1d.js"></script><script type="text/javascript" src="http://static.bh-lay.com//build/multi-page/multi-define.0c57ea1d.js"></script></body>
+</html>

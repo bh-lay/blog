@@ -21,3 +21,4 @@ web/topic/
 
 backEnd/.env
 
+.DS_Store
