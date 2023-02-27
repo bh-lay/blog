@@ -20,7 +20,13 @@ function crossCheck(connect: Connect){
 		connect.setHeader('Access-Control-Allow-Methods', 'GET')
 	}
 }
-
+function defaultErrorHandler(error: Error){
+	console.log(error)
+	console.trace('Crazy Error')
+}
+type appOptions = {
+	errorHandler?: (e: Error) => void
+}
 /**
  * application 类
  */
@@ -30,7 +36,8 @@ export default class App {
 	cache: Cache
 	config
 	components: componentRegisted
-	constructor () {
+	private errorHandler: ((e: Error) => void)
+	constructor (options: appOptions) {
 		this.routes = []
 		const config = getAppConfig()
 		this.config = config
@@ -41,8 +48,15 @@ export default class App {
 		})
 		this.components = {}
 		this.fileReader = new FilerReader(config.static)
+		this.errorHandler = options.errorHandler || defaultErrorHandler
+		
+		this.serverListen()
+		this.errorCatch()
+	}
+	private serverListen() {
+		const config = this.config
 		// server start
-		const server = http.createServer((req,res) => {
+		const server = http.createServer((req, res) => {
 			// 屏蔽非法用户
 			if(this.isAbnormalVisitor(req)){
 				res.writeHead(500)
@@ -69,7 +83,6 @@ export default class App {
 					const html = await newConnect.views('system/mongoFail',{error})
 					newConnect.writeHTML(500, html)
 				})
-
 			}else{
 				// 第三顺序：使用静态文件
 				this.fileReader.read(pathname, req,res, () => {
@@ -92,6 +105,14 @@ export default class App {
 		})
 		server.listen(config.port)
 		console.log('Server start at port: ' + config.port)
+	}
+	private errorCatch() {
+		process.on('uncaughtException', (error: Error) => {
+			this.errorHandler(error)
+		})
+		process.on('unhandledRejection', (error: Error) => {
+			this.errorHandler(error)
+		})
 	}
 	/**
 	 * 检测是否为正常用户
