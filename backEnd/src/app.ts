@@ -9,7 +9,7 @@ dotenv.config({
 })
 
 // 创建app
-const app = new App()
+const app = new App({})
 
 // 注册路由、组件
 registerRouteComponents(app)
