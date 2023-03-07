@@ -57,6 +57,7 @@ export default async function(route: routeItemMatched, connect: Connect, app: Ap
 		})
 	}
 	const moveResult = await Promise.all(fileList.map(async function (file) {
+		console.log('file', file)
 		return await moveFile(file.filepath, uploadToPathname, file.originalFilename || file.newFilename)
 	}))
 	connect.writeJson({
