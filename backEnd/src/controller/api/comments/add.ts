@@ -1,5 +1,5 @@
 import DB from '@/core/DB'
-import { routeItemMatched, Connect, App } from '@/core/types'
+import { routeItemMatched, Connect, App } from '@/core/index'
 import { parseRequestBody } from '@/core/utils/parse'
 import { encodeHtml } from '@/lib/utils'
 

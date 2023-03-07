@@ -4,7 +4,7 @@
  */
 
 import { promises as fs } from 'fs'
-import { App, Connect, routeItemMatched } from '@/core/types'
+import { App, Connect, routeItemMatched } from '@/core/index'
 import { base64PathToAbsolute, hasPermission } from './utils'
 import { parseRequestBody } from '@/core/utils/parse'
 import { isFileExists } from '@/controller/img-robber/static-file'

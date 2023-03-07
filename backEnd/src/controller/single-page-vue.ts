@@ -1,4 +1,4 @@
-import { routeItemMatched, Connect, App } from '@/core/types'
+import { routeItemMatched, Connect, App } from '@/core/index'
 
 export default async function (route: routeItemMatched, connect: Connect, app: App){
 	// 缓存机制

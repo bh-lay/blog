@@ -2,7 +2,7 @@
  * @author bh-lay
  * 
  */
-import { routeItemMatched, Connect, App } from '@/core/types'
+import { routeItemMatched, Connect, App } from '@/core/index'
 import { push as pushAnalysis } from '@/functions/analysis/index'
 import { base64Decode } from '@/lib/utils'
 

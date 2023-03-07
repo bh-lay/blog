@@ -1,5 +1,5 @@
 // 剧中人的朋友圈
-import { routeItemConfig } from '@/core/types'
+import { routeItemConfig } from '@/core/index'
 import momentPostListController from '@/controller/api/moment/post/list'
 import momentPostRestController from '@/controller/api/moment/post/rest'
 import momentFriendListController from '@/controller/api/moment/friend/list'

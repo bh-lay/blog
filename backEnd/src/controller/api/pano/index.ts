@@ -1,7 +1,7 @@
 /*
  * @author bh-lay
  */
-import { routeItemMatched, Connect, App } from '@/core/types'
+import { routeItemMatched, Connect, App } from '@/core/index'
 import { get720Data } from '@/functions/my-720-data'
 
 export async function list (route: routeItemMatched, connect: Connect, app: App) {

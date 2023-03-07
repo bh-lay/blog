@@ -7,10 +7,8 @@
 /* eslint-disable no-undef */
 
 export default function getAppConfig() {
+	const temporaryPath = process.env.temporaryPath || ''
 	return {
-		host : process.env.host || '*',
-		// 端口号
-		port : process.env.port,
 		// 静态资源
 		static: {
 			// 静态资源根目录
@@ -32,7 +30,8 @@ export default function getAppConfig() {
 				pdf : 'application/pdf',
 				txt : 'text/plain'
 			}
-		}, 
+		},
+		temporaryPath,
 		// 前端版本控制（css、js、图片、字体）
 		frontEnd: {
 			// 图床地址
@@ -40,16 +39,16 @@ export default function getAppConfig() {
 		},
 		// SESSION配置
 		session : {
-			root : './temporary/session/'
+			root : temporaryPath + '/session/'
 		},
 		imgRobber : {
-			root : './temporary/img-robber/'
+			root : temporaryPath + '/img-robber/'
 		},
 		// 缓存配置
 		cache: {
 			use: false,
 			max_num: 1000,
-			root: './temporary/cache/'
+			root: temporaryPath + '/cache/'
 		},
 		// 数据库链接
 		mongo : {

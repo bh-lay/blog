@@ -1,4 +1,4 @@
-import { routeItemConfig, routeItemMatched, Connect, App, singleController } from '@/core/types'
+import { routeItemConfig, routeItemMatched, Connect, App, singleController } from '@/core/index'
 import isbot from 'node-isbot'
 // 首页
 import indexController from '@/controller/index'

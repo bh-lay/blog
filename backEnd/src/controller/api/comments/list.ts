@@ -1,6 +1,6 @@
 import DB from '@/core/DB'
 import * as mongodb from 'mongodb'
-import { routeItemMatched, Connect, App } from '@/core/types'
+import { routeItemMatched, Connect, App } from '@/core/index'
 import { encodeHtml } from '@/lib/utils'
 const showdown  = require('showdown')
 

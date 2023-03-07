@@ -2,7 +2,7 @@
  * @author bh-lay
  */
 import * as mongodb from 'mongodb'
-import getAppConfig from '../conf/app_config'
+import getAppConfig from '../conf/app-config'
 
 // 获取数据库
 async function getDB(): Promise<{

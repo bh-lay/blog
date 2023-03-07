@@ -1,4 +1,4 @@
-import { routeItemConfig } from '@/core/types'
+import { routeItemConfig } from '@/core/index'
 import assetRestController from '@/controller/api/asset/index'
 import createFolderController from '@/controller/api/asset/create-folder'
 

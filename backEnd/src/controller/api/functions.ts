@@ -1,7 +1,7 @@
 /**
  * @author bh-lay
  */
-import { App, Connect, routeItemMatched } from '@/core/types'
+import { App, Connect, routeItemMatched } from '@/core/index'
 import syncMoment from '@/functions/moment/index'
 import { updateFrom720 } from '@/functions/my-720-data'
 import { updateFromTuchong } from '@/functions/my-tuchong-data'

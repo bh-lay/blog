@@ -3,7 +3,7 @@
  * demo 
  */
 import { promises as fs } from 'fs'
-import { App, Connect, routeItemMatched } from '@/core/types'
+import { App, Connect, routeItemMatched } from '@/core/index'
 import { base64PathToAbsolute, hasPermission } from './utils'
 import { parseRequestBody } from '@/core/utils/parse'
 import { isFileExists } from '@/controller/img-robber/static-file'
@@ -57,6 +57,7 @@ export default async function(route: routeItemMatched, connect: Connect, app: Ap
 		})
 	}
 	const moveResult = await Promise.all(fileList.map(async function (file) {
+		console.log('file', file)
 		return await moveFile(file.filepath, uploadToPathname, file.originalFilename || file.newFilename)
 	}))
 	connect.writeJson({

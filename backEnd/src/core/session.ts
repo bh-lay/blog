@@ -94,7 +94,7 @@ export default class Session {
 		}
 		const pathname = this.path
 		const data = JSON.stringify(this)
-		fs.writeFile(pathname,data)
+		return fs.writeFile(pathname, data)
 	}
 	get(name: string){
 		const this_session = this.data

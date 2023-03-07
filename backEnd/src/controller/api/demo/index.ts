@@ -1,4 +1,4 @@
-import { Connect, routeItemMatched } from '@/core/types'
+import { Connect, routeItemMatched } from '@/core/index'
 import { parseRequestBody } from '@/core/utils/parse'
 import formidable from 'formidable'
 import { promises as fs } from 'fs'

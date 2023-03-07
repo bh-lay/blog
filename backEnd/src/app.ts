@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv'
-import App from '@/core/index'
+import { App } from '@/core/index'
 import registerRouteComponents from './register-route-components'
 import startCronjob from './cronjob'
 
@@ -7,9 +7,11 @@ import startCronjob from './cronjob'
 dotenv.config({
 	path: './.env'
 })
-
 // 创建app
-const app = new App({})
+const app = new App({
+	// 端口号
+	port: process.env.port || '',
+})
 
 // 注册路由、组件
 registerRouteComponents(app)

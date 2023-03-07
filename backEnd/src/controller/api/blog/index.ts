@@ -1,7 +1,7 @@
 /*
  * @author bh-lay
  */
-import { routeItemMatched, Connect, App } from '@/core/types'
+import { routeItemMatched, Connect, App } from '@/core/index'
 import list from './list'
 import detail from './detail'
 import getTagList from './get-tag-list'

@@ -3,7 +3,7 @@
  * demo 
  */
 import { promises as fs } from 'fs'
-import { App, Connect, routeItemMatched } from '@/core/types'
+import { App, Connect, routeItemMatched } from '@/core/index'
 import { hasPermission, relativePathToAbsolute } from './utils'
 import { parseRequestBody } from '@/core/utils/parse'
 import { isFileExists } from '@/controller/img-robber/static-file'

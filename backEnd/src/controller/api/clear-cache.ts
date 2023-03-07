@@ -1,7 +1,7 @@
 /**
  * @author bh-lay
  */
-import { Connect, routeItemMatched, App } from '@/core/types'
+import { Connect, routeItemMatched, App } from '@/core/index'
 import { parseRequestBody } from '@/core/utils/parse'
 
 export default async function(route: routeItemMatched, connect: Connect, app: App){

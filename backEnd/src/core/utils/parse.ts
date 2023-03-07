@@ -177,7 +177,6 @@ export function parseRequestBody(req: http.IncomingMessage): Promise<{params: ob
 	}
 	return new Promise((resolve, reject) => {
 		const form = formidable({
-			uploadDir: './temporary/upload',
 			keepExtensions: true,
 		})
 

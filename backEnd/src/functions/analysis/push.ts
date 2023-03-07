@@ -1,5 +1,5 @@
 import DB from '@/core/DB'
-import { typeResponse } from '@/core/types'
+import { typeResponse } from '@/core/index'
 import { IncomingMessage } from 'node:http'
 
 const cookieName = 'traceid'

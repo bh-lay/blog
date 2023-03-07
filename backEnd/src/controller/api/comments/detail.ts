@@ -1,5 +1,5 @@
 import DB from '@/core/DB'
-import { routeItemMatched, Connect, App } from '@/core/types'
+import { routeItemMatched, Connect, App } from '@/core/index'
 
 // 获取评论详情
 export default async function(route: routeItemMatched, connect: Connect){

@@ -3,7 +3,7 @@
  * @author bh-lay
  */
 
-import { routeItemMatched, Connect, App } from '@/core/types'
+import { routeItemMatched, Connect, App } from '@/core/index'
 import DB from '@/core/DB'
 type listOption = {
 	limit?: number
