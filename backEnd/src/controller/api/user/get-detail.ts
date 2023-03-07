@@ -12,19 +12,18 @@ import { parseRequestBody } from '@/core/utils/parse'
 async function getUserDetail(userID: string){
 	const {collection, client} = await DB.getCollection('user')
 
-	const docs = await collection.find({
+	const userInfo = await collection.findOne({
 		id: userID
-	}).toArray()
+	})
 	client.close()
 
-	if(docs.length === 0){
+	if(!userInfo){
 		return null
 	}
-	const item = docs[0]
-	if(item && item['password']){
-		delete item['password']
+	if(userInfo && userInfo['password']){
+		delete userInfo['password']
 	}
-	return item
+	return userInfo
 }
 // 获取用户信息
 export default async function (route: routeItemMatched, connect: Connect, app: App){
@@ -49,7 +48,7 @@ export default async function (route: routeItemMatched, connect: Connect, app: A
 		
 	const uid = sessionInstance.get('uid')
 	if (typeof uid === 'string') {
-		const detail = getUserDetail(uid)
+		const detail = await getUserDetail(uid)
 		return connect.writeJson({
 			code : 200,
 			detail : detail
