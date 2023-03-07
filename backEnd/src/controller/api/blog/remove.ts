@@ -6,7 +6,7 @@
 ***************************************************************/
 import DB from '@/core/DB'
 import power from '@/conf/power'
-import { App, Connect, routeItemMatched } from '@/core/types'
+import { App, Connect, routeItemMatched } from '@/core/index'
 
 
 // 删除

@@ -1,4 +1,4 @@
-import { routeItemConfig } from '@/core/types'
+import { routeItemConfig } from '@/core/index'
 import commentsRestController, { list as commentsListController} from '@/controller/api/comments/index'
 import blogRestController, { getList as blogListController, blogTagList } from '@/controller/api/blog/index'
 import labsListController from '@/controller/api/labs/list'

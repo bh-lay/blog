@@ -1,5 +1,5 @@
 import { promises as fs } from 'fs'
-import { routeItemMatched, Connect, App } from '@/core/types'
+import { routeItemMatched, Connect, App } from '@/core/index'
 import getAppConfig from '@/conf/app_config'
 import downloadFile from './download-file'
 import { isFileExists, readFileToResponse } from './static-file'

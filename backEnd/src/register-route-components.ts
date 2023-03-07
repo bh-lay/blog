@@ -1,4 +1,4 @@
-import App from '@/core/index'
+import { App } from '@/core/index'
 import routes from '@/router/index'
 import tagComponent from '@/components/multi-page/tag'
 import navigationBootstrap from '@/components/navigation-bootstrap'

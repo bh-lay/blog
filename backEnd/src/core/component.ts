@@ -5,7 +5,7 @@
  * 
  */
 import { promises as fs } from 'fs'
-import { componentContext, componentFn } from './types'
+import { componentContext, componentFn } from './index'
 
 const baseFileRoot = './src/components/'
 // define template Object

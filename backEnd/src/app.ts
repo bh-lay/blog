@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv'
-import App from '@/core/index'
+import { App } from '@/core/index'
 import registerRouteComponents from './register-route-components'
 import startCronjob from './cronjob'
 

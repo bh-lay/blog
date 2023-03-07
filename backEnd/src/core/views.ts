@@ -9,7 +9,7 @@
  *
  */
 
-import { componentContext, componentRegisted, Connect } from './types'
+import { componentContext, componentRegisted, Connect } from './index'
 import resolveComponent from './component'
 /**
  * 获取components 配置

@@ -1,4 +1,4 @@
-import { routeItemConfig } from '../core/types'
+import { routeItemConfig } from '../core/index'
 import apiRoutes from './api/index'
 import momentApiRoutes from './api/moment'
 import assetApiRoutes from './api/asset'

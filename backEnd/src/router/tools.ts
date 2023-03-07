@@ -1,4 +1,4 @@
-import { routeItemConfig } from '@/core/types'
+import { routeItemConfig } from '@/core/index'
 import { get as imgRobberGetController } from '@/controller/img-robber/index'
 import redirectController from '@/controller/redirect'
 import snsLoginController from '@/controller/sns-login/index'

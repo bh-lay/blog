@@ -3,7 +3,7 @@
  * @author bh-lay
  */
 
-import { routeItemMatched, Connect } from '@/core/types'
+import { routeItemMatched, Connect } from '@/core/index'
 import DB from '@/core/DB'
 
 const collectionName = 'friends'

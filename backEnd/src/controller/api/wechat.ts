@@ -2,7 +2,7 @@
 // import request from 'request'
 // import jsSHA from 'jssha'
 // import getAppConfig from '@/conf/app_config'
-// import { App, Connect, routeItemMatched } from '@/core/types'
+// import { App, Connect, routeItemMatched } from '@/core/index'
 
 // type privateToken = {
 // 	token: string,

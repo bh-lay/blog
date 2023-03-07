@@ -1,5 +1,5 @@
 import fs, { promises } from 'fs'
-import { typeResponse } from '@/core/types'
+import { typeResponse } from '@/core/index'
 import { IncomingMessage, OutgoingHttpHeaders } from 'node:http'
 import zlib from 'zlib'
 

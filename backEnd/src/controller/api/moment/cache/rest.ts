@@ -1,7 +1,7 @@
 /*
  * @author bh-lay
  */
-import { routeItemMatched, Connect } from '@/core/types'
+import { routeItemMatched, Connect } from '@/core/index'
 import power from '@/conf/power'
 import { getCache, setCache, removeCache } from '@/functions/moment/cache'
 import { parseRequestBody } from '@/core/utils/parse'

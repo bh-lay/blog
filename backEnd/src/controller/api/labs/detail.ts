@@ -3,7 +3,7 @@
  */
 
 import DB from '@/core/DB'
-import { routeItemMatched, Connect, App } from '@/core/types'
+import { routeItemMatched, Connect, App } from '@/core/index'
 
 async function getDetail (articleID: string, format: string) {
 	const resJSON: Record<string, any> = {

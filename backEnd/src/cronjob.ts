@@ -3,7 +3,7 @@ import updateLabsFromGithub from '@/functions/update-labs-from-github'
 import { updateDatabaseFromGithub as updateMyInfoFromGithub } from '@/functions/my-github-data'
 import syncMoment from '@/functions/moment/index'
 import { updateFrom720 } from '@/functions/my-720-data'
-import { App } from '@/core/types'
+import { App } from '@/core/index'
 import { updateFromTuchong } from '@/functions/my-tuchong-data'
 /**
  * 计划任务

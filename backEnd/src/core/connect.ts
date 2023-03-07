@@ -8,7 +8,7 @@ import zlib from 'zlib'
 import Session from './session'
 import { writeCookie } from './utils/index'
 import { parseCookie, parseURL, typeParsedUrl } from './utils/parse'
-import { componentContext, componentRegisted, routeItemMatched, typeResponse } from './types'
+import { componentContext, componentRegisted, routeItemMatched, typeResponse } from './index'
 import { replaceComponent } from './views'
 
 const baseViewRoot = './src/views/'

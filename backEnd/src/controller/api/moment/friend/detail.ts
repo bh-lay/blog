@@ -2,7 +2,7 @@
  * @author bh-lay
  */
 
-import { routeItemMatched, Connect } from '@/core/types'
+import { routeItemMatched, Connect } from '@/core/index'
 import { push as pushAnalysis } from '@/functions/analysis/index'
 import power from '@/conf/power'
 import { parseRequestBody } from '@/core/utils/parse'

@@ -1,5 +1,5 @@
 
-import { Connect } from '@/core/types'
+import { Connect } from '@/core/index'
 import { base64Decode } from '@/lib/utils'
 
 const assetPath = '../static/'

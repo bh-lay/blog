@@ -1,7 +1,7 @@
 import http from 'http'
 import juicerLib from 'juicer'
 import { parseCookie, formatTime, parseRequestBody, parseURL } from './parse'
-import { typeResponse } from '../types'
+import { typeResponse } from '../index'
 
 
 juicerLib.set({

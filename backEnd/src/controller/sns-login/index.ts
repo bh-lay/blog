@@ -1,7 +1,7 @@
 /**
  * @author bh-lay
  */
-import { routeItemMatched, Connect, App } from '@/core/types'
+import { routeItemMatched, Connect, App } from '@/core/index'
 import githubSnsLogin from './github'
 
 export default async function(route: routeItemMatched, connect: Connect, app: App) {

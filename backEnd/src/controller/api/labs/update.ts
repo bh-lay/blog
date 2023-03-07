@@ -3,7 +3,7 @@
  * 
  */
 import DB from '@/core/DB'
-import { routeItemMatched, Connect, App } from '@/core/types'
+import { routeItemMatched, Connect, App } from '@/core/index'
 import power from '@/conf/power'
 import parseData from './parse'
 import { parseRequestBody } from '@/core/utils/parse'

@@ -2,7 +2,7 @@
  * @author bh-lay
  * view url : /blog    /blog/
  */
-import { routeItemMatched, Connect, App } from '@/core/types'
+import { routeItemMatched, Connect, App } from '@/core/index'
 import { createPagination } from '@/core/utils/pagination'
 import { formatTime } from '@/core/utils/parse'
 import DB from '@/core/DB'

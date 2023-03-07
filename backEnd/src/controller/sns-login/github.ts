@@ -1,5 +1,5 @@
 import DB from '@/core/DB'
-import { Connect } from '@/core/types'
+import { Connect } from '@/core/index'
 import { createID } from '@/core/utils'
 import { getAccessToken, getUserInfoByToken } from '@/lib/github-sdk'
 

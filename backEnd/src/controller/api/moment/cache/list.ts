@@ -2,7 +2,7 @@
 /*
  * @author bh-lay
  */
-import { routeItemMatched, Connect } from '@/core/types'
+import { routeItemMatched, Connect } from '@/core/index'
 import DB from '@/core/DB'
 
 export default async function (route: routeItemMatched, connect: Connect) {
