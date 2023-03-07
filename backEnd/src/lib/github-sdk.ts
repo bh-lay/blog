@@ -3,7 +3,7 @@
  */
 import https from 'https'
 import querystring from 'querystring'
-import getAppConfig from '@/conf/app_config'
+import getAppConfig from '@/conf/app-config'
 
 export function getAccessToken(code: string): Promise<string>{
 	console.log('getAccessToken----------')

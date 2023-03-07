@@ -7,11 +7,8 @@
 /* eslint-disable no-undef */
 
 export default function getAppConfig() {
-	const temporaryPath = process.env.temporaryPath
+	const temporaryPath = process.env.temporaryPath || ''
 	return {
-		host : process.env.host || '*',
-		// 端口号
-		port : process.env.port,
 		// 静态资源
 		static: {
 			// 静态资源根目录
@@ -33,7 +30,8 @@ export default function getAppConfig() {
 				pdf : 'application/pdf',
 				txt : 'text/plain'
 			}
-		}, 
+		},
+		temporaryPath,
 		// 前端版本控制（css、js、图片、字体）
 		frontEnd: {
 			// 图床地址

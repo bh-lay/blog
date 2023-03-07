@@ -1,7 +1,7 @@
 // 'use strict'
 // import request from 'request'
 // import jsSHA from 'jssha'
-// import getAppConfig from '@/conf/app_config'
+// import getAppConfig from '@/conf/app-config'
 // import { App, Connect, routeItemMatched } from '@/core/index'
 
 // type privateToken = {

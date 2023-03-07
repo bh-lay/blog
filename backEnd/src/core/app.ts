@@ -7,10 +7,11 @@ import pathToRegexp from 'path-to-regexp'
 import http from 'http'
 import Connect from './connect'
 import FilerReader from './staticFile'
-import getAppConfig from '../conf/app_config'
+import getAppConfig from '../conf/app-config'
 import urlRedirectConfig from '../conf/301url'
 import { httpMethod, routeHttpMethod, searchParams, controller, routeItemParsed, routeItemMatched, componentFn, componentRegisted } from './index'
 import Cache from './cache'
+import initTemporary from './utils/init-temporary'
 
 function crossCheck(connect: Connect){
 	const referer = connect.request.headers.referer || ''
@@ -25,7 +26,8 @@ function defaultErrorHandler(error: Error){
 	console.trace('Crazy Error')
 }
 type appOptions = {
-	errorHandler?: (e: Error) => void
+	errorHandler?: (e: Error) => void,
+	port: string
 }
 /**
  * application 类
@@ -35,12 +37,14 @@ export default class App {
 	fileReader: FilerReader
 	cache: Cache
 	config
+	options: appOptions
 	components: componentRegisted
 	private errorHandler: ((e: Error) => void)
 	constructor (options: appOptions) {
 		this.routes = []
 		const config = getAppConfig()
 		this.config = config
+		this.options = options
 		this.cache = new Cache({
 			useCache: config.cache.use ? true : false,
 			max_num: config.cache.max_num,
@@ -49,7 +53,8 @@ export default class App {
 		this.components = {}
 		this.fileReader = new FilerReader(config.static)
 		this.errorHandler = options.errorHandler || defaultErrorHandler
-		
+		// 初始化临时目录
+		initTemporary(config.temporaryPath)
 		this.serverListen()
 		this.errorCatch()
 	}
@@ -103,8 +108,8 @@ export default class App {
 				})
 			}
 		})
-		server.listen(config.port)
-		console.log('Server start at port: ' + config.port)
+		server.listen(this.options.port)
+		console.log('Server start at port: ' + this.options.port)
 	}
 	private errorCatch() {
 		process.on('uncaughtException', (error: Error) => {

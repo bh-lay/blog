@@ -7,9 +7,11 @@ import startCronjob from './cronjob'
 dotenv.config({
 	path: './.env'
 })
-
 // 创建app
-const app = new App({})
+const app = new App({
+	// 端口号
+	port: process.env.port || '',
+})
 
 // 注册路由、组件
 registerRouteComponents(app)
