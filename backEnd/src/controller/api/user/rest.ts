@@ -2,7 +2,7 @@
  * @author bh-lay
  * 
  */
-import DB from '@/core/DB'
+import DB from '@/database/DB'
 // import utils from '@/core/utils/index'
 
 // // 增加一条用户记录

@@ -1,4 +1,4 @@
-import DB from '@/core/DB'
+import DB from '@/database/DB'
 import { typeResponse } from '@/core/index'
 import { IncomingMessage } from 'node:http'
 

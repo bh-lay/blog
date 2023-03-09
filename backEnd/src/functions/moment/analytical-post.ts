@@ -1,4 +1,4 @@
-import DB from '@/core/DB'
+import DB from '@/database/DB'
 import { count as analysisCount } from '@/functions/analysis/index'
 
 export default async function () {

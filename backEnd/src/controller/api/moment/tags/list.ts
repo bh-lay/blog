@@ -3,7 +3,7 @@
  * @author bh-lay
  */
 import { routeItemMatched, Connect } from '@/core/index'
-import DB from '@/core/DB'
+import DB from '@/database/DB'
 
 export default async function (route: routeItemMatched, connect: Connect) {
 	const params = connect.url.search

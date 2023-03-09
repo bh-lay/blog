@@ -7,7 +7,7 @@ import { push as pushAnalysis } from '@/functions/analysis/index'
 import power from '@/conf/power'
 import { parseRequestBody } from '@/core/utils/parse'
 
-import DB from '@/core/DB'
+import DB from '@/database/DB'
 import parseData from './parse'
 import { createID } from '@/core/utils'
 

@@ -1,4 +1,4 @@
-import DB from '@/core/DB'
+import DB from '@/database/DB'
 import { getRepoInfo } from '@/functions/github'
 
 type repoInfo = {

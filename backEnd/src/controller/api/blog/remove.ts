@@ -4,7 +4,7 @@
  */
 /** ************************************************************
 ***************************************************************/
-import DB from '@/core/DB'
+import DB from '@/database/DB'
 import power from '@/conf/power'
 import { App, Connect, routeItemMatched } from '@/core/index'
 

@@ -1,6 +1,6 @@
 
 // author bh-lay
-import DB from '@/core/DB'
+import DB from '@/database/DB'
 
 type friend = {
 	github_username: string | undefined,

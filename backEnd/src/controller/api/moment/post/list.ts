@@ -5,7 +5,7 @@
 import * as mongodb from 'mongodb'
 import { routeItemMatched, Connect } from '@/core/index'
 
-import DB from '@/core/DB'
+import DB from '@/database/DB'
 import { encodeHtml } from '@/lib/utils'
 
 const collectionName = 'moment_post'

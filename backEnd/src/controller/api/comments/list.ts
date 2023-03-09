@@ -1,4 +1,4 @@
-import DB from '@/core/DB'
+import DB from '@/database/DB'
 import * as mongodb from 'mongodb'
 import { routeItemMatched, Connect, App } from '@/core/index'
 import { encodeHtml } from '@/lib/utils'

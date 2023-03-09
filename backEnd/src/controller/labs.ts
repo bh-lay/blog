@@ -3,7 +3,7 @@
  */
 import { routeItemMatched, Connect, App } from '@/core/index'
 import { formatTime } from '@/core/utils/parse'
-import DB from '@/core/DB'
+import DB from '@/database/DB'
 
 const showdown  = require('showdown')
 

@@ -3,7 +3,7 @@
  * 
  */
 import power from '@/conf/power'
-import DB from '@/core/DB'
+import DB from '@/database/DB'
 import { routeItemMatched, Connect, App } from '@/core/index'
 
 // 获取评论详情

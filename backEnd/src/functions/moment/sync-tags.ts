@@ -3,7 +3,7 @@
  *
  */
 import * as mongodb from 'mongodb'
-import DB from '@/core/DB'
+import DB from '@/database/DB'
 
 type tagItemInfo = {
 	name: string,

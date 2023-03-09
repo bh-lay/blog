@@ -1,4 +1,4 @@
-import DB from '@/core/DB'
+import DB from '@/database/DB'
 import { getUserInfo, githubUserInfo } from './github'
 
 const collection_name = 'cache'

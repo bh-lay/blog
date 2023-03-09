@@ -2,7 +2,7 @@
 /*
  * @author bh-lay
  */
-import DB from '@/core/DB'
+import DB from '@/database/DB'
 type listOption = {
 	limit?: number
 	skip?: number

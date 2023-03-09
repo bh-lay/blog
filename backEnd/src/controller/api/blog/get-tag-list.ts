@@ -2,7 +2,7 @@
  * @author bh-lay
  *
  */
-import DB from '@/core/DB'
+import DB from '@/database/DB'
 
 export default async function getTagsList() {
 	const { collection, client } = await DB.getCollection('article')

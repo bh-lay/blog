@@ -1,7 +1,7 @@
 /*
  * @author bh-lay
  */
-import DB from '@/core/DB'
+import DB from '@/database/DB'
 const collectionName = 'moment_cache'
 
 // 获取缓存

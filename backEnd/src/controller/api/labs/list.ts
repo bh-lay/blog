@@ -4,7 +4,7 @@
  */
 
 import { routeItemMatched, Connect, App } from '@/core/index'
-import DB from '@/core/DB'
+import DB from '@/database/DB'
 type listOption = {
 	limit?: number
 	skip?: number

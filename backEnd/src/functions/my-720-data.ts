@@ -1,4 +1,4 @@
-import DB from '@/core/DB'
+import DB from '@/database/DB'
 import request from 'request'
 const collectionName = 'cache',
 	mongon_ID = '720yun_bh-lay',

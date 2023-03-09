@@ -1,4 +1,4 @@
-import DB from '@/core/DB'
+import DB from '@/database/DB'
 
 
 export default async function(type: string, params: Record<string, unknown>) {

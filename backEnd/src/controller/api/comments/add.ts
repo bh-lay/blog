@@ -1,4 +1,4 @@
-import DB from '@/core/DB'
+import DB from '@/database/DB'
 import { routeItemMatched, Connect, App } from '@/core/index'
 import { parseRequestBody } from '@/core/utils/parse'
 import { encodeHtml } from '@/lib/utils'

@@ -4,7 +4,7 @@
  */
 import { routeItemMatched, Connect, App } from '@/core/index'
 import { parseRequestBody } from '@/core/utils/parse'
-import DB from '@/core/DB'
+import DB from '@/database/DB'
 import power from '@/conf/power'
 import parseData from './parse'
 

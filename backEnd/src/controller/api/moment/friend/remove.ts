@@ -5,7 +5,7 @@
 
 import { routeItemMatched, Connect } from '@/core/index'
 import power from '@/conf/power'
-import DB from '@/core/DB'
+import DB from '@/database/DB'
 
 const collectionName = 'friends'
 
