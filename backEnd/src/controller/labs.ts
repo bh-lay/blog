@@ -11,7 +11,7 @@ async function list_page(app: App) {
 	const { collection, client } = await DB.getCollection('labs')
 	const docs = await collection.find({}, { limit: 15 }).sort({ id: -1 }).toArray()
 	for (const i in docs) {
-		docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? app.config.frontEnd.cdnDomain + docs[i].cover : docs[i].cover
+		docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? app.options.frontendCdnDomain + docs[i].cover : docs[i].cover
 	}
 	client.close()
 	return docs

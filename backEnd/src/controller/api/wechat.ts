@@ -1,7 +1,6 @@
 // 'use strict'
 // import request from 'request'
 // import jsSHA from 'jssha'
-// import getAppConfig from '@/conf/app-config'
 // import { App, Connect, routeItemMatched } from '@/core/index'
 
 // type privateToken = {
@@ -28,7 +27,10 @@
 //  */
 
 // async function getWechatTokenFromServer(): Promise<privateToken> {
-// 	const { wechat } = getAppConfig()
+// 	const { wechat } =  {
+		// 	AppId: process.env.wechatAppId,
+		// 	AppSecret: process.env.wechatAppSecret
+		// }
 // 	var wechat_token_url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=' + wechat.AppId + '&secret=' + wechat.AppSecret
 
 // 	return new Promise((resolve, reject) => {
@@ -184,7 +186,10 @@
 // 	var string = raw(ret)
 // 	var shaObj = new jsSHA('SHA-1', 'TEXT')  // new jsSHA(string, 'TEXT');
 // 	shaObj.update(string)
-// 	const { wechat } = getAppConfig()
+// 	const { wechat } = {
+		// 	AppId: process.env.wechatAppId,
+		// 	AppSecret: process.env.wechatAppSecret
+		// }
 // 	return {
 // 		appId: wechat.AppId,
 // 		timestamp: ret.timestamp,

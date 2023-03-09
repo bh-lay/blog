@@ -1,10 +1,10 @@
 import { promises as fs } from 'fs'
 import { routeItemMatched, Connect, App } from '@/core/index'
-import getAppConfig from '@/conf/app-config'
 import downloadFile from './download-file'
 import { isFileExists, readFileToResponse } from './static-file'
 import { base64Encode, base64Decode } from '@/lib/utils'
 
+const imageRobotRoot = '/img-robber/'
 export async function get (route: routeItemMatched, connect: Connect, app: App){
 	// 获取 URL 配置参数
 	const urlSourceStr = base64Decode(route.params.source as string || '')
@@ -24,7 +24,7 @@ export async function get (route: routeItemMatched, connect: Connect, app: App){
 	// 生成新的文件名
 	const fileName = base64Encode(imageOriginUrl).replace(/\//g, '-')
 	// 生成新的文件地址
-	const localFilePath = getAppConfig().imgRobber.root + fileName
+	const localFilePath = app.options.temporaryPath + imageRobotRoot + fileName
 	// 查看文件是否存在
 	const fileExist = await isFileExists(localFilePath)
 	

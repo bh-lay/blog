@@ -7,7 +7,6 @@ import pathToRegexp from 'path-to-regexp'
 import http from 'http'
 import Connect from './connect'
 import FilerReader from './staticFile'
-import getAppConfig from '../conf/app-config'
 import urlRedirectConfig from '../conf/301url'
 import { httpMethod, routeHttpMethod, searchParams, controller, routeItemParsed, routeItemMatched, componentFn, componentRegisted } from './index'
 import Cache from './cache'
@@ -27,7 +26,13 @@ function defaultErrorHandler(error: Error){
 }
 type appOptions = {
 	errorHandler?: (e: Error) => void,
-	port: string
+	port: string,
+	temporaryPath: string,
+	useCache: boolean,
+	maxCacheCount: number,
+	staticRoot:  string,
+	staticFileMaxAge: number,
+	frontendCdnDomain: string,
 }
 /**
  * application 类
@@ -36,30 +41,29 @@ export default class App {
 	routes: routeItemParsed[]
 	fileReader: FilerReader
 	cache: Cache
-	config
 	options: appOptions
 	components: componentRegisted
 	private errorHandler: ((e: Error) => void)
 	constructor (options: appOptions) {
 		this.routes = []
-		const config = getAppConfig()
-		this.config = config
 		this.options = options
 		this.cache = new Cache({
-			useCache: config.cache.use ? true : false,
-			max_num: config.cache.max_num,
-			root: config.cache.root
+			useCache: options.useCache,
+			maxCacheCount: options.maxCacheCount,
+			root: options.temporaryPath + '/cache/'
 		})
 		this.components = {}
-		this.fileReader = new FilerReader(config.static)
+		this.fileReader = new FilerReader({
+			root: options.staticRoot,
+			maxAge: options.staticFileMaxAge
+		})
 		this.errorHandler = options.errorHandler || defaultErrorHandler
 		// 初始化临时目录
-		initTemporary(config.temporaryPath)
+		initTemporary(options.temporaryPath)
 		this.serverListen()
 		this.errorCatch()
 	}
 	private serverListen() {
-		const config = this.config
 		// server start
 		const server = http.createServer((req, res) => {
 			// 屏蔽非法用户
@@ -70,7 +74,7 @@ export default class App {
 			}
 			// 实例化一个connect对象
 			const newConnect = new Connect(req, res, {
-				sessionRoot: config.session.root,
+				sessionRoot: this.options.temporaryPath + '/session/',
 				components: this.components
 			})
 			const path = newConnect.url

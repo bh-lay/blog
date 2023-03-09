@@ -6,21 +6,34 @@ import zlib from 'zlib'
 import http, { OutgoingHttpHeaders } from 'http'
 type typeFileParam = {
 	root: string
-	mime: Record<string, string>
 	maxAge: number
 }
 type typeResponse = http.ServerResponse<http.IncomingMessage> & {
 	req: http.IncomingMessage;
 }
-
+// 定义文件类型 Mime-Type
+const baseMimes = {
+	html : 'text/html',
+	js : 'application/x-javascript',
+	json : 'application/json',
+	css : 'text/css',
+	ico : 'image/x-icon',
+	jpg : 'image/jpeg',
+	png : 'image/png',
+	gif : 'image/gif',
+	rar : 'application/zip',
+	zip : 'application/zip',
+	pdf : 'application/pdf',
+	txt : 'text/plain'
+}
 export default class FilerReader {
 	staticFileRoot: string
 	mime: Record<string, string>
 	maxAge: number
 	constructor (param: typeFileParam){
 		this.staticFileRoot = param.root
-		this.mime = param.mime
-		this.maxAge = param.maxAge
+		this.mime = baseMimes
+		this.maxAge = param.maxAge || 60 * 60 * 24 * 365
 	}
 	read (path: string, req: http.IncomingMessage, res: typeResponse, notFound: () => void) {
 		// 匹配文件扩展名

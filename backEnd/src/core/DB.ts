@@ -2,7 +2,6 @@
  * @author bh-lay
  */
 import * as mongodb from 'mongodb'
-import getAppConfig from '../conf/app-config'
 
 // 获取数据库
 async function getDB(): Promise<{
@@ -10,7 +9,13 @@ async function getDB(): Promise<{
 	db: mongodb.Db
 }> {
 	const MongoClient = mongodb.MongoClient
-	const mongoConig = getAppConfig().mongo
+	const mongoConig = {
+		host: process.env.mongoHost,
+		port: process.env.mongoPort,
+		user: process.env.mongoUser,
+		pass: process.env.mongoPwd,
+		dbName: process.env.MongoDBName
+	}
 	const mongoConnectUrl = `mongodb://${mongoConig.host}:${mongoConig.port}`
 
 	const client = await MongoClient.connect(mongoConnectUrl, {

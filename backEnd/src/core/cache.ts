@@ -5,7 +5,7 @@ import { promises as fs } from 'fs'
 import { isFileExists } from '@/controller/img-robber/static-file'
 type paramOptions = {
 	useCache: boolean
-	max_num: number
+	maxCacheCount: number
 	root: string
 }
 
@@ -16,7 +16,7 @@ export default class Cache {
 	constructor (param: paramOptions){
 		param = param || {}
 		this.useCache = param.useCache
-		this.cache_max_num = param.max_num
+		this.cache_max_num = param.maxCacheCount
 		// 缓存存放目录
 		this.root = param.root
 	}

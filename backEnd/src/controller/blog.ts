@@ -35,7 +35,7 @@ async function getList (app: App, param: getListParams) {
 
 	for (const i in docs) {
 		docs[i].time_show = formatTime(docs[i].time_show, '{y}年-{m}月-{d}日')
-		docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? app.config.frontEnd.cdnDomain + docs[i].cover : docs[i].cover
+		docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? app.options.frontendCdnDomain + docs[i].cover : docs[i].cover
 	}
 	return {
 		docs,

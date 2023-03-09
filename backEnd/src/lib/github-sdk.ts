@@ -3,11 +3,14 @@
  */
 import https from 'https'
 import querystring from 'querystring'
-import getAppConfig from '@/conf/app-config'
 
 export function getAccessToken(code: string): Promise<string>{
 	console.log('getAccessToken----------')
-	const githubConfig = getAppConfig().github
+	const githubConfig = {
+		clientId: process.env.githubClientId,
+		clientSecret: process.env.githubClientSecret,
+		redirectUri: process.env.githubRedirectUri,
+	}
 	return new Promise((resolve, reject) => {
 		const postData = querystring.stringify({
 			client_id : githubConfig.clientId,

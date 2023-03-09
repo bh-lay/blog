@@ -11,6 +11,13 @@ dotenv.config({
 const app = new App({
 	// 端口号
 	port: process.env.port || '',
+	temporaryPath: process.env.temporaryPath || '',
+	useCache: false,
+	maxCacheCount: 1000,
+	staticRoot: '../web/',
+	// 静态资源缓存时间
+	staticFileMaxAge: 60 * 60 * 24 * 365,
+	frontendCdnDomain: process.env.cdnDomain || '',
 })
 
 // 注册路由、组件
