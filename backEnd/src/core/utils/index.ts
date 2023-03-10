@@ -1,22 +1,6 @@
-import http from 'http'
-import juicerLib from 'juicer'
 import { parseCookie, formatTime, parseRequestBody, parseURL } from './parse'
 import { typeResponse } from '../index'
 
-
-juicerLib.set({
-	'tag::operationOpen': '[[@',
-	'tag::operationClose': ']]',
-	'tag::interpolateOpen': '$[[',
-	'tag::interpolateClose': ']]',
-	'tag::noneencodeOpen': '$$[[',
-	'tag::noneencodeClose': ']]',
-	'tag::commentOpen': '[[#',
-	'tag::commentClose': ']]'
-})
-
-
-export const juicer = juicerLib
 export const parse = {
 	cookie: parseCookie,
 	time: formatTime,

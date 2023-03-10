@@ -3,12 +3,11 @@
  */
 import http, { OutgoingHttpHeaders } from 'node:http'
 import { promises as fs } from 'fs'
-import { juicer } from './utils/index'
 import zlib from 'zlib'
 import Session from './session'
 import { writeCookie } from './utils/index'
 import { parseCookie, parseURL, typeParsedUrl } from './utils/parse'
-import { componentContext, componentRegisted, routeItemMatched, typeResponse } from './index'
+import { componentContext, componentRegisted, routeItemMatched, typeResponse, juicer } from './index'
 import { replaceComponent } from './views'
 
 const baseViewRoot = './src/views/'

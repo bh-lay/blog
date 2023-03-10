@@ -1,4 +1,4 @@
-import { juicer } from '@/core/utils/index'
+import { juicer } from '@/core/index'
 import getCommentList from '@/controller/api/comments/list'
 import { componentContext } from '@/core/index'
 
