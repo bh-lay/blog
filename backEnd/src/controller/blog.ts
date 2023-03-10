@@ -3,7 +3,7 @@
  * view url : /blog    /blog/
  */
 import { routeItemMatched, Connect, App } from '@/core/index'
-import { createPagination } from '@/core/utils/pagination'
+import { createPagination } from '@/lib/pagination'
 import { formatTime } from '@/core/utils/parse'
 import DB from '@/database/DB'
 

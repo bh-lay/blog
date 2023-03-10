@@ -1,10 +1,9 @@
-import { parseCookie, formatTime, parseRequestBody, parseURL } from './parse'
+import { parseCookie, formatTime, parseURL } from './parse'
 import { typeResponse } from '../index'
 
 export const parse = {
 	cookie: parseCookie,
 	time: formatTime,
-	request: parseRequestBody,
 	url: parseURL,
 }
 

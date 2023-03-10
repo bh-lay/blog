@@ -5,13 +5,12 @@
 import { promises as fs } from 'fs'
 import { App, Connect, routeItemMatched } from '@/core/index'
 import { hasPermission, relativePathToAbsolute } from './utils'
-import { parseRequestBody } from '@/core/utils/parse'
 import { isFileExists } from '@/controller/img-robber/static-file'
 
 
 export default async function(route: routeItemMatched, connect: Connect, app: App) {
 
-	const { params } = await parseRequestBody(connect.request)
+	const { params } = await connect.parseRequestBody()
 
 	const hasAccess = await hasPermission(connect)
 	if (!hasAccess) {

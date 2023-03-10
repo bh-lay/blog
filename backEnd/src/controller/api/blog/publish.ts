@@ -3,7 +3,6 @@
  */
 import { routeItemMatched, Connect } from '@/core/index'
 import power from '@/conf/power'
-import { parseRequestBody } from '@/core/utils/parse'
 
 import DB from '@/database/DB'
 import parseData from './parse'
@@ -20,7 +19,7 @@ export default async function(route: routeItemMatched, connect: Connect) {
 		})
 		return
 	}
-	const { params } = await parseRequestBody(connect.request)
+	const { params } = await connect.parseRequestBody()
 	
 	const data = parseData(params)
 	if (!data) {

@@ -2,7 +2,6 @@
  * @author bh-lay
  */
 import { Connect, routeItemMatched, App } from '@/core/index'
-import { parseRequestBody } from '@/core/utils/parse'
 
 export default async function(route: routeItemMatched, connect: Connect, app: App){
 	if(connect.request.method != 'POST'){
@@ -13,7 +12,7 @@ export default async function(route: routeItemMatched, connect: Connect, app: Ap
 		return
 	}
 	// FIXME: add power check
-	const { params } = await parseRequestBody(connect.request)
+	const { params } = await connect.parseRequestBody()
 	const typeStr = params.type as string || ''
 	app.cache.clear(typeStr)
 	connect.writeJson({

@@ -1,11 +1,10 @@
 import { Connect, routeItemMatched } from '@/core/index'
-import { parseRequestBody } from '@/core/utils/parse'
 import formidable from 'formidable'
 import { promises as fs } from 'fs'
 
 export async function upload(route: routeItemMatched, connect: Connect){
 
-	const { files } = await parseRequestBody(connect.request)
+	const { files } = await connect.parseRequestBody()
 
 	if (!files) {
 		return connect.writeJson({

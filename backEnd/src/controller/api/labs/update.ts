@@ -6,7 +6,6 @@ import DB from '@/database/DB'
 import { routeItemMatched, Connect, App } from '@/core/index'
 import power from '@/conf/power'
 import parseData from './parse'
-import { parseRequestBody } from '@/core/utils/parse'
 const collectionName = 'labs'
 
 export default async function (route: routeItemMatched, connect: Connect, app: App) {
@@ -18,7 +17,7 @@ export default async function (route: routeItemMatched, connect: Connect, app: A
 		})
 		return
 	}
-	const { params } = await parseRequestBody(connect.request)
+	const { params } = await connect.parseRequestBody()
 	const id = route.params.id
 	const data = parseData(params)
 	if (!data) {

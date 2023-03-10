@@ -1,6 +1,5 @@
 import DB from '@/database/DB'
 import { routeItemMatched, Connect, App } from '@/core/index'
-import { parseRequestBody } from '@/core/utils/parse'
 import { encodeHtml } from '@/lib/utils'
 
 const showdown  = require('showdown')
@@ -61,7 +60,7 @@ const count_limit = 10
 
 // 增加回复/评论
 export default async function (route: routeItemMatched, connect: Connect, app: App){
-	const { params } = await parseRequestBody(connect.request)
+	const { params } = await connect.parseRequestBody()
 
 	if (!params || Object.keys(params).length === 0) {
 		return connect.writeJson({

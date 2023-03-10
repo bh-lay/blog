@@ -3,8 +3,6 @@
  * 
  */
 import { routeItemMatched, Connect, App } from '@/core/index'
-import { parseRequestBody } from '@/core/utils/parse'
-import power from '../../../conf/power'
 import addComments from './add'
 import getList from './list'
 import getDetail from './detail'

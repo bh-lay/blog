@@ -5,7 +5,6 @@
 import { promises as fs } from 'fs'
 import { App, Connect, routeItemMatched } from '@/core/index'
 import { base64PathToAbsolute, hasPermission } from './utils'
-import { parseRequestBody } from '@/core/utils/parse'
 import { isFileExists } from '@/controller/img-robber/static-file'
 import formidable from 'formidable'
 
@@ -36,7 +35,7 @@ export default async function(route: routeItemMatched, connect: Connect, app: Ap
 			msg : 'no power'
 		})
 	}
-	const { files } = await parseRequestBody(connect.request)
+	const { files } = await connect.parseRequestBody()
 
 	if (!files) {
 		return connect.writeJson({

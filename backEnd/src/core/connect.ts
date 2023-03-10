@@ -6,7 +6,7 @@ import { promises as fs } from 'fs'
 import zlib from 'zlib'
 import Session from './session'
 import { writeCookie } from './utils/index'
-import { parseCookie, parseURL, typeParsedUrl } from './utils/parse'
+import { parseCookie, parseRequestBody, parseURL, typeParsedUrl } from './utils/parse'
 import { componentContext, componentRegisted, routeItemMatched, typeResponse, juicer } from './index'
 import { replaceComponent } from './views'
 
@@ -185,6 +185,9 @@ export default class CONNECT {
 	ip(){
 		const req = this.request
 		return req.headers['x-forwarded-for'] || req.connection['remoteAddress']
+	}
+	parseRequestBody() {
+		return parseRequestBody(this.request)
 	}
 }
 

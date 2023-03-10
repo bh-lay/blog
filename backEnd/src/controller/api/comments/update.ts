@@ -2,11 +2,10 @@
 import power from '@/conf/power'
 import DB from '@/database/DB'
 import { routeItemMatched, Connect, App } from '@/core/index'
-import { parseRequestBody } from '@/core/utils/parse'
 
 // 修改评论
 export default async function(route: routeItemMatched, connect: Connect, app: App){
-	const { params } = await parseRequestBody(connect.request)
+	const { params } = await connect.parseRequestBody()
 	const _id = route.params.id
 	const sessionInstance = await connect.session()
 	// 校验权限

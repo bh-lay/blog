@@ -5,8 +5,6 @@
 import DB from '@/database/DB'
 import { routeItemMatched, Connect, App } from '@/core/index'
 import power from '@/conf/power'
-import parseData from './parse'
-import { parseRequestBody } from '@/core/utils/parse'
 
 // 删除
 export default async function (route: routeItemMatched, connect: Connect, app: App) {

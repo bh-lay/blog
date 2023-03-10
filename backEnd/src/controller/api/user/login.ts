@@ -4,7 +4,7 @@
  */
 import DB from '@/database/DB'
 import { routeItemMatched, Connect, Session, App } from '@/core/index'
-import { parseRequestBody, str2md5 } from '@/core/utils/parse'
+import { str2md5 } from '@/core/utils/parse'
 
 
 /**
@@ -63,7 +63,7 @@ export default async function (route: routeItemMatched, connect: Connect){
 		}
 	}
 	// 获取请求参数
-	const { params } = await parseRequestBody(req)
+	const { params } = await connect.parseRequestBody()
 	const email = params.email as string || ''
 	const password = str2md5(params.password as string || '')
 	if(!email || password.length < 2){

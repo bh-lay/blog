@@ -6,7 +6,6 @@ import DB from '@/database/DB'
 import { routeItemMatched, Connect, App } from '@/core/index'
 import power from '@/conf/power'
 import parseData from './parse'
-import { parseRequestBody } from '@/core/utils/parse'
 import { createID } from '@/core/utils'
 
 export default async function (route: routeItemMatched, connect: Connect, app: App) {
@@ -17,7 +16,7 @@ export default async function (route: routeItemMatched, connect: Connect, app: A
 			msg: '没有权限'
 		})
 	}
-	const { params } = await parseRequestBody(connect.request)
+	const { params } = await connect.parseRequestBody()
 	const data = parseData(params)
 	if (!data) {
 		return connect.writeJson({

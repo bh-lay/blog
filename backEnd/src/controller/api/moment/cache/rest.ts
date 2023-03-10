@@ -4,7 +4,6 @@
 import { routeItemMatched, Connect } from '@/core/index'
 import power from '@/conf/power'
 import { getCache, setCache, removeCache } from '@/functions/moment/cache'
-import { parseRequestBody } from '@/core/utils/parse'
 
 async function get(route: routeItemMatched, connect: Connect) {
 	const cacheName =  route.params.name as string || ''
@@ -29,7 +28,7 @@ async function put(route: routeItemMatched, connect: Connect) {
 			msg: '没有权限'
 		})
 	}
-	const { params } = await parseRequestBody(connect.request)
+	const { params } = await connect.parseRequestBody()
 	const content = JSON.parse(params.content as string)
 	await setCache(cacheName, content)
 	connect.writeJson({
