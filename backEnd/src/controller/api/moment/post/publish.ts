@@ -7,7 +7,7 @@ import power from '@/conf/power'
 
 import DB from '@/database/DB'
 import parseData from './parse'
-import { createID } from '@/core/utils'
+import { createID } from '@/lib/utils'
 
 const collectionName = 'moment_post'
 

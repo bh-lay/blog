@@ -1,9 +1,8 @@
-import { parseCookie, formatTime, parseURL } from './parse'
+import { parseCookie, parseURL } from './parse'
 import { typeResponse } from '../index'
 
 export const parse = {
 	cookie: parseCookie,
-	time: formatTime,
 	url: parseURL,
 }
 
@@ -18,7 +17,4 @@ export function writeCookie(cookieObj: Record<string, unknown>, response: typeRe
 // exports.trim = function(str){
 // 	return (str || '').replace(/^\s*|\s*$/g,'')
 // }
-// // 生成ID
-export function createID(){
-	return parseInt(Math.ceil(Math.random()*1000) + '' + new Date().getTime()).toString(36)
-}
+

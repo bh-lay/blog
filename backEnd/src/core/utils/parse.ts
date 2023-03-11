@@ -4,7 +4,6 @@
 import http from 'http'
 import querystring from 'querystring'
 import formidable, {errors as formidableErrors} from 'formidable'
-import crypto from 'crypto'
 
 // 格式化cookie
 export function parseCookie(str: string){
@@ -22,46 +21,6 @@ export function parseCookie(str: string){
 		cookieData[name] = value
 	}
 	return cookieData
-}
-
-/**
- * @param (timestamp/Date,'{y}-{m}-{d} {h}:{i}:{s}')
- * 
- * y:year
- * m:months
- * d:date
- * h:hour
- * i:minutes
- * s:second
- * a:day
- */
-export function formatTime(time: Date | string, format: string){
-
-	format = format ||'{y}-{m}-{d} {h}:{i}:{s}'
-	let date
-	if(typeof(time) === 'object'){
-		date = time
-	}else{
-		date = new Date(parseInt(time))
-	}
-  type timeKey = 'y' | 'm' | 'd' | 'h' | 'i' | 's' | 'a'
-  const formatObj: Record<timeKey, number> = {
-  	y : date.getFullYear(),
-  	m : date.getMonth() + 1,
-  	d : date.getDate(),
-  	h : date.getHours(),
-  	i : date.getMinutes(),
-  	s : date.getSeconds(),
-  	a : date.getDay(),
-  }
-  return format.replace(/{(y|m|d|h|i|s|a)+}/g, function(keyMatched: string, key: string) {
-  	const currentKey = key as timeKey
-  	const value = formatObj[currentKey]
-  	if (keyMatched.length === 4 && value < 10) {
-  		return '0' + value
-  	}
-  	return (value || 0).toString()
-  })
 }
 
 /**
@@ -222,12 +181,4 @@ export function parseURL(url: string): typeParsedUrl{
 		obj.filename = matches? matches[1] : ''
 	}
 	return obj
-}
-
-export function str2md5(text: string | number) {
-	text = text || ''
-	if(typeof(text) != 'string'){
-		text = text.toString()
-	}
-	return crypto.createHash('md5').update(text).digest('hex')
 }

@@ -1,6 +1,6 @@
 import DB from '@/database/DB'
 import { Connect } from '@/core/index'
-import { createID } from '@/core/utils'
+import { createID } from '@/lib/utils'
 import { getAccessToken, getUserInfoByToken } from '@/lib/github-sdk'
 
 async function hanldGithubLogin(connect: Connect) {

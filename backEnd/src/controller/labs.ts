@@ -2,7 +2,7 @@
  * @author bh-lay
  */
 import { routeItemMatched, Connect, App } from '@/core/index'
-import { formatTime } from '@/core/utils/parse'
+import { formatTime } from '@/lib/utils'
 import DB from '@/database/DB'
 
 const showdown  = require('showdown')

@@ -1,5 +1,5 @@
 import { routeItemMatched, Connect, App } from '@/core/index'
-import { formatTime } from '@/core/utils/parse'
+import { formatTime } from '@/lib/utils'
 import { getGithubData } from '@/functions/my-github-data'
 import getCommentList from '@/controller/api/comments/list'
 

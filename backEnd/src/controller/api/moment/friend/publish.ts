@@ -7,7 +7,7 @@ import { routeItemMatched, Connect } from '@/core/index'
 import power from '@/conf/power'
 import DB from '@/database/DB'
 import parseData from './parse'
-import { createID } from '@/core/utils'
+import { createID } from '@/lib/utils'
 
 const collectionName = 'friends'
 

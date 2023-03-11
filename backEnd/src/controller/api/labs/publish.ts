@@ -6,7 +6,7 @@ import DB from '@/database/DB'
 import { routeItemMatched, Connect, App } from '@/core/index'
 import power from '@/conf/power'
 import parseData from './parse'
-import { createID } from '@/core/utils'
+import { createID } from '@/lib/utils'
 
 export default async function (route: routeItemMatched, connect: Connect, app: App) {
 	const sessionInstance = await connect.session()
