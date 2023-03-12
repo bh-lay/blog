@@ -6,7 +6,7 @@
 import pathToRegexp from 'path-to-regexp'
 import http from 'http'
 import Connect from './connect'
-import FilerReader from './staticFile'
+import fileReadController from './file-read-controller'
 import urlRedirectConfig from '../conf/301url'
 import { httpMethod, routeHttpMethod, searchParams, controller, routeItemParsed, routeItemMatched, componentFn, componentRegisted } from './index'
 import Cache from './cache'
@@ -39,7 +39,6 @@ type appOptions = {
  */
 export default class App {
 	routes: routeItemParsed[]
-	fileReader: FilerReader
 	cache: Cache
 	options: appOptions
 	components: componentRegisted
@@ -53,10 +52,6 @@ export default class App {
 			root: options.temporaryPath + '/cache/'
 		})
 		this.components = {}
-		this.fileReader = new FilerReader({
-			root: options.staticRoot,
-			maxAge: options.staticFileMaxAge
-		})
 		this.errorHandler = options.errorHandler || defaultErrorHandler
 		// 初始化临时目录
 		initTemporary(options.temporaryPath)
@@ -94,20 +89,21 @@ export default class App {
 				})
 			}else{
 				// 第三顺序：使用静态文件
-				this.fileReader.read(pathname, req,res, () => {
+				fileReadController(pathname, req.headers, res, {
+					root: this.options.staticRoot,
+					maxAge: this.options.staticFileMaxAge
+				}).catch(async () => {
 					// 第四顺序：查找301重定向
 					if(urlRedirectConfig[pathname]){
 						newConnect.writeCustom(301,{
-							'location' : urlRedirectConfig[path.pathname]
+							location: urlRedirectConfig[path.pathname]
 						}, '')
 					}else{
 						// 最终：只能404了
-						newConnect.views('system/404',{
-							content : '文件找不到啦！'
+						const html = await newConnect.views('system/404',{
+							content: '文件找不到啦！'
 						})
-							.then(function(html){
-								newConnect.writeHTML(404, html)
-							})
+						newConnect.writeHTML(404, html)
 					}
 				})
 			}
