@@ -2,7 +2,7 @@
  * @author bh-lay
  */
 import { promises as fs } from 'fs'
-import { isFileExists } from '@/controller/img-robber/static-file'
+import { isFileExists } from './index'
 
 async function autoCreateFolder(rootPath: string, folderName: string) {
 	const newPath = rootPath + '/' + folderName

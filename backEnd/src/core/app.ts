@@ -6,7 +6,6 @@
 import pathToRegexp from 'path-to-regexp'
 import http from 'http'
 import Connect from './connect'
-import fileReadController from './file-read-controller'
 import urlRedirectConfig from '../conf/301url'
 import { httpMethod, routeHttpMethod, searchParams, controller, routeItemParsed, routeItemMatched, componentFn, componentRegisted } from './index'
 import Cache from './cache'
@@ -87,24 +86,23 @@ export default class App {
 					const html = await newConnect.views('system/mongoFail',{error})
 					newConnect.writeHTML(500, html)
 				})
-			}else{
-				// 第三顺序：使用静态文件
-				fileReadController(pathname, req.headers, res, {
-					root: this.options.staticRoot,
+			} else if(urlRedirectConfig[pathname]){
+				// 第三顺序：查找301重定向
+				newConnect.writeCustom(301,{
+					location: urlRedirectConfig[path.pathname]
+				}, '')
+			} else {
+				// 第四顺序：使用静态文件
+				newConnect.writeFile(this.options.staticRoot + pathname, {
 					maxAge: this.options.staticFileMaxAge
-				}).catch(async () => {
-					// 第四顺序：查找301重定向
-					if(urlRedirectConfig[pathname]){
-						newConnect.writeCustom(301,{
-							location: urlRedirectConfig[path.pathname]
-						}, '')
-					}else{
-						// 最终：只能404了
-						const html = await newConnect.views('system/404',{
-							content: '文件找不到啦！'
-						})
+				})
+				.catch(function() {
+					// 最终：只能404了
+					return newConnect.views('system/404',{
+						content: '文件找不到啦！'
+					}).then((html: string) => {
 						newConnect.writeHTML(404, html)
-					}
+					})
 				})
 			}
 		})

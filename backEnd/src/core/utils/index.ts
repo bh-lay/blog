@@ -1,3 +1,4 @@
+import { promises } from 'fs'
 import { parseCookie, parseURL } from './parse'
 import { typeResponse } from '../index'
 
@@ -14,7 +15,12 @@ export function writeCookie(cookieObj: Record<string, unknown>, response: typeRe
 	}
 	response.setHeader('Set-Cookie',cookie_str)
 }
-// exports.trim = function(str){
-// 	return (str || '').replace(/^\s*|\s*$/g,'')
-// }
 
+// 检查文件是否存在
+export function isFileExists(filePath: string) {
+	return promises.stat(filePath).then(() => {
+		return true
+	}).catch(() => {
+		return false
+	})
+}

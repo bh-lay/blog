@@ -9,6 +9,7 @@ import { writeCookie } from './utils/index'
 import { parseCookie, parseRequestBody, parseURL, typeParsedUrl } from './utils/parse'
 import { componentContext, componentRegisted, routeItemMatched, typeResponse, juicer } from './index'
 import { replaceComponent } from './views'
+import writeStaticFile from './write-static-file'
 
 const baseViewRoot = './src/views/'
 /**
@@ -93,6 +94,11 @@ export default class CONNECT {
 			'Content-Type': 'text/html',
 			'charset': 'utf-8'
 		}, content)
+	}
+	writeFile(filePath: string, options: { maxAge: number }) {
+		return writeStaticFile(filePath, this.request.headers, this.response, {
+			maxAge: options.maxAge
+		})
 	}
 
 	setHeader (key: string, value: string | number) {

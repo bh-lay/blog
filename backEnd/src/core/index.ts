@@ -19,7 +19,7 @@ export { juicer as juicer }
 export { App as App }
 export { Connect as Connect }
 export { Session as Session }
-export { default as fileReadController } from './file-read-controller'
+export { isFileExists } from './utils/index'
 export type httpMethod = 'get' | 'post' | 'put' | 'delete'
 export type routeHttpMethod = 'rest' | 'all' | httpMethod
 export type typeResponse = http.ServerResponse<http.IncomingMessage> & {

@@ -21,7 +21,7 @@
 // FIXME 不要忘了删除过期的session
 
 import { promises as fs } from 'fs'
-import { isFileExists } from '@/controller/img-robber/static-file'
+import { isFileExists } from './utils/index'
 
 type typeSessionData = Record<string, unknown>
 // 生成session id

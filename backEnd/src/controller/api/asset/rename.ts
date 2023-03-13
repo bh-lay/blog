@@ -4,9 +4,8 @@
  */
 
 import { promises as fs } from 'fs'
-import { App, Connect, routeItemMatched } from '@/core/index'
+import { App, Connect, routeItemMatched, isFileExists } from '@/core/index'
 import { base64PathToAbsolute, hasPermission } from './utils'
-import { isFileExists } from '@/controller/img-robber/static-file'
 
 // 重命名
 export default async function(route: routeItemMatched, connect: Connect, app: App) {

@@ -2,7 +2,6 @@ import { promises as fs } from 'fs'
 import http from 'node:http'
 import { routeItemMatched, Connect, App } from '@/core/index'
 import downloadFile from './download-file'
-import { isFileExists, readFileToResponse } from './static-file'
 import { base64Encode, base64Decode } from '@/lib/utils'
 const imageRobotRoot = '/img-robber/'
 function routeSourceToRemoteData(localTemporaryRoot: string, routeSource: string) {
@@ -55,25 +54,31 @@ export async function get(route: routeItemMatched, connect: Connect, app: App){
 		return
 	}
 	const { cachePath, originUrl, referrUrl } = routeParams
-	// 查看文件是否存在
-	const fileExist = await isFileExists(cachePath)
-	
-	if (fileExist) {
-		// 文件存在，直接读取文件
-		return await readFileToResponse(cachePath, connect.request, connect.response)
-	}
 	try {
-		// 文件不存在，先下载文件
-		await downloadFile(originUrl, referrUrl, cachePath)
-		// 下载成功，读取文件
-		await readFileToResponse(cachePath, connect.request, connect.response)
-	} catch(e) {
-		// 下载失败
-		connect.writeJson({
-			code: 2,
-			msg: 'load error !'
+		// 尝试直接读取文件
+		await connect.writeFile(cachePath, {
+			maxAge: app.options.staticFileMaxAge
 		})
-		// 下载失败，删除可能已经下载到本地的文件
-		await fs.unlink(cachePath)
+	} catch(e) {
+		// 读取失败，则认定文件不存在
+		try {
+			// 先下载文件
+			await downloadFile(originUrl, referrUrl, cachePath)
+			// 下载成功，读取文件
+			await connect.writeFile(cachePath, {
+				maxAge: app.options.staticFileMaxAge
+			})
+		} catch(e) {
+			// 下载失败
+			connect.writeJson({
+				code: 2,
+				msg: 'load error !'
+			})
+			// 下载失败，删除可能已经下载到本地的文件
+			try {
+				await fs.unlink(cachePath)
+			} catch(e) {}
+		}
 	}
+
 }

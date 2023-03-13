@@ -2,7 +2,7 @@
  * @author bh-lay
  */
 import { promises as fs } from 'fs'
-import { isFileExists } from '@/controller/img-robber/static-file'
+import { isFileExists } from './utils/index'
 type paramOptions = {
 	useCache: boolean
 	maxCacheCount: number

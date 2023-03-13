@@ -3,9 +3,8 @@
  * demo 
  */
 import { promises as fs } from 'fs'
-import { App, Connect, routeItemMatched } from '@/core/index'
+import { App, Connect, routeItemMatched, isFileExists } from '@/core/index'
 import { hasPermission, relativePathToAbsolute } from './utils'
-import { isFileExists } from '@/controller/img-robber/static-file'
 
 
 export default async function(route: routeItemMatched, connect: Connect, app: App) {
