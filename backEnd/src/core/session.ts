@@ -21,12 +21,13 @@
 // FIXME 不要忘了删除过期的session
 
 import { promises as fs } from 'fs'
+import path from 'path'
 import { isFileExists } from './utils/index'
 
 type typeSessionData = Record<string, unknown>
 // 生成session id
 function createSessionID() {
-	return new Date().getTime() + '-' + Math.ceil(Math.random()*1000)
+	return `${new Date().getTime()}-${Math.ceil(Math.random()*1000)}`
 }
 // 检测是否为正常session id
 function isNormalSessionID(ID: string){
@@ -52,7 +53,7 @@ export default class Session {
 		}
 		// 检测session id 或创建
 		this.sessionID = isNormalSessionID(cookieObj['session_verify'] as string) ? cookieObj['session_verify'] as string : createSessionID()
-		this.path = sessionCacheRoot + this.sessionID + '.txt'
+		this.path = path.join(sessionCacheRoot, `${this.sessionID}.txt`)
 		this.powerCode = ''
 		this.createdTime = 0
 		this.data = {}

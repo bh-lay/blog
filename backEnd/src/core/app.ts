@@ -3,6 +3,7 @@
  * @version 1.0
  * @modified 2014-6-27 23:14
  */
+import path from 'path'
 import pathToRegexp from 'path-to-regexp'
 import http from 'http'
 import Connect from './connect'
@@ -48,7 +49,7 @@ export default class App {
 		this.cache = new Cache({
 			useCache: options.useCache,
 			maxCacheCount: options.maxCacheCount,
-			root: options.temporaryPath + '/cache/'
+			root: path.join(options.temporaryPath, 'cache')
 		})
 		this.components = {}
 		this.errorHandler = options.errorHandler || defaultErrorHandler
@@ -68,11 +69,11 @@ export default class App {
 			}
 			// 实例化一个connect对象
 			const newConnect = new Connect(req, res, {
-				sessionRoot: this.options.temporaryPath + '/session/',
+				sessionRoot: path.join(this.options.temporaryPath, 'session/'),
 				components: this.components
 			})
-			const path = newConnect.url
-			const pathname = path.pathname
+			const connectPath = newConnect.url
+			const pathname = connectPath.pathname
 			const matchedRoutes = this.matchRequestInRoutes(pathname, newConnect.request.method || '')
 			// 第一顺序，执行跨域检测
 			crossCheck(newConnect)
@@ -89,13 +90,16 @@ export default class App {
 			} else if(urlRedirectConfig[pathname]){
 				// 第三顺序：查找301重定向
 				newConnect.writeCustom(301,{
-					location: urlRedirectConfig[path.pathname]
+					location: urlRedirectConfig[connectPath.pathname]
 				}, '')
 			} else {
 				// 第四顺序：使用静态文件
-				newConnect.writeFile(this.options.staticRoot + pathname, {
-					maxAge: this.options.staticFileMaxAge
-				})
+				newConnect.writeFile(
+					path.join(this.options.staticRoot, pathname),
+					{
+						maxAge: this.options.staticFileMaxAge
+					}
+				)
 				.catch(function() {
 					// 最终：只能404了
 					return newConnect.views('system/404',{
@@ -107,7 +111,7 @@ export default class App {
 			}
 		})
 		server.listen(this.options.port)
-		console.log('Server start at port: ' + this.options.port)
+		console.log(`Server start at port:  ${this.options.port}`)
 	}
 	private errorCatch() {
 		process.on('uncaughtException', (error: Error) => {

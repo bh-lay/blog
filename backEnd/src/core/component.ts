@@ -4,6 +4,7 @@
  *  视图片段生成方式
  * 
  */
+import path from 'path'
 import { promises as fs } from 'fs'
 import { componentContext, componentFn } from './index'
 
@@ -15,11 +16,11 @@ export default async function(
 	resolveFn: componentFn,
 	context: componentContext
 ): Promise<string>{
-	const realPath = baseFileRoot + URI
+	const realPath = path.join(baseFileRoot, `${URI}.html`)
 	// 模版内容
 	let componentTemplate = ''
 	try {
-		componentTemplate = await fs.readFile(realPath + '.html', 'utf8')
+		componentTemplate = await fs.readFile(realPath, 'utf8')
 	} catch (e) {
 		componentTemplate = ''
 	}

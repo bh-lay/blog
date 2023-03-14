@@ -10,6 +10,7 @@ import { parseCookie, parseRequestBody, parseURL, typeParsedUrl } from './utils/
 import { componentContext, componentRegisted, routeItemMatched, typeResponse, juicer } from './index'
 import { replaceComponent } from './views'
 import writeStaticFile from './write-static-file'
+import path from 'path'
 
 const baseViewRoot = './src/views/'
 /**
@@ -84,7 +85,7 @@ export default class CONNECT {
 		this.sendResponse(200,{
 			'Content-Type' : 'application/x-javascript',
 			'charset' : 'utf-8',
-		},callbackName + '(' + json_str + ');')
+		}, `${callbackName}(${json_str});`)
 	}
 	/**
 	 * response html page
@@ -170,12 +171,12 @@ export default class CONNECT {
 		})
 	}
 	async views (URI: string, data: Record<string, unknown>){
-		const realPath = baseViewRoot + URI
+		const realPath = path.join(baseViewRoot, `${URI}.html`)
 		data = data || {}
 		// 读取模版
 		let viewTemplate = ''
 		try {
-			viewTemplate = await fs.readFile(realPath + '.html', 'utf8')
+			viewTemplate = await fs.readFile(realPath, 'utf8')
 		} catch (e) {
 			return ''
 		}

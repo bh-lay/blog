@@ -12,7 +12,7 @@ const app = new App({
 	// 端口号
 	port: process.env.port || '',
 	temporaryPath: process.env.temporaryPath || '',
-	useCache: false,
+	useCache: process.env.useCache === 'true',
 	maxCacheCount: 1000,
 	staticRoot: '../web/',
 	// 静态资源缓存时间

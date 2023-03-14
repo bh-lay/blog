@@ -1,6 +1,7 @@
 /**
  * @author bh-lay
  */
+import path from 'path'
 import { promises as fs } from 'fs'
 import { isFileExists } from './utils/index'
 type paramOptions = {
@@ -53,7 +54,7 @@ export default class Cache {
 		cacheContent: string | Record<string, unknown>
 	) {
 		const tagsStr = tags.sort().join('_')
-		const cachePath = this.root + tagsStr + '--' + cacheName
+		const cachePath = path.join(this.root, `${tagsStr}--${cacheName}`)
 
 		// 兼容JSON数据
 		if(typeof(cacheContent) === 'object'){
@@ -92,7 +93,7 @@ export default class Cache {
 		}
 		cacheName = cacheName.replace(/\/|\?/g,'_')
 		const tagsStr = cacheTags.sort().join('_')
-		const cache_path = this.root + tagsStr + '--' + cacheName
+		const cache_path = path.join(this.root, `${tagsStr}--${cacheName}`)
 			
 		// 检测此条缓存是否存在
 		const isCacheExist = await isFileExists(cache_path)
@@ -139,7 +140,9 @@ export default class Cache {
 			}
 			// 没有定义检查函数，或者检查函数返回值为true，删除缓存
 			if(!callback || callback(tags,name)){
-				fs.unlink(root + files[i])
+				fs.unlink(
+					path.join(root, files[i])
+				)
 			}
 		}
 	}
