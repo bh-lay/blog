@@ -1,4 +1,4 @@
-import { routeItemMatched, Connect, App } from '@/core/index'
+import { routeItemMatched, Connect } from '@/core/index'
 import { formatTime } from '@/lib/utils'
 import { getGithubData } from '@/functions/my-github-data'
 import getCommentList from '@/controller/api/comments/list'
@@ -7,7 +7,7 @@ import getCommentList from '@/controller/api/comments/list'
 // 获取用户信息
 export default async function (route: routeItemMatched, connect: Connect) {
   const githubSummary = await getGithubData()
-  const { list, count } = await getCommentList(connect, {
+  const { list } = await getCommentList(connect, {
     limit: 10,
     format: 'plain'
   })

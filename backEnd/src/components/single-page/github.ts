@@ -1,7 +1,7 @@
 
 import { getGithubData } from '@/functions/my-github-data'
 
-export default async function (template: string, data: any) {
+export default async function (template: string) {
   const user_data = await getGithubData()
   return template.replace(/>>(\w+)<</g, function (a, key) {
     switch (key) {

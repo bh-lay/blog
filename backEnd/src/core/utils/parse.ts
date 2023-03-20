@@ -3,7 +3,7 @@
  */
 import http from 'http'
 import querystring from 'querystring'
-import formidable, {errors as formidableErrors} from 'formidable'
+import formidable from 'formidable'
 
 // 格式化cookie
 export function parseCookie (str: string) {
@@ -34,7 +34,7 @@ function parserData (input: string): objectRecord {
   if (!input || input.length == 0) {
     return {}
   }
-	
+  
   // querystring初步解析数据
   const data = querystring.parse(input)
   const obj: objectRecord = {}
@@ -114,7 +114,7 @@ export function parseRequestBody (req: http.IncomingMessage): Promise<{params: o
       })
     })
   } else if (contentType == 'application/x-www-form-urlencoded') {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       // 数据块接收中
       req.addListener('data', function (postDataChunk) {
         postData += postDataChunk
@@ -153,9 +153,9 @@ export function parseRequestBody (req: http.IncomingMessage): Promise<{params: o
 
 
 export type typeParsedUrl = {
-	pathname: string,
-	search: querystring.ParsedUrlQuery,
-	filename: string
+  pathname: string,
+  search: querystring.ParsedUrlQuery,
+  filename: string
 }
 // parse URL
 export function parseURL (url: string): typeParsedUrl {
@@ -164,8 +164,6 @@ export function parseURL (url: string): typeParsedUrl {
   url = url.replace(/\.\.\//g,'')
   
   const a = url.split(/\?/)
-  // 去除首尾的“/”
-  const b = a[0].replace(/^\/|\/$/g,'')
   const searchStr = a[1] || ''
   const search = querystring.parse(searchStr)
   

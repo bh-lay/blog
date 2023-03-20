@@ -3,7 +3,7 @@
  * demo 
  */
 import { promises as fs } from 'fs'
-import { App, Connect, routeItemMatched, isFileExists } from '@/core/index'
+import { Connect, routeItemMatched, isFileExists } from '@/core/index'
 import { base64PathToAbsolute, hasPermission } from './utils'
 import formidable from 'formidable'
 
@@ -25,7 +25,7 @@ async function moveFile (fromPath: string, toDir: string, newFilename: string) {
 }
 
 // 上传文件
-export default async function (route: routeItemMatched, connect: Connect, app: App) {
+export default async function (route: routeItemMatched, connect: Connect) {
   const uploadToPathname = base64PathToAbsolute(route.params.path as string || '')
   const hasAccess = await hasPermission(connect)
   if (!hasAccess) {

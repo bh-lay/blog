@@ -3,7 +3,7 @@
  * 
  */
 import DB from '@/database/DB'
-import { routeItemMatched, Connect, App } from '@/core/index'
+import { routeItemMatched, Connect } from '@/core/index'
 
 /**
  * 获取用户信息
@@ -25,7 +25,7 @@ async function getUserDetail (userID: string) {
   return userInfo
 }
 // 获取用户信息
-export default async function (route: routeItemMatched, connect: Connect, app: App) {
+export default async function (route: routeItemMatched, connect: Connect) {
   const { params = {} } = await connect.parseRequestBody()
 
   // 获取指定用户信息

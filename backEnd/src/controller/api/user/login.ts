@@ -3,7 +3,7 @@
  * 
  */
 import DB from '@/database/DB'
-import { routeItemMatched, Connect, Session, App } from '@/core/index'
+import { routeItemMatched, Connect, Session } from '@/core/index'
 import { str2md5 } from '@/lib/utils'
 
 

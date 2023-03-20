@@ -3,10 +3,10 @@
 import DB from '@/database/DB'
 
 type friend = {
-	github_username: string | undefined,
-	cover: string | undefined,
-	url: string | undefined,
-	adminScore: number | string | undefined
+  github_username: string | undefined,
+  cover: string | undefined,
+  url: string | undefined,
+  adminScore: number | string | undefined
 }
 const countScore = (item: friend) => {
   const hasGithub = item.github_username && item.github_username.length > 2 ? 1 : 0
@@ -23,9 +23,8 @@ export default async function () {
   const postList = await friendCollection.find({}).toArray()
   const promiseLIst = postList.map(async function (doc) {
     const score = countScore(doc as friend)
-				
     const userid = doc.id
-    const {collection, client} = await DB.getCollection('moment_post')
+    const {collection} = await DB.getCollection('moment_post')
 
     const postCount = await collection.countDocuments({
       userid

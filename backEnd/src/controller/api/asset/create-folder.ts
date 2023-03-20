@@ -3,11 +3,11 @@
  * demo 
  */
 import { promises as fs } from 'fs'
-import { App, Connect, routeItemMatched, isFileExists } from '@/core/index'
+import { Connect, routeItemMatched, isFileExists } from '@/core/index'
 import { hasPermission, relativePathToAbsolute } from './utils'
 
 
-export default async function (route: routeItemMatched, connect: Connect, app: App) {
+export default async function (route: routeItemMatched, connect: Connect) {
 
   const { params } = await connect.parseRequestBody()
 

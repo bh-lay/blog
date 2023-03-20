@@ -3,13 +3,11 @@
  * demo 
  */
 import { promises as fs } from 'fs'
-import { App, Connect, routeItemMatched } from '@/core/index'
+import { Connect, routeItemMatched } from '@/core/index'
 import { base64PathToAbsolute, hasPermission } from './utils'
 
-
-
 // 删除
-export default async function (route: routeItemMatched, connect: Connect, app: App) {
+export default async function (route: routeItemMatched, connect: Connect) {
   const hasAccess = await hasPermission(connect)
   if (!hasAccess) {
     return connect.writeJson({

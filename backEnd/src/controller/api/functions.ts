@@ -1,13 +1,13 @@
 /**
  * @author bh-lay
  */
-import { App, Connect, routeItemMatched } from '@/core/index'
+import { Connect, routeItemMatched } from '@/core/index'
 import syncMoment from '@/functions/moment/index'
 import { updateFrom720 } from '@/functions/my-720-data'
 import { updateFromTuchong } from '@/functions/my-tuchong-data'
 
 
-export default async function (route: routeItemMatched, connect: Connect, app: App) {
+export default async function (route: routeItemMatched, connect: Connect) {
   const act = route.params.act
   const sessionInstance = await connect.session()
   if (sessionInstance.get('user_group') !== 'admin') {

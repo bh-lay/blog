@@ -2,11 +2,11 @@
  * @author bh-lay
  * 
  */
-import { routeItemMatched, Connect, App } from '@/core/index'
+import { routeItemMatched, Connect } from '@/core/index'
 import { push as pushAnalysis } from '@/functions/analysis/index'
 import { base64Decode } from '@/lib/utils'
 
-export default async function (route: routeItemMatched, connect: Connect, app: App) {
+export default async function (route: routeItemMatched, connect: Connect) {
   // 获取 URL 配置参数
   let target = base64Decode(route.params.target as string || '')
   target = decodeURIComponent(target)

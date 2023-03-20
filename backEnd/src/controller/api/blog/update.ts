@@ -2,7 +2,7 @@
  * @author bh-lay
  * 
  */
-import { routeItemMatched, Connect, App } from '@/core/index'
+import { routeItemMatched, Connect } from '@/core/index'
 import DB from '@/database/DB'
 import power from '@/conf/power'
 import parseData from './parse'

@@ -31,8 +31,6 @@ export async function list (route: routeItemMatched, connect: Connect, app: App)
   connect.writeJson(JSON.parse(cacheJson))
 }
 
-
-
 export default {
   post: addComments,
   get: getDetail,

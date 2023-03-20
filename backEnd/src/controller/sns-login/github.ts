@@ -42,7 +42,7 @@ export default async function (connect: Connect) {
     const userInfo = await hanldGithubLogin(connect)
     const sessionInstance = await connect.session()
 
-    const {collection, client, db} = await DB.getCollection('user_group')
+    const {collection, client} = await DB.getCollection('user_group')
     const userGroupInfo = await collection.findOne({
       user_group: userInfo.user_group
     })

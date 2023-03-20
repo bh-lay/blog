@@ -4,11 +4,11 @@
  */
 
 import { promises as fs } from 'fs'
-import { App, Connect, routeItemMatched, isFileExists } from '@/core/index'
+import { Connect, routeItemMatched, isFileExists } from '@/core/index'
 import { base64PathToAbsolute, hasPermission } from './utils'
 
 // 重命名
-export default async function (route: routeItemMatched, connect: Connect, app: App) {
+export default async function (route: routeItemMatched, connect: Connect) {
   const hasAccess = await hasPermission(connect)
   if (!hasAccess) {
     return connect.writeJson({

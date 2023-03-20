@@ -1,10 +1,10 @@
 /**
  * @author bh-lay
  */
-import { routeItemMatched, Connect, App } from '@/core/index'
+import { routeItemMatched, Connect } from '@/core/index'
 import githubSnsLogin from './github'
 
-export default async function (route: routeItemMatched, connect: Connect, app: App) {
+export default async function (route: routeItemMatched, connect: Connect) {
   if (route.params.from === 'github') {
     return await githubSnsLogin(connect)
   }

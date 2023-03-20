@@ -15,12 +15,6 @@ export default async function (route: routeItemMatched, connect: Connect) {
   // 内容格式 html/markdown
   const format = data.format || 'markdown'
 
-  const resJSON={
-    code: 200,
-    id: postId,
-    detail: null,
-    format : format
-  }
   const {collection, client} = await DB.getCollection(collectionName)
 
   const docs = await collection.find({
