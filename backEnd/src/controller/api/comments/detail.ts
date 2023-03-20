@@ -2,27 +2,27 @@ import DB from '@/database/DB'
 import { routeItemMatched, Connect, App } from '@/core/index'
 
 // 获取评论详情
-export default async function(route: routeItemMatched, connect: Connect){
-	const id = (route.params.id || '').toString()
+export default async function (route: routeItemMatched, connect: Connect) {
+  const id = (route.params.id || '').toString()
 
-	if(!id || id.length < 2){
-		return connect.writeJson({
-			code: 500
-		})
-	}
-	const {collection, client} = await DB.getCollection('comments')
-	const doc = await collection.findOne({
-		_id: new DB.ObjectId(id)
-	})
-	client.close()
-	if(!doc){
-		return connect.writeJson({
-			code: 500
-		})
-	}else{
-		return connect.writeJson({
-			code: 200,
-			detail: doc
-		})
-	}
+  if (!id || id.length < 2) {
+    return connect.writeJson({
+      code: 500
+    })
+  }
+  const {collection, client} = await DB.getCollection('comments')
+  const doc = await collection.findOne({
+    _id: new DB.ObjectId(id)
+  })
+  client.close()
+  if (!doc) {
+    return connect.writeJson({
+      code: 500
+    })
+  } else {
+    return connect.writeJson({
+      code: 200,
+      detail: doc
+    })
+  }
 }

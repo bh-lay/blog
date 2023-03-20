@@ -7,8 +7,8 @@ import publish from './publish'
 import remove from './remove'
 
 export default {
-	post: publish,
-	delete: remove,
-	get: detail,
-	put: update
+  post: publish,
+  delete: remove,
+  get: detail,
+  put: update
 }

@@ -5,14 +5,14 @@ import Session from './session'
 
 import juicer from 'juicer'
 juicer.set({
-	'tag::operationOpen': '[[@',
-	'tag::operationClose': ']]',
-	'tag::interpolateOpen': '$[[',
-	'tag::interpolateClose': ']]',
-	'tag::noneencodeOpen': '$$[[',
-	'tag::noneencodeClose': ']]',
-	'tag::commentOpen': '[[#',
-	'tag::commentClose': ']]'
+  'tag::operationOpen': '[[@',
+  'tag::operationClose': ']]',
+  'tag::interpolateOpen': '$[[',
+  'tag::interpolateClose': ']]',
+  'tag::noneencodeOpen': '$$[[',
+  'tag::noneencodeClose': ']]',
+  'tag::commentOpen': '[[#',
+  'tag::commentClose': ']]'
 })
 
 export { juicer as juicer }

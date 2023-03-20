@@ -7,8 +7,8 @@ import remove from './remove'
 import upload from './upload'
 
 export default {
-	post: upload,
-	delete: remove,
-	get: fileList,
-	put: rename
+  post: upload,
+  delete: remove,
+  get: fileList,
+  put: rename
 }

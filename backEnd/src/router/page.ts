@@ -17,60 +17,60 @@ import { list as blessListController } from '@/controller/bless'
  *   JS 原生动态版本
  */
 function adaptionViewForSinglePage (controller: singleController): singleController {
-	function wrappedController(route: routeItemMatched, connect: Connect, app: App) {
-		const isBotRequest = isbot(connect.request.headers['user-agent'] || '')
-		const uiVersion = connect.cookie('ui_version')
+  function wrappedController (route: routeItemMatched, connect: Connect, app: App) {
+    const isBotRequest = isbot(connect.request.headers['user-agent'] || '')
+    const uiVersion = connect.cookie('ui_version')
 
-		if (isBotRequest) {
-			// 若命中搜索引擎标识，执行回调默认视图
-			return controller(route, connect, app)
-		}
-		if (uiVersion === 'vue') {
-			return singlePageVueController(route, connect, app)
-		}
-		if (uiVersion === 'js') {
-			return singlePageJsController(route, connect, app)
-		}
+    if (isBotRequest) {
+      // 若命中搜索引擎标识，执行回调默认视图
+      return controller(route, connect, app)
+    }
+    if (uiVersion === 'vue') {
+      return singlePageVueController(route, connect, app)
+    }
+    if (uiVersion === 'js') {
+      return singlePageJsController(route, connect, app)
+    }
 		
-		// 执行回调默认视图
-		return controller(route, connect, app)
-	}
-	return wrappedController
+    // 执行回调默认视图
+    return controller(route, connect, app)
+  }
+  return wrappedController
 }
 const routes: routeItemConfig[] = [
-	// 首页
-	{
-		path: 'get /',
-		controller: adaptionViewForSinglePage(indexController)
-	},
-	{
-		path: 'get /blog',
-		controller: adaptionViewForSinglePage(blogListController)
-	},
-	{
-		path: 'get /blog/:id',
-		controller: adaptionViewForSinglePage(blogDetailController)
-	},
-	{
-		path: 'get /labs',
-		controller: adaptionViewForSinglePage(labsListController)
-	},
-	{
-		path: 'get /720',
-		controller: adaptionViewForSinglePage(panoListController)
-	},
-	{
-		path: 'get /photography',
-		controller: adaptionViewForSinglePage(tuchongListController)
-	},
-	// 留言
-	{
-		path: 'get /bless',
-		controller: adaptionViewForSinglePage(blessListController)
-	},
-	{
-		path: 'get /labs/:name',
-		controller: labsDetailController
-	},
+  // 首页
+  {
+    path: 'get /',
+    controller: adaptionViewForSinglePage(indexController)
+  },
+  {
+    path: 'get /blog',
+    controller: adaptionViewForSinglePage(blogListController)
+  },
+  {
+    path: 'get /blog/:id',
+    controller: adaptionViewForSinglePage(blogDetailController)
+  },
+  {
+    path: 'get /labs',
+    controller: adaptionViewForSinglePage(labsListController)
+  },
+  {
+    path: 'get /720',
+    controller: adaptionViewForSinglePage(panoListController)
+  },
+  {
+    path: 'get /photography',
+    controller: adaptionViewForSinglePage(tuchongListController)
+  },
+  // 留言
+  {
+    path: 'get /bless',
+    controller: adaptionViewForSinglePage(blessListController)
+  },
+  {
+    path: 'get /labs/:name',
+    controller: labsDetailController
+  },
 ]
 export default routes

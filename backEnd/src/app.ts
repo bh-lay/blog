@@ -5,19 +5,19 @@ import startCronjob from './cronjob'
 
 // 引入环境变量配置
 dotenv.config({
-	path: './.env'
+  path: './.env'
 })
 // 创建app
 const app = new App({
-	// 端口号
-	port: process.env.port || '',
-	temporaryPath: process.env.temporaryPath || '',
-	useCache: process.env.useCache === 'true',
-	maxCacheCount: 1000,
-	staticRoot: '../web/',
-	// 静态资源缓存时间
-	staticFileMaxAge: 60 * 60 * 24 * 365,
-	frontendCdnDomain: process.env.cdnDomain || '',
+  // 端口号
+  port: process.env.port || '',
+  temporaryPath: process.env.temporaryPath || '',
+  useCache: process.env.useCache === 'true',
+  maxCacheCount: 1000,
+  staticRoot: '../web/',
+  // 静态资源缓存时间
+  staticFileMaxAge: 60 * 60 * 24 * 365,
+  frontendCdnDomain: process.env.cdnDomain || '',
 })
 
 // 注册路由、组件
