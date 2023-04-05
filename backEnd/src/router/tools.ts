@@ -2,6 +2,7 @@ import { routeItemConfig } from '@/core/index'
 import { get as imgRobberGetController } from '@/controller/img-robber/index'
 import redirectController from '@/controller/redirect'
 import snsLoginController from '@/controller/sns-login/index'
+import { imgRobborRoutePathName } from '@/constants/index'
 
 const routes: routeItemConfig[] = [
   {
@@ -15,7 +16,7 @@ const routes: routeItemConfig[] = [
   },
   // 通用图片盗链方法
   {
-    path: 'get /img-robber/:source*',
+    path: `get /${imgRobborRoutePathName}/:source*`,
     controller: imgRobberGetController
   },
 ]

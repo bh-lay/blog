@@ -13,12 +13,16 @@ async function autoCreateFolder (rootPath: string, folderName: string) {
     await fs.mkdir(newPath)
   }
 }
-export default async function (rootPath: string) {
+export default async function (rootPath: string, extraPathList?: string[]) {
   const exists = await isFileExists(rootPath)
   if (!exists) {
     throw new Error(`temporary path not exist: ${rootPath}`)
   }
-  await autoCreateFolder(rootPath, '/session')
-  await autoCreateFolder(rootPath, '/img-robber')
-  await autoCreateFolder(rootPath, '/cache')
+  const tempPathList = ['session', 'cache']
+  const allTempPathList = tempPathList.concat(extraPathList || [])
+
+  const promiseLIst = allTempPathList.map(async function (pathName) {
+    await autoCreateFolder(rootPath, '/' + pathName)
+  })
+  await Promise.all(promiseLIst)
 }

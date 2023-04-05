@@ -33,6 +33,7 @@ type appOptions = {
   staticRoot:  string,
   staticFileMaxAge: number,
   frontendCdnDomain: string,
+  tempPaths?: string[]
 }
 /**
  * application 类
@@ -54,7 +55,7 @@ export default class App {
     this.components = {}
     this.errorHandler = options.errorHandler || defaultErrorHandler
     // 初始化临时目录
-    initTemporary(options.temporaryPath)
+    initTemporary(options.temporaryPath, options.tempPaths)
     this.serverListen()
     this.errorCatch()
   }

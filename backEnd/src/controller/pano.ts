@@ -4,7 +4,7 @@
 import { routeItemMatched, Connect, App } from '@/core/index'
 import { base64Encode } from '@/lib/utils'
 import { get720Data } from '@/functions/my-720-data'
-
+import { imgRobborRoutePathName } from '@/constants/index'
 export default async function (route: routeItemMatched, connect: Connect, app: App) {
   const html = await app.cache.getWithCreate('pano_list',['html','pano'], async function () {
     const data = await get720Data()
@@ -15,7 +15,7 @@ export default async function (route: routeItemMatched, connect: Connect, app: A
         title: property.name,
         desc: property.remark,
         url: `http://720yun.com/t/${property.pid}?from=bh-lay`,
-        thumb: '/img-robber/' + base64Encode(thumb + '-https://720yun.com'),
+        thumb: `/${imgRobborRoutePathName}/${base64Encode(thumb + '-https://720yun.com')}`,
         pv: item.pvCount,
         like: item.likeCount,
       }

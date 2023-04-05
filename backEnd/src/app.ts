@@ -2,6 +2,7 @@ import * as dotenv from 'dotenv'
 import { App } from '@/core/index'
 import registerRouteComponents from './register-route-components'
 import startCronjob from './cronjob'
+import { imgRobborPathName } from '@/constants/index'
 
 // 引入环境变量配置
 dotenv.config({
@@ -18,6 +19,7 @@ const app = new App({
   // 静态资源缓存时间
   staticFileMaxAge: 60 * 60 * 24 * 365,
   frontendCdnDomain: process.env.cdnDomain || '',
+  tempPaths: [imgRobborPathName],
 })
 
 // 注册路由、组件

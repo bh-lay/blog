@@ -3,7 +3,8 @@ import http from 'node:http'
 import { routeItemMatched, Connect, App } from '@/core/index'
 import downloadFile from './download-file'
 import { base64Encode, base64Decode } from '@/lib/utils'
-const imageRobotRoot = '/img-robber/'
+import { imgRobborPathName } from '@/constants/index'
+
 function routeSourceToRemoteData (localTemporaryRoot: string, routeSource: string) {
   // 获取 URL 配置参数
   const urlSourceStr = base64Decode(routeSource)
@@ -21,7 +22,7 @@ function routeSourceToRemoteData (localTemporaryRoot: string, routeSource: strin
   const cacheFileName = base64Encode(originUrl).replace(/\//g, '-') + '.' + ext
   // 生成新的文件地址
   return {
-    cachePath: localTemporaryRoot + imageRobotRoot + cacheFileName,
+    cachePath: `${localTemporaryRoot}/${imgRobborPathName}/${cacheFileName}`,
     originUrl,
     referrUrl
   }
