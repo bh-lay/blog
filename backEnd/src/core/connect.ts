@@ -6,6 +6,7 @@ import { promises as fs } from 'fs'
 import zlib from 'zlib'
 import Session from './session'
 import { writeCookie } from './utils/index'
+import { mimes } from './utils/mimes'
 import { parseCookie, parseRequestBody, parseURL, typeParsedUrl } from './utils/parse'
 import { componentContext, componentRegisted, routeItemMatched, typeResponse, juicer } from './index'
 import { replaceComponent } from './views'
@@ -24,11 +25,13 @@ export default class CONNECT {
   sessionRoot: string
   components: componentRegisted
   route: routeItemMatched | null
+  mimes: mimes
   _session: Session | null
   _sended: boolean
   constructor (req: http.IncomingMessage, res: typeResponse, options: {
     sessionRoot: string,
-    components: componentRegisted
+    components: componentRegisted,
+    mimes: mimes
   }) {
     this.url = parseURL(req.url || '')
     this.request = req
@@ -37,6 +40,7 @@ export default class CONNECT {
     this.components = options.components
     this._session = null
     this.route = null
+    this.mimes = options.mimes
     // 是否已向客户端发送信息体
     this._sended = false
   }
@@ -71,7 +75,7 @@ export default class CONNECT {
   }
   writeJson (data: Record<string, unknown> | unknown[]) {
     this.sendResponse(200, {
-      'Content-Type' : 'application/json',
+      'Content-Type' : this.mimes.json,
       'charset' : 'utf-8',
     }, JSON.stringify(data))
   }
@@ -83,7 +87,7 @@ export default class CONNECT {
     const json_str = typeof(data) == 'string' ? data : JSON.stringify(data),
       callbackName = this.url.search.callback || 'jsonpCallback'
     this.sendResponse(200,{
-      'Content-Type' : 'application/x-javascript',
+      'Content-Type' : this.mimes.js,
       'charset' : 'utf-8',
     }, `${callbackName}(${json_str});`)
   }
@@ -92,13 +96,14 @@ export default class CONNECT {
    */
   writeHTML (status: number, content: string) {
     this.sendResponse(status,{
-      'Content-Type': 'text/html',
+      'Content-Type': this.mimes.html,
       'charset': 'utf-8'
     }, content)
   }
   writeFile (filePath: string, options: { maxAge: number }) {
     return writeStaticFile(filePath, this.request.headers, this.response, {
-      maxAge: options.maxAge
+      maxAge: options.maxAge,
+      mimes: this.mimes,
     })
   }
 

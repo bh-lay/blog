@@ -10,6 +10,7 @@ import Connect from './connect'
 import urlRedirectConfig from '../conf/301url'
 import { httpMethod, routeHttpMethod, searchParams, controller, routeItemParsed, routeItemMatched, componentFn, componentRegisted } from './index'
 import Cache from './cache'
+import { defaultMimes, mimes } from './utils/mimes'
 import initTemporary from './utils/init-temporary'
 
 function crossCheck (connect: Connect) {
@@ -24,7 +25,7 @@ function defaultErrorHandler (error: Error) {
   console.log(error)
   console.trace('Crazy Error')
 }
-type appOptions = {
+export type appOptions = {
   errorHandler?: (e: Error) => void,
   port: string,
   temporaryPath: string,
@@ -33,7 +34,20 @@ type appOptions = {
   staticRoot:  string,
   staticFileMaxAge: number,
   frontendCdnDomain: string,
-  tempPaths?: string[]
+  tempPaths: string[],
+  mimes: mimes
+}
+type appOptionsParams = {
+  errorHandler?: (e: Error) => void,
+  port: string,
+  temporaryPath: string,
+  useCache: boolean,
+  maxCacheCount: number,
+  staticRoot: string,
+  staticFileMaxAge: number,
+  frontendCdnDomain: string,
+  tempPaths?: string[],
+  mimes?: mimes
 }
 /**
  * application 类
@@ -44,9 +58,15 @@ export default class App {
   options: appOptions
   components: componentRegisted
   private errorHandler: ((e: Error) => void)
-  constructor (options: appOptions) {
+  constructor (options: appOptionsParams) {
     this.routes = []
-    this.options = options
+    // create options
+    this.options = Object.assign({
+      mimes: {},
+      tempPaths: [],
+    }, options)
+    this.options.mimes = Object.assign({}, defaultMimes, options.mimes)
+
     this.cache = new Cache({
       useCache: options.useCache,
       maxCacheCount: options.maxCacheCount,
@@ -71,7 +91,8 @@ export default class App {
       // 实例化一个connect对象
       const newConnect = new Connect(req, res, {
         sessionRoot: path.join(this.options.temporaryPath, 'session/'),
-        components: this.components
+        components: this.components,
+        mimes: this.options.mimes
       })
       const connectPath = newConnect.url
       const pathname = connectPath.pathname

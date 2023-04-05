@@ -1,11 +1,11 @@
 import { promises as fs } from 'fs'
 import http from 'node:http'
-import { routeItemMatched, Connect, App } from '@/core/index'
+import { routeItemMatched, Connect, App, mimes } from '@/core/index'
 import downloadFile from './download-file'
 import { base64Encode, base64Decode } from '@/lib/utils'
 import { imgRobborPathName } from '@/constants/index'
 
-function routeSourceToRemoteData (localTemporaryRoot: string, routeSource: string) {
+function routeSourceToRemoteData (localTemporaryRoot: string, routeSource: string, allowedMimes: mimes) {
   // 获取 URL 配置参数
   const urlSourceStr = base64Decode(routeSource)
   // 分割 URL 参数
@@ -17,9 +17,11 @@ function routeSourceToRemoteData (localTemporaryRoot: string, routeSource: strin
   // 获取图片原始地址和 referr 
   const [originUrl, referrUrl] = urlSourceSplit
   const extMatches = originUrl.match(/.\.([^.?#]+)((?:\?|#).*)?$/)
-  const ext = extMatches ? extMatches[1] : 'jpg'
-  // 生成新的文件名
-  const cacheFileName = base64Encode(originUrl).replace(/\//g, '-') + '.' + ext
+  const matchedExt = extMatches ? extMatches[1] : ''
+  const extension = allowedMimes[matchedExt] ? matchedExt : 'jpg'
+
+  // 生成用于缓存的文件名
+  const cacheFileName = base64Encode(originUrl).replace(/\//g, '-') + '.' + extension
   // 生成新的文件地址
   return {
     cachePath: `${localTemporaryRoot}/${imgRobborPathName}/${cacheFileName}`,
@@ -46,7 +48,8 @@ export async function get (route: routeItemMatched, connect: Connect, app: App) 
       msg: '此接口仅限小剧自己使用哦～'
     })
   }
-  const routeParams = routeSourceToRemoteData(app.options.temporaryPath, route.params.source as string || '')
+  const sourceStrInRoute = route.params.source as string || ''
+  const routeParams = routeSourceToRemoteData(app.options.temporaryPath, sourceStrInRoute, app.options.mimes)
   if (!routeParams) {
     connect.writeJson({
       code: 2,

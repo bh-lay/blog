@@ -4,28 +4,16 @@
 import fs, { promises } from 'fs'
 import zlib from 'zlib'
 import http, { OutgoingHttpHeaders } from 'http'
+import { mimes } from './utils/mimes'
 
 type options = {
-	maxAge: number
+	maxAge: number,
+  mimes: mimes,
 }
 type typeResponse = http.ServerResponse<http.IncomingMessage> & {
 	req: http.IncomingMessage;
 }
-// 定义文件类型 Mime-Type
-const baseMimes: Record<string, string> = {
-  html : 'text/html',
-  js : 'application/x-javascript',
-  json : 'application/json',
-  css : 'text/css',
-  ico : 'image/x-icon',
-  jpg : 'image/jpeg',
-  png : 'image/png',
-  gif : 'image/gif',
-  rar : 'application/zip',
-  zip : 'application/zip',
-  pdf : 'application/pdf',
-  txt : 'text/plain'
-}
+
 export default async function (filePath: string, reqHeaders: http.IncomingHttpHeaders, res: typeResponse, options: options) {
   // 匹配文件扩展名
   const pathnameSplit = filePath.match(/\/.[^\.]+\.([^.]+)$/)
@@ -48,10 +36,10 @@ export default async function (filePath: string, reqHeaders: http.IncomingHttpHe
 
   const expires = new Date(new Date().getTime() + options.maxAge * 1000)
   const headers: OutgoingHttpHeaders = {
-    'Content-Type': baseMimes[extesion] || 'unknown',
-    'Expires' : expires.toUTCString(),
-    'Cache-Control' : 'max-age=' + options.maxAge,
-    'Last-Modified' : lastModified
+    'Content-Type': options.mimes[extesion] || 'unknown',
+    'Expires': expires.toUTCString(),
+    'Cache-Control': 'max-age=' + options.maxAge,
+    'Last-Modified': lastModified
   }
   const	acceptEncoding = reqHeaders['accept-encoding']
   const stream = fs.createReadStream(filePath)

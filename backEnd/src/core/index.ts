@@ -19,6 +19,7 @@ export { juicer as juicer }
 export { App as App }
 export { Connect as Connect }
 export { Session as Session }
+export { mimes } from './utils/mimes'
 export { isFileExists } from './utils/index'
 export type httpMethod = 'get' | 'post' | 'put' | 'delete'
 export type routeHttpMethod = 'rest' | 'all' | httpMethod
