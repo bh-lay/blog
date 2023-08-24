@@ -42,7 +42,7 @@ export default async function (route: routeItemMatched, connect: Connect, app: A
   const cacheContent = await app.cache.getWithCreate(url, ['api','labs'], async function () {
     const data = connect.url.search
     return await getList({
-      limit: typeof data.limit === 'number' ? data.limit : 10,
+      limit: parseInt(data.limit as string) || 10,
       skip: parseInt(data.skip as string, 10)
     })
   })

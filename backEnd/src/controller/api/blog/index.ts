@@ -14,7 +14,7 @@ export async function getList (route: routeItemMatched, connect: Connect, app: A
   const json = await app.cache.getWithCreate(url, ['api','article'], async function () {
     const data = connect.url.search || {}
     return await list({
-      limit: typeof data.limit === 'number' ? data.limit : 10,
+      limit: parseInt(data.limit as string) || 10,
       skip: parseInt(data.skip as string, 10),
       tag: typeof data.tag === 'string' ? data.tag : undefined
     })
