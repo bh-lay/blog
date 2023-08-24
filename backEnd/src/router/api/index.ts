@@ -53,7 +53,7 @@ const routes: routeItemConfig[] = [
   },
   // 清除缓存
   {
-    path: 'all /ajax/clear_cache',
+    path: 'all /api/clear-cache',
     controller: cacheClearController
   },
   {
