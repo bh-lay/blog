@@ -29,6 +29,7 @@ function routeSourceToRemoteData (localTemporaryRoot: string, routeSource: strin
     referrUrl
   }
 }
+const allowedDomains = ['127.0.0.1', 'localhost', 'www.ahzy.top', 'ahzy.top']
 function isAllowedDomain (request: http.IncomingMessage) {
   const referer = request.headers.referer || ''
   const domainMatches = referer.match(/^http(?:s)?\:\/\/([^\/\:]+)(?:\/|\:|$)/)
@@ -36,7 +37,7 @@ function isAllowedDomain (request: http.IncomingMessage) {
     return false
   }
   const domain = domainMatches[1]
-  if (domain === '127.0.0.1' || domain === 'localhost') {
+  if (allowedDomains.includes(domain)) {
     return true
   }
   return /bh-lay\.com$/.test(domain)
