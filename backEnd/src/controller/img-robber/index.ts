@@ -29,7 +29,7 @@ function routeSourceToRemoteData (localTemporaryRoot: string, routeSource: strin
     referrUrl
   }
 }
-const allowedDomains = ['127.0.0.1', 'localhost', 'www.ahzy.top', 'ahzy.top']
+const allowedDomains = ['127.0.0.1', 'localhost', 'www.ahzy.top', 'ahzy.top', 'coding404.gitee.io', '47.100.207.51']
 function isAllowedDomain (request: http.IncomingMessage) {
   const referer = request.headers.referer || ''
   const domainMatches = referer.match(/^http(?:s)?\:\/\/([^\/\:]+)(?:\/|\:|$)/)
