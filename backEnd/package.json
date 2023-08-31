@@ -32,7 +32,7 @@
     "formidable": "^2.1.1",
     "jssha": "^2.0.1",
     "juicer": "~0.6.5-stable",
-    "mongodb": "^4.0.0",
+    "mongodb": "^4.17.0",
     "node-isbot": "0.0.8",
     "nodemailer": "~6.6.1",
     "path-to-regexp": "^3.0.0",
