@@ -14,7 +14,7 @@ export default async function (route: routeItemMatched, connect: Connect, app: A
       return {
         title: property.name,
         desc: property.remark,
-        url: `http://720yun.com/t/${property.pid}?from=bh-lay`,
+        url: `https://720yun.com/t/${property.pid}?from=bh-lay`,
         thumb: `/${imgRobborRoutePathName}/${base64Encode(thumb + '-https://720yun.com')}`,
         pv: item.pvCount,
         like: item.likeCount,

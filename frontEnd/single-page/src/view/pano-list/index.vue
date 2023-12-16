@@ -50,7 +50,7 @@ export default {
 						let thumb = `https://ssl-thumb2.720static.com/${item.property.thumbUrl}?imageMogr2/thumbnail/560`
 						item.title = item.property.name
 						item.desc = item.property.remark
-						item.url = `http://720yun.com/t/${item.property.pid}?from=bh-lay`
+						item.url = `https://720yun.com/t/${item.property.pid}?from=bh-lay`
 						item.thumb = '/img-robber/' + btoa(thumb + '-https://720yun.com')
 						item.pv = item.pvCount
 						item.like = item.likeCount

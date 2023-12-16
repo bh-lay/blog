@@ -57,7 +57,7 @@ function dateDiff (dateTimeStamp) {
 
 // 跳转链接生成
 function urlPrefix (url) {
-	return 'http://bh-lay.com/r/' + btoa(encodeURIComponent(url))
+	return '//bh-lay.com/r/' + btoa(encodeURIComponent(url))
 }
 
 // 跳转链接生成

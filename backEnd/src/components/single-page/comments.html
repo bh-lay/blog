@@ -4,7 +4,7 @@
 [[@each list as it,index]]
 <a href="$[[it.url]]" class="side-comments-item">
   <div class="cover">
-    <img class="media-object" src="[[@if it.user.avatar]]$[[it.user.avatar]][[@else]]http://static.bh-lay.com/user/default.jpg[[@/if]]" onerror="L.gravatar_error_fn(this)" />
+    <img class="media-object" src="[[@if it.user.avatar]]$[[it.user.avatar]][[@else]]//static.bh-lay.com/user/default.jpg[[@/if]]" onerror="L.gravatar_error_fn(this)" />
   </div>
   <div class="main">
     <h4>
