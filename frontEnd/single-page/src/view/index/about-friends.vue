@@ -39,7 +39,7 @@
 		<strong>剧中人的朋友圈</strong>
 		<span>汇聚小剧身边的小伙伴</span>
 	</a>
-	<a href="http://e.bh-lay.com" target="_blank">
+	<a href="//e.bh-lay.com" target="_blank">
 		<strong>小剧起始页</strong>
 		<span>前端工作小帮手</span>
 	</a>

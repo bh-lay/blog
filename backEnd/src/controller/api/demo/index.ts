@@ -31,7 +31,7 @@ export async function upload (route: routeItemMatched, connect: Connect) {
     fs.unlink(file.filepath)
     newFiles.push({
       name : 'upload.jpg',
-      url : 'http://static.bh-lay.com/demo/upload.jpg'
+      url : '//static.bh-lay.com/demo/upload.jpg'
     })
   })
   json.files = newFiles

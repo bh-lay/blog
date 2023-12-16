@@ -1,7 +1,7 @@
 var wx = require('weixin-js-sdk')
 
 let wechatConfigCache = null
-let defaultAvatar = 'http://static.bh-lay.com/user/avatar-small.jpg'
+let defaultAvatar = '//static.bh-lay.com/user/avatar-small.jpg'
 
 function loadWechatConfig () {
 	if (wechatConfigCache) {

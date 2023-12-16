@@ -64,7 +64,7 @@
 		</div>
 		<div class="item">
 			<div class="label">Blog</div>
-			<input type="text" placeholder="http://bh-lay.com" maxlength="50" v-model="userData.blog">
+			<input type="text" placeholder="https://bh-lay.com" maxlength="50" v-model="userData.blog">
 		</div>
 	</div>
 	<Button type="primary" size="small" @click="confirm">确定</Button>

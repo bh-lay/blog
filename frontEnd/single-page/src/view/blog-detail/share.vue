@@ -57,7 +57,7 @@ export default {
 				createShareCard({
 					title: this.title,
 					intro: this.intro,
-					url: 'http://bh-lay.com/blog/' + this.blogID,
+					url: '//bh-lay.com/blog/' + this.blogID,
 					coverUrl
 				})
 					.then(img => {
