@@ -51,8 +51,9 @@ export default async function addRecord (request: IncomingMessage, response: typ
     params
   }
 
-  const {collection} = await DB.getCollection('analysis')
-  collection.insertOne(item)
+  const {collection, client} = await DB.getCollection('analysis')
+  await collection.insertOne(item)
+  client.close()
   return item
 }
 
