@@ -26,6 +26,18 @@ export async function getDbConnect (): Promise<{
   })
 
   const db = client.db(mongoConig.dbName)
+  
+  // close connect when timout
+  const originCloseMethod = client.close
+  client.close = function (): Promise<void> {
+    clearTimeout(closeTimoutTimer)
+    return originCloseMethod.apply(client) as unknown as Promise<void>
+  }
+  const closeTimoutTimer = setTimeout(() => {
+    console.trace('MongoDB missing close connect.')
+    originCloseMethod()
+  }, 1000)
+
   return {
     client,
     db
