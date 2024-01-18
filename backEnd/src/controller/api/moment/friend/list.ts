@@ -4,7 +4,7 @@
  */
 
 import { routeItemMatched, Connect } from '@/core/index'
-import DB from '@/database/DB'
+import { getDocsByPagination } from '@/database/DB'
 
 const collectionName = 'friends'
 
@@ -23,7 +23,7 @@ export default async function (route: routeItemMatched, connect: Connect) {
     params.tags = data.tag
   }
   // 按照分页获取数据
-  const {count, docs} = await DB.getDocsForPagination(collectionName, {
+  const {count, docs} = await getDocsByPagination(collectionName, {
     params,
     limit: limit_num,
     skip: skip_num,

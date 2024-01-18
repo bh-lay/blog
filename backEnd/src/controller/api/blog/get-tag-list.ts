@@ -2,10 +2,10 @@
  * @author bh-lay
  *
  */
-import DB from '@/database/DB'
+import { getDbCollection } from '@/database/DB'
 
 export default async function getTagsList () {
-  const { collection, client } = await DB.getCollection('article')
+  const { collection, client } = await getDbCollection('article')
   const docs = await collection.find().toArray()
 
   client.close()

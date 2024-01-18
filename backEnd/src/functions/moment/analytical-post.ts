@@ -1,8 +1,8 @@
-import DB from '@/database/DB'
+import { getDbConnect } from '@/database/DB'
 import { count as analysisCount } from '@/functions/analysis/index'
 
 export default async function () {
-  const {client, db} = await DB.getDB()
+  const {client, db} = await getDbConnect()
   const postCollection = db.collection('moment_post')
 
   const postList = await postCollection.find({}).toArray()

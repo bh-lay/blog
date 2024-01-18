@@ -5,7 +5,7 @@
 import { routeItemMatched, Connect, App } from '@/core/index'
 import { createPagination } from '@/lib/pagination'
 import { formatTime } from '@/lib/utils'
-import DB from '@/database/DB'
+import { getDbCollection } from '@/database/DB'
 
 const showdown  = require('showdown')
 
@@ -23,7 +23,7 @@ async function getList (app: App, param: getListParams) {
   if (param.tag) {
     findKeys.tags = param.tag
   }
-  const { collection, client } = await DB.getCollection('article')
+  const { collection, client } = await getDbCollection('article')
   const count = await collection.countDocuments(findKeys)
 
   const docs = await collection.find(findKeys, {
@@ -79,7 +79,7 @@ export async function list (route: routeItemMatched, connect: Connect, app: App)
 }
 
 async function getDetail (id: string) {
-  const { collection, client } = await DB.getCollection('article')
+  const { collection, client } = await getDbCollection('article')
   const docs = await collection.find({
     'id': id
   }).toArray()

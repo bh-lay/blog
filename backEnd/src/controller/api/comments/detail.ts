@@ -1,4 +1,4 @@
-import DB from '@/database/DB'
+import { getDbCollection, generateDbObjectId } from '@/database/DB'
 import { routeItemMatched, Connect } from '@/core/index'
 
 // 获取评论详情
@@ -10,9 +10,9 @@ export default async function (route: routeItemMatched, connect: Connect) {
       code: 500
     })
   }
-  const {collection, client} = await DB.getCollection('comments')
+  const {collection, client} = await getDbCollection('comments')
   const doc = await collection.findOne({
-    _id: new DB.ObjectId(id)
+    _id: generateDbObjectId(id)
   })
   client.close()
   if (!doc) {

@@ -1,4 +1,4 @@
-import DB from '@/database/DB'
+import { getDbCollection } from '@/database/DB'
 import { Connect } from '@/core/index'
 import { createID } from '@/lib/utils'
 import { getAccessToken, getUserInfoByToken } from '@/lib/github-sdk'
@@ -11,7 +11,7 @@ async function hanldGithubLogin (connect: Connect) {
   const accessToken = await getAccessToken(code)
   const userDataFromGithub = await getUserInfoByToken(accessToken)
 
-  const {collection, client, db} = await DB.getCollection('user')
+  const {collection, client, db} = await getDbCollection('user')
   const userDataInDatabase = await collection.findOne({
     github_id: userDataFromGithub.id
   })
@@ -42,7 +42,7 @@ export default async function (connect: Connect) {
     const userInfo = await hanldGithubLogin(connect)
     const sessionInstance = await connect.session()
 
-    const {collection, client} = await DB.getCollection('user_group')
+    const {collection, client} = await getDbCollection('user_group')
     const userGroupInfo = await collection.findOne({
       user_group: userInfo.user_group
     })

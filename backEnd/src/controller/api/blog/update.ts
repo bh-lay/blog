@@ -3,7 +3,7 @@
  * 
  */
 import { routeItemMatched, Connect } from '@/core/index'
-import DB from '@/database/DB'
+import { getDbCollection } from '@/database/DB'
 import power from '@/conf/power'
 import parseData from './parse'
 
@@ -27,7 +27,7 @@ export default async function (route: routeItemMatched, connect: Connect) {
       msg: 'empty input'
     })
   }
-  const { collection, client } = await DB.getCollection(collectionName)
+  const { collection, client } = await getDbCollection(collectionName)
 
   await collection.updateOne({
     id: params.id

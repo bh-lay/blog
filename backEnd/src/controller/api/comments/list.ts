@@ -1,4 +1,4 @@
-import DB from '@/database/DB'
+import { getDbConnect, getDocsByPagination } from '@/database/DB'
 import * as mongodb from 'mongodb'
 import { Connect } from '@/core/index'
 import { encodeHtml } from '@/lib/utils'
@@ -62,14 +62,14 @@ export default async function (connect: Connect, data: {
   const skip_num = data.skip || 0
   const getListForAdmin = data.isadmin
   const format = data.format === 'plain' ? data.format : 'html'
-  const {client, db} = await DB.getDB()
+  const {client, db} = await getDbConnect()
   const collection = db.collection('comments')
   const params: {cid?: string} = {}
   if (data.cid && data.cid.length > 1) {
     params.cid = data.cid
   }
   // 按照分页获取数据
-  const {count, docs} = await DB.getDocsForPagination(collection, {
+  const {count, docs} = await getDocsByPagination(collection, {
     params,
     limit: limit_num,
     skip: skip_num,

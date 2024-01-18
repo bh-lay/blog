@@ -5,7 +5,7 @@
 import * as mongodb from 'mongodb'
 import { routeItemMatched, Connect } from '@/core/index'
 
-import DB from '@/database/DB'
+import { getDbConnect, getDocsByPagination } from '@/database/DB'
 import { encodeHtml } from '@/lib/utils'
 
 const collectionName = 'moment_post'
@@ -70,10 +70,10 @@ export default async function (route: routeItemMatched, connect: Connect) {
   }
 	
   // 按照分页获取数据
-  const {client, db}= await DB.getDB()
+  const {client, db}= await getDbConnect()
 
   const collection = db.collection(collectionName)
-  const {count, docs} = await DB.getDocsForPagination(collection, {
+  const {count, docs} = await getDocsByPagination(collection, {
     params,
     limit: limit_num,
     skip: skip_num,

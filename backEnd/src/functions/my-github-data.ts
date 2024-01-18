@@ -1,4 +1,4 @@
-import DB from '@/database/DB'
+import { getDbCollection } from '@/database/DB'
 import { getUserInfo, githubUserInfo } from './github'
 
 const collection_name = 'cache'
@@ -12,7 +12,7 @@ export async function updateDatabaseFromGithub () {
 }
 
 export async function getGithubData (): Promise<githubUserInfo> {
-  const {collection, client} = await DB.getCollection(collection_name)
+  const {collection, client} = await getDbCollection(collection_name)
   const docs = await collection.find({
     id : mongon_ID
   }).toArray()
@@ -26,7 +26,7 @@ export async function getGithubData (): Promise<githubUserInfo> {
 }
 // 保存到数据库
 async function saveDataToDataBase (data: githubUserInfo) {
-  const {collection, client} = await DB.getCollection(collection_name)
+  const {collection, client} = await getDbCollection(collection_name)
   // 计算条数
   const count = await collection.countDocuments({
     id : mongon_ID

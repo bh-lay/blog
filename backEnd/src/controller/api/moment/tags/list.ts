@@ -3,7 +3,7 @@
  * @author bh-lay
  */
 import { routeItemMatched, Connect } from '@/core/index'
-import DB from '@/database/DB'
+import { getDocsByPagination } from '@/database/DB'
 
 export default async function (route: routeItemMatched, connect: Connect) {
   const params = connect.url.search
@@ -11,7 +11,7 @@ export default async function (route: routeItemMatched, connect: Connect) {
   const skip_num = parseInt(params.skip as string) || 0
 
   // 按照分页获取数据
-  const {count, docs} = await DB.getDocsForPagination('moment_tag', {
+  const {count, docs} = await getDocsByPagination('moment_tag', {
     params: {},
     limit: limit_num,
     skip: skip_num,

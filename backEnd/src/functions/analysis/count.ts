@@ -1,9 +1,9 @@
-import DB from '@/database/DB'
+import { getDbCollection } from '@/database/DB'
 
 
 export default async function (type: string, params: Record<string, unknown>) {
 
-  const {collection} = await DB.getCollection('analysis')
+  const {collection} = await getDbCollection('analysis')
 
   const count = await collection.countDocuments({
     type,

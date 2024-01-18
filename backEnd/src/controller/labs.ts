@@ -3,12 +3,12 @@
  */
 import { routeItemMatched, Connect, App } from '@/core/index'
 import { formatTime } from '@/lib/utils'
-import DB from '@/database/DB'
-
+import { getDbCollection } from '@/database/DB'
+// TODO: replace to other package
 const showdown  = require('showdown')
 
 async function list_page (app: App) {
-  const { collection, client } = await DB.getCollection('labs')
+  const { collection, client } = await getDbCollection('labs')
   const docs = await collection.find({}, { limit: 15 }).sort({ id: -1 }).toArray()
   for (const i in docs) {
     docs[i].cover = (docs[i].cover && docs[i].cover[0] == '/') ? app.options.frontendCdnDomain + docs[i].cover : docs[i].cover
@@ -38,7 +38,7 @@ export function list (route: routeItemMatched, connect: Connect, app: App) {
 
 async function get_detail (lab_name: string) {
   // get template
-  const { collection, client } = await DB.getCollection('labs')
+  const { collection, client } = await getDbCollection('labs')
   const docs = await collection.find({ 'name': lab_name }).toArray()
 
   client.close()

@@ -2,7 +2,7 @@
  * @author bh-lay
  */
 
-import DB from '@/database/DB'
+import { getDbCollection } from '@/database/DB'
 import { routeItemMatched, Connect, App } from '@/core/index'
 
 async function getDetail (articleID: string, format: string) {
@@ -13,7 +13,7 @@ async function getDetail (articleID: string, format: string) {
     msg: '',
     detail: null,
   }
-  const {collection, client} = await DB.getCollection('labs')
+  const {collection, client} = await getDbCollection('labs')
 
   const docs = await collection.find({
     id: articleID

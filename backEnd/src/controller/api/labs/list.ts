@@ -4,7 +4,7 @@
  */
 
 import { routeItemMatched, Connect, App } from '@/core/index'
-import DB from '@/database/DB'
+import { getDbCollection, getDocsByPagination } from '@/database/DB'
 type listOption = {
 	limit?: number
 	skip?: number
@@ -15,7 +15,7 @@ async function getList (data: listOption) {
   const params = {}
 
   // 按照分页获取数据
-  const { count, docs } = await DB.getDocsForPagination('labs', {
+  const { count, docs } = await getDocsByPagination('labs', {
     params,
     limit: limit_num,
     skip: skip_num,

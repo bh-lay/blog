@@ -2,12 +2,12 @@
  * @author bh-lay
  * 
  */
-// import DB from '@/database/DB'
+// import { getDbCollection } from '@/database/DB'
 
 // // 增加一条用户记录
 // function add(parm,callback){
 //   parm = parm || {}
-//   DB.getCollection('user')
+//   getDbCollection('user')
 //     .then(({collection, client}) => {
 //       parm.id = utils.createID()
 
@@ -25,7 +25,7 @@
 // }
 // // 修改用户记录
 // function edit(parm,callback){
-//   DB.getCollection('user')
+//   getDbCollection('user')
 //     .then(({collection, client}) => {
 //       collection.updateOne({
 //         id : parm.id
@@ -57,7 +57,7 @@
 //     'limit':limit_num,
 //     'skip':skip_num,
 //   }
-//   DB.getCollection('user')
+//   getDbCollection('user')
 //     .then(({collection, client}) => {
 //       collection.countDocuments(function(err,count){
 //         resJSON['count'] = count

@@ -4,7 +4,7 @@
 import * as mongodb from 'mongodb'
 
 // 获取数据库
-async function getDB (): Promise<{
+export async function getDbConnect (): Promise<{
 	client: mongodb.MongoClient,
 	db: mongodb.Db
 }> {
@@ -32,12 +32,12 @@ async function getDB (): Promise<{
   }
 }
 // 获取数据集合
-async function getCollection (collectionName: string): Promise<{
+export async function getDbCollection (collectionName: string): Promise<{
 	client: mongodb.MongoClient,
 	db: mongodb.Db,
 	collection: mongodb.Collection
 }> {
-  const {client, db} = await getDB()
+  const {client, db} = await getDbConnect()
   const collection = db.collection(collectionName)
   return {
     collection,
@@ -80,9 +80,9 @@ async function getPaginationByCollection (collection: mongodb.Collection, option
  * @param {Object, String} collectionNameOrCollection 数据集合或数据集合名
  * @param {*} params 查询参数
  */
-const getDocsForPagination = async (collectionNameOrCollection: mongodb.Collection | string, params: paginationOptions) => {
+export async function getDocsByPagination (collectionNameOrCollection: mongodb.Collection | string, params: paginationOptions) {
   if (typeof collectionNameOrCollection === 'string') {
-    const {collection, client} = await getCollection(collectionNameOrCollection)
+    const {collection, client} = await getDbCollection(collectionNameOrCollection)
 
     const result = await getPaginationByCollection(collection, params)
     client.close()
@@ -90,9 +90,7 @@ const getDocsForPagination = async (collectionNameOrCollection: mongodb.Collecti
   }
   return await getPaginationByCollection(collectionNameOrCollection, params)
 }
-export default {
-  getDB,
-  getCollection,
-  getDocsForPagination,
-  ObjectId: mongodb.ObjectId
+
+export function generateDbObjectId (id: string) {
+  return new mongodb.ObjectId(id)
 }

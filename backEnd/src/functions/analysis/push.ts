@@ -1,4 +1,4 @@
-import DB from '@/database/DB'
+import { getDbCollection } from '@/database/DB'
 import { typeResponse } from '@/core/index'
 import { IncomingMessage } from 'node:http'
 
@@ -51,7 +51,7 @@ export default async function addRecord (request: IncomingMessage, response: typ
     params
   }
 
-  const {collection, client} = await DB.getCollection('analysis')
+  const {collection, client} = await getDbCollection('analysis')
   await collection.insertOne(item)
   client.close()
   return item
