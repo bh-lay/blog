@@ -14,7 +14,7 @@ async function getDB (): Promise<{
     port: process.env.mongoPort,
     user: process.env.mongoUser,
     pass: process.env.mongoPwd,
-    dbName: process.env.MongoDBName
+    dbName: process.env.mongoDBName
   }
   const mongoConnectUrl = `mongodb://${mongoConig.host}:${mongoConig.port}`
 
