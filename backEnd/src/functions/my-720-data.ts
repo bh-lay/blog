@@ -1,4 +1,4 @@
-import DB from '@/database/DB'
+import { getDbCollection } from '@/database/DB'
 import request from 'request'
 const collectionName = 'cache',
   mongon_ID = '720yun_bh-lay',
@@ -12,7 +12,7 @@ type panoData = {
 }
 // 从数据库读取
 export async function get720Data () {
-  const { collection, client } = await DB.getCollection(collectionName)
+  const { collection, client } = await getDbCollection(collectionName)
   const docs = await collection.find({
     id: mongon_ID
   }).toArray()
@@ -28,7 +28,7 @@ export async function get720Data () {
 // 保存到数据库
 async function saveDataToDataBase (data: Record<string, unknown>) {
   data.id = mongon_ID
-  const { collection, client } = await DB.getCollection(collectionName)
+  const { collection, client } = await getDbCollection(collectionName)
   // 计算条数
   const count = await collection.countDocuments({
     id: mongon_ID

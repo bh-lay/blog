@@ -2,7 +2,7 @@
 /*
  * @author bh-lay
  */
-import DB from '@/database/DB'
+import { getDocsByPagination } from '@/database/DB'
 type listOption = {
 	limit?: number
 	skip?: number
@@ -18,7 +18,7 @@ export default async function (data: listOption) {
     params.tags = data.tag
   }
   // 按照分页获取数据
-  const { count, docs } = await DB.getDocsForPagination('article', {
+  const { count, docs } = await getDocsByPagination('article', {
     params,
     limit: limit_num,
     skip: skip_num,

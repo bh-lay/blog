@@ -2,7 +2,7 @@
  * @author bh-lay
  */
 import { routeItemMatched, Connect } from '@/core/index'
-import DB from '@/database/DB'
+import { getDbCollection } from '@/database/DB'
 
 const collectionName = 'moment_post'
 
@@ -15,7 +15,7 @@ export default async function (route: routeItemMatched, connect: Connect) {
   // 内容格式 html/markdown
   const format = data.format || 'markdown'
 
-  const {collection, client} = await DB.getCollection(collectionName)
+  const {collection, client} = await getDbCollection(collectionName)
 
   const docs = await collection.find({
     id: postId

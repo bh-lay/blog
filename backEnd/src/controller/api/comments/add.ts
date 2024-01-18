@@ -1,4 +1,4 @@
-import DB from '@/database/DB'
+import { getDbCollection } from '@/database/DB'
 import { routeItemMatched, Connect, App } from '@/core/index'
 import { encodeHtml } from '@/lib/utils'
 
@@ -7,7 +7,7 @@ const showdown  = require('showdown')
 const maxCommentsTextLangth = 1000
 
 async function getUserInfo (id: string) {
-  const {collection, client} = await DB.getCollection('user')
+  const {collection, client} = await getDbCollection('user')
 
   const docs = await collection.find({'id' : id}).toArray()
   client.close()
@@ -37,7 +37,7 @@ async function add (data: any) {
     item.user = data.user
   }
 	
-  const {collection, client} = await DB.getCollection('comments')
+  const {collection, client} = await getDbCollection('comments')
   await collection.insertOne(item)
 
   // 内容由 markdown 转为 html

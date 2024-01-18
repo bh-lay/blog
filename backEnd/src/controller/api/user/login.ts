@@ -2,7 +2,7 @@
  * @author bh-lay
  * 
  */
-import DB from '@/database/DB'
+import { getDbCollection } from '@/database/DB'
 import { routeItemMatched, Connect, Session } from '@/core/index'
 import { str2md5 } from '@/lib/utils'
 
@@ -76,7 +76,7 @@ export default async function (route: routeItemMatched, connect: Connect) {
 }
 
 async function getUserGroupPower (userGroupStr: string) {
-  const {collection, client} = await DB.getCollection('user_group')
+  const {collection, client} = await getDbCollection('user_group')
   const docs = await collection.find({'user_group': userGroupStr}).toArray()
   client.close()
   const userGroup = docs[0]
@@ -89,7 +89,7 @@ async function getUserGroupPower (userGroupStr: string) {
 // 处理login
 async function handleLogin (connect: Connect, sessionInstance: Session, username: string, password: string) {
   // matche user
-  const {collection, client} = await DB.getCollection('user')
+  const {collection, client} = await getDbCollection('user')
 
   const docs = await collection.find({
     email: username,

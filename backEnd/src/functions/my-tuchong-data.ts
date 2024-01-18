@@ -1,4 +1,4 @@
-import DB from '@/database/DB'
+import { getDbCollection } from '@/database/DB'
 import request from 'request'
 
 const collectionName = 'cache',
@@ -11,7 +11,7 @@ const collectionName = 'cache',
 	}
 // 从数据库读取
 export async function getTuchongData () {
-  const { collection, client } = await DB.getCollection(collectionName)
+  const { collection, client } = await getDbCollection(collectionName)
   const docs = await collection.find({
     id : mongon_ID
   }).toArray()
@@ -26,7 +26,7 @@ export async function getTuchongData () {
 // 保存到数据库
 async function saveDataToDataBase (data: Record<string, unknown>) {
   data.id = mongon_ID
-  const { collection, client } = await DB.getCollection(collectionName)
+  const { collection, client } = await getDbCollection(collectionName)
   // 查询用户信息
   const count = await collection.countDocuments({
     id : mongon_ID

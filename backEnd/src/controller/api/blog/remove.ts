@@ -4,7 +4,7 @@
  */
 /** ************************************************************
 ***************************************************************/
-import DB from '@/database/DB'
+import { getDbCollection } from '@/database/DB'
 import power from '@/conf/power'
 import { App, Connect, routeItemMatched } from '@/core/index'
 
@@ -25,7 +25,7 @@ export default async function (route: routeItemMatched, connect: Connect, app: A
       code : 201
     })
   }
-  const {collection, client} = await DB.getCollection('article')
+  const {collection, client} = await getDbCollection('article')
 
   await collection.deleteOne({
     id : ID

@@ -3,7 +3,7 @@
  * 
  */
 import power from '@/conf/power'
-import DB from '@/database/DB'
+import { getDbCollection, generateDbObjectId } from '@/database/DB'
 import { routeItemMatched, Connect, App } from '@/core/index'
 
 // 获取评论详情
@@ -22,10 +22,10 @@ export default async function (route: routeItemMatched, connect: Connect, app: A
       code : 201
     })
   }
-  const {collection, client} = await DB.getCollection('comments')
+  const {collection, client} = await getDbCollection('comments')
 
   await collection.deleteOne({
-    _id : new DB.ObjectId(ID)
+    _id: generateDbObjectId(ID)
   })
   client.close()
 	

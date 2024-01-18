@@ -1,12 +1,12 @@
 /*
  * @author bh-lay
  */
-import DB from '@/database/DB'
+import { getDbConnect, getDbCollection } from '@/database/DB'
 const collectionName = 'moment_cache'
 
 // 获取缓存
 export async function getCache (cacheName: string) {
-  const {collection, client} = await DB.getCollection(collectionName)
+  const {collection, client} = await getDbCollection(collectionName)
   const doc = await collection.findOne({
     name: cacheName
   })
@@ -16,7 +16,7 @@ export async function getCache (cacheName: string) {
 
 // 设置缓存
 export async function setCache (cacheName: string, content: string) {
-  const {client, db} = await DB.getDB()
+  const {client, db} = await getDbConnect()
   const collection = db.collection(collectionName)
   // 获取缓存名下的文档总数
   const resultCount = await collection.countDocuments({
@@ -49,7 +49,7 @@ export async function removeCache (name: string) {
   if (!name || name.length < 1) {
     return Promise.reject(new Error('missing ID'))
   }
-  const {collection, client} = await DB.getCollection(collectionName)
+  const {collection, client} = await getDbCollection(collectionName)
   await collection.deleteOne({
     name: name
   })

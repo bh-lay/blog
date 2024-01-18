@@ -1,4 +1,4 @@
-import DB from '@/database/DB'
+import { getDbCollection } from '@/database/DB'
 import { getRepoInfo } from '@/functions/github'
 
 type repoInfo = {
@@ -17,7 +17,7 @@ type repoInfo = {
 }
 // 获取实验室列表
 async function getListFromDatabase () {
-  const {collection, client} = await DB.getCollection('labs')
+  const {collection, client} = await getDbCollection('labs')
   const docs = await collection.find({}).toArray()
   client.close()
   return docs.map(function (item) {
@@ -47,7 +47,7 @@ async function getDataFromGithub (repoName: string): Promise<repoInfo> {
 }
 // 更新实验室单条数据
 async function update (id: string, data: repoInfo) {
-  const {collection, client} = await DB.getCollection('labs')
+  const {collection, client} = await getDbCollection('labs')
 
   await collection.updateOne({
     id: id

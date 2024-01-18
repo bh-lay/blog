@@ -2,14 +2,14 @@
  * @author bh-lay
  * 
  */
-import DB from '@/database/DB'
+import { getDbCollection } from '@/database/DB'
 import { routeItemMatched, Connect } from '@/core/index'
 
 /**
  * 获取用户信息
  */
 async function getUserDetail (userID: string) {
-  const {collection, client} = await DB.getCollection('user')
+  const {collection, client} = await getDbCollection('user')
 
   const userInfo = await collection.findOne({
     id: userID

@@ -5,7 +5,7 @@
 import { routeItemMatched, Connect, App } from '@/core/index'
 import { createPagination } from '@/lib/pagination'
 import { formatTime } from '@/lib/utils'
-import DB from '@/database/DB'
+import { getDbCollection } from '@/database/DB'
 
 type getListParams = {
 	skip: number,
@@ -18,7 +18,7 @@ async function getList (app: App, param: getListParams) {
   const limit = param.limit || 10
   const findKeys = {}
 
-  const { collection, client } = await DB.getCollection('comments')
+  const { collection, client } = await getDbCollection('comments')
   const count = await collection.countDocuments(findKeys)
   const docs = await collection.find(findKeys, {
     limit: limit

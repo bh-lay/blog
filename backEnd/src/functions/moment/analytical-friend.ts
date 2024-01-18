@@ -1,6 +1,6 @@
 
 // author bh-lay
-import DB from '@/database/DB'
+import { getDbConnect, getDbCollection } from '@/database/DB'
 
 type friend = {
   github_username: string | undefined,
@@ -17,14 +17,15 @@ const countScore = (item: friend) => {
 }
 
 export default async function () {
-  const {client, db} = await DB.getDB()
+  const {client, db} = await getDbConnect()
   const friendCollection = db.collection('friends')
 
   const postList = await friendCollection.find({}).toArray()
   const promiseLIst = postList.map(async function (doc) {
     const score = countScore(doc as friend)
     const userid = doc.id
-    const {collection} = await DB.getCollection('moment_post')
+    // TODO: check mongo close
+    const {collection} = await getDbCollection('moment_post')
 
     const postCount = await collection.countDocuments({
       userid

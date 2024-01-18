@@ -2,7 +2,7 @@
  * @author bh-lay
  * 
  */
-import DB from '@/database/DB'
+import { getDbCollection } from '@/database/DB'
 import { routeItemMatched, Connect, App } from '@/core/index'
 import power from '@/conf/power'
 
@@ -23,7 +23,7 @@ export default async function (route: routeItemMatched, connect: Connect, app: A
     })
   }
 
-  const {collection, client} = await DB.getCollection('labs')
+  const {collection, client} = await getDbCollection('labs')
 
   await collection.deleteOne({
     id : ID

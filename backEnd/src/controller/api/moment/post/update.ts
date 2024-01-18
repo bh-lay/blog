@@ -5,7 +5,7 @@
 import { routeItemMatched, Connect } from '@/core/index'
 import power from '@/conf/power'
 
-import DB from '@/database/DB'
+import { getDbCollection } from '@/database/DB'
 import parseData from './parse'
 
 const collectionName = 'moment_post'
@@ -26,7 +26,7 @@ export default async function (route: routeItemMatched, connect: Connect) {
       msg: '请输入完整数据！'
     })
   }
-  const { collection, client } = await DB.getCollection(collectionName)
+  const { collection, client } = await getDbCollection(collectionName)
   await collection.updateOne({
     id: data.id
   }, {

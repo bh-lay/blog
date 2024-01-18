@@ -5,7 +5,7 @@
 import { routeItemMatched, Connect } from '@/core/index'
 import { push as pushAnalysis } from '@/functions/analysis/index'
 
-import DB from '@/database/DB'
+import { getDbCollection } from '@/database/DB'
 
 const collectionName = 'friends'
 
@@ -14,7 +14,7 @@ const collectionName = 'friends'
 export default async function (route: routeItemMatched, connect: Connect) {
   const friendID = route.params.id
 
-  const {collection, client} = await DB.getCollection(collectionName)
+  const {collection, client} = await getDbCollection(collectionName)
 
   const docs = await collection.find({
     id: friendID

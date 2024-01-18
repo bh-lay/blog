@@ -3,7 +3,7 @@
  *
  */
 import * as mongodb from 'mongodb'
-import DB from '@/database/DB'
+import { getDbConnect } from '@/database/DB'
 
 type tagItemInfo = {
 	name: string,
@@ -61,7 +61,7 @@ async function addOrUpdateTag (collection: mongodb.Collection<mongodb.Document>,
   }
 }
 export default async function () {
-  const {client, db} = await DB.getDB()
+  const {client, db} = await getDbConnect()
   const tagsArray = await getTagsList(db)
   if (tagsArray.length === 0) {
     return
