@@ -29,13 +29,16 @@ export async function getDbConnect (): Promise<{
   
   // close connect when timout
   const originCloseMethod = client.close
+  function closeConnect () {
+    return originCloseMethod.apply(client) as unknown as Promise<void>
+  }
   client.close = function (): Promise<void> {
     clearTimeout(closeTimoutTimer)
-    return originCloseMethod.apply(client) as unknown as Promise<void>
+    return closeConnect()
   }
   const closeTimoutTimer = setTimeout(() => {
     console.trace('MongoDB missing close connect.')
-    originCloseMethod()
+    closeConnect()
   }, 1000)
 
   return {
