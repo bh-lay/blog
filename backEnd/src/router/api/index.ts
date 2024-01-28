@@ -53,7 +53,7 @@ const routes: routeItemConfig[] = [
   },
   // 清除缓存
   {
-    path: 'all /api/clear-cache',
+    path: 'post /api/clear-cache',
     controller: cacheClearController
   },
   {
@@ -82,6 +82,7 @@ const routes: routeItemConfig[] = [
     path: 'get /api/user/detail',
     controller: userDetailController
   },
+  // TODO: delete this api
   {
     path: 'all /ajax/user/detail',
     controller: userDetailController

@@ -24,7 +24,7 @@ export default class Cache {
 
   // 清除缓存
   clear (tags?: string | null) {
-    if (typeof(tags) !== 'string' || tags.length > 0) {
+    if (typeof(tags) !== 'string' || tags.length === 0) {
       // 暴力清除
       this.try_del_each_cache()
       return
