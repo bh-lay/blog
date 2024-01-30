@@ -114,7 +114,7 @@ export default class App {
         newConnect.writeCustom(301,{
           location: urlRedirectConfig[connectPath.pathname]
         }, '')
-      } else {
+      } else if (this.options.staticRoot) {
         // 第四顺序：使用静态文件
         newConnect.writeFile(
           path.join(this.options.staticRoot, pathname),

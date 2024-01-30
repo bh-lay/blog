@@ -15,7 +15,7 @@ const app = new App({
   temporaryPath: process.env.temporaryPath || '',
   useCache: process.env.useCache === 'true',
   maxCacheCount: 1000,
-  staticRoot: '../web/',
+  staticRoot: process.env.staticPath || '',
   // 静态资源缓存时间
   staticFileMaxAge: 60 * 60 * 24 * 365,
   frontendCdnDomain: process.env.cdnDomain || '',

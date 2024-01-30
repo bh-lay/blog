@@ -1,5 +1,0 @@
-#
-# robots.txt for layServer
-#
-
-User-agent: *
