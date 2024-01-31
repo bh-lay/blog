@@ -79,7 +79,7 @@ const routes: routeItemConfig[] = [
   },
 	
   {
-    path: 'post /api/user/detail',
+    path: 'all /api/user/detail',
     controller: userDetailController
   },
   // 前端演示用的demo
