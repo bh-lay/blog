@@ -38,7 +38,7 @@ export default {
 	methods: {
 		getList () {
 			this.isLoading = true
-			fetch('/ajax/photography/list?act=get_list', {
+			fetch('/api/photography/list?act=get_list', {
 				method: 'GET'
 			})
 				.then(response => response.json())

@@ -1,7 +1,7 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import App from './App'
+import App from './App.vue'
 import router from './router'
 import filters from './filters/index.js'
 import Footer from './components/footer/index.vue'
@@ -26,7 +26,9 @@ new Vue({
 	el: '#app',
 	router,
 	components: { App },
-	template: '<App/>'
+	render(h) {
+		return h(App)
+	}
 })
 
 // 为保证页面展示稳定，loading 强制显示至少一秒钟

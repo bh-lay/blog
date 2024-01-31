@@ -79,7 +79,7 @@ const routes: routeItemConfig[] = [
   },
 	
   {
-    path: 'get /api/user/detail',
+    path: 'post /api/user/detail',
     controller: userDetailController
   },
   // TODO: delete this api

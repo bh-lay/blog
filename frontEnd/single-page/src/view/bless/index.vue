@@ -1,6 +1,6 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "~@/assets/stylus/variable.styl"
-@import "~@/assets/stylus/mixin.styl"
+@import "../../assets/stylus/variable.styl"
+@import "../../assets/stylus/mixin.styl"
 
 .bless-page
 	background #fff
@@ -122,6 +122,8 @@ import CommentsSendBox from '@/components/comments/send-box.vue'
 import CommentsList from '@/components/comments/list.vue'
 import Github from './github.vue'
 import Comments from './comments.vue'
+import image1 from './images/1.jpg'
+import image2 from './images/2.jpg'
 
 let globalPhotoGraphaIndex = 0
 
@@ -140,14 +142,14 @@ export default {
 
 			photoGraphaList: [
 				{
-					imgSrc: require('./images/1.jpg'),
+					imgSrc: image1,
 					htmlSrc: 'https://bh-lay.tuchong.com/14431809/#image24933177',
-					title: '宏村',
+					title: '束河古城',
 					author: '剧中人'
 				}, {
-					imgSrc: require('./images/2.jpg'),
-					htmlSrc: 'https://720yun.com/t/544jOrkvtn0?from=bh-lay',
-					title: '桂林阳朔',
+					imgSrc: image2,
+					// htmlSrc: 'https://720yun.com/t/544jOrkvtn0?from=bh-lay',
+					title: '崇明黄昏',
 					author: '剧中人'
 				}
 			],

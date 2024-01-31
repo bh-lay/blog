@@ -1,6 +1,5 @@
 
-export var defaultAvatar = require('./default.jpg')
-
+export {  default as defaultAvatar } from './default.jpg'
 const defaultUserData = {
 	username: '',
 	email: '',
@@ -27,7 +26,7 @@ function getUserInfoFromLocal () {
 	}
 }
 function getUserInfoFromServer () {
-	return fetch('/ajax/user/detail', {
+	return fetch('/api/user/detail', {
 		method: 'POST'
 	})
 		.then(rsp => rsp.json())

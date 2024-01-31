@@ -1,6 +1,6 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-@import '~@/assets/stylus/variable.styl'
-@import '~@/assets/stylus/mixin.styl'
+@import '../../assets/stylus/variable.styl'
+@import '../../assets/stylus/mixin.styl'
 
 .labs-list-pager
 	background #dee3e7
@@ -24,7 +24,7 @@
 		.icon
 			height 40px
 			padding-top 20px
-			:global(svg)
+			::v-deep svg
 				display block
 				width 40px
 				margin auto
@@ -122,6 +122,8 @@
 <script>
 import headerBanner from '@/components/header-banner/index.vue'
 import Item from './item.vue'
+import image1 from './images/opus_@2x.jpg'
+import image2 from './images/yangshuo.jpg'
 
 let globalPhotoGraphaIndex = 0
 
@@ -156,12 +158,12 @@ export default {
 		return {
 			photoGraphaList: [
 				{
-					imgSrc: require('./images/opus_@2x.jpg'),
+					imgSrc: image1,
 					htmlSrc: 'https://bh-lay.tuchong.com/14431809/#image24933177',
 					title: '宏村',
 					author: '剧中人'
 				}, {
-					imgSrc: require('./images/yangshuo.jpg'),
+					imgSrc: image2,
 					htmlSrc: 'https://720yun.com/t/544jOrkvtn0?from=bh-lay',
 					title: '桂林阳朔',
 					author: '剧中人'

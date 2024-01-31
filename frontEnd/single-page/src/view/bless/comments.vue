@@ -1,6 +1,6 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "~@/assets/stylus/variable.styl"
-@import "~@/assets/stylus/mixin.styl"
+@import "../../assets/stylus/variable.styl"
+@import "../../assets/stylus/mixin.styl"
 .comments
 	.caption
 		padding .5em 1em

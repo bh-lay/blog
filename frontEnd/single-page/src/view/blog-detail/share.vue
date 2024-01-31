@@ -1,16 +1,15 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "~@/assets/stylus/variable.styl"
+@import "../../assets/stylus/variable.styl"
 
 .sns-share
 	padding 40px 0
 	.share-card
 		min-height 100px
-		:global(img)
+		::v-deep img
 			display block
 			width 400px
 			max-width 100%
 			margin auto
-			box-shadow 2px 2px 4px rgba(0, 0, 0, .1), 2px 2px 15px rgba(0, 0, 0, .1)
 	p
 		text-align center
 		color #67757e
@@ -24,6 +23,22 @@
 <script>
 import filters from '@/filters/index.js'
 
+let shareModuleCache = null
+let shareModuleLoadPromiseCache = null
+function loadShareModuleAndWaitReady() {
+	if (shareModuleCache) {
+		return Promise.resolve(shareModuleCache)
+	}
+	if (shareModuleLoadPromiseCache) {
+		return shareModuleLoadPromiseCache
+	}
+	shareModuleLoadPromiseCache = import('./blog-share.js').then((module) => {
+		shareModuleCache = module
+		shareModuleLoadPromiseCache = null
+		return shareModuleCache
+	})
+	return shareModuleLoadPromiseCache
+}
 export default {
 	name: 'blogShare',
 	props: {
@@ -50,22 +65,23 @@ export default {
 	},
 	methods: {
 		createSharePop () {
-			require.ensure(['./blog-share.js'], () => {
-				// 异步引入分享模块
-				let {createShareCard} = require('./blog-share.js')
-				let coverUrl = filters.imgHosting(this.cover, 'zoom', 420)
-				createShareCard({
-					title: this.title,
-					intro: this.intro,
-					url: '//bh-lay.com/blog/' + this.blogID,
-					coverUrl
-				})
-					.then(img => {
-						this.isCoverLoaded = false
-						this.$refs.cardArea.innerHTML = ''
-						this.$refs.cardArea.appendChild(img)
+			// 异步引入分享模块
+			loadShareModuleAndWaitReady()
+				.then(module => {
+					let { createShareCard } = module || {}
+					let coverUrl = filters.imgHosting(this.cover, 'zoom', 420)
+					return createShareCard({
+						title: this.title,
+						intro: this.intro,
+						url: '//bh-lay.com/blog/' + this.blogID,
+						coverUrl
 					})
-			})
+				})
+				.then(img => {
+					this.isCoverLoaded = false
+					this.$refs.cardArea.innerHTML = ''
+					this.$refs.cardArea.appendChild(img)
+				})
 		}
 	}
 }
