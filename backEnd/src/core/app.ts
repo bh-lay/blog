@@ -7,6 +7,7 @@ import path from 'path'
 import pathToRegexp from 'path-to-regexp'
 import http from 'http'
 import Connect from './connect'
+import querystring from 'querystring'
 import urlRedirectConfig from '../conf/301url'
 import { httpMethod, routeHttpMethod, searchParams, controller, routeItemParsed, routeItemMatched, componentFn, componentRegisted } from './index'
 import Cache from './cache'
@@ -31,10 +32,10 @@ export type appOptions = {
   temporaryPath: string,
   useCache: boolean,
   maxCacheCount: number,
-  staticRoot:  string,
+  staticRoot: string,
   staticFileMaxAge: number,
   frontendCdnDomain: string,
-  tempPaths: string[],
+  extraSubTempPaths: string[],
   mimes: mimes
 }
 type appOptionsParams = {
@@ -46,7 +47,7 @@ type appOptionsParams = {
   staticRoot: string,
   staticFileMaxAge: number,
   frontendCdnDomain: string,
-  tempPaths?: string[],
+  extraSubTempPaths?: string[],
   mimes?: mimes
 }
 /**
@@ -63,7 +64,7 @@ export default class App {
     // create options
     this.options = Object.assign({
       mimes: {},
-      tempPaths: [],
+      extraSubTempPaths: [],
     }, options)
     this.options.mimes = Object.assign({}, defaultMimes, options.mimes)
 
@@ -75,7 +76,7 @@ export default class App {
     this.components = {}
     this.errorHandler = options.errorHandler || defaultErrorHandler
     // 初始化临时目录
-    initTemporary(options.temporaryPath, options.tempPaths)
+    initTemporary(options.temporaryPath, options.extraSubTempPaths)
     this.serverListen()
     this.errorCatch()
   }
@@ -111,10 +112,12 @@ export default class App {
         })
       } else if (urlRedirectConfig[pathname]) {
         // 第三顺序：查找301重定向
+        const originSearch = newConnect.url.search
+        const searchStr = Object.keys(originSearch).length > 0 ? '?' + querystring.stringify(newConnect.url.search) : ''
         newConnect.writeCustom(301,{
-          location: urlRedirectConfig[connectPath.pathname]
+          location: urlRedirectConfig[connectPath.pathname] + searchStr
         }, '')
-      } else {
+      } else if (this.options.staticRoot) {
         // 第四顺序：使用静态文件
         newConnect.writeFile(
           path.join(this.options.staticRoot, pathname),

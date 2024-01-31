@@ -1,5 +1,5 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "~@/assets/stylus/variable.styl"
+@import "../../assets/stylus/variable.styl"
 .footer-main
 	background #161a1d
 	color #fff

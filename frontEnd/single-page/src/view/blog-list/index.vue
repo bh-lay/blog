@@ -1,5 +1,5 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "~@/assets/stylus/variable.styl"
+@import "../../assets/stylus/variable.styl"
 $tag_cnt_bj = #fff
 /** 博文列表页 **/
 .article-list-page
@@ -103,6 +103,8 @@ import headerBanner from '@/components/header-banner/index.vue'
 import stickList from './stick-list.vue'
 import archivesList from './archives-list.vue'
 import tagList from './tag-list.vue'
+import image1 from './images/architecture-b3.jpg'
+import image2 from './images/architecture-b3-2.jpg'
 
 let globalPhotoGraphaIndex = 0
 
@@ -118,12 +120,12 @@ export default {
 		return {
 			photoGraphaList: [
 				{
-					imgSrc: require('./images/architecture-b3.jpg'),
+					imgSrc: image1,
 					htmlSrc: 'https://bh-lay.tuchong.com/27040825/?from=bh-lay',
 					title: '讯飞数据中心',
 					author: '剧中人'
 				}, {
-					imgSrc: require('./images/architecture-b3-2.jpg'),
+					imgSrc: image2,
 					htmlSrc: 'https://bh-lay.tuchong.com/27040825/?from=bh-lay',
 					title: '讯飞数据中心',
 					author: '剧中人'

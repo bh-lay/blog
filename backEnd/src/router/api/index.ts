@@ -61,11 +61,11 @@ const routes: routeItemConfig[] = [
     controller: functionController
   },
   {
-    path: 'all /ajax/pano/list',
+    path: 'all /api/pano/list',
     controller: panoListController
   },
   {
-    path: 'all /ajax/photography/list',
+    path: 'all /api/photography/list',
     controller: photographyListController
   },
   // // 获取微信公众号配置
@@ -79,12 +79,7 @@ const routes: routeItemConfig[] = [
   },
 	
   {
-    path: 'get /api/user/detail',
-    controller: userDetailController
-  },
-  // TODO: delete this api
-  {
-    path: 'all /ajax/user/detail',
+    path: 'post /api/user/detail',
     controller: userDetailController
   },
   // 前端演示用的demo

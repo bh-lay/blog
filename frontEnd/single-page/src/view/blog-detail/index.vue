@@ -1,5 +1,5 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "~@/assets/stylus/variable.styl"
+@import "../../assets/stylus/variable.styl"
 
 .blog-detail
 	font-size 14px

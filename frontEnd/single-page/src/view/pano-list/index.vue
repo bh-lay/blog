@@ -41,7 +41,7 @@ export default {
 	methods: {
 		getList () {
 			this.isLoading = true
-			fetch('/ajax/pano/list?act=get_list', {
+			fetch('/api/pano/list?act=get_list', {
 				method: 'GET'
 			})
 				.then(response => response.json())

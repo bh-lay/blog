@@ -1,5 +1,5 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "~@/assets/stylus/variable.styl"
+@import "../../assets/stylus/variable.styl"
 .archive-list
 	max-width 640px
 	margin 0 auto 20px

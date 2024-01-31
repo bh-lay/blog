@@ -1,12 +1,10 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-@import '~@/assets/stylus/variable.styl';
-@import '~@/assets/stylus/mixin.styl';
+@import '../../assets/stylus/variable.styl';
+@import '../../assets/stylus/mixin.styl';
 
 .index-aboutme
 	height 95vh !important
 	min-height 600px !important
-	:global(.photograghy-author)
-		bottom 60px !important
 	.aboutme-body
 		display flex
 		align-items center
@@ -108,7 +106,8 @@
 
 <script>
 import headerBanner from '@/components/header-banner/index.vue'
-
+import image1 from './images/aboutme.jpg'
+import image2 from './images/aboutme_2.jpg'
 let globalPhotoGraphaIndex = 0
 
 export default {
@@ -121,13 +120,13 @@ export default {
 				{
 					title: '随处撸码',
 					author: '剧中人',
-					imgSrc: require('./images/aboutme_2.jpg'),
+					imgSrc: image2,
 					htmlSrc: 'https://bh-lay.tuchong.com/14977204/'
 				},
 				{
 					title: '办公室背影',
 					author: 'Oo浪沫',
-					imgSrc: require('./images/aboutme.jpg'),
+					imgSrc: image1,
 					htmlSrc: 'https://bh-lay.tuchong.com/'
 				}
 			],

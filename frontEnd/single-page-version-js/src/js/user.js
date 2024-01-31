@@ -24,7 +24,7 @@ window.appLoginCallback = function (data) {
 
 function getMyInfo (onResponse) {
   utils.fetch({
-    url: '/ajax/user/detail',
+    url: '/api/user/detail',
     type: 'POST',
     callback: function (err, data) {
       if (!err && data && data.code === 200) {

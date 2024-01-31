@@ -9,7 +9,7 @@ import utils from '../../js/Base.js';
 let getData = function (onSuccess, onError) {
   utils.fetch({
     type: 'GET',
-    url: '/ajax/photography/list',
+    url: '/api/photography/list',
     data: {
       act: 'get_list'
     },

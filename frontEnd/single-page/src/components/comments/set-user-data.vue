@@ -1,5 +1,5 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "~@/assets/stylus/variable.styl"
+@import "../../assets/stylus/variable.styl"
 .comments-set-user-data
 	padding 10px
 	background #414548
