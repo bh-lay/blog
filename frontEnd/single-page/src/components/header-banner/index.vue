@@ -40,27 +40,16 @@
 	&.zoom-show
 		display block
 		visibility visible
-		-webkit-mask-image url("./images/mask-bj.png")
-		-webkit-mask-repeat no-repeat
-		-webkit-mask-position center center
-		-webkit-mask-size 300%
-		-webkit-animation circle_zoom 1.2s ease-in
-@keyframes circle_zoom {
-	0% {
-		opacity: 0;
-		-webkit-mask-size: 30%;
-	}
-
-	40% {
-		opacity: 0.6;
-		-webkit-mask-size: 60%;
-	}
-
-	100% {
-		opacity: 1;
-		-webkit-mask-size: 300%;
-	}
-}
+		mask-repeat no-repeat
+		mask-position center center
+		animation circle_zoom 1.2s ease-in
+@keyframes circle_zoom
+	0%
+		mask-image radial-gradient(circle, #000 10%, transparent 60%)
+		opacity: 0
+		mask-size 40%
+	100%
+		mask-size 400%
 </style>
 <template>
 <div class="header-banner-outer">
@@ -130,7 +119,7 @@ export default {
 			let spendTime = new Date().getTime() - startTime
 			setTimeout(() => {
 				this.photographyLoaded = true
-			}, 1200)
+			}, 1200 - spendTime)
 		})
 	}
 }
