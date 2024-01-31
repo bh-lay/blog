@@ -9,7 +9,7 @@ import utils from '../../js/Base.js';
 function getData (onSuccess, onError) {
   utils.fetch({
     type: 'GET',
-    url: '/ajax/pano/list',
+    url: '/api/pano/list',
     data: {
       act: 'get_list'
     },

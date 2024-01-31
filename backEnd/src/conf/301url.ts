@@ -2,6 +2,12 @@
  * @author bh-lay
  */
 const config: Record<string, string> = {
+  // rewrite ajax path to api
+  '/ajax/pano/list': ' /api/pano/list',
+  '/ajax/photography/list': '/api/photography/list',
+  '/ajax/user/detail': '/api/user/detail',
+
+  // page to site
   '/link': 'http://moments.bh-lay.com',
   '/directories': 'http://moments.bh-lay.com',
   // directory
