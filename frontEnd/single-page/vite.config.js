@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue2'
-const cdnDomain = 'http://static.bh-lay.com'
+const cdnDomain = '//static.bh-lay.com'
 export default defineConfig({
   resolve: {
     alias: {
