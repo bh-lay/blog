@@ -11,7 +11,7 @@ export default defineConfig({
     CDN_PATH: JSON.stringify(cdnDomain),
   },
   plugins: [vue()],
-  base: cdnDomain + '/build/single-page-vue/',
+  base: process.env.NODE_ENV === 'production' ? cdnDomain + '/build/single-page-vue/' : '',
   server: {
     proxy: {
       '/api': 'http://127.0.0.1:8888/',
