@@ -79,7 +79,7 @@
 			</svg>
 		</div>
 		<div class="avatar">
-			<img data-v-27dd2652="" src="https://cn.gravatar.com/avatar/d7f43fef201a8c9bce3d550aefc03ebe?s=100">
+			<img data-v-27dd2652="" src="https://gravatar.kuibu.net/avatar/d7f43fef201a8c9bce3d550aefc03ebe?s=100">
 		</div>
 	</header>
 	<div class="main">

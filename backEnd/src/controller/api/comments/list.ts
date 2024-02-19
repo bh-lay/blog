@@ -45,6 +45,7 @@ const makeUpUserInfo = async (db: mongodb.Db, docs: mongodb.Document[], format: 
     } else {
       item.user = item.user || {}
     }
+    delete item.user.email
   })
 
   return docs

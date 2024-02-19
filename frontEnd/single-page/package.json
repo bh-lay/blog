@@ -6,8 +6,9 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "vite build && cp ./dist/index.html ../../backEnd/src/views/single-page/vue.html",
-    "uploadSatic": "scp -r ./dist/* root@119.27.164.123:/root/webserver/asset.bh-lay.com/build/single-page-vue/"
+    "build:dev": "vite build --mode=development && npm run applyToView",
+    "build:prod": "vite build --mode=production && npm run applyToView",
+    "applyToView": "cp ./dist/index.html ../../backEnd/src/views/single-page/vue.html"
   },
   "dependencies": {
     "md5": "^2.2.1",

@@ -1,6 +1,6 @@
 // import setWechatData from './wechat/index.js'
 const baseTitle = '小剧客栈-剧中人的个人博客 网页设计师博客 前端工程师 互动设计学习者！'
-const defaultDesc = document.querySelector('meta[name="description"]').content
+// const defaultDesc = document.querySelector('meta[name="description"]').content
 let globalTitle = baseTitle
 // let globalDesc = defaultDesc
 // let globalImg = ''
@@ -49,7 +49,22 @@ function copyPrefix () {
 function consolePrint () {
 	// 控制台
 	try {
-		console.log('一个人到底多无聊\r\n 才会把 console 当成玩具\r\n一个人究竟多堕落\r\n 才会把大好青春荒废在博客上\r\n\r\n\r\n%cfollow me %c https://github.com/bh-lay', 'color:red', 'color:green')
+		console.log(
+			`
+%c 小剧客栈 %c 剧中人的个人博客 %c
+
+一个人到底多无聊
+  才会拿 console 当玩具
+一个人究竟多堕落
+  才会把大好青春荒废在博客上
+
+%cFollow me %c https://github.com/bh-lay`,
+	 		"background:#35495e ; padding: 5px; border-radius: 4px 0 0 4px;  color: #fff;",
+			"background:#41b883 ; padding: 5px; border-radius: 0 4px 4px 0;  color: #fff;",
+			"font-size: 12px",
+			'color:red',
+			'color:green'
+		)
 	} catch (e) {}
 }
 

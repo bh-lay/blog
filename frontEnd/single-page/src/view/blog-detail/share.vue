@@ -42,7 +42,7 @@ function loadShareModuleAndWaitReady() {
 export default {
 	name: 'blogShare',
 	props: {
-		blogID: {
+		sharedUrl: {
 			type: String
 		},
 		cover: {
@@ -73,7 +73,7 @@ export default {
 					return createShareCard({
 						title: this.title,
 						intro: this.intro,
-						url: '//bh-lay.com/blog/' + this.blogID,
+						url: this.sharedUrl,
 						coverUrl
 					})
 				})

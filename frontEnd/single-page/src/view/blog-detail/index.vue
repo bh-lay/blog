@@ -174,12 +174,12 @@
 							:tag="tag"
 						/>
 					</p>
-					<p><strong>转载请注明来源：</strong>http://bh-lay.com/blog/{{detail.id}}</p>
+					<p><strong>转载请注明来源：</strong>{{ blogUrl }}</p>
 				</footer>
 
 				<blogShare
 					v-if="!isLoading"
-					:blogID="detail.id"
+					:shared-url="blogUrl"
 					:title="detail.title"
 					:intro="detail.intro"
 					:cover="detail.cover"
@@ -251,6 +251,9 @@ export default {
 	computed: {
 		blogID () {
 			return this.$route.params.id || ''
+		},
+		blogUrl () {
+			return `${location.origin}/blog/${this.detail.id}`
 		}
 	},
 	mounted () {

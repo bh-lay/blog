@@ -84,14 +84,19 @@
 	text-align center
 	color #5c6870
 	.beian
-		padding 10px 0 20px
+		padding 40px 0 20px
+		font-size: 12px
 		a
-			font-size 14px
-			color #292f32
+			padding 0 1em
+			color #5c6870
 			transition .15s
 			&:hover
 				text-decoration underline
 				color #9da9af
+		img
+			width 18px
+			vertical-align text-bottom
+			margin-right .3em
 .footer-version
 	padding 10px 20px 18px
 	border-top 1px solid #070808
@@ -195,7 +200,12 @@
 	<div class="footer-sub">
 		<p>Design & Code by @剧中人, Base on NodeJS</p>
 		<p>感谢七牛提供近乎免费的CDN服务</p>
-		<div class="beian"><a href="http://beian.miit.gov.cn" rel="nofollow">皖ICP备14001331号-1</a></div>
+		<div class="beian">
+			<a href="http://beian.miit.gov.cn" rel="nofollow">皖ICP备14001331号-1</a>
+			<a href="https://beian.mps.gov.cn/#/query/webSearch?code=34012302001246" rel="noreferrer">
+				<img src="https://beian.mps.gov.cn/web/assets/logo01.6189a29f.png" alt="网安徽章">
+				皖公网安备34012302001246</a>
+		</div>
 	</div>
 	<div class="footer-version">
 		<span>当前：</span>
