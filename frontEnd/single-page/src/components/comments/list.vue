@@ -129,6 +129,10 @@ export default {
 			return fetch(`/api/comments/?cid=${this.cid}&skip=${skip}&limit=${this.page.pageItemCount}`)
 				.then(response => response.json())
 				.then(data => {
+					if (skip > data.data.count) {
+						this.page.pageIndex = 1
+						return
+					}
 					data.data.list.forEach(function (item) {
 						// 若无头像，使用默认头像
 						item.user.avatar = item.user.avatar || defaultAvatar
