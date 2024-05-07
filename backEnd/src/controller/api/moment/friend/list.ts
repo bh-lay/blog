@@ -34,10 +34,7 @@ export default async function (route: routeItemMatched, connect: Connect) {
       score: -1
     }
   })
-  // 删除正文
-  for (const i in docs) {
-    delete docs[i]['content']
-  }
+
   connect.writeJson({
     code: 1,
     limit: limit_num,
