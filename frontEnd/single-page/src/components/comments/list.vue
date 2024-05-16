@@ -15,7 +15,11 @@
 	display flex
 	margin-bottom 30px
 	cursor default
-	transition 0.1s
+	margin-bottom 12px
+	padding 0 20px
+	--comment-border-color #eef
+	&:hover
+		--comment-border-color: #dde;
 	.avatar
 		width 50px
 		height 50px
