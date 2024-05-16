@@ -19,7 +19,6 @@ a
 	position relative
 .view-outer
 	min-height 100vh
-	overflow hidden
 .view-page
 	position relative
 	background #21272c

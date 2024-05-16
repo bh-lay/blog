@@ -4,44 +4,36 @@
 .blog-detail
 	font-size 14px
 	background #fff
-	overflow-x hidden
 	header
 		position relative
-		min-height 300px
-		background no-repeat center #1f3747
-		background-image -webkit-linear-gradient(left, #1f3747 0%, #293d31 100%)
+		background no-repeat center
 		background-size cover
+		&:before
+			content ""
+			position absolute
+			left 0
+			bottom 0
+			width 100%
+			height 100%
+			z-index 0
+			backdrop-filter blur(8px)
 		.header-body
-			padding $navigation-height * 2.2 20px $navigation-height
+			position relative
 			.title
 				margin-bottom .5em
 				line-height 1.2
 				font-size 2em
-				font-weight 500
+				font-weight 700
 				color #fff
 			.article-info
-				width 62%
-				margin-bottom 3em
 				color #fff
-				opacity .8
-	.article-section
-		display flex
-		.article-section-body
-			flex-grow 1
-			width 200px
-			padding 5em 6em 5em 1em
-		.article-section-side
-			display flex
-			width 340px
-			border-left 1px solid #edeff3
-			.article-section-body
-				margin-right -300px
-				padding 30px 320px 20px 20px
-				background #f9fafb
+				opacity .9
+	.section-article
+		position relative
 		.caption
-			padding 0 20px
+			padding 0 20px 2em
 			h1
-				margin-bottom .4em
+				margin-bottom 1em
 				font-size 28px
 			.publish-time
 				display flex
@@ -82,8 +74,6 @@
 		.sns-share
 			margin 0 20px
 	.toc-content
-		width 280px
-		padding 20px 10px 40px
 		.title
 			margin-bottom 10px
 			line-height 2em
@@ -99,62 +89,90 @@
 			transition .2s
 			&:hover
 				color #407fbf
-	.comments-section
-		position relative
-		padding 2em 0 4em
-		background #5a6872
-		&:before
-			position absolute
-			content ''
-			top -15px
-			left 50%
-			margin-left -30px
-			width 0
-			height 0
-			border-style solid
-			border-color transparent transparent #5a6872
-			border-width 0 30px 15px
 @media screen and (max-width $pad-portrait-width)
-	.blog-detail .article-section .article-section-body
-		padding 5em 2em 5em 0
-@media screen and (max-width $pad-landscape-width)
 	.blog-detail
-		padding 0
-		.article-section
-			.article-section-body
-				padding 1em 0
-			.article-section-side
+		header
+			&:before
+				background rgba(0,0,0,.4)
+		.header-body
+			min-height 140px
+			padding $navigation-height * 2 20px $navigation-height
+		.section-article
+			.section-article-body
+				padding 4em 0
+			.section-article-side
 				display none
-		.comments-section
-			padding 2em 0
-	.header-body
-		display none
-		position relative
+	.section-comments
 		padding 2em 0 4em
+		border-top 1px solid #f0f1f5
+@media screen and (min-width $pad-portrait-width)
+	.blog-detail
+		background #f0f1f5
+		header
+			&:before
+				background-image linear-gradient(0deg, #f0f1f5, rgba(0,0,0,.4) 300px), linear-gradient(0deg, #f0f1f5, transparent 100px)
+		.header-body
+			min-height 220px
+			padding $navigation-height * 2.5 20px 360px
+			.article-info
+				width 60%
+	.section-article
+		position relative
+		z-index 1
+		.container
+			display flex
+			margin-top -360px
+			margin-bottom -60px
+			border-radius 12px
+			background #fff
+		.section-article-body
+			width 400px
+			flex-shrink 1
+			flex-grow 1
+			padding 3em 6em 5em 2em
+		.section-article-side
+			width 280px
+			flex-shrink 0.8
+			border-radius 0 12px 12px 0
+			padding 50px 30px 60px
+			border-left 1px solid #edeff3
+			background #f9fafb
+		.toc-content
+			position sticky
+			top 60px
+	.section-comments
+		position relative
+		padding 120px 0 50px
 		background #5a6872
+		z-index 0
 		&:before
-			position absolute
 			content ''
-			top -15px
-			left 50%
-			margin-left -30px
+			position absolute
+			top -240px
+			left 0
 			width 0
 			height 0
+			margin-left 0
 			border-style solid
 			border-color transparent transparent #5a6872
-			border-width 0 30px 15px
+			border-width 0 0 240px 100vw
+		.comments
+			padding-bottom 20px
+			border-radius 12px
+			background #fff
+			overflow hidden
 </style>
 <template>
 <div class="blog-detail" v-loading="isLoading">
-	<header ref="header">
+	<header :style="{backgroundImage: `url(${coverImgUrl})`}">
 		<Container class="header-body">
 			<div class="title">{{detail.title}}</div>
-			<div class="article-info"><span>{{detail.intro}}</span></div>
+			<div class="article-info">{{detail.intro}}</div>
 		</Container>
 	</header>
-	<Container>
-		<div class="article-section">
-			<div class="article-section-body">
+	<div class="section-article">
+		<Container>
+			<div class="section-article-body">
 				<div class="caption">
 					<h1>{{detail.title}}</h1>
 					<div class="publish-time">
@@ -185,27 +203,23 @@
 					:cover="detail.cover"
 				/>
 			</div>
-			<div class="article-section-side">
-				<div class="article-section-body">
-					<Tie :tieTop="60">
-						<div class="toc-content" ref="tieNode">
-							<div class="title">TOC</div>
-							<Button
-								type="text"
-								v-for="item in articleToc"
-								:key="item.id"
-								:style="{
-									paddingLeft: `${item.indent}em`
-								}"
-								@click="scrollTo(item.id)"
-							>{{item.text}}</Button>
-						</div>
-					</Tie>
+			<div class="section-article-side">
+				<div class="toc-content" ref="tieNode">
+					<div class="title">TOC</div>
+					<Button
+						type="text"
+						v-for="item in articleToc"
+						:key="item.id"
+						:style="{
+							paddingLeft: `${item.indent}em`
+						}"
+						@click="scrollTo(item.id)"
+					>{{item.text}}</Button>
 				</div>
 			</div>
-		</div>
-	</Container>
-	<div class="comments-section">
+		</Container>
+	</div>
+	<div class="section-comments">
 		<Container>
 			<Comments
 				:cid="'blog-' + blogID"
@@ -222,7 +236,22 @@ import BlogTag from '@/components/common/blog-tag.vue'
 import filters from '@/filters/index.js'
 import blogShare from './share.vue'
 import buildToc from './build-toc.js'
-import renderBanner from './render-banner.js'
+// 图片预加载
+function loadImg (src, callback) {
+	if (!src) {
+		callback && callback()
+		return
+	}
+	var img = new Image()
+
+	function End () {
+		callback && callback()
+		callback = null
+	}
+
+	img.onerror = img.onload = End
+	img.src = src
+}
 
 export default {
 	name: 'blogDetail',
@@ -243,6 +272,7 @@ export default {
 				tags: [],
 				time_show: ''
 			},
+			coverImgUrl: '',
 			articleToc: [],
 
 			isLoading: true
@@ -275,7 +305,10 @@ export default {
 					this.articleToc = tocData.toc
 
 					// 渲染顶部图片
-					renderBanner(this.$refs.header, data.detail.cover)
+					let coverUrl = filters.imgHosting(data.detail.cover, 'zoom', 420)
+					loadImg(coverUrl, () => {
+						this.coverImgUrl = coverUrl
+					})
 					this.$nextTick(() => this.addCodeSupport())
 				})
 				.catch(() => {})
