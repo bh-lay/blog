@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "cron": "1.8.2",
-    "formidable": "^2.1.1",
+    "formidable": "^3.2.4",
     "jssha": "^2.0.1",
     "juicer": "~0.6.5-stable",
     "mongodb": "^4.17.0",
