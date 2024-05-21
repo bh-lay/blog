@@ -8,9 +8,9 @@ $tag_cnt_bj = #fff
 	background #dee3e7
 	.article-list-header
 		height 300px
-.sticky-bar-outer
-	width 100%
 .sticky-bar
+	position sticky
+	top $navigation-height
 	width 100%
 	background $tag_cnt_bj
 	border-bottom 1px solid #c4cdd4
@@ -73,23 +73,18 @@ $tag_cnt_bj = #fff
 			@nextIndex="nextIndex"
 		/>
 	</div>
-	<Tie
-		class="sticky-bar-outer"
-		:tie-top="56"
-	>
-		<div class="sticky-bar">
-			<Container class="sticky-body">
-				<tagList />
-				<Button
-					size="small"
-					@click="toggleArchivesList"
-					:class="['list-type-switch', useListMode ? 'active' : '']"
-				>
-					<i></i><i></i><i></i><i></i>
-				</Button>
-			</Container>
-		</div>
-	</Tie>
+	<div class="sticky-bar">
+		<Container class="sticky-body">
+			<tagList />
+			<Button
+				size="small"
+				@click="toggleArchivesList"
+				:class="['list-type-switch', useListMode ? 'active' : '']"
+			>
+				<i></i><i></i><i></i><i></i>
+			</Button>
+		</Container>
+	</div>
 	<Container>
 		<archivesList v-if="useListMode"/>
 		<stickList v-else/>

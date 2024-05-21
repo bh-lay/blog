@@ -8,15 +8,6 @@
 		position relative
 		background no-repeat center
 		background-size cover
-		&:before
-			content ""
-			position absolute
-			left 0
-			bottom 0
-			width 100%
-			height 100%
-			z-index 0
-			backdrop-filter blur(8px)
 		.header-body
 			position relative
 			.title
@@ -89,14 +80,15 @@
 			transition .2s
 			&:hover
 				color #407fbf
+@media screen and (max-width $max-mobile-width)
+	.blog-detail header
+		margin-top $navigation-height
 @media screen and (max-width $pad-portrait-width)
 	.blog-detail
 		header
-			&:before
-				background rgba(0,0,0,.4)
+			height 50vw
 		.header-body
-			min-height 140px
-			padding $navigation-height * 2 20px $navigation-height
+			display none
 		.section-article
 			.section-article-body
 				padding 4em 0
@@ -110,7 +102,24 @@
 		background #f0f1f5
 		header
 			&:before
+				content ""
+				position absolute
+				left 0
+				bottom 0
+				width 100%
+				height 100%
+				z-index 0
+				backdrop-filter blur(8px)
 				background-image linear-gradient(0deg, #f0f1f5, rgba(0,0,0,.4) 300px), linear-gradient(0deg, #f0f1f5, transparent 100px)
+			&:after
+				content ""
+				position absolute
+				left 0
+				bottom -10px
+				width 100%
+				height 20px
+				z-index 0
+				background-image linear-gradient(0deg, transparent, #f0f1f5, transparent)
 		.header-body
 			min-height 220px
 			padding $navigation-height * 2.5 20px 360px
@@ -131,15 +140,19 @@
 			flex-grow 1
 			padding 3em 6em 5em 2em
 		.section-article-side
-			width 280px
+			width 320px
 			flex-shrink 0.8
 			border-radius 0 12px 12px 0
-			padding 50px 30px 60px
+			padding 30px 10px 40px
 			border-left 1px solid #edeff3
 			background #f9fafb
 		.toc-content
 			position sticky
-			top 60px
+			top $navigation-height
+			box-sizing border-box
+			max-height calc(100vh - $navigation-height)
+			padding 20px
+			overflow auto
 	.section-comments
 		position relative
 		padding 120px 0 50px
