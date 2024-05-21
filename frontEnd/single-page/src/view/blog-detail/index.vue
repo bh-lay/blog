@@ -80,6 +80,9 @@
 			transition .2s
 			&:hover
 				color #407fbf
+@media screen and (max-width $max-mobile-width)
+	.blog-detail header
+		margin-top $navigation-height
 @media screen and (max-width $pad-portrait-width)
 	.blog-detail
 		header
@@ -145,9 +148,9 @@
 			background #f9fafb
 		.toc-content
 			position sticky
-			top 55px
+			top $navigation-height
 			box-sizing border-box
-			max-height calc(100vh - 55px)
+			max-height calc(100vh - $navigation-height)
 			padding 20px
 			overflow auto
 	.section-comments
