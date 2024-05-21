@@ -150,7 +150,7 @@
 			position sticky
 			top $navigation-height
 			box-sizing border-box
-			max-height calc(100vh - $navigation-height)
+			max-height calc(100vh - 56px)
 			padding 20px
 			overflow auto
 	.section-comments
