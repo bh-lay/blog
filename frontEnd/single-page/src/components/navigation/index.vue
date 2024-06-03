@@ -1,14 +1,30 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 @import "../../assets/stylus/variable.styl"
+@keyframes sticky-navigation-move
+	0%
+		transform translateY(20px)
+		background transparent
+		box-shadow none
+	40%
+		background transparent
+	50%
+		transform translateY(0)
+		box-shadow none
+	100%
+		background #fff
+		box-shadow 0 0 2px #00000010, 0 0 10px #00000020
+
 .navigation
-	position fixed
-	width 100%
 	height $navigation-height
-	top 0
-	left 0
-	padding-top 20px
-	z-index 10000
-	transition .6s ease-in-out
+	.navigation-body
+		position fixed
+		width 100%
+		height $navigation-height
+		top 0
+		left 0
+		z-index 10000
+		background #fff
+		box-shadow 0 0 2px rgba(0,0,0,0.063), 0 0 10px rgba(0,0,0,0.125)
 	.nav-inner
 		position relative
 		display flex
@@ -67,17 +83,23 @@
 				color #007fff
 				&:after
 					width 64%
-	&.mini
-		padding-top 0
-		background #fff
-		box-shadow 0 0 2px rgba(0,0,0,0.063), 0 0 10px rgba(0,0,0,0.125)
 @media screen and (max-width 750px)
 	.navigation .nav-list a
 		width 60px
 		font-size 13px
+@media screen and (min-width $max-mobile-width)
+	.navigation
+		height 0
+	@supports (animation-range: 0 260px)
+		.navigation-body
+			animation sticky-navigation-move linear forwards
+			animation-timeline scroll()
+			animation-range 0 260px
+
+	// @supports (animation-timeline: scroll())
+
 @media screen and (max-width $max-mobile-width)
 	.navigation
-		padding-top 0
 		.nav-inner
 			margin-left -10px
 		.nav-list-body
@@ -146,39 +168,40 @@
 	<div
 		class="navigation"
 		:class="{
-			mini: isScrolling,
 			'nav-slidedown': navSlidedown
 		}"
 	>
-		<Container>
-			<div class="nav-inner">
-				<router-link
-					to="/"
-					class="nav-logo"
-				>
-					<svg viewBox="150 50 1700 1700" xmlns="http://www.w3.org/2000/svg">
-						<path d="m1636.55 1484.58a211.6 211.6 0 0 1 -250.18 54.76 801.031 801.031 0 0 0 -775.466 1.51 211.855 211.855 0 0 1 -247.233-55.97 796.437 796.437 0 0 1 -163.671-484.88c0-441.828 358.172-800 800-800s800 358.172 800 800a796.409 796.409 0 0 1 -163.45 484.58zm-636.55-884.58c-220.914 0-400 179.086-400 400s179.086 400 400 400 400-179.09 400-400-179.09-400-400-400z"/>
-					</svg>
-					<span>小剧客栈</span>
-				</router-link>
-				<div class="nav-list">
-					<Button class="nav-more-btn" @click="navSlidedown = !navSlidedown"><i></i><i></i><i></i></Button>
-					<div class="nav-mask" @click="navSlidedown = false"></div>
-					<div class="nav-list-body">
-						<router-link
-							to="/"
-							class="index-page"
-						>首页</router-link>
-						<router-link
-							v-for="nav in navList"
-							:key="nav.type"
-							:to="nav.href"
-							class="sub-page"
-						>{{nav.label}}</router-link>
+		<div class="navigation-body">
+			<Container>
+				<div class="nav-inner">
+					<router-link
+						to="/"
+						class="nav-logo"
+					>
+						<svg viewBox="150 50 1700 1700" xmlns="http://www.w3.org/2000/svg">
+							<path d="m1636.55 1484.58a211.6 211.6 0 0 1 -250.18 54.76 801.031 801.031 0 0 0 -775.466 1.51 211.855 211.855 0 0 1 -247.233-55.97 796.437 796.437 0 0 1 -163.671-484.88c0-441.828 358.172-800 800-800s800 358.172 800 800a796.409 796.409 0 0 1 -163.45 484.58zm-636.55-884.58c-220.914 0-400 179.086-400 400s179.086 400 400 400 400-179.09 400-400-179.09-400-400-400z"/>
+						</svg>
+						<span>小剧客栈</span>
+					</router-link>
+					<div class="nav-list">
+						<Button class="nav-more-btn" @click="navSlidedown = !navSlidedown"><i></i><i></i><i></i></Button>
+						<div class="nav-mask" @click="navSlidedown = false"></div>
+						<div class="nav-list-body">
+							<router-link
+								to="/"
+								class="index-page"
+							>首页</router-link>
+							<router-link
+								v-for="nav in navList"
+								:key="nav.type"
+								:to="nav.href"
+								class="sub-page"
+							>{{nav.label}}</router-link>
+						</div>
 					</div>
 				</div>
-			</div>
-		</Container>
+			</Container>
+		</div>
 	</div>
 </template>
 
@@ -188,8 +211,7 @@ export default {
 	name: 'navigation',
 	data () {
 		return {
-			isScrolling: false,
-			navList: [
+			navList: Object.freeze([
 				{
 					label: '博文',
 					href: '/blog',
@@ -215,24 +237,8 @@ export default {
 					href: '/bless',
 					type: 'bless'
 				}
-			],
+			]),
 			navSlidedown: false
-		}
-	},
-	mounted () {
-		this.ajustNavigation()
-		window.addEventListener('scroll', this.scrollListener)
-	},
-	beforeDestroy () {
-		window.removeEventListener('scroll', this.scrollListener)
-	},
-	methods: {
-		scrollListener () {
-			this.ajustNavigation()
-		},
-		ajustNavigation () {
-			let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
-			this.isScrolling = scrollTop > 50
 		}
 	},
 	watch: {

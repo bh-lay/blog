@@ -80,18 +80,16 @@
 			transition .2s
 			&:hover
 				color #407fbf
-@media screen and (max-width $max-mobile-width)
-	.blog-detail header
-		margin-top $navigation-height
 @media screen and (max-width $pad-portrait-width)
 	.blog-detail
 		header
 			height 50vw
+			background-color #eee
 		.header-body
 			display none
 		.section-article
 			.section-article-body
-				padding 4em 0
+				padding 2.5em 0 4em
 			.section-article-side
 				display none
 	.section-comments
