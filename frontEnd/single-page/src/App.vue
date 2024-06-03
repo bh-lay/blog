@@ -1,4 +1,5 @@
 <style lang="stylus" rel="stylesheet/stylus">
+@import "./assets/stylus/variable.styl"
 @import './assets/stylus/article.styl'
 @import './assets/stylus/hightlight.styl'
 
@@ -65,6 +66,17 @@ html
 	50%,
 	100%
 		transform scale(0.88)
+.view-page-leave
+	position absolute
+	top 0px
+	left 0px
+	z-index 0
+	width 100%
+	height 100vh
+	overflow hidden
+@media screen and (max-width $max-mobile-width)
+	.view-page-leave
+		top $navigation-height
 </style>
 <template>
 	<div id="app">
@@ -94,13 +106,7 @@ export default {
 		beforeLeave (node) {
 			let scrollTop = getScrollTop()
 			window.scrollTo(0, 0)
-			node.style.position = 'absolute'
-			node.style.top = '0px'
-			node.style.left = '0px'
-			node.style.zIndex = 0
-			node.style.width = '100%'
-			node.style.height = '100vh'
-			node.style.overflow = 'hidden'
+			node.classList.add('view-page-leave')
 			node.scrollTop = scrollTop
 		},
 		afterLeave () {
