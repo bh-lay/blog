@@ -84,11 +84,12 @@
 	.blog-detail
 		header
 			height 50vw
+			background-color #eee
 		.header-body
 			display none
 		.section-article
 			.section-article-body
-				padding 4em 0
+				padding 2.5em 0 4em
 			.section-article-side
 				display none
 	.section-comments
