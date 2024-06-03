@@ -80,9 +80,6 @@
 			transition .2s
 			&:hover
 				color #407fbf
-@media screen and (max-width $max-mobile-width)
-	.blog-detail header
-		margin-top $navigation-height
 @media screen and (max-width $pad-portrait-width)
 	.blog-detail
 		header
