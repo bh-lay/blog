@@ -2,39 +2,40 @@
  * @author bh-lay
  *
  */
+import * as mongodb from 'mongodb'
 import { getDbCollection } from '@/database/DB'
 
 export default async function getTagsList () {
   const { collection, client } = await getDbCollection('article')
-  const docs = await collection.find().toArray()
+  type tagItem = {
+    count: number,
+    name: string
+  }
+  const cursor: mongodb.AggregationCursor<tagItem> = await collection.aggregate()
+    .unwind('$tags')
+    .group({
+      _id: '$tags',
+      count: { $sum: 1 }
+    })
+    .sort({
+      count: -1
+    })
+    .project<tagItem>({
+      _id: 0,
+      name: {
+        $convert: {
+          input: '$_id',
+          to: 'string'
+        },
+      },
+      count: 1
+    })
+    .limit(30)
+
+  const tagsArray = await cursor.toArray()
 
   client.close()
 
-  const tagsObj: Record<string, number> = {}
-  const tagsArray: {name: string, count: number}[] = []
-  if (!docs || docs.length === 0) {
-    return tagsArray
-  }
-  // 获取所有标签
-  docs.forEach((article) => {
-    const this_tags = article.tags
-    if (Object.prototype.toString.call(this_tags) == '[object Array]') {
-      for (let s = 0, count = this_tags.length; s < count; s++) {
-        const tagStr = this_tags[s]
-        tagsObj[tagStr] = tagsObj[tagStr] ? tagsObj[tagStr] + 1 : 1
-      }
-    }
-  })
-  // 转换为数组
-  for (const k in tagsObj) {
-    tagsArray.push({
-      name: k,
-      count: tagsObj[k]
-    })
-  }
-  // 排序
-  tagsArray.sort(function (x, y) {
-    return y.count - x.count
-  })
+
   return tagsArray
 }

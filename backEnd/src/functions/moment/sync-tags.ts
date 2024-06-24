@@ -12,33 +12,32 @@ type tagItemInfo = {
 
 async function getTagsList (DBClient: mongodb.Db) {
   const collection = DBClient.collection('moment_post')
-  const docs = await collection.find().toArray()
-
-
-  const tagsObj: Record<string, number> = {}
-  const tagsArray: tagItemInfo[] = []
-  // 获取所有标签
-  docs.forEach((docItem) => {
-    const this_tags = docItem.tags
-    if (Object.prototype.toString.call(this_tags) == '[object Array]') {
-      for (let s = 0, count = this_tags.length; s < count; s++) {
-        const tagStr = this_tags[s]
-        tagsObj[tagStr] = tagsObj[tagStr] ? tagsObj[tagStr] + 1 : 1
-      }
-    }
-  })
-
-  // 转换为数组
-  for (const k in tagsObj) {
-    tagsArray.push({
-      name: k,
-      count: tagsObj[k]
-    })
+  type tagItem = {
+    count: number,
+    name: string
   }
-  // 排序
-  tagsArray.sort(function (x, y) {
-    return y.count - x.count
-  })
+  const cursor: mongodb.AggregationCursor<tagItem> = await collection.aggregate()
+    .unwind('$tags')
+    .group({
+      _id: '$tags',
+      count: { $sum: 1 }
+    })
+    .sort({
+      count: -1
+    })
+    .project<tagItem>({
+      _id: 0,
+      name: {
+        $convert: {
+          input: '$_id',
+          to: 'string'
+        },
+      },
+      count: 1
+    })
+    .limit(30)
+
+  const tagsArray = await cursor.toArray()
   return tagsArray
 }
 async function addOrUpdateTag (collection: mongodb.Collection<mongodb.Document>, {name, count}: tagItemInfo) {

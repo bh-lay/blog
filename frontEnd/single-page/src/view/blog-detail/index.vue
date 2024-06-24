@@ -306,6 +306,12 @@ export default {
 			fetch(`/api/blog/${this.blogID}?format=html`)
 				.then(response => response.json())
 				.then(data => {
+					if (data.code === 2) {
+						this.$router.replace({
+							path: '/blog/',
+						})
+						return
+					}
 					for (let key in this.detail) {
 						this.detail[key] = data.detail[key]
 					}

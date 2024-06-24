@@ -16,6 +16,9 @@
 
 .navigation
 	height $navigation-height
+	--highlight-color hsl(204deg, 100%, 34%)
+	--text-color hsl(220deg, 16%, 5%)
+	--secondary-opacity 0.68
 	.navigation-body
 		position fixed
 		width 100%
@@ -34,24 +37,42 @@
 		margin 0 -10px
 		background #fff
 	.nav-logo
+		position relative
 		height $navigation-height
-		padding 0 18px
+		padding 0 24px 0 18px
 		line-height $navigation-height
-		background #0d9af2
+		transition .3s
 		svg
 			display inline-block
 			vertical-align middle
-			width 25px
-			height 25px
+			width 32px
+			height 32px
 			margin-right 2px
-			fill #fff
+			fill var(--highlight-color)
 		span
 			display inline-block
 			vertical-align middle
+			padding-left 8px
 			line-height 30px
-			font-weight bold
-			font-size 14px
-			color #fff
+			font-weight 900
+			font-size 16px
+			color var(--text-color)
+			opacity var(--secondary-opacity)
+		&:after
+			content ""
+			position absolute
+			right 0
+			top 32%
+			height 36%
+			width 1px
+			background var(--text-color)
+			opacity .2
+			transition .25s
+		&:hover
+			background: hsl(210deg, 12%, 90%)
+			&:after
+				opacity 0
+
 	.nav-more-btn
 		display none
 	.nav-list
@@ -63,24 +84,25 @@
 			line-height $navigation-height
 			text-align center
 			font-size 14px
-			font-weight bold
-			color #2d3339
+			font-weight 900
+			color var(--text-color)
 			text-decoration none
+			opacity var(--secondary-opacity)
 			transition .2s
 			&:after
 				content ''
 				position absolute
-				bottom 15px
+				bottom 12px
 				left 18%
 				width 0
 				height 1px
-				background #007fff
+				background var(--highlight-color)
 				transition .4s
 			&:hover:after
 				width 30%
 			&.sub-page.router-link-active,
 			&.index-page.router-link-exact-active
-				color #007fff
+				opacity 1
 				&:after
 					width 64%
 @media screen and (max-width 750px)
@@ -90,13 +112,18 @@
 @media screen and (min-width $max-mobile-width)
 	.navigation
 		height 0
-	@supports (animation-range: 0 260px)
-		.navigation-body
-			animation sticky-navigation-move linear forwards
-			animation-timeline scroll()
-			animation-range 0 260px
-
-	// @supports (animation-timeline: scroll())
+		@supports (animation-range: 0 260px)
+			.navigation-body
+				animation sticky-navigation-move linear forwards
+				animation-timeline scroll()
+				animation-range 0 260px
+			.nav-inner
+				background rgba(255, 255, 255, 0.32)
+				backdrop-filter blur(3px)
+				overflow hidden
+				transition .8s .1s;
+				&:hover
+					background #fff
 
 @media screen and (max-width $max-mobile-width)
 	.navigation
