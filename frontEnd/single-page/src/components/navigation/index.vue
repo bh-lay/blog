@@ -118,10 +118,10 @@
 				animation-timeline scroll()
 				animation-range 0 260px
 			.nav-inner
-				background rgba(255, 255, 255, 0.32)
+				background rgba(255, 255, 255, 0.46)
 				backdrop-filter blur(3px)
 				overflow hidden
-				transition .8s .1s;
+				transition 1.4s .3s;
 				&:hover
 					background #fff
 
