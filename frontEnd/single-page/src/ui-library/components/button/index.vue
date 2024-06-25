@@ -35,6 +35,14 @@ a
 		text-decoration underline
 	&:disabled
 		color #333
+.ui-button-ghost
+	border-color transparent
+	background transparent
+	color #606266
+	&:hover
+		border-color #7a9fb8
+	&:disabled
+		color #333
 .ui-button-default
 	border-color #dcdfe6
 	background #fff
