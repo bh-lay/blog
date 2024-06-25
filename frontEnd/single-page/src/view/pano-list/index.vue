@@ -1,35 +1,135 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
+@import '../../assets/stylus/variable.styl'
+@import '../../assets/stylus/mixin.styl'
+
+.pano-list-pager
+	background #f0f1f5
+.pano-header
+	position relative
+	height 600px
+	background #eee
+	iframe
+		width 100%
+		height 100%
+		opacity 0
+		transition .4s
+		&.visible
+			opacity 1
+
+.pano-profile-card
+	display flex
+	align-items center
+	height 54px
+	padding 0 15px 10px 20px
+	border-radius 8px 8px 0 0
+	background #365463
+	img
+		width 68px
+		height 24px
+	span
+		display block
+		flex-grow 1
+		padding 0 20px
+		line-height 30px
+		font-size 14px
+		color #a4b7c1
+
+.post-list
+	min-height 400px
+	margin-top -10px
+	padding 24px
+	display flex
+	flex-wrap wrap
+	gap 12px
+	background #fff
+	border-radius 8px
+	.post-item,
+	& > i
+		width 240px
+		flex-grow 1
+	& > i
+		display block
+		height 0
+		padding 0
+		line-height 0
+		font-size 0
+@media screen and (min-width $pad-portrait-width)
+	.pano-header
+		&:before
+			content ""
+			position absolute
+			left 0
+			bottom 0
+			width 100%
+			height 100%
+			z-index 0
+			background-image linear-gradient(0deg, #f0f1f5, transparent 300px), linear-gradient(0deg, #f0f1f5, transparent 100px)
+		&:after
+			content ""
+			position absolute
+			left 0
+			bottom -10px
+			width 100%
+			height 20px
+			z-index 0
+			background-image linear-gradient(0deg, transparent, #f0f1f5, transparent)
+	.main-pager
+		position relative
+		margin-top -200px !important
+@media screen and (max-width $pad-portrait-width)
+	.pano-header
+		height 40vw
+		margin-bottom 20px
+	.post-list
+		padding 15px
+		gap 8px
+		.post-item,
+		& > i
+			width 170px
 </style>
 <template>
-<layout
-  :intro="intro"
-	:thirdProfile="thirdProfile"
-	:postList="postList"
-	:isLoading="isLoading"
->
-	<template slot="profile-icon">
-		<svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
-			<path d="M513.509376 691.195904C544.41984 690.853888 574.468096 689.575936 603.686912 687.702016L594.900992 716.8 685.391872 666.796032 586.078208 636.991488 599.914496 661.608448C573.980672 663.023616 547.373056 664.031232 520.022016 664.338432 278.726656 667.076608 82.591744 624.328704 81.93024 568.864768 81.608704 541.534208 128.886784 516.220928 205.723648 497.240064 201.795584 489.535488 199.698432 481.570816 199.698432 473.417728 199.698432 472.95488 199.77216 472.502272 199.780352 472.031232 102.0416 496.463872 40.511488 531.29216 40.962048 569.339904 41.807872 639.58016 253.370368 694.157312 513.509376 691.195904L513.509376 691.195904 513.509376 691.195904ZM855.093248 326.096896C877.725696 326.096896 896.0512 308.115456 896.0512 285.93152 896.0512 263.7312 877.725696 245.76 855.093248 245.76 832.47104 245.76 814.135296 263.739392 814.135296 285.93152 814.135296 308.115456 832.47104 326.096896 855.093248 326.096896L855.093248 326.096896 855.093248 326.096896ZM855.093248 259.13344C870.172672 259.13344 882.407424 271.128576 882.407424 285.92128 882.407424 300.709888 870.180864 312.702976 855.093248 312.702976 839.99744 312.702976 827.779072 300.709888 827.779072 285.92128 827.779072 271.128576 839.99744 259.13344 855.093248 259.13344L855.093248 259.13344 855.093248 259.13344ZM731.142144 649.418752C739.579904 655.691776 744.833024 663.492608 745.668608 671.987712 887.90016 648.497152 983.607296 606.06464 983.037952 558.62272 982.577152 519.419904 916.447232 485.113856 812.91264 462.944256 813.666304 466.393088 814.145536 469.876736 814.145536 473.397248 814.145536 477.771776 813.518848 482.097152 812.351488 486.342656 900.12672 503.713792 955.410432 529.534976 955.7504 558.92992 956.174336 596.795392 865.462272 630.784 731.142144 649.418752L731.142144 649.418752 731.142144 649.418752ZM731.142144 649.418752 731.142144 649.418752Z"></path>
-			<path d="M361.2672 302.2848 191.694848 302.2848 191.694848 339.968 323.584 339.968C295.323648 384.129024 272.949248 425.637888 256.462848 463.910912 239.681536 502.181888 229.083136 536.332288 224.667648 566.0672L262.350848 566.0672C266.176512 535.744512 276.482048 500.709376 292.968448 460.670976 309.454848 420.927488 332.417024 377.6512 361.2672 330.842112L361.2672 302.2848 361.2672 302.2848Z"></path>
-			<path d="M518.770688 411.506688C510.8224 422.4 496.103424 434.765824 474.3168 448.897024 452.825088 463.026176 437.223424 474.804224 427.2128 484.8128 417.204224 494.821376 409.843712 504.832 405.428224 515.135488 401.012736 525.733888 398.9504 538.392576 398.9504 553.1136L398.9504 566.0672 568.5248 566.0672 568.5248 528.384 434.573312 528.384C434.573312 520.435712 436.045824 513.662976 439.283712 508.069888 442.5216 502.4768 448.114688 496.5888 456.357888 490.405888 464.308224 484.222976 480.2048 473.919488 504.346624 459.788288 527.603712 445.952 544.090112 432.410624 553.803776 419.162112 563.519488 405.9136 568.5248 390.309888 568.5248 372.058112 568.5248 350.861312 560.869376 333.785088 546.1504 321.1264 531.136512 308.762624 511.410176 302.2848 487.2704 302.2848 471.9616 302.2848 459.008 305.522688 447.821824 312.000512 436.6336 318.476288 426.625024 327.897088 417.792 339.968L417.792 372.9408C427.2128 362.3424 437.516288 354.394112 448.704512 348.506112 459.597824 342.910976 470.489088 339.968 481.3824 339.968 496.6912 339.968 508.762112 343.205888 517.593088 349.3888 526.426112 355.571712 530.8416 364.107776 530.8416 374.706176 530.8416 388.544512 526.718976 400.908288 518.770688 411.506688L518.770688 411.506688Z"></path>
-			<path d="M627.697664 533.684224C641.828864 555.4688 662.142976 566.0672 688.345088 566.0672 716.017664 566.0672 737.509376 554.881024 752.818176 531.9168 768.126976 509.247488 775.780352 476.274688 775.780352 432.9984 775.780352 345.856 748.402688 302.2848 694.233088 302.2848 665.380864 302.2848 643.596288 314.0608 628.5824 337.022976 613.566464 360.282112 606.208 394.432512 606.208 439.181312 606.208 480.397312 613.2736 511.8976 627.697664 533.684224L627.697664 533.684224ZM692.1728 339.968C722.788352 339.968 738.097152 372.058112 738.097152 435.941376 738.097152 497.7664 722.495488 528.384 691.288064 528.384 659.492864 528.384 643.8912 498.061312 643.8912 437.413888 643.8912 372.645888 659.787776 339.968 692.1728 339.968L692.1728 339.968Z"></path>
-		</svg>
-	</template>
-</layout>
+<div class="pano-list-pager">
+	<div class="pano-header">
+		<iframe
+			:class="iframeLoaded ? 'visible' : ''"
+			src="https://www.720yun.com/market?pid=0bcjO5tusy1"
+			scrolling="no"
+			frameborder="0"
+			title="全景"
+		/>
+	</div>
+	<Container class="main-pager">
+		<div class="pano-profile-card">
+			<img :src="logo" alt="720yun" />
+			<span>作品托管在 720 云平台</span>
+			<Button :href="thirdProfile.url" target="_blank" type="primary" size="small">小剧的 720 云主页</Button>
+		</div>
+		<div class="post-list" v-loading="isLoading">
+			<Item
+				v-for="item in postList"
+				:key="item.id"
+				:post="item"
+			/>
+			<i /><i /><i />
+		</div>
+	</Container>
+	<Footer />
+</div>
 </template>
 
 <script>
-import layout from '@/components/sns-page-layout/index.vue'
+
+import Item from './item.vue'
 export default {
-	name: 'labs-page',
-	components: {layout},
+	name: 'pano-page',
+	components: {Item},
 	data () {
 		return {
-			intro: '以下作品无特殊说明均由小剧拍摄并制作完成，作品托管在720云。',
+			logo: 'data:image/png;base64,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',
 			thirdProfile: {
-				title: '720yun',
 				url: 'https://720yun.com/u/19023widcyv'
 			},
+			iframeLoaded: false,
 			postList: [],
 
 			isLoading: false
@@ -37,8 +137,14 @@ export default {
 	},
 	created () {
 		this.getList()
+		setTimeout(() => {
+			this.iframeLoaded = true
+		}, 2400)
 	},
 	methods: {
+		handleLoaded() {
+			alert(11)
+		},
 		getList () {
 			this.isLoading = true
 			fetch('/api/pano/list?act=get_list', {
@@ -46,7 +152,8 @@ export default {
 			})
 				.then(response => response.json())
 				.then(data => {
-					data.data.list.forEach(function (item) {
+					const panoList = data?.data?.list || []
+					panoList.forEach(function (item) {
 						let thumb = `https://ssl-thumb2.720static.com/${item.property.thumbUrl}?imageMogr2/thumbnail/560`
 						item.title = item.property.name
 						item.desc = item.property.remark
@@ -55,7 +162,8 @@ export default {
 						item.pv = item.pvCount
 						item.like = item.likeCount
 					})
-					this.postList = data.data.list
+					panoList.sort((itemA, itemB) => itemB.pv - itemA.pv)
+					this.postList = panoList
 				})
 				.catch(() => {})
 				.then(() => {
