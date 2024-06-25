@@ -8,13 +8,13 @@
 	position relative
 	height 600px
 	background #eee
+	opacity 0
+	transition .4s
+	&.visible
+		opacity 1
 	iframe
 		width 100%
 		height 100%
-		opacity 0
-		transition .4s
-		&.visible
-			opacity 1
 
 .pano-profile-card
 	display flex
@@ -40,7 +40,7 @@
 	padding 24px
 	display flex
 	flex-wrap wrap
-	gap 12px
+	gap 15px
 	background #fff
 	border-radius 8px
 	.post-item,
@@ -76,22 +76,32 @@
 	.main-pager
 		position relative
 		margin-top -200px !important
+		padding-bottom 50px
 @media screen and (max-width $pad-portrait-width)
 	.pano-header
 		height 40vw
 		margin-bottom 20px
+	.pano-profile-card
+		padding 0 12px 10px
+		img
+			width 40px
+			object-fit contain
+		span
+			padding 0 12px
+			font-size 12px
+	.main-pager
+		padding-bottom 20px
 	.post-list
-		padding 15px
-		gap 8px
+		padding 12px
+		gap 10px
 		.post-item,
 		& > i
 			width 170px
 </style>
 <template>
 <div class="pano-list-pager">
-	<div class="pano-header">
+	<div class="pano-header" :class="iframeLoaded ? 'visible' : ''">
 		<iframe
-			:class="iframeLoaded ? 'visible' : ''"
 			src="https://www.720yun.com/market?pid=0bcjO5tusy1"
 			scrolling="no"
 			frameborder="0"
