@@ -13,6 +13,7 @@
   "dependencies": {
     "md5": "^2.2.1",
     "qrcode": "^1.4.4",
+    "three": "^0.151.3",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vue-stick": "^1.0.5",

@@ -34,9 +34,9 @@ export default function (app: App) {
     })
   }, null, true, 'Asia/Hong_Kong')
 
-  // 每晚三点零十分
-  new CronJob.CronJob('01 10 03 * * *', function () {
-    // 清除全部缓存
-    app.cache.clear()
-  }, null, true, 'Asia/Hong_Kong')
+  // // 每晚三点零十分
+  // new CronJob.CronJob('01 10 03 * * *', function () {
+  //   // 清除全部缓存
+  //   app.cache.clear()
+  // }, null, true, 'Asia/Hong_Kong')
 }
