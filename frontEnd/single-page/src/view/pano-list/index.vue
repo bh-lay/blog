@@ -13,7 +13,22 @@
 	&.header-visible
 		.header-gallery
 			opacity 1
-
+	.panorama-author
+		position absolute
+		bottom 10px
+		left 0
+		width: 100%
+		text-align right
+		opacity .2
+		transition .4s
+		a
+			font-size 12px
+			color #fff
+			text-shadow 1px 1px 1px #000, 0 0 5px rgba(0, 0, 0, 0.5)
+			&:hover
+				text-decoration underline
+	&:hover .panorama-author
+		opacity 1
 .pano-profile-card
 	display flex
 	align-items center
@@ -72,6 +87,9 @@
 			height 20px
 			z-index 1
 			background-image linear-gradient(0deg, transparent, #f0f1f5, transparent)
+		.panorama-author
+			bottom 150px
+			z-index 2
 	.main-pager
 		position relative
 		z-index 1
@@ -102,6 +120,11 @@
 <div class="pano-list-pager">
 	<div class="pano-header" :class="panoVisible ? 'header-visible' : ''">
 		<header-gallery @pano-ready="panoVisible = true"/>
+		<div class="panorama-author">
+			<Container>
+				<a href="https://www.720yun.com/t/0bcjO5tusy1?scene_id=2337588" target="_blank">《妹纸们》素材来自 @SNH48 后期 By 剧中人</a>
+			</Container>
+		</div>
 	</div>
 	<Container class="main-pager">
 		<div class="pano-profile-card">

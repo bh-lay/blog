@@ -22,7 +22,6 @@ export default {
 		})
 	},
 	beforeDestroy() {
-		debugger
 		this.$clinderPanorama?.destroy()
 	},
 }
