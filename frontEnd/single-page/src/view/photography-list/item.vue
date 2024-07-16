@@ -24,6 +24,7 @@
 <div
 	class="potography-item"
 	:style="{
+		flexBasis: `calc(var(--base-width) * ${printImage.width / printImage.height})`,
 		aspectRatio: printImage.width/printImage.height,
 		backgroundImage: `url(${printImageUrl})`
 	}"

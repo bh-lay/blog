@@ -48,17 +48,18 @@
 	display flex
 	flex-wrap wrap
 	gap 12px
-	--cell-height 300px
 	padding 50px 24px
+	--base-width 300px
 	& > i
 		display block
-		width calc(var(--cell-height) * 2)
+		width calc(var(--base-width) * 2)
+		max-width 100%
 		height 0
 		flex-grow 2
 		flex-shrink 0
 .potography-item
 	flex-grow 1
-	flex-shrink 0
+	max-width 100%
 	height var(--cell-height)
 	background #eee no-repeat center
 	background-size cover
