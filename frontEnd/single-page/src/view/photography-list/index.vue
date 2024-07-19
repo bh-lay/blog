@@ -49,7 +49,7 @@
 	flex-wrap wrap
 	gap 12px
 	padding 50px 24px
-	--base-width 300px
+	--base-width 250px
 	& > i
 		display block
 		width calc(var(--base-width) * 2)
