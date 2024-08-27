@@ -28,7 +28,7 @@
     "style-loader": "^0.18.2",
     "uglify-es": "git://github.com/mishoo/UglifyJS2.git#harmony",
     "url-loader": "^0.5.9",
-    "webpack": "^3.5.5"
+    "webpack": "^5.94.0"
   },
   "name": "single-page",
   "version": "1.0.0",
