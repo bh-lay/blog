@@ -35,7 +35,7 @@
     "mongodb": "^4.17.0",
     "node-isbot": "0.0.8",
     "nodemailer": "~6.9.9",
-    "path-to-regexp": "^3.0.0",
+    "path-to-regexp": "^3.3.0",
     "request": "^2.88.2",
     "showdown": "^1.9.1"
   }
