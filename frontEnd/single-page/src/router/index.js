@@ -74,7 +74,9 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-	if (document.startViewTransition) {
+	if (to.name === from.name) {
+		next()
+	} else if (document.startViewTransition) {
 		document.startViewTransition(() => {
 			window.scrollTo(0, 0)
 			next()
