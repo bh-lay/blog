@@ -15,6 +15,7 @@ a
 	text-decoration none
 html
 	--scrollbar-color #c4c9d4;
+	view-transition-name root-view;
 
 ::-webkit-scrollbar
 	width 12px;
@@ -41,77 +42,44 @@ html
 	-webkit-font-smoothing antialiased
 	-moz-osx-font-smoothing grayscale
 	position relative
-.view-outer
-	min-height 100vh
 .view-page
 	position relative
+	min-height 100vh
 	background #21272c
-.view-animate-enter-active
-	animation view-in 1.2s ease-in-out
-.view-animate-leave-active
-	animation view-out 1.2s ease-in-out
-	transform-origin center bottom
 
 @keyframes view-in
-	0%,
-	50%
+	0%
 		opacity 0
-		transform translate(0, 200px)
+		transform translate(0, 20vh)
 	100%
 		opacity 1
 		transform translate(0, 0)
 @keyframes view-out
 	0%
 		transform scale(1)
-	50%,
+		
 	100%
-		transform scale(0.88)
-.view-page-leave
-	position absolute
-	top 0px
-	left 0px
-	z-index 0
-	width 100%
-	height 100vh
-	overflow hidden
-@media screen and (max-width $max-mobile-width)
-	.view-page-leave
-		top $navigation-height
+		transform scale(0.9)
+::view-transition-old(root-view)
+	transform-origin 50vw 100vh
+	animation view-out 0.5s ease-in-out forwards
+::view-transition-new(root-view)
+	opacity 0
+	animation view-in 0.8s 0.4s ease-in-out
 </style>
 <template>
 	<div id="app">
 		<Navigation/>
-		<div class="view-outer">
-			<transition
-				name="view-animate"
-				@beforeLeave="beforeLeave"
-				@afterLeave="afterLeave"
-			>
-				<router-view class="view-page" />
-			</transition>
-		</div>
+		<router-view class="view-page" />
 	</div>
 </template>
 
 <script>
 import './assets/stylus/animation.css'
 import Navigation from './components/navigation/index.vue'
-function getScrollTop () {
-	return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
-}
+
 export default {
 	name: 'App',
 	components: {Navigation},
-	methods: {
-		beforeLeave (node) {
-			let scrollTop = getScrollTop()
-			window.scrollTo(0, 0)
-			node.classList.add('view-page-leave')
-			node.scrollTop = scrollTop
-		},
-		afterLeave () {
-			// window.scrollTo(0, 0)
-		}
-	}
 }
 </script>
