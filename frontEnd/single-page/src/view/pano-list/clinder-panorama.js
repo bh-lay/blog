@@ -48,7 +48,7 @@ export default class ClinderPanorama {
     });
 
     this.renderer.setSize(this.width, this.height);
-
+    this.renderer.setPixelRatio(window.devicePixelRatio);
     this.element.appendChild(this.renderer.domElement);
 
     this.cylinder = this._createClinder(panoramaUrl, onLoadded)
