@@ -1,6 +1,6 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-@import '../../assets/stylus/variable.styl'
-@import '../../assets/stylus/mixin.styl'
+@import '../../common/stylus/variable.styl'
+@import '../../common/stylus/mixin.styl'
 .header-banner-outer
 	height 100%
 	min-height 200px

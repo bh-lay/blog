@@ -1,6 +1,6 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "../../assets/stylus/variable.styl"
-@import "../../assets/stylus/mixin.styl"
+@import "../../common/stylus/variable.styl"
+@import "../../common/stylus/mixin.styl"
 
 .index-about-backend
   padding 12em 0 20em

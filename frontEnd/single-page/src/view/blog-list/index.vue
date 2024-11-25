@@ -1,5 +1,5 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "../../assets/stylus/variable.styl"
+@import "../../common/stylus/variable.styl"
 $tag_cnt_bj = #fff
 /** 博文列表页 **/
 .article-list-page

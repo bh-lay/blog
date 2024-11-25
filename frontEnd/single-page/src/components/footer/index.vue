@@ -1,5 +1,5 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "../../assets/stylus/variable.styl"
+@import "../../common/stylus/variable.styl"
 .footer-main
 	background #161a1d
 	color #fff
@@ -203,7 +203,7 @@
 		<div class="beian">
 			<a href="http://beian.miit.gov.cn" rel="nofollow">皖ICP备14001331号-1</a>
 			<a href="https://beian.mps.gov.cn/#/query/webSearch?code=34012302001246" rel="noreferrer">
-				<img src="https://beian.mps.gov.cn/web/assets/logo01.6189a29f.png" alt="网安徽章">
+				<img src="https://beian.mps.gov.cn/web/common/logo01.6189a29f.png" alt="网安徽章">
 				皖公网安备34012302001246</a>
 		</div>
 	</div>

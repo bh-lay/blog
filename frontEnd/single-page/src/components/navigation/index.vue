@@ -1,5 +1,5 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "../../assets/stylus/variable.styl"
+@import "../../common/stylus/variable.styl"
 @keyframes sticky-navigation-move
 	0%
 		transform translateY(20px)
@@ -11,6 +11,7 @@
 		transform translateY(0)
 		box-shadow none
 	100%
+		transform translateY(0)
 		background #fff
 		box-shadow 0 0 2px #00000010, 0 0 10px #00000020
 
@@ -114,6 +115,8 @@
 		height 0
 		@supports (animation-range: 0 260px)
 			.navigation-body
+				transform translateY(20px)
+				background transparent
 				animation sticky-navigation-move linear forwards
 				animation-timeline scroll()
 				animation-range 0 260px

@@ -1,6 +1,6 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-@import '../../assets/stylus/variable.styl'
-@import '../../assets/stylus/mixin.styl'
+@import '../../common/stylus/variable.styl'
+@import '../../common/stylus/mixin.styl'
 
 .pano-list-pager
 	background #f0f1f5

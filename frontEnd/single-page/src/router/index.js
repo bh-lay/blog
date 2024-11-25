@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import { beforeRouterChange } from "@/common/view-transition/"
 import Index from '@/view/index/index.vue'
 import BlogList from '@/view/blog-list/index.vue'
 import BlogDetail from '@/view/blog-detail/index.vue'
@@ -32,7 +33,7 @@ const router = new Router({
 		},
 		{
 			path: '/blog/:id',
-			name: 'blogDetailPage',
+			name: 'blogDetail',
 			component: BlogDetail,
 			meta: {
 				title: '加载中...'
@@ -73,17 +74,6 @@ const router = new Router({
 	]
 })
 
-router.beforeEach((to, from, next) => {
-	if (to.name === from.name) {
-		next()
-	} else if (document.startViewTransition) {
-		document.startViewTransition(() => {
-			window.scrollTo(0, 0)
-			next()
-		})
-	} else {
-		next()
-	}
-})
+router.beforeEach(beforeRouterChange)
 
 export default router

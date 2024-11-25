@@ -6,7 +6,7 @@ import router from './router'
 import filters from './filters/index.js'
 import Footer from './components/footer/index.vue'
 import UILibrary from './ui-library/index.js'
-import funny from './assets/js/funny.js'
+import funny from './common/js/funny.js'
 
 Vue.use(filters)
 Vue.use(UILibrary)

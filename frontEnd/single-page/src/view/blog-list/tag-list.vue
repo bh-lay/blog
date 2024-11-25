@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import {getApiData} from '@/assets/js/api.js'
+import {getApiData} from '@/common/js/api.js'
 
 export default {
 	name: 'post-list',

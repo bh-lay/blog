@@ -1,5 +1,5 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "../../assets/stylus/variable.styl"
+@import "../../common/stylus/variable.styl"
 .send-box
 	margin-bottom 20px
 	box-shadow 0 0 2px rgba(0, 0, 0, 0.2)
