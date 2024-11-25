@@ -1,0 +1,63 @@
+// Navigation
+.navigation .navigation-body
+	view-transition-name navigation-view;
+
+// Root View
+.base-router-transition .view-page
+	view-transition-name root-view;
+
+@keyframes root-view-in
+	0%
+		opacity 0
+		transform translate(0, 15vh)
+	100%
+		opacity 1
+		transform translate(0, 0)
+@keyframes root-view-out
+	0%
+		transform scale(1)
+	100%
+		transform scale(0.9)
+::view-transition-old(root-view)
+	transform-origin 50vw 100vh
+	animation root-view-out 0.5s ease-in-out forwards
+::view-transition-new(root-view)
+	opacity 0
+	animation root-view-in 0.8s 0.4s ease-in-out
+
+// Article View
+.article-router-transition
+	.router-transition-article-item img
+		view-transition-name article-head-view;
+	.blog-detail header
+		view-transition-name article-head-view;
+	.section-article
+		view-transition-name article-body-view;
+::view-transition-old(article-head-view)
+	animation none
+	mix-blend-mode normal
+	height 100%
+	overflow clip
+	object-fit cover
+::view-transition-new(article-head-view)
+	animation article-head-fade-in 1s ease-out forwards
+	mix-blend-mode normal
+	height 100%
+	overflow clip
+	opacity 0
+::view-transition-new(article-body-view)
+	opacity 0
+	animation article-body-transition-in 0.3s 0.4s ease-out forwards
+@keyframes article-head-fade-in
+	0%
+		opacity 0
+	100%
+		opacity 1
+@keyframes article-body-transition-in
+	0%
+		opacity 0
+		transform translate(0, 8vh)
+	100%
+		opacity 1
+		transform translate(0, 0)
+		

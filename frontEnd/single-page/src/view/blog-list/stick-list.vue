@@ -1,5 +1,5 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "../../assets/stylus/variable.styl"
+@import "../../common/stylus/variable.styl"
 .stick-list
 	padding-top 20px
 .status
@@ -10,9 +10,9 @@
 	background #fff
 	transition box-shadow .3s ease-out
 	transition-delay .1s
-	.link
-		display block
+	.article-item-link
 		text-decoration none
+		cursor pointer
 	.title
 		display block
 		padding 1em .5em .2em
@@ -111,15 +111,12 @@
 	>
 		<template slot-scope="scope">
 			<div :class="['article-item', !scope.data.cover ? 'pure-text' : '']">
-				<router-link
-					:to="'/blog/'+ scope.data.id"
-					:title="scope.data.title" class="link"
-				>
+				<div class="article-item-link" @click="handleArticleClick($event, scope.data)">
 					<div class="label" v-if="scope.data.is_new"><span>new</span></div>
-					<img v-if="scope.data.cover" :src="scope.data.cover | imgHosting('zoom', 400)" :alt="scope.data.title" />
+					<img v-if="scope.data.cover" :src="scope.data.cover | imgHosting('zoom', 420)" :alt="scope.data.title" />
 					<div class="title">{{scope.data.title}}</div>
 					<div class="info">{{scope.data.intro}}</div>
-				</router-link>
+				</div>
 				<footer>
 					<div class="tags">
 						<blog-tag
@@ -139,6 +136,7 @@
 
 <script>
 import Stick from 'vue-stick'
+import { markArticleClick } from "@/common/view-transition/"
 import BlogTag from '@/components/common/blog-tag.vue'
 
 const prefixBlogList = list => {
@@ -189,6 +187,16 @@ export default {
 				behavior: 'smooth',
 				block: 'center',
 				inline: 'nearest'
+			})
+		},
+		handleArticleClick(event, articleData) {
+			const matchedNode = event.target.closest(".article-item-link");
+			markArticleClick(matchedNode)
+			this.$router.push({
+				name: "blogDetail",
+				params: {
+					id: articleData.id
+				}
 			})
 		},
 		loadMore () {

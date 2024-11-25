@@ -1,5 +1,5 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "../../assets/stylus/variable.styl"
+@import "../../common/stylus/variable.styl"
 
 .sns-share
 	padding 40px 0

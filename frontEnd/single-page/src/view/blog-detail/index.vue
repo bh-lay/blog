@@ -1,5 +1,5 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "../../assets/stylus/variable.styl"
+@import "../../common/stylus/variable.styl"
 
 .blog-detail
 	font-size 14px
@@ -241,7 +241,7 @@
 </div>
 </template>
 <script>
-import highlight from '@/assets/js/highlight.js'
+import highlight from '@/common/js/highlight.js'
 import Comments from '@/components/comments/index.vue'
 import BlogTag from '@/components/common/blog-tag.vue'
 import filters from '@/filters/index.js'
