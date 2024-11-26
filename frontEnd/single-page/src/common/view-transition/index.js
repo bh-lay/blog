@@ -1,15 +1,25 @@
 import "./view-transition.styl"
+
+const isSupportViewTransition = !!document.startViewTransition;
 const baseRouterTransitionClass = "base-router-transition"
 const articleRouterTransitionClass = "article-router-transition"
 
 let hasClickArticleBefore = false;
-export function markArticleClick(clickedNode) {
+let lastClickedArticleData = null;
+export function markArticleClick(clickedNode, articleData) {
 	if (!clickedNode) {
 		return
 	}
 	hasClickArticleBefore = true;
+	lastClickedArticleData = articleData
 	clickedNode.classList.add("router-transition-article-item")
 }
+export function getLastClickedArticle() {
+	const lastData = lastClickedArticleData
+	lastClickedArticleData = null
+	return lastData
+}
+
 function getScrollTop () {
 	return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
 }
@@ -23,7 +33,6 @@ function setBodyScrollToRouteView () {
 export function beforeRouterChange (to, from, next) {
 	const isFirstPage = !from.name;
 	const isSameView = to.name === from.name;
-	const isSupportViewTransition = !!document.startViewTransition;
 	if (isFirstPage || isSameView || !isSupportViewTransition) {
 		return next()
 	}

@@ -191,7 +191,7 @@ export default {
 		},
 		handleArticleClick(event, articleData) {
 			const matchedNode = event.target.closest(".article-item-link");
-			markArticleClick(matchedNode)
+			markArticleClick(matchedNode, articleData)
 			this.$router.push({
 				name: "blogDetail",
 				params: {
