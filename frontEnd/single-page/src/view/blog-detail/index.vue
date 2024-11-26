@@ -128,6 +128,7 @@
 		z-index 1
 		.container
 			display flex
+			min-height 1000px
 			margin-top -360px
 			margin-bottom -60px
 			border-radius 12px
@@ -174,7 +175,7 @@
 			overflow hidden
 </style>
 <template>
-<div class="blog-detail" v-loading="isLoading">
+<div class="blog-detail">
 	<header :style="{backgroundImage: `url(${coverImgUrl})`}">
 		<Container class="header-body">
 			<div class="title">{{detail.title}}</div>
@@ -183,7 +184,7 @@
 	</header>
 	<div class="section-article">
 		<Container>
-			<div class="section-article-body">
+			<div class="section-article-body" v-loading="isLoading">
 				<div class="caption">
 					<h1>{{detail.title}}</h1>
 					<div class="publish-time">
@@ -245,6 +246,7 @@ import highlight from '@/common/js/highlight.js'
 import Comments from '@/components/comments/index.vue'
 import BlogTag from '@/components/common/blog-tag.vue'
 import filters from '@/filters/index.js'
+import { getLastClickedArticle } from "@/common/view-transition/"
 import blogShare from './share.vue'
 import buildToc from './build-toc.js'
 // 图片预加载
@@ -298,10 +300,31 @@ export default {
 		}
 	},
 	mounted () {
-		this.init()
+		this.initFromCache()
+		this.initFromApi()
 	},
 	methods: {
-		init () {
+		initFromCache() {
+			const lastClickedArticle = getLastClickedArticle()
+			if (!lastClickedArticle) {
+				return
+			}
+			if (lastClickedArticle.id !== this.blogID) {
+				return
+			}
+			this.detail = {
+				id: lastClickedArticle.id || '',
+				title: lastClickedArticle.title || '',
+				author: lastClickedArticle.author || '',
+				content: `<p>${lastClickedArticle.intro || ''}</p>`,
+				cover: lastClickedArticle.cover || '',
+				intro: lastClickedArticle.intro || '',
+				tags: lastClickedArticle.tags || [],
+				time_show: lastClickedArticle.time_show || ''
+			}
+			this.coverImgUrl = filters.imgHosting(lastClickedArticle.cover, 'zoom', 420)
+		},
+		initFromApi() {
 			this.isLoading = true
 			fetch(`/api/blog/${this.blogID}?format=html`)
 				.then(response => response.json())

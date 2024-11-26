@@ -14,8 +14,8 @@
     "md5": "^2.2.1",
     "qrcode": "^1.4.4",
     "three": "^0.151.3",
-    "vue": "^3.0.0",
-    "vue-router": "^3.0.1",
+    "vue": "^2.7.16",
+    "vue-router": "^3.6.5",
     "vue-stick": "^1.0.5",
     "weixin-js-sdk": "^1.4.0-test"
   },
