@@ -202,9 +202,7 @@
 		<p>感谢七牛提供近乎免费的CDN服务</p>
 		<div class="beian">
 			<a href="http://beian.miit.gov.cn" rel="nofollow">皖ICP备14001331号-1</a>
-			<a href="https://beian.mps.gov.cn/#/query/webSearch?code=34012302001246" rel="noreferrer">
-				<img src="https://beian.mps.gov.cn/web/common/logo01.6189a29f.png" alt="网安徽章">
-				皖公网安备34012302001246</a>
+			<a href="https://beian.mps.gov.cn/#/query/webSearch?code=34012302001246" rel="noreferrer">皖公网安备34012302001246</a>
 		</div>
 	</div>
 	<div class="footer-version">

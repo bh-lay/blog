@@ -75,7 +75,7 @@ import md5 from 'md5'
 import {getUserInfo, setUserInfo, defaultAvatar} from './data.js'
 
 function gravatar (input) {
-	return `https://gravatar.kuibu.net/avatar/${md5(input)}?s=100`
+	return `https://assets-eu.mofei.life/gravatar/${md5(input)}?s=100`
 }
 
 export default {
