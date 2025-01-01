@@ -1,9 +1,12 @@
 import { getDbConnect, getDocsByPagination } from '@/database/DB'
 import * as mongodb from 'mongodb'
 import { Connect } from '@/core/index'
-import { encodeHtml } from '@/lib/utils'
+import { encodeHtml, str2md5 } from '@/lib/utils'
 const showdown  = require('showdown')
 
+function gravatar (input: string) {
+  return `https://assets-eu.mofei.life/gravatar/${str2md5(input)}?s=100`
+}
 /**
  * 处理评论数据
  *  增加用户信息
@@ -18,6 +21,9 @@ const makeUpUserInfo = async (db: mongodb.Db, docs: mongodb.Document[], format: 
     // 获取所有需要的用户id
     if (item.uid && userIDList.indexOf(item.uid) === -1) {
       userIDList.push(item.uid)
+    }
+    if (item.user && item.user.email) {
+      item.user.avatar = gravatar(item.user.email)
     }
     // 内容由 markdown 转为 html
     if (format === 'html') {

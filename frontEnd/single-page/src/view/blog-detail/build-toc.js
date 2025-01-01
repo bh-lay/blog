@@ -13,13 +13,21 @@ function prefixID (htmlPart) {
 		id
 	}
 }
+function extractTextFromHTML(htmlString) {
+    let div = document.createElement('div');
+    div.innerHTML = htmlString;
+    let text = div.textContent || div.innerText;
+    return text;
+}
+
 function buildToc (article) {
 	var toc = []
-	article = article.replace(/<h(\d)(?:\s[^>]+)*>([^<]+)/g, (htmlPart, indent, text) => {
-		let prefix = prefixID(htmlPart, indent, text)
+	article = article.replace(/<h(\d)(?:\s[^>]+)*>(.*?)<\/h\d>/g, (htmlPart, indent, innerHTML) => {
+		let prefix = prefixID(htmlPart, indent, innerHTML)
 		toc.push({
 			indent,
-			text,
+			text: extractTextFromHTML(innerHTML),
+			// text: innerHTML,
 			id: prefix.id
 		})
 		return prefix.htmlPart

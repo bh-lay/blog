@@ -33,26 +33,24 @@
 		view-transition-name article-head-view;
 	.section-article
 		view-transition-name article-body-view;
+::view-transition-group(article-head-view)
+	animation-duration 0.4s
+	animation-timing-function ease-out
 ::view-transition-old(article-head-view)
-	animation none
-	mix-blend-mode normal
 	height 100%
 	overflow clip
 	object-fit cover
 ::view-transition-new(article-head-view)
-	animation article-head-fade-in 1s ease-out forwards
-	mix-blend-mode normal
 	height 100%
 	overflow clip
-	opacity 0
 ::view-transition-new(article-body-view)
 	opacity 0
-	animation article-body-transition-in 0.3s 0.4s ease-out forwards
-@keyframes article-head-fade-in
-	0%
-		opacity 0
-	100%
-		opacity 1
+	animation article-body-transition-in 0.4s 0.3s ease-out forwards
+// @keyframes article-head-fade-in
+// 	0%
+// 		opacity 0
+// 	100%
+// 		opacity 1
 @keyframes article-body-transition-in
 	0%
 		opacity 0
