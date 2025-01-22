@@ -24,7 +24,7 @@
     "style-loader": "^3.3.4",
     "stylus": "^0.54.8",
     "stylus-loader": "^6.1.0",
-    "vite": "^4.5.5"
+    "vite": "^4.5.9"
   },
   "engines": {
     "node": ">= 6.0.0",
