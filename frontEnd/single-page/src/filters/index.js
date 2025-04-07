@@ -55,12 +55,6 @@ function dateDiff (dateTimeStamp) {
 	return result
 }
 
-// 跳转链接生成
-function urlPrefix (url) {
-	return '//bh-lay.com/r/' + btoa(encodeURIComponent(url))
-}
-
-// 跳转链接生成
 function imgHosting (url, type = 'zoom', width = 300, height) {
 	if (typeof (url) !== 'string') {
 		return ''
@@ -88,7 +82,7 @@ function imgHosting (url, type = 'zoom', width = 300, height) {
 	return src
 }
 
-let filters = { timeFormat, dateDiff, urlPrefix, imgHosting }
+let filters = { timeFormat, dateDiff, imgHosting }
 filters.install = function (Vue) {
 	for (let filterKey in filters) {
 		Vue.filter(filterKey, filters[filterKey])
