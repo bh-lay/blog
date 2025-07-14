@@ -16,6 +16,8 @@ export default defineConfig({
     proxy: {
       '/api': 'http://127.0.0.1:8888/',
       '/img-robber': 'http://127.0.0.1:8888/',
+      // '/api': 'https://bh-lay.com/',
+      // '/img-robber': 'https://bh-lay.com/',
     }
   }
 })
