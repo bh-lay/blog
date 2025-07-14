@@ -164,7 +164,7 @@
 			background rgba(255, 255, 255, 0.6)
 		.toc-content
 			position sticky
-			top $navigation-height
+			top $navigation-height + 20
 			box-sizing border-box
 			max-height calc(100vh - 56px)
 			overflow auto
