@@ -10,15 +10,21 @@
 		background-size cover
 		.header-body
 			position relative
+			color #21262c
 			.title
 				margin-bottom .5em
 				line-height 1.2
 				font-size 2em
 				font-weight 700
-				color #fff
-			.article-info
-				color #fff
+			.article-info span
+				padding 0 0.5em
+				border 1px solid rgba(255, 255, 255, 0.05)
+				border-radius 4px
 				opacity .9
+				box-decoration-break clone
+				-webkit-box-decoration-break clone
+				background rgba(255, 255, 255, 0.05)
+				line-height 2
 	.section-article
 		position relative
 		.caption
@@ -66,17 +72,16 @@
 			margin 0 20px
 	.toc-content
 		.title
-			margin-bottom 10px
-			line-height 2em
-			font-size 15px
-			color #c2ccd6
+			margin-bottom 1.5em
+			font-weight 400
+			color #52667a
 		button
 			display block
 			margin-bottom 10px
 			line-height 1.2em
 			text-align left
 			font-size 14px
-			color #667f99
+			color #52667a
 			transition .2s
 			&:hover
 				color #407fbf
@@ -96,8 +101,9 @@
 		padding 2em 0 4em
 		border-top 1px solid #f0f1f5
 @media screen and (min-width $pad-portrait-width)
+	$page_bj_color = #f0f1f5
 	.blog-detail
-		background #f0f1f5
+		background $page_bj_color
 		header
 			&:before
 				content ""
@@ -107,8 +113,18 @@
 				width 100%
 				height 100%
 				z-index 0
+				pointer-events none
 				backdrop-filter blur(8px)
-				background-image linear-gradient(0deg, #f0f1f5, rgba(0,0,0,.4) 300px), linear-gradient(0deg, #f0f1f5, transparent 100px)
+				background-image linear-gradient(
+					0deg,
+					$page_bj_color,
+					transparentify($page_bj_color, 0.5) 300px
+				),
+				linear-gradient(
+					0deg,
+					$page_bj_color,
+					transparent 100px
+				)
 			&:after
 				content ""
 				position absolute
@@ -117,7 +133,7 @@
 				width 100%
 				height 20px
 				z-index 0
-				background-image linear-gradient(0deg, transparent, #f0f1f5, transparent)
+				background-image linear-gradient(0deg, transparent, $page_bj_color, transparent)
 		.header-body
 			min-height 220px
 			padding $navigation-height * 2.5 20px 360px
@@ -128,46 +144,46 @@
 		z-index 1
 		.container
 			display flex
-			min-height 1000px
+			min-height 1500px
 			margin-top -360px
-			margin-bottom -60px
-			border-radius 12px
-			background #fff
+			margin-bottom -80px
 		.section-article-body
 			width 400px
 			flex-shrink 1
 			flex-grow 1
 			padding 3em 6em 5em 2em
+			border-radius 8px
+			background #fff
+			box-shadow 5px 10px 10px -5px rgba(0, 0, 0, .2)
 		.section-article-side
-			width 320px
+			width 280px
 			flex-shrink 0.8
-			border-radius 0 12px 12px 0
-			padding 30px 10px 40px
-			border-left 1px solid #edeff3
-			background #f9fafb
+			border-radius 0 18px 18px 0
+			margin 30px 0
+			padding 38px 15px 40px 30px
+			background rgba(255, 255, 255, 0.6)
 		.toc-content
 			position sticky
 			top $navigation-height
 			box-sizing border-box
 			max-height calc(100vh - 56px)
-			padding 20px
 			overflow auto
 	.section-comments
 		position relative
-		padding 120px 0 50px
+		padding 140px 0 50px
 		background #5a6872
 		z-index 0
 		&:before
 			content ''
 			position absolute
-			top -240px
+			top -30vh
 			left 0
 			width 0
 			height 0
 			margin-left 0
 			border-style solid
 			border-color transparent transparent #5a6872
-			border-width 0 0 240px 100vw
+			border-width 0 0 30vh 100vw
 		.comments
 			padding-bottom 20px
 			border-radius 12px
@@ -179,7 +195,7 @@
 	<header :style="{backgroundImage: `url(${coverImgUrl})`}">
 		<Container class="header-body">
 			<div class="title">{{detail.title}}</div>
-			<div class="article-info">{{detail.intro}}</div>
+			<div class="article-info"><span>{{detail.intro}}</span></div>
 		</Container>
 	</header>
 	<div class="section-article">
