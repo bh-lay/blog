@@ -34,6 +34,8 @@
 				margin-right .6em
 				font-weight 500
 				color #364249
+			a.who:hover
+				text-decoration underline
 			.time
 				color #aaa
 		.btn-reply
@@ -64,7 +66,11 @@
 <div class="content">
 	<div class="caption">
 		<div class="info">
-				<a class="who" :href="item.user.blog" v-if="item.user.blog">{{item.user.username}}</a>
+				<a
+					v-if="item.user.blog"
+					class="who"
+					:href="siteUrlTransform(item.user.blog)"
+				>{{item.user.username}}</a>
 				<span v-else class="who">{{item.user.username}}</span>
 				<span class="time">{{item.time | timeFormat}}</span>
 		</div>
@@ -84,6 +90,7 @@
 <script>
 import SendBox from './send-box.vue'
 import {defaultAvatar} from './data.js'
+import { createExternalSiteUrl } from '@/common/js/cross-site-utils.js'
 
 export default {
 	name: 'comments-list',
@@ -114,7 +121,10 @@ export default {
 		sendSuccess () {
 			this.replyMode = false
 			this.$emit('replySuccess')
-		}
+		},
+		siteUrlTransform(url) {
+			return createExternalSiteUrl(url)
+		},
 	}
 }
 </script>
