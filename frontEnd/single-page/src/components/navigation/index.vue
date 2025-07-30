@@ -1,5 +1,6 @@
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 @import "../../common/stylus/variable.styl"
+$page_bj_color = #f0f1f5
 @keyframes sticky-navigation-move
 	0%
 		transform translateY(20px)
@@ -14,12 +15,11 @@
 		transform translateY(0)
 		background #fff
 		box-shadow 0 0 2px #00000010, 0 0 10px #00000020
-
+	
 .navigation
 	height $navigation-height
-	--highlight-color hsl(204deg, 100%, 34%)
-	--text-color hsl(220deg, 16%, 5%)
-	--secondary-opacity 0.68
+	--highlight-color hsl(204deg, 100%, 50%)
+	--text-color hsl(220deg, 15, 8)
 	.navigation-body
 		position fixed
 		width 100%
@@ -28,7 +28,6 @@
 		left 0
 		z-index 10000
 		background #fff
-		box-shadow 0 0 2px rgba(0,0,0,0.063), 0 0 10px rgba(0,0,0,0.125)
 	.nav-inner
 		position relative
 		display flex
@@ -58,21 +57,8 @@
 			font-weight 900
 			font-size 16px
 			color var(--text-color)
-			opacity var(--secondary-opacity)
-		&:after
-			content ""
-			position absolute
-			right 0
-			top 32%
-			height 36%
-			width 1px
-			background var(--text-color)
-			opacity .2
-			transition .25s
 		&:hover
 			background: hsl(210deg, 12%, 90%)
-			&:after
-				opacity 0
 
 	.nav-more-btn
 		display none
@@ -88,7 +74,6 @@
 			font-weight 900
 			color var(--text-color)
 			text-decoration none
-			opacity var(--secondary-opacity)
 			transition .2s
 			&:after
 				content ''
@@ -96,7 +81,7 @@
 				bottom 12px
 				left 18%
 				width 0
-				height 1px
+				height 2px
 				background var(--highlight-color)
 				transition .4s
 			&:hover:after
@@ -105,12 +90,31 @@
 			&.index-page.router-link-exact-active
 				opacity 1
 				&:after
+					transition 1.2s .5s
 					width 64%
 @media screen and (max-width 750px)
 	.navigation .nav-list a
 		width 60px
 		font-size 13px
 @media screen and (min-width $max-mobile-width)
+	:global(.navigation-shadow:after)
+		content ''
+		position absolute
+		width 100%
+		height 240px
+		top 0
+		left 0
+		// background-image linear-gradient(
+		// 	180deg,
+		// 	transparentify(#fff, 0.2) 70px,
+		// 	transparent 240px
+		// )
+		// background rgba(255, 255, 255, .15)
+		backdrop-filter blur(2px) contrast(0.5) brightness(1.3);
+		mask-image linear-gradient(180deg, #000 80px, transparent)
+		-webkit-backdrop-filter blur(2px) contrast(0.5);
+		-webkit-mask-image linear-gradient(180deg, #000 80px, transparent)
+		pointer-events none
 	.navigation
 		height 0
 		@supports (animation-range: 0 260px)
@@ -121,17 +125,13 @@
 				animation-timeline scroll()
 				animation-range 0 260px
 			.nav-inner
-				background rgba(255, 255, 255, 0.46)
-				backdrop-filter blur(3px)
+				background transparent
 				overflow hidden
-				transition 1.4s .3s;
-				&:hover
-					background #fff
-
 @media screen and (max-width $max-mobile-width)
 	.navigation
 		.nav-inner
 			margin-left -10px
+			box-shadow 0 0 2px rgba(0,0,0,0.063), 0 0 10px rgba(0,0,0,0.125)
 		.nav-list-body
 			position absolute
 			top 60px

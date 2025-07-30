@@ -54,7 +54,7 @@
 <template>
 <div class="header-banner-outer">
 	<div
-		class="header-banner"
+		class="header-banner navigation-shadow"
 		:style="{
 			backgroundImage: `url(${photography.imgSrc})`
 		}"
