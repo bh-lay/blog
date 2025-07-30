@@ -90,6 +90,7 @@
 		header
 			height 50vw
 			background-color #eee
+			opacity .3
 		.header-body
 			display none
 		.section-article

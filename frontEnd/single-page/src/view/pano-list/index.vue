@@ -117,7 +117,7 @@
 			width 170px
 </style>
 <template>
-<div class="pano-list-pager">
+<div class="pano-list-pager navigation-shadow">
 	<div class="pano-header" :class="panoVisible ? 'header-visible' : ''">
 		<header-gallery @pano-ready="panoVisible = true"/>
 		<div class="panorama-author">
