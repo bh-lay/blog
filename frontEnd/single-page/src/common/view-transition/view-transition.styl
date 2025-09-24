@@ -2,28 +2,39 @@
 .navigation .navigation-body
 	view-transition-name navigation-view;
 
-// Root View
+// Default Router View
 .base-router-transition .view-page
-	view-transition-name root-view;
+	view-transition-name default-router-view;
 
-@keyframes root-view-in
-	0%
-		opacity 0
-		transform translate(0, 15vh)
-	100%
-		opacity 1
-		transform translate(0, 0)
-@keyframes root-view-out
+@keyframes default-router-view-ani
 	0%
 		transform scale(1)
+	30%
+	35%
+		transform scale(0.94, 0.91)
 	100%
-		transform scale(0.9)
-::view-transition-old(root-view)
-	transform-origin 50vw 100vh
-	animation root-view-out 0.5s ease-in-out forwards
-::view-transition-new(root-view)
-	opacity 0
-	animation root-view-in 0.8s 0.4s ease-in-out
+		transform scale(1)
+@keyframes default-router-view-ani-fade-in
+	0%
+	50%
+		opacity 0
+	100%
+		opacity 1
+@keyframes default-router-view-ani-fade-out
+	50%
+		opacity 1
+	100%
+		opacity 0
+::view-transition-group(default-router-view)
+	height 100%
+	overflow clip
+	object-fit cover
+	mix-blend-mode normal
+	animation default-router-view-ani 1.2s ease-in-out forwards
+::view-transition-new(default-router-view)
+	animation default-router-view-ani-fade-in 1.2s ease-in-out forwards
+::view-transition-old(default-router-view)
+	animation default-router-view-ani-fade-out 1.2s ease-in-out forwards
 
 // Article View
 .article-router-transition
