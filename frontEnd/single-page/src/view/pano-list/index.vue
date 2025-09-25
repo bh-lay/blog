@@ -50,18 +50,17 @@
 		grid-area span 4 / span 4 / auto /
 		width calc(var(--grid-size) * 4 + var(--grid-gap) * 3)
 		height calc(var(--grid-size) * 4 + var(--grid-gap) * 3)
-		.title
-			font-size 22px
+		font-size 24px
 	&.size-2-2
 		grid-area span 2 / span 2 / auto /
 		width calc(var(--grid-size) * 2 + var(--grid-gap) * 1)
 		height calc(var(--grid-size) * 2 + var(--grid-gap) * 1)
-		.title
-			font-size 16px
+		font-size 16px
 	&.size-1-1
 		grid-area span 1 / span 1 / auto /
 		width calc(var(--grid-size) * 1)
 		height calc(var(--grid-size) * 1)
+		font-size 12px
 	.cover
 		background-color #555
 		background-size cover
@@ -75,30 +74,29 @@
 		left 0
 		bottom 0
 		width 100%
-		height 5em
+		height 6em
 		box-sizing border-box
-		padding 2.5em 0 0.5em 1em
+		padding 3.5em 0 0.5em 1em
 		line-height 2em
-		font-size 12px
+		font-size 1em
 		font-weight 900
 		color #fff
 		white-space nowrap
 		overflow hidden
 		text-overflow ellipsis
-		background linear-gradient(transparent, rgba(0,0,0,.5))
+		background linear-gradient(transparent, rgba(0,0,0,.6))
 .pano-profile
 	grid-area span 4 / span 2 / auto /
 	width calc(var(--grid-size) * 2 + var(--grid-gap) * 1)
 	height calc(var(--grid-size) * 4 + var(--grid-gap) * 3)
-	background linear-gradient(45deg, #0f2954, rgba(20, 120, 50, 60%))
+	background linear-gradient(50deg, #091d3d, rgba(20, 120, 50, 60%))
 	background-color transparent
 	.part-a
 		display flex
 		flex-direction column
 		justify-content center
-		// align-items center
-		width 70%
-		height 60%
+		width 65%
+		height 62%
 		margin 0 auto
 		padding 0 12px
 		border-bottom 1px solid rgba(255, 255, 255, .07)
@@ -112,24 +110,24 @@
 		.ui-button-primary
 			width 100%
 	.part-b
-		padding 40px 40px 0
+		padding 32px 45px 0
 		h2
 			display flex
 			justify-content space-between
 			margin 0
 			line-height 1em
 			text-align center
-			font-size 70px
+			font-size 65px
 			font-weight 200
 			color #fff
 		h3
-			margin 30px 0 0
+			margin 32px 0 0
 			letter-spacing 6px
 			line-height 1em
 			text-align center
-			font-size 26px
+			font-size 24px
 			font-weight 200
-			color rgba(255, 255, 255, .7)
+			color rgba(255, 255, 255, .6)
 		
 @media screen and (min-width $pad-portrait-width)
 	.pano-header
@@ -165,7 +163,7 @@
 			transition .2s ease-in-out
 		&:hover
 			.cover
-				opacity .5
+				opacity .6
 @media screen and (max-width $pad-portrait-width)
 	.pano-header
 		height 40vw
