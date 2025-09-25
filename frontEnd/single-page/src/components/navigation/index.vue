@@ -110,7 +110,7 @@ $page_bj_color = #f0f1f5
 		// 	transparent 240px
 		// )
 		// background rgba(255, 255, 255, .15)
-		backdrop-filter blur(2px) contrast(0.5) brightness(1.3);
+		backdrop-filter blur(2px) contrast(0.75);
 		mask-image linear-gradient(180deg, #000 80px, transparent)
 		-webkit-backdrop-filter blur(2px) contrast(0.5);
 		-webkit-mask-image linear-gradient(180deg, #000 80px, transparent)

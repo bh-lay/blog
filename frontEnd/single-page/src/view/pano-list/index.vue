@@ -29,43 +29,108 @@
 				text-decoration underline
 	&:hover .panorama-author
 		opacity 1
-.pano-profile-card
-	display flex
-	align-items center
-	height 54px
-	padding 0 15px 10px 20px
-	border-radius 8px 8px 0 0
-	background #365463
-	img
-		width 68px
-		height 24px
-	span
-		display block
-		flex-grow 1
-		padding 0 20px
-		line-height 30px
-		font-size 14px
-		color #a4b7c1
 
 .post-list
+	--grid-size 124px
+	--grid-gap 4px
 	min-height 400px
-	margin-top -10px
-	padding 24px
-	display flex
-	flex-wrap wrap
-	gap 15px
-	background #fff
-	border-radius 8px
-	.post-item,
-	& > i
-		width 240px
-		flex-grow 1
-	& > i
-		display block
-		height 0
-		padding 0
-		line-height 0
-		font-size 0
+	display grid
+	grid-template-columns repeat(auto-fill, var(--grid-size))
+	grid-template-rows repeat(auto-fill, var(--grid-size))
+	grid-auto-flow dense
+	gap var(--grid-gap)
+	justify-content center
+.post-item
+	display block
+	position relative
+	box-shadow 1px 1px 2px rgba(0, 0, 0, .2)
+	background #000
+	overflow hidden
+	&.size-4-4
+		grid-area span 4 / span 4 / auto /
+		width calc(var(--grid-size) * 4 + var(--grid-gap) * 3)
+		height calc(var(--grid-size) * 4 + var(--grid-gap) * 3)
+		.title
+			font-size 22px
+	&.size-2-2
+		grid-area span 2 / span 2 / auto /
+		width calc(var(--grid-size) * 2 + var(--grid-gap) * 1)
+		height calc(var(--grid-size) * 2 + var(--grid-gap) * 1)
+		.title
+			font-size 16px
+	&.size-1-1
+		grid-area span 1 / span 1 / auto /
+		width calc(var(--grid-size) * 1)
+		height calc(var(--grid-size) * 1)
+	.cover
+		background-color #555
+		background-size cover
+		background-position center
+		&:before
+			content ''
+			display block
+			padding-top 100%
+	.title
+		position absolute
+		left 0
+		bottom 0
+		width 100%
+		height 5em
+		box-sizing border-box
+		padding 2.5em 0 0.5em 1em
+		line-height 2em
+		font-size 12px
+		font-weight 900
+		color #fff
+		white-space nowrap
+		overflow hidden
+		text-overflow ellipsis
+		background linear-gradient(transparent, rgba(0,0,0,.5))
+.pano-profile
+	grid-area span 4 / span 2 / auto /
+	width calc(var(--grid-size) * 2 + var(--grid-gap) * 1)
+	height calc(var(--grid-size) * 4 + var(--grid-gap) * 3)
+	background linear-gradient(45deg, #0f2954, rgba(20, 120, 50, 60%))
+	background-color transparent
+	.part-a
+		display flex
+		flex-direction column
+		justify-content center
+		// align-items center
+		width 70%
+		height 60%
+		margin 0 auto
+		padding 0 12px
+		border-bottom 1px solid rgba(255, 255, 255, .07)
+		span
+			margin 40px 0 12px
+			color #fff
+			opacity .6
+		img
+			width 68px
+			margin-bottom 90px
+		.ui-button-primary
+			width 100%
+	.part-b
+		padding 40px 40px 0
+		h2
+			display flex
+			justify-content space-between
+			margin 0
+			line-height 1em
+			text-align center
+			font-size 70px
+			font-weight 200
+			color #fff
+		h3
+			margin 30px 0 0
+			letter-spacing 6px
+			line-height 1em
+			text-align center
+			font-size 26px
+			font-weight 200
+			color rgba(255, 255, 255, .7)
+		
 @media screen and (min-width $pad-portrait-width)
 	.pano-header
 		height 540px
@@ -95,26 +160,29 @@
 		z-index 1
 		margin-top -140px !important
 		padding-bottom 50px
+	.post-item
+		.cover
+			transition .2s ease-in-out
+		&:hover
+			.cover
+				opacity .5
 @media screen and (max-width $pad-portrait-width)
 	.pano-header
 		height 40vw
 		margin-bottom 20px
-	.pano-profile-card
-		padding 0 12px 10px
-		img
-			width 40px
-			object-fit contain
-		span
-			padding 0 12px
-			font-size 12px
 	.main-pager
 		padding-bottom 20px
 	.post-list
-		padding 12px
-		gap 10px
-		.post-item,
-		& > i
-			width 170px
+		--grid-size 120px
+	.post-item
+		&.size-4-4
+			grid-area span 3 / span 3 / auto /
+			width calc(var(--grid-size) * 3)
+			height calc(var(--grid-size) * 3)
+		&.size-4-2
+			grid-area span 2 / span 4 / auto /
+			width calc(var(--grid-size) * 4)
+			height calc(var(--grid-size) * 2)
 </style>
 <template>
 <div class="pano-list-pager navigation-shadow">
@@ -127,18 +195,31 @@
 		</div>
 	</div>
 	<Container class="main-pager">
-		<div class="pano-profile-card">
-			<img :src="logo" alt="720yun" />
-			<span>作品托管在 720 云平台</span>
-			<Button :href="thirdProfile.url" target="_blank" type="primary" size="small">小剧的 720 云主页</Button>
-		</div>
 		<div class="post-list" v-loading="isLoading">
-			<Item
+			<div class="post-item pano-profile">
+				<div class="part-a">
+					<span>作品托管在</span>
+					<img :src="logo" alt="720 云平台" />
+					<Button :href="thirdProfile.url" target="_blank" type="primary" size="small">小剧的 720 云主页</Button>
+				</div>
+				<div class="part-b">
+					<h2><span>全</span><span>景</span></h2>
+					<h3>记录新方式</h3>
+				</div>
+			</div>
+			<a
 				v-for="item in postList"
 				:key="item.id"
-				:post="item"
-			/>
-			<i /><i /><i />
+				class="post-item"
+				:class="`size-${item.size || '1-1'}`"
+				:href="item.url"
+				target="_blank"
+			>
+				<div class="cover" :style="{
+					backgroundImage: `url(${item.thumb})`
+				}"></div>
+				<div class="title">{{item.title}}</div>
+			</a>
 		</div>
 	</Container>
 	<Footer />
@@ -146,12 +227,10 @@
 </template>
 
 <script>
-
-import Item from './item.vue'
+import panoData from './data.json'
 export default {
 	name: 'pano-page',
 	components: {
-		Item,
 		HeaderGallery: () => import('./header-gallery.vue')
 	},
 	data () {
@@ -165,38 +244,10 @@ export default {
 			isLoading: false
 		}
 	},
-	created () {
-		this.getList()
-	},
-	methods: {
-		handleLoaded() {
-			alert(11)
-		},
-		getList () {
-			this.isLoading = true
-			fetch('/api/pano/list?act=get_list', {
-				method: 'GET'
-			})
-				.then(response => response.json())
-				.then(data => {
-					const panoList = data?.data?.list || []
-					panoList.forEach(function (item) {
-						let thumb = `https://ssl-thumb2.720static.com/${item.property.thumbUrl}?imageMogr2/thumbnail/560`
-						item.title = item.property.name
-						item.desc = item.property.remark
-						item.url = `https://720yun.com/t/${item.property.pid}?from=bh-lay`
-						item.thumb = '/img-robber/' + btoa(thumb + '-https://720yun.com')
-						item.pv = item.pvCount
-						item.like = item.likeCount
-					})
-					panoList.sort((itemA, itemB) => itemB.pv - itemA.pv)
-					this.postList = panoList
-				})
-				.catch(() => {})
-				.then(() => {
-					this.isLoading = false
-				})
-		}
+	mounted() {
+		setTimeout(() => {
+			this.postList = panoData
+		}, 120)
 	}
 }
 </script>
