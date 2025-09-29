@@ -22,25 +22,15 @@
 			padding 10px 15px
 			font-size 16px
 			color #fff
+		.desc
+			padding 10px 15px
+			font-size 14px
+			color #fff
+			opacity .7
 	&:hover
 		.potography-info
 			opacity 1
 </style>
-<template>
-<div
-	class="potography-item"
-	:style="{
-		flexBasis: `calc(var(--base-width) * ${printImage.width / printImage.height})`,
-		aspectRatio: printImage.width/printImage.height,
-	}"
->
-	<img v-lazy="printImageUrl" class="photo" />
-	<a class="potography-info" :href="post.url" target="_blank">
-		<div class="title">{{post.title}}</div>
-		<div class="desc">{{post.intro}}</div>
-	</a>
-</div>
-</template>
 
 <script>
 import filters from '@/filters/index.js'
@@ -57,21 +47,60 @@ export default {
 		return {
 		}
 	},
-	computed: {
-		printImage() {
-			return (this.post?.images || [])[0] || {}
-		},
-		printImageUrl() {
-			return this.printImage.source?.l || ''
-		},
-		
-		thumb() {
-			return filters.imgHosting(this.post.cover)
-		},
+	render(h) {
+		const targetUrl = this.post.url
+		let printImageWidth = 10;
+		let printImageHeight = 10;
+		let printImageUrl = '';
+		const printImage = (this.post?.images || [])[0]
+		if (printImage) {
+			printImageWidth = printImage.width;
+			printImageHeight = printImage.height;
+			printImageUrl = printImage.source?.l || '';
+		} else {
+			const titleImage = this.post.title_image || {}
+			printImageWidth = titleImage.width;
+			printImageHeight = titleImage.height;
+			printImageUrl = titleImage.url
+		}
+
+		return h(
+			'div', {
+				class: 'potography-item',
+				style: {
+					flexBasis: `calc(var(--base-width) * ${printImageWidth / printImageHeight})`,
+					aspectRatio: printImageWidth/printImageHeight,
+				},
+			},
+			[
+				h('img', {
+					class: 'photo',
+					directives: [
+						{
+							name: 'lazy',
+							value: printImageUrl,
+						}
+					],
+				}),
+				h(
+					'a', {
+						class: 'potography-info',
+						attrs: {
+							href: targetUrl,
+							target: '_blank'
+						}
+					},
+					[
+						h('div', {
+							class: 'title'
+						}, this.post.title),
+						h('div', {
+							class: 'desc'
+						}, this.post.excerpt)
+					]
+				)
+			]
+		)
 	},
-	created () {
-	},
-	methods: {
-	}
 }
 </script>
