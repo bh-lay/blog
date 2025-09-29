@@ -61,8 +61,7 @@
 	flex-grow 1
 	max-width 100%
 	height var(--cell-height)
-	background #eee no-repeat center
-	background-size cover
+	background #eee
 
 @media (max-width: $max-mobile-width)
 	.labs-sub-header

@@ -3,6 +3,12 @@
 @import '../../common/stylus/mixin.styl'
 .potography-item
 	position relative
+	img
+		position relative
+		display block
+		width 100%
+		height 100%
+		object-fit cover
 	.potography-info
 		position absolute
 		top 0
@@ -26,9 +32,9 @@
 	:style="{
 		flexBasis: `calc(var(--base-width) * ${printImage.width / printImage.height})`,
 		aspectRatio: printImage.width/printImage.height,
-		backgroundImage: `url(${printImageUrl})`
 	}"
 >
+	<img v-lazy="printImageUrl" class="photo" />
 	<a class="potography-info" :href="post.url" target="_blank">
 		<div class="title">{{post.title}}</div>
 		<div class="desc">{{post.intro}}</div>

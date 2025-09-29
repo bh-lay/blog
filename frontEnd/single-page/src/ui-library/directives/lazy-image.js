@@ -23,6 +23,12 @@ function waitImageLoad(el, realImgSrc, nextFn) {
     observer.unobserve(el);
   }
 }
+
+function unobserve(el) {
+  if (el[nodeUnObserverFnKey]) {
+    el[nodeUnObserverFnKey]();
+  }
+}
 export default {
   bind: (el, binding) => {
     const realImgSrc = binding.value
@@ -30,13 +36,15 @@ export default {
       el.classList.remove(nodePlaceholderClass)
       el.classList.add(nodeLoadedClass)
       el.src = realImgSrc;
+      unobserve(el)
+      setTimeout(() => {
+        el.classList.remove(nodeLoadedClass)
+      }, 1500)
     })
     el.classList.add(nodePlaceholderClass)
   },
   unbind: (el) => {
-    if (el[nodeUnObserverFnKey]) {
-      el[nodeUnObserverFnKey]();
-    }
+    unobserve(el)
     el.classList.remove(nodePlaceholderClass)
     el.classList.remove(nodeLoadedClass)
   },

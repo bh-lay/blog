@@ -260,28 +260,13 @@
 </template>
 <script>
 import highlight from '@/common/js/highlight.js'
+import { loadImg } from '@/common/js/node-utils.js'
 import Comments from '@/components/comments/index.vue'
 import BlogTag from '@/components/common/blog-tag.vue'
 import filters from '@/filters/index.js'
 import { getLastClickedArticle } from "@/common/view-transition/"
 import blogShare from './share.vue'
 import buildToc from './build-toc.js'
-// 图片预加载
-function loadImg (src, callback) {
-	if (!src) {
-		callback && callback()
-		return
-	}
-	var img = new Image()
-
-	function End () {
-		callback && callback()
-		callback = null
-	}
-
-	img.onerror = img.onload = End
-	img.src = src
-}
 
 export default {
 	name: 'blogDetail',

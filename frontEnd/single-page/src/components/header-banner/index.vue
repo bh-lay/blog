@@ -71,23 +71,7 @@
 </template>
 
 <script>
-
-// 图片预加载
-function loadImg (src, callback) {
-	if (!src) {
-		callback && callback()
-		return
-	}
-	var img = new Image()
-
-	function End () {
-		callback && callback()
-		callback = null
-	}
-
-	img.onerror = img.onload = End
-	img.src = src
-}
+import { loadImg } from '@/common/js/node-utils.js'
 
 export default {
 	name: 'header-banner',

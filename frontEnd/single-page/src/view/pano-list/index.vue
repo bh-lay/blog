@@ -43,8 +43,8 @@
 .post-item
 	display block
 	position relative
-	box-shadow 1px 1px 2px rgba(0, 0, 0, .2)
-	background #000
+	// box-shadow 1px 1px 2px rgba(0, 0, 0, .2)
+	background #e2e3e9
 	overflow hidden
 	&.size-4-4
 		grid-area span 4 / span 4 / auto /
@@ -62,9 +62,9 @@
 		height calc(var(--grid-size) * 1)
 		font-size 12px
 	.cover
-		background-color #555
-		background-size cover
-		background-position center
+		display block
+		width 100%
+		height 100%
 		&:before
 			content ''
 			display block
@@ -213,9 +213,7 @@
 				:href="item.url"
 				target="_blank"
 			>
-				<div class="cover" :style="{
-					backgroundImage: `url(${item.thumb})`
-				}"></div>
+				<img v-lazy="item.thumb" class="cover" />
 				<div class="title">{{item.title}}</div>
 			</a>
 		</div>
