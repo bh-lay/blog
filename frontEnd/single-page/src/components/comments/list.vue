@@ -17,7 +17,7 @@
 	cursor default
 	margin-bottom 12px
 	padding 0 20px
-	--comment-border-color #eef
+	--comment-border-color #f7f7fd
 	&:hover
 		--comment-border-color: #dde;
 	.avatar

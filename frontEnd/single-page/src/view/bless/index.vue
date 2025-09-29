@@ -3,8 +3,7 @@
 @import "../../common/stylus/mixin.styl"
 
 .bless-page
-	background #fff
-	overflow hidden
+	background #f5f8fa
 .bless-header
 	height 70vh !important
 	min-height 450px !important
@@ -33,23 +32,21 @@
 .bless-body
 	display flex
 	flex-wrap wrap
+	padding 20px 0 80px
+	gap 20px
 	.main-body
 		width 400px
 		flex 1
 		flex-basis auto
 		overflow auto
 		box-sizing border-box
-		padding 20px 20px 80px
+		.comments-list
+			padding 20px 0
+			border-radius 8px
+			background #fff
 	.bless-sidebar
 		position relative
 		width 320px
-	.sidebar-body
-		box-sizing border-box
-		height 100%
-		margin-right -300px
-		padding 20px 320px 20px 20px
-		border-left 1px solid #ebf1f5
-		background #f5f8fa
 		.side-card
 			margin-bottom 20px
 			overflow hidden
@@ -62,14 +59,9 @@
 		display block
 		.main-body
 			width auto
-			padding 20px 0 40px
+			margin-bottom 20px
 		.bless-sidebar
 			width auto
-		.sidebar-body
-			margin 0
-			padding 0
-			border none
-			background transparent
 </style>
 <template>
 <div class="bless-page">
@@ -98,18 +90,16 @@
 			/>
 		</div>
 		<div class="bless-sidebar">
-			<div class="sidebar-body">
-				<Github
-					class="side-card"
-					:summary="githubSummary"
-					:isLoading="isLoading"
-				/>
-				<Comments
-					class="side-card"
-					:list="commentList"
-					:isLoading="isLoading"
-				/>
-			</div>
+			<Github
+				class="side-card"
+				:summary="githubSummary"
+				:isLoading="isLoading"
+			/>
+			<Comments
+				class="side-card"
+				:list="commentList"
+				:isLoading="isLoading"
+			/>
 		</div>
 	</Container>
 	<Footer />
