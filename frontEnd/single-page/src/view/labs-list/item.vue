@@ -64,7 +64,7 @@
 <template>
 <div class="post-item" :href="post.url" target="_blank">
 	<div class="thumb">
-		<img :src="thumb" />
+		<img v-lazy="thumb" />
 	</div>
 	<div class="intro">
 		<div class="title">{{post.title}}</div>
