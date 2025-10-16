@@ -75,10 +75,12 @@ export default {
 			[
 				h('img', {
 					class: 'photo',
+					attrs: {
+						src: printImageUrl,
+					},
 					directives: [
 						{
 							name: 'lazy',
-							value: printImageUrl,
 						}
 					],
 				}),
