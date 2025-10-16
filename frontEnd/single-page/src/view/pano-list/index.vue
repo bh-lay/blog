@@ -213,7 +213,7 @@
 				:href="item.url"
 				target="_blank"
 			>
-				<img v-lazy="item.thumb" class="cover" />
+				<img v-lazy :src="item.thumb" class="cover" />
 				<div class="title">{{item.title}}</div>
 			</a>
 		</div>

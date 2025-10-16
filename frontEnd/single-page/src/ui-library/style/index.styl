@@ -18,10 +18,12 @@
 	&.ui-loading-layer-hidden
 		visibility hidden
 		opacity 0
-.ui-lazy-image-placeholder
-	opacity .05
-	background url('../images/lazy-placeholder.svg') no-repeat center
-	background-size 50px 50px
-.ui-lazy-image-loaded
-	transition 1.2s
+.lazy-loading
+	transition 0s !important
+	// object-fit  none
+	opacity .2
+.lazy-loaded-start
+	opacity 0
+.lazy-loaded
+	transition 1.4s !important
 	opacity 1

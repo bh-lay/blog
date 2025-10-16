@@ -212,7 +212,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="article" ref="article" v-html="detail.content"></div>
+				<div class="article" ref="article"></div>
 				<footer>
 					<p><strong>tags：</strong>
 						<blog-tag
@@ -263,10 +263,12 @@ import highlight from '@/common/js/highlight.js'
 import { loadImg } from '@/common/js/node-utils.js'
 import Comments from '@/components/comments/index.vue'
 import BlogTag from '@/components/common/blog-tag.vue'
+import { LazyLoadManager } from '@/common/js/lazy-load-manager.js'
 import filters from '@/filters/index.js'
 import { getLastClickedArticle } from "@/common/view-transition/"
 import blogShare from './share.vue'
 import buildToc from './build-toc.js'
+import lazyPlaceholderUrl from '@/ui-library/images/lazy-placeholder.svg'
 
 export default {
 	name: 'blogDetail',
@@ -304,6 +306,16 @@ export default {
 	mounted () {
 		this.initFromCache()
 		this.initFromApi()
+		this._lazyLoadManager = new LazyLoadManager({
+			rootMargin: '0px',
+			threshold: 0.1,
+			placeholder: lazyPlaceholderUrl,
+			fallback: lazyPlaceholderUrl,
+			srcAttr: 'src'
+		});
+	},
+	beforeDestroy() {
+		this._lazyLoadManager.destroy();
 	},
 	methods: {
 		initFromCache() {
@@ -343,7 +355,7 @@ export default {
 
 					// 构建大纲数据
 					let tocData = buildToc(data.detail.content)
-					this.detail.content = tocData.article
+					// this.detail.content = tocData.article
 					this.articleToc = tocData.toc
 
 					// 渲染顶部图片
@@ -351,6 +363,11 @@ export default {
 					loadImg(coverUrl, () => {
 						this.coverImgUrl = coverUrl
 					})
+					const parser = new DOMParser();
+					const docNode = parser.parseFromString(`<div>${tocData.article}</div>`, 'text/html');
+					const articleNode = docNode.body.firstChild
+					this.$refs.article.appendChild(articleNode);
+					this._lazyLoadManager.lazyLoad(articleNode.querySelectorAll('img'));
 					this.$nextTick(() => this.addCodeSupport())
 				})
 				.catch(() => {})
