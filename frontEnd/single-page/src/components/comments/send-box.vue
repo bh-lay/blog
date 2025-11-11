@@ -1,103 +1,121 @@
-<style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "../../common/stylus/variable.styl"
-.comments-send-box
-	display flex
-	padding 20px
-	background #fff
-	.side
-		width 50px
-		margin-right 20px
-		.avatar
-			width 40px
-			height 40px
-			margin 0 auto 5px
-			border-radius 8px
-			background no-repeat center #333
-			background-size cover
-		.name
-			text-align center
-			font-size 12px
-			word-break break-all
-	.main
-		flex-grow 1
-	.input-content
-		position relative
-		border 1px solid #d7dfe4
-		&:before
-			content ""
-			position absolute
-			display block
-			width 12px
-			height 12px
-			top 15px
-			left -7px
-			border 1px solid #d7dfe4
-			border-width 0 0 1px 1px
-			background #fff
-			transform rotate(45deg)
-	.placeholder
-		box-sizing border-box
-		position absolute
-		width 100%
-		height 100%
-		top 0
-		left 0
-		padding 15px
-		line-height 20px
-		font-size 14px
-		color #a6a6a6
-		cursor text
-		background #fff
-		transition .15s
-		small
-			font-size 13px
-			color #ddd
-	textarea
-		box-sizing border-box
-		display block
-		width 100%
-		padding 4px 10px
-		margin 0
-		border none
-		resize none
-		font-family inherit
-		line-height 24px
-		font-size 14px
-		color #333
-		&:focus
-			outline none
-			border-color #fa0
-	.footer
-		height 0
-		overflow hidden
-		transition .2s
-		button
-			margin-top 10px
-	&.active
-		.placeholder
-			opacity 0
-			visibility hidden
-		.footer
-			height 50px
-@media screen and (max-width $max-mobile-width)
-	.comments-send-box
-		display block
-		padding 13px
-		.side
-			display flex
-			width 100%
-			margin-bottom 10px
-			align-items center
-			.avatar
-				width 30px
-				height 30px
-				margin 0 10px 0 0
-		.input-content:before
-			top -5px
-			left 13px
-			width 8px
-			height 8px
-			border-width 1px 0 0 1px
+<style lang="scss" scoped>
+.comments-send-box {
+  display: flex;
+  padding: 20px;
+  background: #fff;
+}
+.comments-send-box .side {
+  width: 50px;
+  margin-right: 20px;
+}
+.comments-send-box .side .avatar {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 5px;
+  border-radius: 8px;
+  background: no-repeat center #333;
+  background-size: cover;
+}
+.comments-send-box .side .name {
+  text-align: center;
+  font-size: 12px;
+  word-break: break-all;
+}
+.comments-send-box .main {
+  flex-grow: 1;
+}
+.comments-send-box .input-content {
+  position: relative;
+  border: 1px solid #d7dfe4;
+}
+.comments-send-box .input-content:before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 12px;
+  height: 12px;
+  top: 15px;
+  left: -7px;
+  border: 1px solid #d7dfe4;
+  border-width: 0 0 1px 1px;
+  background: #fff;
+  transform: rotate(45deg);
+}
+.comments-send-box .placeholder {
+  box-sizing: border-box;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  padding: 15px;
+  line-height: 20px;
+  font-size: 14px;
+  color: #a6a6a6;
+  cursor: text;
+  background: #fff;
+  transition: 0.15s;
+}
+.comments-send-box .placeholder small {
+  font-size: 13px;
+  color: #ddd;
+}
+.comments-send-box textarea {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  padding: 4px 10px;
+  margin: 0;
+  border: none;
+  resize: none;
+  font-family: inherit;
+  line-height: 24px;
+  font-size: 14px;
+  color: #333;
+}
+.comments-send-box textarea:focus {
+  outline: none;
+  border-color: #fa0;
+}
+.comments-send-box .footer {
+  height: 0;
+  overflow: hidden;
+  transition: 0.2s;
+}
+.comments-send-box .footer button {
+  margin-top: 10px;
+}
+.comments-send-box.active .placeholder {
+  opacity: 0;
+  visibility: hidden;
+}
+.comments-send-box.active .footer {
+  height: 50px;
+}
+@media screen and (max-width: 600px) {
+  .comments-send-box {
+    display: block;
+    padding: 13px;
+  }
+  .comments-send-box .side {
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+    align-items: center;
+  }
+  .comments-send-box .side .avatar {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px 0 0;
+  }
+  .comments-send-box .input-content:before {
+    top: -5px;
+    left: 13px;
+    width: 8px;
+    height: 8px;
+    border-width: 1px 0 0 1px;
+  }
+}
 </style>
 <template>
 <div class="comments-send-box" :class="[(isStartInput || content.length) ? 'active' : 'default']">

@@ -1,18 +1,20 @@
-<style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "../../common/stylus/variable.styl"
-
-.sns-share
-	padding 40px 0
-	.share-card
-		min-height 100px
-		::v-deep img
-			display block
-			width 400px
-			max-width 100%
-			margin auto
-	p
-		text-align center
-		color #67757e
+<style lang="scss" scoped>
+.sns-share {
+  padding: 40px 0;
+}
+.sns-share .share-card {
+  min-height: 100px;
+}
+.sns-share .share-card ::v-deep img {
+  display: block;
+  width: 400px;
+  max-width: 100%;
+  margin: auto;
+}
+.sns-share p {
+  text-align: center;
+  color: #67757e;
+}
 </style>
 <template>
 <div class="sns-share">

@@ -1,148 +1,185 @@
-<style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "../../common/stylus/variable.styl"
-.footer-main
-	background #161a1d
-	color #fff
-.footer-container
-	display flex
-	padding 80px 0 60px
-	.footer-part-main
-		width 50%
-		.label
-			display flex
-			align-items: center;
-			margin-bottom 20px
-			svg
-				display block
-				width 80px
-				margin-right 20px
-				fill #505c62
-			h3
-				margin 0
-				font-size 26px
-				color #5c6870
-		p
-			margin 0
-			padding-right 40px
-			font-size 16px
-			color #474e52
-	.footer-part-side
-		width 25%
-		h3
-			margin 0 0 20px
-			font-size 18px
-			color #5c6870
-	.link-list
-		list-style none
-		margin 0
-		padding 0
-		li
-			list-style none
-			margin 0
-			padding 0
-		a
-			display inline-block
-			margin-bottom 15px
-			color #5c6870
-			transition .15s ease-in-out
-			small
-				padding-left 5px
-				opacity .7
-			&:hover
-				color #9da9af
-		.primary
-			a
-				height 32px
-				padding 0 12px
-				line-height 32px
-				border 1px solid currentColor
-				border-radius 16px
-	.footer-sns-link
-		display flex
-		justify-content space-between
-		padding 40px 0 0
-		a
-			display block
-			width 60px
-			height 60px
-			transition .15s ease-in-out
-			svg
-				display block
-				height 40px
-				margin auto
-				fill #505c62
-			span
-				display block
-				text-align center
-				color #474e52
-			&:hover
-				background #fff
-.footer-sub
-	padding 40px 0 20px
-	border-top 1px solid #0d1012
-	background #121517
-	text-align center
-	color #5c6870
-	.beian
-		padding 40px 0 20px
-		font-size: 12px
-		a
-			padding 0 1em
-			color #5c6870
-			transition .15s
-			&:hover
-				text-decoration underline
-				color #9da9af
-		img
-			width 18px
-			vertical-align text-bottom
-			margin-right .3em
-.footer-version
-	padding 10px 20px 18px
-	border-top 1px solid #070808
-	background #090a0b
-	text-align center
-	button
-		margin-right 20px
-		color #2e3438
-		&:hover
-			color #8f9ba3
-		&[disabled]
-			color #576975
-	span
-		display inline-block
-		vertical-align text-bottom
-		height 1em
-		margin-left 20px
-		line-height 1em
-		font-size 12px
-		color #2e3438
-@media screen and (max-width $pad-portrait-width)
-	.footer-container
-		flex-wrap wrap
-		.footer-part-main
-			width 100%
-			margin-bottom 40px
-			p
-				padding-right 0
-		.footer-part-side
-			width 50%
-@media screen and (max-width $max-mobile-width)
-	.footer-container
-		display block
-		padding-top 30px
-		.footer-part-main,
-		.footer-part-side
-			width auto
-			padding 0 5px
-		.footer-part-main
-			.label
-				svg
-					width 60px
-				h3
-					font-size 20px
-			p
-				font-size 14px
+<style lang="scss" scoped>
+.footer-main {
+  background: #161a1d;
+  color: #fff;
+}
+.footer-container {
+  display: flex;
+  padding: 80px 0 60px;
+}
+.footer-container .footer-part-main {
+  width: 50%;
+}
+.footer-container .footer-part-main .label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.footer-container .footer-part-main .label svg {
+  display: block;
+  width: 80px;
+  margin-right: 20px;
+  fill: #505c62;
+}
+.footer-container .footer-part-main .label h3 {
+  margin: 0;
+  font-size: 26px;
+  color: #5c6870;
+}
+.footer-container .footer-part-main p {
+  margin: 0;
+  padding-right: 40px;
+  font-size: 16px;
+  color: #474e52;
+}
+.footer-container .footer-part-side {
+  width: 25%;
+}
+.footer-container .footer-part-side h3 {
+  margin: 0 0 20px;
+  font-size: 18px;
+  color: #5c6870;
+}
+.footer-container .link-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.footer-container .link-list li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.footer-container .link-list a {
+  display: inline-block;
+  margin-bottom: 15px;
+  color: #5c6870;
+  transition: 0.15s ease-in-out;
+}
+.footer-container .link-list a small {
+  padding-left: 5px;
+  opacity: 0.7;
+}
+.footer-container .link-list a:hover {
+  color: #9da9af;
+}
+.footer-container .link-list .primary a {
+  height: 32px;
+  padding: 0 12px;
+  line-height: 32px;
+  border: 1px solid currentColor;
+  border-radius: 16px;
+}
+.footer-container .footer-sns-link {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px 0 0;
+}
+.footer-container .footer-sns-link a {
+  display: block;
+  width: 60px;
+  height: 60px;
+  transition: 0.15s ease-in-out;
+}
+.footer-container .footer-sns-link a svg {
+  display: block;
+  height: 40px;
+  margin: auto;
+  fill: #505c62;
+}
+.footer-container .footer-sns-link a span {
+  display: block;
+  text-align: center;
+  color: #474e52;
+}
+.footer-container .footer-sns-link a:hover {
+  background: #fff;
+}
+.footer-sub {
+  padding: 40px 0 20px;
+  border-top: 1px solid #0d1012;
+  background: #121517;
+  text-align: center;
+  color: #5c6870;
+}
+.footer-sub .beian {
+  padding: 40px 0 20px;
+  font-size: 12px;
+}
+.footer-sub .beian a {
+  padding: 0 1em;
+  color: #5c6870;
+  transition: 0.15s;
+}
+.footer-sub .beian a:hover {
+  text-decoration: underline;
+  color: #9da9af;
+}
+.footer-sub .beian img {
+  width: 18px;
+  vertical-align: text-bottom;
+  margin-right: 0.3em;
+}
+.footer-version {
+  padding: 10px 20px 18px;
+  border-top: 1px solid #070808;
+  background: #090a0b;
+  text-align: center;
+}
+.footer-version button {
+  margin-right: 20px;
+  color: #2e3438;
+}
+.footer-version button:hover {
+  color: #8f9ba3;
+}
+.footer-version button[disabled] {
+  color: #576975;
+}
+.footer-version span {
+  display: inline-block;
+  vertical-align: text-bottom;
+  height: 1em;
+  margin-left: 20px;
+  line-height: 1em;
+  font-size: 12px;
+  color: #2e3438;
+}
+@media screen and (max-width: 1024px) {
+  .footer-container {
+    flex-wrap: wrap;
+  }
+  .footer-container .footer-part-main {
+    width: 100%;
+    margin-bottom: 40px;
+  }
+  .footer-container .footer-part-main p {
+    padding-right: 0;
+  }
+  .footer-container .footer-part-side {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .footer-container {
+    display: block;
+    padding-top: 30px;
+  }
+  .footer-container .footer-part-main,
+  .footer-container .footer-part-side {
+    width: auto;
+    padding: 0 5px;
+  }
+  .footer-container .footer-part-main .label svg {
+    width: 60px;
+  }
+  .footer-container .footer-part-main .label h3 {
+    font-size: 20px;
+  }
+  .footer-container .footer-part-main p {
+    font-size: 14px;
+  }
+}
 </style>
 <template>
 <div class="app-footer">

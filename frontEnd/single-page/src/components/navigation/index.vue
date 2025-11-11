@@ -1,198 +1,283 @@
-<style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "../../common/stylus/variable.styl"
-$page_bj_color = #f0f1f5
-@keyframes sticky-navigation-move
-	0%
-		transform translateY(20px)
-		background transparent
-		box-shadow none
-	40%
-		background transparent
-	50%
-		transform translateY(0)
-		box-shadow none
-	100%
-		transform translateY(0)
-		background #fff
-		box-shadow 0 0 2px #00000010, 0 0 10px #00000020
-	
-.navigation
-	height $navigation-height
-	--highlight-color hsl(204deg, 100%, 50%)
-	--text-color hsl(220deg, 15, 8)
-	.navigation-body
-		position fixed
-		width 100%
-		height $navigation-height
-		top 0
-		left 0
-		z-index 10000
-		background #fff
-	.nav-inner
-		position relative
-		display flex
-		align-items center
-		justify-content space-between
-		height $navigation-height
-		margin 0 -10px
-		background #fff
-	.nav-logo
-		position relative
-		height $navigation-height
-		padding 0 24px 0 18px
-		line-height $navigation-height
-		transition .3s
-		svg
-			display inline-block
-			vertical-align middle
-			width 32px
-			height 32px
-			margin-right 2px
-			fill var(--highlight-color)
-		span
-			display inline-block
-			vertical-align middle
-			padding-left 8px
-			line-height 30px
-			font-weight 900
-			font-size 16px
-			color var(--text-color)
-		&:hover
-			background: hsl(210deg, 12%, 90%)
-
-	.nav-more-btn
-		display none
-	.nav-list
-		padding-right 15px
-		a
-			position relative
-			display inline-block
-			width 80px
-			line-height $navigation-height
-			text-align center
-			font-size 14px
-			font-weight 900
-			color var(--text-color)
-			text-decoration none
-			transition .2s
-			&:after
-				content ''
-				position absolute
-				bottom 12px
-				left 18%
-				width 0
-				height 2px
-				background var(--highlight-color)
-				transition .4s
-			&:hover:after
-				width 30%
-			&.sub-page.router-link-active,
-			&.index-page.router-link-exact-active
-				opacity 1
-				&:after
-					transition 1.2s .5s
-					width 64%
-@media screen and (max-width 750px)
-	.navigation .nav-list a
-		width 60px
-		font-size 13px
-@media screen and (min-width $max-mobile-width)
-	:global(.navigation-shadow:after)
-		content ''
-		position absolute
-		width 100%
-		height 240px
-		top 0
-		left 0
-		// background-image linear-gradient(
-		// 	180deg,
-		// 	transparentify(#fff, 0.2) 70px,
-		// 	transparent 240px
-		// )
-		// background rgba(255, 255, 255, .15)
-		backdrop-filter blur(2px) contrast(0.75);
-		mask-image linear-gradient(180deg, #000 80px, transparent)
-		-webkit-backdrop-filter blur(2px) contrast(0.5);
-		-webkit-mask-image linear-gradient(180deg, #000 80px, transparent)
-		pointer-events none
-	.navigation
-		height 0
-		@supports (animation-range: 0 260px)
-			.navigation-body
-				transform translateY(20px)
-				background transparent
-				animation sticky-navigation-move linear forwards
-				animation-timeline scroll()
-				animation-range 0 260px
-			.nav-inner
-				background transparent
-				overflow hidden
-@media screen and (max-width $max-mobile-width)
-	.navigation
-		.nav-inner
-			margin-left -10px
-			box-shadow 0 0 2px rgba(0,0,0,0.063), 0 0 10px rgba(0,0,0,0.125)
-		.nav-list-body
-			position absolute
-			top 60px
-			right 10px
-			width 200px
-			background #fff
-			box-shadow 2px 2px 10px rgba(0,0,0,0.1), 1px 1px 2px rgba(0,0,0,0.2)
-			transition .2s ease-in-out
-			visibility hidden
-			opacity 0
-		.nav-list
-			a
-				display block
-				width 100%
-		.nav-mask
-			position fixed
-			top 0
-			left 0
-			width 100%
-			height 100%
-			background rgba(0, 0, 0, .2)
-			transition .2s ease-in-out
-			visibility hidden
-			opacity 0
-		.nav-more-btn
-			position absolute
-			display block
-			width 44px
-			height 44px
-			top 7px
-			right 10px
-			border none
-			cursor default
-			background #fff
-			i
-				display block
-				position absolute
-				width 26px
-				height 4px
-				left 9px
-				border-radius 4px
-				background #444
-				transition .2s ease-in-out
-				&:nth-child(1)
-					top 10px
-				&:nth-child(2)
-					top 19px
-				&:nth-child(3)
-					top 28px
-	.nav-slidedown
-		.nav-more-btn
-			i:nth-child(1)
-				transform translateY(9px) rotate(-45deg)
-			i:nth-child(2)
-				opacity: 0
-			i:nth-child(3)
-				transform translateY(-9px) rotate(45deg)
-		.nav-list-body
-		.nav-mask
-			visibility visible
-			opacity 1
+<style lang="scss" scoped>
+.navigation {
+  height: 56px;
+  --highlight-color: #09f;
+  --text-color: #111317;
+}
+.navigation .navigation-body {
+  position: fixed;
+  width: 100%;
+  height: 56px;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  background: #fff;
+}
+.navigation .nav-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  margin: 0 -10px;
+  background: #fff;
+}
+.navigation .nav-logo {
+  position: relative;
+  height: 56px;
+  padding: 0 24px 0 18px;
+  line-height: 56px;
+  transition: 0.3s;
+}
+.navigation .nav-logo svg {
+  display: inline-block;
+  vertical-align: middle;
+  width: 32px;
+  height: 32px;
+  margin-right: 2px;
+  fill: var(--highlight-color);
+}
+.navigation .nav-logo span {
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 8px;
+  line-height: 30px;
+  font-weight: 900;
+  font-size: 16px;
+  color: var(--text-color);
+}
+.navigation .nav-logo:hover {
+  background: #e2e6e9;
+}
+.navigation .nav-more-btn {
+  display: none;
+}
+.navigation .nav-list {
+  padding-right: 15px;
+}
+.navigation .nav-list a {
+  position: relative;
+  display: inline-block;
+  width: 80px;
+  line-height: 56px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: 0.2s;
+}
+.navigation .nav-list a:after {
+  content: '';
+  position: absolute;
+  bottom: 12px;
+  left: 18%;
+  width: 0;
+  height: 2px;
+  background: var(--highlight-color);
+  transition: 0.4s;
+}
+.navigation .nav-list a:hover:after {
+  width: 30%;
+}
+.navigation .nav-list a.sub-page.router-link-active,
+.navigation .nav-list a.index-page.router-link-exact-active {
+  opacity: 1;
+}
+.navigation .nav-list a.sub-page.router-link-active:after,
+.navigation .nav-list a.index-page.router-link-exact-active:after {
+  transition: 1.2s 0.5s;
+  width: 64%;
+}
+@media screen and (max-width: 750px) {
+  .navigation .nav-list a {
+    width: 60px;
+    font-size: 13px;
+  }
+}
+@media screen and (min-width: 600px) {
+  :global(.navigation-shadow:after) {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 240px;
+    top: 0;
+    left: 0;
+    backdrop-filter: blur(2px) contrast(0.75);
+    mask-image: linear-gradient(180deg, #000 80px, transparent);
+    -webkit-backdrop-filter: blur(2px) contrast(0.5);
+    -webkit-mask-image: linear-gradient(180deg, #000 80px, transparent);
+    pointer-events: none;
+  }
+  .navigation {
+    height: 0;
+  }
+  @supports (animation-range: 0 260px) {
+    .navigation .navigation-body {
+      transform: translateY(20px);
+      background: transparent;
+      animation: sticky-navigation-move linear forwards;
+      animation-timeline: scroll();
+      animation-range: 0 260px;
+    }
+    .navigation .nav-inner {
+      background: transparent;
+      overflow: hidden;
+    }
+  }
+}
+@media screen and (max-width: 600px) {
+  .navigation .nav-inner {
+    margin-left: -10px;
+    box-shadow: 0 0 2px rgba(0,0,0,0.063), 0 0 10px rgba(0,0,0,0.125);
+  }
+  .navigation .nav-list-body {
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    width: 200px;
+    background: #fff;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1), 1px 1px 2px rgba(0,0,0,0.2);
+    transition: 0.2s ease-in-out;
+    visibility: hidden;
+    opacity: 0;
+  }
+  .navigation .nav-list a {
+    display: block;
+    width: 100%;
+  }
+  .navigation .nav-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.2);
+    transition: 0.2s ease-in-out;
+    visibility: hidden;
+    opacity: 0;
+  }
+  .navigation .nav-more-btn {
+    position: absolute;
+    display: block;
+    width: 44px;
+    height: 44px;
+    top: 7px;
+    right: 10px;
+    border: none;
+    cursor: default;
+    background: #fff;
+  }
+  .navigation .nav-more-btn i {
+    display: block;
+    position: absolute;
+    width: 26px;
+    height: 4px;
+    left: 9px;
+    border-radius: 4px;
+    background: #444;
+    transition: 0.2s ease-in-out;
+  }
+  .navigation .nav-more-btn i:nth-child(1) {
+    top: 10px;
+  }
+  .navigation .nav-more-btn i:nth-child(2) {
+    top: 19px;
+  }
+  .navigation .nav-more-btn i:nth-child(3) {
+    top: 28px;
+  }
+  .nav-slidedown .nav-more-btn i:nth-child(1) {
+    transform: translateY(9px) rotate(-45deg);
+  }
+  .nav-slidedown .nav-more-btn i:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-slidedown .nav-more-btn i:nth-child(3) {
+    transform: translateY(-9px) rotate(45deg);
+  }
+  .nav-slidedown .nav-list-body,
+  .nav-slidedown .nav-mask {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+@-moz-keyframes sticky-navigation-move {
+  0% {
+    transform: translateY(20px);
+    background: transparent;
+    box-shadow: none;
+  }
+  40% {
+    background: transparent;
+  }
+  50% {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+  100% {
+    transform: translateY(0);
+    background: #fff;
+    box-shadow: 0 0 2px rgba(0,0,0,0.063), 0 0 10px rgba(0,0,0,0.125);
+  }
+}
+@-webkit-keyframes sticky-navigation-move {
+  0% {
+    transform: translateY(20px);
+    background: transparent;
+    box-shadow: none;
+  }
+  40% {
+    background: transparent;
+  }
+  50% {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+  100% {
+    transform: translateY(0);
+    background: #fff;
+    box-shadow: 0 0 2px rgba(0,0,0,0.063), 0 0 10px rgba(0,0,0,0.125);
+  }
+}
+@-o-keyframes sticky-navigation-move {
+  0% {
+    transform: translateY(20px);
+    background: transparent;
+    box-shadow: none;
+  }
+  40% {
+    background: transparent;
+  }
+  50% {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+  100% {
+    transform: translateY(0);
+    background: #fff;
+    box-shadow: 0 0 2px rgba(0,0,0,0.063), 0 0 10px rgba(0,0,0,0.125);
+  }
+}
+@keyframes sticky-navigation-move {
+  0% {
+    transform: translateY(20px);
+    background: transparent;
+    box-shadow: none;
+  }
+  40% {
+    background: transparent;
+  }
+  50% {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+  100% {
+    transform: translateY(0);
+    background: #fff;
+    box-shadow: 0 0 2px rgba(0,0,0,0.063), 0 0 10px rgba(0,0,0,0.125);
+  }
+}
 </style>
 <template>
 	<div

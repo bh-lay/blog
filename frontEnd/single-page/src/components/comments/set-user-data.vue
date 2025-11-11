@@ -1,51 +1,62 @@
-<style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "../../common/stylus/variable.styl"
-.comments-set-user-data
-	padding 10px
-	background #414548
-	.title
-		display flex
-		justify-content space-between
-		align-items center
-		margin-bottom 8px
-		strong
-			font-size 15px
-			color #fff
-		span
-			font-size 12px
-			color #8c9297
-	.list
-		display flex
-		margin 0 -5px 10px
-		.item
-			flex-grow 1
-			margin 0 5px
-		.label
-			height 18px
-			line-height 14px
-			font-size 12px
-			color #8c9297
-		input
-			display block
-			box-sizing border-box
-			width 100%
-			height 30px
-			margin 0
-			padding 0 10px
-			border none
-			color #454e54
-			transition .2s
-			&:focus
-				outline none
-				background #d7d9db
-@media screen and (max-width $max-mobile-width)
-	.comments-set-user-data
-		.title
-			display none
-		.list
-			flex-wrap wrap
-			.item:first-child
-				width 100%
+<style lang="scss" scoped>
+.comments-set-user-data {
+  padding: 10px;
+  background: #414548;
+}
+.comments-set-user-data .title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.comments-set-user-data .title strong {
+  font-size: 15px;
+  color: #fff;
+}
+.comments-set-user-data .title span {
+  font-size: 12px;
+  color: #8c9297;
+}
+.comments-set-user-data .list {
+  display: flex;
+  margin: 0 -5px 10px;
+}
+.comments-set-user-data .list .item {
+  flex-grow: 1;
+  margin: 0 5px;
+}
+.comments-set-user-data .list .label {
+  height: 18px;
+  line-height: 14px;
+  font-size: 12px;
+  color: #8c9297;
+}
+.comments-set-user-data .list input {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 30px;
+  margin: 0;
+  padding: 0 10px;
+  border: none;
+  color: #454e54;
+  transition: 0.2s;
+}
+.comments-set-user-data .list input:focus {
+  outline: none;
+  background: #d7d9db;
+}
+@media screen and (max-width: 600px) {
+  .comments-set-user-data .title {
+    display: none;
+  }
+  .comments-set-user-data .list {
+    flex-wrap: wrap;
+  }
+  .comments-set-user-data .list .item:first-child {
+    width: 100%;
+  }
+}
 </style>
 <template>
 <div class="comments-set-user-data">

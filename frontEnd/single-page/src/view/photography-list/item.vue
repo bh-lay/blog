@@ -1,35 +1,38 @@
-<style lang="stylus" rel="stylesheet/stylus" scoped>
-@import '../../common/stylus/variable.styl'
-@import '../../common/stylus/mixin.styl'
-.potography-item
-	position relative
-	img
-		position relative
-		display block
-		width 100%
-		height 100%
-		object-fit cover
-	.potography-info
-		position absolute
-		top 0
-		left 0
-		width 100%
-		height 100%
-		background rgba(0, 0, 0, .6)
-		opacity 0
-		transition .3s
-		.title
-			padding 10px 15px
-			font-size 16px
-			color #fff
-		.desc
-			padding 10px 15px
-			font-size 14px
-			color #fff
-			opacity .7
-	&:hover
-		.potography-info
-			opacity 1
+<style lang="scss" scoped>
+.potography-item {
+  position: relative;
+}
+.potography-item img {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.potography-item .potography-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  opacity: 0;
+  transition: 0.3s;
+}
+.potography-item .potography-info .title {
+  padding: 10px 15px;
+  font-size: 16px;
+  color: #fff;
+}
+.potography-item .potography-info .desc {
+  padding: 10px 15px;
+  font-size: 14px;
+  color: #fff;
+  opacity: 0.7;
+}
+.potography-item:hover .potography-info {
+  opacity: 1;
+}
 </style>
 
 <script>

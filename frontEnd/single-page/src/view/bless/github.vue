@@ -1,74 +1,84 @@
-<style lang="stylus" rel="stylesheet/stylus" scoped>
-@import '../../common/stylus/variable.styl'
-@import '../../common/stylus/mixin.styl'
-
-
-.side-github
-	header
-		position relative
-		height 110px
-		background #29353d
-	.logo
-		position absolute
-		bottom 0
-		left 31%
-		width 38%
-		height 76px
-		overflow hidden
-		text-align center
-		svg
-			width 100%
-			fill #1f282e
-	.avatar
-		position absolute
-		bottom -30px
-		left 50%
-		width 70px
-		height 70px
-		margin-left -40px
-		padding 5px
-		border-radius 100%
-		background #fff
-		img
-			display block
-			width 70px
-			height 70px
-			border-radius 100%
-	.main
-		padding 40px 0 15px
-		text-align center
-		h3
-			font-size 18px
-			font-weight normal
-			margin-bottom .5em
-		i
-			margin-right 6px
-	.count
-		border-top 1px solid #eee
-		&:after
-			content ''
-			display block
-			clear both
-			height 0
-			overflow hidden
-		a
-			display block
-			width 33.333%
-			float left
-			padding 10px 0
-			&:hover
-				background #fafafa
-		strong,
-		span
-			display block
-			text-align center
-			line-height 1.2em
-		strong
-			font-size 20px
-			color #333
-		span
-			font-size 12px
-			color #aaa
+<style lang="scss" scoped>
+.side-github header {
+  position: relative;
+  height: 110px;
+  background: #29353d;
+}
+.side-github .logo {
+  position: absolute;
+  bottom: 0;
+  left: 31%;
+  width: 38%;
+  height: 76px;
+  overflow: hidden;
+  text-align: center;
+}
+.side-github .logo svg {
+  width: 100%;
+  fill: #1f282e;
+}
+.side-github .avatar {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  width: 70px;
+  height: 70px;
+  margin-left: -40px;
+  padding: 5px;
+  border-radius: 100%;
+  background: #fff;
+}
+.side-github .avatar img {
+  display: block;
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+}
+.side-github .main {
+  padding: 40px 0 15px;
+  text-align: center;
+}
+.side-github .main h3 {
+  font-size: 18px;
+  font-weight: normal;
+  margin-bottom: 0.5em;
+}
+.side-github .main i {
+  margin-right: 6px;
+}
+.side-github .count {
+  border-top: 1px solid #eee;
+}
+.side-github .count:after {
+  content: '';
+  display: block;
+  clear: both;
+  height: 0;
+  overflow: hidden;
+}
+.side-github .count a {
+  display: block;
+  width: 33.333%;
+  float: left;
+  padding: 10px 0;
+}
+.side-github .count a:hover {
+  background: #fafafa;
+}
+.side-github .count strong,
+.side-github .count span {
+  display: block;
+  text-align: center;
+  line-height: 1.2em;
+}
+.side-github .count strong {
+  font-size: 20px;
+  color: #333;
+}
+.side-github .count span {
+  font-size: 12px;
+  color: #aaa;
+}
 </style>
 <template>
 <div class="side-github" v-loading="isLoading">
@@ -79,7 +89,7 @@
 			</svg>
 		</div>
 		<div class="avatar">
-			<img data-v-27dd2652="" src="https://assets-eu.mofei.life/gravatar/d7f43fef201a8c9bce3d550aefc03ebe?s=100">
+			<img v-lazy data-v-27dd2652="" src="https://assets-eu.mofei.life/gravatar/d7f43fef201a8c9bce3d550aefc03ebe?s=100">
 		</div>
 	</header>
 	<div class="main">

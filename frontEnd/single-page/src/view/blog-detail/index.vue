@@ -1,195 +1,318 @@
-<style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "../../common/stylus/variable.styl"
+<style lang="scss" scoped>
+@use "../../common/styles/variables" as *;
+@use "sass:color";
 
-.blog-detail
-	font-size 14px
-	background #fff
-	header
-		position relative
-		background no-repeat center
-		background-size cover
-		.header-body
-			position relative
-			color #21262c
-			.title
-				margin-bottom .5em
-				line-height 1.2
-				font-size 2em
-				font-weight 700
-			.article-info span
-				padding 0 0.5em
-				border 1px solid rgba(255, 255, 255, 0.05)
-				border-radius 4px
-				opacity .9
-				box-decoration-break clone
-				-webkit-box-decoration-break clone
-				background rgba(255, 255, 255, 0.05)
-				line-height 2
-	.section-article
-		position relative
-		.caption
-			padding 0 20px 2em
-			h1
-				margin-bottom 1em
-				font-size 28px
-			.publish-time
-				display flex
-				width 230px
-				border-radius 4px
-				overflow hidden
-				background #edf0f2
-				font-size 14px
-				.label
-					display flex
-					width 85px
-					background #2691d9
-					justify-content center
-					align-items center
-					font-weight bold
-					font-size 14px
-					color #fff
-				.main
-					flex-grow 1
-					padding 5px 0 5px 15px
-				.date-relative
-					font-weight bold
-					font-size 16px
-					color #454e54
-				.date-real
-					font-size 12px
-					color #8f9ba3
-		.article
-			font-size 16px
-			color #22272a
-		footer
-			margin 0 20px
-			p
-				word-break break-all
-				line-height: 24px
-				font-size 14px
-				color #5c6870
-		.sns-share
-			margin 0 20px
-	.toc-content
-		.title
-			margin-bottom 1.5em
-			font-weight 400
-			color #52667a
-		button
-			display block
-			margin-bottom 10px
-			line-height 1.2em
-			text-align left
-			font-size 14px
-			color #52667a
-			transition .2s
-			&:hover
-				color #407fbf
-@media screen and (max-width $pad-portrait-width)
-	.blog-detail
-		header
-			height 50vw
-			background-color #eee
-			opacity .3
-		.header-body
-			display none
-		.section-article
-			.section-article-body
-				padding 2.5em 0 4em
-			.section-article-side
-				display none
-	.section-comments
-		padding 2em 0 4em
-		border-top 1px solid #f0f1f5
-@media screen and (min-width $pad-portrait-width)
-	$page_bj_color = #f0f1f5
-	.blog-detail
-		background $page_bj_color
-		header
-			&:before
-				content ""
-				position absolute
-				left 0
-				bottom 0
-				width 100%
-				height 100%
-				z-index 0
-				pointer-events none
-				backdrop-filter blur(8px)
-				background-image linear-gradient(
-					0deg,
-					$page_bj_color,
-					transparentify($page_bj_color, 0.5) 300px
-				),
-				linear-gradient(
-					0deg,
-					$page_bj_color,
-					transparent 100px
-				)
-			&:after
-				content ""
-				position absolute
-				left 0
-				bottom -10px
-				width 100%
-				height 20px
-				z-index 0
-				background-image linear-gradient(0deg, transparent, $page_bj_color, transparent)
-		.header-body
-			min-height 220px
-			padding $navigation-height * 2.5 20px 360px
-			.article-info
-				width 60%
-	.section-article
-		position relative
-		z-index 1
-		.container
-			display flex
-			min-height 1500px
-			margin-top -360px
-			margin-bottom -80px
-		.section-article-body
-			width 400px
-			flex-shrink 1
-			flex-grow 1
-			padding 3em 6em 5em 2em
-			border-radius 8px
-			background #fff
-			box-shadow 5px 10px 10px -5px rgba(0, 0, 0, .2)
-		.section-article-side
-			width 280px
-			flex-shrink 0.8
-			border-radius 0 18px 18px 0
-			margin 30px 0
-			padding 38px 15px 40px 30px
-			background rgba(255, 255, 255, 0.6)
-		.toc-content
-			position sticky
-			top $navigation-height + 20
-			box-sizing border-box
-			max-height calc(100vh - 56px)
-			overflow auto
-	.section-comments
-		position relative
-		padding 140px 0 50px
-		background #5a6872
-		z-index 0
-		&:before
-			content ''
-			position absolute
-			top -30vh
-			left 0
-			width 0
-			height 0
-			margin-left 0
-			border-style solid
-			border-color transparent transparent #5a6872
-			border-width 0 0 30vh 100vw
-		.comments
-			padding-bottom 20px
-			border-radius 12px
-			background #fff
-			overflow hidden
+.blog-detail {
+	font-size: 14px;
+	background: #fff;
+
+	header {
+		position: relative;
+		background: no-repeat center;
+		background-size: cover;
+
+		.header-body {
+			position: relative;
+			color: #21262c;
+
+			.title {
+				margin-bottom: 0.5em;
+				line-height: 1.2;
+				font-size: 2em;
+				font-weight: 700;
+			}
+
+			.article-info span {
+				padding: 0 0.5em;
+				border: 1px solid rgba(255, 255, 255, 0.05);
+				border-radius: 4px;
+				opacity: 0.9;
+				box-decoration-break: clone;
+				-webkit-box-decoration-break: clone;
+				background: rgba(255, 255, 255, 0.05);
+				line-height: 2;
+			}
+		}
+	}
+
+	.section-article {
+		position: relative;
+
+		.caption {
+			padding: 0 20px 2em;
+
+			h1 {
+				margin-bottom: 1em;
+				font-size: 28px;
+			}
+
+			.publish-time {
+				display: flex;
+				width: 230px;
+				border-radius: 4px;
+				overflow: hidden;
+				background: #edf0f2;
+				font-size: 14px;
+
+				.label {
+					display: flex;
+					width: 85px;
+					background: #2691d9;
+					justify-content: center;
+					align-items: center;
+					font-weight: bold;
+					font-size: 14px;
+					color: #fff;
+				}
+
+				.main {
+					flex-grow: 1;
+					padding: 5px 0 5px 15px;
+				}
+
+				.date-relative {
+					font-weight: bold;
+					font-size: 16px;
+					color: #454e54;
+				}
+
+				.date-real {
+					font-size: 12px;
+					color: #8f9ba3;
+				}
+			}
+		}
+
+		.article {
+			font-size: 16px;
+			color: #22272a;
+		}
+
+		footer {
+			margin: 0 20px;
+
+			p {
+				word-break: break-all;
+				line-height: 24px;
+				font-size: 14px;
+				color: #5c6870;
+			}
+		}
+
+		.sns-share {
+			margin: 0 20px;
+		}
+	}
+
+	.toc-content {
+		.title {
+			margin-bottom: 1.5em;
+			font-weight: 400;
+			color: #52667a;
+		}
+
+		button {
+			display: block;
+			margin-bottom: 10px;
+			line-height: 1.2em;
+			text-align: left;
+			font-size: 14px;
+			color: #52667a;
+			transition: 0.2s;
+
+			&:hover {
+				color: #407fbf;
+			}
+		}
+	}
+	.toc-mask-for-mobile,
+	.toc-trigger-for-mobile {
+		display: none;
+	}
+}
+
+@media screen and (max-width: $pad-portrait-width) {
+	.blog-detail {
+		header {
+			height: 50vw;
+			background-color: #eee;
+			opacity: 0.3;
+		}
+
+		.header-body {
+			display: none;
+		}
+
+		.section-article {
+			.section-article-body {
+				padding: 2.5em 0 4em;
+			}
+			.toc-mask-for-mobile {
+				display: block;
+				visibility: hidden;
+				opacity: 0;
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(255, 255, 255, 0.5);
+				transition: .4s .1s ease-in-out;
+			}
+			.section-article-side {
+				visibility: hidden;
+				opacity: 0;
+				position: fixed;
+				left: 0;
+				bottom: -20px;
+				box-sizing: border-box;
+				width: 100%;
+				height: 75%;
+				padding: 30px 24px;
+				overflow: auto;
+				border-radius: 16px 16px 0 0;
+				box-shadow: 0 2px 24px rgba(0,0,0,.3), 0 2px 4px rgba(0,0,0,.2);
+				background: #fff;
+				transition: .15s ease-in-out;
+			}
+			&.toc-visible-for-mobile {
+				.section-article-side {
+					opacity: 1;
+					bottom: 0;
+					visibility: visible;
+					z-index: 3;
+				}
+				.toc-mask-for-mobile {
+					opacity: 1;
+					visibility: visible;
+					z-index: 2;
+				}
+			}
+
+			.toc-trigger-for-mobile {
+				display: block;
+				position: fixed;
+				bottom: 20px;
+				right: 20px;
+				z-index: 1;
+			}
+		}
+	}
+
+	.section-comments {
+		padding: 2em 0 4em;
+		border-top: 1px solid #f0f1f5;
+	}
+}
+
+@media screen and (min-width: $pad-portrait-width) {
+	$page_bj_color: #f0f1f5;
+
+	.blog-detail {
+		background: $page_bj_color;
+
+		header {
+			&:before {
+				content: "";
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				width: 100%;
+				height: 100%;
+				z-index: 0;
+				pointer-events: none;
+				backdrop-filter: blur(8px);
+				background-image: linear-gradient(0deg, $page_bj_color, color.scale($page_bj_color, $alpha: -50%) 300px), linear-gradient(0deg, $page_bj_color, transparent 100px);
+			}
+
+			&:after {
+				content: "";
+				position: absolute;
+				left: 0;
+				bottom: -10px;
+				width: 100%;
+				height: 20px;
+				z-index: 0;
+				background-image: linear-gradient(0deg, transparent, $page_bj_color, transparent);
+			}
+		}
+
+		.header-body {
+			min-height: 220px;
+			padding: $navigation-height * 2.5 20px 360px;
+
+			.article-info {
+				width: 60%;
+			}
+		}
+	}
+
+	.section-article {
+		position: relative;
+		z-index: 1;
+
+		.container {
+			display: flex;
+			min-height: 1500px;
+			margin-top: -360px;
+			margin-bottom: -80px;
+		}
+
+		.section-article-body {
+			width: 400px;
+			flex-shrink: 1;
+			flex-grow: 1;
+			padding: 3em 6em 5em 2em;
+			border-radius: 8px;
+			background: #fff;
+			box-shadow: 5px 10px 10px -5px rgba(0, 0, 0, 0.2);
+		}
+
+		.section-article-side {
+			width: 280px;
+			flex-shrink: 0.8;
+			border-radius: 0 18px 18px 0;
+			margin: 30px 0;
+			padding: 38px 15px 40px 30px;
+			background: rgba(255, 255, 255, 0.6);
+		}
+
+		.toc-content {
+			position: sticky;
+			top: $navigation-height + 20;
+			box-sizing: border-box;
+			max-height: calc(100vh - 56px);
+			overflow: auto;
+		}
+	}
+
+	.section-comments {
+		position: relative;
+		padding: 140px 0 50px;
+		background: #5a6872;
+		z-index: 0;
+
+		&:before {
+			content: '';
+			position: absolute;
+			top: -30vh;
+			left: 0;
+			width: 0;
+			height: 0;
+			margin-left: 0;
+			border-style: solid;
+			border-color: transparent transparent #5a6872;
+			border-width: 0 0 30vh 100vw;
+		}
+
+		.comments {
+			padding-bottom: 20px;
+			border-radius: 12px;
+			background: #fff;
+			overflow: hidden;
+		}
+	}
+}
 </style>
 <template>
 <div class="blog-detail">
@@ -199,7 +322,7 @@
 			<div class="article-info"><span>{{detail.intro}}</span></div>
 		</Container>
 	</header>
-	<div class="section-article">
+	<div class="section-article" :class="tocVisibleInMobile ? 'toc-visible-for-mobile' : ''">
 		<Container>
 			<div class="section-article-body" v-loading="isLoading">
 				<div class="caption">
@@ -247,6 +370,13 @@
 				</div>
 			</div>
 		</Container>
+		<div class="toc-mask-for-mobile" @click="tocVisibleInMobile = false" />
+		<Button
+			class="toc-trigger-for-mobile"
+			type="primary"
+			size="small"
+			@click="tocVisibleInMobile = true"
+		>TOC</Button>
 	</div>
 	<div class="section-comments">
 		<Container>
@@ -291,6 +421,7 @@ export default {
 			},
 			coverImgUrl: '',
 			articleToc: [],
+			tocVisibleInMobile: false,
 
 			isLoading: true
 		}

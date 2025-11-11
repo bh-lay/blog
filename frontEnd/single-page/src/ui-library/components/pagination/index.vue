@@ -114,38 +114,44 @@ export default {
 	}
 }
 </script>
-<style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "../../../common/stylus/variable.styl"
-
-.ui-pagination
-	text-align center
-	font-weight bold
-	font-size 14px
-	span
-		display inline-block
-		padding 6px 15px
-		line-height 1.5
-		background #fff
-		color #526a7a
-		text-decoration none
-		cursor pointer
-		transition .15s ease-in-out
-		&:hover
-			background-color #f1f3f4
-		&.active
-			background #428bca
-			color #fff
-			font-size 22px
-			cursor default
-			&:hover
-				cursor default
-		&.disabled
-			opacity .5
-			cursor not-allowed
-			&:hover
-				cursor default
-@media screen and (max-width $max-mobile-width)
-	.ui-pagination
-		.page-num:not(.active)
-			display none
+<style lang="scss" scoped>
+.ui-pagination {
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+}
+.ui-pagination span {
+  display: inline-block;
+  padding: 6px 15px;
+  line-height: 1.5;
+  background: #fff;
+  color: #526a7a;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.15s ease-in-out;
+}
+.ui-pagination span:hover {
+  background-color: #f1f3f4;
+}
+.ui-pagination span.active {
+  background: #428bca;
+  color: #fff;
+  font-size: 22px;
+  cursor: default;
+}
+.ui-pagination span.active:hover {
+  cursor: default;
+}
+.ui-pagination span.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.ui-pagination span.disabled:hover {
+  cursor: default;
+}
+@media screen and (max-width: 600px) {
+  .ui-pagination .page-num:not(.active) {
+    display: none;
+  }
+}
 </style>

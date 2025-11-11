@@ -1,23 +1,27 @@
-<style lang="stylus" rel="stylesheet/stylus" scoped>
-.tag-list
-	display flex
-	flex-wrap wrap
-	height 30px
-	overflow hidden
-	button
-		flex-grow 1
-		max-width 100px
-		margin 0 10px 5px 0
-		border-color #e8eaee
-		color #576575
-		&:hover
-			border-color #8599ad
-			color #576575
-		&.ui-button-primary
-			border-color #576575
-			background #576575
-			color #fff
-			cursor default
+<style lang="scss" scoped>
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  height: 30px;
+  overflow: hidden;
+}
+.tag-list button {
+  flex-grow: 1;
+  max-width: 100px;
+  margin: 0 10px 5px 0;
+  border-color: #e8eaee;
+  color: #576575;
+}
+.tag-list button:hover {
+  border-color: #8599ad;
+  color: #576575;
+}
+.tag-list button.ui-button-primary {
+  border-color: #576575;
+  background: #576575;
+  color: #fff;
+  cursor: default;
+}
 </style>
 <template>
 	<div class="tag-list" v-loading="isLoading">

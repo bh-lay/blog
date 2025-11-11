@@ -2,7 +2,7 @@
  * @author bh-lay
  * 
  */
-import { routeItemMatched, Connect } from '@/core/index'
+import { routeItemMatched, Connect, App } from '@/core/index'
 import { getDbCollection } from '@/database/DB'
 import power from '@/conf/power'
 import parseData from './parse'
@@ -10,7 +10,7 @@ import parseData from './parse'
 
 const collectionName = 'article'
 
-export default async function (route: routeItemMatched, connect: Connect) {
+export default async function (route: routeItemMatched, connect: Connect, app: App) {
   const sessionInstance = await connect.session()
   if (!sessionInstance.power(power.BLOG_EDIT)) {
     connect.writeJson( {
@@ -35,6 +35,8 @@ export default async function (route: routeItemMatched, connect: Connect) {
     $set: params
   })
   client.close()
+  // 清除文章标签相关缓存
+  app.cache.clear('tags,article')
   connect.writeJson({
     code : 200
   })

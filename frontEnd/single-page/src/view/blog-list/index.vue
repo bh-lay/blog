@@ -1,68 +1,83 @@
-<style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "../../common/stylus/variable.styl"
-$tag_cnt_bj = #fff
+<style lang="scss" scoped>
 /** 博文列表页 **/
-.article-list-page
-	min-height 600px
-	padding-bottom 20px
-	background #dee3e7
-	.article-list-header
-		height 300px
-.sticky-bar
-	position sticky
-	top $navigation-height
-	width 100%
-	background $tag_cnt_bj
-	border-bottom 1px solid #c4cdd4
-	z-index 500
-.sticky-body
-	display flex
-	align-items start
-	padding 12px 0
-	.tag-list
-		flex-grow 1
-		width 200px
-		margin-right 10px
-.list-type-switch
-	position relative
-	width 30px
-	background #f1f3f4
-	i
-		position absolute
-		width 8px
-		height 8px
-		background #bec6ca
-		transition .2s
-		&:nth-child(1)
-			top 5px
-			left 5px
-		&:nth-child(2)
-			top 5px
-			left 15px
-		&:nth-child(3)
-			top 15px
-			left 5px
-		&:nth-child(4)
-			top 15px
-			left 15px
-	&.active
-		i
-			width 18px
-			height 3px
-			left 5px
-			&:nth-child(1)
-				top 6px
-			&:nth-child(4)
-				top 12px
-			&:nth-child(3)
-				top 18px
-			&:nth-child(2)
-				left 15px
-				width 0
-				height 0
-@media (max-width: $max-mobile-width)
-	.sticky-body
-		padding 7px 0
+.article-list-page {
+  min-height: 600px;
+  padding-bottom: 20px;
+  background: #dee3e7;
+}
+.article-list-page .article-list-header {
+  height: 300px;
+}
+.sticky-bar {
+  position: sticky;
+  top: 56px;
+  width: 100%;
+  background: #fff;
+  border-bottom: 1px solid #c4cdd4;
+  z-index: 500;
+}
+.sticky-body {
+  display: flex;
+  align-items: start;
+  padding: 12px 0;
+}
+.sticky-body .tag-list {
+  flex-grow: 1;
+  width: 200px;
+  margin-right: 10px;
+}
+.list-type-switch {
+  position: relative;
+  width: 30px;
+  background: #f1f3f4;
+}
+.list-type-switch i {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #bec6ca;
+  transition: 0.2s;
+}
+.list-type-switch i:nth-child(1) {
+  top: 5px;
+  left: 5px;
+}
+.list-type-switch i:nth-child(2) {
+  top: 5px;
+  left: 15px;
+}
+.list-type-switch i:nth-child(3) {
+  top: 15px;
+  left: 5px;
+}
+.list-type-switch i:nth-child(4) {
+  top: 15px;
+  left: 15px;
+}
+.list-type-switch.active i {
+  width: 18px;
+  height: 3px;
+  left: 5px;
+}
+.list-type-switch.active i:nth-child(1) {
+  top: 6px;
+}
+.list-type-switch.active i:nth-child(4) {
+  top: 12px;
+}
+.list-type-switch.active i:nth-child(3) {
+  top: 18px;
+}
+.list-type-switch.active i:nth-child(2) {
+  left: 15px;
+  width: 0;
+  height: 0;
+}
+@media (max-width: 600px) {
+  .sticky-body {
+    padding: 7px 0;
+  }
+}
 </style>
 <template>
 <div class="article-list-page">

@@ -1,20 +1,20 @@
-<style lang="stylus" rel="stylesheet/stylus" scoped>
-@import '../../common/stylus/variable.styl';
-@import '../../common/stylus/mixin.styl';
-
+<style lang="scss" scoped>
 /* * 首页 * */
-.index-page
-	overflow hidden
-	section
-		position relative
-		font-size 14px
-
-.index-about-links
-	padding 7em 0
-	text-align center
-	background #fff
-	a
-		margin 0 20px
+.index-page {
+  overflow: hidden;
+}
+.index-page section {
+  position: relative;
+  font-size: 14px;
+}
+.index-about-links {
+  padding: 7em 0;
+  text-align: center;
+  background: #fff;
+}
+.index-about-links a {
+  margin: 0 20px;
+}
 </style>
 <template>
 <div class="index-page">

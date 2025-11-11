@@ -1,8 +1,8 @@
-<style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "../../common/stylus/variable.styl"
-.send-box
-	margin-bottom 20px
-	box-shadow 0 0 2px rgba(0, 0, 0, 0.2)
+<style lang="scss" scoped>
+.send-box {
+  margin-bottom: 20px;
+  box-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
 </style>
 <template>
 <div class="comments">

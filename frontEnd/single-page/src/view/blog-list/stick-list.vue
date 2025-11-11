@@ -1,103 +1,121 @@
-<style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "../../common/stylus/variable.styl"
-.stick-list
-	padding-top 20px
-.status
-	height 52px
-	margin-bottom 20px
-.article-item
-	overflow hidden
-	background #fff
-	transition box-shadow .3s ease-out
-	transition-delay .1s
-	.article-item-link
-		text-decoration none
-		cursor pointer
-	.title
-		display block
-		padding 1em .5em .2em
-		font-weight normal
-		line-height 1.5em
-		text-align center
-		font-size 18px
-		color #22252a
-		outline none
-	img
-		display block
-		background #eee
-		max-width 100%
-		margin auto
-	.info
-		padding 20px
-		line-height 1.4
-		font-size 13px
-		color #8a98a8
-		text-indent 2em
-	.label
-		position absolute
-		top 0
-		right 0
-		width 30px
-		height 30px
-		background #f70
-		border 1px solid #c7cdd1
-		border-width 0 0 1px 1px
-		&:before
-			position absolute
-			content ''
-			width 0
-			height 0
-			top 0
-			right 0
-			border 1px solid #fff
-			border-width 0 30px 30px 0
-			border-color transparent transparent #fff transparent
-		span
-			position absolute
-			display block
-			top 0
-			right 0
-			width 100%
-			height 100%
-			-webkit-transform rotate(45deg) scale(.8)
-			transform rotate(45deg) scale(.8)
-			text-align center
-			line-height 15px
-			color #fff
-	footer
-		display flex
-		align-items center
-		padding 7px 15px
-		border-top 1px solid #edeff3
-		background #f9fafb
-		line-height 24px
-		.tags
-			flex-grow 1
-		.time
-			white-space nowrap
-			color #7e94a9
-			font-size 12px
-	&.pure-text .link
-			background url("./blog-card.jpg") no-repeat top right #fff
-			background-size 170px 34px
-	&:hover
-		box-shadow 5px 10px 10px -5px rgba(0, 0, 0, .2)
-
-@media (max-width: $max-mobile-width)
-	.stick-list
-		padding-top 10px
-	.article-item
-		.title
-			padding: 1em 0 0.2em;
-			font-size 14px
-		.info
-			padding 5px 10px 15px
-			font-size 12px
-		footer .tags
-			display none
-		&.pure-text .link
-			padding-top 5px
-			background-size 85px 17px
+<style lang="scss" scoped>
+.stick-list {
+  padding-top: 20px;
+}
+.status {
+  height: 52px;
+  margin-bottom: 20px;
+}
+.article-item {
+  overflow: hidden;
+  background: #fff;
+  transition: box-shadow 0.3s ease-out;
+  transition-delay: 0.1s;
+}
+.article-item .article-item-link {
+  text-decoration: none;
+  cursor: pointer;
+}
+.article-item .title {
+  display: block;
+  padding: 1em 0.5em 0.2em;
+  font-weight: normal;
+  line-height: 1.5em;
+  text-align: center;
+  font-size: 18px;
+  color: #22252a;
+  outline: none;
+}
+.article-item img {
+  display: block;
+  background: #eee;
+  max-width: 100%;
+  margin: auto;
+}
+.article-item .info {
+  padding: 20px;
+  line-height: 1.4;
+  font-size: 13px;
+  color: #8a98a8;
+  text-indent: 2em;
+}
+.article-item .label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  background: #f70;
+  border: 1px solid #c7cdd1;
+  border-width: 0 0 1px 1px;
+}
+.article-item .label:before {
+  position: absolute;
+  content: '';
+  width: 0;
+  height: 0;
+  top: 0;
+  right: 0;
+  border: 1px solid #fff;
+  border-width: 0 30px 30px 0;
+  border-color: transparent transparent #fff transparent;
+}
+.article-item .label span {
+  position: absolute;
+  display: block;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transform: rotate(45deg) scale(0.8);
+  transform: rotate(45deg) scale(0.8);
+  text-align: center;
+  line-height: 15px;
+  color: #fff;
+}
+.article-item footer {
+  display: flex;
+  align-items: center;
+  padding: 7px 15px;
+  border-top: 1px solid #edeff3;
+  background: #f9fafb;
+  line-height: 24px;
+}
+.article-item footer .tags {
+  flex-grow: 1;
+}
+.article-item footer .time {
+  white-space: nowrap;
+  color: #7e94a9;
+  font-size: 12px;
+}
+.article-item.pure-text .link {
+  background: url("./blog-card.jpg") no-repeat top right #fff;
+  background-size: 170px 34px;
+}
+.article-item:hover {
+  box-shadow: 5px 10px 10px -5px rgba(0,0,0,0.2);
+}
+@media (max-width: 600px) {
+  .stick-list {
+    padding-top: 10px;
+  }
+  .article-item .title {
+    padding: 1em 0 0.2em;
+    font-size: 14px;
+  }
+  .article-item .info {
+    padding: 5px 10px 15px;
+    font-size: 12px;
+  }
+  .article-item footer .tags {
+    display: none;
+  }
+  .article-item.pure-text .link {
+    padding-top: 5px;
+    background-size: 85px 17px;
+  }
+}
 </style>
 <template>
 <div class="stick-list">
