@@ -52,7 +52,7 @@
 		:key="item._id"
 	>
 		<div class="avatar">
-			<img :src="item.user.avatar" />
+			<img v-lazy :src="item.user.avatar" />
 		</div>
 		<ItemContent
 			:cid="cid"

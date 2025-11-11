@@ -133,6 +133,9 @@ export class LazyLoadManager {
 					el.classList.add("lazy-loaded");
 					setTimeout(() => {
 						el.classList.remove("lazy-loaded");
+						if (isError) {
+							el.classList.add("lazy-load-failed");
+						}
 					}, 3000);
 				}, 20);
 			});

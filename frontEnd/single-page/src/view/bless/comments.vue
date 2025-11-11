@@ -62,7 +62,7 @@
 			class="side-comments-item"
 		>
 			<div class="cover">
-				<img :src="item.user.avatar || defaultAvatar" >
+				<img v-lazy :src="item.user.avatar || defaultAvatar" >
 			</div>
 			<div class="main">
 				<h4>{{item.user.username}}<small>0:21 1-21</small></h4>
