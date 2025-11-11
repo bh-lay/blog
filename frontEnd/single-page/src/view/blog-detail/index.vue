@@ -1,5 +1,6 @@
 <style lang="scss" scoped>
 @use "../../common/styles/variables" as *;
+@use "sass:color";
 
 .blog-detail {
 	font-size: 14px;
@@ -124,6 +125,10 @@
 			}
 		}
 	}
+	.toc-mask-for-mobile,
+	.toc-trigger-for-mobile {
+		display: none;
+	}
 }
 
 @media screen and (max-width: $pad-portrait-width) {
@@ -142,9 +147,54 @@
 			.section-article-body {
 				padding: 2.5em 0 4em;
 			}
-
+			.toc-mask-for-mobile {
+				display: block;
+				visibility: hidden;
+				opacity: 0;
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(255, 255, 255, 0.5);
+				transition: .4s .1s ease-in-out;
+			}
 			.section-article-side {
-				display: none;
+				visibility: hidden;
+				opacity: 0;
+				position: fixed;
+				left: 0;
+				bottom: -20px;
+				box-sizing: border-box;
+				width: 100%;
+				height: 75%;
+				padding: 30px 24px;
+				overflow: auto;
+				border-radius: 16px 16px 0 0;
+				box-shadow: 0 2px 24px rgba(0,0,0,.3), 0 2px 4px rgba(0,0,0,.2);
+				background: #fff;
+				transition: .15s ease-in-out;
+			}
+			&.toc-visible-for-mobile {
+				.section-article-side {
+					opacity: 1;
+					bottom: 0;
+					visibility: visible;
+					z-index: 3;
+				}
+				.toc-mask-for-mobile {
+					opacity: 1;
+					visibility: visible;
+					z-index: 2;
+				}
+			}
+
+			.toc-trigger-for-mobile {
+				display: block;
+				position: fixed;
+				bottom: 20px;
+				right: 20px;
+				z-index: 1;
 			}
 		}
 	}
@@ -172,7 +222,7 @@
 				z-index: 0;
 				pointer-events: none;
 				backdrop-filter: blur(8px);
-				background-image: linear-gradient(0deg, $page_bj_color, transparentize($page_bj_color, 0.5) 300px), linear-gradient(0deg, $page_bj_color, transparent 100px);
+				background-image: linear-gradient(0deg, $page_bj_color, color.scale($page_bj_color, $alpha: -50%) 300px), linear-gradient(0deg, $page_bj_color, transparent 100px);
 			}
 
 			&:after {
@@ -272,7 +322,7 @@
 			<div class="article-info"><span>{{detail.intro}}</span></div>
 		</Container>
 	</header>
-	<div class="section-article">
+	<div class="section-article" :class="tocVisibleInMobile ? 'toc-visible-for-mobile' : ''">
 		<Container>
 			<div class="section-article-body" v-loading="isLoading">
 				<div class="caption">
@@ -320,6 +370,13 @@
 				</div>
 			</div>
 		</Container>
+		<div class="toc-mask-for-mobile" @click="tocVisibleInMobile = false" />
+		<Button
+			class="toc-trigger-for-mobile"
+			type="primary"
+			size="small"
+			@click="tocVisibleInMobile = true"
+		>TOC</Button>
 	</div>
 	<div class="section-comments">
 		<Container>
@@ -364,6 +421,7 @@ export default {
 			},
 			coverImgUrl: '',
 			articleToc: [],
+			tocVisibleInMobile: false,
 
 			isLoading: true
 		}
