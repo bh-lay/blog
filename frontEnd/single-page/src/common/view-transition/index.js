@@ -1,4 +1,4 @@
-import "./view-transition.styl"
+import "./view-transition.scss"
 
 const isSupportViewTransition = !!document.startViewTransition;
 const baseRouterTransitionClass = "base-router-transition"

@@ -1,50 +1,56 @@
-<style lang="stylus" rel="stylesheet/stylus" scoped>
-@import '../../common/stylus/variable.styl';
-@import '../../common/stylus/mixin.styl';
-
-.index-aboutme
-	height 95vh !important
-	min-height 600px !important
-	.aboutme-body
-		display flex
-		align-items center
-		position relative
-		height 80%
-		color #fff
-	h2,
-	h3
-		margin 0
-		padding-left 10px
-		line-height 1.5em
-		font-weight 200
-	h2
-		font-size 2em
-	h3
-		font-size 3em
-		strong
-			font-weight 500
-	p
-		padding-left: 10px;
-		margin: 1.5em 0 1em;
-		font-size: 1.1em;
-	.my-sns-links
-		a
-			display inline-block
-			vertical-align middle
-			width 2.2em
-			height 2.2em
-			margin 0 10px
-			line-height 2.2em
-			border 1px solid currentColor
-			border-radius 100%
-			font-size 1.3em
-			color inherit
-			transition .2s ease-in
-			svg
-				width 100%
-				fill currentColor
-			&:hover
-				background rgba(255, 255, 255, .5)
+<style lang="scss" scoped>
+.index-aboutme {
+  height: 95vh !important;
+  min-height: 600px !important;
+}
+.index-aboutme .aboutme-body {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 80%;
+  color: #fff;
+}
+.index-aboutme h2,
+.index-aboutme h3 {
+  margin: 0;
+  padding-left: 10px;
+  line-height: 1.5em;
+  font-weight: 200;
+}
+.index-aboutme h2 {
+  font-size: 2em;
+}
+.index-aboutme h3 {
+  font-size: 3em;
+}
+.index-aboutme h3 strong {
+  font-weight: 500;
+}
+.index-aboutme p {
+  padding-left: 10px;
+  margin: 1.5em 0 1em;
+  font-size: 1.1em;
+}
+.index-aboutme .my-sns-links a {
+  display: inline-block;
+  vertical-align: middle;
+  width: 2.2em;
+  height: 2.2em;
+  margin: 0 10px;
+  line-height: 2.2em;
+  border: 1px solid currentColor;
+  border-radius: 100%;
+  font-size: 1.3em;
+  color: inherit;
+  transition: 0.2s ease-in;
+}
+.index-aboutme .my-sns-links a svg {
+  width: 100%;
+  fill: currentColor;
+}
+.index-aboutme .my-sns-links a:hover {
+  background: rgba(255,255,255,0.5);
+}
 </style>
 <template>
 <headerBanner

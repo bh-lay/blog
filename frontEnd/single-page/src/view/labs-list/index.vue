@@ -1,4 +1,4 @@
-<style lang="stylus" rel="stylesheet/stylus" scoped>
+<style lang="scss" scoped>
 </style>
 <template>
 <layout

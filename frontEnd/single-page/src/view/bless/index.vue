@@ -1,67 +1,77 @@
-<style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "../../common/stylus/variable.styl"
-@import "../../common/stylus/mixin.styl"
-
-.bless-page
-	background #f5f8fa
-.bless-header
-	height 70vh !important
-	min-height 450px !important
-	.bless-header-content
-		position absolute
-		top 20%
-		left 0
-		width 100%
-		height 60%
-		display flex
-		align-items center
-		justify-content center
-	.bless-header-main
-		width 100%
-		max-width 700px
-		margin auto
-		padding 0 20px
-	h2
-		height 1em
-		line-height 1em
-		margin 0 0 0.5em
-		text-align center
-		font-weight normal
-		font-size 30px
-		color #fff
-.bless-body
-	display flex
-	flex-wrap wrap
-	padding 20px 0 80px
-	gap 20px
-	.main-body
-		width 400px
-		flex 1
-		flex-basis auto
-		overflow auto
-		box-sizing border-box
-		.comments-list
-			padding 20px 0
-			border-radius 8px
-			background #fff
-	.bless-sidebar
-		position relative
-		width 320px
-		.side-card
-			margin-bottom 20px
-			overflow hidden
-			background #fff
-			border-radius 2px
-			box-shadow 0 0 2px rgba(0, 0, 0, 0.2)
-
-@media screen and (max-width $pad-portrait-width)
-	.bless-body
-		display block
-		.main-body
-			width auto
-			margin-bottom 20px
-		.bless-sidebar
-			width auto
+<style lang="scss" scoped>
+.bless-page {
+  background: #f5f8fa;
+}
+.bless-header {
+  height: 70vh !important;
+  min-height: 450px !important;
+}
+.bless-header .bless-header-content {
+  position: absolute;
+  top: 20%;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bless-header .bless-header-main {
+  width: 100%;
+  max-width: 700px;
+  margin: auto;
+  padding: 0 20px;
+}
+.bless-header h2 {
+  height: 1em;
+  line-height: 1em;
+  margin: 0 0 0.5em;
+  text-align: center;
+  font-weight: normal;
+  font-size: 30px;
+  color: #fff;
+}
+.bless-body {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px 0 80px;
+  gap: 20px;
+}
+.bless-body .main-body {
+  width: 400px;
+  flex: 1;
+  flex-basis: auto;
+  overflow: auto;
+  box-sizing: border-box;
+}
+.bless-body .main-body .comments-list {
+  padding: 20px 0;
+  border-radius: 8px;
+  background: #fff;
+}
+.bless-body .bless-sidebar {
+  position: relative;
+  width: 320px;
+}
+.bless-body .bless-sidebar .side-card {
+  margin-bottom: 20px;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+@media screen and (max-width: 1024px) {
+  .bless-body {
+    display: block;
+  }
+  .bless-body .main-body {
+    width: auto;
+    margin-bottom: 20px;
+  }
+  .bless-body .bless-sidebar {
+    width: auto;
+  }
+}
 </style>
 <template>
 <div class="bless-page">

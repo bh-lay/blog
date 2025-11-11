@@ -1,66 +1,95 @@
-<style lang="stylus" rel="stylesheet/stylus" scoped>
-	@import "../../common/stylus/variable.styl"
-	.content
-		position relative
-		width 200px
-		flex-grow 1
-		padding 15px
-		border 1px solid var(--comment-border-color)
-		background #fff
-		border-radius 2px
-		transition .2s
-		&:before
-			content ''
-			position absolute
-			display block
-			width 12px
-			height 12px
-			top 16px
-			left -7px
-			border 1px solid var(--comment-border-color)
-			border-width 0 0 1px 1px
-			background #fff
-			transform rotate(45deg)
-			transition .2s
-	.caption
-		display flex
-		margin-bottom 15px
-		font-size 14px
-		line-height 20px
-		.info
-			flex-grow 1
-			width 100px
-			.who
-				margin-right .6em
-				font-weight 500
-				color #364249
-			a.who:hover
-				text-decoration underline
-			.time
-				color #aaa
-		.btn-reply
-			color #aaa
-			&:hover
-				color #333
-	.article
-		min-height 20px
-		padding: 0
-		font-size 14px
-		pre
-			background #f8f8f8
-			padding 20px 30px
-			color #222
-	.send-box
-		border-top 1px solid #dfe7ec
-		background #f1f3f4
-@media screen and (max-width $max-mobile-width)
-	.content:before
-		width 10px
-		height 10px
-		top 10px
-		left -6px
-	.caption .info .who
-		display block
+<style lang="scss" scoped>
+@use "../../common/styles/variables" as *;
+
+.content {
+	position: relative;
+	width: 200px;
+	flex-grow: 1;
+	padding: 15px;
+	border: 1px solid var(--comment-border-color);
+	background: #fff;
+	border-radius: 2px;
+	transition: 0.2s;
+
+	&:before {
+		content: '';
+		position: absolute;
+		display: block;
+		width: 12px;
+		height: 12px;
+		top: 16px;
+		left: -7px;
+		border: 1px solid var(--comment-border-color);
+		border-width: 0 0 1px 1px;
+		background: #fff;
+		transform: rotate(45deg);
+		transition: 0.2s;
+	}
+}
+
+.caption {
+	display: flex;
+	margin-bottom: 15px;
+	font-size: 14px;
+	line-height: 20px;
+
+	.info {
+		flex-grow: 1;
+		width: 100px;
+
+		.who {
+			margin-right: 0.6em;
+			font-weight: 500;
+			color: #364249;
+		}
+
+		a.who:hover {
+			text-decoration: underline;
+		}
+
+		.time {
+			color: #aaa;
+		}
+	}
+
+	.btn-reply {
+		color: #aaa;
+
+		&:hover {
+			color: #333;
+		}
+	}
+}
+
+.article {
+	min-height: 20px;
+	padding: 0;
+	font-size: 14px;
+
+	pre {
+		background: #f8f8f8;
+		padding: 20px 30px;
+		color: #222;
+	}
+}
+
+.send-box {
+	border-top: 1px solid #dfe7ec;
+	background: #f1f3f4;
+}
+
+@media screen and (max-width: $max-mobile-width) {
+	.content:before {
+		width: 10px;
+		height: 10px;
+		top: 10px;
+		left: -6px;
+	}
+
+	.caption .info .who {
+		display: block;
+	}
+}
 </style>
 <template>
 <div class="content">

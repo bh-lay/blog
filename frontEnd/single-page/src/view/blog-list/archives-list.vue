@@ -1,30 +1,36 @@
-<style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "../../common/stylus/variable.styl"
-.archive-list
-	max-width 640px
-	margin 0 auto 20px
-	padding 20px 20px 40px
-.archive-title
-	line-height 1.5em
-	margin-bottom 20px
-	border-bottom 1px solid #bdc6ca
-	text-indent 10px
-	font-size 16px
-	color #414f58
-.archive-item
-	margin-bottom 30px
-	.caption
-		display flex
-		justify-content space-between
-		margin-bottom 10px
-		a
-			font-size 16px
-		span
-			font-size 14px
-			color #8f9aa3
-	p
-		margin 0
-		color #636f79
+<style lang="scss" scoped>
+.archive-list {
+  max-width: 640px;
+  margin: 0 auto 20px;
+  padding: 20px 20px 40px;
+}
+.archive-title {
+  line-height: 1.5em;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #bdc6ca;
+  text-indent: 10px;
+  font-size: 16px;
+  color: #414f58;
+}
+.archive-item {
+  margin-bottom: 30px;
+}
+.archive-item .caption {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.archive-item .caption a {
+  font-size: 16px;
+}
+.archive-item .caption span {
+  font-size: 14px;
+  color: #8f9aa3;
+}
+.archive-item p {
+  margin: 0;
+  color: #636f79;
+}
 </style>
 <template>
 <div class="archive-list" v-loading="isLoading">

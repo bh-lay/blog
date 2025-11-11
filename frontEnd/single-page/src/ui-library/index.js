@@ -1,7 +1,7 @@
 import components from './components/index.js'
 import directives from './directives/index.js'
 import filters from './filters/index.js'
-import '@/ui-library/style/index.styl'
+import '@/ui-library/style/index.scss'
 
 export default {
 	install (Vue) {

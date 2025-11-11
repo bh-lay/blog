@@ -1,7 +1,8 @@
-<style lang="stylus" rel="stylesheet/stylus" scoped>
-.header-gallery
-	background #333
-	height 100%
+<style lang="scss" scoped>
+.header-gallery {
+  background: #333;
+  height: 100%;
+}
 </style>
 <template>
 <div class="header-gallery"></div>

@@ -1,186 +1,214 @@
-<style lang="stylus" rel="stylesheet/stylus" scoped>
-@import '../../common/stylus/variable.styl'
-@import '../../common/stylus/mixin.styl'
-
-.pano-list-pager
-	background #f0f1f5
-.pano-header
-	position relative
-	background #ddd
-	.header-gallery
-		opacity 0
-		transition 2s
-	&.header-visible
-		.header-gallery
-			opacity 1
-	.panorama-author
-		position absolute
-		bottom 10px
-		left 0
-		width: 100%
-		text-align right
-		opacity .2
-		transition .4s
-		a
-			font-size 12px
-			color #fff
-			text-shadow 1px 1px 1px #000, 0 0 5px rgba(0, 0, 0, 0.5)
-			&:hover
-				text-decoration underline
-	&:hover .panorama-author
-		opacity 1
-
-.post-list
-	--grid-size 124px
-	--grid-gap 4px
-	min-height 400px
-	display grid
-	grid-template-columns repeat(auto-fill, var(--grid-size))
-	grid-template-rows repeat(auto-fill, var(--grid-size))
-	grid-auto-flow dense
-	gap var(--grid-gap)
-	justify-content center
-.post-item
-	display block
-	position relative
-	// box-shadow 1px 1px 2px rgba(0, 0, 0, .2)
-	background #e2e3e9
-	overflow hidden
-	&.size-4-4
-		grid-area span 4 / span 4 / auto /
-		width calc(var(--grid-size) * 4 + var(--grid-gap) * 3)
-		height calc(var(--grid-size) * 4 + var(--grid-gap) * 3)
-		font-size 24px
-	&.size-2-2
-		grid-area span 2 / span 2 / auto /
-		width calc(var(--grid-size) * 2 + var(--grid-gap) * 1)
-		height calc(var(--grid-size) * 2 + var(--grid-gap) * 1)
-		font-size 16px
-	&.size-1-1
-		grid-area span 1 / span 1 / auto /
-		width calc(var(--grid-size) * 1)
-		height calc(var(--grid-size) * 1)
-		font-size 12px
-	.cover
-		display block
-		width 100%
-		height 100%
-		&:before
-			content ''
-			display block
-			padding-top 100%
-	.title
-		position absolute
-		left 0
-		bottom 0
-		width 100%
-		height 6em
-		box-sizing border-box
-		padding 3.5em 0 0.5em 1em
-		line-height 2em
-		font-size 1em
-		font-weight 900
-		color #fff
-		white-space nowrap
-		overflow hidden
-		text-overflow ellipsis
-		background linear-gradient(transparent, rgba(0,0,0,.6))
-.pano-profile
-	grid-area span 4 / span 2 / auto /
-	width calc(var(--grid-size) * 2 + var(--grid-gap) * 1)
-	height calc(var(--grid-size) * 4 + var(--grid-gap) * 3)
-	background linear-gradient(50deg, #091d3d, rgba(20, 120, 50, 60%))
-	background-color transparent
-	.part-a
-		display flex
-		flex-direction column
-		justify-content center
-		width 65%
-		height 62%
-		margin 0 auto
-		padding 0 12px
-		border-bottom 1px solid rgba(255, 255, 255, .07)
-		span
-			margin 40px 0 12px
-			color #fff
-			opacity .6
-		img
-			width 68px
-			margin-bottom 90px
-		.ui-button-primary
-			width 100%
-	.part-b
-		padding 32px 45px 0
-		h2
-			display flex
-			justify-content space-between
-			margin 0
-			line-height 1em
-			text-align center
-			font-size 65px
-			font-weight 200
-			color #fff
-		h3
-			margin 32px 0 0
-			letter-spacing 6px
-			line-height 1em
-			text-align center
-			font-size 24px
-			font-weight 200
-			color rgba(255, 255, 255, .6)
-		
-@media screen and (min-width $pad-portrait-width)
-	.pano-header
-		height 540px
-		&:before
-			content ""
-			position absolute
-			left 0
-			bottom 0
-			width 100%
-			height 100%
-			z-index 1
-			background-image linear-gradient(0deg, #f0f1f5, transparent 300px), linear-gradient(0deg, #f0f1f5, transparent 100px)
-		&:after
-			content ""
-			position absolute
-			left 0
-			bottom -10px
-			width 100%
-			height 20px
-			z-index 1
-			background-image linear-gradient(0deg, transparent, #f0f1f5, transparent)
-		.panorama-author
-			bottom 150px
-			z-index 2
-	.main-pager
-		position relative
-		z-index 1
-		margin-top -140px !important
-		padding-bottom 50px
-	.post-item
-		.cover
-			transition .2s ease-in-out
-		&:hover
-			.cover
-				opacity .6
-@media screen and (max-width $pad-portrait-width)
-	.pano-header
-		height 40vw
-		margin-bottom 20px
-	.main-pager
-		padding-bottom 20px
-	.post-list
-		--grid-size 120px
-	.post-item
-		&.size-4-4
-			grid-area span 3 / span 3 / auto /
-			width calc(var(--grid-size) * 3)
-			height calc(var(--grid-size) * 3)
-		&.size-4-2
-			grid-area span 2 / span 4 / auto /
-			width calc(var(--grid-size) * 4)
-			height calc(var(--grid-size) * 2)
+<style lang="scss" scoped>
+.pano-list-pager {
+  background: #f0f1f5;
+}
+.pano-header {
+  position: relative;
+  background: #ddd;
+}
+.pano-header .header-gallery {
+  opacity: 0;
+  transition: 2s;
+}
+.pano-header.header-visible .header-gallery {
+  opacity: 1;
+}
+.pano-header .panorama-author {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  text-align: right;
+  opacity: 0.2;
+  transition: 0.4s;
+}
+.pano-header .panorama-author a {
+  font-size: 12px;
+  color: #fff;
+  text-shadow: 1px 1px 1px #000, 0 0 5px rgba(0,0,0,0.5);
+}
+.pano-header .panorama-author a:hover {
+  text-decoration: underline;
+}
+.pano-header:hover .panorama-author {
+  opacity: 1;
+}
+.post-list {
+  --grid-size: 124px;
+  --grid-gap: 4px;
+  min-height: 400px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, var(--grid-size));
+  grid-template-rows: repeat(auto-fill, var(--grid-size));
+  grid-auto-flow: dense;
+  gap: var(--grid-gap);
+  justify-content: center;
+}
+.post-item {
+  display: block;
+  position: relative;
+  background: #e2e3e9;
+  overflow: hidden;
+}
+.post-item.size-4-4 {
+  grid-area: span 4/span 4 /auto;
+  width: calc(var(--grid-size) * 4 + var(--grid-gap) * 3);
+  height: calc(var(--grid-size) * 4 + var(--grid-gap) * 3);
+  font-size: 24px;
+}
+.post-item.size-2-2 {
+  grid-area: span 2/span 2 /auto;
+  width: calc(var(--grid-size) * 2 + var(--grid-gap) * 1);
+  height: calc(var(--grid-size) * 2 + var(--grid-gap) * 1);
+  font-size: 16px;
+}
+.post-item.size-1-1 {
+  grid-area: span 1/span 1 /auto;
+  width: calc(var(--grid-size) * 1);
+  height: calc(var(--grid-size) * 1);
+  font-size: 12px;
+}
+.post-item .cover {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.post-item .cover:before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+.post-item .title {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 6em;
+  box-sizing: border-box;
+  padding: 3.5em 0 0.5em 1em;
+  line-height: 2em;
+  font-size: 1em;
+  font-weight: 900;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: linear-gradient(transparent, rgba(0,0,0,0.6));
+}
+.pano-profile {
+  grid-area: span 4/span 2 /auto;
+  width: calc(var(--grid-size) * 2 + var(--grid-gap) * 1);
+  height: calc(var(--grid-size) * 4 + var(--grid-gap) * 3);
+  background: linear-gradient(50deg, #091d3d, rgba(20,120,50,0.6));
+  background-color: transparent;
+}
+.pano-profile .part-a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 65%;
+  height: 62%;
+  margin: 0 auto;
+  padding: 0 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.pano-profile .part-a span {
+  margin: 40px 0 12px;
+  color: #fff;
+  opacity: 0.6;
+}
+.pano-profile .part-a img {
+  width: 68px;
+  margin-bottom: 90px;
+}
+.pano-profile .part-a .ui-button-primary {
+  width: 100%;
+}
+.pano-profile .part-b {
+  padding: 32px 45px 0;
+}
+.pano-profile .part-b h2 {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  line-height: 1em;
+  text-align: center;
+  font-size: 65px;
+  font-weight: 200;
+  color: #fff;
+}
+.pano-profile .part-b h3 {
+  margin: 32px 0 0;
+  letter-spacing: 6px;
+  line-height: 1em;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 200;
+  color: rgba(255,255,255,0.6);
+}
+@media screen and (min-width: 1024px) {
+  .pano-header {
+    height: 540px;
+  }
+  .pano-header:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-image: linear-gradient(0deg, #f0f1f5, transparent 300px), linear-gradient(0deg, #f0f1f5, transparent 100px);
+  }
+  .pano-header:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 100%;
+    height: 20px;
+    z-index: 1;
+    background-image: linear-gradient(0deg, transparent, #f0f1f5, transparent);
+  }
+  .pano-header .panorama-author {
+    bottom: 150px;
+    z-index: 2;
+  }
+  .main-pager {
+    position: relative;
+    z-index: 1;
+    margin-top: -140px !important;
+    padding-bottom: 50px;
+  }
+  .post-item .cover {
+    transition: 0.2s ease-in-out;
+  }
+  .post-item:hover .cover {
+    opacity: 0.6;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .pano-header {
+    height: 40vw;
+    margin-bottom: 20px;
+  }
+  .main-pager {
+    padding-bottom: 20px;
+  }
+  .post-list {
+    --grid-size: 120px;
+  }
+  .post-item.size-4-4 {
+    grid-area: span 3/span 3 /auto;
+    width: calc(var(--grid-size) * 3);
+    height: calc(var(--grid-size) * 3);
+  }
+  .post-item.size-4-2 {
+    grid-area: span 2/span 4 /auto;
+    width: calc(var(--grid-size) * 4);
+    height: calc(var(--grid-size) * 2);
+  }
+}
 </style>
 <template>
 <div class="pano-list-pager navigation-shadow">

@@ -1,43 +1,52 @@
-<style lang="stylus" rel="stylesheet/stylus" scoped>
-@import "../../common/stylus/variable.styl"
-.comments-list
-	min-height 400px
-.list-empty
-	padding 20px
-	background #fff
-	p
-		font-size 14px
-		color #8599ad
-	h3
-		font-size 18px
-		color #5c6870
-.l-com-item
-	display flex
-	margin-bottom 30px
-	cursor default
-	margin-bottom 12px
-	padding 0 20px
-	--comment-border-color #f7f7fd
-	&:hover
-		--comment-border-color: #dde;
-	.avatar
-		width 50px
-		height 50px
-		margin-right 20px
-		border-radius 8px
-		overflow hidden
-		background #ddd
-		img
-			width  100%
-			height 100%
-
-@media screen and (max-width $max-mobile-width)
-	.l-com-item
-		margin-bottom 15px
-		.avatar
-			width 35px
-			height 35px
-			margin-right 12px
+<style lang="scss" scoped>
+.comments-list {
+  min-height: 400px;
+}
+.list-empty {
+  padding: 20px;
+  background: #fff;
+}
+.list-empty p {
+  font-size: 14px;
+  color: #8599ad;
+}
+.list-empty h3 {
+  font-size: 18px;
+  color: #5c6870;
+}
+.l-com-item {
+  display: flex;
+  margin-bottom: 30px;
+  cursor: default;
+  margin-bottom: 12px;
+  padding: 0 20px;
+  --comment-border-color: #f7f7fd;
+}
+.l-com-item:hover {
+  --comment-border-color: #dde;
+}
+.l-com-item .avatar {
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ddd;
+}
+.l-com-item .avatar img {
+  width: 100%;
+  height: 100%;
+}
+@media screen and (max-width: 600px) {
+  .l-com-item {
+    margin-bottom: 15px;
+  }
+  .l-com-item .avatar {
+    width: 35px;
+    height: 35px;
+    margin-right: 12px;
+  }
+}
 </style>
 <template>
 <div class="comments-list" v-loading="isLoading">
