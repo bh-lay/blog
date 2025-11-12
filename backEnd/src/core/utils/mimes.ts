@@ -12,5 +12,7 @@ export const defaultMimes: mimes = {
   rar: 'application/zip',
   zip: 'application/zip',
   pdf: 'application/pdf',
-  txt: 'text/plain'
+  txt: 'text/plain',
+  xml: 'application/xml',
+  rss: 'application/rss+xml'
 }
