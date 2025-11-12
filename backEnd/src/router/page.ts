@@ -9,6 +9,7 @@ import { list as labsListController, detail as labsDetailController } from '@/co
 import panoListController from '@/controller/pano'
 import { list as tuchongListController } from '@/controller/photography'
 import { list as blessListController } from '@/controller/bless'
+import { rss as rssController } from '@/controller/rss'
 
 /**
  * 视图切换方法
@@ -71,6 +72,11 @@ const routes: routeItemConfig[] = [
   {
     path: 'get /labs/:name',
     controller: labsDetailController
+  },
+  // RSS Feed
+  {
+    path: 'get /rss',
+    controller: rssController
   },
 ]
 export default routes
