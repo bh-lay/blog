@@ -125,8 +125,7 @@
 			}
 		}
 	}
-	.toc-mask-for-mobile,
-	.toc-trigger-for-mobile {
+	.toc-mask-for-mobile {
 		display: none;
 	}
 }
@@ -187,14 +186,6 @@
 					visibility: visible;
 					z-index: 2;
 				}
-			}
-
-			.toc-trigger-for-mobile {
-				display: block;
-				position: fixed;
-				bottom: 20px;
-				right: 20px;
-				z-index: 1;
 			}
 		}
 	}
@@ -370,13 +361,7 @@
 				</div>
 			</div>
 		</Container>
-		<div class="toc-mask-for-mobile" @click="tocVisibleInMobile = false" />
-		<Button
-			class="toc-trigger-for-mobile"
-			type="primary"
-			size="small"
-			@click="tocVisibleInMobile = true"
-		>TOC</Button>
+		<div class="toc-mask-for-mobile" />
 	</div>
 	<div class="section-comments">
 		<Container>
@@ -399,13 +384,14 @@ import { getLastClickedArticle } from "@/common/view-transition/"
 import blogShare from './share.vue'
 import buildToc from './build-toc.js'
 import lazyPlaceholderUrl from '@/ui-library/images/lazy-placeholder.svg'
+import { tocVisibleHashKey } from '@/components/navigation/article-toc.vue'
 
 export default {
 	name: 'blogDetail',
 	components: {
 		Comments,
 		blogShare,
-		BlogTag
+		BlogTag,
 	},
 	data () {
 		return {
@@ -421,7 +407,6 @@ export default {
 			},
 			coverImgUrl: '',
 			articleToc: [],
-			tocVisibleInMobile: false,
 
 			isLoading: true
 		}
@@ -432,6 +417,9 @@ export default {
 		},
 		blogUrl () {
 			return `${location.origin}/blog/${this.detail.id}`
+		},
+		tocVisibleInMobile () {
+			return this.$route.hash === tocVisibleHashKey
 		}
 	},
 	mounted () {

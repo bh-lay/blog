@@ -1,4 +1,5 @@
 <style lang="scss" scoped>
+@use "../../common/styles/variables" as *;
 .navigation {
   height: 56px;
   --highlight-color: #09f;
@@ -53,15 +54,16 @@
   display: none;
 }
 .navigation .nav-list {
+  display: flex;
   padding-right: 15px;
 }
 .navigation .nav-list a {
   position: relative;
   display: inline-block;
-  width: 80px;
+  width: 5em;
   line-height: 56px;
   text-align: center;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 900;
   color: var(--text-color);
   text-decoration: none;
@@ -89,13 +91,7 @@
   transition: 1.2s 0.5s;
   width: 64%;
 }
-@media screen and (max-width: 750px) {
-  .navigation .nav-list a {
-    width: 60px;
-    font-size: 13px;
-  }
-}
-@media screen and (min-width: 600px) {
+@media screen and (min-width: $max-mobile-width) {
   :global(.navigation-shadow:after) {
     content: '';
     position: absolute;
@@ -122,11 +118,11 @@
     }
     .navigation .nav-inner {
       background: transparent;
-      overflow: hidden;
+      // overflow: hidden;
     }
   }
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: $max-mobile-width) {
   .navigation .nav-inner {
     margin-left: -10px;
     box-shadow: 0 0 2px rgba(0,0,0,0.063), 0 0 10px rgba(0,0,0,0.125);
@@ -158,48 +154,18 @@
     opacity: 0;
   }
   .navigation .nav-more-btn {
-    position: absolute;
     display: block;
-    width: 44px;
-    height: 44px;
-    top: 7px;
-    right: 10px;
-    border: none;
-    cursor: default;
-    background: #fff;
-  }
-  .navigation .nav-more-btn i {
-    display: block;
-    position: absolute;
-    width: 26px;
-    height: 4px;
-    left: 9px;
-    border-radius: 4px;
-    background: #444;
-    transition: 0.2s ease-in-out;
-  }
-  .navigation .nav-more-btn i:nth-child(1) {
-    top: 10px;
-  }
-  .navigation .nav-more-btn i:nth-child(2) {
-    top: 19px;
-  }
-  .navigation .nav-more-btn i:nth-child(3) {
-    top: 28px;
-  }
-  .nav-slidedown .nav-more-btn i:nth-child(1) {
-    transform: translateY(9px) rotate(-45deg);
-  }
-  .nav-slidedown .nav-more-btn i:nth-child(2) {
-    opacity: 0;
-  }
-  .nav-slidedown .nav-more-btn i:nth-child(3) {
-    transform: translateY(-9px) rotate(45deg);
   }
   .nav-slidedown .nav-list-body,
   .nav-slidedown .nav-mask {
     visibility: visible;
     opacity: 1;
+  }
+}
+
+@media screen and (max-width: $pad-landscape-width) {
+  .navigation .nav-list a {
+    font-size: 13px;
   }
 }
 @-moz-keyframes sticky-navigation-move {
@@ -299,9 +265,10 @@
 						<span>小剧客栈</span>
 					</router-link>
 					<div class="nav-list">
-						<Button class="nav-more-btn" @click="navSlidedown = !navSlidedown"><i></i><i></i><i></i></Button>
+            <article-toc />
+            <line-icon-trigger class="nav-more-btn" :active="navSlidedown" @toggle-display="navSlidedown = !navSlidedown" />
 						<div class="nav-mask" @click="navSlidedown = false"></div>
-						<div class="nav-list-body">
+            <div class="nav-list-body">
 							<router-link
 								to="/"
 								class="index-page"
@@ -321,9 +288,11 @@
 </template>
 
 <script>
-
+import LineIconTrigger from "./line-icon-trigger.vue"
+import ArticleToc from "./article-toc.vue"
 export default {
 	name: 'navigation',
+  components: { LineIconTrigger, ArticleToc },
 	data () {
 		return {
 			navList: Object.freeze([
