@@ -163,13 +163,13 @@
   }
 }
 
-@media screen and (max-width: $pad-landscape-width) {
+@media screen and (min-width: $max-mobile-width) and (max-width: $pad-landscape-width) {
   .navigation .nav-list a {
     width: 4.5em;
     font-size: 13px;
   }
 }
-@media screen and (max-width: $pad-portrait-width) {
+@media screen and (min-width: $pad-landscape-width) and (max-width: $pad-portrait-width) {
   .navigation .nav-list a {
     font-size: 14px;
   }
