@@ -39,7 +39,7 @@
 		position: relative;
 
 		.caption {
-			padding: 0 20px 2em;
+			padding-bottom: 4em;
 
 			h1 {
 				margin-bottom: 1em;
@@ -144,7 +144,7 @@
 
 		.section-article {
 			.section-article-body {
-				padding: 2.5em 0 4em;
+				padding: 2.5em 1em 4em;
 			}
 			.toc-mask-for-mobile {
 				display: block;
@@ -253,7 +253,7 @@
 			width: 400px;
 			flex-shrink: 1;
 			flex-grow: 1;
-			padding: 3em 6em 5em 2em;
+			padding: 3em 6em 5em 3.5em;
 			border-radius: 8px;
 			background: #fff;
 			box-shadow: 5px 10px 10px -5px rgba(0, 0, 0, 0.2);
@@ -301,6 +301,14 @@
 			border-radius: 12px;
 			background: #fff;
 			overflow: hidden;
+		}
+	}
+}
+
+@media screen and (max-width: $max-mobile-width) {
+	.blog-detail {
+		.section-article .section-article-body {
+			padding: 0 10px;
 		}
 	}
 }
