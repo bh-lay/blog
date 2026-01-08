@@ -38,7 +38,7 @@
     "style-loader": "^0.18.2",
     "uglify-es": "git://github.com/mishoo/UglifyJS2.git#harmony",
     "url-loader": "^0.5.9",
-    "webpack": "^3.5.5"
+    "webpack": "^5.96.1"
   },
   "devDependencies": {
     "dotenv": "^10.0.0"
