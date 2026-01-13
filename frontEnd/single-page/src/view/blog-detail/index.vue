@@ -129,7 +129,7 @@
 		display: none;
 	}
 }
-
+// mobile
 @media screen and (max-width: $pad-portrait-width) {
 	.blog-detail {
 		header {
@@ -195,7 +195,7 @@
 		border-top: 1px solid #f0f1f5;
 	}
 }
-
+// laptop
 @media screen and (min-width: $pad-portrait-width) {
 	$page_bj_color: #f0f1f5;
 
@@ -305,6 +305,17 @@
 	}
 }
 
+@media screen and (min-width: $pad-portrait-width) and (max-width: $laptop-small-width) {
+	.section-article {
+		.section-article-body {
+        	padding: 2em 4em 5em 2.4em;
+		}
+		.section-article-side {
+			width: 200px;
+			padding: 30px 12px 30px 20px;
+		}
+	}
+}
 @media screen and (max-width: $max-mobile-width) {
 	.blog-detail {
 		.section-article .section-article-body {
