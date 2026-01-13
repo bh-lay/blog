@@ -15,7 +15,7 @@
     height: 100%;
     top: 0;
     left: 0;
-    background: linear-gradient(rgba(238, 240, 241, .2), rgba(238, 240, 241, 1));
+    background: linear-gradient(rgba(238, 240, 241, .1), rgba(238, 240, 241, 1));
     backdrop-filter: blur(1px);
   }
   &::after {
@@ -42,18 +42,25 @@
     }
   }
 }
-.friend-list {
-  --grid-size: 70px;
+.main-friend-list-container {
+  position: relative;
+  margin-top: -320px !important;
+}
+.section-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #171a1c
+}
+.active-friend-list {
+  --grid-size: 72px;
   --grid-gap: 8px;
   min-height: 400px;
-  margin: -320px auto 0;
   padding: 20px 0 60px;
   display: grid;
   grid-template-columns: repeat(auto-fill, var(--grid-size));
   grid-template-rows: repeat(auto-fill, var(--grid-size));
   grid-auto-flow: dense;
   gap: var(--grid-gap);
-  justify-content: center;
 }
 .friend-avatar {
   aspect-ratio: 1;
@@ -182,67 +189,75 @@
     }
   }
 }
-@media screen and (max-width: 1400px) {
-  .friend-list {
-    --grid-size: 66px;
+@media screen and (max-width: $laptop-big-width) {
+  .active-friend-list {
+    --grid-size: 77px;
   }
 }
-@media screen and (max-width: 1320px) {
-  .friend-list {
-    --grid-size: 72px;
+@media screen and (max-width: $laptop-small-width) {
+  .active-friend-list {
+    --grid-size: 89px;
   }
 }
 
-@media screen and (max-width: 1250px) {
-  .friend-list {
-    --grid-size: 67px;
+@media screen and (max-width: $pad-portrait-width) {
+  .active-friend-list {
+    --grid-size: calc((100vw - 80px) / 9 - var(--grid-gap) / 2);
   }
 }
-@media screen and (max-width: 1170px) {
-  .friend-list {
-    --grid-size: 73px;
+@media screen and (max-width: $pad-landscape-width) {
+  .active-friend-list {
+    --grid-size: calc((100vw - 20px) / 8.5 - var(--grid-gap) / 2);
   }
 }
-@media screen and (max-width: 1084px) {
-  .friend-list {
-    --grid-size: 68px;
-  }
-}
-@media screen and (max-width: 1020px) {
-  .friend-list {
-    --grid-size: 76px;
-  }
-}
-@media screen and (max-width: 940px) {
-  .friend-list {
-    --grid-size: 69px;
-  }
-}
-@media screen and (max-width: 860px) {
-  .friend-list {
-    --grid-size: 78px;
-  }
-}
-@media screen and (max-width: 770px) {
-  .friend-list {
-    --grid-size: 69px;
-  }
-}
-@media screen and (max-width: 690px) {
-  .friend-list {
-    --grid-size: 82px;
-  }
-}
-@media screen and (max-width: 608px) {
-  .friend-list {
-    --grid-size: 70px;
-    width: calc(var(--grid-size) * 6 + var(--grid-gap) * 5);
-  }
-}
-@media screen and (max-width: 500px) {
-  .friend-list {
-    --grid-size: 20vw;
+
+@media screen and (max-width: $max-mobile-width) {
+  .active-friend-list {
+    --grid-size: calc((100vw - 20px) / 4.2 - var(--grid-gap) / 2);;
     width: 100%;
+  }
+}
+
+.miss-connect-friend-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 15px 0 40px
+}
+.miss-friend-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 55px;
+  border-radius: 4px;
+  border: 1px solid #fff;
+  cursor: default;
+}
+
+.blog-group-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 15px 0 100px;
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 55px;
+    border-radius: 4px;
+    border: 1px solid #fff;
+    transition: .2s;
+    &:hover {
+      background-color: #fff;
+    }
+  }
+  img {
+    display: block;
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
   }
 }
 </style>
@@ -256,8 +271,9 @@
       </div>
     </Container>
   </div>
-	<Container class="container">
-    <div class="friend-list" v-loading="isLoading">
+	<Container class="main-friend-list-container">
+    <div class="section-title">活跃好友</div>
+    <div class="active-friend-list" v-loading="isLoading">
       <div
         class="friend-item"
         v-for="(item, index) in friendsList"
@@ -306,6 +322,27 @@
       :size="page.pageItemCount"
       :current.sync="page.pageIndex"
     />
+    <div class="section-title">静默好友</div>
+    <div class="section-desc">站点已无法访问，或者博客已停更多年的好友。</div>
+    <div class="miss-connect-friend-list">
+      <div
+        class="miss-friend-item"
+        v-for="item in missConnectFriends"
+        :key="item.id"
+      >{{ item.title }}</div>
+    </div>
+    <div class="section-title">站群</div>
+    <div class="blog-group-list">
+      <a :href="siteUrlTransform('https://www.boyouquan.com/home')">
+        <img src="https://www.boyouquan.com/assets/images/sites/logo/logo.svg" alt="">
+      </a>
+      <a :href="siteUrlTransform('https://www.foreverblog.cn/')" target="_blank" >
+        <img src="https://foreverblog.cn/assets/logo/logo_en_default.png" alt="">
+      </a>
+      <a :href="siteUrlTransform('https://bloginc.cn')">
+        <img src="https://bloginc.cn/img/logo_bloginc_all.svg" alt="">
+      </a>
+    </div>
   </Container>
 	<Footer />
 </div>
@@ -321,10 +358,11 @@ export default {
 		return {
 			page: {
 				total: 0,
-				pageItemCount: 40,
+				pageItemCount: 60,
 				pageIndex: parseInt(this.$route.query.page) || 1
 			},
 			friendsList: [],
+      missConnectFriends: [],
 			getListTimer: null,
 
 			replyMode: false,
@@ -357,18 +395,26 @@ export default {
 				.then(response => response.json())
 				.then(data => {
 					this.page.total = data.count
-					this.friendsList = (data.list || []).map(item => {
-            const isLarge = item.score > 14
-            const isMedium = item.score > 10 && item.score <= 14
-            const isSmall = item.score <= 10
-            return {
-              ...item,
-              isLarge,
-              isMedium,
-              isSmall,
-              order: Math.ceil(Math.random() * (isLarge ? 20 : 100))
+          const activeFriends = []
+          const missConnectFriends = [];
+					(data.list || []).forEach(item => {
+            if (item.isShow) {
+              const isLarge = item.score > 14
+              const isMedium = item.score > 10 && item.score <= 14
+              const isSmall = item.score <= 10
+              activeFriends.push({
+                ...item,
+                isLarge,
+                isMedium,
+                isSmall,
+                order: Math.ceil(Math.random() * (isLarge ? 10 : 100))
+              })
+            } else {
+              missConnectFriends.push(item)
             }
           })
+          this.friendsList = activeFriends
+          this.missConnectFriends = missConnectFriends
 				})
 				.catch(() => {
           debugger
