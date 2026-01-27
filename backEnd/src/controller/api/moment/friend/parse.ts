@@ -10,7 +10,7 @@ export default function (data: Record<string, unknown>) {
     title: decodeURI(data.title as string || ''),
     avatar: data.avatar ||'',
     url: data.url ||'',
-    isShow: data.isShow ||1,// 1:show;0:hidden
+    isShow: !!data.isShow,
     adminScore: data.adminScore || 0,
     github_username : data.github_username || null,
     discription: data.discription,

@@ -6,6 +6,7 @@ import { routeItemMatched, Connect } from '@/core/index'
 import { push as pushAnalysis } from '@/functions/analysis/index'
 
 import { getDbCollection } from '@/database/DB'
+import parseData from './parse'
 
 const collectionName = 'friends'
 
@@ -16,11 +17,11 @@ export default async function (route: routeItemMatched, connect: Connect) {
 
   const {collection, client} = await getDbCollection(collectionName)
 
-  const docs = await collection.find({
+  const doc = await collection.findOne({
     id: friendID
-  }).toArray()
+  })
   client.close()
-  if (!docs || docs.length==0) {
+  if (!doc) {
     connect.writeJson({
       code: 2,
       msg: 'could not find this blog !'
@@ -28,7 +29,7 @@ export default async function (route: routeItemMatched, connect: Connect) {
   } else {
     connect.writeJson({
       code: 2,
-      detail: docs[0]
+      detail: parseData(doc)
     })
   }
   // 打点统计

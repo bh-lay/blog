@@ -5,6 +5,7 @@
 
 import { routeItemMatched, Connect } from '@/core/index'
 import { getDocsByPagination } from '@/database/DB'
+import parseData from './parse'
 
 const collectionName = 'friends'
 
@@ -28,6 +29,6 @@ export default async function (route: routeItemMatched, connect: Connect) {
     limit: limit_num,
     skip: skip_num,
     count,
-    list: docs
+    list: docs.map(parseData)
   })
 }
