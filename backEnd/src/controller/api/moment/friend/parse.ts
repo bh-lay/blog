@@ -12,6 +12,7 @@ export default function (data: Record<string, unknown>) {
     url: data.url ||'',
     isShow: !!data.isShow,
     adminScore: data.adminScore || 0,
+    score: data.score || 0,
     github_username : data.github_username || null,
     discription: data.discription,
     time_create: data.time_create
