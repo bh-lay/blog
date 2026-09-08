@@ -38,6 +38,7 @@
   color: #414f58;
 }
 .side-comments-item .main h4 small {
+  margin-left: 0.5em;
   opacity: 0.7;
   font-weight: normal;
 }
@@ -73,7 +74,7 @@
 				<img v-lazy :src="item.user.avatar || defaultAvatar" >
 			</div>
 			<div class="main">
-				<h4>{{item.user.username}}<small>0:21 1-21</small></h4>
+				<h4>{{item.user.username}}<small>{{ item.time }}</small></h4>
 				<p>{{item.content}}</p>
 			</div>
 		</router-link>
@@ -82,8 +83,6 @@
 </template>
 
 <script>
-import CommentsSendBox from '@/components/comments/send-box.vue'
-import CommentsList from '@/components/comments/list.vue'
 import {defaultAvatar} from '@/components/comments/data.js'
 export default {
 	name: 'latest-comments',
@@ -93,9 +92,5 @@ export default {
 			defaultAvatar
 		}
 	},
-	created () {
-	},
-	methods: {
-	}
 }
 </script>
