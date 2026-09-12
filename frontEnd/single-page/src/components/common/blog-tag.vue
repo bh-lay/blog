@@ -57,14 +57,12 @@ a.router-link-exact-active:before {
 <router-link :to="'/blog?tag=' + tag" >{{tag}}</router-link>
 </template>
 
-<script>
-export default {
-	name: 'blogTag',
-	props: {
-		tag: {
-			type: String,
-			default: ''
-		}
-	}
-}
+<script setup lang="ts">
+defineOptions({ name: 'blogTag' })
+
+withDefaults(defineProps<{
+	tag?: string
+}>(), {
+	tag: ''
+})
 </script>

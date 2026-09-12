@@ -5,7 +5,7 @@
 .sns-share .share-card {
   min-height: 100px;
 }
-.sns-share .share-card ::v-deep img {
+.sns-share .share-card :deep(img) {
   display: block;
   width: 400px;
   max-width: 100%;
@@ -22,69 +22,59 @@
 	<p>长按或扫描分享给你的好友～</p>
 </div>
 </template>
-<script>
-import filters from '@/filters/index.js'
+<script setup lang="ts">
+import { ref } from 'vue'
+import { imgHosting } from '@/filters'
 
-let shareModuleCache = null
-let shareModuleLoadPromiseCache = null
-function loadShareModuleAndWaitReady() {
+let shareModuleCache: typeof import('./blog-share') | null = null
+let shareModuleLoadPromiseCache: Promise<typeof import('./blog-share')> | null = null
+
+function loadShareModuleAndWaitReady () {
 	if (shareModuleCache) {
 		return Promise.resolve(shareModuleCache)
 	}
 	if (shareModuleLoadPromiseCache) {
 		return shareModuleLoadPromiseCache
 	}
-	shareModuleLoadPromiseCache = import('./blog-share.js').then((module) => {
+	shareModuleLoadPromiseCache = import('./blog-share').then((module) => {
 		shareModuleCache = module
 		shareModuleLoadPromiseCache = null
 		return shareModuleCache
 	})
 	return shareModuleLoadPromiseCache
 }
-export default {
-	name: 'blogShare',
-	props: {
-		sharedUrl: {
-			type: String
-		},
-		cover: {
-			type: String
-		},
-		title: {
-			type: String
-		},
-		intro: {
-			type: String
-		}
-	},
-	data () {
-		return {
-			isCoverLoaded: false
-		}
-	},
-	created () {
-		this.createSharePop()
-	},
-	methods: {
-		createSharePop () {
-			// 异步引入分享模块
-			loadShareModuleAndWaitReady()
-				.then(module => {
-					let { createShareCard } = module || {}
-					let coverUrl = filters.imgHosting(this.cover, 'zoom', 420)
-					return createShareCard({
-						title: this.title,
-						intro: this.intro,
-						url: this.sharedUrl,
-						coverUrl
-					})
-				})
-				.then(img => {
-					this.isCoverLoaded = false
-					this.$refs.cardArea.innerHTML = ''
-					this.$refs.cardArea.appendChild(img)
-				})
-		}
-	}
+
+const props = defineProps<{
+	sharedUrl?: string
+	cover?: string
+	title?: string
+	intro?: string
+}>()
+
+const isCoverLoaded = ref(false)
+const cardArea = ref<HTMLElement | null>(null)
+
+function createSharePop () {
+	// 异步引入分享模块
+	loadShareModuleAndWaitReady()
+		.then(module => {
+			const { createShareCard } = module || {}
+			const coverUrl = imgHosting(props.cover || '', 'zoom', 420)
+			return createShareCard({
+				title: props.title || '',
+				intro: props.intro || '',
+				url: props.sharedUrl || '',
+				coverUrl
+			})
+		})
+		.then(img => {
+			isCoverLoaded.value = false
+			if (cardArea.value) {
+				cardArea.value.innerHTML = ''
+				cardArea.value.appendChild(img)
+			}
+		})
 }
+
+createSharePop()
 </script>

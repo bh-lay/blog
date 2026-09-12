@@ -110,53 +110,42 @@
   </div>
 </template>
 
-<script>
-import filters from '@/filters/index.js'
-export default {
-  data() {
-    return {
-      widgets: [
-        ['正则可视化', 1, 1], ['JSON格式化', 1, 2],
-        ['工位后视镜', 2, 1], ['文本对比', 2, 2],
-        ['二维码工具', 3, 1], ['倒计时', 3, 2],
-        ['三角形生成器', 4, 1], ['图片base64', 4, 2],
-        ['简裁变图', 5, 1], ['小书房', 5, 2],
-      ],
-      post: {
-        _id: '62c4ea07997fdf777f773f9c',
-        id: 'a25as2cfjd',
-        name: 'workbench',
-        title: '',
-        cover: '',
-        time_create: 1657072135077,
-        git_full_name: '/bh-lay/lays-workbench',
-        demo_url: '',
-        intro: '',
-        github: {
-          name: 'lays-workbench',
-          full_name: 'bh-lay/lays-workbench',
-          html_url: 'https://github.com/bh-lay/lays-workbench',
-          description: '剧中人的个人上网首页',
-          created_at: '2021-06-17T05:16:46Z',
-          updated_at: '2025-12-14T14:51:12Z',
-          pushed_at: '2026-01-15T15:04:05Z',
-          git_url: 'git://github.com/bh-lay/lays-workbench.git',
-          homepage: 'http://e.bh-lay.com/',
-          stargazers_count: 23,
-          watchers_count: 23,
-          forks_count: 5
-        }
-      }
-    }
-  },
-  computed: {
-    thumb() {
-      return filters.imgHosting('/blog/lays-workbench/home-screen-capture.jpg', 'zoom', 1800)
-    },
-  },
-  created() {
-  },
-  methods: {
-  }
-}
+<script setup lang="ts">
+import { ref } from 'vue'
+import { imgHosting } from '@/filters'
+
+const widgets: [string, number, number][] = [
+	['正则可视化', 1, 1], ['JSON格式化', 1, 2],
+	['工位后视镜', 2, 1], ['文本对比', 2, 2],
+	['二维码工具', 3, 1], ['倒计时', 3, 2],
+	['三角形生成器', 4, 1], ['图片base64', 4, 2],
+	['简裁变图', 5, 1], ['小书房', 5, 2]
+]
+const post = ref({
+	_id: '62c4ea07997fdf777f773f9c',
+	id: 'a25as2cfjd',
+	name: 'workbench',
+	title: '',
+	cover: '',
+	time_create: 1657072135077,
+	git_full_name: '/bh-lay/lays-workbench',
+	demo_url: '',
+	intro: '',
+	github: {
+		name: 'lays-workbench',
+		full_name: 'bh-lay/lays-workbench',
+		html_url: 'https://github.com/bh-lay/lays-workbench',
+		description: '剧中人的个人上网首页',
+		created_at: '2021-06-17T05:16:46Z',
+		updated_at: '2025-12-14T14:51:12Z',
+		pushed_at: '2026-01-15T15:04:05Z',
+		git_url: 'git://github.com/bh-lay/lays-workbench.git',
+		homepage: 'http://e.bh-lay.com/',
+		stargazers_count: 23,
+		watchers_count: 23,
+		forks_count: 5
+	}
+})
+
+const thumb = imgHosting('/blog/lays-workbench/home-screen-capture.jpg', 'zoom', 1800)
 </script>

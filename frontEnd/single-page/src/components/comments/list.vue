@@ -72,93 +72,88 @@
 	<Pagination
 		:total="page.total"
 		:size="page.pageItemCount"
-		:current.sync="page.pageIndex"
+		v-model:current="page.pageIndex"
 	/>
 </div>
 </template>
-<script>
+<script setup lang="ts">
+import { ref, reactive, watch, onMounted } from 'vue'
 import ItemContent from './item-content.vue'
-import {defaultAvatar} from './data.js'
+import { defaultAvatar } from './data'
 
-export default {
-	name: 'comments-list',
-	components: {
-		ItemContent
-	},
-	props: {
-		cid: {
-			type: String,
-			required: true
-		},
-		pageIndex: {
-			type: Number,
-			required: false,
-			default: 1
-		}
-	},
-	data () {
-		return {
-			page: {
-				total: 0,
-				pageItemCount: 15,
-				pageIndex: this.pageIndex || 1
-			},
-			list: [],
-			getListTimer: null,
-
-			replyMode: false,
-			isLoading: false
-		}
-	},
-	computed: {
-	},
-	mounted () {
-		this.getList()
-	},
-	watch: {
-		'page.pageIndex' () {
-			this.$refs.scrollMark.scrollIntoView({
-				behavior: 'smooth',
-				block: 'center',
-				inline: 'nearest'
-			})
-			this.$emit('update:pageIndex', this.page.pageIndex)
-			this.getList()
-		}
-	},
-	methods: {
-		getList () {
-			this.isLoading = true
-			clearTimeout(this.getListTimer)
-			this.getListTimer = setTimeout(() => {
-				this.forceGetList()
-					.then(() => {
-						this.isLoading = false
-					})
-			})
-		},
-		forceGetList () {
-			let skip = (this.page.pageIndex - 1) * this.page.pageItemCount
-			return fetch(`/api/comments/?cid=${this.cid}&skip=${skip}&limit=${this.page.pageItemCount}`)
-				.then(response => response.json())
-				.then(data => {
-					if (skip > data.data.count) {
-						this.page.pageIndex = 1
-						return
-					}
-					data.data.list.forEach(function (item) {
-						// 若无头像，使用默认头像
-						item.user.avatar = item.user.avatar || defaultAvatar
-					})
-					this.page.total = data.data.count
-					this.list = data.data.list
-				})
-				.catch(() => {})
-		},
-		refresh () {
-			this.page.pageIndex = 1
-			this.getList()
-		}
-	}
+interface PageState {
+	total: number
+	pageItemCount: number
+	pageIndex: number
 }
+
+const props = withDefaults(defineProps<{
+	cid: string
+	pageIndex?: number
+}>(), {
+	pageIndex: 1
+})
+
+const emit = defineEmits<{ (e: 'update:pageIndex', index: number): void }>()
+
+const page = reactive<PageState>({
+	total: 0,
+	pageItemCount: 15,
+	pageIndex: props.pageIndex || 1
+})
+const list = ref<any[]>([])
+const scrollMark = ref<HTMLElement | null>(null)
+let getListTimer: ReturnType<typeof setTimeout> | null = null
+const isLoading = ref(false)
+
+watch(() => page.pageIndex, () => {
+	scrollMark.value && scrollMark.value.scrollIntoView({
+		behavior: 'smooth',
+		block: 'center',
+		inline: 'nearest'
+	})
+	emit('update:pageIndex', page.pageIndex)
+	getList()
+})
+
+function getList () {
+	isLoading.value = true
+	if (getListTimer) clearTimeout(getListTimer)
+	getListTimer = setTimeout(() => {
+		forceGetList()
+			.then(() => {
+				isLoading.value = false
+			})
+	})
+}
+
+function forceGetList () {
+	const skip = (page.pageIndex - 1) * page.pageItemCount
+	return fetch(`/api/comments/?cid=${props.cid}&skip=${skip}&limit=${page.pageItemCount}`)
+		.then(response => response.json())
+		.then(data => {
+			if (skip > data.data.count) {
+				page.pageIndex = 1
+				return
+			}
+			data.data.list.forEach(function (item: any) {
+				// 若无头像，使用默认头像
+				item.user.avatar = item.user.avatar || defaultAvatar
+			})
+			page.total = data.data.count
+			list.value = data.data.list
+		})
+		.catch(() => {})
+}
+
+function refresh () {
+	page.pageIndex = 1
+	getList()
+}
+
+onMounted(() => {
+	getList()
+})
+
+defineExpose({ refresh })
 </script>

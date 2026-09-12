@@ -1,19 +1,19 @@
-let blurCanvas = document.createElement('canvas')
-let blurCtx = blurCanvas.getContext('2d')
+const blurCanvas = document.createElement('canvas')
+const blurCtx = blurCanvas.getContext('2d') as CanvasRenderingContext2D
 blurCanvas.width = screen.width
 blurCanvas.height = screen.height
 
-function saturate (src, w, h, sv) {
-	let len = w * h
-	let pos, i, j, offset
+function saturate (src: Uint8ClampedArray, w: number, h: number, sv: number) {
+	const len = w * h
+	let pos: number, i: number, j: number, offset: number
 
-	let lumR = (1 - sv) * 0.3086
-	let lumG = (1 - sv) * 0.6094
-	let lumB = (1 - sv) * 0.0820
+	const lumR = (1 - sv) * 0.3086
+	const lumG = (1 - sv) * 0.6094
+	const lumB = (1 - sv) * 0.0820
 
-	let r, g, b
+	let r: number, g: number, b: number
 
-	let shiftW = w << 2
+	const shiftW = w << 2
 
 	for (j = 0; j < h; j++) {
 		offset = j * shiftW
@@ -37,25 +37,25 @@ function saturate (src, w, h, sv) {
 				((lumB + sv) * b)
 		}
 	}
+	void len
 }
 
-function boxBlur (src, w, h, r, sv) {
-	let tmp = new Uint8Array(w * h * 4)
+function boxBlur (src: Uint8ClampedArray, w: number, h: number, r: number, sv: number) {
+	const tmp = new Uint8Array(w * h * 4)
 	blurRight(src, tmp, w, h, r)
 	blurDown(tmp, src, w, h, r)
 	blurLeft(src, tmp, w, h, r)
 	blurUp(tmp, src, w, h, r);
-
 	(sv !== undefined && sv !== 1) && saturate(src, w, h, sv)
 }
 
-function blurRight (src, dest, w, h, r) {
-	let i, j, offset, pos, posR
+function blurRight (src: Uint8ClampedArray, dest: Uint8Array, w: number, h: number, r: number) {
+	let i: number, j: number, offset: number, pos: number, posR: number
 
-	let shiftR = r << 2
-	let shiftW = w << 2
+	const shiftR = r << 2
+	const shiftW = w << 2
 
-	let weightR, weightG, weightB, weightA
+	let weightR: number, weightG: number, weightB: number, weightA: number
 
 	for (j = 0; j < h; j++) {
 		weightR = 0
@@ -96,13 +96,13 @@ function blurRight (src, dest, w, h, r) {
 	}
 }
 
-function blurLeft (src, dest, w, h, r) {
-	let i, j, offset, pos, posR
+function blurLeft (src: Uint8ClampedArray, dest: Uint8Array, w: number, h: number, r: number) {
+	let i: number, j: number, offset: number, pos: number, posR: number
 
-	let shiftR = r << 2
-	let shiftW = w << 2
+	const shiftR = r << 2
+	const shiftW = w << 2
 
-	let weightR, weightG, weightB, weightA
+	let weightR: number, weightG: number, weightB: number, weightA: number
 
 	for (j = 0; j < h; j++) {
 		weightR = 0
@@ -143,15 +143,14 @@ function blurLeft (src, dest, w, h, r) {
 	}
 }
 
-function blurDown (src, dest, w, h, r) {
-	let i, j, offset, pos, posR
+function blurDown (src: Uint8Array, dest: Uint8ClampedArray, w: number, h: number, r: number) {
+	let i: number, j: number, offset: number, pos: number, posR: number
 
-	let shiftR = r << 2
-	let shiftW = w << 2
+	const shiftW = w << 2
 
-	let offsetR = shiftW * r
+	const offsetR = shiftW * r
 
-	let weightR, weightG, weightB, weightA
+	let weightR: number, weightG: number, weightB: number, weightA: number
 
 	for (i = 0; i < w; i++) {
 		weightR = 0
@@ -192,15 +191,14 @@ function blurDown (src, dest, w, h, r) {
 	}
 }
 
-function blurUp (src, dest, w, h, r) {
-	let i, j, offset, pos, posR
+function blurUp (src: Uint8Array, dest: Uint8ClampedArray, w: number, h: number, r: number) {
+	let i: number, j: number, offset: number, pos: number, posR: number
 
-	let shiftR = r << 2
-	let shiftW = w << 2
+	const shiftW = w << 2
 
-	let offsetR = shiftW * r
+	const offsetR = shiftW * r
 
-	let weightR, weightG, weightB, weightA
+	let weightR: number, weightG: number, weightB: number, weightA: number
 
 	for (i = 0; i < w; i++) {
 		weightR = 0
@@ -241,28 +239,28 @@ function blurUp (src, dest, w, h, r) {
 	}
 }
 
-function blurRect (context, x, y, w, h, r, sv) {
-	let ctx = context
-	let canvas = ctx.canvas
+function blurRect (context: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number, sv?: number) {
+	const ctx = context
+	const canvas = ctx.canvas
 
-	let srcW = w | 0
-	let srcH = h | 0
+	const srcW = w | 0
+	const srcH = h | 0
 
-	let srcX = x | 0
-	let srcY = y | 0
+	const srcX = x | 0
+	const srcY = y | 0
 
 	r = Math.min(Math.max(r, 8), 256)
 
-	let resizeFactor = Math.max(0, ((Math.log(r) / Math.log(2)) - 3) | 0)
-	let radius = r >>> resizeFactor
+	const resizeFactor = Math.max(0, ((Math.log(r) / Math.log(2)) - 3) | 0)
+	const radius = r >>> resizeFactor
 
-	let resizeWidth = canvas.width >>> resizeFactor
-	let resizeHeight = canvas.height >>> resizeFactor
+	const resizeWidth = canvas.width >>> resizeFactor
+	const resizeHeight = canvas.height >>> resizeFactor
 
 	blurCtx.drawImage(canvas, 0, 0, resizeWidth, resizeHeight)
-	let imageData = blurCtx.getImageData(0, 0, resizeWidth, resizeHeight)
+	const imageData = blurCtx.getImageData(0, 0, resizeWidth, resizeHeight)
 
-	boxBlur(imageData.data, resizeWidth, resizeHeight, radius, sv)
+	boxBlur(imageData.data, resizeWidth, resizeHeight, radius, sv as number)
 
 	blurCtx.putImageData(imageData, 0, 0)
 

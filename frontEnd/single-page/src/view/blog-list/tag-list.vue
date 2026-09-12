@@ -28,59 +28,57 @@
 		<Button
 			@click="switchTag('')"
 			size="small"
-			:type="!$route.query.tag ? 'primary' : 'default'"
+			:type="!route.query.tag ? 'primary' : 'default'"
 		>全部</Button>
 		<Button
 			v-for="(tag, index) in tagList"
 			:key="index"
-			:type="$route.query.tag === tag ? 'primary' : 'default'"
+			:type="route.query.tag === tag ? 'primary' : 'default'"
 			size="small"
 			@click="switchTag(tag)"
 		>{{tag}}</Button>
 	</div>
 </template>
 
-<script>
-import {getApiData} from '@/common/js/api.js'
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { getApiData } from '@/common/ts/api'
 
-export default {
-	name: 'post-list',
-	components: {},
-	data () {
-		return {
-			tagList: [],
-			isLoading: false
-		}
-	},
-	created () {
-		this.getTagList()
-	},
-	methods: {
-		getTagList () {
-			this.isLoading = true
-			getApiData('/blogtag/')
-				.then(({list}) => {
-					this.tagList = list.map(item => item.name).slice(0, 10)
-				})
-				.catch(() => {})
-				.then(() => {
-					this.isLoading = false
-				})
-		},
-		switchTag (tag) {
-			let query = {}
-			if (this.$route.query.type === 'list') {
-				query.type = 'list'
-				query.page = 1
-			}
-			if (tag) {
-				query.tag = tag
-			}
-			this.$router.replace({
-				path: '/blog/',
-				query
-			})
-		}
-	}
+const route = useRoute()
+const router = useRouter()
+
+const tagList = ref<string[]>([])
+const isLoading = ref(false)
+
+function getTagList () {
+	isLoading.value = true
+	getApiData('/blogtag/')
+		.then(({ list }) => {
+			tagList.value = list.map((item: any) => item.name).slice(0, 10)
+		})
+		.catch(() => {})
+		.then(() => {
+			isLoading.value = false
+		})
 }
+
+function switchTag (tag: string) {
+	const query: any = {}
+	if (route.query.type === 'list') {
+		query.type = 'list'
+		query.page = 1
+	}
+	if (tag) {
+		query.tag = tag
+	}
+	router.replace({
+		path: '/blog/',
+		query
+	})
+}
+
+onMounted(() => {
+	getTagList()
+})
 </script>

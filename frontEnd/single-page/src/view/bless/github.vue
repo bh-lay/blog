@@ -117,16 +117,13 @@
 </div>
 </template>
 
-<script>
-export default {
-	name: 'my-github-summary',
-	props: ['summary', 'isLoading'],
-	data () {
-		return {
-			profileURL: 'https://github.com/bh-lay'
-		}
-	},
-	created () {},
-	methods: {}
-}
+<script setup lang="ts">
+defineOptions({ name: 'my-github-summary' })
+
+defineProps<{
+	summary?: any
+	isLoading?: boolean
+}>()
+
+const profileURL = 'https://github.com/bh-lay'
 </script>

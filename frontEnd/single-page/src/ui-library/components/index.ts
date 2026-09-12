@@ -5,5 +5,5 @@ import Pagination from './pagination/index.vue'
 export default {
 	Container,
 	Pagination,
-	Button,
+	Button
 }

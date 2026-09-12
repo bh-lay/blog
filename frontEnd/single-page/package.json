@@ -4,30 +4,33 @@
   "description": "single-page",
   "author": "剧中人 <bh_lay@126.com>",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build:dev": "vite build --mode=development && npm run applyToView",
     "build:prod": "vite build --mode=production && npm run applyToView",
+    "typecheck": "vue-tsc --noEmit",
     "applyToView": "cp ./dist/index.html ../../backEnd/src/views/single-page/vue.html"
   },
   "dependencies": {
     "md5": "^2.2.1",
     "qrcode": "^1.4.4",
     "three": "^0.151.3",
-    "vue": "^2.7.16",
-    "vue-router": "^3.6.5",
-    "vue-stick": "^1.0.5",
+    "vue": "^3.5.42",
+    "vue-router": "^5.3.1",
     "weixin-js-sdk": "^1.4.0-test"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue2": "^2.2.0",
-    "sass": "^1.77.0",
-    "style-loader": "^3.3.4",
-    "vite": "^7.2.2"
+    "@types/node": "^22.20.2",
+    "@vitejs/plugin-vue": "^6.0.8",
+    "sass": "^1.104.0",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.0",
+    "vue-tsc": "^3.3.11"
   },
   "engines": {
-    "node": ">= 6.0.0",
-    "npm": ">= 3.0.0"
+    "node": ">= 18.0.0",
+    "npm": ">= 8.0.0"
   },
   "browserslist": [
     "> 1%",

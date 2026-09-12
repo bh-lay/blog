@@ -90,29 +90,15 @@
 </div>
 </template>
 
-<script>
-import filters from '@/filters/index.js'
-export default {
-	props: {
-		post: {
-			type: Object,
-			default () {
-				return {}
-			}
-		}
-	},
-	data () {
-		return {
-		}
-	},
-	computed: {
-		thumb() {
-			return filters.imgHosting(this.post.cover)
-		},
-	},
-	created () {
-	},
-	methods: {
-	}
-}
+<script setup lang="ts">
+import { computed } from 'vue'
+import { imgHosting } from '@/filters'
+
+const props = withDefaults(defineProps<{
+	post?: any
+}>(), {
+	post: () => ({})
+})
+
+const thumb = computed(() => imgHosting(props.post.cover))
 </script>

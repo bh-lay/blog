@@ -320,7 +320,7 @@
     <Pagination
       :total="page.total"
       :size="page.pageItemCount"
-      :current.sync="page.pageIndex"
+      v-model:current="page.pageIndex"
     />
     <div class="section-title">静默好友</div>
     <div class="section-desc">站点已无法访问，或者博客已停更多年的好友。</div>
@@ -348,97 +348,95 @@
 </div>
 </template>
 
-<script>
-import { createExternalSiteUrl } from '@/common/js/cross-site-utils.js'
-import { imgRobber } from '@/common/js/img-robber.js'
-export default {
-	name: 'blogPageArchives',
-	components: {},
-	data () {
-		return {
-			page: {
-				total: 0,
-				pageItemCount: 60,
-				pageIndex: parseInt(this.$route.query.page) || 1
-			},
-			friendsList: [],
-      missConnectFriends: [],
-			getListTimer: null,
+<script setup lang="ts">
+import { ref, onMounted, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { createExternalSiteUrl } from '@/common/ts/cross-site-utils'
+import { imgRobber } from '@/common/ts/img-robber'
 
-			replyMode: false,
-			isLoading: false
-		}
-	},
-	mounted () {
-		this.getList()
-	},
-	methods: {
-    createImgRobber(imgUrl) {
-      if (!imgUrl) {
-        return ''
-      }
-      return imgRobber(imgUrl)
-    },
-		getList () {
-			this.isLoading = true
-			clearTimeout(this.getListTimer)
-			this.getListTimer = setTimeout(() => {
-				this.forceGetList()
-					.then(() => {
-						this.isLoading = false
-					})
-			})
-		},
-		forceGetList () {
-			let skip = (this.page.pageIndex - 1) * this.page.pageItemCount
-			return fetch(`/api/moment/friend/?skip=${skip}&limit=${this.page.pageItemCount}`)
-				.then(response => response.json())
-				.then(data => {
-					this.page.total = data.count
-          const activeFriends = []
-          const missConnectFriends = [];
-					(data.list || []).forEach(item => {
-            if (item.isShow) {
-              const isLarge = item.score > 14
-              const isMedium = item.score > 10 && item.score <= 14
-              const isSmall = item.score <= 10
-              activeFriends.push({
-                ...item,
-                isLarge,
-                isMedium,
-                isSmall,
-                order: Math.ceil(Math.random() * (isLarge ? 10 : 100))
-              })
-            } else {
-              missConnectFriends.push(item)
-            }
-          })
-          this.friendsList = activeFriends
-          this.missConnectFriends = missConnectFriends
-				})
-				.catch(() => {
-          debugger
-        })
-		},
-		replacePath () {
-			let query = {
-				page: this.page.pageIndex
-			}
-			this.$router.replace({
-				path: '/friends/',
-				query
-			})
-		},
+const route = useRoute()
+const router = useRouter()
 
-		siteUrlTransform(url) {
-			return createExternalSiteUrl(url)
-		},
-	},
-	watch: {
-		'page.pageIndex' () {
-			this.replacePath()
-			this.getList()
-		}
+const page = ref({
+	total: 0,
+	pageItemCount: 60,
+	pageIndex: parseInt(String(route.query.page)) || 1
+})
+const friendsList = ref<any[]>([])
+const missConnectFriends = ref<any[]>([])
+let getListTimer: ReturnType<typeof setTimeout> | null = null
+const isLoading = ref(false)
+
+function createImgRobber (imgUrl?: string) {
+	if (!imgUrl) {
+		return ''
 	}
+	return imgRobber(imgUrl)
 }
+
+function getList () {
+	isLoading.value = true
+	if (getListTimer) clearTimeout(getListTimer)
+	getListTimer = setTimeout(() => {
+		forceGetList()
+			.then(() => {
+				isLoading.value = false
+			})
+	})
+}
+
+function forceGetList () {
+	const skip = (page.value.pageIndex - 1) * page.value.pageItemCount
+	return fetch(`/api/moment/friend/?skip=${skip}&limit=${page.value.pageItemCount}`)
+		.then(response => response.json())
+		.then(data => {
+			page.value.total = data.count
+			const activeFriends: any[] = []
+			const missConnectFriendList: any[] = []
+			;(data.list || []).forEach((item: any) => {
+				if (item.isShow) {
+					const isLarge = item.score > 14
+					const isMedium = item.score > 10 && item.score <= 14
+					const isSmall = item.score <= 10
+					activeFriends.push({
+						...item,
+						isLarge,
+						isMedium,
+						isSmall,
+						order: Math.ceil(Math.random() * (isLarge ? 10 : 100))
+					})
+				} else {
+					missConnectFriendList.push(item)
+				}
+			})
+			friendsList.value = activeFriends
+			missConnectFriends.value = missConnectFriendList
+		})
+		.catch(() => {
+			debugger
+		})
+}
+
+function replacePath () {
+	const query = {
+		page: page.value.pageIndex
+	}
+	router.replace({
+		path: '/friends/',
+		query
+	})
+}
+
+function siteUrlTransform (url: string) {
+	return createExternalSiteUrl(url)
+}
+
+onMounted(() => {
+	getList()
+})
+
+watch(() => page.value.pageIndex, () => {
+	replacePath()
+	getList()
+})
 </script>

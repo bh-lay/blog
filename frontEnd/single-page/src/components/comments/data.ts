@@ -1,12 +1,20 @@
+export { default as defaultAvatar } from './default.jpg'
 
-export {  default as defaultAvatar } from './default.jpg'
-const defaultUserData = {
+export interface UserData {
+	username: string
+	email: string
+	blog: string
+	avatar: string
+}
+
+const defaultUserData: UserData = {
 	username: '',
 	email: '',
 	blog: '',
 	avatar: ''
 }
-export function setUserInfo ({username, email, blog, avatar}) {
+
+export function setUserInfo ({ username, email, blog, avatar }: UserData) {
 	localStorage.setItem('userInfo', JSON.stringify({
 		username,
 		email,
@@ -14,8 +22,9 @@ export function setUserInfo ({username, email, blog, avatar}) {
 		avatar
 	}))
 }
-function getUserInfoFromLocal () {
-	let dataStr = localStorage.getItem('userInfo')
+
+function getUserInfoFromLocal (): UserData {
+	const dataStr = localStorage.getItem('userInfo')
 	if (!dataStr) {
 		return Object.assign({}, defaultUserData)
 	}
@@ -25,7 +34,8 @@ function getUserInfoFromLocal () {
 		return Object.assign({}, defaultUserData)
 	}
 }
-function getUserInfoFromServer () {
+
+function getUserInfoFromServer (): Promise<UserData | null> {
 	return fetch('/api/user/detail', {
 		method: 'POST'
 	})
@@ -34,8 +44,10 @@ function getUserInfoFromServer () {
 			return data.detail || null
 		})
 }
-let userCache = null
-export function getUserInfo () {
+
+let userCache: UserData | null = null
+
+export function getUserInfo (): Promise<UserData | null> {
 	// 若有登陆缓存，则直接使用
 	if (userCache) {
 		return Promise.resolve(userCache)

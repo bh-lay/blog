@@ -35,77 +35,48 @@
 }
 </style>
 
-<script>
-import filters from '@/filters/index.js'
-export default {
-	props: {
-		post: {
-			type: Object,
-			default () {
-				return {}
-			}
-		}
-	},
-	data () {
-		return {
-		}
-	},
-	render(h) {
-		const targetUrl = this.post.url
-		let printImageWidth = 10;
-		let printImageHeight = 10;
-		let printImageUrl = '';
-		const printImage = (this.post?.images || [])[0]
-		if (printImage) {
-			printImageWidth = printImage.width;
-			printImageHeight = printImage.height;
-			printImageUrl = printImage.source?.l || '';
-		} else {
-			const titleImage = this.post.title_image || {}
-			printImageWidth = titleImage.width;
-			printImageHeight = titleImage.height;
-			printImageUrl = titleImage.url
-		}
+<template>
+	<div
+		class="potography-item"
+		:style="{
+			flexBasis: `calc(var(--base-width) * ${ratio})`,
+			aspectRatio: ratio
+		}"
+	>
+		<img class="photo" v-lazy :src="printImageUrl" />
+		<a class="potography-info" :href="post.url" target="_blank">
+			<div class="title">{{ post.title }}</div>
+			<div class="desc">{{ post.excerpt }}</div>
+		</a>
+	</div>
+</template>
 
-		return h(
-			'div', {
-				class: 'potography-item',
-				style: {
-					flexBasis: `calc(var(--base-width) * ${printImageWidth / printImageHeight})`,
-					aspectRatio: printImageWidth/printImageHeight,
-				},
-			},
-			[
-				h('img', {
-					class: 'photo',
-					attrs: {
-						src: printImageUrl,
-					},
-					directives: [
-						{
-							name: 'lazy',
-						}
-					],
-				}),
-				h(
-					'a', {
-						class: 'potography-info',
-						attrs: {
-							href: targetUrl,
-							target: '_blank'
-						}
-					},
-					[
-						h('div', {
-							class: 'title'
-						}, this.post.title),
-						h('div', {
-							class: 'desc'
-						}, this.post.excerpt)
-					]
-				)
-			]
-		)
-	},
-}
+<script setup lang="ts">
+import { computed } from 'vue'
+
+const props = withDefaults(defineProps<{
+	post?: any
+}>(), {
+	post: () => ({})
+})
+
+const printImageData = computed(() => {
+	const printImage = (props.post?.images || [])[0]
+	if (printImage) {
+		return {
+			width: printImage.width,
+			height: printImage.height,
+			url: printImage.source?.l || ''
+		}
+	}
+	const titleImage = props.post.title_image || {}
+	return {
+		width: titleImage.width,
+		height: titleImage.height,
+		url: titleImage.url
+	}
+})
+
+const printImageUrl = computed(() => printImageData.value.url)
+const ratio = computed(() => printImageData.value.width / printImageData.value.height)
 </script>

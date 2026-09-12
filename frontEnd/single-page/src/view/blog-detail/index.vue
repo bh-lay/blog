@@ -340,8 +340,8 @@
 					<div class="publish-time">
 						<div class="label">发布时间</div>
 						<div class="main">
-							<div class="date-relative">{{detail.time_show | dateDiff}}</div>
-							<div class="date-real">{{detail.time_show | timeFormat}}</div>
+							<div class="date-relative">{{ dateDiff(detail.time_show) }}</div>
+							<div class="date-real">{{ timeFormat(detail.time_show) }}</div>
 						</div>
 					</div>
 				</div>
@@ -392,147 +392,154 @@
 	<Footer />
 </div>
 </template>
-<script>
-import highlight from '@/common/js/highlight.js'
-import { loadImg } from '@/common/js/node-utils.js'
+<script setup lang="ts">
+import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import highlight from '@/common/ts/highlight'
+import { loadImg } from '@/common/ts/node-utils'
 import Comments from '@/components/comments/index.vue'
 import BlogTag from '@/components/common/blog-tag.vue'
-import { LazyLoadManager } from '@/common/js/lazy-load-manager.js'
-import filters from '@/filters/index.js'
-import { getLastClickedArticle } from "@/common/view-transition/"
+import { LazyLoadManager } from '@/common/ts/lazy-load-manager'
+import { dateDiff, imgHosting } from '@/filters'
+import { timeFormat } from '@/ui-library/filters'
+import { getLastClickedArticle } from '@/common/view-transition'
 import blogShare from './share.vue'
-import buildToc from './build-toc.js'
+import buildToc from './build-toc'
+import type { TocItem } from './build-toc'
 import lazyPlaceholderUrl from '@/ui-library/images/lazy-placeholder.svg'
 import { tocVisibleHashKey } from '@/components/navigation/article-toc.vue'
+import funny from '@/common/ts/funny'
 
-export default {
-	name: 'blogDetail',
-	components: {
-		Comments,
-		blogShare,
-		BlogTag,
-	},
-	data () {
-		return {
-			detail: {
-				id: '',
-				title: '',
-				author: '',
-				content: '',
-				cover: '',
-				intro: '',
-				tags: [],
-				time_show: ''
-			},
-			coverImgUrl: '',
-			articleToc: [],
-
-			isLoading: true
-		}
-	},
-	computed: {
-		blogID () {
-			return this.$route.params.id || ''
-		},
-		blogUrl () {
-			return `${location.origin}/blog/${this.detail.id}`
-		},
-		tocVisibleInMobile () {
-			return this.$route.hash === tocVisibleHashKey
-		}
-	},
-	mounted () {
-		this.initFromCache()
-		this.initFromApi()
-		this._lazyLoadManager = new LazyLoadManager({
-			rootMargin: '0px',
-			threshold: 0.1,
-			placeholder: lazyPlaceholderUrl,
-			fallback: lazyPlaceholderUrl,
-			srcAttr: 'src'
-		});
-	},
-	beforeDestroy() {
-		this._lazyLoadManager.destroy();
-	},
-	methods: {
-		initFromCache() {
-			const lastClickedArticle = getLastClickedArticle()
-			if (!lastClickedArticle) {
-				return
-			}
-			if (lastClickedArticle.id !== this.blogID) {
-				return
-			}
-			this.detail = {
-				id: lastClickedArticle.id || '',
-				title: lastClickedArticle.title || '',
-				author: lastClickedArticle.author || '',
-				content: `<p>${lastClickedArticle.intro || ''}</p>`,
-				cover: lastClickedArticle.cover || '',
-				intro: lastClickedArticle.intro || '',
-				tags: lastClickedArticle.tags || [],
-				time_show: lastClickedArticle.time_show || ''
-			}
-			this.coverImgUrl = filters.imgHosting(lastClickedArticle.cover, 'zoom', 420)
-		},
-		initFromApi() {
-			this.isLoading = true
-			fetch(`/api/blog/${this.blogID}?format=html`)
-				.then(response => response.json())
-				.then(data => {
-					if (data.code === 2) {
-						this.$router.replace({
-							path: '/blog/',
-						})
-						return
-					}
-					for (let key in this.detail) {
-						this.detail[key] = data.detail[key]
-					}
-
-					// 构建大纲数据
-					let tocData = buildToc(data.detail.content)
-					// this.detail.content = tocData.article
-					this.articleToc = tocData.toc
-
-					// 渲染顶部图片
-					let coverUrl = filters.imgHosting(data.detail.cover, 'zoom', 420)
-					loadImg(coverUrl, () => {
-						this.coverImgUrl = coverUrl
-					})
-					const parser = new DOMParser();
-					const docNode = parser.parseFromString(`<div>${tocData.article}</div>`, 'text/html');
-					const articleNode = docNode.body.firstChild
-					this.$refs.article.appendChild(articleNode);
-					this._lazyLoadManager.lazyLoad(articleNode.querySelectorAll('img'));
-					this.$nextTick(() => this.addCodeSupport())
-				})
-				.catch(() => {})
-				.then(() => {
-					this.isLoading = false
-
-					let coverUrl = filters.imgHosting(this.detail.cover, 'cover', 420)
-					this.setTitle(this.detail.title, this.detail.intro, coverUrl)
-				})
-		},
-		addCodeSupport () {
-			// 代码高亮
-			let codeList = this.$refs.article.querySelectorAll('pre code')
-			codeList.forEach(codeNode => highlight(codeNode))
-		},
-		scrollTo (id) {
-			// 绑定 toc 点击事件
-			let node = document.querySelector('[data-id="' + id + '"]')
-			if (!node) {
-				return
-			}
-			node.scrollIntoView({
-				behavior: 'smooth',
-				block: 'center',
-				inline: 'nearest'
-			})
-		}
-	}
+export interface DetailData {
+	id: string
+	title: string
+	author: string
+	content: string
+	cover: string
+	intro: string
+	tags: string[]
+	time_show: string
 }
+
+const route = useRoute()
+const router = useRouter()
+
+const detail = ref<DetailData>({
+	id: '',
+	title: '',
+	author: '',
+	content: '',
+	cover: '',
+	intro: '',
+	tags: [],
+	time_show: ''
+})
+const coverImgUrl = ref('')
+const articleToc = ref<TocItem[]>([])
+const isLoading = ref(true)
+
+const article = ref<HTMLElement | null>(null)
+const tieNode = ref<HTMLElement | null>(null)
+
+let lazyLoadManager: LazyLoadManager | null = null
+
+const blogID = computed(() => (route.params.id as string) || '')
+const blogUrl = computed(() => `${location.origin}/blog/${detail.value.id}`)
+const tocVisibleInMobile = computed(() => route.hash === tocVisibleHashKey)
+
+function initFromCache () {
+	const lastClickedArticle = getLastClickedArticle()
+	if (!lastClickedArticle) {
+		return
+	}
+	if (lastClickedArticle.id !== blogID.value) {
+		return
+	}
+	detail.value = {
+		id: lastClickedArticle.id || '',
+		title: lastClickedArticle.title || '',
+		author: lastClickedArticle.author || '',
+		content: `<p>${lastClickedArticle.intro || ''}</p>`,
+		cover: lastClickedArticle.cover || '',
+		intro: lastClickedArticle.intro || '',
+		tags: lastClickedArticle.tags || [],
+		time_show: lastClickedArticle.time_show || ''
+	}
+	coverImgUrl.value = imgHosting(lastClickedArticle.cover, 'zoom', 420)
+}
+
+function initFromApi () {
+	isLoading.value = true
+	fetch(`/api/blog/${blogID.value}?format=html`)
+		.then(response => response.json())
+		.then(data => {
+			if (data.code === 2) {
+				router.replace({
+					path: '/blog/'
+				})
+				return
+			}
+			for (const key in detail.value) {
+				(detail.value as any)[key] = data.detail[key]
+			}
+
+			// 构建大纲数据
+			const tocData = buildToc(data.detail.content)
+			articleToc.value = tocData.toc
+
+			// 渲染顶部图片
+			const coverUrl = imgHosting(data.detail.cover, 'zoom', 420)
+			loadImg(coverUrl, () => {
+				coverImgUrl.value = coverUrl
+			})
+			const parser = new DOMParser()
+			const docNode = parser.parseFromString(`<div>${tocData.article}</div>`, 'text/html')
+			const articleNode = docNode.body.firstChild as Element
+			article.value && article.value.appendChild(articleNode)
+			lazyLoadManager && lazyLoadManager.lazyLoad(articleNode.querySelectorAll('img'))
+			nextTick(() => addCodeSupport())
+		})
+		.catch(() => {})
+		.then(() => {
+			isLoading.value = false
+
+			const coverUrl = imgHosting(detail.value.cover, 'cover', 420)
+			funny.setTitle(detail.value.title, detail.value.intro, coverUrl)
+		})
+}
+
+function addCodeSupport () {
+	// 代码高亮
+	const codeList = article.value ? article.value.querySelectorAll('pre code') : []
+	codeList.forEach(codeNode => highlight(codeNode))
+}
+
+function scrollTo (id: string) {
+	// 绑定 toc 点击事件
+	const node = document.querySelector('[data-id="' + id + '"]')
+	if (!node) {
+		return
+	}
+	node.scrollIntoView({
+		behavior: 'smooth',
+		block: 'center',
+		inline: 'nearest'
+	})
+}
+
+onMounted(() => {
+	initFromCache()
+	initFromApi()
+	lazyLoadManager = new LazyLoadManager({
+		rootMargin: '0px',
+		threshold: 0.1,
+		placeholder: lazyPlaceholderUrl,
+		fallback: lazyPlaceholderUrl,
+		srcAttr: 'src'
+	})
+})
+
+onBeforeUnmount(() => {
+	lazyLoadManager && lazyLoadManager.destroy()
+})
 </script>

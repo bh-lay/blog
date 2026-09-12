@@ -109,53 +109,48 @@
 </div>
 </template>
 
-<script>
-import { loadImg } from '@/common/js/node-utils.js'
+<script setup lang="ts">
+import { ref } from 'vue'
+import { loadImg } from '@/common/ts/node-utils'
 
-export default {
-	name: 'header-banner',
-	props: {
-    mask: {
-      type: Boolean,
-      default: true,
-    },
-    navigationShadowVisible: {
-      type: Boolean,
-      default: true,
-    },
-    authorVisible: {
-      type: Boolean,
-      default: true,
-    },
-		photoGraphaList: {
-			type: Array
-		},
-		photoGraphaIndex: {
-			type: Number,
-			default: 0
-		}
-	},
-	data () {
-		return {
-			photographyLoaded: false,
-			photography: {}
-		}
-	},
-	created () {
-		let startTime = new Date().getTime()
-		this.photography = this.photoGraphaList[this.photoGraphaIndex]
-
-		let nextIndex = this.photoGraphaIndex + 1
-		if (nextIndex >= this.photoGraphaList.length) {
-			nextIndex = 0
-		}
-		this.$emit('nextIndex', nextIndex)
-		loadImg(this.photography.imgSrc, () => {
-			let spendTime = new Date().getTime() - startTime
-			setTimeout(() => {
-				this.photographyLoaded = true
-			}, 1200 - spendTime)
-		})
-	}
+interface Photography {
+	imgSrc?: string
+	title?: string
+	author?: string
+	htmlSrc?: string
 }
+
+const props = withDefaults(defineProps<{
+	mask?: boolean
+	navigationShadowVisible?: boolean
+	authorVisible?: boolean
+	photoGraphaList?: Photography[]
+	photoGraphaIndex?: number
+}>(), {
+	mask: true,
+	navigationShadowVisible: true,
+	authorVisible: true,
+	photoGraphaList: () => [],
+	photoGraphaIndex: 0
+})
+
+const emit = defineEmits<{ (e: 'nextIndex', index: number): void }>()
+
+const photographyLoaded = ref(false)
+const photography = ref<Photography>({})
+
+const startTime = new Date().getTime()
+photography.value = props.photoGraphaList[props.photoGraphaIndex] || {}
+
+let nextIndex = props.photoGraphaIndex + 1
+if (nextIndex >= props.photoGraphaList.length) {
+	nextIndex = 0
+}
+emit('nextIndex', nextIndex)
+loadImg(photography.value.imgSrc || '', () => {
+	const spendTime = new Date().getTime() - startTime
+	setTimeout(() => {
+		photographyLoaded.value = true
+	}, 1200 - spendTime)
+})
 </script>

@@ -27,90 +27,61 @@
 		}">&gt;&gt;</span>
 	</section>
 </template>
-<script>
-export default {
-	props: {
-		pagegroup: {
-			type: Number,
-			required: false,
-			default: 5
-		},
-		total: {
-			type: Number,
-			required: true
-		},
-		size: {
-			type: Number,
-			required: true
-		},
-		current: {
-			type: Number,
-			required: true,
-			default: 1
-		},
-		pageInfo: {}
-	},
-	computed: {
-		page () {
-			return Math.ceil(this.total / this.size)
-		},
-		setList () {
-			var len = this.page
-			let temp = []
-			let list = []
-			let count = Math.floor(this.pagegroup / 2)
-			let center = this.current
-			if (len <= this.pagegroup) {
-				while (len--) {
-					temp.push({
-						text: this.page - len,
-						val: this.page - len
-					})
-				}
-				return temp
-			}
-			while (len--) {
-				temp.push(this.page - len)
-			}
-			var idx = temp.indexOf(center)
-			idx < count && (center = center + count - idx)
-			this.current > this.page - count && (center = this.page - count)
-			temp = temp.splice(center - count - 1, this.pagegroup)
-			do {
-				var t = temp.shift()
-				list.push({
-					text: t,
-					val: t
-				})
-			} while (temp.length)
-			if (this.page > this.pagegroup) {
-				if (this.current > count + 1) {
-					list.unshift({
-						text: '...',
-						val: list[0].val - 1
-					})
-				}
-				if (this.current < this.page - count) {
-					list.push({
-						text: '...',
-						val: list[list.length - 1].val + 1
-					})
-				}
-			}
-			return list
+<script setup lang="ts">
+import { computed } from 'vue'
+
+const props = withDefaults(defineProps<{
+	pagegroup?: number
+	total: number
+	size: number
+	current?: number
+	pageInfo?: any
+}>(), {
+	pagegroup: 5,
+	current: 1
+})
+
+const emit = defineEmits<{ (e: 'update:current', value: number): void }>()
+
+const page = computed(() => Math.ceil(props.total / props.size))
+
+const setList = computed(() => {
+	let len = page.value
+	let temp: number[] = []
+	let list: { text: string | number; val: number }[] = []
+	const count = Math.floor(props.pagegroup / 2)
+	let center = props.current
+	if (len <= props.pagegroup) {
+		while (len--) {
+			temp.push(page.value - len)
 		}
-	},
-	created () {
-		return {
-			page: 0
+		return temp.map((t) => ({ text: t, val: t }))
+	}
+	while (len--) {
+		temp.push(page.value - len)
+	}
+	const idx = temp.indexOf(center)
+	idx < count && (center = center + count - idx)
+	props.current > page.value - count && (center = page.value - count)
+	temp = temp.splice(center - count - 1, props.pagegroup)
+	do {
+		const t = temp.shift() as number
+		list.push({ text: t, val: t })
+	} while (temp.length)
+	if (page.value > props.pagegroup) {
+		if (props.current > count + 1) {
+			list.unshift({ text: '...', val: list[0].val - 1 })
 		}
-	},
-	methods: {
-		clickCurrent (idx) {
-			if (this.current !== idx && idx > 0 && idx < this.page + 1) {
-				this.$emit('update:current', idx)
-			}
+		if (props.current < page.value - count) {
+			list.push({ text: '...', val: list[list.length - 1].val + 1 })
 		}
+	}
+	return list
+})
+
+function clickCurrent (idx: number) {
+	if (props.current !== idx && idx > 0 && idx < page.value + 1) {
+		emit('update:current', idx)
 	}
 }
 </script>

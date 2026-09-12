@@ -17,30 +17,18 @@
 	/>
 </div>
 </template>
-<script>
+<script setup lang="ts">
+import { ref } from 'vue'
 import SendBox from './send-box.vue'
 import List from './list.vue'
 
-export default {
-	name: 'comments-section',
-	components: {
-		SendBox,
-		List
-	},
-	props: {
-		cid: {
-			type: String,
-			required: true
-		}
-	},
-	data () {
-		return {
-		}
-	},
-	methods: {
-		sendSuccess () {
-			this.$refs.commentsList.refresh()
-		}
-	}
+defineProps<{
+	cid: string
+}>()
+
+const commentsList = ref<InstanceType<typeof List> | null>(null)
+
+function sendSuccess () {
+	commentsList.value && commentsList.value.refresh()
 }
 </script>

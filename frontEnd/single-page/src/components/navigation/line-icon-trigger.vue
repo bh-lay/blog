@@ -42,14 +42,12 @@
 <template>
 	<Button class="line-icon-trigger" :class="active ? 'active' : ''" @click="$emit('toggle-display')"><i></i><i></i><i></i></Button>
 </template>
-<script>
+<script setup lang="ts">
+withDefaults(defineProps<{
+	active?: boolean
+}>(), {
+	active: false
+})
 
-export default {
-	props: {
-		active: {
-			type: Boolean,
-			default: false,
-		}
-	}
-}
+defineEmits<{ (e: 'toggle-display'): void }>()
 </script>

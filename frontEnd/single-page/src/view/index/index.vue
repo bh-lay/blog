@@ -30,13 +30,11 @@
 </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import aboutMe from './about-me.vue'
 import aboutDesign from './about-design.vue'
 import aboutBackend from './about-backend.vue'
 import aboutFriends from './about-friends.vue'
-export default {
-	name: 'index-page',
-	components: { aboutMe, aboutDesign, aboutBackend, aboutFriends }
-}
+
+defineOptions({ name: 'index-page' })
 </script>

@@ -82,15 +82,11 @@
 </div>
 </template>
 
-<script>
-import {defaultAvatar} from '@/components/comments/data.js'
-export default {
-	name: 'latest-comments',
-	props: ['list', 'isLoading'],
-	data () {
-		return {
-			defaultAvatar
-		}
-	},
-}
+<script setup lang="ts">
+import { defaultAvatar } from '@/components/comments/data'
+
+defineProps<{
+	list?: any[]
+	isLoading?: boolean
+}>()
 </script>

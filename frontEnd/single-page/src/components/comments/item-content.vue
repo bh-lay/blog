@@ -100,7 +100,7 @@
 					:href="siteUrlTransform(item.user.blog)"
 				>{{item.user.username}}</a>
 				<span v-else class="who">{{item.user.username}}</span>
-				<span class="time">{{item.time | timeFormat}}</span>
+				<span class="time">{{ timeFormat(item.time) }}</span>
 		</div>
 		<Button type="text" class="btn-reply" @click="replyMode = !replyMode">回复</Button>
 	</div>
@@ -115,44 +115,27 @@
 	/>
 </div>
 </template>
-<script>
+<script setup lang="ts">
+import { ref } from 'vue'
 import SendBox from './send-box.vue'
-import {defaultAvatar} from './data.js'
-import { createExternalSiteUrl } from '@/common/js/cross-site-utils.js'
+import { createExternalSiteUrl } from '@/common/ts/cross-site-utils'
+import { timeFormat } from '@/ui-library/filters'
 
-export default {
-	name: 'comments-list',
-	components: {
-		SendBox
-	},
-	props: {
-		item: {
-			type: Object
-		},
-		cid: {
-			type: String,
-			required: true
-		}
-	},
-	data () {
-		return {
-			replyMode: false
-		}
-	},
-	computed: {
-	},
-	mounted () {
-	},
-	watch: {
-	},
-	methods: {
-		sendSuccess () {
-			this.replyMode = false
-			this.$emit('replySuccess')
-		},
-		siteUrlTransform(url) {
-			return createExternalSiteUrl(url)
-		},
-	}
+withDefaults(defineProps<{
+	item?: any
+	cid: string
+}>(), {})
+
+const emit = defineEmits<{ (e: 'replySuccess'): void }>()
+
+const replyMode = ref(false)
+
+function sendSuccess () {
+	replyMode.value = false
+	emit('replySuccess')
+}
+
+function siteUrlTransform (url: string) {
+	return createExternalSiteUrl(url)
 }
 </script>

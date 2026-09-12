@@ -1,6 +1,7 @@
-let domain = '/api'
+const domain = '/api'
+
 // 获取
-export function getApiData (url = '') {
+export function getApiData (url = ''): Promise<any> {
 	return fetch(domain + url.replace(/^\b(\/)*/, '/'), {
 		method: 'GET',
 		mode: 'cors'

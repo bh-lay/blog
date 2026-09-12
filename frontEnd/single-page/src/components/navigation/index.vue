@@ -288,48 +288,44 @@
 	</div>
 </template>
 
-<script>
-import LineIconTrigger from "./line-icon-trigger.vue"
-import ArticleToc from "./article-toc.vue"
-export default {
-	name: 'navigation',
-  components: { LineIconTrigger, ArticleToc },
-	data () {
-		return {
-			navList: Object.freeze([
-				{
-					label: '博文',
-					href: '/blog',
-					type: 'blog'
-				},
-				{
-					label: '实验室',
-					href: '/labs/',
-					type: 'labs'
-				},
-				{
-					label: '全景',
-					href: '/720/',
-					type: '720'
-				},
-				{
-					label: '摄影',
-					href: '/photography',
-					type: 'photography'
-				},
-				{
-					label: '留言',
-					href: '/bless',
-					type: 'bless'
-				}
-			]),
-			navSlidedown: false
-		}
+<script setup lang="ts">
+import { ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import LineIconTrigger from './line-icon-trigger.vue'
+import ArticleToc from './article-toc.vue'
+
+const navList = Object.freeze([
+	{
+		label: '博文',
+		href: '/blog',
+		type: 'blog'
 	},
-	watch: {
-		$route () {
-			this.navSlidedown = false
-		}
+	{
+		label: '实验室',
+		href: '/labs/',
+		type: 'labs'
+	},
+	{
+		label: '全景',
+		href: '/720/',
+		type: '720'
+	},
+	{
+		label: '摄影',
+		href: '/photography',
+		type: 'photography'
+	},
+	{
+		label: '留言',
+		href: '/bless',
+		type: 'bless'
 	}
-}
+])
+
+const navSlidedown = ref(false)
+
+const route = useRoute()
+watch(() => route.fullPath, () => {
+	navSlidedown.value = false
+})
 </script>

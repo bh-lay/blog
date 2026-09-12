@@ -90,52 +90,43 @@
 </div>
 </template>
 
-<script>
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
 import headerBanner from '@/components/header-banner/index.vue'
 import LaysWorkbench from './lays-workbench.vue'
 import Item from './item.vue'
 import headerBg from './images/hero-bg.jpg'
 
-export default {
-	name: 'labs-page',
-	components: {headerBanner, LaysWorkbench, Item},
-	data () {
-		return {
-			thirdProfile: {
-				title: 'Github',
-				url: ''
-			},
-			postList: [],
+const thirdProfile = ref({
+	title: 'Github',
+	url: ''
+})
+const postList = ref<any[]>([])
+const isLoading = ref(false)
 
-			headerBg,
-			isLoading: false,
-		}
-	},
-	created () {
-		this.getList()
-	},
-	methods: {
-		getList () {
-			this.isLoading = true
-			fetch('/api/labs?limit=20', {
-				method: 'GET'
+function getList () {
+	isLoading.value = true
+	fetch('/api/labs?limit=20', {
+		method: 'GET'
+	})
+		.then(response => response.json())
+		.then(data => {
+			data.list.forEach(function (item: any) {
+				// item.thumb = imgHosting(item.cover)
+				// item.desc = item.intro
+				// item.url = '/labs/' + item.name
+				// item.star = item.github.stargazers_count
+				// item.fork = item.github.forks_count
 			})
-				.then(response => response.json())
-				.then(data => {
-					data.list.forEach(function (item) {
-						// item.thumb = filters.imgHosting(item.cover)
-						// item.desc = item.intro
-						// item.url = '/labs/' + item.name
-						// item.star = item.github.stargazers_count
-						// item.fork = item.github.forks_count
-					})
-					this.postList = data.list
-				})
-				.catch(() => {})
-				.then(() => {
-					this.isLoading = false
-				})
-		}
-	}
+			postList.value = data.list
+		})
+		.catch(() => {})
+		.then(() => {
+			isLoading.value = false
+		})
 }
+
+onMounted(() => {
+	getList()
+})
 </script>

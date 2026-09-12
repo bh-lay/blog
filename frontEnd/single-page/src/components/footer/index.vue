@@ -256,15 +256,11 @@
 </div>
 </template>
 
-<script>
+<script setup lang="ts">
+defineOptions({ name: 'app-footer' })
 
-export default {
-	name: 'app-footer',
-	methods: {
-		switchVersion (version) {
-			document.cookie = `ui_version=${version};path=/;`
-			window.location.reload()
-		}
-	}
+function switchVersion (version: string) {
+	document.cookie = `ui_version=${version};path=/;`
+	window.location.reload()
 }
 </script>
