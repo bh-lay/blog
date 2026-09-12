@@ -6,14 +6,15 @@
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  padding-top: 100px;
+  padding: 100px 0 50px;
 
   .screenshot {
     display: block;
     width: 900px;
+    max-width: 95%;
+    aspect-ratio: 1.75;
     margin-bottom: 20px;
     border-radius: 14px;
-    aspect-ratio: 1.75;
     background: #2e3247;
     object-fit: cover;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5), 10px 10px 30px rgba(0, 0, 0, 0.5);
@@ -30,6 +31,7 @@
   }
 
   .desc {
+    padding: 0 20px;
     line-height: 1.2em;
     font-size: 18px;
     color: #cabeaf;
@@ -40,7 +42,10 @@
       display: inline-block;
       margin: 0 16px;
       font-size: 18px;
-      color: #ddd2c5
+      color: #ddd2c5;
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 
@@ -103,14 +108,14 @@
     />
     <div class="title">小剧起始页</div>
     <div class="desc">一款为自己开发的站点，是小剧工作上的独家兵器库，上网冲浪的小助手。</div>
-    <Button size="large" href="https://e.bh-lay.com/">
+    <Button size="large" type="primary" href="https://e.bh-lay.com/">
       快速访问
     </Button>
     <div class="links">
       <a href="/blog?tag=%E5%B0%8F%E5%89%A7%E8%B5%B7%E5%A7%8B%E9%A1%B5">
         开发记录
       </a>
-      <a :href="`https://github.com/${post.git_full_name}`">
+      <a href="https://github.com/bh-lay/lays-workbench">
         Github
       </a>
     </div>
@@ -146,32 +151,6 @@ const widgets: [string, number, number][] = [
 	['简裁变图', 5, 1], ['小书房', 5, 2]
 ]
 const marqueeWidgets = [...widgets, ...widgets]
-
-const post = ref({
-	_id: '62c4ea07997fdf777f773f9c',
-	id: 'a25as2cfjd',
-	name: 'workbench',
-	title: '',
-	cover: '',
-	time_create: 1657072135077,
-	git_full_name: '/bh-lay/lays-workbench',
-	demo_url: '',
-	intro: '',
-	github: {
-		name: 'lays-workbench',
-		full_name: 'bh-lay/lays-workbench',
-		html_url: 'https://github.com/bh-lay/lays-workbench',
-		description: '剧中人的个人上网首页',
-		created_at: '2021-06-17T05:16:46Z',
-		updated_at: '2025-12-14T14:51:12Z',
-		pushed_at: '2026-01-15T15:04:05Z',
-		git_url: 'git://github.com/bh-lay/lays-workbench.git',
-		homepage: 'http://e.bh-lay.com/',
-		stargazers_count: 23,
-		watchers_count: 23,
-		forks_count: 5
-	}
-})
 
 const thumb = imgHosting('/blog/lays-workbench/home-screen-capture.jpg', 'zoom', 1800)
 
