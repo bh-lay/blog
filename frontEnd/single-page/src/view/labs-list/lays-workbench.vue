@@ -17,6 +17,9 @@
     background: #2e3247;
     object-fit: cover;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5), 10px 10px 30px rgba(0, 0, 0, 0.5);
+    transform-style: preserve-3d;
+    will-change: transform;
+    transition: transform 0.2s ease-out;
   }
 
   .title {
@@ -53,12 +56,19 @@
     }
 
     .widgets-list-body {
-      display: flex;
-      gap: 20px;
       overflow: hidden;
     }
 
+    .widgets-marquee {
+      display: flex;
+      width: max-content;
+      animation: widgets-marquee 40s linear infinite;
+    }
+
     .widgets-item {
+      flex-shrink: 0;
+      margin-right: 20px;
+
       .widgets-screenshot {
         width: 306px;
         height: 138px;
@@ -75,10 +85,22 @@
     }
   }
 }
+
+@keyframes widgets-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
 </style>
 <template>
   <div class="section-workbench">
-    <img class="screenshot" v-lazy :src="thumb" />
+    <img
+      ref="screenshot"
+      class="screenshot"
+      v-lazy
+      :src="thumb"
+      @mousemove="onScreenshotMove"
+      @mouseleave="onScreenshotLeave"
+    />
     <div class="title">小剧起始页</div>
     <div class="desc">一款为自己开发的站点，是小剧工作上的独家兵器库，上网冲浪的小助手。</div>
     <Button size="large" href="https://e.bh-lay.com/">
@@ -95,15 +117,17 @@
     <div class="widgets-list">
       <div class="widgets-list-title">众多好用的小组件</div>
       <div class="widgets-list-body">
-        <div
-          class="widgets-item"
-          v-for="item in widgets"
-          :key="item[0]"
-        >
-          <div class="widgets-screenshot" :style="{
-            backgroundPosition: `-${307 * (item[2] - 1) + 5}px  -${139 * (item[1] - 1) + 5}px`
-          }"></div>
-        <div class="widgets-title">{{ item[0] }}</div>
+        <div class="widgets-marquee">
+          <div
+            class="widgets-item"
+            v-for="(item, index) in marqueeWidgets"
+            :key="index"
+          >
+            <div class="widgets-screenshot" :style="{
+              backgroundPosition: `-${307 * (item[2] - 1) + 5}px  -${139 * (item[1] - 1) + 5}px`
+            }"></div>
+            <div class="widgets-title">{{ item[0] }}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -121,6 +145,8 @@ const widgets: [string, number, number][] = [
 	['三角形生成器', 4, 1], ['图片base64', 4, 2],
 	['简裁变图', 5, 1], ['小书房', 5, 2]
 ]
+const marqueeWidgets = [...widgets, ...widgets]
+
 const post = ref({
 	_id: '62c4ea07997fdf777f773f9c',
 	id: 'a25as2cfjd',
@@ -148,4 +174,26 @@ const post = ref({
 })
 
 const thumb = imgHosting('/blog/lays-workbench/home-screen-capture.jpg', 'zoom', 1800)
+
+const screenshot = ref<HTMLElement | null>(null)
+const MAX_TILT = 5
+
+function onScreenshotMove(event: MouseEvent) {
+  const el = screenshot.value
+  if (!el) return
+  const rect = el.getBoundingClientRect()
+  // 归一化到 -0.5 ~ 0.5，中心为 0
+  const x = (event.clientX - rect.left) / rect.width - 0.5
+  const y = (event.clientY - rect.top) / rect.height - 0.5
+  // 鼠标所在的一侧向后（远离视线）倾斜，中心点保持不动
+  const rotateY = x * MAX_TILT
+  const rotateX = -y * MAX_TILT
+  el.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`
+}
+
+function onScreenshotLeave() {
+  const el = screenshot.value
+  if (el) el.style.transform = ''
+}
+
 </script>

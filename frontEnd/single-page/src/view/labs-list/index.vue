@@ -19,13 +19,13 @@
 		margin: 0 0 0.2em;
 		font-size: 60px;
 		font-weight: 800;
-		text-shadow: 5px 5px #a5a097;
+		text-shadow: 5px 5px rgba(165, 160, 151, 0.5);
 	}
 	p {
 		margin: 0 0 3em;
 		font-size: 18px;
 		font-weight: 500;
-		text-shadow: 1px 1px #a5a097;
+		text-shadow: 1px 1px rgba(165, 160, 151, 0.5);
 	}
   }
 }
