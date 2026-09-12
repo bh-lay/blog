@@ -2,6 +2,7 @@
 .index-aboutme {
   height: 95vh !important;
   min-height: 600px !important;
+  background-color: #ddd;
 }
 .index-aboutme .aboutme-body {
   display: flex;

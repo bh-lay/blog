@@ -28,6 +28,12 @@ a:disabled {
   padding: 12px 20px;
   font-size: 14px;
 }
+.ui-button-large {
+  padding: 18px 30px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: 700;
+}
 .ui-button-text {
   border: none;
   background: transparent;
