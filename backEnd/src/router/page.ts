@@ -78,5 +78,10 @@ const routes: routeItemConfig[] = [
     path: 'get /rss',
     controller: rssController
   },
+  // 留言
+  {
+    path: 'get /friends',
+    controller: adaptionViewForSinglePage(blessListController)
+  },
 ]
 export default routes

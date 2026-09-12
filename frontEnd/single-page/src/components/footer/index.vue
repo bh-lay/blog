@@ -198,7 +198,11 @@
 				<h3>相关链接</h3>
 				<ul class="link-list">
 					<li><a href="https://github.com/bh-lay/blog" target="_blank">博客源码<small>Github</small></a></li>
-					<li><a href="/directories" target="_blank">剧中人的朋友圈</a></li>
+					<li>
+            <router-link
+              to="/friends"
+            >剧中人的朋友圈</router-link>
+          </li>
 					<li class="primary"><a href="https://e.bh-lay.com/" target="_blank">小剧起始页<small>前端工作小帮手</small></a></li>
 				</ul>
 			</div>

@@ -9,6 +9,7 @@ import LabsList from '@/view/labs-list/index.vue'
 import PanoList from '@/view/pano-list/index.vue'
 import PhotographyList from '@/view/photography-list/index.vue'
 import Bless from '@/view/bless/index.vue'
+import Friends from '@/view/friends/index.vue'
 
 Vue.use(Router)
 
@@ -69,6 +70,14 @@ const router = new Router({
 			component: Bless,
 			meta: {
 				title: '留言板'
+			}
+		},
+		{
+			path: '/friends/',
+			name: 'friendsPage',
+			component: Friends,
+			meta: {
+				title: '朋友圈'
 			}
 		}
 	]

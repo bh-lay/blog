@@ -10,7 +10,7 @@
 		}
   }
 }
-@media screen and (min-width: $max-mobile-width) and (max-width: $pad-portrait-width) {
+@media screen and (min-width: $pad-landscape-width) and (max-width: $pad-portrait-width) {
   .article-toc-btn-for-mobile {
     display: block;
     position: absolute;
@@ -18,7 +18,7 @@
     top: 6px;
   }
 }
-@media screen and (max-width: $max-mobile-width) {
+@media screen and (max-width: $pad-landscape-width) {
   .article-toc-btn-for-mobile {
     display: block;
     margin-right: 8px;

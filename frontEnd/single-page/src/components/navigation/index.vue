@@ -91,7 +91,8 @@
   transition: 1.2s 0.5s;
   width: 64%;
 }
-@media screen and (min-width: $max-mobile-width) {
+// moble
+@media screen and (min-width: $pad-landscape-width) {
   :global(.navigation-shadow:after) {
     content: '';
     position: absolute;
@@ -122,7 +123,8 @@
     }
   }
 }
-@media screen and (max-width: $max-mobile-width) {
+// laptop
+@media screen and (max-width: $pad-landscape-width){
   .navigation .nav-inner {
     margin-left: -10px;
     box-shadow: 0 0 2px rgba(0,0,0,0.063), 0 0 10px rgba(0,0,0,0.125);
@@ -162,16 +164,9 @@
     opacity: 1;
   }
 }
-
-@media screen and (min-width: $max-mobile-width) and (max-width: $pad-landscape-width) {
-  .navigation .nav-list a {
-    width: 4.5em;
-    font-size: 13px;
-  }
-}
 @media screen and (min-width: $pad-landscape-width) and (max-width: $pad-portrait-width) {
   .navigation .nav-list a {
-    font-size: 14px;
+    font-size: 13px;
   }
 }
 @-moz-keyframes sticky-navigation-move {
