@@ -1,4 +1,5 @@
 <style lang="scss" scoped>
+@use "../../common/styles/variables" as *;
 .wood-cut-web {
   padding: 160px 0;
   background: #dddbda;
@@ -37,7 +38,29 @@
     }
   }
 }
-
+@media screen and (max-width: $pad-landscape-width) {
+  .wood-cut-web {
+    padding: 100px 0;
+  }
+  .wood-cut-web-inner {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    .screenshot {
+      max-width: 90%;
+    }
+    .intro {
+      width: 80%;
+      text-align: center;
+      .desc {
+        margin-bottom: 30px;
+      }
+      .links {
+        justify-content: center;
+      }
+    }
+  }
+}
 </style>
 <template>
 <div class="wood-cut-web">

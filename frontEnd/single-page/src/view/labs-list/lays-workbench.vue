@@ -1,4 +1,5 @@
 <style lang="scss" scoped>
+@use "../../common/styles/variables" as *;
 .section-workbench {
   position: relative;
   z-index: 1;
@@ -11,7 +12,7 @@
   .screenshot {
     display: block;
     width: 900px;
-    max-width: 95%;
+    max-width: 90%;
     aspect-ratio: 1.75;
     margin-bottom: 20px;
     border-radius: 14px;
@@ -33,6 +34,7 @@
   .desc {
     padding: 0 20px;
     line-height: 1.2em;
+    text-align: center;
     font-size: 18px;
     color: #cabeaf;
   }
@@ -86,6 +88,30 @@
         font-size: 14px;
         font-weight: 700;
         color: #8a837b;
+      }
+    }
+  }
+}
+@media screen and (max-width: $pad-landscape-width) {
+  .section-workbench {
+    padding: 50px 0 20px;
+    .screenshot {
+      margin-bottom: 10px;
+    }
+    .title {
+      font-size: 20px;
+    }
+    .desc {
+      font-size: 14px;
+    }
+    .links {
+      a {
+        font-size: 14px;
+      }
+    }
+    .widgets-list {
+      .widgets-list-title {
+        font-size: 16px;
       }
     }
   }

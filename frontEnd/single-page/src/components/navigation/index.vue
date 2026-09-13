@@ -92,7 +92,7 @@
   width: 64%;
 }
 // moble
-@media screen and (min-width: $pad-landscape-width) {
+@media screen and (min-width: ($pad-landscape-width + 1px)) {
   :global(.navigation-shadow:after) {
     content: '';
     position: absolute;

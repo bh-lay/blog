@@ -1,4 +1,5 @@
 <style lang="scss" scoped>
+@use "../../common/styles/variables" as *;
 .labs-list-pager {
   background: #383736;
 }
@@ -12,24 +13,49 @@
   flex-direction: row-reverse;
   padding: 150px 20px 0 0;
   .labs-hero-wording {
-	width: 500px;
-	text-align: right;
-	color: #2b211d;
-	h1 {
-		margin: 0 0 0.2em;
-		font-size: 60px;
-		font-weight: 800;
-		text-shadow: 5px 5px rgba(165, 160, 151, 0.5);
-	}
-	p {
-		margin: 0 0 3em;
-		font-size: 18px;
-		font-weight: 500;
-		text-shadow: 1px 1px rgba(165, 160, 151, 0.5);
-	}
+    width: 500px;
+    text-align: right;
+    color: #2b211d;
+    h1 {
+      margin: 0 0.15em 0.2em;
+      font-size: 60px;
+      font-weight: 800;
+      text-shadow: 5px 5px rgba(165, 160, 151, 0.5);
+    }
+    p {
+      margin: 0 0 3em;
+      line-height: 1.5em;
+      font-size: 18px;
+      font-weight: 700;
+      span {
+        padding: 0 0.5em;
+        border-radius: 4px;
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
+        background-color:rgba(165, 160, 151, 0.5);
+      }
+    }
   }
 }
 
+@media screen and (max-width: $pad-landscape-width) {
+  .labs-list-header  {
+    height: 200px;
+  }
+  .labs-hero-section {
+    padding: 25px 20px 0 0;
+    .labs-hero-wording {
+      width: 70%;
+      h1 {
+        font-size: 22px;
+      }
+      p {
+        margin-bottom: 1.2em;
+        font-size: 12px;
+      }
+    }
+  }
+}
 .labs-list-archive {
 	padding: 60px 0;
 	.post-list-title {
@@ -80,7 +106,7 @@
 			<Container class="labs-hero-section">
 				<div class="labs-hero-wording">
 					<h1>小剧实验室</h1>
-					<p>小剧也曾不知天高地厚的造过不少「轮子」，虽然不好用<br/>却也是我成长路上一个个深深浅浅的脚印</p>
+					<p><span>小剧也曾不知天高地厚的造过不少「轮子」，虽然不好用</span><br/><span>却也是我成长路上一个个深深浅浅的脚印</span></p>
 					<div class="button">
 						<Button href="https://github.com/bh-lay" target="_blank" type="primary" size="large">Github</Button>
 					</div>
