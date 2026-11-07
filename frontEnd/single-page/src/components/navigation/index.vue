@@ -102,8 +102,6 @@
     left: 0;
     backdrop-filter: blur(2px) contrast(0.75);
     mask-image: linear-gradient(180deg, #000 80px, transparent);
-    -webkit-backdrop-filter: blur(2px) contrast(0.5);
-    -webkit-mask-image: linear-gradient(180deg, #000 80px, transparent);
     pointer-events: none;
   }
   .navigation {
@@ -279,6 +277,7 @@
 								:key="nav.type"
 								:to="nav.href"
 								class="sub-page"
+								:class="{ 'router-link-active': isNavActive(nav.href) }"
 							>{{nav.label}}</router-link>
 						</div>
 					</div>
@@ -328,4 +327,11 @@ const route = useRoute()
 watch(() => route.fullPath, () => {
 	navSlidedown.value = false
 })
+
+// 按路径前缀判断导航是否处于激活状态（解决 /blog 与 /blog/:id 平级路由不触发 router-link-active 的问题）
+function isNavActive(href: string) {
+	const path = route.path
+	const base = href.replace(/\/+$/, '')
+	return base !== '' && (path === base || path.startsWith(`${base}/`))
+}
 </script>
