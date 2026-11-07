@@ -92,7 +92,7 @@
   width: 64%;
 }
 // moble
-@media screen and (min-width: $pad-landscape-width) {
+@media screen and (min-width: ($pad-landscape-width + 1px)) {
   :global(.navigation-shadow:after) {
     content: '';
     position: absolute;
@@ -102,8 +102,6 @@
     left: 0;
     backdrop-filter: blur(2px) contrast(0.75);
     mask-image: linear-gradient(180deg, #000 80px, transparent);
-    -webkit-backdrop-filter: blur(2px) contrast(0.5);
-    -webkit-mask-image: linear-gradient(180deg, #000 80px, transparent);
     pointer-events: none;
   }
   .navigation {
@@ -279,6 +277,7 @@
 								:key="nav.type"
 								:to="nav.href"
 								class="sub-page"
+								:class="{ 'router-link-active': isNavActive(nav.href) }"
 							>{{nav.label}}</router-link>
 						</div>
 					</div>
@@ -288,48 +287,51 @@
 	</div>
 </template>
 
-<script>
-import LineIconTrigger from "./line-icon-trigger.vue"
-import ArticleToc from "./article-toc.vue"
-export default {
-	name: 'navigation',
-  components: { LineIconTrigger, ArticleToc },
-	data () {
-		return {
-			navList: Object.freeze([
-				{
-					label: '博文',
-					href: '/blog',
-					type: 'blog'
-				},
-				{
-					label: '实验室',
-					href: '/labs/',
-					type: 'labs'
-				},
-				{
-					label: '全景',
-					href: '/720/',
-					type: '720'
-				},
-				{
-					label: '摄影',
-					href: '/photography',
-					type: 'photography'
-				},
-				{
-					label: '留言',
-					href: '/bless',
-					type: 'bless'
-				}
-			]),
-			navSlidedown: false
-		}
+<script setup lang="ts">
+import { ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import LineIconTrigger from './line-icon-trigger.vue'
+import ArticleToc from './article-toc.vue'
+
+const navList = Object.freeze([
+	{
+		label: '博文',
+		href: '/blog',
+		type: 'blog'
 	},
-	watch: {
-		$route () {
-			this.navSlidedown = false
-		}
+	{
+		label: '实验室',
+		href: '/labs/',
+		type: 'labs'
+	},
+	{
+		label: '全景',
+		href: '/720/',
+		type: '720'
+	},
+	{
+		label: '摄影',
+		href: '/photography',
+		type: 'photography'
+	},
+	{
+		label: '留言',
+		href: '/bless',
+		type: 'bless'
 	}
+])
+
+const navSlidedown = ref(false)
+
+const route = useRoute()
+watch(() => route.fullPath, () => {
+	navSlidedown.value = false
+})
+
+// 按路径前缀判断导航是否处于激活状态（解决 /blog 与 /blog/:id 平级路由不触发 router-link-active 的问题）
+function isNavActive(href: string) {
+	const path = route.path
+	const base = href.replace(/\/+$/, '')
+	return base !== '' && (path === base || path.startsWith(`${base}/`))
 }
 </script>

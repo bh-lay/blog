@@ -1,7 +1,7 @@
-var wx = require('weixin-js-sdk')
+import wx from 'weixin-js-sdk'
 
-let wechatConfigCache = null
-let defaultAvatar = '//static.bh-lay.com/user/avatar-small.jpg'
+let wechatConfigCache: any = null
+const defaultAvatar = '//static.bh-lay.com/user/avatar-small.jpg'
 
 function loadWechatConfig () {
 	if (wechatConfigCache) {
@@ -23,11 +23,11 @@ function loadWechatConfig () {
 		})
 }
 
-export function updatePageInfo (title, desc, img) {
+export function updatePageInfo (title: string, desc?: string, img?: string) {
 	loadWechatConfig()
 		.then(() => {
 			wx.ready(function () {
-				let data = {
+				const data = {
 					title,
 					desc,
 					link: location.href,

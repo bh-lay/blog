@@ -81,52 +81,45 @@
 	<Button type="primary" size="small" @click="confirm">确定</Button>
 </div>
 </template>
-<script>
+<script setup lang="ts">
+import { reactive, onMounted } from 'vue'
 import md5 from 'md5'
-import {getUserInfo, setUserInfo, defaultAvatar} from './data.js'
+import { setUserInfo, defaultAvatar } from './data'
+import type { UserData } from './data'
 
-function gravatar (input) {
+function gravatar (input: string) {
 	return `https://assets-eu.mofei.life/gravatar/${md5(input)}?s=100`
 }
 
-export default {
-	name: 'comments-set-user-data',
-	props: {
-		data: {
-			type: Object,
-			default () {
-				return {
-					username: '',
-					email: '',
-					blog: '',
-					avatar: ''
-				}
-			}
-		}
-	},
-	data () {
-		return {
-			content: '',
-			isStartInput: false,
-			userData: {
-				username: '',
-				email: '',
-				blog: '',
-				avatar: ''
-			}
-		}
-	},
-	mounted () {
-		for (let key in this.userData) {
-			this.userData[key] = this.data[key]
-		}
-	},
-	methods: {
-		confirm () {
-			this.userData.avatar = this.userData.email ? gravatar(this.userData.email) : defaultAvatar
-			setUserInfo(this.userData)
-			this.$emit('confirm', Object.assign({}, this.userData))
-		}
+const props = withDefaults(defineProps<{
+	data?: UserData
+}>(), {
+	data: () => ({
+		username: '',
+		email: '',
+		blog: '',
+		avatar: ''
+	})
+})
+
+const emit = defineEmits<{ (e: 'confirm', data: UserData): void }>()
+
+const userData = reactive<UserData>({
+	username: '',
+	email: '',
+	blog: '',
+	avatar: ''
+})
+
+onMounted(() => {
+	for (const key in userData) {
+		(userData as any)[key] = (props.data as any)[key]
 	}
+})
+
+function confirm () {
+	userData.avatar = userData.email ? gravatar(userData.email) : defaultAvatar
+	setUserInfo(userData)
+	emit('confirm', Object.assign({}, userData))
 }
 </script>

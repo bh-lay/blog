@@ -127,11 +127,11 @@
 		:columnSpacing="isMobile ? 6 : 10"
 		@onScrollEnd="loadMore"
 	>
-		<template slot-scope="scope">
+		<template #default="scope">
 			<div :class="['article-item', !scope.data.cover ? 'pure-text' : '']">
 				<div class="article-item-link" @click="handleArticleClick($event, scope.data)">
 					<div class="label" v-if="scope.data.is_new"><span>new</span></div>
-					<img v-if="scope.data.cover" :src="scope.data.cover | imgHosting('zoom', 420)" :alt="scope.data.title" />
+					<img v-if="scope.data.cover" :src="imgHosting(scope.data.cover, 'zoom', 420)" :alt="scope.data.title" />
 					<div class="title">{{scope.data.title}}</div>
 					<div class="info">{{scope.data.intro}}</div>
 				</div>
@@ -143,7 +143,7 @@
 							:tag="tag"
 						/>
 					</div>
-					<div class="time" :title="scope.data.time_show | timeFormat">{{scope.data.time_show | dateDiff}}</div>
+					<div class="time" :title="timeFormat(scope.data.time_show)">{{ dateDiff(scope.data.time_show) }}</div>
 				</footer>
 			</div>
 		</template>
@@ -152,15 +152,19 @@
 </div>
 </template>
 
-<script>
-import Stick from 'vue-stick'
-import { markArticleClick } from "@/common/view-transition/"
+<script setup lang="ts">
+import { ref, computed, onMounted, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import Stick from '@/components/common/stick.vue'
+import { markArticleClick } from '@/common/view-transition'
 import BlogTag from '@/components/common/blog-tag.vue'
+import { dateDiff, imgHosting } from '@/filters'
+import { timeFormat } from '@/ui-library/filters'
 
-const prefixBlogList = list => {
+const prefixBlogList = (list: any[]) => {
 	list = list || []
 
-	let now = new Date().getTime()
+	const now = new Date().getTime()
 	list.forEach(item => {
 		// 三个月内的博文都算新闻章
 		item.is_new = (now - item.time_show) / (1000 * 60 * 60 * 24) < 90
@@ -168,85 +172,75 @@ const prefixBlogList = list => {
 
 	return list
 }
-export default {
-	name: 'blogPageStick',
-	components: {
-		Stick: Stick.component,
-		BlogTag
-	},
-	data () {
-		return {
-			page: {
-				skip: 0,
-				tag: '',
-				limit: 20,
-				count: Infinity
-			},
-			list: [],
-			isLoading: false,
 
-			isMobile: window.innerWidth < 600
-		}
-	},
-	computed: {
-		tag () {
-			return this.$route.query.tag || ''
-		}
-	},
-	mounted () {
-		this.loadMore()
-	},
-	methods: {
-		refresh () {
-			this.page.skip = 0
-			this.list = []
-			this.loadMore()
-			this.$refs.scrollMark.scrollIntoView({
-				behavior: 'smooth',
-				block: 'center',
-				inline: 'nearest'
-			})
-		},
-		handleArticleClick(event, articleData) {
-			const matchedNode = event.target.closest(".article-item-link");
-			markArticleClick(matchedNode, articleData)
-			this.$router.push({
-				name: "blogDetail",
-				params: {
-					id: articleData.id
-				}
-			})
-		},
-		loadMore () {
-			// 防止重复加载
-			if (this.isLoading) {
-				return
-			}
-			// 超出总量不加载
-			if (this.page.skip >= this.page.count) {
-				return
-			}
-			this.isLoading = true
-			fetch(`/api/blog?skip=${this.page.skip}&limit=${this.page.limit}&tag=${this.tag}`, {
-				method: 'GET'
-			})
-				.then(response => response.json())
-				.then(data => {
-					this.page.count = data.count
-					this.page.skip += this.page.limit
-					let blogList = prefixBlogList(data.list)
-					this.list = this.list.concat(blogList)
-				})
-				.catch(() => {})
-				.then(() => {
-					this.isLoading = false
-				})
-		}
-	},
-	watch: {
-		$route () {
-			this.refresh()
-		}
-	}
+const page = ref({
+	skip: 0,
+	tag: '',
+	limit: 20,
+	count: Infinity
+})
+const list = ref<any[]>([])
+const isLoading = ref(false)
+const isMobile = ref(window.innerWidth < 600)
+const scrollMark = ref<HTMLElement | null>(null)
+
+const route = useRoute()
+const router = useRouter()
+const tag = computed(() => (route.query.tag as string) || '')
+
+function refresh () {
+	page.value.skip = 0
+	list.value = []
+	loadMore()
+	scrollMark.value && scrollMark.value.scrollIntoView({
+		behavior: 'smooth',
+		block: 'center',
+		inline: 'nearest'
+	})
 }
+
+function handleArticleClick (event: MouseEvent, articleData: any) {
+	const matchedNode = (event.target as HTMLElement).closest('.article-item-link')
+	markArticleClick(matchedNode, articleData)
+	router.push({
+		name: 'blogDetail',
+		params: {
+			id: articleData.id
+		}
+	})
+}
+
+function loadMore () {
+	// 防止重复加载
+	if (isLoading.value) {
+		return
+	}
+	// 超出总量不加载
+	if (page.value.skip >= page.value.count) {
+		return
+	}
+	isLoading.value = true
+	fetch(`/api/blog?skip=${page.value.skip}&limit=${page.value.limit}&tag=${tag.value}`, {
+		method: 'GET'
+	})
+		.then(response => response.json())
+		.then(data => {
+			page.value.count = data.count
+			page.value.skip += page.value.limit
+			const blogList = prefixBlogList(data.list)
+			list.value = list.value.concat(blogList)
+		})
+		.catch(() => {})
+		.then(() => {
+			isLoading.value = false
+		})
+}
+
+onMounted(() => {
+	loadMore()
+})
+
+watch(() => route.fullPath, () => {
+	refresh()
+})
 </script>

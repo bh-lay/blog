@@ -111,39 +111,31 @@
 </headerBanner>
 </template>
 
-<script>
+<script setup lang="ts">
+import { ref } from 'vue'
 import headerBanner from '@/components/header-banner/index.vue'
 import image1 from './images/aboutme.jpg'
 import image2 from './images/aboutme_2.jpg'
+
 let globalPhotoGraphaIndex = 0
 
-export default {
-	name: 'index-about-me',
-	components: { headerBanner },
-	data () {
-		return {
-			photographyLoaded: false,
-			photoGraphaList: [
-				{
-					title: '随处撸码',
-					author: '剧中人',
-					imgSrc: image2,
-					htmlSrc: 'https://bh-lay.tuchong.com/14977204/'
-				},
-				{
-					title: '办公室背影',
-					author: 'Oo浪沫',
-					imgSrc: image1,
-					htmlSrc: 'https://bh-lay.tuchong.com/'
-				}
-			],
-			photoGraphaIndex: globalPhotoGraphaIndex
-		}
+const photoGraphaList = [
+	{
+		title: '随处撸码',
+		author: '剧中人',
+		imgSrc: image2,
+		htmlSrc: 'https://bh-lay.tuchong.com/14977204/'
 	},
-	methods: {
-		nextIndex (index) {
-			globalPhotoGraphaIndex = index
-		}
+	{
+		title: '办公室背影',
+		author: 'Oo浪沫',
+		imgSrc: image1,
+		htmlSrc: 'https://bh-lay.tuchong.com/'
 	}
+]
+const photoGraphaIndex = ref(globalPhotoGraphaIndex)
+
+function nextIndex (index: number) {
+	globalPhotoGraphaIndex = index
 }
 </script>

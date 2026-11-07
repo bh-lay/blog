@@ -1,33 +1,34 @@
-
-import Vue from 'vue'
+import { nextTick } from 'vue'
+import type { Directive } from 'vue'
 
 const nodeKey = '$loadingNode'
 const maskNodeClass = 'ui-loading-layer'
 const maskNodeHiddenClass = 'ui-loading-layer-hidden'
 
-function getStyle (elem, prop) {
-	var style = window.getComputedStyle(elem, null)
-	return prop in style ? style[prop] : style.getPropertyValue(prop)
+function getStyle (elem: Element, prop: string): string {
+	const style = window.getComputedStyle(elem, null)
+	return prop in style ? (style as any)[prop] : style.getPropertyValue(prop)
 }
 
-function toggleVisible (parentNode, visible) {
-	let useMethod = visible ? 'remove' : 'add'
-	let maskNode = parentNode[nodeKey]
+function toggleVisible (parentNode: any, visible: boolean) {
+	const useMethod = visible ? 'remove' : 'add'
+	const maskNode = parentNode[nodeKey]
 	if (maskNode) {
 		maskNode.classList[useMethod](maskNodeHiddenClass)
 	} else {
-		Vue.nextTick(() => {
+		nextTick(() => {
 			toggleVisible(parentNode, visible)
 		})
 	}
 }
+
 export default {
-	bind (el, binding, vnode) {
-		Vue.nextTick(() => {
+	beforeMount (el: HTMLElement, binding: any) {
+		nextTick(() => {
 			if (getStyle(el, 'position') === 'static') {
 				el.style.position = 'relative'
 			}
-			let node = document.createElement('div')
+			const node = document.createElement('div')
 			node.innerHTML = '<div><span>正在加载</span></div>'
 			node.classList.add(maskNodeClass)
 			el.appendChild(node)
@@ -38,9 +39,9 @@ export default {
 		})
 	},
 
-	update (el, binding, vnode) {
+	updated (el: HTMLElement, binding: any) {
 		if (binding.value !== binding.oldValue) {
 			toggleVisible(el, binding.value)
 		}
 	}
-}
+} as Directive

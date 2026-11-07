@@ -155,85 +155,76 @@
 	</div>
 </div>
 </template>
-<script>
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
 import setUserData from './set-user-data.vue'
-import {getUserInfo, defaultAvatar} from './data.js'
+import { getUserInfo } from './data'
+import type { UserData } from './data'
 
-export default {
-	name: 'comments-send-box',
-	components: {
-		setUserData
-	},
-	props: {
-		cid: {
-			type: String,
-			required: true
-		},
-		replyForID: {
-			type: String
-		},
-		replyForUsername: {
-			type: String
-		}
-	},
-	data () {
-		return {
-			content: '',
-			isStartInput: false,
-			userData: {
-				username: '',
-				email: '',
-				blog: '',
-				avatar: ''
-			},
+const props = defineProps<{
+	cid: string
+	replyForID?: string
+	replyForUsername?: string
+}>()
 
-			setUserDataVisible: false
-		}
-	},
-	mounted () {
-		this.getUserData()
-	},
-	methods: {
-		startInput () {
-			this.isStartInput = true
-			this.$refs.textarea.focus()
-		},
-		getUserData () {
-			getUserInfo().then(user => {
-				this.userData = user || {}
-			})
-		},
-		onSetUserDataSuccess (userData) {
-			this.setUserDataVisible = false
-			this.userData = userData
-		},
-		submit () {
-			if (this.userData.username.length === 0) {
-				this.setUserDataVisible = true
-				return
-			}
-			let data = {
-				cid: this.cid,
-				content: this.content,
-				user: this.userData
-			}
-			if (this.replyForID) {
-				data.reply_for_id = this.replyForID
-				data.content = `@${this.replyForUsername} ${data.content}`
-			}
-			fetch('/api/comments/0', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(data)
-			})
-				.then(response => response.json())
-				.then(data => {
-					this.content = ''
-					this.$emit('sendSuccess')
-				})
-		}
-	}
+const emit = defineEmits<{ (e: 'sendSuccess'): void }>()
+
+const content = ref('')
+const isStartInput = ref(false)
+const userData = ref<UserData>({
+	username: '',
+	email: '',
+	blog: '',
+	avatar: ''
+})
+const setUserDataVisible = ref(false)
+const textarea = ref<HTMLTextAreaElement | null>(null)
+
+function startInput () {
+	isStartInput.value = true
+	textarea.value && textarea.value.focus()
 }
+
+function getUserData () {
+	getUserInfo().then(user => {
+		userData.value = user || ({} as UserData)
+	})
+}
+
+function onSetUserDataSuccess (data: UserData) {
+	setUserDataVisible.value = false
+	userData.value = data
+}
+
+function submit () {
+	if (!userData.value.username || userData.value.username.length === 0) {
+		setUserDataVisible.value = true
+		return
+	}
+	const data: any = {
+		cid: props.cid,
+		content: content.value,
+		user: userData.value
+	}
+	if (props.replyForID) {
+		data.reply_for_id = props.replyForID
+		data.content = `@${props.replyForUsername} ${data.content}`
+	}
+	fetch('/api/comments/0', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(data)
+	})
+		.then(response => response.json())
+		.then(() => {
+			content.value = ''
+			emit('sendSuccess')
+		})
+}
+
+onMounted(() => {
+	getUserData()
+})
 </script>

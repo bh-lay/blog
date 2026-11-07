@@ -8,65 +8,77 @@ import {
   Mesh,
 } from 'three'
 
+export interface PanoramaOptions {
+  panoramaUrl: string
+  element: HTMLElement
+  onInit?: () => void
+}
+
 export default class ClinderPanorama {
   cameraFov = 43
   cylinderRadius = 10
   cylinderHeight = 8
   cylinderRadialSegments = 60
   cylinderHeightSegments = 2
-  
+
   width = 1
   height = 1
-  scene = null
-  element = null
-  camera = null
-  renderer = null
-  cylinder = null
-  
-  constructor(options) {
-    this.element = options.element;
-    this.updateSize();
+  scene: any = null
+  element: HTMLElement
+  camera: any = null
+  renderer: any = null
+  cylinder: any = null
+
+  private _stopAnimation?: () => void
+  private _resizeObserver?: ResizeObserver
+  private _intersectionobserver?: IntersectionObserver
+
+  constructor(options: PanoramaOptions) {
+    this.element = options.element
+    this.updateSize()
     this.initWorld(options.panoramaUrl, () => {
       this.updateCameraAndRenderer()
       options.onInit && options.onInit()
-    });
+    })
     this.updateCameraAndRenderer()
-    this.animateStart();
-    this.addEventListener();
+    this.animateStart()
+    this.addEventListener()
   }
-  initWorld(panoramaUrl, onLoadded) {
-    this.scene = new Scene();
+
+  initWorld(panoramaUrl: string, onLoadded: () => void) {
+    this.scene = new Scene()
     this.camera = new PerspectiveCamera(
       this.cameraFov,
       this.width / this.height,
       1,
       15
-    );
-    this.camera.position.set(0, 0, 0);
+    )
+    this.camera.position.set(0, 0, 0)
     this.renderer = new WebGLRenderer({
       antialias: true,
-    });
+    })
 
-    this.renderer.setSize(this.width, this.height);
-    this.renderer.setPixelRatio(window.devicePixelRatio);
-    this.element.appendChild(this.renderer.domElement);
+    this.renderer.setSize(this.width, this.height)
+    this.renderer.setPixelRatio(window.devicePixelRatio)
+    this.element.appendChild(this.renderer.domElement)
 
     this.cylinder = this._createClinder(panoramaUrl, onLoadded)
-    this.scene.add(this.cylinder);
+    this.scene.add(this.cylinder)
   }
-  _createClinder(panoramaUrl, onLoadded) {
-    const textureLoader = new TextureLoader();
+
+  _createClinder(panoramaUrl: string, onLoadded: () => void) {
+    const textureLoader = new TextureLoader()
     // textureLoader.setCrossOrigin('anonymous');
     const texture = textureLoader.load(
       panoramaUrl,
-      (texture) => {
+      () => {
         onLoadded && onLoadded()
       },
-    );
+    )
     const material = new MeshBasicMaterial({
       map: texture,
       // wireframe: true,
-    });
+    })
 
     const cylinderGeometry = new CylinderGeometry(
       this.cylinderRadius,
@@ -78,49 +90,55 @@ export default class ClinderPanorama {
     )
     // 反转内部面
     cylinderGeometry.scale(-1, 1, 1)
-    
-    return new Mesh(cylinderGeometry, material);
+
+    return new Mesh(cylinderGeometry, material)
   }
+
   animateStart() {
     this.animateStop()
-  
-    let stopFlag = false;
-    const startTime = Date.now();
+
+    let stopFlag = false
+    const startTime = Date.now()
     const startY = this.cylinder.rotation.y
     const animate = () => {
       if (stopFlag) {
         return
       }
-      const now = Date.now();
-      this.cylinder.rotation.y = startY + (now - startTime) / 29000;
-      requestAnimationFrame(animate);
-      this.renderer.render(this.scene, this.camera); 
+      const now = Date.now()
+      this.cylinder.rotation.y = startY + (now - startTime) / 29000
+      requestAnimationFrame(animate)
+      this.renderer.render(this.scene, this.camera)
     }
 
-    animate();
+    animate()
     this._stopAnimation = () => {
       stopFlag = true
     }
   }
+
   animateStop() {
-    this._stopAnimation && this._stopAnimation();
+    this._stopAnimation && this._stopAnimation()
   }
+
   updateSize() {
-    this.width = this.element.clientWidth;
-    this.height = this.element.clientHeight;
+    this.width = this.element.clientWidth
+    this.height = this.element.clientHeight
   }
+
   updateCameraAndRenderer() {
-    this.camera.aspect = this.width / this.height;
-    this.camera.updateProjectionMatrix();
-    this.renderer.setSize(this.width, this.height);
-    this.renderer.render(this.scene, this.camera); 
+    this.camera.aspect = this.width / this.height
+    this.camera.updateProjectionMatrix()
+    this.renderer.setSize(this.width, this.height)
+    this.renderer.render(this.scene, this.camera)
   }
+
   handleResize() {
     if (this.element && this.camera && this.renderer) {
-      this.updateSize();
+      this.updateSize()
       this.updateCameraAndRenderer()
     }
   }
+
   addEventListener() {
     this._resizeObserver = new ResizeObserver(this.handleResize.bind(this))
     this._resizeObserver.observe(this.element)
@@ -135,21 +153,23 @@ export default class ClinderPanorama {
     })
     this._intersectionobserver.observe(this.element)
   }
+
   removeEventListener() {
-    this._resizeObserver.unobserve(this.element)
-    this._resizeObserver.disconnect()
-    
-    this._intersectionobserver.unobserve(this.element)
-    this._intersectionobserver.disconnect()
+    this._resizeObserver!.unobserve(this.element)
+    this._resizeObserver!.disconnect()
+
+    this._intersectionobserver!.unobserve(this.element)
+    this._intersectionobserver!.disconnect()
   }
+
   destroy() {
     this.removeEventListener()
     this.animateStop()
 
-    this.scene = null;
-    this.element = null;
-    this.camera = null;
-    this.renderer = null;
-    this.cylinder = null;
+    this.scene = null
+    this.element = null as any
+    this.camera = null
+    this.renderer = null
+    this.cylinder = null
   }
 }

@@ -135,24 +135,12 @@
 </a>
 </template>
 
-<script>
-export default {
-	name: 'labs-post-item',
-	props: {
-		post: {
-			type: Object,
-			default () {
-				return {}
-			}
-		}
-	},
-	data () {
-		return {
-		}
-	},
-	created () {
-	},
-	methods: {
-	}
-}
+<script setup lang="ts">
+defineOptions({ name: 'labs-post-item' })
+
+withDefaults(defineProps<{
+	post?: any
+}>(), {
+	post: () => ({})
+})
 </script>

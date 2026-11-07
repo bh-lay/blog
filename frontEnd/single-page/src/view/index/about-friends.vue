@@ -51,16 +51,6 @@
 </section>
 </template>
 
-<script>
-export default {
-	name: 'index-about-friends',
-	data () {
-		return {
-		}
-	},
-	created () {
-	},
-	methods: {
-	}
-}
+<script setup lang="ts">
+defineOptions({ name: 'index-about-friends' })
 </script>

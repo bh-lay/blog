@@ -27,7 +27,7 @@
   height: 40px;
   padding-top: 20px;
 }
-.labs-sub-header .labs-profile-card .icon ::v-deep svg {
+.labs-sub-header .labs-profile-card .icon :deep(svg) {
   display: block;
   width: 40px;
   margin: auto;
@@ -122,63 +122,57 @@
 </div>
 </template>
 
-<script>
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
 import headerBanner from '@/components/header-banner/index.vue'
 import Item from './item.vue'
 import image1 from '@/components/sns-page-layout/images/opus_@2x.jpg'
 import image2 from '@/components/sns-page-layout/images/yangshuo.jpg'
 
 let globalPhotoGraphaIndex = 0
-export default {
-	name: 'labs-page',
-	components: {headerBanner, Item},
-	data () {
-		return {
-			photoGraphaList: [
-				{
-					imgSrc: image1,
-					htmlSrc: 'https://bh-lay.tuchong.com/14431809/#image24933177',
-					title: '宏村',
-					author: '剧中人'
-				}, {
-					imgSrc: image2,
-					htmlSrc: 'https://720yun.com/t/544jOrkvtn0?from=bh-lay',
-					title: '桂林阳朔',
-					author: '剧中人'
-				}
-			],
-			photoGraphaIndex: globalPhotoGraphaIndex,
-			intro: '摄影是小剧为数不多的爱好之一，这里仅仅是收藏一些还能看的过去的照片，作品托管在图虫。',
-			thirdProfile: {
-				title: '图虫',
-				url: 'https://bh-lay.tuchong.com/?from=bh-lay'
-			},
-			postList: [],
 
-			isLoading: false
-		}
-	},
-	created () {
-		this.getList()
-	},
-	methods: {
-		nextIndex (index) {
-			globalPhotoGraphaIndex = index
-		},
-		getList () {
-			this.isLoading = true
-			fetch('/api/photography/list?act=get_list', {
-				method: 'GET'
-			})
-				.then(response => response.json())
-				.then(data => {
-					this.postList = data.post_list
-				})
-				.catch(() => {})
-				.then(() => {
-					this.isLoading = false
-				})
-		}
+const photoGraphaList = [
+	{
+		imgSrc: image1,
+		htmlSrc: 'https://bh-lay.tuchong.com/14431809/#image24933177',
+		title: '宏村',
+		author: '剧中人'
+	}, {
+		imgSrc: image2,
+		htmlSrc: 'https://720yun.com/t/544jOrkvtn0?from=bh-lay',
+		title: '桂林阳朔',
+		author: '剧中人'
 	}
+]
+const photoGraphaIndex = ref(globalPhotoGraphaIndex)
+const intro = '摄影是小剧为数不多的爱好之一，这里仅仅是收藏一些还能看的过去的照片，作品托管在图虫。'
+const thirdProfile = ref({
+	title: '图虫',
+	url: 'https://bh-lay.tuchong.com/?from=bh-lay'
+})
+const postList = ref<any[]>([])
+const isLoading = ref(false)
+
+function nextIndex (index: number) {
+	globalPhotoGraphaIndex = index
 }
+
+function getList () {
+	isLoading.value = true
+	fetch('/api/photography/list?act=get_list', {
+		method: 'GET'
+	})
+		.then(response => response.json())
+		.then(data => {
+			postList.value = data.post_list
+		})
+		.catch(() => {})
+		.then(() => {
+			isLoading.value = false
+		})
+}
+
+onMounted(() => {
+	getList()
+})
 </script>

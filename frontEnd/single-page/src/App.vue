@@ -65,18 +65,13 @@ html {
 }
 </style>
 <template>
-	<div id="app">
+	<div class="app-root">
 		<Navigation/>
 		<router-view class="view-page" />
 	</div>
 </template>
 
-<script>
+<script setup lang="ts">
 import './common/styles/animation.css'
 import Navigation from './components/navigation/index.vue'
-
-export default {
-	name: 'App',
-	components: {Navigation},
-}
 </script>

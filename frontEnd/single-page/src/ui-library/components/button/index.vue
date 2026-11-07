@@ -1,3 +1,36 @@
+<template>
+	<a
+		v-if="href"
+		:class="[`ui-button-${type}`, type !== 'text' ? `ui-button-${size}` : '']"
+		:href="href"
+		:target="target"
+		@click="$emit('click', $event)"
+	>
+		<slot />
+	</a>
+	<button
+		v-else
+		:class="[`ui-button-${type}`, type !== 'text' ? `ui-button-${size}` : '']"
+		@click="$emit('click', $event)"
+	>
+		<slot />
+	</button>
+</template>
+<script setup lang="ts">
+withDefaults(defineProps<{
+	type?: string
+	href?: string
+	target?: string
+	size?: string
+}>(), {
+	type: 'default',
+	href: '',
+	target: '_blank',
+	size: 'middle'
+})
+
+defineEmits<{ (e: 'click', event: MouseEvent): void }>()
+</script>
 <style lang="scss" scoped>
 button,
 a {
@@ -81,61 +114,3 @@ a:disabled {
   background: #aaa;
 }
 </style>
-
-<script>
-export default {
-	name: 'ui-button',
-	props: {
-		type: {
-			type: String,
-			default: 'default'
-		},
-		href: {
-			type: String,
-			default: ''
-		},
-		target: {
-			type: String,
-			default: '_blank'
-		},
-		size: {
-			type: String,
-			// small、middle、large
-			default: 'middle'
-		}
-	},
-	render (createElement) {
-		let nodeName
-		let attrs = {}
-		let classNameList = [`ui-button-${this.type}`]
-		// 文本类型不设置尺寸
-		if (this.type !== 'text') {
-			classNameList.push(`ui-button-${this.size}`)
-		}
-		if (this.href) {
-			nodeName = 'a'
-			attrs = {
-				href: this.href,
-				target: this.target
-			}
-		} else {
-			nodeName = 'button'
-		}
-		return createElement(
-			nodeName,
-			{
-				class: classNameList,
-				attrs,
-				on: {
-					click: () => {
-						this.$emit('click')
-					}
-				}
-			},
-			[
-				this.$slots.default
-			]
-		)
-	}
-}
-</script>

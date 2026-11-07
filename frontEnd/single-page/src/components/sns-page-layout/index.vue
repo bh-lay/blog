@@ -27,7 +27,7 @@
   height: 40px;
   padding-top: 20px;
 }
-.labs-sub-header .labs-profile-card .icon ::v-deep svg {
+.labs-sub-header .labs-profile-card .icon :deep(svg) {
   display: block;
   width: 40px;
   margin: auto;
@@ -135,63 +135,49 @@
 </div>
 </template>
 
-<script>
+<script setup lang="ts">
+import { ref } from 'vue'
 import headerBanner from '@/components/header-banner/index.vue'
 import Item from './item.vue'
 import image1 from './images/opus_@2x.jpg'
 import image2 from './images/yangshuo.jpg'
 
+interface ThirdProfile {
+	url?: string
+	title?: string
+	[key: string]: any
+}
+
+withDefaults(defineProps<{
+	intro?: string
+	thirdProfile?: ThirdProfile
+	postList?: any[]
+	isLoading?: boolean
+}>(), {
+	intro: '',
+	thirdProfile: () => ({ url: '' }),
+	postList: () => [],
+	isLoading: true
+})
+
 let globalPhotoGraphaIndex = 0
 
-export default {
-	name: 'sns-page-layout',
-	components: {headerBanner, Item},
-	props: {
-		intro: {
-			type: String,
-			default: ''
-		},
-		thirdProfile: {
-			type: Object,
-			default () {
-				return {
-					url: ''
-				}
-			}
-		},
-		postList: {
-			type: Array,
-			default () {
-				return []
-			}
-		},
-		isLoading: {
-			type: Boolean,
-			default: true
-		}
-	},
-	data () {
-		return {
-			photoGraphaList: [
-				{
-					imgSrc: image1,
-					htmlSrc: 'https://bh-lay.tuchong.com/14431809/#image24933177',
-					title: '宏村',
-					author: '剧中人'
-				}, {
-					imgSrc: image2,
-					htmlSrc: 'https://720yun.com/t/544jOrkvtn0?from=bh-lay',
-					title: '桂林阳朔',
-					author: '剧中人'
-				}
-			],
-			photoGraphaIndex: globalPhotoGraphaIndex
-		}
-	},
-	methods: {
-		nextIndex (index) {
-			globalPhotoGraphaIndex = index
-		}
+const photoGraphaList = [
+	{
+		imgSrc: image1,
+		htmlSrc: 'https://bh-lay.tuchong.com/14431809/#image24933177',
+		title: '宏村',
+		author: '剧中人'
+	}, {
+		imgSrc: image2,
+		htmlSrc: 'https://720yun.com/t/544jOrkvtn0?from=bh-lay',
+		title: '桂林阳朔',
+		author: '剧中人'
 	}
+]
+const photoGraphaIndex = ref(globalPhotoGraphaIndex)
+
+function nextIndex (index: number) {
+	globalPhotoGraphaIndex = index
 }
 </script>

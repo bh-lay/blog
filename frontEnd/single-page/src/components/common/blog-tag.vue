@@ -12,59 +12,63 @@ a {
   color: #6c8693;
   text-decoration: none;
   transition: 0.15s;
-}
-a:before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: -8px;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 10px 8px 10px 0;
-  border-color: transparent #eff3f5 transparent transparent;
-  transition: 0.15s;
-}
-a:after {
-  content: '';
-  display: block;
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  top: 8px;
-  left: -2px;
-  border-radius: 100%;
-  background: #fff;
-}
-a:hover {
-  background: #525f7a;
-  color: #e2e6e9;
-}
-a:hover:before {
-  border-right-color: #525f7a;
-}
-a.router-link-exact-active {
-  background: #1f4ead;
-  color: #bed0f4;
-  cursor: default;
-}
-a.router-link-exact-active:before {
-  border-right-color: #1f4ead;
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: -8px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 8px 10px 0;
+    border-color: transparent #eff3f5 transparent transparent;
+    transition: 0.15s;
+  }
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    top: 8px;
+    left: -2px;
+    border-radius: 100%;
+    background: #fff;
+  }
+  &:hover {
+    background: #525f7a;
+    color: #e2e6e9;
+    &:before {
+      border-right-color: #525f7a;
+    }
+  }
+  &.tag-active {
+    background: #1f4ead;
+    color: #bed0f4;
+    cursor: default;
+    &:before {
+      border-right-color: #1f4ead;
+    }
+  }
 }
 </style>
 <template>
-<router-link :to="'/blog?tag=' + tag" >{{tag}}</router-link>
+<router-link :to="'/blog?tag=' + tag" :class="{ 'tag-active': isTagActive(tag) }" >{{tag}}</router-link>
 </template>
 
-<script>
-export default {
-	name: 'blogTag',
-	props: {
-		tag: {
-			type: String,
-			default: ''
-		}
-	}
+<script setup lang="ts">
+import { useRoute } from 'vue-router'
+
+defineOptions({ name: 'blogTag' })
+const route = useRoute()
+withDefaults(defineProps<{
+	tag?: string
+}>(), {
+	tag: ''
+})
+function isTagActive(tag: string) {
+	const tagInRoute = route.query.tag as string
+	return tag === tagInRoute
 }
 </script>

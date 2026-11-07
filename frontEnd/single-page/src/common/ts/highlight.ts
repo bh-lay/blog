@@ -3,29 +3,29 @@
  *  Base on https://github.com/niceue/highlight
  **/
 
-let ruleSet = {}
+const ruleSet: Record<string, any> = {}
 
-function highlight (text, lang) {
+function highlight (text?: any, lang?: string) {
 	switch (typeof text) {
-	case 'undefined':
-	case 'object':
-		highlightElements(text || document)
-		break
-	case 'string':
-		return parse(text, lang)
+		case 'undefined':
+		case 'object':
+			highlightElements(text || document)
+			break
+		case 'string':
+			return parse(text, lang)
 	}
 }
 
 // 添加高亮语法
-highlight.add = function (lang, data, rules) {
-	let exp
-	let rule
-	let arr = []
+;(highlight as any).add = function (lang: string, data: any, rules: any) {
+	let exp: any
+	let rule: any
+	const arr: any = []
 
 	arr.toString = joinExp
 
-	for (let className in rules) {
-		if (!rules.hasOwnProperty(className)) {
+	for (const className in rules) {
+		if (!Object.prototype.hasOwnProperty.call(rules, className)) {
 			return
 		}
 		rule = rules[className]
@@ -39,7 +39,7 @@ highlight.add = function (lang, data, rules) {
 		})
 	}
 
-	let a = lang.split(' ')
+	const a = lang.split(' ')
 	let i = a.length
 	while (i--) {
 		ruleSet[a[i]] = {
@@ -49,26 +49,26 @@ highlight.add = function (lang, data, rules) {
 	}
 }
 
-function highlightElements (node) {
-	let parent = node.parentNode
+function highlightElements (node: any) {
+	const parent = node.parentNode
 	let lang = (node.className || '').match(/(?:^|\s)(javascript|css|html)(?:$|\s)/)
 	lang = lang ? lang[1] : 'javascript'
-	let { html, lines } = parse(node.innerHTML, lang)
+	const { html, lines } = parse(node.innerHTML, lang)
 	if (parent && (parent.tagName || '').toLowerCase() === 'pre') {
 		node = parent
 	}
 	if (lines.length > 10) {
 		const tempDiv = document.createElement('div')
 		tempDiv.innerHTML = html
-		const highlightEl = tempDiv.childNodes[0]
-		highlightEl.style = 'height: 300px'
+		const highlightEl = tempDiv.childNodes[0] as HTMLElement
+		highlightEl.setAttribute('style', 'height: 300px')
 
 		const showMoreEl = document.createElement('div')
 		showMoreEl.classList.add('highlight-show-more')
 		showMoreEl.innerHTML = '查看全部'
 		showMoreEl.addEventListener('click', function () {
-			showMoreEl.parentNode.removeChild(showMoreEl)
-			highlightEl.style = 'height: auto'
+			showMoreEl.parentNode?.removeChild(showMoreEl)
+			highlightEl.setAttribute('style', 'height: auto')
 		})
 
 		highlightEl.appendChild(showMoreEl)
@@ -78,32 +78,33 @@ function highlightElements (node) {
 	}
 }
 
-function joinExp () {
-	let exps = []
+function joinExp (this: any) {
+	const exps = []
 	for (let i = 0; i < this.length; i++) exps.push(this[i].exp)
 	return exps.join('|')
 }
 
-function parse (text, lang) {
+function parse (text: string, lang?: string) {
 	lang = lang || 'js'
-	let config = ruleSet[lang]
-	let rules = config.rules
-	let parsed = text.replace(/\r?\n$/, '').replace(new RegExp(rules, 'g'), function () {
+	const config = ruleSet[lang]
+	const rules = config.rules
+	const parsed = text.replace(/\r?\n$/, '').replace(new RegExp(rules, 'g'), function () {
 		let i = 0
 		let j = 1
 		let ruleItem = rules[i]
+		const args: any = arguments
 		while (ruleItem) {
-			if (arguments[j]) {
+			if (args[j]) {
 				// if no custom replacement defined do the simple replacement
 				if (!ruleItem.replacement) {
-					return '<span class="' + ruleItem.className + '">' + arguments[0] + '</span>'
+					return '<span class="' + ruleItem.className + '">' + args[0] + '</span>'
 				} else if (typeof ruleItem.replacement === 'function') {
-					return ruleItem.replacement(arguments[0], ruleItem)
+					return ruleItem.replacement(args[0], ruleItem)
 				} else {
 					// replace $0 with the className then do normal replaces
 					let str = ruleItem.replacement.replace('$0', ruleItem.className)
 					for (let k = 1; k <= ruleItem.length - 1; k++) {
-						str = str.replace('$' + k, arguments[j + k])
+						str = str.replace('$' + k, args[j + k])
 					}
 					return str
 				}
@@ -126,7 +127,7 @@ function parse (text, lang) {
 	}
 }
 
-highlight.add('js javascript typescript json',
+;(highlight as any).add('js javascript typescript json',
 	{
 		className: 'js'
 	},
@@ -134,9 +135,9 @@ highlight.add('js javascript typescript json',
 		blockComments: {
 			/* eslint-disable no-useless-escape */
 			exp: /\/\*[^*]*\*+([^\/][^*]*\*+)*\//,
-			replacement: function (str) {
-				let start = '<span class="comment">'
-				let end = '</span>'
+			replacement: function (str: string) {
+				const start = '<span class="comment">'
+				const end = '</span>'
 				return start + str.replace(/\r?\n/g, end + '\r\n' + start) + end
 			}
 		},
@@ -162,7 +163,7 @@ highlight.add('js javascript typescript json',
 			exp: /\b(toString|valueOf|window|element|prototype|constructor|document|location|escape|unescape|parseInt|parseFloat|setTimeout|clearTimeout|setInterval|clearInterval|NaN|isNaN|Infinity|Date)\b/
 		}
 	})
-highlight.add('html xml',
+;(highlight as any).add('html xml',
 	{
 		className: 'html'
 	},
@@ -189,7 +190,7 @@ highlight.add('html xml',
 			exp: /&lt;!DOCTYPE([^&]|&[^g]|&g[^t])*&gt;/
 		}
 	})
-highlight.add('css',
+;(highlight as any).add('css',
 	{
 		className: 'css'
 	},

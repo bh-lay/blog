@@ -96,7 +96,7 @@
 			<CommentsList
 				cid="define-1"
 				ref="commentsList"
-				:pageIndex.sync="pageIndex"
+				v-model:pageIndex="pageIndex"
 			/>
 		</div>
 		<div class="bless-sidebar">
@@ -116,7 +116,9 @@
 </div>
 </template>
 
-<script>
+<script setup lang="ts">
+import { ref, onMounted, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import headerBanner from '@/components/header-banner/index.vue'
 import CommentsSendBox from '@/components/comments/send-box.vue'
 import CommentsList from '@/components/comments/list.vue'
@@ -127,69 +129,67 @@ import image2 from './images/2.jpg'
 
 let globalPhotoGraphaIndex = 0
 
-export default {
-	name: 'bless-page',
-	components: {CommentsSendBox, CommentsList, Comments, Github, headerBanner},
-	data () {
-		return {
-			commentList: [],
-			githubSummary: {
-				public_repos: 0,
-				followers: 0,
-				following: 0
-			},
-			pageIndex: parseInt(this.$route.query.page, 10) || 1,
+const route = useRoute()
+const router = useRouter()
 
-			photoGraphaList: [
-				{
-					imgSrc: image1,
-					htmlSrc: 'https://bh-lay.tuchong.com/14431809/#image24933177',
-					title: '束河古城',
-					author: '剧中人'
-				}, {
-					imgSrc: image2,
-					// htmlSrc: 'https://720yun.com/t/544jOrkvtn0?from=bh-lay',
-					title: '崇明黄昏',
-					author: '剧中人'
-				}
-			],
-			photoGraphaIndex: globalPhotoGraphaIndex,
-			isLoading: false
-		}
-	},
-	created () {
-		this.getSummary()
-	},
-	methods: {
-		sendSuccess () {
-			this.$refs.commentsList.refresh()
-		},
-		getSummary () {
-			this.isLoading = true
-			fetch('/api/single-page-side')
-				.then(response => response.json())
-				.then(data => {
-					this.githubSummary = data.githubSummary
-					this.commentList = data.commentList
-				})
-				.catch(() => {})
-				.then(() => {
-					this.isLoading = false
-				})
-		},
-		nextIndex (index) {
-			globalPhotoGraphaIndex = index
-		}
-	},
-	watch: {
-		pageIndex () {
-			this.$router.replace({
-				path: '/bless',
-				query: {
-					page: this.pageIndex
-				}
-			})
-		}
+const commentList = ref<any[]>([])
+const githubSummary = ref({
+	public_repos: 0,
+	followers: 0,
+	following: 0
+})
+const pageIndex = ref(parseInt(String(route.query.page), 10) || 1)
+
+const photoGraphaList = [
+	{
+		imgSrc: image1,
+		htmlSrc: 'https://bh-lay.tuchong.com/14431809/#image24933177',
+		title: '束河古城',
+		author: '剧中人'
+	}, {
+		imgSrc: image2,
+		// htmlSrc: 'https://720yun.com/t/544jOrkvtn0?from=bh-lay',
+		title: '崇明黄昏',
+		author: '剧中人'
 	}
+]
+const photoGraphaIndex = ref(globalPhotoGraphaIndex)
+const isLoading = ref(false)
+
+const commentsList = ref<InstanceType<typeof CommentsList> | null>(null)
+
+function sendSuccess () {
+	commentsList.value && commentsList.value.refresh()
 }
+
+function getSummary () {
+	isLoading.value = true
+	fetch('/api/single-page-side')
+		.then(response => response.json())
+		.then(data => {
+			githubSummary.value = data.githubSummary
+			commentList.value = data.commentList
+		})
+		.catch(() => {})
+		.then(() => {
+			isLoading.value = false
+		})
+}
+
+function nextIndex (index: number) {
+	globalPhotoGraphaIndex = index
+}
+
+onMounted(() => {
+	getSummary()
+})
+
+watch(pageIndex, () => {
+	router.replace({
+		path: '/bless',
+		query: {
+			page: pageIndex.value
+		}
+	})
+})
 </script>

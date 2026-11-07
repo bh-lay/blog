@@ -2,7 +2,7 @@
 @use "../../common/styles/variables" as *;
 .article-toc-btn-for-mobile {
   display: none;
-  :deep i {
+  :deep(i) {
     width: 18px;
     right: 12px;
 		&:nth-child(2) {
@@ -34,38 +34,36 @@
   />
 </template>
 
-<script>
-import LineIconTrigger from "./line-icon-trigger.vue"
+<script lang="ts">
+export const tocVisibleHashKey = '#open-toc-for-mobile'
+</script>
+<script setup lang="ts">
+import { computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import LineIconTrigger from './line-icon-trigger.vue'
 
-export const tocVisibleHashKey = "#open-toc-for-mobile"
+withDefaults(defineProps<{
+  active?: boolean
+}>(), {
+  active: false
+})
 
-export default {
-  components: { LineIconTrigger },
-  props: {
-    active: {
-      type: Boolean,
-      default: false,
-    }
-  },
-  computed: {
-    isArticlePage() {
-      return this.$route.name === "blogDetail"
-    },
-    isActive() {
-      if (!this.isArticlePage) {
-        return false
-      }
-      return this.$route.hash === tocVisibleHashKey
-    }
-  },
-	methods: {
-    toggleDisplay() {
-      this.$router.replace({
-        path: this.$route.path,
-        query: this.$route.query,
-        hash: this.isActive ? '' : tocVisibleHashKey
-      });
-    }
-	},
+const route = useRoute()
+const router = useRouter()
+
+const isArticlePage = computed(() => route.name === 'blogDetail')
+const isActive = computed(() => {
+  if (!isArticlePage.value) {
+    return false
+  }
+  return route.hash === tocVisibleHashKey
+})
+
+function toggleDisplay() {
+  router.replace({
+    path: route.path,
+    query: route.query,
+    hash: isActive.value ? '' : tocVisibleHashKey
+  })
 }
 </script>

@@ -35,8 +35,6 @@
 <template>
 <div class="container"><slot /></div>
 </template>
-<script>
-export default {
-	name: 'ui-container',
-}
+<script setup lang="ts">
+defineOptions({ name: 'ui-container' })
 </script>

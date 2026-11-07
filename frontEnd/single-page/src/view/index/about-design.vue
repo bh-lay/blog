@@ -174,12 +174,6 @@
 </section>
 </template>
 
-<script>
-export default {
-	name: 'index-about-design',
-	data () {
-		return {
-		}
-	}
-}
+<script setup lang="ts">
+defineOptions({ name: 'index-about-design' })
 </script>

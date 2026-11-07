@@ -108,7 +108,9 @@
 </div>
 </template>
 
-<script>
+<script setup lang="ts">
+import { ref, computed } from 'vue'
+import { useRoute } from 'vue-router'
 import headerBanner from '@/components/header-banner/index.vue'
 import stickList from './stick-list.vue'
 import archivesList from './archives-list.vue'
@@ -118,46 +120,31 @@ import image2 from './images/architecture-b3-2.jpg'
 
 let globalPhotoGraphaIndex = 0
 
-export default {
-	name: 'blogPage',
-	components: {
-		headerBanner,
-		tagList,
-		stickList,
-		archivesList
-	},
-	data () {
-		return {
-			photoGraphaList: [
-				{
-					imgSrc: image1,
-					htmlSrc: 'https://bh-lay.tuchong.com/27040825/?from=bh-lay',
-					title: '讯飞数据中心',
-					author: '剧中人'
-				}, {
-					imgSrc: image2,
-					htmlSrc: 'https://bh-lay.tuchong.com/27040825/?from=bh-lay',
-					title: '讯飞数据中心',
-					author: '剧中人'
-				}
-			],
-			photoGraphaIndex: globalPhotoGraphaIndex,
-			useListMode: localStorage.getItem('blog-layout') === 'list'
-		}
-	},
-	computed: {
-		tag () {
-			return this.$route.query.tag || ''
-		}
-	},
-	methods: {
-		nextIndex (index) {
-			globalPhotoGraphaIndex = index
-		},
-		toggleArchivesList () {
-			this.useListMode = !this.useListMode
-			localStorage.setItem('blog-layout', this.useListMode ? 'list' : 'card')
-		}
+const photoGraphaList = [
+	{
+		imgSrc: image1,
+		htmlSrc: 'https://bh-lay.tuchong.com/27040825/?from=bh-lay',
+		title: '讯飞数据中心',
+		author: '剧中人'
+	}, {
+		imgSrc: image2,
+		htmlSrc: 'https://bh-lay.tuchong.com/27040825/?from=bh-lay',
+		title: '讯飞数据中心',
+		author: '剧中人'
 	}
+]
+const photoGraphaIndex = ref(globalPhotoGraphaIndex)
+const useListMode = ref(localStorage.getItem('blog-layout') === 'list')
+
+const route = useRoute()
+const tag = computed(() => (route.query.tag as string) || '')
+
+function nextIndex (index: number) {
+	globalPhotoGraphaIndex = index
+}
+
+function toggleArchivesList () {
+	useListMode.value = !useListMode.value
+	localStorage.setItem('blog-layout', useListMode.value ? 'list' : 'card')
 }
 </script>
