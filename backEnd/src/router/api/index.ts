@@ -1,5 +1,6 @@
 import { routeItemConfig } from '@/core/index'
 import commentsRestController, { list as commentsListController} from '@/controller/api/comments/index'
+import commentsBatchRemoveController from '@/controller/api/comments/batch-remove'
 import blogRestController, { getList as blogListController, blogTagList } from '@/controller/api/blog/index'
 import labsListController from '@/controller/api/labs/list'
 import labsRestController from '@/controller/api/labs/rest'
@@ -23,6 +24,12 @@ const routes: routeItemConfig[] = [
   {
     path: 'rest /api/comments/:id',
     controller: commentsRestController
+  },
+  // 批量删除评论：DELETE /api/comments ，body: { ids: [] }
+  // 使用集合路径（不带 :id），避免被上面的 rest /api/comments/:id 匹配
+  {
+    path: 'delete /api/comments',
+    controller: commentsBatchRemoveController
   },
   // 博文
   {
