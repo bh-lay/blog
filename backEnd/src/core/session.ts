@@ -82,7 +82,7 @@ export default class Session {
   }
   private fillFromCache (sessionCached: Record<string, unknown>) {
     this.data = sessionCached.data as typeSessionData
-    this.powerCode = sessionCached.powerCode as string
+    this.powerCode = sessionCached.powerCode as string || ''
     this.createdTime = sessionCached.createdTime as number
   }
   set (param: Record<string, unknown>) {

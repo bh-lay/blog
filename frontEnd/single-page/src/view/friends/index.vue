@@ -359,7 +359,7 @@ const router = useRouter()
 
 const page = ref({
 	total: 0,
-	pageItemCount: 60,
+	pageItemCount: 80,
 	pageIndex: parseInt(String(route.query.page)) || 1
 })
 const friendsList = ref<any[]>([])
